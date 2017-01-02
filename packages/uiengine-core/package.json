@@ -6,7 +6,7 @@
   "author": "Dennis Reimann",
   "license": "UNLICENSED",
   "engines": {
-    "node": ">=7.1.0"
+    "node": ">=7.3.0"
   },
   "repository": {
     "type": "git",
