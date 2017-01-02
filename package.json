@@ -2,9 +2,9 @@
   "name": "hakuin",
   "version": "0.0.1",
   "description": "the sound of one hand",
-  "main": "index.js",
   "author": "Dennis Reimann",
   "license": "UNLICENSED",
+  "main": "./lib/index.js",
   "engines": {
     "node": ">=7.3.0"
   },
@@ -15,5 +15,10 @@
   "bin": {
     "hakuin": "./bin/hakuin.js"
   },
-  "main": "./lib/index.js"
+  "scripts": {
+    "test": "standard"
+  },
+  "devDependencies": {
+    "standard": "^8.6.0"
+  }
 }
