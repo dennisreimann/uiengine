@@ -1,0 +1,12 @@
+name: Test
+namespace: test
+
+target:
+  site: ./dist/site
+  assets: ./dist/test
+
+basedirs:
+  components: ./src/components
+  templates: ./src/templates
+  includes: ./site/includes
+  pages: ./site/pages
