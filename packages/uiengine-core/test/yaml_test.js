@@ -4,11 +4,24 @@ const assert = require('assert')
 const Yaml = require('../lib/util/yaml')
 
 describe('Yaml', () => {
-  describe('#readFile', () => {
+  describe('#fromFile', () => {
     it('should return parsed yaml', (done) => {
-      Yaml.readFile('./test/project/pages/page.yml')
+      Yaml.fromFile('./test/fixtures/yaml.yml')
         .then(data => {
           assert.equal(data.name, 'Index')
+          assert.equal(data.number, 2)
+          done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('#fromString', () => {
+    it('should return parsed yaml', (done) => {
+      Yaml.fromString('name: Index\nnumber: 2')
+        .then(data => {
+          assert.equal(data.name, 'Index')
+          assert.equal(data.number, 2)
           done()
         })
         .catch(done)

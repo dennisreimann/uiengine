@@ -1,6 +1,3 @@
----
-name: Index
----
 # Homepage
 
 Welcome!

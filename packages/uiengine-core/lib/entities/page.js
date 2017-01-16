@@ -1,10 +1,10 @@
 const path = require('path')
 const R = require('ramda')
 const glob = require('globby')
-const yaml = require('../util/yaml')
+const frontmatter = require('../util/frontmatter')
 const markdown = require('../util/markdown')
 
-const PAGE_FILENAME = 'page.yml'
+const PAGE_FILENAME = 'page.md'
 
 const pageIdToPageFilePath = (pagesPath, pageId) => {
   const relativePath = pageId === 'index' ? '.' : pageId
@@ -18,6 +18,13 @@ const pageFilePathToPageId = (pagesPath, pageFilePath) => {
   const pageId = path.dirname(relativePath)
 
   return pageId
+}
+
+async function readPageFile (pageFilePath) {
+  const { attributes, body } = await frontmatter.fromFile(pageFilePath)
+  const content = await markdown.fromString(body)
+
+  return { attributes, content }
 }
 
 async function findPageIds (pagesPath, pageGlob = '**') {
@@ -46,15 +53,11 @@ async function fetchByPageId (state, pageId) {
   const pageFile = { relativePath, absolutePath }
   const childGlob = path.join(pageId, '*')
   const fetchChildren = findPageIds(pagesPath, childGlob)
-  const fetchPageData = yaml.readFile(absolutePath)
-  const fetchContent = markdown.readFile(absolutePath.replace(/\.yml$/, '.md'))
-  const [ pageData, children, content ] = await Promise.all([
-    fetchPageData,
-    fetchChildren,
-    fetchContent
-  ])
+  const fetchPageData = readPageFile(absolutePath)
+  const [ pageData, children ] = await Promise.all([ fetchPageData, fetchChildren ])
+  const { attributes, content } = pageData
   const baseData = { id: pageId, pageFile: pageFile, children: children, content: content }
-  const data = R.mergeAll([baseData, pageData])
+  const data = R.mergeAll([baseData, attributes])
 
   return data
 }

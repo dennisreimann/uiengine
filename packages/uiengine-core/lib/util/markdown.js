@@ -1,21 +1,11 @@
-const fs = require('fs')
+const R = require('ramda')
 const MarkdownIt = require('markdown-it')
+const parsing = require('./parsing')
+
 const md = new MarkdownIt()
-
-async function readFile (filePath) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-        resolve(undefined)
-      } else {
-        const parsed = md.render(data)
-
-        resolve(parsed)
-      }
-    })
-  })
-}
+const parseString = s => md.render(s.trim())
 
 module.exports = {
-  readFile
+  fromFile: R.partial(parsing.fromFile, [parseString]),
+  fromString: R.partial(parsing.fromString, [parseString])
 }
