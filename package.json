@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "deep-extend": "^0.4.1",
+    "fastmatter": "^1.1.1",
     "globby": "^6.1.0",
     "js-yaml": "^3.7.0",
     "markdown-it": "^8.2.2",
