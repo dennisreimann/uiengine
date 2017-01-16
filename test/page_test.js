@@ -61,6 +61,15 @@ describe('Page', () => {
         })
         .catch(done)
     })
+
+    it('should render content from markdown', (done) => {
+      Page.fetchByPageId(state, 'index')
+        .then(data => {
+          assert.equal(data.content, '<h1>Homepage</h1>\n<p>Welcome!</p>\n')
+          done()
+        })
+        .catch(done)
+    })
   })
 
   describe('#fetchAll', () => {
