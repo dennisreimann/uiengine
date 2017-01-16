@@ -3,7 +3,7 @@ const assert = require('assert')
 
 const Hakuin = require('../lib/index')
 
-const testConfigPath = './test/support/test-config.yml'
+const testConfigPath = './test/project/project.yml'
 
 describe('Hakuin', () => {
   describe('#generate', () => {

@@ -1,15 +1,26 @@
+const R = require('ramda')
 const Config = require('./configuration')
 const Builder = require('./builder')
+const Page = require('./entities/page')
 
 async function generate (options) {
-  let config
+  let state = {}
+
+  // setup with config
   if (options && typeof options.config === 'string') {
-    config = Config.read(options.config, options)
+    const config = await Config.read(options.config, options)
+    state = R.assoc('config', config, state)
   }
 
-  console.log('builder started')
-  const value = await Builder.generateSite(config)
-  console.log('builder done', value)
+  // 1. fetch entities (pages and components)
+  const pages = await Page.fetchAll(state)
+  state = R.assoc('pages', pages, state)
+
+  // 2. transform state (navigation, etc.)
+
+  // 3. generate site (output html)
+
+  const value = await Builder.generateSite(state)
   return value
 }
 
