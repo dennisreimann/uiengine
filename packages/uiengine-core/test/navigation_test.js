@@ -9,7 +9,7 @@ const page = (id, children, path) => {
 
 describe('Navigation', () => {
   describe('#forPageIdAsRoot', () => {
-    it('should generate site navigation', (done) => {
+    it('should generate site navigation', done => {
       const state = {
         pages: {
           'index': page('index', ['child1', 'child2']),
@@ -23,7 +23,7 @@ describe('Navigation', () => {
       }
 
       Navigation.forPageIdAsRoot(state, 'index')
-        .then(function (result) {
+        .then(result => {
           assert.equal(result.length, 1)
 
           const root = result[0]
@@ -59,7 +59,7 @@ describe('Navigation', () => {
         .catch(done)
     })
 
-    it('should generate subtree navigation', (done) => {
+    it('should generate subtree navigation', done => {
       const state = {
         pages: {
           'index': page('index', ['child1', 'child2']),
@@ -69,7 +69,7 @@ describe('Navigation', () => {
       }
 
       Navigation.forPageIdAsRoot(state, 'child1')
-        .then(function (result) {
+        .then(result => {
           assert.equal(result.length, 1)
 
           const child1 = result[0]
@@ -85,7 +85,7 @@ describe('Navigation', () => {
         .catch(done)
     })
 
-    it('should take path from page config if explicitely provided', (done) => {
+    it('should take path from page config if explicitely provided', done => {
       const state = {
         pages: {
           'child1': page('child1', [], 'childpage/path/explicit')
@@ -93,7 +93,7 @@ describe('Navigation', () => {
       }
 
       Navigation.forPageIdAsRoot(state, 'child1')
-        .then(function (result) {
+        .then(result => {
           assert.equal(result.length, 1)
 
           const root = result[0]
@@ -105,10 +105,10 @@ describe('Navigation', () => {
         .catch(done)
     })
 
-    it('should throw error if page does not exist', (done) => {
+    it('should throw error if page does not exist', done => {
       const state = { pages: {} }
       Navigation.forPageIdAsRoot(state, 'index')
-        .catch(function (error) {
+        .catch(error => {
           assert(error)
           done()
         })

@@ -4,14 +4,17 @@ const Builder = require('./builder')
 const Navigation = require('./navigation')
 const Page = require('./page')
 
-async function generate (options) {
-  let state = {}
-
-  // 0. setup state with config
-  if (options && typeof options.config === 'string') {
+async function setupStateWithOptions (options = {}) {
+  if (typeof options.config === 'string') {
     const config = await Config.read(options.config, options)
-    state = R.assoc('config', config, state)
+    return { config }
+  } else {
+    return Promise.reject('Please provide the config file path with the options.')
   }
+}
+
+async function generate (options) {
+  let state = await setupStateWithOptions(options)
 
   // 1. fetch entities (pages and components)
   const pages = await Page.fetchAll(state)
@@ -22,7 +25,6 @@ async function generate (options) {
   state = R.assoc('navigation', navigation, state)
 
   // 3. generate site (output html)
-
   const value = await Builder.generateSite(state)
   return value
 }

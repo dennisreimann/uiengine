@@ -12,7 +12,7 @@ const state = {
 
 describe('Page', () => {
   describe('#fetchByPageId', () => {
-    it('should return page object for index page', (done) => {
+    it('should return page object for index page', done => {
       Page.fetchByPageId(state, 'index')
         .then(data => {
           assert.equal(data.id, 'index')
@@ -22,7 +22,7 @@ describe('Page', () => {
         .catch(done)
     })
 
-    it('should return page object for child page', (done) => {
+    it('should return page object for child page', done => {
       Page.fetchByPageId(state, 'child1')
         .then(data => {
           assert.equal(data.id, 'child1')
@@ -32,7 +32,7 @@ describe('Page', () => {
         .catch(done)
     })
 
-    it('should return page object for grand child page', (done) => {
+    it('should return page object for grand child page', done => {
       Page.fetchByPageId(state, 'child1/grandchild1')
         .then(data => {
           assert.equal(data.id, 'child1/grandchild1')
@@ -42,7 +42,7 @@ describe('Page', () => {
         .catch(done)
     })
 
-    it('should infer children if they are not provided', (done) => {
+    it('should infer children if they are not provided', done => {
       Page.fetchByPageId(state, 'child1')
         .then(data => {
           assert.equal(data.children.length, 1)
@@ -52,7 +52,7 @@ describe('Page', () => {
         .catch(done)
     })
 
-    it('should not infer children if they are explicitely provided', (done) => {
+    it('should not infer children if they are explicitely provided', done => {
       Page.fetchByPageId(state, 'child2')
         .then(data => {
           assert.equal(data.children.length, 1)
@@ -62,7 +62,7 @@ describe('Page', () => {
         .catch(done)
     })
 
-    it('should render content from markdown', (done) => {
+    it('should render content from markdown', done => {
       Page.fetchByPageId(state, 'index')
         .then(data => {
           assert.equal(data.content, '<h1>Homepage</h1>\n<p>Welcome!</p>\n')
@@ -73,7 +73,7 @@ describe('Page', () => {
   })
 
   describe('#fetchAll', () => {
-    it('should return pages object', (done) => {
+    it('should return pages object', done => {
       Page.fetchAll(state)
         .then(data => {
           const pageIds = Object.keys(data)
