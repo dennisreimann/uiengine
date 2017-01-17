@@ -1,5 +1,5 @@
 ---
-name: Child 2
+title: Child 2
 children:
 - child2/grandchild2
 ---

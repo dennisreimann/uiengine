@@ -1,5 +1,5 @@
 ---
-name: Grandchild 2
+title: Grandchild 2
 ---
 # Grandchild 2
 

@@ -1,5 +1,5 @@
 ---
-name: Index
+title: Index
 ---
 # Homepage
 
