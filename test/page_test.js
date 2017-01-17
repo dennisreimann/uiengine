@@ -1,7 +1,7 @@
 /* global describe, it */
 const assert = require('assert')
 
-const Page = require('../lib/entities/page')
+const Page = require('../lib/page')
 const state = {
   config: {
     basedirs: {
