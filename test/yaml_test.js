@@ -5,7 +5,7 @@ const Yaml = require('../lib/util/yaml')
 
 describe('Yaml', () => {
   describe('#fromFile', () => {
-    it('should return parsed yaml', (done) => {
+    it('should return parsed yaml', done => {
       Yaml.fromFile('./test/fixtures/yaml.yml')
         .then(data => {
           assert.equal(data.name, 'Index')
@@ -17,7 +17,7 @@ describe('Yaml', () => {
   })
 
   describe('#fromString', () => {
-    it('should return parsed yaml', (done) => {
+    it('should return parsed yaml', done => {
       Yaml.fromString('name: Index\nnumber: 2')
         .then(data => {
           assert.equal(data.name, 'Index')

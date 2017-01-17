@@ -7,7 +7,7 @@ const testConfigPath = './test/project/project.yml'
 
 describe('Configuration', () => {
   describe('#read', () => {
-    it('should return config object', (done) => {
+    it('should return config object', done => {
       Configuration.read(testConfigPath)
         .then(config => {
           assert.equal(config.name, 'Test')
@@ -24,7 +24,7 @@ describe('Configuration', () => {
         .catch(done)
     })
 
-    it('should take options', (done) => {
+    it('should take options', done => {
       const opts = { debug: true }
 
       Configuration.read(testConfigPath, opts)
