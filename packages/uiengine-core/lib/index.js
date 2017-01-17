@@ -1,6 +1,7 @@
 const R = require('ramda')
 const Config = require('./configuration')
 const Builder = require('./builder')
+const Navigation = require('./navigation')
 const Page = require('./page')
 
 async function generate (options) {
@@ -17,6 +18,8 @@ async function generate (options) {
   state = R.assoc('pages', pages, state)
 
   // 2. transform state (navigation, etc.)
+  const navigation = await Navigation.forPageIdAsRoot(state, 'index')
+  state = R.assoc('navigation', navigation, state)
 
   // 3. generate site (output html)
 

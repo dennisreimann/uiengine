@@ -1,5 +1,5 @@
 ---
-name: Child 1
+title: Child 1
 ---
 # Child 1
 

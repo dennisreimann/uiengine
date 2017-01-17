@@ -15,7 +15,8 @@ const pageIdToPageFilePath = (pagesPath, pageId) => {
 
 const pageFilePathToPageId = (pagesPath, pageFilePath) => {
   const relativePath = path.relative(pagesPath, pageFilePath)
-  const pageId = path.dirname(relativePath)
+  const dirname = path.dirname(relativePath)
+  const pageId = dirname === '.' ? 'index' : dirname
 
   return pageId
 }
@@ -42,8 +43,12 @@ async function fetchAll (state) {
 
   const pageFetch = R.partial(fetchByPageId, [state])
   const pageFetches = R.map(pageFetch, pageIds)
+  const pageList = await Promise.all(pageFetches)
 
-  return Promise.all(pageFetches)
+  const assocPage = (pages, page) => R.assoc(page.id, page, pages)
+  const pages = R.reduce(assocPage, {}, pageList)
+
+  return pages
 }
 
 async function fetchByPageId (state, pageId) {

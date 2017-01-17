@@ -16,7 +16,7 @@ describe('Page', () => {
       Page.fetchByPageId(state, 'index')
         .then(data => {
           assert.equal(data.id, 'index')
-          assert.equal(data.name, 'Index')
+          assert.equal(data.title, 'Index')
           done()
         })
         .catch(done)
@@ -26,7 +26,7 @@ describe('Page', () => {
       Page.fetchByPageId(state, 'child1')
         .then(data => {
           assert.equal(data.id, 'child1')
-          assert.equal(data.name, 'Child 1')
+          assert.equal(data.title, 'Child 1')
           done()
         })
         .catch(done)
@@ -36,7 +36,7 @@ describe('Page', () => {
       Page.fetchByPageId(state, 'child1/grandchild1')
         .then(data => {
           assert.equal(data.id, 'child1/grandchild1')
-          assert.equal(data.name, 'Grandchild 1')
+          assert.equal(data.title, 'Grandchild 1')
           done()
         })
         .catch(done)
@@ -73,10 +73,15 @@ describe('Page', () => {
   })
 
   describe('#fetchAll', () => {
-    it('should return pages list', (done) => {
+    it('should return pages object', (done) => {
       Page.fetchAll(state)
         .then(data => {
-          assert.equal(data.length, 6)
+          const pageIds = Object.keys(data)
+
+          assert.equal(pageIds.length, 6)
+          assert(pageIds.includes('index'), 'missing page "index"')
+          assert(pageIds.includes('child1'), 'missing page "child1"')
+          assert(pageIds.includes('child2'), 'missing page "child2"')
           done()
         })
         .catch(done)
