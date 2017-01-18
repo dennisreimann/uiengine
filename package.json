@@ -5,6 +5,11 @@
   "author": "Dennis Reimann",
   "license": "UNLICENSED",
   "main": "./lib/index.js",
+  "files": [
+    "bin",
+    "default-theme",
+    "lib"
+  ],
   "engines": {
     "node": ">=7.3.0"
   },
@@ -16,15 +21,27 @@
     "hakuin": "./bin/hakuin.js"
   },
   "scripts": {
+    "clean": "rimraf default-theme/*",
     "pretest": "standard",
-    "test": "mocha --harmony -R landing"
+    "test": "mocha --harmony -R dot",
+    "prestart": "yarn run clean",
+    "start": "gulp",
+    "prebuild": "yarn run clean",
+    "build": "gulp build"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-rename": "^1.2.2",
     "mocha": "^3.2.0",
+    "rimraf": "^2.5.4",
+    "run-sequence": "^1.2.2",
     "standard": "^8.6.0"
   },
   "standard": {
     "globals": [
+      "afterEach",
+      "beforeEach",
       "describe",
       "it"
     ]
@@ -33,8 +50,11 @@
     "deep-extend": "^0.4.1",
     "fastmatter": "^1.1.1",
     "globby": "^6.1.0",
+    "handlebars": "^4.0.6",
+    "handlebars-layout": "^0.1.3",
     "js-yaml": "^3.7.0",
     "markdown-it": "^8.2.2",
-    "ramda": "^0.23.0"
+    "ramda": "^0.23.0",
+    "yargs": "^6.6.0"
   }
 }

@@ -1,5 +1,6 @@
 ---
 title: Grandchild 1
+template: testTemplate
 ---
 # Grandchild 1
 

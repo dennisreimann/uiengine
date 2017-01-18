@@ -13,7 +13,7 @@ describe('Configuration', () => {
           assert.equal(config.name, 'Test')
           assert.equal(config.namespace, 'test')
           assert.equal(config.target.site, './test/project/dist/site')
-          assert.equal(config.target.assets, './test/project/dist/test')
+          assert.equal(config.target.assets, './test/project/dist/assets')
           assert.equal(config.basedirs.components, './test/project/components')
           assert.equal(config.basedirs.templates, './test/project/templates')
           assert.equal(config.basedirs.includes, './test/project/includes')

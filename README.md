@@ -11,3 +11,10 @@ the sound of one hand
 
 - Are always `async`
 - First argument is always the state
+
+### Theme
+
+- helpers.js
+- partials/*.hbs
+- templates/*.hbs
+

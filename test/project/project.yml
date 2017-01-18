@@ -3,10 +3,11 @@ namespace: test
 
 target:
   site: ./test/project/dist/site
-  assets: ./test/project/dist/test
+  assets: ./test/project/dist/assets
 
 basedirs:
   components: ./test/project/components
   templates: ./test/project/templates
   includes: ./test/project/includes
   pages: ./test/project/pages
+  theme: ./test/fixtures/theme

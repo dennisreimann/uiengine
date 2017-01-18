@@ -10,8 +10,8 @@ describe('Hakuin', () => {
     it('should generate site', done => {
       const opts = { config: testConfigPath }
       Hakuin.generate(opts)
-        .then(result => {
-          assert.equal(true, result)
+        .then(state => {
+          assert.equal(state.config.name, 'Test')
           done()
         })
         .catch(done)
