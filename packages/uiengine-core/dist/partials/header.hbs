@@ -1,0 +1,20 @@
+<header class="hakuin-header">
+  <div class="hakuin-header__section hakuin-header__nav">
+    <div class="hakuin-header__brand">
+      <a href="{{absoluteUrl navigation.root.id page.path}}" class="hakuin-header__logo">
+        {{@root.config.name}}
+      </a>
+    </div>
+    {{> nav}}
+    {{#if @root.config.version}}
+      <div class="hakuin-header__version">
+        {{@root.config.version}}
+      </div>
+    {{/if}}
+  </div>
+  {{#if (hasContent navigation.subitems)}}
+    <div class="hakuin-header__section hakuin-header__subnav">
+      {{> subnav}}
+    </div>
+  {{/if}}
+</header>

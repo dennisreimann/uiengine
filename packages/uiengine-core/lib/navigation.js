@@ -7,7 +7,6 @@ const withRoot = (state, rootPageId) => {
 
   const page = {
     id: root.id,
-    path: root.path || root.id,
     children: children
   }
 

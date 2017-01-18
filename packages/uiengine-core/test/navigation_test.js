@@ -85,26 +85,6 @@ describe('Navigation', () => {
         .catch(done)
     })
 
-    it('should take path from page config if explicitely provided', done => {
-      const state = {
-        pages: {
-          'child1': page('child1', [], 'childpage/path/explicit')
-        }
-      }
-
-      Navigation.forPageIdAsRoot(state, 'child1')
-        .then(result => {
-          assert.equal(result.length, 1)
-
-          const root = result[0]
-          assert.equal(root.id, 'child1')
-          assert.equal(root.path, 'childpage/path/explicit')
-
-          done()
-        })
-        .catch(done)
-    })
-
     it('should throw error if page does not exist', done => {
       const state = { pages: {} }
       Navigation.forPageIdAsRoot(state, 'index')

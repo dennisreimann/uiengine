@@ -62,6 +62,24 @@ describe('Page', () => {
         .catch(done)
     })
 
+    it('should infer path if it is not provided', done => {
+      Page.fetchByPageId(state, 'child2/grandchild2')
+        .then(data => {
+          assert.equal(data.path, 'child2/grandchild2')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should not infer path if it is explicitely provided', done => {
+      Page.fetchByPageId(state, 'child1')
+        .then(data => {
+          assert.equal(data.path, 'childpage/path/explicit')
+          done()
+        })
+        .catch(done)
+    })
+
     it('should render content from markdown', done => {
       Page.fetchByPageId(state, 'index')
         .then(data => {

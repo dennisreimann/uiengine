@@ -1,0 +1,14 @@
+{{#extend "layout"}}
+  {{#content "main"}}
+    <section class="hakuin-page">
+      <div class="hakuin-content">
+        <div class="hakuin-content__wrap">
+          {{#with page}}
+            <h1 class="hakuin-title"{{#if id}} id="{{id}}"{{/if}}>{{title}}</h1>
+            {{{content}}}
+          {{/with}}
+        </div>
+      </div>
+    </section>
+  {{/content}}
+{{/extend}}
