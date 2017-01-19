@@ -1,24 +1,21 @@
 /* global describe, it */
 const assert = require('assert')
+const Factory = require('./support/factory')
 
 const Navigation = require('../lib/navigation')
-
-const page = (id, children, path) => {
-  return { id, children, path: (path || id) }
-}
 
 describe('Navigation', () => {
   describe('#forPageIdAsRoot', () => {
     it('should generate site navigation', done => {
       const state = {
         pages: {
-          'index': page('index', ['child1', 'child2']),
-          'child1': page('child1', ['child1/grandchild1', 'child1/grandchild2']),
-          'child2': page('child2', ['child2/grandchild1']),
-          'child1/grandchild1': page('child1/grandchild1', []),
-          'child1/grandchild2': page('child1/grandchild2', []),
-          'child2/grandchild1': page('child2/grandchild1', ['child2/grandchild1/greatgrandchild1']),
-          'child2/grandchild1/greatgrandchild1': page('child2/grandchild1/greatgrandchild1', [])
+          'index': Factory.page('index', { children: ['child1', 'child2'] }),
+          'child1': Factory.page('child1', { children: ['child1/grandchild1', 'child1/grandchild2'] }),
+          'child2': Factory.page('child2', { children: ['child2/grandchild1'] }),
+          'child1/grandchild1': Factory.page('child1/grandchild1'),
+          'child1/grandchild2': Factory.page('child1/grandchild2'),
+          'child2/grandchild1': Factory.page('child2/grandchild1', { children: ['child2/grandchild1/greatgrandchild1'] }),
+          'child2/grandchild1/greatgrandchild1': Factory.page('child2/grandchild1/greatgrandchild1')
         }
       }
 
@@ -62,9 +59,9 @@ describe('Navigation', () => {
     it('should generate subtree navigation', done => {
       const state = {
         pages: {
-          'index': page('index', ['child1', 'child2']),
-          'child1': page('child1', ['child1/grandchild1']),
-          'child1/grandchild1': page('child1/grandchild1', [])
+          'index': Factory.page('index', { children: ['child1', 'child2'] }),
+          'child1': Factory.page('child1', { children: ['child1/grandchild1'] }),
+          'child1/grandchild1': Factory.page('child1/grandchild1')
         }
       }
 

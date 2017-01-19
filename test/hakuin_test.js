@@ -1,17 +1,28 @@
 /* global describe, it */
 const assert = require('assert')
+const fs = require('fs-extra')
+const assertFileExists = require('./support/assertFileExists')
 
 const Hakuin = require('../lib/index')
 
+const sitePath = './test/tmp/site'
+const assetsPath = './test/tmp/assets'
 const testConfigPath = './test/project/project.yml'
 
 describe('Hakuin', () => {
   describe('#generate', () => {
+    afterEach(() => {
+      fs.removeSync(sitePath)
+      fs.removeSync(assetsPath)
+    })
+
     it('should generate site', done => {
       const opts = { config: testConfigPath }
+
       Hakuin.generate(opts)
         .then(state => {
-          assert.equal(state.config.name, 'Test')
+          assertFileExists(`${sitePath}/index.html`)
+
           done()
         })
         .catch(done)
