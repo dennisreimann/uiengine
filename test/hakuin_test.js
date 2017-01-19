@@ -22,6 +22,25 @@ describe('Hakuin', () => {
       Hakuin.generate(opts)
         .then(state => {
           assertFileExists(`${sitePath}/index.html`)
+          assertFileExists(`${sitePath}/childpage/path/explicit/index.html`)
+          assertFileExists(`${sitePath}/child1/grandchild1/index.html`)
+          assertFileExists(`${sitePath}/child2/index.html`)
+          assertFileExists(`${sitePath}/child2/grandchild1/index.html`)
+          assertFileExists(`${sitePath}/child2/grandchild2/index.html`)
+          assertFileExists(`${sitePath}/index.html`)
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should copy theme assets', done => {
+      const opts = { config: testConfigPath }
+
+      Hakuin.generate(opts)
+        .then(state => {
+          assertFileExists(`${assetsPath}/styles/main.css`)
+          assertFileExists(`${assetsPath}/scripts/main.js`)
 
           done()
         })
