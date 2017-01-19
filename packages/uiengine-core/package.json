@@ -7,7 +7,7 @@
   "main": "./lib/index.js",
   "files": [
     "bin",
-    "default-theme",
+    "theme",
     "lib"
   ],
   "engines": {
@@ -21,21 +21,11 @@
     "hakuin": "./bin/hakuin.js"
   },
   "scripts": {
-    "clean": "rimraf default-theme/*",
     "pretest": "standard",
-    "test": "mocha --harmony -R dot",
-    "prestart": "yarn run clean",
-    "start": "gulp",
-    "prebuild": "yarn run clean",
-    "build": "gulp build"
+    "test": "mocha --harmony -R dot"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-load-plugins": "^1.4.0",
-    "gulp-rename": "^1.2.2",
     "mocha": "^3.2.0",
-    "rimraf": "^2.5.4",
-    "run-sequence": "^1.2.2",
     "standard": "^8.6.0"
   },
   "standard": {
