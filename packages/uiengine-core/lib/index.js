@@ -20,7 +20,6 @@ async function generate (options) {
   // 1. setup (rendering) and data fetching (pages and components)
   // TODO:
   // - fetch components
-  // - copy theme assets
   const setupRenderContext = Renderer.setupContext(state)
   const fetchPages = Page.fetchAll(state)
   const [ pages ] = await Promise.all([ fetchPages, setupRenderContext ])
@@ -30,8 +29,10 @@ async function generate (options) {
   const navigation = await Navigation.forPageIdAsRoot(state, 'index')
   state = R.assoc('navigation', navigation, state)
 
-  // 3. generate site (output html)
-  state = await Builder.generateSite(state)
+  // 3. generate site (output html) and copy assets
+  const generateSite = Builder.generateSite(state)
+  const copyAssets = Builder.copyAssets(state)
+  await Promise.all([ generateSite, copyAssets ])
 
   return state
 }

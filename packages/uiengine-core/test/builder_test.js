@@ -7,10 +7,12 @@ const Builder = require('../lib/builder')
 const Renderer = require('../lib/renderer')
 
 const sitePath = './test/tmp/site'
+const assetsPath = './test/tmp/assets'
 const state = {
   config: {
     target: {
-      site: sitePath
+      site: sitePath,
+      assets: assetsPath
     },
     basedirs: {
       pages: './test/project/pages',
@@ -49,6 +51,21 @@ describe('Builder', () => {
       Builder.generatePage(state, 'child1')
         .then(state => {
           assertFileExists(`${sitePath}/custom/page/path/index.html`)
+
+          done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('#copyAssets', () => {
+    afterEach(() => { fs.removeSync(assetsPath) })
+
+    it('should generate site', done => {
+      Builder.copyAssets(state)
+        .then(state => {
+          assertFileExists(`${assetsPath}/styles/main.css`)
+          assertFileExists(`${assetsPath}/scripts/main.js`)
 
           done()
         })

@@ -1,6 +1,8 @@
 /* global describe, it */
 const assert = require('assert')
-const fs = require('fs')
+const assertFileExists = require('./support/assertFileExists')
+const fs = require('fs-extra')
+const path = require('path')
 
 const File = require('../lib/util/file')
 
@@ -23,7 +25,33 @@ describe('File', () => {
         .then(() => {
           const content = fs.readFileSync(filePath)
           assert.equal(content, 'Test')
-          fs.unlinkSync(filePath)
+          fs.removeSync(filePath)
+          done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('#copy', () => {
+    it('should copy file from source to destination', done => {
+      const src = './test/fixtures/frontmatter.txt'
+      const dst = './test/tmp/frontmatter.txt'
+      File.copy(src, dst)
+        .then(() => {
+          assertFileExists(dst)
+          fs.removeSync(dst)
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should copy directory from source to destination', done => {
+      const src = './test/fixtures/theme/templates'
+      const dst = './test/tmp/theme/templates'
+      File.copy(src, dst)
+        .then(() => {
+          assertFileExists(path.join(dst, 'testTemplate.hbs'))
+          fs.removeSync('./test/tmp/theme')
           done()
         })
         .catch(done)

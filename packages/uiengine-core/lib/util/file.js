@@ -32,7 +32,27 @@ async function write (filePath, content) {
   })
 }
 
+async function copy (src, dst) {
+  return new Promise((resolve, reject) => {
+    const dir = path.dirname(dst)
+    fs.mkdirs(dir, err => {
+      if (err) {
+        reject(err)
+      } else {
+        fs.copy(src, dst, err => {
+          if (err) {
+            reject(err)
+          } else {
+            resolve()
+          }
+        })
+      }
+    })
+  })
+}
+
 module.exports = {
   read,
-  write
+  write,
+  copy
 }
