@@ -2,8 +2,8 @@ name: Test
 namespace: test
 
 target:
-  site: ./test/project/dist/site
-  assets: ./test/project/dist/assets
+  site: ./test/tmp/site
+  assets: ./test/tmp/assets
 
 basedirs:
   components: ./test/project/components
