@@ -46,12 +46,12 @@ describe('File', () => {
     })
 
     it('should copy directory from source to destination', done => {
-      const src = './test/fixtures/theme/templates'
-      const dst = './test/tmp/theme/templates'
+      const src = './test/fixtures'
+      const dst = './test/tmp/fixtures'
       File.copy(src, dst)
         .then(() => {
-          assertFileExists(path.join(dst, 'testTemplate.hbs'))
-          fs.removeSync('./test/tmp/theme')
+          assertFileExists(path.join(dst, 'yaml.yml'))
+          fs.removeSync(dst)
           done()
         })
         .catch(done)
