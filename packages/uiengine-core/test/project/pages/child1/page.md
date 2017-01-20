@@ -1,6 +1,5 @@
 ---
 title: Child 1
-template: testTemplate
 path: childpage/path/explicit
 ---
 # Child 1

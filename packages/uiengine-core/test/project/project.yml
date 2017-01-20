@@ -3,11 +3,11 @@ namespace: test
 
 target:
   site: ./test/tmp/site
-  assets: ./test/tmp/assets
+  assets: ./test/tmp/site/assets
 
 basedirs:
   components: ./test/project/components
   templates: ./test/project/templates
   includes: ./test/project/includes
   pages: ./test/project/pages
-  theme: ./test/fixtures/theme
+  theme: ../hakuin-theme-react
