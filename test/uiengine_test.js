@@ -3,13 +3,13 @@ const assert = require('assert')
 const fs = require('fs-extra')
 const assertFileExists = require('./support/assertFileExists')
 
-const Hakuin = require('../lib/index')
+const UIengine = require('../lib/index')
 
 const sitePath = './test/tmp/site'
 const assetsPath = './test/tmp/assets'
 const testConfigPath = './test/project/project.yml'
 
-describe('Hakuin', () => {
+describe('UIengine', () => {
   describe('#generate', () => {
     afterEach(() => {
       fs.removeSync(sitePath)
@@ -19,7 +19,7 @@ describe('Hakuin', () => {
     it('should generate site', done => {
       const opts = { config: testConfigPath }
 
-      Hakuin.generate(opts)
+      UIengine.generate(opts)
         .then(state => {
           assertFileExists(`${sitePath}/index.html`)
           assertFileExists(`${sitePath}/childpage/path/explicit/index.html`)
@@ -37,7 +37,7 @@ describe('Hakuin', () => {
     it('should copy theme assets', done => {
       const opts = { config: testConfigPath }
 
-      Hakuin.generate(opts)
+      UIengine.generate(opts)
         .then(state => {
           assertFileExists(`${assetsPath}/styles/main.css`)
           assertFileExists(`${assetsPath}/scripts/main.js`)
@@ -48,7 +48,7 @@ describe('Hakuin', () => {
     })
 
     it('should throw error if no config option is provided', done => {
-      Hakuin.generate()
+      UIengine.generate()
         .catch(error => {
           assert(error)
           done()

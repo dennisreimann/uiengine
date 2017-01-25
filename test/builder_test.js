@@ -16,7 +16,7 @@ const state = {
     },
     basedirs: {
       pages: './test/project/pages',
-      theme: '../hakuin-theme-handlebars'
+      theme: '../uiengine-theme-handlebars'
     }
   },
   pages: {

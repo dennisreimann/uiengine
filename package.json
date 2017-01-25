@@ -1,7 +1,7 @@
 {
-  "name": "hakuin",
-  "version": "0.0.1",
-  "description": "the sound of one hand",
+  "name": "uiengine",
+  "version": "0.1.0",
+  "description": "",
   "author": "Dennis Reimann",
   "license": "UNLICENSED",
   "main": "./lib/index.js",
@@ -15,15 +15,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dennisreimann/hakuin.git"
+    "url": "https://github.com/dennisreimann/uiengine.git"
   },
   "bin": {
-    "hakuin": "./bin/hakuin.js"
+    "uiengine": "./bin/uiengine.js"
   },
   "scripts": {
     "pretest": "standard",
     "test": "mocha --harmony -R dot",
-    "build": "rm -rf ./test/tmp/site && ./bin/hakuin.js site --config=./test/project/project.yml && serve ./test/tmp/site"
+    "build": "rm -rf ./test/tmp/site && ./bin/uiengine.js site --config=./test/project/project.yml && serve ./test/tmp/site"
   },
   "devDependencies": {
     "mocha": "^3.2.0",

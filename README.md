@@ -1,6 +1,4 @@
-# Hakuin
-
-the sound of one hand
+# UIengine
 
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
@@ -25,5 +23,5 @@ yarn test
 
 ### Theme
 
-Use the [default theme](https://github.com/dennisreimann/hakuin-theme) as a basis for your customizations.
+Use the [default theme](https://github.com/dennisreimann/uiengine-theme-react) as a basis for your customizations.
 
