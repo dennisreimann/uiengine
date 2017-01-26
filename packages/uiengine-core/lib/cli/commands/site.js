@@ -1,4 +1,4 @@
-const UIengine = require('../../index')
+const UIengine = require('../../uiengine')
 
 exports.command = 'site'
 
