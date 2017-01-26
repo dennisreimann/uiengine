@@ -24,8 +24,8 @@ async function generate (options) {
 
   // 2. setup and transformations
   const setupTheme = Theme.setup(state)
-  const createNavigration = Navigation.forPageIdAsRoot(state, 'index')
-  const [navigation] = await Promise.all([createNavigration, setupTheme])
+  const createNavigation = Navigation.forPages(state)
+  const [navigation] = await Promise.all([createNavigation, setupTheme])
   state = R.assoc('navigation', navigation, state)
 
   // 3. output

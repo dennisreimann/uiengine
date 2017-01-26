@@ -3,28 +3,7 @@ const R = require('ramda')
 const glob = require('globby')
 const frontmatter = require('./util/frontmatter')
 const markdown = require('./util/markdown')
-
-const PAGE_FILENAME = 'page.md'
-
-const pageIdToPath = (pageId) => {
-  const pagePath = pageId === 'index' ? '' : pageId
-  return pagePath
-}
-
-const pageIdToPageFilePath = (pagesPath, pageId) => {
-  const relativePath = pageId === 'index' ? '.' : pageId
-  const absolutePath = path.join(pagesPath, relativePath, PAGE_FILENAME)
-
-  return absolutePath
-}
-
-const pageFilePathToPageId = (pagesPath, pageFilePath) => {
-  const relativePath = path.relative(pagesPath, pageFilePath)
-  const dirname = path.dirname(relativePath)
-  const pageId = dirname === '.' ? 'index' : dirname
-
-  return pageId
-}
+const PageUtil = require('./util/page')
 
 async function readPageFile (pageFilePath) {
   const { attributes, body } = await frontmatter.fromFile(pageFilePath)
@@ -34,9 +13,9 @@ async function readPageFile (pageFilePath) {
 }
 
 async function findPageIds (pagesPath, pageGlob = '**') {
-  const pathGlob = path.resolve(pagesPath, pageGlob, PAGE_FILENAME)
+  const pathGlob = path.resolve(pagesPath, pageGlob, PageUtil.PAGE_FILENAME)
   const pagePaths = await glob(pathGlob)
-  const pageIdFromPageFilePath = R.partial(pageFilePathToPageId, [pagesPath])
+  const pageIdFromPageFilePath = R.partial(PageUtil.pageFilePathToPageId, [pagesPath])
   const pageIds = R.map(pageIdFromPageFilePath, pagePaths)
 
   return pageIds
@@ -58,17 +37,17 @@ async function fetchAll (state) {
 
 async function fetchByPageId (state, pageId) {
   const pagesPath = state.config.basedirs.pages
-  const absolutePath = pageIdToPageFilePath(pagesPath, pageId)
+  const absolutePath = PageUtil.pageIdToPageFilePath(pagesPath, pageId)
   const relativePath = path.relative(pagesPath, absolutePath)
   const pageFile = { relativePath, absolutePath }
-  const childsPath = pageIdToPath(pageId)
+  const childsPath = PageUtil.pageIdToPath(pageId)
   const childsGlob = path.join(childsPath, '*')
   const fetchChildren = findPageIds(pagesPath, childsGlob)
   const fetchPageData = readPageFile(absolutePath)
   const [ pageData, children ] = await Promise.all([ fetchPageData, fetchChildren ])
   const { attributes, content } = pageData
   const template = 'page'
-  const baseData = { id: pageId, path: pageIdToPath(pageId), pageFile, children, content, template }
+  const baseData = { id: pageId, path: PageUtil.pageIdToPath(pageId), pageFile, children, content, template }
   const data = R.mergeAll([baseData, attributes])
 
   if (data.template) {

@@ -1,25 +1,41 @@
 const R = require('ramda')
+const NavigationData = require('./data/navigation')
+const PageUtil = require('./util/page')
 
-const withRoot = (state, rootPageId) => {
-  const root = state.pages[rootPageId]
-  const collectChildren = R.partial(withRoot, [state])
-  const children = R.map(collectChildren, root.children)
+const assocNavigation = (siteNav, pageNav) =>
+  R.assoc(pageNav.id, pageNav, siteNav)
 
-  const page = {
-    id: root.id,
-    children: children
-  }
+const dataForPageId = (pages, pageId) => {
+  const page = pages[pageId]
+  const parentId = PageUtil.parentIdForPageId(pageId)
+  const parentIds = PageUtil.parentIdsForPageId(pageId)
+  // const collectChildren = R.partial(dataForPageId, [pages])
+  // const children = R.map(collectChildren, page.children)
+  const children = page.children
+  const data = NavigationData(pageId, parentId, parentIds, children)
 
-  return page
+  return data
 }
 
-async function forPageIdAsRoot (state, rootPageId) {
+async function forPages ({ pages }) {
   return new Promise((resolve, reject) => {
-    const navigation = [withRoot(state, rootPageId)]
+    const pageIds = Object.keys(pages)
+    const pageNavigation = R.partial(dataForPageId, [pages])
+    const pageNavigations = R.map(pageNavigation, pageIds)
+    const navigation = R.reduce(assocNavigation, {}, pageNavigations)
+
+    resolve(navigation)
+  })
+}
+
+async function forPageId ({ pages }, pageId) {
+  return new Promise((resolve, reject) => {
+    const navigation = dataForPageId(pages, pageId)
     resolve(navigation)
   })
 }
 
 module.exports = {
-  forPageIdAsRoot
+  forPages,
+  forPageId
 }

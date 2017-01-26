@@ -26,11 +26,11 @@ async function setup (state) {
 }
 
 async function copyAssets (state) {
-  const themePath = state.config.basedirs.theme
-  const assetsPath = path.resolve(themePath, 'assets')
+  const Theme = getTheme(state)
+  const sourcePath = Theme.assetsPath
   const targetPath = path.resolve(state.config.target.assets)
 
-  await File.copy(assetsPath, targetPath)
+  await File.copy(sourcePath, targetPath)
 
   return state
 }

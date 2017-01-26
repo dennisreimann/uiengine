@@ -10,4 +10,4 @@ basedirs:
   templates: ./test/project/templates
   includes: ./test/project/includes
   pages: ./test/project/pages
-  theme: ../uiengine-theme-react
+  theme: ./test/project/theme
