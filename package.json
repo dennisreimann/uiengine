@@ -4,7 +4,7 @@
   "description": "",
   "author": "Dennis Reimann",
   "license": "UNLICENSED",
-  "main": "./lib/index.js",
+  "main": "./lib/uiengine.js",
   "files": [
     "bin",
     "theme",

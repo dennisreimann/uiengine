@@ -3,12 +3,13 @@ const assert = require('assert')
 const fs = require('fs-extra')
 const assertFileExists = require('./support/assertFileExists')
 
-const UIengine = require('../lib/index')
+const UIengine = require('../lib/uiengine')
 
 const sitePath = './test/tmp/site'
-const assetsPath = './test/tmp/assets'
+const assetsPath = './test/tmp/site/assets'
 const testConfigPath = './test/project/project.yml'
 
+// "end to end" tests
 describe('UIengine', () => {
   describe('#generate', () => {
     afterEach(() => {
