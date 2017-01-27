@@ -7,12 +7,17 @@ const assocNavigation = (siteNav, pageNav) =>
 
 const dataForPageId = (pages, pageId) => {
   const page = pages[pageId]
+  const childIds = page.childIds
   const parentId = PageUtil.parentIdForPageId(pageId)
   const parentIds = PageUtil.parentIdsForPageId(pageId)
-  // const collectChildren = R.partial(dataForPageId, [pages])
-  // const children = R.map(collectChildren, page.children)
-  const children = page.children
-  const data = NavigationData(pageId, parentId, parentIds, children)
+  const parent = pages[parentId]
+  const siblings = parent && parent.childIds || []
+  const indexInSiblings = R.indexOf(pageId, siblings)
+  const siblingsBeforeIds = R.dropLast(siblings.length - indexInSiblings, siblings)
+  const siblingsAfterIds = R.drop(indexInSiblings + 1, siblings)
+  const siblingBeforeId = R.last(siblingsBeforeIds)
+  const siblingAfterId = R.head(siblingsAfterIds)
+  const data = NavigationData(pageId, parentId, parentIds, childIds, siblingBeforeId, siblingsBeforeIds, siblingAfterId, siblingsAfterIds)
 
   return data
 }

@@ -20,7 +20,7 @@ const state = {
     }
   },
   pages: {
-    'index': Factory.page('index', { children: ['child1'] }),
+    'index': Factory.page('index', { childIds: ['child1'] }),
     'child1': Factory.page('child1', { path: 'custom/page/path' })
   }
 }

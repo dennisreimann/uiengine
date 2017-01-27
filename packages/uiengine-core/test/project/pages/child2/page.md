@@ -1,6 +1,6 @@
 ---
 title: Child 2
-children:
+childIds:
 - child2/grandchild2
 ---
 # Child 2

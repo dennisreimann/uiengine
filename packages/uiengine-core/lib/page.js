@@ -5,6 +5,9 @@ const frontmatter = require('./util/frontmatter')
 const markdown = require('./util/markdown')
 const PageUtil = require('./util/page')
 
+const assocPage = (pages, page) =>
+  R.assoc(page.id, page, pages)
+
 async function readPageFile (pageFilePath) {
   const { attributes, body } = await frontmatter.fromFile(pageFilePath)
   const content = await markdown.fromString(body)
@@ -29,7 +32,6 @@ async function fetchAll (state) {
   const pageFetches = R.map(pageFetch, pageIds)
   const pageList = await Promise.all(pageFetches)
 
-  const assocPage = (pages, page) => R.assoc(page.id, page, pages)
   const pages = R.reduce(assocPage, {}, pageList)
 
   return pages
@@ -42,12 +44,12 @@ async function fetchByPageId (state, pageId) {
   const pageFile = { relativePath, absolutePath }
   const childsPath = PageUtil.pageIdToPath(pageId)
   const childsGlob = path.join(childsPath, '*')
-  const fetchChildren = findPageIds(pagesPath, childsGlob)
+  const fetchChildIds = findPageIds(pagesPath, childsGlob)
   const fetchPageData = readPageFile(absolutePath)
-  const [ pageData, children ] = await Promise.all([ fetchPageData, fetchChildren ])
+  const [ pageData, childIds ] = await Promise.all([ fetchPageData, fetchChildIds ])
   const { attributes, content } = pageData
   const template = 'page'
-  const baseData = { id: pageId, path: PageUtil.pageIdToPath(pageId), pageFile, children, content, template }
+  const baseData = { id: pageId, path: PageUtil.pageIdToPath(pageId), pageFile, childIds, content, template }
   const data = R.mergeAll([baseData, attributes])
 
   if (data.template) {
