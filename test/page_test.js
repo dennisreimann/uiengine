@@ -42,32 +42,32 @@ describe('Page', () => {
         .catch(done)
     })
 
-    it('should infer children if they are not provided', done => {
+    it('should infer childIds if they are not provided', done => {
       Page.fetchByPageId(state, 'child1')
         .then(data => {
-          assert.equal(data.children.length, 1)
-          assert.equal(data.children[0], 'child1/grandchild1')
+          assert.equal(data.childIds.length, 1)
+          assert.equal(data.childIds[0], 'child1/grandchild1')
           done()
         })
         .catch(done)
     })
 
-    it('should infer children for index if they are not provided', done => {
+    it('should infer childIds for index if they are not provided', done => {
       Page.fetchByPageId(state, 'index')
         .then(data => {
-          assert.equal(data.children.length, 2)
-          assert.equal(data.children[0], 'child1')
-          assert.equal(data.children[1], 'child2')
+          assert.equal(data.childIds.length, 2)
+          assert.equal(data.childIds[0], 'child1')
+          assert.equal(data.childIds[1], 'child2')
           done()
         })
         .catch(done)
     })
 
-    it('should not infer children if they are explicitely provided', done => {
+    it('should not infer childIds if they are explicitely provided', done => {
       Page.fetchByPageId(state, 'child2')
         .then(data => {
-          assert.equal(data.children.length, 1)
-          assert.equal(data.children[0], 'child2/grandchild2')
+          assert.equal(data.childIds.length, 1)
+          assert.equal(data.childIds[0], 'child2/grandchild2')
           done()
         })
         .catch(done)
