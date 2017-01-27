@@ -11,7 +11,6 @@ describe('Configuration', () => {
       Configuration.read(testConfigPath)
         .then(config => {
           assert.equal(config.name, 'Test')
-          assert.equal(config.namespace, 'test')
           assert.equal(config.target.site, './test/tmp/site')
           assert.equal(config.target.assets, './test/tmp/site/assets')
           assert.equal(config.basedirs.components, './test/project/components')

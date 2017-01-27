@@ -1,5 +1,4 @@
 name: Test
-namespace: test
 
 target:
   site: ./test/tmp/site
