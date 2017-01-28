@@ -20,7 +20,7 @@ describe('File', () => {
 
   describe('#write', () => {
     it('should write content to file', done => {
-      const filePath = './test/tmpWriteFileTest.txt'
+      const filePath = './test/tmp/writeFileTest.txt'
       File.write(filePath, 'Test')
         .then(() => {
           const content = fs.readFileSync(filePath)

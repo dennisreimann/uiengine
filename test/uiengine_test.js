@@ -1,13 +1,14 @@
 /* global describe, it */
-const assert = require('assert')
 const fs = require('fs-extra')
+const path = require('path')
+const assert = require('assert')
 const assertFileExists = require('./support/assertFileExists')
 
 const UIengine = require('../lib/uiengine')
 
-const sitePath = './test/tmp/site'
-const assetsPath = './test/tmp/site/assets'
-const testConfigPath = './test/project/project.yml'
+const sitePath = path.resolve(__dirname, '../sample_project/dist')
+const assetsPath = path.resolve(__dirname, '../sample_project/dist/assets')
+const testConfigPath = path.resolve(__dirname, '../sample_project/uiengine.yml')
 
 // "end to end" tests
 describe('UIengine', () => {
@@ -23,12 +24,13 @@ describe('UIengine', () => {
       UIengine.generate(opts)
         .then(state => {
           assertFileExists(`${sitePath}/index.html`)
-          assertFileExists(`${sitePath}/childpage/path/explicit/index.html`)
-          assertFileExists(`${sitePath}/child1/grandchild1/index.html`)
-          assertFileExists(`${sitePath}/child2/index.html`)
-          assertFileExists(`${sitePath}/child2/grandchild1/index.html`)
-          assertFileExists(`${sitePath}/child2/grandchild2/index.html`)
-          assertFileExists(`${sitePath}/index.html`)
+          assertFileExists(`${sitePath}/documentation/index.html`)
+          assertFileExists(`${sitePath}/pattern-library/index.html`)
+          assertFileExists(`${sitePath}/patterns/atoms/index.html`)
+          assertFileExists(`${sitePath}/patterns/molecules/index.html`)
+          assertFileExists(`${sitePath}/patterns/organisms/index.html`)
+          assertFileExists(`${sitePath}/patterns/templates/index.html`)
+          assertFileExists(`${sitePath}/patterns/pages/index.html`)
 
           done()
         })
