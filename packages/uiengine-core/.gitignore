@@ -1,6 +1,7 @@
 /coverage
 /node_modules
 /npm-debug*
+/sample_project/dist
 /test/tmp
 *log
 .DS_Store

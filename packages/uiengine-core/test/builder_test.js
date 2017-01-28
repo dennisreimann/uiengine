@@ -1,5 +1,6 @@
 /* global after, before, describe, it */
 const fs = require('fs-extra')
+const path = require('path')
 const Factory = require('./support/factory')
 const assertFileExists = require('./support/assertFileExists')
 
@@ -8,16 +9,17 @@ const Theme = require('../lib/theme')
 
 const sitePath = './test/tmp/site'
 const assetsPath = './test/tmp/assets'
+
 const state = {
   config: {
     target: {
       site: sitePath,
       assets: assetsPath
     },
-    basedirs: {
-      pages: './test/project/pages',
-      theme: '../uiengine-theme-handlebars'
-    }
+    source: {
+      pages: path.resolve(__dirname, '../sample_project/pages')
+    },
+    theme: path.resolve(__dirname, '../sample_project/theme')
   },
   pages: {
     'index': Factory.page('index', { childIds: ['child1'] }),

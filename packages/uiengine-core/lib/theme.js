@@ -2,32 +2,31 @@ const path = require('path')
 const File = require('./util/file')
 
 const getTheme = (state) => {
-  const themePath = path.resolve(process.cwd(), state.config.basedirs.theme)
-  const Theme = require(themePath)
-
-  return Theme
+  const theme = state.config.theme
+  return require(theme)
 }
 
 async function render (state, templateId, data = {}) {
-  const Theme = getTheme(state)
-  const rendered = await Theme.render(templateId, data)
-
-  return rendered
+  const theme = getTheme(state)
+  return await theme.render(templateId, data)
 }
 
 async function setup (state) {
-  const Theme = getTheme(state)
-  const setupTheme = Theme.setup()
-  const setupAssets = copyAssets(state)
+  const theme = getTheme(state)
+  const tasks = [copyAssets(state)]
 
-  await Promise.all([setupTheme, setupAssets])
+  if (typeof theme.setup === 'function') {
+    tasks.push(theme.setup())
+  }
+
+  await Promise.all(tasks)
 
   return state
 }
 
 async function copyAssets (state) {
-  const Theme = getTheme(state)
-  const sourcePath = Theme.assetsPath
+  const theme = getTheme(state)
+  const sourcePath = theme.assetsPath
   const targetPath = path.resolve(state.config.target.assets)
 
   await File.copy(sourcePath, targetPath)
@@ -36,9 +35,16 @@ async function copyAssets (state) {
 }
 
 async function teardown (state) {
-  const Theme = getTheme(state)
+  const theme = getTheme(state)
+  const tasks = []
 
-  return await Theme.teardown()
+  if (typeof theme.teardown === 'function') {
+    tasks.push(theme.teardown())
+  }
+
+  await Promise.all(tasks)
+
+  return state
 }
 
 module.exports = {

@@ -1,22 +1,23 @@
 /* global describe, it */
+const path = require('path')
 const assert = require('assert')
 
 const Configuration = require('../lib/configuration')
 
-const testConfigPath = './test/project/project.yml'
+const testConfigPath = path.resolve(__dirname, '../sample_project/uiengine.yml')
 
 describe('Configuration', () => {
   describe('#read', () => {
     it('should return config object', done => {
       Configuration.read(testConfigPath)
         .then(config => {
-          assert.equal(config.name, 'Test')
-          assert.equal(config.target.site, './test/tmp/site')
-          assert.equal(config.target.assets, './test/tmp/site/assets')
-          assert.equal(config.basedirs.components, './test/project/components')
-          assert.equal(config.basedirs.templates, './test/project/templates')
-          assert.equal(config.basedirs.includes, './test/project/includes')
-          assert.equal(config.basedirs.pages, './test/project/pages')
+          assert.equal(config.name, 'UIengine sample')
+          assert(config.target.site.endsWith('sample_project/dist'))
+          assert(config.target.assets.endsWith('sample_project/dist/assets'))
+          assert(config.source.components.endsWith('sample_project/components'))
+          assert(config.source.templates.endsWith('sample_project/templates'))
+          assert(config.source.includes.endsWith('sample_project/includes'))
+          assert(config.source.pages.endsWith('sample_project/pages'))
 
           done()
         })
