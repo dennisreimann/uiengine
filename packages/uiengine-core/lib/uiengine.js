@@ -3,6 +3,7 @@ const R = require('ramda')
 const Config = require('./configuration')
 const Builder = require('./builder')
 const Navigation = require('./navigation')
+const Component = require('./component')
 const Page = require('./page')
 const Theme = require('./theme')
 const PageUtil = require('./util/page')
@@ -23,8 +24,10 @@ async function generate (options) {
 
   // 1. data fetching
   const fetchPages = Page.fetchAll(state)
-  const [pages] = await Promise.all([fetchPages])
+  const fetchComponents = Component.fetchAll(state)
+  const [pages, components] = await Promise.all([fetchPages, fetchComponents])
   state = R.assoc('pages', pages, state)
+  state = R.assoc('components', components, state)
 
   // 2. setup and transformations
   const setupTheme = Theme.setup(state)
