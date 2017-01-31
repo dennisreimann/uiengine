@@ -1,11 +1,10 @@
-/* global after, before, describe, it */
+/* global describe, it */
 const fs = require('fs-extra')
 const path = require('path')
 const Factory = require('./support/factory')
 const assertFileExists = require('./support/assertFileExists')
 
 const Builder = require('../lib/builder')
-const Theme = require('../lib/theme')
 
 const sitePath = './test/tmp/site'
 const assetsPath = './test/tmp/assets'
@@ -28,9 +27,6 @@ const state = {
 }
 
 describe('Builder', () => {
-  before(() => Theme.setup(state))
-  after(() => Theme.teardown(state))
-
   describe('#generateSite', () => {
     afterEach(() => { fs.removeSync(sitePath) })
 
