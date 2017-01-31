@@ -27,17 +27,4 @@ describe('ComponentUtil', () => {
       assert.equal(ComponentUtil.componentFilePathToComponentId(componentsPath, './components/button/additional.pdf'), 'button')
     })
   })
-
-  describe('#componentIdToVariationsPath', () => {
-    it('should return variations path for component id', () => {
-      assert.equal(ComponentUtil.componentIdToVariationsPath(componentsPath, 'button'), 'components/button/variations')
-    })
-  })
-
-  describe('#variationIdFromVariationFilePath', () => {
-    it('should return variation id for variation file path', () => {
-      const variationId = ComponentUtil.variationIdFromVariationFilePath(componentsPath, 'button', './components/button/variations/primary-button.pug')
-      assert.equal(variationId, 'button/primary-button')
-    })
-  })
 })
