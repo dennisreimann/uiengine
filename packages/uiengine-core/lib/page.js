@@ -26,6 +26,8 @@ async function findPageIds (pagesPath, pageGlob = '**') {
 
 async function fetchAll (state) {
   const pagesPath = state.config.source.pages
+  if (!pagesPath) return {}
+
   const pageIds = await findPageIds(pagesPath)
 
   const pageFetch = R.partial(fetchById, [state])

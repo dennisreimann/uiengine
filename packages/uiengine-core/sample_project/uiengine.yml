@@ -1,12 +1,18 @@
 # Project name – defaults to name from package.json, here you can overwrite it
 name: UIengine sample
 
+# Base directories for the input, your raw source files:
+# - pages is the directory of the UIengine's site structure and page markdown files
+# - components is the root of the directory containing the components
 source:
+  pages: ./pages
   components: ./components
   templates: ./templates
   includes: ./includes
-  pages: ./pages
 
+# Destination paths for the generated output:
+# - site is the directory where the html files for the pages will be stored
+# - assets will contain the static files belonging to the theme (the sites UI)
 target:
   site: ./dist
   assets: ./dist/assets

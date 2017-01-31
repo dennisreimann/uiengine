@@ -36,6 +36,8 @@ async function findVariationIds (componentsPath, componentId, variationGlob = '*
 
 async function fetchAll (state) {
   const componentsPath = state.config.source.components
+  if (!componentsPath) return {}
+
   const componentIds = await findComponentIds(componentsPath)
 
   const componentFetch = R.partial(fetchById, [state])
