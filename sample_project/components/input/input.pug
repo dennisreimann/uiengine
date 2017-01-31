@@ -1,0 +1,4 @@
+mixin input(id, name, type)
+  - const type = attributes.type || 'text'
+  - const classes = `input input--${type}` + (attributes.required ? ' input--required' : '')
+  input(id=id name=name type=type)&attributes(attributes)

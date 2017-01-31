@@ -1,0 +1,6 @@
+mixin label(id, title)
+  label.label(for=id)
+    if block
+      block
+    else
+      = title
