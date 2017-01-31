@@ -55,6 +55,17 @@ describe('Component', () => {
         })
         .catch(done)
     })
+
+    it('should return empty object if components source is not set', done => {
+      Component.fetchAll({ config: { source: { } } })
+        .then(data => {
+          const componentIds = Object.keys(data)
+
+          assert.equal(componentIds.length, 0)
+          done()
+        })
+        .catch(done)
+    })
   })
 
   describe('#fetchAll', () => {
@@ -68,6 +79,17 @@ describe('Component', () => {
           assert(componentIds.includes('label'), 'missing component "label"')
           assert(componentIds.includes('formrow'), 'missing component "formrow"')
           assert(componentIds.includes('form'), 'missing component "form"')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should return empty object if components source is not set', done => {
+      Component.fetchAll({ config: { source: { } } })
+        .then(data => {
+          const componentIds = Object.keys(data)
+
+          assert.equal(componentIds.length, 0)
           done()
         })
         .catch(done)

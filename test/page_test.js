@@ -134,5 +134,16 @@ describe('Page', () => {
         })
         .catch(done)
     })
+
+    it('should return empty object if pages source is not set', done => {
+      Page.fetchAll({ config: { source: { } } })
+        .then(data => {
+          const pageIds = Object.keys(data)
+
+          assert.equal(pageIds.length, 0)
+          done()
+        })
+        .catch(done)
+    })
   })
 })
