@@ -111,7 +111,7 @@ describe('Page', () => {
     it('should render content from markdown', done => {
       Page.fetchById(state, 'index')
         .then(data => {
-          assert.equal(data.content, '<p>Welcome!</p>\n')
+          assert.equal(data.content, '<p>Welcome!</p>')
           done()
         })
         .catch(done)

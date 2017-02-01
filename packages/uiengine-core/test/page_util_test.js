@@ -1,9 +1,10 @@
 /* global describe, it */
+const path = require('path')
 const assert = require('assert')
 
 const PageUtil = require('../lib/util/page')
 
-const pagesPath = './pages'
+const pagesPath = path.resolve(__dirname, '../sample_project/pages')
 
 describe('PageUtil', () => {
   describe('#pageIdToPath', () => {
@@ -18,25 +19,31 @@ describe('PageUtil', () => {
 
   describe('#pageIdToPageFilePath', () => {
     it('should return page file path for index page', () => {
-      assert.equal(PageUtil.pageIdToPageFilePath(pagesPath, 'index'), 'pages/page.md')
+      assert.equal(
+        PageUtil.pageIdToPageFilePath(pagesPath, 'index'),
+        path.join(pagesPath, 'page.md')
+      )
     })
 
     it('should return page file path for page', () => {
-      assert.equal(PageUtil.pageIdToPageFilePath(pagesPath, 'patterns/atoms/buttons'), 'pages/patterns/atoms/buttons/page.md')
+      assert.equal(
+        PageUtil.pageIdToPageFilePath(pagesPath, 'patterns/atoms/buttons'),
+        path.join(pagesPath, 'patterns', 'atoms', 'buttons', 'page.md')
+      )
     })
   })
 
   describe('#pageFilePathToPageId', () => {
     it('should return page id for index file path', () => {
-      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, './pages/page.md'), 'index')
+      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'page.md')), 'index')
     })
 
     it('should return page id for page file path', () => {
-      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, './pages/patterns/atoms/buttons/page.md'), 'patterns/atoms/buttons')
+      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'patterns', 'atoms', 'buttons', 'page.md')), 'patterns/atoms/buttons')
     })
 
     it('should return page id for file path', () => {
-      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, './pages/patterns/atoms/buttons/additional.pdf'), 'patterns/atoms/buttons')
+      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'patterns', 'atoms', 'buttons', 'additional.pdf')), 'patterns/atoms/buttons')
     })
   })
 

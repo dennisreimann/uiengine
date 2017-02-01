@@ -1,30 +1,39 @@
 /* global describe, it */
+const path = require('path')
 const assert = require('assert')
 
 const ComponentUtil = require('../lib/util/component')
 
-const componentsPath = './components'
+const componentsPath = path.resolve(__dirname, '../sample_project/components')
 
 describe('ComponentUtil', () => {
   describe('#componentIdToPath', () => {
     it('should return path for component', () => {
-      assert.equal(ComponentUtil.componentIdToPath(componentsPath, 'button'), 'components/button')
+      assert.equal(
+        ComponentUtil.componentIdToPath(componentsPath, 'button'),
+        path.join(componentsPath, 'button')
+      )
     })
   })
 
   describe('#componentIdToComponentFilePath', () => {
     it('should return component file path for component', () => {
-      assert.equal(ComponentUtil.componentIdToComponentFilePath(componentsPath, 'button'), 'components/button/component.md')
+      assert.equal(
+        ComponentUtil.componentIdToComponentFilePath(componentsPath, 'button'),
+        path.join(componentsPath, 'button', 'component.md')
+      )
     })
   })
 
   describe('#componentFilePathToComponentId', () => {
     it('should return component id for component file path', () => {
-      assert.equal(ComponentUtil.componentFilePathToComponentId(componentsPath, './components/button/component.md'), 'button')
+      const filePath = path.join(componentsPath, 'button', 'component.md')
+      assert.equal(ComponentUtil.componentFilePathToComponentId(componentsPath, filePath), 'button')
     })
 
     it('should return component id for file path', () => {
-      assert.equal(ComponentUtil.componentFilePathToComponentId(componentsPath, './components/button/additional.pdf'), 'button')
+      const filePath = path.join(componentsPath, 'button', 'additional.pdf')
+      assert.equal(ComponentUtil.componentFilePathToComponentId(componentsPath, filePath), 'button')
     })
   })
 })
