@@ -20,12 +20,14 @@ async function generatePage (state, pageId) {
   const templateId = page.template
   const pageData = pageDataFromState(state, pageId)
   const data = R.assoc('page', page, pageData)
-  const rendered = await Theme.render(state, templateId, data)
+  const html = await Theme.render(state, templateId, data)
 
   const pageDirectory = page.path === 'index' ? '' : page.path
-  const relativePath = path.join(pageDirectory, 'index.html')
-  const filePath = path.resolve(state.config.target.site, relativePath)
-  await File.write(filePath, rendered)
+  const targetPath = path.resolve(state.config.target.site, pageDirectory)
+  const htmlPath = path.resolve(targetPath, 'index.html')
+  const writeHtml = File.write(htmlPath, html)
+  const copyFiles = R.map((source) => File.copy(source, path.resolve(targetPath, path.basename(source))), page.files)
+  await Promise.all([writeHtml, ...copyFiles])
 
   return state
 }

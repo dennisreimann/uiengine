@@ -3,10 +3,11 @@ const path = require('path')
 const assert = require('assert')
 
 const Page = require('../lib/page')
+const pagesPath = path.resolve(__dirname, '../sample_project/pages')
 const state = {
   config: {
     source: {
-      pages: path.resolve(__dirname, '../sample_project/pages')
+      pages: pagesPath
     }
   }
 }
@@ -112,6 +113,25 @@ describe('Page', () => {
       Page.fetchById(state, 'index')
         .then(data => {
           assert.equal(data.content, '<p>Welcome!</p>')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should register files', done => {
+      Page.fetchById(state, 'patterns')
+        .then(data => {
+          assert.equal(data.files.length, 1)
+          assert.equal(data.files[0], path.join(pagesPath, 'patterns', 'patterns-file.txt'))
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should register empty array if no files are present', done => {
+      Page.fetchById(state, 'patterns/atoms')
+        .then(data => {
+          assert.equal(data.files.length, 0)
           done()
         })
         .catch(done)

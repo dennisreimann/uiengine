@@ -1,6 +1,6 @@
 module.exports = {
-  page (id, { childIds = [], path = null, template = 'page' } = {}) {
+  page (id, { childIds = [], files = [], path = null, template = 'page' } = {}) {
     const pagePath = path || (id === 'index' ? '' : id)
-    return { id, childIds, template, path: pagePath }
+    return { id, childIds, files, template, path: pagePath }
   }
 }
