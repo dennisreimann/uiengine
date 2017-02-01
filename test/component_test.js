@@ -33,7 +33,7 @@ describe('Component', () => {
         .catch(done)
     })
 
-    it('should not infer childIds if they are explicitely provided', done => {
+    it('should not infer variationIds if they are explicitely provided', done => {
       Component.fetchById(state, 'input')
         .then(data => {
           assert.equal(data.variationIds.length, 5)
@@ -50,7 +50,7 @@ describe('Component', () => {
     it('should render content from markdown', done => {
       Component.fetchById(state, 'input')
         .then(data => {
-          assert.equal(data.content, '<p>An input field that can be used inside a form.</p>\n')
+          assert.equal(data.content, '<p>An input field that can be used inside a form.</p>')
           done()
         })
         .catch(done)
