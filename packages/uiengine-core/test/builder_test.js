@@ -90,4 +90,16 @@ describe('Builder', () => {
         .catch(done)
     })
   })
+
+  describe('#dumpState', () => {
+    it('should generate state file', done => {
+      Builder.dumpState(state)
+        .then(state => {
+          assertFileExists(path.join(sitePath, 'state.json'))
+
+          done()
+        })
+        .catch(done)
+    })
+  })
 })

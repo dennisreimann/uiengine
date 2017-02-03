@@ -37,7 +37,8 @@ async function generate (options) {
 
   // 3. output
   const generateSite = Builder.generateSite(state)
-  await Promise.all([generateSite])
+  const dumpState = Builder.dumpState(state)
+  await Promise.all([generateSite, dumpState])
 
   return state
 }
