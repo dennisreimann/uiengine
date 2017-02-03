@@ -47,6 +47,8 @@
     "globby": "^6.1.0",
     "js-yaml": "^3.7.0",
     "markdown-it": "^8.2.2",
+    "markdown-it-anchor": "^2.6.0",
+    "pug": "^2.0.0-beta10",
     "ramda": "^0.23.0",
     "yargs": "^6.6.0"
   }
