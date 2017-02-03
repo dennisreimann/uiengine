@@ -31,6 +31,7 @@ describe('UIengine', () => {
           assertFileExists(`${sitePath}/patterns/organisms/index.html`)
           assertFileExists(`${sitePath}/patterns/templates/index.html`)
           assertFileExists(`${sitePath}/patterns/pages/index.html`)
+          assertFileExists(`${sitePath}/state.json`)
 
           done()
         })
