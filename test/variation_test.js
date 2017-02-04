@@ -6,7 +6,7 @@ const Variation = require('../lib/variation')
 const state = {
   config: {
     source: {
-      components: path.resolve(__dirname, '../sample_project/components')
+      components: path.resolve(__dirname, '..', 'sample_project', 'src', 'components')
     }
   }
 }
@@ -17,16 +17,10 @@ describe('Variation', () => {
       Variation.fetchById(state, 'input/text')
         .then(data => {
           assert.equal(data.id, 'input/text')
-          done()
-        })
-        .catch(done)
-    })
-
-    it('should render variation', done => {
-      Variation.fetchById(state, 'input/text')
-        .then(data => {
-          assert.equal(data.raw, '+input("name", "person[name]")')
-          // TODO: test render
+          assert.equal(data.raw, 'include /input/input.pug\n\n+input(id, name)')
+          assert.equal(data.title, 'Text Input')
+          assert.equal(data.context.id, 'name')
+          assert.equal(data.context.name, 'person[name]')
           done()
         })
         .catch(done)
