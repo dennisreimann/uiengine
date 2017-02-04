@@ -8,7 +8,7 @@ describe('Markdown', () => {
     it('should return rendered markdown', done => {
       Markdown.fromFile('./test/fixtures/markdown.md')
         .then(data => {
-          assert.equal(data, '<h1>Homepage</h1>\n<p>Welcome!</p>')
+          assert.equal(data, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
           done()
         })
         .catch(done)
@@ -19,7 +19,7 @@ describe('Markdown', () => {
     it('should return rendered markdown', done => {
       Markdown.fromString('# Homepage\n\nWelcome!')
         .then(data => {
-          assert.equal(data, '<h1>Homepage</h1>\n<p>Welcome!</p>')
+          assert.equal(data, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
           done()
         })
         .catch(done)

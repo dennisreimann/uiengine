@@ -6,7 +6,7 @@ const Component = require('../lib/component')
 const state = {
   config: {
     source: {
-      components: path.resolve(__dirname, '../sample_project/components')
+      components: path.resolve(__dirname, '..', 'sample_project', 'src', 'components')
     }
   }
 }
@@ -33,15 +33,14 @@ describe('Component', () => {
         .catch(done)
     })
 
-    it('should not infer variationIds if they are explicitely provided', done => {
+    it('should not infer variationIds if they are explicitely provided by variations attribute', done => {
       Component.fetchById(state, 'input')
         .then(data => {
-          assert.equal(data.variationIds.length, 5)
-          assert.equal(data.variationIds[0], 'text')
-          assert.equal(data.variationIds[1], 'text-required')
-          assert.equal(data.variationIds[2], 'text-disabled')
-          assert.equal(data.variationIds[3], 'number')
-          assert.equal(data.variationIds[4], 'checkbox')
+          assert.equal(data.variationIds.length, 4)
+          assert.equal(data.variationIds[0], 'input/text')
+          assert.equal(data.variationIds[1], 'input/text-required')
+          assert.equal(data.variationIds[2], 'input/text-disabled')
+          assert.equal(data.variationIds[3], 'input/number')
           done()
         })
         .catch(done)

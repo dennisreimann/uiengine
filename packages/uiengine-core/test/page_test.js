@@ -3,7 +3,7 @@ const path = require('path')
 const assert = require('assert')
 
 const Page = require('../lib/page')
-const pagesPath = path.resolve(__dirname, '../sample_project/pages')
+const pagesPath = path.resolve(__dirname, '../sample_project/src/pages')
 const state = {
   config: {
     source: {

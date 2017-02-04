@@ -5,31 +5,67 @@ const Factory = require('./support/factory')
 const assertFileExists = require('./support/assertFileExists')
 
 const Builder = require('../lib/builder')
+const NavigationData = require('../lib/data/navigation')
+const ComponentData = require('../lib/data/component')
+const VariationData = require('../lib/data/variation')
 
+const templating = path.resolve(__dirname, '..', 'lib', 'templating', 'uiengine-templating-pug')
+const theme = path.resolve(__dirname, '..', 'theme')
+const projectPath = path.resolve(__dirname, '..', 'sample_project')
 const tmpPath = path.resolve(__dirname, 'tmp')
 const sitePath = path.resolve(tmpPath, 'site')
-const assetsPath = path.resolve(tmpPath, 'site/assets')
+const assetsPath = path.resolve(tmpPath, 'site', 'assets')
 
 const state = {
   config: {
+    name: 'Builder Test',
+    version: '0.1.0',
     target: {
       site: sitePath,
       assets: assetsPath
     },
     source: {
-      pages: path.resolve(__dirname, '../sample_project/pages')
+      components: path.resolve(projectPath, 'src', 'components'),
+      templates: path.resolve(projectPath, 'src', 'templates'),
+      pages: path.resolve(projectPath, 'src', 'pages')
     },
-    theme: path.resolve(__dirname, '../sample_project/theme')
+    theme,
+    templating
   },
   pages: {
-    'index': Factory.page('index', {
+    index: Factory.page('index', {
       childIds: ['patterns'],
-      files: [path.resolve(__dirname, '../sample_project/pages/index.txt')]
+      files: [path.resolve(projectPath, 'src', 'pages', 'index.txt')]
     }),
-    'patterns': Factory.page('patterns', {
+    patterns: Factory.page('patterns', {
       path: 'pattern-library',
-      files: [path.resolve(__dirname, '../sample_project/pages/patterns/patterns-file.txt')]
+      files: [path.resolve(projectPath, 'src', 'pages', 'patterns', 'patterns-file.txt')]
     })
+  },
+  navigation: {
+    index: NavigationData('index', null, [], ['patterns']),
+    patterns: NavigationData('patterns', 'index', ['index'])
+  },
+  components: {
+    input: ComponentData(
+      'input',
+      path.resolve(projectPath, 'src', 'components', 'input'),
+      ['input/text'],
+      {
+        content: '<p>An input field that can be used inside a form.</p>',
+        title: 'Input'
+      }
+    )
+  },
+  variations: {
+    'input/text': VariationData(
+      'input/text',
+      'input',
+      path.resolve(projectPath, 'src', 'components', 'input', 'variations', 'text.pug'),
+      'include /input/input.pug\n\n+input(id, name)',
+      { id: 'name', name: 'person[name]' },
+      { title: 'Text Input' }
+    )
   }
 }
 
@@ -84,6 +120,18 @@ describe('Builder', () => {
       Builder.generatePage(state, 'patterns')
         .then(state => {
           assertFileExists(path.join(sitePath, 'pattern-library', 'patterns-file.txt'))
+
+          done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('#generateVariation', () => {
+    it('should generate variation page', done => {
+      Builder.generateVariation(state, 'input/text')
+        .then(state => {
+          assertFileExists(path.join(sitePath, 'variations', 'input', 'text.html'))
 
           done()
         })

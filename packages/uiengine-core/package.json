@@ -7,7 +7,8 @@
   "main": "./lib/uiengine.js",
   "files": [
     "bin",
-    "default_theme",
+    "theme",
+    "templating",
     "lib",
     "sample_project"
   ],
@@ -24,7 +25,7 @@
   "scripts": {
     "pretest": "standard",
     "test": "mocha --harmony -R dot",
-    "build": "rm -rf ./sample_project/dist && ./bin/uiengine.js site --config=./sample_project/uiengine.yml && serve ./sample_project/dist"
+    "build": "rm -rf ./sample_project/dist && ./bin/uiengine.js site --config=./sample_project/uiengine.yml && cp -R ./sample_project/src/assets ./sample_project/dist && serve ./sample_project/dist"
   },
   "devDependencies": {
     "mocha": "^3.2.0",

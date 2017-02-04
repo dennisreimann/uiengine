@@ -4,7 +4,7 @@ const assert = require('assert')
 
 const ComponentUtil = require('../lib/util/component')
 
-const componentsPath = path.resolve(__dirname, '../sample_project/components')
+const componentsPath = path.resolve(__dirname, '../sample_project/src/components')
 
 describe('ComponentUtil', () => {
   describe('#componentIdToPath', () => {

@@ -4,7 +4,7 @@ const assert = require('assert')
 
 const VariationUtil = require('../lib/util/variation')
 
-const componentsPath = path.resolve(__dirname, '../sample_project/components')
+const componentsPath = path.resolve(__dirname, '../sample_project/src/components')
 
 describe('VariationUtil', () => {
   describe('#componentIdToVariationsPath', () => {

@@ -1,14 +1,14 @@
 const path = require('path')
 const File = require('./util/file')
 
-const getTheme = (state) => {
-  const theme = state.config.theme
+const getTheme = ({ config }) => {
+  const theme = config.theme
   return require(theme)
 }
 
-async function render (state, templateId, data = {}) {
+async function renderTemplate (state, templateId, data = {}) {
   const theme = getTheme(state)
-  return await theme.render(templateId, data)
+  return await theme.renderTemplate(templateId, data)
 }
 
 async function setup (state) {
@@ -50,7 +50,7 @@ async function teardown (state) {
 
 module.exports = {
   setup,
-  render,
+  renderTemplate,
   teardown
 }
 

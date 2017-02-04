@@ -4,10 +4,15 @@ const Config = require('./configuration')
 const Builder = require('./builder')
 const Navigation = require('./navigation')
 const Component = require('./component')
+const Variation = require('./variation')
 const Page = require('./page')
 const Theme = require('./theme')
+const Templating = require('./templating')
 const PageUtil = require('./util/page')
+const ComponentUtil = require('./util/component')
 
+// set the state in this modules scope so that we
+// can access it when handling incremental changes
 let state = {}
 
 async function setupStateWithOptions (options = {}) {
@@ -22,17 +27,24 @@ async function setupStateWithOptions (options = {}) {
 async function generate (options) {
   // 0. setup
   state = await setupStateWithOptions(options)
-  state = await Theme.setup(state)
+
+  const setupTheme = Theme.setup(state)
+  const setupTemplating = Templating.setup(state)
+  await Promise.all([setupTheme, setupTemplating])
 
   // 1. data fetching
   const fetchPages = Page.fetchAll(state)
   const fetchComponents = Component.fetchAll(state)
-  const [pages, components] = await Promise.all([fetchPages, fetchComponents])
+  const fetchVariations = Variation.fetchAll(state)
+  const [pages, components, variations] = await Promise.all([fetchPages, fetchComponents, fetchVariations])
+
   state = R.assoc('pages', pages, state)
   state = R.assoc('components', components, state)
+  state = R.assoc('variations', variations, state)
 
   // 2. transformations
   const navigation = await Navigation.forPages(state)
+
   state = R.assoc('navigation', navigation, state)
 
   // 3. output
@@ -44,7 +56,9 @@ async function generate (options) {
 }
 
 async function generateIncrementForChangedFile (options, filePath) {
-  const pagesPath = path.relative('.', state.config.source.pages)
+  const { components, pages } = state.config.source
+  const pagesPath = components ? path.relative('.', pages) : false
+  const componentsPath = components ? path.relative('.', components) : false
   const relativeFilePath = path.relative('.', filePath)
 
   // TODO: Implement the correct behaviour
@@ -54,6 +68,12 @@ async function generateIncrementForChangedFile (options, filePath) {
     await generate(options)
 
     return { file: relativeFilePath, type: 'page', item: pageId }
+  } else if (relativeFilePath.startsWith(componentsPath)) {
+    const componentId = ComponentUtil.componentFilePathToComponentId(componentsPath, filePath)
+
+    await generate(options)
+
+    return { file: relativeFilePath, type: 'component', item: componentId }
   } else {
     await generate(options)
 

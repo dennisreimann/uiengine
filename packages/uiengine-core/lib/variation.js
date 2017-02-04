@@ -2,6 +2,7 @@ const path = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const frontmatter = require('./util/frontmatter')
+const VariationData = require('./data/variation')
 const VariationUtil = require('./util/variation')
 
 const assocVariation = (variations, variation) =>
@@ -44,9 +45,10 @@ async function fetchById (state, id) {
   const variationFilePath = VariationUtil.variationIdToVariationFilePath(componentsPath, id)
   const variationData = await readVariationFile(variationFilePath)
 
-  const { attributes, raw } = variationData
-  const baseData = { id, componentId, path: variationFilePath, raw }
-  const data = R.mergeAll([baseData, attributes])
+  let { attributes, raw } = variationData
+  const context = attributes.context
+  attributes = R.dissoc('context', attributes)
+  const data = VariationData(id, componentId, variationFilePath, raw, context, attributes)
 
   return data
 }

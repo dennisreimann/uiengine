@@ -30,3 +30,7 @@ yarn test
 
 Use the [default theme](https://github.com/dennisreimann/uiengine-theme-react) as a basis for your customizations.
 
+## Alternatives
+
+- http://fractal.build/
+- https://fbrctr.github.io/
