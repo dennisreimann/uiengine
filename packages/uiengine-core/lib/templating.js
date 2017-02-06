@@ -1,20 +1,30 @@
+const R = require('ramda')
+
 const getTemplating = (state) => {
   const templating = state.config.templating
   return require(templating)
 }
 
-async function renderTemplate (state, templateId, data = {}) {
+async function renderTemplate (state, templateId, data = {}, opts = {}) {
   const templating = getTemplating(state)
-  const source = state.config.source
-  const rendered = await templating.renderTemplate(source, templateId, data)
+  const { components, templates } = state.config.source
+
+  opts = R.assoc('templatesPath', templates, opts)
+  opts = R.assoc('componentsPath', components, opts)
+
+  const rendered = await templating.renderTemplate(templateId, data, opts)
 
   return rendered
 }
 
 async function renderString (state, templateString, data = {}, opts = {}) {
   const templating = getTemplating(state)
-  const source = state.config.source
-  const rendered = await templating.renderString(source, templateString, data, opts)
+  const { components, templates } = state.config.source
+
+  opts = R.assoc('templatesPath', templates, opts)
+  opts = R.assoc('componentsPath', components, opts)
+
+  const rendered = await templating.renderString(templateString, data, opts)
 
   return rendered
 }

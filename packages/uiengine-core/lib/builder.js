@@ -4,16 +4,18 @@ const Theme = require('./theme')
 const Templating = require('./templating')
 const File = require('./util/file')
 
-const pageDataFromState = ({ pages, navigation, config: { name, version } }, pageId) => {
+const getPageData = ({ pages, navigation, config: { name, version } }, pageId) => {
+  const page = pages[pageId]
   const config = { name, version }
-  const data = { pages, navigation, config }
+  const data = { page, pages, navigation, config }
 
   return data
 }
 
-const variationDataFromState = ({ config: { name, version } }, variationId) => {
+const getVariationData = ({ variations, config: { name, version } }, variationId, rendered) => {
+  const variation = R.assoc('rendered', rendered, variations[variationId])
   const config = { name, version }
-  const data = { config }
+  const data = { variation, config }
 
   return data
 }
@@ -38,8 +40,7 @@ async function generatePage (state, pageId) {
   const { pages, config } = state
   const page = pages[pageId]
   const templateId = page.template || 'page'
-  const pageData = pageDataFromState(state, pageId)
-  const data = R.assoc('page', page, pageData)
+  const data = getPageData(state, pageId)
   const html = await Theme.renderTemplate(state, templateId, data)
 
   // write file and copy files belonging to the page
@@ -74,12 +75,11 @@ async function generateVariation (state, variationId) {
   }
 
   const templateId = variation.template || 'variation'
-  const { context, raw, path } = variation
-  const rendered = await Templating.renderString(state, raw, context, { path })
+  const { context, raw } = variation
+  const opts = { filePath: variation.path }
+  const rendered = await Templating.renderString(state, raw, context, opts)
 
-  let data = variationDataFromState(state, variationId)
-  data = R.assoc('variation', variation, data)
-  data = R.assocPath(['variation', 'rendered'], rendered, data)
+  let data = getVariationData(state, variationId, rendered)
   const html = await Templating.renderTemplate(state, templateId, data)
 
   // write file

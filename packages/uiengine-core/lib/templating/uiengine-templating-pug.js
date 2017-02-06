@@ -3,19 +3,21 @@ const pug = require('pug')
 
 let templateCache = {}
 
-async function renderTemplate ({ templates }, templateId, data = {}) {
+async function renderTemplate (templateId, data = {}, opts = {}) {
   return new Promise((resolve, reject) => {
     let template = templateCache[templateId]
+
     if (!template) {
-      const templateFile = `${templateId}.pug`
-      const templatePath = path.resolve(templates, templateFile)
+      const templateFileName = `${templateId}.pug`
+      const { templatesPath } = opts
+      const templatePath = path.resolve(templatesPath, templateFileName)
 
       try {
         template = pug.compileFile(templatePath, {
           pretty: true,
           cache: true,
-          filename: templatePath,
-          basedir: templates
+          filename: templateFileName,
+          basedir: templatesPath
         })
       } catch (err) {
         reject(`Pug could not compile template "${templateId}".\n\n${err.stack}`)
@@ -29,17 +31,20 @@ async function renderTemplate ({ templates }, templateId, data = {}) {
   })
 }
 
-async function renderString ({ components }, templateString, data = {}, opts = {}) {
+async function renderString (templateString, data = {}, opts = {}) {
   return new Promise((resolve, reject) => {
     const templateId = templateString
     let template = templateCache[templateId]
+
     if (!template) {
+      const { componentsPath, filePath } = opts
+
       try {
         template = pug.compile(templateString, {
           pretty: true,
           cache: true,
-          filename: opts.path,
-          basedir: components
+          filename: filePath,
+          basedir: componentsPath
         })
       } catch (err) {
         reject(`Pug could not compile template string:\n\n${templateString}\n\n${err.message}`)
