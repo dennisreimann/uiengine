@@ -3,7 +3,7 @@ title: Pattern Library
 # custom path
 path: pattern-library
 # explicitely list children to ensure the correct order
-childIds:
+children:
 - atoms
 - molecules
 - organisms

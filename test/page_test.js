@@ -3,7 +3,7 @@ const path = require('path')
 const assert = require('assert')
 
 const Page = require('../lib/page')
-const pagesPath = path.resolve(__dirname, '../sample_project/src/pages')
+const pagesPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'pages')
 const state = {
   config: {
     source: {
@@ -36,9 +36,18 @@ describe('Page', () => {
     })
 
     it('should return page object for grand child page', done => {
+      Page.fetchById(state, 'patterns')
+        .then(data => {
+          assert.equal(data.id, 'patterns')
+          assert.equal(data.title, 'Pattern Library')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should infer page title if it is not provided', done => {
       Page.fetchById(state, 'patterns/atoms')
         .then(data => {
-          assert.equal(data.id, 'patterns/atoms')
           assert.equal(data.title, 'Atoms')
           done()
         })
@@ -72,11 +81,11 @@ describe('Page', () => {
       Page.fetchById(state, 'patterns')
         .then(data => {
           assert.equal(data.childIds.length, 5)
-          assert.equal(data.childIds[0], 'atoms')
-          assert.equal(data.childIds[1], 'molecules')
-          assert.equal(data.childIds[2], 'organisms')
-          assert.equal(data.childIds[3], 'templates')
-          assert.equal(data.childIds[4], 'pages')
+          assert.equal(data.childIds[0], 'patterns/atoms')
+          assert.equal(data.childIds[1], 'patterns/molecules')
+          assert.equal(data.childIds[2], 'patterns/organisms')
+          assert.equal(data.childIds[3], 'patterns/templates')
+          assert.equal(data.childIds[4], 'patterns/pages')
           done()
         })
         .catch(done)
