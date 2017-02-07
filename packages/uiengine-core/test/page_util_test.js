@@ -17,6 +17,14 @@ describe('PageUtil', () => {
     })
   })
 
+  describe('#pageIdToTitle', () => {
+    it('should return titleized name', () => {
+      assert.equal(PageUtil.pageIdToTitle('index'), 'Home')
+      assert.equal(PageUtil.pageIdToTitle('patterns/atoms'), 'Atoms')
+      assert.equal(PageUtil.pageIdToTitle('pattern-library'), 'Pattern Library')
+    })
+  })
+
   describe('#pageIdToPageFilePath', () => {
     it('should return page file path for index page', () => {
       assert.equal(
