@@ -24,9 +24,14 @@ async function findPageIds (pagesPath, pathPattern = '**') {
   return pageIds
 }
 
-async function findFiles (pagesPath, pathPattern = '**') {
-  const pattern = path.resolve(pagesPath, pathPattern)
-  const filePaths = await glob([pattern, `!**/${PageUtil.PAGE_FILENAME}`])
+async function findPageFiles (pagesPath, pagePath, childIds = []) {
+  const basePath = path.join(pagesPath, pagePath)
+  const filesPattern = path.join(basePath, '{,*/}*.*')
+  const pageExcludes = ['_{,*/}*.*', `**/${PageUtil.PAGE_FILENAME}`]
+  const childExcludes = R.map(id => path.join(id, '**'), childIds)
+  const excludes = R.concat(pageExcludes, childExcludes)
+  const excludePatterns = R.map((exclude) => '!' + path.join(basePath, exclude), excludes)
+  const filePaths = await glob([filesPattern, ...excludePatterns])
 
   return filePaths
 }
@@ -50,11 +55,10 @@ async function fetchById (state, pageId) {
   const pagePath = PageUtil.pageIdToPath(pageId)
   const absolutePath = PageUtil.pageIdToPageFilePath(pagesPath, pageId)
   const childPattern = path.join(pagePath, '*')
-  const filesPattern = path.join(pagePath, '*.*')
   const fetchChildIds = findPageIds(pagesPath, childPattern)
-  const fetchFiles = findFiles(pagesPath, filesPattern)
   const fetchPageData = readPageFile(absolutePath)
-  const [ pageData, childIds, files ] = await Promise.all([fetchPageData, fetchChildIds, fetchFiles])
+  const [ pageData, childIds ] = await Promise.all([fetchPageData, fetchChildIds])
+  const files = await findPageFiles(pagesPath, pagePath, childIds)
 
   const { attributes, content } = pageData
   const baseData = { id: pageId, path: pagePath, childIds, content, files }

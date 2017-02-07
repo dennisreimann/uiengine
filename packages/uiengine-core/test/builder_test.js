@@ -35,11 +35,17 @@ const state = {
   pages: {
     index: Factory.page('index', {
       childIds: ['patterns'],
-      files: [path.resolve(projectPath, 'src', 'pages', 'index.txt')]
+      files: [
+        path.resolve(projectPath, 'src', 'pages', 'extra-files', 'file-in-folder.txt'),
+        path.resolve(projectPath, 'src', 'pages', 'index.txt')
+      ]
     }),
     patterns: Factory.page('patterns', {
       path: 'pattern-library',
-      files: [path.resolve(projectPath, 'src', 'pages', 'patterns', 'patterns-file.txt')]
+      files: [
+        path.resolve(projectPath, 'src', 'pages', 'patterns', 'patterns-file.txt'),
+        path.resolve(projectPath, 'src', 'pages', 'patterns', 'some-files', 'file-in-folder.txt')
+      ]
     })
   },
   navigation: {
@@ -116,10 +122,30 @@ describe('Builder', () => {
         .catch(done)
     })
 
+    it('should copy page files in extra folder', done => {
+      Builder.generatePage(state, 'index')
+        .then(state => {
+          assertFileExists(path.join(sitePath, 'extra-files', 'file-in-folder.txt'))
+
+          done()
+        })
+        .catch(done)
+    })
+
     it('should copy page files for pages with custom paths', done => {
       Builder.generatePage(state, 'patterns')
         .then(state => {
           assertFileExists(path.join(sitePath, 'pattern-library', 'patterns-file.txt'))
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should copy page files in extra folder for pages with custom paths', done => {
+      Builder.generatePage(state, 'patterns')
+        .then(state => {
+          assertFileExists(path.join(sitePath, 'pattern-library', 'some-files', 'file-in-folder.txt'))
 
           done()
         })
