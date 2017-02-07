@@ -44,12 +44,11 @@ async function findPageIds (pagesPath, pathPattern = '**') {
 }
 
 async function findPageFiles (pagesPath, pagePath, childIds = []) {
-  const basePath = path.join(pagesPath, pagePath)
-  const filesPattern = path.join(basePath, '{,*/}*.*')
-  const pageExcludes = ['_{,*/}*.*', `**/${PageUtil.PAGE_FILENAME}`]
+  const filesPattern = path.join(pagesPath, pagePath, '{,*/}*.*')
+  const pageExcludes = ['**/_{,*/}*.*', `**/${PageUtil.PAGE_FILENAME}`]
   const childExcludes = R.map(id => path.join(id, '**'), childIds)
   const excludes = R.concat(pageExcludes, childExcludes)
-  const excludePatterns = R.map((exclude) => '!' + path.join(basePath, exclude), excludes)
+  const excludePatterns = R.map((exclude) => '!' + path.join(pagesPath, exclude), excludes)
   const filePaths = await glob([filesPattern, ...excludePatterns])
 
   return filePaths
