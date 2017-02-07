@@ -118,11 +118,23 @@ describe('Page', () => {
         .catch(done)
     })
 
-    it('should register files', done => {
+    it('should register files that do not start with an underscore', done => {
       Page.fetchById(state, 'patterns')
         .then(data => {
-          assert.equal(data.files.length, 1)
+          assert.equal(data.files.length, 2)
           assert.equal(data.files[0], path.join(pagesPath, 'patterns', 'patterns-file.txt'))
+          assert.equal(data.files[1], path.join(pagesPath, 'patterns', 'some-files', 'file-in-folder.txt'))
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should register files in folders that do not start with an underscore', done => {
+      Page.fetchById(state, 'index')
+        .then(data => {
+          assert.equal(data.files.length, 2)
+          assert.equal(data.files[0], path.join(pagesPath, 'extra-files', 'file-in-folder.txt'))
+          assert.equal(data.files[1], path.join(pagesPath, 'index.txt'))
           done()
         })
         .catch(done)
