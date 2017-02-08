@@ -7,9 +7,10 @@ mixin nav(pageIds, classBase = 'nav')
 
 mixin navItem(pageId, classBase = 'nav')
   if navPage = pages[pageId]
+    - const childrenClass = navigation[pageId].childIds.length ? ` ${classBase}__item--children` : ''
     - const currentClass = h.isCurrentPage(navPage.id) ? ` ${classBase}__item--current` : ''
     - const activeClass = h.isActivePage(navPage.id) ? ` ${classBase}__item--active` : ''
-    - const itemClasses = `${classBase}__item` + activeClass + currentClass
+    - const itemClasses = `${classBase}__item` + activeClass + currentClass + childrenClass
     li(class=itemClasses)
       a(class=`${classBase}__link` href=h.pageLink(navPage.id))= navPage.title
       +nav(navigation[pageId].childIds, classBase)

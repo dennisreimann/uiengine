@@ -1,2 +1,39 @@
+*
+  margin 0
+  padding 0
+  border 0
+  outline 0
+  box-sizing border-box
+  vertical-align baseline
+
+html
+  line-height 1.5
+  font-family $font-family-base
+  @media print
+    font-size 10pt
+  @media up_to_S
+    font-size 14px
+  @media S_to_M
+    font-size 15px
+  @media M_and_up
+    font-size 16px
+
 body
-  background #BBB
+  color $color-text
+  background $color-white
+
+p
+ul
+ol
+article
+section
+  +
+    h2
+      margin-top $space-large
+  +
+    h3
+    h4
+    h5
+    h6
+      margin-top $space-medium
+

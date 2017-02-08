@@ -28,7 +28,7 @@ const src = {
   scripts: ['theme/scripts/*.js'],
   static: ['./theme/static/**'],
   rev: ['./theme/assets/**/*.{css,js,map,ico,cur,svg,jpg,jpeg,png,gif,woff,woff2}'],
-  site: ['./sample_project/src/{components,pages}/**/*']
+  site: ['./sample_project/src/{components,pages}/**/*', './theme/{assets,templates}/**/*']
 }
 
 const uieOpts = {
@@ -39,7 +39,6 @@ const uieOpts = {
 gulp.task('static', () =>
   gulp.src(src.static)
     .pipe(gulp.dest(`${paths.theme}/assets`))
-    .pipe(gulp.dest(`${paths.site}/assets`))
 )
 
 gulp.task('styles', cb =>
@@ -56,7 +55,6 @@ gulp.task('styles', cb =>
       csswring
     ]))
     .pipe(gulp.dest(`${paths.theme}/assets/styles`))
-    .pipe(gulp.dest(`${paths.site}/assets/styles`))
     .pipe(browserSync.stream({ match: '**/*.css' }))
 )
 
@@ -67,7 +65,6 @@ gulp.task('scripts', () =>
     .pipe(p.concat('uiengine.js'))
     .pipe(p.uglify())
     .pipe(gulp.dest(`${paths.theme}/assets/scripts`))
-    .pipe(gulp.dest(`${paths.site}/assets/scripts`))
     .pipe(browserSync.stream({ match: '**/*.js' }))
 )
 
@@ -78,16 +75,14 @@ gulp.task('rev', () => {
     .pipe(revAll.revision())
     .pipe(p.revDeleteOriginal())
     .pipe(gulp.dest(`${paths.theme}/assets`))
-    .pipe(gulp.dest(`${paths.site}/assets`))
     .pipe(revAll.manifestFile())
     .pipe(gulp.dest(`${paths.theme}/assets`))
-    .pipe(gulp.dest(`${paths.site}/assets`))
 })
 
 gulp.task('site', (cb) => {
   UIengine.generate(uieOpts)
     .then(() => cb())
-    .catch(error => p.util.log('Error generating site:', error))
+    .catch(error => p.util.log('Error generating site:', error, error.stack))
 })
 
 gulp.task('browserSync', () =>
@@ -113,8 +108,8 @@ gulp.task('watch', cb => {
   gulp.watch(`${paths.site}/**/*.html`).on('change', () => debounce('reload', browserSync.reload, 500))
 })
 
-gulp.task('build', (cb) => runSequence(['scripts', 'styles', 'static'], 'site', cb))
+gulp.task('build', (cb) => runSequence(['scripts', 'styles', 'static'], cb))
 
-gulp.task('develop', (cb) => runSequence('build', ['watch', 'browserSync'], cb))
+gulp.task('develop', (cb) => runSequence('build', 'site', ['watch', 'browserSync'], cb))
 
 gulp.task('production', cb => runSequence('build', 'rev', cb))
