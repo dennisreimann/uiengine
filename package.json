@@ -72,6 +72,9 @@
       "beforeEach",
       "describe",
       "it"
+    ],
+    "ignore": [
+      "/theme/assets"
     ]
   }
 }

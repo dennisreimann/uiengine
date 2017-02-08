@@ -10,7 +10,7 @@ html
   body
     .wrap
       nav.nav
-        a.nav__menu(href="#menu") Menü
+        a.nav__menu(href="#menu") Menu
         a.nav__home(href=h.pageLink('index'))= config.name
         if navigation && navigation.index
           +nav(navigation.index.childIds, 'nav')#menu
