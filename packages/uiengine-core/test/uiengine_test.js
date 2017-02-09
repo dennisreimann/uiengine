@@ -1,4 +1,4 @@
-/* global describe, it */
+/* global afterEach, beforeEach, describe, it */
 const fs = require('fs-extra')
 const path = require('path')
 const assert = require('assert')
@@ -6,6 +6,8 @@ const assertExists = require('./support/assertExists')
 
 const UIengine = require('../lib/uiengine')
 
+const pagesPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'pages')
+const componentsPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'components')
 const sitePath = path.resolve(__dirname, '..', 'sample_project', 'dist')
 const assetsPath = path.resolve(__dirname, '..', 'sample_project', 'dist', 'assets')
 const testConfigPath = path.resolve(__dirname, '..', 'sample_project', 'uiengine.yml')
@@ -13,12 +15,12 @@ const opts = { config: testConfigPath }
 
 // "end to end" tests
 describe('UIengine', () => {
-  describe('#generate', () => {
-    afterEach(() => {
-      fs.removeSync(sitePath)
-      fs.removeSync(assetsPath)
-    })
+  afterEach(() => {
+    fs.removeSync(sitePath)
+    fs.removeSync(assetsPath)
+  })
 
+  describe('#generate', () => {
     it('should generate pages', done => {
       UIengine.generate(opts)
         .then(state => {
@@ -80,6 +82,58 @@ describe('UIengine', () => {
           assert(error)
           done()
         })
+    })
+  })
+
+  describe('#generateIncrementForChangedFile', () => {
+    beforeEach(() => UIengine.generate(opts))
+
+    it('should generate page', done => {
+      const filePath = path.join(pagesPath, 'patterns', 'page.md')
+
+      UIengine.generateIncrementForChangedFile(opts, filePath)
+        .then(result => {
+          assertExists(path.join(sitePath, 'pattern-library', 'index.html'))
+
+          assert.equal(result.type, 'page')
+          assert.equal(result.item, 'patterns')
+          assert.equal(result.file, 'sample_project/src/pages/patterns/page.md')
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should generate component', done => {
+      const filePath = path.join(componentsPath, 'form', 'form.pug')
+
+      UIengine.generateIncrementForChangedFile(opts, filePath)
+        .then(result => {
+          assertExists(path.join(sitePath, 'variations', 'form', 'form.pug.html'))
+
+          assert.equal(result.type, 'component')
+          assert.equal(result.item, 'form')
+          assert.equal(result.file, 'sample_project/src/components/form/form.pug')
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should generate variation', done => {
+      const filePath = path.join(componentsPath, 'form', 'variations', 'form.pug')
+
+      UIengine.generateIncrementForChangedFile(opts, filePath)
+        .then(result => {
+          assertExists(path.join(sitePath, 'variations', 'form', 'form.pug.html'))
+
+          assert.equal(result.type, 'variation')
+          assert.equal(result.item, 'form/form.pug')
+          assert.equal(result.file, 'sample_project/src/components/form/variations/form.pug')
+
+          done()
+        })
+        .catch(done)
     })
   })
 })
