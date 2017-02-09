@@ -2,15 +2,15 @@
 const fs = require('fs-extra')
 const path = require('path')
 const Factory = require('./support/factory')
-const assertFileExists = require('./support/assertFileExists')
+const assertExists = require('./support/assertExists')
 
 const Builder = require('../lib/builder')
 const NavigationData = require('../lib/data/navigation')
 const ComponentData = require('../lib/data/component')
 const VariationData = require('../lib/data/variation')
 
-const templating = path.resolve(__dirname, '..', 'lib', 'templating', 'uiengine-templating-pug')
 const theme = path.resolve(__dirname, '..', 'theme')
+const templatingPath = path.resolve(__dirname, '..', 'templating')
 const projectPath = path.resolve(__dirname, '..', 'sample_project')
 const tmpPath = path.resolve(__dirname, 'tmp')
 const sitePath = path.resolve(tmpPath, 'site')
@@ -29,8 +29,14 @@ const state = {
       templates: path.resolve(projectPath, 'src', 'templates'),
       pages: path.resolve(projectPath, 'src', 'pages')
     },
-    theme,
-    templating
+    templating: {
+      pug: path.resolve(templatingPath, 'uiengine-templating-pug'),
+      hbs: path.resolve(templatingPath, 'uiengine-templating-handlebars')
+    },
+    templates: {
+      variation: 'variation-preview.pug'
+    },
+    theme
   },
   pages: {
     index: Factory.page('index', {
@@ -56,7 +62,7 @@ const state = {
     input: ComponentData(
       'input',
       path.resolve(projectPath, 'src', 'components', 'input'),
-      ['input/text'],
+      ['input/text.pug'],
       {
         content: '<p>An input field that can be used inside a form.</p>',
         title: 'Input'
@@ -64,8 +70,8 @@ const state = {
     )
   },
   variations: {
-    'input/text': VariationData(
-      'input/text',
+    'input/text.pug': VariationData(
+      'input/text.pug',
       'input',
       path.resolve(projectPath, 'src', 'components', 'input', 'variations', 'text.pug'),
       'include /input/input.pug\n\n+input(id, name)',
@@ -82,8 +88,8 @@ describe('Builder', () => {
     it('should generate site', done => {
       Builder.generateSite(state)
         .then(state => {
-          assertFileExists(path.join(sitePath, 'index.html'))
-          assertFileExists(path.join(sitePath, 'pattern-library', 'index.html'))
+          assertExists(path.join(sitePath, 'index.html'))
+          assertExists(path.join(sitePath, 'pattern-library', 'index.html'))
 
           done()
         })
@@ -95,7 +101,7 @@ describe('Builder', () => {
     it('should generate page', done => {
       Builder.generatePage(state, 'index')
         .then(state => {
-          assertFileExists(path.join(sitePath, 'index.html'))
+          assertExists(path.join(sitePath, 'index.html'))
 
           done()
         })
@@ -105,7 +111,7 @@ describe('Builder', () => {
     it('should generate page with custom path', done => {
       Builder.generatePage(state, 'patterns')
         .then(state => {
-          assertFileExists(path.join(sitePath, 'pattern-library', 'index.html'))
+          assertExists(path.join(sitePath, 'pattern-library', 'index.html'))
 
           done()
         })
@@ -115,7 +121,7 @@ describe('Builder', () => {
     it('should copy page files', done => {
       Builder.generatePage(state, 'index')
         .then(state => {
-          assertFileExists(path.join(sitePath, 'index.txt'))
+          assertExists(path.join(sitePath, 'index.txt'))
 
           done()
         })
@@ -125,7 +131,7 @@ describe('Builder', () => {
     it('should copy page files in extra folder', done => {
       Builder.generatePage(state, 'index')
         .then(state => {
-          assertFileExists(path.join(sitePath, 'extra-files', 'file-in-folder.txt'))
+          assertExists(path.join(sitePath, 'extra-files', 'file-in-folder.txt'))
 
           done()
         })
@@ -135,7 +141,7 @@ describe('Builder', () => {
     it('should copy page files for pages with custom paths', done => {
       Builder.generatePage(state, 'patterns')
         .then(state => {
-          assertFileExists(path.join(sitePath, 'pattern-library', 'patterns-file.txt'))
+          assertExists(path.join(sitePath, 'pattern-library', 'patterns-file.txt'))
 
           done()
         })
@@ -145,7 +151,7 @@ describe('Builder', () => {
     it('should copy page files in extra folder for pages with custom paths', done => {
       Builder.generatePage(state, 'patterns')
         .then(state => {
-          assertFileExists(path.join(sitePath, 'pattern-library', 'some-files', 'file-in-folder.txt'))
+          assertExists(path.join(sitePath, 'pattern-library', 'some-files', 'file-in-folder.txt'))
 
           done()
         })
@@ -155,9 +161,9 @@ describe('Builder', () => {
 
   describe('#generateVariation', () => {
     it('should generate variation page', done => {
-      Builder.generateVariation(state, 'input/text')
+      Builder.generateVariation(state, 'input/text.pug')
         .then(state => {
-          assertFileExists(path.join(sitePath, 'variations', 'input', 'text.html'))
+          assertExists(path.join(sitePath, 'variations', 'input', 'text.pug.html'))
 
           done()
         })
@@ -169,7 +175,7 @@ describe('Builder', () => {
     it('should generate state file', done => {
       Builder.dumpState(state)
         .then(state => {
-          assertFileExists(path.join(sitePath, 'state.json'))
+          assertExists(path.join(sitePath, 'state.json'))
 
           done()
         })

@@ -46,8 +46,10 @@ async function fetchById (state, id) {
   const variationData = await readVariationFile(variationFilePath)
 
   let { attributes, raw } = variationData
+  const title = VariationUtil.variationIdToTitle(id)
   const context = attributes.context
   attributes = R.dissoc('context', attributes)
+  attributes = R.merge({ title }, attributes)
   const data = VariationData(id, componentId, variationFilePath, raw, context, attributes)
 
   return data

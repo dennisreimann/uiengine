@@ -1,6 +1,6 @@
 /* global describe, it */
 const assert = require('assert')
-const assertFileExists = require('./support/assertFileExists')
+const assertExists = require('./support/assertExists')
 const fs = require('fs-extra')
 const path = require('path')
 
@@ -38,7 +38,7 @@ describe('File', () => {
       const dst = './test/tmp/frontmatter.txt'
       File.copy(src, dst)
         .then(() => {
-          assertFileExists(dst)
+          assertExists(dst)
           fs.removeSync(dst)
           done()
         })
@@ -50,7 +50,7 @@ describe('File', () => {
       const dst = './test/tmp/fixtures'
       File.copy(src, dst)
         .then(() => {
-          assertFileExists(path.join(dst, 'yaml.yml'))
+          assertExists(path.join(dst, 'yaml.yml'))
           fs.removeSync(dst)
           done()
         })

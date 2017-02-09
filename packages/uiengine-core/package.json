@@ -9,6 +9,7 @@
     "bin",
     "lib",
     "sample_project",
+    "templating",
     "theme"
   ],
   "engines": {
@@ -59,6 +60,7 @@
     "gulp-stylus": "^2.6.0",
     "gulp-uglify": "^2.0.1",
     "gulp-util": "^3.0.8",
+    "handlebars": "^4.0.6",
     "mocha": "^3.2.0",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",

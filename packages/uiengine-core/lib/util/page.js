@@ -1,4 +1,5 @@
 const path = require('path')
+const StringUtil = require('./string')
 
 const PAGE_FILENAME = 'page.md'
 const INDEX_ID = 'index'
@@ -13,10 +14,7 @@ const pageIdToTitle = (pageId) => {
   if (isIndexPage(pageId)) return 'Home'
 
   const basename = path.basename(pageId)
-  const title = basename
-    .split(/\W+/gi)
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ')
+  const title = StringUtil.titleize(basename)
 
   return title
 }
