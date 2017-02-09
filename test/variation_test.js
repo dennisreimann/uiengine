@@ -14,13 +14,22 @@ const state = {
 describe('Variation', () => {
   describe('#fetchById', () => {
     it('should return variation object', done => {
-      Variation.fetchById(state, 'input/text')
+      Variation.fetchById(state, 'input/text.pug')
         .then(data => {
-          assert.equal(data.id, 'input/text')
+          assert.equal(data.id, 'input/text.pug')
           assert.equal(data.raw, 'include /input/input.pug\n\n+input(id, name)')
           assert.equal(data.title, 'Text Input')
           assert.equal(data.context.id, 'name')
           assert.equal(data.context.name, 'person[name]')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should infer variation title if it is not provided', done => {
+      Variation.fetchById(state, 'form/form.pug')
+        .then(data => {
+          assert.equal(data.title, 'Form')
           done()
         })
         .catch(done)
@@ -33,16 +42,23 @@ describe('Variation', () => {
         .then(data => {
           const variationIds = Object.keys(data)
 
-          assert.equal(variationIds.length, 9)
-          assert(variationIds.includes('input/checkbox'), 'missing variation "input/checkbox"')
-          assert(variationIds.includes('input/number'), 'missing variation "input/number"')
-          assert(variationIds.includes('input/text'), 'missing variation "input/text"')
-          assert(variationIds.includes('input/text-disabled'), 'missing variation "input/text-disabled"')
-          assert(variationIds.includes('input/text-required'), 'missing variation "input/text-required"')
-          assert(variationIds.includes('label/label'), 'missing variation "label/label"')
-          assert(variationIds.includes('formrow/text-with-label'), 'missing variation "formrow/text-with-label"')
-          assert(variationIds.includes('formrow/text-without-label'), 'missing variation "formrow/text-without-label"')
-          assert(variationIds.includes('form/form'), 'missing variation "form/form"')
+          assert.equal(variationIds.length, 11);
+
+          [ 'input/checkbox.pug',
+            'input/number.pug',
+            'input/text.hbs',
+            'input/text.pug',
+            'input/text-disabled.pug',
+            'input/text-required.pug',
+            'label/label.hbs',
+            'label/label.pug',
+            'formrow/text-with-label.pug',
+            'formrow/text-without-label.pug',
+            'form/form.pug'
+          ].map(id => {
+            assert(variationIds.includes(id), `missing variation "${id}"`)
+          })
+
           done()
         })
         .catch(done)

@@ -2,13 +2,14 @@
 const fs = require('fs-extra')
 const path = require('path')
 const assert = require('assert')
-const assertFileExists = require('./support/assertFileExists')
+const assertExists = require('./support/assertExists')
 
 const UIengine = require('../lib/uiengine')
 
 const sitePath = path.resolve(__dirname, '..', 'sample_project', 'dist')
 const assetsPath = path.resolve(__dirname, '..', 'sample_project', 'dist', 'assets')
 const testConfigPath = path.resolve(__dirname, '..', 'sample_project', 'uiengine.yml')
+const opts = { config: testConfigPath }
 
 // "end to end" tests
 describe('UIengine', () => {
@@ -19,18 +20,16 @@ describe('UIengine', () => {
     })
 
     it('should generate pages', done => {
-      const opts = { config: testConfigPath }
-
       UIengine.generate(opts)
         .then(state => {
-          assertFileExists(path.join(sitePath, 'index.html'))
-          assertFileExists(path.join(sitePath, 'documentation', 'index.html'))
-          assertFileExists(path.join(sitePath, 'pattern-library', 'index.html'))
-          assertFileExists(path.join(sitePath, 'patterns', 'atoms', 'index.html'))
-          assertFileExists(path.join(sitePath, 'patterns', 'molecules', 'index.html'))
-          assertFileExists(path.join(sitePath, 'patterns', 'organisms', 'index.html'))
-          assertFileExists(path.join(sitePath, 'patterns', 'templates', 'index.html'))
-          assertFileExists(path.join(sitePath, 'patterns', 'pages', 'index.html'))
+          assertExists(path.join(sitePath, 'index.html'))
+          assertExists(path.join(sitePath, 'documentation', 'index.html'))
+          assertExists(path.join(sitePath, 'pattern-library', 'index.html'))
+          assertExists(path.join(sitePath, 'patterns', 'atoms', 'index.html'))
+          assertExists(path.join(sitePath, 'patterns', 'molecules', 'index.html'))
+          assertExists(path.join(sitePath, 'patterns', 'organisms', 'index.html'))
+          assertExists(path.join(sitePath, 'patterns', 'templates', 'index.html'))
+          assertExists(path.join(sitePath, 'patterns', 'pages', 'index.html'))
 
           done()
         })
@@ -38,11 +37,9 @@ describe('UIengine', () => {
     })
 
     it('should generate state file', done => {
-      const opts = { config: testConfigPath }
-
       UIengine.generate(opts)
         .then(state => {
-          assertFileExists(path.join(sitePath, 'state.json'))
+          assertExists(path.join(sitePath, 'state.json'))
 
           done()
         })
@@ -50,18 +47,16 @@ describe('UIengine', () => {
     })
 
     it('should generate variation previews', done => {
-      const opts = { config: testConfigPath }
-
       UIengine.generate(opts)
         .then(state => {
-          assertFileExists(path.join(sitePath, 'variations', 'form', 'form.html'))
-          assertFileExists(path.join(sitePath, 'variations', 'formrow', 'text-with-label.html'))
-          assertFileExists(path.join(sitePath, 'variations', 'formrow', 'text-without-label.html'))
-          assertFileExists(path.join(sitePath, 'variations', 'input', 'number.html'))
-          assertFileExists(path.join(sitePath, 'variations', 'input', 'text-disabled.html'))
-          assertFileExists(path.join(sitePath, 'variations', 'input', 'text-required.html'))
-          assertFileExists(path.join(sitePath, 'variations', 'input', 'text.html'))
-          assertFileExists(path.join(sitePath, 'variations', 'label', 'label.html'))
+          assertExists(path.join(sitePath, 'variations', 'form', 'form.pug.html'))
+          assertExists(path.join(sitePath, 'variations', 'formrow', 'text-with-label.pug.html'))
+          assertExists(path.join(sitePath, 'variations', 'formrow', 'text-without-label.pug.html'))
+          assertExists(path.join(sitePath, 'variations', 'input', 'number.pug.html'))
+          assertExists(path.join(sitePath, 'variations', 'input', 'text-disabled.pug.html'))
+          assertExists(path.join(sitePath, 'variations', 'input', 'text-required.pug.html'))
+          assertExists(path.join(sitePath, 'variations', 'input', 'text.pug.html'))
+          assertExists(path.join(sitePath, 'variations', 'label', 'label.pug.html'))
 
           done()
         })
@@ -69,12 +64,10 @@ describe('UIengine', () => {
     })
 
     it('should copy theme assets', done => {
-      const opts = { config: testConfigPath }
-
       UIengine.generate(opts)
         .then(state => {
-          assertFileExists(path.join(assetsPath, 'styles', 'uiengine.css'))
-          assertFileExists(path.join(assetsPath, 'scripts', 'uiengine.js'))
+          assertExists(path.join(assetsPath, 'styles'))
+          assertExists(path.join(assetsPath, 'scripts'))
 
           done()
         })

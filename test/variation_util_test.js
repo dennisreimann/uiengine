@@ -4,7 +4,7 @@ const assert = require('assert')
 
 const VariationUtil = require('../lib/util/variation')
 
-const componentsPath = path.resolve(__dirname, '../sample_project/src/components')
+const componentsPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'components')
 
 describe('VariationUtil', () => {
   describe('#componentIdToVariationsPath', () => {
@@ -19,7 +19,14 @@ describe('VariationUtil', () => {
     it('should return variation id for variation file path', () => {
       const variationFilePath = path.join(componentsPath, 'button', 'variations', 'primary-button.pug')
       const variationId = VariationUtil.variationIdFromVariationFilePath(componentsPath, variationFilePath)
-      assert.equal(variationId, 'button/primary-button')
+      assert.equal(variationId, 'button/primary-button.pug')
+    })
+  })
+
+  describe('#variationIdToTitle', () => {
+    it('should return titleized name', () => {
+      assert.equal(VariationUtil.variationIdToTitle('form/form.pug'), 'Form')
+      assert.equal(VariationUtil.variationIdToTitle('formrow/formrow-with-label.pug'), 'Formrow With Label')
     })
   })
 
@@ -33,7 +40,7 @@ describe('VariationUtil', () => {
 
   describe('#componentIdFromVariationId', () => {
     it('should return variation id for variation file path', () => {
-      const componentId = VariationUtil.componentIdFromVariationId('button/primary-button')
+      const componentId = VariationUtil.componentIdFromVariationId('button/primary-button.pug')
       assert.equal(componentId, 'button')
     })
   })
@@ -41,7 +48,7 @@ describe('VariationUtil', () => {
   describe('#variationIdToVariationFilePath', () => {
     it('should return component id for variation file path', () => {
       assert.equal(
-        VariationUtil.variationIdToVariationFilePath(componentsPath, 'input/checkbox'),
+        VariationUtil.variationIdToVariationFilePath(componentsPath, 'input/checkbox.pug'),
         path.join(componentsPath, 'input', 'variations', 'checkbox.pug')
       )
     })
