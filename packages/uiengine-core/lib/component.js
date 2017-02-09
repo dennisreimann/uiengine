@@ -46,8 +46,8 @@ async function findVariationIds (componentsPath, componentId, variationGlob = '*
   const variationsPath = VariationUtil.componentIdToVariationsPath(componentsPath, componentId)
   const pathGlob = path.join(variationsPath, variationGlob)
   const variationPaths = await glob(pathGlob)
-  const variationIdFromVariationFilePath = R.partial(VariationUtil.variationIdFromVariationFilePath, [componentsPath])
-  const variationIds = R.map(variationIdFromVariationFilePath, variationPaths)
+  const variationFilePathToVariationId = R.partial(VariationUtil.variationFilePathToVariationId, [componentsPath])
+  const variationIds = R.map(variationFilePathToVariationId, variationPaths)
 
   return variationIds
 }

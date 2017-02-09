@@ -19,8 +19,8 @@ async function findVariationIds (componentsPath, variationGlob = '*') {
   const variationsPath = VariationUtil.componentIdToVariationsPath(componentsPath, '**')
   const pathGlob = path.join(variationsPath, variationGlob)
   const variationPaths = await glob(pathGlob)
-  const variationIdFromVariationFilePath = R.partial(VariationUtil.variationIdFromVariationFilePath, [componentsPath])
-  const variationIds = R.map(variationIdFromVariationFilePath, variationPaths)
+  const variationFilePathToVariationId = R.partial(VariationUtil.variationFilePathToVariationId, [componentsPath])
+  const variationIds = R.map(variationFilePathToVariationId, variationPaths)
 
   return variationIds
 }
@@ -41,7 +41,7 @@ async function fetchAll (state) {
 
 async function fetchById (state, id) {
   const componentsPath = state.config.source.components
-  const componentId = VariationUtil.componentIdFromVariationId(id)
+  const componentId = VariationUtil.variationIdToComponentId(id)
   const variationFilePath = VariationUtil.variationIdToVariationFilePath(componentsPath, id)
   const variationData = await readVariationFile(variationFilePath)
 

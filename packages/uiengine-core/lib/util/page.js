@@ -28,6 +28,10 @@ const pageIdToPageFilePath = (pagesPath, pageId) => {
 
 const pageFilePathToPageId = (pagesPath, pageFilePath) => {
   const relativePath = path.relative(pagesPath, pageFilePath)
+
+  // invalid path: this is not a page
+  if (relativePath.startsWith('..')) return null
+
   const dirname = path.dirname(relativePath)
   const pageId = isIndexPath(dirname) ? INDEX_ID : dirname
 

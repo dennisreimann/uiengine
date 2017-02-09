@@ -8,7 +8,11 @@ const componentIdToComponentFilePath = (componentsPath, componentId) => path.joi
 
 const componentFilePathToComponentId = (componentsPath, componentFilePath) => {
   const relativePath = path.relative(componentsPath, componentFilePath)
-  const dirname = path.dirname(relativePath)
+
+  // invalid path: this is not a component
+  if (relativePath.startsWith('..')) return null
+
+  const dirname = path.dirname(relativePath).split(path.sep)[0]
 
   return dirname
 }
