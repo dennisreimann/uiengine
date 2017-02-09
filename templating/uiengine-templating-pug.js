@@ -1,33 +1,32 @@
 const pug = require('pug')
 const R = require('ramda')
 
-async function setup () {
-  return new Promise((resolve, reject) => {
-    console.log('pug setup')
-    resolve()
-  })
-}
+// async function setup (opts = {}) {
+//   return new Promise((resolve, reject) => {
+//     console.log('pug setup')
+//     resolve()
+//   })
+// }
 
-async function registerComponent (filePath) {
-  return new Promise((resolve, reject) => {
-    console.log('pug component', filePath)
-    resolve()
-  })
-}
+// async function registerComponent (filePath, opts = {}) {
+//   return new Promise((resolve, reject) => {
+//     console.log('pug component', filePath)
+//     resolve()
+//   })
+// }
 
-async function registerTemplate (filePath) {
-  return new Promise((resolve, reject) => {
-    console.log('pug template', filePath)
-    resolve()
-  })
-}
+// async function registerTemplate (filePath, opts = {}) {
+//   return new Promise((resolve, reject) => {
+//     console.log('pug template', filePath)
+//     resolve()
+//   })
+// }
 
 async function renderTemplate (templatePath, data = {}, opts = {}) {
   return new Promise((resolve, reject) => {
     const { templatesPath } = opts
     const context = R.merge({
       pretty: true,
-      cache: true,
       filename: templatePath,
       basedir: templatesPath
     }, data)
@@ -47,7 +46,6 @@ async function renderString (templateString, data = {}, opts = {}) {
     const { componentsPath, filePath } = opts
     const context = R.merge({
       pretty: true,
-      cache: true,
       filename: filePath,
       basedir: componentsPath
     }, data)
@@ -63,9 +61,9 @@ async function renderString (templateString, data = {}, opts = {}) {
 }
 
 module.exports = {
-  setup,
-  registerComponent,
-  registerTemplate,
+  // setup,
+  // registerComponent,
+  // registerTemplate,
   renderTemplate,
   renderString
 }

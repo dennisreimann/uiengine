@@ -36,11 +36,12 @@ describe('Component', () => {
     it('should not infer variationIds if they are explicitely provided by variations attribute', done => {
       Component.fetchById(state, 'input')
         .then(data => {
-          assert.equal(data.variationIds.length, 4)
-          assert.equal(data.variationIds[0], 'input/text.pug')
-          assert.equal(data.variationIds[1], 'input/text-required.pug')
-          assert.equal(data.variationIds[2], 'input/text-disabled.pug')
-          assert.equal(data.variationIds[3], 'input/number.pug')
+          assert.equal(data.variationIds.length, 5)
+          assert.equal(data.variationIds[0], 'input/text.hbs')
+          assert.equal(data.variationIds[1], 'input/text.pug')
+          assert.equal(data.variationIds[2], 'input/text-required.pug')
+          assert.equal(data.variationIds[3], 'input/text-disabled.pug')
+          assert.equal(data.variationIds[4], 'input/number.pug')
           done()
         })
         .catch(done)

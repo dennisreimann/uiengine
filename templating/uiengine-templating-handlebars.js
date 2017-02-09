@@ -1,33 +1,34 @@
+const path = require('path')
 const File = require('../lib/util/file')
 let Handlebars
 
 try {
   Handlebars = require('handlebars')
 } catch (err) {
-  console.error('Please add "handlebars" to your projects dependencies as it is required for the uiengine-templating-handlebars adapter!')
+  console.error('Please add "handlebars" to the dependencies. It is required by the uiengine-templating-handlebars adapter.')
   throw err
 }
 
-async function setup () {
-  return new Promise((resolve, reject) => {
-    console.log('hbs setup')
-    resolve()
-  })
+// async function setup (opts = {}) {
+//   return new Promise((resolve, reject) => {
+//     console.log('hbs setup')
+//     resolve()
+//   })
+// }
+
+async function registerComponent (filePath, opts = {}) {
+  const raw = await File.read(filePath)
+  const id = path.basename(filePath, path.extname(filePath))
+
+  Handlebars.registerPartial(id, raw)
 }
 
-async function registerComponent (filePath) {
-  return new Promise((resolve, reject) => {
-    console.log('hbs component', filePath)
-    resolve()
-  })
-}
-
-async function registerTemplate (filePath) {
-  return new Promise((resolve, reject) => {
-    console.log('hbs template', filePath)
-    resolve()
-  })
-}
+// async function registerTemplate (filePath, opts = {}) {
+//   return new Promise((resolve, reject) => {
+//     console.log('hbs template', filePath)
+//     resolve()
+//   })
+// }
 
 async function renderTemplate (templatePath, data = {}, opts = {}) {
   const templateString = await File.read(templatePath)
@@ -49,9 +50,9 @@ async function renderString (templateString, data = {}, opts = {}) {
 }
 
 module.exports = {
-  setup,
+  // setup,
   registerComponent,
-  registerTemplate,
+  // registerTemplate,
   renderTemplate,
   renderString
 }
