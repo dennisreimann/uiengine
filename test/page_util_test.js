@@ -4,7 +4,7 @@ const assert = require('assert')
 
 const PageUtil = require('../lib/util/page')
 
-const pagesPath = path.resolve(__dirname, '../sample_project/src/pages')
+const pagesPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'pages')
 
 describe('PageUtil', () => {
   describe('#pageIdToPath', () => {
@@ -52,6 +52,11 @@ describe('PageUtil', () => {
 
     it('should return page id for file path', () => {
       assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'patterns', 'atoms', 'buttons', 'additional.pdf')), 'patterns/atoms/buttons')
+    })
+
+    it('should return null for invalid file path', () => {
+      const filePath = path.resolve(__dirname, '..', 'sample_project', 'src', 'components', 'component.md')
+      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, filePath), null)
     })
   })
 
