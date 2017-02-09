@@ -1,6 +1,7 @@
 ---
 title: Input
 variations:
+- text.hbs
 - text.pug
 - text-required.pug
 - text-disabled.pug

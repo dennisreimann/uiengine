@@ -1,4 +1,4 @@
 mixin input(id, name, type)
   - var type = type || attributes.type || 'text'
   - var classes = `input input--${type}` + (attributes.required ? ' input--required' : '')
-  input(id=id name=name type=type)&attributes(attributes)
+  input(id=id class=classes name=name type=type)&attributes(attributes)

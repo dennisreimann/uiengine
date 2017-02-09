@@ -12,13 +12,19 @@ const getAdapter = ({ config: { templating } }, extension) => {
   }
 }
 
-async function renderTemplate (state, templatePath, data = {}, opts = {}) {
-  const extension = path.extname(templatePath).replace(/^\./, '')
-  const adapter = getAdapter(state, extension)
+const optsWithPaths = (state, opts) => {
   const { components, templates } = state.config.source
 
   opts = R.assoc('templatesPath', templates, opts)
   opts = R.assoc('componentsPath', components, opts)
+
+  return opts
+}
+
+async function renderTemplate (state, templatePath, data = {}, opts = {}) {
+  const extension = path.extname(templatePath).replace(/^\./, '')
+  const adapter = getAdapter(state, extension)
+  opts = optsWithPaths(state, opts)
 
   const rendered = await adapter.renderTemplate(templatePath, data, opts)
 
@@ -27,19 +33,16 @@ async function renderTemplate (state, templatePath, data = {}, opts = {}) {
 
 async function renderString (state, extension, templateString, data = {}, opts = {}) {
   const adapter = getAdapter(state, extension)
-  const { components, templates } = state.config.source
-
-  opts = R.assoc('templatesPath', templates, opts)
-  opts = R.assoc('componentsPath', components, opts)
+  opts = optsWithPaths(state, opts)
 
   const rendered = await adapter.renderString(templateString, data, opts)
 
   return rendered
 }
 
-async function setup (state) {
+async function setup (state, opts = {}) {
   const { config } = state
-  const { templates, components } = config.source
+  const { components, templates } = config.source
   const templatingAdapters = Object.keys(config.templating) || []
   const tasks = []
 
@@ -48,7 +51,8 @@ async function setup (state) {
 
     // general setup
     if (typeof setup === 'function') {
-      tasks.push(setup())
+      opts = optsWithPaths(state, opts)
+      tasks.push(setup(opts))
     }
 
     // register components: only files with the extension
@@ -77,25 +81,9 @@ async function setup (state) {
   return state
 }
 
-async function teardown (state) {
-  const templatingAdapters = Object.keys(state.config.templating) || []
-
-  const tasks = R.map((extension) => {
-    const adapter = getAdapter(state, extension)
-    const task = typeof adapter.teardown === 'function' ? adapter.teardown() : true
-
-    return task
-  }, templatingAdapters)
-
-  await Promise.all(tasks)
-
-  return state
-}
-
 module.exports = {
   setup,
   renderTemplate,
-  renderString,
-  teardown
+  renderString
 }
 
