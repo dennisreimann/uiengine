@@ -17,8 +17,8 @@ describe('Variation', () => {
       Variation.fetchById(state, 'input/text.pug')
         .then(data => {
           assert.equal(data.id, 'input/text.pug')
-          assert.equal(data.raw, 'include /input/input.pug\n\n+input(id, name)')
           assert.equal(data.title, 'Text Input')
+          assert.equal(data.content, '<p>This is documentation for the text input.</p>')
           assert.equal(data.context.id, 'name')
           assert.equal(data.context.name, 'person[name]')
           done()
@@ -42,7 +42,7 @@ describe('Variation', () => {
         .then(data => {
           const variationIds = Object.keys(data)
 
-          assert.equal(variationIds.length, 11);
+          assert.equal(variationIds.length, 12);
 
           [ 'input/checkbox.pug',
             'input/number.pug',
@@ -51,6 +51,7 @@ describe('Variation', () => {
             'input/text-disabled.pug',
             'input/text-required.pug',
             'label/label.hbs',
+            'label/label.jsx',
             'label/label.pug',
             'formrow/text-with-label.pug',
             'formrow/text-without-label.pug',

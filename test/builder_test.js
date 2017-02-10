@@ -1,4 +1,4 @@
-/* global describe, it */
+/* global afterEach, describe, it */
 const fs = require('fs-extra')
 const path = require('path')
 const Factory = require('./support/factory')
@@ -10,7 +10,6 @@ const ComponentData = require('../lib/data/component')
 const VariationData = require('../lib/data/variation')
 
 const theme = path.resolve(__dirname, '..', 'theme')
-const templatingPath = path.resolve(__dirname, '..', 'templating')
 const projectPath = path.resolve(__dirname, '..', 'sample_project')
 const tmpPath = path.resolve(__dirname, 'tmp')
 const sitePath = path.resolve(tmpPath, 'site')
@@ -30,8 +29,9 @@ const state = {
       pages: path.resolve(projectPath, 'src', 'pages')
     },
     templating: {
-      pug: path.resolve(templatingPath, 'uiengine-templating-pug'),
-      hbs: path.resolve(templatingPath, 'uiengine-templating-handlebars')
+      pug: path.resolve(projectPath, 'node_modules', 'uiengine-templating-pug'),
+      jsx: path.resolve(projectPath, 'node_modules', 'uiengine-templating-react'),
+      hbs: path.resolve(projectPath, 'node_modules', 'uiengine-templating-handlebars')
     },
     templates: {
       variation: 'variation-preview.pug'
@@ -74,7 +74,7 @@ const state = {
       'input/text.pug',
       'input',
       path.resolve(projectPath, 'src', 'components', 'input', 'variations', 'text.pug'),
-      'include /input/input.pug\n\n+input(id, name)',
+      '<p>This is documentation for the text input.</p>',
       { id: 'name', name: 'person[name]' },
       { title: 'Text Input' }
     )
@@ -82,7 +82,7 @@ const state = {
 }
 
 describe('Builder', () => {
-  afterEach(() => { fs.removeSync(assetsPath) })
+  afterEach(() => { fs.removeSync(tmpPath) })
 
   describe('#generateSite', () => {
     it('should generate site', done => {

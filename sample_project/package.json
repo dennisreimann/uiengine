@@ -1,0 +1,38 @@
+{
+  "name": "uiengine-sample-project",
+  "version": "0.1.0",
+  "description": "UIengine Sample Project",
+  "author": "Dennis Reimann",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dennisreimann/uiengine.git"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "start": "yarn run clean && node --harmony `which gulp` develop",
+    "build": "yarn run clean && node --harmony `which gulp` build"
+  },
+  "dependencies": {
+    "babel-core": "^6.22.1",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "handlebars": "^4.0.6",
+    "pug": "^2.0.0-beta10",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "uiengine": "file:..",
+    "uiengine-templating-handlebars": "file:../../uiengine-templating-handlebars",
+    "uiengine-templating-pug": "file:../../uiengine-templating-pug",
+    "uiengine-templating-react": "file:../../uiengine-templating-react"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.7",
+    "gulp": "^3.9.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-util": "^3.0.8",
+    "rimraf": "^2.5.4",
+    "run-sequence": "^1.2.2"
+  }
+}
