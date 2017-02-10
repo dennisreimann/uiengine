@@ -2,80 +2,70 @@ const path = require('path')
 const R = require('ramda')
 const glob = require('globby')
 
-const getAdapter = ({ config: { templating } }, extension) => {
-  const module = templating[extension]
+const getAdapter = ({ config: { templating } }, ext) => {
+  const module = templating[ext]
 
   try {
     return require(module)
   } catch (err) {
-    throw new Error(`Could not load templating adapter for "${extension}" files:\n\n${err.stack}`)
+    throw new Error(`Could not load templating adapter for "${ext}" files:\n\n${err.stack}`)
   }
 }
 
-const optsWithPaths = (state, opts) => {
+const extension = (filePath) =>
+  path.extname(filePath).replace(/^\./, '')
+
+async function render (state, templatePath, data = {}) {
+  const ext = extension(templatePath)
+  const adapter = getAdapter(state, ext)
   const { components, templates } = state.config.source
-
-  opts = R.assoc('templatesPath', templates, opts)
-  opts = R.assoc('componentsPath', components, opts)
-
-  return opts
-}
-
-async function render (state, templatePath, data = {}, opts = {}) {
-  const extension = path.extname(templatePath).replace(/^\./, '')
-  const adapter = getAdapter(state, extension)
-  opts = optsWithPaths(state, opts)
+  const opts = { components, templates }
 
   const rendered = await adapter.render(templatePath, data, opts)
 
   return rendered
 }
 
-async function setup (state, opts = {}) {
+async function registerComponents (state) {
   const { config } = state
-  const { components, templates } = config.source
-  const templatingAdapters = Object.keys(config.templating) || []
+  const adapters = Object.keys(config.templating) || []
   const tasks = []
 
-  templatingAdapters.map((extension) => {
-    const { setup, registerComponent, registerTemplate } = getAdapter(state, extension)
-
-    // general setup
-    if (typeof setup === 'function') {
-      opts = optsWithPaths(state, opts)
-      tasks.push(setup(opts))
-    }
+  adapters.map((ext) => {
+    const { registerComponent } = getAdapter(state, ext)
 
     // register components: only files with the extension
     // in the components source folder root. No variations!
     if (typeof registerComponent === 'function') {
-      const pattern = path.join(components, `*/*.${extension}`)
+      const pattern = path.join(config.source.components, `*/*.${ext}`)
       const paths = glob.sync(pattern)
       const registers = R.map(registerComponent, paths)
-
-      tasks.push(...registers)
-    }
-
-    // register templates: every file with the extension
-    // in the templates source folder
-    if (typeof registerTemplate === 'function') {
-      const pattern = path.join(templates, `**/*.${extension}`)
-      const paths = glob.sync(pattern)
-      const registers = R.map(registerTemplate, paths)
 
       tasks.push(...registers)
     }
   })
 
   await Promise.all(tasks)
+}
 
-  return state
+async function registerComponent (state, filePath) {
+  const { config } = state
+  const ext = extension(filePath)
+
+  if (config.templating[ext]) {
+    const { registerComponent } = getAdapter(state, ext)
+
+    if (typeof registerComponent === 'function') {
+      await registerComponent(filePath)
+    }
+  }
 }
 
 // TODO: Offer hook to update templates and components
 
 module.exports = {
-  setup,
+  registerComponents,
+  registerComponent,
   render
 }
 

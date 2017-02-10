@@ -80,10 +80,8 @@ async function generateVariation (state, variationId) {
 
   const templateFileName = variation.template || config.templates.variation
   const templatePath = path.join(config.source.templates, templateFileName)
-  const { context } = variation
-  const filePath = variation.path
-  const opts = { filePath }
-  const rendered = await Templating.render(state, filePath, context, opts)
+  const { context, path: filePath } = variation
+  const rendered = await Templating.render(state, filePath, context)
 
   let data = getVariationData(state, variationId, rendered)
   const html = await Templating.render(state, templatePath, data)
