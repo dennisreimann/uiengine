@@ -67,6 +67,6 @@ gulp.task('watch', cb => {
 
 gulp.task('build', (cb) => runSequence(['scripts', 'styles', 'static'], cb))
 
-gulp.task('develop', (cb) => runSequence('build', 'site', 'watch', cb))
+gulp.task('develop', (cb) => runSequence('build', 'watch', cb))
 
 gulp.task('production', cb => runSequence('build', 'rev', cb))
