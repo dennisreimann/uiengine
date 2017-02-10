@@ -1,4 +1,4 @@
-/* global afterEach, beforeEach, describe, it */
+/* global afterEach, describe, it */
 const fs = require('fs-extra')
 const path = require('path')
 const assert = require('assert')
@@ -10,8 +10,7 @@ const pagesPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'pages'
 const componentsPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'components')
 const sitePath = path.resolve(__dirname, '..', 'sample_project', 'dist')
 const assetsPath = path.resolve(__dirname, '..', 'sample_project', 'dist', 'assets')
-const testConfigPath = path.resolve(__dirname, '..', 'sample_project', 'uiengine.yml')
-const opts = { config: testConfigPath }
+const opts = { config: path.resolve(__dirname, '..', 'sample_project', 'uiengine.yml') }
 
 // "end to end" tests
 describe('UIengine', () => {
@@ -57,7 +56,9 @@ describe('UIengine', () => {
           assertExists(path.join(sitePath, 'variations', 'input', 'number.pug.html'))
           assertExists(path.join(sitePath, 'variations', 'input', 'text-disabled.pug.html'))
           assertExists(path.join(sitePath, 'variations', 'input', 'text-required.pug.html'))
+          assertExists(path.join(sitePath, 'variations', 'input', 'text.hbs.html'))
           assertExists(path.join(sitePath, 'variations', 'input', 'text.pug.html'))
+          assertExists(path.join(sitePath, 'variations', 'label', 'label.hbs.html'))
           assertExists(path.join(sitePath, 'variations', 'label', 'label.pug.html'))
 
           done()
@@ -86,8 +87,6 @@ describe('UIengine', () => {
   })
 
   describe('#generateIncrementForChangedFile', () => {
-    beforeEach(() => UIengine.generate(opts))
-
     it('should generate page', done => {
       const filePath = path.join(pagesPath, 'patterns', 'page.md')
 

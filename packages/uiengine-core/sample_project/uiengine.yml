@@ -38,8 +38,9 @@ target:
 # UIengine will `require` the template adapter, which has to provide a defined set of
 # functions for setup and rendering. For details see the templating docs.
 templating:
-  pug: uiengine-templating-pug
-  hbs: uiengine-templating-handlebars
+  pug: ./node_modules/uiengine-templating-pug
+  jsx: ./node_modules/uiengine-templating-react
+  hbs: ./node_modules/uiengine-templating-handlebars
 
 templates:
   variation: variation-preview.pug

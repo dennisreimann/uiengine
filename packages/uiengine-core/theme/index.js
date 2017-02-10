@@ -1,5 +1,4 @@
 const path = require('path')
-const R = require('ramda')
 const pug = require('pug')
 const helpers = require('./helpers')
 
@@ -8,33 +7,32 @@ const templatesPath = path.resolve(__dirname, 'templates')
 
 const pugOpts = {
   basedir: templatesPath,
-  pretty: true
+  pretty: true,
+  cache: true
 }
 
-let templateCache = {}
-
-async function renderTemplate (id, data = {}) {
+async function render (id, data = {}) {
   return new Promise((resolve, reject) => {
-    let template = templateCache[id]
-    if (!template) {
-      const fileName = `${id}.pug`
-      const templatePath = path.resolve(templatesPath, fileName)
-      try {
-        template = pug.compileFile(templatePath, pugOpts)
-      } catch (err) {
-        reject(`Pug could not compile template "${id}".\n\n${err.stack}`)
-      }
-      templateCache[id] = template
-    }
+    // FIXME: Unify with templating adapters:
+    // take filePath instead of template id
+    const filePath = path.resolve(templatesPath, `${id}.pug`)
+    const context = Object.assign(pugOpts, data, { h: helpers(data) })
 
-    // assign helper functions
-    data = R.assoc('h', helpers(data), data)
-    const rendered = template(data)
-    resolve(rendered)
+    try {
+      const rendered = pug.renderFile(filePath, context)
+
+      resolve(rendered)
+    } catch (err) {
+      reject([
+        `Pug could not render "${filePath}"!`,
+        err.stack,
+        JSON.stringify(context, null, '  ')
+      ].join('\n\n'))
+    }
   })
 }
 
 module.exports = {
   assetsPath,
-  renderTemplate
+  render
 }

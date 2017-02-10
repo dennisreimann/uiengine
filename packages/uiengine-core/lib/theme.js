@@ -6,9 +6,9 @@ const getTheme = ({ config }) => {
   return require(theme)
 }
 
-async function renderTemplate (state, templateId, data = {}) {
+async function render (state, templateId, data = {}) {
   const theme = getTheme(state)
-  return await theme.renderTemplate(templateId, data)
+  return await theme.render(templateId, data)
 }
 
 async function setup (state) {
@@ -50,7 +50,7 @@ async function teardown (state) {
 
 module.exports = {
   setup,
-  renderTemplate,
+  render,
   teardown
 }
 

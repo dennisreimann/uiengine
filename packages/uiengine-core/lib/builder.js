@@ -43,7 +43,7 @@ async function generatePage (state, pageId) {
   const page = pages[pageId]
   const templateId = page.template || 'page'
   const data = getPageData(state, pageId)
-  const html = await Theme.renderTemplate(state, templateId, data)
+  const html = await Theme.render(state, templateId, data)
 
   // write file and copy files belonging to the page
   const targetPagePath = page.path === 'index' ? '' : page.path
@@ -80,14 +80,13 @@ async function generateVariation (state, variationId) {
 
   const templateFileName = variation.template || config.templates.variation
   const templatePath = path.join(config.source.templates, templateFileName)
-  const { context, raw } = variation
+  const { context } = variation
   const filePath = variation.path
   const opts = { filePath }
-  const adapter = path.extname(filePath).replace(/^\./, '')
-  const rendered = await Templating.renderString(state, adapter, raw, context, opts)
+  const rendered = await Templating.render(state, filePath, context, opts)
 
   let data = getVariationData(state, variationId, rendered)
-  const html = await Templating.renderTemplate(state, templatePath, data)
+  const html = await Templating.render(state, templatePath, data)
 
   // write file
   const htmlPath = path.resolve(config.target.site, VariationUtil.VARIATIONS_DIRNAME, `${variation.id}.html`)

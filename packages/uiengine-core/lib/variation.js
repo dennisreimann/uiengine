@@ -1,6 +1,7 @@
 const path = require('path')
 const R = require('ramda')
 const glob = require('globby')
+const markdown = require('./util/markdown')
 const frontmatter = require('./util/frontmatter')
 const VariationData = require('./data/variation')
 const VariationUtil = require('./util/variation')
@@ -9,17 +10,30 @@ const assocVariation = (variations, variation) =>
   R.assoc(variation.id, variation, variations)
 
 async function readVariationFile (filePath) {
-  const { attributes, body } = await frontmatter.fromFile(filePath)
-  const raw = body
+  const variationName = path.basename(filePath, path.extname(filePath))
+  const variationFile = path.join(path.dirname(filePath), `${variationName}.md`)
+  const variation = await frontmatter.fromFile(variationFile)
 
-  return { attributes, raw }
+  if (variation) {
+    const { attributes, body } = variation
+    const content = await markdown.fromString(body)
+
+    return { attributes, content }
+  } else {
+    // no variation file
+    return { attributes: {} }
+  }
 }
 
-async function findVariationIds (componentsPath, variationGlob = '*') {
-  const variationsPath = VariationUtil.componentIdToVariationsPath(componentsPath, '**')
-  const pathGlob = path.join(variationsPath, variationGlob)
-  const variationPaths = await glob(pathGlob)
-  const variationFilePathToVariationId = R.partial(VariationUtil.variationFilePathToVariationId, [componentsPath])
+async function findVariationIds (state, componentPath = '**') {
+  const { components } = state.config.source
+  if (!components) return []
+
+  const variationsPath = VariationUtil.componentIdToVariationsPath(components, componentPath)
+  const pattern = path.join(variationsPath, '*')
+  const excludePattern = '!' + path.join(variationsPath, '*.md')
+  const variationPaths = await glob([pattern, excludePattern])
+  const variationFilePathToVariationId = R.partial(VariationUtil.variationFilePathToVariationId, [components])
   const variationIds = R.map(variationFilePathToVariationId, variationPaths)
 
   return variationIds
@@ -28,7 +42,7 @@ async function findVariationIds (componentsPath, variationGlob = '*') {
 async function fetchAll (state) {
   const componentsPath = state.config.source.components
   if (!componentsPath) return {}
-  const variationIds = await findVariationIds(componentsPath)
+  const variationIds = await findVariationIds(state)
 
   const variationFetch = R.partial(fetchById, [state])
   const variationFetches = R.map(variationFetch, variationIds)
@@ -43,19 +57,20 @@ async function fetchById (state, id) {
   const componentsPath = state.config.source.components
   const componentId = VariationUtil.variationIdToComponentId(id)
   const variationFilePath = VariationUtil.variationIdToVariationFilePath(componentsPath, id)
-  const variationData = await readVariationFile(variationFilePath)
+  let { attributes, content } = await readVariationFile(variationFilePath)
 
-  let { attributes, raw } = variationData
   const title = VariationUtil.variationIdToTitle(id)
   const context = attributes.context
   attributes = R.dissoc('context', attributes)
   attributes = R.merge({ title }, attributes)
-  const data = VariationData(id, componentId, variationFilePath, raw, context, attributes)
+
+  const data = VariationData(id, componentId, variationFilePath, content, context, attributes)
 
   return data
 }
 
 module.exports = {
+  findVariationIds,
   fetchAll,
   fetchById
 }

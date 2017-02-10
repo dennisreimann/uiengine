@@ -23,11 +23,12 @@ describe('Component', () => {
     })
 
     it('should infer variationIds if they are not provided', done => {
-      Component.fetchById(state, 'formrow')
+      Component.fetchById(state, 'label')
         .then(data => {
-          assert.equal(data.variationIds.length, 2)
-          assert.equal(data.variationIds[0], 'formrow/text-with-label.pug')
-          assert.equal(data.variationIds[1], 'formrow/text-without-label.pug')
+          assert.equal(data.variationIds.length, 3)
+          assert.equal(data.variationIds[0], 'label/label.hbs')
+          assert.equal(data.variationIds[1], 'label/label.jsx')
+          assert.equal(data.variationIds[2], 'label/label.pug')
           done()
         })
         .catch(done)

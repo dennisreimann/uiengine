@@ -34,15 +34,6 @@ async function readPageFile (filePath) {
   return { attributes, content }
 }
 
-async function findPageIds (pagesPath, pathPattern = '**') {
-  const pattern = path.resolve(pagesPath, pathPattern, PageUtil.PAGE_FILENAME)
-  const pagePaths = await glob(pattern)
-  const pageIdFromPageFilePath = R.partial(PageUtil.pageFilePathToPageId, [pagesPath])
-  const pageIds = R.map(pageIdFromPageFilePath, pagePaths)
-
-  return pageIds
-}
-
 async function findPageFiles (pagesPath, pagePath, childIds = []) {
   const filesPattern = path.join(pagesPath, pagePath, '{,*/}*.*')
   const pageExcludes = ['**/_{,*/}*.*', `**/${PageUtil.PAGE_FILENAME}`]
@@ -54,10 +45,20 @@ async function findPageFiles (pagesPath, pagePath, childIds = []) {
   return filePaths
 }
 
+async function findPageIds (state, pagePath = '**') {
+  const { pages } = state.config.source
+  if (!pages) return []
+
+  const pattern = path.resolve(pages, pagePath, PageUtil.PAGE_FILENAME)
+  const pagePaths = await glob(pattern)
+  const pageIdFromPageFilePath = R.partial(PageUtil.pageFilePathToPageId, [pages])
+  const pageIds = R.map(pageIdFromPageFilePath, pagePaths)
+
+  return pageIds
+}
+
 async function fetchAll (state) {
-  const pagesPath = state.config.source.pages
-  if (!pagesPath) return {}
-  const pageIds = await findPageIds(pagesPath)
+  const pageIds = await findPageIds(state)
 
   const pageFetch = R.partial(fetchById, [state])
   const pageFetches = R.map(pageFetch, pageIds)
@@ -69,14 +70,14 @@ async function fetchAll (state) {
 }
 
 async function fetchById (state, id) {
-  const pagesPath = state.config.source.pages
+  const { pages } = state.config.source
   const pagePath = PageUtil.pageIdToPath(id)
-  const absolutePath = PageUtil.pageIdToPageFilePath(pagesPath, id)
+  const absolutePath = PageUtil.pageIdToPageFilePath(pages, id)
   const childPattern = path.join(pagePath, '*')
-  const fetchChildIds = findPageIds(pagesPath, childPattern)
+  const fetchChildIds = findPageIds(state, childPattern)
   const fetchPageData = readPageFile(absolutePath)
   const [pageData, childIds] = await Promise.all([fetchPageData, fetchChildIds])
-  const files = await findPageFiles(pagesPath, pagePath, childIds)
+  const files = await findPageFiles(pages, pagePath, childIds)
 
   let { attributes, content } = pageData
   attributes = convertUserProvidedChildrenList(id, attributes)

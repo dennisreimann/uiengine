@@ -5,7 +5,6 @@ const assert = require('assert')
 const Configuration = require('../lib/configuration')
 
 const themePath = path.resolve(__dirname, '..', 'theme')
-const templatingPath = path.resolve(__dirname, '..', 'templating')
 const sampleProjectPath = path.resolve(__dirname, '..', 'sample_project')
 const testConfigPath = path.resolve(sampleProjectPath, 'uiengine.yml')
 
@@ -61,7 +60,9 @@ describe('Configuration', () => {
     it('should resolve templating', done => {
       Configuration.read(testConfigPath)
         .then(config => {
-          assert.equal(config.templating.pug, path.resolve(templatingPath, 'uiengine-templating-pug'))
+          assert.equal(config.templating.pug, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-pug'))
+          assert.equal(config.templating.jsx, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-react'))
+          assert.equal(config.templating.hbs, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-handlebars'))
 
           done()
         })

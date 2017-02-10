@@ -4,7 +4,7 @@ const glob = require('globby')
 const frontmatter = require('./util/frontmatter')
 const markdown = require('./util/markdown')
 const ComponentUtil = require('./util/component')
-const VariationUtil = require('./util/variation')
+const Variation = require('./variation')
 
 const assocComponent = (components, component) =>
   R.assoc(component.id, component, components)
@@ -33,29 +33,20 @@ async function readComponentFile (filePath) {
   return { attributes, content }
 }
 
-async function findComponentIds (componentsPath, componentGlob = '**') {
-  const pathGlob = path.resolve(componentsPath, componentGlob, ComponentUtil.COMPONENT_FILENAME)
-  const componentPaths = await glob(pathGlob)
-  const componentIdFromComponentFilePath = R.partial(ComponentUtil.componentFilePathToComponentId, [componentsPath])
+async function findComponentIds (state, componentPath = '**') {
+  const { components } = state.config.source
+  if (!components) return []
+
+  const pattern = path.resolve(components, componentPath, ComponentUtil.COMPONENT_FILENAME)
+  const componentPaths = await glob(pattern)
+  const componentIdFromComponentFilePath = R.partial(ComponentUtil.componentFilePathToComponentId, [components])
   const componentIds = R.map(componentIdFromComponentFilePath, componentPaths)
 
   return componentIds
 }
 
-async function findVariationIds (componentsPath, componentId, variationGlob = '*') {
-  const variationsPath = VariationUtil.componentIdToVariationsPath(componentsPath, componentId)
-  const pathGlob = path.join(variationsPath, variationGlob)
-  const variationPaths = await glob(pathGlob)
-  const variationFilePathToVariationId = R.partial(VariationUtil.variationFilePathToVariationId, [componentsPath])
-  const variationIds = R.map(variationFilePathToVariationId, variationPaths)
-
-  return variationIds
-}
-
 async function fetchAll (state) {
-  const componentsPath = state.config.source.components
-  if (!componentsPath) return {}
-  const componentIds = await findComponentIds(componentsPath)
+  const componentIds = await findComponentIds(state)
 
   const componentFetch = R.partial(fetchById, [state])
   const componentFetches = R.map(componentFetch, componentIds)
@@ -70,7 +61,7 @@ async function fetchById (state, id) {
   const componentsPath = state.config.source.components
   const componentPath = ComponentUtil.componentIdToPath(componentsPath, id)
   const componentFilePath = ComponentUtil.componentIdToComponentFilePath(componentsPath, id)
-  const fetchVariationIds = findVariationIds(componentsPath, id)
+  const fetchVariationIds = Variation.findVariationIds(state, id)
   const fetchComponentData = readComponentFile(componentFilePath)
   const [ componentData, variationIds ] = await Promise.all([fetchComponentData, fetchVariationIds])
 
