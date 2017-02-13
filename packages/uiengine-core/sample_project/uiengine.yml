@@ -19,33 +19,21 @@ target:
   site: ./dist
   assets: ./dist/assets
 
-# If you want to use your own theme instead of the default one, there are two options:
-# - provide the path to a directory inside this project that contains the theme
-#   (case: you use the theme just for this project)
-# - give the name of the npm package that is the theme
-#   (case: you use the theme more than once and want to share it across projects)
-#
-# UIengine will `require` the theme, which has to provide a defined set of functions
-# for setup and rendering. For details see the theme docs.
-# theme: ./my-uiengine-theme
-
-# Template adapters works similar to how configuring the theme is handled:
-# - provide the path to a node module inside this project that configures your templating
-#   (case: you use the templating just for this project)
-# - give the name of the npm package that is the templating adapter
-#   (case: you use the templating more than once and want to share it across projects)
-#
-# UIengine will `require` the template adapter, which has to provide a defined set of
-# functions for setup and rendering. For details see the templating docs.
-templating:
+# Adapters are used for templating/rendering. Each adapter is a module that gets required
+# and needs to provide functions for setup and rendering. For details see the adapters docs.
+adapters:
   pug:
-    module: ./node_modules/uiengine-templating-pug
+    module: ./node_modules/uiengine-adapter-pug
     options:
       pretty: true
       basedir: ./src/components
-  jsx: ./node_modules/uiengine-templating-react
-  hbs: ./node_modules/uiengine-templating-handlebars
+  jsx: ./node_modules/uiengine-adapter-react
+  hbs: ./node_modules/uiengine-adapter-handlebars
 
+# Here you can configure the template that the variation preview gets embeded in.
 templates:
   variation: variation-preview.pug
 
+# UIengine will `require` the theme, which has to provide a defined set of functions
+# for setup and rendering. For details see the theme docs.
+# theme: ./my-uiengine-theme
