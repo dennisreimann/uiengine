@@ -28,18 +28,18 @@ const state = {
       templates: path.resolve(projectPath, 'src', 'templates'),
       pages: path.resolve(projectPath, 'src', 'pages')
     },
-    templating: {
+    adapters: {
       pug: {
-        module: path.resolve(projectPath, 'node_modules', 'uiengine-templating-pug'),
+        module: path.resolve(projectPath, 'node_modules', 'uiengine-adapter-pug'),
         options: {
           basedir: path.resolve(projectPath, 'src', 'components')
         }
       },
       jsx: {
-        module: path.resolve(projectPath, 'node_modules', 'uiengine-templating-react'),
+        module: path.resolve(projectPath, 'node_modules', 'uiengine-adapter-react'),
         options: {}
       },
-      hbs: path.resolve(projectPath, 'node_modules', 'uiengine-templating-handlebars')
+      hbs: path.resolve(projectPath, 'node_modules', 'uiengine-adapter-handlebars')
     },
     templates: {
       variation: 'variation-preview.pug'

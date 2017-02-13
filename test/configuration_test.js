@@ -57,16 +57,16 @@ describe('Configuration', () => {
         .catch(done)
     })
 
-    it('should resolve templating', done => {
+    it('should resolve adapters', done => {
       Configuration.read(testConfigPath)
         .then(config => {
-          assert.equal(config.templating.pug.module, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-pug'))
-          assert.equal(config.templating.pug.options.pretty, true)
-          assert.equal(config.templating.pug.options.basedir, path.resolve(sampleProjectPath, 'src', 'components'))
-          assert.equal(config.templating.jsx.module, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-react'))
-          assert.equal(config.templating.hbs.module, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-handlebars'))
-          assert.equal(Object.keys(config.templating.jsx.options).length, 0)
-          assert.equal(Object.keys(config.templating.hbs.options).length, 0)
+          assert.equal(config.adapters.pug.module, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-adapter-pug'))
+          assert.equal(config.adapters.pug.options.pretty, true)
+          assert.equal(config.adapters.pug.options.basedir, path.resolve(sampleProjectPath, 'src', 'components'))
+          assert.equal(config.adapters.jsx.module, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-adapter-react'))
+          assert.equal(config.adapters.hbs.module, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-adapter-handlebars'))
+          assert.equal(Object.keys(config.adapters.jsx.options).length, 0)
+          assert.equal(Object.keys(config.adapters.hbs.options).length, 0)
 
           done()
         })
