@@ -1,0 +1,6 @@
+/coverage
+/lib
+/npm-debug*
+/node_modules
+*log
+.DS_Store
