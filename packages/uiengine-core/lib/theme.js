@@ -1,10 +1,7 @@
 const path = require('path')
 const File = require('./util/file')
 
-const getTheme = ({ config }) => {
-  const theme = config.theme
-  return require(theme)
-}
+const getTheme = ({ config: { theme } }) => require(theme)
 
 async function render (state, templateId, data = {}) {
   const theme = getTheme(state)
