@@ -13,8 +13,7 @@ const pugOpts = {
 
 async function render (id, data = {}) {
   return new Promise((resolve, reject) => {
-    // FIXME: Unify with templating adapters:
-    // take filePath instead of template id
+    // FIXME: Unify with adapters: take filePath instead of template id
     const filePath = path.resolve(templatesPath, `${id}.pug`)
     const context = Object.assign(pugOpts, data, { h: helpers(data) })
 

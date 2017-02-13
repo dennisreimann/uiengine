@@ -7,14 +7,13 @@ A pattern library generator that gets out of your way.
 ## Documentation
 
 - [Configuration](./docs/config.md)
+- [Adapters](./docs/adapters.md)
+- [Component](./docs/component.md)
+- [Variation](./docs/variation.md)
 - [Theme](./docs/theme.md)
+- [YAML](./docs/yaml.md)
 
 ## Development
-
-### Public functions
-
-- Are always `async`
-- First argument is always the state
 
 ### Setup
 
@@ -28,9 +27,14 @@ yarn install
 yarn test
 ```
 
+### Public functions
+
+- Are always `async`
+- First argument is always the state
+
 ### Theme
 
-Use the [default theme](https://github.com/dennisreimann/uiengine-theme-react) as a basis for your customizations.
+Use the [default theme](./theme) as a basis for your customizations.
 
 ## Alternatives
 
