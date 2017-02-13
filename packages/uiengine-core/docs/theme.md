@@ -8,7 +8,8 @@ If you want to use your own theme instead of the default one, there are two opti
 - give the name of the npm package that is the theme
   (case: you use the theme more than once and want to share it across projects)
 
-UIengine will `require` the theme, which has to export an async `render` function as well as an `assetsPath`:
+UIengine will `require` the theme.
+The module has to export an async `render` function as well as an `assetsPath`:
 
 - `render(templateId, data)` gets the template name and the data for the page that should get rendered.
   This function is called asynchronously and has to return a `Promise`!
@@ -23,7 +24,7 @@ This makes sense when you are working with i.e. Handlebars and you have to regis
 Apart from that you most likely will not need to provided these hooks.
 But if you do, make sure to return a `Promise`:
 
-- `setup()` hook for initializing the templating.
+- `setup()` hook for initializing the theme.
   Gets called before the project gets generated.
 - `teardown()` hook to undo everything that happened during setup.
   This is not used by UIengine itself but you might need this in tests for the theme.
