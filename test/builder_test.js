@@ -29,8 +29,16 @@ const state = {
       pages: path.resolve(projectPath, 'src', 'pages')
     },
     templating: {
-      pug: path.resolve(projectPath, 'node_modules', 'uiengine-templating-pug'),
-      jsx: path.resolve(projectPath, 'node_modules', 'uiengine-templating-react'),
+      pug: {
+        module: path.resolve(projectPath, 'node_modules', 'uiengine-templating-pug'),
+        options: {
+          basedir: path.resolve(projectPath, 'src', 'components')
+        }
+      },
+      jsx: {
+        module: path.resolve(projectPath, 'node_modules', 'uiengine-templating-react'),
+        options: {}
+      },
       hbs: path.resolve(projectPath, 'node_modules', 'uiengine-templating-handlebars')
     },
     templates: {

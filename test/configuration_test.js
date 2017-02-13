@@ -60,9 +60,13 @@ describe('Configuration', () => {
     it('should resolve templating', done => {
       Configuration.read(testConfigPath)
         .then(config => {
-          assert.equal(config.templating.pug, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-pug'))
-          assert.equal(config.templating.jsx, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-react'))
-          assert.equal(config.templating.hbs, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-handlebars'))
+          assert.equal(config.templating.pug.module, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-pug'))
+          assert.equal(config.templating.pug.options.pretty, true)
+          assert.equal(config.templating.pug.options.basedir, path.resolve(sampleProjectPath, 'src', 'components'))
+          assert.equal(config.templating.jsx.module, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-react'))
+          assert.equal(config.templating.hbs.module, path.resolve(sampleProjectPath, 'node_modules', 'uiengine-templating-handlebars'))
+          assert.equal(Object.keys(config.templating.jsx.options).length, 0)
+          assert.equal(Object.keys(config.templating.hbs.options).length, 0)
 
           done()
         })
