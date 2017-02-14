@@ -1,7 +1,7 @@
 /* global describe, it */
 const assert = require('assert')
 
-const Markdown = require('../lib/util/markdown')
+const Markdown = require('../src/util/markdown')
 
 describe('Markdown', () => {
   describe('#fromFile', () => {

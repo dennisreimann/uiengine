@@ -2,7 +2,7 @@
 const path = require('path')
 const assert = require('assert')
 
-const Component = require('../lib/component')
+const Component = require('../src/component')
 const state = {
   config: {
     source: {

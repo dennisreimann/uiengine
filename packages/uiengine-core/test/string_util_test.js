@@ -1,7 +1,7 @@
 /* global describe, it */
 const assert = require('assert')
 
-const StringUtil = require('../lib/util/string')
+const StringUtil = require('../src/util/string')
 
 describe('StringUtil', () => {
   describe('#titleize', () => {

@@ -4,7 +4,7 @@ const assertExists = require('./support/assertExists')
 const fs = require('fs-extra')
 const path = require('path')
 
-const File = require('../lib/util/file')
+const File = require('../src/util/file')
 
 describe('File', () => {
   describe('#read', () => {

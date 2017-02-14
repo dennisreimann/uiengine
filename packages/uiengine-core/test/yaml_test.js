@@ -1,7 +1,7 @@
 /* global describe, it */
 const assert = require('assert')
 
-const Yaml = require('../lib/util/yaml')
+const Yaml = require('../src/util/yaml')
 
 describe('Yaml', () => {
   describe('#fromFile', () => {

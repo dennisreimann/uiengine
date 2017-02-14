@@ -2,8 +2,6 @@ const path = require('path')
 const R = require('ramda')
 const yaml = require('./util/yaml')
 
-const DEFAULT_THEME = path.resolve(__dirname, '..', 'theme')
-
 const readPackageJson = () => {
   let data = {}
   try {
@@ -30,7 +28,7 @@ const resolveModule = (basedir, module) =>
 const resolvePath = (basedir, relativePath) =>
   path.resolve(basedir, relativePath)
 
-const resolveTheme = (basedir, theme = DEFAULT_THEME) =>
+const resolveTheme = (basedir, theme = 'uiengine-theme-default') =>
   resolveModule(basedir, theme)
 
 const resolveAdapter = (basedir, adapter) => {

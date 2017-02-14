@@ -2,7 +2,7 @@
 const assert = require('assert')
 const Factory = require('./support/factory')
 
-const Navigation = require('../lib/navigation')
+const Navigation = require('../src/navigation')
 
 describe('Navigation', () => {
   describe('#forPages', () => {

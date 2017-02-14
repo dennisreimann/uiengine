@@ -1,4 +1,5 @@
 /coverage
+/lib
 /npm-debug*
 /sample_project/dist
 /test/tmp

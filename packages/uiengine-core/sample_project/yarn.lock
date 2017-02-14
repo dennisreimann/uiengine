@@ -2429,12 +2429,6 @@ map-cache@^0.2.0:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/map-cache/-/map-cache-0.2.2.tgz#c32abd0bd6525d9b051645bb4f26ac5dc98a0dbf"
 
-markdown-it-anchor@^2.6.0:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/markdown-it-anchor/-/markdown-it-anchor-2.7.1.tgz#372f67da7a4c4632ad0ebe4c9691726efe25342a"
-  dependencies:
-    string "^3.0.1"
-
 markdown-it@^8.2.2:
   version "8.2.2"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.2.2.tgz#e39593d976f9c4b7ee7f338a3a1e9e10c3db4e36"
@@ -3431,10 +3425,6 @@ string-width@^1.0.1, string-width@^1.0.2:
     is-fullwidth-code-point "^1.0.0"
     strip-ansi "^3.0.0"
 
-string@^3.0.1:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/string/-/string-3.3.3.tgz#5ea211cd92d228e184294990a6cc97b366a77cb0"
-
 string_decoder@~0.10.x:
   version "0.10.31"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
@@ -3577,24 +3567,30 @@ uid-number@~0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
-"uiengine-templating-handlebars@file:../../uiengine-templating-handlebars":
+uiengine-adapter-handlebars@^0.1.0:
   version "0.1.0"
+  resolved "https://registry.yarnpkg.com/uiengine-adapter-handlebars/-/uiengine-adapter-handlebars-0.1.0.tgz#8b0a716109e36b66e0b5231e8866a71f0b3d4baa"
   dependencies:
     handlebars "^4.0.6"
 
-"uiengine-templating-pug@file:../../uiengine-templating-pug":
+uiengine-adapter-pug@^0.1.0:
   version "0.1.0"
+  resolved "https://registry.yarnpkg.com/uiengine-adapter-pug/-/uiengine-adapter-pug-0.1.0.tgz#0200a8d9bbade074ca9853e48d27708639691cd6"
   dependencies:
     pug "^2.0.0-beta10"
 
-"uiengine-templating-react@file:../../uiengine-templating-react":
+uiengine-adapter-react@^0.1.0:
   version "0.1.0"
+  resolved "https://registry.yarnpkg.com/uiengine-adapter-react/-/uiengine-adapter-react-0.1.0.tgz#bae83ef06e48dcefc8f9a3fe1443179a76a929ca"
   dependencies:
+    babel-core "^6.22.1"
+    babel-register "^6.22.0"
     react "^15.4.2"
     react-dom "^15.4.2"
 
-"uiengine@file:..":
+uiengine@^0.1.0:
   version "0.1.0"
+  resolved "https://registry.yarnpkg.com/uiengine/-/uiengine-0.1.0.tgz#f1b368ec271155fa25167885e8985fa7180f1b11"
   dependencies:
     deep-extend "^0.4.1"
     fastmatter "^1.1.1"

@@ -2,7 +2,7 @@
 const path = require('path')
 const assert = require('assert')
 
-const ComponentUtil = require('../lib/util/component')
+const ComponentUtil = require('../src/util/component')
 
 const componentsPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'components')
 
