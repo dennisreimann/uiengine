@@ -30,8 +30,7 @@
   ],
   "scripts": {
     "build": "rimraf lib && babel src --out-dir lib",
-    "test": "standard && mocha --harmony -R dot",
-    "release": "yarn run test && yarn run build && npm publish"
+    "test": "standard && mocha --harmony -R dot"
   },
   "dependencies": {
     "deep-extend": "^0.4.1",
