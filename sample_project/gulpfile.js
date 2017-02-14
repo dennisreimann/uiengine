@@ -1,7 +1,7 @@
 const gulp = require('gulp')
 const runSequence = require('run-sequence')
 const BrowserSync = require('browser-sync')
-const UIengine = require('..')
+const UIengine = require('uiengine')
 const p = require('gulp-load-plugins')()
 
 const browserSync = BrowserSync.create()

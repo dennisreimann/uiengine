@@ -32,10 +32,6 @@ yarn test
 - Are always `async`
 - First argument is always the state
 
-### Theme
-
-Use the [default theme](./theme) as a basis for your customizations.
-
 ## Alternatives
 
 - http://fractal.build/

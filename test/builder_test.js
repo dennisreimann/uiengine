@@ -4,12 +4,11 @@ const path = require('path')
 const Factory = require('./support/factory')
 const assertExists = require('./support/assertExists')
 
-const Builder = require('../lib/builder')
-const NavigationData = require('../lib/data/navigation')
-const ComponentData = require('../lib/data/component')
-const VariationData = require('../lib/data/variation')
+const Builder = require('../src/builder')
+const NavigationData = require('../src/data/navigation')
+const ComponentData = require('../src/data/component')
+const VariationData = require('../src/data/variation')
 
-const theme = path.resolve(__dirname, '..', 'theme')
 const projectPath = path.resolve(__dirname, '..', 'sample_project')
 const tmpPath = path.resolve(__dirname, 'tmp')
 const sitePath = path.resolve(tmpPath, 'site')
@@ -30,21 +29,25 @@ const state = {
     },
     adapters: {
       pug: {
-        module: path.resolve(projectPath, 'node_modules', 'uiengine-adapter-pug'),
+        module: 'uiengine-adapter-pug',
         options: {
+          pretty: true,
           basedir: path.resolve(projectPath, 'src', 'components')
         }
       },
       jsx: {
-        module: path.resolve(projectPath, 'node_modules', 'uiengine-adapter-react'),
+        module: 'uiengine-adapter-react',
         options: {}
       },
-      hbs: path.resolve(projectPath, 'node_modules', 'uiengine-adapter-handlebars')
+      hbs: {
+        module: 'uiengine-adapter-handlebars',
+        options: {}
+      }
     },
     templates: {
       variation: 'variation-preview.pug'
     },
-    theme
+    theme: 'uiengine-theme-default'
   },
   pages: {
     index: Factory.page('index', {
@@ -89,8 +92,10 @@ const state = {
   }
 }
 
+void fs
+
 describe('Builder', () => {
-  afterEach(() => { fs.removeSync(tmpPath) })
+  // afterEach(() => { fs.removeSync(tmpPath) })
 
   describe('#generateSite', () => {
     it('should generate site', done => {

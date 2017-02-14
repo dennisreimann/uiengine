@@ -4,7 +4,7 @@ const path = require('path')
 const assert = require('assert')
 const assertExists = require('./support/assertExists')
 
-const UIengine = require('../lib/uiengine')
+const UIengine = require('../src/uiengine')
 
 const pagesPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'pages')
 const componentsPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'components')

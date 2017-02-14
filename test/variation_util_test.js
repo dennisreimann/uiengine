@@ -2,7 +2,7 @@
 const path = require('path')
 const assert = require('assert')
 
-const VariationUtil = require('../lib/util/variation')
+const VariationUtil = require('../src/util/variation')
 
 const componentsPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'components')
 

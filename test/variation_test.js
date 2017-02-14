@@ -2,7 +2,7 @@
 const path = require('path')
 const assert = require('assert')
 
-const Variation = require('../lib/variation')
+const Variation = require('../src/variation')
 const state = {
   config: {
     source: {

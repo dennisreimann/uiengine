@@ -1,7 +1,7 @@
 /* global describe, it */
 const assert = require('assert')
 
-const Frontmatter = require('../lib/util/frontmatter')
+const Frontmatter = require('../src/util/frontmatter')
 
 const string = `
 ---

@@ -23,12 +23,12 @@ target:
 # and needs to provide functions for setup and rendering. For details see the adapters docs.
 adapters:
   pug:
-    module: ./node_modules/uiengine-adapter-pug
+    module: uiengine-adapter-pug
     options:
       pretty: true
       basedir: ./src/components
-  jsx: ./node_modules/uiengine-adapter-react
-  hbs: ./node_modules/uiengine-adapter-handlebars
+  jsx: uiengine-adapter-react
+  hbs: uiengine-adapter-handlebars
 
 # Here you can configure the template that the variation preview gets embeded in.
 templates:

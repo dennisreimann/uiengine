@@ -1,8 +1,0 @@
-extends _layout
-
-block main
-  section.page(id=h.dasherize(page.id))
-    header.page__header
-      h1.page__title= page.title
-    article.page__main
-      .page__content!=page.content

@@ -5,15 +5,8 @@
   "author": "Dennis Reimann",
   "license": "UNLICENSED",
   "main": "./lib/uiengine.js",
-  "files": [
-    "bin",
-    "lib",
-    "sample_project",
-    "templating",
-    "theme"
-  ],
   "engines": {
-    "node": ">=7.3.0"
+    "node": ">=6.9.5"
   },
   "repository": {
     "type": "git",
@@ -22,11 +15,16 @@
   "bin": {
     "uiengine": "./bin/uiengine.js"
   },
+  "keywords": [
+    "uiengine",
+    "uiengineering",
+    "pattern-library",
+    "style-guide",
+    "static-site"
+  ],
   "scripts": {
-    "clean": "rimraf theme/assets sample_project/dist",
-    "start": "yarn run clean && node --harmony `which gulp` develop",
-    "build": "yarn run clean && node --harmony `which gulp` build",
-    "production": "yarn run clean && node --harmony `which gulp` production",
+    "build": "rimraf lib && babel src --out-dir lib",
+    "preversion": "yarn run build",
     "pretest": "standard",
     "test": "mocha --harmony -R dot"
   },
@@ -38,24 +36,15 @@
     "js-yaml": "^3.7.0",
     "markdown-it": "^8.2.2",
     "markdown-it-anchor": "^2.6.0",
-    "pug": "^2.0.0-beta10",
     "ramda": "^0.23.0",
+    "uiengine-theme-default": "file:../theme-default",
     "yargs": "^6.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
-    "css-mqpacker": "^5.0.1",
-    "csswring": "^5.1.1",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-postcss": "^6.3.0",
-    "gulp-rev-all": "0.8.23",
-    "gulp-rev-delete-original": "^0.2.2",
-    "gulp-stylus": "^2.6.0",
-    "gulp-uglify": "^2.0.1",
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-preset-env": "^1.1.8",
     "mocha": "^3.2.0",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",
@@ -71,8 +60,8 @@
       "it"
     ],
     "ignore": [
-      "/theme/assets",
-      "*.jsx"
+      "/lib",
+      "/theme/assets"
     ]
   }
 }

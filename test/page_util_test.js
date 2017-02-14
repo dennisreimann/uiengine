@@ -2,7 +2,7 @@
 const path = require('path')
 const assert = require('assert')
 
-const PageUtil = require('../lib/util/page')
+const PageUtil = require('../src/util/page')
 
 const pagesPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'pages')
 
