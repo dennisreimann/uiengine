@@ -72,8 +72,8 @@ async function read (configFilePath, flags = {}) {
 
   source = R.map(resolvePaths, source)
   target = R.map(resolvePaths, target)
-  adapters = R.map(resolveAdapters, adapters)
   theme = resolveTheme(configPath, theme)
+  adapters = R.map(resolveAdapters, adapters || {})
 
   data = R.assoc('source', source, data)
   data = R.assoc('target', target, data)
