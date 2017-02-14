@@ -1,0 +1,55 @@
+{
+  "name": "uiengine-theme-default",
+  "version": "0.1.0",
+  "description": "UIengine default theme.",
+  "author": "Dennis Reimann",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "engines": {
+    "node": ">=6.9.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dennisreimann/uiengine-theme-default.git"
+  },
+  "keywords": [
+    "uiengine",
+    "uiengine-theme"
+  ],
+  "scripts": {
+    "clean": "rimraf assets lib",
+    "build": "yarn run clean && gulp build",
+    "start": "yarn run clean && gulp develop",
+    "preversion": "yarn run build"
+  },
+  "dependencies": {
+    "pug": "^2.0.0-beta10"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.7.2",
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-preset-env": "^1.1.8",
+    "css-mqpacker": "^5.0.1",
+    "csswring": "^5.1.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.3.0",
+    "gulp-rev-all": "0.8.23",
+    "gulp-rev-delete-original": "^0.2.2",
+    "gulp-stylus": "^2.6.0",
+    "gulp-uglify": "^2.0.1",
+    "rimraf": "^2.5.4",
+    "run-sequence": "^1.2.2",
+    "standard": "^8.6.0"
+  },
+  "standard": {
+    "ignore": [
+      "/lib",
+      "/assets"
+    ]
+  }
+}

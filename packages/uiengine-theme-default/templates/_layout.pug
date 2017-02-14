@@ -1,0 +1,19 @@
+include _nav
+
+doctype
+html
+  head
+    title #{page.title} • #{config.name} (#{config.version})
+    meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
+    meta(name="viewport" content="width=device-width,initial-scale=1")
+    link(href=h.assetPath("assets/styles/uiengine.css") rel="stylesheet")
+  body
+    .wrap
+      nav.nav
+        a.nav__menu(href="#menu") Menu
+        a.nav__home(href=h.pageLink('index'))= config.name
+        if navigation && navigation.index
+          +nav(navigation.index.childIds, 'nav')#menu
+      main.main
+        block main
+    script(src=h.assetPath("assets/scripts/uiengine.js") defer)
