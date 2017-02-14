@@ -2,7 +2,7 @@ const pug = require('pug')
 
 async function render (options, filePath, data = {}) {
   return new Promise((resolve, reject) => {
-    const context = Object.assign(options, data)
+    const context = Object.assign({}, options, data)
 
     try {
       const rendered = pug.renderFile(filePath, context)

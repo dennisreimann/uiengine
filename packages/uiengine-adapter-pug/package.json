@@ -5,6 +5,8 @@
   "author": "Dennis Reimann",
   "license": "MIT",
   "main": "./lib/index.js",
+  "homepage": "https://github.com/dennisreimann/uiengine-adapter-pug",
+  "bugs": "https://github.com/dennisreimann/uiengine-adapter-pug/issues",
   "engines": {
     "node": ">=6.9.5"
   },
@@ -12,6 +14,9 @@
     "type": "git",
     "url": "https://github.com/dennisreimann/uiengine-adapter-pug.git"
   },
+  "files": [
+    "lib"
+  ],
   "keywords": [
     "uiengine-adapter",
     "uiengine",
@@ -23,12 +28,16 @@
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-preset-env": "^1.1.8",
-    "babel-preset-es2015": "^6.22.0",
     "rimraf": "^2.5.4",
     "standard": "^8.6.0"
   },
   "scripts": {
     "build": "rimraf lib && babel src --out-dir lib",
     "preversion": "yarn run build"
+  },
+  "standard": {
+    "ignore": [
+      "/lib"
+    ]
   }
 }
