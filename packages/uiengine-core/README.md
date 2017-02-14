@@ -36,7 +36,9 @@ yarn run build
 ### Release
 
 ```bash
-npm version VERSION && yarn run release
+yarn run test && yarn run build
+npm version VERSION
+npm publish
 ```
 
 ### Public functions
