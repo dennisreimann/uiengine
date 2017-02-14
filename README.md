@@ -27,6 +27,18 @@ yarn install
 yarn test
 ```
 
+### Build
+
+```bash
+yarn run build
+```
+
+### Release
+
+```bash
+npm version VERSION && yarn run release
+```
+
 ### Public functions
 
 - Are always `async`
