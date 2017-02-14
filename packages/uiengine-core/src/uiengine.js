@@ -60,9 +60,9 @@ async function generateIncrementForChangedFile (options, filePath) {
   const { components, pages } = state.config.source
   const file = path.relative('.', filePath)
 
-  const pageId = PageUtil.pageFilePathToPageId(pages, filePath)
-  const componentId = ComponentUtil.componentFilePathToComponentId(components, filePath)
-  let variationId = VariationUtil.variationFilePathToVariationId(components, filePath)
+  const pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
+  const componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
+  let variationId = components ? VariationUtil.variationFilePathToVariationId(components, filePath) : undefined
 
   // FIXME: Remove this quickfix and rebuild all variation
   // files belonging to the meta variation markdown file.
