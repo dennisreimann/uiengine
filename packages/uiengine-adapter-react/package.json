@@ -1,6 +1,6 @@
 {
   "name": "uiengine-adapter-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "UIengine template adapter for React/JSX.",
   "author": "Dennis Reimann",
   "license": "MIT",
