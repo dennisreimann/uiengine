@@ -1,10 +1,12 @@
 {
   "name": "uiengine",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "A pattern library generator that gets out of your way.",
   "author": "Dennis Reimann",
   "license": "UNLICENSED",
   "main": "./lib/uiengine.js",
+  "homepage": "https://github.com/dennisreimann/uiengine",
+  "bugs": "https://github.com/dennisreimann/uiengine/issues",
   "engines": {
     "node": ">=6.9.5"
   },
@@ -15,6 +17,10 @@
   "bin": {
     "uiengine": "./bin/uiengine.js"
   },
+  "files": [
+    "bin",
+    "lib"
+  ],
   "keywords": [
     "uiengine",
     "uiengineering",
@@ -24,9 +30,8 @@
   ],
   "scripts": {
     "build": "rimraf lib && babel src --out-dir lib",
-    "preversion": "yarn run build",
-    "pretest": "standard",
-    "test": "mocha --harmony -R dot"
+    "test": "standard && mocha --harmony -R dot",
+    "release": "yarn run test && yarn run build && npm publish"
   },
   "dependencies": {
     "deep-extend": "^0.4.1",
@@ -37,7 +42,7 @@
     "markdown-it": "^8.2.2",
     "markdown-it-anchor": "^2.6.0",
     "ramda": "^0.23.0",
-    "uiengine-theme-default": "file:../theme-default",
+    "uiengine-theme-default": "^0.1.3",
     "yargs": "^6.6.0"
   },
   "devDependencies": {
