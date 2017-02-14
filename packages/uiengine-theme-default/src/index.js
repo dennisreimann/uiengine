@@ -14,7 +14,7 @@ const pugOpts = {
 async function render (id, data = {}) {
   return new Promise((resolve, reject) => {
     const filePath = path.resolve(templatesPath, `${id}.pug`)
-    const context = Object.assign(pugOpts, data, { h: helpers(data) })
+    const context = Object.assign({}, pugOpts, data, { h: helpers(data) })
 
     try {
       const rendered = pug.renderFile(filePath, context)

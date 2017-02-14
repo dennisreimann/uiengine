@@ -1,10 +1,12 @@
 {
   "name": "uiengine-theme-default",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "UIengine default theme.",
   "author": "Dennis Reimann",
   "license": "MIT",
   "main": "./lib/index.js",
+  "homepage": "https://github.com/dennisreimann/uiengine-theme-default",
+  "bugs": "https://github.com/dennisreimann/uiengine-theme-default/issues",
   "engines": {
     "node": ">=6.9.5"
   },
@@ -12,6 +14,11 @@
     "type": "git",
     "url": "https://github.com/dennisreimann/uiengine-theme-default.git"
   },
+  "files": [
+    "assets",
+    "lib",
+    "templates"
+  ],
   "keywords": [
     "uiengine",
     "uiengine-theme"
@@ -27,7 +34,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
-    "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-preset-env": "^1.1.8",
     "css-mqpacker": "^5.0.1",
