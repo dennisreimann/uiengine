@@ -29,10 +29,16 @@
     "static-site"
   ],
   "scripts": {
-    "build": "rimraf lib && babel src --out-dir lib",
+    "clean": "rimraf lib",
+    "prestart": "yarn run clean",
+    "prebuild": "yarn run clean",
+    "prerelease": "yarn run clean",
+    "start": "yarn run build -- -w & yarn run test -- -w",
+    "build": "babel src --out-dir lib",
     "test": "mocha --compilers js:babel-register -R dot",
     "cover": "nyc yarn run test",
-    "lint": "standard"
+    "lint": "standard",
+    "release": "yarn run lint && yarn run cover && yarn run build"
   },
   "dependencies": {
     "deep-extend": "^0.4.1",
