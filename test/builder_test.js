@@ -9,7 +9,7 @@ const NavigationData = require('../src/data/navigation')
 const ComponentData = require('../src/data/component')
 const VariationData = require('../src/data/variation')
 
-const projectPath = path.resolve(__dirname, '..', 'sample_project')
+const projectPath = path.resolve(__dirname, 'project')
 const tmpPath = path.resolve(__dirname, 'tmp')
 const sitePath = path.resolve(tmpPath, 'site')
 const assetsPath = path.resolve(tmpPath, 'site', 'assets')
@@ -92,10 +92,8 @@ const state = {
   }
 }
 
-void fs
-
 describe('Builder', () => {
-  // afterEach(() => { fs.removeSync(tmpPath) })
+  afterEach(() => { fs.removeSync(tmpPath) })
 
   describe('#generateSite', () => {
     it('should generate site', done => {

@@ -6,7 +6,7 @@ const Variation = require('../src/variation')
 const state = {
   config: {
     source: {
-      components: path.resolve(__dirname, '..', 'sample_project', 'src', 'components')
+      components: path.resolve(__dirname, 'project', 'src', 'components')
     }
   }
 }

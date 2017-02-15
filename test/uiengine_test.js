@@ -6,11 +6,11 @@ const assertExists = require('./support/assertExists')
 
 const UIengine = require('../src/uiengine')
 
-const pagesPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'pages')
-const componentsPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'components')
-const sitePath = path.resolve(__dirname, '..', 'sample_project', 'dist')
-const assetsPath = path.resolve(__dirname, '..', 'sample_project', 'dist', 'assets')
-const opts = { config: path.resolve(__dirname, '..', 'sample_project', 'uiengine.yml') }
+const pagesPath = path.resolve(__dirname, 'project', 'src', 'pages')
+const componentsPath = path.resolve(__dirname, 'project', 'src', 'components')
+const sitePath = path.resolve(__dirname, 'project', 'dist')
+const assetsPath = path.resolve(__dirname, 'project', 'dist', 'assets')
+const opts = { config: path.resolve(__dirname, 'project', 'uiengine.yml') }
 
 // "end to end" tests
 describe('UIengine', () => {
@@ -96,7 +96,7 @@ describe('UIengine', () => {
 
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'patterns')
-          assert.equal(result.file, 'sample_project/src/pages/patterns/page.md')
+          assert.equal(result.file, 'test/project/src/pages/patterns/page.md')
 
           done()
         })
@@ -112,7 +112,7 @@ describe('UIengine', () => {
 
           assert.equal(result.type, 'component')
           assert.equal(result.item, 'form')
-          assert.equal(result.file, 'sample_project/src/components/form/form.pug')
+          assert.equal(result.file, 'test/project/src/components/form/form.pug')
 
           done()
         })
@@ -128,7 +128,7 @@ describe('UIengine', () => {
 
           assert.equal(result.type, 'variation')
           assert.equal(result.item, 'form/form.pug')
-          assert.equal(result.file, 'sample_project/src/components/form/variations/form.pug')
+          assert.equal(result.file, 'test/project/src/components/form/variations/form.pug')
 
           done()
         })

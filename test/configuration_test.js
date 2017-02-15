@@ -4,7 +4,7 @@ const assert = require('assert')
 
 const Configuration = require('../src/configuration')
 
-const sampleProjectPath = path.resolve(__dirname, '..', 'sample_project')
+const sampleProjectPath = path.resolve(__dirname, 'project')
 const testConfigPath = path.resolve(sampleProjectPath, 'uiengine.yml')
 
 describe('Configuration', () => {
