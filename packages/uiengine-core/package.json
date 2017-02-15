@@ -30,7 +30,9 @@
   ],
   "scripts": {
     "build": "rimraf lib && babel src --out-dir lib",
-    "test": "standard && mocha --harmony -R dot"
+    "test": "mocha --compilers js:babel-register -R dot",
+    "cover": "nyc yarn run test",
+    "lint": "standard"
   },
   "dependencies": {
     "deep-extend": "^0.4.1",
@@ -49,7 +51,9 @@
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-preset-env": "^1.1.8",
+    "babel-register": "^6.23.0",
     "mocha": "^3.2.0",
+    "nyc": "^10.1.2",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",
     "standard": "^8.6.0"

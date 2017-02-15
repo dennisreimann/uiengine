@@ -27,6 +27,18 @@ yarn install
 yarn test
 ```
 
+With coverage info:
+
+```bash
+yarn run cover
+```
+
+Basic linting:
+
+```bash
+yarn run lint
+```
+
 ### Build
 
 ```bash
