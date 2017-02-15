@@ -3,7 +3,7 @@
   "version": "0.1.4",
   "description": "A pattern library generator that gets out of your way.",
   "author": "Dennis Reimann",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "main": "./lib/uiengine.js",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
