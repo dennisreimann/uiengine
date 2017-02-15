@@ -17,10 +17,10 @@ exports.handler = argv => {
   }
 
   UIengine.generate(opts)
-    .then((state) =>
-      console.log(`✅  ${state.config.name} generated!`))
-    .catch((error) => {
-      console.error(`🚨  generating the site failed! \n\n${error}`)
+    .then(({ config: { name }}) =>
+      console.log(`✅  ${name} generated!`))
+    .catch((err) => {
+      console.error([`🚨  generating the site failed!`, err.stack].join('\n\n'))
       process.exit(1)
     })
 }

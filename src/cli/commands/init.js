@@ -14,28 +14,10 @@ exports.handler = argv => {
   const name = path.basename(directory)
   const pagesDir = 'pages'
   const configFileName = `${name}.yml`
-  const configContent = `
-name: ${name}
-
-target:
-  site: ./site
-  assets: ./site/assets
-
-source:
-  components: ./src/components
-  templates: ./src/templates
-  includes: ./src/includes
-  pages: ./${pagesDir}
-`.trim()
-
-  const indexContent = `
----
-title: Home
----
-# Homepage
-
-Welcome!
-`.trim()
+  const configTemplate = require('../templates/config').template
+  const pageTemplate = require('../templates/page').template
+  const configContent = configTemplate(name).trim()
+  const indexContent = pageTemplate('Home').trim()
 
   const configPath = path.relative(process.cwd(), path.join(directory, configFileName))
   const indexPath = path.relative(process.cwd(), path.join(directory, pagesDir, `page.md`))
@@ -55,9 +37,9 @@ Build it using this command:
 
 $ uiengine site --config=${configFileName}
 
-Enjoy!`))
-    .catch((error) => {
-      console.error(`🚨  initializing ${name} failed! \n\n${error}`)
+Enjoy! ✌️`))
+    .catch((err) => {
+      console.error([`🚨  initializing ${name} failed!`, err.stack].join('\n\n'))
       process.exit(1)
     })
 }
