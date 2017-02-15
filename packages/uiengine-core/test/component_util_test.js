@@ -4,7 +4,7 @@ const assert = require('assert')
 
 const ComponentUtil = require('../src/util/component')
 
-const componentsPath = path.resolve(__dirname, '..', 'sample_project', 'src', 'components')
+const componentsPath = path.resolve(__dirname, 'project', 'src', 'components')
 
 describe('ComponentUtil', () => {
   describe('#componentIdToPath', () => {
@@ -42,7 +42,7 @@ describe('ComponentUtil', () => {
     })
 
     it('should return null for invalid file path', () => {
-      const filePath = path.join(__dirname, '..', 'sample_project', 'src', 'pages', 'page.md')
+      const filePath = path.join(__dirname, 'project', 'src', 'pages', 'page.md')
       assert.equal(ComponentUtil.componentFilePathToComponentId(componentsPath, filePath), null)
     })
   })

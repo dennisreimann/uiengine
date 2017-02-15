@@ -2,7 +2,7 @@
 /coverage
 /lib
 /npm-debug*
-/sample_project/dist
+/test/project/dist
 /test/tmp
 *log
 .DS_Store

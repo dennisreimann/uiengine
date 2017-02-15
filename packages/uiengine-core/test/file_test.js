@@ -16,6 +16,14 @@ describe('File', () => {
         })
         .catch(done)
     })
+
+    it('should throw error in case the file does not exist', done => {
+      File.read('./test/does-not-exist.txt')
+        .catch(error => {
+          assert(error)
+          done()
+        })
+    })
   })
 
   describe('#write', () => {
