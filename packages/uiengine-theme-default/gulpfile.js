@@ -7,7 +7,7 @@ const p = require('gulp-load-plugins')()
 
 const paths = {
   stylesLib: './src/styles/lib',
-  assets: './assets',
+  dist: './static/_uiengine-theme',
   lib: './lib'
 }
 
@@ -15,8 +15,8 @@ const src = {
   lib: ['./src/*.js'],
   styles: ['./src/styles/*.styl'],
   scripts: ['src/scripts/*.js'],
-  static: ['./src/static/**'],
-  rev: ['./assets/**/*.{css,js,map,ico,cur,svg,jpg,jpeg,png,gif,woff,woff2}']
+  static: ['./src/{fonts,images,svgs}/**'],
+  rev: [paths.dist + '/**/*.{css,js,map,ico,cur,svg,jpg,jpeg,png,gif,woff,woff2}']
 }
 
 gulp.task('lib', () =>
@@ -28,7 +28,7 @@ gulp.task('lib', () =>
 
 gulp.task('static', () =>
   gulp.src(src.static)
-    .pipe(gulp.dest(paths.assets))
+    .pipe(gulp.dest(paths.dist))
 )
 
 gulp.task('styles', cb =>
@@ -44,7 +44,7 @@ gulp.task('styles', cb =>
       autoprefixer({ browsers: ['last 2 versions'] }),
       csswring
     ]))
-    .pipe(gulp.dest(`${paths.assets}/styles`))
+    .pipe(gulp.dest(`${paths.dist}/styles`))
 )
 
 gulp.task('scripts', () =>
@@ -53,7 +53,7 @@ gulp.task('scripts', () =>
     .pipe(p.babel())
     .pipe(p.concat('uiengine.js'))
     .pipe(p.uglify())
-    .pipe(gulp.dest(`${paths.assets}/scripts`))
+    .pipe(gulp.dest(`${paths.dist}/scripts`))
 )
 
 gulp.task('rev', () => {
@@ -62,9 +62,9 @@ gulp.task('rev', () => {
   return gulp.src(src.rev)
     .pipe(revAll.revision())
     .pipe(p.revDeleteOriginal())
-    .pipe(gulp.dest(paths.assets))
+    .pipe(gulp.dest(paths.dist))
     .pipe(revAll.manifestFile())
-    .pipe(gulp.dest(paths.assets))
+    .pipe(gulp.dest(paths.dist))
 })
 
 gulp.task('watch', cb => {

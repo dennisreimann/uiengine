@@ -1,23 +1,33 @@
 # UIengine default theme
 
-## Development
+## Workflows
 
-### Setup
+### 📦 Setup
 
 ```bash
 yarn install
 ```
 
-### Build
+### 🛠 Development
 
-Development build that continually generates files on update:
+Create a build and rerun on file change:
 
 ```bash
 yarn start
 ```
 
-Create a production build to ship a new version:
+Create a one-off build:
 
 ```bash
 yarn run build
+```
+
+### 🚀 Release
+
+Create and publish a new release:
+
+```bash
+yarn run release
+npm version VERSION
+npm publish
 ```

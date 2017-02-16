@@ -1,8 +1,7 @@
-const path = require('path')
-const pug = require('pug')
-const helpers = require('./helpers')
+import path from 'path'
+import pug from 'pug'
+import helpers from './helpers'
 
-const assetsPath = path.resolve(__dirname, '..', 'assets')
 const templatesPath = path.resolve(__dirname, '..', 'templates')
 
 const pugOpts = {
@@ -11,7 +10,9 @@ const pugOpts = {
   cache: true
 }
 
-async function render (id, data = {}) {
+export const staticPath = path.resolve(__dirname, '..', 'static')
+
+export async function render (id, data = {}) {
   return new Promise((resolve, reject) => {
     const filePath = path.resolve(templatesPath, `${id}.pug`)
     const context = Object.assign({}, pugOpts, data, { h: helpers(data) })
@@ -28,9 +29,4 @@ async function render (id, data = {}) {
       ].join('\n\n'))
     }
   })
-}
-
-module.exports = {
-  assetsPath,
-  render
 }

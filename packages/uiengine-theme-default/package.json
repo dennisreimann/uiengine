@@ -15,8 +15,8 @@
     "url": "https://github.com/dennisreimann/uiengine-theme-default.git"
   },
   "files": [
-    "assets",
     "lib",
+    "static",
     "templates"
   ],
   "keywords": [
@@ -24,10 +24,10 @@
     "uiengine-theme"
   ],
   "scripts": {
-    "clean": "rimraf assets lib",
+    "clean": "rimraf lib static",
     "build": "yarn run clean && gulp build",
     "start": "yarn run clean && gulp develop",
-    "preversion": "yarn run build"
+    "release": "yarn run build"
   },
   "dependencies": {
     "pug": "^2.0.0-beta10"
@@ -55,7 +55,7 @@
   "standard": {
     "ignore": [
       "/lib",
-      "/assets"
+      "/static"
     ]
   }
 }

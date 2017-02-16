@@ -1,36 +1,37 @@
-const path = require('path')
+import path from 'path'
 
-const PAGE_FILE = 'index.html'
+const pageFile = 'index.html'
+const assetsDir = '_uiengine-theme'
+const manifestPath = path.resolve(__dirname, '..', 'static', assetsDir, 'rev-manifest.json')
 
 const revvedFile = (filePath) => {
   let revs
-  try { revs = require(`../assets/rev-manifest.json`) } catch (err) { }
-  return revs && revs[filePath] || filePath
+  try { revs = require(manifestPath) } catch (err) { }
+  const file = revs && revs[filePath] || filePath
+  return `${assetsDir}/${file}`
 }
 
-const createLink = (toPath, fromPath) => {
-  let relativePath = path.relative(fromPath, toPath)
+const relativePath = (toPath, fromPath) => {
+  const relative = path.relative(fromPath, toPath)
 
-  if (relativePath) {
-    relativePath = relativePath.replace(/^\.\.\//, '')
+  if (relative) {
+    return relative.replace(/^\.\.\//, '')
   } else { // from == to
-    relativePath = path.basename(toPath)
+    return path.basename(toPath)
   }
-
-  return relativePath
 }
 
 // function that binds the current page data and returns
 // an object with helper functions based on that data
-module.exports = (data) => {
-  const { pages, page, navigation } = data
+export default function (data) {
+  const { page, pages, navigation } = data
 
   return {
     assetPath (filePath) {
       const target = revvedFile(filePath)
-      const source = path.join(page.path, PAGE_FILE)
+      const source = path.join(page.path, pageFile)
 
-      return createLink(target, source)
+      return relativePath(target, source)
     },
 
     isCurrentPage (pageId) {
@@ -47,9 +48,9 @@ module.exports = (data) => {
 
     pageLink (pageId) {
       const targetPage = pages[pageId]
-      const target = path.join(targetPage.path, PAGE_FILE)
-      const source = path.join(page.path, PAGE_FILE)
-      const href = createLink(target, source)
+      const target = path.join(targetPage.path, pageFile)
+      const source = path.join(page.path, pageFile)
+      const href = relativePath(target, source)
 
       return href
     }
