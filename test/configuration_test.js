@@ -35,8 +35,7 @@ describe('Configuration', () => {
     it('should resolve target and source paths', done => {
       Configuration.read(testConfigPath)
         .then(config => {
-          assert.equal(config.target.site, path.resolve(sampleProjectPath, 'dist'))
-          assert.equal(config.target.assets, path.resolve(sampleProjectPath, 'dist', 'assets'))
+          assert.equal(config.target, path.resolve(sampleProjectPath, 'dist'))
           assert.equal(config.source.components, path.resolve(sampleProjectPath, 'src', 'components'))
           assert.equal(config.source.templates, path.resolve(sampleProjectPath, 'src', 'templates'))
           assert.equal(config.source.pages, path.resolve(sampleProjectPath, 'src', 'pages'))

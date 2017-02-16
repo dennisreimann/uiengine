@@ -8,29 +8,27 @@ const UIengine = require('../src/uiengine')
 
 const pagesPath = path.resolve(__dirname, 'project', 'src', 'pages')
 const componentsPath = path.resolve(__dirname, 'project', 'src', 'components')
-const sitePath = path.resolve(__dirname, 'project', 'dist')
-const assetsPath = path.resolve(__dirname, 'project', 'dist', 'assets')
+const targetPath = path.resolve(__dirname, 'project', 'dist')
 const opts = { config: path.resolve(__dirname, 'project', 'uiengine.yml') }
 
 // "end to end" tests
 describe('UIengine', () => {
-  afterEach(() => {
-    fs.removeSync(sitePath)
-    fs.removeSync(assetsPath)
-  })
+  afterEach(() => { fs.removeSync(targetPath) })
 
   describe('#generate', () => {
     it('should generate pages', done => {
+      setTimeout(done, 5000)
+
       UIengine.generate(opts)
         .then(state => {
-          assertExists(path.join(sitePath, 'index.html'))
-          assertExists(path.join(sitePath, 'documentation', 'index.html'))
-          assertExists(path.join(sitePath, 'pattern-library', 'index.html'))
-          assertExists(path.join(sitePath, 'patterns', 'atoms', 'index.html'))
-          assertExists(path.join(sitePath, 'patterns', 'molecules', 'index.html'))
-          assertExists(path.join(sitePath, 'patterns', 'organisms', 'index.html'))
-          assertExists(path.join(sitePath, 'patterns', 'templates', 'index.html'))
-          assertExists(path.join(sitePath, 'patterns', 'pages', 'index.html'))
+          assertExists(path.join(targetPath, 'index.html'))
+          assertExists(path.join(targetPath, 'documentation', 'index.html'))
+          assertExists(path.join(targetPath, 'pattern-library', 'index.html'))
+          assertExists(path.join(targetPath, 'patterns', 'atoms', 'index.html'))
+          assertExists(path.join(targetPath, 'patterns', 'molecules', 'index.html'))
+          assertExists(path.join(targetPath, 'patterns', 'organisms', 'index.html'))
+          assertExists(path.join(targetPath, 'patterns', 'templates', 'index.html'))
+          assertExists(path.join(targetPath, 'patterns', 'pages', 'index.html'))
 
           done()
         })
@@ -40,7 +38,7 @@ describe('UIengine', () => {
     it('should generate state file', done => {
       UIengine.generate(opts)
         .then(state => {
-          assertExists(path.join(sitePath, 'state.json'))
+          assertExists(path.join(targetPath, 'state.json'))
 
           done()
         })
@@ -50,16 +48,16 @@ describe('UIengine', () => {
     it('should generate variation previews', done => {
       UIengine.generate(opts)
         .then(state => {
-          assertExists(path.join(sitePath, 'variations', 'form', 'form.pug.html'))
-          assertExists(path.join(sitePath, 'variations', 'formrow', 'text-with-label.pug.html'))
-          assertExists(path.join(sitePath, 'variations', 'formrow', 'text-without-label.pug.html'))
-          assertExists(path.join(sitePath, 'variations', 'input', 'number.pug.html'))
-          assertExists(path.join(sitePath, 'variations', 'input', 'text-disabled.pug.html'))
-          assertExists(path.join(sitePath, 'variations', 'input', 'text-required.pug.html'))
-          assertExists(path.join(sitePath, 'variations', 'input', 'text.hbs.html'))
-          assertExists(path.join(sitePath, 'variations', 'input', 'text.pug.html'))
-          assertExists(path.join(sitePath, 'variations', 'label', 'label.hbs.html'))
-          assertExists(path.join(sitePath, 'variations', 'label', 'label.pug.html'))
+          assertExists(path.join(targetPath, 'variations', 'form', 'form.pug.html'))
+          assertExists(path.join(targetPath, 'variations', 'formrow', 'text-with-label.pug.html'))
+          assertExists(path.join(targetPath, 'variations', 'formrow', 'text-without-label.pug.html'))
+          assertExists(path.join(targetPath, 'variations', 'input', 'number.pug.html'))
+          assertExists(path.join(targetPath, 'variations', 'input', 'text-disabled.pug.html'))
+          assertExists(path.join(targetPath, 'variations', 'input', 'text-required.pug.html'))
+          assertExists(path.join(targetPath, 'variations', 'input', 'text.hbs.html'))
+          assertExists(path.join(targetPath, 'variations', 'input', 'text.pug.html'))
+          assertExists(path.join(targetPath, 'variations', 'label', 'label.hbs.html'))
+          assertExists(path.join(targetPath, 'variations', 'label', 'label.pug.html'))
 
           done()
         })
@@ -67,6 +65,8 @@ describe('UIengine', () => {
     })
 
     it('should copy theme assets', done => {
+      const assetsPath = path.join(targetPath, '_uiengine-theme')
+
       UIengine.generate(opts)
         .then(state => {
           assertExists(path.join(assetsPath, 'styles'))
@@ -92,7 +92,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForChangedFile(opts, filePath)
         .then(result => {
-          assertExists(path.join(sitePath, 'pattern-library', 'index.html'))
+          assertExists(path.join(targetPath, 'pattern-library', 'index.html'))
 
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'patterns')
@@ -108,7 +108,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForChangedFile(opts, filePath)
         .then(result => {
-          assertExists(path.join(sitePath, 'variations', 'form', 'form.pug.html'))
+          assertExists(path.join(targetPath, 'variations', 'form', 'form.pug.html'))
 
           assert.equal(result.type, 'component')
           assert.equal(result.item, 'form')
@@ -124,7 +124,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForChangedFile(opts, filePath)
         .then(result => {
-          assertExists(path.join(sitePath, 'variations', 'form', 'form.pug.html'))
+          assertExists(path.join(targetPath, 'variations', 'form', 'form.pug.html'))
 
           assert.equal(result.type, 'variation')
           assert.equal(result.item, 'form/form.pug')

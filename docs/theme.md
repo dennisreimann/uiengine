@@ -9,13 +9,13 @@ If you want to use your own theme instead of the default one, there are two opti
   (case: you use the theme more than once and want to share it across projects)
 
 UIengine will `require` the theme.
-The module has to export an async `render` function as well as an `assetsPath`:
+The module has to export an async `render` function as well as a `staticPath`:
 
 - `render(templateId, data)` gets the template name and the data for the page that should get rendered.
   This function is called asynchronously and has to return a `Promise`!
   For details about the incoming `data` structure see the [page data](#page-data) section.
-- `assetsPath` is the path to the directory containing the static assets (scripts, styles, etc.) of the theme.
-  They get copied to the `target.assets` path when the project gets generated.
+- `staticPath` is the path to the directory containing static files/assets of the theme (scripts, styles, etc.).
+  They get copied to the `target` path when the project gets generated.
 
 In addition to that there are **optional hooks for `setup` and `teardown`**.
 You can use the setup hook to create a template cache with precompiled templates that `render` can use.
@@ -30,7 +30,7 @@ But if you do, make sure to return a `Promise`:
   This is not used by UIengine itself but you might need this in tests for the theme.
 
 This actually sounds more complicated than it really is.
-To see how it actually works have a look at the [default theme](../theme).
+To see how it actually works have a look at the [default theme](https://github.com/dennisreimann/uiengine-theme-default).
 
 ## Page Data
 

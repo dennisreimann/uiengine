@@ -71,7 +71,7 @@ async function read (configFilePath, flags = {}) {
   const resolveAdapters = R.partial(resolveAdapter, [configPath])
 
   source = R.map(resolvePaths, source)
-  target = R.map(resolvePaths, target)
+  target = resolvePath(configPath, target)
   theme = resolveTheme(configPath, theme)
   adapters = R.map(resolveAdapters, adapters || {})
 

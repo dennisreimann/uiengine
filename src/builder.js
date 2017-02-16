@@ -31,7 +31,7 @@ const copyPageFile = (targetPath, sourcePath, source) => {
 
 async function dumpState (state) {
   const json = JSON.stringify(state, null, '  ')
-  const filePath = path.resolve(state.config.target.site, 'state.json')
+  const filePath = path.resolve(state.config.target, 'state.json')
 
   await File.write(filePath, json)
 
@@ -48,7 +48,7 @@ async function generatePage (state, pageId) {
   // write file and copy files belonging to the page
   const targetPagePath = page.path === 'index' ? '' : page.path
   const sourcePagePath = PageUtil.pageIdToPath(page.id)
-  const targetPath = path.resolve(config.target.site, targetPagePath)
+  const targetPath = path.resolve(config.target, targetPagePath)
   const sourcePath = path.resolve(config.source.pages, sourcePagePath)
   const htmlPath = path.resolve(targetPath, 'index.html')
   const writeHtml = File.write(htmlPath, html)
@@ -87,7 +87,7 @@ async function generateVariation (state, variationId) {
   const html = await Connector.render(state, templatePath, data)
 
   // write file
-  const htmlPath = path.resolve(config.target.site, VariationUtil.VARIATIONS_DIRNAME, `${variation.id}.html`)
+  const htmlPath = path.resolve(config.target, VariationUtil.VARIATIONS_DIRNAME, `${variation.id}.html`)
   await File.write(htmlPath, html)
 
   return state

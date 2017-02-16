@@ -11,22 +11,18 @@ const VariationData = require('../src/data/variation')
 
 const projectPath = path.resolve(__dirname, 'project')
 const tmpPath = path.resolve(__dirname, 'tmp')
-const sitePath = path.resolve(tmpPath, 'site')
-const assetsPath = path.resolve(tmpPath, 'site', 'assets')
+const target = path.resolve(tmpPath, 'site')
 
 const state = {
   config: {
     name: 'Builder Test',
     version: '0.1.0',
-    target: {
-      site: sitePath,
-      assets: assetsPath
-    },
     source: {
       components: path.resolve(projectPath, 'src', 'components'),
       templates: path.resolve(projectPath, 'src', 'templates'),
       pages: path.resolve(projectPath, 'src', 'pages')
     },
+    target,
     adapters: {
       pug: {
         module: 'uiengine-adapter-pug',
@@ -99,8 +95,8 @@ describe('Builder', () => {
     it('should generate site', done => {
       Builder.generateSite(state)
         .then(state => {
-          assertExists(path.join(sitePath, 'index.html'))
-          assertExists(path.join(sitePath, 'pattern-library', 'index.html'))
+          assertExists(path.join(target, 'index.html'))
+          assertExists(path.join(target, 'pattern-library', 'index.html'))
 
           done()
         })
@@ -112,7 +108,7 @@ describe('Builder', () => {
     it('should generate page', done => {
       Builder.generatePage(state, 'index')
         .then(state => {
-          assertExists(path.join(sitePath, 'index.html'))
+          assertExists(path.join(target, 'index.html'))
 
           done()
         })
@@ -122,7 +118,7 @@ describe('Builder', () => {
     it('should generate page with custom path', done => {
       Builder.generatePage(state, 'patterns')
         .then(state => {
-          assertExists(path.join(sitePath, 'pattern-library', 'index.html'))
+          assertExists(path.join(target, 'pattern-library', 'index.html'))
 
           done()
         })
@@ -132,7 +128,7 @@ describe('Builder', () => {
     it('should copy page files', done => {
       Builder.generatePage(state, 'index')
         .then(state => {
-          assertExists(path.join(sitePath, 'index.txt'))
+          assertExists(path.join(target, 'index.txt'))
 
           done()
         })
@@ -142,7 +138,7 @@ describe('Builder', () => {
     it('should copy page files in extra folder', done => {
       Builder.generatePage(state, 'index')
         .then(state => {
-          assertExists(path.join(sitePath, 'extra-files', 'file-in-folder.txt'))
+          assertExists(path.join(target, 'extra-files', 'file-in-folder.txt'))
 
           done()
         })
@@ -152,7 +148,7 @@ describe('Builder', () => {
     it('should copy page files for pages with custom paths', done => {
       Builder.generatePage(state, 'patterns')
         .then(state => {
-          assertExists(path.join(sitePath, 'pattern-library', 'patterns-file.txt'))
+          assertExists(path.join(target, 'pattern-library', 'patterns-file.txt'))
 
           done()
         })
@@ -162,7 +158,7 @@ describe('Builder', () => {
     it('should copy page files in extra folder for pages with custom paths', done => {
       Builder.generatePage(state, 'patterns')
         .then(state => {
-          assertExists(path.join(sitePath, 'pattern-library', 'some-files', 'file-in-folder.txt'))
+          assertExists(path.join(target, 'pattern-library', 'some-files', 'file-in-folder.txt'))
 
           done()
         })
@@ -174,7 +170,7 @@ describe('Builder', () => {
     it('should generate variation page', done => {
       Builder.generateVariation(state, 'input/text.pug')
         .then(state => {
-          assertExists(path.join(sitePath, 'variations', 'input', 'text.pug.html'))
+          assertExists(path.join(target, 'variations', 'input', 'text.pug.html'))
 
           done()
         })
@@ -186,7 +182,7 @@ describe('Builder', () => {
     it('should generate state file', done => {
       Builder.dumpState(state)
         .then(state => {
-          assertExists(path.join(sitePath, 'state.json'))
+          assertExists(path.join(target, 'state.json'))
 
           done()
         })
