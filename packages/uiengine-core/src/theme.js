@@ -1,4 +1,3 @@
-const path = require('path')
 const File = require('./util/file')
 
 const getTheme = ({ config: { theme } }) => require(theme)
@@ -10,7 +9,7 @@ async function render (state, templateId, data = {}) {
 
 async function setup (state) {
   const theme = getTheme(state)
-  const tasks = [copyAssets(state)]
+  const tasks = [copyStatic(state)]
 
   if (typeof theme.setup === 'function') {
     const markdownIt = require('./util/markdown').markdownIt
@@ -22,12 +21,11 @@ async function setup (state) {
   return state
 }
 
-async function copyAssets (state) {
-  const theme = getTheme(state)
-  const sourcePath = theme.assetsPath
-  const targetPath = path.resolve(state.config.target.assets)
+async function copyStatic (state) {
+  const { staticPath } = getTheme(state)
+  const { target } = state.config
 
-  await File.copy(sourcePath, targetPath)
+  await File.copy(staticPath, target)
 
   return state
 }

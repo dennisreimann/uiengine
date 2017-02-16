@@ -17,7 +17,7 @@ exports.handler = argv => {
   }
 
   UIengine.generate(opts)
-    .then(({ config: { name }}) =>
+    .then(({ config: { name } }) =>
       console.log(`✅  ${name} generated!`))
     .catch((err) => {
       console.error([`🚨  generating the site failed!`, err.stack].join('\n\n'))

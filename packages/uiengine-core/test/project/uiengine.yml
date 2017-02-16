@@ -12,12 +12,8 @@ source:
   templates: ./src/templates
   pages: ./src/pages
 
-# Destination paths for the generated output:
-# - site is the directory where the html files for the pages will be stored
-# - assets will contain the static files belonging to the theme (the sites UI)
-target:
-  site: ./dist
-  assets: ./dist/assets
+# Destination path for the generated site.
+target: ./dist
 
 # Adapters are used for templating/rendering. Each adapter is a module that gets required
 # and needs to provide functions for setup and rendering. For details see the adapters docs.
