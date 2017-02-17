@@ -1,4 +1,10 @@
-mixin nav(pageIds, classBase = 'nav')
+include /navigation/navTree
+
+mixin sitemap()
+  nav.sitemap
+    +navTree(navigation.index.childIds, 'sitemap')
+
+mixin navTree(pageIds, classBase = 'nav')
   if pageIds.length
     - const treeClasses = `${classBase}__tree`
     ul(class=treeClasses)&attributes(attributes)
@@ -13,5 +19,5 @@ mixin navItem(pageId, classBase = 'nav')
     - const itemClasses = `${classBase}__item` + activeClass + currentClass + childrenClass
     li(class=itemClasses)
       a(class=`${classBase}__link` href=h.pageLink(navPage.id))= navPage.title
-      +nav(navigation[pageId].childIds, classBase)
+      +navTree(navigation[pageId].childIds, classBase)
 

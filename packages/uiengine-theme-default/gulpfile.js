@@ -13,8 +13,9 @@ const paths = {
 
 const src = {
   lib: ['./src/*.js'],
-  styles: ['./src/styles/*.styl'],
-  scripts: ['src/scripts/*.js'],
+  pug: ['./src/**/*.pug'],
+  styles: ['./src/styles/*.styl', './src/components/**/*.styl'],
+  scripts: ['src/scripts/*.js', './src/components/**/*.js'],
   static: ['./src/{fonts,images,svgs}/**'],
   rev: [paths.dist + '/**/*.{css,js,map,ico,cur,svg,jpg,jpeg,png,gif,woff,woff2}']
 }
@@ -23,6 +24,11 @@ gulp.task('lib', () =>
   gulp.src(src.lib)
     .pipe(p.plumber())
     .pipe(p.babel())
+    .pipe(gulp.dest(paths.lib))
+)
+
+gulp.task('pug', () =>
+  gulp.src(src.pug)
     .pipe(gulp.dest(paths.lib))
 )
 
@@ -36,7 +42,7 @@ gulp.task('styles', cb =>
     .pipe(p.plumber())
     .pipe(p.stylus({
       paths: [paths.stylesLib],
-      import: ['mediaQueries', 'variables']
+      import: ['variables', 'mediaQueries', 'extends']
     }))
     .pipe(p.concat('uiengine.css'))
     .pipe(p.postcss([
@@ -69,11 +75,12 @@ gulp.task('rev', () => {
 
 gulp.task('watch', cb => {
   gulp.watch(src.lib, ['lib'])
+  gulp.watch(src.pug, ['pug'])
   gulp.watch(src.static, ['static'])
   gulp.watch(src.scripts, ['scripts'])
   gulp.watch(src.styles.concat([`${paths.stylesLib}/*.styl`]), ['styles'])
 })
 
-gulp.task('generate', ['lib', 'scripts', 'styles', 'static'])
+gulp.task('generate', ['lib', 'pug', 'scripts', 'styles', 'static'])
 gulp.task('build', cb => runSequence('generate', 'rev', cb))
 gulp.task('develop', (cb) => runSequence('generate', 'watch', cb))

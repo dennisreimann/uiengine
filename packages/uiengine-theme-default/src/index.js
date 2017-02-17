@@ -2,10 +2,11 @@ import path from 'path'
 import pug from 'pug'
 import helpers from './helpers'
 
-const templatesPath = path.resolve(__dirname, '..', 'templates')
+const componentsPath = path.resolve(__dirname, 'components')
+const templatesPath = path.resolve(__dirname, 'templates')
 
 const pugOpts = {
-  basedir: templatesPath,
+  basedir: componentsPath,
   pretty: true,
   cache: true
 }

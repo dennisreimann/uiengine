@@ -1,4 +1,4 @@
-include _nav
+include /navigation/navigation
 
 doctype
 html
@@ -7,13 +7,9 @@ html
     meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
     meta(name="viewport" content="width=device-width,initial-scale=1")
     link(href=h.assetPath("styles/uiengine.css") rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css?family=Merriweather+Sans:300i,400,800" rel="stylesheet")
   body
-    .wrap
-      nav.nav
-        a.nav__menu(href="#menu") Menu
-        a.nav__home(href=h.pageLink('index'))= config.name
-        if navigation && navigation.index
-          +nav(navigation.index.childIds, 'nav')#menu
-      main.main
-        block main
+    +navigation()
+    main.main
+      block main
     script(src=h.assetPath("scripts/uiengine.js") defer)

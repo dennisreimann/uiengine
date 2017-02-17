@@ -16,8 +16,7 @@
   },
   "files": [
     "lib",
-    "static",
-    "templates"
+    "static"
   ],
   "keywords": [
     "uiengine",
