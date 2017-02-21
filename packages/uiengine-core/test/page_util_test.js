@@ -84,4 +84,28 @@ describe('PageUtil', () => {
       assert.equal(parentIds[2], 'patterns/atoms')
     })
   })
+
+  describe('#pageIdForComponentId', () => {
+    it('should convert the component id into a page id based on the parent page id for index page')
+
+    it('should convert the component id into a page id based on the parent page id for child page')
+  })
+
+  describe('#pagePathForComponentId', () => {
+    it('should convert the component id into a page path based on the parent page path for index page')
+
+    it('should convert the component id into a page path based on the parent page path for child page')
+  })
+
+  describe('#convertUserProvidedChildrenList', () => {
+    it('should convert the children list provided by the user to childIds for index page')
+
+    it('should convert the children list provided by the user to childIds for child page')
+  })
+
+  describe('#convertUserProvidedComponentsList', () => {
+    it('should convert the components list provided by the user to componentIds for index page')
+
+    it('should convert the components list provided by the user to componentIds for child page')
+  })
 })

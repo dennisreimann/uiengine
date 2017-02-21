@@ -1,8 +1,9 @@
 const path = require('path')
 
 const COMPONENT_FILENAME = 'component.md'
+const COMPONENTS_DIRNAME = 'components'
 
-const componentIdToPath = (componentsPath, componentId) => path.join(componentsPath, componentId)
+const componentIdToPath = (componentId) => path.join(COMPONENTS_DIRNAME, componentId)
 
 const componentIdToComponentFilePath = (componentsPath, componentId) => path.join(componentsPath, componentId, COMPONENT_FILENAME)
 
@@ -21,5 +22,6 @@ module.exports = {
   componentIdToPath,
   componentIdToComponentFilePath,
   componentFilePathToComponentId,
-  COMPONENT_FILENAME
+  COMPONENT_FILENAME,
+  COMPONENTS_DIRNAME
 }

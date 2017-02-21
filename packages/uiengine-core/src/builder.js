@@ -6,10 +6,30 @@ const PageUtil = require('./util/page')
 const VariationUtil = require('./util/variation')
 const File = require('./util/file')
 
-const getPageData = ({ pages, navigation, config: { name, version } }, pageId) => {
+const pageFile = 'index.html'
+
+const getPageData = ({ pages, navigation, components, variations, config: { name, version } }, pageId) => {
   const page = pages[pageId]
   const config = { name, version }
-  const data = { page, pages, navigation, config }
+  const data = { page, pages, components, variations, navigation, config }
+
+  return data
+}
+
+const getComponentData = ({ pages, navigation, components, variations, config: { name, version } }, pageId, componentId) => {
+  const parent = pages[pageId]
+  const component = components[componentId]
+  const page = {
+    id: PageUtil.pageIdForComponentId(parent.id, component.id),
+    path: PageUtil.pagePathForComponentId(parent.path, component.id),
+    title: component.title,
+    childIds: [],
+    files: [],
+    content: component.content
+  }
+
+  const config = { name, version }
+  const data = { page, pages, component, components, variations, navigation, config }
 
   return data
 }
@@ -34,8 +54,6 @@ async function dumpState (state) {
   const filePath = path.resolve(state.config.target, 'state.json')
 
   await File.write(filePath, json)
-
-  return state
 }
 
 async function generatePage (state, pageId) {
@@ -46,33 +64,73 @@ async function generatePage (state, pageId) {
   const html = await Theme.render(state, templateId, data)
 
   // write file and copy files belonging to the page
+  //
+  // TODO: Move copying files out into a separate function,
+  // so that we have these operations as granular as possible
   const targetPagePath = page.path === 'index' ? '' : page.path
   const sourcePagePath = PageUtil.pageIdToPath(page.id)
   const targetPath = path.resolve(config.target, targetPagePath)
   const sourcePath = path.resolve(config.source.pages, sourcePagePath)
-  const htmlPath = path.resolve(targetPath, 'index.html')
+  const htmlPath = path.resolve(targetPath, pageFile)
   const writeHtml = File.write(htmlPath, html)
   const copyFile = R.partial(copyPageFile, [targetPath, sourcePath])
   const copyFiles = R.map(copyFile, page.files)
-  await Promise.all([writeHtml, ...copyFiles])
 
-  return state
+  await Promise.all([writeHtml, ...copyFiles])
 }
 
-async function generateComponent (state, componentId) {
+async function generatePageComponents (state, pageId) {
+  const { pages } = state
+  const page = pages[pageId]
+  const componentIds = page.componentIds || []
+  const build = R.partial(generatePageComponent, [state, pageId])
+  const builds = R.map(build, componentIds)
+
+  await Promise.all(builds)
+}
+
+async function generatePageComponent (state, pageId, componentId) {
+  const { components, pages, config: { target } } = state
+  const parent = pages[pageId]
+  const component = components[componentId]
+  const templateId = component.template || 'component'
+  const data = getComponentData(state, pageId, componentId)
+  const html = await Theme.render(state, templateId, data)
+
+  const targetPath = path.join(target, PageUtil.pagePathForComponentId(parent.path, component.id))
+  const htmlPath = path.resolve(targetPath, pageFile)
+  await File.write(htmlPath, html)
+}
+
+async function generateComponentPages (state, componentId) {
+  const { pages } = state
+
+  const build = R.partial(generatePage, [state])
+  const builds = []
+
+  // FIXME: This is ugly!
+  R.map((page) => {
+    const componentIds = page.componentIds || []
+    if (componentIds.includes(componentId)) {
+      builds.push(build(page.id))
+    }
+  }, pages)
+
+  await Promise.all(builds)
+}
+
+async function generateComponentVariations (state, componentId) {
   const { components } = state
   const component = components[componentId]
   const variationIds = component.variationIds || []
+  const build = R.partial(generateVariation, [state])
+  const builds = R.map(build, variationIds)
 
-  const generate = R.partial(generateVariation, [state])
-  const generateVariations = R.map(generate, variationIds)
-  await Promise.all(generateVariations)
-
-  return state
+  await Promise.all(builds)
 }
 
 async function generateVariation (state, variationId) {
-  const { variations, config } = state
+  const { variations, config: { source, target, templates } } = state
   const variation = variations[variationId]
   if (!variation) return Promise.reject(`Variation "${variationId}" does not exist or has not been fetched yet.`)
 
@@ -82,35 +140,40 @@ async function generateVariation (state, variationId) {
 
   // render variation preview, with layout
   const data = getVariationData(state, variationId, rendered)
-  const templateFileName = variation.template || config.templates.variation
-  const templatePath = path.join(config.source.templates, templateFileName)
+  const templateId = variation.template || 'variation'
+  const templateFile = templates[templateId]
+  if (!templateFile) return Promise.reject(`Template "${templateId}" for variation "${variationId}" does not exist. Please add it to your configuration.`)
+
+  const templatePath = path.join(source.templates, templateFile)
   const html = await Connector.render(state, templatePath, data)
 
   // write file
-  const htmlPath = path.resolve(config.target, VariationUtil.VARIATIONS_DIRNAME, `${variation.id}.html`)
+  const htmlPath = path.resolve(target, VariationUtil.VARIATIONS_DIRNAME, `${variation.id}.html`)
   await File.write(htmlPath, html)
-
-  return state
 }
 
 async function generateSite (state) {
   const pageIds = Object.keys(state.pages)
+  const variationIds = Object.keys(state.variations)
+
   const pageBuild = R.partial(generatePage, [state])
   const pageBuilds = R.map(pageBuild, pageIds)
 
-  const componentIds = Object.keys(state.components)
-  const componentBuild = R.partial(generateComponent, [state])
-  const componentBuilds = R.map(componentBuild, componentIds)
+  const pageComponentsBuild = R.partial(generatePageComponents, [state])
+  const pageComponentsBuilds = R.map(pageComponentsBuild, pageIds)
 
-  await Promise.all([...pageBuilds, ...componentBuilds])
+  const variationBuild = R.partial(generateVariation, [state])
+  const variationBuilds = R.map(variationBuild, variationIds)
 
-  return state
+  await Promise.all([...pageBuilds, ...variationBuilds, ...pageComponentsBuilds])
 }
 
 module.exports = {
   generateSite,
   generatePage,
-  generateComponent,
+  generatePageComponents,
+  generateComponentPages,
+  generateComponentVariations,
   generateVariation,
   dumpState
 }

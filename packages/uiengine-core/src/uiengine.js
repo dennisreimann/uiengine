@@ -44,7 +44,7 @@ async function generate (options) {
   state = R.assoc('variations', variations, state)
 
   // 2. transformations
-  const navigation = await Navigation.forPages(state)
+  const navigation = await Navigation.fetch(state)
 
   state = R.assoc('navigation', navigation, state)
 
@@ -99,7 +99,7 @@ async function fetchAndAssocVariation (id) {
 }
 
 async function fetchAndAssocNavigation () {
-  const navigation = await Navigation.forPages(state)
+  const navigation = await Navigation.fetch(state)
   state = R.assoc('navigation', navigation, state)
   return navigation
 }
@@ -125,7 +125,10 @@ async function regenerateComponent (id) {
   const { variationIds } = await updateComponent(id)
   const fetchAndAssocVariations = R.map(fetchAndAssocVariation, variationIds)
   await Promise.all(fetchAndAssocVariations)
-  await Builder.generateComponent(state, id)
+
+  const buildPages = Builder.generateComponentPages(state, id)
+  const buildVariations = Builder.generateComponentVariations(state, id)
+  await Promise.all([buildPages, buildVariations])
 }
 
 module.exports = {

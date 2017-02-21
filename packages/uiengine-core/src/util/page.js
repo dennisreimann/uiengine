@@ -1,4 +1,5 @@
 const path = require('path')
+const R = require('ramda')
 const StringUtil = require('./string')
 
 const PAGE_FILENAME = 'page.md'
@@ -38,6 +39,12 @@ const pageFilePathToPageId = (pagesPath, pageFilePath) => {
   return pageId
 }
 
+const pageIdForComponentId = (parentPageId, componentId) =>
+  `${pageIdToPath(parentPageId)}/${componentId}`
+
+const pagePathForComponentId = (parentPagePath, componentId) =>
+  `${parentPagePath}/${componentId}`
+
 const parentIdForPageId = (pageId) => {
   if (isIndexPage(pageId)) return null
   const parentDir = path.dirname(pageId)
@@ -55,12 +62,52 @@ const parentIdsForPageId = (pageId) => {
   return parentIds
 }
 
+// turns the list of children from the user provided attributes
+// into a list of correctly named childIds
+const convertUserProvidedChildrenList = (pageId, attributes = {}) => {
+  let { children } = attributes
+  if (typeof children !== 'object') return attributes
+
+  const prefix = pageIdToPath(pageId)
+  const childIds = R.map((id) =>
+    id.startsWith(prefix) ? id : `${prefix}/${id}`,
+    children
+  )
+
+  attributes = R.dissoc('children', attributes)
+  attributes = R.assoc('childIds', childIds, attributes)
+
+  return attributes
+}
+
+// turns the list of components from the user provided attributes
+// into a list of correctly named componentIds
+const convertUserProvidedComponentsList = (pageId, attributes = {}) => {
+  let { components } = attributes
+  if (typeof components !== 'object') return attributes
+
+  // const prefix = pageIdToPath(pageId)
+  // const componentIds = R.map((id) =>
+  //   id.startsWith(prefix) ? id : `${prefix}/${id}`,
+  //   components
+  // )
+
+  attributes = R.dissoc('components', attributes)
+  attributes = R.assoc('componentIds', components, attributes)
+
+  return attributes
+}
+
 module.exports = {
   pageIdToPath,
   pageIdToTitle,
   pageIdToPageFilePath,
+  pageIdForComponentId,
+  pagePathForComponentId,
   pageFilePathToPageId,
   parentIdsForPageId,
   parentIdForPageId,
+  convertUserProvidedChildrenList,
+  convertUserProvidedComponentsList,
   PAGE_FILENAME
 }

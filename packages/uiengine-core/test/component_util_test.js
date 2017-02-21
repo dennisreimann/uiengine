@@ -10,8 +10,8 @@ describe('ComponentUtil', () => {
   describe('#componentIdToPath', () => {
     it('should return path for component', () => {
       assert.equal(
-        ComponentUtil.componentIdToPath(componentsPath, 'button'),
-        path.join(componentsPath, 'button')
+        ComponentUtil.componentIdToPath('button'),
+        'components/button'
       )
     })
   })
