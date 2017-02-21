@@ -1,6 +1,4 @@
-extends includes/layout
-
-include /sitemap/sitemap
+extends includes/layout.pug
 
 block main
   section.page(id=h.dasherize(page.id))
@@ -8,6 +6,3 @@ block main
       h1.page__title= page.title
     article.page__content
       !=page.content
-
-    h2 Sitemap
-    +sitemap()

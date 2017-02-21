@@ -24,32 +24,32 @@ const relativePath = (toPath, fromPath) => {
 // function that binds the current page data and returns
 // an object with helper functions based on that data
 export default function (data) {
-  const { page, pages, navigation } = data
+  const { page, navigation } = data
+  const currentItem = navigation[page.id]
 
   return {
     assetPath (filePath) {
       const target = revvedFile(filePath)
-      const source = path.join(page.path, pageFile)
+      const source = path.join(currentItem.path, pageFile)
 
       return relativePath(target, source)
-    },
-
-    isCurrentPage (pageId) {
-      return pageId === page.id
-    },
-
-    isActivePage (pageId) {
-      return this.isCurrentPage(pageId) || navigation[page.id].parentIds.includes(pageId)
     },
 
     dasherize (string) {
       return string.replace(/\W+/gi, '-')
     },
 
-    pageLink (pageId) {
-      const targetPage = pages[pageId]
-      const target = path.join(targetPage.path, pageFile)
-      const source = path.join(page.path, pageFile)
+    isCurrentPage (item) {
+      return item.id === currentItem.id
+    },
+
+    isActivePage (item) {
+      return this.isCurrentPage(item) || (currentItem.parentIds.includes(item.id) && item.id !== 'index')
+    },
+
+    pageLink (item) {
+      const target = path.join(item.path, pageFile)
+      const source = path.join(currentItem.path, pageFile)
       const href = relativePath(target, source)
 
       return href

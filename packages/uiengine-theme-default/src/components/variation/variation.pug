@@ -1,0 +1,11 @@
+include /variationHeader/variationHeader.pug
+include /variationInfo/variationInfo.pug
+include /variationCode/variationCode.pug
+include /variationPreview/variationPreview.pug
+
+mixin variation(variation)
+  article.variation(id=variation.id)
+    +variationHeader(variation)
+    +variationInfo(variation)
+    +variationCode(variation)
+    +variationPreview(variation)

@@ -1,23 +1,6 @@
-include /navigation/navTree
+include /common/navTree.pug
 
 mixin sitemap()
   nav.sitemap
     +navTree(navigation.index.childIds, 'sitemap')
-
-mixin navTree(pageIds, classBase = 'nav')
-  if pageIds.length
-    - const treeClasses = `${classBase}__tree`
-    ul(class=treeClasses)&attributes(attributes)
-      for pageId in pageIds
-        +navItem(pageId, classBase)
-
-mixin navItem(pageId, classBase = 'nav')
-  if navPage = pages[pageId]
-    - const childrenClass = navigation[pageId].childIds.length ? ` ${classBase}__item--children` : ''
-    - const currentClass = h.isCurrentPage(navPage.id) ? ` ${classBase}__item--current` : ''
-    - const activeClass = h.isActivePage(navPage.id) ? ` ${classBase}__item--active` : ''
-    - const itemClasses = `${classBase}__item` + activeClass + currentClass + childrenClass
-    li(class=itemClasses)
-      a(class=`${classBase}__link` href=h.pageLink(navPage.id))= navPage.title
-      +navTree(navigation[pageId].childIds, classBase)
 

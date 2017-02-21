@@ -1,0 +1,8 @@
+mixin variationCode(variation)
+  .variation__section.variation-code
+    if variation.raw
+      pre.variation-code__raw
+        != variation.raw
+    if variation.context
+      pre.variation-code__context
+        != variation.context

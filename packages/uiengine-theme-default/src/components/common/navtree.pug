@@ -1,0 +1,17 @@
+mixin navTree(itemIds, classBase = 'nav')
+  if itemIds.length
+    - const treeClasses = `${classBase}__tree`
+    ul(class=treeClasses)&attributes(attributes)
+      for itemId in itemIds
+        +navItem(itemId, classBase)
+
+mixin navItem(itemId, classBase = 'nav')
+  if item = navigation[itemId]
+    - const classList = [`${classBase}__item`]
+    - item.childIds.length ? classList.push(`${classBase}__item--children`) : false
+    - h.isCurrentPage(item) ? classList.push(`${classBase}__item--current`) : false
+    - h.isActivePage(item) ? classList.push(`${classBase}__item--active`) : false
+    - const classes = classList.join(' ')
+    li(class=classes)
+      a(class=`${classBase}__link` href=h.pageLink(item))= item.title
+      +navTree(item.childIds, classBase)

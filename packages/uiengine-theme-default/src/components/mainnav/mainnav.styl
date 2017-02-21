@@ -1,0 +1,26 @@
+.mainnav
+  color $color-white
+  background $color-brand-seco
+  @media $mq-up_to_XS
+    font-size $font-size-small
+  @media $mq-XS_and_up
+    font-size $font-size-base
+
+  &__tree
+    display flex
+    list-style none
+    margin 0
+
+  &__item
+    border-top 3px solid transparent
+    border-bottom 3px solid transparent
+    &--active,
+    &--current
+      background $color-dark-bg
+      border-bottom 3px solid $color-white
+
+  &__link
+    display block
+    color inherit
+    text-decoration none
+    padding $space-normal $space-large
