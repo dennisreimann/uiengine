@@ -3,6 +3,8 @@
  *
  * @module data/navigation
  * @param {String} id the page id, i.e. `"index/child"`
+ * @param {String} title the page title
+ * @param {String} path the page path
  * @param {String} parentId the page id of the parent, i.e. `"index"`
  * @param {Array} parentIds the page ids of the parents in ascending order, i.e. `["index"]`
  * @param {Array} childIds the page ids of the children
@@ -12,9 +14,11 @@
  * @param {Array} siblingsAfterIds the page ids of the siblings after the page
  * @returns {Function} factory for creating the data structure
  */
-module.exports = (id, parentId, parentIds = [], childIds = [], siblingBeforeId, siblingsBeforeIds = [], siblingAfterId, siblingsAfterIds = []) => {
+module.exports = (id, title, path, parentId, parentIds = [], childIds = [], siblingBeforeId, siblingsBeforeIds = [], siblingAfterId, siblingsAfterIds = []) => {
   return {
     id,
+    title,
+    path,
     parentId,
     parentIds,
     childIds,

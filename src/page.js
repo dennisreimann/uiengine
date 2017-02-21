@@ -8,23 +8,6 @@ const PageUtil = require('./util/page')
 const assocPage = (pages, page) =>
   R.assoc(page.id, page, pages)
 
-// turns the list of children from the user provided attributes
-// into a list of correctly named childIds
-const convertUserProvidedChildrenList = (pageId, attributes = {}) => {
-  let { children } = attributes
-  if (typeof children !== 'object') return attributes
-
-  const childIds = R.map((childId) =>
-    childId.startsWith(`${pageId}/`) ? childId : `${pageId}/${childId}`,
-    children
-  )
-
-  attributes = R.dissoc('children', attributes)
-  attributes = R.assoc('childIds', childIds, attributes)
-
-  return attributes
-}
-
 async function readPageFile (filePath) {
   let { attributes, body } = await frontmatter.fromFile(filePath)
   const content = await markdown.fromString(body)
@@ -76,11 +59,14 @@ async function fetchById (state, id) {
   const childPattern = path.join(pagePath, '*')
   const fetchChildIds = findPageIds(state, childPattern)
   const fetchPageData = readPageFile(absolutePath)
+  // fetch childPageIds before fetching files to exclude
+  // the children directories when looking for files
   const [pageData, childIds] = await Promise.all([fetchPageData, fetchChildIds])
   const files = await findPageFiles(pages, pagePath, childIds)
 
   let { attributes, content } = pageData
-  attributes = convertUserProvidedChildrenList(id, attributes)
+  attributes = PageUtil.convertUserProvidedChildrenList(id, attributes)
+  attributes = PageUtil.convertUserProvidedComponentsList(id, attributes)
   const title = PageUtil.pageIdToTitle(id)
   const baseData = { id, path: pagePath, title, childIds, content, files }
   const data = R.mergeAll([baseData, attributes])

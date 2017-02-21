@@ -16,8 +16,8 @@ describe('UIengine', () => {
   afterEach(() => { fs.removeSync(targetPath) })
 
   describe('#generate', () => {
-    it('should generate pages', done => {
-      setTimeout(done, 5000)
+    it('should generate pages', function (done) {
+      this.timeout(3000)
 
       UIengine.generate(opts)
         .then(state => {

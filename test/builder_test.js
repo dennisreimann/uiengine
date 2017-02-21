@@ -6,7 +6,6 @@ const assertExists = require('./support/assertExists')
 
 const Builder = require('../src/builder')
 const NavigationData = require('../src/data/navigation')
-const ComponentData = require('../src/data/component')
 const VariationData = require('../src/data/variation')
 
 const projectPath = path.resolve(__dirname, 'project')
@@ -47,6 +46,7 @@ const state = {
   },
   pages: {
     index: Factory.page('index', {
+      title: 'Home',
       childIds: ['patterns'],
       files: [
         path.resolve(projectPath, 'src', 'pages', 'extra-files', 'file-in-folder.txt'),
@@ -54,27 +54,26 @@ const state = {
       ]
     }),
     patterns: Factory.page('patterns', {
+      title: 'Pattern Library',
       path: 'pattern-library',
       files: [
         path.resolve(projectPath, 'src', 'pages', 'patterns', 'patterns-file.txt'),
         path.resolve(projectPath, 'src', 'pages', 'patterns', 'some-files', 'file-in-folder.txt')
-      ]
+      ],
+      componentIds: ['input']
     })
   },
   navigation: {
-    index: NavigationData('index', null, [], ['patterns']),
-    patterns: NavigationData('patterns', 'index', ['index'])
+    'index': NavigationData('index', 'Home', '', null, [], ['patterns']),
+    'patterns': NavigationData('patterns', 'Pattern Library', 'pattern-library', 'index', ['index'], ['patterns/input']),
+    'patterns/input': NavigationData('patterns/input', 'Awesome Input', 'pattern-library/input', 'patterns', ['index', 'patterns'])
   },
   components: {
-    input: ComponentData(
-      'input',
-      path.resolve(projectPath, 'src', 'components', 'input'),
-      ['input/text.pug'],
-      {
-        content: '<p>An input field that can be used inside a form.</p>',
-        title: 'Input'
-      }
-    )
+    input: Factory.component('input', {
+      title: 'Awesome Input',
+      variationIds: ['input/text.pug'],
+      content: '<p>An input field that can be used inside a form.</p>'
+    })
   },
   variations: {
     'input/text.pug': VariationData(
@@ -92,7 +91,9 @@ describe('Builder', () => {
   afterEach(() => { fs.removeSync(tmpPath) })
 
   describe('#generateSite', () => {
-    it('should generate site', done => {
+    it('should generate site', function (done) {
+      this.timeout(3000)
+
       Builder.generateSite(state)
         .then(state => {
           assertExists(path.join(target, 'index.html'))
@@ -159,6 +160,42 @@ describe('Builder', () => {
       Builder.generatePage(state, 'patterns')
         .then(state => {
           assertExists(path.join(target, 'pattern-library', 'some-files', 'file-in-folder.txt'))
+
+          done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('#generatePageComponents', () => {
+    it('should generate component pages', done => {
+      Builder.generatePageComponents(state, 'patterns')
+        .then(state => {
+          assertExists(path.join(target, 'pattern-library', 'input', 'index.html'))
+
+          done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('#generateComponentPages', () => {
+    it('should generate pages having this component as subpage', done => {
+      Builder.generateComponentPages(state, 'input')
+        .then(state => {
+          assertExists(path.join(target, 'pattern-library', 'index.html'))
+
+          done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('#generateComponentVariations', () => {
+    it('should generate component variation pages', done => {
+      Builder.generateComponentVariations(state, 'input')
+        .then(state => {
+          assertExists(path.join(target, 'variations', 'input', 'text.pug.html'))
 
           done()
         })

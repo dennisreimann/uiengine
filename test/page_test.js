@@ -58,8 +58,8 @@ describe('Page', () => {
       Page.fetchById(state, 'patterns/atoms')
         .then(data => {
           assert.equal(data.childIds.length, 3)
-          assert.equal(data.childIds[0], 'patterns/atoms/buttons')
-          assert.equal(data.childIds[1], 'patterns/atoms/copytext')
+          assert.equal(data.childIds[0], 'patterns/atoms/copytext')
+          assert.equal(data.childIds[1], 'patterns/atoms/form-elements')
           assert.equal(data.childIds[2], 'patterns/atoms/headlines')
           done()
         })
@@ -86,6 +86,30 @@ describe('Page', () => {
           assert.equal(data.childIds[2], 'patterns/organisms')
           assert.equal(data.childIds[3], 'patterns/templates')
           assert.equal(data.childIds[4], 'patterns/pages')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should not infer childIds for index if they are provided', done => {
+      // TODO: This needs a correct implementation with correct test data.
+      // Right now the index page does not provide children list!
+      Page.fetchById(state, 'index')
+        .then(data => {
+          assert.equal(data.childIds.length, 2)
+          assert.equal(data.childIds[0], 'documentation')
+          assert.equal(data.childIds[1], 'patterns')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should convert componentIds for user provided component list', done => {
+      Page.fetchById(state, 'patterns/atoms/form-elements')
+        .then(data => {
+          assert.equal(data.componentIds.length, 2)
+          assert.equal(data.componentIds[0], 'label')
+          assert.equal(data.componentIds[1], 'input')
           done()
         })
         .catch(done)
@@ -170,7 +194,6 @@ describe('Page', () => {
           assert(pageIds.includes('documentation'), 'missing page "documentation"')
           assert(pageIds.includes('patterns'), 'missing page "patterns"')
           assert(pageIds.includes('patterns/atoms'), 'missing page "patterns/atoms"')
-          assert(pageIds.includes('patterns/atoms/buttons'), 'missing page "patterns/atoms/buttons"')
           done()
         })
         .catch(done)
