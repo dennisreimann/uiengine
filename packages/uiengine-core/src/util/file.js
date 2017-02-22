@@ -7,7 +7,7 @@ async function read (filePath) {
       if (err) {
         reject(err)
       } else {
-        resolve(string)
+        resolve(string.trim())
       }
     })
   })

@@ -63,7 +63,7 @@ async function render (state, templatePath, data = {}) {
     const { options } = adapters[ext]
     const rendered = await render(options, templatePath, data)
 
-    return rendered
+    return rendered.trim()
   } else {
     throw new Error(`The "${ext}" adapter does not support rendering.`)
   }

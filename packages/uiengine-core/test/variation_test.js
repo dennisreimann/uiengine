@@ -40,6 +40,9 @@ describe('Variation', () => {
           assert.equal(data.content, '<p>This is documentation for the text input.</p>')
           assert.equal(data.context.id, 'name')
           assert.equal(data.context.name, 'person[name]')
+          assert.equal(data.raw, 'include /input/input.pug\n\n+input(id, name)')
+          assert.equal(data.rendered, '<input class="input input--text" id="name" name="person[name]" type="text"/>')
+
           done()
         })
         .catch(done)

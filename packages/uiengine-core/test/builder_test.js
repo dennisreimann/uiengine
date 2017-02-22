@@ -6,7 +6,6 @@ const assertExists = require('./support/assertExists')
 
 const Builder = require('../src/builder')
 const NavigationData = require('../src/data/navigation')
-const VariationData = require('../src/data/variation')
 
 const projectPath = path.resolve(__dirname, 'project')
 const tmpPath = path.resolve(__dirname, 'tmp')
@@ -76,15 +75,15 @@ const state = {
     })
   },
   variations: {
-    'input/text.pug': VariationData(
-      'input/text.pug',
-      'input',
-      path.resolve(projectPath, 'src', 'components', 'input', 'variations', 'text.pug'),
-      '<p>This is documentation for the text input.</p>',
-      'RENDERED',
-      { id: 'name', name: 'person[name]' },
-      { title: 'Text Input' }
-    )
+    'input/text.pug': {
+      id: 'input/text.pug',
+      componentId: 'input',
+      path: path.resolve(projectPath, 'src', 'components', 'input', 'variations', 'text.pug'),
+      content: '<p>This is documentation for the text input.</p>',
+      rendered: '<input class="input input--text" id="name" name="person[name]" type="text"/>',
+      context: { id: 'name', name: 'person[name]' },
+      title: 'Text Input'
+    }
   }
 }
 
