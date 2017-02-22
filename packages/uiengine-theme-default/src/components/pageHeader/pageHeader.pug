@@ -1,0 +1,9 @@
+mixin pageHeader(page, navigation)
+  header.page-header&attributes(attributes)
+    .wrap.wrap--content
+      - const navItem = navigation[page.id]
+      - const parentItem = navigation[navItem.parentId]
+      if parentItem
+        a.page-header__parent-link(href=h.pageLink(parentItem))= parentItem.title
+      h1.page-header__title= page.title
+      block

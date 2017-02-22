@@ -1,8 +1,8 @@
 extends includes/layout.pug
 
+include /component/component.pug
+include /pageHeader/pageHeader.pug
+include /variation/variation.pug
+
 block main
-  section.page(id=h.dasherize(page.id))
-    header.page__header
-      h1.page__title= page.title
-    article.page__content
-      !=page.content
+  +component(page)

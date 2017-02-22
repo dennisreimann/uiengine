@@ -35,6 +35,13 @@ export default function (data) {
       return relativePath(target, source)
     },
 
+    variationPreviewPath (variationId) {
+      const target = path.join('variations', `${variationId}.html`)
+      const source = path.join(currentItem.path, pageFile)
+
+      return relativePath(target, source)
+    },
+
     dasherize (string) {
       return string.replace(/\W+/gi, '-')
     },
@@ -53,6 +60,11 @@ export default function (data) {
       const href = relativePath(target, source)
 
       return href
+    },
+
+    t (string) {
+      // TODO: Add proper localization support
+      return string
     }
   }
 }

@@ -1,0 +1,39 @@
+.variation-header
+  color $color-white
+  background-color $color-brand-main
+  padding-top $space-large
+  padding-bottom $space-large
+
+  .wrap
+    display flex
+    align-items baseline
+
+  &__description
+    text-decoration none
+    font-size $font-size-tiny
+    color $color-yellow
+    text-align right
+    width 6rem
+    margin-left -6rem
+    padding-right $space-large
+
+  &__title
+    font-size 1.5rem
+
+  &__component-title
+    &:after
+      content " > "
+
+  &__items
+    margin-left $space-large
+    border-left 1px solid $color-yellow
+    padding-left $space-large
+    font-size 1.5rem
+
+  &__link
+    text-decoration none
+    color inherit
+
+  &__link + &__link
+    margin-left $space-large
+

@@ -1,0 +1,23 @@
+include /pageHeader/pageHeader.pug
+include /variation/variation.pug
+
+mixin component(page)
+  - variationIds = component.variationIds
+  section.component(id=h.dasherize(page.id))
+    +pageHeader(page, navigation)
+
+    .wrap.wrap--content
+      article.page__content
+        !=page.content
+
+      nav.page-nav
+      ul.page-nav__tree
+        for variationId in variationIds
+          - variation = variations[variationId]
+          li.page-nav__item
+            a(class="page-nav__link" href=`#${h.dasherize(variation.id)}`)= variation.title
+
+  section.variations
+    for variationId in variationIds
+      - variation = variations[variationId]
+      +variation(variation)

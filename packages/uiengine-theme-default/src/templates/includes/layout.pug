@@ -1,5 +1,5 @@
 include /main/main.pug
-include /mainnav/mainnav.pug
+include /mainNav/mainNav.pug
 
 doctype
 html
@@ -10,7 +10,7 @@ html
     link(href=h.assetPath("styles/uiengine.css") rel="stylesheet")
     link(href="https://fonts.googleapis.com/css?family=Merriweather+Sans:300i,400,800" rel="stylesheet")
   body
-    +mainnav()
+    +mainNav()
     +main()
       block main
     script(src=h.assetPath("scripts/uiengine.js") defer)

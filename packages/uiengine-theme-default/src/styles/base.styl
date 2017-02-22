@@ -20,7 +20,18 @@ html
 
 body
   color $color-text
-  background $color-white
+  background-color $color-white
+
+h1
+h2
+h3
+  font-weight 400
+
+h4
+h5
+h6
+  font-weight 400
+
 
 p
 ul
@@ -36,4 +47,22 @@ section
     h5
     h6
       margin-top $space-medium
+
+.wrap
+  margin 0 auto
+  padding-left $space-large
+  padding-right $space-large
+
+  &--large
+    max-width 75rem
+
+  &--content
+    max-width 55rem
+
+
+.page
+  &__content
+    padding-top $space-large
+    padding-bottom $space-large
+
 

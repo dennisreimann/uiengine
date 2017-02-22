@@ -1,11 +1,15 @@
 include /variationHeader/variationHeader.pug
-include /variationInfo/variationInfo.pug
 include /variationCode/variationCode.pug
 include /variationPreview/variationPreview.pug
 
 mixin variation(variation)
-  article.variation(id=variation.id)
+  article.variation(id=h.dasherize(variation.id))
     +variationHeader(variation)
-    +variationInfo(variation)
-    +variationCode(variation)
+
+    .wrap.wrap--content
+      .variation__content
+        != variation.content
+
     +variationPreview(variation)
+
+    +variationCode(variation)

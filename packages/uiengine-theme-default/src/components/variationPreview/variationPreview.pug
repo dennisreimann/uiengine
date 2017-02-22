@@ -1,2 +1,4 @@
 mixin variationPreview(variation)
   .variation__section.variation-preview
+    if variation.rendered
+      iframe.variation-preview__iframe(src=h.variationPreviewPath(variation.id))

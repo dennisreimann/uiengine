@@ -1,6 +1,8 @@
-.mainnav
+.main-nav
   color $color-white
   background $color-brand-seco
+  border-bottom 2px solid $color-gray-20
+
   @media $mq-up_to_XS
     font-size $font-size-small
   @media $mq-XS_and_up
@@ -9,15 +11,21 @@
   &__tree
     display flex
     list-style none
-    margin 0
+    margin-left $space-large * -1
 
   &__item
-    border-top 3px solid transparent
     border-bottom 3px solid transparent
+    font-weight 400
+
     &--active,
     &--current
-      background $color-dark-bg
-      border-bottom 3px solid $color-white
+      color $color-dark-bg
+      background $color-white
+
+    &:not(&--active)
+      &:hover
+        background $color-dark-bg
+        border-bottom 3px solid $color-white
 
   &__link
     display block

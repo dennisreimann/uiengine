@@ -1,8 +1,14 @@
 mixin variationCode(variation)
   .variation__section.variation-code
-    if variation.raw
-      pre.variation-code__raw
-        != variation.raw
-    if variation.context
-      pre.variation-code__context
-        != variation.context
+    .wrap.wrap--content
+      if variation.raw
+        header.variation-code__header
+          h3= h.t('Code')
+        pre.variation-code__raw
+          != variation.raw
+
+      if variation.context
+        header.variation-code__header
+          h3= h.t('Daten')
+        pre.variation-code__context
+          != JSON.stringify(variation.context, null, '  ')

@@ -1,19 +1,19 @@
 mixin variationHeader(variation)
-  header.variation-header
-    - const component = components[variation.componentId]
-    h2
-      span= component.title
-      span= variation.title
-    +variationHeaderItems(variation)
+  - const idPrefix = h.dasherize(variation.id)
+  - const component = components[variation.componentId]
+  header.variation-header&attributes(attributes)
+    .wrap.wrap--content
+      span.variation-header__description= h.t('Variation')
 
-mixin variationHeaderItems(variation)
-  nav.variation-header__items
-    if variation.content
-      +variationHeaderItem(`${variation.id}-info`, 'Infos')
-    if variation.raw || variation.context
-      +variationHeaderItem(`${variation.id}-code`, 'Code')
-    if variation.rendered
-      +variationHeaderItem(`${variation.id}-preview`, 'Vorschau')
+      h2.variation-header__title
+        span.variation-header__component-title= component.title
+        span.variation-header__variation-title= variation.title
+
+      nav.variation-header__items
+        if variation.rendered
+          +variationHeaderItem(`${idPrefix}-preview`, 'Vorschau')
+        if variation.raw || variation.context
+          +variationHeaderItem(`${idPrefix}-code`, 'Code')
 
 mixin variationHeaderItem(id, title)
   a.variation-header__link(href=`#${id}`)= title
