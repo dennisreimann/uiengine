@@ -3,8 +3,8 @@ const R = require('ramda')
 const glob = require('globby')
 const markdown = require('./util/markdown')
 const frontmatter = require('./util/frontmatter')
-const VariationData = require('./data/variation')
 const VariationUtil = require('./util/variation')
+const File = require('./util/file')
 const Connector = require('./connector')
 
 const assocVariation = (variations, variation) =>
@@ -59,8 +59,8 @@ async function fetchAll (state) {
 async function fetchById (state, id) {
   const componentsPath = state.config.source.components
   const componentId = VariationUtil.variationIdToComponentId(id)
-  const filePath = VariationUtil.variationIdToVariationFilePath(componentsPath, id)
-  let { attributes, content } = await readVariationFile(filePath)
+  const path = VariationUtil.variationIdToVariationFilePath(componentsPath, id)
+  let { attributes, content } = await readVariationFile(path)
 
   const title = VariationUtil.variationIdToTitle(id)
   const context = attributes.context
@@ -68,8 +68,12 @@ async function fetchById (state, id) {
   attributes = R.merge({ title }, attributes)
 
   // render raw variation, without layout
-  const rendered = await Connector.render(state, filePath, context)
-  const data = VariationData(id, componentId, filePath, content, rendered, context, attributes)
+  const rawTemplate = File.read(path)
+  const renderTemplate = Connector.render(state, path, context)
+  const [raw, rendered] = await Promise.all([rawTemplate, renderTemplate])
+
+  const baseData = { id, componentId, path, content, raw, rendered, context }
+  const data = R.mergeAll([attributes, baseData])
 
   return data
 }

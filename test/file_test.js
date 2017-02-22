@@ -11,7 +11,7 @@ describe('File', () => {
     it('should return file content', done => {
       File.read('./test/fixtures/markdown.md')
         .then(data => {
-          assert.equal(data, '# Homepage\n\nWelcome!\n')
+          assert.equal(data, '# Homepage\n\nWelcome!')
           done()
         })
         .catch(done)
