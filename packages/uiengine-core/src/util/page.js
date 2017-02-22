@@ -4,12 +4,26 @@ const StringUtil = require('./string')
 
 const PAGE_FILENAME = 'page.md'
 const INDEX_ID = 'index'
-const INDEX_PATH = '.'
+const INDEX_FILE_PATH = '.'
+const INDEX_PAGE_PATH = ''
 
-const isIndexPage = (pageId) => pageId === INDEX_ID
-const isIndexPath = (pagePath) => pagePath === INDEX_PATH
+const isIndexPage = (pageId) =>
+  pageId === INDEX_ID
 
-const pageIdToPath = (pageId) => isIndexPage(pageId) ? '' : pageId
+const isIndexFilePath = (pagePath) =>
+  pagePath === INDEX_FILE_PATH
+
+const isIndexPagePath = (pagePath) =>
+  pagePath === INDEX_PAGE_PATH
+
+const pageIdToPath = (pageId) =>
+  isIndexPage(pageId) ? INDEX_PAGE_PATH : pageId
+
+const pageIdForComponentId = (parentPageId, componentId) =>
+  isIndexPage(parentPageId) ? componentId : `${pageIdToPath(parentPageId)}/${componentId}`
+
+const pagePathForComponentId = (parentPagePath, componentId) =>
+  isIndexPagePath(parentPagePath) ? componentId : `${parentPagePath}/${componentId}`
 
 const pageIdToTitle = (pageId) => {
   if (isIndexPage(pageId)) return 'Home'
@@ -21,7 +35,7 @@ const pageIdToTitle = (pageId) => {
 }
 
 const pageIdToPageFilePath = (pagesPath, pageId) => {
-  const relativePath = isIndexPage(pageId) ? INDEX_PATH : pageId
+  const relativePath = isIndexPage(pageId) ? INDEX_FILE_PATH : pageId
   const absolutePath = path.join(pagesPath, relativePath, PAGE_FILENAME)
 
   return absolutePath
@@ -34,21 +48,15 @@ const pageFilePathToPageId = (pagesPath, pageFilePath) => {
   if (relativePath.startsWith('..')) return null
 
   const dirname = path.dirname(relativePath)
-  const pageId = isIndexPath(dirname) ? INDEX_ID : dirname
+  const pageId = isIndexFilePath(dirname) ? INDEX_ID : dirname
 
   return pageId
 }
 
-const pageIdForComponentId = (parentPageId, componentId) =>
-  `${pageIdToPath(parentPageId)}/${componentId}`
-
-const pagePathForComponentId = (parentPagePath, componentId) =>
-  `${parentPagePath}/${componentId}`
-
 const parentIdForPageId = (pageId) => {
   if (isIndexPage(pageId)) return null
   const parentDir = path.dirname(pageId)
-  const parentId = isIndexPath(parentDir) ? INDEX_ID : parentDir
+  const parentId = isIndexFilePath(parentDir) ? INDEX_ID : parentDir
 
   return parentId
 }
@@ -86,12 +94,6 @@ const convertUserProvidedComponentsList = (pageId, attributes = {}) => {
   let { components } = attributes
   if (typeof components !== 'object') return attributes
 
-  // const prefix = pageIdToPath(pageId)
-  // const componentIds = R.map((id) =>
-  //   id.startsWith(prefix) ? id : `${prefix}/${id}`,
-  //   components
-  // )
-
   attributes = R.dissoc('components', attributes)
   attributes = R.assoc('componentIds', components, attributes)
 
@@ -99,6 +101,9 @@ const convertUserProvidedComponentsList = (pageId, attributes = {}) => {
 }
 
 module.exports = {
+  isIndexPage,
+  isIndexPagePath,
+  isIndexFilePath,
   pageIdToPath,
   pageIdToTitle,
   pageIdToPageFilePath,

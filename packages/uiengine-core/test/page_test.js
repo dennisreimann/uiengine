@@ -92,13 +92,19 @@ describe('Page', () => {
     })
 
     it('should not infer childIds for index if they are provided', done => {
-      // TODO: This needs a correct implementation with correct test data.
-      // Right now the index page does not provide children list!
+      const state = {
+        config: {
+          source: {
+            pages: path.resolve(__dirname, 'project', 'src', 'docs')
+          }
+        }
+      }
+
       Page.fetchById(state, 'index')
         .then(data => {
           assert.equal(data.childIds.length, 2)
-          assert.equal(data.childIds[0], 'documentation')
-          assert.equal(data.childIds[1], 'patterns')
+          assert.equal(data.childIds[0], 'patterns')
+          assert.equal(data.childIds[1], 'documentation')
           done()
         })
         .catch(done)

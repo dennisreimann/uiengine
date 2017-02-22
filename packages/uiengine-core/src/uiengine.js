@@ -64,7 +64,7 @@ async function generateIncrementForChangedFile (options, filePath) {
   const componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
   let variationId = components ? VariationUtil.variationFilePathToVariationId(components, filePath) : undefined
 
-  // FIXME: Remove this quickfix and rebuild all variation
+  // TODO: Remove this quickfix and rebuild all variation
   // files belonging to the meta variation markdown file.
   if (variationId && variationId.endsWith('.md')) {
     variationId = undefined
@@ -113,7 +113,11 @@ async function updateComponent (id) {
 async function regeneratePage (id) {
   await fetchAndAssocPage(id)
   await fetchAndAssocNavigation()
-  await Builder.generatePage(state, id)
+
+  const buildPage = Builder.generatePage(state, id)
+  const copyFiles = Builder.copyPageFiles(state, id)
+
+  await Promise.all([buildPage, copyFiles])
 }
 
 async function regenerateVariation (id) {
