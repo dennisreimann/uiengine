@@ -22,10 +22,10 @@
     "pug": "^2.0.0-beta10",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "uiengine": "^0.1.0",
-    "uiengine-adapter-handlebars": "^0.1.0",
-    "uiengine-adapter-pug": "^0.1.0",
-    "uiengine-adapter-react": "^0.1.0"
+    "uiengine": "file:../..",
+    "uiengine-adapter-handlebars": "^0.1.1",
+    "uiengine-adapter-pug": "^0.1.1",
+    "uiengine-adapter-react": "^0.1.1"
   },
   "devDependencies": {
     "browser-sync": "^2.18.7",
