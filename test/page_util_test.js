@@ -86,26 +86,57 @@ describe('PageUtil', () => {
   })
 
   describe('#pageIdForComponentId', () => {
-    it('should convert the component id into a page id based on the parent page id for index page')
+    it('should convert the component id into a page id based on the parent page id for index page', () => {
+      const pageId = PageUtil.pageIdForComponentId('index', 'button')
+      assert.equal(pageId, 'button')
+    })
 
-    it('should convert the component id into a page id based on the parent page id for child page')
+    it('should convert the component id into a page id based on the parent page id for child page', () => {
+      const pageId = PageUtil.pageIdForComponentId('patterns/atoms', 'button')
+      assert.equal(pageId, 'patterns/atoms/button')
+    })
   })
 
   describe('#pagePathForComponentId', () => {
-    it('should convert the component id into a page path based on the parent page path for index page')
+    it('should convert the component id into a page path based on the parent page path for index page', () => {
+      const pagePath = PageUtil.pagePathForComponentId('', 'button')
+      assert.equal(pagePath, 'button')
+    })
 
-    it('should convert the component id into a page path based on the parent page path for child page')
+    it('should convert the component id into a page path based on the parent page path for child page', () => {
+      const pagePath = PageUtil.pagePathForComponentId('pattern-library/atoms', 'button')
+      assert.equal(pagePath, 'pattern-library/atoms/button')
+    })
   })
 
   describe('#convertUserProvidedChildrenList', () => {
-    it('should convert the children list provided by the user to childIds for index page')
+    it('should convert the children list provided by the user to childIds for index page', () => {
+      const attrs = { children: ['patterns', 'docs'] }
+      const { childIds } = PageUtil.convertUserProvidedChildrenList('index', attrs)
+      assert.equal(childIds[0], 'patterns')
+      assert.equal(childIds[1], 'docs')
+    })
 
-    it('should convert the children list provided by the user to childIds for child page')
+    it('should convert the children list provided by the user to childIds for child page', () => {
+      const attrs = { children: ['atoms', 'molecules'] }
+      const { childIds } = PageUtil.convertUserProvidedChildrenList('patterns', attrs)
+      assert.equal(childIds[0], 'patterns/atoms')
+      assert.equal(childIds[1], 'patterns/molecules')
+    })
   })
 
   describe('#convertUserProvidedComponentsList', () => {
-    it('should convert the components list provided by the user to componentIds for index page')
+    it('should convert the components list provided by the user to componentIds for index page', () => {
+      const attrs = { components: ['link'] }
+      const { componentIds } = PageUtil.convertUserProvidedComponentsList('index', attrs)
+      assert.equal(componentIds[0], 'link')
+    })
 
-    it('should convert the components list provided by the user to componentIds for child page')
+    it('should convert the components list provided by the user to componentIds for child page', () => {
+      const attrs = { components: ['link', 'button'] }
+      const { componentIds } = PageUtil.convertUserProvidedComponentsList('patterns/atoms', attrs)
+      assert.equal(componentIds[0], 'link')
+      assert.equal(componentIds[1], 'button')
+    })
   })
 })

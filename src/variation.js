@@ -5,6 +5,7 @@ const markdown = require('./util/markdown')
 const frontmatter = require('./util/frontmatter')
 const VariationData = require('./data/variation')
 const VariationUtil = require('./util/variation')
+const Connector = require('./connector')
 
 const assocVariation = (variations, variation) =>
   R.assoc(variation.id, variation, variations)
@@ -58,15 +59,17 @@ async function fetchAll (state) {
 async function fetchById (state, id) {
   const componentsPath = state.config.source.components
   const componentId = VariationUtil.variationIdToComponentId(id)
-  const variationFilePath = VariationUtil.variationIdToVariationFilePath(componentsPath, id)
-  let { attributes, content } = await readVariationFile(variationFilePath)
+  const filePath = VariationUtil.variationIdToVariationFilePath(componentsPath, id)
+  let { attributes, content } = await readVariationFile(filePath)
 
   const title = VariationUtil.variationIdToTitle(id)
   const context = attributes.context
   attributes = R.dissoc('context', attributes)
   attributes = R.merge({ title }, attributes)
 
-  const data = VariationData(id, componentId, variationFilePath, content, context, attributes)
+  // render raw variation, without layout
+  const rendered = await Connector.render(state, filePath, context)
+  const data = VariationData(id, componentId, filePath, content, rendered, context, attributes)
 
   return data
 }

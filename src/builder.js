@@ -2,9 +2,9 @@ const path = require('path')
 const R = require('ramda')
 const Theme = require('./theme')
 const Connector = require('./connector')
+const File = require('./util/file')
 const PageUtil = require('./util/page')
 const VariationUtil = require('./util/variation')
-const File = require('./util/file')
 
 const pageFile = 'index.html'
 
@@ -34,8 +34,8 @@ const getComponentData = ({ pages, navigation, components, variations, config: {
   return data
 }
 
-const getVariationData = ({ variations, config: { name, version } }, variationId, rendered) => {
-  const variation = R.assoc('rendered', rendered, variations[variationId])
+const getVariationData = ({ variations, config: { name, version } }, variationId) => {
+  const variation = variations[variationId]
   const config = { name, version }
   const data = { variation, config }
 
@@ -56,6 +56,19 @@ async function dumpState (state) {
   await File.write(filePath, json)
 }
 
+async function copyPageFiles (state, pageId) {
+  const { pages, config } = state
+  const page = pages[pageId]
+  const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
+  const sourcePagePath = PageUtil.pageIdToPath(page.id)
+  const targetPath = path.resolve(config.target, targetPagePath)
+  const sourcePath = path.resolve(config.source.pages, sourcePagePath)
+  const copyFile = R.partial(copyPageFile, [targetPath, sourcePath])
+  const copyFiles = R.map(copyFile, page.files)
+
+  await Promise.all(copyFiles)
+}
+
 async function generatePage (state, pageId) {
   const { pages, config } = state
   const page = pages[pageId]
@@ -63,20 +76,11 @@ async function generatePage (state, pageId) {
   const data = getPageData(state, pageId)
   const html = await Theme.render(state, templateId, data)
 
-  // write file and copy files belonging to the page
-  //
-  // TODO: Move copying files out into a separate function,
-  // so that we have these operations as granular as possible
-  const targetPagePath = page.path === 'index' ? '' : page.path
-  const sourcePagePath = PageUtil.pageIdToPath(page.id)
+  const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
   const targetPath = path.resolve(config.target, targetPagePath)
-  const sourcePath = path.resolve(config.source.pages, sourcePagePath)
   const htmlPath = path.resolve(targetPath, pageFile)
-  const writeHtml = File.write(htmlPath, html)
-  const copyFile = R.partial(copyPageFile, [targetPath, sourcePath])
-  const copyFiles = R.map(copyFile, page.files)
 
-  await Promise.all([writeHtml, ...copyFiles])
+  await File.write(htmlPath, html)
 }
 
 async function generatePageComponents (state, pageId) {
@@ -134,12 +138,8 @@ async function generateVariation (state, variationId) {
   const variation = variations[variationId]
   if (!variation) return Promise.reject(`Variation "${variationId}" does not exist or has not been fetched yet.`)
 
-  // render raw variation, without layout
-  const { context, path: filePath } = variation
-  const rendered = await Connector.render(state, filePath, context)
-
   // render variation preview, with layout
-  const data = getVariationData(state, variationId, rendered)
+  const data = getVariationData(state, variationId)
   const templateId = variation.template || 'variation'
   const templateFile = templates[templateId]
   if (!templateFile) return Promise.reject(`Template "${templateId}" for variation "${variationId}" does not exist. Please add it to your configuration.`)
@@ -159,13 +159,21 @@ async function generateSite (state) {
   const pageBuild = R.partial(generatePage, [state])
   const pageBuilds = R.map(pageBuild, pageIds)
 
+  const pageFilesBuild = R.partial(copyPageFiles, [state])
+  const pageFilesBuilds = R.map(pageFilesBuild, pageIds)
+
   const pageComponentsBuild = R.partial(generatePageComponents, [state])
   const pageComponentsBuilds = R.map(pageComponentsBuild, pageIds)
 
   const variationBuild = R.partial(generateVariation, [state])
   const variationBuilds = R.map(variationBuild, variationIds)
 
-  await Promise.all([...pageBuilds, ...variationBuilds, ...pageComponentsBuilds])
+  await Promise.all([
+    ...pageBuilds,
+    ...pageFilesBuilds,
+    ...pageComponentsBuilds,
+    ...variationBuilds
+  ])
 }
 
 module.exports = {
@@ -175,5 +183,6 @@ module.exports = {
   generateComponentPages,
   generateComponentVariations,
   generateVariation,
+  copyPageFiles,
   dumpState
 }

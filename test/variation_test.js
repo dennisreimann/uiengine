@@ -3,10 +3,29 @@ const path = require('path')
 const assert = require('assert')
 
 const Variation = require('../src/variation')
+
+const projectPath = path.resolve(__dirname, 'project')
 const state = {
   config: {
     source: {
-      components: path.resolve(__dirname, 'project', 'src', 'components')
+      components: path.resolve(projectPath, 'src', 'components')
+    },
+    adapters: {
+      pug: {
+        module: 'uiengine-adapter-pug',
+        options: {
+          pretty: true,
+          basedir: path.resolve(projectPath, 'src', 'components')
+        }
+      },
+      jsx: {
+        module: 'uiengine-adapter-react',
+        options: {}
+      },
+      hbs: {
+        module: 'uiengine-adapter-handlebars',
+        options: {}
+      }
     }
   }
 }

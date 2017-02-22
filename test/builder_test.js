@@ -64,9 +64,9 @@ const state = {
     })
   },
   navigation: {
-    'index': NavigationData('index', 'Home', '', null, [], ['patterns']),
-    'patterns': NavigationData('patterns', 'Pattern Library', 'pattern-library', 'index', ['index'], ['patterns/input']),
-    'patterns/input': NavigationData('patterns/input', 'Awesome Input', 'pattern-library/input', 'patterns', ['index', 'patterns'])
+    'index': NavigationData('index', 'Home', '', [], null, ['patterns']),
+    'patterns': NavigationData('patterns', 'Pattern Library', 'pattern-library', ['index'], 'index', { childIds: ['patterns/input'] }),
+    'patterns/input': NavigationData('patterns/input', 'Awesome Input', 'pattern-library/input', ['index', 'patterns'], 'patterns')
   },
   components: {
     input: Factory.component('input', {
@@ -81,6 +81,7 @@ const state = {
       'input',
       path.resolve(projectPath, 'src', 'components', 'input', 'variations', 'text.pug'),
       '<p>This is documentation for the text input.</p>',
+      'RENDERED',
       { id: 'name', name: 'person[name]' },
       { title: 'Text Input' }
     )
@@ -125,9 +126,11 @@ describe('Builder', () => {
         })
         .catch(done)
     })
+  })
 
+  describe('#copyPageFiles', () => {
     it('should copy page files', done => {
-      Builder.generatePage(state, 'index')
+      Builder.copyPageFiles(state, 'index')
         .then(state => {
           assertExists(path.join(target, 'index.txt'))
 
@@ -137,7 +140,7 @@ describe('Builder', () => {
     })
 
     it('should copy page files in extra folder', done => {
-      Builder.generatePage(state, 'index')
+      Builder.copyPageFiles(state, 'index')
         .then(state => {
           assertExists(path.join(target, 'extra-files', 'file-in-folder.txt'))
 
@@ -147,7 +150,7 @@ describe('Builder', () => {
     })
 
     it('should copy page files for pages with custom paths', done => {
-      Builder.generatePage(state, 'patterns')
+      Builder.copyPageFiles(state, 'patterns')
         .then(state => {
           assertExists(path.join(target, 'pattern-library', 'patterns-file.txt'))
 
@@ -157,7 +160,7 @@ describe('Builder', () => {
     })
 
     it('should copy page files in extra folder for pages with custom paths', done => {
-      Builder.generatePage(state, 'patterns')
+      Builder.copyPageFiles(state, 'patterns')
         .then(state => {
           assertExists(path.join(target, 'pattern-library', 'some-files', 'file-in-folder.txt'))
 
