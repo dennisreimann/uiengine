@@ -6,7 +6,7 @@ async function fromFile (parseString, filePath) {
       if (err) {
         resolve(undefined)
       } else {
-        const parsed = parseString(string)
+        const parsed = parseString(string, filePath)
 
         resolve(parsed)
       }
