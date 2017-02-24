@@ -74,7 +74,7 @@ async function generateIncrementForChangedFile (options, filePath) {
     await regeneratePage(pageId)
     return { file, type: 'page', item: pageId }
   } else if (variationId) {
-    await regenerateVariation(variationId)
+    await regenerateVariation(variationId, componentId)
     return { file, type: 'variation', item: variationId }
   } else if (componentId) {
     await Connector.registerComponentFile(state, filePath)
@@ -120,9 +120,12 @@ async function regeneratePage (id) {
   await Promise.all([buildPage, copyFiles])
 }
 
-async function regenerateVariation (id) {
+async function regenerateVariation (id, componentId) {
   await fetchAndAssocVariation(id)
-  await Builder.generateVariation(state, id)
+
+  const buildVariation = Builder.generateVariation(state, id)
+  const buildPages = Builder.generatePagesHavingComponent(state, componentId)
+  await Promise.all([buildPages, buildVariation])
 }
 
 async function regenerateComponent (id) {
@@ -130,7 +133,7 @@ async function regenerateComponent (id) {
   const fetchAndAssocVariations = R.map(fetchAndAssocVariation, variationIds)
   await Promise.all(fetchAndAssocVariations)
 
-  const buildPages = Builder.generateComponentPages(state, id)
+  const buildPages = Builder.generatePagesHavingComponent(state, id)
   const buildVariations = Builder.generateComponentVariations(state, id)
   await Promise.all([buildPages, buildVariations])
 }

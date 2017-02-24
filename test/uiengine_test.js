@@ -1,4 +1,4 @@
-/* global afterEach, describe, it */
+/* global afterEach, beforeEach, describe, it */
 const fs = require('fs-extra')
 const path = require('path')
 const assert = require('assert')
@@ -121,7 +121,6 @@ describe('UIengine', () => {
 
     it('should generate variation', done => {
       const filePath = path.join(componentsPath, 'form', 'variations', 'form.pug')
-
       UIengine.generateIncrementForChangedFile(opts, filePath)
         .then(result => {
           assertExists(path.join(targetPath, 'variations', 'form', 'form.pug.html'))
@@ -129,6 +128,7 @@ describe('UIengine', () => {
           assert.equal(result.type, 'variation')
           assert.equal(result.item, 'form/form.pug')
           assert.equal(result.file, 'test/project/src/components/form/variations/form.pug')
+          assertExists(path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html'))
 
           done()
         })
