@@ -169,9 +169,9 @@ describe('Builder', () => {
     })
   })
 
-  describe('#generatePageComponents', () => {
-    it('should generate component pages', done => {
-      Builder.generatePageComponents(state, 'patterns')
+  describe('#generateComponentForPage', () => {
+    it('should generate component page', done => {
+      Builder.generateComponentForPage(state, 'patterns', 'input')
         .then(state => {
           assertExists(path.join(target, 'pattern-library', 'input', 'index.html'))
 
@@ -181,11 +181,23 @@ describe('Builder', () => {
     })
   })
 
-  describe('#generateComponentPages', () => {
-    it('should generate pages having this component as subpage', done => {
-      Builder.generateComponentPages(state, 'input')
+  describe('#generateComponentsForPage', () => {
+    it('should generate component pages', done => {
+      Builder.generateComponentsForPage(state, 'patterns')
         .then(state => {
-          assertExists(path.join(target, 'pattern-library', 'index.html'))
+          assertExists(path.join(target, 'pattern-library', 'input', 'index.html'))
+
+          done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('#generatePagesHavingComponent', () => {
+    it('should generate pages having this component as subpage', done => {
+      Builder.generatePagesHavingComponent(state, 'input')
+        .then(state => {
+          assertExists(path.join(target, 'pattern-library', 'input', 'index.html'))
 
           done()
         })

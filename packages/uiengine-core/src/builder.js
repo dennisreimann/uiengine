@@ -83,17 +83,17 @@ async function generatePage (state, pageId) {
   await File.write(htmlPath, html)
 }
 
-async function generatePageComponents (state, pageId) {
+async function generateComponentsForPage (state, pageId) {
   const { pages } = state
   const page = pages[pageId]
   const componentIds = page.componentIds || []
-  const build = R.partial(generatePageComponent, [state, pageId])
+  const build = R.partial(generateComponentForPage, [state, pageId])
   const builds = R.map(build, componentIds)
 
   await Promise.all(builds)
 }
 
-async function generatePageComponent (state, pageId, componentId) {
+async function generateComponentForPage (state, pageId, componentId) {
   const { components, pages, config: { target } } = state
   const parent = pages[pageId]
   const component = components[componentId]
@@ -106,17 +106,17 @@ async function generatePageComponent (state, pageId, componentId) {
   await File.write(htmlPath, html)
 }
 
-async function generateComponentPages (state, componentId) {
+async function generatePagesHavingComponent (state, componentId) {
   const { pages } = state
 
-  const build = R.partial(generatePage, [state])
+  const build = R.partial(generateComponentForPage, [state])
   const builds = []
 
   // FIXME: This is ugly!
   R.map((page) => {
     const componentIds = page.componentIds || []
     if (componentIds.includes(componentId)) {
-      builds.push(build(page.id))
+      builds.push(build(page.id, componentId))
     }
   }, pages)
 
@@ -162,7 +162,7 @@ async function generateSite (state) {
   const pageFilesBuild = R.partial(copyPageFiles, [state])
   const pageFilesBuilds = R.map(pageFilesBuild, pageIds)
 
-  const pageComponentsBuild = R.partial(generatePageComponents, [state])
+  const pageComponentsBuild = R.partial(generateComponentsForPage, [state])
   const pageComponentsBuilds = R.map(pageComponentsBuild, pageIds)
 
   const variationBuild = R.partial(generateVariation, [state])
@@ -179,8 +179,9 @@ async function generateSite (state) {
 module.exports = {
   generateSite,
   generatePage,
-  generatePageComponents,
-  generateComponentPages,
+  generateComponentForPage,
+  generateComponentsForPage,
+  generatePagesHavingComponent,
   generateComponentVariations,
   generateVariation,
   copyPageFiles,
