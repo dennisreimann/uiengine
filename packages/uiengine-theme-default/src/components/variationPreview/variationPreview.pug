@@ -1,4 +1,5 @@
-mixin variationPreview(variation)
-  .variation__section.variation-preview
-    if variation.rendered
-      iframe.variation-preview__iframe(src=h.variationPreviewPath(variation.id))
+mixin variationPreview(variation, active)
+  - const id = `${h.dasherize(variation.id)}-preview`
+  - const classes = active ? 'variation__section--active' : null
+  .variation__section.variation-preview(id=id class=classes)&attributes(attributes)
+    iframe.variation-preview__iframe(src=h.variationPreviewPath(variation.id))

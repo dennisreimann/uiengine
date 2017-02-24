@@ -1,15 +1,26 @@
+include /permalink/permalink.pug
 include /variationHeader/variationHeader.pug
 include /variationCode/variationCode.pug
 include /variationPreview/variationPreview.pug
 
 mixin variation(variation)
-  article.variation(id=h.dasherize(variation.id))
+  - const varId = h.dasherize(variation.id)
+  article.variation(id=varId)
     +variationHeader(variation)
 
     .wrap.wrap--content
-      .variation__content
-        != variation.content
+      if variation.content
+        .variation__content
+          != variation.content
 
-    +variationPreview(variation)
+      .variation__links
+        a.variation__link(href=h.variationPreviewPath(variation.id) target=varId)= h.t('Variante in separatem Fenster öffnen')
+        +permalink(h.t('Varianten-Link kopieren'), `#${varId}`).variation__link
 
-    +variationCode(variation)
+    if variation.raw || variation.context || variation.rendered
+      .variation__sections
+        if variation.rendered
+          +variationPreview(variation, true)
+
+        if variation.raw || variation.context || variation.rendered
+          +variationCode(variation, !variation.rendered)

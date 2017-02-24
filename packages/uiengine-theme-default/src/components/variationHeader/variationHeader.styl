@@ -9,13 +9,16 @@
     align-items baseline
 
   &__description
-    text-decoration none
-    font-size $font-size-tiny
-    color $color-yellow
-    text-align right
-    width 6rem
-    margin-left -6rem
-    padding-right $space-large
+    @media up_to_L
+      display none
+    @media L_and_up
+      text-decoration none
+      font-size $font-size-tiny
+      color $color-yellow
+      text-align right
+      width 6rem
+      margin-left -6rem
+      padding-right $space-large
 
   &__title
     font-size 1.5rem
@@ -24,7 +27,7 @@
     &:after
       content " > "
 
-  &__items
+  &__links
     margin-left $space-large
     border-left 1px solid $color-yellow
     padding-left $space-large
@@ -33,6 +36,9 @@
   &__link
     text-decoration none
     color inherit
+
+    &--active
+      color $color-yellow
 
   &__link + &__link
     margin-left $space-large

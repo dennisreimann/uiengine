@@ -1,6 +1,8 @@
 mixin mainNav()
   nav.main-nav
     .wrap.wrap--large
+      a.main-nav__config(href=h.pageLink(navigation['index']))
+        | #{config.name} (#{config.version})
       ul.main-nav__tree
         +mainNavItem('index')
         if navigation && navigation.index
@@ -15,4 +17,4 @@ mixin mainNavItem(itemId)
     - h.isActivePage(item) ? classList.push('main-nav__item--active') : false
     - const classes = classList.join(' ')
     li.main-nav__item(class=classes)
-      a(class="main-nav__link" href=h.pageLink(item))= item.title
+      a.main-nav__link(href=h.pageLink(item))= item.title

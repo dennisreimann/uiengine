@@ -1,11 +1,22 @@
 .variation-code
   &__header
+    display flex
+    align-items baseline
+    justify-content space-between
+    margin-top $space-large
     margin-bottom $space-tiny
 
-  &__raw,
+  &__toggle
+    background none
+
+  &__block
+    &--hidden
+      display none
+
+  &__raw
   &__context
+  &__rendered
     overflow-x auto
-    margin-bottom $space-large
     border 1px solid $color-gray-70
     padding $space-normal
     color $color-white
@@ -17,5 +28,8 @@
 
   &__context
     background-color $color-brand-seco
+
+  &__rendered
+    background-color $color-dark-bg
 
 

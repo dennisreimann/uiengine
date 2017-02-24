@@ -6,14 +6,14 @@ mixin variationHeader(variation)
       span.variation-header__description= h.t('Variation')
 
       h2.variation-header__title
-        span.variation-header__component-title= component.title
         span.variation-header__variation-title= variation.title
 
-      nav.variation-header__items
+      nav.variation-header__links
         if variation.rendered
-          +variationHeaderItem(`${idPrefix}-preview`, 'Vorschau')
-        if variation.raw || variation.context
-          +variationHeaderItem(`${idPrefix}-code`, 'Code')
+          +variationHeaderLink(`${idPrefix}-preview`, 'Vorschau', true)
+        if variation.raw || variation.context || variation.rendered
+          +variationHeaderLink(`${idPrefix}-code`, 'Code', !variation.rendered)
 
-mixin variationHeaderItem(id, title)
-  a.variation-header__link(href=`#${id}`)= title
+mixin variationHeaderLink(id, title, active)
+  - const classes = active ? 'variation-header__link--active' : null
+  a.variation-header__link(href=`#${id}` class=classes)= title

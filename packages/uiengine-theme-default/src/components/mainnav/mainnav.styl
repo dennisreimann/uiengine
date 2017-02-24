@@ -1,4 +1,5 @@
 .main-nav
+  overflow hidden
   color $color-white
   background $color-brand-seco
   border-bottom 2px solid $color-gray-20
@@ -7,6 +8,11 @@
     font-size $font-size-small
   @media $mq-XS_and_up
     font-size $font-size-base
+
+  .wrap
+    display flex
+    flex-flow row
+    justify-content space-between
 
   &__tree
     display flex
@@ -32,3 +38,12 @@
     color inherit
     text-decoration none
     padding $space-normal $space-large
+
+  &__config
+    order 2
+    margin-right $space-large * -1
+    display block
+    color $color-lightred
+    text-decoration none
+    padding $space-normal $space-large
+    white-space nowrap

@@ -1,14 +1,31 @@
-mixin variationCode(variation)
-  .variation__section.variation-code
+mixin variationCode(variation, active)
+  - const id = `${h.dasherize(variation.id)}-code`
+  - const classes = active ? 'variation__section--active' : null
+  .variation__section.variation-code(id=id class=classes)&attributes(attributes)
     .wrap.wrap--content
       if variation.raw
+        - const blockId = `${h.dasherize(variation.id)}-raw`
         header.variation-code__header
           h3= h.t('Code')
-        pre.variation-code__raw
-          != variation.raw
+          button.variation-code__toggle(data-target=blockId)= h.t('Anzeigen / Ausblenden')
+        .variation-code__block(id=blockId)
+          pre.variation-code__raw
+            != variation.raw
 
       if variation.context
+        - const blockId = `${h.dasherize(variation.id)}-context`
         header.variation-code__header
           h3= h.t('Daten')
-        pre.variation-code__context
-          != JSON.stringify(variation.context, null, '  ')
+          button.variation-code__toggle(data-target=blockId)= h.t('Anzeigen / Ausblenden')
+        .variation-code__block(id=blockId)
+          pre.variation-code__context
+            != h.jsonEscape(variation.context)
+
+      if variation.rendered
+        - const blockId = `${h.dasherize(variation.id)}-rendered`
+        header.variation-code__header
+          h3= h.t('HTML')
+          button.variation-code__toggle(data-target=blockId)= h.t('Anzeigen / Ausblenden')
+        .variation-code__block.variation-code__block--hidden(id=blockId)
+          pre.variation-code__rendered
+            != h.htmlEscape(variation.rendered)

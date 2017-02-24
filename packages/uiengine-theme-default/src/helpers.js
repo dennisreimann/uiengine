@@ -21,6 +21,24 @@ const relativePath = (toPath, fromPath) => {
   }
 }
 
+// TODO: Add proper localization support
+const t = (string) =>
+  string
+
+const htmlEscape = html =>
+  String(html)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+
+const jsonEscape = json =>
+  htmlEscape(JSON.stringify(json, null, '  '))
+
+const dasherize = string =>
+  String(string)
+    .replace(/\W+/gi, '-')
+
 // function that binds the current page data and returns
 // an object with helper functions based on that data
 export default function (data) {
@@ -28,6 +46,11 @@ export default function (data) {
   const currentItem = navigation[page.id]
 
   return {
+    t,
+    dasherize,
+    htmlEscape,
+    jsonEscape,
+
     assetPath (filePath) {
       const target = revvedFile(filePath)
       const source = path.join(currentItem.path, pageFile)
@@ -40,10 +63,6 @@ export default function (data) {
       const source = path.join(currentItem.path, pageFile)
 
       return relativePath(target, source)
-    },
-
-    dasherize (string) {
-      return string.replace(/\W+/gi, '-')
     },
 
     isCurrentPage (item) {
@@ -60,11 +79,6 @@ export default function (data) {
       const href = relativePath(target, source)
 
       return href
-    },
-
-    t (string) {
-      // TODO: Add proper localization support
-      return string
     }
   }
 }

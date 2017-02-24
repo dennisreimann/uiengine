@@ -5,7 +5,21 @@
     padding-top $space-large
     padding-bottom $space-large
 
-  // &__section
-  //   display none
-  //   &:first-child
-  //     display block
+  &__links
+    padding-top $space-large
+    padding-bottom $space-large
+
+  &__link
+    display block
+    text-decoration none
+    font-size $font-size-tiny
+    color $color-gray-70
+
+  &__link + &__link
+    margin-top $space-small
+
+  &__section
+    display none
+
+    &--active
+      display block

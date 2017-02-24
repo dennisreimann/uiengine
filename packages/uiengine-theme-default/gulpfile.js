@@ -3,6 +3,8 @@ const runSequence = require('run-sequence')
 const autoprefixer = require('autoprefixer')
 const mqpacker = require('css-mqpacker')
 const csswring = require('csswring')
+const webpack = require('webpack')
+const webpackStream = require('webpack-stream')
 const p = require('gulp-load-plugins')()
 
 const paths = {
@@ -54,10 +56,17 @@ gulp.task('styles', cb =>
 )
 
 gulp.task('scripts', () =>
-  gulp.src(src.scripts)
+  gulp.src('src/scripts/main.js')
     .pipe(p.plumber())
-    .pipe(p.babel())
+    .pipe(webpackStream({}, webpack))
     .pipe(p.concat('uiengine.js'))
+    .pipe(gulp.dest(`${paths.dist}/scripts`))
+)
+
+gulp.task('scripts:preview', cb =>
+  gulp.src('node_modules/iframe-resizer/js/iframeResizer.contentWindow.js')
+    .pipe(p.plumber())
+    .pipe(p.concat('uiengine-preview.js'))
     .pipe(p.uglify())
     .pipe(gulp.dest(`${paths.dist}/scripts`))
 )
@@ -81,6 +90,6 @@ gulp.task('watch', cb => {
   gulp.watch(src.styles.concat([`${paths.stylesLib}/*.styl`]), ['styles'])
 })
 
-gulp.task('generate', ['lib', 'pug', 'scripts', 'styles', 'static'])
+gulp.task('generate', ['lib', 'pug', 'scripts', 'scripts:preview', 'styles', 'static'])
 gulp.task('build', cb => runSequence('generate', 'rev', cb))
 gulp.task('develop', (cb) => runSequence('generate', 'watch', cb))
