@@ -4,7 +4,9 @@ const path = require('path')
 const assert = require('assert')
 const yaml = require('js-yaml')
 const parsing = require('./parsing')
-const MarkdownIt = require('markdown-it')
+const Markdown = require('./markdown')
+
+const renderMarkdown = Markdown.parseString
 
 const IncludeYamlType = new yaml.Type('!include', {
   kind: 'scalar',
@@ -50,12 +52,8 @@ const parseString = (s, filename) => {
   return yaml.safeLoad(s.trim(), { schema, filename })
 }
 
-const renderMarkdown = string => {
-  const markdownIt = new MarkdownIt()
-  return markdownIt.render(string.trim()).trim()
-}
-
 module.exports = {
+  parseString,
   fromFile: R.partial(parsing.fromFile, [parseString]),
   fromString: R.partial(parsing.fromString, [parseString])
 }

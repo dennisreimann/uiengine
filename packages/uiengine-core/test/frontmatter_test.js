@@ -6,6 +6,8 @@ const Frontmatter = require('../src/util/frontmatter')
 const string = `
 ---
 name: Index
+included_md: !include /test/fixtures/markdown.md
+content: !markdown |\n  # Headline\n  Text paragraph
 ---
 Hello
 `
@@ -29,6 +31,16 @@ describe('Frontmatter', () => {
         .then(data => {
           assert.equal(data.attributes.name, 'Index')
           assert.equal(data.body, 'Hello')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should work with custom yaml types', done => {
+      Frontmatter.fromString(string)
+        .then(data => {
+          assert.equal(data.attributes.included_md, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
+          assert.equal(data.attributes.content, '<h1 id="headline">Headline</h1>\n<p>Text paragraph</p>')
           done()
         })
         .catch(done)

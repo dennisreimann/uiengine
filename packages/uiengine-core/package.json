@@ -42,7 +42,6 @@
   },
   "dependencies": {
     "deep-extend": "^0.4.1",
-    "fastmatter": "^1.1.1",
     "fs-extra": "^2.0.0",
     "globby": "^6.1.0",
     "js-yaml": "^3.7.0",

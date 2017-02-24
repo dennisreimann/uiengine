@@ -48,7 +48,7 @@ describe('Yaml', () => {
     it('should include markdown files', done => {
       Yaml.fromFile('./test/fixtures/yaml-with-includes.yml')
         .then(data => {
-          assert.equal(data.included_md, '<h1>Homepage</h1>\n<p>Welcome!</p>')
+          assert.equal(data.included_md, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
           done()
         })
         .catch(done)
@@ -69,7 +69,7 @@ describe('Yaml', () => {
     it('should parse with custom markdown type', done => {
       Yaml.fromString('content: !markdown |\n  # Headline\n  Text paragraph')
         .then(data => {
-          assert.equal(data.content, '<h1>Headline</h1>\n<p>Text paragraph</p>')
+          assert.equal(data.content, '<h1 id="headline">Headline</h1>\n<p>Text paragraph</p>')
           done()
         })
         .catch(done)
