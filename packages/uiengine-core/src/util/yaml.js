@@ -4,34 +4,55 @@ const path = require('path')
 const assert = require('assert')
 const yaml = require('js-yaml')
 const parsing = require('./parsing')
+const MarkdownIt = require('markdown-it')
 
 const IncludeYamlType = new yaml.Type('!include', {
   kind: 'scalar',
 
-  construct (includePath, a, b, c) {
-    assert(path.isAbsolute(includePath), 'YAML Include Schema requires an absolute path (its root is the current working directory)')
+  construct (includePath) {
+    const cwd = process.cwd()
+    assert(path.isAbsolute(includePath), `YAML Include Schema requires an absolute path (root is ${cwd})`)
+    const filePath = path.join(cwd, includePath)
 
     const isYAML = includePath.match(/\.ya?ml$/)
     const isJS = includePath.match(/\.js(on)?$/)
+    const isMarkdown = includePath.match(/\.(md|markdown)?$/)
 
-    if (isYAML || isJS) {
-      const filePath = path.join(process.cwd(), includePath)
-
-      if (isYAML) {
-        return parseString(fs.readFileSync(filePath, 'utf-8'))
-      } else {
-        return require(filePath)
-      }
+    if (isYAML) {
+      const string = fs.readFileSync(filePath, 'utf-8')
+      return parseString(string)
+    } else if (isMarkdown) {
+      const string = fs.readFileSync(filePath, 'utf-8')
+      return renderMarkdown(string)
+    } else if (isJS) {
+      return require(filePath)
     } else {
       return includePath
     }
   }
 })
 
-const schema = yaml.Schema.create([IncludeYamlType])
+const MarkdownYamlType = new yaml.Type('!markdown', {
+  kind: 'scalar',
+
+  resolve (data) {
+    return typeof data === 'string'
+  },
+
+  construct (string) {
+    return renderMarkdown(string)
+  }
+})
+
+const schema = yaml.Schema.create([IncludeYamlType, MarkdownYamlType])
 
 const parseString = (s, filename) => {
   return yaml.safeLoad(s.trim(), { schema, filename })
+}
+
+const renderMarkdown = string => {
+  const markdownIt = new MarkdownIt()
+  return markdownIt.render(string.trim()).trim()
 }
 
 module.exports = {

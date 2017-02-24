@@ -1,4 +1,4 @@
-title: YAML with include
 included_yaml: !include /test/fixtures/yaml.yml
 included_json: !include /test/fixtures/json.json
 included_js: !include /test/fixtures/include.js
+included_md: !include /test/fixtures/markdown.md
