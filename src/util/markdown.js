@@ -12,6 +12,7 @@ const parseString = s => markdownIt.render(s.trim()).trim()
 
 module.exports = {
   markdownIt,
+  parseString,
   fromFile: R.partial(parsing.fromFile, [parseString]),
   fromString: R.partial(parsing.fromString, [parseString])
 }

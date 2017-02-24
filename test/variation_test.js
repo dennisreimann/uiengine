@@ -56,6 +56,17 @@ describe('Variation', () => {
         })
         .catch(done)
     })
+
+    it('should parse attributes with custom yaml types', done => {
+      Variation.fetchById(state, 'input/text-disabled.pug')
+        .then(data => {
+          assert.equal(data.included_md, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
+          assert.equal(data.content_md, '<h1 id="headline">Headline</h1>\n<p>Text paragraph</p>')
+          assert.equal(data.context.number, 4)
+          done()
+        })
+        .catch(done)
+    })
   })
 
   describe('#fetchAll', () => {
