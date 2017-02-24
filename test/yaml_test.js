@@ -18,7 +18,6 @@ describe('Yaml', () => {
     it('should include yaml files', done => {
       Yaml.fromFile('./test/fixtures/yaml-with-includes.yml')
         .then(data => {
-          assert.equal(data.title, 'YAML with include')
           assert.equal(data.included_yaml.name, 'Index')
           assert.equal(data.included_yaml.number, 2)
           done()
@@ -29,7 +28,6 @@ describe('Yaml', () => {
     it('should include json files', done => {
       Yaml.fromFile('./test/fixtures/yaml-with-includes.yml')
         .then(data => {
-          assert.equal(data.title, 'YAML with include')
           assert.equal(data.included_json.name, 'JSON')
           assert.equal(data.included_json.number, 3)
           done()
@@ -40,9 +38,17 @@ describe('Yaml', () => {
     it('should include js files', done => {
       Yaml.fromFile('./test/fixtures/yaml-with-includes.yml')
         .then(data => {
-          assert.equal(data.title, 'YAML with include')
           assert.equal(data.included_js.name, 'Included JS')
           assert.equal(data.included_js.number, 4)
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should include markdown files', done => {
+      Yaml.fromFile('./test/fixtures/yaml-with-includes.yml')
+        .then(data => {
+          assert.equal(data.included_md, '<h1>Homepage</h1>\n<p>Welcome!</p>')
           done()
         })
         .catch(done)
@@ -55,6 +61,15 @@ describe('Yaml', () => {
         .then(data => {
           assert.equal(data.name, 'Index')
           assert.equal(data.number, 2)
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should parse with custom markdown type', done => {
+      Yaml.fromString('content: !markdown |\n  # Headline\n  Text paragraph')
+        .then(data => {
+          assert.equal(data.content, '<h1>Headline</h1>\n<p>Text paragraph</p>')
           done()
         })
         .catch(done)
