@@ -3,6 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const assert = require('assert')
 const yaml = require('js-yaml')
+const chalk = require('chalk')
 const parsing = require('./parsing')
 const Markdown = require('./markdown')
 
@@ -49,7 +50,11 @@ const MarkdownYamlType = new yaml.Type('!markdown', {
 const schema = yaml.Schema.create([IncludeYamlType, MarkdownYamlType])
 
 const parseString = (s, filename) => {
-  return yaml.safeLoad(s.trim(), { schema, filename })
+  try {
+    return yaml.safeLoad(s.trim(), { schema, filename })
+  } catch (err) {
+    throw new Error(`Could not parse YAML: ${chalk.red(err)}\n\n${chalk.gray(s)}`)
+  }
 }
 
 module.exports = {
