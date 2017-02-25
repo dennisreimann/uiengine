@@ -41,7 +41,10 @@ const state = {
     templates: {
       variation: 'variation-preview.pug'
     },
-    theme: 'uiengine-theme-default'
+    theme: {
+      module: 'uiengine-theme-default',
+      options: {}
+    }
   },
   pages: {
     index: Factory.page('index', {

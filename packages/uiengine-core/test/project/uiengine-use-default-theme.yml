@@ -1,0 +1,7 @@
+source:
+  components: ./src/components
+  templates: ./src/templates
+  pages: ./src/pages
+
+# Destination path for the generated site.
+target: ./dist
