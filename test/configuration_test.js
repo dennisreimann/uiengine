@@ -48,7 +48,19 @@ describe('Configuration', () => {
     it('should resolve theme', done => {
       Configuration.read(testConfigPath)
         .then(config => {
-          assert.equal(config.theme, 'uiengine-theme-default')
+          assert.equal(config.theme.module, 'uiengine-theme-default')
+          assert.equal(config.theme.options.look, 'uiengineering')
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should resolve default theme if no theme is given', done => {
+      Configuration.read(path.resolve(sampleProjectPath, 'uiengine-use-default-theme.yml'))
+        .then(config => {
+          assert.equal(config.theme.module, 'uiengine-theme-default')
+          assert.equal(Object.keys(config.theme.options).length, 0)
 
           done()
         })

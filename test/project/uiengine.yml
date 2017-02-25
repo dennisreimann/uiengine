@@ -32,4 +32,7 @@ templates:
 
 # UIengine will `require` the theme, which has to provide a defined set of functions
 # for setup and rendering. For details see the theme docs.
-# theme: ./my-uiengine-theme
+theme:
+  module: uiengine-theme-default
+  options:
+    look: uiengineering

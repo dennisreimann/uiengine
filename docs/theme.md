@@ -11,7 +11,7 @@ If you want to use your own theme instead of the default one, there are two opti
 UIengine will `require` the theme.
 The module has to export an async `render` function as well as a `staticPath`:
 
-- `render(templateId, data)` gets the template name and the data for the page that should get rendered.
+- `render(options, templateId, data)` gets the template name and the data for the page that should get rendered.
   This function is called asynchronously and has to return a `Promise`!
   For details about the incoming `data` structure see the [page data](#page-data) section.
 - `staticPath` is the path to the directory containing static files/assets of the theme (scripts, styles, etc.).
@@ -24,9 +24,9 @@ This makes sense when you are working with i.e. Handlebars and you have to regis
 Apart from that you most likely will not need to provided these hooks.
 But if you do, make sure to return a `Promise`:
 
-- `setup()` hook for initializing the theme.
+- `setup(options)` hook for initializing the theme.
   Gets called before the project gets generated.
-- `teardown()` hook to undo everything that happened during setup.
+- `teardown(options)` hook to undo everything that happened during setup.
   This is not used by UIengine itself but you might need this in tests for the theme.
 
 This actually sounds more complicated than it really is.
