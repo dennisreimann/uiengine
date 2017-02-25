@@ -1,4 +1,5 @@
 const gulp = require('gulp')
+const mergeStream = require('merge-stream')
 const runSequence = require('run-sequence')
 const autoprefixer = require('autoprefixer')
 const mqpacker = require('css-mqpacker')
@@ -22,6 +23,8 @@ const src = {
   rev: [paths.dist + '/**/*.{css,js,map,ico,cur,svg,jpg,jpeg,png,gif,woff,woff2}']
 }
 
+const looks = ['default', 'uiengineering']
+
 gulp.task('lib', () =>
   gulp.src(src.lib)
     .pipe(p.plumber())
@@ -39,21 +42,22 @@ gulp.task('static', () =>
     .pipe(gulp.dest(paths.dist))
 )
 
-gulp.task('styles', cb =>
+const styles = look =>
   gulp.src(src.styles)
     .pipe(p.plumber())
     .pipe(p.stylus({
       paths: [paths.stylesLib],
-      import: ['variables', 'mediaQueries', 'extends']
+      import: ['variables', 'mediaQueries', `looks/${look}`]
     }))
-    .pipe(p.concat('uiengine.css'))
+    .pipe(p.concat(`uiengine-${look}.css`))
     .pipe(p.postcss([
       mqpacker,
       autoprefixer({ browsers: ['last 2 versions'] }),
       csswring
     ]))
     .pipe(gulp.dest(`${paths.dist}/styles`))
-)
+
+gulp.task('styles', () => mergeStream(...looks.map(styles)))
 
 gulp.task('scripts', () =>
   gulp.src('src/scripts/main.js')

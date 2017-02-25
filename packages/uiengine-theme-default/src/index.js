@@ -13,10 +13,11 @@ const pugOpts = {
 
 export const staticPath = path.resolve(__dirname, '..', 'static')
 
-export async function render (id, data = {}) {
+export async function render (options, id, data = {}) {
   return new Promise((resolve, reject) => {
     const filePath = path.resolve(templatesPath, `${id}.pug`)
-    const context = Object.assign({}, pugOpts, data, { h: helpers(data) })
+    const theme = { h: helpers(options, data) }
+    const context = Object.assign({}, pugOpts, data, theme)
 
     try {
       const rendered = pug.renderFile(filePath, context)

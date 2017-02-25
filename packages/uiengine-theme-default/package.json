@@ -51,6 +51,7 @@
     "gulp-stylus": "^2.6.0",
     "gulp-uglify": "^2.0.1",
     "iframe-resizer": "^3.5.10",
+    "merge-stream": "^1.0.1",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",
     "standard": "^8.6.0",

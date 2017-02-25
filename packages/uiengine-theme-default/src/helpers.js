@@ -41,22 +41,29 @@ const dasherize = string =>
 
 // function that binds the current page data and returns
 // an object with helper functions based on that data
-export default function (data) {
+export default function (options, data) {
   const { page, navigation } = data
   const currentItem = navigation[page.id]
+
+  const assetPath = (filePath) => {
+    const target = revvedFile(filePath)
+    const source = path.join(currentItem.path, pageFile)
+
+    return relativePath(target, source)
+  }
+
+  const look = options.look || 'default'
+  const stylesPath = assetPath(`styles/uiengine-${look}.css`)
+  const scriptsPath = assetPath('scripts/uiengine.js')
 
   return {
     t,
     dasherize,
     htmlEscape,
     jsonEscape,
-
-    assetPath (filePath) {
-      const target = revvedFile(filePath)
-      const source = path.join(currentItem.path, pageFile)
-
-      return relativePath(target, source)
-    },
+    assetPath,
+    stylesPath,
+    scriptsPath,
 
     variationPreviewPath (variationId) {
       const target = path.join('variations', `${variationId}.html`)
