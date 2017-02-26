@@ -1,7 +1,7 @@
 const pug = require('pug')
 
-async function render (options, filePath, data = {}) {
-  return new Promise((resolve, reject) => {
+const render = (options, filePath, data = {}) =>
+  new Promise((resolve, reject) => {
     const context = Object.assign({}, options, data)
 
     try {
@@ -9,14 +9,13 @@ async function render (options, filePath, data = {}) {
 
       resolve(rendered)
     } catch (err) {
-      reject([
-        `Pug could not render "${filePath}"!`,
-        err.stack,
-        JSON.stringify(context, null, '  ')
-      ].join('\n\n'))
+      const message = [`Pug could not render "${filePath}"!`, err]
+
+      if (options.debug) message.push(JSON.stringify(context, null, '  '))
+
+      reject(message.join('\n\n'))
     }
   })
-}
 
 module.exports = {
   render
