@@ -8,5 +8,5 @@ module.exports = (path) => {
     exists = stat.isFile() || stat.isDirectory()
   } catch (err) { }
 
-  assert(exists, `Does not exist: ${path}`)
+  assert(exists, `File does not exist: ${path}`)
 }

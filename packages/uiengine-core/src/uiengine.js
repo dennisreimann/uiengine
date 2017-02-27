@@ -60,6 +60,8 @@ async function generateIncrementForChangedFile (options, filePath) {
   const { components, pages } = state.config.source
   const file = path.relative('.', filePath)
 
+  // TODO: Add handler for template changes
+
   const pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
   const componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
   let variationId = components ? VariationUtil.variationFilePathToVariationId(components, filePath) : undefined
