@@ -17,6 +17,7 @@ const paths = {
 const src = {
   lib: ['./src/*.js'],
   pug: ['./src/**/*.pug'],
+  svgs: ['./src/svgs/**/*.svg'],
   styles: ['./src/styles/*.styl', './src/components/**/*.styl'],
   scripts: ['src/scripts/*.js', './src/components/**/*.js'],
   static: ['./src/{fonts,images,svgs}/**'],
@@ -40,6 +41,13 @@ gulp.task('pug', () =>
 gulp.task('static', () =>
   gulp.src(src.static)
     .pipe(gulp.dest(paths.dist))
+)
+
+gulp.task('svgs', () =>
+  gulp.src(src.svgs)
+    .pipe(p.plumber())
+    .pipe(p.svgSprite({ mode: { symbol: { dest: '', sprite: 'sprite.svg' } } }))
+    .pipe(gulp.dest(`${paths.dist}/svgs`))
 )
 
 const styles = look =>
@@ -89,11 +97,12 @@ gulp.task('rev', () => {
 gulp.task('watch', cb => {
   gulp.watch(src.lib, ['lib'])
   gulp.watch(src.pug, ['pug'])
+  gulp.watch(src.svgs, ['svgs'])
   gulp.watch(src.static, ['static'])
   gulp.watch(src.scripts, ['scripts'])
   gulp.watch(src.styles.concat([`${paths.stylesLib}/*.styl`]), ['styles'])
 })
 
-gulp.task('generate', ['lib', 'pug', 'scripts', 'scripts:preview', 'styles', 'static'])
+gulp.task('generate', ['lib', 'pug', 'scripts', 'scripts:preview', 'svgs', 'styles', 'static'])
 gulp.task('build', cb => runSequence('generate', 'rev', cb))
 gulp.task('develop', (cb) => runSequence('generate', 'watch', cb))

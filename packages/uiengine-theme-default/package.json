@@ -49,6 +49,7 @@
     "gulp-rev-all": "0.8.23",
     "gulp-rev-delete-original": "^0.2.2",
     "gulp-stylus": "^2.6.0",
+    "gulp-svg-sprite": "^1.3.6",
     "gulp-uglify": "^2.0.1",
     "iframe-resizer": "^3.5.10",
     "merge-stream": "^1.0.1",
