@@ -86,7 +86,19 @@ describe('Configuration', () => {
     it('should resolve templates', done => {
       Configuration.read(testConfigPath)
         .then(config => {
-          assert.equal(config.templates.variation, 'variation-preview.pug')
+          assert.equal(config.templates.variation, path.resolve(sampleProjectPath, 'src', 'templates', 'variation-preview.pug'))
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should register templates', done => {
+      Configuration.read(testConfigPath)
+        .then(config => {
+          assert.equal(config.templates['variation-preview'], path.resolve(sampleProjectPath, 'src', 'templates', 'variation-preview.pug'))
+          assert.equal(config.templates['other-page'], path.resolve(sampleProjectPath, 'src', 'templates', 'other-page.pug'))
+          assert.equal(config.templates['common/include'], path.resolve(sampleProjectPath, 'src', 'templates', 'common', 'include.pug'))
 
           done()
         })

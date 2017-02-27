@@ -1,6 +1,7 @@
 const path = require('path')
 const R = require('ramda')
 const assert = require('assert')
+const glob = require('globby')
 const chalk = require('chalk')
 const yaml = require('./util/yaml')
 
@@ -55,6 +56,30 @@ const resolvePackage = (basedir, config, type) => {
   }
 }
 
+const resolveTemplates = (templatesDir, config) => {
+  if (!path.isAbsolute(templatesDir)) return config
+
+  // templates that are explicitely listed in the config
+  const resolveDeclaredTemplates = R.partial(resolvePath, [templatesDir])
+  const declared = R.map(resolveDeclaredTemplates, config)
+
+  // templates that exist inside the templates directory
+  const pattern = path.join(templatesDir, `**/*.*`)
+  const paths = glob.sync(pattern)
+  const templates = R.reduce((tmpl, templatePath) => {
+    const relative = path.relative(templatesDir, templatePath)
+    const dirname = path.dirname(relative)
+    const extname = path.extname(relative)
+    const name = path.basename(relative, extname)
+    const id = path.join(dirname, name)
+    tmpl[id] = templatePath
+
+    return tmpl
+  }, declared, paths)
+
+  return templates
+}
+
 async function read (configFilePath, flags = {}) {
   // retrieve config and options
   const projectConfig = await yaml.fromFile(configFilePath)
@@ -68,22 +93,25 @@ async function read (configFilePath, flags = {}) {
   let data = R.mergeAll([defaults, projectConfig, options])
 
   // resolve paths, adapters, and theme
-  let { source, target, theme, adapters } = projectConfig
-  const resolvePaths = R.partial(resolvePath, [configPath])
-  const resolveAdapters = R.partial(resolvePackage, [configPath], 'Adapter')
+  let { source, target, theme, adapters, templates } = projectConfig
 
   assert(source, 'Please provide a "source" config.')
   assert(target, 'Please provide a "target" config with the destination path for the generated site.')
+
+  const resolvePaths = R.partial(resolvePath, [configPath])
+  const resolveAdapters = R.partial(resolvePackage, [configPath], 'Adapter')
 
   source = R.map(resolvePaths, source)
   target = resolvePath(configPath, target)
   theme = resolveTheme(configPath, theme)
   adapters = R.map(resolveAdapters, adapters || {})
+  templates = resolveTemplates(source.templates, templates || {})
 
   data = R.assoc('source', source, data)
   data = R.assoc('target', target, data)
   data = R.assoc('theme', theme, data)
   data = R.assoc('adapters', adapters, data)
+  data = R.assoc('templates', templates, data)
 
   return data
 }

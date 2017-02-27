@@ -3,7 +3,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const Factory = require('./support/factory')
 const assertExists = require('./support/assertExists')
-
+const assertContentMatches = require('./support/assertContentMatches')
 const Builder = require('../src/builder')
 const NavigationData = require('../src/data/navigation')
 
@@ -39,7 +39,8 @@ const state = {
       }
     },
     templates: {
-      variation: 'variation-preview.pug'
+      variation: path.resolve(projectPath, 'src', 'templates', 'variation-preview.pug'),
+      custom: path.resolve(projectPath, 'src', 'templates', 'other-page.pug')
     },
     theme: {
       module: 'uiengine-theme-default',
@@ -63,12 +64,25 @@ const state = {
         path.resolve(projectPath, 'src', 'pages', 'patterns', 'some-files', 'file-in-folder.txt')
       ],
       componentIds: ['input']
+    }),
+    sandbox: Factory.page('sandbox', {
+      title: 'Sandbox',
+      path: 'sandbox',
+      template: 'sandbox',
+      childIds: ['sandbox/custom-page']
+    }),
+    'sandbox/custom-page': Factory.page('sandbox/custom-page', {
+      title: 'Custom Page',
+      template: 'custom',
+      content: 'Content for custom template'
     })
   },
   navigation: {
     'index': NavigationData('index', 'Home', '', [], null, ['patterns']),
     'patterns': NavigationData('patterns', 'Pattern Library', 'pattern-library', ['index'], 'index', { childIds: ['patterns/input'] }),
-    'patterns/input': NavigationData('patterns/input', 'Awesome Input', 'pattern-library/input', ['index', 'patterns'], 'patterns')
+    'patterns/input': NavigationData('patterns/input', 'Awesome Input', 'pattern-library/input', ['index', 'patterns'], 'patterns'),
+    'sandbox': NavigationData('sandbox', 'Sandbox', 'sandbox', ['index'], 'index'),
+    'sandbox/custom-page': NavigationData('sandbox/custom-page', 'Custom Page', 'sandbox/custom-page', ['index', 'sandbox'], 'sandbox')
   },
   components: {
     input: Factory.component('input', {
@@ -98,9 +112,11 @@ describe('Builder', () => {
       this.timeout(3000)
 
       Builder.generateSite(state)
-        .then(state => {
+        .then(() => {
           assertExists(path.join(target, 'index.html'))
           assertExists(path.join(target, 'pattern-library', 'index.html'))
+          assertExists(path.join(target, 'sandbox', 'index.html'))
+          assertExists(path.join(target, 'sandbox', 'custom-page', 'index.html'))
 
           done()
         })
@@ -111,8 +127,10 @@ describe('Builder', () => {
   describe('#generatePage', () => {
     it('should generate page', done => {
       Builder.generatePage(state, 'index')
-        .then(state => {
-          assertExists(path.join(target, 'index.html'))
+        .then(() => {
+          const pagePath = path.join(target, 'index.html')
+
+          assertContentMatches(pagePath, '<title>Home • Builder Test')
 
           done()
         })
@@ -121,8 +139,22 @@ describe('Builder', () => {
 
     it('should generate page with custom path', done => {
       Builder.generatePage(state, 'patterns')
-        .then(state => {
-          assertExists(path.join(target, 'pattern-library', 'index.html'))
+        .then(() => {
+          const pagePath = path.join(target, 'pattern-library', 'index.html')
+
+          assertContentMatches(pagePath, '<title>Pattern Library • Builder Test')
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should generate page with custom template', done => {
+      Builder.generatePage(state, 'sandbox/custom-page')
+        .then(() => {
+          const pagePath = path.join(target, 'sandbox', 'custom-page', 'index.html')
+
+          assertContentMatches(pagePath, /^This is the custom template<br\/>Content for custom template$/)
 
           done()
         })
@@ -133,7 +165,7 @@ describe('Builder', () => {
   describe('#copyPageFiles', () => {
     it('should copy page files', done => {
       Builder.copyPageFiles(state, 'index')
-        .then(state => {
+        .then(() => {
           assertExists(path.join(target, 'index.txt'))
 
           done()
@@ -143,7 +175,7 @@ describe('Builder', () => {
 
     it('should copy page files in extra folder', done => {
       Builder.copyPageFiles(state, 'index')
-        .then(state => {
+        .then(() => {
           assertExists(path.join(target, 'extra-files', 'file-in-folder.txt'))
 
           done()
@@ -153,7 +185,7 @@ describe('Builder', () => {
 
     it('should copy page files for pages with custom paths', done => {
       Builder.copyPageFiles(state, 'patterns')
-        .then(state => {
+        .then(() => {
           assertExists(path.join(target, 'pattern-library', 'patterns-file.txt'))
 
           done()
@@ -163,7 +195,7 @@ describe('Builder', () => {
 
     it('should copy page files in extra folder for pages with custom paths', done => {
       Builder.copyPageFiles(state, 'patterns')
-        .then(state => {
+        .then(() => {
           assertExists(path.join(target, 'pattern-library', 'some-files', 'file-in-folder.txt'))
 
           done()
@@ -175,7 +207,7 @@ describe('Builder', () => {
   describe('#generateComponentForPage', () => {
     it('should generate component page', done => {
       Builder.generateComponentForPage(state, 'patterns', 'input')
-        .then(state => {
+        .then(() => {
           assertExists(path.join(target, 'pattern-library', 'input', 'index.html'))
 
           done()
@@ -187,7 +219,7 @@ describe('Builder', () => {
   describe('#generateComponentsForPage', () => {
     it('should generate component pages', done => {
       Builder.generateComponentsForPage(state, 'patterns')
-        .then(state => {
+        .then(() => {
           assertExists(path.join(target, 'pattern-library', 'input', 'index.html'))
 
           done()
@@ -199,7 +231,7 @@ describe('Builder', () => {
   describe('#generatePagesHavingComponent', () => {
     it('should generate pages having this component as subpage', done => {
       Builder.generatePagesHavingComponent(state, 'input')
-        .then(state => {
+        .then(() => {
           assertExists(path.join(target, 'pattern-library', 'input', 'index.html'))
 
           done()
@@ -211,7 +243,7 @@ describe('Builder', () => {
   describe('#generateComponentVariations', () => {
     it('should generate component variation pages', done => {
       Builder.generateComponentVariations(state, 'input')
-        .then(state => {
+        .then(() => {
           assertExists(path.join(target, 'variations', 'input', 'text.pug.html'))
 
           done()
@@ -223,7 +255,7 @@ describe('Builder', () => {
   describe('#generateVariation', () => {
     it('should generate variation page', done => {
       Builder.generateVariation(state, 'input/text.pug')
-        .then(state => {
+        .then(() => {
           assertExists(path.join(target, 'variations', 'input', 'text.pug.html'))
 
           done()
@@ -235,7 +267,7 @@ describe('Builder', () => {
   describe('#dumpState', () => {
     it('should generate state file', done => {
       Builder.dumpState(state)
-        .then(state => {
+        .then(() => {
           assertExists(path.join(target, 'state.json'))
 
           done()

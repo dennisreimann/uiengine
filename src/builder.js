@@ -7,6 +7,8 @@ const PageUtil = require('./util/page')
 const VariationUtil = require('./util/variation')
 
 const pageFile = 'index.html'
+const defaultTemplatePage = 'page'
+const defaultTemplateComponent = 'component'
 
 const getPageData = ({ pages, navigation, components, variations, config: { name, version } }, pageId) => {
   const page = pages[pageId]
@@ -49,6 +51,14 @@ const copyPageFile = (targetPath, sourcePath, source) => {
   return File.copy(source, target)
 }
 
+const render = (state, template, data) => {
+  if (path.isAbsolute(template)) {
+    return Connector.render(state, template, data)
+  } else {
+    return Theme.render(state, template, data)
+  }
+}
+
 async function dumpState (state) {
   const json = JSON.stringify(state, null, '  ')
   const filePath = path.resolve(state.config.target, 'state.json')
@@ -69,12 +79,22 @@ async function copyPageFiles (state, pageId) {
   await Promise.all(copyFiles)
 }
 
+const getTemplateWithDefault = (state, templateId, defaultId) => {
+  if (templateId) {
+    const templates = state.config.templates || {}
+
+    return templates[templateId] || defaultId
+  } else {
+    return defaultId
+  }
+}
+
 async function generatePage (state, pageId) {
   const { pages, config } = state
   const page = pages[pageId]
-  const templateId = page.template || 'page'
+  const templateId = getTemplateWithDefault(state, page.template, defaultTemplatePage)
   const data = getPageData(state, pageId)
-  const html = await Theme.render(state, templateId, data)
+  const html = await render(state, templateId, data)
 
   const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
   const targetPath = path.resolve(config.target, targetPagePath)
@@ -97,9 +117,9 @@ async function generateComponentForPage (state, pageId, componentId) {
   const { components, pages, config: { target } } = state
   const parent = pages[pageId]
   const component = components[componentId]
-  const templateId = component.template || 'component'
+  const templateId = getTemplateWithDefault(state, component.template, defaultTemplateComponent)
   const data = getComponentData(state, pageId, componentId)
-  const html = await Theme.render(state, templateId, data)
+  const html = await render(state, templateId, data)
 
   const targetPath = path.join(target, PageUtil.pagePathForComponentId(parent.path, component.id))
   const htmlPath = path.resolve(targetPath, pageFile)
@@ -134,18 +154,17 @@ async function generateComponentVariations (state, componentId) {
 }
 
 async function generateVariation (state, variationId) {
-  const { variations, config: { source, target, templates } } = state
+  const { variations, config: { target, templates } } = state
   const variation = variations[variationId]
   if (!variation) return Promise.reject(`Variation "${variationId}" does not exist or has not been fetched yet.`)
 
   // render variation preview, with layout
   const data = getVariationData(state, variationId)
-  const templateId = variation.template || 'variation'
-  const templateFile = templates[templateId]
-  if (!templateFile) return Promise.reject(`Template "${templateId}" for variation "${variationId}" does not exist. Please add it to your configuration.`)
+  const templateId = getTemplateWithDefault(state, variation.template, 'variation')
+  const templatePath = templates[templateId]
+  if (!templatePath) return Promise.reject(`Template "${templateId}" for variation "${variationId}" does not exist.\n\nPlease add it to your configuration, like this:\n\ntemplates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE`)
 
-  const templatePath = path.join(source.templates, templateFile)
-  const html = await Connector.render(state, templatePath, data)
+  const html = await render(state, templatePath, data)
 
   // write file
   const htmlPath = path.resolve(target, VariationUtil.VARIATIONS_DIRNAME, `${variation.id}.html`)
