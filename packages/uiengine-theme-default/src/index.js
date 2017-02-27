@@ -17,18 +17,18 @@ export async function render (options, id, data = {}) {
   return new Promise((resolve, reject) => {
     const filePath = path.resolve(templatesPath, `${id}.pug`)
     const theme = { h: helpers(options, data) }
-    const context = Object.assign({}, pugOpts, data, theme)
+    const context = Object.assign({}, pugOpts, options, data, theme)
 
     try {
       const rendered = pug.renderFile(filePath, context)
 
       resolve(rendered)
     } catch (err) {
-      reject([
-        `Pug could not render "${filePath}"!`,
-        err.stack,
-        JSON.stringify(context, null, '  ')
-      ].join('\n\n'))
+      const message = [`Pug could not render "${filePath}"!`, err]
+
+      if (options.debug) message.push(JSON.stringify(context, null, '  '))
+
+      reject(message.join('\n\n'))
     }
   })
 }
