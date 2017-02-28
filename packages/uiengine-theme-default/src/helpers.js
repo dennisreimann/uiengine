@@ -1,4 +1,5 @@
 import path from 'path'
+import assert from 'assert'
 
 const pageFile = 'index.html'
 const assetsDir = '_uiengine-theme'
@@ -44,6 +45,8 @@ const dasherize = string =>
 export default function (options, data) {
   const { page, navigation } = data
   const currentItem = navigation[page.id]
+
+  assert(currentItem, `Missing navigation item for page "${page.id}".`)
 
   const assetPath = (filePath) => {
     const target = revvedFile(filePath)
