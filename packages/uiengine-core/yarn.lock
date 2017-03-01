@@ -3169,9 +3169,9 @@ uid-number@~0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
-uiengine-theme-default@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.3.1.tgz#31cf424341877dee2c0b7bd74fb560bd1e9cf705"
+uiengine-theme-default@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.4.0.tgz#99e07785ab6e469e1ac8dd10d6fb903be68dcad7"
   dependencies:
     pug "^2.0.0-beta10"
 
