@@ -1,0 +1,25 @@
+extends includes/layout.pug
+
+include /pageHeader/pageHeader.pug
+include /pageNav/pageNav.pug
+
+block main
+  section.sandbox(id=h.dasherize(page.id))
+    +pageHeader(page, navigation)
+
+    .wrap.wrap--content
+      article.page__content
+        !=page.content
+
+      section.sandbox__pages
+        - const navItem = navigation[page.id]
+        - const itemIds = navItem.childIds
+        if itemIds
+          for itemId in itemIds
+            - const page = pages[itemId]
+            - const item = navigation[page.id]
+            .sandbox-page
+              h2.sandbox-page__title
+                a(class="page-nav__link" href=h.pageLink(item))= item.title
+              .sandbox-page__content
+                != page.content
