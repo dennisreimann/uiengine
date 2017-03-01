@@ -40,7 +40,8 @@ const state = {
     },
     templates: {
       variation: path.resolve(projectPath, 'src', 'templates', 'variation-preview.pug'),
-      custom: path.resolve(projectPath, 'src', 'templates', 'other-page.pug')
+      custom: path.resolve(projectPath, 'src', 'templates', 'other-page.pug'),
+      page: path.resolve(projectPath, 'src', 'templates', 'page.pug')
     },
     theme: {
       module: 'uiengine-theme-default',
@@ -68,13 +69,24 @@ const state = {
     sandbox: Factory.page('sandbox', {
       title: 'Sandbox',
       path: 'sandbox',
-      template: 'sandbox',
+      template: 'theme:sandbox',
       childIds: ['sandbox/custom-page']
+    }),
+    'sandbox/page': Factory.page('sandbox/page', {
+      title: 'Page',
+      template: 'page',
+      content: 'Content for page template',
+      context: {
+        myContextVariable: 'This is my page template'
+      }
     }),
     'sandbox/custom-page': Factory.page('sandbox/custom-page', {
       title: 'Custom Page',
       template: 'custom',
-      content: 'Content for custom template'
+      content: 'Content for custom template',
+      context: {
+        myContextVariable: 'This is my context'
+      }
     })
   },
   navigation: {
@@ -154,7 +166,19 @@ describe('Builder', () => {
         .then(() => {
           const pagePath = path.join(target, 'sandbox', 'custom-page', 'index.html')
 
-          assertContentMatches(pagePath, /^This is the custom template<br\/>Content for custom template$/)
+          assertContentMatches(pagePath, /^This is the custom template<br\/>This is my context$/)
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should generate page with custom template which has the same name as a theme template', done => {
+      Builder.generatePage(state, 'sandbox/page')
+        .then(() => {
+          const pagePath = path.join(target, 'sandbox', 'page', 'index.html')
+
+          assertContentMatches(pagePath, /^This is my page template$/)
 
           done()
         })
