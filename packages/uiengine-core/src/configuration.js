@@ -57,7 +57,7 @@ const resolvePackage = (basedir, config, type) => {
 }
 
 const resolveTemplates = (templatesDir, config) => {
-  if (!path.isAbsolute(templatesDir)) return config
+  if (!templatesDir || !path.isAbsolute(templatesDir)) return config
 
   // templates that are explicitely listed in the config
   const resolveDeclaredTemplates = R.partial(resolvePath, [templatesDir])

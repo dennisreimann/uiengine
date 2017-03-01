@@ -59,16 +59,19 @@ async function fetchById (state, id) {
   const childPattern = path.join(pagePath, '*')
   const fetchChildIds = findPageIds(state, childPattern)
   const fetchPageData = readPageFile(absolutePath)
+
   // fetch childPageIds before fetching files to exclude
   // the children directories when looking for files
   const [pageData, childIds] = await Promise.all([fetchPageData, fetchChildIds])
   const files = await findPageFiles(pages, pagePath, childIds)
 
   let { attributes, content } = pageData
+  const title = PageUtil.pageIdToTitle(id)
+  // const context = attributes.context
+  // attributes = R.dissoc('context', attributes)
   attributes = PageUtil.convertUserProvidedChildrenList(id, attributes)
   attributes = PageUtil.convertUserProvidedComponentsList(id, attributes)
-  const title = PageUtil.pageIdToTitle(id)
-  const baseData = { id, path: pagePath, title, childIds, content, files }
+  const baseData = { id, path: pagePath, title, childIds, content, files } //, context
   const data = R.mergeAll([baseData, attributes])
 
   return data
