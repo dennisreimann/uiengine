@@ -1,12 +1,93 @@
 .variation-preview
+  position relative
+
+  &__container
+    width 100%
+    min-width 250px
+    resize horizontal
+    overflow auto
+    margin 0 auto
+    text-align center
+
+    &[data-breakpoint]
+      transition-property width
+      transition-duration .25s
+      transition-timing-function ease-out
+
+  &__size
+    height .8125rem
+    margin-bottom $space-normal
+    border-bottom 1px solid $color-gray-20
+    position relative
+
+    &:before
+    &:after
+      height 100%
+      position absolute
+      top 50%
+      content ''
+
+    &:before
+      left 0
+      border-left 1px solid $color-gray-20
+
+    &:after
+      right 0
+      border-right 1px solid $color-gray-20
+
+  &__sizer
+    line-height 1
+    padding-left $space-normal
+    padding-right $space-normal
+    color $color-gray-20
+    background $color-white
+    display inline-block
+    font-size $font-size-base
+    font-family $font-family-base
+    cursor pointer
+
   &__iframe
     display block
     width 100%
-    margin 0 auto
-    border-top 1px solid $color-gray-20
 
-    // $breakpoints = json('../../styles/lib/breakpoints.json', {})
-    // for $breakpoint-name in $breakpoints
-    //   $breakpoint-width = $breakpoints[$breakpoint-name]
-    //   &[data-breakpoint={$breakpoint-name}]
-    //     width $breakpoint-width
+  &__breakpoints
+    position absolute
+    top $space-normal
+    left calc(50% - 5rem)
+    width 10rem
+    max-height 0
+    transition-property max-height
+    transition-duration .15s
+    transition-timing-function ease-out
+    overflow hidden
+
+    &--active
+      max-height 20rem
+      transition-timing-function ease-in
+
+  &__breakpoints-inner
+    border 1px solid $color-gray-20
+    border-top none
+    padding-top $space-normal
+
+  &__breakpoint
+    display block
+    width 100%
+    font-size $font-size-small
+    font-family $font-family-base
+    color $color-gray-20
+    text-align center
+    background alpha($color-white, .925)
+    cursor pointer
+    padding-top $space-small
+    padding-bottom $space-small
+    padding-left $space-normal
+    padding-right $space-normal
+    &:first-child
+      padding-top $space-normal
+    &:last-child
+      padding-bottom $space-normal
+    &:hover
+      color $color-white
+      background alpha($color-gray-20, .925)
+

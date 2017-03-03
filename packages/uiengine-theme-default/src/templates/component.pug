@@ -5,4 +5,11 @@ include /pageHeader/pageHeader.pug
 include /variation/variation.pug
 
 block main
+  if config.breakpoints
+    script
+      | window.UIengine.breakpoints = !{JSON.stringify(config.breakpoints)};
+    style
+      each width, breakpoint in config.breakpoints
+        | .variation-preview__container[data-breakpoint='#{breakpoint}'] { width: #{width}px; }
+
   +component(page)

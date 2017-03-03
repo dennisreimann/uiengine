@@ -8,10 +8,13 @@
 
   &__toggle
     background none
+    color $color-gray-20
+    font-size $font-size-tiny
+    font-family $font-family-base
+    cursor pointer
 
-  &__block
-    &--hidden
-      display none
+  &__block:not(&__block--active)
+    display none
 
   &__raw
   &__context

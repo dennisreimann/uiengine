@@ -13,9 +13,11 @@ mixin variation(variation)
         .variation__content
           != variation.content
 
-      .variation__links
-        a.variation__link(href=h.variationPreviewPath(variation.id) target=varId)= h.t('Variante in separatem Fenster öffnen')
-        +permalink(h.t('Varianten-Link kopieren'), `#${varId}`).variation__link
+      ul.variation__links
+        li
+          +permalink(h.t('Variationslink kopieren'), `#${varId}`).variation__link
+        li
+          a.variation__link(href=h.variationPreviewPath(variation.id) target=varId)= h.t('Variation in separatem Fenster öffnen')
 
     if variation.raw || variation.context || variation.rendered
       .variation__sections

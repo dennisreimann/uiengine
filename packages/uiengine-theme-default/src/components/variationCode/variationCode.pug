@@ -7,8 +7,8 @@ mixin variationCode(variation, active)
         - const blockId = `${h.dasherize(variation.id)}-raw`
         header.variation-code__header
           h3= h.t('Code')
-          button.variation-code__toggle(data-target=blockId)= h.t('Anzeigen / Ausblenden')
-        .variation-code__block(id=blockId)
+          button.variation-code__toggle(type="button" data-block-target=blockId)= h.t('Anzeigen / Ausblenden')
+        .variation-code__block.variation-code__block--active(id=blockId)
           pre.variation-code__raw
             != variation.raw
 
@@ -16,8 +16,8 @@ mixin variationCode(variation, active)
         - const blockId = `${h.dasherize(variation.id)}-context`
         header.variation-code__header
           h3= h.t('Daten')
-          button.variation-code__toggle(data-target=blockId)= h.t('Anzeigen / Ausblenden')
-        .variation-code__block(id=blockId)
+          button.variation-code__toggle(type="button" data-block-target=blockId)= h.t('Anzeigen / Ausblenden')
+        .variation-code__block.variation-code__block--active(id=blockId)
           pre.variation-code__context
             != h.jsonEscape(variation.context)
 
@@ -25,7 +25,7 @@ mixin variationCode(variation, active)
         - const blockId = `${h.dasherize(variation.id)}-rendered`
         header.variation-code__header
           h3= h.t('HTML')
-          button.variation-code__toggle(data-target=blockId)= h.t('Anzeigen / Ausblenden')
-        .variation-code__block.variation-code__block--hidden(id=blockId)
+          button.variation-code__toggle(type="button" data-block-target=blockId)= h.t('Anzeigen / Ausblenden')
+        .variation-code__block(id=blockId)
           pre.variation-code__rendered
             != h.htmlEscape(variation.rendered)
