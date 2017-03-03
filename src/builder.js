@@ -34,17 +34,17 @@ const render = (state, templateId, data) => {
   }
 }
 
-const getPageData = ({ pages, navigation, components, variations, config: { name, version } }, pageId) => {
+const getPageData = ({ pages, navigation, components, variations, config }, pageId) => {
   const page = pages[pageId]
 
   if (isThemeTemplate(page.template)) {
-    return { page, pages, components, variations, navigation, config: { name, version } }
+    return { page, pages, components, variations, navigation, config }
   } else {
     return page.context || {}
   }
 }
 
-const getComponentData = ({ pages, navigation, components, variations, config: { name, version } }, pageId, componentId) => {
+const getComponentData = ({ pages, navigation, components, variations, config }, pageId, componentId) => {
   const parent = pages[pageId]
   const component = components[componentId]
   const page = {
@@ -56,15 +56,13 @@ const getComponentData = ({ pages, navigation, components, variations, config: {
     files: []
   }
 
-  const config = { name, version }
   const data = { page, pages, component, components, variations, navigation, config }
 
   return data
 }
 
-const getVariationData = ({ variations, config: { name, version } }, variationId) => {
+const getVariationData = ({ variations, config }, variationId) => {
   const variation = variations[variationId]
-  const config = { name, version }
   const data = { variation, config }
 
   return data
