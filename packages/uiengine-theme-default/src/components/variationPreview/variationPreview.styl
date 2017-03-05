@@ -2,12 +2,13 @@
   position relative
 
   &__container
-    width 100%
     min-width 250px
     resize horizontal
-    overflow auto
+    overflow scroll
     margin 0 auto
     text-align center
+    // leave space for the resize handle
+    padding-bottom $space-normal
 
     &[data-breakpoint]
       transition-property width
@@ -36,7 +37,6 @@
       border-right 1px solid $color-gray-20
 
   &__sizer
-    line-height 1
     padding-left $space-normal
     padding-right $space-normal
     color $color-gray-20

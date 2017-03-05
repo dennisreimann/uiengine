@@ -14,3 +14,5 @@ mixin variationPreview(variation, active)
           each width, breakpoint in config.breakpoints
             button.variation-preview__breakpoint(type="button" data-width=width data-breakpoint=breakpoint data-breakpoints-target=breakpointsId data-container-target=containerId)
               = `${breakpoint}: ${width}px`
+          button.variation-preview__breakpoint(type="button" data-breakpoints-target=breakpointsId data-container-target=containerId)
+            = h.t('zurücksetzen')

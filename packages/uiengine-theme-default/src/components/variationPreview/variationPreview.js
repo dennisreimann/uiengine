@@ -8,7 +8,7 @@ const previewScriptSrc = `../../_uiengine-theme/${previewScriptPath}`
 // get breakpoints if they are configures
 const breakpoints = window.UIengine.breakpoints || {}
 const breakpointNames = Object.keys(breakpoints)
-const breakpointWidths = Object.values(breakpoints)
+const breakpointWidths = Object.values ? Object.values(breakpoints) : Object.keys(breakpoints).map(k => breakpoints[k])
 
 if (breakpoints) {
   const toggleBreakpoints = (breakpoints) =>
@@ -34,15 +34,21 @@ if (breakpoints) {
     const width = breakpoint.getAttribute('data-width')
     const bpId = breakpoint.getAttribute('data-breakpoint')
 
-    // animate resizes
-    container.ontransitionend = e => {
-      container.style.width = `${width}px`
+    if (bpId) {
+      // animate resizes
+      const resizedHandler = e => {
+        container.style.width = `${width}px`
+        container.removeAttribute('data-breakpoint')
+        container.removeEventListener('transitionend', resizedHandler)
+      }
+      container.addEventListener('transitionend', resizedHandler)
+      container.setAttribute('data-breakpoint', bpId)
+      container.style.width = null
+    } else {
+      // reset
       container.removeAttribute('data-breakpoint')
-      container.ontransitionend = null
+      container.style.width = null
     }
-
-    container.setAttribute('data-breakpoint', bpId)
-    container.style.width = null
 
     toggleBreakpoints(breakpoints)
   })
