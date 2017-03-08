@@ -42,10 +42,10 @@ gulp.task('browserSync', () =>
 )
 
 gulp.task('watch', cb => {
-  gulp.watch(src.site).on('change', (file) =>
-    UIengine.generateIncrementForChangedFile(uieOpts, file.path)
+  gulp.watch(src.site).on('change', (event) =>
+    UIengine.generateIncrementForFileChange(uieOpts, event.path, event.type)
       .then(change => p.util.log('Rebuilt', change.type, change.item, '(triggered by', change.file, ')'))
-      .catch(error => p.util.log('Error generating increment for changed file', file.path, ':', error))
+      .catch(error => p.util.log('Error generating increment for changed file', event.path, ':', error))
   )
   // use debounce to prevent reloading for every file change
   gulp.watch(`${paths.site}/**/*.html`).on('change', () => debounce('reload', browserSync.reload, 500))
