@@ -3,6 +3,8 @@ const fs = require('fs-extra')
 const path = require('path')
 const assert = require('assert')
 const assertExists = require('./support/assertExists')
+const assertContentMatches = require('./support/assertContentMatches')
+const assertContentDoesNotMatch = require('./support/assertContentDoesNotMatch')
 
 const UIengine = require('../src/uiengine')
 
@@ -86,14 +88,15 @@ describe('UIengine', () => {
     })
   })
 
-  describe('#generateIncrementForChangedFile', () => {
-    it('should generate page', done => {
+  describe('#generateIncrementForFileChange', () => {
+    it('should generate page on change', done => {
       const filePath = path.join(pagesPath, 'patterns', 'page.md')
 
-      UIengine.generateIncrementForChangedFile(opts, filePath)
+      UIengine.generateIncrementForFileChange(opts, filePath, 'changed')
         .then(result => {
           assertExists(path.join(targetPath, 'pattern-library', 'index.html'))
 
+          assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'patterns')
           assert.equal(result.file, 'test/project/src/pages/patterns/page.md')
@@ -103,13 +106,83 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate component', done => {
+    it('should generate page on create', done => {
+      const pagePath = path.join(targetPath, 'documentation', 'created', 'index.html')
+      const filePath = path.join(pagesPath, 'documentation', 'created', 'page.md')
+      const fileDir = path.dirname(filePath)
+
+      fs.mkdirsSync(fileDir)
+      fs.writeFileSync(filePath, '---\ntitle: Created\ncomponents:\n- label\n---\nContent for created page.')
+
+      UIengine.generateIncrementForFileChange(opts, filePath, 'created')
+        .then(result => {
+          assertContentMatches(pagePath, 'Content for created page.')
+          assertExists(path.join(targetPath, 'documentation', 'created', 'label', 'index.html'))
+
+          assert.equal(result.action, 'created')
+          assert.equal(result.type, 'page')
+          assert.equal(result.item, 'documentation/created')
+          assert.equal(result.file, 'test/project/src/pages/documentation/created/page.md')
+
+          fs.removeSync(fileDir)
+
+          done()
+        })
+        .catch(err => {
+          fs.removeSync(fileDir)
+
+          done(err)
+        })
+    })
+
+    it('should generate page on delete', done => {
+      const parentPagePath = path.join(targetPath, 'documentation', 'index.html')
+      const filePath = path.join(pagesPath, 'documentation', 'created', 'page.md')
+      const fileDir = path.dirname(filePath)
+
+      fs.mkdirsSync(fileDir)
+      fs.writeFileSync(filePath, '---\ntitle: Created Page\n---\nContent for created page.')
+
+      UIengine.generateIncrementForFileChange(opts, filePath, 'created')
+        .then(result => {
+          assertContentMatches(parentPagePath, 'Created Page')
+
+          fs.removeSync(filePath)
+
+          UIengine.generateIncrementForFileChange(opts, filePath, 'deleted')
+            .then(result => {
+              assertContentDoesNotMatch(parentPagePath, 'Created Page')
+
+              assert.equal(result.action, 'deleted')
+              assert.equal(result.type, 'page')
+              assert.equal(result.item, 'documentation/created')
+              assert.equal(result.file, 'test/project/src/pages/documentation/created/page.md')
+
+              fs.removeSync(fileDir)
+
+              done()
+            })
+            .catch(err => {
+              fs.removeSync(fileDir)
+
+              done(err)
+            })
+        })
+        .catch(err => {
+          fs.removeSync(fileDir)
+
+          done(err)
+        })
+    })
+
+    it('should generate component on change', done => {
       const filePath = path.join(componentsPath, 'form', 'form.pug')
 
-      UIengine.generateIncrementForChangedFile(opts, filePath)
+      UIengine.generateIncrementForFileChange(opts, filePath, 'changed')
         .then(result => {
           assertExists(path.join(targetPath, 'variations', 'form', 'form.pug.html'))
 
+          assert.equal(result.action, 'changed')
           assert.equal(result.type, 'component')
           assert.equal(result.item, 'form')
           assert.equal(result.file, 'test/project/src/components/form/form.pug')
@@ -119,20 +192,87 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate variation', done => {
+    it('should generate variation on update', done => {
       const filePath = path.join(componentsPath, 'form', 'variations', 'form.pug')
-      UIengine.generateIncrementForChangedFile(opts, filePath)
-        .then(result => {
-          assertExists(path.join(targetPath, 'variations', 'form', 'form.pug.html'))
+      const componentPath = path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html')
+      const existingVariationPath = path.join(targetPath, 'variations', 'form', 'form.pug.html')
 
+      fs.removeSync(existingVariationPath)
+      fs.removeSync(componentPath)
+
+      UIengine.generateIncrementForFileChange(opts, filePath, 'changed')
+        .then(result => {
+          assertExists(existingVariationPath)
+
+          assert.equal(result.action, 'changed')
           assert.equal(result.type, 'variation')
           assert.equal(result.item, 'form/form.pug')
           assert.equal(result.file, 'test/project/src/components/form/variations/form.pug')
-          assertExists(path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html'))
 
+          assertExists(componentPath)
           done()
         })
         .catch(done)
+    })
+
+    it('should generate variation on create', done => {
+      const filePath = path.join(componentsPath, 'form', 'variations', 'form-fieldsets.pug')
+      const componentPath = path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html')
+
+      fs.removeSync(componentPath)
+      fs.writeFileSync(filePath, 'p Test')
+
+      UIengine.generateIncrementForFileChange(opts, filePath, 'created')
+        .then(result => {
+          assertContentMatches(componentPath, '<span class="variation-header__variation-title">Form Fieldsets</span>')
+          assertExists(componentPath)
+
+          assert.equal(result.action, 'created')
+          assert.equal(result.type, 'variation')
+          assert.equal(result.item, 'form/form-fieldsets.pug')
+          assert.equal(result.file, 'test/project/src/components/form/variations/form-fieldsets.pug')
+
+          fs.removeSync(filePath)
+
+          done()
+        })
+        .catch(err => {
+          fs.removeSync(filePath)
+
+          done(err)
+        })
+    })
+
+    it('should generate variation on delete', done => {
+      const filePath = path.join(componentsPath, 'form', 'variations', 'form-fieldsets.pug')
+      const componentPath = path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html')
+
+      fs.writeFileSync(filePath, 'p Test')
+
+      UIengine.generateIncrementForFileChange(opts, filePath, 'created')
+        .then(result => {
+          assertContentMatches(componentPath, '<span class="variation-header__variation-title">Form Fieldsets</span>')
+
+          fs.removeSync(filePath)
+
+          UIengine.generateIncrementForFileChange(opts, filePath, 'deleted')
+            .then(result => {
+              assertContentDoesNotMatch(componentPath, '<span class="variation-header__variation-title">Form Fieldsets</span>')
+
+              assert.equal(result.action, 'deleted')
+              assert.equal(result.type, 'variation')
+              assert.equal(result.item, 'form/form-fieldsets.pug')
+              assert.equal(result.file, 'test/project/src/components/form/variations/form-fieldsets.pug')
+
+              done()
+            })
+            .catch(done)
+        })
+        .catch(err => {
+          fs.removeSync(filePath)
+
+          done(err)
+        })
     })
   })
 })

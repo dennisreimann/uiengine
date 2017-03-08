@@ -56,9 +56,11 @@ async function generate (options) {
   return state
 }
 
-async function generateIncrementForChangedFile (options, filePath) {
+async function generateIncrementForFileChange (options, filePath, action = 'changed') {
+  const isDeleted = action === 'deleted'
   const { components, pages } = state.config.source
   const file = path.relative('.', filePath)
+  let type, item
 
   // TODO: Add handler for template changes
 
@@ -73,25 +75,48 @@ async function generateIncrementForChangedFile (options, filePath) {
   }
 
   if (pageId) {
-    await regeneratePage(pageId)
-    return { file, type: 'page', item: pageId }
+    if (isDeleted) {
+      await removePage(pageId)
+    } else {
+      await regeneratePage(pageId)
+    }
+    type = 'page'
+    item = pageId
   } else if (variationId) {
-    await regenerateVariation(variationId, componentId)
-    return { file, type: 'variation', item: variationId }
+    if (isDeleted) {
+      await removeVariation(variationId, componentId)
+    } else {
+      await regenerateVariation(variationId, componentId)
+    }
+    type = 'variation'
+    item = variationId
   } else if (componentId) {
+    // TODO: handle delete case
     await Connector.registerComponentFile(state, filePath)
     await regenerateComponent(componentId)
-    return { file, type: 'component', item: componentId }
+
+    type = 'component'
+    item = componentId
   } else {
     await generate(options)
-    return { file, type: 'site', item: state.config.name }
+
+    type = 'site'
+    item = state.config.name
   }
+
+  return { file, type, item, action }
 }
 
 async function fetchAndAssocPage (id) {
   const page = await Page.fetchById(state, id)
   state = R.assocPath(['pages', id], page, state)
   return page
+}
+
+async function fetchAndAssocComponent (id) {
+  const component = await Component.fetchById(state, id)
+  state = R.assocPath(['components', id], component, state)
+  return component
 }
 
 async function fetchAndAssocVariation (id) {
@@ -106,32 +131,50 @@ async function fetchAndAssocNavigation () {
   return navigation
 }
 
-async function updateComponent (id) {
-  const component = await Component.fetchById(state, id)
-  state = R.assocPath(['components', id], component, state)
-  return component
+async function removePage (id) {
+  const parentId = PageUtil.parentIdForPageId(id)
+
+  state = R.dissocPath(['pages', id], state)
+
+  await fetchAndAssocPage(parentId)
+  await fetchAndAssocNavigation()
+  await Builder.generatePage(state, parentId)
 }
 
 async function regeneratePage (id) {
-  await fetchAndAssocPage(id)
+  const parentId = PageUtil.parentIdForPageId(id)
+
+  const fetchPage = fetchAndAssocPage(id)
+  const fetchParent = fetchAndAssocPage(parentId)
+  await Promise.all([fetchPage, fetchParent])
+
   await fetchAndAssocNavigation()
 
   const buildPage = Builder.generatePage(state, id)
+  const buildParent = Builder.generatePage(state, parentId)
+  const buildComponents = Builder.generateComponentsForPage(state, id)
   const copyFiles = Builder.copyPageFiles(state, id)
-
-  await Promise.all([buildPage, copyFiles])
+  await Promise.all([buildPage, buildParent, buildComponents, copyFiles])
 }
 
 async function regenerateVariation (id, componentId) {
-  await fetchAndAssocVariation(id)
+  const fetchVariation = fetchAndAssocVariation(id)
+  const fetchComponent = fetchAndAssocComponent(componentId)
+  await Promise.all([fetchVariation, fetchComponent])
 
   const buildVariation = Builder.generateVariation(state, id)
   const buildPages = Builder.generatePagesHavingComponent(state, componentId)
   await Promise.all([buildPages, buildVariation])
 }
 
+async function removeVariation (id, componentId) {
+  state = R.dissocPath(['variations', id], state)
+  await fetchAndAssocComponent(componentId)
+  await Builder.generatePagesHavingComponent(state, componentId)
+}
+
 async function regenerateComponent (id) {
-  const { variationIds } = await updateComponent(id)
+  const { variationIds } = await fetchAndAssocComponent(id)
   const fetchAndAssocVariations = R.map(fetchAndAssocVariation, variationIds)
   await Promise.all(fetchAndAssocVariations)
 
@@ -142,5 +185,5 @@ async function regenerateComponent (id) {
 
 module.exports = {
   generate,
-  generateIncrementForChangedFile
+  generateIncrementForFileChange
 }
