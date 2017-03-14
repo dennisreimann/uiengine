@@ -1,13 +1,16 @@
 .page-header
-  color $color-page-head-text
-  background-color $color-page-head-bg
-  padding-top $space-huge
-  padding-bottom $space-large
+  color $color-pagehead-text
+  background-color $color-pagehead-bg
+  padding-top $space-large
+  padding-bottom $space-medium
 
   &__parent-link
     text-decoration none
     font-size $font-size-tiny
-    color $color-head-link
+    color $color-pagehead-link
+
+    &:hover
+      color $color-pagehead-link-hover
 
     &:before
       content "< "

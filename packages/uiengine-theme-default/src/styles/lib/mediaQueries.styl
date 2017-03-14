@@ -1,25 +1,27 @@
-$mq-S-width = 480px
-$mq-M-width = 640px
-$mq-L-width = 960px
+$mq-xs-width = 320px
+$mq-s-width = 480px
+$mq-m-width = 600px
+$mq-l-width = 850px
+$mq-xl-width = 1024px
 
-mq_to(to)
-  s("screen and (max-width: %s)", to - 1)
-mq_from(from)
-  s("screen and (min-width: %s)", from)
-mq_from_to(from, to)
-  s("screen and (min-width: %s) and (max-width: %s)", from, to - 1)
-mq_from_and_print(from)
-  s("screen and (min-width: %s), print", from)
+mq_to($to)
+  s("screen and (max-width: %s)", $to - 1)
+mq_from($from)
+  s("screen and (min-width: %s)", $from)
+mq_from_to($from, $to)
+  s("screen and (min-width: %s) and (max-width: %s)", $from, $to - 1)
+mq_from_and_print($from)
+  s("screen and (min-width: %s), print", $from)
 
-up_to_S = mq_to($mq-S-width)
-up_to_M = mq_to($mq-M-width)
-up_to_L = mq_to($mq-L-width)
+$mq-up_to_s = mq_to($mq-s-width)
+$mq-up_to_m = mq_to($mq-m-width)
+$mq-up_to_l = mq_to($mq-l-width)
+$mq-up_to_xl = mq_to($mq-xl-width)
 
-S_and_up = mq_from($mq-S-width)
-M_and_up = mq_from($mq-M-width)
-L_and_up = mq_from($mq-L-width)
-L_and_up_and_print = mq_from_and_print($mq-L-width)
+$mq-s_and_up = mq_from($mq-s-width)
+$mq-m_and_up = mq_from($mq-m-width)
+$mq-l_and_up = mq_from($mq-l-width)
+$mq-xl_and_up = mq_from($mq-xl-width)
 
-S_to_M = mq_from_to($mq-S-width, $mq-M-width)
-S_to_L = mq_from_to($mq-S-width, $mq-L-width)
-M_to_L = mq_from_to($mq-M-width, $mq-L-width)
+$mq-s_to_m = mq_from_to($mq-s-width, $mq-m-width)
+$mq-l_to_xl = mq_from_to($mq-l-width, $mq-xl-width)

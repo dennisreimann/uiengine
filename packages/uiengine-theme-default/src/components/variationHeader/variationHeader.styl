@@ -1,27 +1,27 @@
 .variation-header
   color $color-white
-  background-color $color-variation-head-bg
-  padding-top $space-large
-  padding-bottom $space-large
+  background-color $color-variationhead-bg
+  padding-top $space-medium
 
   .wrap
     display flex
+    flex-wrap wrap
     align-items baseline
 
   &__description
-    @media up_to_L
-      display none
-    @media L_and_up
-      text-decoration none
-      font-size $font-size-tiny
-      color $color-variation-head-meta
+    font-size $font-size-tiny
+    color $color-variationhead-meta
+    @media $mq-up_to_xl
+      flex-basis 100%
+    @media $mq-xl_and_up
       text-align right
       width 6rem
       margin-left -6rem
       padding-right $space-large
 
   &__title
-    font-size 1.5rem
+    font-size $font-size-large
+    padding-bottom $space-medium
 
   &__component-title
     &:after
@@ -29,17 +29,29 @@
 
   &__links
     margin-left $space-large
-    border-left 1px solid $color-variation-head-meta
     padding-left $space-large
-    font-size 1.5rem
+    font-size $font-size-large
+    &:before
+      content ""
+      position relative
+      left $space-large * -1
+      border-left 1px solid $color-variationhead-meta
 
   &__link
+    display inline-block
+    padding-bottom $space-medium
     text-decoration none
-    color $color-variation-head-link
+    color $color-variationhead-link
+
+    &:hover
+      color $color-variationhead-link-hover
 
     &--active
-      color $color-variation-head-link-active
-      // TODO: Add triangle highlight
+      color $color-variationhead-link-current
+      background-image url(../svgs/triangle.svg)
+      background-position 50% 100%
+      background-repeat no-repeat
+      background-size 1.25rem
 
   &__link + &__link
     margin-left $space-large

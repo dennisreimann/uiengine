@@ -1,41 +1,46 @@
 $color-neutral-20 = #CCC
 
 // navigation 
-$color-main-nav-bg = #333
-$color-main-nav-bg-active = #FFF
-$color-main-nav-text = #FFF
-$color-main-nav-text-active = #333
-$color-main-nav-text-config = #777
-$color-main-nav-border = transparent
-$color-main-nav-border-active = #FFF
+$color-mainnav-bg = #333
+$color-mainnav-bg-current = $color-white
+$color-mainnav-text = $color-white
+$color-mainnav-text-hover = #333
+$color-mainnav-text-current = #333
+$color-mainnav-text-meta = #777
 
 // page header
-$color-page-head-bg = #666
-$color-page-head-text = #FFF
-$color-page-head-link = #7DF
-$color-page-head-link-active = #FFF
-$color-page-head-meta = #CCC
+$color-pagehead-bg = #666
+$color-pagehead-text = $color-white
+$color-pagehead-link = #7DF
+$color-pagehead-link-hover = #7DF
+$color-pagehead-meta = #CCC
 
-// page nav
-$color-page-nav-link = #999
-$color-page-nav-link-hover = darken($color-page-head-link, 15)
+// page links
+$color-pagenav-link = #999
+$color-pagenav-link-hover = darken($color-pagehead-link, 15)
 
 // variation header
-$color-variation-head-bg = $color-page-head-bg
-$color-variation-head-text = $color-page-head-text
-$color-variation-head-link = $color-page-head-link
-$color-variation-head-link-active = $color-page-head-link-active
-$color-variation-head-meta = $color-page-head-meta
+$color-variationhead-bg = $color-pagehead-bg
+$color-variationhead-text = $color-pagehead-text
+$color-variationhead-link = $color-pagehead-link
+$color-variationhead-link-hover = $color-pagehead-link
+$color-variationhead-link-current = $color-white
+$color-variationhead-meta = $color-pagehead-meta
+
+// variation links
+$color-variationnav-link = $color-pagenav-link
+$color-variationnav-link-hover = $color-pagenav-link-hover
 
 // main
-$color-main-bg = #FFF
+$color-main-bg = $color-white
 $color-main-text = #222
-$color-main-link = darken($color-page-head-link, 15)
+$color-main-link = darken($color-pagehead-link, 15)
+$color-main-link-hover = darken($color-pagehead-link, 10)
 
 // code & data
 $color-code-bg = #222
 $color-code-text = #EEE
-$color-code-link = $color-page-nav-link
+$color-code-link = $color-pagenav-link
 $color-code-link-hover = $color-main-link
 $color-data-bg = #222
 $color-data-text = #EEE

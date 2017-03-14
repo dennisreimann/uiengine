@@ -11,11 +11,13 @@ html
   font-family $font-family-base
   @media print
     font-size 10pt
-  @media up_to_S
+  @media $mq-up_to_s
+    font-size 13px
+  @media $mq-s_to_m
     font-size 14px
-  @media S_to_M
+  @media $mq-m_to_l
     font-size 15px
-  @media M_and_up
+  @media $mq-l_and_up
     font-size 16px
 
 body
@@ -32,7 +34,6 @@ h5
 h6
   font-weight 400
 
-
 p
 ul
 ol
@@ -46,7 +47,7 @@ section
     h4
     h5
     h6
-      margin-top $space-medium
+      margin-top $space-normal
 
 .wrap
   margin 0 auto

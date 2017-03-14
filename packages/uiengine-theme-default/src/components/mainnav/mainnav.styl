@@ -1,12 +1,7 @@
 .main-nav
   overflow hidden
-  color $color-main-nav-text
-  background $color-main-nav-bg
-
-  @media $mq-up_to_XS
-    font-size $font-size-small
-  @media $mq-XS_and_up
-    font-size $font-size-base
+  color $color-mainnav-text
+  background $color-mainnav-bg
 
   .wrap
     display flex
@@ -19,19 +14,17 @@
     margin-left $space-large * -1
 
   &__item
-    border-bottom 3px solid $color-main-nav-border
     font-weight 400
 
     &--active,
     &--current
-      color $color-main-nav-text-active
-      background $color-main-nav-bg-active
+      color $color-mainnav-text-current
+      background $color-mainnav-bg-current
 
     &:not(&--active)
       &:hover
-        color $color-main-nav-text-active
-        background $color-main-nav-bg-active
-        border-bottom 3px solid $color-main-nav-border-active
+        color $color-mainnav-text-hover
+        background $color-mainnav-bg-current
 
   &__link
     display block
@@ -43,7 +36,7 @@
     order 2
     margin-right $space-large * -1
     display block
-    color $color-main-nav-text-config
+    color $color-mainnav-text-meta
     text-decoration none
     padding $space-normal $space-large
     white-space nowrap
