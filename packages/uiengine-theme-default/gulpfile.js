@@ -8,6 +8,8 @@ const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
 const p = require('gulp-load-plugins')()
 
+const looks = ['default', 'uiengineering']
+
 const paths = {
   stylesLib: './src/styles/lib',
   dist: './static/_uiengine-theme',
@@ -17,21 +19,23 @@ const paths = {
 const src = {
   lib: ['./src/*.js'],
   pug: ['./src/**/*.pug'],
+  icons: ['./src/icons/**/*.svg'],
   svgs: ['./src/svgs/**/*.svg'],
   styles: ['./src/styles/*.styl', './src/components/**/*.styl'],
   scripts: ['src/scripts/*.js', './src/components/**/*.js'],
-  static: ['./src/{fonts,images,svgs}/**'],
+  static: ['./src/{fonts,images}/**'],
   rev: [paths.dist + '/**/*.{css,js,map,ico,cur,svg,jpg,jpeg,png,gif,woff,woff2}']
 }
 
-const looks = ['default', 'uiengineering']
+const dist = (folder = '') => gulp.dest(`${paths.dist}/${folder}`)
 
 const styles = look =>
   gulp.src(src.styles)
     .pipe(p.plumber())
     .pipe(p.stylus({
       paths: [paths.stylesLib],
-      import: ['variables', 'mediaQueries', `looks/${look}`]
+      import: ['variables', 'mediaQueries', `looks/${look}`],
+      url: { name: 'embedurl' }
     }))
     .pipe(p.concat(`uiengine-${look}.css`))
     .pipe(p.postcss([
@@ -39,7 +43,7 @@ const styles = look =>
       autoprefixer({ browsers: ['last 2 versions'] }),
       csswring
     ]))
-    .pipe(gulp.dest(`${paths.dist}/styles`))
+    .pipe(dist('styles'))
 
 gulp.task('styles', () => mergeStream(...looks.map(styles)))
 
@@ -57,14 +61,43 @@ gulp.task('pug', () =>
 
 gulp.task('static', () =>
   gulp.src(src.static)
-    .pipe(gulp.dest(paths.dist))
+    .pipe(dist())
+)
+
+gulp.task('icons', () =>
+  gulp.src(src.icons)
+    .pipe(p.plumber())
+    .pipe(p.svgSprite({
+      mode: {
+        symbol: {
+          dest: '',
+          sprite: 'icons.svg',
+          inline: true
+        }
+      },
+      shape: {
+        transform: [
+          {
+            svgo: {
+              plugins: [
+                { removeTitle: true },
+                { removeStyleElement: true },
+                { removeUselessStrokeAndFill: true },
+                { removeAttrs: { attrs: '(stroke|fill)' } }
+              ]
+            }
+          }
+        ]
+      }
+    }))
+    .pipe(gulp.dest(`${paths.lib}/templates/includes`))
 )
 
 gulp.task('svgs', () =>
   gulp.src(src.svgs)
     .pipe(p.plumber())
-    .pipe(p.svgSprite({ mode: { symbol: { dest: '', sprite: 'sprite.svg' } } }))
-    .pipe(gulp.dest(`${paths.dist}/svgs`))
+    .pipe(p.svgo())
+    .pipe(dist('svgs'))
 )
 
 gulp.task('scripts', () =>
@@ -72,7 +105,7 @@ gulp.task('scripts', () =>
     .pipe(p.plumber())
     .pipe(webpackStream({}, webpack))
     .pipe(p.concat('uiengine.js'))
-    .pipe(gulp.dest(`${paths.dist}/scripts`))
+    .pipe(dist('scripts'))
 )
 
 gulp.task('scripts:preview', cb =>
@@ -80,7 +113,7 @@ gulp.task('scripts:preview', cb =>
     .pipe(p.plumber())
     .pipe(p.concat('uiengine-preview.js'))
     .pipe(p.uglify())
-    .pipe(gulp.dest(`${paths.dist}/scripts`))
+    .pipe(dist('scripts'))
 )
 
 gulp.task('rev', () => {
@@ -89,20 +122,21 @@ gulp.task('rev', () => {
   return gulp.src(src.rev)
     .pipe(revAll.revision())
     .pipe(p.revDeleteOriginal())
-    .pipe(gulp.dest(paths.dist))
+    .pipe(dist())
     .pipe(revAll.manifestFile())
-    .pipe(gulp.dest(paths.dist))
+    .pipe(dist())
 })
 
 gulp.task('watch', cb => {
   gulp.watch(src.lib, ['lib'])
   gulp.watch(src.pug, ['pug'])
+  gulp.watch(src.icons, ['icons'])
   gulp.watch(src.svgs, ['svgs'])
   gulp.watch(src.static, ['static'])
   gulp.watch(src.scripts, ['scripts'])
-  gulp.watch(src.styles.concat([`${paths.stylesLib}/*.styl`]), ['styles'])
+  gulp.watch(src.styles.concat([`${paths.stylesLib}/**/*.styl`]), ['styles'])
 })
 
-gulp.task('generate', ['lib', 'pug', 'scripts', 'scripts:preview', 'svgs', 'styles', 'static'])
+gulp.task('generate', ['lib', 'pug', 'scripts', 'scripts:preview', 'icons', 'svgs', 'styles', 'static'])
 gulp.task('build', cb => runSequence('generate', 'rev', cb))
 gulp.task('develop', (cb) => runSequence('generate', 'watch', cb))
