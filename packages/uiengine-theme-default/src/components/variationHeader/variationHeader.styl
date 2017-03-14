@@ -1,6 +1,6 @@
 .variation-header
   color $color-white
-  background-color $color-brand-main
+  background-color $color-variation-head-bg
   padding-top $space-large
   padding-bottom $space-large
 
@@ -14,7 +14,7 @@
     @media L_and_up
       text-decoration none
       font-size $font-size-tiny
-      color $color-yellow
+      color $color-variation-head-meta
       text-align right
       width 6rem
       margin-left -6rem
@@ -29,16 +29,17 @@
 
   &__links
     margin-left $space-large
-    border-left 1px solid $color-yellow
+    border-left 1px solid $color-variation-head-meta
     padding-left $space-large
     font-size 1.5rem
 
   &__link
     text-decoration none
-    color inherit
+    color $color-variation-head-link
 
     &--active
-      color $color-yellow
+      color $color-variation-head-link-active
+      // TODO: Add triangle highlight
 
   &__link + &__link
     margin-left $space-large

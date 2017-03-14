@@ -1,17 +1,16 @@
 .page-nav
   &__tree
-    // list-style none
     font-size $font-size-tiny
-    color $color-gray-70
+    color $color-page-nav-link
     padding-left $space-normal
 
   &__item
     padding-top $space-tiny
     padding-bottom $space-tiny
 
-    &--current
-      color $color-brand-main
-
   &__link
-    color inherit
+    color $color-page-nav-link
     text-decoration none
+
+    &:hover
+      color $color-page-nav-link-hover

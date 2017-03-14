@@ -26,6 +26,23 @@ const src = {
 
 const looks = ['default', 'uiengineering']
 
+const styles = look =>
+  gulp.src(src.styles)
+    .pipe(p.plumber())
+    .pipe(p.stylus({
+      paths: [paths.stylesLib],
+      import: ['variables', 'mediaQueries', `looks/${look}`]
+    }))
+    .pipe(p.concat(`uiengine-${look}.css`))
+    .pipe(p.postcss([
+      mqpacker,
+      autoprefixer({ browsers: ['last 2 versions'] }),
+      csswring
+    ]))
+    .pipe(gulp.dest(`${paths.dist}/styles`))
+
+gulp.task('styles', () => mergeStream(...looks.map(styles)))
+
 gulp.task('lib', () =>
   gulp.src(src.lib)
     .pipe(p.plumber())
@@ -49,23 +66,6 @@ gulp.task('svgs', () =>
     .pipe(p.svgSprite({ mode: { symbol: { dest: '', sprite: 'sprite.svg' } } }))
     .pipe(gulp.dest(`${paths.dist}/svgs`))
 )
-
-const styles = look =>
-  gulp.src(src.styles)
-    .pipe(p.plumber())
-    .pipe(p.stylus({
-      paths: [paths.stylesLib],
-      import: ['variables', 'mediaQueries', `looks/${look}`]
-    }))
-    .pipe(p.concat(`uiengine-${look}.css`))
-    .pipe(p.postcss([
-      mqpacker,
-      autoprefixer({ browsers: ['last 2 versions'] }),
-      csswring
-    ]))
-    .pipe(gulp.dest(`${paths.dist}/styles`))
-
-gulp.task('styles', () => mergeStream(...looks.map(styles)))
 
 gulp.task('scripts', () =>
   gulp.src('src/scripts/main.js')

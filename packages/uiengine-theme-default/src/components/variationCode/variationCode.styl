@@ -8,10 +8,12 @@
 
   &__toggle
     background none
-    color $color-gray-20
+    color $color-code-link
     font-size $font-size-tiny
     font-family $font-family-base
     cursor pointer
+    &:hover
+      color $color-code-link-hover
 
   &__block:not(&__block--active)
     display none
@@ -20,19 +22,20 @@
   &__context
   &__rendered
     overflow-x auto
-    border 1px solid $color-gray-70
     padding $space-normal
-    color $color-white
     font-family $font-family-code
     font-size $font-size-small
 
   &__raw
-    background-color $color-dark-bg
+    color $color-code-text
+    background-color $color-code-bg
 
   &__context
-    background-color $color-brand-seco
+    color $color-data-text
+    background-color $color-data-bg
 
   &__rendered
-    background-color $color-dark-bg
+    color $color-code-text
+    background-color $color-code-bg
 
 
