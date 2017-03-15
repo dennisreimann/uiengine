@@ -1,0 +1,7 @@
+profiles = bold bolditalic extrabold extrabolditalic italic light lightitalic regular
+for profile in profiles
+  @font-face
+    font-family s('merriweathersans-%s', profile)
+    src s('url(../fonts/merriweathersans-%s.woff2) format("woff2"), url(../fonts/merriweathersans-%s.woff) format("woff")', profile, profile)
+    font-weight normal
+    font-style normal
