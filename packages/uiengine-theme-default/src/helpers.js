@@ -1,5 +1,6 @@
 import path from 'path'
 import assert from 'assert'
+import highlightjs from 'highlight.js'
 
 const pageFile = 'index.html'
 const assetsDir = '_uiengine-theme'
@@ -34,11 +35,27 @@ const htmlEscape = html =>
     .replace(/"/g, '&quot;')
 
 const jsonEscape = json =>
-  htmlEscape(JSON.stringify(json, null, '  '))
+  JSON.stringify(json, null, '  ')
+
+const highlight = (code, lang) => {
+  const languages = (lang != null) ? [lang] : undefined
+  const highlighted = highlightjs.highlightAuto(code, languages)
+
+  return highlighted.value
+}
 
 const dasherize = string =>
   String(string)
     .replace(/\W+/gi, '-')
+
+const decorateRaw = (code, lang) =>
+  highlight(code, lang)
+
+const decorateContext = json =>
+  highlight(jsonEscape(json), 'json')
+
+const decorateRendered = html =>
+  highlight(html, 'html')
 
 // function that binds the current page data and returns
 // an object with helper functions based on that data
@@ -56,17 +73,21 @@ export default function (options, data) {
   }
 
   const look = options.look || 'default'
+  const hljs = options.hljs || 'tomorrow'
+  const hljsPath = assetPath(`styles/hljs/${hljs}.css`)
   const stylesPath = assetPath(`styles/uiengine-${look}.css`)
   const scriptsPath = assetPath('scripts/uiengine.js')
 
   return {
     t,
     dasherize,
-    htmlEscape,
-    jsonEscape,
+    decorateRaw,
+    decorateContext,
+    decorateRendered,
     assetPath,
     stylesPath,
     scriptsPath,
+    hljsPath,
 
     variationPreviewPath (variationId) {
       const target = path.join('variations', `${variationId}.html`)
