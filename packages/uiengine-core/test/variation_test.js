@@ -42,6 +42,7 @@ describe('Variation', () => {
           assert.equal(data.context.name, 'person[name]')
           assert.equal(data.raw, 'include /input/input.pug\n\n+input(id, name)')
           assert.equal(data.rendered, '<input class="input input--text" id="name" name="person[name]" type="text"/>')
+          assert.equal(data.extension, 'pug')
 
           done()
         })
