@@ -7,6 +7,14 @@ const path = require('path')
 const File = require('../src/util/file')
 
 describe('File', () => {
+  describe('#extension', () => {
+    it('should return file extension', () => {
+      const ext = File.extension('./test/fixtures/markdown.md')
+
+      assert.equal(ext, 'md')
+    })
+  })
+
   describe('#read', () => {
     it('should return file content', done => {
       File.read('./test/fixtures/markdown.md')

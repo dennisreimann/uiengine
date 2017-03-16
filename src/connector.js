@@ -1,9 +1,7 @@
 const path = require('path')
 const R = require('ramda')
 const glob = require('globby')
-
-const extension = (filePath) =>
-  path.extname(filePath).replace(/^\./, '')
+const File = require('./util/file')
 
 const getModule = ({ config: { adapters } }, ext) => {
   const { module } = adapters[ext]
@@ -41,7 +39,7 @@ async function setup (state) {
 
 async function registerComponentFile (state, filePath) {
   const { config: { adapters } } = state
-  const ext = extension(filePath)
+  const ext = File.extension(filePath)
   const adapter = adapters[ext]
 
   if (adapter) {
@@ -56,7 +54,7 @@ async function registerComponentFile (state, filePath) {
 
 async function render (state, templatePath, data = {}) {
   const { config: { adapters } } = state
-  const ext = extension(templatePath)
+  const ext = File.extension(templatePath)
   const { render } = getModule(state, ext)
 
   if (typeof render === 'function') {
