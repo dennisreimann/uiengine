@@ -4,6 +4,15 @@ A pattern library generator that gets out of your way.
 
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
+## ❗️ Disclaimer
+
+This project is currently under active development.
+
+Some of the concepts and APIs are subject to change.
+We do not recommend to use this project in production until it hits a v1.0 release.
+Nevertheless we encourage people to try it out and provide us feedback.
+Please do not to rely on it for production use until we provide a stable release and remove this disclaimer.
+
 ## 📘 Documentation
 
 - [Configuration](./docs/config.md)
