@@ -1,0 +1,15 @@
+icon-size($size)
+  width $size
+  height $size
+
+icon-color($fill)
+  path
+    fill $fill
+
+icon-position($top = null, $left = null)
+  if $top || $left
+    position relative
+  if $top
+    top $top
+  if $left
+    left $left

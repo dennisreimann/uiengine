@@ -15,8 +15,16 @@
     font-size $font-size-tiny
     color $color-variationnav-link
 
+    .icon
+      margin-right $space-tiny
+      icon-color($color-variationnav-link)
+      icon-position(1px)
+
     &:hover
       color $color-variationnav-link-hover
+
+      .icon
+        icon-color($color-variationnav-link-hover)
 
   &__link + &__link
     margin-top $space-small

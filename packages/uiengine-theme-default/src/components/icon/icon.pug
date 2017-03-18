@@ -1,0 +1,4 @@
+mixin icon(symbol)
+  - const classes = `icon--${symbol}`
+  svg.icon(class=classes role="img")&attributes(attributes)
+    use(xlink:href=`#${symbol}`)

@@ -1,2 +1,7 @@
-mixin permalink(title, link)
-  a.permalink(href=link data-clipboard-text=link)&attributes(attributes)= title
+include /icon/icon.pug
+
+mixin permalink(title, link, icon)
+  a.permalink(href=link data-clipboard-text=link)&attributes(attributes)
+    if icon
+      +icon(icon).permalink__icon
+    = title

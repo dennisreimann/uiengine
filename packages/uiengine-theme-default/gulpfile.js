@@ -35,7 +35,7 @@ const styles = look =>
     .pipe(p.plumber())
     .pipe(p.stylus({
       paths: [paths.stylesLib],
-      import: ['variables', 'mediaQueries', `looks/${look}`],
+      import: ['variables', 'mediaQueries', 'mixins', `looks/${look}`],
       url: { name: 'embedurl' }
     }))
     .pipe(p.concat(`uiengine-${look}.css`))
@@ -87,7 +87,6 @@ gulp.task('icons', () =>
             svgo: {
               plugins: [
                 { removeTitle: true },
-                { removeStyleElement: true },
                 { removeUselessStrokeAndFill: true },
                 { removeAttrs: { attrs: '(stroke|fill)' } }
               ]

@@ -9,12 +9,17 @@
     font-size $font-size-tiny
     color $color-pagehead-link
 
+    .icon
+      margin-left $space-normal * -1
+      icon-size(.5rem)
+      icon-color($color-pagehead-link)
+      icon-position(1px)
+
     &:hover
       color $color-pagehead-link-hover
 
-    &:before
-      content "< "
-      margin-left -1.5ch
+      .icon
+        icon-color($color-pagehead-link-hover)
 
   &__title
     font-size 1.5rem
