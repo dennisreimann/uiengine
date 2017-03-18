@@ -1,12 +1,16 @@
 mixin variationPreview(variation, active)
-  - const id = `${h.dasherize(variation.id)}-preview`
-  - const breakpointsId = `${id}-breakpoints`
-  - const containerId = `${id}-container`
+  - const variationId = h.dasherize(variation.id)
+  - const previewId = `${variationId}-preview`
+  - const breakpointsId = `${variationId}-breakpoints`
+  - const containerId = `${variationId}-container`
   - const classes = active ? 'variation__section--active' : null
-  .variation__section.variation-preview(id=id class=classes)&attributes(attributes)
-    .variation-preview__container(id=containerId)
+  .variation__section.variation-preview(id=previewId class=classes)&attributes(attributes)
+    .variation-preview__container(id=containerId data-variation-id=variationId)
       .variation-preview__size
         button.variation-preview__sizer(type="button" data-breakpoints-target=breakpointsId)
+      script.
+        var width = window.sessionStorage.getItem('variation:width:#{variationId}');
+        if (width) { document.getElementById('#{containerId}').style.width = width + 'px' }
       iframe.variation-preview__iframe(src=h.variationPreviewPath(variation.id))
     if config.breakpoints
       .variation-preview__breakpoints(id=breakpointsId)

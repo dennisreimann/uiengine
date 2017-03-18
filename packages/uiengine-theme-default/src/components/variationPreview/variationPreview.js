@@ -31,6 +31,7 @@ if (breakpoints) {
     const breakpoints = document.getElementById(breakpointsSelector)
     const containerSelector = e.target.getAttribute('data-container-target')
     const container = document.getElementById(containerSelector)
+    const variationId = container.getAttribute('data-variation-id')
     const width = breakpoint.getAttribute('data-width')
     const bpId = breakpoint.getAttribute('data-breakpoint')
 
@@ -44,10 +45,12 @@ if (breakpoints) {
       container.addEventListener('transitionend', resizedHandler)
       container.setAttribute('data-breakpoint', bpId)
       container.style.width = null
+      window.sessionStorage.setItem(`variation:width:${variationId}`, width)
     } else {
       // reset
       container.removeAttribute('data-breakpoint')
       container.style.width = null
+      window.sessionStorage.removeItem(`variation:width:${variationId}`)
     }
 
     toggleBreakpoints(breakpoints)
@@ -85,7 +88,8 @@ document.querySelectorAll('.variation-preview__iframe').forEach(iframe => {
 
     contentWindow.onresize = e => {
       debounce(`${iframe.id}-resize`, () => {
-        sizer.textContent = sizerTextForWidth(e.target.innerWidth)
+        const width = e.target.innerWidth
+        sizer.textContent = sizerTextForWidth(width)
       }, 10)
     }
   }
