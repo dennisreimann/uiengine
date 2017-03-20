@@ -192,7 +192,95 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate variation on update', done => {
+    it('should generate component on create', done => {
+      const componentPath = path.join(componentsPath, 'my-new-component')
+      const filePath = path.join(componentPath, 'component.md')
+      const fileDir = path.dirname(filePath)
+
+      fs.mkdirsSync(fileDir)
+      fs.writeFileSync(filePath, '---\ntitle: New component\n---\n')
+
+      UIengine.generateIncrementForFileChange(opts, filePath, 'created')
+        .then(result => {
+          const state = UIengine.getState()
+          assert.equal(state.components['my-new-component'].title, 'New component')
+
+          assert.equal(result.action, 'created')
+          assert.equal(result.type, 'component')
+          assert.equal(result.item, 'my-new-component')
+          assert.equal(result.file, 'test/project/src/components/my-new-component/component.md')
+
+          fs.removeSync(fileDir)
+
+          done()
+        })
+        .catch(err => {
+          fs.removeSync(fileDir)
+
+          done(err)
+        })
+    })
+
+    it('should generate component on delete', done => {
+      const componentPath = path.join(componentsPath, 'my-new-component')
+      const filePath = path.join(componentPath, 'component.md')
+
+      fs.mkdirsSync(componentPath)
+      fs.writeFileSync(filePath, '---\ntitle: New component\n---\n')
+
+      UIengine.generateIncrementForFileChange(opts, filePath, 'created')
+        .then(result => {
+          const state = UIengine.getState()
+          assert.equal(state.components['my-new-component'].title, 'New component')
+
+          fs.removeSync(filePath)
+
+          UIengine.generateIncrementForFileChange(opts, filePath, 'deleted')
+            .then(result => {
+              const state = UIengine.getState()
+              assert.equal(state.components['my-new-component'].title, 'My New Component')
+
+              assert.equal(result.action, 'deleted')
+              assert.equal(result.type, 'component')
+              assert.equal(result.item, 'my-new-component')
+              assert.equal(result.file, 'test/project/src/components/my-new-component/component.md')
+
+              fs.removeSync(componentPath)
+
+              UIengine.generateIncrementForFileChange(opts, componentPath, 'deleted')
+                .then(result => {
+                  const state = UIengine.getState()
+                  assert.equal(state.components['my-new-component'], null)
+
+                  assert.equal(result.action, 'deleted')
+                  assert.equal(result.type, 'component')
+                  assert.equal(result.item, 'my-new-component')
+                  assert.equal(result.file, 'test/project/src/components/my-new-component')
+
+                  fs.removeSync(componentPath)
+
+                  done()
+                })
+                .catch(err => {
+                  fs.removeSync(componentPath)
+
+                  done(err)
+                })
+            })
+            .catch(err => {
+              fs.removeSync(componentPath)
+
+              done(err)
+            })
+        })
+        .catch(err => {
+          fs.removeSync(componentPath)
+
+          done(err)
+        })
+    })
+
+    it('should generate variation on change', done => {
       const filePath = path.join(componentsPath, 'form', 'variations', 'form.pug')
       const componentPath = path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html')
       const existingVariationPath = path.join(targetPath, 'variations', 'form', 'form.pug.html')

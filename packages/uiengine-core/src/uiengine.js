@@ -16,6 +16,8 @@ const VariationUtil = require('./util/variation')
 // can access it when handling incremental changes
 let state = {}
 
+const getState = () => state
+
 async function setupStateWithOptions (options = {}) {
   if (typeof options.config === 'string') {
     const config = await Config.read(options.config, options)
@@ -56,20 +58,28 @@ async function generate (options) {
   return state
 }
 
+// TODO: Add handler for template changes
 async function generateIncrementForFileChange (options, filePath, action = 'changed') {
   const isDeleted = action === 'deleted'
   const { components, pages } = state.config.source
   const file = path.relative('.', filePath)
+  const isComponentDir = path.dirname(filePath) === components
   let type, item
 
-  // TODO: Add handler for template changes
-
   const pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
-  const componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
+  let componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
   let variationId = components ? VariationUtil.variationFilePathToVariationId(components, filePath) : undefined
 
-  // TODO: Remove this quickfix and rebuild all variation
-  // files belonging to the meta variation markdown file.
+  // In case a component directory has been deleted we
+  // need to reset the component id with the dirname
+  if (componentId && isComponentDir) {
+    componentId = ComponentUtil.componentPathToComponentId(components, filePath)
+  }
+
+  // It is more efficient to rebuild the whole component
+  // in case a variation meta file changes, as we would
+  // have to find affected variation ids and rebuild
+  // them individually.
   if (variationId && variationId.endsWith('.md')) {
     variationId = undefined
   }
@@ -91,10 +101,12 @@ async function generateIncrementForFileChange (options, filePath, action = 'chan
     type = 'variation'
     item = variationId
   } else if (componentId) {
-    // TODO: handle delete case
-    await Connector.registerComponentFile(state, filePath)
-    await regenerateComponent(componentId)
-
+    if (isDeleted && isComponentDir) {
+      await removeComponent(componentId)
+    } else {
+      await Connector.registerComponentFile(state, filePath)
+      await regenerateComponent(componentId)
+    }
     type = 'component'
     item = componentId
   } else {
@@ -183,7 +195,14 @@ async function regenerateComponent (id) {
   await Promise.all([buildPages, buildVariations])
 }
 
+async function removeComponent (id) {
+  state = R.dissocPath(['components', id], state)
+
+  await Builder.generatePagesHavingComponent(state, id)
+}
+
 module.exports = {
+  getState,
   generate,
   generateIncrementForFileChange
 }
