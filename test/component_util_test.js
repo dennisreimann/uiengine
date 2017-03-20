@@ -46,4 +46,11 @@ describe('ComponentUtil', () => {
       assert.equal(ComponentUtil.componentFilePathToComponentId(componentsPath, filePath), null)
     })
   })
+
+  describe('#componentPathToComponentId', () => {
+    it('should return component id for component path', () => {
+      const componentPath = path.join(componentsPath, 'button')
+      assert.equal(ComponentUtil.componentPathToComponentId(componentsPath, componentPath), 'button')
+    })
+  })
 })

@@ -40,14 +40,14 @@ async function readComponentFile (filePath) {
   }
 }
 
-async function findComponentIds (state, componentPath = '**') {
+async function findComponentIds (state) {
   const { components } = state.config.source
   if (!components) return []
 
-  const pattern = path.resolve(components, componentPath, ComponentUtil.COMPONENT_FILENAME)
+  const pattern = path.resolve(components, '*')
   const componentPaths = await glob(pattern)
-  const componentIdFromComponentFilePath = R.partial(ComponentUtil.componentFilePathToComponentId, [components])
-  const componentIds = R.map(componentIdFromComponentFilePath, componentPaths)
+  const componentIdFromComponentPath = R.partial(ComponentUtil.componentPathToComponentId, [components])
+  const componentIds = R.map(componentIdFromComponentPath, componentPaths)
 
   return componentIds
 }
@@ -74,7 +74,8 @@ async function fetchById (state, id) {
 
   let { attributes, content } = componentData
   attributes = convertUserProvidedVariationsList(id, attributes)
-  const baseData = { id, path: componentPath, variationIds, content }
+  const title = ComponentUtil.componentIdToTitle(id)
+  const baseData = { id, title, path: componentPath, variationIds, content }
   const data = R.mergeAll([baseData, attributes])
 
   return data

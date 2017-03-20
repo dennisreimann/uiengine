@@ -22,6 +22,16 @@ describe('Component', () => {
         .catch(done)
     })
 
+    it('should return component object for components without component.md file', done => {
+      Component.fetchById(state, 'form')
+        .then(data => {
+          assert.equal(data.id, 'form')
+          assert.equal(data.title, 'Form')
+          done()
+        })
+        .catch(done)
+    })
+
     it('should infer variationIds if they are not provided', done => {
       Component.fetchById(state, 'label')
         .then(data => {
