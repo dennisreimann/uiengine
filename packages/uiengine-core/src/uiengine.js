@@ -202,6 +202,7 @@ async function removeComponent (id) {
 }
 
 module.exports = {
+  setupStateWithOptions,
   getState,
   generate,
   generateIncrementForFileChange

@@ -3,7 +3,8 @@ const StringUtil = require('./string')
 
 const VARIATIONS_DIRNAME = 'variations'
 
-const componentIdToVariationsPath = (componentsPath, componentId) => path.join(componentsPath, componentId, VARIATIONS_DIRNAME)
+const componentIdToVariationsPath = (componentsPath, componentId) =>
+  path.join(componentsPath, componentId, VARIATIONS_DIRNAME)
 
 const variationIdToTitle = (id) => {
   const basename = path.basename(id, path.extname(id))
