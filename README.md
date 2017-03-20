@@ -15,6 +15,12 @@ Please do not to rely on it for production use until we provide a stable release
 
 ## 📘 Documentation
 
+How Tos:
+
+- [Getting Started](./docs/getting-started.md)
+
+Technical information:
+
 - [Configuration](./docs/config.md)
 - [Adapters](./docs/adapters.md)
 - [Component](./docs/component.md)
