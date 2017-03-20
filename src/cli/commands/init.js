@@ -1,5 +1,6 @@
 const path = require('path')
 const File = require('../../util/file')
+const PageUtil = require('../../util/page')
 
 exports.command = 'init [dir]'
 
@@ -20,7 +21,7 @@ exports.handler = argv => {
   const indexContent = pageTemplate('Home').trim()
 
   const configPath = path.relative(process.cwd(), path.join(directory, configFileName))
-  const indexPath = path.relative(process.cwd(), path.join(directory, pagesDir, `page.md`))
+  const indexPath = path.relative(process.cwd(), path.join(directory, pagesDir, PageUtil.PAGE_FILENAME))
   const createConfigFile = File.write(configPath, configContent)
   const createIndexPage = File.write(indexPath, indexContent)
 
