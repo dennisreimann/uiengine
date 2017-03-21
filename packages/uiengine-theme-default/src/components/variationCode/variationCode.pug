@@ -18,7 +18,7 @@ mixin variationCode(variation, active)
           h3= h.t('Daten')
           button.variation-code__toggle(type="button" data-block-target=blockId)= h.t('Anzeigen / Ausblenden')
         .variation-code__block.variation-code__block--active(id=blockId)
-          pre.variation-code__context
+          pre.variation-code__context.hljs(lang="json")
             != h.decorateContext(variation.context)
 
       if variation.rendered

@@ -73,7 +73,7 @@ export default function (options, data) {
   }
 
   const look = options.look || 'default'
-  const hljs = options.hljs || 'tomorrow'
+  const hljs = options.hljs || 'atom-one-dark'
   const hljsPath = assetPath(`styles/hljs/${hljs}.css`)
   const stylesPath = assetPath(`styles/uiengine-${look}.css`)
   const scriptsPath = assetPath('scripts/uiengine.js')
