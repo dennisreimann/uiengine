@@ -12,22 +12,14 @@ const debounce = (key, fn, delay) => {
   debounceTimer[key] = setTimeout(fn, delay)
 }
 
-const paths = {
-  config: './uiengine.yml',
-  site: './dist'
-}
-
-const src = {
-  site: ['./src/{components,pages}/**/*', './theme/{assets,templates}/**/*']
-}
-
-const uieOpts = {
-  config: paths.config,
-  debug: true
-}
+const target = './dist'
+const sources = [
+  './uiengine.yml',
+  './src/{components,pages,templates}/**/*.{md,hbs,jsx,pug}'
+]
 
 gulp.task('site', (cb) => {
-  UIengine.generate(uieOpts)
+  UIengine.generate()
     .then(() => cb())
     .catch(error => p.util.log('Error generating site:', error, error.stack))
 })
@@ -35,22 +27,19 @@ gulp.task('site', (cb) => {
 gulp.task('browserSync', () =>
   browserSync.init({
     open: false,
-    server: {
-      baseDir: paths.site
-    }
+    server: { baseDir: target }
   })
 )
 
 gulp.task('watch', cb => {
-  gulp.watch(src.site).on('change', (event) =>
-    UIengine.generateIncrementForFileChange(uieOpts, event.path, event.type)
+  gulp.watch(sources).on('change', (event) =>
+    UIengine.generateIncrementForFileChange(event.path, event.type)
       .then(change => p.util.log('Rebuilt', change.type, change.item, '(triggered by', change.file, ')'))
       .catch(error => p.util.log('Error generating increment for changed file', event.path, ':', error))
   )
   // use debounce to prevent reloading for every file change
-  gulp.watch(`${paths.site}/**/*.html`).on('change', () => debounce('reload', browserSync.reload, 500))
+  gulp.watch(`${target}/**/*.html`).on('change', () => debounce('reload', browserSync.reload, 500))
 })
 
 gulp.task('build', (cb) => runSequence(['site'], cb))
-
 gulp.task('develop', (cb) => runSequence('build', ['watch', 'browserSync'], cb))

@@ -1,14 +1,10 @@
 const UIengine = require('../../uiengine')
 
-exports.command = 'site'
+exports.describe = 'Generate the site'
 
-exports.describe = 'Create the whole site'
-
-exports.builder = yargs =>
-  yargs
-    .demandOption(['config'])
-    .describe('config', 'Path to config file')
-    .example('$0 site --config=uiengine.yml')
+exports.builder = argv =>
+  argv
+    .example('$0 generate')
 
 exports.handler = argv => {
   const opts = {

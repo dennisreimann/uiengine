@@ -12,6 +12,8 @@ const PageUtil = require('./util/page')
 const ComponentUtil = require('./util/component')
 const VariationUtil = require('./util/variation')
 
+const CONFIG_FILENAME = 'uiengine.yml'
+
 // set the state in this modules scope so that we
 // can access it when handling incremental changes
 let state = {}
@@ -19,22 +21,25 @@ let state = {}
 const getState = () => state
 
 async function setupStateWithOptions (options = {}) {
-  if (typeof options.config === 'string') {
-    const config = await Config.read(options.config, options)
-    return { config }
-  } else {
-    return Promise.reject('Please provide the config file path with the options.')
-  }
+  const configFilePath = options.config || CONFIG_FILENAME
+  const config = await Config.read(configFilePath, options)
+
+  return { config }
 }
 
 async function generate (options) {
-  // 0. setup
   state = await setupStateWithOptions(options)
 
   const setupTheme = Theme.setup(state)
   const setupAdapters = Connector.setup(state)
   await Promise.all([setupTheme, setupAdapters])
 
+  await generateEverything()
+
+  return state
+}
+
+async function generateEverything () {
   // 1. data fetching
   const fetchPages = Page.fetchAll(state)
   const fetchComponents = Component.fetchAll(state)
@@ -59,7 +64,7 @@ async function generate (options) {
 }
 
 // TODO: Add handler for template changes
-async function generateIncrementForFileChange (options, filePath, action = 'changed') {
+async function generateIncrementForFileChange (filePath, action = 'changed') {
   const isDeleted = action === 'deleted'
   const { components, pages } = state.config.source
   const file = path.relative('.', filePath)
@@ -110,7 +115,7 @@ async function generateIncrementForFileChange (options, filePath, action = 'chan
     type = 'component'
     item = componentId
   } else {
-    await generate(options)
+    await generateEverything()
 
     type = 'site'
     item = state.config.name
@@ -202,6 +207,7 @@ async function removeComponent (id) {
 }
 
 module.exports = {
+  CONFIG_FILENAME,
   setupStateWithOptions,
   getState,
   generate,
