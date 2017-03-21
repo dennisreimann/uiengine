@@ -47,15 +47,26 @@ This markdown file can contain [YAML frontmatter](yaml.md) and has to be named l
 
 ## ✨ How to generate the project?
 
-The site can begenerated with the following command:
+The site can be generated with the following command:
 
 ```bash
 uiengine generate
 ```
 
-To rebuild on file change (in development) you can also leverage the watch mode:
+To rebuild on file change you can also leverage the watch mode:
 
 ```bash
 uiengine generate --watch
 ```
 
+You can also spawn a server for the generated site:
+
+```bash
+uiengine generate --serve
+```
+
+The `watch` and `serve` options can be combined, which makes a good development environment:
+
+```bash
+uiengine generate --watch --serve
+```

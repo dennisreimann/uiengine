@@ -53,6 +53,7 @@
     "yargs": "^6.6.0"
   },
   "optionalDependencies": {
+    "browser-sync": "^2.18.8",
     "chokidar": "^1.6.1"
   },
   "devDependencies": {
