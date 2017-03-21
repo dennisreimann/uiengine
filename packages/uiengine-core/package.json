@@ -52,6 +52,9 @@
     "uiengine-theme-default": "^0.6.1",
     "yargs": "^6.6.0"
   },
+  "optionalDependencies": {
+    "chokidar": "^1.6.1"
+  },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
     "babel-cli": "^6.23.0",

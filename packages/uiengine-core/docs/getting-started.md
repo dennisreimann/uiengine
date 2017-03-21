@@ -20,7 +20,7 @@ uiengine init
 
 ## ⚙️ How to configure the project?
 
-TODO: Add short description linking to the [config.md](config details).
+TODO: Add short description linking to the [config details](./config.md).
 
 ## ➕ How to create a component?
 
@@ -44,3 +44,18 @@ You create a variation by adding a file renderable by one of the configured adap
 
 In addition to the raw render file, you can also add a markdown file containing the meta information for the variation.
 This markdown file can contain [YAML frontmatter](yaml.md) and has to be named like the variation, but having with the fil extension `.md`.
+
+## ✨ How to generate the project?
+
+The site can begenerated with the following command:
+
+```bash
+uiengine generate
+```
+
+To rebuild on file change (in development) you can also leverage the watch mode:
+
+```bash
+uiengine generate --watch
+```
+
