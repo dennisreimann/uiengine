@@ -2,6 +2,8 @@ export const template = (name) =>
 `
 # Project config: Defaults to name and version from package.json.
 # Here you can overwrite it and add more custom properties.
+# For a detailed documentation of all the options in here see
+# https://github.com/dennisreimann/uiengine/blob/master/docs/config.md
 name: ${name}
 
 # Base directories for the input, your raw source files:

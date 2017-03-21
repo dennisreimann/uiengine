@@ -9,17 +9,12 @@ const String = require('../../util/string')
 const getTemplate = id =>
   require(`../templates/${id}`).template
 
-exports.command = 'scaffold'
-
 exports.describe = 'Create basic files for a new component/page'
 
-exports.builder = yargs =>
-  yargs
-    .demandOption(['config'])
+exports.builder = argv =>
+  argv
     .demandCommand(1)
-    .nargs('componentId', 1)
-    .describe('config', 'Path to config file')
-    .example('$0 scaffold <component_id> [variation1_id variation2_id ...] --config=uiengine.yml')
+    .example('$0 scaffold <component_id> [variation1 variation2 ...]')
 
 exports.handler = argv => {
   const opts = {

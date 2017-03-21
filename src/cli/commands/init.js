@@ -2,19 +2,19 @@ const path = require('path')
 const File = require('../../util/file')
 const PageUtil = require('../../util/page')
 
-exports.command = 'init [dir]'
-
 exports.desc = 'Create a basic structure and config file'
 
-exports.builder = yargs =>
-  yargs
+exports.builder = argv =>
+  argv
+    .string('dir')
     .default('dir', '.')
+    .describe('dir', 'The base directory')
 
 exports.handler = argv => {
   const directory = path.resolve(process.cwd(), argv.dir)
   const name = path.basename(directory)
   const pagesDir = 'pages'
-  const configFileName = `${name}.yml`
+  const configFileName = argv.config
   const configTemplate = require('../templates/config').template
   const pageTemplate = require('../templates/page').template
   const configContent = configTemplate(name).trim()
@@ -26,19 +26,22 @@ exports.handler = argv => {
   const createIndexPage = File.write(indexPath, indexContent)
 
   Promise.all([createConfigFile, createIndexPage])
-    .then((state) =>
+    .then((state) => {
+      const configOpt = configFileName !== 'uiengine.yml' ? `--config=${configFileName}` : ''
       console.log(`✅  ${name} initialized!
 
 The following files were created:
 
-- ${configPath} (uiengine configuration file)
+- ${configPath} (config file)
 - ${indexPath} (index page)
 
-Build it using this command:
+Go ahead and update the config file according to your needs. 
+After that you can generate the site using this command:
 
-$ uiengine site --config=${configFileName}
+$ uiengine generate ${configOpt}
 
-Enjoy! ✌️`))
+Enjoy! ✌️`)
+    })
     .catch((err) => {
       console.error([`🚨  initializing ${name} failed!`, err.stack].join('\n\n'))
       process.exit(1)
