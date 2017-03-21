@@ -1,0 +1,13 @@
+include /icon/icon.pug
+
+mixin pageheader(page, navigation)
+  header.pageheader&attributes(attributes)
+    .wrap.wrap--content
+      - const navItem = navigation[page.id]
+      - const parentItem = navigation[navItem.parentId]
+      if parentItem
+        a.pageheader__parent-link(href=h.pageLink(parentItem))
+          +icon('caret-left')
+          = parentItem.title
+      h1.pageheader__title= page.title
+      block

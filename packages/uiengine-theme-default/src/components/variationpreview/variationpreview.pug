@@ -1,0 +1,22 @@
+mixin variationpreview(variation, active)
+  - const variationId = h.dasherize(variation.id)
+  - const previewId = `${variationId}-preview`
+  - const breakpointsId = `${variationId}-breakpoints`
+  - const containerId = `${variationId}-container`
+  - const classes = active ? 'variation__section--active' : null
+  variationpreview(id=previewId class=classes)&attributes(attributes)
+    .variationpreview__container(id=containerId data-variation-id=variationId)
+      .variationpreview__size
+        button.variationpreview__sizer(type="button" data-breakpoints-target=breakpointsId)
+      script.
+        var width = window.sessionStorage.getItem('variation:width:#{variationId}');
+        if (width) { document.getElementById('#{containerId}').style.width = width + 'px' }
+      iframe.variationpreview__iframe(src=h.variationpreviewPath(variation.id))
+    if config.breakpoints
+      .variationpreview__breakpoints(id=breakpointsId)
+        .variationpreview__breakpoints-inner
+          each width, breakpoint in config.breakpoints
+            button.variationpreview__breakpoint(type="button" data-width=width data-breakpoint=breakpoint data-breakpoints-target=breakpointsId data-container-target=containerId)
+              = `${breakpoint}: ${width}px`
+          button.variationpreview__breakpoint(type="button" data-breakpoints-target=breakpointsId data-container-target=containerId)
+            = h.t('zurücksetzen')

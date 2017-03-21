@@ -1,4 +1,4 @@
-mixin navTree(itemIds, classBase = 'nav')
+mixin navtree(itemIds, classBase = 'nav')
   if itemIds.length
     - const treeClasses = `${classBase}__tree`
     ul(class=treeClasses)&attributes(attributes)
@@ -14,4 +14,4 @@ mixin navItem(itemId, classBase = 'nav')
     - const classes = classList.join(' ')
     li(class=classes)
       a(class=`${classBase}__link` href=h.pageLink(item))= item.title
-      +navTree(item.childIds, classBase)
+      +navtree(item.childIds, classBase)

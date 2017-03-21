@@ -1,0 +1,20 @@
+mixin navigation()
+  nav.navigation
+    .wrap.wrap--large
+      a.navigation__config(href=h.pageLink(navigation['index']))
+        | #{config.name} (#{config.version})
+      ul.navigation__tree
+        +navigationItem('index')
+        if navigation && navigation.index
+          for itemId in navigation.index.childIds
+            +navigationItem(itemId)
+
+mixin navigationItem(itemId)
+  if item = navigation[itemId]
+    - const classList = []
+    - item.childIds.length ? classList.push('navigation__item--children') : false
+    - h.isCurrentPage(item) ? classList.push('navigation__item--current') : false
+    - h.isActivePage(item) ? classList.push('navigation__item--active') : false
+    - const classes = classList.join(' ')
+    li.navigation__item(class=classes)
+      a.navigation__link(href=h.pageLink(item))= item.title

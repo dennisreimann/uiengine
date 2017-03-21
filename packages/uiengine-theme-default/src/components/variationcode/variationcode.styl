@@ -1,19 +1,30 @@
-.variation-code
+.variationcode
   &__header
     display flex
-    align-items baseline
-    justify-content space-between
     margin-top $space-large
     margin-bottom $space-tiny
 
   &__toggle
+    margin-left $space-small
     background none
     color $color-code-link
-    font-size $font-size-tiny
-    font-family $font-family-base
     cursor pointer
+
+    .icon
+      transition-property transform
+      transition-duration .15s
+      icon-color($color-code-link)
+      icon-position(1px, -3px)
+
     &:hover
       color $color-code-link-hover
+
+      .icon
+        icon-color($color-code-link-hover)
+
+    &--active
+      .icon
+        transform rotate(90deg)
 
   &__block:not(&__block--active)
     display none

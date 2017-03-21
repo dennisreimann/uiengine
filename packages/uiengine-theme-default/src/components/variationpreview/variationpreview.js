@@ -12,20 +12,20 @@ const breakpointWidths = Object.values ? Object.values(breakpoints) : Object.key
 
 if (breakpoints) {
   const toggleBreakpoints = (breakpoints) =>
-  breakpoints.classList.toggle('variation-preview__breakpoints--active')
+  breakpoints.classList.toggle('variationpreview__breakpoints--active')
 
-  on('click', '.variation-preview__sizer', e => {
+  on('click', '.variationpreview__sizer', e => {
     const breakpointsSelector = e.target.getAttribute('data-breakpoints-target')
     const breakpoints = document.getElementById(breakpointsSelector)
 
     toggleBreakpoints(breakpoints)
   })
 
-  on('click', '.variation-preview__breakpoints-inner', e => {
+  on('click', '.variationpreview__breakpoints-inner', e => {
     toggleBreakpoints(e.target.parentNode)
   })
 
-  on('click', '.variation-preview__breakpoint', e => {
+  on('click', '.variationpreview__breakpoint', e => {
     const breakpoint = e.target
     const breakpointsSelector = e.target.getAttribute('data-breakpoints-target')
     const breakpoints = document.getElementById(breakpointsSelector)
@@ -72,7 +72,7 @@ const sizerTextForWidth = innerWidth => {
   return text
 }
 
-document.querySelectorAll('.variation-preview__iframe').forEach(iframe => {
+document.querySelectorAll('.variationpreview__iframe').forEach(iframe => {
   const container = iframe.parentNode
   const sizer = container.firstElementChild.firstElementChild
 

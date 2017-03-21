@@ -89,7 +89,7 @@ export default function (options, data) {
     scriptsPath,
     hljsPath,
 
-    variationPreviewPath (variationId) {
+    variationpreviewPath (variationId) {
       const target = path.join('variations', `${variationId}.html`)
       const source = path.join(currentItem.path, pageFile)
 

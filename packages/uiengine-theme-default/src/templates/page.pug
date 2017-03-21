@@ -1,11 +1,11 @@
 extends includes/layout.pug
 
-include /pageHeader/pageHeader.pug
-include /pageNav/pageNav.pug
+include /pageheader/pageheader.pug
+include /pagenav/pagenav.pug
 
 block main
   section.page(id=h.dasherize(page.id))
-    +pageHeader(page, navigation)
+    +pageheader(page, navigation)
 
     .wrap.wrap--content
       article.page__content
@@ -13,4 +13,4 @@ block main
 
       - const navItem = navigation[page.id]
       - const itemIds = navItem.childIds
-      +pageNav(itemIds, navigation)
+      +pagenav(itemIds, navigation)

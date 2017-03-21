@@ -1,4 +1,4 @@
-import '../components/variationHeader/variationHeader'
-import '../components/variationPreview/variationPreview'
-import '../components/variationCode/variationCode'
+import '../components/variationheader/variationheader'
+import '../components/variationpreview/variationpreview'
+import '../components/variationcode/variationcode'
 import '../components/permalink/permalink'

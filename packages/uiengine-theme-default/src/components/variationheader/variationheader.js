@@ -1,6 +1,6 @@
 import { on } from '../../scripts/lib/util'
 
-on('click', '.variation-header__link', e => {
+on('click', '.variationheader__link', e => {
   e.preventDefault()
 
   const link = e.target
@@ -12,7 +12,7 @@ on('click', '.variation-header__link', e => {
   for (let i = 0; i < links.length; i++) {
     const item = links[i]
     const op = (item === link) ? 'add' : 'remove'
-    item.classList[op]('variation-header__link--active')
+    item.classList[op]('variationheader__link--active')
   }
 
   for (let i = 0; i < sections.length; i++) {

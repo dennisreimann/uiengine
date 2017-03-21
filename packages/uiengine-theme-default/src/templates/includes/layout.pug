@@ -1,5 +1,5 @@
 include /main/main.pug
-include /mainNav/mainNav.pug
+include /navigation/navigation.pug
 
 doctype
 html
@@ -13,7 +13,7 @@ html
       window.UIengine = {}
   body
     include icons.svg
-    +mainNav()
+    +navigation()
     +main()
       block main
     script(src=h.scriptsPath defer)

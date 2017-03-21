@@ -1,7 +1,7 @@
 extends includes/layout.pug
 
 include /component/component.pug
-include /pageHeader/pageHeader.pug
+include /pageheader/pageheader.pug
 include /variation/variation.pug
 
 block main
@@ -10,6 +10,6 @@ block main
       | window.UIengine.breakpoints = !{JSON.stringify(config.breakpoints)};
     style
       each width, breakpoint in config.breakpoints
-        | .variation-preview__container[data-breakpoint='#{breakpoint}'] { width: #{width}px; }
+        | .variationpreview__container[data-breakpoint='#{breakpoint}'] { width: #{width}px; }
 
   +component(page)

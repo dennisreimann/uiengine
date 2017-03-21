@@ -1,0 +1,19 @@
+mixin variationheader(variation)
+  - const idPrefix = h.dasherize(variation.id)
+  - const component = components[variation.componentId]
+  header.variationheader&attributes(attributes)
+    .wrap.wrap--content
+      span.variationheader__description= h.t('Variation')
+
+      h2.variationheader__title
+        span.variationheader__variation-title= variation.title
+
+      nav.variationheader__links
+        if variation.rendered
+          +variationheaderLink(`${idPrefix}-preview`, 'Vorschau', true)
+        if variation.raw || variation.context || variation.rendered
+          +variationheaderLink(`${idPrefix}-code`, 'Code', !variation.rendered)
+
+mixin variationheaderLink(id, title, active)
+  - const classes = active ? 'variationheader__link--active' : null
+  a.variationheader__link(href=`#${id}` class=classes)= title

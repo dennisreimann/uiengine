@@ -1,11 +1,11 @@
 extends includes/layout.pug
 
-include /pageHeader/pageHeader.pug
-include /pageNav/pageNav.pug
+include /pageheader/pageheader.pug
+include /pagenav/pagenav.pug
 
 block main
   section.sandbox(id=h.dasherize(page.id))
-    +pageHeader(page, navigation)
+    +pageheader(page, navigation)
 
     .wrap.wrap--content
       article.page__content
@@ -20,6 +20,6 @@ block main
             - const item = navigation[page.id]
             .sandbox-page
               h2.sandbox-page__title
-                a(class="page-nav__link" href=h.pageLink(item))= item.title
+                a(class="pagenav__link" href=h.pageLink(item))= item.title
               .sandbox-page__content
                 != page.content

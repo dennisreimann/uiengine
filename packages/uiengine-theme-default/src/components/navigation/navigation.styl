@@ -1,7 +1,7 @@
-.main-nav
+.navigation
   overflow hidden
-  color $color-mainnav-text
-  background $color-mainnav-bg
+  color $color-navigation-text
+  background $color-navigation-bg
 
   .wrap
     display flex
@@ -18,13 +18,13 @@
 
     &--active,
     &--current
-      color $color-mainnav-text-current
-      background $color-mainnav-bg-current
+      color $color-navigation-text-current
+      background $color-navigation-bg-current
 
     &:not(&--active)
       &:hover
-        color $color-mainnav-text-hover
-        background $color-mainnav-bg-current
+        color $color-navigation-text-hover
+        background $color-navigation-bg-current
 
   &__link
     display block
@@ -36,7 +36,7 @@
     order 2
     margin-right $space-large * -1
     display block
-    color $color-mainnav-text-meta
+    color $color-navigation-text-meta
     text-decoration none
     padding $space-normal $space-large
     white-space nowrap
