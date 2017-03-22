@@ -4,7 +4,7 @@ mixin variationpreview(variation, active)
   - const breakpointsId = `${variationId}-breakpoints`
   - const containerId = `${variationId}-container`
   - const classes = active ? 'variation__section--active' : null
-  variationpreview(id=previewId class=classes)&attributes(attributes)
+  .variationpreview(id=previewId class=classes)&attributes(attributes)
     .variationpreview__container(id=containerId data-variation-id=variationId)
       .variationpreview__size
         button.variationpreview__sizer(type="button" data-breakpoints-target=breakpointsId)

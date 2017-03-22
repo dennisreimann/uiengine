@@ -87,6 +87,7 @@ gulp.task('icons', () =>
             svgo: {
               plugins: [
                 { removeTitle: true },
+                { removeStyleElement: true },
                 { removeUselessStrokeAndFill: true },
                 { removeAttrs: { attrs: '(stroke|fill)' } }
               ]
