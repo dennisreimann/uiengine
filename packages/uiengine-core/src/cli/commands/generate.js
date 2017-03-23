@@ -1,5 +1,6 @@
 const path = require('path')
 const UIengine = require('../../uiengine')
+const debounce = require('../../util/debounce')
 
 exports.describe = 'Generate the site'
 
@@ -34,12 +35,6 @@ exports.handler = argv => {
       console.error([`🚨  generating the site failed!`, err.stack].join('\n\n'))
       process.exit(1)
     })
-}
-
-const debounceTimer = {}
-const debounce = (key, fn, delay) => {
-  clearTimeout(debounceTimer[key])
-  debounceTimer[key] = setTimeout(fn, delay)
 }
 
 const requireOptional = (module, option) => {
