@@ -72,10 +72,10 @@ export default function (options, data) {
     return relativePath(target, source)
   }
 
-  const look = options.look || 'default'
+  const skin = options.skin || 'default'
   const hljs = options.hljs || 'atom-one-dark'
   const hljsPath = assetPath(`styles/hljs/${hljs}.css`)
-  const stylesPath = assetPath(`styles/uiengine-${look}.css`)
+  const stylesPath = assetPath(`styles/uiengine-${skin}.css`)
   const scriptsPath = assetPath('scripts/uiengine.js')
 
   return {

@@ -8,7 +8,7 @@ const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
 const p = require('gulp-load-plugins')()
 
-const looks = ['default', 'uiengineering']
+const skins = ['default', 'uiengineering']
 
 const paths = {
   stylesLib: './src/styles/lib',
@@ -30,15 +30,15 @@ const src = {
 
 const dist = (folder = '') => gulp.dest(`${paths.dist}/${folder}`)
 
-const styles = look =>
+const styles = skin =>
   gulp.src(src.styles)
     .pipe(p.plumber())
     .pipe(p.stylus({
       paths: [paths.stylesLib],
-      import: ['variables', 'mediaQueries', 'mixins', `looks/${look}`],
+      import: ['variables', 'mediaQueries', 'mixins', `skins/${skin}`],
       url: { name: 'embedurl' }
     }))
-    .pipe(p.concat(`uiengine-${look}.css`))
+    .pipe(p.concat(`uiengine-${skin}.css`))
     .pipe(p.postcss([
       mqpacker,
       autoprefixer({ browsers: ['last 2 versions'] }),
@@ -46,7 +46,7 @@ const styles = look =>
     ]))
     .pipe(dist('styles'))
 
-gulp.task('styles', () => mergeStream(...looks.map(styles)))
+gulp.task('styles', () => mergeStream(...skins.map(styles)))
 
 gulp.task('hljs', () =>
   gulp.src(src.hljs)
