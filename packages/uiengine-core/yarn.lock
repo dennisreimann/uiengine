@@ -3807,9 +3807,9 @@ uid-number@~0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
-uiengine-theme-default@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.6.1.tgz#1f934a0e0ba0bec42c5d5dc9383db52a494a7d5c"
+uiengine-theme-default@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.7.0.tgz#04818ef2b00e5104abbf711895eb539e3e639165"
   dependencies:
     highlight.js "^9.10.0"
     pug "^2.0.0-beta10"
