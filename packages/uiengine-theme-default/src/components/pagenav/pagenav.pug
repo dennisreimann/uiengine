@@ -3,9 +3,9 @@ mixin pagenav(itemIds, navigation)
     nav.pagenav
       ul.pagenav__tree
         for itemId in itemIds
-          +pagenavItem(itemId)
+          +pagenavItem(itemId, navigation)
 
-mixin pagenavItem(itemId)
+mixin pagenavItem(itemId, navigation)
   if item = navigation[itemId]
     - const classList = []
     - item.childIds.length ? classList.push('pagenav__item--children') : false

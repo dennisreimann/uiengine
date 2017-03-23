@@ -11,11 +11,11 @@ mixin component(page)
         !=page.content
 
       nav.pagenav
-      ul.pagenav__tree
-        for variationId in variationIds
-          - variation = variations[variationId]
-          li.pagenav__item
-            a(class="pagenav__link" href=`#${h.dasherize(variation.id)}`)= variation.title
+        ul.pagenav__tree
+          for variationId in variationIds
+            - variation = variations[variationId]
+            li.pagenav__item
+              a(class="pagenav__link" href=`#${h.dasherize(variation.id)}`)= variation.title
 
   section.variations
     for variationId in variationIds

@@ -12,3 +12,21 @@ icon-position($top = null, $left = null)
     top $top
   if $left
     left $left
+
+markdown-container()
+  a:not([class])
+    color $color-main-link
+
+    &:hover
+      color $color-main-link-hover
+
+  p:not([class])
+    margin-bottom $space-normal
+
+  ul:not([class])
+  ol:not([class])
+    margin-bottom $space-normal
+    margin-left $space-medium
+
+  > :last-child
+    margin-bottom 0 !important
