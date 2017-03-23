@@ -5,6 +5,8 @@ import highlightjs from 'highlight.js'
 const pageFile = 'index.html'
 const assetsDir = '_uiengine-theme'
 const manifestPath = path.resolve(__dirname, '..', 'static', assetsDir, 'rev-manifest.json')
+const localesPath = path.resolve(__dirname, '..', 'static', assetsDir, 'locales')
+const supportedLocales = ['en', 'de']
 
 const revvedFile = (filePath) => {
   let revs
@@ -22,17 +24,6 @@ const relativePath = (toPath, fromPath) => {
     return path.basename(toPath)
   }
 }
-
-// TODO: Add proper localization support
-const t = (string) =>
-  string
-
-const htmlEscape = html =>
-  String(html)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
 
 const jsonEscape = json =>
   JSON.stringify(json, null, '  ')
@@ -72,14 +63,16 @@ export default function (options, data) {
     return relativePath(target, source)
   }
 
+  const lang = supportedLocales.includes(options.lang) ? options.lang : 'en'
   const skin = options.skin || 'default'
   const hljs = options.hljs || 'atom-one-dark'
   const hljsPath = assetPath(`styles/hljs/${hljs}.css`)
   const stylesPath = assetPath(`styles/uiengine-${skin}.css`)
   const scriptsPath = assetPath('scripts/uiengine.js')
+  const localePath = path.resolve(localesPath, `${lang}.json`)
+  const localized = require(localePath)
 
   return {
-    t,
     dasherize,
     decorateRaw,
     decorateContext,
@@ -88,8 +81,13 @@ export default function (options, data) {
     stylesPath,
     scriptsPath,
     hljsPath,
+    lang,
 
-    variationpreviewPath (variationId) {
+    t (key) {
+      return key.split('.').reduce((a, b) => a && a[b], localized)
+    },
+
+    variationPreviewPath (variationId) {
       const target = path.join('variations', `${variationId}.html`)
       const source = path.join(currentItem.path, pageFile)
 

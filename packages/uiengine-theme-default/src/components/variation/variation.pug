@@ -16,11 +16,11 @@ mixin variation(variation)
 
       ul.variation__links
         li
-          +permalink(h.t('Variationslink kopieren'), `#${varId}`, 'globe').variation__link
+          +permalink(h.t('variation.copy_permalink'), `#${varId}`, 'globe').variation__link
         li
-          a.variation__link(href=h.variationpreviewPath(variation.id) target=varId)
+          a.variation__link(href=h.variationPreviewPath(variation.id) target=varId)
             +icon('open-in-window')
-            = h.t('Variation in separatem Fenster öffnen')
+            = h.t('variation.open_in_window')
 
     if variation.raw || variation.context || variation.rendered
       .variation__sections

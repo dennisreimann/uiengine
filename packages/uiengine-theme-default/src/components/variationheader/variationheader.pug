@@ -3,16 +3,16 @@ mixin variationheader(variation)
   - const component = components[variation.componentId]
   header.variationheader&attributes(attributes)
     .wrap.wrap--content
-      span.variationheader__description= h.t('Variation')
+      span.variationheader__description= h.t('variation.label')
 
       h2.variationheader__title
         span.variationheader__variation-title= variation.title
 
       nav.variationheader__links
         if variation.rendered
-          +variationheaderLink(`${idPrefix}-preview`, 'Vorschau', true)
+          +variationheaderLink(`${idPrefix}-preview`, h.t('variation.preview'), true)
         if variation.raw || variation.context || variation.rendered
-          +variationheaderLink(`${idPrefix}-code`, 'Code', !variation.rendered)
+          +variationheaderLink(`${idPrefix}-code`, h.t('variation.code'), !variation.rendered)
 
 mixin variationheaderLink(id, title, active)
   - const classes = active ? 'variationheader__link--active' : null

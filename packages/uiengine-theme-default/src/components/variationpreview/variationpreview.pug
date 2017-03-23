@@ -11,7 +11,7 @@ mixin variationpreview(variation, active)
       script.
         var width = window.sessionStorage.getItem('variation:width:#{variationId}');
         if (width) { document.getElementById('#{containerId}').style.width = width + 'px' }
-      iframe.variationpreview__iframe(src=h.variationpreviewPath(variation.id))
+      iframe.variationpreview__iframe(src=h.variationPreviewPath(variation.id))
     if config.breakpoints
       .variationpreview__breakpoints(id=breakpointsId)
         .variationpreview__breakpoints-inner
@@ -19,4 +19,4 @@ mixin variationpreview(variation, active)
             button.variationpreview__breakpoint(type="button" data-width=width data-breakpoint=breakpoint data-breakpoints-target=breakpointsId data-container-target=containerId)
               = `${breakpoint}: ${width}px`
           button.variationpreview__breakpoint(type="button" data-breakpoints-target=breakpointsId data-container-target=containerId)
-            = h.t('zurücksetzen')
+            = h.t('breakpoints.reset')

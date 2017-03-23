@@ -1,0 +1,15 @@
+breakpoints:
+  reset: reset
+
+variation:
+  label: Variation
+  copy_permalink: Copy link to variation
+  open_in_window: Open in separate window
+  preview: Preview
+  code: Code
+  raw: Code
+  context: Data
+  rendered: HTML
+
+sitemap:
+  label: Sitemap

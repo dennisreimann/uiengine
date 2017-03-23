@@ -8,7 +8,7 @@ mixin variationcode(variation, active)
           - const blockId = `${h.dasherize(variation.id)}-raw`
           section.variationcode__section.variationcode__section--expanded(id=blockId)
             header.variationcode__header(role="button" data-section-target=blockId)
-              h3= h.t('Code')
+              h3= h.t('variation.raw')
               +icon('caret-down-double').variationcode__expandicon
             .variationcode__content
               pre.variationcode__raw.hljs(lang=variation.extension)
@@ -18,7 +18,7 @@ mixin variationcode(variation, active)
           - const blockId = `${h.dasherize(variation.id)}-context`
           section.variationcode__section.variationcode__section--expanded(id=blockId)
             header.variationcode__header(role="button" data-section-target=blockId)
-              h3= h.t('Daten')
+              h3= h.t('variation.context')
               +icon('caret-down-double').variationcode__expandicon
             .variationcode__content
               pre.variationcode__context.hljs(lang="json")
@@ -28,7 +28,7 @@ mixin variationcode(variation, active)
           - const blockId = `${h.dasherize(variation.id)}-rendered`
           section.variationcode__section(id=blockId)
             header.variationcode__header(role="button" data-section-target=blockId)
-              h3= h.t('HTML')
+              h3= h.t('variation.rendered')
               +icon('caret-down-double').variationcode__expandicon
             .variationcode__content
               pre.variationcode__rendered.hljs(lang="html")

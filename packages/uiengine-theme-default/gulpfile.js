@@ -25,6 +25,7 @@ const src = {
   hljs: ['./node_modules/highlight.js/styles/**'],
   scripts: ['src/scripts/*.js', './src/components/**/*.js'],
   static: ['./src/{fonts,images}/**'],
+  locales: ['./src/locales/*.yml'],
   rev: [paths.dist + '/**/*.{css,js,map,ico,cur,svg,jpg,jpeg,png,gif,woff,woff2}']
 }
 
@@ -47,6 +48,12 @@ const styles = skin =>
     .pipe(dist('styles'))
 
 gulp.task('styles', () => mergeStream(...skins.map(styles)))
+
+gulp.task('locales', () =>
+  gulp.src(src.locales)
+    .pipe(p.yaml())
+    .pipe(dist('locales'))
+)
 
 gulp.task('hljs', () =>
   gulp.src(src.hljs)
@@ -140,9 +147,10 @@ gulp.task('watch', cb => {
   gulp.watch(src.svgs, ['svgs'])
   gulp.watch(src.static, ['static'])
   gulp.watch(src.scripts, ['scripts'])
+  gulp.watch(src.locales, ['locales'])
   gulp.watch(src.styles.concat([`${paths.stylesLib}/**/*.styl`]), ['styles'])
 })
 
-gulp.task('generate', ['lib', 'pug', 'scripts', 'scripts:preview', 'icons', 'svgs', 'styles', 'static', 'hljs'])
+gulp.task('generate', ['lib', 'pug', 'scripts', 'scripts:preview', 'icons', 'svgs', 'styles', 'static', 'hljs', 'locales'])
 gulp.task('build', cb => runSequence('generate', 'rev', cb))
 gulp.task('develop', (cb) => runSequence('generate', 'watch', cb))
