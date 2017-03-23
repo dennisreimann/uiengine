@@ -1,52 +1,49 @@
 .variationcode
+  &__sections
+    margin-right $space-normal * -1
+    margin-left $space-normal * -1
+
   &__header
     display flex
-    margin-top $space-large
-    margin-bottom $space-tiny
-
-  &__toggle
-    margin-left $space-small
-    background none
-    color $color-code-link
+    align-items center
+    justify-content space-between
+    border 1px solid $color-neutral-20
+    padding $space-small $space-normal
     cursor pointer
-
-    .icon
-      transition-property transform
-      transition-duration .15s
-      icon-color($color-code-link)
-      icon-position(.15em)
+    color $color-code-header
 
     &:hover
-      color $color-code-link-hover
+      color $color-code-header-hover
 
-      .icon
-        icon-color($color-code-link-hover)
+  &__section:not(.variationcode__section--expanded) + &__section &__header
+    border-top 0
 
-    &--active
-      .icon
-        transform rotate(90deg)
+  &__expandicon
+    transition-property transform
+    transition-duration .15s
+    icon-color($color-code-header)
 
-  &__block:not(&__block--active)
+    .variationcode__header:hover &
+      icon-color($color-code-header-hover)
+
+    .variationcode__section--expanded &
+      transform rotate(-180deg)
+
+  &__content
     display none
+
+    .variationcode__section--expanded &
+      display block
 
   &__raw
   &__context
   &__rendered
     overflow-x auto
-    padding $space-normal
     font-family $font-family-code
     font-size $font-size-small
-
-  &__raw
+    // defaults, will be overriden by hljs
     color $color-code-text
     background-color $color-code-bg
-
-  &__context
-    color $color-data-text
-    background-color $color-data-bg
-
-  &__rendered
-    color $color-code-text
-    background-color $color-code-bg
-
+    // use important to override hljs styling which differs per theme
+    padding $space-normal !important
 

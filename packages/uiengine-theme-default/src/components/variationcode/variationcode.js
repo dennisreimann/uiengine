@@ -1,10 +1,9 @@
 import { on } from '../../scripts/lib/util'
 
-on('click', '.variationcode__toggle', e => {
+on('click', '.variationcode__header', e => {
   const toggle = e.target
-  const blockSelector = toggle.getAttribute('data-block-target')
-  const block = document.getElementById(blockSelector)
+  const sectionSelector = toggle.getAttribute('data-section-target')
+  const section = document.getElementById(sectionSelector)
 
-  toggle.classList.toggle('variationcode__toggle--active')
-  block.classList.toggle('variationcode__block--active')
+  section.classList.toggle('variationcode__section--expanded')
 })

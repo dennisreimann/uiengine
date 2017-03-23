@@ -3,32 +3,33 @@ mixin variationcode(variation, active)
   - const classes = active ? 'variation__section--active' : null
   .variationcode(id=id class=classes)&attributes(attributes)
     .wrap.wrap--content
-      if variation.raw
-        - const blockId = `${h.dasherize(variation.id)}-raw`
-        header.variationcode__header
-          h3= h.t('Code')
-          button.variationcode__toggle.variationcode__toggle--active(type="button" data-block-target=blockId)
-            +icon('caret-right-double')
-        .variationcode__block.variationcode__block--active(id=blockId)
-          pre.variationcode__raw.hljs(lang=variation.extension)
-            != h.decorateRaw(variation.raw, variation.extension)
+      .variationcode__sections
+        if variation.raw
+          - const blockId = `${h.dasherize(variation.id)}-raw`
+          section.variationcode__section.variationcode__section--expanded(id=blockId)
+            header.variationcode__header(role="button" data-section-target=blockId)
+              h3= h.t('Code')
+              +icon('caret-down-double').variationcode__expandicon
+            .variationcode__content
+              pre.variationcode__raw.hljs(lang=variation.extension)
+                != h.decorateRaw(variation.raw, variation.extension)
 
-      if variation.context
-        - const blockId = `${h.dasherize(variation.id)}-context`
-        header.variationcode__header
-          h3= h.t('Daten')
-          button.variationcode__toggle.variationcode__toggle--active(type="button" data-block-target=blockId)
-            +icon('caret-right-double')
-        .variationcode__block.variationcode__block--active(id=blockId)
-          pre.variationcode__context.hljs(lang="json")
-            != h.decorateContext(variation.context)
+        if variation.context
+          - const blockId = `${h.dasherize(variation.id)}-context`
+          section.variationcode__section.variationcode__section--expanded(id=blockId)
+            header.variationcode__header(role="button" data-section-target=blockId)
+              h3= h.t('Daten')
+              +icon('caret-down-double').variationcode__expandicon
+            .variationcode__content
+              pre.variationcode__context.hljs(lang="json")
+                != h.decorateContext(variation.context)
 
-      if variation.rendered
-        - const blockId = `${h.dasherize(variation.id)}-rendered`
-        header.variationcode__header
-          h3= h.t('HTML')
-          button.variationcode__toggle(type="button" data-block-target=blockId)
-            +icon('caret-right-double')
-        .variationcode__block(id=blockId)
-          pre.variationcode__rendered.hljs(lang="html")
-            != h.decorateRendered(variation.rendered)
+        if variation.rendered
+          - const blockId = `${h.dasherize(variation.id)}-rendered`
+          section.variationcode__section(id=blockId)
+            header.variationcode__header(role="button" data-section-target=blockId)
+              h3= h.t('HTML')
+              +icon('caret-down-double').variationcode__expandicon
+            .variationcode__content
+              pre.variationcode__rendered.hljs(lang="html")
+                != h.decorateRendered(variation.rendered)
