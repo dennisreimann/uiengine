@@ -3,14 +3,9 @@ const runSequence = require('run-sequence')
 const BrowserSync = require('browser-sync')
 const UIengine = require('uiengine')
 const p = require('gulp-load-plugins')()
+const debounce = require('../../src/util/debounce')
 
 const browserSync = BrowserSync.create()
-
-const debounceTimer = {}
-const debounce = (key, fn, delay) => {
-  clearTimeout(debounceTimer[key])
-  debounceTimer[key] = setTimeout(fn, delay)
-}
 
 const target = './dist'
 const sources = [
