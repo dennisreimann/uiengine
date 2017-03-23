@@ -35,4 +35,4 @@ templates:
 theme:
   module: uiengine-theme-default
   options:
-    look: uiengineering
+    skin: uiengineering
