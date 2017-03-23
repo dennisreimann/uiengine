@@ -8,7 +8,7 @@ const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
 const p = require('gulp-load-plugins')()
 
-const skins = ['default', 'uiengineering']
+const skins = ['default', 'deeplake', 'uiengineering']
 
 const paths = {
   stylesLib: './src/styles/lib',
