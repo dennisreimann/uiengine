@@ -1,9 +1,35 @@
 .sitemap
   line-height 2
 
-  a
+  &__link
     color inherit
     text-decoration none
 
   &__tree
-    margin-left $space-normal
+    list-style none
+
+  & > &__tree
+    display flex
+    flex-wrap wrap
+
+  & > &__tree &__item
+    @media $mq-up_to_m
+      flex-basis 100%
+    @media $mq-m_to_l
+      flex-basis (100/2)%
+    @media $mq-l_and_up
+      flex-basis (100/3)%
+
+  & > &__tree > &__item
+    margin-top $space-small
+    border-top 1px solid $color-neutral-20
+    padding-top $space-small
+    padding-bottom $space-medium
+
+  & > &__tree > &__item > &__link
+    font-family $font-bold
+
+  & > &__tree &__tree &__tree
+    margin-left $space-medium
+
+
