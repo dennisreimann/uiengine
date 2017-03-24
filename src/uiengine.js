@@ -34,12 +34,12 @@ async function generate (options) {
   const setupAdapters = Connector.setup(state)
   await Promise.all([setupTheme, setupAdapters])
 
-  await generateEverything()
+  await generateContent()
 
   return state
 }
 
-async function generateEverything () {
+async function generateContent () {
   // 1. data fetching
   const fetchPages = Page.fetchAll(state)
   const fetchComponents = Component.fetchAll(state)
@@ -65,15 +65,20 @@ async function generateEverything () {
 
 // TODO: Add handler for template changes
 async function generateIncrementForFileChange (filePath, action = 'changed') {
+  const { source: { components, pages, configFile }, theme, debug } = state.config
   const isDeleted = action === 'deleted'
-  const { components, pages } = state.config.source
-  const file = path.relative('.', filePath)
+  const file = path.relative(process.cwd(), filePath)
+  const isThemeFile = debug && !!file.match(theme.module)
   const isComponentDir = path.dirname(filePath) === components
-  let type, item
+  let pageId, componentId, variationId
 
-  const pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
-  let componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
-  let variationId = components ? VariationUtil.variationFilePathToVariationId(components, filePath) : undefined
+  // Skip generating individual items in case the theme
+  // got chnaged as we need to regenerate everything
+  if (!isThemeFile) {
+    pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
+    componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
+    variationId = components ? VariationUtil.variationFilePathToVariationId(components, filePath) : undefined
+  }
 
   // In case a component directory has been deleted we
   // need to reset the component id with the dirname
@@ -95,16 +100,14 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
     } else {
       await regeneratePage(pageId)
     }
-    type = 'page'
-    item = pageId
+    return { file, action, type: 'page', item: pageId }
   } else if (variationId) {
     if (isDeleted) {
       await removeVariation(variationId, componentId)
     } else {
       await regenerateVariation(variationId, componentId)
     }
-    type = 'variation'
-    item = variationId
+    return { file, action, type: 'variation', item: variationId }
   } else if (componentId) {
     if (isDeleted && isComponentDir) {
       await removeComponent(componentId)
@@ -112,16 +115,11 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
       await Connector.registerComponentFile(state, filePath)
       await regenerateComponent(componentId)
     }
-    type = 'component'
-    item = componentId
+    return { file, action, type: 'component', item: componentId }
   } else {
-    await generateEverything()
-
-    type = 'site'
-    item = state.config.name
+    await generate({ config: configFile })
+    return { file, action, type: 'site', item: state.config.name }
   }
-
-  return { file, type, item, action }
 }
 
 async function fetchAndAssocPage (id) {

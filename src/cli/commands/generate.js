@@ -24,15 +24,17 @@ exports.handler = argv => {
     debug: argv.debug
   }
 
+  console.log(`🚧  Generating …\n`)
+
   UIengine.generate(opts)
     .then(({ config }) => {
-      console.log(`✅  ${config.name} generated!`)
+      console.log(`✅  ${config.name} generated!\n`)
 
-      const browserSync = argv.serve ? startServer(config) : null
+      const browserSync = argv.serve ? startServer(config, argv.watch) : null
       if (argv.watch) startWatcher(config, browserSync)
     })
     .catch((err) => {
-      console.error([`🚨  generating the site failed!`, err.stack].join('\n\n'))
+      console.error([`🚨  generating the site failed!`, err.stack].join('\n\n') + '\n')
       process.exit(1)
     })
 }
@@ -46,62 +48,56 @@ const requireOptional = (module, option) => {
   }
 }
 
-const startWatcher = ({ source: { config, components, pages, templates }, target, adapters }, browserSync) => {
-  const chokidar = requireOptional('chokidar', 'watch')
-  const watchOpts = {
-    ignoreInitial: true,
-    awaitWriteFinish: {
-      pollInterval: 50,
-      stabilityThreshold: 50
-    }
+const watchOptions = {
+  ignoreInitial: true,
+  awaitWriteFinish: {
+    pollInterval: 50,
+    stabilityThreshold: 50
   }
+}
+
+const startWatcher = ({ source: { configFile, components, pages, templates }, adapters, theme, debug }, browserSync) => {
+  const chokidar = requireOptional('chokidar', 'watch')
 
   // watch paths
+  const baseDir = process.cwd()
   const exts = '.{' + Object.keys(adapters).concat('md').join(',') + '}'
   const componentsGlob = components ? path.join(components, '**/*' + exts) : null
   const templatesGlob = templates ? path.join(templates, '**/*' + exts) : null
-  const pagesGlob = templates ? path.join(pages, '**/*') : null
-  const targetGlob = target ? path.join(target, '**/*.html') : null
-  const sourceFiles = [config, componentsGlob, templatesGlob, pagesGlob].filter(a => a)
+  const pagesGlob = templates ? path.join(pages, '**') : null
+  const themeGlob = debug ? path.join(baseDir, 'node_modules/uiengine-theme-default/{lib,static}', '**') : null
+  const sourceFiles = [configFile, componentsGlob, templatesGlob, pagesGlob, themeGlob].filter(a => a)
 
-  const log = console.log.bind(console)
-  const debouncedReload = (type, filePath) => debounce('reload', browserSync.reload, 500)
-  const handleFileChange = (type, filePath) => {
+  // const log = log.bind(console)
+  const handleFileChange = (type, filePath) => debounce('reload', () => {
     UIengine.generateIncrementForFileChange(filePath, type)
-      .then(change => log(`✨  Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`))
-      .catch(error => log(`🚨  Error generating increment for changed file ${path.relative(__dirname, filePath)}:`, error))
-  }
+      .then(change => console.log(`✨  Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`))
+      .catch(error => console.log(`🚨  Error generating increment for changed file ${path.relative(baseDir, filePath)}:`, error))
+  })
 
   // source
-  chokidar.watch(sourceFiles, watchOpts)
+  chokidar.watch(sourceFiles, watchOptions)
     .on('add', filePath => handleFileChange('added', filePath))
     .on('addDir', filePath => handleFileChange('added', filePath))
     .on('change', filePath => handleFileChange('changed', filePath))
     .on('unlink', filePath => handleFileChange('deleted', filePath))
     .on('unlinkDir', filePath => handleFileChange('deleted', filePath))
 
-  // target
-  if (targetGlob && browserSync) {
-    chokidar.watch(targetGlob, watchOpts)
-      .on('add', filePath => debouncedReload('added', filePath))
-      .on('addDir', filePath => debouncedReload('added', filePath))
-      .on('change', filePath => debouncedReload('changed', filePath))
-  }
-
-  console.log(`🔁  Watching for file changes …`)
+  console.log(`🔁  Watching for file changes …\n`)
 }
 
-const startServer = ({ source: { config, components, pages, templates }, target, adapters }) => {
-  const browserSync = requireOptional('browser-sync', 'serve').create()
+const startServer = ({ target, browserSync }, watch) => {
+  const server = requireOptional('browser-sync', 'serve').create()
+  const options = browserSync || { server: { baseDir: target }, notify: false }
 
-  browserSync.init({
-    open: false,
-    server: {
-      baseDir: target
-    }
-  })
+  if (watch) {
+    options.files = options.files || options.server.baseDir
+    options.watchOptions = options.watchOptions || watchOptions
+    options.reloadDebounce = typeof options.reloadDebounce !== 'undefined' ? options.reloadDebounce : 125
+    options.reloadThrottle = typeof options.reloadThrottle !== 'undefined' ? options.reloadThrottle : 125
+  }
 
-  console.log(`🌎  Serving generated site …`)
+  server.init(options)
 
-  return browserSync
+  return server
 }
