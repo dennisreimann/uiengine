@@ -13,12 +13,41 @@ icon-position($top = null, $left = null)
   if $left
     left $left
 
+link-with-hover($color-base, $color-hover, $animate-underline = true)
+  $transition = .2s
+  text-decoration none
+  color $color-base
+  transition $transition
+
+  &:hover
+    color $color-hover
+
+    .icon
+      icon-color($color-hover)
+
+  .icon
+    transition $transition
+    icon-color($color-base)
+
+  if $animate-underline
+    position relative
+
+    &:after
+      content ''
+      position absolute
+      bottom 0
+      left 0
+      width 0%
+      border-bottom 1px solid $color-base
+      transition $transition
+
+    &:hover:after
+      width 100%
+      border-bottom 1px solid $color-hover
+
 markdown-container()
   a:not([class])
-    color $color-main-link
-
-    &:hover
-      color $color-main-link-hover
+    link-with-hover($color-main-link, $color-main-link-hover)
 
   p:not([class])
     margin-bottom $space-normal

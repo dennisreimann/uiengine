@@ -37,11 +37,7 @@
   &__link
     display inline-block
     padding-bottom $space-medium
-    text-decoration none
-    color $color-variationhead-link
-
-    &:hover
-      color $color-variationhead-link-hover
+    link-with-hover($color-variationhead-link, $color-variationhead-link-hover, false)
 
     &--active
       color $color-variationhead-link-current
