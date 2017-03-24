@@ -59,6 +59,7 @@ const parseString = (s, filename) => {
 
 module.exports = {
   parseString,
+  fromFileSync: R.partial(parsing.fromFileSync, [parseString]),
   fromFile: R.partial(parsing.fromFile, [parseString]),
   fromString: R.partial(parsing.fromString, [parseString])
 }
