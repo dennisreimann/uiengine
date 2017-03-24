@@ -204,10 +204,14 @@ async function removeComponent (id) {
   await Builder.generatePagesHavingComponent(state, id)
 }
 
+const gulp = (gulp, options = {}) =>
+  require('./integrations/gulp')(gulp, options)
+
 module.exports = {
   CONFIG_FILENAME,
   setupStateWithOptions,
   getState,
   generate,
-  generateIncrementForFileChange
+  generateIncrementForFileChange,
+  gulp
 }

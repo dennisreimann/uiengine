@@ -18,7 +18,8 @@ const defaultTemplateComponent = themeTemplatePrefix + 'component'
 const defaultTemplateVariation = 'variation'
 const pageFile = 'index.html'
 
-const isThemeTemplate = templateId => !templateId || templateId.startsWith(themeTemplatePrefix)
+const isThemeTemplate = templateId =>
+  !templateId || templateId.startsWith(themeTemplatePrefix)
 
 const render = (state, templateId, data) => {
   if (isThemeTemplate(templateId)) {

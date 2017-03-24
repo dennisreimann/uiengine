@@ -1,4 +1,5 @@
 const path = require('path')
+const Common = require('./common')
 const UIengine = require('../../uiengine')
 const debounce = require('../../util/debounce')
 
@@ -56,32 +57,18 @@ const watchOptions = {
   }
 }
 
-const startWatcher = ({ source: { configFile, components, pages, templates }, adapters, theme, debug }, browserSync) => {
+const startWatcher = (config, browserSync) => {
   const chokidar = requireOptional('chokidar', 'watch')
-
-  // watch paths
-  const baseDir = process.cwd()
-  const exts = '.{' + Object.keys(adapters).concat('md').join(',') + '}'
-  const componentsGlob = components ? path.join(components, '**/*' + exts) : null
-  const templatesGlob = templates ? path.join(templates, '**/*' + exts) : null
-  const pagesGlob = templates ? path.join(pages, '**') : null
-  const themeGlob = debug ? path.join(baseDir, 'node_modules/uiengine-theme-default/{lib,static}', '**') : null
-  const sourceFiles = [configFile, componentsGlob, templatesGlob, pagesGlob, themeGlob].filter(a => a)
-
-  // const log = log.bind(console)
-  const handleFileChange = (type, filePath) => debounce('reload', () => {
-    UIengine.generateIncrementForFileChange(filePath, type)
-      .then(change => console.log(`✨  Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`))
-      .catch(error => console.log(`🚨  Error generating increment for changed file ${path.relative(baseDir, filePath)}:`, error))
-  })
+  const handle = Common.handleFileChange
+  const sourceFiles = Common.sourceFilesFromConfig(config)
 
   // source
   chokidar.watch(sourceFiles, watchOptions)
-    .on('add', filePath => handleFileChange('added', filePath))
-    .on('addDir', filePath => handleFileChange('added', filePath))
-    .on('change', filePath => handleFileChange('changed', filePath))
-    .on('unlink', filePath => handleFileChange('deleted', filePath))
-    .on('unlinkDir', filePath => handleFileChange('deleted', filePath))
+    .on('add', filePath => handle(filePath, 'added'))
+    .on('addDir', filePath => handle(filePath, 'added'))
+    .on('change', filePath => handle(filePath, 'changed'))
+    .on('unlink', filePath => handle(filePath, 'deleted'))
+    .on('unlinkDir', filePath => handle(filePath, 'deleted'))
 
   console.log(`🔁  Watching for file changes …\n`)
 }

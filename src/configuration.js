@@ -81,8 +81,17 @@ const resolveTemplates = (templatesDir, config) => {
 }
 
 async function read (configFilePath, flags = {}) {
-  // retrieve config and options
   const projectConfig = await yaml.fromFile(configFilePath)
+  return _read(configFilePath, flags, projectConfig)
+}
+
+function readSync (configFilePath, flags = {}) {
+  const projectConfig = yaml.fromFileSync(configFilePath)
+  return _read(configFilePath, flags, projectConfig)
+}
+
+const _read = (configFilePath, flags, projectConfig) => {
+  // retrieve config and options
   const configPath = path.dirname(configFilePath)
   const packageData = readPackageJson()
   const options = readFlags(flags)
@@ -118,5 +127,6 @@ async function read (configFilePath, flags = {}) {
 }
 
 module.exports = {
-  read
+  read,
+  readSync
 }

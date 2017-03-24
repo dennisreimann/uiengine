@@ -39,6 +39,7 @@ For the evaluation process you might also want to have a look at the [alternativ
 How To and Quick Start:
 
 - [Getting Started](./docs/getting-started.md)
+- [Integrations](./docs/integrations.md)
 
 Technical documentation, with more detailed information:
 

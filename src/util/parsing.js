@@ -1,5 +1,12 @@
 const fs = require('fs')
 
+function fromFileSync (parseString, filePath) {
+  const string = fs.readFileSync(filePath, 'utf8')
+  const parsed = parseString(string, filePath)
+
+  return parsed
+}
+
 async function fromFile (parseString, filePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, string) => {
@@ -27,6 +34,7 @@ async function fromString (parseString, string) {
 }
 
 module.exports = {
+  fromFileSync,
   fromFile,
   fromString
 }
