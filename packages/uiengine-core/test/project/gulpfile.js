@@ -33,7 +33,7 @@ gulp.task('watch', cb => {
       .catch(error => p.util.log('Error generating increment for changed file', event.path, ':', error))
   )
   // use debounce to prevent reloading for every file change
-  gulp.watch(`${target}/**/*.html`).on('change', () => debounce('reload', browserSync.reload, 500))
+  gulp.watch(`${target}/**/*.html`).on('change', () => debounce('reload', browserSync.reload))
 })
 
 gulp.task('build', (cb) => runSequence(['site'], cb))
