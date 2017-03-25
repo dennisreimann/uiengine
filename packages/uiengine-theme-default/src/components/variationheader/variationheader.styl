@@ -38,7 +38,7 @@
 
   &__label
     position absolute
-    right $space-large
+    right 4.25rem
     bottom .9rem
     padding $space-tiny $space-small
     border 1px solid $color-variationhead-label-text
@@ -88,4 +88,86 @@
 
   &__link + &__link
     margin-left $space-large
+
+  &__actions
+    position absolute
+    right $space-large
+    bottom .9rem
+
+  &__actiontoggle
+    width 2.1rem
+    height 2.1rem
+    border 1px solid $color-variationhead-label-text
+    border-radius 50%
+    transition .2s
+    cursor pointer
+    color $color-variationhead-button-text
+    background $color-variationhead-button-bg
+
+    &:hover
+      color $color-variationhead-button-text-hover
+      background $color-variationhead-button-bg-hover
+
+      .icon
+        icon-color($color-variationhead-button-text-hover)
+
+    .icon
+      transition .2s
+      icon-color($color-variationhead-button-text)
+      icon-position(.2em)
+
+  &__actionlist
+    display none
+    width 280px
+    position absolute
+    z-index 10
+    top 3rem
+    right 0
+    list-style none
+    border 1px solid $color-modal-border
+    border-top none
+
+    &--active
+      display block
+
+    &:after
+      content ''
+      position absolute
+      top -1.25rem
+      right .35rem
+      width 1.25rem
+      height 1.25rem
+      background-image url(../svgs/triangle.svg)
+      background-position 50% 100%
+      background-repeat no-repeat
+      background-size 1.25rem
+
+  &__actionlink
+    display block
+    width 100%
+    font-size $font-size-small
+    font-family $font-family-base
+    color $color-modal-text
+    background $color-modal-bg
+    padding-top $space-small
+    padding-bottom $space-normal
+    padding-left $space-normal
+    padding-right $space-normal
+    text-decoration none
+    
+    .icon
+      margin-right $space-small
+      icon-position(4px)
+      icon-size(1.25rem)
+      icon-color($color-modal-text)
+
+    &:hover
+      color $color-modal-text-hover
+      background $color-modal-bg-hover
+
+      .icon
+        icon-color($color-modal-text-hover)
+
+  &__actionlink + &__actionlink
+    border-top 1px solid $color-modal-border
 

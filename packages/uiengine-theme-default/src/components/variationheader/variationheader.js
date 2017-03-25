@@ -21,3 +21,17 @@ on('click', '.variationheader__link', e => {
     section.classList[op]('variation__section--active')
   }
 })
+
+const toggleActionlist = (actionlist) =>
+  actionlist.classList.toggle('variationheader__actionlist--active')
+
+on('click', '.variationheader__actiontoggle', e => {
+  const actionlistSelector = e.target.getAttribute('data-actionlist-target')
+  const actionlist = document.getElementById(actionlistSelector)
+
+  toggleActionlist(actionlist)
+})
+
+on('click', '.variationheader__actionlink', e => {
+  toggleActionlist(e.target.parentNode.parentNode)
+})

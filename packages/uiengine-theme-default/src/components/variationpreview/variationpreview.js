@@ -12,7 +12,7 @@ const breakpointWidths = Object.values ? Object.values(breakpoints) : Object.key
 
 if (breakpoints) {
   const toggleBreakpoints = (breakpoints) =>
-  breakpoints.classList.toggle('variationpreview__breakpoints--active')
+    breakpoints.classList.toggle('variationpreview__breakpoints--active')
 
   on('click', '.variationpreview__sizer', e => {
     const breakpointsSelector = e.target.getAttribute('data-breakpoints-target')

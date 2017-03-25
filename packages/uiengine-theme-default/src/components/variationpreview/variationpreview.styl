@@ -30,17 +30,17 @@
 
     &:before
       left 0
-      border-left 1px solid $color-neutral-20
+      border-left 1px solid $color-modal-border
 
     &:after
       right 0
-      border-right 1px solid $color-neutral-20
+      border-right 1px solid $color-modal-border
 
   &__sizer
     padding-left $space-normal
     padding-right $space-normal
-    color $color-neutral-20
-    background $color-white
+    color $color-modal-text
+    background $color-main-bg
     display inline-block
     font-size $font-size-base
     font-family $font-family-base
@@ -53,6 +53,7 @@
 
   &__breakpoints
     position absolute
+    z-index 5
     top $space-normal
     left calc(50% - 5rem)
     width 10rem
@@ -67,18 +68,19 @@
       transition-timing-function ease-in
 
   &__breakpoints-inner
-    border 1px solid $color-neutral-20
+    border 1px solid $color-modal-border
     border-top none
     padding-top $space-normal
 
   &__breakpoint
     display block
     width 100%
+    border-top 1px solid $color-modal-border
     font-size $font-size-small
     font-family $font-family-base
-    color $color-neutral-20
+    color $color-modal-text
     text-align center
-    background alpha($color-white, .925)
+    background $color-modal-bg
     cursor pointer
     padding-top $space-small
     padding-bottom $space-small
@@ -89,6 +91,6 @@
     &:last-child
       padding-bottom $space-normal
     &:hover
-      color $color-white
-      background alpha($color-neutral-20, .925)
+      color $color-modal-text-hover
+      background $color-modal-bg-hover 
 
