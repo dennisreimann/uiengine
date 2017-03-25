@@ -27,7 +27,7 @@ It gives you and your clients/stakeholders a platform to document, discuss and d
 - **Template agnostic**: UIengine gives you freedom of choice regarding the templating engine your project uses.
   It works best with whatever can be rendered via JavaScript, which includes popular solutions like JSX, Pug/Jade, Handlebars,etc.
 - **Best Practice approach**: The tools tries to get out of your way as much as possible and does not enforce a particular structure. 
-  Nevertheless it guides you towards best practices like not using application logic in the view layer (i.e. having crazy amounts of helpers or global variables) by proposing a separating of data and template.
+  Nevertheless it guides you towards best practices like not using application logic in the view layer (i.e. having crazy amounts of helpers or global variables) by proposing a separation of data and template.
 - **Produces production ready code**: You can establish a pattern library first approach, yet the view layer/templating developed will be ready to use in your application from day one.
   By separating the generating of the pattern library/documentation from the actual build process, you can integrate the UIengine into existing projects or start out from the beginning in greenfield projects.
 - **Flexible integrations**: Various templating engines are integrated via a concept of adapters, giving you flexibility of choice and the option to integrate custom ones. Same goes for the theme, which can be configured with different skins or can be completely swapped out so you can fit it to your needs. 
