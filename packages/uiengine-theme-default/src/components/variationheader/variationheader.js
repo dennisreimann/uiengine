@@ -1,4 +1,4 @@
-import { on } from '../../scripts/lib/util'
+import { on, trigger } from '../../scripts/lib/util'
 
 on('click', '.variationheader__link', e => {
   e.preventDefault()
@@ -22,16 +22,23 @@ on('click', '.variationheader__link', e => {
   }
 })
 
+const activeClass = 'variationheader__actionlist--active'
+
 const toggleActionlist = (actionlist) =>
-  actionlist.classList.toggle('variationheader__actionlist--active')
+  actionlist.classList.toggle(activeClass)
+
+on('modal:close', 'body', e => {
+  document.querySelectorAll('.variationheader__actionlist').forEach(actionlist => {
+    actionlist.classList.remove(activeClass)
+  })
+})
 
 on('click', '.variationheader__actiontoggle', e => {
+  e.stopImmediatePropagation()
+  trigger('modal:close')
+
   const actionlistSelector = e.target.getAttribute('data-actionlist-target')
   const actionlist = document.getElementById(actionlistSelector)
 
   toggleActionlist(actionlist)
-})
-
-on('click', '.variationheader__actionlink', e => {
-  toggleActionlist(e.target.parentNode.parentNode)
 })

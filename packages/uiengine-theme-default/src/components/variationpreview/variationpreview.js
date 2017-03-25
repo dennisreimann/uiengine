@@ -1,5 +1,5 @@
 import { iframeResizer } from 'iframe-resizer'
-import { debounce, on } from '../../scripts/lib/util'
+import { debounce, on, trigger } from '../../scripts/lib/util'
 
 // split this up to make the revving work
 const previewScriptPath = 'scripts/uiengine-preview.js'
@@ -11,24 +11,29 @@ const breakpointNames = Object.keys(breakpoints)
 const breakpointWidths = Object.values ? Object.values(breakpoints) : Object.keys(breakpoints).map(k => breakpoints[k])
 
 if (breakpoints) {
-  const toggleBreakpoints = (breakpoints) =>
-    breakpoints.classList.toggle('variationpreview__breakpoints--active')
+  const activeClass = 'variationpreview__breakpoints--active'
+
+  const toggleBreakpoints = breakpoints =>
+    breakpoints.classList.toggle(activeClass)
+
+  on('modal:close', 'body', e => {
+    document.querySelectorAll('.variationpreview__breakpoints').forEach(breakpoints => {
+      breakpoints.classList.remove(activeClass)
+    })
+  })
 
   on('click', '.variationpreview__sizer', e => {
+    e.stopImmediatePropagation()
+    trigger('modal:close')
+
     const breakpointsSelector = e.target.getAttribute('data-breakpoints-target')
     const breakpoints = document.getElementById(breakpointsSelector)
 
     toggleBreakpoints(breakpoints)
   })
 
-  on('click', '.variationpreview__breakpoints-inner', e => {
-    toggleBreakpoints(e.target.parentNode)
-  })
-
   on('click', '.variationpreview__breakpoint', e => {
     const breakpoint = e.target
-    const breakpointsSelector = e.target.getAttribute('data-breakpoints-target')
-    const breakpoints = document.getElementById(breakpointsSelector)
     const containerSelector = e.target.getAttribute('data-container-target')
     const container = document.getElementById(containerSelector)
     const variationId = container.getAttribute('data-variation-id')
@@ -52,8 +57,6 @@ if (breakpoints) {
       container.style.width = null
       window.sessionStorage.removeItem(`variation:width:${variationId}`)
     }
-
-    toggleBreakpoints(breakpoints)
   })
 }
 

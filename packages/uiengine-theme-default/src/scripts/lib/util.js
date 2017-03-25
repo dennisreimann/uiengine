@@ -10,3 +10,9 @@ export const on = (type, selector, func) => {
     if (e.target.matches(selector)) func(e)
   })
 }
+
+export const trigger = (type, detail = {}) => {
+  const event = new window.CustomEvent(type, { detail })
+  document.body.dispatchEvent(event)
+}
+

@@ -23,7 +23,7 @@ const src = {
   svgs: ['./src/svgs/**/*.svg'],
   styles: ['./src/styles/*.styl', './src/components/**/*.styl'],
   hljs: ['./node_modules/highlight.js/styles/**'],
-  scripts: ['src/scripts/*.js', './src/components/**/*.js'],
+  scripts: ['src/scripts/**/*.js', './src/components/**/*.js'],
   static: ['./src/{fonts,images}/**'],
   locales: ['./src/locales/*.yml'],
   rev: [paths.dist + '/**/*.{css,js,map,ico,cur,svg,jpg,jpeg,png,gif,woff,woff2}']
