@@ -2,7 +2,7 @@ breakpoints:
   reset: zurücksetzen
 
 variation:
-  label: Variation
+  naming: Variation
   copy_permalink: Variationslink kopieren
   open_in_window: Variation in separatem Fenster öffnen
   preview: Vorschau

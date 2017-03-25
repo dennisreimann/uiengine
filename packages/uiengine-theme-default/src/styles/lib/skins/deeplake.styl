@@ -1,31 +1,36 @@
 $color-neutral-20 = #CCC
+$color-blue-deep = #31475C
+$color-blue-light = #68B4C8
+$color-yellow-light = #FFDD97
 
 // navigation
-$color-navigation-bg = darken(#31475C, 15)
+$color-navigation-bg = darken($color-blue-deep, 15)
 $color-navigation-bg-current = $color-white
 $color-navigation-text = $color-white
-$color-navigation-text-hover = #331833
-$color-navigation-text-current = #331833
+$color-navigation-text-hover = $color-blue-deep
+$color-navigation-text-current = $color-blue-deep
 $color-navigation-text-meta = #999
 
 // page header
-$color-pagehead-bg = #31475C
+$color-pagehead-bg = $color-blue-deep
 $color-pagehead-text = $color-white
-$color-pagehead-link = #FFDD97
-$color-pagehead-link-hover = #FFDD97
-$color-pagehead-meta = #FFDD97
+$color-pagehead-link = $color-yellow-light
+$color-pagehead-link-hover = $color-yellow-light
+$color-pagehead-meta = $color-yellow-light
 
 // page links
-$color-pagenav-link = lighten(#31475C, 15)
-$color-pagenav-link-hover = #68B4C8
+$color-pagenav-link = lighten($color-blue-deep, 15)
+$color-pagenav-link-hover = $color-blue-light
 
 // variation header
-$color-variationhead-bg = #68B4C8
+$color-variationhead-bg = $color-blue-light
 $color-variationhead-text = $color-pagehead-text
 $color-variationhead-link = $color-pagehead-link
 $color-variationhead-link-hover = $color-white
 $color-variationhead-link-current = $color-white
-$color-variationhead-meta = #FFDD97
+$color-variationhead-meta = $color-yellow-light
+$color-variationhead-label-bg = alpha($color-blue-deep, .5)
+$color-variationhead-label-text = $color-white
 
 // variation links
 $color-variationnav-link = $color-pagenav-link

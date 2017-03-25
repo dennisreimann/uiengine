@@ -3,10 +3,14 @@ mixin variationheader(variation)
   - const component = components[variation.componentId]
   header.variationheader&attributes(attributes)
     .wrap.wrap--content
-      span.variationheader__description= h.t('variation.label')
+      div.variationheader__meta
+        span.variationheader__naming= h.t('variation.naming')
+        if variation.status
+          span.variationheader__status= variation.status
+        if variation.label
+          span.variationheader__label= variation.label
 
-      h2.variationheader__title
-        span.variationheader__variation-title= variation.title
+      h2.variationheader__title= variation.title
 
       nav.variationheader__links
         if variation.rendered

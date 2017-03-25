@@ -1,23 +1,52 @@
 .variationheader
-  color $color-white
+  color $color-variationhead-text
   background-color $color-variationhead-bg
   padding-top $space-medium
+  position relative
 
   .wrap
     display flex
     flex-wrap wrap
-    align-items baseline
+    align-items last baseline
 
-  &__description
-    font-size $font-size-tiny
+  &__meta
+    margin-top $space-tiny
     color $color-variationhead-meta
+    @media $mq-up_to_m
+      font-size $font-size-small
+    @media $mq-m_and_up
+      font-size $font-size-tiny
     @media $mq-up_to_xl
       flex-basis 100%
     @media $mq-xl_and_up
       text-align right
-      width 6rem
-      margin-left -6rem
+      width 8rem
+      margin-left -8rem
       padding-right $space-large
+
+  &__naming
+  &__status
+    @media $mq-xl_and_up
+      display block
+
+  &__naming + &__status
+    @media $mq-up_to_xl
+      margin-left $space-small
+
+  &__status
+    color $color-variationhead-text
+
+  &__label
+    position absolute
+    right $space-large
+    bottom .9rem
+    padding $space-tiny $space-small
+    border 1px solid $color-variationhead-label-text
+    border-radius $space-normal
+    border-bottom-right-radius 0
+    color $color-variationhead-label-text
+    background $color-variationhead-label-bg
+    font-size $font-size-base
 
   &__title
     font-family $font-family-bold
@@ -25,19 +54,30 @@
     padding-bottom $space-medium
 
   &__links
-    margin-left $space-large
-    padding-left $space-large
-    font-size $font-size-large
-    &:before
-      content ""
-      position relative
-      left $space-large * -1
-      border-left 1px solid $color-variationhead-meta
+    @media $mq-up_to_m
+      flex-basis 100%
+      font-size $font-size-subhead
+    @media $mq-m_and_up
+      font-size $font-size-large
+      margin-left $space-large
+      padding-left $space-large
+
+      &:before
+        content ""
+        position relative
+        left $space-large * -1
+        border-left 1px solid $color-variationhead-meta
 
   &__link
     display inline-block
     padding-bottom $space-medium
-    link-with-hover($color-variationhead-link, $color-variationhead-link-hover, false)
+    color $color-variationhead-link
+    text-decoration none
+    transition-property color
+    transition-duration .2s
+
+    &:hover
+      color $color-variationhead-link-hover
 
     &--active
       color $color-variationhead-link-current
