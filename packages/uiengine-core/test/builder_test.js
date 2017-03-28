@@ -16,9 +16,12 @@ const state = {
     name: 'Builder Test',
     version: '0.1.0',
     source: {
+      base: projectPath,
+      configFile: path.resolve(projectPath, 'uiengine.yml'),
       components: path.resolve(projectPath, 'src', 'components'),
       templates: path.resolve(projectPath, 'src', 'templates'),
-      pages: path.resolve(projectPath, 'src', 'pages')
+      pages: path.resolve(projectPath, 'src', 'pages'),
+      data: path.resolve(projectPath, 'src', 'data')
     },
     target,
     adapters: {

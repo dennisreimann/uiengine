@@ -11,6 +11,7 @@ source:
   components: ./src/components
   templates: ./src/templates
   pages: ./src/pages
+  data: ../fixtures
 
 # Destination path for the generated site.
 target: ./dist

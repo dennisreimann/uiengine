@@ -10,10 +10,11 @@ const Connector = require('./connector')
 const assocVariation = (variations, variation) =>
   R.assoc(variation.id, variation, variations)
 
-async function readVariationFile (filePath) {
+async function readVariationFile (state, filePath) {
+  const { source } = state.config
   const variationName = path.basename(filePath, path.extname(filePath))
   const variationFile = path.join(path.dirname(filePath), `${variationName}.md`)
-  const variation = await frontmatter.fromFile(variationFile)
+  const variation = await frontmatter.fromFile(variationFile, source)
 
   if (variation) {
     const { attributes, body } = variation
@@ -61,7 +62,7 @@ async function fetchById (state, id) {
   const componentId = VariationUtil.variationIdToComponentId(id)
   const filePath = VariationUtil.variationIdToVariationFilePath(componentsPath, id)
   const extension = File.extension(filePath)
-  let { attributes, content } = await readVariationFile(filePath)
+  let { attributes, content } = await readVariationFile(state, filePath)
 
   const title = VariationUtil.variationIdToTitle(id)
   const context = attributes.context

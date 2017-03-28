@@ -2,6 +2,7 @@ source:
   components: ./src/components
   templates: ./src/templates
   pages: ./src/pages
+  data: ./src/data
 
 # Destination path for the generated site.
 target: ./dist

@@ -26,8 +26,9 @@ const convertUserProvidedVariationsList = (componentId, attributes = {}) => {
   return attributes
 }
 
-async function readComponentFile (filePath) {
-  const component = await frontmatter.fromFile(filePath)
+async function readComponentFile (state, filePath) {
+  const { source } = state.config
+  const component = await frontmatter.fromFile(filePath, source)
 
   if (component) {
     const { attributes, body } = component
@@ -69,7 +70,7 @@ async function fetchById (state, id) {
   const componentPath = ComponentUtil.componentIdToPath(id)
   const componentFilePath = ComponentUtil.componentIdToComponentFilePath(componentsPath, id)
   const fetchVariationIds = Variation.findVariationIds(state, id)
-  const fetchComponentData = readComponentFile(componentFilePath)
+  const fetchComponentData = readComponentFile(state, componentFilePath)
   const [ componentData, variationIds ] = await Promise.all([fetchComponentData, fetchVariationIds])
 
   let { attributes, content } = componentData

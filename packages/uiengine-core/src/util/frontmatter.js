@@ -14,7 +14,7 @@ var isSeparator = function (line) {
 
 var NEWLINE = '\n'
 
-var fastmatter = function (str) {
+var fastmatter = function (str, filename, sourcePaths) {
   var bodyOnly = {
     attributes: {},
     body: str
@@ -42,12 +42,13 @@ var fastmatter = function (str) {
   }
 
   return {
-    attributes: attributes.length ? Yaml.parseString(attributes.join(NEWLINE)) : {},
+    attributes: attributes.length ? Yaml.parseString(attributes.join(NEWLINE), filename, sourcePaths) : {},
     body: lines.slice(i + 1).join(NEWLINE)
   }
 }
 
-const parseString = s => fastmatter(s.trim())
+const parseString = (string, filename, sourcePaths) =>
+  fastmatter(string.trim(), filename, sourcePaths)
 
 module.exports = {
   parseString,
