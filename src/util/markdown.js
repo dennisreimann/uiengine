@@ -8,7 +8,8 @@ const markdownIt = new MarkdownIt({
 })
   .use(require('markdown-it-anchor'))
 
-const parseString = s => markdownIt.render(s.trim()).trim()
+const parseString = (string, filename, sourcePaths) =>
+  markdownIt.render(string.trim()).trim()
 
 module.exports = {
   markdownIt,

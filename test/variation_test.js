@@ -8,7 +8,9 @@ const projectPath = path.resolve(__dirname, 'project')
 const state = {
   config: {
     source: {
-      components: path.resolve(projectPath, 'src', 'components')
+      components: path.resolve(projectPath, 'src', 'components'),
+      data: path.resolve(projectPath, '..', 'fixtures'),
+      base: projectPath
     },
     adapters: {
       pug: {

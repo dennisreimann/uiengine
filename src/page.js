@@ -8,8 +8,9 @@ const PageUtil = require('./util/page')
 const assocPage = (pages, page) =>
   R.assoc(page.id, page, pages)
 
-async function readPageFile (filePath) {
-  let { attributes, body } = await frontmatter.fromFile(filePath)
+async function readPageFile (state, filePath) {
+  const { source } = state.config
+  let { attributes, body } = await frontmatter.fromFile(filePath, source)
   const content = await markdown.fromString(body)
   // prevent empty attributes from being null
   attributes = attributes || {}
@@ -58,7 +59,7 @@ async function fetchById (state, id) {
   const absolutePath = PageUtil.pageIdToPageFilePath(pages, id)
   const childPattern = path.join(pagePath, '*')
   const fetchChildIds = findPageIds(state, childPattern)
-  const fetchPageData = readPageFile(absolutePath)
+  const fetchPageData = readPageFile(state, absolutePath)
 
   // fetch childPageIds before fetching files to exclude
   // the children directories when looking for files

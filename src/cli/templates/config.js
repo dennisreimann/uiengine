@@ -10,10 +10,12 @@ name: ${name}
 # - components is the root of the directory containing the components
 # - templates contains the variation preview and sandbox templates
 # - pages is the directory of the UIengine's site structure and page markdown files
+# - data contains sample data that can be referenced in variations and pages
 source:
   components: ./src/components
   templates: ./src/templates
   pages: ./src/pages
+  data: ./src/data
 
 # Destination paths for the generated output.
 target: ./dist
