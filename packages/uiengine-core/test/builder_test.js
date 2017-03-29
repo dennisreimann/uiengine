@@ -267,6 +267,18 @@ describe('Builder', () => {
     })
   })
 
+  describe('#generatePagesHavingTemplate', () => {
+    it('should generate pages having this template', done => {
+      Builder.generatePagesHavingTemplate(state, 'custom')
+        .then(() => {
+          assertExists(path.join(target, 'sandbox', 'custom-page', 'index.html'))
+
+          done()
+        })
+        .catch(done)
+    })
+  })
+
   describe('#generateComponentVariations', () => {
     it('should generate component variation pages', done => {
       Builder.generateComponentVariations(state, 'input')

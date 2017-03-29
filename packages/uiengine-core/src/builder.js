@@ -145,17 +145,20 @@ async function generateComponentForPage (state, pageId, componentId) {
 
 async function generatePagesHavingComponent (state, componentId) {
   const { pages } = state
-
+  const affectedPages = R.filter(page => (page.componentIds || []).includes(componentId), pages)
+  const pageIds = Object.keys(affectedPages)
   const build = R.partial(generateComponentForPage, [state])
-  const builds = []
+  const builds = R.map(pageId => build(pageId, componentId), pageIds)
 
-  // FIXME: This is ugly!
-  R.map((page) => {
-    const componentIds = page.componentIds || []
-    if (componentIds.includes(componentId)) {
-      builds.push(build(page.id, componentId))
-    }
-  }, pages)
+  await Promise.all(builds)
+}
+
+async function generatePagesHavingTemplate (state, templateId) {
+  const { pages } = state
+  const affectedPages = R.filter(page => (page.template || defaultTemplatePage) === templateId, pages)
+  const pageIds = Object.keys(affectedPages)
+  const build = R.partial(generatePage, [state])
+  const builds = R.map(build, pageIds)
 
   await Promise.all(builds)
 }
@@ -215,6 +218,7 @@ module.exports = {
   generateComponentForPage,
   generateComponentsForPage,
   generatePagesHavingComponent,
+  generatePagesHavingTemplate,
   generateComponentVariations,
   generateVariation,
   copyPageFiles,
