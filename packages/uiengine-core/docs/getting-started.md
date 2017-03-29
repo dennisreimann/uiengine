@@ -76,3 +76,6 @@ The `watch` and `serve` options can be combined, which makes a good development 
 ```bash
 uiengine generate --watch --serve
 ```
+
+Under the hood [BrowserSync](https://www.browsersync.io/) is used to provide serving and watching the files.
+For information on how to configure the server and pass additional options, see the [configuration documentation](./config.md#BrowserSync).
