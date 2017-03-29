@@ -1,36 +1,40 @@
 # UIengine
 
-A pattern library generator that gets out of your way.
+An [*Interface Exchange*](#-the--interface--exchange-)  generator that gets out of your way.
 
-[![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+## 🚀  What it enables
 
-## ❗️ Disclaimer
+- Establishes a *pattern library driven workflow* and helps you structuring your web UI into modular components.
+- Gives your team and stakeholders a central spot to *discuss, develop, and document* the UI of the website/application.
+- Produces production ready code from day one and *aims to replace most deliverables* with usable and testable output.
+- *Makes documentation fun and easy* by providing the tools to create and structure the docs in a way that fits your project.
+
+### 👩‍💻 The 👨‍🎨 Interface 👩‍🔬 Exchange 👨‍💼
+
+The terms *Pattern Library* or *Styleguide* suggest an association with a particular craft that affects the UI. Pattern libraries are understood as a tool that is primarily used by developers, whereas styleguides are associated with the creative output of the designers.
+In contrast to that, the term *Interface Exchange* describes a place where everyone involved in the UI comes together: Concept and user experience, product owners, as well as designers and developers.
+
+## ☝️ Disclaimer
 
 This project is currently under active development.
 
-Some of the concepts and APIs are subject to change.
-We do not recommend to use this project in production until it hits a v1.0 release.
-Nevertheless we encourage people to try it out and provide us feedback.
-Please do not to rely on it for production use until we provide a stable release and remove this disclaimer.
+Some of the concepts and APIs are subject to change. Please do not to rely on it for production use until we provide a stable v1.0 release (see the [roadmap](https://github.com/dennisreimann/uiengine/milestones) for details). Nevertheless we encourage you to try it out and provide feedback.
 
 ## 🗜 Prerequisites
 
-UIengine requires at least Node.js 6.9.
-Future versions will track the latest active Node.js LTS version, which guarantees a reasonable level of backwards compatibility.
+UIengine requires at least Node.js 6.9. Future versions will track the latest active Node.js LTS version, which guarantees a reasonable level of backwards compatibility.
 
-## 👓 Why choose the UIengine?
+## 🔩 Technical TL;DR
 
-The general case for this project is to establish a pattern library driven development approach.
-The UIengine helps you structuring your web UI into modular components.
-It gives you and your clients/stakeholders a platform to document, discuss and develop the interface or the website/application. 
+[![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-- **Template agnostic**: UIengine gives you freedom of choice regarding the templating engine your project uses.
-  It works best with whatever can be rendered via JavaScript, which includes popular solutions like JSX, Pug/Jade, Handlebars,etc.
-- **Best Practice approach**: The tools tries to get out of your way as much as possible and does not enforce a particular structure. 
-  Nevertheless it guides you towards best practices like not using application logic in the view layer (i.e. having crazy amounts of helpers or global variables) by proposing a separation of data and template.
-- **Produces production ready code**: You can establish a pattern library first approach, yet the view layer/templating developed will be ready to use in your application from day one.
-  By separating the generating of the pattern library/documentation from the actual build process, you can integrate the UIengine into existing projects or start out from the beginning in greenfield projects.
-- **Flexible integrations**: Various templating engines are integrated via a concept of adapters, giving you flexibility of choice and the option to integrate custom ones. Same goes for the theme, which can be configured with different skins or can be completely swapped out so you can fit it to your needs. 
+At its core, the UIengine is a static site generator. It consumes the data by parsing the files and structure of your project and generates the Interface Exchange based on this data. In development mode the output is regenerated on file change and synced to the browser, giving you a comfortable experience creating the components and docs.
+
+- **Template agnostic**: Various templating engines are integrated via the concept of adapters, giving you flexibility of choice and the option to integrate custom ones. It works best with whatever can be rendered via JavaScript, which includes popular solutions like JSX, Pug/Jade, Handlebars, etc.
+- **Best practice approach**: The tool guides you towards best practices like not using application logic in the view layer (i.e. having crazy amounts of helpers or global variables) by proposing a separation of data and template.
+- **In sync with the end product**: Since the docs are generated from the code that will be used in your application, you get a living pattern library – not a thing that needs to be looked after as a separate task.
+- **Covers green- and brownfield projects**: Whether you start out with a pattern library or want to transition your process and refactor your existing UI into modular components, the UIengine has you covered.
+- **Flexible integrations**: The theme can be configured with different skins or can be completely swapped out so you can fit it to your needs. Same goes for the markdown parsing/rendering which is configurable too.
 
 For the evaluation process you might also want to have a look at the [alternatives](#-alternatives).
 
@@ -68,12 +72,13 @@ OK, the UIengine looks really cool but it's not quite what you are looking for?
 Or you want to first compare a few solutions to see which one is the right fit?
 Here are some other projects that you might want to evaluate:
 
-- [Fractal](http://fractal.build/)
-- [patternplate](https://github.com/sinnerschrader/patternplate)
 - [Pattern Lab](http://patternlab.io/)
+- [Fractal](http://fractal.build/)
+- [patternplate](https://github.com/sinnerschrader/patternplate/)
+- [PatternPack](http://patternpack.org/)
 - [Fabricator](https://fbrctr.github.io/)
 - [Assemble](http://assemble.io/)
 
 - - - - -
 
-Brought to you by the nice people behind [UIengineering](https://www.uiengineering.de). 
+👨🏻‍💻 Brought to you by the nice people behind [UIengineering](https://www.uiengineering.de). 👨🏻‍💻
