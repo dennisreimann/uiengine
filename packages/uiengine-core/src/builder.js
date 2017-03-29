@@ -29,7 +29,17 @@ const render = (state, templateId, data) => {
     const templates = state.config.templates || {}
     const template = templates[templateId]
 
-    if (!template) throw new Error(chalk.red(`Template "${templateId}" does not exist.\n\nIn case you want to reference an existing theme template,\nplease prefix it with "theme:" – i.e. "theme:page".\n\nIf this is supposed to be a custom template, add it to the\ntemplates source directory or refer to it like this:\n\ntemplates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE\n\n`) + chalk.gray(`Registered templates:\n\n${JSON.stringify(templates, null, '  ')}`))
+    if (!template) {
+      throw new Error(chalk.red([
+        `Template "${templateId}" does not exist.`,
+        'In case you want to reference an existing theme template,\nplease prefix it with "theme:" – i.e. "theme:page".',
+        'If this is supposed to be a custom template, add it to the\ntemplates source directory or refer to it like this:',
+        `templates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE`
+      ].join('\n\n')) + chalk.gray([
+        'Registered templates:',
+        `${JSON.stringify(templates, null, '  ')}`
+      ].join('\n\n')))
+    }
 
     return Connector.render(state, template, data)
   }

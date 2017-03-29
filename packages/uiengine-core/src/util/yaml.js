@@ -77,7 +77,7 @@ const parseString = (string, filename, sourcePaths) => {
 
     return yaml.safeLoad(string.trim(), { schema, filename })
   } catch (err) {
-    throw new Error(`Could not parse YAML: ${chalk.red(err)}\n\n${chalk.gray(string)}`)
+    throw new Error(chalk.red(`Could not parse YAML: ${err}`) + '\n\n' + chalk.gray(string))
   }
 }
 

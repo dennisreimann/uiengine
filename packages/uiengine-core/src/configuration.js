@@ -3,7 +3,7 @@ const R = require('ramda')
 const assert = require('assert')
 const glob = require('globby')
 const chalk = require('chalk')
-const yaml = require('./util/yaml')
+const Yaml = require('./util/yaml')
 
 const readPackageJson = () => {
   let data = {}
@@ -81,12 +81,12 @@ const resolveTemplates = (templatesDir, config) => {
 }
 
 async function read (configFilePath, flags = {}) {
-  const projectConfig = await yaml.fromFile(configFilePath)
+  const projectConfig = await Yaml.fromFile(configFilePath)
   return _read(configFilePath, flags, projectConfig)
 }
 
 function readSync (configFilePath, flags = {}) {
-  const projectConfig = yaml.fromFileSync(configFilePath)
+  const projectConfig = Yaml.fromFileSync(configFilePath)
   return _read(configFilePath, flags, projectConfig)
 }
 

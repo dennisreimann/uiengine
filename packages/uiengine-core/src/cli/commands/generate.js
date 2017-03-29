@@ -1,4 +1,4 @@
-const Common = require('./common')
+const Common = require('../../integrations/common')
 const UIengine = require('../../uiengine')
 
 exports.describe = 'Generate the site'
