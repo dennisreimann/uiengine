@@ -5,9 +5,8 @@ mixin variationcode(variation, active)
     .wrap.wrap--content
       .variationcode__sections
         if variation.raw
-          - const blockId = `${h.dasherize(variation.id)}-raw`
-          section.variationcode__section.variationcode__section--expanded(id=blockId)
-            header.variationcode__header(role="button" data-section-target=blockId)
+          section.variationcode__section.variationcode__section--expanded
+            header.variationcode__header(role="button")
               h3= h.t('variation.raw')
               +icon('caret-down-double').variationcode__expandicon
             .variationcode__content
@@ -15,9 +14,8 @@ mixin variationcode(variation, active)
                 != h.decorateRaw(variation.raw, variation.extension)
 
         if variation.context
-          - const blockId = `${h.dasherize(variation.id)}-context`
-          section.variationcode__section.variationcode__section--expanded(id=blockId)
-            header.variationcode__header(role="button" data-section-target=blockId)
+          section.variationcode__section.variationcode__section--expanded
+            header.variationcode__header(role="button")
               h3= h.t('variation.context')
               +icon('caret-down-double').variationcode__expandicon
             .variationcode__content
@@ -25,9 +23,8 @@ mixin variationcode(variation, active)
                 != h.decorateContext(variation.context)
 
         if variation.rendered
-          - const blockId = `${h.dasherize(variation.id)}-rendered`
           section.variationcode__section(id=blockId)
-            header.variationcode__header(role="button" data-section-target=blockId)
+            header.variationcode__header(role="button")
               h3= h.t('variation.rendered')
               +icon('caret-down-double').variationcode__expandicon
             .variationcode__content

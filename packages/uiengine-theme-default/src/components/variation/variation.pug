@@ -6,8 +6,8 @@ mixin variation(variation)
   article.variation(id=h.dasherize(variation.id))
     +variationheader(variation)
 
-    .wrap.wrap--content
-      if variation.content
+    if variation.content
+      .wrap.wrap--content
         .variation__content
           != variation.content
 
