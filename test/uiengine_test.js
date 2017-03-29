@@ -10,6 +10,7 @@ const UIengine = require('../src/uiengine')
 
 const pagesPath = path.resolve(__dirname, 'project', 'src', 'pages')
 const componentsPath = path.resolve(__dirname, 'project', 'src', 'components')
+const templatesPath = path.resolve(__dirname, 'project', 'src', 'templates')
 const targetPath = path.resolve(__dirname, 'project', 'dist')
 const opts = { config: path.resolve(__dirname, 'project', 'uiengine.yml') }
 
@@ -361,6 +362,23 @@ describe('UIengine', () => {
 
           done(err)
         })
+    })
+
+    it('should regenerate pages with template on template change', done => {
+      const filePath = path.join(templatesPath, 'page.pug')
+
+      UIengine.generateIncrementForFileChange(filePath, 'changed')
+        .then(result => {
+          assertExists(path.join(targetPath, 'documentation', 'custom-template', 'index.html'))
+
+          assert.equal(result.action, 'changed')
+          assert.equal(result.type, 'template')
+          assert.equal(result.item, 'page')
+          assert.equal(result.file, 'test/project/src/templates/page.pug')
+
+          done()
+        })
+        .catch(done)
     })
   })
 })

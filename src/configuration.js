@@ -4,6 +4,7 @@ const assert = require('assert')
 const glob = require('globby')
 const chalk = require('chalk')
 const Yaml = require('./util/yaml')
+const TemplateUtil = require('./util/template')
 
 const readPackageJson = () => {
   let data = {}
@@ -56,22 +57,18 @@ const resolvePackage = (basedir, config, type) => {
   }
 }
 
-const resolveTemplates = (templatesDir, config) => {
-  if (!templatesDir || !path.isAbsolute(templatesDir)) return config
+const resolveTemplates = (templatesPath, config) => {
+  if (!templatesPath || !path.isAbsolute(templatesPath)) return config
 
   // templates that are explicitely listed in the config
-  const resolveDeclaredTemplates = R.partial(resolvePath, [templatesDir])
+  const resolveDeclaredTemplates = R.partial(resolvePath, [templatesPath])
   const declared = R.map(resolveDeclaredTemplates, config)
 
   // templates that exist inside the templates directory
-  const pattern = path.join(templatesDir, `**/*.*`)
+  const pattern = path.join(templatesPath, `**/*.*`)
   const paths = glob.sync(pattern)
   const templates = R.reduce((tmpl, templatePath) => {
-    const relative = path.relative(templatesDir, templatePath)
-    const dirname = path.dirname(relative)
-    const extname = path.extname(relative)
-    const name = path.basename(relative, extname)
-    const id = path.join(dirname, name)
+    const id = TemplateUtil.templateFilePathToTemplateId(templatesPath, templatePath)
     tmpl[id] = templatePath
 
     return tmpl

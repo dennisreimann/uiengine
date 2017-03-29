@@ -10,6 +10,7 @@ const Theme = require('./theme')
 const Connector = require('./connector')
 const PageUtil = require('./util/page')
 const ComponentUtil = require('./util/component')
+const TemplateUtil = require('./util/template')
 const VariationUtil = require('./util/variation')
 
 const CONFIG_FILENAME = 'uiengine.yml'
@@ -63,22 +64,22 @@ async function generateContent () {
   return state
 }
 
-// TODO: Add handler for template changes
 async function generateIncrementForFileChange (filePath, action = 'changed') {
-  const { source: { components, pages, data, configFile }, theme, debug } = state.config
+  const { source: { components, pages, templates, data, configFile }, theme, debug } = state.config
   const isDeleted = action === 'deleted'
   const file = path.relative(process.cwd(), filePath)
   const isDataFile = !!filePath.startsWith(data)
   const isThemeFile = debug && !!file.match(theme.module)
   const isComponentDir = path.dirname(filePath) === components
-  let pageId, componentId, variationId
+  let pageId, componentId, templateId, variationId
 
-  // Skip generating individual items in case the theme or data
-  // got changed as we need to regenerate everything
+  // Skip generating individual items in case the theme or
+  // data got changed as we need to regenerate everything
   if (!isDataFile && !isThemeFile) {
     pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
     componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
     variationId = components ? VariationUtil.variationFilePathToVariationId(components, filePath) : undefined
+    templateId = templates ? TemplateUtil.templateFilePathToTemplateId(templates, filePath) : undefined
   }
 
   // In case a component directory has been deleted we
@@ -117,6 +118,9 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
       await regenerateComponent(componentId)
     }
     return { file, action, type: 'component', item: componentId }
+  } else if (templateId) {
+    await regenerateTemplate(templateId)
+    return { file, action, type: 'template', item: templateId }
   } else {
     await generate({ config: configFile })
     return { file, action, type: 'site', item: state.config.name }
@@ -197,6 +201,10 @@ async function regenerateComponent (id) {
   const buildPages = Builder.generatePagesHavingComponent(state, id)
   const buildVariations = Builder.generateComponentVariations(state, id)
   await Promise.all([buildPages, buildVariations])
+}
+
+async function regenerateTemplate (id) {
+  await Builder.generatePagesHavingTemplate(state, id)
 }
 
 async function removeComponent (id) {
