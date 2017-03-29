@@ -18,9 +18,15 @@ You should initialize the UIengine in the directory that also contains your `pac
 uiengine init
 ```
 
+This command creates a config file named `uiengine.yml`, which contains the basic configuration.
+It also creates the folder `pages` containing a `page.md` file.
+This is the page file for the index page of the Interface Exchange.
+
 ## ⚙️ How to configure the project?
 
-TODO: Add short description linking to the [config details](./config.md).
+The config file `uiengine.yml` contains the basic configuration for your project.
+If you generated the file with the `init` command it contains comments for the individual sections.
+See the [config documentation](./config.md) for details.
 
 ## ➕ How to create a component?
 
@@ -42,8 +48,8 @@ uiengine scaffold COMPONENT_ID VARIATION_1 VARIATION_2 VARIATION_3
 A variation needs at least a file to render.
 You create a variation by adding a file renderable by one of the configured adapters to the `variations` directory of a component.
 
-In addition to the raw render file, you can also add a markdown file containing the meta information for the variation.
-This markdown file can contain [YAML frontmatter](yaml.md) and has to be named like the variation, but having with the fil extension `.md`.
+In addition to the raw render file, you can also add a markdown file containing the metadata for the variation.
+This markdown file can contain [YAML frontmatter](yaml.md) and has to be named like the variation, but must have the file extension `.md`.
 
 ## ✨ How to generate the project?
 
