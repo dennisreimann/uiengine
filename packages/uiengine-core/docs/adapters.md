@@ -16,7 +16,7 @@ An adapter module has to export an async `render` function:
   rendered and the data to render it with.
   This function is called asynchronously and has to return a `Promise`!
   The incoming `data` depends on the file that gets rendered:
-  For variations this is the context that is provided via the [variation metadata](./variation.md).
+  For variants this is the context that is provided via the [variant metadata](./variant.md).
 
 In addition to that there is an **optional hooks for `registerComponentFile`**.
 You can use this hook to i.e. register partials when working with Handlebars:

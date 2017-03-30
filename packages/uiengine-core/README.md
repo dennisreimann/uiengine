@@ -50,7 +50,7 @@ Technical documentation, with more detailed information:
 - [Configuration](./docs/config.md)
 - [Adapters](./docs/adapters.md)
 - [Component](./docs/component.md)
-- [Variation](./docs/variation.md)
+- [variant](./docs/variant.md)
 - [Theme](./docs/theme.md)
 - [YAML](./docs/yaml.md)
 

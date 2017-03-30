@@ -5,17 +5,17 @@ const Theme = require('./theme')
 const Connector = require('./connector')
 const File = require('./util/file')
 const PageUtil = require('./util/page')
-const VariationUtil = require('./util/variation')
+const VariantUtil = require('./util/variant')
 
 // Theme templates need to be prefixed with "theme:" to be referenced
 // as an alternative page template. This might be the case for certain
 // pages like the homepage or sandbox overview.
-// The variation template default does not have this prefix, because
+// The variant template default does not have this prefix, because
 // by definition it must be an application template of the project.
 const themeTemplatePrefix = 'theme:'
 const defaultTemplatePage = themeTemplatePrefix + 'page'
 const defaultTemplateComponent = themeTemplatePrefix + 'component'
-const defaultTemplateVariation = 'variation'
+const defaultTemplateVariant = 'variant'
 const pageFile = 'index.html'
 
 const isThemeTemplate = templateId =>
@@ -45,17 +45,17 @@ const render = (state, templateId, data) => {
   }
 }
 
-const getPageData = ({ pages, navigation, components, variations, config }, pageId) => {
+const getPageData = ({ pages, navigation, components, variants, config }, pageId) => {
   const page = pages[pageId]
 
   if (isThemeTemplate(page.template)) {
-    return { page, pages, components, variations, navigation, config }
+    return { page, pages, components, variants, navigation, config }
   } else {
     return page.context || {}
   }
 }
 
-const getComponentData = ({ pages, navigation, components, variations, config }, pageId, componentId) => {
+const getComponentData = ({ pages, navigation, components, variants, config }, pageId, componentId) => {
   const parent = pages[pageId]
   const component = components[componentId]
   const page = {
@@ -67,14 +67,14 @@ const getComponentData = ({ pages, navigation, components, variations, config },
     files: []
   }
 
-  const data = { page, pages, component, components, variations, navigation, config }
+  const data = { page, pages, component, components, variants, navigation, config }
 
   return data
 }
 
-const getVariationData = ({ variations, config }, variationId) => {
-  const variation = variations[variationId]
-  const data = { variation, config }
+const getVariantData = ({ variants, config }, variantId) => {
+  const variant = variants[variantId]
+  const data = { variant, config }
 
   return data
 }
@@ -163,34 +163,34 @@ async function generatePagesHavingTemplate (state, templateId) {
   await Promise.all(builds)
 }
 
-async function generateComponentVariations (state, componentId) {
+async function generateComponentVariants (state, componentId) {
   const { components } = state
   const component = components[componentId]
-  const variationIds = component.variationIds || []
-  const build = R.partial(generateVariation, [state])
-  const builds = R.map(build, variationIds)
+  const variantIds = component.variantIds || []
+  const build = R.partial(generateVariant, [state])
+  const builds = R.map(build, variantIds)
 
   await Promise.all(builds)
 }
 
-async function generateVariation (state, variationId) {
-  const { variations, config: { target } } = state
-  const variation = variations[variationId]
-  if (!variation) return Promise.reject(`Variation "${variationId}" does not exist or has not been fetched yet.`)
+async function generateVariant (state, variantId) {
+  const { variants, config: { target } } = state
+  const variant = variants[variantId]
+  if (!variant) return Promise.reject(`variant "${variantId}" does not exist or has not been fetched yet.`)
 
-  // render variation preview, with layout
-  const data = getVariationData(state, variationId)
-  const templateId = variation.template || defaultTemplateVariation
+  // render variant preview, with layout
+  const data = getVariantData(state, variantId)
+  const templateId = variant.template || defaultTemplateVariant
   const html = await render(state, templateId, data)
 
   // write file
-  const htmlPath = path.resolve(target, VariationUtil.VARIATIONS_DIRNAME, `${variation.id}.html`)
+  const htmlPath = path.resolve(target, VariantUtil.VARIANTS_DIRNAME, `${variant.id}.html`)
   await File.write(htmlPath, html)
 }
 
 async function generateSite (state) {
   const pageIds = Object.keys(state.pages)
-  const variationIds = Object.keys(state.variations)
+  const variantIds = Object.keys(state.variants)
 
   const pageBuild = R.partial(generatePage, [state])
   const pageBuilds = R.map(pageBuild, pageIds)
@@ -201,14 +201,14 @@ async function generateSite (state) {
   const pageComponentsBuild = R.partial(generateComponentsForPage, [state])
   const pageComponentsBuilds = R.map(pageComponentsBuild, pageIds)
 
-  const variationBuild = R.partial(generateVariation, [state])
-  const variationBuilds = R.map(variationBuild, variationIds)
+  const variantBuild = R.partial(generateVariant, [state])
+  const variantBuilds = R.map(variantBuild, variantIds)
 
   await Promise.all([
     ...pageBuilds,
     ...pageFilesBuilds,
     ...pageComponentsBuilds,
-    ...variationBuilds
+    ...variantBuilds
   ])
 }
 
@@ -219,8 +219,8 @@ module.exports = {
   generateComponentsForPage,
   generatePagesHavingComponent,
   generatePagesHavingTemplate,
-  generateComponentVariations,
-  generateVariation,
+  generateComponentVariants,
+  generateVariant,
   copyPageFiles,
   dumpState
 }

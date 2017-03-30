@@ -23,7 +23,7 @@ async function setup (state) {
     const { registerComponentFile } = getModule(state, ext)
 
     // register components: only files with the extension
-    // in the components source folder root. No variations!
+    // in the components source folder root. No variants!
     if (typeof registerComponentFile === 'function') {
       const { options } = adapters[ext]
       const pattern = path.join(components, `*/*.${ext}`)

@@ -1,12 +1,12 @@
 const R = require('ramda')
 
-module.exports = (id, path, variationIds = [], attributes) => {
+module.exports = (id, path, variantIds = [], attributes) => {
   const baseData = {
     id,
     path
   }
 
-  // allow variationIds to be set via attributes 'variations' property,
-  // which gets transformed into variationIds property
-  return R.mergeAll([{ variationIds }, attributes, baseData])
+  // allow variantIds to be set via attributes 'variants' property,
+  // which gets transformed into variantIds property
+  return R.mergeAll([{ variantIds }, attributes, baseData])
 }

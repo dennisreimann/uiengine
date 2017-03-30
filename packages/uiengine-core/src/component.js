@@ -4,24 +4,24 @@ const glob = require('globby')
 const frontmatter = require('./util/frontmatter')
 const markdown = require('./util/markdown')
 const ComponentUtil = require('./util/component')
-const Variation = require('./variation')
+const variant = require('./variant')
 
 const assocComponent = (components, component) =>
   R.assoc(component.id, component, components)
 
-// turns the list of variations from the user provided attributes
-// into a list of correctly named variationIds
-const convertUserProvidedVariationsList = (componentId, attributes = {}) => {
-  let { variations } = attributes
-  if (typeof variations !== 'object') return attributes
+// turns the list of variants from the user provided attributes
+// into a list of correctly named variantIds
+const convertUserProvidedVariantsList = (componentId, attributes = {}) => {
+  let { variants } = attributes
+  if (typeof variants !== 'object') return attributes
 
-  const variationIds = R.map((variationId) =>
-    variationId.startsWith(`${componentId}/`) ? variationId : `${componentId}/${variationId}`,
-    variations
+  const variantIds = R.map((variantId) =>
+    variantId.startsWith(`${componentId}/`) ? variantId : `${componentId}/${variantId}`,
+    variants
   )
 
-  attributes = R.dissoc('variations', attributes)
-  attributes = R.assoc('variationIds', variationIds, attributes)
+  attributes = R.dissoc('variants', attributes)
+  attributes = R.assoc('variantIds', variantIds, attributes)
 
   return attributes
 }
@@ -69,14 +69,14 @@ async function fetchById (state, id) {
   const componentsPath = state.config.source.components
   const componentPath = ComponentUtil.componentIdToPath(id)
   const componentFilePath = ComponentUtil.componentIdToComponentFilePath(componentsPath, id)
-  const fetchVariationIds = Variation.findVariationIds(state, id)
+  const fetchVariantIds = variant.findVariantIds(state, id)
   const fetchComponentData = readComponentFile(state, componentFilePath)
-  const [ componentData, variationIds ] = await Promise.all([fetchComponentData, fetchVariationIds])
+  const [ componentData, variantIds ] = await Promise.all([fetchComponentData, fetchVariantIds])
 
   let { attributes, content } = componentData
-  attributes = convertUserProvidedVariationsList(id, attributes)
+  attributes = convertUserProvidedVariantsList(id, attributes)
   const title = ComponentUtil.componentIdToTitle(id)
-  const baseData = { id, title, path: componentPath, variationIds, content }
+  const baseData = { id, title, path: componentPath, variantIds, content }
   const data = R.mergeAll([baseData, attributes])
 
   return data

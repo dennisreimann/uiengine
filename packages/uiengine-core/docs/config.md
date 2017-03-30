@@ -19,9 +19,9 @@ version: 1.0.0
 
 The base directories for the input, your raw source files:
 - `components` is the root of the directory containing the components
-- `templates` contains the variation preview and sandbox templates
+- `templates` contains the variant preview and sandbox templates
 - `pages` is the directory of the UIengine's site structure and page markdown files
-- `data` contains sample data that can be referenced in variations and pages
+- `data` contains sample data that can be referenced in variants and pages
 
 ```yaml
 source:
@@ -81,12 +81,12 @@ In either way the adapter module can be …
 ### Templates
 
 By default the list of templates is generated from the files within the templates source directory – the filename without extension being the key.
-You will need at least a template named `variation` for the variation preview.
+You will need at least a template named `variant` for the variant preview.
 Here you can configure this preview as well as other templates.
 
 ```yaml
 templates:
-  variation: variation-preview.pug
+  variant: variant-preview.pug
 ```
 
 ### Theme 
@@ -105,7 +105,7 @@ theme:
 
 ### Breakpoints 
 
-The breakpoints defined here will be shown in the viewport resizer tool for the variation preview.
+The breakpoints defined here will be shown in the viewport resizer tool for the variant preview.
 Declare them with the name as key and the minimum media query pixel being the value.
 
 ```yaml

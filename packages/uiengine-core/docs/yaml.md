@@ -11,7 +11,7 @@ For the details on how to configure the individual items, see the information in
 
 - [Page](./page.md)
 - [Component](./component.md)
-- [Variation](./variation.md)
+- [variant](./variant.md)
 
 ## Custom schema
 

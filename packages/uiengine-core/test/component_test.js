@@ -32,27 +32,27 @@ describe('Component', () => {
         .catch(done)
     })
 
-    it('should infer variationIds if they are not provided', done => {
+    it('should infer variantIds if they are not provided', done => {
       Component.fetchById(state, 'label')
         .then(data => {
-          assert.equal(data.variationIds.length, 3)
-          assert.equal(data.variationIds[0], 'label/label.hbs')
-          assert.equal(data.variationIds[1], 'label/label.jsx')
-          assert.equal(data.variationIds[2], 'label/label.pug')
+          assert.equal(data.variantIds.length, 3)
+          assert.equal(data.variantIds[0], 'label/label.hbs')
+          assert.equal(data.variantIds[1], 'label/label.jsx')
+          assert.equal(data.variantIds[2], 'label/label.pug')
           done()
         })
         .catch(done)
     })
 
-    it('should not infer variationIds if they are explicitely provided by variations attribute', done => {
+    it('should not infer variantIds if they are explicitely provided by variants attribute', done => {
       Component.fetchById(state, 'input')
         .then(data => {
-          assert.equal(data.variationIds.length, 5)
-          assert.equal(data.variationIds[0], 'input/text.hbs')
-          assert.equal(data.variationIds[1], 'input/text.pug')
-          assert.equal(data.variationIds[2], 'input/text-required.pug')
-          assert.equal(data.variationIds[3], 'input/text-disabled.pug')
-          assert.equal(data.variationIds[4], 'input/number.pug')
+          assert.equal(data.variantIds.length, 5)
+          assert.equal(data.variantIds[0], 'input/text.hbs')
+          assert.equal(data.variantIds[1], 'input/text.pug')
+          assert.equal(data.variantIds[2], 'input/text-required.pug')
+          assert.equal(data.variantIds[3], 'input/text-disabled.pug')
+          assert.equal(data.variantIds[4], 'input/number.pug')
           done()
         })
         .catch(done)

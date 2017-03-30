@@ -4,14 +4,14 @@ const Config = require('./configuration')
 const Builder = require('./builder')
 const Navigation = require('./navigation')
 const Component = require('./component')
-const Variation = require('./variation')
+const Variant = require('./variant')
 const Page = require('./page')
 const Theme = require('./theme')
 const Connector = require('./connector')
 const PageUtil = require('./util/page')
 const ComponentUtil = require('./util/component')
 const TemplateUtil = require('./util/template')
-const VariationUtil = require('./util/variation')
+const VariantUtil = require('./util/variant')
 
 const CONFIG_FILENAME = 'uiengine.yml'
 
@@ -44,12 +44,12 @@ async function generateContent () {
   // 1. data fetching
   const fetchPages = Page.fetchAll(state)
   const fetchComponents = Component.fetchAll(state)
-  const fetchVariations = Variation.fetchAll(state)
-  const [pages, components, variations] = await Promise.all([fetchPages, fetchComponents, fetchVariations])
+  const fetchVariants = Variant.fetchAll(state)
+  const [pages, components, variants] = await Promise.all([fetchPages, fetchComponents, fetchVariants])
 
   state = R.assoc('pages', pages, state)
   state = R.assoc('components', components, state)
-  state = R.assoc('variations', variations, state)
+  state = R.assoc('variants', variants, state)
 
   // 2. transformations
   const navigation = await Navigation.fetch(state)
@@ -71,14 +71,14 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
   const isDataFile = !!filePath.startsWith(data)
   const isThemeFile = debug && !!file.match(theme.module)
   const isComponentDir = path.dirname(filePath) === components
-  let pageId, componentId, templateId, variationId
+  let pageId, componentId, templateId, variantId
 
   // Skip generating individual items in case the theme or
   // data got changed as we need to regenerate everything
   if (!isDataFile && !isThemeFile) {
     pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
     componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
-    variationId = components ? VariationUtil.variationFilePathToVariationId(components, filePath) : undefined
+    variantId = components ? VariantUtil.variantFilePathToVariantId(components, filePath) : undefined
     templateId = templates ? TemplateUtil.templateFilePathToTemplateId(templates, filePath) : undefined
   }
 
@@ -89,11 +89,11 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
   }
 
   // It is more efficient to rebuild the whole component
-  // in case a variation meta file changes, as we would
-  // have to find affected variation ids and rebuild
+  // in case a variant meta file changes, as we would
+  // have to find affected variant ids and rebuild
   // them individually.
-  if (variationId && variationId.endsWith('.md')) {
-    variationId = undefined
+  if (variantId && variantId.endsWith('.md')) {
+    variantId = undefined
   }
 
   if (pageId) {
@@ -103,13 +103,13 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
       await regeneratePage(pageId)
     }
     return { file, action, type: 'page', item: pageId }
-  } else if (variationId) {
+  } else if (variantId) {
     if (isDeleted) {
-      await removeVariation(variationId, componentId)
+      await removeVariant(variantId, componentId)
     } else {
-      await regenerateVariation(variationId, componentId)
+      await regenerateVariant(variantId, componentId)
     }
-    return { file, action, type: 'variation', item: variationId }
+    return { file, action, type: 'variant', item: variantId }
   } else if (componentId) {
     if (isDeleted && isComponentDir) {
       await removeComponent(componentId)
@@ -139,10 +139,10 @@ async function fetchAndAssocComponent (id) {
   return component
 }
 
-async function fetchAndAssocVariation (id) {
-  const variation = await Variation.fetchById(state, id)
-  state = R.assocPath(['variations', id], variation, state)
-  return variation
+async function fetchAndAssocVariant (id) {
+  const variant = await Variant.fetchById(state, id)
+  state = R.assocPath(['variants', id], variant, state)
+  return variant
 }
 
 async function fetchAndAssocNavigation () {
@@ -177,30 +177,30 @@ async function regeneratePage (id) {
   await Promise.all([buildPage, buildParent, buildComponents, copyFiles])
 }
 
-async function regenerateVariation (id, componentId) {
-  const fetchVariation = fetchAndAssocVariation(id)
+async function regenerateVariant (id, componentId) {
+  const fetchVariant = fetchAndAssocVariant(id)
   const fetchComponent = fetchAndAssocComponent(componentId)
-  await Promise.all([fetchVariation, fetchComponent])
+  await Promise.all([fetchVariant, fetchComponent])
 
-  const buildVariation = Builder.generateVariation(state, id)
+  const buildVariant = Builder.generateVariant(state, id)
   const buildPages = Builder.generatePagesHavingComponent(state, componentId)
-  await Promise.all([buildPages, buildVariation])
+  await Promise.all([buildPages, buildVariant])
 }
 
-async function removeVariation (id, componentId) {
-  state = R.dissocPath(['variations', id], state)
+async function removeVariant (id, componentId) {
+  state = R.dissocPath(['variants', id], state)
   await fetchAndAssocComponent(componentId)
   await Builder.generatePagesHavingComponent(state, componentId)
 }
 
 async function regenerateComponent (id) {
-  const { variationIds } = await fetchAndAssocComponent(id)
-  const fetchAndAssocVariations = R.map(fetchAndAssocVariation, variationIds)
-  await Promise.all(fetchAndAssocVariations)
+  const { variantIds } = await fetchAndAssocComponent(id)
+  const fetchAndAssocVariants = R.map(fetchAndAssocVariant, variantIds)
+  await Promise.all(fetchAndAssocVariants)
 
   const buildPages = Builder.generatePagesHavingComponent(state, id)
-  const buildVariations = Builder.generateComponentVariations(state, id)
-  await Promise.all([buildPages, buildVariations])
+  const buildVariants = Builder.generateComponentVariants(state, id)
+  await Promise.all([buildPages, buildVariants])
 }
 
 async function regenerateTemplate (id) {
