@@ -14,6 +14,10 @@ An [*Interface Exchange*](#-the--interface--exchange-)  generator that gets out 
 The terms *Pattern Library* or *Styleguide* suggest an association with a particular craft that affects the UI. Pattern libraries are understood as a tool that is primarily used by developers, whereas styleguides are associated with the creative output of the designers.
 In contrast to that, the term *Interface Exchange* describes a place where everyone involved in the UI comes together: Concept and user experience, product owners, as well as designers and developers.
 
+## 🖥 Screenshots
+
+![Component](./docs/media/screenshot-component.png)
+
 ## ☝️ Disclaimer
 
 This project is currently under active development.
