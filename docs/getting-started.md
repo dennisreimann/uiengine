@@ -30,17 +30,17 @@ See the [config documentation](./config.md) for details.
 
 ## ➕ How to create a component?
 
-To generate the basic files of a component you can use the `scaffold` command:
+To generate the basic files of a component you can use the `component` command:
 
 ```bash
-uiengine scaffold COMPONENT_ID
+uiengine component COMPONENT_ID
 ```
 
 This will also generate a default variant named after the component.
 In case you want to directly add some variants, you can list them like so:
 
 ```bash
-uiengine scaffold COMPONENT_ID VARIANT_1 VARIANT_2 VARIANT_3
+uiengine component COMPONENT_ID VARIANT_1 VARIANT_2 VARIANT_3
 ```
 
 ## ➕ How to create a variant?
@@ -50,6 +50,27 @@ You create a variant by adding a file renderable by one of the configured adapte
 
 In addition to the raw render file, you can also add a markdown file containing the metadata for the variant.
 This markdown file can contain [YAML frontmatter](yaml.md) and has to be named like the variant, but must have the file extension `.md`.
+
+## ➕ How to create a page?
+
+To generate the basic files and folders of a page you can use the `page` command:
+
+```bash
+uiengine page PAGE_ID
+```
+
+This generate a `page.md` inside the folder matching the page id in you pages source directory.
+In case you want to directly add some pages, you can list them like so:
+
+```bash
+uiengine page PAGE_1_ID PAGE_2_ID PAGE_3_ID
+```
+
+Example: Say you would like to create pages for grouping your components with the [Atomic Design Methodology](http://atomicdesign.bradfrost.com/chapter-2/):
+
+```bash
+uiengine page atoms molecules organisms templates pages
+```
 
 ## ✨ How to generate the project?
 
