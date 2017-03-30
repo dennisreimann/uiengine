@@ -10,3 +10,15 @@ Plain and simple:
 adapters:
   jsx: uiengine-adapter-react
 ```
+
+With options:
+
+```yaml
+adapters:
+  jsx:
+    module: uiengine-adapter-react
+    options:
+      debug: true
+```
+
+Right now there is only the option `debug` for a more detailed output in case of rendering errors.
