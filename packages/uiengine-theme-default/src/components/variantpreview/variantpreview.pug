@@ -11,7 +11,7 @@ mixin variantpreview(variant, active)
       script.
         var width = window.sessionStorage.getItem('variant:width:#{variantId}');
         if (width) { document.getElementById('#{containerId}').style.width = width + 'px' }
-      iframe.variantpreview__iframe(src=h.variantPreviewPath(variant.id))
+      iframe.variantpreview__iframe(src=h.variantPreviewPath(variant.id) frameborder="0" scrolling="no")
     if config.breakpoints
       .variantpreview__breakpoints(id=breakpointsId)
         .variantpreview__breakpoints-inner

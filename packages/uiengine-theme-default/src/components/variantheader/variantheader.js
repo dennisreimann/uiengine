@@ -35,9 +35,11 @@ on('modal:close', 'body', e => {
 
 on('click', '.variantheader__actiontoggle', e => {
   e.stopImmediatePropagation()
-  trigger('modal:close')
 
-  const actionlistSelector = e.target.getAttribute('data-actionlist-target')
+  let el = e.target
+  while (!el.matches('.variantheader__actiontoggle')) { el = el.parentNode }
+
+  const actionlistSelector = el.getAttribute('data-actionlist-target')
   const actionlist = document.getElementById(actionlistSelector)
 
   toggleActionlist(actionlist)

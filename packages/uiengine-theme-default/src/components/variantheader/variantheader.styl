@@ -1,16 +1,16 @@
 .variantheader
   color $color-varianthead-text
   background-color $color-varianthead-bg
-  padding-top $space-medium
   position relative
 
   .wrap
     display flex
     flex-wrap wrap
-    align-items last baseline
+    align-items flex-end
 
   &__meta
     margin-top $space-tiny
+    padding-top .85rem
     color $color-varianthead-meta
     @media $mq-up_to_m
       font-size $font-size-small
@@ -23,6 +23,7 @@
       width 8rem
       margin-left -8rem
       padding-right $space-large
+      padding-bottom 1.35rem
 
   &__naming
   &__status
@@ -52,6 +53,10 @@
     font-family $font-family-bold
     font-size $font-size-large
     padding-bottom $space-medium
+    @media $mq-up_to_xl
+      padding-top $space-tiny
+    @media $mq-xl_and_up
+      padding-top $space-medium
 
   &__links
     @media $mq-up_to_m
@@ -75,6 +80,10 @@
     text-decoration none
     transition-property color
     transition-duration .2s
+    @media $mq-up_to_xl
+      padding-top $space-tiny
+    @media $mq-xl_and_up
+      padding-top $space-medium
 
     &:hover
       color $color-varianthead-link-hover
@@ -154,7 +163,7 @@
     padding-left $space-normal
     padding-right $space-normal
     text-decoration none
-    
+
     .icon
       margin-right $space-small
       icon-position(4px)

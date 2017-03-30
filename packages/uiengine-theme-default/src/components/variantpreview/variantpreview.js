@@ -24,7 +24,6 @@ if (breakpoints) {
 
   on('click', '.variantpreview__sizer', e => {
     e.stopImmediatePropagation()
-    trigger('modal:close')
 
     const breakpointsSelector = e.target.getAttribute('data-breakpoints-target')
     const breakpoints = document.getElementById(breakpointsSelector)
