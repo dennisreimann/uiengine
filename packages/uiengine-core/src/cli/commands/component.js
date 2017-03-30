@@ -9,12 +9,12 @@ const String = require('../../util/string')
 const getTemplate = id =>
   require(`../templates/${id}`).template
 
-exports.describe = 'Create basic files for a new component/page'
+exports.describe = 'Create basic files for a new component'
 
 exports.builder = argv =>
   argv
     .demandCommand(1)
-    .example('$0 scaffold <component_id> [variant1 variant2 ...]')
+    .example('$0 component <component_id> [variant1 variant2 ...]')
 
 exports.handler = argv => {
   const opts = {
@@ -51,7 +51,7 @@ exports.handler = argv => {
 
       Promise.all(tasks)
         .then((state) =>
-          console.log(`✅  ${componentId} scaffolded!
+          console.log(`✅  ${componentId} created!
 
 The following files were created:
 
@@ -69,7 +69,7 @@ components:
 Enjoy! ✌️`))
     })
     .catch((err) => {
-      console.error([`🚨  scaffolding the component ${componentId} failed!`, err.stack].join('\n\n'))
+      console.error([`🚨  creating the component ${componentId} failed!`, err.stack].join('\n\n'))
       process.exit(1)
     })
 }
