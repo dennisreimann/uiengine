@@ -2,7 +2,7 @@
 const path = require('path')
 const assert = require('assert')
 
-const Variation = require('../src/variation')
+const Variant = require('../src/variant')
 
 const projectPath = path.resolve(__dirname, 'project')
 const state = {
@@ -32,10 +32,10 @@ const state = {
   }
 }
 
-describe('Variation', () => {
+describe('Variant', () => {
   describe('#fetchById', () => {
-    it('should return variation object', done => {
-      Variation.fetchById(state, 'input/text.pug')
+    it('should return variant object', done => {
+      Variant.fetchById(state, 'input/text.pug')
         .then(data => {
           assert.equal(data.id, 'input/text.pug')
           assert.equal(data.title, 'Text Input')
@@ -51,8 +51,8 @@ describe('Variation', () => {
         .catch(done)
     })
 
-    it('should infer variation title if it is not provided', done => {
-      Variation.fetchById(state, 'form/form.pug')
+    it('should infer variant title if it is not provided', done => {
+      Variant.fetchById(state, 'form/form.pug')
         .then(data => {
           assert.equal(data.title, 'Form')
           done()
@@ -61,7 +61,7 @@ describe('Variation', () => {
     })
 
     it('should parse attributes with custom yaml types', done => {
-      Variation.fetchById(state, 'input/text-disabled.pug')
+      Variant.fetchById(state, 'input/text-disabled.pug')
         .then(data => {
           assert.equal(data.included_md, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
           assert.equal(data.content_md, '<h1 id="headline">Headline</h1>\n<p>Text paragraph</p>')
@@ -73,12 +73,12 @@ describe('Variation', () => {
   })
 
   describe('#fetchAll', () => {
-    it('should return variations object', done => {
-      Variation.fetchAll(state)
+    it('should return variants object', done => {
+      Variant.fetchAll(state)
         .then(data => {
-          const variationIds = Object.keys(data)
+          const variantIds = Object.keys(data)
 
-          assert.equal(variationIds.length, 12);
+          assert.equal(variantIds.length, 12);
 
           [ 'input/checkbox.pug',
             'input/number.pug',
@@ -93,7 +93,7 @@ describe('Variation', () => {
             'formrow/text-without-label.pug',
             'form/form.pug'
           ].map(id => {
-            assert(variationIds.includes(id), `missing variation "${id}"`)
+            assert(variantIds.includes(id), `missing variant "${id}"`)
           })
 
           done()
@@ -102,11 +102,11 @@ describe('Variation', () => {
     })
 
     it('should return empty object if components source is not set', done => {
-      Variation.fetchAll({ config: { source: { } } })
+      Variant.fetchAll({ config: { source: { } } })
         .then(data => {
-          const variationIds = Object.keys(data)
+          const variantIds = Object.keys(data)
 
-          assert.equal(variationIds.length, 0)
+          assert.equal(variantIds.length, 0)
           done()
         })
         .catch(done)

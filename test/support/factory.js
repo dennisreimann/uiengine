@@ -2,7 +2,7 @@ export function component (id, attrs = {}) {
   attrs.title = attrs.title || id
   attrs.content = attrs.content || ''
   attrs.template = attrs.template || 'theme:component'
-  attrs.variationIds = attrs.variationIds || []
+  attrs.variantIds = attrs.variantIds || []
 
   return Object.assign({}, attrs, { id })
 }

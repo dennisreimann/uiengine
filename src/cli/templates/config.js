@@ -8,9 +8,9 @@ name: ${name}
 
 # Base directories for the input, your raw source files:
 # - components is the root of the directory containing the components
-# - templates contains the variation preview and sandbox templates
+# - templates contains the variant preview and sandbox templates
 # - pages is the directory of the UIengine's site structure and page markdown files
-# - data contains sample data that can be referenced in variations and pages
+# - data contains sample data that can be referenced in variants and pages
 source:
   components: ./src/components
   templates: ./src/templates
@@ -29,13 +29,13 @@ adapters:
       pretty: true
       basedir: ./src/components
 
-# Here you can configure the template that the variation preview gets embeded in.
+# Here you can configure the template that the variant preview gets embeded in.
 # By default the list of templates is generated from the files within the templates
 # source directory – the filename without extension being the key.
-# You will need at least a template named "variation" for the variation preview.
+# You will need at least a template named "variant" for the variant preview.
 # Here you can configure this preview as well as other templates.
 templates:
-  variation: variation-preview.pug
+  variant: variant-preview.pug
 
 # UIengine will require the theme, which has to provide a defined set of functions
 # for setup and rendering. For details see the theme docs.

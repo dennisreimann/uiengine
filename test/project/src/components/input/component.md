@@ -1,6 +1,6 @@
 ---
 title: Input
-variations:
+variants:
 - text.hbs
 - text.pug
 - text-required.pug

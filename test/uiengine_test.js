@@ -48,19 +48,19 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate variation previews', done => {
+    it('should generate variant previews', done => {
       UIengine.generate(opts)
         .then(state => {
-          assertExists(path.join(targetPath, 'variations', 'form', 'form.pug.html'))
-          assertExists(path.join(targetPath, 'variations', 'formrow', 'text-with-label.pug.html'))
-          assertExists(path.join(targetPath, 'variations', 'formrow', 'text-without-label.pug.html'))
-          assertExists(path.join(targetPath, 'variations', 'input', 'number.pug.html'))
-          assertExists(path.join(targetPath, 'variations', 'input', 'text-disabled.pug.html'))
-          assertExists(path.join(targetPath, 'variations', 'input', 'text-required.pug.html'))
-          assertExists(path.join(targetPath, 'variations', 'input', 'text.hbs.html'))
-          assertExists(path.join(targetPath, 'variations', 'input', 'text.pug.html'))
-          assertExists(path.join(targetPath, 'variations', 'label', 'label.hbs.html'))
-          assertExists(path.join(targetPath, 'variations', 'label', 'label.pug.html'))
+          assertExists(path.join(targetPath, 'variants', 'form', 'form.pug.html'))
+          assertExists(path.join(targetPath, 'variants', 'formrow', 'text-with-label.pug.html'))
+          assertExists(path.join(targetPath, 'variants', 'formrow', 'text-without-label.pug.html'))
+          assertExists(path.join(targetPath, 'variants', 'input', 'number.pug.html'))
+          assertExists(path.join(targetPath, 'variants', 'input', 'text-disabled.pug.html'))
+          assertExists(path.join(targetPath, 'variants', 'input', 'text-required.pug.html'))
+          assertExists(path.join(targetPath, 'variants', 'input', 'text.hbs.html'))
+          assertExists(path.join(targetPath, 'variants', 'input', 'text.pug.html'))
+          assertExists(path.join(targetPath, 'variants', 'label', 'label.hbs.html'))
+          assertExists(path.join(targetPath, 'variants', 'label', 'label.pug.html'))
 
           done()
         })
@@ -181,7 +181,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, 'variations', 'form', 'form.pug.html'))
+          assertExists(path.join(targetPath, 'variants', 'form', 'form.pug.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'component')
@@ -281,22 +281,22 @@ describe('UIengine', () => {
         })
     })
 
-    it('should generate variation on change', done => {
-      const filePath = path.join(componentsPath, 'form', 'variations', 'form.pug')
+    it('should generate variant on change', done => {
+      const filePath = path.join(componentsPath, 'form', 'variants', 'form.pug')
       const componentPath = path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html')
-      const existingVariationPath = path.join(targetPath, 'variations', 'form', 'form.pug.html')
+      const existingVariantPath = path.join(targetPath, 'variants', 'form', 'form.pug.html')
 
-      fs.removeSync(existingVariationPath)
+      fs.removeSync(existingVariantPath)
       fs.removeSync(componentPath)
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(existingVariationPath)
+          assertExists(existingVariantPath)
 
           assert.equal(result.action, 'changed')
-          assert.equal(result.type, 'variation')
+          assert.equal(result.type, 'variant')
           assert.equal(result.item, 'form/form.pug')
-          assert.equal(result.file, 'test/project/src/components/form/variations/form.pug')
+          assert.equal(result.file, 'test/project/src/components/form/variants/form.pug')
 
           assertExists(componentPath)
           done()
@@ -304,8 +304,8 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate variation on create', done => {
-      const filePath = path.join(componentsPath, 'form', 'variations', 'form-fieldsets.pug')
+    it('should generate variant on create', done => {
+      const filePath = path.join(componentsPath, 'form', 'variants', 'form-fieldsets.pug')
       const componentPath = path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html')
 
       fs.removeSync(componentPath)
@@ -313,13 +313,13 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'created')
         .then(result => {
-          assertContentMatches(componentPath, 'class="variationheader__title">Form Fieldsets</')
+          assertContentMatches(componentPath, 'class="variantheader__title">Form Fieldsets</')
           assertExists(componentPath)
 
           assert.equal(result.action, 'created')
-          assert.equal(result.type, 'variation')
+          assert.equal(result.type, 'variant')
           assert.equal(result.item, 'form/form-fieldsets.pug')
-          assert.equal(result.file, 'test/project/src/components/form/variations/form-fieldsets.pug')
+          assert.equal(result.file, 'test/project/src/components/form/variants/form-fieldsets.pug')
 
           fs.removeSync(filePath)
 
@@ -332,26 +332,26 @@ describe('UIengine', () => {
         })
     })
 
-    it('should generate variation on delete', done => {
-      const filePath = path.join(componentsPath, 'form', 'variations', 'form-fieldsets.pug')
+    it('should generate variant on delete', done => {
+      const filePath = path.join(componentsPath, 'form', 'variants', 'form-fieldsets.pug')
       const componentPath = path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html')
 
       fs.writeFileSync(filePath, 'p Test')
 
       UIengine.generateIncrementForFileChange(filePath, 'created')
         .then(result => {
-          assertContentMatches(componentPath, 'class="variationheader__title">Form Fieldsets</')
+          assertContentMatches(componentPath, 'class="variantheader__title">Form Fieldsets</')
 
           fs.removeSync(filePath)
 
           UIengine.generateIncrementForFileChange(filePath, 'deleted')
             .then(result => {
-              assertContentDoesNotMatch(componentPath, 'class="variationheader__title">Form Fieldsets</')
+              assertContentDoesNotMatch(componentPath, 'class="variantheader__title">Form Fieldsets</')
 
               assert.equal(result.action, 'deleted')
-              assert.equal(result.type, 'variation')
+              assert.equal(result.type, 'variant')
               assert.equal(result.item, 'form/form-fieldsets.pug')
-              assert.equal(result.file, 'test/project/src/components/form/variations/form-fieldsets.pug')
+              assert.equal(result.file, 'test/project/src/components/form/variants/form-fieldsets.pug')
 
               done()
             })

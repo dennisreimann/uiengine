@@ -42,7 +42,7 @@ const state = {
       }
     },
     templates: {
-      variation: path.resolve(projectPath, 'src', 'templates', 'variation-preview.pug'),
+      variant: path.resolve(projectPath, 'src', 'templates', 'variant-preview.pug'),
       custom: path.resolve(projectPath, 'src', 'templates', 'other-page.pug'),
       page: path.resolve(projectPath, 'src', 'templates', 'page.pug')
     },
@@ -102,15 +102,15 @@ const state = {
   components: {
     input: Factory.component('input', {
       title: 'Awesome Input',
-      variationIds: ['input/text.pug'],
+      variantIds: ['input/text.pug'],
       content: '<p>An input field that can be used inside a form.</p>'
     })
   },
-  variations: {
+  variants: {
     'input/text.pug': {
       id: 'input/text.pug',
       componentId: 'input',
-      path: path.resolve(projectPath, 'src', 'components', 'input', 'variations', 'text.pug'),
+      path: path.resolve(projectPath, 'src', 'components', 'input', 'variants', 'text.pug'),
       content: '<p>This is documentation for the text input.</p>',
       rendered: '<input class="input input--text" id="name" name="person[name]" type="text"/>',
       context: { id: 'name', name: 'person[name]' },
@@ -279,11 +279,11 @@ describe('Builder', () => {
     })
   })
 
-  describe('#generateComponentVariations', () => {
-    it('should generate component variation pages', done => {
-      Builder.generateComponentVariations(state, 'input')
+  describe('#generateComponentVariants', () => {
+    it('should generate component variant pages', done => {
+      Builder.generateComponentVariants(state, 'input')
         .then(() => {
-          assertExists(path.join(target, 'variations', 'input', 'text.pug.html'))
+          assertExists(path.join(target, 'variants', 'input', 'text.pug.html'))
 
           done()
         })
@@ -291,11 +291,11 @@ describe('Builder', () => {
     })
   })
 
-  describe('#generateVariation', () => {
-    it('should generate variation page', done => {
-      Builder.generateVariation(state, 'input/text.pug')
+  describe('#generateVariant', () => {
+    it('should generate variant page', done => {
+      Builder.generateVariant(state, 'input/text.pug')
         .then(() => {
-          assertExists(path.join(target, 'variations', 'input', 'text.pug.html'))
+          assertExists(path.join(target, 'variants', 'input', 'text.pug.html'))
 
           done()
         })

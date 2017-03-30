@@ -3,7 +3,7 @@ const R = require('ramda')
 const UIengine = require('../../uiengine')
 const File = require('../../util/file')
 const ComponentUtil = require('../../util/component')
-const VariationUtil = require('../../util/variation')
+const VariantUtil = require('../../util/variant')
 const String = require('../../util/string')
 
 const getTemplate = id =>
@@ -14,7 +14,7 @@ exports.describe = 'Create basic files for a new component/page'
 exports.builder = argv =>
   argv
     .demandCommand(1)
-    .example('$0 scaffold <component_id> [variation1 variation2 ...]')
+    .example('$0 scaffold <component_id> [variant1 variant2 ...]')
 
 exports.handler = argv => {
   const opts = {
@@ -22,8 +22,8 @@ exports.handler = argv => {
     debug: argv.debug
   }
   const componentId = argv._[1]
-  const variations = argv._.slice(2)
-  const variationNames = variations.length ? variations : [componentId]
+  const variants = argv._.slice(2)
+  const variantNames = variants.length ? variants : [componentId]
 
   UIengine.setupStateWithOptions(opts)
     .then(({ config }) => {
@@ -35,19 +35,19 @@ exports.handler = argv => {
       const componentFilePath = path.relative(process.cwd(), path.join(componentsDir, componentId, ComponentUtil.COMPONENT_FILENAME))
       const tasks = [File.write(componentFilePath, componentContent)]
 
-      // variations
-      const variationFiles = []
-      const createVariations = R.map(variationName => {
-        const variationId = `${componentId}/${variationName}.md`
-        const variationTitle = String.titleize(variationName)
-        const variationTemplate = getTemplate('variation')
-        const variationContent = variationTemplate(variationTitle).trim()
-        const variationFilePath = VariationUtil.variationIdToVariationFilePath(componentsDir, variationId)
-        variationFiles.push(variationFilePath)
-        return File.write(variationFilePath, variationContent)
-      }, variationNames)
+      // variants
+      const variantFiles = []
+      const createVariants = R.map(variantName => {
+        const variantId = `${componentId}/${variantName}.md`
+        const variantTitle = String.titleize(variantName)
+        const variantTemplate = getTemplate('variant')
+        const variantContent = variantTemplate(variantTitle).trim()
+        const variantFilePath = VariantUtil.variantIdToVariantFilePath(componentsDir, variantId)
+        variantFiles.push(variantFilePath)
+        return File.write(variantFilePath, variantContent)
+      }, variantNames)
 
-      tasks.push(...createVariations)
+      tasks.push(...createVariants)
 
       Promise.all(tasks)
         .then((state) =>
@@ -56,7 +56,7 @@ exports.handler = argv => {
 The following files were created:
 
 - ${componentFilePath} (component file)
-` + R.map(variationFile => '- ' + path.relative(process.cwd(), variationFile), variationFiles).join('\n') + `
+` + R.map(variantFile => '- ' + path.relative(process.cwd(), variantFile), variantFiles).join('\n') + `
 
 Add the component to a page by adding the component id to the page file:
 

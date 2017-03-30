@@ -36,20 +36,20 @@ To generate the basic files of a component you can use the `scaffold` command:
 uiengine scaffold COMPONENT_ID
 ```
 
-This will also generate a default variation named after the component.
-In case you want to directly add some variations, you can list them like so:
+This will also generate a default variant named after the component.
+In case you want to directly add some variants, you can list them like so:
 
 ```bash
-uiengine scaffold COMPONENT_ID VARIATION_1 VARIATION_2 VARIATION_3
+uiengine scaffold COMPONENT_ID VARIANT_1 VARIANT_2 VARIANT_3
 ```
 
-## ➕ How to create a variation?
+## ➕ How to create a variant?
 
-A variation needs at least a file to render.
-You create a variation by adding a file renderable by one of the configured adapters to the `variations` directory of a component.
+A variant needs at least a file to render.
+You create a variant by adding a file renderable by one of the configured adapters to the `variants` directory of a component.
 
-In addition to the raw render file, you can also add a markdown file containing the metadata for the variation.
-This markdown file can contain [YAML frontmatter](yaml.md) and has to be named like the variation, but must have the file extension `.md`.
+In addition to the raw render file, you can also add a markdown file containing the metadata for the variant.
+This markdown file can contain [YAML frontmatter](yaml.md) and has to be named like the variant, but must have the file extension `.md`.
 
 ## ✨ How to generate the project?
 

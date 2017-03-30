@@ -5,7 +5,7 @@ version: '1.0.0'
 
 # Base directories for the input, your raw source files:
 # - components is the root of the directory containing the components
-# - templates contains the variation preview and sandbox templates
+# - templates contains the variant preview and sandbox templates
 # - pages is the directory of the UIengine's site structure and page markdown files
 source:
   components: ./src/components
@@ -27,9 +27,9 @@ adapters:
   jsx: uiengine-adapter-react
   hbs: uiengine-adapter-handlebars
 
-# Here you can configure the template that the variation preview gets embeded in.
+# Here you can configure the template that the variant preview gets embeded in.
 templates:
-  variation: variation-preview.pug
+  variant: variant-preview.pug
 
 # UIengine will `require` the theme, which has to provide a defined set of functions
 # for setup and rendering. For details see the theme docs.

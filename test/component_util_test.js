@@ -36,8 +36,8 @@ describe('ComponentUtil', () => {
       assert.equal(ComponentUtil.componentFilePathToComponentId(componentsPath, filePath), 'button')
     })
 
-    it('should return component id for variation file path', () => {
-      const filePath = path.join(componentsPath, 'button', 'variations', 'button.pug')
+    it('should return component id for variant file path', () => {
+      const filePath = path.join(componentsPath, 'button', 'variants', 'button.pug')
       assert.equal(ComponentUtil.componentFilePathToComponentId(componentsPath, filePath), 'button')
     })
 
