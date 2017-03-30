@@ -35,6 +35,7 @@
     "prerelease": "yarn run clean",
     "start": "yarn run build -- -w & yarn run test -- -w",
     "build": "babel src --out-dir lib",
+    "test:setup": "cd test/project && yarn install && cd -",
     "test": "mocha --compilers js:babel-register -R dot",
     "cover": "nyc yarn run test",
     "lint": "standard",

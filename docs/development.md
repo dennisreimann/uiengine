@@ -27,6 +27,12 @@ yarn run build
 
 ### 🚥 Tests
 
+Setup:
+
+```bash
+yarn run test:setup
+```
+
 Basic linting:
 
 ```bash
