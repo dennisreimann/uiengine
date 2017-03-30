@@ -92,7 +92,7 @@ templates:
 ### Theme 
 
 Like an adapter, UIengine will require the theme, which has to provide a defined set of functions for setup and rendering.
-For details see the [theme documentation](./theme.md).
+For details see the [theme documentation](./theme.md) or have a look at the [default theme configuration options](https://github.com/dennisreimann/uiengine-theme-default).
 
 ```yaml
 theme:
