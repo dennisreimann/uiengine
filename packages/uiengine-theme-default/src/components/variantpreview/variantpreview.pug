@@ -1,0 +1,22 @@
+mixin variantpreview(variant, active)
+  - const variantId = h.dasherize(variant.id)
+  - const previewId = `${variantId}-preview`
+  - const breakpointsId = `${variantId}-breakpoints`
+  - const containerId = `${variantId}-container`
+  - const classes = active ? 'variant__section--active' : null
+  .variantpreview(id=previewId class=classes)&attributes(attributes)
+    .variantpreview__container(id=containerId data-variant-id=variantId)
+      .variantpreview__size
+        button.variantpreview__sizer(type="button" data-breakpoints-target=breakpointsId)
+      script.
+        var width = window.sessionStorage.getItem('variant:width:#{variantId}');
+        if (width) { document.getElementById('#{containerId}').style.width = width + 'px' }
+      iframe.variantpreview__iframe(src=h.variantPreviewPath(variant.id))
+    if config.breakpoints
+      .variantpreview__breakpoints(id=breakpointsId)
+        .variantpreview__breakpoints-inner
+          each width, breakpoint in config.breakpoints
+            button.variantpreview__breakpoint(type="button" data-width=width data-breakpoint=breakpoint data-breakpoints-target=breakpointsId data-container-target=containerId)
+              = `${breakpoint}: ${width}px`
+          button.variantpreview__breakpoint(type="button" data-breakpoints-target=breakpointsId data-container-target=containerId)
+            = h.t('breakpoints.reset')

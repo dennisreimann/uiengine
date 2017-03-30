@@ -1,0 +1,39 @@
+include /icon/icon.pug
+include /permalink/permalink.pug
+
+mixin variantheader(variant)
+  - const variantId = h.dasherize(variant.id)
+  - const actionlistId = `${h.dasherize(variant.id)}-actionlist`
+  - const component = components[variant.componentId]
+  header.variantheader&attributes(attributes)
+    .wrap.wrap--content
+      div.variantheader__meta
+        span.variantheader__naming= h.t('variant.naming')
+        if variant.status
+          span.variantheader__status= variant.status
+        if variant.label
+          span.variantheader__label= variant.label
+
+      h2.variantheader__title= variant.title
+
+      nav.variantheader__links
+        if variant.rendered
+          +variantheaderLink(`${variantId}-preview`, h.t('variant.preview'), true)
+        if variant.raw || variant.context || variant.rendered
+          +variantheaderLink(`${variantId}-code`, h.t('variant.code'), !variant.rendered)
+
+      .variantheader__actions
+        button.variantheader__actiontoggle(type="button" data-actionlist-target=actionlistId)
+          +icon('sheet')
+
+        ul.variantheader__actionlist(id=actionlistId)
+          li.variantheader__action
+            +permalink(h.t('variant.copy_permalink'), `#${variantId}`, 'globe').variantheader__actionlink
+          li.variantheader__action
+            a.variantheader__actionlink(href=h.variantPreviewPath(variant.id) target=variantId)
+              +icon('open-in-window')
+              = h.t('variant.open_in_window')
+
+mixin variantheaderLink(id, title, active)
+  - const classes = active ? 'variantheader__link--active' : null
+  a.variantheader__link(href=`#${id}` class=classes)= title

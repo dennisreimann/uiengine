@@ -1,6 +1,6 @@
-import '../components/variationheader/variationheader'
-import '../components/variationpreview/variationpreview'
-import '../components/variationcode/variationcode'
+import '../components/variantheader/variantheader'
+import '../components/variantpreview/variantpreview'
+import '../components/variantcode/variantcode'
 import '../components/permalink/permalink'
 import { trigger } from './lib/util'
 

@@ -1,9 +1,9 @@
 breakpoints:
   reset: reset
 
-variation:
-  naming: Variation
-  copy_permalink: Copy link to variation
+variant:
+  naming: Variant
+  copy_permalink: Copy link to variant
   open_in_window: Open in separate window
   preview: Preview
   code: Code

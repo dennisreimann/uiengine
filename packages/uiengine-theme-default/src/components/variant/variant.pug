@@ -1,0 +1,20 @@
+include /variantheader/variantheader.pug
+include /variantcode/variantcode.pug
+include /variantpreview/variantpreview.pug
+
+mixin variant(variant)
+  article.variant(id=h.dasherize(variant.id))
+    +variantheader(variant)
+
+    if variant.content
+      .wrap.wrap--content
+        .variant__content
+          != variant.content
+
+    if variant.raw || variant.context || variant.rendered
+      .variant__sections
+        if variant.rendered
+          +variantpreview(variant, true).variant__section
+
+        if variant.raw || variant.context || variant.rendered
+          +variantcode(variant, !variant.rendered).variant__section

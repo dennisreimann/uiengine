@@ -11,18 +11,18 @@ const breakpointNames = Object.keys(breakpoints)
 const breakpointWidths = Object.values ? Object.values(breakpoints) : Object.keys(breakpoints).map(k => breakpoints[k])
 
 if (breakpoints) {
-  const activeClass = 'variationpreview__breakpoints--active'
+  const activeClass = 'variantpreview__breakpoints--active'
 
   const toggleBreakpoints = breakpoints =>
     breakpoints.classList.toggle(activeClass)
 
   on('modal:close', 'body', e => {
-    document.querySelectorAll('.variationpreview__breakpoints').forEach(breakpoints => {
+    document.querySelectorAll('.variantpreview__breakpoints').forEach(breakpoints => {
       breakpoints.classList.remove(activeClass)
     })
   })
 
-  on('click', '.variationpreview__sizer', e => {
+  on('click', '.variantpreview__sizer', e => {
     e.stopImmediatePropagation()
     trigger('modal:close')
 
@@ -32,11 +32,11 @@ if (breakpoints) {
     toggleBreakpoints(breakpoints)
   })
 
-  on('click', '.variationpreview__breakpoint', e => {
+  on('click', '.variantpreview__breakpoint', e => {
     const breakpoint = e.target
     const containerSelector = e.target.getAttribute('data-container-target')
     const container = document.getElementById(containerSelector)
-    const variationId = container.getAttribute('data-variation-id')
+    const variantId = container.getAttribute('data-variant-id')
     const width = breakpoint.getAttribute('data-width')
     const bpId = breakpoint.getAttribute('data-breakpoint')
 
@@ -50,12 +50,12 @@ if (breakpoints) {
       container.addEventListener('transitionend', resizedHandler)
       container.setAttribute('data-breakpoint', bpId)
       container.style.width = null
-      window.sessionStorage.setItem(`variation:width:${variationId}`, width)
+      window.sessionStorage.setItem(`variant:width:${variantId}`, width)
     } else {
       // reset
       container.removeAttribute('data-breakpoint')
       container.style.width = null
-      window.sessionStorage.removeItem(`variation:width:${variationId}`)
+      window.sessionStorage.removeItem(`variant:width:${variantId}`)
     }
   })
 }
@@ -75,7 +75,7 @@ const sizerTextForWidth = innerWidth => {
   return text
 }
 
-document.querySelectorAll('.variationpreview__iframe').forEach(iframe => {
+document.querySelectorAll('.variantpreview__iframe').forEach(iframe => {
   const container = iframe.parentNode
   const sizer = container.firstElementChild.firstElementChild
 

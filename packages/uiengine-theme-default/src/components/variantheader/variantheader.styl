@@ -1,6 +1,6 @@
-.variationheader
-  color $color-variationhead-text
-  background-color $color-variationhead-bg
+.variantheader
+  color $color-varianthead-text
+  background-color $color-varianthead-bg
   padding-top $space-medium
   position relative
 
@@ -11,7 +11,7 @@
 
   &__meta
     margin-top $space-tiny
-    color $color-variationhead-meta
+    color $color-varianthead-meta
     @media $mq-up_to_m
       font-size $font-size-small
     @media $mq-m_and_up
@@ -34,18 +34,18 @@
       margin-left $space-small
 
   &__status
-    color $color-variationhead-text
+    color $color-varianthead-text
 
   &__label
     position absolute
     right 4.25rem
     bottom .9rem
     padding $space-tiny $space-small
-    border 1px solid $color-variationhead-label-text
+    border 1px solid $color-varianthead-label-text
     border-radius $space-normal
     border-bottom-right-radius 0
-    color $color-variationhead-label-text
-    background $color-variationhead-label-bg
+    color $color-varianthead-label-text
+    background $color-varianthead-label-bg
     font-size $font-size-base
 
   &__title
@@ -66,21 +66,21 @@
         content ""
         position relative
         left $space-large * -1
-        border-left 1px solid $color-variationhead-meta
+        border-left 1px solid $color-varianthead-meta
 
   &__link
     display inline-block
     padding-bottom $space-medium
-    color $color-variationhead-link
+    color $color-varianthead-link
     text-decoration none
     transition-property color
     transition-duration .2s
 
     &:hover
-      color $color-variationhead-link-hover
+      color $color-varianthead-link-hover
 
     &--active
-      color $color-variationhead-link-current
+      color $color-varianthead-link-current
       background-image url(../svgs/triangle.svg)
       background-position 50% 100%
       background-repeat no-repeat
@@ -97,23 +97,23 @@
   &__actiontoggle
     width 2.1rem
     height 2.1rem
-    border 1px solid $color-variationhead-label-text
+    border 1px solid $color-varianthead-label-text
     border-radius 50%
     transition .2s
     cursor pointer
-    color $color-variationhead-button-text
-    background $color-variationhead-button-bg
+    color $color-varianthead-button-text
+    background $color-varianthead-button-bg
 
     &:hover
-      color $color-variationhead-button-text-hover
-      background $color-variationhead-button-bg-hover
+      color $color-varianthead-button-text-hover
+      background $color-varianthead-button-bg-hover
 
       .icon
-        icon-color($color-variationhead-button-text-hover)
+        icon-color($color-varianthead-button-text-hover)
 
     .icon
       transition .2s
-      icon-color($color-variationhead-button-text)
+      icon-color($color-varianthead-button-text)
       icon-position(.2em)
 
   &__actionlist

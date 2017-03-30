@@ -1,0 +1,32 @@
+mixin variantcode(variant, active)
+  - const id = `${h.dasherize(variant.id)}-code`
+  - const classes = active ? 'variant__section--active' : null
+  .variantcode(id=id class=classes)&attributes(attributes)
+    .wrap.wrap--content
+      .variantcode__sections
+        if variant.raw
+          section.variantcode__section.variantcode__section--expanded
+            header.variantcode__header(role="button")
+              h3= h.t('variant.raw')
+              +icon('caret-down-double').variantcode__expandicon
+            .variantcode__content
+              pre.variantcode__raw.hljs(lang=variant.extension)
+                != h.decorateRaw(variant.raw, variant.extension)
+
+        if variant.context
+          section.variantcode__section.variantcode__section--expanded
+            header.variantcode__header(role="button")
+              h3= h.t('variant.context')
+              +icon('caret-down-double').variantcode__expandicon
+            .variantcode__content
+              pre.variantcode__context.hljs(lang="json")
+                != h.decorateContext(variant.context)
+
+        if variant.rendered
+          section.variantcode__section(id=blockId)
+            header.variantcode__header(role="button")
+              h3= h.t('variant.rendered')
+              +icon('caret-down-double').variantcode__expandicon
+            .variantcode__content
+              pre.variantcode__rendered.hljs(lang="html")
+                != h.decorateRendered(variant.rendered)

@@ -1,4 +1,4 @@
-.variationcode
+.variantcode
   margin-top $space-large
 
   &__sections
@@ -17,7 +17,7 @@
     &:hover
       color $color-code-header-hover
 
-  &__section:not(.variationcode__section--expanded) + &__section &__header
+  &__section:not(.variantcode__section--expanded) + &__section &__header
     border-top 0
 
   &__expandicon
@@ -25,16 +25,16 @@
     transition-duration .15s
     icon-color($color-code-header)
 
-    .variationcode__header:hover &
+    .variantcode__header:hover &
       icon-color($color-code-header-hover)
 
-    .variationcode__section--expanded &
+    .variantcode__section--expanded &
       transform rotate(-180deg)
 
   &__content
     display none
 
-    .variationcode__section--expanded &
+    .variantcode__section--expanded &
       display block
 
   &__raw

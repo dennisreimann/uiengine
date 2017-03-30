@@ -87,8 +87,8 @@ export default function (options, data) {
       return key.split('.').reduce((a, b) => a && a[b], localized)
     },
 
-    variationPreviewPath (variationId) {
-      const target = path.join('variations', `${variationId}.html`)
+    variantPreviewPath (variantId) {
+      const target = path.join('variants', `${variantId}.html`)
       const source = path.join(currentItem.path, pageFile)
 
       return relativePath(target, source)

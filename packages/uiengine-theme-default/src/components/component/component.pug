@@ -1,8 +1,8 @@
 include /pageheader/pageheader.pug
-include /variation/variation.pug
+include /variant/variant.pug
 
 mixin component(page)
-  - variationIds = component.variationIds
+  - variantIds = component.variantIds
   section.component(id=h.dasherize(page.id))
     +pageheader(page, navigation)
 
@@ -12,12 +12,12 @@ mixin component(page)
 
       nav.pagenav
         ul.pagenav__tree
-          for variationId in variationIds
-            - variation = variations[variationId]
+          for variantId in variantIds
+            - variant = variants[variantId]
             li.pagenav__item
-              a(class="pagenav__link" href=`#${h.dasherize(variation.id)}`)= variation.title
+              a(class="pagenav__link" href=`#${h.dasherize(variant.id)}`)= variant.title
 
-  section.variations
-    for variationId in variationIds
-      - variation = variations[variationId]
-      +variation(variation)
+  section.variants
+    for variantId in variantIds
+      - variant = variants[variantId]
+      +variant(variant)

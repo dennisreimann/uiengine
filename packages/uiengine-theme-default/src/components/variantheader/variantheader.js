@@ -1,6 +1,6 @@
 import { on, trigger } from '../../scripts/lib/util'
 
-on('click', '.variationheader__link', e => {
+on('click', '.variantheader__link', e => {
   e.preventDefault()
 
   const link = e.target
@@ -12,28 +12,28 @@ on('click', '.variationheader__link', e => {
   for (let i = 0; i < links.length; i++) {
     const item = links[i]
     const op = (item === link) ? 'add' : 'remove'
-    item.classList[op]('variationheader__link--active')
+    item.classList[op]('variantheader__link--active')
   }
 
   for (let i = 0; i < sections.length; i++) {
     const section = sections[i]
     const op = (section === target) ? 'add' : 'remove'
-    section.classList[op]('variation__section--active')
+    section.classList[op]('variant__section--active')
   }
 })
 
-const activeClass = 'variationheader__actionlist--active'
+const activeClass = 'variantheader__actionlist--active'
 
 const toggleActionlist = (actionlist) =>
   actionlist.classList.toggle(activeClass)
 
 on('modal:close', 'body', e => {
-  document.querySelectorAll('.variationheader__actionlist').forEach(actionlist => {
+  document.querySelectorAll('.variantheader__actionlist').forEach(actionlist => {
     actionlist.classList.remove(activeClass)
   })
 })
 
-on('click', '.variationheader__actiontoggle', e => {
+on('click', '.variantheader__actiontoggle', e => {
   e.stopImmediatePropagation()
   trigger('modal:close')
 
