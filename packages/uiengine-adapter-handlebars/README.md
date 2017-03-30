@@ -1,5 +1,7 @@
 # UIengine template adapter for Handlebars
 
+🚦 *State:* Proof of concept
+
 ## Configuration
 
 Plain and simple:
