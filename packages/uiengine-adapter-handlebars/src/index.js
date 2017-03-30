@@ -31,12 +31,11 @@ async function render (options, filePath, data = {}) {
 
           resolve(rendered)
         } catch (err) {
-          reject([
-            `Handlebars could not render "${filePath}"!`,
-            err.stack,
-            raw,
-            JSON.stringify(data, null, '  ')
-          ].join('\n\n'))
+          const message = [`Handlebars could not render "${filePath}"!`, err]
+
+          if (options.debug) message.push(raw, JSON.stringify(data, null, '  '))
+
+          reject(message.join('\n\n'))
         }
       }
     })

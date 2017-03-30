@@ -22,3 +22,5 @@ adapters:
 Available options:
 
 - `namespace` prefixes partials with the given namespace and a slash: `myapp/component`
+
+In addition to that there is the option `debug` for a more detailed output in case of rendering errors.
