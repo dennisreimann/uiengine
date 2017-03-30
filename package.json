@@ -67,7 +67,8 @@
     "nyc": "^10.1.2",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",
-    "standard": "^8.6.0"
+    "standard": "^8.6.0",
+    "uiengine-test-project": "file:test/project"
   },
   "standard": {
     "globals": [

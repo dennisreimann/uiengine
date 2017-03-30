@@ -1,17 +1,17 @@
 {
-  "name": "uiengine-sample-project",
+  "name": "uiengine-test-project",
   "version": "0.1.0",
-  "description": "UIengine Sample Project",
+  "description": "UIengine Test Project",
   "author": "Dennis Reimann",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/dennisreimann/uiengine.git"
   },
   "scripts": {
     "clean": "rimraf dist",
-    "start": "yarn run clean && node --harmony `which gulp` develop",
-    "build": "yarn run clean && node --harmony `which gulp` build"
+    "start": "yarn run clean && gulp develop",
+    "build": "yarn run clean && gulp build"
   },
   "dependencies": {
     "babel-core": "^6.22.1",
@@ -23,9 +23,9 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "uiengine": "file:../..",
-    "uiengine-adapter-handlebars": "^0.1.1",
-    "uiengine-adapter-pug": "^0.1.1",
-    "uiengine-adapter-react": "^0.1.1"
+    "uiengine-adapter-handlebars": "^0.1.2",
+    "uiengine-adapter-pug": "^0.1.2",
+    "uiengine-adapter-react": "^0.1.2"
   },
   "devDependencies": {
     "browser-sync": "^2.18.7",
