@@ -20,7 +20,24 @@ const handleFileChange = (filePath, type) => debounce('reload', () => {
     .catch(error => console.log(`🚨  Error generating increment for changed file ${path.relative(process.cwd(), filePath)}:`, error))
 })
 
+const watchOptions = {
+  ignoreInitial: true,
+  awaitWriteFinish: {
+    pollInterval: 50,
+    stabilityThreshold: 50
+  }
+}
+
+const browserSyncOptions = {
+  notify: false,
+  reloadThrottle: 125,
+  reloadDebounce: 125,
+  watchOptions
+}
+
 module.exports = {
   sourceFilesFromConfig,
-  handleFileChange
+  handleFileChange,
+  watchOptions,
+  browserSyncOptions
 }
