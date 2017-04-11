@@ -2,9 +2,9 @@ include /variantheader/variantheader.pug
 include /variantcode/variantcode.pug
 include /variantpreview/variantpreview.pug
 
-mixin variant(variant)
+mixin variant(variant, includeDetails)
   article.variant(id=h.dasherize(variant.id))
-    +variantheader(variant)
+    +variantheader(variant, includeDetails)
 
     if variant.content
       .wrap.wrap--content

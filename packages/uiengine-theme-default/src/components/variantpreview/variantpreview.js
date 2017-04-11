@@ -1,5 +1,5 @@
 import { iframeResizer } from 'iframe-resizer'
-import { debounce, on, trigger } from '../../scripts/lib/util'
+import { debounce, on } from '../../scripts/lib/util'
 
 // split this up to make the revving work
 const previewScriptPath = 'scripts/uiengine-preview.js'
@@ -88,10 +88,11 @@ document.querySelectorAll('.variantpreview__iframe').forEach(iframe => {
 
     iframeResizer(iframeResizerOpts, iframe)
 
+    sizer.textContent = sizerTextForWidth(contentWindow.innerWidth)
+
     contentWindow.onresize = e => {
       debounce(`${iframe.id}-resize`, () => {
-        const width = e.target.innerWidth
-        sizer.textContent = sizerTextForWidth(width)
+        sizer.textContent = sizerTextForWidth(e.target.innerWidth)
       }, 10)
     }
   }

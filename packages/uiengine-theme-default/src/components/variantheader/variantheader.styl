@@ -64,14 +64,16 @@
       font-size $font-size-subhead
     @media $mq-m_and_up
       font-size $font-size-large
-      margin-left $space-large
-      padding-left $space-large
 
-      &:before
-        content ""
-        position relative
-        left $space-large * -1
-        border-left 1px solid $color-varianthead-meta
+      .variantheader__title + &
+        margin-left $space-large
+        padding-left $space-large
+
+        &:before
+          content ""
+          position relative
+          left $space-large * -1
+          border-left 1px solid $color-varianthead-meta
 
   &__link
     display inline-block
