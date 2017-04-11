@@ -37,3 +37,7 @@ theme:
   module: uiengine-theme-default
   options:
     skin: uiengineering
+
+breakpoints: !include src/lib/breakpoints.json
+
+browserSync: !include bs-config.js

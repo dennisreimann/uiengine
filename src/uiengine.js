@@ -35,7 +35,7 @@ async function generate (options) {
   const setupAdapters = Connector.setup(state)
   await Promise.all([setupTheme, setupAdapters])
 
-  await generateContent()
+  state = await generateContent()
 
   return state
 }
@@ -121,8 +121,11 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
   } else if (templateId) {
     await regenerateTemplate(templateId)
     return { file, action, type: 'template', item: templateId }
-  } else {
+  } else if (isThemeFile) {
     await generate({ config: configFile })
+    return { file, action, type: 'site', item: state.config.name }
+  } else {
+    await generateContent()
     return { file, action, type: 'site', item: state.config.name }
   }
 }

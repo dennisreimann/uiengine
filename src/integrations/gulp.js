@@ -19,8 +19,14 @@ module.exports = (gulp, options) => {
     },
 
     // return the gulp watch task that handles file changes
-    watch () {
-      return gulp.watch(sourceFiles).on('change', event =>
+    watch (additionalGlobs = []) {
+      if (!additionalGlobs.constructor.name.toLowerCase() === 'array') {
+        additionalGlobs = [additionalGlobs]
+      }
+
+      const watchFiles = additionalGlobs.concat(sourceFiles)
+
+      return gulp.watch(watchFiles).on('change', event =>
         Common.handleFileChange(event.path, event.type)
       )
     }

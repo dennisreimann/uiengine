@@ -2,8 +2,7 @@
 
 ## Gulp
 
-To integrate the UIengine into your Gulp build you have to add the
-following lines of code to your Gulpfile:
+To integrate the UIengine into your Gulp build you have to add the following lines of code to your Gulpfile:
 
 ```js
 // import gulp
@@ -24,3 +23,15 @@ gulp.task('watch', () => {
   uiGulp.watch()
 })
 ```
+
+The `uiGulp.watch()` function generates a `gulp.watch()` for the files and folders referenced in your [project configuration](./config.md).
+It performs the neccessary actions to rebuild the site as efficiently as possible.
+
+In case your project has additional files that should trigger a rebuild you can pass them as a `String` or `Array`, like with `gulp.watch`:
+
+```js
+gulp.task('watch', () => {
+  // create a watcher for file changes and pass
+  // additional files that should trigger a rebuild
+  uiGulp.watch(['src/data/*.json', 'src/custom/**/*.md'])
+})
