@@ -24,7 +24,7 @@ module.exports = (gulp, options) => {
         additionalGlobs = [additionalGlobs]
       }
 
-      const watchFiles = additionalGlobs.concat(sourceFiles)
+      const watchFiles = sourceFiles.concat(additionalGlobs)
 
       return gulp.watch(watchFiles).on('change', event =>
         Common.handleFileChange(event.path, event.type)
