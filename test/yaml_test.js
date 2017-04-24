@@ -114,5 +114,16 @@ describe('Yaml', () => {
         })
         .catch(done)
     })
+
+    it('should allow duplicate keys and override and extend previous values', done => {
+      Yaml.fromString('object:\n  value1: 1\n  value2: 2\nobject:\n  value1: 1\n  value2:\n    nested: 3\n  value3: 4', sourcePaths)
+        .then(data => {
+          assert.equal(data.object.value1, 1)
+          assert.equal(data.object.value2.nested, 3)
+          assert.equal(data.object.value3, 4)
+          done()
+        })
+        .catch(done)
+    })
   })
 })
