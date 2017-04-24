@@ -70,6 +70,46 @@ describe('Variant', () => {
         })
         .catch(done)
     })
+
+    it('should omit marked parts in code', done => {
+      Variant.fetchById(state, 'form/form.pug')
+        .then(data => {
+          assert.equal(data.raw, `
+include /form/form.pug
+include /formrow/formrow.pug
+include /input/input.pug
+include /label/label.pug
+
++form("#")
+  +formrow()
+  +formrow()
+    +label("last_name", "Last name")
+    +input("last_name", "person[last_name]")
+  +formrow()`.trim())
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should omit marked parts in preview', done => {
+      Variant.fetchById(state, 'form/form.pug')
+        .then(data => {
+          assert.equal(data.rendered, `
+<form class="form" action="#" type="GET">
+  <div class="form__row">
+    <label class="label" for="first_name">First name
+    </label>
+    <input class="input input--text" id="first_name" name="person[first_name]" type="text"/>
+  </div>
+  <div class="form__row">
+  </div>
+  <div class="form__row">
+  </div>
+</form>`.trim())
+          done()
+        })
+        .catch(done)
+    })
   })
 
   describe('#fetchAll', () => {

@@ -5,5 +5,13 @@ include /label/label.pug
 
 +form("#")
   +formrow()
-    +label("name", "Name")
-    +input("name", "person[name]")
+    <!-- omit:code:start -->
+    +label("first_name", "First name")
+    +input("first_name", "person[first_name]")
+    <!-- omit:code:end -->
+  +formrow()
+    <!-- omit:preview:start -->
+    +label("last_name", "Last name")
+    +input("last_name", "person[last_name]")
+    <!-- omit:preview:end -->
+  +formrow()
