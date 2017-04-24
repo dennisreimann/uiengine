@@ -74,8 +74,9 @@ const parseString = (string, filename, sourcePaths) => {
     const IncludeYamlType = includeYamlType(filename, sourcePaths)
     const DataYamlType = dataYamlType(filename, sourcePaths)
     const schema = yaml.Schema.create([IncludeYamlType, DataYamlType, MarkdownYamlType])
+    const json = true // duplicate keys in a mapping will override values rather than throwing an error
 
-    return yaml.safeLoad(string.trim(), { schema, filename })
+    return yaml.safeLoad(string.trim(), { schema, filename, json })
   } catch (err) {
     throw new Error(chalk.red(`Could not parse YAML: ${err}`) + '\n\n' + chalk.gray(string))
   }
