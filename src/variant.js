@@ -7,6 +7,14 @@ const VariantUtil = require('./util/variant')
 const File = require('./util/file')
 const Connector = require('./connector')
 
+const regexpClean = new RegExp('([\\s]*?<!--\\s?omit:.*?\\s?-->)', 'gi')
+
+const omit = (mark, string) => {
+  const regexpOmit = new RegExp(`([\\s]*?<!--\\s?omit:${mark}:start\\s?-->[\\s\\S]*?<!--\\s?omit:${mark}:end\\s?-->)`, 'gi')
+
+  return string.replace(regexpOmit, '').replace(regexpClean, '')
+}
+
 const assocVariant = (variants, variant) =>
   R.assoc(variant.id, variant, variants)
 
@@ -72,7 +80,11 @@ async function fetchById (state, id) {
   // render raw variant, without layout
   const rawTemplate = File.read(filePath)
   const renderTemplate = Connector.render(state, filePath, context)
-  const [raw, rendered] = await Promise.all([rawTemplate, renderTemplate])
+  let [raw, rendered] = await Promise.all([rawTemplate, renderTemplate])
+
+  // adjust raw and rendered: omit marked parts
+  if (raw) raw = omit('code', raw)
+  if (rendered) rendered = omit('preview', rendered)
 
   const baseData = { id, componentId, path: filePath, content, raw, rendered, context, extension }
   const data = R.mergeAll([attributes, baseData])
