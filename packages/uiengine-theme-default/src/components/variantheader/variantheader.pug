@@ -26,11 +26,11 @@ mixin variantheader(variant, includeDetails)
 
       .variantheader__actions
         button.variantheader__actiontoggle(type="button" data-actionlist-target=actionlistId)
-          +icon('sheet')
+          +icon('tools')
 
         ul.variantheader__actionlist(id=actionlistId)
           li.variantheader__action
-            +permalink(h.t('variant.copy_permalink'), `#${variantId}`, 'globe').variantheader__actionlink
+            +permalink(h.t('variant.copy_permalink'), `#${variantId}`).variantheader__actionlink
           li.variantheader__action
             a.variantheader__actionlink(href=h.variantPreviewPath(variant.id) target=variantId)
               +icon('open-in-window')

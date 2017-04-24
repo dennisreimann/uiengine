@@ -7,7 +7,7 @@ mixin pageheader(page, navigation)
       - const parentItem = navigation[navItem.parentId]
       if parentItem
         a.pageheader__parent-link(href=h.pageLink(parentItem))
-          +icon('caret-small-left-double')
+          +icon('caret-left-double')
           = parentItem.title
       h1.pageheader__title= page.title
       block
