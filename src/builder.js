@@ -176,7 +176,7 @@ async function generateComponentVariants (state, componentId) {
 async function generateVariant (state, variantId) {
   const { variants, config: { target } } = state
   const variant = variants[variantId]
-  if (!variant) return Promise.reject(`variant "${variantId}" does not exist or has not been fetched yet.`)
+  if (!variant) return new Error(`variant "${variantId}" does not exist or has not been fetched yet.`)
 
   // render variant preview, with layout
   const data = getVariantData(state, variantId)

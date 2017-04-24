@@ -14,8 +14,9 @@ const getTheme = (state) => {
 async function render (state, templateId, data = {}) {
   const { config: { theme: { options } } } = state
   const { render } = getTheme(state)
+  const rendered = await render(options, templateId, data)
 
-  return await render(options, templateId, data)
+  return rendered
 }
 
 async function setup (state) {
@@ -58,4 +59,3 @@ module.exports = {
   render,
   teardown
 }
-

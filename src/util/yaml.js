@@ -47,7 +47,7 @@ const includeYamlType = (embeddingFilePath, sourcePaths) =>
     construct (includePath) {
       let basedir
       if (path.isAbsolute(includePath)) {
-        basedir = sourcePaths && sourcePaths.base || process.cwd()
+        basedir = (sourcePaths && sourcePaths.base) || process.cwd()
       } else {
         basedir = path.dirname(path.resolve(embeddingFilePath))
       }

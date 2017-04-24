@@ -1,7 +1,7 @@
 const path = require('path')
 const UIengine = require('../uiengine')
 
-require('yargs')
+module.exports = require('yargs')
   // debug
   .boolean('debug')
   .global('debug')
