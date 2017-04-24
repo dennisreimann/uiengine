@@ -48,10 +48,10 @@
     "globby": "^6.1.0",
     "js-yaml": "^3.7.0",
     "markdown-it": "^8.2.2",
-    "markdown-it-anchor": "^2.6.0",
+    "markdown-it-anchor": "^4.0.0",
     "ramda": "^0.23.0",
-    "uiengine-theme-default": "^0.7.4",
-    "yargs": "^6.6.0"
+    "uiengine-theme-default": "^0.7.5",
+    "yargs": "^7.1.0"
   },
   "optionalDependencies": {
     "browser-sync": "^2.18.8",
@@ -67,7 +67,7 @@
     "nyc": "^10.1.2",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",
-    "standard": "^8.6.0",
+    "standard": "^10.0.2",
     "uiengine-test-project": "file:test/project"
   },
   "standard": {
