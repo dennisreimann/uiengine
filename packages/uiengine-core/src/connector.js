@@ -73,4 +73,3 @@ module.exports = {
   registerComponentFile,
   render
 }
-
