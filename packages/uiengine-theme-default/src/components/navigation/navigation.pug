@@ -1,5 +1,5 @@
 mixin navigation()
-  nav.navigation
+  nav.navigation&attributes(attributes)
     .wrap.wrap--large
       a.navigation__config(href=h.pageLink(navigation['index']))
         | #{config.name} (#{config.version})

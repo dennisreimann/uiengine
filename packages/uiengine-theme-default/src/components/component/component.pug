@@ -4,20 +4,21 @@ include /variant/variant.pug
 mixin component(page)
   - variantIds = component.variantIds
   - hasManyVariants = variantIds.length > 1
-  section.component(id=h.dasherize(page.id))
+  section.component(id=h.dasherize(page.id))&attributes(attributes)
     +pageheader(page, navigation)
 
-    .wrap.wrap--content
-      article.page__content
-        !=page.content
+    if page.content || hasManyVariants
+      .wrap.wrap--content
+        article.page__content
+          !=page.content
 
-      if hasManyVariants
-        nav.pagenav
-          ul.pagenav__tree
-            for variantId in variantIds
-              - variant = variants[variantId]
-              li.pagenav__item
-                a(class="pagenav__link" href=`#${h.dasherize(variant.id)}`)= variant.title
+          if hasManyVariants
+            nav.pagenav
+              ul.pagenav__tree
+                for variantId in variantIds
+                  - variant = variants[variantId]
+                  li.pagenav__item
+                    a(class="pagenav__link" href=`#${h.dasherize(variant.id)}`)= variant.title
 
   section.variants
     for variantId in variantIds

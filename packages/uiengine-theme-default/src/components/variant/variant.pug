@@ -3,7 +3,7 @@ include /variantcode/variantcode.pug
 include /variantpreview/variantpreview.pug
 
 mixin variant(variant, includeDetails)
-  article.variant(id=h.dasherize(variant.id))
+  article.variant(id=h.dasherize(variant.id))&attributes(attributes)
     +variantheader(variant, includeDetails)
 
     if variant.content

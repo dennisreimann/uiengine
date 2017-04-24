@@ -46,6 +46,15 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
       border-bottom 1px solid $color-hover
 
 markdown-container()
+  h1
+  h2
+  h3
+  h4
+  h5
+  h6
+    &:not([class])
+      font-family $font-family-bold
+
   a:not([class])
     link-with-hover($color-main-link, $color-main-link-hover)
 

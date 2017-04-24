@@ -23,3 +23,6 @@ block main
                 a(class="pagenav__link" href=h.pageLink(item))= item.title
               .sandbox-page__content
                 != page.content
+                - const navItem = navigation[page.id]
+                - const itemIds = navItem.childIds
+                +pagenav(itemIds, navigation).sandbox-page__pagenav

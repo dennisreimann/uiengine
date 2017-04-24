@@ -64,7 +64,11 @@ section
   &__content
     markdown-container()
     margin-top $space-large
-    margin-bottom $space-medium
+    margin-bottom $space-large
 
-.sandbox-page + .sandbox-page
-  margin-top $space-large
+.sandbox-page
+  &__content
+    markdown-container()
+
+  + .sandbox-page
+    margin-top $space-large
