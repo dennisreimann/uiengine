@@ -21,30 +21,6 @@ const pageFile = 'index.html'
 const isThemeTemplate = templateId =>
   !templateId || templateId.startsWith(themeTemplatePrefix)
 
-const render = (state, templateId, data) => {
-  if (isThemeTemplate(templateId)) {
-    const template = templateId.substring(themeTemplatePrefix.length)
-    return Theme.render(state, template, data)
-  } else {
-    const templates = state.config.templates || {}
-    const template = templates[templateId]
-
-    if (!template) {
-      throw new Error(chalk.red([
-        `Template "${templateId}" does not exist.`,
-        'In case you want to reference an existing theme template,\nplease prefix it with "theme:" – i.e. "theme:page".',
-        'If this is supposed to be a custom template, add it to the\ntemplates source directory or refer to it like this:',
-        `templates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE`
-      ].join('\n\n')) + chalk.gray([
-        'Registered templates:',
-        `${JSON.stringify(templates, null, '  ')}`
-      ].join('\n\n')))
-    }
-
-    return Connector.render(state, template, data)
-  }
-}
-
 const getPageData = ({ pages, navigation, components, variants, config }, pageId) => {
   const page = pages[pageId]
 
@@ -86,6 +62,42 @@ const copyPageFile = (targetPath, sourcePath, source) => {
   return File.copy(source, target)
 }
 
+const render = (state, templateId, data) => {
+  if (isThemeTemplate(templateId)) {
+    const template = templateId.substring(themeTemplatePrefix.length)
+
+    return Theme.render(state, template, data)
+  } else {
+    const templates = state.config.templates || {}
+    const template = templates[templateId]
+
+    if (!template) {
+      throw new Error(chalk.red([
+        `Template "${templateId}" does not exist.`,
+        'In case you want to reference an existing theme template,\nplease prefix it with "theme:" – i.e. "theme:page".',
+        'If this is supposed to be a custom template, add it to the\ntemplates source directory or refer to it like this:',
+        `templates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE`
+      ].join('\n\n')) + chalk.gray([
+        'Registered templates:',
+        `${JSON.stringify(templates, null, '  ')}`
+      ].join('\n\n')))
+    }
+
+    return Connector.render(state, template, data)
+  }
+}
+
+async function renderWithFallback (state, templateId, data, identifier) {
+  let html
+  try {
+    html = await render(state, templateId, data)
+  } catch (err) {
+    html = `<!DOCTYPE html><html><body><pre>${err}</pre></body></html>`
+    console.error(chalk.red(`${identifier} could not be generated!`) + '\n\n' + chalk.gray(err))
+  }
+  return html
+}
+
 async function dumpState (state) {
   const json = JSON.stringify(state, null, '  ')
   const filePath = path.resolve(state.config.target, 'state.json')
@@ -108,10 +120,13 @@ async function copyPageFiles (state, pageId) {
 
 async function generatePage (state, pageId) {
   const { pages, config } = state
+  const identifier = `Page "${pageId}"`
   const page = pages[pageId]
-  const templateId = page.template || defaultTemplatePage
+  if (!page) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
+
   const data = getPageData(state, pageId)
-  const html = await render(state, templateId, data)
+  const templateId = page.template || defaultTemplatePage
+  const html = await renderWithFallback(state, templateId, data, identifier)
 
   const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
   const targetPath = path.resolve(config.target, targetPagePath)
@@ -132,11 +147,14 @@ async function generateComponentsForPage (state, pageId) {
 
 async function generateComponentForPage (state, pageId, componentId) {
   const { components, pages, config: { target } } = state
+  const identifier = `Component "${componentId}"`
   const parent = pages[pageId]
   const component = components[componentId]
-  const templateId = component.template || defaultTemplateComponent
+  if (!component) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
+
   const data = getComponentData(state, pageId, componentId)
-  const html = await render(state, templateId, data)
+  const templateId = component.template || defaultTemplateComponent
+  const html = await renderWithFallback(state, templateId, data, identifier)
 
   const targetPath = path.join(target, PageUtil.pagePathForComponentId(parent.path, component.id))
   const htmlPath = path.resolve(targetPath, pageFile)
@@ -175,13 +193,14 @@ async function generateComponentVariants (state, componentId) {
 
 async function generateVariant (state, variantId) {
   const { variants, config: { target } } = state
+  const identifier = `Variant "${variantId}"`
   const variant = variants[variantId]
-  if (!variant) return new Error(`variant "${variantId}" does not exist or has not been fetched yet.`)
+  if (!variant) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
 
   // render variant preview, with layout
   const data = getVariantData(state, variantId)
   const templateId = variant.template || defaultTemplateVariant
-  const html = await render(state, templateId, data)
+  const html = await renderWithFallback(state, templateId, data, identifier)
 
   // write file
   const htmlPath = path.resolve(target, VariantUtil.VARIANTS_DIRNAME, `${variant.id}.html`)
