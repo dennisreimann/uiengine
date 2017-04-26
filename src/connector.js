@@ -68,8 +68,34 @@ async function render (state, templatePath, data = {}) {
   }
 }
 
+async function filesForComponent (state, ext, componentName) {
+  const { filesForComponent } = getModule(state, ext)
+
+  if (typeof filesForComponent === 'function') {
+    const files = await filesForComponent(componentName)
+
+    return files
+  } else {
+    return []
+  }
+}
+
+async function filesForVariant (state, ext, componentName, variantName) {
+  const { filesForVariant } = getModule(state, ext)
+
+  if (typeof filesForVariant === 'function') {
+    const files = await filesForVariant(componentName, variantName)
+
+    return files
+  } else {
+    return []
+  }
+}
+
 module.exports = {
   setup,
   registerComponentFile,
-  render
+  render,
+  filesForComponent,
+  filesForVariant
 }
