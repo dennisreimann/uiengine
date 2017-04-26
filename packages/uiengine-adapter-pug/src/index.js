@@ -17,6 +17,24 @@ const render = (options, filePath, data = {}) =>
     }
   })
 
+const filesForComponent = (componentName) =>
+  [
+    {
+      basename: `${componentName}.pug`,
+      data: `mixin ${componentName}()\n  .${componentName}\n    //- TODO: implement\n`
+    }
+  ]
+
+const filesForVariant = (componentName, variantName) =>
+  [
+    {
+      basename: `${variantName}.pug`,
+      data: `+${componentName}()\n`
+    }
+  ]
+
 module.exports = {
-  render
+  render,
+  filesForComponent,
+  filesForVariant
 }
