@@ -1,6 +1,7 @@
 const path = require('path')
 const R = require('ramda')
 const glob = require('globby')
+const chalk = require('chalk')
 const markdown = require('./util/markdown')
 const frontmatter = require('./util/frontmatter')
 const VariantUtil = require('./util/variant')
@@ -78,9 +79,16 @@ async function fetchById (state, id) {
   attributes = R.merge({ title }, attributes)
 
   // render raw variant, without layout
-  const rawTemplate = File.read(filePath)
+  let raw, rendered
+  const readTemplate = File.read(filePath)
   const renderTemplate = Connector.render(state, filePath, context)
-  let [raw, rendered] = await Promise.all([rawTemplate, renderTemplate])
+
+  try {
+    [raw, rendered] = await Promise.all([readTemplate, renderTemplate])
+  } catch (err) {
+    rendered = `<!DOCTYPE html><html><body><pre>${err}</pre></body></html>`
+    console.error(chalk.red(`Variant "${id}" could not be rendered!`) + '\n\n' + chalk.gray(err))
+  }
 
   // adjust raw and rendered: omit marked parts
   if (raw) raw = omit('code', raw)
