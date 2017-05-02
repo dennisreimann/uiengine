@@ -30,7 +30,7 @@ mixin variantheader(variant, includeDetails)
 
         ul.variantheader__actionlist(id=actionlistId)
           li.variantheader__action
-            +permalink(h.t('variant.copy_permalink'), `#${variantId}`).variantheader__actionlink
+            +permalink(`#${variantId}`, h.t('variant.copy_permalink')).variantheader__actionlink
           li.variantheader__action
             a.variantheader__actionlink(href=h.variantPreviewPath(variant.id) target=variantId)
               +icon('open-in-window')
