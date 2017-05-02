@@ -1,3 +1,5 @@
+include /icon/icon.pug
+
 mixin variantcode(variant, active)
   - const id = `${h.dasherize(variant.id)}-code`
   - const classes = active ? 'variant__section--active' : null

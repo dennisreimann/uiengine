@@ -6,6 +6,7 @@ include /sitemap/sitemap.pug
 block main
   section.page(id=h.dasherize(page.id))
     +pageheader(page, navigation)
+
     .wrap.wrap--content
       article.page__content
         !=page.content
