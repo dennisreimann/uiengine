@@ -1,0 +1,13 @@
+extends includes/layout.pug
+
+include /pageheader/pageheader.pug
+include /schema/schema.pug
+
+block main
+  section.page(id=h.dasherize(page.id))
+    +pageheader(page, navigation)
+
+    .wrap.wrap--content
+      article.page__content
+        each item, id in schema
+          +schema(id, item)

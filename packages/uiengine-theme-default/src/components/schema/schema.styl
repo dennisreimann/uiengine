@@ -1,0 +1,59 @@
+.schema
+  width 100%
+  margin-top $space-large
+  border-collapse collapse
+
+  &__title
+    font-family $font-family-base
+    font-size $font-size-subhead
+    text-align left
+    margin-bottom $space-small
+
+  &__propertyname
+  &__propertytype
+  &__propertydescription
+  &__propertydefault
+  &__propertyrequired
+    padding .25rem .5rem
+
+    th&
+      color $color-schemahead-text
+      text-align left
+      border-bottom 1px solid $color-schemahead-border
+      font-size $font-size-tiny
+      font-family $font-family-light
+      font-weight normal
+
+    td&
+      color $color-schemabody-text
+      border-bottom 1px solid $color-schemabody-border
+
+  &__propertyname
+    width 10em
+    padding-left 0
+
+  &__propertytype
+    width 6em
+
+  &__propertydescription
+    width auto
+
+  &__propertyname,
+  &__propertytype,
+  &__propertydescription code,
+  &__propertydefault,
+  &__propertyrequired
+    td&
+      font-family $font-family-code
+      font-size $font-size-small
+
+  &__propertyrequired
+    width 4em
+    color $color-schemabody-text
+    th&,
+    td&
+      text-align center
+
+  &__propertydefault
+    width 6em
+    padding-right 0

@@ -11,5 +11,13 @@ variant:
   context: Daten
   rendered: HTML
 
+schema:
+  copy_permalink: Link kopieren
+  property_name: Property
+  property_type: Typ
+  property_description: Beschreibung
+  property_required: Pflicht
+  property_default: Standard
+
 sitemap:
   label: Sitemap

@@ -1,13 +1,17 @@
 include /pageheader/pageheader.pug
+include /schema/schema.pug
 include /variant/variant.pug
 
 mixin component(page)
-  - variantIds = component.variantIds
-  - hasManyVariants = variantIds.length > 1
+  - const schema = component.schema
+  - const variantIds = component.variantIds
+  - const hasSchema = schema && Object.keys(schema).length
+  - const hasVariants = variantIds && variantIds.length
+  - const hasManyVariants = variantIds && variantIds.length > 1
   section.component(id=h.dasherize(page.id))&attributes(attributes)
     +pageheader(page, navigation)
 
-    if page.content || hasManyVariants
+    if page.content || hasManyVariants || hasSchema
       .wrap.wrap--content
         article.page__content
           !=page.content
@@ -20,7 +24,12 @@ mixin component(page)
                   li.pagenav__item
                     a(class="pagenav__link" href=`#${h.dasherize(variant.id)}`)= variant.title
 
-  section.variants
-    for variantId in variantIds
-      - variant = variants[variantId]
-      +variant(variant, hasManyVariants)
+          if hasSchema
+            each item, id in schema
+              +schema(id, item)
+
+  if hasVariants
+    section.variants
+      for variantId in variantIds
+        - variant = variants[variantId]
+        +variant(variant, hasManyVariants)

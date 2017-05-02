@@ -7,6 +7,7 @@ const assetsDir = '_uiengine-theme'
 const manifestPath = path.resolve(__dirname, '..', 'static', assetsDir, 'rev-manifest.json')
 const localesPath = path.resolve(__dirname, '..', 'static', assetsDir, 'locales')
 const supportedLocales = ['en', 'de']
+const propertyPrimitives = ['string', 'number', 'array', 'date', 'boolean', 'block']
 
 const revvedFile = (filePath) => {
   let revs
@@ -87,8 +88,19 @@ export default function (options, data) {
       return key.split('.').reduce((a, b) => a && a[b], localized)
     },
 
+    propertyType (type) {
+      if (propertyPrimitives.includes(type.toLowerCase())) {
+        return type
+      } else {
+        const target = path.join('_schema', `index.html`)
+        const source = path.join(currentItem.path, pageFile)
+
+        return `<a href="${relativePath(target, source)}#${type}">${type}</a>`
+      }
+    },
+
     variantPreviewPath (variantId) {
-      const target = path.join('variants', `${variantId}.html`)
+      const target = path.join('_variants', `${variantId}.html`)
       const source = path.join(currentItem.path, pageFile)
 
       return relativePath(target, source)
