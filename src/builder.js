@@ -5,7 +5,6 @@ const Theme = require('./theme')
 const Connector = require('./connector')
 const File = require('./util/file')
 const PageUtil = require('./util/page')
-const VariantUtil = require('./util/variant')
 
 // Theme templates need to be prefixed with "theme:" to be referenced
 // as an alternative page template. This might be the case for certain
@@ -203,7 +202,7 @@ async function generateVariant (state, variantId) {
   const html = await renderWithFallback(state, templateId, data, identifier)
 
   // write file
-  const htmlPath = path.resolve(target, VariantUtil.VARIANTS_DIRNAME, `${variant.id}.html`)
+  const htmlPath = path.resolve(target, '_variants', `${variant.id}.html`)
   await File.write(htmlPath, html)
 }
 

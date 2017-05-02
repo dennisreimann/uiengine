@@ -51,16 +51,16 @@ describe('UIengine', () => {
     it('should generate variant previews', done => {
       UIengine.generate(opts)
         .then(state => {
-          assertExists(path.join(targetPath, 'variants', 'form', 'form.pug.html'))
-          assertExists(path.join(targetPath, 'variants', 'formrow', 'text-with-label.pug.html'))
-          assertExists(path.join(targetPath, 'variants', 'formrow', 'text-without-label.pug.html'))
-          assertExists(path.join(targetPath, 'variants', 'input', 'number.pug.html'))
-          assertExists(path.join(targetPath, 'variants', 'input', 'text-disabled.pug.html'))
-          assertExists(path.join(targetPath, 'variants', 'input', 'text-required.pug.html'))
-          assertExists(path.join(targetPath, 'variants', 'input', 'text.hbs.html'))
-          assertExists(path.join(targetPath, 'variants', 'input', 'text.pug.html'))
-          assertExists(path.join(targetPath, 'variants', 'label', 'label.hbs.html'))
-          assertExists(path.join(targetPath, 'variants', 'label', 'label.pug.html'))
+          assertExists(path.join(targetPath, '_variants', 'form', 'form.pug.html'))
+          assertExists(path.join(targetPath, '_variants', 'formrow', 'text-with-label.pug.html'))
+          assertExists(path.join(targetPath, '_variants', 'formrow', 'text-without-label.pug.html'))
+          assertExists(path.join(targetPath, '_variants', 'input', 'number.pug.html'))
+          assertExists(path.join(targetPath, '_variants', 'input', 'text-disabled.pug.html'))
+          assertExists(path.join(targetPath, '_variants', 'input', 'text-required.pug.html'))
+          assertExists(path.join(targetPath, '_variants', 'input', 'text.hbs.html'))
+          assertExists(path.join(targetPath, '_variants', 'input', 'text.pug.html'))
+          assertExists(path.join(targetPath, '_variants', 'label', 'label.hbs.html'))
+          assertExists(path.join(targetPath, '_variants', 'label', 'label.pug.html'))
 
           done()
         })
@@ -181,7 +181,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, 'variants', 'form', 'form.pug.html'))
+          assertExists(path.join(targetPath, '_variants', 'form', 'form.pug.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'component')
@@ -284,7 +284,7 @@ describe('UIengine', () => {
     it('should generate variant on change', done => {
       const filePath = path.join(componentsPath, 'form', 'variants', 'form.pug')
       const componentPath = path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html')
-      const existingVariantPath = path.join(targetPath, 'variants', 'form', 'form.pug.html')
+      const existingVariantPath = path.join(targetPath, '_variants', 'form', 'form.pug.html')
 
       fs.removeSync(existingVariantPath)
       fs.removeSync(componentPath)
