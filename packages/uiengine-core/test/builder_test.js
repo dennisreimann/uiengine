@@ -283,7 +283,7 @@ describe('Builder', () => {
     it('should generate component variant pages', done => {
       Builder.generateComponentVariants(state, 'input')
         .then(() => {
-          assertExists(path.join(target, 'variants', 'input', 'text.pug.html'))
+          assertExists(path.join(target, '_variants', 'input', 'text.pug.html'))
 
           done()
         })
@@ -295,7 +295,7 @@ describe('Builder', () => {
     it('should generate variant page', done => {
       Builder.generateVariant(state, 'input/text.pug')
         .then(() => {
-          assertExists(path.join(target, 'variants', 'input', 'text.pug.html'))
+          assertExists(path.join(target, '_variants', 'input', 'text.pug.html'))
 
           done()
         })
