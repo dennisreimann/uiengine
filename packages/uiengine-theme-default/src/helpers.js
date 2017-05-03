@@ -7,7 +7,6 @@ const assetsDir = '_uiengine-theme'
 const manifestPath = path.resolve(__dirname, '..', 'static', assetsDir, 'rev-manifest.json')
 const localesPath = path.resolve(__dirname, '..', 'static', assetsDir, 'locales')
 const supportedLocales = ['en', 'de']
-const propertyPrimitives = ['string', 'number', 'array', 'date', 'boolean', 'block']
 
 const revvedFile = (filePath) => {
   let revs
@@ -52,8 +51,9 @@ const decorateRendered = html =>
 // function that binds the current page data and returns
 // an object with helper functions based on that data
 export default function (options, data) {
-  const { page, navigation } = data
+  const { page, schema, navigation } = data
   const currentItem = navigation[page.id]
+  const customPropertyTypes = schema ? Object.keys(schema) : []
 
   assert(currentItem, `Missing navigation item for page "${page.id}".`)
 
@@ -89,13 +89,14 @@ export default function (options, data) {
     },
 
     propertyType (type) {
-      if (propertyPrimitives.includes(type.toLowerCase())) {
-        return type
-      } else {
+      const [displayName, normalizedType] = type.match(/^\[?(\w+)\]?$/i)
+      if (customPropertyTypes.includes(normalizedType)) {
         const target = path.join('_schema', `index.html`)
         const source = path.join(currentItem.path, pageFile)
 
-        return `<a href="${relativePath(target, source)}#${type}">${type}</a>`
+        return `<a href="${relativePath(target, source)}#${normalizedType}">${displayName}</a>`
+      } else {
+        return displayName
       }
     },
 
