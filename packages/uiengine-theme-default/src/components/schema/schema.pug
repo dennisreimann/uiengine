@@ -1,6 +1,6 @@
-mixin schema(id, params)
-  table.schema(id=id)&attributes(attributes)
-    caption.schema__title= id
+mixin schema(title, params)
+  table.schema&attributes(attributes)
+    caption.schema__title= title
     thead
       tr
         th.schema__propertyname= h.t('schema.property_name')

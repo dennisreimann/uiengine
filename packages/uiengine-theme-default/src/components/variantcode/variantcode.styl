@@ -1,7 +1,5 @@
 .variantcode
-  margin-top $space-large
-
-  &__sections
+  &__segments
     margin-right $space-normal * -1
     margin-left $space-normal * -1
 
@@ -17,7 +15,7 @@
     &:hover
       color $color-code-header-hover
 
-  &__section:not(.variantcode__section--expanded) + &__section &__header
+  &__segment:not(.variantcode__segment--expanded) + &__segment &__header
     border-top 0
 
   &__expandicon
@@ -29,13 +27,13 @@
     .variantcode__header:hover &
       icon-color($color-code-header-hover)
 
-    .variantcode__section--expanded &
+    .variantcode__segment--expanded &
       transform rotate(-180deg)
 
   &__content
     display none
 
-    .variantcode__section--expanded &
+    .variantcode__segment--expanded &
       display block
 
   &__raw

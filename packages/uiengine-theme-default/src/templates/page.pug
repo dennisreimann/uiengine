@@ -4,13 +4,13 @@ include /pageheader/pageheader.pug
 include /pagenav/pagenav.pug
 
 block main
+  - const itemIds = navigation[page.id].childIds
   section.page(id=h.dasherize(page.id))
     +pageheader(page, navigation)
 
-    .wrap.wrap--content
-      article.page__content
+    if page.content
+      article.content.wrap
         !=page.content
 
-      - const navItem = navigation[page.id]
-      - const itemIds = navItem.childIds
-      +pagenav(itemIds, navigation)
+    if itemIds
+      +pagenav(itemIds, navigation).wrap

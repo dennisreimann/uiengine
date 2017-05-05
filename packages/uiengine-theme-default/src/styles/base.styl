@@ -27,16 +27,19 @@ body
 h1
 h2
 h3
+  font-family $font-family-bold
   font-weight 400
 
 h4
 h5
 h6
+  font-family $font-family-base
   font-weight 400
 
 p
 ul
 ol
+table
 article
 section
   +
@@ -49,26 +52,51 @@ section
     h6
       margin-top $space-normal
 
+section
+  margin-bottom $space-huge
+
+article
+  margin-top $space-large
+  margin-bottom $space-medium
+
 .wrap
-  margin 0 auto
+  margin-left auto
+  margin-right auto
   padding-left $space-large
   padding-right $space-large
+  max-width 55rem
 
-  &--large
+  &--wide
     max-width 75rem
 
-  &--content
-    max-width 55rem
+.content
+  h1
+  h2
+  h3
+  h4
+  h5
+  h6
+    &:not([class])
+      margin-bottom $space-tiny
 
-.page
-  &__content
-    markdown-container()
-    margin-top $space-large
+  a:not([class])
+    link-with-hover($color-main-link, $color-main-link-hover)
+
+  p:not([class])
+    margin-bottom $space-normal
+
+  img:not([class])
+    border 8px solid #ddd
+    max-width 100%
+
+  ul:not([class])
+  ol:not([class])
+    margin-bottom $space-normal
+    margin-left $space-medium
+
+  table:not([class])
+    margin-top $space-normal
     margin-bottom $space-large
 
-.sandbox-page
-  &__content
-    markdown-container()
-
-  + .sandbox-page
-    margin-top $space-large
+  > :last-child
+    margin-bottom 0 !important

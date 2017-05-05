@@ -1,20 +1,61 @@
-include /variantheader/variantheader.pug
+include /icon/icon.pug
+include /permalink/permalink.pug
 include /variantcode/variantcode.pug
 include /variantpreview/variantpreview.pug
 
 mixin variant(variant, includeDetails)
+  - const variantId = h.dasherize(variant.id)
+  - const hasPreview = variant.rendered
+  - const hasCode = variant.raw || variant.context || variant.rendered
+  - const actionlistId = `${h.dasherize(variant.id)}-actionlist`
   article.variant(id=h.dasherize(variant.id))&attributes(attributes)
-    +variantheader(variant, includeDetails)
+    header.variantheader&attributes(attributes)
+      .variantheader__inner.wrap
+        div.variantheader__meta
+          if includeDetails
+            span.variantheader__naming= h.t('variant.naming')
+          if variant.status
+            span.variantheader__status= variant.status
+          if variant.label
+            span.variantheader__label= variant.label
+
+        if includeDetails
+          h2.variantheader__title= variant.title
+
+        if hasPreview && hasCode
+          nav.variantheader__links
+            if hasPreview
+              +variantheaderLink(`${variantId}-preview`, h.t('variant.preview'), true)
+            if hasCode
+              +variantheaderLink(`${variantId}-code`, h.t('variant.code'), !hasPreview)
+
+        .variantheader__actions
+          button.variantheader__actiontoggle(type="button" data-actionlist-target=actionlistId)
+            +icon('tools')
+
+          ul.variantheader__actionlist(id=actionlistId)
+            li.variantheader__action
+              +permalink(`#${variantId}`, h.t('variant.copy_permalink')).variantheader__actionlink
+            li.variantheader__action
+              a.variantheader__actionlink(href=h.variantPreviewPath(variant.id) target=variantId)
+                +icon('open-in-window')
+                = h.t('variant.open_in_window')
 
     if variant.content
-      .wrap.wrap--content
-        .variant__content
-          != variant.content
+      article.content.wrap
+        != variant.content
 
-    if variant.raw || variant.context || variant.rendered
+    if hasPreview || hasCode
       .variant__sections
-        if variant.rendered
-          +variantpreview(variant, true).variant__section
+        if hasPreview
+          - const classes = 'variant__section--active'
+          +variantpreview(variant).variant__section(id=`${variantId}-preview` class=classes)
 
-        if variant.raw || variant.context || variant.rendered
-          +variantcode(variant, !variant.rendered).variant__section
+        if hasCode
+          - const classes = !hasPreview ? 'variant__section--active' : null
+          +variantcode(variant, !variant.rendered).variant__section(id=`${variantId}-code` class=classes)
+
+
+mixin variantheaderLink(id, title, isActive)
+  - const classes = isActive ? 'variantheader__link--active' : null
+  a.variantheader__link(href=`#${id}` class=classes)= title

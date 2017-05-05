@@ -4,32 +4,54 @@ include /variant/variant.pug
 
 mixin component(page)
   - const schema = component.schema
+  - const componentId = h.dasherize(component.id)
+  - const sectionInfoId = `${componentId}-info`
+  - const sectionSchemaId = `${componentId}-schema`
+  - const sectionActiveClass = 'component__section--active'
   - const variantIds = component.variantIds
   - const hasSchema = schema && Object.keys(schema).length
   - const hasVariants = variantIds && variantIds.length
   - const hasManyVariants = variantIds && variantIds.length > 1
-  section.component(id=h.dasherize(page.id))&attributes(attributes)
-    +pageheader(page, navigation)
-
-    if page.content || hasManyVariants || hasSchema
-      .wrap.wrap--content
-        article.page__content
-          !=page.content
-
-          if hasManyVariants
-            nav.pagenav
-              ul.pagenav__tree
-                for variantId in variantIds
-                  - variant = variants[variantId]
-                  li.pagenav__item
-                    a(class="pagenav__link" href=`#${h.dasherize(variant.id)}`)= variant.title
-
+  - const hasInfo = page.content || hasManyVariants
+  section.component&attributes(attributes)
+    +pageheader(page, navigation).componentheader
+      if hasInfo && hasSchema
+        nav.componentheader__links
+          if hasInfo
+            +componentheaderLink(sectionInfoId, h.t('component.info'), hasInfo)
           if hasSchema
+            +componentheaderLink(sectionSchemaId, h.t('component.schema'), !hasInfo)
+
+    if hasInfo || hasSchema
+      .component__sections
+        if hasInfo
+          - const classes = sectionActiveClass
+          .component__section(id=sectionInfoId class=classes)
+            if page.content
+              article.content.wrap
+                !=page.content
+
+            if hasManyVariants
+              nav.pagenav.wrap
+                ul.pagenav__tree
+                  each variantId in variantIds
+                    - variant = variants[variantId]
+                    li.pagenav__item
+                      a(class="pagenav__link" href=`#${h.dasherize(variant.id)}`)= variant.title
+
+        if hasSchema
+          - const classes = !hasInfo ? sectionActiveClass : null
+          .component__section(id=sectionSchemaId class=classes)
             each item, id in schema
-              +schema(id, item)
+              article.wrap
+                +schema(id, item)
 
   if hasVariants
     section.variants
-      for variantId in variantIds
+      each variantId in variantIds
         - variant = variants[variantId]
         +variant(variant, hasManyVariants)
+
+mixin componentheaderLink(id, title, isActive)
+  - const classes = isActive ? 'componentheader__link--active' : null
+  a.componentheader__link(href=`#${id}` class=classes)= title

@@ -1,6 +1,10 @@
 breakpoints:
   reset: reset
 
+component:
+  info: Info
+  schema: Schema
+
 variant:
   naming: Variant
   copy_permalink: Copy link to variant

@@ -44,31 +44,3 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
     &:hover:after
       width 100%
       border-bottom 1px solid $color-hover
-
-markdown-container()
-  h1
-  h2
-  h3
-  h4
-  h5
-  h6
-    &:not([class])
-      font-family $font-family-bold
-
-  a:not([class])
-    link-with-hover($color-main-link, $color-main-link-hover)
-
-  p:not([class])
-    margin-bottom $space-normal
-  
-  img:not([class])
-    border 8px solid #ddd 
-    max-width 100%
-
-  ul:not([class])
-  ol:not([class])
-    margin-bottom $space-normal
-    margin-left $space-medium
-
-  > :last-child
-    margin-bottom 0 !important

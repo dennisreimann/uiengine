@@ -1,10 +1,8 @@
-mixin variantpreview(variant, active)
+mixin variantpreview(variant)
   - const variantId = h.dasherize(variant.id)
-  - const previewId = `${variantId}-preview`
   - const breakpointsId = `${variantId}-breakpoints`
   - const containerId = `${variantId}-container`
-  - const classes = active ? 'variant__section--active' : null
-  .variantpreview(id=previewId class=classes)&attributes(attributes)
+  article.variantpreview&attributes(attributes)
     .variantpreview__container(id=containerId data-variant-id=variantId)
       .variantpreview__size
         button.variantpreview__sizer(type="button" data-breakpoints-target=breakpointsId)

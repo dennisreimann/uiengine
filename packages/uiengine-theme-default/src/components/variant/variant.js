@@ -1,4 +1,4 @@
-import { on, trigger } from '../../scripts/lib/util'
+import { on } from '../../scripts/lib/util'
 
 on('click', '.variantheader__link', e => {
   e.preventDefault()

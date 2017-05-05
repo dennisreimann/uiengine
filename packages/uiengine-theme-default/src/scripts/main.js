@@ -1,4 +1,5 @@
-import '../components/variantheader/variantheader'
+import '../components/component/component'
+import '../components/variant/variant'
 import '../components/variantpreview/variantpreview'
 import '../components/variantcode/variantcode'
 import '../components/permalink/permalink'

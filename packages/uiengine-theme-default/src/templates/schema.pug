@@ -7,7 +7,6 @@ block main
   section.page(id=h.dasherize(page.id))
     +pageheader(page, navigation)
 
-    .wrap.wrap--content
-      article.page__content
-        each item, id in schema
-          +schema(id, item)
+    each item, id in schema
+      article.wrap
+        +schema(id, item)

@@ -7,9 +7,10 @@ block main
   section.page(id=h.dasherize(page.id))
     +pageheader(page, navigation)
 
-    .wrap.wrap--content
-      article.page__content
+    if page.content
+      article.content.wrap
         !=page.content
 
+    article.content.wrap
       h2= h.t('sitemap.label')
       +sitemap()
