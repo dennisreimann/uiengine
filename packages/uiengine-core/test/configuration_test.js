@@ -40,6 +40,7 @@ describe('Configuration', () => {
           assert.equal(config.source.templates, path.resolve(sampleProjectPath, 'src', 'templates'))
           assert.equal(config.source.pages, path.resolve(sampleProjectPath, 'src', 'pages'))
           assert.equal(config.source.data, path.resolve(sampleProjectPath, '..', 'fixtures'))
+          assert.equal(config.source.schema, path.resolve(sampleProjectPath, 'src', 'schema'))
           assert.equal(config.source.base, path.resolve(sampleProjectPath))
           assert.equal(config.source.configFile, testConfigPath)
 

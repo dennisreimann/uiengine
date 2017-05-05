@@ -55,7 +55,8 @@ Technical documentation, with more detailed information:
 - [Configuration](./docs/config.md)
 - [Adapters](./docs/adapters.md)
 - [Component](./docs/component.md)
-- [variant](./docs/variant.md)
+- [Variant](./docs/variant.md)
+- [Schema](./docs/schema.md)
 - [Theme](./docs/theme.md)
 - [YAML](./docs/yaml.md)
 

@@ -12,6 +12,7 @@ source:
   templates: ./src/templates
   pages: ./src/pages
   data: ../fixtures
+  schema: ./src/schema
 
 # Destination path for the generated site.
 target: ./dist

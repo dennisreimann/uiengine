@@ -21,6 +21,7 @@ const state = {
       components: path.resolve(projectPath, 'src', 'components'),
       templates: path.resolve(projectPath, 'src', 'templates'),
       pages: path.resolve(projectPath, 'src', 'pages'),
+      schema: path.resolve(projectPath, 'src', 'schema'),
       data: path.resolve(projectPath, 'src', 'data')
     },
     target,
@@ -116,6 +117,35 @@ const state = {
       context: { id: 'name', name: 'person[name]' },
       title: 'Text Input'
     }
+  },
+  schema: {
+    'Entity': {
+      title: {
+        type: 'String',
+        description: 'Title',
+        required: true
+      },
+      date: {
+        type: 'Date',
+        description: 'Publising date',
+        required: true
+      },
+      customObject: {
+        type: 'CustomObject',
+        description: 'A custom object'
+      }
+    },
+    'CustomObject': {
+      tags: {
+        type: 'Array',
+        description: 'Tags as strings'
+      },
+      isHidden: {
+        type: 'Boolean',
+        default: 'false',
+        description: 'Entity should be hidden'
+      }
+    }
   }
 }
 
@@ -182,6 +212,21 @@ describe('Builder', () => {
           const pagePath = path.join(target, 'sandbox', 'page', 'index.html')
 
           assertContentMatches(pagePath, /^This is my page template$/)
+
+          done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('#generateSchemaPage', () => {
+    it('should generate schema page', done => {
+      Builder.generateSchemaPage(state)
+        .then(state => {
+          const pagePath = path.join(target, '_schema', 'index.html')
+
+          assertContentMatches(pagePath, /Entity/)
+          assertContentMatches(pagePath, /CustomObject/)
 
           done()
         })

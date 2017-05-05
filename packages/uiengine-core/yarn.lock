@@ -4396,15 +4396,15 @@ uiengine-adapter-react@^0.1.2:
     uiengine-adapter-pug "^0.1.2"
     uiengine-adapter-react "^0.1.2"
 
-uiengine-theme-default@^0.7.6:
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.7.6.tgz#12ca1f9be555ee1d0b73aef3f95343950803d017"
+uiengine-theme-default@^0.7.7:
+  version "0.7.7"
+  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.7.7.tgz#436b619e625a6ab056d28452b90b338e0277b70a"
   dependencies:
     highlight.js "^9.10.0"
     pug "^2.0.0-beta10"
 
 "uiengine@file:":
-  version "0.7.6"
+  version "0.7.7"
   dependencies:
     chalk "^1.1.3"
     deep-extend "^0.4.1"
@@ -4414,7 +4414,7 @@ uiengine-theme-default@^0.7.6:
     markdown-it "^8.2.2"
     markdown-it-anchor "^4.0.0"
     ramda "^0.23.0"
-    uiengine-theme-default "^0.7.6"
+    uiengine-theme-default "^0.7.7"
     yargs "^7.1.0"
   optionalDependencies:
     browser-sync "^2.18.8"

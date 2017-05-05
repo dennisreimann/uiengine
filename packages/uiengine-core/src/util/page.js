@@ -114,5 +114,6 @@ module.exports = {
   parentIdForPageId,
   convertUserProvidedChildrenList,
   convertUserProvidedComponentsList,
-  PAGE_FILENAME
+  PAGE_FILENAME,
+  INDEX_ID
 }
