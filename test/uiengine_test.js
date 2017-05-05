@@ -9,6 +9,7 @@ const assertContentDoesNotMatch = require('./support/assertContentDoesNotMatch')
 const UIengine = require('../src/uiengine')
 
 const pagesPath = path.resolve(__dirname, 'project', 'src', 'pages')
+const schemaPath = path.resolve(__dirname, 'project', 'src', 'schema')
 const componentsPath = path.resolve(__dirname, 'project', 'src', 'components')
 const templatesPath = path.resolve(__dirname, 'project', 'src', 'templates')
 const targetPath = path.resolve(__dirname, 'project', 'dist')
@@ -42,6 +43,16 @@ describe('UIengine', () => {
       UIengine.generate(opts)
         .then(state => {
           assertExists(path.join(targetPath, 'state.json'))
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should generate schema page', done => {
+      UIengine.generate(opts)
+        .then(state => {
+          assertExists(path.join(targetPath, '_schema', 'index.html'))
 
           done()
         })
@@ -174,6 +185,23 @@ describe('UIengine', () => {
 
           done(err)
         })
+    })
+
+    it('should generate schema page on change', done => {
+      const filePath = path.join(schemaPath, 'entity.yml')
+
+      UIengine.generateIncrementForFileChange(filePath, 'changed')
+        .then(result => {
+          assertExists(path.join(targetPath, '_schema', 'index.html'))
+
+          assert.equal(result.action, 'changed')
+          assert.equal(result.type, 'page')
+          assert.equal(result.item, 'schema')
+          assert.equal(result.file, 'test/project/src/schema/entity.yml')
+
+          done()
+        })
+        .catch(done)
     })
 
     it('should generate component on change', done => {

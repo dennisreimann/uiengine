@@ -2,14 +2,15 @@ const path = require('path')
 const UIengine = require('../uiengine')
 const debounce = require('../util/debounce')
 
-const sourceFilesFromConfig = ({ source: { configFile, components, data, pages, templates }, adapters, debug }) => {
+const sourceFilesFromConfig = ({ source: { configFile, components, data, schema, pages, templates }, adapters, debug }) => {
   const exts = '.{' + Object.keys(adapters).concat('md').join(',') + '}'
   const componentsGlob = components ? path.join(components, '**/*' + exts) : null
   const templatesGlob = templates ? path.join(templates, '**/*' + exts) : null
   const pagesGlob = templates ? path.join(pages, '**') : null
   const dataGlob = data ? path.join(data, '**') : null
+  const schemaGlob = data ? path.join(schema, '**/*.yml') : null
   const themeGlob = debug ? path.join(process.cwd(), 'node_modules/uiengine-theme-default/{lib,static}', '**') : null
-  const sourceFiles = [configFile, componentsGlob, dataGlob, pagesGlob, templatesGlob, themeGlob].filter(a => a)
+  const sourceFiles = [configFile, componentsGlob, dataGlob, schemaGlob, pagesGlob, templatesGlob, themeGlob].filter(a => a)
 
   return sourceFiles
 }

@@ -6,9 +6,11 @@ const Navigation = require('./navigation')
 const Component = require('./component')
 const Variant = require('./variant')
 const Page = require('./page')
+const Schema = require('./schema')
 const Theme = require('./theme')
 const Connector = require('./connector')
 const PageUtil = require('./util/page')
+const SchemaUtil = require('./util/schema')
 const ComponentUtil = require('./util/component')
 const TemplateUtil = require('./util/template')
 const VariantUtil = require('./util/variant')
@@ -43,11 +45,13 @@ async function generate (options) {
 async function generateContent () {
   // 1. data fetching
   const fetchPages = Page.fetchAll(state)
+  const fetchSchema = Schema.fetchAll(state)
   const fetchComponents = Component.fetchAll(state)
   const fetchVariants = Variant.fetchAll(state)
-  const [pages, components, variants] = await Promise.all([fetchPages, fetchComponents, fetchVariants])
+  const [pages, schema, components, variants] = await Promise.all([fetchPages, fetchSchema, fetchComponents, fetchVariants])
 
   state = R.assoc('pages', pages, state)
+  state = R.assoc('schema', schema, state)
   state = R.assoc('components', components, state)
   state = R.assoc('variants', variants, state)
 
@@ -65,18 +69,20 @@ async function generateContent () {
 }
 
 async function generateIncrementForFileChange (filePath, action = 'changed') {
-  const { source: { components, pages, templates, data, configFile }, theme, debug } = state.config
+  const { source: { components, pages, templates, data, schema, configFile }, theme, debug } = state.config
   const isDeleted = action === 'deleted'
   const file = path.relative(process.cwd(), filePath)
-  const isDataFile = !!filePath.startsWith(data)
+  const isSchemaFile = !!filePath.startsWith(schema)
+  const isDataFile = !isSchemaFile && !!filePath.startsWith(data)
   const isThemeFile = debug && !!file.match(theme.module)
   const isComponentDir = path.dirname(filePath) === components
-  let pageId, componentId, templateId, variantId
+  let pageId, componentId, templateId, variantId, schemaId
 
   // Skip generating individual items in case the theme or
   // data got changed as we need to regenerate everything
   if (!isDataFile && !isThemeFile) {
     pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
+    schemaId = schema ? SchemaUtil.schemaFilePathToSchemaId(schema, filePath) : undefined
     componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
     variantId = components ? VariantUtil.variantFilePathToVariantId(components, filePath) : undefined
     templateId = templates ? TemplateUtil.templateFilePathToTemplateId(templates, filePath) : undefined
@@ -118,6 +124,9 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
       await regenerateComponent(componentId)
     }
     return { file, action, type: 'component', item: componentId }
+  } else if (schemaId) {
+    await regenerateSchemaPage(schemaId)
+    return { file, action, type: 'page', item: 'schema' }
   } else if (templateId) {
     await regenerateTemplate(templateId)
     return { file, action, type: 'template', item: templateId }
@@ -134,6 +143,12 @@ async function fetchAndAssocPage (id) {
   const page = await Page.fetchById(state, id)
   state = R.assocPath(['pages', id], page, state)
   return page
+}
+
+async function fetchAndAssocSchema (id) {
+  const schema = await Schema.fetchById(state, id)
+  state = R.assocPath(['schema', id], schema, state)
+  return schema
 }
 
 async function fetchAndAssocComponent (id) {
@@ -178,6 +193,12 @@ async function regeneratePage (id) {
   const buildComponents = Builder.generateComponentsForPage(state, id)
   const copyFiles = Builder.copyPageFiles(state, id)
   await Promise.all([buildPage, buildParent, buildComponents, copyFiles])
+}
+
+async function regenerateSchemaPage (schemaId) {
+  await fetchAndAssocSchema(schemaId)
+
+  await Builder.generateSchemaPage(state)
 }
 
 async function regenerateVariant (id, componentId) {

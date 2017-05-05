@@ -1,7 +1,7 @@
 const path = require('path')
 
 const templateFilePathToTemplateId = (templatesPath, templateFilePath) => {
-  if (!templateFilePath.startsWith(templatesPath)) return
+  if (!templateFilePath.startsWith(templatesPath)) return null
 
   const relative = path.relative(templatesPath, templateFilePath)
   const dirname = path.dirname(relative)

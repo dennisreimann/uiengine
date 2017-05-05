@@ -38,6 +38,8 @@ A component directory most likely also has a directory named [variants](./varian
 To add some meta data to the component, there is the `component.md` markdown file.
 This meta data can supply the title, and description as well as a status and label for the component.
 
+## Component file
+
 The `component.md` contents for the button might look like this:
 
 ```markdown

@@ -5,6 +5,7 @@ const Theme = require('./theme')
 const Connector = require('./connector')
 const File = require('./util/file')
 const PageUtil = require('./util/page')
+const NavigationData = require('./data/navigation')
 
 // Theme templates need to be prefixed with "theme:" to be referenced
 // as an alternative page template. This might be the case for certain
@@ -14,23 +15,24 @@ const PageUtil = require('./util/page')
 const themeTemplatePrefix = 'theme:'
 const defaultTemplatePage = themeTemplatePrefix + 'page'
 const defaultTemplateComponent = themeTemplatePrefix + 'component'
+const defaultTemplateSchema = themeTemplatePrefix + 'schema'
 const defaultTemplateVariant = 'variant'
 const pageFile = 'index.html'
 
 const isThemeTemplate = templateId =>
   !templateId || templateId.startsWith(themeTemplatePrefix)
 
-const getPageData = ({ pages, navigation, components, variants, config }, pageId) => {
+const getPageData = ({ pages, navigation, config }, pageId) => {
   const page = pages[pageId]
 
   if (isThemeTemplate(page.template)) {
-    return { page, pages, components, variants, navigation, config }
+    return { page, pages, navigation, config }
   } else {
     return page.context || {}
   }
 }
 
-const getComponentData = ({ pages, navigation, components, variants, config }, pageId, componentId) => {
+const getComponentData = ({ pages, navigation, components, schema, variants, config }, pageId, componentId) => {
   const parent = pages[pageId]
   const component = components[componentId]
   const page = {
@@ -42,7 +44,7 @@ const getComponentData = ({ pages, navigation, components, variants, config }, p
     files: []
   }
 
-  const data = { page, pages, component, components, variants, navigation, config }
+  const data = { page, pages, component, components, schema, variants, navigation, config }
 
   return data
 }
@@ -50,6 +52,26 @@ const getComponentData = ({ pages, navigation, components, variants, config }, p
 const getVariantData = ({ variants, config }, variantId) => {
   const variant = variants[variantId]
   const data = { variant, config }
+
+  return data
+}
+
+const getSchemaData = ({ schema, pages, navigation, config }) => {
+  const parentId = PageUtil.INDEX_ID
+  const childIds = []
+  const page = {
+    id: 'schema',
+    path: '_schema',
+    title: 'Schema',
+    childIds: [],
+    files: []
+  }
+
+  // the schema page is standalone and does not appear in the regular navigation.
+  // nevertheless it needs an own navigation item on its own page, which gets attached here.
+  navigation.schema = NavigationData(page.id, page.title, page.path, childIds, parentId, { parentIds: [parentId] })
+
+  const data = { page, pages, schema, navigation, config }
 
   return data
 }
@@ -206,9 +228,25 @@ async function generateVariant (state, variantId) {
   await File.write(htmlPath, html)
 }
 
+async function generateSchemaPage (state) {
+  const { config: { target } } = state
+  const identifier = `Schema`
+
+  // render schema page
+  const data = getSchemaData(state)
+  const templateId = defaultTemplateSchema
+  const html = await renderWithFallback(state, templateId, data, identifier)
+
+  // write file
+  const htmlPath = path.resolve(target, '_schema', 'index.html')
+  await File.write(htmlPath, html)
+}
+
 async function generateSite (state) {
   const pageIds = Object.keys(state.pages)
   const variantIds = Object.keys(state.variants)
+
+  const schemaBuild = generateSchemaPage(state)
 
   const pageBuild = R.partial(generatePage, [state])
   const pageBuilds = R.map(pageBuild, pageIds)
@@ -223,6 +261,7 @@ async function generateSite (state) {
   const variantBuilds = R.map(variantBuild, variantIds)
 
   await Promise.all([
+    schemaBuild,
     ...pageBuilds,
     ...pageFilesBuilds,
     ...pageComponentsBuilds,
@@ -233,6 +272,7 @@ async function generateSite (state) {
 module.exports = {
   generateSite,
   generatePage,
+  generateSchemaPage,
   generateComponentForPage,
   generateComponentsForPage,
   generatePagesHavingComponent,
