@@ -4396,9 +4396,9 @@ uiengine-adapter-react@^0.1.2:
     uiengine-adapter-pug "^0.1.2"
     uiengine-adapter-react "^0.1.2"
 
-uiengine-theme-default@^0.7.7:
-  version "0.7.7"
-  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.7.7.tgz#436b619e625a6ab056d28452b90b338e0277b70a"
+uiengine-theme-default@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.8.0.tgz#7d370279833d3c7a19801a30d54e667f3bb537ae"
   dependencies:
     highlight.js "^9.10.0"
     pug "^2.0.0-beta10"
