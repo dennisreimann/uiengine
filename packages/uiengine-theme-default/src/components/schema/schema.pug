@@ -1,5 +1,5 @@
 mixin schema(title, params)
-  table.schema&attributes(attributes)
+  table.schema(id=title)&attributes(attributes)
     caption.schema__title= title
     thead
       tr

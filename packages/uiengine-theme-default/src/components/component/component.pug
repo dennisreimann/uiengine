@@ -43,7 +43,7 @@ mixin component(page)
           - const classes = !hasInfo ? sectionActiveClass : null
           .component__section(id=sectionSchemaId class=classes)
             each item, id in schema
-              article.wrap
+              article.content.wrap
                 +schema(id, item)
 
   if hasVariants

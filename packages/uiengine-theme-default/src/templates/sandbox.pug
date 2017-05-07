@@ -17,7 +17,7 @@ block main
       - const item = navigation[page.id]
       - const itemIds = navigation[page.id].childIds
       article.content.wrap
-        h4
+        h3
           a(class="pagenav__link" href=h.pageLink(item))= item.title
         if page.content
           != page.content
