@@ -2,5 +2,5 @@ language: node_js
 cache: yarn
 node_js:
   - "7"
-before_script:
-  - yarn run test:setup
+script:
+  - yarn run ci

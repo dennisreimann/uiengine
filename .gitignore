@@ -5,5 +5,6 @@
 /test/project/dist
 /test/tmp
 *log
+.coveralls.yml
 .DS_Store
 node_modules

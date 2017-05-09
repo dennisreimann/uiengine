@@ -38,6 +38,7 @@
     "test:setup": "cd test/project && yarn install && cd -",
     "test": "mocha --compilers js:babel-register -R dot",
     "cover": "nyc yarn run test",
+    "ci": "yarn run test:setup && yarn run cover && nyc report --reporter=text-lcov | coveralls",
     "lint": "standard",
     "release": "yarn run lint && yarn run cover && yarn run build"
   },
@@ -63,7 +64,9 @@
     "babel-core": "^6.23.1",
     "babel-preset-env": "^1.1.8",
     "babel-register": "^6.23.0",
+    "coveralls": "^2.13.1",
     "mocha": "^3.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^10.1.2",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",
