@@ -32,6 +32,7 @@ UIengine requires at least Node.js 6.9. Future versions will track the latest ac
 
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Build Status](https://travis-ci.org/dennisreimann/uiengine.svg?branch=master)](https://travis-ci.org/dennisreimann/uiengine)
+[![Coverage Status](https://coveralls.io/repos/github/dennisreimann/uiengine/badge.svg?branch=master)](https://coveralls.io/github/dennisreimann/uiengine?branch=master)
 
 At its core, the UIengine is a static site generator. It consumes the data by parsing the files and structure of your project and generates the Interface Exchange based on this data. In development mode the output is regenerated on file change and synced to the browser, giving you a comfortable experience creating the components and docs.
 
