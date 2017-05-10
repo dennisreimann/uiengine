@@ -24,7 +24,7 @@
     "react-dom": "^15.4.2",
     "uiengine": "file:../..",
     "uiengine-adapter-handlebars": "^0.1.2",
-    "uiengine-adapter-pug": "^0.1.3",
+    "uiengine-adapter-pug": "^0.1.4",
     "uiengine-adapter-react": "^0.1.2"
   },
   "devDependencies": {
