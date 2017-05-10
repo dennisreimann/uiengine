@@ -39,10 +39,6 @@ const resolvePackage = (basedir, config, type) => {
   if (typeof config === 'object' && typeof config.module === 'string') {
     const options = typeof config.options === 'object' ? config.options : {}
 
-    // FIXME: It is ugly to fix option paths in here as we don't know what the
-    // option keys might be. They are different per adapter. (here: Pug)
-    if (options.basedir) options.basedir = resolvePath(basedir, options.basedir)
-
     return {
       module: resolveModule(basedir, config.module),
       options
