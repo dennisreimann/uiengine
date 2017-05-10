@@ -1,14 +1,38 @@
 # Getting Started
 
+This guide assumes you have set up your `PATH` in a way that the installed node module binaries are available.
+If that is not the case and you get errors when running the `uiengine` command, please use prefixed path `./node_modules/.bin/uiengine` to execute the command. 
+
+## 🏎 TL;DR – The fast lane
+
+```bash
+mkdir uiengine-test && cd uiengine-test && npm init
+npm install --save-dev uiengine uiengine-adapter-pug
+uiengine init
+uiengine component button
+uiengine page atoms molecules organisms
+mkdir src/templates && echo '!= variant.rendered' > src/templates/variant-preview.pug
+uiengine generate
+```
+
+Now you have a basic test project setup and can read about the steps in detail … 
+
 ## 📦 How to install the UIengine?
 
 The UIengine should be installed as a dependency for a project.
 
 ```bash
-npm install --save uiengine
+npm install --save-dev uiengine
 ```
 
-In case you do not want to hook it into you CI pipeline you can also install it as a development dependency only.
+You will also need at least one adapter to render your components.
+Here we will use Pug as an example, so go ahead and install it:
+
+```bash
+npm install --save-dev uiengine-adapter-pug
+```
+
+See the [adapter docs](./adapters.md) for details and a list of available adapters.
 
 ## 🔰 How to setup the UIengine in a project?
 
@@ -50,6 +74,15 @@ You create a variant by adding a file renderable by one of the configured adapte
 
 In addition to the raw render file, you can also add a markdown file containing the metadata for the variant.
 This markdown file can contain [YAML frontmatter](yaml.md) and has to be named like the variant, but must have the file extension `.md`.
+
+To render a variant, we also need a layout:
+
+```bash
+mkdir src/templates && echo '!= variant.rendered' > src/templates/variant-preview.pug
+```
+
+The output of the variable `variant.rendered` will be the rendered HTML of the variant (hence the name 😉).
+You can go ahead and wrap it in a proper layout with corect HTML and style and script references.
 
 ## ➕ How to create a page?
 
