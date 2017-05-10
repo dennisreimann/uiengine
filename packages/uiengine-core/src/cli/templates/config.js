@@ -27,7 +27,6 @@ adapters:
     module: uiengine-adapter-pug
     options:
       pretty: true
-      basedir: ./src/components
 
 # Here you can configure the template that the variant preview gets embeded in.
 # By default the list of templates is generated from the files within the templates

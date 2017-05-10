@@ -22,9 +22,7 @@ target: ./dist
 adapters:
   pug:
     module: uiengine-adapter-pug
-    options:
-      pretty: true
-      basedir: ./src/components
+    options: !include pug-adapter-options.js
   jsx: uiengine-adapter-react
   hbs: uiengine-adapter-handlebars
 
