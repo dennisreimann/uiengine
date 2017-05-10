@@ -4423,9 +4423,9 @@ uiengine-adapter-handlebars@^0.1.2:
   dependencies:
     handlebars "^4.0.6"
 
-uiengine-adapter-pug@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/uiengine-adapter-pug/-/uiengine-adapter-pug-0.1.3.tgz#0dd33853570c38690235ecce01ec6e2aabc3cd4c"
+uiengine-adapter-pug@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/uiengine-adapter-pug/-/uiengine-adapter-pug-0.1.4.tgz#94c3046ef5bb0b1bfa33d16036617b1af97e2e25"
   dependencies:
     pug "^2.0.0-beta10"
 
@@ -4454,9 +4454,9 @@ uiengine-adapter-react@^0.1.2:
     uiengine-adapter-pug "^0.1.2"
     uiengine-adapter-react "^0.1.2"
 
-uiengine-theme-default@^0.8.1:
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.8.1.tgz#741a3dfc4b70115956b1f8bb6e3cb2ff23104972"
+uiengine-theme-default@^0.8.2:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.8.2.tgz#edd79a6102a32003c4576c094861c103f72330a1"
   dependencies:
     highlight.js "^9.10.0"
     pug "^2.0.0-beta10"
