@@ -1,4 +1,4 @@
-export const template = (name) =>
+export const template = (name, pagesDir) =>
 `
 # Project config: Defaults to name and version from package.json.
 # Here you can overwrite it and add more custom properties.
@@ -11,11 +11,13 @@ name: ${name}
 # - templates contains the variant preview and sandbox templates
 # - pages is the directory of the UIengine's site structure and page markdown files
 # - data contains sample data that can be referenced in variants and pages
+# - schema contains the optional schema definitions for the components
 source:
   components: ./src/components
   templates: ./src/templates
-  pages: ./src/pages
-  data: ./src/data
+  pages: ./${pagesDir}
+  data: ./src/uiengine/data
+  schema: ./src/uiengine/schema
 
 # Destination paths for the generated output.
 target: ./dist
