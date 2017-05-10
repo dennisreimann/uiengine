@@ -61,27 +61,43 @@ describe('PageUtil', () => {
   })
 
   describe('#parentIdForPageId', () => {
-    it('should return null for index file path', () => {
-      assert.equal(PageUtil.parentIdForPageId('index'), null)
+    it('should return null for index page id', () => {
+      const pageIds = ['index']
+      assert.equal(PageUtil.parentIdForPageId(pageIds, 'index'), null)
     })
 
-    it('should return parent page id for page file path', () => {
-      assert.equal(PageUtil.parentIdForPageId('patterns/atoms/buttons'), 'patterns/atoms')
+    it('should return parent page id for page id', () => {
+      const pageIds = ['index', 'patterns', 'patterns/atoms', 'patterns/atoms/buttons']
+      assert.equal(PageUtil.parentIdForPageId(pageIds, 'patterns/atoms/buttons'), 'patterns/atoms')
+    })
+
+    it('should return next parent page id for page id with no intermediate parent', () => {
+      const pageIds = ['index', 'patterns/atoms/buttons']
+      assert.equal(PageUtil.parentIdForPageId(pageIds, 'patterns/atoms/buttons'), 'index')
     })
   })
 
   describe('#parentIdsForPageId', () => {
     it('should return empty array for index file path', () => {
-      const parentIds = PageUtil.parentIdsForPageId('index')
+      const pageIds = ['index']
+      const parentIds = PageUtil.parentIdsForPageId(pageIds, 'index')
       assert.equal(parentIds.length, 0)
     })
 
     it('should return array with parent page ids for page file path', () => {
-      const parentIds = PageUtil.parentIdsForPageId('patterns/atoms/buttons')
+      const pageIds = ['index', 'patterns', 'patterns/atoms', 'patterns/atoms/buttons']
+      const parentIds = PageUtil.parentIdsForPageId(pageIds, 'patterns/atoms/buttons')
       assert.equal(parentIds.length, 3)
       assert.equal(parentIds[0], 'index')
       assert.equal(parentIds[1], 'patterns')
       assert.equal(parentIds[2], 'patterns/atoms')
+    })
+
+    it('should return correct array with parent page ids for page id with no intermediate parent', () => {
+      const pageIds = ['index', 'patterns/atoms/buttons']
+      const parentIds = PageUtil.parentIdsForPageId(pageIds, 'patterns/atoms/buttons')
+      assert.equal(parentIds.length, 1)
+      assert.equal(parentIds[0], 'index')
     })
   })
 

@@ -53,18 +53,22 @@ const pageFilePathToPageId = (pagesPath, pageFilePath) => {
   return pageId
 }
 
-const parentIdForPageId = (pageId) => {
+const parentIdForPageId = (pageIds, pageId) => {
   if (isIndexPage(pageId)) return null
   const parentDir = path.dirname(pageId)
   const parentId = isIndexFilePath(parentDir) ? INDEX_ID : parentDir
 
-  return parentId
+  if (pageIds.includes(parentId)) {
+    return parentId
+  } else {
+    return parentIdForPageId(pageIds, parentId)
+  }
 }
 
-const parentIdsForPageId = (pageId) => {
+const parentIdsForPageId = (pageIds, pageId) => {
   if (isIndexPage(pageId)) return []
-  const parentId = parentIdForPageId(pageId)
-  const parentIds = parentIdsForPageId(parentId)
+  const parentId = parentIdForPageId(pageIds, pageId)
+  const parentIds = parentIdsForPageId(pageIds, parentId)
   parentIds.push(parentId)
 
   return parentIds

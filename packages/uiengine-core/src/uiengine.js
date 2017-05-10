@@ -170,7 +170,8 @@ async function fetchAndAssocNavigation () {
 }
 
 async function removePage (id) {
-  const parentId = PageUtil.parentIdForPageId(id)
+  const pageIds = Object.keys(state.pages)
+  const parentId = PageUtil.parentIdForPageId(pageIds, id)
 
   state = R.dissocPath(['pages', id], state)
 
@@ -180,7 +181,8 @@ async function removePage (id) {
 }
 
 async function regeneratePage (id) {
-  const parentId = PageUtil.parentIdForPageId(id)
+  const pageIds = Object.keys(state.pages)
+  const parentId = PageUtil.parentIdForPageId(pageIds, id)
 
   const fetchPage = fetchAndAssocPage(id)
   const fetchParent = fetchAndAssocPage(parentId)

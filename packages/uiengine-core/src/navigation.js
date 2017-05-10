@@ -25,31 +25,33 @@ const itemsForPageId = (state, id) => {
 const dataForPage = (state, page) => {
   const { pages } = state
   const pageId = page.id
+  const pageIds = Object.keys(pages)
   const componentIds = page.componentIds || []
   const componentPageIds = R.map((componentId) => PageUtil.pageIdForComponentId(pageId, componentId), componentIds)
-  const parentId = PageUtil.parentIdForPageId(pageId)
+  const parentId = PageUtil.parentIdForPageId(pageIds, pageId)
   const parent = pages[parentId]
   const childIds = page.childIds.concat(componentPageIds)
-  const relations = dataForPageRelations(pageId, parent)
+  const relations = dataForPageRelations(pageIds, pageId, parent)
   const data = NavigationData(pageId, page.title, page.path, childIds, parentId, relations)
 
   return data
 }
 
 const dataForPageComponentId = (state, parent, id) => {
-  const { components } = state
+  const { components, pages } = state
   const component = components[id]
+  const pageIds = Object.keys(pages)
   const pageId = PageUtil.pageIdForComponentId(parent.id, component.id)
   const pagePath = PageUtil.pagePathForComponentId(parent.path, component.id)
-  const parentId = PageUtil.parentIdForPageId(pageId)
+  const parentId = PageUtil.parentIdForPageId(pageIds, pageId)
   const childIds = []
-  const relations = dataForPageRelations(pageId, parent)
+  const relations = dataForPageRelations(pageIds, pageId, parent)
   const data = NavigationData(pageId, component.title, pagePath, childIds, parentId, relations)
 
   return data
 }
 
-const dataForPageRelations = (pageId, parent) => {
+const dataForPageRelations = (pageIds, pageId, parent) => {
   let siblings = []
   if (parent) {
     const parentPrefix = PageUtil.pageIdToPath(parent.id)
@@ -57,7 +59,7 @@ const dataForPageRelations = (pageId, parent) => {
     siblings = (parent.childIds || []).concat(parentComponentPageIds)
   }
 
-  const parentIds = PageUtil.parentIdsForPageId(pageId)
+  const parentIds = PageUtil.parentIdsForPageId(pageIds, pageId)
   const indexInSiblings = R.indexOf(pageId, siblings)
   const siblingsBeforeIds = R.dropLast(siblings.length - indexInSiblings, siblings)
   const siblingsAfterIds = R.drop(indexInSiblings + 1, siblings)

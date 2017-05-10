@@ -118,6 +118,23 @@ describe('UIengine', () => {
         .catch(done)
     })
 
+    it('should generate page without direct parent on change', done => {
+      const filePath = path.join(pagesPath, 'patterns', 'pages', 'ajax', 'layer', 'page.md')
+
+      UIengine.generateIncrementForFileChange(filePath, 'changed')
+        .then(result => {
+          assertExists(path.join(targetPath, 'patterns', 'pages', 'ajax', 'layer', 'index.html'))
+
+          assert.equal(result.action, 'changed')
+          assert.equal(result.type, 'page')
+          assert.equal(result.item, 'patterns/pages/ajax/layer')
+          assert.equal(result.file, 'test/project/src/pages/patterns/pages/ajax/layer/page.md')
+
+          done()
+        })
+        .catch(done)
+    })
+
     it('should generate page on create', done => {
       const pagePath = path.join(targetPath, 'documentation', 'created', 'index.html')
       const filePath = path.join(pagesPath, 'documentation', 'created', 'page.md')
