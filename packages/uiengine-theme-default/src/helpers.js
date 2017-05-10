@@ -39,6 +39,10 @@ const dasherize = string =>
   String(string)
     .replace(/\W+/gi, '-')
 
+const titleize = string =>
+  String(string)
+    .replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())
+
 const decorateRaw = (code, lang) =>
   highlight(code, lang)
 
@@ -75,6 +79,7 @@ export default function (options, data) {
 
   return {
     dasherize,
+    titleize,
     decorateRaw,
     decorateContext,
     decorateRendered,
@@ -89,12 +94,13 @@ export default function (options, data) {
     },
 
     propertyType (type) {
-      const [displayName, normalizedType] = type.match(/^\[?(\w+)\]?$/i)
+      const [displayName, normalizedType] = type.match(/^\[?([\w\s|]+)\]?$/i)
       if (customPropertyTypes.includes(normalizedType)) {
         const target = path.join('_schema', `index.html`)
         const source = path.join(currentItem.path, pageFile)
+        const anchor = dasherize(normalizedType)
 
-        return `<a href="${relativePath(target, source)}#${normalizedType}">${displayName}</a>`
+        return `<a href="${relativePath(target, source)}#${anchor}">${displayName}</a>`
       } else {
         return displayName
       }
