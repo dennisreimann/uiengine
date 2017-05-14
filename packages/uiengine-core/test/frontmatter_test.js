@@ -8,7 +8,7 @@ const string = `
 ---
 name: Index
 included_md: !include /fixtures/markdown.md
-data: !data json.json
+data: !data /json.json
 content: !markdown |\n  # Headline\n  Text paragraph
 ---
 Hello
