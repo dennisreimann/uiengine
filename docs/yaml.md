@@ -47,8 +47,8 @@ Think of it as a convenience helper for including your mock data.
 ```yaml
 context:
   productlist:
-    - !data items/product-01.yml
-    - !data items/product-02.yml
+    - !data /products/01.yml
+    - !data /products/02.yml
 ```
 
 You should prefer this to the `!include` schema for referencing your mocks which should be kept in one place (namely `source.data`). 

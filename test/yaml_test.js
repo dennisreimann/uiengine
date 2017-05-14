@@ -12,7 +12,7 @@ const sourcePaths = {
 const string = `
 name: Index
 included_md: !include /fixtures/markdown.md
-data: !data json.json
+data: !data /json.json
 content: !markdown |\n  # Headline\n  Text paragraph
 `
 
@@ -47,6 +47,8 @@ describe('Yaml', () => {
         .then(data => {
           assert.equal(data.absolute_include_yaml.name, 'Index')
           assert.equal(data.absolute_include_yaml.number, 2)
+          assert.equal(data.nested_include.absolute_include.number, 2)
+          assert.equal(data.nested_include.relative_include.number, 2)
           done()
         })
         .catch(done)
@@ -57,6 +59,8 @@ describe('Yaml', () => {
         .then(data => {
           assert.equal(data.data_yaml.name, 'Index')
           assert.equal(data.data_yaml.number, 2)
+          assert.equal(data.data_nested.absolute_data.number, 2)
+          assert.equal(data.data_nested.relative_data.number, 2)
           done()
         })
         .catch(done)
