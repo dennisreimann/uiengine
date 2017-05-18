@@ -2,5 +2,9 @@
 // http://www.browsersync.io/docs/options/
 
 module.exports = {
-  open: false
+  notify: false,
+  open: false,
+  server: {
+    baseDir: './dist'
+  }
 }

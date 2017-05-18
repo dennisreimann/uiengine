@@ -22,7 +22,7 @@
     "pug": "^2.0.0-beta10",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "uiengine": "^0.8.2",
+    "uiengine": "^0.8.3",
     "uiengine-adapter-handlebars": "^0.1.2",
     "uiengine-adapter-pug": "^0.1.4",
     "uiengine-adapter-react": "^0.1.2"
