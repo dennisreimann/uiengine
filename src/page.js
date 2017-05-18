@@ -68,7 +68,7 @@ async function fetchById (state, id) {
 
   let { attributes, content } = pageData
   const title = PageUtil.pageIdToTitle(id)
-  attributes = PageUtil.convertUserProvidedChildrenList(id, attributes)
+  attributes = PageUtil.convertUserProvidedChildrenList(id, childIds, attributes)
   attributes = PageUtil.convertUserProvidedComponentsList(id, attributes)
   const baseData = { id, path: pagePath, title, childIds, content, files }
   const data = R.mergeAll([baseData, attributes])

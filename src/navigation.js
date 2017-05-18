@@ -1,4 +1,5 @@
 const R = require('ramda')
+const chalk = require('chalk')
 const PageUtil = require('./util/page')
 const NavigationData = require('./data/navigation')
 
@@ -23,11 +24,22 @@ const itemsForPageId = (state, id) => {
 }
 
 const dataForPage = (state, page) => {
-  const { pages } = state
+  const { pages, components } = state
   const pageId = page.id
   const pageIds = Object.keys(pages)
+  const availableComponentIds = components ? Object.keys(components) : []
   const componentIds = page.componentIds || []
-  const componentPageIds = R.map((componentId) => PageUtil.pageIdForComponentId(pageId, componentId), componentIds)
+  const componentPageIds = R.map(componentId => {
+    if (availableComponentIds.includes(componentId)) {
+      return PageUtil.pageIdForComponentId(pageId, componentId)
+    } else {
+      throw new Error(chalk.red([
+        `Component "${componentId}" does not exist, but was inserted on page "${pageId}".`,
+        'Here is a list of available components:',
+        `${availableComponentIds.map(id => `- ${id}`).join('\n')}`
+      ].join('\n')))
+    }
+  }, componentIds)
   const parentId = PageUtil.parentIdForPageId(pageIds, pageId)
   const parent = pages[parentId]
   const childIds = page.childIds.concat(componentPageIds)

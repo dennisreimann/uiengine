@@ -127,25 +127,35 @@ describe('PageUtil', () => {
 
   describe('#convertUserProvidedChildrenList', () => {
     it('should convert the children list provided by the user to childIds for index page', () => {
-      const attrs = { children: ['patterns', 'docs'] }
-      const { childIds } = PageUtil.convertUserProvidedChildrenList('index', attrs)
+      const availableChildIds = ['docs', 'patterns']
+      const attrs = { children: availableChildIds.reverse() }
+      const { childIds } = PageUtil.convertUserProvidedChildrenList('index', availableChildIds, attrs)
       assert.equal(childIds[0], 'patterns')
       assert.equal(childIds[1], 'docs')
     })
 
     it('should convert the children list provided by the user to childIds for child page', () => {
-      const attrs = { children: ['atoms', 'molecules'] }
-      const { childIds } = PageUtil.convertUserProvidedChildrenList('patterns', attrs)
+      const availableChildIds = ['patterns/atoms', 'patterns/molecules']
+      const attrs = { children: availableChildIds }
+      const { childIds } = PageUtil.convertUserProvidedChildrenList('patterns', availableChildIds, attrs)
       assert.equal(childIds[0], 'patterns/atoms')
       assert.equal(childIds[1], 'patterns/molecules')
+    })
+
+    it('should throw an error if a child does not exist', () => {
+      const availableChildIds = ['atoms']
+      const attrs = { children: ['atoms', 'doesnotexist'] }
+
+      assert.throws(() => PageUtil.convertUserProvidedChildrenList('patterns', availableChildIds, attrs))
     })
   })
 
   describe('#convertUserProvidedComponentsList', () => {
     it('should convert the components list provided by the user to componentIds for index page', () => {
-      const attrs = { components: ['link'] }
+      const attrs = { components: ['link', 'button'] }
       const { componentIds } = PageUtil.convertUserProvidedComponentsList('index', attrs)
       assert.equal(componentIds[0], 'link')
+      assert.equal(componentIds[1], 'button')
     })
 
     it('should convert the components list provided by the user to componentIds for child page', () => {
