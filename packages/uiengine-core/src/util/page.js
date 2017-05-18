@@ -1,4 +1,5 @@
 const path = require('path')
+const chalk = require('chalk')
 const R = require('ramda')
 const StringUtil = require('./string')
 
@@ -76,15 +77,23 @@ const parentIdsForPageId = (pageIds, pageId) => {
 
 // turns the list of children from the user provided attributes
 // into a list of correctly named childIds
-const convertUserProvidedChildrenList = (pageId, attributes = {}) => {
+const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes = {}) => {
   let { children } = attributes
   if (typeof children !== 'object') return attributes
 
   const prefix = pageIdToPath(pageId)
-  const childIds = R.map((id) =>
-    id.startsWith(prefix) ? id : `${prefix}/${id}`,
-    children
-  )
+  const childIds = R.map(id => {
+    const childId = id.startsWith(prefix) ? id : `${prefix}/${id}`
+    if (availableChildIds.includes(childId)) {
+      return childId
+    } else {
+      throw new Error(chalk.red([
+        `Child page "${id}" does not exist for page "${pageId}".`,
+        'Here is a list of available child pages:',
+        `${availableChildIds.map(childId => `- ${childId}`).join('\n')}`
+      ].join('\n')))
+    }
+  }, children)
 
   attributes = R.dissoc('children', attributes)
   attributes = R.assoc('childIds', childIds, attributes)

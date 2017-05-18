@@ -1,4 +1,5 @@
 /* global describe, it */
+const R = require('ramda')
 const assert = require('assert')
 const Factory = require('./support/factory')
 
@@ -187,6 +188,16 @@ describe('Navigation', () => {
     it('should throw error if page does not exist', done => {
       const state = { pages: {} }
       Navigation.fetchForPageId(state, 'index')
+        .catch(error => {
+          assert(error)
+          done()
+        })
+    })
+
+    it('should throw an error if component does not exist', done => {
+      const testState = R.assoc('components', {}, state)
+
+      Navigation.fetchForPageId(testState, 'atoms')
         .catch(error => {
           assert(error)
           done()
