@@ -37,6 +37,6 @@ theme:
   options:
     skin: uiengineering
 
-breakpoints: !include src/lib/breakpoints.json
+breakpoints: !include ./src/lib/breakpoints.json
 
-browserSync: !include bs-config.js
+browserSync: !include ./bs-config.js

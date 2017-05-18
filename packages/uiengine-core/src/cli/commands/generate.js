@@ -65,7 +65,11 @@ const startWatcher = (config) => {
 
 const startServer = ({ target, browserSync }, watch) => {
   const server = requireOptional('browser-sync', 'serve').create()
-  const options = browserSync || { server: { baseDir: target } }
+  const defaults = { server: { baseDir: target } }
+  const options = browserSync || defaults
+
+  options.server = options.server || defaults.server
+  options.server.baseDir = options.server.baseDir || defaults.server.baseDir
 
   if (watch) {
     options.files = options.files || options.server.baseDir
