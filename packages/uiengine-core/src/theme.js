@@ -1,5 +1,6 @@
 const chalk = require('chalk')
 const File = require('./util/file')
+const { debug3, debug4 } = require('./util/debug')
 
 const getTheme = (state) => {
   const { config: { theme: { module } } } = state
@@ -20,6 +21,8 @@ async function render (state, templateId, data = {}) {
 }
 
 async function setup (state) {
+  debug3(state, 'Theme.setup():start')
+
   const { config: { theme: { options } } } = state
   const { setup } = getTheme(state)
   const tasks = [copyStatic(state)]
@@ -31,16 +34,24 @@ async function setup (state) {
   }
 
   await Promise.all(tasks)
+
+  debug3(state, 'Theme.setup():end')
 }
 
 async function copyStatic (state) {
+  debug4(state, 'Theme.copyStatic():start')
+
   const { config: { target } } = state
   const { staticPath } = getTheme(state)
 
   await File.copy(staticPath, target)
+
+  debug4(state, 'Theme.copyStatic():end')
 }
 
 async function teardown (state) {
+  debug3(state, 'Theme.teardown():start')
+
   const { config: { theme: { options } } } = state
   const { teardown } = getTheme(state)
   const tasks = []
@@ -50,6 +61,8 @@ async function teardown (state) {
   }
 
   await Promise.all(tasks)
+
+  debug3(state, 'Theme.teardown():end')
 
   return state
 }

@@ -4,16 +4,21 @@ const glob = require('globby')
 const frontmatter = require('./util/frontmatter')
 const markdown = require('./util/markdown')
 const PageUtil = require('./util/page')
+const { debug2, debug3, debug4 } = require('./util/debug')
 
 const assocPage = (pages, page) =>
   R.assoc(page.id, page, pages)
 
 async function readPageFile (state, filePath) {
+  debug4(state, `Page.readPageFile(${filePath}):start`)
+
   const { source } = state.config
   let { attributes, body } = await frontmatter.fromFile(filePath, source)
   const content = await markdown.fromString(body)
   // prevent empty attributes from being null
   attributes = attributes || {}
+
+  debug4(state, `Page.readPageFile(${filePath}):end`)
 
   return { attributes, content }
 }
@@ -42,6 +47,8 @@ async function findPageIds (state, pagePath = '**') {
 }
 
 async function fetchAll (state) {
+  debug2(state, `Page.fetchAll():start`)
+
   const pageIds = await findPageIds(state)
 
   const pageFetch = R.partial(fetchById, [state])
@@ -50,10 +57,14 @@ async function fetchAll (state) {
 
   const pages = R.reduce(assocPage, {}, pageList)
 
+  debug2(state, `Page.fetchAll():end`)
+
   return pages
 }
 
 async function fetchById (state, id) {
+  debug3(state, `Page.fetchById(${id}):start`)
+
   const { pages } = state.config.source
   const pagePath = PageUtil.pageIdToPath(id)
   const absolutePath = PageUtil.pageIdToPageFilePath(pages, id)
@@ -72,6 +83,8 @@ async function fetchById (state, id) {
   attributes = PageUtil.convertUserProvidedComponentsList(id, attributes)
   const baseData = { id, path: pagePath, title, childIds, content, files }
   const data = R.mergeAll([baseData, attributes])
+
+  debug3(state, `Page.fetchById(${id}):end`)
 
   return data
 }

@@ -3,9 +3,9 @@ const UIengine = require('../uiengine')
 
 module.exports = require('yargs')
   // debug
-  .boolean('debug')
+  .boolean('number')
   .global('debug')
-  .default('debug', false)
+  .default('debug', 0)
   .describe('debug', 'Flag to enable debug mode')
   .alias('d', 'debug')
   // config

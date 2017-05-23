@@ -7,6 +7,7 @@ const frontmatter = require('./util/frontmatter')
 const VariantUtil = require('./util/variant')
 const File = require('./util/file')
 const Connector = require('./connector')
+const { debug2, debug3, debug4 } = require('./util/debug')
 
 const regexpClean = new RegExp('([\\s]*?<!--\\s?omit:.*?\\s?-->)', 'gi')
 
@@ -20,20 +21,24 @@ const assocVariant = (variants, variant) =>
   R.assoc(variant.id, variant, variants)
 
 async function readVariantFile (state, filePath) {
+  debug4(state, `Variant.readVariantFile(${filePath}):start`)
+
   const { source } = state.config
   const variantName = path.basename(filePath, path.extname(filePath))
   const variantFile = path.join(path.dirname(filePath), `${variantName}.md`)
   const variant = await frontmatter.fromFile(variantFile, source)
+  let data = { attributes: {} } // in case there is no variant file
 
   if (variant) {
     const { attributes, body } = variant
     const content = await markdown.fromString(body)
 
-    return { attributes, content }
-  } else {
-    // no variant file
-    return { attributes: {} }
+    data = { attributes, content }
   }
+
+  debug4(state, `Variant.readVariantFile(${filePath}):end`)
+
+  return data
 }
 
 async function findVariantIds (state, componentPath = '**') {
@@ -52,6 +57,8 @@ async function findVariantIds (state, componentPath = '**') {
 }
 
 async function fetchAll (state) {
+  debug2(state, `Variant.fetchAll():start`)
+
   const componentsPath = state.config.source.components
   if (!componentsPath) return {}
 
@@ -63,10 +70,14 @@ async function fetchAll (state) {
 
   const variants = R.reduce(assocVariant, {}, variantList)
 
+  debug2(state, `Variant.fetchAll():end`)
+
   return variants
 }
 
 async function fetchById (state, id) {
+  debug3(state, `Variant.fetchById(${id}):start`)
+
   const componentsPath = state.config.source.components
   const componentId = VariantUtil.variantIdToComponentId(id)
   const filePath = VariantUtil.variantIdToVariantFilePath(componentsPath, id)
@@ -96,6 +107,8 @@ async function fetchById (state, id) {
 
   const baseData = { id, componentId, path: filePath, content, raw, rendered, context, extension }
   const data = R.mergeAll([attributes, baseData])
+
+  debug3(state, `Variant.fetchById(${id}):end`)
 
   return data
 }
