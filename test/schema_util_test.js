@@ -4,7 +4,7 @@ const assert = require('assert')
 
 const SchemaUtil = require('../src/util/schema')
 
-const schemaPath = path.resolve(__dirname, 'project', 'src', 'schema')
+const schemaPath = path.resolve(__dirname, 'project', 'src', 'uiengine', 'schema')
 
 describe('SchemaUtil', () => {
   describe('#schemaIdToTitle', () => {

@@ -10,9 +10,9 @@ version: '1.0.0'
 source:
   components: ./src/components
   templates: ./src/templates
-  pages: ./src/pages
+  schema: ./src/uiengine/schema
+  pages: ./src/uiengine/pages
   data: ../fixtures
-  schema: ./src/schema
 
 # Destination path for the generated site.
 target: ./dist

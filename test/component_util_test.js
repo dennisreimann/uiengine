@@ -42,7 +42,7 @@ describe('ComponentUtil', () => {
     })
 
     it('should return null for invalid file path', () => {
-      const filePath = path.join(__dirname, 'project', 'src', 'pages', 'page.md')
+      const filePath = path.join(__dirname, 'project', 'src', 'uiengine', 'pages', 'page.md')
       assert.equal(ComponentUtil.componentFilePathToComponentId(componentsPath, filePath), null)
     })
   })

@@ -28,9 +28,9 @@ The base directories for the input, your raw source files:
 source:
   components: ./src/components
   templates: ./src/templates
-  pages: ./src/pages
-  data: ./src/data
-  schema: ./src/schema
+  pages: ./src/uiengine/pages
+  data: ./src/uiengine/data
+  schema: ./src/uiengine/schema
 ```
 
 ### Target

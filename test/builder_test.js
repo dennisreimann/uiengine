@@ -20,9 +20,9 @@ const state = {
       configFile: path.resolve(projectPath, 'uiengine.yml'),
       components: path.resolve(projectPath, 'src', 'components'),
       templates: path.resolve(projectPath, 'src', 'templates'),
-      pages: path.resolve(projectPath, 'src', 'pages'),
-      schema: path.resolve(projectPath, 'src', 'schema'),
-      data: path.resolve(projectPath, 'src', 'data')
+      pages: path.resolve(projectPath, 'src', 'uiengine', 'pages'),
+      schema: path.resolve(projectPath, 'src', 'uiengine', 'schema'),
+      data: path.resolve(projectPath, '..', 'fixtures')
     },
     target,
     adapters: {
@@ -57,16 +57,16 @@ const state = {
       title: 'Home',
       childIds: ['patterns'],
       files: [
-        path.resolve(projectPath, 'src', 'pages', 'extra-files', 'file-in-folder.txt'),
-        path.resolve(projectPath, 'src', 'pages', 'index.txt')
+        path.resolve(projectPath, 'src', 'uiengine', 'pages', 'extra-files', 'file-in-folder.txt'),
+        path.resolve(projectPath, 'src', 'uiengine', 'pages', 'index.txt')
       ]
     }),
     patterns: Factory.page('patterns', {
       title: 'Pattern Library',
       path: 'pattern-library',
       files: [
-        path.resolve(projectPath, 'src', 'pages', 'patterns', 'patterns-file.txt'),
-        path.resolve(projectPath, 'src', 'pages', 'patterns', 'some-files', 'file-in-folder.txt')
+        path.resolve(projectPath, 'src', 'uiengine', 'pages', 'patterns', 'patterns-file.txt'),
+        path.resolve(projectPath, 'src', 'uiengine', 'pages', 'patterns', 'some-files', 'file-in-folder.txt')
       ],
       componentIds: ['input']
     }),

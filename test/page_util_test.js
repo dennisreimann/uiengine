@@ -4,7 +4,7 @@ const assert = require('assert')
 
 const PageUtil = require('../src/util/page')
 
-const pagesPath = path.resolve(__dirname, 'project', 'src', 'pages')
+const pagesPath = path.resolve(__dirname, 'project', 'src', 'uiengine', 'pages')
 
 describe('PageUtil', () => {
   describe('#pageIdToPath', () => {

@@ -8,8 +8,8 @@ const assertContentDoesNotMatch = require('./support/assertContentDoesNotMatch')
 
 const UIengine = require('../src/uiengine')
 
-const pagesPath = path.resolve(__dirname, 'project', 'src', 'pages')
-const schemaPath = path.resolve(__dirname, 'project', 'src', 'schema')
+const pagesPath = path.resolve(__dirname, 'project', 'src', 'uiengine', 'pages')
+const schemaPath = path.resolve(__dirname, 'project', 'src', 'uiengine', 'schema')
 const componentsPath = path.resolve(__dirname, 'project', 'src', 'components')
 const templatesPath = path.resolve(__dirname, 'project', 'src', 'templates')
 const targetPath = path.resolve(__dirname, 'project', 'dist')
@@ -111,7 +111,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'patterns')
-          assert.equal(result.file, 'test/project/src/pages/patterns/page.md')
+          assert.equal(result.file, 'test/project/src/uiengine/pages/patterns/page.md')
 
           done()
         })
@@ -128,7 +128,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'patterns/pages/ajax/layer')
-          assert.equal(result.file, 'test/project/src/pages/patterns/pages/ajax/layer/page.md')
+          assert.equal(result.file, 'test/project/src/uiengine/pages/patterns/pages/ajax/layer/page.md')
 
           done()
         })
@@ -151,7 +151,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'created')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'documentation/created')
-          assert.equal(result.file, 'test/project/src/pages/documentation/created/page.md')
+          assert.equal(result.file, 'test/project/src/uiengine/pages/documentation/created/page.md')
 
           fs.removeSync(fileDir)
 
@@ -185,7 +185,7 @@ describe('UIengine', () => {
               assert.equal(result.action, 'deleted')
               assert.equal(result.type, 'page')
               assert.equal(result.item, 'documentation/created')
-              assert.equal(result.file, 'test/project/src/pages/documentation/created/page.md')
+              assert.equal(result.file, 'test/project/src/uiengine/pages/documentation/created/page.md')
 
               fs.removeSync(fileDir)
 
@@ -214,7 +214,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'schema')
-          assert.equal(result.file, 'test/project/src/schema/entity.yml')
+          assert.equal(result.file, 'test/project/src/uiengine/schema/entity.yml')
 
           done()
         })
