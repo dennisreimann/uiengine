@@ -5,6 +5,7 @@ const Theme = require('./theme')
 const Connector = require('./connector')
 const File = require('./util/file')
 const PageUtil = require('./util/page')
+const { debug2, debug3, debug4 } = require('./util/debug')
 const NavigationData = require('./data/navigation')
 
 // Theme templates need to be prefixed with "theme:" to be referenced
@@ -84,10 +85,15 @@ const copyPageFile = (targetPath, sourcePath, source) => {
 }
 
 const render = (state, templateId, data) => {
+  debug4(state, `Builder.render(${templateId}):start`)
+
   if (isThemeTemplate(templateId)) {
     const template = templateId.substring(themeTemplatePrefix.length)
+    const rendered = Theme.render(state, template, data)
 
-    return Theme.render(state, template, data)
+    debug4(state, `Builder.render(${templateId}):end`)
+
+    return rendered
   } else {
     const templates = state.config.templates || {}
     const template = templates[templateId]
@@ -104,7 +110,11 @@ const render = (state, templateId, data) => {
       ].join('\n\n')))
     }
 
-    return Connector.render(state, template, data)
+    const rendered = Connector.render(state, template, data)
+
+    debug4(state, `Builder.render(${templateId}):end`)
+
+    return rendered
   }
 }
 
@@ -120,13 +130,19 @@ async function renderWithFallback (state, templateId, data, identifier) {
 }
 
 async function dumpState (state) {
+  debug2(state, 'Builder.dumpState():start')
+
   const json = JSON.stringify(state, null, '  ')
   const filePath = path.resolve(state.config.target, 'state.json')
 
   await File.write(filePath, json)
+
+  debug2(state, 'Builder.dumpState():end')
 }
 
 async function copyPageFiles (state, pageId) {
+  debug4(state, `Builder.copyPageFiles(${pageId}):start`)
+
   const { pages, config } = state
   const page = pages[pageId]
   const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
@@ -137,9 +153,13 @@ async function copyPageFiles (state, pageId) {
   const copyFiles = R.map(copyFile, page.files)
 
   await Promise.all(copyFiles)
+
+  debug4(state, `Builder.copyPageFiles(${pageId}):start`)
 }
 
 async function generatePage (state, pageId) {
+  debug2(state, `Builder.generatePage(${pageId}):start`)
+
   const { pages, config } = state
   const identifier = `Page "${pageId}"`
   const page = pages[pageId]
@@ -154,9 +174,13 @@ async function generatePage (state, pageId) {
   const htmlPath = path.resolve(targetPath, pageFile)
 
   await File.write(htmlPath, html)
+
+  debug2(state, `Builder.generatePage(${pageId}):end`)
 }
 
 async function generateComponentsForPage (state, pageId) {
+  debug3(state, `Builder.generateComponentsForPage(${pageId}):start`)
+
   const { pages } = state
   const page = pages[pageId]
   const componentIds = page.componentIds || []
@@ -164,9 +188,13 @@ async function generateComponentsForPage (state, pageId) {
   const builds = R.map(build, componentIds)
 
   await Promise.all(builds)
+
+  debug3(state, `Builder.generateComponentsForPage(${pageId}):end`)
 }
 
 async function generateComponentForPage (state, pageId, componentId) {
+  debug4(state, `Builder.generateComponentForPage(${pageId}, ${componentId}):start`)
+
   const { components, pages, config: { target } } = state
   const identifier = `Component "${componentId}"`
   const parent = pages[pageId]
@@ -180,6 +208,8 @@ async function generateComponentForPage (state, pageId, componentId) {
   const targetPath = path.join(target, PageUtil.pagePathForComponentId(parent.path, component.id))
   const htmlPath = path.resolve(targetPath, pageFile)
   await File.write(htmlPath, html)
+
+  debug4(state, `Builder.generateComponentForPage(${pageId}, ${componentId}):end`)
 }
 
 async function generatePagesHavingComponent (state, componentId) {
@@ -203,6 +233,8 @@ async function generatePagesHavingTemplate (state, templateId) {
 }
 
 async function generateComponentVariants (state, componentId) {
+  debug3(state, `Builder.generateComponentVariants(${componentId}):start`)
+
   const { components } = state
   const component = components[componentId]
   const variantIds = component.variantIds || []
@@ -210,9 +242,13 @@ async function generateComponentVariants (state, componentId) {
   const builds = R.map(build, variantIds)
 
   await Promise.all(builds)
+
+  debug3(state, `Builder.generateComponentVariants(${componentId}):end`)
 }
 
 async function generateVariant (state, variantId) {
+  debug2(state, `Builder.generateVariant(${variantId}):start`)
+
   const { variants, config: { target } } = state
   const identifier = `Variant "${variantId}"`
   const variant = variants[variantId]
@@ -226,9 +262,13 @@ async function generateVariant (state, variantId) {
   // write file
   const htmlPath = path.resolve(target, '_variants', `${variant.id}.html`)
   await File.write(htmlPath, html)
+
+  debug2(state, `Builder.generateVariant(${variantId}):end`)
 }
 
 async function generateSchemaPage (state) {
+  debug2(state, 'Builder.generateSchemaPage():start')
+
   const { config: { target } } = state
   const identifier = `Schema`
 
@@ -240,9 +280,13 @@ async function generateSchemaPage (state) {
   // write file
   const htmlPath = path.resolve(target, '_schema', 'index.html')
   await File.write(htmlPath, html)
+
+  debug2(state, 'Builder.generateSchemaPage():end')
 }
 
 async function generateSite (state) {
+  debug2(state, 'Builder.generateSite():start')
+
   const pageIds = Object.keys(state.pages)
   const variantIds = Object.keys(state.variants)
 
@@ -267,6 +311,8 @@ async function generateSite (state) {
     ...pageComponentsBuilds,
     ...variantBuilds
   ])
+
+  debug2(state, 'Builder.generateSite():end')
 }
 
 module.exports = {

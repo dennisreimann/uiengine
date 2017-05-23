@@ -3,6 +3,7 @@ const R = require('ramda')
 const glob = require('globby')
 const chalk = require('chalk')
 const File = require('./util/file')
+const { debug3 } = require('./util/debug')
 
 const getModule = ({ config: { adapters } }, ext) => {
   const { module } = adapters[ext]
@@ -15,6 +16,8 @@ const getModule = ({ config: { adapters } }, ext) => {
 }
 
 async function setup (state) {
+  debug3(state, 'Connector.setup():start')
+
   const { config: { adapters, source: { components } } } = state
   const exts = Object.keys(adapters) || []
   const tasks = []
@@ -36,6 +39,8 @@ async function setup (state) {
   })
 
   await Promise.all(tasks)
+
+  debug3(state, 'Connector.setup():end')
 }
 
 async function registerComponentFile (state, filePath) {

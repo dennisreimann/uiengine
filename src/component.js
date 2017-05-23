@@ -4,7 +4,8 @@ const glob = require('globby')
 const frontmatter = require('./util/frontmatter')
 const markdown = require('./util/markdown')
 const ComponentUtil = require('./util/component')
-const variant = require('./variant')
+const Variant = require('./variant')
+const { debug2, debug3, debug4 } = require('./util/debug')
 
 const assocComponent = (components, component) =>
   R.assoc(component.id, component, components)
@@ -27,18 +28,22 @@ const convertUserProvidedVariantsList = (componentId, attributes = {}) => {
 }
 
 async function readComponentFile (state, filePath) {
+  debug4(state, `Component.readComponentFile(${filePath}):start`)
+
   const { source } = state.config
   const component = await frontmatter.fromFile(filePath, source)
+  let data = { attributes: {} } // in case there is no component file
 
   if (component) {
     const { attributes, body } = component
     const content = await markdown.fromString(body)
 
-    return { attributes, content }
-  } else {
-    // no component file
-    return { attributes: {} }
+    data = { attributes, content }
   }
+
+  debug4(state, `Component.readComponentFile(${filePath}):end`)
+
+  return data
 }
 
 async function findComponentIds (state) {
@@ -54,6 +59,8 @@ async function findComponentIds (state) {
 }
 
 async function fetchAll (state) {
+  debug2(state, `Component.fetchAll():start`)
+
   const componentIds = await findComponentIds(state)
 
   const componentFetch = R.partial(fetchById, [state])
@@ -62,14 +69,18 @@ async function fetchAll (state) {
 
   const components = R.reduce(assocComponent, {}, componentList)
 
+  debug2(state, `Component.fetchAll():end`)
+
   return components
 }
 
 async function fetchById (state, id) {
+  debug3(state, `Component.fetchById(${id}):start`)
+
   const componentsPath = state.config.source.components
   const componentPath = ComponentUtil.componentIdToPath(id)
   const componentFilePath = ComponentUtil.componentIdToComponentFilePath(componentsPath, id)
-  const fetchVariantIds = variant.findVariantIds(state, id)
+  const fetchVariantIds = Variant.findVariantIds(state, id)
   const fetchComponentData = readComponentFile(state, componentFilePath)
   const [ componentData, variantIds ] = await Promise.all([fetchComponentData, fetchVariantIds])
 
@@ -78,6 +89,8 @@ async function fetchById (state, id) {
   const title = ComponentUtil.componentIdToTitle(id)
   const baseData = { id, title, path: componentPath, variantIds, content }
   const data = R.mergeAll([baseData, attributes])
+
+  debug3(state, `Component.fetchById(${id}):end`)
 
   return data
 }

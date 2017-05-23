@@ -14,6 +14,7 @@ const SchemaUtil = require('./util/schema')
 const ComponentUtil = require('./util/component')
 const TemplateUtil = require('./util/template')
 const VariantUtil = require('./util/variant')
+const { debug2 } = require('./util/debug')
 
 const CONFIG_FILENAME = 'uiengine.yml'
 
@@ -33,16 +34,22 @@ async function setupStateWithOptions (options = {}) {
 async function generate (options) {
   state = await setupStateWithOptions(options)
 
+  debug2(state, 'UIengine.generate():start')
+
   const setupTheme = Theme.setup(state)
   const setupAdapters = Connector.setup(state)
   await Promise.all([setupTheme, setupAdapters])
 
   state = await generateContent()
 
+  debug2(state, 'UIengine.generate():end')
+
   return state
 }
 
 async function generateContent () {
+  debug2(state, 'UIengine.generateContent():start')
+
   // 1. data fetching
   const fetchPages = Page.fetchAll(state)
   const fetchSchema = Schema.fetchAll(state)
@@ -64,6 +71,8 @@ async function generateContent () {
   const generateSite = Builder.generateSite(state)
   const dumpState = Builder.dumpState(state)
   await Promise.all([generateSite, dumpState])
+
+  debug2(state, 'UIengine.generateContent():end')
 
   return state
 }
