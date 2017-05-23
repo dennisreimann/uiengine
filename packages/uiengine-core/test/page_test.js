@@ -3,7 +3,7 @@ const path = require('path')
 const assert = require('assert')
 
 const Page = require('../src/page')
-const pagesPath = path.resolve(__dirname, 'project', 'src', 'pages')
+const pagesPath = path.resolve(__dirname, 'project', 'src', 'uiengine', 'pages')
 const state = {
   config: {
     source: {
@@ -95,7 +95,7 @@ describe('Page', () => {
       const state = {
         config: {
           source: {
-            pages: path.resolve(__dirname, 'project', 'src', 'docs')
+            pages: path.resolve(__dirname, 'project', 'src', 'uiengine', 'docs')
           }
         }
       }

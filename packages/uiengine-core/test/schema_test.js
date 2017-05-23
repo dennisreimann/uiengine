@@ -3,7 +3,7 @@ const path = require('path')
 const assert = require('assert')
 
 const Schema = require('../src/schema')
-const schemaPath = path.resolve(__dirname, 'project', 'src', 'schema')
+const schemaPath = path.resolve(__dirname, 'project', 'src', 'uiengine', 'schema')
 const state = {
   config: {
     source: {
