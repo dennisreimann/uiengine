@@ -82,7 +82,20 @@ mkdir src/templates && echo '!= variant.rendered' > src/templates/variant-previe
 ```
 
 The output of the variable `variant.rendered` will be the rendered HTML of the variant (hence the name 😉).
-You can go ahead and wrap it in a proper layout with corect HTML and style and script references.
+You can go ahead and wrap it in a proper layout with corect HTML and style and script references, like so:
+
+```pug
+doctype
+html(class=`preview-${variant.id}`)
+  head
+    title= variant.title
+    link(rel="stylesheet" href="/style/my.css")
+  body
+    != variant.rendered
+    script(src="/scripts/my.js")
+```
+
+As you can see the template also gets some variant meta data for the rendering, like `variant.title` and `variant.id`.
 
 ## ➕ How to create a page?
 
