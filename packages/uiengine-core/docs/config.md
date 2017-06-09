@@ -82,7 +82,7 @@ In either way the adapter module can be …
 
 ### Templates
 
-By default the list of templates is generated from the files within the templates source directory – the filename without extension being the key.
+By default the list of templates is generated from the files within the templates source directory – the file path without extension being the key.
 You will need at least a template named `variant` for the variant preview.
 Here you can configure this preview as well as other templates.
 
