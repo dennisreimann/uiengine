@@ -192,18 +192,21 @@ async function removePage (id) {
 async function regeneratePage (id) {
   const pageIds = Object.keys(state.pages)
   const parentId = PageUtil.parentIdForPageId(pageIds, id)
+  const fetchTasks = [fetchAndAssocPage(id)]
 
-  const fetchPage = fetchAndAssocPage(id)
-  const fetchParent = fetchAndAssocPage(parentId)
-  await Promise.all([fetchPage, fetchParent])
+  if (parentId) fetchTasks.push(fetchAndAssocPage(parentId))
+  await Promise.all(fetchTasks)
 
   await fetchAndAssocNavigation()
 
-  const buildPage = Builder.generatePage(state, id)
-  const buildParent = Builder.generatePage(state, parentId)
-  const buildComponents = Builder.generateComponentsForPage(state, id)
-  const copyFiles = Builder.copyPageFiles(state, id)
-  await Promise.all([buildPage, buildParent, buildComponents, copyFiles])
+  const buildTasks = [
+    Builder.generatePage(state, id),
+    Builder.copyPageFiles(state, id),
+    Builder.generateComponentsForPage(state, id)
+  ]
+  if (parentId) buildTasks.push(Builder.generatePage(state, parentId))
+
+  await Promise.all(buildTasks)
 }
 
 async function regenerateSchemaPage (schemaId) {
