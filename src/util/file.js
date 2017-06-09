@@ -1,8 +1,17 @@
 const path = require('path')
 const fs = require('fs-extra')
 
-const extension = (filePath) =>
+const extension = filePath =>
   path.extname(filePath).replace(/^\./, '')
+
+const exists = filePath => {
+  try {
+    const stat = fs.statSync(filePath)
+    return stat.isFile() || stat.isDirectory()
+  } catch (err) {
+    return false
+  }
+}
 
 async function read (filePath) {
   return new Promise((resolve, reject) => {
@@ -58,5 +67,6 @@ module.exports = {
   read,
   write,
   copy,
-  extension
+  extension,
+  exists
 }

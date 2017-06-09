@@ -152,6 +152,23 @@ describe('UIengine', () => {
         .catch(done)
     })
 
+    it('should copy page files on change', done => {
+      const filePath = path.join(pagesPath, 'extra-files', 'file-in-folder.txt')
+
+      UIengine.generateIncrementForFileChange(filePath, 'changed')
+        .then(result => {
+          assertExists(path.join(targetPath, 'extra-files', 'file-in-folder.txt'))
+
+          assert.equal(result.action, 'changed')
+          assert.equal(result.type, 'page')
+          assert.equal(result.item, 'index')
+          assert.equal(result.file, 'test/project/src/uiengine/pages/extra-files/file-in-folder.txt')
+
+          done()
+        })
+        .catch(done)
+    })
+
     it('should generate page on create', done => {
       const pagePath = path.join(targetPath, 'documentation', 'created', 'index.html')
       const filePath = path.join(pagesPath, 'documentation', 'created', 'page.md')
