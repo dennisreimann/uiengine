@@ -15,24 +15,22 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, schema,
   return sourceFiles
 }
 
-const handleFileChange = (filePath, type) => debounce('reload', () => {
+const handleFileChange = (filePath, type) => debounce('handleFileChange', () => {
   UIengine.generateIncrementForFileChange(filePath, type)
     .then(change => console.log(`✨  Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`))
     .catch(error => console.log(`🚨  Error generating increment for changed file ${path.relative(process.cwd(), filePath)}:`, error))
 })
 
+// see https://github.com/paulmillr/chokidar#api
 const watchOptions = {
   ignoreInitial: true,
-  awaitWriteFinish: {
-    pollInterval: 50,
-    stabilityThreshold: 50
-  }
+  awaitWriteFinish: true
 }
 
+// see https://www.browsersync.io/docs/options/
 const browserSyncOptions = {
   notify: false,
-  reloadThrottle: 125,
-  reloadDebounce: 125,
+  reloadThrottle: 1000,
   watchOptions
 }
 
