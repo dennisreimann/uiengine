@@ -3,6 +3,7 @@ const MarkdownIt = require('markdown-it')
 const parsing = require('./parsing')
 
 const markdownIt = new MarkdownIt({
+  html: true,
   linkify: true,
   typographer: true
 })
