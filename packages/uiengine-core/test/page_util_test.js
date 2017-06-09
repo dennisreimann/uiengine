@@ -47,11 +47,19 @@ describe('PageUtil', () => {
     })
 
     it('should return page id for page file path', () => {
-      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'patterns', 'atoms', 'buttons', 'page.md')), 'patterns/atoms/buttons')
+      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'patterns', 'atoms', 'copytext', 'page.md')), 'patterns/atoms/copytext')
     })
 
     it('should return page id for file path', () => {
-      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'patterns', 'atoms', 'buttons', 'additional.pdf')), 'patterns/atoms/buttons')
+      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'patterns', 'atoms', 'copytext', 'additional.pdf')), 'patterns/atoms/copytext')
+    })
+
+    it('should return page id for nested file path', () => {
+      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'static', 'additional.pdf')), 'index')
+    })
+
+    it('should return page id for nested file path without direct parent', () => {
+      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'static', 'test', 'nested', 'additional.pdf')), 'index')
     })
 
     it('should return null for invalid file path', () => {

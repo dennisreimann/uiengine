@@ -1,6 +1,7 @@
 const path = require('path')
 const chalk = require('chalk')
 const R = require('ramda')
+const File = require('./file')
 const StringUtil = require('./string')
 
 const PAGE_FILENAME = 'page.md'
@@ -49,9 +50,18 @@ const pageFilePathToPageId = (pagesPath, pageFilePath) => {
   if (relativePath.startsWith('..')) return null
 
   const dirname = path.dirname(relativePath)
-  const pageId = isIndexFilePath(dirname) ? INDEX_ID : dirname
+  const filename = path.basename(relativePath)
 
-  return pageId
+  if (filename === PAGE_FILENAME || File.exists(path.resolve(pageFilePath, '..', PAGE_FILENAME))) {
+    const pageId = isIndexFilePath(dirname) ? INDEX_ID : dirname
+
+    return pageId
+  } else {
+    const parentPath = path.resolve(pageFilePath, '..', '..')
+    const parentPageFilePath = path.join(parentPath, filename)
+
+    return pageFilePathToPageId(pagesPath, parentPageFilePath)
+  }
 }
 
 const parentIdForPageId = (pageIds, pageId) => {
