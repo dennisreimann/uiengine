@@ -17,15 +17,15 @@ describe('SchemaUtil', () => {
   describe('#schemaIdToSchemaFilePath', () => {
     it('should return schema file path for schema', () => {
       assert.equal(
-        SchemaUtil.schemaIdToSchemaFilePath(schemaPath, 'entity'),
-        path.join(schemaPath, 'entity.yml')
+        SchemaUtil.schemaIdToSchemaFilePath(schemaPath, 'Entity'),
+        path.join(schemaPath, 'Entity.yml')
       )
     })
   })
 
   describe('#schemaFilePathToSchemaId', () => {
     it('should return schema id for schema file path', () => {
-      assert.equal(SchemaUtil.schemaFilePathToSchemaId(schemaPath, path.join(schemaPath, 'entity.yml')), 'entity')
+      assert.equal(SchemaUtil.schemaFilePathToSchemaId(schemaPath, path.join(schemaPath, 'Entity.yml')), 'Entity')
     })
 
     it('should return null for invalid file path', () => {
