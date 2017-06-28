@@ -242,7 +242,7 @@ describe('UIengine', () => {
     })
 
     it('should generate schema page on change', done => {
-      const filePath = path.join(schemaPath, 'entity.yml')
+      const filePath = path.join(schemaPath, 'Entity.yml')
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
@@ -251,7 +251,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'schema')
-          assert.equal(result.file, 'test/project/src/uiengine/schema/entity.yml')
+          assert.equal(result.file, 'test/project/src/uiengine/schema/Entity.yml')
 
           done()
         })
