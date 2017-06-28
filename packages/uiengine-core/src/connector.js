@@ -29,6 +29,7 @@ async function setup (state) {
     // in the components source folder root. No variants!
     if (typeof registerComponentFile === 'function') {
       const { options } = adapters[ext]
+
       const pattern = path.join(components, `*/*.${ext}`)
       const paths = glob.sync(pattern)
       const register = R.partial(registerComponentFile, [options])
