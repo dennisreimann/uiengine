@@ -44,7 +44,7 @@ uiengine init
 
 This command creates a config file named `uiengine.yml`, which contains the basic configuration.
 It also creates the folder `pages` containing a `page.md` file.
-This is the page file for the index page of the Interface Exchange.
+This is the page file for the index page of the documentation.
 
 ## ⚙️ How to configure the project?
 
