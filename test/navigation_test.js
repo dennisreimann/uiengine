@@ -1,4 +1,3 @@
-/* global describe, it */
 const R = require('ramda')
 const assert = require('assert')
 const Factory = require('./support/factory')

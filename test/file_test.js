@@ -1,4 +1,3 @@
-/* global describe, it */
 const assert = require('assert')
 const assertExists = require('./support/assertExists')
 const fs = require('fs-extra')

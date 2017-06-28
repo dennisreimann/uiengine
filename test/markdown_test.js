@@ -1,4 +1,3 @@
-/* global describe, it */
 const assert = require('assert')
 
 const Markdown = require('../src/util/markdown')
