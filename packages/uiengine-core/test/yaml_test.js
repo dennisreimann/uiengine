@@ -13,6 +13,7 @@ name: Index
 included_md: !include /fixtures/markdown.md
 data: !data /json.json
 content: !markdown |\n  # Headline\n  Text paragraph
+include_with_incompatible_type: !include /fixtures/layout.psd
 `
 
 describe('Yaml', () => {
@@ -113,6 +114,7 @@ describe('Yaml', () => {
           assert.equal(data.content, '<h1 id="headline">Headline</h1>\n<p>Text paragraph</p>')
           assert.equal(data.data.name, 'JSON')
           assert.equal(data.data.number, 3)
+          assert.equal(data.include_with_incompatible_type, path.resolve(__dirname, 'fixtures', 'layout.psd'))
           done()
         })
         .catch(done)
@@ -127,6 +129,14 @@ describe('Yaml', () => {
           done()
         })
         .catch(done)
+    })
+
+    it('should throw error with invalid YAML', done => {
+      Yaml.fromString(': invalid', sourcePaths)
+        .catch(error => {
+          assert(error)
+          done()
+        })
     })
   })
 })

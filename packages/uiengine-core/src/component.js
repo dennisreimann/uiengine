@@ -5,7 +5,7 @@ const frontmatter = require('./util/frontmatter')
 const markdown = require('./util/markdown')
 const ComponentUtil = require('./util/component')
 const Variant = require('./variant')
-const { debug2, debug3, debug4 } = require('./util/debug')
+const { debug2, debug3, debug4, debug5 } = require('./util/debug')
 
 const assocComponent = (components, component) =>
   R.assoc(component.id, component, components)
@@ -31,14 +31,16 @@ async function readComponentFile (state, filePath) {
   debug4(state, `Component.readComponentFile(${filePath}):start`)
 
   const { source } = state.config
-  const component = await frontmatter.fromFile(filePath, source)
   let data = { attributes: {} } // in case there is no component file
 
-  if (component) {
+  try {
+    const component = await frontmatter.fromFile(filePath, source)
     const { attributes, body } = component
     const content = await markdown.fromString(body)
 
     data = { attributes, content }
+  } catch (err) {
+    debug5(state, 'Could not read component file', filePath, err)
   }
 
   debug4(state, `Component.readComponentFile(${filePath}):end`)

@@ -141,12 +141,28 @@ describe('PageUtil', () => {
       assert.equal(childIds[1], 'docs')
     })
 
-    it('should convert the children list provided by the user to childIds for child page', () => {
+    it('should convert a prefixed children list provided by the user to childIds for child page', () => {
       const availableChildIds = ['patterns/atoms', 'patterns/molecules']
       const attrs = { children: availableChildIds }
       const { childIds } = PageUtil.convertUserProvidedChildrenList('patterns', availableChildIds, attrs)
       assert.equal(childIds[0], 'patterns/atoms')
       assert.equal(childIds[1], 'patterns/molecules')
+    })
+
+    it('should convert a non-prefixed children list provided by the user to childIds for child page', () => {
+      const availableChildIds = ['patterns/atoms', 'patterns/molecules']
+      const children = ['atoms', 'molecules']
+      const attrs = { children }
+      const { childIds } = PageUtil.convertUserProvidedChildrenList('patterns', availableChildIds, attrs)
+      assert.equal(childIds[0], 'patterns/atoms')
+      assert.equal(childIds[1], 'patterns/molecules')
+    })
+
+    it('should return the attributes as they are if the children list is not provided by the user', () => {
+      const availableChildIds = ['docs', 'patterns']
+      const attrs = { title: 'No children' }
+      const converted = PageUtil.convertUserProvidedChildrenList('index', availableChildIds, attrs)
+      assert.equal(attrs, converted)
     })
 
     it('should throw an error if a child does not exist', () => {
@@ -170,6 +186,12 @@ describe('PageUtil', () => {
       const { componentIds } = PageUtil.convertUserProvidedComponentsList('patterns/atoms', attrs)
       assert.equal(componentIds[0], 'link')
       assert.equal(componentIds[1], 'button')
+    })
+
+    it('should return the attributes as they are if the components list is not provided by the user', () => {
+      const attrs = { title: 'No components' }
+      const converted = PageUtil.convertUserProvidedComponentsList('index', attrs)
+      assert.equal(attrs, converted)
     })
   })
 })
