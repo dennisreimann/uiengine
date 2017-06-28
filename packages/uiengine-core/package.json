@@ -67,9 +67,11 @@
     "coveralls": "^2.13.1",
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.3.0",
+    "mocha-sinon": "^2.0.0",
     "nyc": "^10.1.2",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",
+    "sinon": "^2.3.5",
     "standard": "^10.0.2",
     "uiengine-test-project": "file:test/project"
   },
