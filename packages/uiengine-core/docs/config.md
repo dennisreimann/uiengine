@@ -11,7 +11,7 @@ Defaults to `name` and `version` from your package.json file.
 Here you can overwrite it and add more custom properties.
 
 ```yaml
-name: My projects interface exchange
+name: ACME Design System
 version: 1.0.0
 ```
 

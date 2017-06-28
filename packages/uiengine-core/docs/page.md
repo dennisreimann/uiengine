@@ -55,9 +55,9 @@ children:
 - sandbox
 ---
 
-<img src="static/logo.svg" alt="ACME Interface Exchange" class="acme-logo" />
+<img src="static/logo.svg" alt="ACME Design System" class="acme-logo" />
 
-The ACME Interface Exchange: Components and templates for our web application.
+The ACME Design System: Components and templates for our web application.
 ````
 
 The `title` is the name of the page that is refered to in the navigation. 
@@ -96,11 +96,11 @@ Basically there are two types of pages …
 
 ### Theme templates
 
-These pages are the documentation part of your Interface Exchange, which use predefined templates:
+These templates are layouts for the documentation pages:
 
 - `theme:page` – the default page template that contains the title and description as well as a navigation for child pages.
 - `theme:sandbox` – a template like the page template, but also contains more detailed information about the child pages.
-- `theme:sitemap` – a template like the page template, but also contains a sitemap of the whole Interface Exchange, which is handy for the home/index page.
+- `theme:sitemap` – a template like the page template, but also contains a sitemap of all pages, which is handy for the home/index page.
 - `theme:component` – the template a component page gets rendered with, listing the component details and its variants.
 - `theme:schema` - the template the schema page gets rendered with: It contains tabular data of the [component schema](./schema.md).
 
