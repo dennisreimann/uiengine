@@ -18,6 +18,12 @@ const { debug2 } = require('./util/debug')
 
 const CONFIG_FILENAME = 'uiengine.yml'
 
+// track the state of a running generate process to
+// cancel regenerating during a full generate
+let isCurrentlyGenerating = false
+
+const isGenerating = () => isCurrentlyGenerating
+
 // set the state in this modules scope so that we
 // can access it when handling incremental changes
 let state = {}
@@ -32,6 +38,7 @@ async function setupStateWithOptions (options = {}) {
 }
 
 async function generate (options) {
+  isCurrentlyGenerating = true
   state = await setupStateWithOptions(options)
 
   debug2(state, 'UIengine.generate():start')
@@ -41,6 +48,7 @@ async function generate (options) {
   await Promise.all([setupTheme, setupAdapters])
 
   state = await generateContent()
+  isCurrentlyGenerating = false
 
   debug2(state, 'UIengine.generate():end')
 
@@ -258,6 +266,7 @@ module.exports = {
   CONFIG_FILENAME,
   setupStateWithOptions,
   getState,
+  isGenerating,
   generate,
   generateIncrementForFileChange,
   gulp

@@ -16,6 +16,7 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, schema,
 }
 
 const handleFileChange = (filePath, type) => debounce('handleFileChange', () => {
+  if (UIengine.isGenerating()) return
   UIengine.generateIncrementForFileChange(filePath, type)
     .then(change => console.log(`✨  Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`))
     .catch(error => console.log(`🚨  Error generating increment for changed file ${path.relative(process.cwd(), filePath)}:`, error))
