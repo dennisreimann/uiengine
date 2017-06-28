@@ -11,8 +11,7 @@ async function fromFile (parseString, filePath, sourcePaths) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, string) => {
       if (err) {
-        // TODO: Clarify why this is not reject
-        resolve(undefined)
+        reject(err)
       } else {
         const parsed = parseString(string, filePath, sourcePaths)
 

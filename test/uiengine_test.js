@@ -1,3 +1,5 @@
+require('mocha-sinon')()
+
 const fs = require('fs-extra')
 const path = require('path')
 const assert = require('assert')
@@ -7,12 +9,14 @@ const assertContentDoesNotMatch = require('./support/assertContentDoesNotMatch')
 
 const UIengine = require('../src/uiengine')
 
-const pagesPath = path.resolve(__dirname, 'project', 'src', 'uiengine', 'pages')
-const schemaPath = path.resolve(__dirname, 'project', 'src', 'uiengine', 'schema')
-const componentsPath = path.resolve(__dirname, 'project', 'src', 'components')
-const templatesPath = path.resolve(__dirname, 'project', 'src', 'templates')
-const targetPath = path.resolve(__dirname, 'project', 'dist')
-const opts = { config: path.resolve(__dirname, 'project', 'uiengine.yml') }
+const projectPath = path.resolve(__dirname, 'project')
+const dataPath = path.resolve(projectPath, 'src', 'uiengine', 'data')
+const pagesPath = path.resolve(projectPath, 'src', 'uiengine', 'pages')
+const schemaPath = path.resolve(projectPath, 'src', 'uiengine', 'schema')
+const componentsPath = path.resolve(projectPath, 'src', 'components')
+const templatesPath = path.resolve(projectPath, 'src', 'templates')
+const targetPath = path.resolve(projectPath, 'dist')
+const opts = { config: path.resolve(projectPath, 'uiengine.yml'), debug: true }
 
 // "end to end" tests
 describe('UIengine', () => {
@@ -271,6 +275,23 @@ describe('UIengine', () => {
         .catch(done)
     })
 
+    it('should generate component on variant meta file change', done => {
+      const filePath = path.join(componentsPath, 'input', 'variants', 'text.md')
+
+      UIengine.generateIncrementForFileChange(filePath, 'changed')
+        .then(result => {
+          assertExists(path.join(targetPath, '_variants', 'input', 'text.pug.html'))
+
+          assert.equal(result.action, 'changed')
+          assert.equal(result.type, 'component')
+          assert.equal(result.item, 'input')
+          assert.equal(result.file, 'test/project/src/components/input/variants/text.md')
+
+          done()
+        })
+        .catch(done)
+    })
+
     it('should generate component on create', done => {
       const componentPath = path.join(componentsPath, 'my-new-component')
       const filePath = path.join(componentPath, 'component.md')
@@ -457,6 +478,76 @@ describe('UIengine', () => {
           done()
         })
         .catch(done)
+    })
+
+    it('should regenerate content on data change', done => {
+      const filePath = path.join(dataPath, 'items.yml')
+
+      UIengine.generateIncrementForFileChange(filePath, 'changed')
+        .then(result => {
+          assertExists(path.join(targetPath, 'index.html'))
+
+          assert.equal(result.action, 'changed')
+          assert.equal(result.type, 'site')
+          assert.equal(result.item, 'UIengine Sample Project')
+          assert.equal(result.file, 'test/project/src/uiengine/data/items.yml')
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should regenerate everything on theme file change', done => {
+      const filePath = path.resolve(projectPath, 'node_modules', 'uiengine-theme-default', 'lib', 'index.js')
+
+      UIengine.generateIncrementForFileChange(filePath, 'changed')
+        .then(result => {
+          assertExists(path.join(targetPath, 'index.html'))
+
+          assert.equal(result.action, 'changed')
+          assert.equal(result.type, 'site')
+          assert.equal(result.item, 'UIengine Sample Project')
+          assert.equal(result.file, 'test/project/node_modules/uiengine-theme-default/lib/index.js')
+
+          done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('#isGenerating', () => {
+    it('should return whether or not a generate is currently running', function (done) {
+      this.timeout(3000)
+
+      assert(!UIengine.isGenerating())
+
+      UIengine.generate(opts)
+        .then(state => {
+          assert(!UIengine.isGenerating())
+
+          done()
+        })
+        .catch(done)
+
+      assert(UIengine.isGenerating())
+    })
+  })
+
+  describe('#gulp', () => {
+    it('should return a module to invoke gulp', function () {
+      const fn = function () {}
+      const gulp = { task: fn, watch: fn }
+      this.sinon.stub(gulp, 'task')
+      this.sinon.stub(gulp, 'watch').returns({ on: fn })
+
+      const uiGulp = UIengine.gulp(gulp, opts)
+
+      uiGulp.task('patterns')
+      assert(gulp.task.calledOnce)
+      assert(gulp.task.calledWith('patterns'))
+
+      uiGulp.watch()
+      assert(gulp.watch.calledOnce)
     })
   })
 })

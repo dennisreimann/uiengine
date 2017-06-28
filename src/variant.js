@@ -7,7 +7,7 @@ const frontmatter = require('./util/frontmatter')
 const VariantUtil = require('./util/variant')
 const File = require('./util/file')
 const Connector = require('./connector')
-const { debug2, debug3, debug4 } = require('./util/debug')
+const { debug2, debug3, debug4, debug5 } = require('./util/debug')
 
 const regexpClean = new RegExp('([\\s]*?<!--\\s?omit:.*?\\s?-->)', 'gi')
 
@@ -26,14 +26,16 @@ async function readVariantFile (state, filePath) {
   const { source } = state.config
   const variantName = path.basename(filePath, path.extname(filePath))
   const variantFile = path.join(path.dirname(filePath), `${variantName}.md`)
-  const variant = await frontmatter.fromFile(variantFile, source)
   let data = { attributes: {} } // in case there is no variant file
 
-  if (variant) {
+  try {
+    const variant = await frontmatter.fromFile(variantFile, source)
     const { attributes, body } = variant
     const content = await markdown.fromString(body)
 
     data = { attributes, content }
+  } catch (err) {
+    debug5(state, 'Could not read variant file', filePath, err)
   }
 
   debug4(state, `Variant.readVariantFile(${filePath}):end`)

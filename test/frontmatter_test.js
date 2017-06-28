@@ -43,6 +43,39 @@ describe('Frontmatter', () => {
         .catch(done)
     })
 
+    it('should work with only the attributes', done => {
+      const string = `---\nname: Index\n---`
+      Frontmatter.fromString(string, sourcePaths)
+        .then(data => {
+          assert.equal(data.attributes.name, 'Index')
+          assert.equal(data.body, '')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should work with only the body', done => {
+      const string = 'Hello'
+      Frontmatter.fromString(string, sourcePaths)
+        .then(data => {
+          assert.equal(Object.keys(data.attributes).length, 0)
+          assert.equal(data.body, 'Hello')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should work with malformed string', done => {
+      const string = '---\nHello'
+      Frontmatter.fromString(string, sourcePaths)
+        .then(data => {
+          assert.equal(Object.keys(data.attributes).length, 0)
+          assert.equal(data.body, '---\nHello')
+          done()
+        })
+        .catch(done)
+    })
+
     it('should work with custom yaml types', done => {
       Frontmatter.fromString(string, sourcePaths)
         .then(data => {
