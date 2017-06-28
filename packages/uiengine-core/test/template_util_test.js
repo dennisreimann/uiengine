@@ -1,4 +1,3 @@
-/* global describe, it */
 const path = require('path')
 const assert = require('assert')
 
