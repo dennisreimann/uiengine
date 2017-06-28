@@ -1,4 +1,4 @@
-const debug = (level, state, label, message) => {
+const debug = (level, state, label, ...additional) => {
   const { debug } = state.config
   if (!debug || level > debug) return
 
@@ -7,7 +7,7 @@ const debug = (level, state, label, message) => {
     const action = timingEvent === 'start' ? 'time' : 'timeEnd'
     console[action](timingLabel)
   } else {
-    console.log(label, message)
+    console.info(label, ...additional)
   }
 }
 
