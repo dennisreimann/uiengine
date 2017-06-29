@@ -94,6 +94,20 @@ describe('Yaml', () => {
         })
         .catch(done)
     })
+
+    it('should extend data structures by deep merging them', done => {
+      Yaml.fromFile('./test/fixtures/yaml-with-extends.yml', sourcePaths)
+        .then(data => {
+          assert.equal(data.name, 'Index')
+          assert.equal(data.number, 3)
+          assert.equal(data.nested.name, 'Index')
+          assert.equal(data.nested.number, 4)
+          assert.equal(data.nested.deep.extended, true)
+          assert.equal(data.nested.deep.overwritten, true)
+          done()
+        })
+        .catch(done)
+    })
   })
 
   describe('#fromString', () => {
@@ -135,6 +149,14 @@ describe('Yaml', () => {
       Yaml.fromString(': invalid', sourcePaths)
         .catch(error => {
           assert(error)
+          done()
+        })
+    })
+
+    it('should throw error if extend is missing the extendable', done => {
+      Yaml.fromString('!extend\nname: Index', sourcePaths)
+        .catch(error => {
+          assert(error.message.match('YAML Extend Schema'))
           done()
         })
     })
