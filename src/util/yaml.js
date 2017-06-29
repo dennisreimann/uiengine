@@ -4,6 +4,7 @@ const path = require('path')
 const assert = require('assert')
 const yaml = require('js-yaml')
 const chalk = require('chalk')
+const deepExtend = require('deep-extend')
 const parsing = require('./parsing')
 const Markdown = require('./markdown')
 
@@ -59,6 +60,21 @@ const includeYamlType = (embeddingFilePath, sourcePaths) =>
     }
   })
 
+const extendYamlType = (embeddingFilePath, sourcePaths) =>
+  new yaml.Type('!extend', {
+    kind: 'mapping',
+
+    construct (data) {
+      const extendable = data._
+      assert(extendable, `YAML Extend Schema requires the data structure to be extended defined with the key '_', which is missing: ${data}`)
+      delete data._
+
+      const extended = deepExtend(extendable, data)
+
+      return extended
+    }
+  })
+
 const MarkdownYamlType = new yaml.Type('!markdown', {
   kind: 'scalar',
 
@@ -74,8 +90,9 @@ const MarkdownYamlType = new yaml.Type('!markdown', {
 const parseString = (string, filename, sourcePaths) => {
   try {
     const IncludeYamlType = includeYamlType(filename, sourcePaths)
+    const ExtendYamlType = extendYamlType(filename, sourcePaths)
     const DataYamlType = dataYamlType(filename, sourcePaths)
-    const schema = yaml.Schema.create([IncludeYamlType, DataYamlType, MarkdownYamlType])
+    const schema = yaml.Schema.create([IncludeYamlType, ExtendYamlType, DataYamlType, MarkdownYamlType])
     const json = true // duplicate keys in a mapping will override values rather than throwing an error
 
     return yaml.safeLoad(string.trim(), { schema, filename, json })

@@ -1,0 +1,11 @@
+!extend
+_: !data yaml.yml
+number: 3
+nested: !extend
+  _: !include yaml.yml
+  number: 4
+  deep: !extend
+    _:
+      extended: true
+      overwritten: false
+    overwritten: true
