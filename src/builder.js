@@ -1,10 +1,10 @@
 const path = require('path')
 const R = require('ramda')
-const chalk = require('chalk')
 const Theme = require('./theme')
 const Connector = require('./connector')
 const File = require('./util/file')
 const PageUtil = require('./util/page')
+const { error } = require('./util/message')
 const { debug2, debug3, debug4 } = require('./util/debug')
 const NavigationData = require('./data/navigation')
 
@@ -99,15 +99,15 @@ const render = (state, templateId, data) => {
     const template = templates[templateId]
 
     if (!template) {
-      throw new Error(chalk.red([
+      throw new Error(error([
         `Template "${templateId}" does not exist.`,
         'In case you want to reference an existing theme template,\nplease prefix it with "theme:" – i.e. "theme:page".',
         'If this is supposed to be a custom template, add it to the\ntemplates source directory or refer to it like this:',
         `templates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE`
-      ].join('\n\n')) + chalk.gray([
+      ].join('\n\n')), [
         'Registered templates:',
         `${JSON.stringify(templates, null, '  ')}`
-      ].join('\n\n')))
+      ].join('\n\n'))
     }
 
     const rendered = Connector.render(state, template, data)
@@ -124,7 +124,7 @@ async function renderWithFallback (state, templateId, data, identifier) {
     html = await render(state, templateId, data)
   } catch (err) {
     html = `<!DOCTYPE html><html><body><pre>${err}</pre></body></html>`
-    console.error(chalk.red(`${identifier} could not be generated!`) + '\n\n' + chalk.gray(err))
+    console.error(error(`${identifier} could not be generated!`, err))
   }
   return html
 }

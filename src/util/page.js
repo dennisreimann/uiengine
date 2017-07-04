@@ -1,8 +1,8 @@
 const path = require('path')
-const chalk = require('chalk')
 const R = require('ramda')
 const File = require('./file')
 const StringUtil = require('./string')
+const { error } = require('./message')
 
 const PAGE_FILENAME = 'page.md'
 const INDEX_ID = 'index'
@@ -97,7 +97,7 @@ const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes =
     if (availableChildIds.includes(childId)) {
       return childId
     } else {
-      throw new Error(chalk.red([
+      throw new Error(error([
         `Child page "${id}" does not exist for page "${pageId}".`,
         'Here is a list of available child pages:',
         `${availableChildIds.map(childId => `- ${childId}`).join('\n')}`

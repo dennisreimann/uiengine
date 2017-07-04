@@ -3,10 +3,10 @@ const fs = require('fs')
 const path = require('path')
 const assert = require('assert')
 const yaml = require('js-yaml')
-const chalk = require('chalk')
 const deepExtend = require('deep-extend')
 const parsing = require('./parsing')
 const Markdown = require('./markdown')
+const { error } = require('./message')
 
 const renderMarkdown = Markdown.parseString
 
@@ -97,7 +97,7 @@ const parseString = (string, filename, sourcePaths) => {
 
     return yaml.safeLoad(string.trim(), { schema, filename, json })
   } catch (err) {
-    throw new Error(chalk.red(`Could not parse YAML: ${err.stack}`) + '\n\n' + chalk.gray(string))
+    throw new Error(error(`Could not parse YAML: ${err.stack}`, string))
   }
 }
 

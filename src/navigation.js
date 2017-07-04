@@ -1,6 +1,6 @@
 const R = require('ramda')
-const chalk = require('chalk')
 const PageUtil = require('./util/page')
+const { error } = require('./util/message')
 const NavigationData = require('./data/navigation')
 
 const assocNavigation = (nav, item) =>
@@ -33,7 +33,7 @@ const dataForPage = (state, page) => {
     if (availableComponentIds.includes(componentId)) {
       return PageUtil.pageIdForComponentId(pageId, componentId)
     } else {
-      throw new Error(chalk.red([
+      throw new Error(error([
         `Component "${componentId}" does not exist, but was inserted on page "${pageId}".`,
         'Here is a list of available components:',
         `${availableComponentIds.map(id => `- ${id}`).join('\n')}`
