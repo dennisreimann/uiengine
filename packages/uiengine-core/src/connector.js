@@ -1,8 +1,8 @@
 const path = require('path')
 const R = require('ramda')
 const glob = require('globby')
-const chalk = require('chalk')
 const File = require('./util/file')
+const { error } = require('./util/message')
 const { debug3 } = require('./util/debug')
 
 const getModule = ({ config: { adapters } }, ext) => {
@@ -11,7 +11,7 @@ const getModule = ({ config: { adapters } }, ext) => {
   try {
     return require(module)
   } catch (err) {
-    throw new Error(chalk.red(`Could not load "${ext}" adapter:`) + '\n\n' + chalk.gray(err.stack))
+    throw new Error(error(`Could not load "${ext}" adapter:`, err.stack))
   }
 }
 
@@ -70,7 +70,7 @@ async function render (state, templatePath, data = {}) {
 
     return rendered.trim()
   } else {
-    throw new Error(chalk.red(`The "${ext}" adapter does not support rendering.`))
+    throw new Error(error(`The "${ext}" adapter does not support rendering.`))
   }
 }
 

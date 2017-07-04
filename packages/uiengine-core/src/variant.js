@@ -1,12 +1,12 @@
 const path = require('path')
 const R = require('ramda')
 const glob = require('globby')
-const chalk = require('chalk')
-const markdown = require('./util/markdown')
-const frontmatter = require('./util/frontmatter')
+const Connector = require('./connector')
+const Markdown = require('./util/markdown')
+const Frontmatter = require('./util/frontmatter')
 const VariantUtil = require('./util/variant')
 const File = require('./util/file')
-const Connector = require('./connector')
+const { error } = require('./util/message')
 const { debug2, debug3, debug4, debug5 } = require('./util/debug')
 
 const regexpClean = new RegExp('([\\s]*?<!--\\s?omit:.*?\\s?-->)', 'gi')
@@ -29,9 +29,9 @@ async function readVariantFile (state, filePath) {
   let data = { attributes: {} } // in case there is no variant file
 
   try {
-    const variant = await frontmatter.fromFile(variantFile, source)
+    const variant = await Frontmatter.fromFile(variantFile, source)
     const { attributes, body } = variant
-    const content = await markdown.fromString(body)
+    const content = await Markdown.fromString(body)
 
     data = { attributes, content }
   } catch (err) {
@@ -100,7 +100,7 @@ async function fetchById (state, id) {
     [raw, rendered] = await Promise.all([readTemplate, renderTemplate])
   } catch (err) {
     rendered = `<!DOCTYPE html><html><body><pre>${err}</pre></body></html>`
-    console.error(chalk.red(`Variant "${id}" could not be rendered!`) + '\n\n' + chalk.gray(err))
+    console.error(error(`Variant "${id}" could not be rendered!`, err))
   }
 
   // adjust raw and rendered: omit marked parts

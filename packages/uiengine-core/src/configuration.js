@@ -2,9 +2,9 @@ const path = require('path')
 const R = require('ramda')
 const assert = require('assert')
 const glob = require('globby')
-const chalk = require('chalk')
 const Yaml = require('./util/yaml')
 const TemplateUtil = require('./util/template')
+const { error } = require('./util/message')
 
 const readPackageJson = () => {
   let data = {}
@@ -49,7 +49,7 @@ const resolvePackage = (basedir, config, type) => {
       options: {}
     }
   } else {
-    throw new Error(chalk.red(`${type} needs to be a configuration object (with module and options keys) or a module string (requireable path or name): `) + chalk.gray(config))
+    throw new Error(error(`${type} needs to be a configuration object (with module and options keys) or a module string (requireable path or name):`, config))
   }
 }
 

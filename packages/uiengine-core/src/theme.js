@@ -1,5 +1,5 @@
-const chalk = require('chalk')
 const File = require('./util/file')
+const { error } = require('./util/message')
 const { debug3, debug4 } = require('./util/debug')
 
 const getTheme = (state) => {
@@ -8,7 +8,7 @@ const getTheme = (state) => {
   try {
     return require(module)
   } catch (err) {
-    throw new Error(chalk.red(`Could not load "${module}" theme:`) + '\n\n' + chalk.gray(err.stack))
+    throw new Error(error(`Could not load "${module}" theme:`, err.stack))
   }
 }
 
