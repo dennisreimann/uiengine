@@ -9,6 +9,7 @@ variant:
   naming: Variant
   copy_permalink: Copy link to variant
   open_in_window: Open in separate window
+  edit_on_codepen: Edit on Codepen
   preview: Preview
   code: Code
   raw: Code

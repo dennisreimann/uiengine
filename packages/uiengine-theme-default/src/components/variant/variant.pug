@@ -40,6 +40,12 @@ mixin variant(variant, includeDetails)
               a.variantheader__actionlink(href=h.variantPreviewPath(variant.id) target=variantId)
                 +icon('open-in-window')
                 = h.t('variant.open_in_window')
+            li.variantheader__action
+              form(action="https://codepen.io/pen/define" method="POST" target="_blank")
+                input(type="hidden" name="data" data-value=JSON.stringify({ title: variant.title, html: variant.rendered, language: variant.extension, raw: variant.raw }))
+                a.variantheader__actionlink.variantheader__actionlink--codepen(href="#" data-variant-target=variantId)
+                  +icon('globe')
+                  = h.t('variant.edit_on_codepen')
 
     if variant.content
       article.content.wrap

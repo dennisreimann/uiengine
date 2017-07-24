@@ -44,3 +44,47 @@ on('click', '.variantheader__actiontoggle', e => {
 
   toggleActionlist(actionlist)
 })
+
+// CodePen API documentation:
+// https://blog.codepen.io/documentation/api/prefill/
+on('click', '.variantheader__actionlink--codepen', e => {
+  e.preventDefault()
+
+  const link = e.target
+  const variantId = link.getAttribute('data-variant-target')
+  const variantNode = document.getElementById(variantId)
+  const iframeDocument = variantNode.querySelector('iframe').contentDocument
+  const { styleSheets, scripts } = iframeDocument
+  const form = link.parentNode
+  const input = link.previousSibling
+  const value = JSON.parse(input.dataset.value)
+
+  let css = ''
+  let cssExt = ''
+  let js = ''
+  let jsExt = ''
+
+  for (let i = 0; i < styleSheets.length; i++) {
+    const styleSheet = styleSheets[i]
+    if (styleSheet.href) {
+      cssExt += `${styleSheet.href};`
+    } else {
+      css += [].slice.call(styleSheet.cssRules).reduce((prev, cssRule) => prev + cssRule.cssText, '')
+    }
+  }
+
+  for (let i = 0; i < scripts.length; i++) {
+    const script = scripts[i]
+    if (script.src) {
+      jsExt += `${script.src};`
+    } else if (script.id !== '__bs_script__') {
+      js += script.innerHTML
+    }
+  }
+
+  const data = Object.assign({}, value, { css, css_external: cssExt, js, js_external: jsExt })
+
+  input.setAttribute('value', JSON.stringify(data))
+
+  form.submit()
+})
