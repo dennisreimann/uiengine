@@ -88,7 +88,8 @@ const _read = (configFilePath, flags, projectConfig) => {
 
   // initialize data with defaults
   const { name, version } = packageData
-  const defaults = { name, version }
+  const update = Date.now()
+  const defaults = { name, version, update }
   let data = R.mergeAll([defaults, projectConfig, options])
 
   // resolve paths, adapters, and theme
