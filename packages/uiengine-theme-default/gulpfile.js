@@ -19,7 +19,7 @@ const paths = {
 const src = {
   lib: ['./src/*.js'],
   pug: ['./src/**/*.pug'],
-  icons: ['./src/icons/**/*.svg'],
+  icons: ['./src/icons/sprite/**/*.svg'],
   svgs: ['./src/svgs/**/*.svg'],
   styles: ['./src/styles/*.styl', './src/components/**/*.styl'],
   hljs: ['./node_modules/highlight.js/styles/**'],
