@@ -5,7 +5,8 @@ mixin variantpreview(variant)
   article.variantpreview&attributes(attributes)
     .variantpreview__container(id=containerId data-variant-id=variantId)
       .variantpreview__size
-        button.variantpreview__sizer(type="button" data-breakpoints-target=breakpointsId)
+        if config.breakpoints
+          button.variantpreview__sizer(type="button" data-breakpoints-target=breakpointsId)
       script.
         var width = window.sessionStorage.getItem('variant:width:#{variantId}');
         if (width) { document.getElementById('#{containerId}').style.width = width + 'px' }
