@@ -59,7 +59,7 @@ When building up data structures as the context for pages you might want to defi
 The `!extend` schema helps with that as it lets you include and extend the data defined in separate base data files.
 
 The data that should be extended is defined as the value of the key `_`.
-You can actually defined this extendable data inline, but you will most likely use the `!data` or even `!include` schema to reference the base data.
+You can actually define this extendable data inline, but you will most likely use the `!data` or even `!include` schema to reference an external file.
 
 ```yaml
 context:
