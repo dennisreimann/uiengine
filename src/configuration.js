@@ -16,11 +16,8 @@ const readPackageJson = () => {
   return data
 }
 
-const readFlags = (flags) => {
-  const debug = flags.debug || false
-  const data = { debug }
-
-  return data
+const readFlags = flags => {
+  return flags.debug ? { debug: flags.debug } : {}
 }
 
 // if module is a relative path, resolve the absolute path,
