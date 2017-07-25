@@ -1,7 +1,7 @@
-import '../components/component/component'
-import '../components/variant/variant'
-import '../components/variantpreview/variantpreview'
-import '../components/variantcode/variantcode'
+import '../components/contentheader/contentheader'
+import '../components/navigation/navigation'
+import '../components/variant/variantcode'
+import '../components/variant/variantpreview'
 import '../components/permalink/permalink'
 import { trigger } from './lib/util'
 

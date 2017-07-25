@@ -1,0 +1,8 @@
+mixin footer()
+  footer.footer&attributes(attributes)
+    if config.copyright
+      p.footer__copyright= config.copyright
+    if config.version
+      p.footer__version
+        = `${h.t('footer.version')} ${config.version} – `
+        = `${h.t('footer.last_update')} ${new Date(config.update).toLocaleString(h.lang)}.`

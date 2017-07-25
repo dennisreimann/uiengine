@@ -1,0 +1,72 @@
+*
+  margin 0
+  padding 0
+  border 0
+  outline 0
+  box-sizing border-box
+  vertical-align baseline
+
+html
+  height 100%
+  line-height 1.5
+  font-family $font-family-light
+  @media print
+    font-size 10pt
+  @media $mq-up_to_m
+    font-size 14px
+  @media $mq-m_to_l
+    font-size 15px
+  @media $mq-l_and_up
+    font-size 16px
+
+body
+  height 100%
+
+h1
+h2
+h3
+  font-family $font-family-bold
+  font-weight 400
+
+h1
+  font-size $font-size-xl
+  line-height 1.25
+
+h2
+  font-size $font-size-l
+  line-height 1.35
+
+h3
+  font-size $font-size-m
+
+h4
+h5
+h6
+  font-family $font-family-regular
+  font-size $font-size-m
+  font-weight normal
+
+b,
+em,
+i,
+strong
+  font-style normal
+  font-weight normal
+
+i,
+em
+  font-family $font-family-lightitalic
+
+b,
+strong
+  font-family $font-family-bold
+
+b em,
+b i,
+em b,
+em strong,
+i b,
+i strong,
+strong em,
+strong i
+  font-family $font-family-bolditalic

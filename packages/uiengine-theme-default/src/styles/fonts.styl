@@ -1,7 +1,10 @@
-profiles = bold bolditalic extrabold extrabolditalic italic light lightitalic regular
-for profile in profiles
+// converts fonts defined in json file to variables:
+fonts = json(pathjoin('..', 'tokens', 'fonts.json'), { hash: true })
+
+for $profile, $font-family in values(fonts)
   @font-face
-    font-family s('merriweathersans-%s', profile)
-    src s('url(../fonts/merriweathersans-%s.woff2) format("woff2"), url(../fonts/merriweathersans-%s.woff) format("woff")', profile, profile)
+    font-family $font-family
+    src s('url(../fonts/%s.woff2) format("woff2"), url(../fonts/%s.woff) format("woff")', $font-family, $font-family)
     font-weight normal
     font-style normal
+    font-display optional

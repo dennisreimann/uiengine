@@ -1,0 +1,22 @@
+$navigation-width = 300px
+
+@media $mq-l_and_up
+  .layout
+    display flex
+    flex-direction column
+    height 100%
+
+  .navigation
+    position fixed
+    top 0
+    left 0
+    bottom 0
+    width $navigation-width
+    overflow-y scroll
+
+  .main
+    flex 1
+    margin-left $navigation-width
+
+  .footer
+    margin-left $navigation-width

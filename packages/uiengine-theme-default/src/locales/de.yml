@@ -6,7 +6,6 @@ component:
   schema: Schema
 
 variant:
-  naming: Variante
   copy_permalink: Variantenlink kopieren
   open_in_window: In separatem Fenster öffnen
   edit_on_codepen: In Codepen öffnen
@@ -26,3 +25,7 @@ schema:
 
 sitemap:
   label: Sitemap
+
+footer:
+  version: Version
+  last_update: Letztes Update am

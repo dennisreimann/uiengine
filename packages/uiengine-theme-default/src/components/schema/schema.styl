@@ -3,10 +3,10 @@
   border-collapse collapse
 
   &__title
-    font-family $font-family-base
-    font-size $font-size-subhead
+    font-family $font-family-regular
+    font-size $font-size-m
     text-align left
-    margin-bottom $space-small
+    margin-bottom $space-s
 
   &__propertyname
   &__propertytype
@@ -16,16 +16,16 @@
     padding .25rem .5rem
 
     th&
-      color $color-schemahead-text
+      color $color-secondary-text
       text-align left
-      border-bottom 1px solid $color-schemahead-border
-      font-size $font-size-tiny
+      border-bottom 1px solid $color-border-medium
       font-family $font-family-light
+      font-size $font-size-xs
       font-weight normal
 
     td&
-      color $color-schemabody-text
-      border-bottom 1px solid $color-schemabody-border
+      border-bottom 1px solid $color-border-light
+      font-size $font-size-s
 
   &__propertyname
     width 10em
@@ -44,11 +44,9 @@
   &__propertyrequired
     td&
       font-family $font-family-code
-      font-size $font-size-small
 
   &__propertyrequired
     width 4em
-    color $color-schemabody-text
     th&,
     td&
       text-align center

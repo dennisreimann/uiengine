@@ -1,0 +1,10 @@
+mixin contentheader(title)
+  header.contentheader&attributes(attributes)
+    if block
+      block
+    else
+      h1.contentheader__title= title
+
+mixin contentheaderOption(id, title, isActive)
+  - const classes = isActive ? 'contentheader__option--active' : null
+  a.contentheader__option(href=`#${id}` class=classes)&attributes(attributes)= title

@@ -1,42 +1,107 @@
+$itemtoggle-size = 36px
+$itemtoggle-inset = 28px
+
+nav_inset(level)
+  $itemtoggle-inset * level
+
 .navigation
-  overflow hidden
+  position relative
   color $color-navigation-text
   background $color-navigation-bg
 
-  .wrap
-    display flex
-    flex-flow row
-    justify-content space-between
+  &--collapsed &__tree
+    @media $mq-up_to_l
+      display none
+
+  &__home
+    display block
+    color inherit
+    text-decoration none
+    text-align center
+    font-family $font-family-regular
+    @media $mq-up_to_l
+      padding $space-m $space-xxl
+    @media $mq-l_and_up
+      font-size $font-size-l
+      margin-top $space-xxs
+      padding $space-xxl $space-m
 
   &__tree
-    display flex
     list-style none
-    margin-left $space-large * -1
+
+    for level in (0..5)
+      &--level-{level}
+        .navigation__itemtoggle
+          left nav_inset(level)
+        .navigation__link
+          padding-left $itemtoggle-size + nav_inset(level)
+          background-color blend(rgba($color-navigation-bg, 1 - level / 20))
 
   &__item
-    font-weight 400
+    position relative
 
-    &--active,
-    &--current
-      color $color-navigation-text-current
-      background $color-navigation-bg-current
+  &__item--collapsed &__tree
+    display none
 
-    &:not(&--active)
-      &:hover
-        color $color-navigation-text-hover
-        background $color-navigation-bg-current
+  &__item--collapsed &__icon
+    transform rotate(-90deg)
+
+  &__menutoggle,
+  &__itemtoggle
+    appearance none
+    cursor pointer
+    background transparent
+    position absolute
+
+  &__menutoggle
+    width 40px
+    height 40px
+    padding 8px
+    @media $mq-up_to_m
+      top 1px
+    @media $mq-m_to_l
+      top 3px
+    @media $mq-l_and_up
+      display none
+
+  &__itemtoggle
+    width 36px
+    height 36px
+    padding 6px
+    @media $mq-up_to_m
+      top 4px
+    @media $mq-m_to_l
+      top 6px
+    @media $mq-l_and_up
+      top 1px
+
+    .navigation__icon
+      icon-size(.75)
+
+  &__icon
+    icon-size(1)
+    fill $color-navigation-text
+    transition-property transform
+    transition-duration $transition-duration-fast
 
   &__link
     display block
     color inherit
     text-decoration none
-    padding $space-normal $space-large
+    padding-right $space-m
+    @media $mq-up_to_l
+      font-size $font-size-m
+      padding-top $space-m
+      padding-bottom $space-m
+    @media $mq-l_and_up
+      font-size $font-size-s
+      padding-top $space-s
+      padding-bottom $space-s
 
-  &__config
-    order 2
-    margin-right $space-large * -1
-    display block
-    color $color-navigation-text-meta
-    text-decoration none
-    padding $space-normal $space-large
-    white-space nowrap
+  &__item--current > &__link
+    font-family $font-family-bold
+    color $color-navigation-text-current !important
+    background-color blend(rgba($color-navigation-bg, .125)) !important
+
+  &__item--current > &__itemtoggle &__icon
+    fill $color-navigation-text-current !important

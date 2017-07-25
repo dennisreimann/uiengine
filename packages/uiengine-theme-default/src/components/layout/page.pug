@@ -1,0 +1,11 @@
+extends layout.pug
+
+include /contentheader/contentheader.pug
+
+block main
+  section.page(id=h.dasherize(page.id))
+    +contentheader(page.title).sob-m
+
+    if page.content
+      article.content
+        != page.content

@@ -1,0 +1,80 @@
+.variantpreview
+  position relative
+
+  &__container
+    min-width 250px
+    resize horizontal
+    overflow scroll
+    margin 0 auto
+    text-align center
+    // leave space for the resize handle
+    padding-bottom $space-m
+
+    &[data-breakpoint]
+      transition-property width
+      transition-duration $transition-duration-medium
+      transition-timing-function ease-out
+
+  &__size
+    height 12px
+    margin-bottom 1.25rem
+    border-bottom 1px solid $color-border-medium
+    position relative
+
+    &:before
+    &:after
+      height 13px
+      position absolute
+      top 50%
+      content ''
+
+    &:before
+      left 0
+      border-left 1px solid $color-border-medium
+
+    &:after
+      right 0
+      border-right 1px solid $color-border-medium
+
+  &__sizer
+    padding-left $space-m
+    padding-right $space-m
+    color $color-modal-text
+    background $color-main-bg
+    display inline-block
+    font-size $font-size-m
+    font-family $font-family-regular
+    cursor pointer
+
+  &__iframe
+    display block
+    width 100%
+    border 0
+
+  &__breakpoints
+    position absolute
+    z-index 5
+    top $space-m
+    left calc(50% - 5rem)
+    width 10rem
+    max-height 0
+    transition-duration $transition-duration-medium
+    transition-property max-height
+    transition-timing-function ease-out
+    overflow hidden
+
+    &--active
+      max-height 20rem
+      transition-timing-function ease-in
+
+  &__breakpoints-inner
+    border 1px solid $color-border-medium
+    border-top none
+    padding-top $space-m
+
+  &__breakpoint
+    modal-option()
+    text-align center
+    &:first-child
+      margin-top $space-s
+

@@ -12,69 +12,40 @@ const skins = ['default', 'deeplake', 'uiengineering']
 
 const paths = {
   stylesLib: './src/styles/lib',
-  dist: './static/_uiengine-theme',
+  theme: './static/_uiengine-theme',
   lib: './lib'
 }
 
 const src = {
   lib: ['./src/*.js'],
-  pug: ['./src/**/*.pug'],
+  pug: ['./src/components/*/*.pug'],
   icons: ['./src/icons/sprite/**/*.svg'],
-  svgs: ['./src/svgs/**/*.svg'],
   styles: ['./src/styles/*.styl', './src/components/**/*.styl'],
   hljs: ['./node_modules/highlight.js/styles/**'],
   scripts: ['src/scripts/**/*.js', './src/components/**/*.js'],
   static: ['./src/{fonts,images}/**'],
   locales: ['./src/locales/*.yml'],
-  rev: [paths.dist + '/**/*.{css,js,map,ico,cur,svg,jpg,jpeg,png,gif,woff,woff2}']
+  rev: [paths.theme + '/**/*.{css,js,map,ico,cur,svg,jpg,jpeg,png,gif,woff,woff2}']
 }
 
-const dist = (folder = '') => gulp.dest(`${paths.dist}/${folder}`)
-
-const styles = skin =>
-  gulp.src(src.styles)
-    .pipe(p.plumber())
-    .pipe(p.stylus({
-      paths: [paths.stylesLib],
-      import: ['variables', 'mediaQueries', 'mixins', `skins/${skin}`],
-      url: { name: 'embedurl' }
-    }))
-    .pipe(p.concat(`uiengine-${skin}.css`))
-    .pipe(p.postcss([
-      mqpacker,
-      autoprefixer({ browsers: ['last 2 versions'] }),
-      csswring
-    ]))
-    .pipe(dist('styles'))
-
-gulp.task('styles', () => mergeStream(...skins.map(styles)))
-
-gulp.task('locales', () =>
-  gulp.src(src.locales)
-    .pipe(p.yaml())
-    .pipe(dist('locales'))
-)
-
-gulp.task('hljs', () =>
-  gulp.src(src.hljs)
-    .pipe(dist('styles/hljs'))
-)
+const lib = (folder = '') => gulp.dest(`${paths.lib}/${folder}`)
+const theme = (folder = '') => gulp.dest(`${paths.theme}/${folder}`)
 
 gulp.task('lib', () =>
   gulp.src(src.lib)
     .pipe(p.plumber())
     .pipe(p.babel())
-    .pipe(gulp.dest(paths.lib))
+    .pipe(lib())
 )
 
 gulp.task('pug', () =>
   gulp.src(src.pug)
-    .pipe(gulp.dest(paths.lib))
+    .pipe(lib('components'))
 )
 
 gulp.task('static', () =>
   gulp.src(src.static)
-    .pipe(dist())
+    .pipe(theme())
 )
 
 gulp.task('icons', () =>
@@ -103,14 +74,36 @@ gulp.task('icons', () =>
         ]
       }
     }))
-    .pipe(gulp.dest(`${paths.lib}/templates/includes`))
+    .pipe(lib('components/layout'))
 )
 
-gulp.task('svgs', () =>
-  gulp.src(src.svgs)
+const styles = skin =>
+  gulp.src(src.styles)
     .pipe(p.plumber())
-    .pipe(p.svgo())
-    .pipe(dist('svgs'))
+    .pipe(p.stylus({
+      paths: [paths.stylesLib],
+      import: ['variables', 'mediaQueries', 'mixins', `skins/${skin}`],
+      url: { name: 'embedurl' }
+    }))
+    .pipe(p.concat(`uiengine-${skin}.css`))
+    .pipe(p.postcss([
+      mqpacker,
+      autoprefixer({ browsers: ['last 2 versions'] }),
+      csswring
+    ]))
+    .pipe(theme('styles'))
+
+gulp.task('styles', () => mergeStream(...skins.map(styles)))
+
+gulp.task('locales', () =>
+  gulp.src(src.locales)
+    .pipe(p.yaml())
+    .pipe(theme('locales'))
+)
+
+gulp.task('hljs', () =>
+  gulp.src(src.hljs)
+    .pipe(theme('styles/hljs'))
 )
 
 gulp.task('scripts', () =>
@@ -118,7 +111,7 @@ gulp.task('scripts', () =>
     .pipe(p.plumber())
     .pipe(webpackStream({}, webpack))
     .pipe(p.concat('uiengine.js'))
-    .pipe(dist('scripts'))
+    .pipe(theme('scripts'))
 )
 
 gulp.task('scripts:preview', cb =>
@@ -126,7 +119,7 @@ gulp.task('scripts:preview', cb =>
     .pipe(p.plumber())
     .pipe(p.concat('uiengine-preview.js'))
     .pipe(p.uglify())
-    .pipe(dist('scripts'))
+    .pipe(theme('scripts'))
 )
 
 gulp.task('rev', () => {
@@ -135,22 +128,21 @@ gulp.task('rev', () => {
   return gulp.src(src.rev)
     .pipe(revAll.revision())
     .pipe(p.revDeleteOriginal())
-    .pipe(dist())
+    .pipe(theme())
     .pipe(revAll.manifestFile())
-    .pipe(dist())
+    .pipe(theme())
 })
 
 gulp.task('watch', cb => {
   gulp.watch(src.lib, ['lib'])
   gulp.watch(src.pug, ['pug'])
   gulp.watch(src.icons, ['icons'])
-  gulp.watch(src.svgs, ['svgs'])
   gulp.watch(src.static, ['static'])
   gulp.watch(src.scripts, ['scripts'])
   gulp.watch(src.locales, ['locales'])
   gulp.watch(src.styles.concat([`${paths.stylesLib}/**/*.styl`]), ['styles'])
 })
 
-gulp.task('generate', ['lib', 'pug', 'scripts', 'scripts:preview', 'icons', 'svgs', 'styles', 'static', 'hljs', 'locales'])
+gulp.task('generate', ['lib', 'pug', 'scripts', 'scripts:preview', 'icons', 'styles', 'static', 'hljs', 'locales'])
 gulp.task('build', cb => runSequence('generate', 'rev', cb))
 gulp.task('develop', (cb) => runSequence('generate', 'watch', cb))

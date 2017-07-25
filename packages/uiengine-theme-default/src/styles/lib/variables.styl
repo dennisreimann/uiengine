@@ -1,39 +1,31 @@
-$font-size-ultra = 6rem
-$font-size-mega = 4.5rem
-$font-size-boss = 3rem
-$font-size-huge = 2rem
-$font-size-large = 1.5rem
-$font-size-head = 1.25rem
-$font-size-subhead = 1.125rem
-$font-size-base = 1rem
-$font-size-small = .9rem
-$font-size-tiny = .7rem
+$icon-size-original = 24px
 
-$space-tiny = .25rem
-$space-small = .5rem
-$space-normal = .75rem
-$space-medium = 1rem
-$space-large = 1.5rem
-$space-huge = 2.5rem
-$space-mega = 4rem
+$transition-duration-fast = .15s
+$transition-duration-medium = .25s
 
-$font-light = merriweathersans-light
-$font-regular = merriweathersans-regular
-$font-bold = merriweathersans-bold
+// converts fonts defined in json file to variables:
+json(pathjoin('..', 'tokens', 'fonts.json'), null, '$font-')
 
-$font-family-light = $font-light, 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif
-$font-family-base = $font-regular, 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif
-$font-family-bold = $font-bold, 'Helvetica', Arial, Tahoma, Verdana, sans-serif
+$font-family-fallback = 'Helvetica', Arial, Tahoma, Verdana, sans-serif
 $font-family-code = 'Fira Code', Hasklig, 'Source Code Pro', 'DejaVu Sans Mono', Hack, Meslo, Menlo, Inconsolata, Consolas, 'Liberation Mono', Courier, monospace
+$font-family-bold = $font-merriweathersans-bold, $font-family-fallback
+$font-family-light = $font-merriweathersans-light, $font-family-fallback
+$font-family-regular = $font-merriweathersans-regular, $font-family-fallback
+$font-family-bolditalic = $font-merriweathersans-bolditalic, $font-family-fallback
+$font-family-lightitalic = $font-merriweathersans-lightitalic, $font-family-fallback
+
+// converts breakpoints defined in json file to variables:
+// { "S": 320 } -> $breakpoint-S = 320
+json(pathjoin('..', 'tokens', 'breakpoints.json'), null, '$breakpoint-')
+
+$breakpoint-s = unit($breakpoint-S, 'px')
+$breakpoint-m = unit($breakpoint-M, 'px')
+$breakpoint-l = unit($breakpoint-L, 'px')
+$breakpoint-xl = unit($breakpoint-XL, 'px')
 
 // more colors are configured via skins
-$color-white = #FFF
-$color-black = #000
+json(pathjoin('..', 'tokens', 'colors.json'), null, '$color-')
 
-$color-neutral-10 = #EEE
-$color-neutral-20 = #CCC
-$color-neutral-50 = #AAA
-$color-neutral-60 = #999
-$color-neutral-70 = #555
-$color-neutral-80 = #333
-$color-neutral-90 = #222
+json(pathjoin('..', 'tokens', 'spaces.json'), null, '$space-')
+
+json(pathjoin('..', 'tokens', 'fontsizes.json'), null, '$font-size-')

@@ -1,0 +1,28 @@
+include /footer/footer.pug
+include /main/main.pug
+include /navigation/navigation.pug
+
+doctype
+html(lang=h.lang)
+  head
+    title #{page.title} • #{config.name} (#{config.version})
+    meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
+    meta(name="viewport" content="width=device-width,initial-scale=1")
+    link(rel="preload" as="font" type="font/woff2" crossorigin href=h.assetPath("fonts/merriweathersans-regular.woff2"))
+    link(rel="preload" as="font" type="font/woff2" crossorigin href=h.assetPath("fonts/merriweathersans-light.woff2"))
+    link(rel="preload" as="font" type="font/woff2" crossorigin href=h.assetPath("fonts/merriweathersans-bold.woff2"))
+    link(href=h.stylesPath rel="stylesheet")
+    link(href=h.hljsPath rel="stylesheet")
+    script
+      | window.UIengine = { breakpoints: !{JSON.stringify(config.breakpoints || {})} }
+    if config.breakpoints
+      style
+        each width, breakpoint in config.breakpoints
+          | .variantpreview__container[data-breakpoint='#{breakpoint}'] { width: #{width}px; }
+  body
+    include icons.svg
+    .layout
+      +navigation()
+      +main()
+      +footer()
+    script(src=h.scriptsPath defer)

@@ -1,3 +1,3 @@
 ---
-title: Hauptnavigation
+title: Main navigation
 ---

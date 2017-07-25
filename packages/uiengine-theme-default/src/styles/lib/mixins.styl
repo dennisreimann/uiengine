@@ -1,9 +1,7 @@
-icon-size($size)
+icon-size($factor = 1)
+  $size = $icon-size-original * $factor
   width $size
   height $size
-
-icon-color($fill)
-  fill $fill
 
 icon-position($top = null, $left = null)
   if $top || $left
@@ -14,20 +12,20 @@ icon-position($top = null, $left = null)
     left $left
 
 link-with-hover($color-base, $color-hover, $animate-underline = true)
-  $transition = .2s
-  text-decoration none
+  $transition-duration = $transition-duration-fast
   color $color-base
-  transition $transition
+  transition-duration $transition-duration
+  text-decoration none
 
   &:hover
     color $color-hover
 
     .icon
-      icon-color($color-hover)
+      fill $color-hover
 
   .icon
-    transition $transition
-    icon-color($color-base)
+    transition-duration $transition-duration
+    fill $color-base
 
   if $animate-underline
     position relative
@@ -39,8 +37,34 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
       left 0
       width 0%
       border-bottom 1px solid $color-base
-      transition $transition
+      transition-duration $transition-duration
 
     &:hover:after
       width 100%
       border-bottom 1px solid $color-hover
+
+modal-option()
+  display block
+  width 100%
+  border-top 1px solid $color-border-light
+  padding $space-s $space-m
+  cursor pointer
+  color $color-modal-text
+  background $color-modal-bg
+  font-size $font-size-s
+  font-family $font-family-light
+  text-decoration none
+
+  .icon
+    margin-right $space-s
+    fill $color-modal-text
+    icon-size(.875)
+    icon-position(6px)
+    margin-top -6px
+
+  &:hover
+    color $color-modal-text-hover
+    background $color-modal-bg-hover
+
+    .icon
+      fill $color-modal-text-hover
