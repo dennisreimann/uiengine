@@ -9,8 +9,7 @@ const { debug2, debug3, debug4 } = require('./util/debug')
 const NavigationData = require('./data/navigation')
 
 // Theme templates need to be prefixed with "theme:" to be referenced
-// as an alternative page template. This might be the case for certain
-// pages like the homepage or sandbox overview.
+// as an alternative page template.
 // The variant template default does not have this prefix, because
 // by definition it must be an application template of the project.
 const themeTemplatePrefix = 'theme:'

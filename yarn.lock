@@ -4583,6 +4583,13 @@ uiengine-theme-default@^0.8.2:
     highlight.js "^9.10.0"
     pug "^2.0.0-beta10"
 
+uiengine-theme-default@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.9.0.tgz#e066b08bd216f72ba2ef54e8ae23a6e3c739123b"
+  dependencies:
+    highlight.js "^9.10.0"
+    pug "^2.0.0-beta10"
+
 uiengine@^0.8.3:
   version "0.8.4"
   resolved "https://registry.yarnpkg.com/uiengine/-/uiengine-0.8.4.tgz#636b486ffa59211a0f8a9c1357b17e33745658ae"

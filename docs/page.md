@@ -14,7 +14,7 @@ pages
 |   |___page.md
 |___organisms
 |   |___page.md
-|___sandbox
+|___prototype
 |   |___page.md
 |   |___homepage
 |   |   |___page.md
@@ -52,7 +52,7 @@ children:
 - atoms
 - molecules
 - organisms
-- sandbox
+- prototype
 ---
 
 <img src="static/logo.svg" alt="ACME Design System" class="acme-logo" />
@@ -99,8 +99,6 @@ Basically there are two types of pages …
 These templates are layouts for the documentation pages:
 
 - `theme:page` – the default page template that contains the title and description as well as a navigation for child pages.
-- `theme:sandbox` – a template like the page template, but also contains more detailed information about the child pages.
-- `theme:sitemap` – a template like the page template, but also contains a sitemap of all pages, which is handy for the home/index page.
 - `theme:component` – the template a component page gets rendered with, listing the component details and its variants.
 - `theme:schema` - the template the schema page gets rendered with: It contains tabular data of the [component schema](./schema.md).
 
@@ -123,7 +121,7 @@ In addition to that you can also define custom names for the [templates configur
 
 #### Providing data
 
-As you can use these custom templates to render example/sandbox pages for your website/application, you might want to provide some [sample data](./yaml.md#include).
+As you can use these custom templates to render example/prototype pages for your website/application, you might want to provide some [sample data](./yaml.md#include).
 To pass this data into your template, you can use the `context` property of the page:
 
 ```markdown

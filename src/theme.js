@@ -2,7 +2,7 @@ const File = require('./util/file')
 const { error } = require('./util/message')
 const { debug3, debug4 } = require('./util/debug')
 
-const getTheme = (state) => {
+const getTheme = state => {
   const { config: { theme: { module } } } = state
 
   try {
