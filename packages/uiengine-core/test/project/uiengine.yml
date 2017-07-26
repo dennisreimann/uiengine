@@ -5,7 +5,7 @@ version: '1.0.0'
 
 # Base directories for the input, your raw source files:
 # - components is the root of the directory containing the components
-# - templates contains the variant preview and sandbox templates
+# - templates contains the variant preview and application templates
 # - pages is the directory of the UIengine's site structure and page markdown files
 source:
   components: ./src/components

@@ -92,6 +92,7 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
   const isSchemaFile = !!filePath.startsWith(schema)
   const isDataFile = !isSchemaFile && !!filePath.startsWith(data)
   const isThemeFile = debug && !!file.match(theme.module)
+  const isStaticThemeFile = isThemeFile && file.match('/static/')
   const isComponentDir = path.dirname(filePath) === components
   let pageId, componentId, templateId, variantId, schemaId
 
@@ -147,6 +148,9 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
   } else if (templateId) {
     await regenerateTemplate(templateId)
     return { file, action, type: 'template', item: templateId }
+  } else if (isStaticThemeFile) {
+    await Theme.setup(state)
+    return { file, action, type: 'theme', item: state.theme.module }
   } else if (isThemeFile) {
     await generate({ config: configFile })
     return { file, action, type: 'site', item: state.config.name }

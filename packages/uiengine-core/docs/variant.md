@@ -20,14 +20,13 @@ components
 ```
 
 To add some meta data to the variant, just put a markdown file named like the variant alongside the variant file.
-This meta data can supply the title, description, and render context as well as a status and label for the variant.
+This meta data can supply the title, description, and render context as well as a label for the variant.
 
 The `button-primary.md` contents might look like this:
 
 ```markdown
 ---
 title: Primary button
-status: Ready
 label: B02
 context:
   title: Buy now!
@@ -37,8 +36,7 @@ Should only appear once on a page. Use this button style for Call To Action butt
 ````
 
 The `context` is the data the variant file gets rendered with.
-The `title`, `status`, and `label` get displayed in the documentation. 
-The `status` is meant to communicate the current state of a variant (i.e. "concept", "work in progress", or "ready to use").
+The `title` and `label` get displayed in the documentation. 
 The `label` is an individual marker that can be used as a reference in mockups or wireframes to reference variants. 
 
 ## Code and Preview
