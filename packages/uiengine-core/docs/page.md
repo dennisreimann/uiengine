@@ -47,7 +47,6 @@ The `page.md` contents for the home/index page might look like this:
 ```markdown
 ---
 title: Home
-template: theme:sitemap
 children:
 - atoms
 - molecules

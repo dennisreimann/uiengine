@@ -69,13 +69,12 @@ const state = {
       ],
       componentIds: ['input']
     }),
-    sandbox: Factory.page('sandbox', {
+    prototype: Factory.page('prototype', {
       title: 'Sandbox',
-      path: 'sandbox',
-      template: 'theme:sandbox',
-      childIds: ['sandbox/custom-page']
+      path: 'prototype',
+      childIds: ['prototype/custom-page']
     }),
-    'sandbox/page': Factory.page('sandbox/page', {
+    'prototype/page': Factory.page('prototype/page', {
       title: 'Page',
       template: 'page',
       content: 'Content for page template',
@@ -83,7 +82,7 @@ const state = {
         myContextVariable: 'This is my page template'
       }
     }),
-    'sandbox/custom-page': Factory.page('sandbox/custom-page', {
+    'prototype/custom-page': Factory.page('prototype/custom-page', {
       title: 'Custom Page',
       template: 'custom',
       content: 'Content for custom template',
@@ -96,8 +95,8 @@ const state = {
     'index': NavigationData('index', 'Home', '', [], null, ['patterns']),
     'patterns': NavigationData('patterns', 'Pattern Library', 'pattern-library', ['index'], 'index', { childIds: ['patterns/input'] }),
     'patterns/input': NavigationData('patterns/input', 'Awesome Input', 'pattern-library/input', ['index', 'patterns'], 'patterns'),
-    'sandbox': NavigationData('sandbox', 'Sandbox', 'sandbox', ['index'], 'index'),
-    'sandbox/custom-page': NavigationData('sandbox/custom-page', 'Custom Page', 'sandbox/custom-page', ['index', 'sandbox'], 'sandbox')
+    'prototype': NavigationData('prototype', 'Sandbox', 'prototype', ['index'], 'index'),
+    'prototype/custom-page': NavigationData('prototype/custom-page', 'Custom Page', 'prototype/custom-page', ['index', 'prototype'], 'prototype')
   },
   components: {
     input: Factory.component('input', {
@@ -159,8 +158,8 @@ describe('Builder', () => {
         .then(() => {
           assertExists(path.join(target, 'index.html'))
           assertExists(path.join(target, 'pattern-library', 'index.html'))
-          assertExists(path.join(target, 'sandbox', 'index.html'))
-          assertExists(path.join(target, 'sandbox', 'custom-page', 'index.html'))
+          assertExists(path.join(target, 'prototype', 'index.html'))
+          assertExists(path.join(target, 'prototype', 'custom-page', 'index.html'))
 
           done()
         })
@@ -194,9 +193,9 @@ describe('Builder', () => {
     })
 
     it('should generate page with custom template', done => {
-      Builder.generatePage(state, 'sandbox/custom-page')
+      Builder.generatePage(state, 'prototype/custom-page')
         .then(() => {
-          const pagePath = path.join(target, 'sandbox', 'custom-page', 'index.html')
+          const pagePath = path.join(target, 'prototype', 'custom-page', 'index.html')
 
           assertContentMatches(pagePath, /^This is the custom template<br\/>This is my context$/)
 
@@ -206,9 +205,9 @@ describe('Builder', () => {
     })
 
     it('should generate page with custom template which has the same name as a theme template', done => {
-      Builder.generatePage(state, 'sandbox/page')
+      Builder.generatePage(state, 'prototype/page')
         .then(() => {
-          const pagePath = path.join(target, 'sandbox', 'page', 'index.html')
+          const pagePath = path.join(target, 'prototype', 'page', 'index.html')
 
           assertContentMatches(pagePath, /^This is my page template$/)
 
@@ -315,7 +314,7 @@ describe('Builder', () => {
     it('should generate pages having this template', done => {
       Builder.generatePagesHavingTemplate(state, 'custom')
         .then(() => {
-          assertExists(path.join(target, 'sandbox', 'custom-page', 'index.html'))
+          assertExists(path.join(target, 'prototype', 'custom-page', 'index.html'))
 
           done()
         })
