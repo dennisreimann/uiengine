@@ -412,7 +412,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'created')
         .then(result => {
-          assertContentMatches(componentPath, 'class="variantheader__title">Form Fieldsets</')
+          assertContentMatches(componentPath, '>Form Fieldsets</')
           assertExists(componentPath)
 
           assert.equal(result.action, 'created')
@@ -439,13 +439,13 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'created')
         .then(result => {
-          assertContentMatches(componentPath, 'class="variantheader__title">Form Fieldsets</')
+          assertContentMatches(componentPath, '>Form Fieldsets</')
 
           fs.removeSync(filePath)
 
           UIengine.generateIncrementForFileChange(filePath, 'deleted')
             .then(result => {
-              assertContentDoesNotMatch(componentPath, 'class="variantheader__title">Form Fieldsets</')
+              assertContentDoesNotMatch(componentPath, '>Form Fieldsets</')
 
               assert.equal(result.action, 'deleted')
               assert.equal(result.type, 'variant')
