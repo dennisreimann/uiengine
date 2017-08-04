@@ -1,0 +1,3 @@
+mixin label(text, inverted)
+  - const classes = inverted ? 'label--inverted' : null
+  span.label(class=classes)&attributes(attributes)= text

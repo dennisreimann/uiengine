@@ -46,7 +46,6 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
 modal-option()
   display block
   width 100%
-  border-top 1px solid $color-border-light
   padding $space-s $space-m
   cursor pointer
   color $color-modal-text
@@ -56,11 +55,11 @@ modal-option()
   text-decoration none
 
   .icon
+    margin-top -6px
     margin-right $space-s
     fill $color-modal-text
     icon-size(.875)
     icon-position(6px)
-    margin-top -6px
 
   &:hover
     color $color-modal-text-hover

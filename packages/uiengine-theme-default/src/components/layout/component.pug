@@ -1,6 +1,7 @@
 extends layout.pug
 
 include /contentheader/contentheader.pug
+include /label/label.pug
 include /schema/schema.pug
 include /variant/variant.pug
 
@@ -19,7 +20,7 @@ block main
   section.component(id=componentId)
     +contentheader()
       if component.label
-        span.contentheader__label= component.label
+        +label(component.label, true).sob-m.sor-s
       h1.contentheader__title= component.title
       if hasInfo && hasSchema
         .contentheader__options
@@ -27,7 +28,7 @@ block main
           +contentheaderOption(sectionSchemaId, h.t('component.schema'), false)
 
     if hasInfo || hasSchema
-      .component__sections.sot-m
+      .component__sections.sot-xs
         if hasInfo
           - const classes = sectionActiveClass
           .contentsection(id=sectionInfoId class=classes)
@@ -54,4 +55,4 @@ block main
     section.variants
       each variantId in variantIds
         - variant = variants[variantId]
-        +variant(variant, hasManyVariants).sot-xxl
+        +variant(variant, hasManyVariants)

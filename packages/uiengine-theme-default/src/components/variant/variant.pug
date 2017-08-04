@@ -10,7 +10,7 @@ mixin variant(variant, includeDetails)
   article.variant(id=h.dasherize(variant.id))&attributes(attributes)
     +contentheader().sob-m
       if variant.label
-        span.contentheader__label= variant.label
+        +label(variant.label).sob-s.sor-s
 
       h2.contentheader__title= variant.title
 
@@ -90,15 +90,15 @@ mixin __variantpreview(variant)
       .variantpreview__size
         if config.breakpoints
           button.variantpreview__sizer(type="button" data-breakpoints-target=breakpointsId)
+      if config.breakpoints
+        .variantpreview__breakpoints(id=breakpointsId)
+          .variantpreview__breakpoints-inner
+            each width, breakpoint in config.breakpoints
+              button.variantpreview__breakpoint(type="button" data-width=width data-breakpoint=breakpoint data-breakpoints-target=breakpointsId data-container-target=containerId)
+                = `${breakpoint}: ${width}px`
+            button.variantpreview__breakpoint(type="button" data-breakpoints-target=breakpointsId data-container-target=containerId)
+              = h.t('breakpoints.reset')
       script.
         var width = window.sessionStorage.getItem('variant:width:#{variantId}');
         if (width) { document.getElementById('#{containerId}').style.width = width + 'px' }
       iframe.variantpreview__iframe(src=h.variantPreviewPath(variant.id) frameborder="0" scrolling="no")
-    if config.breakpoints
-      .variantpreview__breakpoints(id=breakpointsId)
-        .variantpreview__breakpoints-inner
-          each width, breakpoint in config.breakpoints
-            button.variantpreview__breakpoint(type="button" data-width=width data-breakpoint=breakpoint data-breakpoints-target=breakpointsId data-container-target=containerId)
-              = `${breakpoint}: ${width}px`
-          button.variantpreview__breakpoint(type="button" data-breakpoints-target=breakpointsId data-container-target=containerId)
-            = h.t('breakpoints.reset')

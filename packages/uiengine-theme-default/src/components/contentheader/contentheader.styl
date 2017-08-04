@@ -4,17 +4,6 @@
   flex-wrap wrap
   justify-content space-between
   align-items flex-end
-  border-bottom 1px solid $color-border-light
-
-  &__label
-    padding $space-xs $space-s
-    border-radius $space-m
-    border-bottom-right-radius 0
-    color $color-contentheader-label-text
-    background $color-contentheader-label-bg
-    margin-bottom $space-s
-    margin-right $space-s
-    font-size $font-size-s
 
   &__title
     margin-right $space-l
@@ -69,15 +58,16 @@
     list-style none
     position absolute
     z-index 10
-    top 2.3125rem
     right 0
     width 280px
-    border 1px solid $color-border-light
-    border-top none
+    border 1px solid $color-modal-border-outer
 
     &--active
       display block
 
   &__actionlink
     modal-option()
+
+  &__action + &__action
+    border-top 1px solid $color-modal-border-inner
 

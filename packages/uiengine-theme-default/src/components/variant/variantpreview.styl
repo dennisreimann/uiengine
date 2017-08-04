@@ -16,25 +16,27 @@
       transition-timing-function ease-out
 
   &__size
-    height 12px
-    margin-bottom 1.25rem
-    border-bottom 1px solid $color-border-medium
     position relative
+    margin-bottom $space-s
 
     &:before
     &:after
-      height 13px
+      width 40px
+      height 15px
       position absolute
-      top 50%
+      top calc(50% - 8px)
       content ''
+      background-color $color-white
+      background-size 40px 15px
+      background-repeat none
 
     &:before
       left 0
-      border-left 1px solid $color-border-medium
+      background-image embedurl('preview-left.svg')
 
     &:after
       right 0
-      border-right 1px solid $color-border-medium
+      background-image embedurl('preview-right.svg')
 
   &__sizer
     padding-left $space-m
@@ -54,7 +56,6 @@
   &__breakpoints
     position absolute
     z-index 5
-    top $space-m
     left calc(50% - 5rem)
     width 10rem
     max-height 0
@@ -68,13 +69,12 @@
       transition-timing-function ease-in
 
   &__breakpoints-inner
-    border 1px solid $color-border-medium
-    border-top none
-    padding-top $space-m
+    border 1px solid $color-modal-border-outer
 
   &__breakpoint
     modal-option()
     text-align center
-    &:first-child
-      margin-top $space-s
+
+  &__breakpoint + &__breakpoint
+    border-top 1px solid $color-modal-border-inner
 
