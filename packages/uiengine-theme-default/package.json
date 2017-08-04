@@ -8,7 +8,7 @@
   "homepage": "https://github.com/dennisreimann/uiengine-theme-default",
   "bugs": "https://github.com/dennisreimann/uiengine-theme-default/issues",
   "engines": {
-    "node": ">=6.9.5"
+    "node": ">=6.11.2"
   },
   "repository": {
     "type": "git",
@@ -29,37 +29,37 @@
     "release": "yarn run build"
   },
   "dependencies": {
-    "highlight.js": "^9.10.0",
-    "pug": "^2.0.0-beta10"
+    "highlight.js": "^9.12.0",
+    "pug": "^2.0.0-rc.3"
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.2",
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
-    "babel-preset-env": "^1.1.8",
-    "babel-preset-es2015": "^6.22.0",
-    "clipboard": "^1.6.0",
-    "css-mqpacker": "^5.0.1",
-    "csswring": "^5.1.1",
+    "autoprefixer": "^7.1.2",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "clipboard": "^1.7.1",
+    "css-mqpacker": "^6.0.1",
+    "csswring": "^6.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
     "gulp-load-plugins": "^1.5.0",
     "gulp-plumber": "^1.1.0",
-    "gulp-postcss": "^6.3.0",
+    "gulp-postcss": "^7.0.0",
     "gulp-rev-all": "0.8.23",
-    "gulp-rev-delete-original": "^0.2.2",
+    "gulp-rev-delete-original": "^0.2.3",
     "gulp-stylus": "^2.6.0",
-    "gulp-svg-sprite": "^1.3.6",
-    "gulp-svgo": "^1.0.3",
-    "gulp-uglify": "^2.0.1",
+    "gulp-svg-sprite": "^1.3.7",
+    "gulp-svgo": "^1.2.5",
+    "gulp-uglify": "^3.0.0",
     "gulp-yaml": "^1.0.1",
-    "iframe-resizer": "^3.5.10",
+    "iframe-resizer": "^3.5.14",
     "merge-stream": "^1.0.1",
-    "rimraf": "^2.5.4",
-    "run-sequence": "^1.2.2",
-    "standard": "^8.6.0",
-    "webpack": "^2.2.1",
+    "rimraf": "^2.6.1",
+    "run-sequence": "^2.1.0",
+    "standard": "^10.0.2",
+    "webpack": "^3.4.1",
     "webpack-stream": "^3.2.0"
   },
   "standard": {
