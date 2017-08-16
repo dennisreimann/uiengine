@@ -72,7 +72,6 @@ async function generateContent () {
 
   // 2. transformations
   const navigation = await Navigation.fetch(state)
-
   state = R.assoc('navigation', navigation, state)
 
   // 3. output
@@ -150,7 +149,7 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
     return { file, action, type: 'template', item: templateId }
   } else if (isStaticThemeFile) {
     await Theme.setup(state)
-    return { file, action, type: 'theme', item: state.theme.module }
+    return { file, action, type: 'theme static', item: state.config.theme.module }
   } else if (isThemeFile) {
     await generate({ config: configFile })
     return { file, action, type: 'site', item: state.config.name }
@@ -224,7 +223,7 @@ async function regeneratePage (id) {
 async function regenerateSchemaPage (schemaId) {
   await fetchAndAssocSchema(schemaId)
 
-  await Builder.generateSchemaPage(state)
+  await Builder.generatePage(state, 'schema')
 }
 
 async function regenerateVariant (id, componentId) {

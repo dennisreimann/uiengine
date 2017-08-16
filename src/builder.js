@@ -6,45 +6,32 @@ const File = require('./util/file')
 const PageUtil = require('./util/page')
 const { error } = require('./util/message')
 const { debug2, debug3, debug4 } = require('./util/debug')
-const NavigationData = require('./data/navigation')
 
 // Theme templates need to be prefixed with "theme:" to be referenced
 // as an alternative page template.
 // The variant template default does not have this prefix, because
 // by definition it must be an application template of the project.
 const themeTemplatePrefix = 'theme:'
-const defaultTemplatePage = themeTemplatePrefix + 'page'
-const defaultTemplateComponent = themeTemplatePrefix + 'component'
-const defaultTemplateSchema = themeTemplatePrefix + 'schema'
 const defaultTemplateVariant = 'variant'
 const pageFile = 'index.html'
 
 const isThemeTemplate = templateId =>
-  !templateId || templateId.startsWith(themeTemplatePrefix)
+  templateId.startsWith(themeTemplatePrefix)
 
-const getPageData = ({ pages, navigation, config }, pageId) => {
+const getPageData = (state, pageId) => {
+  const { pages } = state
   const page = pages[pageId]
+  const navigationId = pageId
 
-  if (isThemeTemplate(page.template)) {
-    return { page, pages, navigation, config }
-  } else {
-    return page.context || {}
-  }
+  return isThemeTemplate(page.template)
+    ? Object.assign({}, state, { navigationId })
+    : page.context
 }
 
-const getComponentData = ({ pages, navigation, components, schema, variants, config }, pageId, componentId) => {
-  const parent = pages[pageId]
-  const component = components[componentId]
-  const page = {
-    id: PageUtil.pageIdForComponentId(parent.id, component.id),
-    path: PageUtil.pagePathForComponentId(parent.path, component.id),
-    title: component.title,
-    content: component.content,
-    childIds: [],
-    files: []
-  }
+const getComponentData = (state, pageId, componentId) => {
+  const navigationId = PageUtil.pageIdForComponentId(pageId, componentId)
 
-  const data = { page, pages, component, components, schema, variants, navigation, config }
+  const data = Object.assign({}, state, { navigationId })
 
   return data
 }
@@ -52,26 +39,6 @@ const getComponentData = ({ pages, navigation, components, schema, variants, con
 const getVariantData = ({ variants, config }, variantId) => {
   const variant = variants[variantId]
   const data = { variant, config }
-
-  return data
-}
-
-const getSchemaData = ({ schema, pages, navigation, config }) => {
-  const parentId = PageUtil.INDEX_ID
-  const childIds = []
-  const page = {
-    id: 'schema',
-    path: '_schema',
-    title: 'Schema',
-    childIds: [],
-    files: []
-  }
-
-  // the schema page is standalone and does not appear in the regular navigation.
-  // nevertheless it needs an own navigation item on its own page, which gets attached here.
-  navigation.schema = NavigationData(page.id, page.title, page.path, childIds, parentId, { parentIds: [parentId] })
-
-  const data = { page, pages, schema, navigation, config }
 
   return data
 }
@@ -100,7 +67,7 @@ const render = (state, templateId, data) => {
     if (!template) {
       throw new Error(error([
         `Template "${templateId}" does not exist.`,
-        'In case you want to reference an existing theme template,\nplease prefix it with "theme:" – i.e. "theme:page".',
+        'In case you want to reference an existing theme template,\nplease prefix it with "theme:" – i.e. "theme:documentation".',
         'If this is supposed to be a custom template, add it to the\ntemplates source directory or refer to it like this:',
         `templates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE`
       ].join('\n\n')), [
@@ -165,7 +132,7 @@ async function generatePage (state, pageId) {
   if (!page) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
 
   const data = getPageData(state, pageId)
-  const templateId = page.template || defaultTemplatePage
+  const templateId = page.template
   const html = await renderWithFallback(state, templateId, data, identifier)
 
   const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
@@ -201,7 +168,7 @@ async function generateComponentForPage (state, pageId, componentId) {
   if (!component) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
 
   const data = getComponentData(state, pageId, componentId)
-  const templateId = component.template || defaultTemplateComponent
+  const templateId = component.template
   const html = await renderWithFallback(state, templateId, data, identifier)
 
   const targetPath = path.join(target, PageUtil.pagePathForComponentId(parent.path, component.id))
@@ -223,7 +190,7 @@ async function generatePagesHavingComponent (state, componentId) {
 
 async function generatePagesHavingTemplate (state, templateId) {
   const { pages } = state
-  const affectedPages = R.filter(page => (page.template || defaultTemplatePage) === templateId, pages)
+  const affectedPages = R.filter(page => page.template === templateId, pages)
   const pageIds = Object.keys(affectedPages)
   const build = R.partial(generatePage, [state])
   const builds = R.map(build, pageIds)
@@ -265,31 +232,11 @@ async function generateVariant (state, variantId) {
   debug2(state, `Builder.generateVariant(${variantId}):end`)
 }
 
-async function generateSchemaPage (state) {
-  debug2(state, 'Builder.generateSchemaPage():start')
-
-  const { config: { target } } = state
-  const identifier = `Schema`
-
-  // render schema page
-  const data = getSchemaData(state)
-  const templateId = defaultTemplateSchema
-  const html = await renderWithFallback(state, templateId, data, identifier)
-
-  // write file
-  const htmlPath = path.resolve(target, '_schema', 'index.html')
-  await File.write(htmlPath, html)
-
-  debug2(state, 'Builder.generateSchemaPage():end')
-}
-
 async function generateSite (state) {
   debug2(state, 'Builder.generateSite():start')
 
   const pageIds = Object.keys(state.pages)
   const variantIds = Object.keys(state.variants)
-
-  const schemaBuild = generateSchemaPage(state)
 
   const pageBuild = R.partial(generatePage, [state])
   const pageBuilds = R.map(pageBuild, pageIds)
@@ -304,7 +251,6 @@ async function generateSite (state) {
   const variantBuilds = R.map(variantBuild, variantIds)
 
   await Promise.all([
-    schemaBuild,
     ...pageBuilds,
     ...pageFilesBuilds,
     ...pageComponentsBuilds,
@@ -317,7 +263,6 @@ async function generateSite (state) {
 module.exports = {
   generateSite,
   generatePage,
-  generateSchemaPage,
   generateComponentForPage,
   generateComponentsForPage,
   generatePagesHavingComponent,

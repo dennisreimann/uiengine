@@ -3,10 +3,10 @@ const PageUtil = require('./util/page')
 const { error } = require('./util/message')
 const NavigationData = require('./data/navigation')
 
-const assocNavigation = (nav, item) =>
-  R.assoc(item.id, item, nav)
+const assocNavigation = (navigation, entry) =>
+  R.assoc(entry.id, entry, navigation)
 
-const itemsForPageId = (state, id) => {
+const dataForPageId = (state, id) => {
   const { pages } = state
   const page = pages[id]
 
@@ -44,7 +44,7 @@ const dataForPage = (state, page) => {
   const parent = pages[parentId]
   const childIds = page.childIds.concat(componentPageIds)
   const relations = dataForPageRelations(pageIds, pageId, parent)
-  const data = NavigationData(pageId, page.title, page.path, childIds, parentId, relations)
+  const data = NavigationData(pageId, pageId, page.title, page.path, page.template, childIds, parentId, relations)
 
   return data
 }
@@ -58,7 +58,7 @@ const dataForPageComponentId = (state, parent, id) => {
   const parentId = PageUtil.parentIdForPageId(pageIds, pageId)
   const childIds = []
   const relations = dataForPageRelations(pageIds, pageId, parent)
-  const data = NavigationData(pageId, component.title, pagePath, childIds, parentId, relations)
+  const data = NavigationData(pageId, component.id, component.title, pagePath, component.template, childIds, parentId, relations)
 
   return data
 }
@@ -84,9 +84,9 @@ const dataForPageRelations = (pageIds, pageId, parent) => {
 async function fetch (state) {
   return new Promise((resolve, reject) => {
     const pageIds = Object.keys(state.pages)
-    const pageNavigationItems = R.partial(itemsForPageId, [state])
-    const navigationItems = R.chain(pageNavigationItems, pageIds)
-    const navigation = R.reduce(assocNavigation, {}, navigationItems)
+    const pageNavigationData = R.partial(dataForPageId, [state])
+    const navigationData = R.chain(pageNavigationData, pageIds)
+    const navigation = R.reduce(assocNavigation, {}, navigationData)
 
     resolve(navigation)
   })
@@ -94,7 +94,7 @@ async function fetch (state) {
 
 async function fetchForPageId (state, id) {
   return new Promise((resolve, reject) => {
-    const navigation = itemsForPageId(state, id)
+    const navigation = dataForPageId(state, id)
     resolve(navigation)
   })
 }

@@ -89,14 +89,20 @@ const state = {
       context: {
         myContextVariable: 'This is my context'
       }
+    }),
+    schema: Factory.page('schema', {
+      title: 'Schema',
+      path: '_schema',
+      template: 'theme:schema'
     })
   },
   navigation: {
-    'index': NavigationData('index', 'Home', '', [], null, ['patterns']),
-    'patterns': NavigationData('patterns', 'Pattern Library', 'pattern-library', ['index'], 'index', { childIds: ['patterns/input'] }),
-    'patterns/input': NavigationData('patterns/input', 'Awesome Input', 'pattern-library/input', ['index', 'patterns'], 'patterns'),
-    'prototype': NavigationData('prototype', 'Sandbox', 'prototype', ['index'], 'index'),
-    'prototype/custom-page': NavigationData('prototype/custom-page', 'Custom Page', 'prototype/custom-page', ['index', 'prototype'], 'prototype')
+    'index': NavigationData('index', 'index', 'Home', '', 'theme:documentation', [], null, ['patterns']),
+    'patterns': NavigationData('patterns', 'patterns', 'Pattern Library', 'pattern-library', 'theme:documentation', ['index'], 'index', { childIds: ['patterns/input'] }),
+    'patterns/input': NavigationData('patterns/input', 'input', 'Awesome Input', 'pattern-library/input', 'theme:component', ['index', 'patterns'], 'patterns'),
+    'prototype': NavigationData('prototype', 'prototype', 'Sandbox', 'prototype', 'theme:documentation', ['index'], 'index'),
+    'prototype/custom-page': NavigationData('prototype/custom-page', 'prototype/custom-page', 'Custom Page', 'prototype/custom-page', 'custom', ['index', 'prototype'], 'prototype'),
+    'schema': NavigationData('schema', 'schema', 'Schema', '_schema', 'theme:schema')
   },
   components: {
     input: Factory.component('input', {
@@ -217,9 +223,9 @@ describe('Builder', () => {
     })
   })
 
-  describe('#generateSchemaPage', () => {
+  describe('#generatePage with "schema"', () => {
     it('should generate schema page', done => {
-      Builder.generateSchemaPage(state)
+      Builder.generatePage(state, 'schema')
         .then(state => {
           const pagePath = path.join(target, '_schema', 'index.html')
 

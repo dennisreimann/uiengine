@@ -97,7 +97,7 @@ Basically there are two types of pages …
 
 These templates are layouts for the documentation pages:
 
-- `theme:page` – the default page template that contains the title and description as well as a navigation for child pages.
+- `theme:documentation` – the default page template that contains the title and description (rendered markdown).
 - `theme:component` – the template a component page gets rendered with, listing the component details and its variants.
 - `theme:schema` - the template the schema page gets rendered with: It contains tabular data of the [component schema](./schema.md).
 

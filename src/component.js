@@ -88,8 +88,9 @@ async function fetchById (state, id) {
 
   let { attributes, content } = componentData
   attributes = convertUserProvidedVariantsList(id, attributes)
+  const template = 'theme:component'
   const title = ComponentUtil.componentIdToTitle(id)
-  const baseData = { id, title, path: componentPath, variantIds, content }
+  const baseData = { id, path: componentPath, template, title, variantIds, content }
   const data = R.mergeAll([baseData, attributes])
 
   debug3(state, `Component.fetchById(${id}):end`)
