@@ -16,10 +16,10 @@ const fromExternalFile = (embeddingFilePath, sourcePaths, filePath) => {
   const isMarkdown = filePath.match(/\.(md|markdown)?$/)
 
   if (isYAML) {
-    const string = fs.readFileSync(filePath, 'utf-8')
+    const string = fs.readFileSync(filePath, 'utf8')
     return parseString(string, filePath, sourcePaths)
   } else if (isMarkdown) {
-    const string = fs.readFileSync(filePath, 'utf-8')
+    const string = fs.readFileSync(filePath, 'utf8')
     return renderMarkdown(string, filePath, sourcePaths)
   } else if (isJS) {
     return require(filePath)

@@ -38,7 +38,7 @@ describe('File', () => {
       const filePath = './test/tmp/writeFileTest.txt'
       File.write(filePath, 'Test')
         .then(() => {
-          const content = fs.readFileSync(filePath)
+          const content = fs.readFileSync(filePath, 'utf8')
           assert.equal(content, 'Test')
           fs.removeSync(filePath)
           done()
