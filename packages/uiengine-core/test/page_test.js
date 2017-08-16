@@ -194,22 +194,24 @@ describe('Page', () => {
         .then(data => {
           const pageIds = Object.keys(data)
 
-          assert.equal(pageIds.length, 13)
+          assert.equal(pageIds.length, 14)
           assert(pageIds.includes('index'), 'missing page "index"')
           assert(pageIds.includes('documentation'), 'missing page "documentation"')
           assert(pageIds.includes('patterns'), 'missing page "patterns"')
           assert(pageIds.includes('patterns/atoms'), 'missing page "patterns/atoms"')
+          assert(pageIds.includes('schema'), 'missing page "schema"')
           done()
         })
         .catch(done)
     })
 
-    it('should return empty object if pages source is not set', done => {
+    it('should return only schema page if pages source is not set', done => {
       Page.fetchAll({ config: { source: { } } })
         .then(data => {
           const pageIds = Object.keys(data)
 
-          assert.equal(pageIds.length, 0)
+          assert.equal(pageIds.length, 1)
+          assert.equal(pageIds[0], 'schema')
           done()
         })
         .catch(done)

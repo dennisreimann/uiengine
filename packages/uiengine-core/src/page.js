@@ -9,6 +9,17 @@ const { debug2, debug3, debug4 } = require('./util/debug')
 const assocPage = (pages, page) =>
   R.assoc(page.id, page, pages)
 
+const createSchemaPage = state => (
+  {
+    id: 'schema',
+    path: '_schema',
+    template: 'theme:schema',
+    title: 'Schema',
+    childIds: [],
+    files: []
+  }
+)
+
 async function readPageFile (state, filePath) {
   debug4(state, `Page.readPageFile(${filePath}):start`)
 
@@ -55,6 +66,9 @@ async function fetchAll (state) {
   const pageFetches = R.map(pageFetch, pageIds)
   const pageList = await Promise.all(pageFetches)
 
+  // append schema page
+  pageList.push(createSchemaPage(state))
+
   const pages = R.reduce(assocPage, {}, pageList)
 
   debug2(state, `Page.fetchAll():end`)
@@ -81,7 +95,7 @@ async function fetchById (state, id) {
   const title = PageUtil.pageIdToTitle(id)
   attributes = PageUtil.convertUserProvidedChildrenList(id, childIds, attributes)
   attributes = PageUtil.convertUserProvidedComponentsList(id, attributes)
-  const baseData = { id, path: pagePath, title, childIds, content, files }
+  const baseData = { id, path: pagePath, template: 'theme:documentation', title, childIds, content, files }
   const data = R.mergeAll([baseData, attributes])
 
   debug3(state, `Page.fetchById(${id}):end`)
