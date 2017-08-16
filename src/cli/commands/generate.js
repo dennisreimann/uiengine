@@ -1,5 +1,6 @@
 const Common = require('../../integrations/common')
 const UIengine = require('../../uiengine')
+const { debug3 } = require('../../util/debug')
 
 exports.describe = 'Generate the site'
 
@@ -26,11 +27,12 @@ exports.handler = argv => {
   console.log(`🚧  Generating …\n`)
 
   UIengine.generate(opts)
-    .then(({ config }) => {
+    .then((state) => {
+      const { config } = state
       console.log(`✅  ${config.name} generated!\n`)
 
-      if (argv.serve) startServer(config, argv.watch)
-      if (argv.watch) startWatcher(config)
+      if (argv.serve) startServer(state, argv.watch)
+      if (argv.watch) startWatcher(state)
     })
     .catch((err) => {
       console.error([`🚨  generating the site failed!`, err.stack].join('\n\n') + '\n')
@@ -47,7 +49,7 @@ const requireOptional = (module, option) => {
   }
 }
 
-const startWatcher = (config) => {
+const startWatcher = ({ config }) => {
   const chokidar = requireOptional('chokidar', 'watch')
   const handle = Common.handleFileChange
   const sourceFiles = Common.sourceFilesFromConfig(config)
@@ -63,7 +65,8 @@ const startWatcher = (config) => {
   console.log(`🔁  Watching for file changes …\n`)
 }
 
-const startServer = ({ target, browserSync }, watch) => {
+const startServer = (state, watch) => {
+  const { target, browserSync } = state.config
   const server = requireOptional('browser-sync', 'serve').create()
   const defaults = { server: { baseDir: target } }
   const options = browserSync || defaults
@@ -75,9 +78,10 @@ const startServer = ({ target, browserSync }, watch) => {
     options.files = options.files || options.server.baseDir
     options.watchOptions = options.watchOptions || Common.browserSyncOptions.watchOptions
     options.notify = typeof options.notify !== 'undefined' ? options.notify : Common.browserSyncOptions.notify
-    options.reloadDebounce = typeof options.reloadDebounce !== 'undefined' ? options.reloadDebounce : Common.browserSyncOptions.reloadDebounce
     options.reloadThrottle = typeof options.reloadThrottle !== 'undefined' ? options.reloadThrottle : Common.browserSyncOptions.reloadThrottle
   }
+
+  debug3(state, 'BrowserSync options:', JSON.stringify(options, null, '  '))
 
   server.init(options)
 
