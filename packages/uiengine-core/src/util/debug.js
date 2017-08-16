@@ -1,3 +1,5 @@
+const message = require('./message')
+
 const debug = (level, state, label, ...additional) => {
   const { debug } = state.config
   if (!debug || level > debug) return
@@ -5,9 +7,9 @@ const debug = (level, state, label, ...additional) => {
   const [, timingLabel, timingEvent] = label.match(/(.*):(start|end)$/) || []
   if (timingLabel) {
     const action = timingEvent === 'start' ? 'time' : 'timeEnd'
-    console[action](timingLabel)
+    console[action](message.info(timingLabel))
   } else {
-    console.info(label, ...additional)
+    console.info(message.info(label, additional.join(['\n\n'])))
   }
 }
 
