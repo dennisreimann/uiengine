@@ -11,8 +11,8 @@ const assocPage = (pages, page) =>
 
 const createSchemaPage = state => (
   {
-    id: 'schema',
-    path: '_schema',
+    id: PageUtil.SCHEMA_ID,
+    path: PageUtil.SCHEMA_PAGE_PATH,
     template: 'theme:schema',
     title: 'Schema',
     childIds: [],
@@ -90,6 +90,8 @@ async function fetchById (state, id) {
   // the children directories when looking for files
   const [pageData, childIds] = await Promise.all([fetchPageData, fetchChildIds])
   const files = await findPageFiles(pages, pagePath, childIds)
+
+  if (PageUtil.isIndexPage(id)) childIds.push(PageUtil.SCHEMA_ID)
 
   let { attributes, content } = pageData
   const title = PageUtil.pageIdToTitle(id)
