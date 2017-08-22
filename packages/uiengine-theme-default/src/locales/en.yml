@@ -16,15 +16,13 @@ variant:
   rendered: HTML
 
 schema:
+  title: Schema
   copy_permalink: Copy link
   property_name: Property
   property_type: Type
   property_description: Description
   property_required: Required
   property_default: Default
-
-sitemap:
-  label: Sitemap
 
 footer:
   version: Version

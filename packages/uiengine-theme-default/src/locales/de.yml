@@ -23,9 +23,6 @@ schema:
   property_required: Pflicht
   property_default: Standard
 
-sitemap:
-  label: Sitemap
-
 footer:
   version: Version
   last_update: Letztes Update am
