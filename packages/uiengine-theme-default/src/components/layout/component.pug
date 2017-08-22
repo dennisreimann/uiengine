@@ -6,6 +6,8 @@ include /schema/schema.pug
 include /variant/variant.pug
 
 block main
+  - const navigationItem = navigation[navigationId]
+  - const component = components[navigationItem.itemId]
   - const schema = component.schema
   - const componentId = h.dasherize(component.id)
   - const sectionInfoId = `${componentId}-info`
@@ -15,7 +17,7 @@ block main
   - const hasSchema = schema && Object.keys(schema).length
   - const hasVariants = variantIds && variantIds.length
   - const hasManyVariants = variantIds && variantIds.length > 1
-  - const hasInfo = page.content || hasManyVariants
+  - const hasInfo = component.content || hasManyVariants
 
   section.component(id=componentId)
     +contentheader()
@@ -32,9 +34,9 @@ block main
         if hasInfo
           - const classes = sectionActiveClass
           .contentsection(id=sectionInfoId class=classes)
-            if page.content
+            if component.content
               .content
-                !=page.content
+                !=component.content
 
             if hasManyVariants
               .content.sot-l.fs-s

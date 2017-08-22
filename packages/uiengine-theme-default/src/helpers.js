@@ -55,11 +55,11 @@ const decorateRendered = html =>
 // function that binds the current page data and returns
 // an object with helper functions based on that data
 export default function (options, data) {
-  const { page, schema, navigation } = data
-  const currentItem = navigation[page.id]
+  const { navigationId, navigation, schema } = data
+  const currentItem = navigation[navigationId]
   const customPropertyTypes = schema ? Object.keys(schema) : []
 
-  assert(currentItem, `Missing navigation item for page "${page.id}".`)
+  assert(currentItem, `Missing navigation item for page "${navigationId}".`)
 
   const assetPath = (filePath) => {
     const target = revvedFile(filePath)

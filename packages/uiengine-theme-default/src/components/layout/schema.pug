@@ -4,6 +4,9 @@ include /contentheader/contentheader.pug
 include /schema/schema.pug
 
 block main
+  - const navigationItem = navigation[navigationId]
+  - const page = pages[navigationItem.itemId]
+
   section.page(id=h.dasherize(page.id))
     +contentheader(page.title).sob-l
 
