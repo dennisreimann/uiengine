@@ -8,6 +8,8 @@ const PAGE_FILENAME = 'page.md'
 const INDEX_ID = 'index'
 const INDEX_FILE_PATH = '.'
 const INDEX_PAGE_PATH = ''
+const SCHEMA_ID = 'schema'
+const SCHEMA_PAGE_PATH = '_schema'
 
 const isIndexPage = (pageId) =>
   pageId === INDEX_ID
@@ -138,5 +140,7 @@ module.exports = {
   convertUserProvidedChildrenList,
   convertUserProvidedComponentsList,
   PAGE_FILENAME,
-  INDEX_ID
+  INDEX_ID,
+  SCHEMA_ID,
+  SCHEMA_PAGE_PATH
 }

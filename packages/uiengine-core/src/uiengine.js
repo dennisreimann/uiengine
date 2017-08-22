@@ -223,7 +223,7 @@ async function regeneratePage (id) {
 async function regenerateSchemaPage (schemaId) {
   await fetchAndAssocSchema(schemaId)
 
-  await Builder.generatePage(state, 'schema')
+  await Builder.generatePage(state, PageUtil.SCHEMA_ID)
 }
 
 async function regenerateVariant (id, componentId) {

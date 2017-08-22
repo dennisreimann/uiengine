@@ -68,9 +68,10 @@ describe('Page', () => {
     it('should infer childIds for index if they are not provided', done => {
       Page.fetchById(state, 'index')
         .then(data => {
-          assert.equal(data.childIds.length, 2)
+          assert.equal(data.childIds.length, 3)
           assert.equal(data.childIds[0], 'documentation')
           assert.equal(data.childIds[1], 'patterns')
+          assert.equal(data.childIds[2], 'schema')
           done()
         })
         .catch(done)
