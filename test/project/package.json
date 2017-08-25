@@ -26,7 +26,7 @@
     "uiengine-adapter-handlebars": "^0.1.2",
     "uiengine-adapter-pug": "^0.1.4",
     "uiengine-adapter-react": "^0.1.2",
-    "uiengine-theme-default": "^0.9.0"
+    "uiengine-theme-default": "^0.10.0"
   },
   "devDependencies": {
     "browser-sync": "^2.18.7",
