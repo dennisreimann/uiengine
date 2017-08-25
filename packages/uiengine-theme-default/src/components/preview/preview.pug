@@ -1,0 +1,20 @@
+mixin preview(id, src)
+  - const breakpointsId = `${id}-breakpoints`
+  - const containerId = `${id}-container`
+  .preview&attributes(attributes)
+    .preview__container(id=containerId data-preview-id=id)
+      .preview__size
+        if config.breakpoints
+          button.preview__sizer(type="button" data-breakpoints-target=breakpointsId)
+      if config.breakpoints
+        .preview__breakpoints(id=breakpointsId)
+          .preview__breakpoints-inner
+            each width, breakpoint in config.breakpoints
+              button.preview__breakpoint(type="button" data-width=width data-breakpoint=breakpoint data-breakpoints-target=breakpointsId data-container-target=containerId)
+                = `${breakpoint}: ${width}px`
+            button.preview__breakpoint(type="button" data-breakpoints-target=breakpointsId data-container-target=containerId)
+              = h.t('breakpoints.reset')
+      script.
+        var width = window.sessionStorage.getItem('preview:width:#{id}');
+        if (width) { document.getElementById('#{containerId}').style.width = width + 'px' }
+      iframe.preview__iframe(src=src frameborder="0" scrolling="no")

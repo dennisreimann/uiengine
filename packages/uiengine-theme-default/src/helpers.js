@@ -96,7 +96,7 @@ export default function (options, data) {
     propertyType (type) {
       const [displayName, normalizedType] = type.match(/^\[?([\w\s|]+)\]?$/i)
       if (customPropertyTypes.includes(normalizedType)) {
-        const target = path.join('_schema', `index.html`)
+        const target = path.join('_schema', pageFile)
         const source = path.join(currentItem.path, pageFile)
         const anchor = dasherize(normalizedType)
 
@@ -104,6 +104,13 @@ export default function (options, data) {
       } else {
         return displayName
       }
+    },
+
+    pagePreviewPath (pagePath, templateId) {
+      const target = path.join(pagePath, `_${templateId}.html`)
+      const source = path.join(currentItem.path, pageFile)
+
+      return relativePath(target, source)
     },
 
     variantPreviewPath (variantId) {

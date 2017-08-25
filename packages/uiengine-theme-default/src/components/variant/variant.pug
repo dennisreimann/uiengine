@@ -1,6 +1,8 @@
+include /code/code.pug
 include /contentheader/contentheader.pug
 include /icon/icon.pug
 include /permalink/permalink.pug
+include /preview/preview.pug
 
 mixin variant(variant, includeDetails)
   - const variantId = h.dasherize(variant.id)
@@ -44,61 +46,10 @@ mixin variant(variant, includeDetails)
       .contentsections.sot-xl
         if hasPreview
           - const classes = 'contentsection--active'
-          +__variantpreview(variant).contentsection(id=`${variantId}-preview` class=classes)
+          - const previewId = h.dasherize(variant.id)
+          - const src = h.variantPreviewPath(variant.id)
+          +preview(previewId, src).contentsection(id=`${variantId}-preview` class=classes)
 
         if hasCode
           - const classes = !hasPreview ? 'contentsection--active' : null
-          +__variantcode(variant, !variant.rendered).contentsection(id=`${variantId}-code` class=classes)
-
-
-mixin __variantcode(variant)
-  .variantcode&attributes(attributes)
-    .variantcode__segments
-      if variant.raw
-        .variantcode__segment.variantcode__segment--expanded
-          header.variantcode__header(role="button")
-            h4.variantcode__title= h.t('variant.raw')
-            +icon('caret-down-double').variantcode__expandicon
-          .variantcode__content
-            pre.variantcode__raw.hljs(lang=variant.extension)
-              != h.decorateRaw(variant.raw, variant.extension)
-
-      if variant.context
-        .variantcode__segment.variantcode__segment--expanded
-          header.variantcode__header(role="button")
-            h4.variantcode__title= h.t('variant.context')
-            +icon('caret-down-double').variantcode__expandicon
-          .variantcode__content
-            pre.variantcode__context.hljs(lang="json")
-              != h.decorateContext(variant.context)
-
-      if variant.rendered
-        .variantcode__segment(id=blockId)
-          header.variantcode__header(role="button")
-            h4.variantcode__title= h.t('variant.rendered')
-            +icon('caret-down-double').variantcode__expandicon
-          .variantcode__content
-            pre.variantcode__rendered.hljs(lang="html")
-              != h.decorateRendered(variant.rendered)
-
-mixin __variantpreview(variant)
-  - const variantId = h.dasherize(variant.id)
-  - const breakpointsId = `${variantId}-breakpoints`
-  - const containerId = `${variantId}-container`
-  .variantpreview&attributes(attributes)
-    .variantpreview__container(id=containerId data-variant-id=variantId)
-      .variantpreview__size
-        if config.breakpoints
-          button.variantpreview__sizer(type="button" data-breakpoints-target=breakpointsId)
-      if config.breakpoints
-        .variantpreview__breakpoints(id=breakpointsId)
-          .variantpreview__breakpoints-inner
-            each width, breakpoint in config.breakpoints
-              button.variantpreview__breakpoint(type="button" data-width=width data-breakpoint=breakpoint data-breakpoints-target=breakpointsId data-container-target=containerId)
-                = `${breakpoint}: ${width}px`
-            button.variantpreview__breakpoint(type="button" data-breakpoints-target=breakpointsId data-container-target=containerId)
-              = h.t('breakpoints.reset')
-      script.
-        var width = window.sessionStorage.getItem('variant:width:#{variantId}');
-        if (width) { document.getElementById('#{containerId}').style.width = width + 'px' }
-      iframe.variantpreview__iframe(src=h.variantPreviewPath(variant.id) frameborder="0" scrolling="no")
+          +code(variant.extension, variant.raw, variant.context, variant.rendered).contentsection(id=`${variantId}-code` class=classes)

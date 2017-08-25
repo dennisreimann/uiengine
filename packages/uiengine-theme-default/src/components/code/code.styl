@@ -1,18 +1,18 @@
-.variantcode
+.code
   &__segment
-    .variantcode__expandicon
+    .code__expandicon
       fill $color-code-header
-    .variantcode__header
+    .code__header
       color $color-code-header
       &:hover
         color $color-code-header-hover
-        .variantcode__expandicon
+        .code__expandicon
           fill $color-code-header-hover
 
     &--expanded
-      .variantcode__header
+      .code__header
         color $color-code-header-current
-      .variantcode__expandicon
+      .code__expandicon
         fill $color-code-header-current
         transform rotate(-180deg)
 
@@ -35,7 +35,7 @@
 
   &__content
     display none
-    .variantcode__segment--expanded &
+    .code__segment--expanded &
       display block
 
   &__raw

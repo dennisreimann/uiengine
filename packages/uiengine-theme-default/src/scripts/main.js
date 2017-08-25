@@ -1,8 +1,8 @@
+import '../components/code/code'
 import '../components/contentheader/contentheader'
 import '../components/navigation/navigation'
-import '../components/variant/variantcode'
-import '../components/variant/variantpreview'
 import '../components/permalink/permalink'
+import '../components/preview/preview'
 import { trigger } from './lib/util'
 
 document.body.addEventListener('click', e => {

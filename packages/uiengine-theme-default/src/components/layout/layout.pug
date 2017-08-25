@@ -21,7 +21,7 @@ html(lang=h.lang)
     if config.breakpoints
       style
         each width, breakpoint in config.breakpoints
-          | .variantpreview__container[data-breakpoint='#{breakpoint}'] { width: #{width}px; }
+          | .preview__container[data-breakpoint='#{breakpoint}'] { width: #{width}px; }
   body
     include icons.svg
     .layout
