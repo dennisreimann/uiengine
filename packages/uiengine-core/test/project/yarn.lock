@@ -1895,6 +1895,10 @@ highlight.js@^9.10.0:
   version "9.10.0"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.10.0.tgz#f9f0b14c0be00f0e4fb1e577b749fed9e6f52f55"
 
+highlight.js@^9.12.0:
+  version "9.12.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
+
 hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
@@ -2880,9 +2884,29 @@ pug-filters@^2.1.0:
     resolve "^1.1.6"
     uglify-js "^2.6.1"
 
+pug-filters@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/pug-filters/-/pug-filters-2.1.4.tgz#ab247c0f58765414b61be7b54fe979e9f6fc898f"
+  dependencies:
+    clean-css "^3.3.0"
+    constantinople "^3.0.1"
+    jstransformer "1.0.0"
+    pug-error "^1.3.2"
+    pug-walk "^1.1.4"
+    resolve "^1.1.6"
+    uglify-js "^2.6.1"
+
 pug-lexer@^2.3.1:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/pug-lexer/-/pug-lexer-2.3.2.tgz#68b19d96ea5dc0e4a86148b01cb966c17815a614"
+  dependencies:
+    character-parser "^2.1.1"
+    is-expression "^3.0.0"
+    pug-error "^1.3.2"
+
+pug-lexer@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/pug-lexer/-/pug-lexer-3.1.0.tgz#fd087376d4a675b4f59f8fef422883434e9581a2"
   dependencies:
     character-parser "^2.1.1"
     is-expression "^3.0.0"
@@ -2895,6 +2919,13 @@ pug-linker@^2.0.1:
     pug-error "^1.3.2"
     pug-walk "^1.1.1"
 
+pug-linker@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/pug-linker/-/pug-linker-3.0.2.tgz#cc0780cf9f3f5522b270871785492b99588d3142"
+  dependencies:
+    pug-error "^1.3.2"
+    pug-walk "^1.1.4"
+
 pug-load@^2.0.4:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/pug-load/-/pug-load-2.0.5.tgz#eaaf46ccace8aff7461e0fad1e2b67305514f2c6"
@@ -2902,9 +2933,23 @@ pug-load@^2.0.4:
     object-assign "^4.1.0"
     pug-walk "^1.1.1"
 
+pug-load@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/pug-load/-/pug-load-2.0.8.tgz#1df1c1716f3e68c70d71699cff9458472dc38b9b"
+  dependencies:
+    object-assign "^4.1.0"
+    pug-walk "^1.1.4"
+
 pug-parser@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/pug-parser/-/pug-parser-2.0.2.tgz#53a680cfd05039dcb0c27d029094bc4a792689b0"
+  dependencies:
+    pug-error "^1.3.2"
+    token-stream "0.0.1"
+
+pug-parser@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/pug-parser/-/pug-parser-3.0.1.tgz#dc0c5dd6c9c2d89da6105abbdf3d1b0fb4d39b5e"
   dependencies:
     pug-error "^1.3.2"
     token-stream "0.0.1"
@@ -2923,6 +2968,10 @@ pug-walk@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/pug-walk/-/pug-walk-1.1.1.tgz#b9976240d213692e6993fbc13ae1205c54052efe"
 
+pug-walk@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/pug-walk/-/pug-walk-1.1.4.tgz#29e5174af43b67e99c31b448632e1ff86ddd671c"
+
 pug@^2.0.0-beta10:
   version "2.0.0-beta9"
   resolved "https://registry.yarnpkg.com/pug/-/pug-2.0.0-beta9.tgz#158ec6dbace5bb78f2b25e8825477d03ea6e14b0"
@@ -2933,6 +2982,19 @@ pug@^2.0.0-beta10:
     pug-linker "^2.0.1"
     pug-load "^2.0.4"
     pug-parser "^2.0.2"
+    pug-runtime "^2.0.3"
+    pug-strip-comments "^1.0.2"
+
+pug@^2.0.0-rc.3:
+  version "2.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/pug/-/pug-2.0.0-rc.3.tgz#553cb3c3a97bb54ec3cb1e08591dcae3b6f58891"
+  dependencies:
+    pug-code-gen "^1.1.1"
+    pug-filters "^2.1.4"
+    pug-lexer "^3.1.0"
+    pug-linker "^3.0.2"
+    pug-load "^2.0.8"
+    pug-parser "^3.0.1"
     pug-runtime "^2.0.3"
     pug-strip-comments "^1.0.2"
 
@@ -3598,16 +3660,16 @@ uiengine-adapter-react@^0.1.2:
     react "^15.4.2"
     react-dom "^15.4.2"
 
+uiengine-theme-default@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.10.0.tgz#8d91374a933c7cebc459f0b782ff7a2b96616f36"
+  dependencies:
+    highlight.js "^9.12.0"
+    pug "^2.0.0-rc.3"
+
 uiengine-theme-default@^0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.8.2.tgz#edd79a6102a32003c4576c094861c103f72330a1"
-  dependencies:
-    highlight.js "^9.10.0"
-    pug "^2.0.0-beta10"
-
-uiengine-theme-default@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/uiengine-theme-default/-/uiengine-theme-default-0.9.0.tgz#e066b08bd216f72ba2ef54e8ae23a6e3c739123b"
   dependencies:
     highlight.js "^9.10.0"
     pug "^2.0.0-beta10"
