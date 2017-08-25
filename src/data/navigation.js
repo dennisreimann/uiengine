@@ -1,10 +1,10 @@
-module.exports = (id, itemId, title, path, template, childIds = [], parentId, { parentIds = [], siblingBeforeId = null, siblingsBeforeIds = [], siblingAfterId = null, siblingsAfterIds = [] } = {}) => {
+module.exports = (id, itemId, title, path, type, childIds = [], parentId, { parentIds = [], siblingBeforeId = null, siblingsBeforeIds = [], siblingAfterId = null, siblingsAfterIds = [] } = {}) => {
   return {
     id,
     itemId,
     title,
     path,
-    template,
+    type,
     childIds,
     parentId,
     parentIds,

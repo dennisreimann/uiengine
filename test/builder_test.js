@@ -14,6 +14,7 @@ const state = {
   config: {
     name: 'Builder Test',
     version: '0.1.0',
+    update: Date.now(),
     source: {
       base: projectPath,
       configFile: path.resolve(projectPath, 'uiengine.yml'),
@@ -74,14 +75,6 @@ const state = {
       path: 'prototype',
       childIds: ['prototype/custom-page']
     }),
-    'prototype/page': Factory.page('prototype/page', {
-      title: 'Page',
-      template: 'page',
-      content: 'Content for page template',
-      context: {
-        myContextVariable: 'This is my page template'
-      }
-    }),
     'prototype/custom-page': Factory.page('prototype/custom-page', {
       title: 'Custom Page',
       template: 'custom',
@@ -93,16 +86,16 @@ const state = {
     schema: Factory.page('schema', {
       title: 'Schema',
       path: '_schema',
-      template: 'theme:schema'
+      type: 'schema'
     })
   },
   navigation: {
-    'index': NavigationData('index', 'index', 'Home', '', 'theme:documentation', [], null, ['patterns']),
-    'patterns': NavigationData('patterns', 'patterns', 'Pattern Library', 'pattern-library', 'theme:documentation', ['index'], 'index', { childIds: ['patterns/input'] }),
-    'patterns/input': NavigationData('patterns/input', 'input', 'Awesome Input', 'pattern-library/input', 'theme:component', ['index', 'patterns'], 'patterns'),
-    'prototype': NavigationData('prototype', 'prototype', 'Sandbox', 'prototype', 'theme:documentation', ['index'], 'index'),
+    'index': NavigationData('index', 'index', 'Home', '', 'documentation', [], null, ['patterns']),
+    'patterns': NavigationData('patterns', 'patterns', 'Pattern Library', 'pattern-library', 'documentation', ['index'], 'index', { childIds: ['patterns/input'] }),
+    'patterns/input': NavigationData('patterns/input', 'input', 'Awesome Input', 'pattern-library/input', 'component', ['index', 'patterns'], 'patterns'),
+    'prototype': NavigationData('prototype', 'prototype', 'Sandbox', 'prototype', 'documentation', ['index'], 'index'),
     'prototype/custom-page': NavigationData('prototype/custom-page', 'prototype/custom-page', 'Custom Page', 'prototype/custom-page', 'custom', ['index', 'prototype'], 'prototype'),
-    'schema': NavigationData('schema', 'schema', 'Schema', '_schema', 'theme:schema')
+    'schema': NavigationData('schema', 'schema', 'Schema', '_schema', 'schema')
   },
   components: {
     input: Factory.component('input', {
@@ -201,21 +194,11 @@ describe('Builder', () => {
     it('should generate page with custom template', done => {
       Builder.generatePage(state, 'prototype/custom-page')
         .then(() => {
-          const pagePath = path.join(target, 'prototype', 'custom-page', 'index.html')
+          const pageTypePath = path.join(target, 'prototype', 'custom-page', 'index.html')
+          const pageTemplatePath = path.join(target, 'prototype', 'custom-page', '_custom.html')
 
-          assertContentMatches(pagePath, /^This is the custom template<br\/>This is my context$/)
-
-          done()
-        })
-        .catch(done)
-    })
-
-    it('should generate page with custom template which has the same name as a theme template', done => {
-      Builder.generatePage(state, 'prototype/page')
-        .then(() => {
-          const pagePath = path.join(target, 'prototype', 'page', 'index.html')
-
-          assertContentMatches(pagePath, /^This is my page template$/)
+          assertContentMatches(pageTypePath, '<title>Custom Page • Builder Test')
+          assertContentMatches(pageTemplatePath, /^This is the custom template<br\/>This is my context$/)
 
           done()
         })

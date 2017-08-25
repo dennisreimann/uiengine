@@ -7,34 +7,8 @@ const PageUtil = require('./util/page')
 const { error } = require('./util/message')
 const { debug2, debug3, debug4 } = require('./util/debug')
 
-// Theme templates need to be prefixed with "theme:" to be referenced
-// as an alternative page template.
-// The variant template default does not have this prefix, because
-// by definition it must be an application template of the project.
-const themeTemplatePrefix = 'theme:'
 const defaultTemplateVariant = 'variant'
 const pageFile = 'index.html'
-
-const isThemeTemplate = templateId =>
-  templateId.startsWith(themeTemplatePrefix)
-
-const getPageData = (state, pageId) => {
-  const { pages } = state
-  const page = pages[pageId]
-  const navigationId = pageId
-
-  return isThemeTemplate(page.template)
-    ? Object.assign({}, state, { navigationId })
-    : page.context
-}
-
-const getComponentData = (state, pageId, componentId) => {
-  const navigationId = PageUtil.pageIdForComponentId(pageId, componentId)
-
-  const data = Object.assign({}, state, { navigationId })
-
-  return data
-}
 
 const getVariantData = ({ variants, config }, variantId) => {
   const variant = variants[variantId]
@@ -50,25 +24,17 @@ const copyPageFile = (targetPath, sourcePath, source) => {
   return File.copy(source, target)
 }
 
-const render = (state, templateId, data) => {
-  debug4(state, `Builder.render(${templateId}):start`)
+const render = (state, templateType, templateId, data) => {
+  debug4(state, `Builder.render(${templateType},${templateId}):start`)
 
-  if (isThemeTemplate(templateId)) {
-    const template = templateId.substring(themeTemplatePrefix.length)
-    const rendered = Theme.render(state, template, data)
-
-    debug4(state, `Builder.render(${templateId}):end`)
-
-    return rendered
-  } else {
+  if (templateId) {
     const templates = state.config.templates || {}
     const template = templates[templateId]
 
     if (!template) {
       throw new Error(error([
         `Template "${templateId}" does not exist.`,
-        'In case you want to reference an existing theme template,\nplease prefix it with "theme:" – i.e. "theme:documentation".',
-        'If this is supposed to be a custom template, add it to the\ntemplates source directory or refer to it like this:',
+        'Add it to the templates source directory or refer to it like this:',
         `templates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE`
       ].join('\n\n')), [
         'Registered templates:',
@@ -78,16 +44,22 @@ const render = (state, templateId, data) => {
 
     const rendered = Connector.render(state, template, data)
 
-    debug4(state, `Builder.render(${templateId}):end`)
+    debug4(state, `Builder.render(${templateType},${templateId}):end`)
+
+    return rendered
+  } else {
+    const rendered = Theme.render(state, templateType, data)
+
+    debug4(state, `Builder.render(${templateType},${templateId}):end`)
 
     return rendered
   }
 }
 
-async function renderWithFallback (state, templateId, data, identifier) {
+async function renderWithFallback (state, templateType, templateId, data, identifier) {
   let html
   try {
-    html = await render(state, templateId, data)
+    html = await render(state, templateType, templateId, data)
   } catch (err) {
     html = `<!DOCTYPE html><html><body><pre>${err}</pre></body></html>`
     console.error(error(`${identifier} could not be generated!`, err))
@@ -123,23 +95,49 @@ async function copyPageFiles (state, pageId) {
   debug4(state, `Builder.copyPageFiles(${pageId}):start`)
 }
 
-async function generatePage (state, pageId) {
-  debug2(state, `Builder.generatePage(${pageId}):start`)
+async function generatePageWithType (state, page, identifier) {
+  debug3(state, `Builder.generatePageWithType(${page.id}):start`)
 
-  const { pages, config } = state
-  const identifier = `Page "${pageId}"`
-  const page = pages[pageId]
-  if (!page) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
-
-  const data = getPageData(state, pageId)
-  const templateId = page.template
-  const html = await renderWithFallback(state, templateId, data, identifier)
+  const { config } = state
+  const data = Object.assign({}, state, { navigationId: page.id })
+  const html = await renderWithFallback(state, page.type, null, data, identifier)
 
   const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
   const targetPath = path.resolve(config.target, targetPagePath)
   const htmlPath = path.resolve(targetPath, pageFile)
 
   await File.write(htmlPath, html)
+
+  debug3(state, `Builder.generatePageWithType(${page.id}):end`)
+}
+
+async function generatePageWithTemplate (state, page, identifier) {
+  debug3(state, `Builder.generatePageWithTemplate(${page.id}):start`)
+
+  const { config } = state
+  const html = await renderWithFallback(state, null, page.template, page.context, identifier)
+
+  const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
+  const targetPath = path.resolve(config.target, targetPagePath)
+  const htmlPath = path.resolve(targetPath, `_${page.template}.html`)
+
+  await File.write(htmlPath, html)
+
+  debug3(state, `Builder.generatePageWithTemplate(${page.id}):end`)
+}
+
+async function generatePage (state, pageId) {
+  debug2(state, `Builder.generatePage(${pageId}):start`)
+
+  const { pages } = state
+  const identifier = `Page "${pageId}"`
+  const page = pages[pageId]
+  if (!page) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
+
+  const tasks = [generatePageWithType(state, page, identifier)]
+  if (page.template) tasks.push(generatePageWithTemplate(state, page, identifier))
+
+  await Promise.all(tasks)
 
   debug2(state, `Builder.generatePage(${pageId}):end`)
 }
@@ -167,9 +165,8 @@ async function generateComponentForPage (state, pageId, componentId) {
   const component = components[componentId]
   if (!component) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
 
-  const data = getComponentData(state, pageId, componentId)
-  const templateId = component.template
-  const html = await renderWithFallback(state, templateId, data, identifier)
+  const data = Object.assign({}, state, { navigationId: PageUtil.pageIdForComponentId(pageId, componentId) })
+  const html = await renderWithFallback(state, component.type, null, data, identifier)
 
   const targetPath = path.join(target, PageUtil.pagePathForComponentId(parent.path, component.id))
   const htmlPath = path.resolve(targetPath, pageFile)
@@ -223,7 +220,7 @@ async function generateVariant (state, variantId) {
   // render variant preview, with layout
   const data = getVariantData(state, variantId)
   const templateId = variant.template || defaultTemplateVariant
-  const html = await renderWithFallback(state, templateId, data, identifier)
+  const html = await renderWithFallback(state, null, templateId, data, identifier)
 
   // write file
   const htmlPath = path.resolve(target, '_variants', `${variant.id}.html`)
