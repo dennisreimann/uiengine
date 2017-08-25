@@ -13,7 +13,7 @@ const createSchemaPage = state => (
   {
     id: PageUtil.SCHEMA_ID,
     path: PageUtil.SCHEMA_PAGE_PATH,
-    template: 'theme:schema',
+    type: 'schema',
     title: 'Schema',
     childIds: [],
     files: []
@@ -95,9 +95,10 @@ async function fetchById (state, id) {
 
   let { attributes, content } = pageData
   const title = PageUtil.pageIdToTitle(id)
+  const type = attributes.template ? 'template' : 'documentation'
   attributes = PageUtil.convertUserProvidedChildrenList(id, childIds, attributes)
   attributes = PageUtil.convertUserProvidedComponentsList(id, attributes)
-  const baseData = { id, path: pagePath, template: 'theme:documentation', title, childIds, content, files }
+  const baseData = { id, path: pagePath, type, title, childIds, content, files }
   const data = R.mergeAll([baseData, attributes])
 
   debug3(state, `Page.fetchById(${id}):end`)

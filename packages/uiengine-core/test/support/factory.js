@@ -1,7 +1,7 @@
 export function component (id, attrs = {}) {
   attrs.title = attrs.title || id
   attrs.content = attrs.content || ''
-  attrs.template = attrs.template || 'theme:component'
+  attrs.type = attrs.type || 'component'
   attrs.variantIds = attrs.variantIds || []
 
   return Object.assign({}, attrs, { id })
@@ -11,7 +11,7 @@ export function page (id, attrs = {}) {
   attrs.path = attrs.path || (id === 'index' ? '' : id)
   attrs.title = attrs.title || id
   attrs.content = attrs.content || ''
-  attrs.template = attrs.template || 'theme:documentation'
+  attrs.type = attrs.type || (attrs.template ? 'template' : 'documentation')
   attrs.files = attrs.files || []
   attrs.childIds = attrs.childIds || []
   attrs.componentIds = attrs.componentIds || []

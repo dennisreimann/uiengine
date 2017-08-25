@@ -95,11 +95,12 @@ Basically there are two types of pages …
 
 ### Theme templates
 
-These templates are layouts for the documentation pages:
+These templates are predefined in the theme.
+They are used for the standard documentation pages:
 
-- `theme:documentation` – the default page template that contains the title and description (rendered markdown).
-- `theme:component` – the template a component page gets rendered with, listing the component details and its variants.
-- `theme:schema` - the template the schema page gets rendered with: It contains tabular data of the [component schema](./schema.md).
+- `documentation` – the default page template that contains the title and description (rendered markdown).
+- `component` – the template a component page gets rendered with, listing the component details and its variants.
+- `schema` - the template the schema page gets rendered with: It contains tabular data of the [component schema](./schema.md).
 
 ### Your custom templates
 
