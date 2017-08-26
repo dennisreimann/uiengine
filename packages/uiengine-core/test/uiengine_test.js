@@ -24,7 +24,7 @@ describe('UIengine', () => {
 
   describe('#generate', () => {
     it('should generate pages', function (done) {
-      this.timeout(3000)
+      this.timeout(5000)
 
       UIengine.generate(opts)
         .then(state => {
@@ -517,7 +517,7 @@ describe('UIengine', () => {
 
   describe('#isGenerating', () => {
     it('should return whether or not a generate is currently running', function (done) {
-      this.timeout(3000)
+      this.timeout(5000)
 
       assert(!UIengine.isGenerating())
 

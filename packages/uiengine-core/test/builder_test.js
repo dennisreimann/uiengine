@@ -151,7 +151,7 @@ describe('Builder', () => {
 
   describe('#generateSite', () => {
     it('should generate site', function (done) {
-      this.timeout(3000)
+      this.timeout(5000)
 
       Builder.generateSite(state)
         .then(() => {
