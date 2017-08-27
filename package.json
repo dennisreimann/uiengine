@@ -1,5 +1,30 @@
 {
-	"devDependencies": {
-		"lerna": "^2.1.0"
-	}
+  "private": true,
+  "name": "uiengine-monorepo",
+  "description": "UIengine Monorepo",
+  "license": "MIT",
+  "version": "0.10.0",
+  "author": "Dennis Reimann <mail@dennisreimann.de>",
+  "homepage": "https://github.com/dennisreimann/uiengine",
+  "bugs": "https://github.com/dennisreimann/uiengine",
+  "repository": "dennisreimann/uiengine",
+  "devDependencies": {
+    "lerna": "^2.1.0",
+    "babel-core": "^6.23.1",
+    "babel-preset-env": "^1.1.8",
+    "babel-preset-es2015": "^6.24.1",
+    "coveralls": "^2.13.1",
+    "rimraf": "^2.6.1",
+    "standard": "^10.0.2"
+  },
+  "standard": {
+    "globals": [
+      "after",
+      "afterEach",
+      "before",
+      "beforeEach",
+      "describe",
+      "it"
+    ]
+  }
 }

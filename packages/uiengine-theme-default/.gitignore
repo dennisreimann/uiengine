@@ -1,8 +1,0 @@
-/assets
-/coverage
-/lib
-/npm-debug*
-/node_modules
-/static
-*log
-.DS_Store

@@ -1,0 +1,14 @@
+language: node_js
+cache: yarn
+node_js:
+  - "node"
+  - "lts/*"
+before_script:
+  - lerna bootstrap
+script:
+  # Lint all packages
+  - standard
+  # Run tests and coverage
+  - lerna run cover
+  # Upload coverage data
+  - nyc report --reporter=text-lcov | coveralls

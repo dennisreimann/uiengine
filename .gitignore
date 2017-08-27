@@ -1,0 +1,22 @@
+# General
+.DS_Store
+node_modules
+
+# Logs
+npm-debug*
+*log
+
+# Test and coverage reports
+.coveralls.yml
+.nyc_output
+coverage
+
+# Package specific rules: Specify them here and not in the package path so
+# we can profit from Standard.js ignoring the paths listed in gitignore.
+/packages/core/lib
+/packages/core/test/tmp
+
+/packages/test-project/dist
+
+/packages/theme/lib
+/packages/theme/static

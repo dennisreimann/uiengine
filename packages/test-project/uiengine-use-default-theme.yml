@@ -1,0 +1,9 @@
+source:
+  components: ./src/components
+  templates: ./src/templates
+  schema: ./src/uiengine/schema
+  pages: ./src/uiengine/pages
+  data: ./src/uiengine/data
+
+# Destination path for the generated site.
+target: ./dist
