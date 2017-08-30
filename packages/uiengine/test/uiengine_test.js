@@ -10,6 +10,7 @@ const assertContentDoesNotMatch = require('./support/assertContentDoesNotMatch')
 const UIengine = require('../src/uiengine')
 
 const { testProjectPath } = require('./support/paths')
+const testProjectRelativePath = '../uiengine-test-project'
 const dataPath = path.resolve(testProjectPath, 'src', 'uiengine', 'data')
 const pagesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'pages')
 const schemaPath = path.resolve(testProjectPath, 'src', 'uiengine', 'schema')
@@ -114,7 +115,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'patterns')
-          assert.equal(result.file, '../test-project/src/uiengine/pages/patterns/page.md')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/patterns/page.md'))
 
           done()
         })
@@ -131,7 +132,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'index')
-          assert.equal(result.file, '../test-project/src/uiengine/pages/page.md')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/page.md'))
 
           done()
         })
@@ -148,7 +149,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'patterns/pages/ajax/layer')
-          assert.equal(result.file, '../test-project/src/uiengine/pages/patterns/pages/ajax/layer/page.md')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/patterns/pages/ajax/layer/page.md'))
 
           done()
         })
@@ -165,7 +166,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'index')
-          assert.equal(result.file, '../test-project/src/uiengine/pages/extra-files/file-in-folder.txt')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/extra-files/file-in-folder.txt'))
 
           done()
         })
@@ -188,7 +189,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'created')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'documentation/created')
-          assert.equal(result.file, '../test-project/src/uiengine/pages/documentation/created/page.md')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/documentation/created/page.md'))
 
           fs.removeSync(fileDir)
 
@@ -222,7 +223,7 @@ describe('UIengine', () => {
               assert.equal(result.action, 'deleted')
               assert.equal(result.type, 'page')
               assert.equal(result.item, 'documentation/created')
-              assert.equal(result.file, '../test-project/src/uiengine/pages/documentation/created/page.md')
+              assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/documentation/created/page.md'))
 
               fs.removeSync(fileDir)
 
@@ -251,7 +252,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'schema')
-          assert.equal(result.file, '../test-project/src/uiengine/schema/Entity.yml')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/schema/Entity.yml'))
 
           done()
         })
@@ -268,7 +269,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'component')
           assert.equal(result.item, 'form')
-          assert.equal(result.file, '../test-project/src/components/form/form.pug')
+          assert.equal(result.file, path.join(testProjectRelativePath, '/src/components/form/form.pug'))
 
           done()
         })
@@ -285,7 +286,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'component')
           assert.equal(result.item, 'input')
-          assert.equal(result.file, '../test-project/src/components/input/variants/text.md')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/input/variants/text.md'))
 
           done()
         })
@@ -308,7 +309,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'created')
           assert.equal(result.type, 'component')
           assert.equal(result.item, 'my-new-component')
-          assert.equal(result.file, '../test-project/src/components/my-new-component/component.md')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/my-new-component/component.md'))
 
           fs.removeSync(fileDir)
 
@@ -343,7 +344,7 @@ describe('UIengine', () => {
               assert.equal(result.action, 'deleted')
               assert.equal(result.type, 'component')
               assert.equal(result.item, 'my-new-component')
-              assert.equal(result.file, '../test-project/src/components/my-new-component/component.md')
+              assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/my-new-component/component.md'))
 
               fs.removeSync(componentPath)
 
@@ -355,7 +356,7 @@ describe('UIengine', () => {
                   assert.equal(result.action, 'deleted')
                   assert.equal(result.type, 'component')
                   assert.equal(result.item, 'my-new-component')
-                  assert.equal(result.file, '../test-project/src/components/my-new-component')
+                  assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/my-new-component'))
 
                   fs.removeSync(componentPath)
 
@@ -395,7 +396,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'variant')
           assert.equal(result.item, 'form/form.pug')
-          assert.equal(result.file, '../test-project/src/components/form/variants/form.pug')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/form/variants/form.pug'))
 
           assertExists(componentPath)
           done()
@@ -418,7 +419,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'created')
           assert.equal(result.type, 'variant')
           assert.equal(result.item, 'form/form-fieldsets.pug')
-          assert.equal(result.file, '../test-project/src/components/form/variants/form-fieldsets.pug')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/form/variants/form-fieldsets.pug'))
 
           fs.removeSync(filePath)
 
@@ -450,7 +451,7 @@ describe('UIengine', () => {
               assert.equal(result.action, 'deleted')
               assert.equal(result.type, 'variant')
               assert.equal(result.item, 'form/form-fieldsets.pug')
-              assert.equal(result.file, '../test-project/src/components/form/variants/form-fieldsets.pug')
+              assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/form/variants/form-fieldsets.pug'))
 
               done()
             })
@@ -473,7 +474,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'template')
           assert.equal(result.item, 'page')
-          assert.equal(result.file, '../test-project/src/templates/page.pug')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/templates/page.pug'))
 
           done()
         })
@@ -490,7 +491,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'site')
           assert.equal(result.item, 'UIengine Sample Project')
-          assert.equal(result.file, '../test-project/src/uiengine/data/items.yml')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/data/items.yml'))
 
           done()
         })
@@ -507,7 +508,7 @@ describe('UIengine', () => {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'site')
           assert.equal(result.item, 'UIengine Sample Project')
-          assert.equal(result.file, '../test-project/node_modules/uiengine-theme-default/lib/index.js')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'node_modules/uiengine-theme-default/lib/index.js'))
 
           done()
         })

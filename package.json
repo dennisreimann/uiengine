@@ -4,7 +4,7 @@
   "description": "UIengine Monorepo",
   "license": "MIT",
   "version": "0.10.0",
-  "author": "Dennis Reimann <mail@dennisreimann.de>",
+  "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
   "repository": "dennisreimann/uiengine",
@@ -16,6 +16,9 @@
     "coveralls": "^2.13.1",
     "rimraf": "^2.6.1",
     "standard": "^10.0.2"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap --hoist"
   },
   "standard": {
     "globals": [

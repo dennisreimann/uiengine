@@ -4,7 +4,7 @@ node_js:
   - "node"
   - "lts/*"
 before_script:
-  - lerna bootstrap
+  - yarn run bootstrap
 script:
   # Lint all packages
   - standard

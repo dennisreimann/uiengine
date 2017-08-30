@@ -11,7 +11,7 @@ Dependencies are managed via [Yarn](https://yarnpkg.com/).
 Once you have Yarn installed and this repo cloned, you can bootstrap the packages:
 
 ```bash
-lerna bootstrap
+yarn run bootstrap
 ```
 
 ### 🛠 Development

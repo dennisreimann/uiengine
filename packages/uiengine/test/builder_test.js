@@ -6,7 +6,7 @@ const assertContentMatches = require('./support/assertContentMatches')
 const Builder = require('../src/builder')
 const NavigationData = require('../src/data/navigation')
 
-const projectPath = path.resolve(__dirname, '..', '..', 'test-project')
+const { testProjectPath } = require('./support/paths')
 const tmpPath = path.resolve(__dirname, 'tmp')
 const target = path.resolve(tmpPath, 'site')
 
@@ -16,13 +16,13 @@ const state = {
     version: '0.1.0',
     update: Date.now(),
     source: {
-      base: projectPath,
-      configFile: path.resolve(projectPath, 'uiengine.yml'),
-      components: path.resolve(projectPath, 'src', 'components'),
-      templates: path.resolve(projectPath, 'src', 'templates'),
-      pages: path.resolve(projectPath, 'src', 'uiengine', 'pages'),
-      schema: path.resolve(projectPath, 'src', 'uiengine', 'schema'),
-      data: path.resolve(projectPath, '..', 'fixtures')
+      base: testProjectPath,
+      configFile: path.resolve(testProjectPath, 'uiengine.yml'),
+      components: path.resolve(testProjectPath, 'src', 'components'),
+      templates: path.resolve(testProjectPath, 'src', 'templates'),
+      pages: path.resolve(testProjectPath, 'src', 'uiengine', 'pages'),
+      schema: path.resolve(testProjectPath, 'src', 'uiengine', 'schema'),
+      data: path.resolve(testProjectPath, '..', 'fixtures')
     },
     target,
     adapters: {
@@ -30,7 +30,7 @@ const state = {
         module: 'uiengine-adapter-pug',
         options: {
           pretty: true,
-          basedir: path.resolve(projectPath, 'src', 'components')
+          basedir: path.resolve(testProjectPath, 'src', 'components')
         }
       },
       jsx: {
@@ -43,9 +43,9 @@ const state = {
       }
     },
     templates: {
-      variant: path.resolve(projectPath, 'src', 'templates', 'variant-preview.pug'),
-      custom: path.resolve(projectPath, 'src', 'templates', 'other-page.pug'),
-      page: path.resolve(projectPath, 'src', 'templates', 'page.pug')
+      variant: path.resolve(testProjectPath, 'src', 'templates', 'variant-preview.pug'),
+      custom: path.resolve(testProjectPath, 'src', 'templates', 'other-page.pug'),
+      page: path.resolve(testProjectPath, 'src', 'templates', 'page.pug')
     },
     theme: {
       module: 'uiengine-theme-default',
@@ -57,16 +57,16 @@ const state = {
       title: 'Home',
       childIds: ['patterns'],
       files: [
-        path.resolve(projectPath, 'src', 'uiengine', 'pages', 'extra-files', 'file-in-folder.txt'),
-        path.resolve(projectPath, 'src', 'uiengine', 'pages', 'index.txt')
+        path.resolve(testProjectPath, 'src', 'uiengine', 'pages', 'extra-files', 'file-in-folder.txt'),
+        path.resolve(testProjectPath, 'src', 'uiengine', 'pages', 'index.txt')
       ]
     }),
     patterns: Factory.page('patterns', {
       title: 'Pattern Library',
       path: 'pattern-library',
       files: [
-        path.resolve(projectPath, 'src', 'uiengine', 'pages', 'patterns', 'patterns-file.txt'),
-        path.resolve(projectPath, 'src', 'uiengine', 'pages', 'patterns', 'some-files', 'file-in-folder.txt')
+        path.resolve(testProjectPath, 'src', 'uiengine', 'pages', 'patterns', 'patterns-file.txt'),
+        path.resolve(testProjectPath, 'src', 'uiengine', 'pages', 'patterns', 'some-files', 'file-in-folder.txt')
       ],
       componentIds: ['input']
     }),
@@ -108,7 +108,7 @@ const state = {
     'input/text.pug': {
       id: 'input/text.pug',
       componentId: 'input',
-      path: path.resolve(projectPath, 'src', 'components', 'input', 'variants', 'text.pug'),
+      path: path.resolve(testProjectPath, 'src', 'components', 'input', 'variants', 'text.pug'),
       content: '<p>This is documentation for the text input.</p>',
       rendered: '<input class="input input--text" id="name" name="person[name]" type="text"/>',
       context: { id: 'name', name: 'person[name]' },

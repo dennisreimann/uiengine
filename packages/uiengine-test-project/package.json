@@ -1,9 +1,10 @@
 {
+  "private": true,
   "name": "uiengine-test-project",
   "description": "UIengine Test Project",
   "license": "MIT",
   "version": "0.10.0",
-  "author": "Dennis Reimann <mail@dennisreimann.de>",
+  "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
   "repository": "dennisreimann/uiengine",
@@ -20,7 +21,6 @@
     "pug": "^2.0.0-rc.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "uiengine": "^0.10.0",
     "uiengine-adapter-handlebars": "^0.1.2",
     "uiengine-adapter-pug": "^0.1.4",
     "uiengine-adapter-react": "^0.1.2",
@@ -32,5 +32,8 @@
     "browser-sync": "^2.18.7",
     "gulp": "^3.9.1",
     "run-sequence": "^2.1.0"
+  },
+  "peerDependencies": {
+    "uiengine": "^0.10.0"
   }
 }

@@ -3,7 +3,7 @@
   "description": "Create, document and evolve your design system collaboratively.",
   "license": "MIT",
   "version": "0.10.0",
-  "author": "Dennis Reimann <mail@dennisreimann.de>",
+  "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
   "repository": "dennisreimann/uiengine",
@@ -55,6 +55,7 @@
     "mocha-lcov-reporter": "^1.3.0",
     "mocha-sinon": "^2.0.0",
     "nyc": "^11.0.3",
-    "sinon": "^2.3.5"
+    "sinon": "^2.3.5",
+    "uiengine-test-project": "^0.10.0"
   }
 }
