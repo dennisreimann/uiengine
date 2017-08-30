@@ -6,9 +6,11 @@ node_js:
 before_script:
   - yarn run bootstrap
 script:
-  # Lint all packages
+  # Lint and build all packages
   - standard
+  - lerna run build
   # Run tests and coverage
-  - lerna run cover
+  - cd ./packages/uiengine
+  - yarn run cover
   # Upload coverage data
   - nyc report --reporter=text-lcov | coveralls

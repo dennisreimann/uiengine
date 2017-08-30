@@ -9,11 +9,10 @@
   "bugs": "https://github.com/dennisreimann/uiengine",
   "repository": "dennisreimann/uiengine",
   "devDependencies": {
-    "lerna": "^2.1.0",
+    "lerna": "^2.1.2",
     "babel-core": "^6.23.1",
     "babel-preset-env": "^1.1.8",
     "babel-preset-es2015": "^6.24.1",
-    "coveralls": "^2.13.1",
     "rimraf": "^2.6.1",
     "standard": "^10.0.2"
   },
