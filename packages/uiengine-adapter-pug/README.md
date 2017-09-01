@@ -1,5 +1,7 @@
 # UIengine template adapter for Pug
 
+🚦 *State:* Production ready
+
 ## Configuration
 
 Plain and simple:

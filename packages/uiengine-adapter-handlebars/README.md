@@ -16,7 +16,7 @@ With options:
 ```yaml
 adapters:
   hbs:
-    module: ./node_modules/uiengine-adapter-handlebars
+    module: uiengine-adapter-handlebars
     options:
       namespace: 'myapp'
 ```
