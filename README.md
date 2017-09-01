@@ -85,12 +85,13 @@ Concept and user experience, product owners, as well as designers and developers
 
 And even though the UIengine is not completely there yet, we strive to evolve it into a tool that fits the needs of all crafts.
 
-## 💁 Related projects
+## 💁 Individual packages
 
-- 🎨 [UIengine default theme](./packages/theme)
-- 🔌 [Pug templating adapter](https://github.com/dennisreimann/uiengine-adapter-pug)
-- 🔌 [React/JSX templating adapter](https://github.com/dennisreimann/uiengine-adapter-react)
-- 🔌 [Handlebars templating adapter](https://github.com/dennisreimann/uiengine-adapter-handlebars)
+- 🚀 [UIengine core](./packages/uiengine)
+- 🎨 [UIengine default theme](./packages/uiengine-theme-default)
+- 🔌 [Pug templating adapter](./packages/uiengine-adapter-pug)
+- 🔌 [React/JSX templating adapter](./packages/uiengine-adapter-react)
+- 🔌 [Handlebars templating adapter](./packages/uiengine-adapter-handlebars)
 
 ### 🖖 Alternatives
 

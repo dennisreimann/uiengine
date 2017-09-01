@@ -355,7 +355,7 @@ babel-code-frame@^6.16.0, babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babel-core@^6.22.1, babel-core@^6.23.1, babel-core@^6.26.0:
+babel-core@^6.23.1, babel-core@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.0.tgz#af32f78b31a6fcef119c87b0fd8d9753f03a0bb8"
   dependencies:
@@ -1013,7 +1013,7 @@ babel-preset-stage-3@^6.24.1:
     babel-plugin-transform-exponentiation-operator "^6.24.1"
     babel-plugin-transform-object-rest-spread "^6.22.0"
 
-babel-register@^6.22.0, babel-register@^6.26.0:
+babel-register@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-register/-/babel-register-6.26.0.tgz#6ed021173e2fcb486d7acb45c6009a856f647071"
   dependencies:
@@ -3436,7 +3436,7 @@ gulplog@^1.0.0:
   dependencies:
     glogg "^1.0.0"
 
-handlebars@^4.0.10, handlebars@^4.0.2, handlebars@^4.0.3, handlebars@^4.0.6:
+handlebars@^4.0.10, handlebars@^4.0.2, handlebars@^4.0.3:
   version "4.0.10"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.10.tgz#3d30c718b09a3d96f23ea4cc1f403c4d3ba9ff4f"
   dependencies:
@@ -5793,7 +5793,7 @@ pug-walk@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/pug-walk/-/pug-walk-1.1.4.tgz#29e5174af43b67e99c31b448632e1ff86ddd671c"
 
-pug@^2.0.0-beta10, pug@^2.0.0-rc.3:
+pug@^2.0.0-rc.3:
   version "2.0.0-rc.3"
   resolved "https://registry.yarnpkg.com/pug/-/pug-2.0.0-rc.3.tgz#553cb3c3a97bb54ec3cb1e08591dcae3b6f58891"
   dependencies:
@@ -5876,7 +5876,7 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@^15.4.2, react-dom@^15.6.1:
+react-dom@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.1.tgz#2cb0ed4191038e53c209eb3a79a23e2a4cf99470"
   dependencies:
@@ -5885,7 +5885,7 @@ react-dom@^15.4.2, react-dom@^15.6.1:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react@^15.4.2, react@^15.6.1:
+react@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"
   dependencies:
@@ -7045,27 +7045,6 @@ uglifyjs-webpack-plugin@^0.4.6:
 uid-number@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
-
-uiengine-adapter-handlebars@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/uiengine-adapter-handlebars/-/uiengine-adapter-handlebars-0.1.2.tgz#bdf2fec43f245b5f1e1f3df80198b52b9d708101"
-  dependencies:
-    handlebars "^4.0.6"
-
-uiengine-adapter-pug@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/uiengine-adapter-pug/-/uiengine-adapter-pug-0.1.4.tgz#94c3046ef5bb0b1bfa33d16036617b1af97e2e25"
-  dependencies:
-    pug "^2.0.0-beta10"
-
-uiengine-adapter-react@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/uiengine-adapter-react/-/uiengine-adapter-react-0.1.2.tgz#9ded65777dd1b19b6516cac474ca260454a1da16"
-  dependencies:
-    babel-core "^6.22.1"
-    babel-register "^6.22.0"
-    react "^15.4.2"
-    react-dom "^15.4.2"
 
 ultron@1.0.x:
   version "1.0.2"

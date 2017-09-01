@@ -13,10 +13,10 @@ coverage
 
 # Package specific rules: Specify them here and not in the package path so
 # we can profit from Standard.js ignoring the paths listed in gitignore.
-/packages/uiengine/lib
+/packages/*/lib
+
 /packages/uiengine/test/tmp
 
 /packages/uiengine-test-project/dist
 
-/packages/uiengine-theme-default/lib
 /packages/uiengine-theme-default/static

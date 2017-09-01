@@ -1,19 +1,16 @@
 {
   "name": "uiengine-adapter-handlebars",
-  "version": "0.1.2",
   "description": "UIengine template adapter for Handlebars.",
-  "author": "Dennis Reimann",
   "license": "MIT",
-  "main": "./lib/index.js",
-  "homepage": "https://github.com/dennisreimann/uiengine-adapter-handlebars",
-  "bugs": "https://github.com/dennisreimann/uiengine-adapter-handlebars/issues",
+  "version": "0.1.2",
+  "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
+  "homepage": "https://github.com/dennisreimann/uiengine",
+  "bugs": "https://github.com/dennisreimann/uiengine",
+  "repository": "dennisreimann/uiengine",
   "engines": {
-    "node": ">=6.9.5"
+    "node": ">=6.11.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dennisreimann/uiengine-adapter-handlebars.git"
-  },
+  "main": "./lib/index.js",
   "files": [
     "lib"
   ],
@@ -23,21 +20,10 @@
     "handlebars"
   ],
   "dependencies": {
-    "handlebars": "^4.0.6"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.22.2",
-    "babel-preset-env": "^1.1.8",
-    "rimraf": "^2.5.4",
-    "standard": "^8.6.0"
+    "handlebars": "^4.0.10"
   },
   "scripts": {
-    "build": "rimraf lib && babel src --out-dir lib",
-    "preversion": "yarn run build"
-  },
-  "standard": {
-    "ignore": [
-      "/lib"
-    ]
+    "clean": "rimraf lib",
+    "build": "yarn run clean && babel src --out-dir lib"
   }
 }
