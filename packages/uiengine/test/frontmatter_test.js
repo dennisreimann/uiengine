@@ -21,7 +21,7 @@ const sourcePaths = {
 describe('Frontmatter', () => {
   describe('#fromFile', () => {
     it('should return attributes and body', done => {
-      Frontmatter.fromFile('./test/fixtures/frontmatter.txt', sourcePaths)
+      Frontmatter.fromFile(path.join(__dirname, 'fixtures/frontmatter.txt'), sourcePaths)
         .then(data => {
           assert.equal(data.attributes.name, 'Index')
           assert.equal(data.body, 'Hello')

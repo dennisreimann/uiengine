@@ -1,11 +1,12 @@
 const assert = require('assert')
+const path = require('path')
 
 const Markdown = require('../src/util/markdown')
 
 describe('Markdown', () => {
   describe('#fromFile', () => {
     it('should return rendered markdown', done => {
-      Markdown.fromFile('./test/fixtures/markdown.md')
+      Markdown.fromFile(path.join(__dirname, 'fixtures/markdown.md'))
         .then(data => {
           assert.equal(data, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
           done()

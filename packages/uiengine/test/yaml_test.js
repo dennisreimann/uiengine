@@ -8,6 +8,10 @@ const sourcePaths = {
   data: path.join(__dirname, 'fixtures')
 }
 
+const yaml = path.join(__dirname, 'fixtures/yaml.yml')
+const yamlWithExtends = path.join(__dirname, 'fixtures/yaml-with-extends.yml')
+const yamlWithIncludes = path.join(__dirname, 'fixtures/yaml-with-includes.yml')
+
 const string = `
 name: Index
 included_md: !include /fixtures/markdown.md
@@ -19,7 +23,7 @@ include_with_incompatible_type: !include /fixtures/layout.psd
 describe('Yaml', () => {
   describe('#fromFile', () => {
     it('should return parsed yaml', done => {
-      Yaml.fromFile('./test/fixtures/yaml.yml', sourcePaths)
+      Yaml.fromFile(yaml, sourcePaths)
         .then(data => {
           assert.equal(data.name, 'Index')
           assert.equal(data.number, 2)
@@ -29,7 +33,7 @@ describe('Yaml', () => {
     })
 
     it('should include yaml files referenced by relative !include', done => {
-      Yaml.fromFile('./test/fixtures/yaml-with-includes.yml', sourcePaths)
+      Yaml.fromFile(yamlWithIncludes, sourcePaths)
         .then(data => {
           assert.equal(data.relative1_include_yaml.name, 'Index')
           assert.equal(data.relative1_include_yaml.number, 2)
@@ -43,7 +47,7 @@ describe('Yaml', () => {
     })
 
     it('should include yaml files referenced by absolute !include', done => {
-      Yaml.fromFile('./test/fixtures/yaml-with-includes.yml', sourcePaths)
+      Yaml.fromFile(yamlWithIncludes, sourcePaths)
         .then(data => {
           assert.equal(data.absolute_include_yaml.name, 'Index')
           assert.equal(data.absolute_include_yaml.number, 2)
@@ -55,7 +59,7 @@ describe('Yaml', () => {
     })
 
     it('should include yaml files referenced by !data', done => {
-      Yaml.fromFile('./test/fixtures/yaml-with-includes.yml', sourcePaths)
+      Yaml.fromFile(yamlWithIncludes, sourcePaths)
         .then(data => {
           assert.equal(data.data_yaml.name, 'Index')
           assert.equal(data.data_yaml.number, 2)
@@ -67,7 +71,7 @@ describe('Yaml', () => {
     })
 
     it('should include json files referenced by !data', done => {
-      Yaml.fromFile('./test/fixtures/yaml-with-includes.yml', sourcePaths)
+      Yaml.fromFile(yamlWithIncludes, sourcePaths)
         .then(data => {
           assert.equal(data.data_json.name, 'JSON')
           assert.equal(data.data_json.number, 3)
@@ -77,7 +81,7 @@ describe('Yaml', () => {
     })
 
     it('should include js files referenced by !data', done => {
-      Yaml.fromFile('./test/fixtures/yaml-with-includes.yml', sourcePaths)
+      Yaml.fromFile(yamlWithIncludes, sourcePaths)
         .then(data => {
           assert.equal(data.data_js.name, 'Included JS')
           assert.equal(data.data_js.number, 4)
@@ -87,7 +91,7 @@ describe('Yaml', () => {
     })
 
     it('should include markdown files referenced by !data', done => {
-      Yaml.fromFile('./test/fixtures/yaml-with-includes.yml', sourcePaths)
+      Yaml.fromFile(yamlWithIncludes, sourcePaths)
         .then(data => {
           assert.equal(data.data_md, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
           done()
@@ -96,7 +100,7 @@ describe('Yaml', () => {
     })
 
     it('should extend data structures by deep merging them', done => {
-      Yaml.fromFile('./test/fixtures/yaml-with-extends.yml', sourcePaths)
+      Yaml.fromFile(yamlWithExtends, sourcePaths)
         .then(data => {
           assert.equal(data.name, 'Index')
           assert.equal(data.number, 3)

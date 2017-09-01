@@ -13,12 +13,21 @@
     "babel-core": "^6.23.1",
     "babel-preset-env": "^1.1.8",
     "babel-preset-es2015": "^6.24.1",
+    "coveralls": "^2.13.1",
     "lerna": "^2.1.2",
+    "mocha": "^3.5.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "mocha-sinon": "^2.0.0",
+    "nyc": "^11.1.0",
     "rimraf": "^2.6.1",
+    "sinon": "^3.2.1",
     "standard": "^10.0.2"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist"
+    "setup": "lerna bootstrap --hoist && lerna run build",
+    "start": "yarn run tests -- -w",
+    "tests": "mocha --compilers js:babel-register -R dot packages/*/test",
+    "cover": "nyc yarn run tests"
   },
   "standard": {
     "globals": [

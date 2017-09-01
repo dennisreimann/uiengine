@@ -27,10 +27,8 @@
   ],
   "scripts": {
     "clean": "rimraf lib test/tmp",
-    "start": "yarn run clean && yarn run build -- -w & yarn run test -- -w",
-    "build": "yarn run clean && babel src --out-dir lib",
-    "test": "mocha --compilers js:babel-register -R dot",
-    "cover": "nyc yarn run test"
+    "start": "yarn run clean && yarn run build -- -w",
+    "build": "yarn run clean && babel src --out-dir lib"
   },
   "dependencies": {
     "chalk": "^2.1.0",
@@ -49,14 +47,7 @@
     "chokidar": "^1.6.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-register": "^6.26.0",
-    "coveralls": "^2.13.1",
-    "mocha": "^3.5.0",
-    "mocha-lcov-reporter": "^1.3.0",
-    "mocha-sinon": "^2.0.0",
-    "nyc": "^11.1.0",
-    "sinon": "^3.2.1",
     "uiengine-adapter-handlebars": "^0.1.2",
     "uiengine-adapter-pug": "^0.1.4",
     "uiengine-adapter-react": "^0.1.2"

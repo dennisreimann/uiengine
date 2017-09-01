@@ -9,8 +9,7 @@ const assertContentDoesNotMatch = require('./support/assertContentDoesNotMatch')
 
 const UIengine = require('../src/uiengine')
 
-const { testProjectPath } = require('./support/paths')
-const testProjectRelativePath = '../uiengine-test-project'
+const { testProjectPath, testProjectRelativePath } = require('./support/paths')
 const dataPath = path.resolve(testProjectPath, 'src', 'uiengine', 'data')
 const pagesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'pages')
 const schemaPath = path.resolve(testProjectPath, 'src', 'uiengine', 'schema')

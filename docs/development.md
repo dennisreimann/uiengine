@@ -8,10 +8,10 @@
 ### 📦 Setup
 
 Dependencies are managed via [Yarn](https://yarnpkg.com/).
-Once you have Yarn installed and this repo cloned, you can bootstrap the packages:
+Once you have Yarn installed and this repo cloned, you can setup the packages:
 
 ```bash
-yarn run bootstrap
+yarn run setup
 ```
 
 ### 🛠 Development

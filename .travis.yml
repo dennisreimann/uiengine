@@ -4,13 +4,11 @@ node_js:
   - "node"
   - "lts/*"
 before_script:
-  - yarn run bootstrap
+  - yarn run setup
 script:
   # Lint and build all packages
   - standard
-  - lerna run build
   # Run tests and coverage
-  - cd ./packages/uiengine
   - yarn run cover
   # Upload coverage data
   - nyc report --reporter=text-lcov | coveralls
