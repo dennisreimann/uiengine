@@ -26,6 +26,7 @@
   },
   "scripts": {
     "clean": "rimraf lib",
+    "start": "yarn run clean && yarn run build -- -w",
     "build": "yarn run clean && babel src --out-dir lib"
   }
 }
