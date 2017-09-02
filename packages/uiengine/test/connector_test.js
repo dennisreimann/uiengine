@@ -4,7 +4,7 @@ const path = require('path')
 const assert = require('assert')
 const Connector = require('../src/connector')
 
-const { testProjectPath } = require('./support/paths')
+const { testProjectPath } = require('../../../test/support/paths')
 const testAdapterPath = path.resolve(__dirname, 'fixtures', 'test-adapter')
 const noopAdapterPath = path.resolve(__dirname, 'fixtures', 'noop-adapter')
 const componentsPath = path.resolve(testProjectPath, 'src', 'components')

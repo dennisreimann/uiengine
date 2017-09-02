@@ -6,9 +6,8 @@ const assertContentMatches = require('./support/assertContentMatches')
 const Builder = require('../src/builder')
 const NavigationData = require('../src/data/navigation')
 
-const { testProjectPath } = require('./support/paths')
-const tmpPath = path.resolve(__dirname, 'tmp')
-const target = path.resolve(tmpPath, 'site')
+const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
+const target = path.resolve(testTmpPath, 'site')
 
 const state = {
   config: {
@@ -147,7 +146,7 @@ const state = {
 }
 
 describe('Builder', () => {
-  afterEach(() => { fs.removeSync(tmpPath) })
+  afterEach(() => { fs.removeSync(testTmpPath) })
 
   describe('#generateSite', () => {
     it('should generate site', function (done) {

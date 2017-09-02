@@ -10,12 +10,11 @@ npm-debug*
 .coveralls.yml
 .nyc_output
 coverage
+test/tmp
 
 # Package specific rules: Specify them here and not in the package path so
 # we can profit from Standard.js ignoring the paths listed in gitignore.
 /packages/*/lib
-
-/packages/uiengine/test/tmp
 
 /packages/uiengine-test-project/dist
 

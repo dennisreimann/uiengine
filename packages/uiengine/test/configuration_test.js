@@ -1,7 +1,7 @@
 const path = require('path')
 const assert = require('assert')
 
-const { testProjectPath } = require('./support/paths')
+const { testProjectPath, testProjectTargetPath } = require('../../../test/support/paths')
 const Configuration = require('../src/configuration')
 
 const testConfigPath = path.resolve(testProjectPath, 'uiengine.yml')
@@ -34,7 +34,7 @@ describe('Configuration', () => {
     it('should resolve target and source paths', done => {
       Configuration.read(testConfigPath)
         .then(config => {
-          assert.equal(config.target, path.resolve(testProjectPath, 'dist'))
+          assert.equal(config.target, testProjectTargetPath)
           assert.equal(config.source.components, path.resolve(testProjectPath, 'src', 'components'))
           assert.equal(config.source.templates, path.resolve(testProjectPath, 'src', 'templates'))
           assert.equal(config.source.pages, path.resolve(testProjectPath, 'src', 'uiengine', 'pages'))

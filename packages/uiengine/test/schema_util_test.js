@@ -2,7 +2,7 @@ const path = require('path')
 const assert = require('assert')
 
 const SchemaUtil = require('../src/util/schema')
-const { testProjectPath } = require('./support/paths')
+const { testProjectPath } = require('../../../test/support/paths')
 const schemaPath = path.resolve(testProjectPath, 'src', 'uiengine', 'schema')
 
 describe('SchemaUtil', () => {

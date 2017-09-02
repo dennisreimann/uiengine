@@ -9,18 +9,17 @@ const assertContentDoesNotMatch = require('./support/assertContentDoesNotMatch')
 
 const UIengine = require('../src/uiengine')
 
-const { testProjectPath, testProjectRelativePath } = require('./support/paths')
+const { testProjectPath, testProjectRelativePath, testProjectTargetPath } = require('../../../test/support/paths')
 const dataPath = path.resolve(testProjectPath, 'src', 'uiengine', 'data')
 const pagesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'pages')
 const schemaPath = path.resolve(testProjectPath, 'src', 'uiengine', 'schema')
 const componentsPath = path.resolve(testProjectPath, 'src', 'components')
 const templatesPath = path.resolve(testProjectPath, 'src', 'templates')
-const targetPath = path.resolve(testProjectPath, 'dist')
 const opts = { config: path.resolve(testProjectPath, 'uiengine.yml'), debug: true }
 
 // "end to end" tests
 describe('UIengine', () => {
-  afterEach(() => { fs.removeSync(targetPath) })
+  afterEach(() => { fs.removeSync(testProjectTargetPath) })
 
   describe('#generate', () => {
     it('should generate pages', function (done) {
@@ -28,14 +27,14 @@ describe('UIengine', () => {
 
       UIengine.generate(opts)
         .then(state => {
-          assertExists(path.join(targetPath, 'index.html'))
-          assertExists(path.join(targetPath, 'documentation', 'index.html'))
-          assertExists(path.join(targetPath, 'pattern-library', 'index.html'))
-          assertExists(path.join(targetPath, 'patterns', 'atoms', 'index.html'))
-          assertExists(path.join(targetPath, 'patterns', 'molecules', 'index.html'))
-          assertExists(path.join(targetPath, 'patterns', 'organisms', 'index.html'))
-          assertExists(path.join(targetPath, 'patterns', 'templates', 'index.html'))
-          assertExists(path.join(targetPath, 'patterns', 'pages', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'documentation', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'pattern-library', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'patterns', 'atoms', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'patterns', 'molecules', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'patterns', 'organisms', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'patterns', 'templates', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'patterns', 'pages', 'index.html'))
 
           done()
         })
@@ -45,7 +44,7 @@ describe('UIengine', () => {
     it('should generate state file', done => {
       UIengine.generate(opts)
         .then(state => {
-          assertExists(path.join(targetPath, 'state.json'))
+          assertExists(path.join(testProjectTargetPath, 'state.json'))
 
           done()
         })
@@ -55,7 +54,7 @@ describe('UIengine', () => {
     it('should generate schema page', done => {
       UIengine.generate(opts)
         .then(state => {
-          assertExists(path.join(targetPath, '_schema', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, '_schema', 'index.html'))
 
           done()
         })
@@ -65,16 +64,16 @@ describe('UIengine', () => {
     it('should generate variant previews', done => {
       UIengine.generate(opts)
         .then(state => {
-          assertExists(path.join(targetPath, '_variants', 'form', 'form.pug.html'))
-          assertExists(path.join(targetPath, '_variants', 'formrow', 'text-with-label.pug.html'))
-          assertExists(path.join(targetPath, '_variants', 'formrow', 'text-without-label.pug.html'))
-          assertExists(path.join(targetPath, '_variants', 'input', 'number.pug.html'))
-          assertExists(path.join(targetPath, '_variants', 'input', 'text-disabled.pug.html'))
-          assertExists(path.join(targetPath, '_variants', 'input', 'text-required.pug.html'))
-          assertExists(path.join(targetPath, '_variants', 'input', 'text.hbs.html'))
-          assertExists(path.join(targetPath, '_variants', 'input', 'text.pug.html'))
-          assertExists(path.join(targetPath, '_variants', 'label', 'label.hbs.html'))
-          assertExists(path.join(targetPath, '_variants', 'label', 'label.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'form', 'form.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'formrow', 'text-with-label.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'formrow', 'text-without-label.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'number.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text-disabled.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text-required.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text.hbs.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'label', 'label.hbs.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'label', 'label.pug.html'))
 
           done()
         })
@@ -82,7 +81,7 @@ describe('UIengine', () => {
     })
 
     it('should copy theme assets', done => {
-      const assetsPath = path.join(targetPath, '_uiengine-theme')
+      const assetsPath = path.join(testProjectTargetPath, '_uiengine-theme')
 
       UIengine.generate(opts)
         .then(state => {
@@ -109,7 +108,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, 'pattern-library', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'pattern-library', 'index.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
@@ -126,7 +125,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'index.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
@@ -143,7 +142,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, 'patterns', 'pages', 'ajax', 'layer', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'patterns', 'pages', 'ajax', 'layer', 'index.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
@@ -160,7 +159,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, 'extra-files', 'file-in-folder.txt'))
+          assertExists(path.join(testProjectTargetPath, 'extra-files', 'file-in-folder.txt'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
@@ -173,7 +172,7 @@ describe('UIengine', () => {
     })
 
     it('should generate page on create', done => {
-      const pagePath = path.join(targetPath, 'documentation', 'created', 'index.html')
+      const pagePath = path.join(testProjectTargetPath, 'documentation', 'created', 'index.html')
       const filePath = path.join(pagesPath, 'documentation', 'created', 'page.md')
       const fileDir = path.dirname(filePath)
 
@@ -183,7 +182,7 @@ describe('UIengine', () => {
       UIengine.generateIncrementForFileChange(filePath, 'created')
         .then(result => {
           assertContentMatches(pagePath, 'Content for created page.')
-          assertExists(path.join(targetPath, 'documentation', 'created', 'label', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'documentation', 'created', 'label', 'index.html'))
 
           assert.equal(result.action, 'created')
           assert.equal(result.type, 'page')
@@ -202,7 +201,7 @@ describe('UIengine', () => {
     })
 
     it('should generate page on delete', done => {
-      const parentPagePath = path.join(targetPath, 'documentation', 'index.html')
+      const parentPagePath = path.join(testProjectTargetPath, 'documentation', 'index.html')
       const filePath = path.join(pagesPath, 'documentation', 'created', 'page.md')
       const fileDir = path.dirname(filePath)
 
@@ -246,7 +245,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, '_schema', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, '_schema', 'index.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
@@ -263,7 +262,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, '_variants', 'form', 'form.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'form', 'form.pug.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'component')
@@ -280,7 +279,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, '_variants', 'input', 'text.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text.pug.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'component')
@@ -382,8 +381,8 @@ describe('UIengine', () => {
 
     it('should generate variant on change', done => {
       const filePath = path.join(componentsPath, 'form', 'variants', 'form.pug')
-      const componentPath = path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html')
-      const existingVariantPath = path.join(targetPath, '_variants', 'form', 'form.pug.html')
+      const componentPath = path.join(testProjectTargetPath, 'patterns', 'organisms', 'form', 'index.html')
+      const existingVariantPath = path.join(testProjectTargetPath, '_variants', 'form', 'form.pug.html')
 
       fs.removeSync(existingVariantPath)
       fs.removeSync(componentPath)
@@ -405,7 +404,7 @@ describe('UIengine', () => {
 
     it('should generate variant on create', done => {
       const filePath = path.join(componentsPath, 'form', 'variants', 'form-fieldsets.pug')
-      const componentPath = path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html')
+      const componentPath = path.join(testProjectTargetPath, 'patterns', 'organisms', 'form', 'index.html')
 
       fs.removeSync(componentPath)
       fs.writeFileSync(filePath, 'p Test')
@@ -433,7 +432,7 @@ describe('UIengine', () => {
 
     it('should generate variant on delete', done => {
       const filePath = path.join(componentsPath, 'form', 'variants', 'form-fieldsets.pug')
-      const componentPath = path.join(targetPath, 'patterns', 'organisms', 'form', 'index.html')
+      const componentPath = path.join(testProjectTargetPath, 'patterns', 'organisms', 'form', 'index.html')
 
       fs.writeFileSync(filePath, 'p Test')
 
@@ -468,7 +467,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, 'documentation', 'custom-template', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'documentation', 'custom-template', 'index.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'template')
@@ -485,7 +484,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'index.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'site')
@@ -502,7 +501,7 @@ describe('UIengine', () => {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(targetPath, 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'index.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'site')

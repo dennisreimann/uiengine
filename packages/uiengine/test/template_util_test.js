@@ -2,7 +2,7 @@ const path = require('path')
 const assert = require('assert')
 
 const TemplateUtil = require('../src/util/template')
-const { testProjectPath } = require('./support/paths')
+const { testProjectPath } = require('../../../test/support/paths')
 const templatesPath = path.resolve(testProjectPath, 'src', 'templates')
 
 describe('TemplateUtil', () => {

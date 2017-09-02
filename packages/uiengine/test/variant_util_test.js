@@ -3,7 +3,7 @@ const assert = require('assert')
 
 const VariantUtil = require('../src/util/variant')
 
-const { testProjectPath } = require('./support/paths')
+const { testProjectPath } = require('../../../test/support/paths')
 const componentsPath = path.resolve(testProjectPath, 'src', 'components')
 
 describe('VariantUtil', () => {

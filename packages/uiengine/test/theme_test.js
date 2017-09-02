@@ -6,8 +6,8 @@ const assert = require('assert')
 const assertExists = require('./support/assertExists')
 const Theme = require('../src/theme')
 
-const tmpPath = path.resolve(__dirname, 'tmp')
-const target = path.resolve(tmpPath, 'site')
+const { testTmpPath } = require('../../../test/support/paths')
+const target = path.resolve(testTmpPath, 'site')
 const testThemePath = path.resolve(__dirname, 'fixtures', 'test-theme')
 const testThemeOptions = { opt1: 1, opt2: 2 }
 const TestTheme = require(testThemePath)
@@ -32,7 +32,7 @@ describe('Theme', () => {
   })
 
   describe('#setup', () => {
-    afterEach(() => { fs.removeSync(tmpPath) })
+    afterEach(() => { fs.removeSync(testTmpPath) })
 
     it('should call the themes setup function', function (done) {
       this.sinon.stub(TestTheme, 'setup')

@@ -4,6 +4,7 @@ const fs = require('fs-extra')
 const path = require('path')
 
 const File = require('../src/util/file')
+const { testTmpPath } = require('../../../test/support/paths')
 
 describe('File', () => {
   describe('#extension', () => {
@@ -35,7 +36,7 @@ describe('File', () => {
 
   describe('#write', () => {
     it('should write content to file', done => {
-      const filePath = path.join(__dirname, 'tmp/writeFileTest.txt')
+      const filePath = path.join(testTmpPath, 'writeFileTest.txt')
       File.write(filePath, 'Test')
         .then(() => {
           const content = fs.readFileSync(filePath, 'utf8')
@@ -50,7 +51,7 @@ describe('File', () => {
   describe('#copy', () => {
     it('should copy file from source to destination', done => {
       const src = path.join(__dirname, 'fixtures/frontmatter.txt')
-      const dst = path.join(__dirname, 'tmp/frontmatter.txt')
+      const dst = path.join(testTmpPath, 'frontmatter.txt')
       File.copy(src, dst)
         .then(() => {
           assertExists(dst)
@@ -62,7 +63,7 @@ describe('File', () => {
 
     it('should copy directory from source to destination', done => {
       const src = path.join(__dirname, 'fixtures')
-      const dst = path.join(__dirname, 'tmp/fixtures')
+      const dst = path.join(testTmpPath, 'fixtures')
       File.copy(src, dst)
         .then(() => {
           assertExists(path.join(dst, 'yaml.yml'))

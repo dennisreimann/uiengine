@@ -3,7 +3,7 @@ const assert = require('assert')
 
 const PageUtil = require('../src/util/page')
 
-const { testProjectPath } = require('./support/paths')
+const { testProjectPath } = require('../../../test/support/paths')
 const pagesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'pages')
 
 describe('PageUtil', () => {

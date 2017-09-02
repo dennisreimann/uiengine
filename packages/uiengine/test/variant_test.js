@@ -3,7 +3,7 @@ const assert = require('assert')
 
 const Variant = require('../src/variant')
 
-const { testProjectPath } = require('./support/paths')
+const { testProjectPath } = require('../../../test/support/paths')
 const componentsPath = path.resolve(testProjectPath, 'src', 'components')
 
 const state = {
