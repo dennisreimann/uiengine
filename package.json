@@ -24,11 +24,14 @@
     "standard": "^10.0.2"
   },
   "scripts": {
-    "setup": "lerna bootstrap --hoist && lerna run build",
-    "start": "yarn run tests -- -w --watch-extensions js,jsx,json,md,yml,hbs,pug",
+    "setup": "lerna bootstrap && lerna run build",
+    "start": "yarn run tests -w --watch-extensions js,jsx,json,md,yml,hbs,pug",
     "tests": "mocha --compilers js:babel-register -R dot packages/*/test",
     "cover": "nyc yarn run tests"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "standard": {
     "globals": [
       "after",
