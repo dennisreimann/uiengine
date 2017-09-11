@@ -156,13 +156,5 @@ describe('Yaml', () => {
           done()
         })
     })
-
-    it('should throw error if extend is missing the extendable', done => {
-      Yaml.fromString('!extend\nname: Index', sourcePaths)
-        .catch(error => {
-          assert(error.message.match('YAML Extend Schema'))
-          done()
-        })
-    })
   })
 })

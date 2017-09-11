@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "chalk": "^2.1.0",
-    "deep-extend": "^0.5.0",
     "fs-extra": "^4.0.1",
     "globby": "^6.1.0",
     "js-yaml": "^3.9.1",

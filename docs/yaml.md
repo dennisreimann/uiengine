@@ -53,42 +53,6 @@ context:
 
 You should prefer this to the `!include` schema for referencing your mocks which should be kept in one place (namely `source.data`). 
 
-### !extend
-
-When building up data structures as the context for pages you might want to define some set of base data.
-The `!extend` schema helps with that as it lets you include and extend the data defined in separate base data files.
-
-The data that should be extended is defined as the value of the key `_`.
-You can actually define this extendable data inline, but you will most likely use the `!data` or even `!include` schema to reference an external file.
-
-```yaml
-context:
-  !extend:
-    _: !data /globals.yml
-    title: Homepage
-    teasers: []
-```
-
-The data defined within the `context` gets (deeply) merged into the data defined in the referenced file `globals.yml`.
-Let's say `globals.yml` contains this data:
-
-```yaml
-title: My website
-currentUser: 
-  login: user@example.org
-```
-
-Then the resulting page context would look like this:
-
-```yaml
-title: Homepage            # 'My website' got overwritten by merge
-currentUser:               # Merged in from 'globals.yml'
-  login: user@example.org  # Deep merge brings in nested data as well
-teasers: []                # Data defined in page context
-```
-
-The syntax isn't the prettiest, however it works for all possible cases – see [the testfile](../test/fixtures/yaml-with-extends.yml).
-
 ### !markdown
 
 In case you do not want to reference an external markdown file, the `!markdown` allows you to render markdown inline in a YAML file:
@@ -109,5 +73,35 @@ context:
     Pork belly short loin beef pig filet mignon shank chuck t-bone.
 ```
 
+### Using the merge key (`<<`)
 
+When building up data structures as the context for pages you might want to define some set of base data.
+The [merge key `<<`](http://www.yaml.org/refcard.html) helps with that as it lets you include and extend the data defined in separate base data files.
 
+The data that should be extended is pulled in via the merge key.
+You can actually define this extendable data inline, but you will most likely use the `!data` or even `!include` schema to reference an external file.
+
+```yaml
+context:
+  <<: !data /globals.yml
+  title: Homepage
+  teasers: []
+```
+
+The data defined within the `context` gets (deeply) merged into the data defined in the referenced file `globals.yml`.
+Let's say `globals.yml` contains this data:
+
+```yaml
+title: My website
+currentUser: 
+  login: user@example.org
+```
+
+Then the resulting page context would look like this:
+
+```yaml
+title: Homepage            # 'My website' got overwritten by merge
+currentUser:               # Merged in from 'globals.yml'
+  login: user@example.org  # Deep merge brings in nested data as well
+teasers: []                # Data defined in page context
+```
