@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "clean": "rimraf lib",
-    "start": "yarn run clean && yarn run build -- -w",
+    "start": "yarn run clean && yarn run build -w",
     "build": "yarn run clean && babel src --out-dir lib"
   },
   "dependencies": {
@@ -52,6 +52,6 @@
     "uiengine-adapter-react": "^0.1.2"
   },
   "peerDependencies": {
-    "uiengine-test-project": "^0.10.0"
+    "test-project": "^0.10.0"
   }
 }

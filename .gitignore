@@ -16,6 +16,6 @@ test/tmp
 # we can profit from Standard.js ignoring the paths listed in gitignore.
 /packages/*/lib
 
-/packages/uiengine-test-project/dist
+/packages/test-project/dist
 
 /packages/uiengine-theme-default/static

@@ -16,9 +16,7 @@ yarn run setup
 
 ### 🛠 Development
 
-
-Create a build, run the tests and rerun on file change.
-This needs to be done per package in the particular folder:
+Create a build and rebuild on file change.
 
 ```bash
 yarn start
@@ -35,13 +33,19 @@ standard
 Run the tests:
 
 ```bash
-lerna run test
+yarn test
+```
+
+Run the tests continually on file change:
+
+```bash
+yarn test-watch
 ```
 
 Tests with coverage info:
 
 ```bash
-lerna run cover
+yarn cover
 ```
 
 ### 🚀 Release
@@ -49,7 +53,7 @@ lerna run cover
 Build a new release:
 
 ```bash
-lerna run build
+yarn build
 ```
 
 Publish a new release:

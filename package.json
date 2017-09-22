@@ -24,10 +24,12 @@
     "standard": "^10.0.2"
   },
   "scripts": {
-    "setup": "lerna bootstrap && lerna run build",
-    "start": "yarn run tests -w --watch-extensions js,jsx,json,md,yml,hbs,pug",
-    "tests": "mocha --compilers js:babel-register -R dot packages/*/test",
-    "cover": "nyc yarn run tests"
+    "setup": "lerna bootstrap && yarn run build",
+    "start": "lerna run start --parallel --scope uiengine*",
+    "build": "lerna run build --parallel --scope uiengine*",
+    "test": "mocha --compilers js:babel-register -R dot packages/*/test",
+    "test-watch": "yarn test -w --watch-extensions js,jsx,json,md,yml,hbs,pug",
+    "cover": "nyc yarn test"
   },
   "workspaces": [
     "packages/*"

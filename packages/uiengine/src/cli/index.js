@@ -21,4 +21,6 @@ module.exports = require('yargs')
   .usage(`Usage: $0 <command> [options]`)
   .help()
   .alias('h', 'help')
+  .version()
+  .alias('v', 'version')
   .argv

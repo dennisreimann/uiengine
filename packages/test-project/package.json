@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "uiengine-test-project",
+  "name": "test-project",
   "description": "UIengine Test Project",
   "license": "MIT",
   "version": "0.10.0",
@@ -13,7 +13,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "start": "yarn run clean && gulp develop",
+    "dev": "yarn run clean && gulp develop",
     "build": "yarn run clean && gulp build"
   },
   "dependencies": {
