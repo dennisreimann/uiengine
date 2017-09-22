@@ -15,6 +15,7 @@ const ComponentUtil = require('./util/component')
 const TemplateUtil = require('./util/template')
 const VariantUtil = require('./util/variant')
 const { debug2 } = require('./util/debug')
+const integrations = require('./integrations')
 
 const CONFIG_FILENAME = 'uiengine.yml'
 
@@ -262,9 +263,6 @@ async function removeComponent (id) {
   await Builder.generatePagesHavingComponent(state, id)
 }
 
-const gulp = (gulp, options = {}) =>
-  require('./integrations/gulp')(gulp, options)
-
 module.exports = {
   CONFIG_FILENAME,
   setupStateWithOptions,
@@ -272,5 +270,5 @@ module.exports = {
   isGenerating,
   generate,
   generateIncrementForFileChange,
-  gulp
+  integrations
 }

@@ -2,7 +2,9 @@ const gulp = require('gulp')
 const runSequence = require('run-sequence')
 const bsConfig = require('./bs-config')
 const browserSync = require('browser-sync').create()
-const uiGulp = require('uiengine').gulp(gulp)
+const UIengine = require('uiengine')
+
+const uiGulp = UIengine.integrations.gulp(gulp)
 
 uiGulp.task('site')
 gulp.task('browserSync', cb => browserSync.init(bsConfig))

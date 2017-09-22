@@ -28,6 +28,7 @@
     "browser-sync": "^2.18.13",
     "gulp": "^3.9.1",
     "run-sequence": "^2.1.0",
+    "theo": "^6.0.0-beta.7",
     "uiengine": "^0.10.0",
     "uiengine-adapter-handlebars": "^0.1.2",
     "uiengine-adapter-pug": "^0.1.4",

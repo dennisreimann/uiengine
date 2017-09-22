@@ -102,7 +102,7 @@ const _read = (configFilePath, flags, projectConfig) => {
   const resolveAdapters = R.partial(resolvePackage, [configPath], 'Adapter')
 
   source = R.map(resolvePaths, source)
-  source.base = configPath
+  source.base = path.resolve(configPath)
   source.configFile = resolvePath(configPath, configFilePath)
   target = resolvePath(configPath, target)
   theme = resolveTheme(configPath, theme)

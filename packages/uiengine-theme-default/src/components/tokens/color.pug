@@ -1,0 +1,13 @@
+mixin color(token)
+  dl.token.token--color&attributes(attributes)
+    dt.token__label.token__label--name= h.t('token.name')
+    dd.token__value.token__value--name= token.name
+    if token.type
+      dt.token__label.token__label--type= h.t('token.type')
+      dd.token__value.token__value--type= token.type
+    if token.value
+      dt.token__label.token__label--value= h.t('token.value')
+      dd.token__value.token__value--value= token.value
+    if token.description
+      dt.token__label.token__label--description= h.t('token.description')
+      dd.token__value.token__value--description= token.description

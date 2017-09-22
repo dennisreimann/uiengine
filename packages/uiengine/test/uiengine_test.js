@@ -61,6 +61,41 @@ describe('UIengine', () => {
         .catch(done)
     })
 
+    it('should generate tokens page with token list', done => {
+      UIengine.generate(opts)
+        .then(state => {
+          const pagePath = path.join(testProjectTargetPath, 'documentation', 'tokens', 'spaces', 'index.html')
+
+          assertContentMatches(pagePath, '.5rem')
+          assertContentMatches(pagePath, '1rem')
+          assertContentMatches(pagePath, '1.5rem')
+          assertContentMatches(pagePath, '3rem')
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should generate tokens page with token categories', done => {
+      UIengine.generate(opts)
+        .then(state => {
+          const pagePath = path.join(testProjectTargetPath, 'documentation', 'tokens', 'colors', 'index.html')
+          // categories
+          assertContentMatches(pagePath, 'Brand')
+          assertContentMatches(pagePath, 'Neutral')
+          assertContentMatches(pagePath, 'Text')
+          assertContentMatches(pagePath, 'Background')
+
+          // token values
+          assertContentMatches(pagePath, 'colorBrandPrimary')
+          assertContentMatches(pagePath, '#FF183E')
+          assertContentMatches(pagePath, 'Primary brand color')
+
+          done()
+        })
+        .catch(done)
+    })
+
     it('should generate variant previews', done => {
       UIengine.generate(opts)
         .then(state => {
@@ -539,7 +574,7 @@ describe('UIengine', () => {
       this.sinon.stub(gulp, 'task')
       this.sinon.stub(gulp, 'watch').returns({ on: fn })
 
-      const uiGulp = UIengine.gulp(gulp, opts)
+      const uiGulp = UIengine.integrations.gulp(gulp, opts)
 
       uiGulp.task('patterns')
       assert(gulp.task.calledOnce)

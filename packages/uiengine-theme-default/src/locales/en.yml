@@ -22,6 +22,12 @@ code:
   context: Data
   rendered: HTML
 
+token:
+  name: Name
+  type: Type
+  value: Value
+  description: Description
+
 schema:
   copy_permalink: Copy link
   property_name: Property

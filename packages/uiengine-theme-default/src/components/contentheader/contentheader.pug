@@ -1,9 +1,9 @@
-mixin contentheader(title)
+mixin contentheader(title, element = 'h1')
   header.contentheader&attributes(attributes)
     if block
       block
     else
-      h1.contentheader__title= title
+      <#{element} class="contentheader__title">#{title}</#{element}>
 
 mixin contentheaderOption(id, title, isActive)
   - const classes = isActive ? 'contentheader__option--active' : null

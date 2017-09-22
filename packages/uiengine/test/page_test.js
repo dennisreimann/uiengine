@@ -7,6 +7,7 @@ const pagesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'pages')
 const state = {
   config: {
     source: {
+      base: testProjectPath,
       pages: pagesPath
     }
   }
@@ -188,6 +189,34 @@ describe('Page', () => {
         })
         .catch(done)
     })
+
+    it('should determine page type documentation for standard pages', done => {
+      Page.fetchById(state, 'index')
+        .then(data => {
+          assert.equal(data.type, 'documentation')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should determine page type template for pages with custom template', done => {
+      Page.fetchById(state, 'documentation/custom-template')
+        .then(data => {
+          assert.equal(data.type, 'template')
+          assert.equal(data.template, 'page')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should determine page type tokens for pages with tokens attribute', done => {
+      Page.fetchById(state, 'documentation/tokens/spaces')
+        .then(data => {
+          assert.equal(data.type, 'tokens')
+          done()
+        })
+        .catch(done)
+    })
   })
 
   describe('#fetchAll', () => {
@@ -196,7 +225,7 @@ describe('Page', () => {
         .then(data => {
           const pageIds = Object.keys(data)
 
-          assert.equal(pageIds.length, 14)
+          assert.equal(pageIds.length, 17)
           assert(pageIds.includes('index'), 'missing page "index"')
           assert(pageIds.includes('documentation'), 'missing page "documentation"')
           assert(pageIds.includes('patterns'), 'missing page "patterns"')

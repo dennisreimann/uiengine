@@ -1,0 +1,22 @@
+extends layout.pug
+
+include /contentheader/contentheader.pug
+include /tokens/tokens.pug
+
+block main
+  - const navigationItem = navigation[navigationId]
+  - const page = pages[navigationItem.itemId]
+
+  section.page(id=h.dasherize(page.id))
+    +contentheader(page.title).sob-m
+
+    if page.content
+      article.content
+        != page.content
+
+    if page.tokens instanceof Array
+      +tokens(page.tokens)
+    else
+      each tokens, title in page.tokens
+        +contentheader(title, 'h2').sot-xl.sob-xs
+        +tokens(tokens)

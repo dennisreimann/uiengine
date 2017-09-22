@@ -82,6 +82,11 @@ The most basic elements of our application.
 The `components` list references the component ids that should be included as child pages for this page.
 Think of the components parent page as a kind of category – here we are using the Atomic Design Methodology to group components.
 
+### Referencing design tokens
+
+The `page.md` can also reference design tokens.
+For details see the [design token docs](./design-tokens.md).
+
 ## Additional page files
 
 A page can have extra files and folders, too.
