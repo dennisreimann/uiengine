@@ -5,6 +5,6 @@ module.exports = {
   notify: false,
   open: false,
   server: {
-    baseDir: './dist'
+    baseDir: '../../test/tmp'
   }
 }

@@ -29,6 +29,7 @@
     "build": "lerna run build --parallel --scope uiengine*",
     "test": "mocha --compilers js:babel-register -R dot packages/*/test",
     "test-watch": "yarn test -w --watch-extensions js,jsx,json,md,yml,hbs,pug",
+    "test-project": "lerna run start --parallel --scope test-project",
     "cover": "nyc yarn test"
   },
   "workspaces": [

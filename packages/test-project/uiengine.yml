@@ -2,6 +2,7 @@
 # Here you can overwrite it and add more custom properties.
 name: UIengine Sample Project
 version: '1.0.0'
+debug: 1
 
 # Base directories for the input, your raw source files:
 # - components is the root of the directory containing the components

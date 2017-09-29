@@ -13,8 +13,9 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "dev": "yarn run clean && gulp develop",
-    "build": "yarn run clean && gulp build"
+    "start": "yarn run clean && gulp develop",
+    "build": "yarn run clean && gulp build",
+    "standalone": "yarn run clean && uiengine generate -s -w -d"
   },
   "dependencies": {
     "handlebars": "^4.0.10",
