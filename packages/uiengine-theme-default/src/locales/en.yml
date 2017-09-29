@@ -26,6 +26,7 @@ token:
   name: Name
   type: Type
   value: Value
+  variable: Variable
   description: Description
 
 schema:

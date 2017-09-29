@@ -2,7 +2,8 @@ include /tokens/color.pug
 include /tokens/token.pug
 
 mixin tokens(tokens)
-  each token in tokens
-    case token.type
-      when 'color': +color(token)
-      default: +token(token)
+  .tokens
+    each token in tokens
+      case token.type
+        when 'color': +color(token)
+        default: +token(token)

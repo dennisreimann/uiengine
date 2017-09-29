@@ -24,8 +24,12 @@ aliases: &aliases
     value: "#FFF"
     category: *neutral
 
+  colorNeutral50:
+    value: "rgb(0, 0, 0, .5)"
+    category: *neutral
+
   colorNeutralBlack:
-    value: "#000"
+    value: "hsl(0, 0%, 0%)"
     category: *neutral
 
 props:

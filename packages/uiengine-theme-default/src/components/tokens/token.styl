@@ -1,0 +1,57 @@
+.token
+  flex-grow 0
+  flex-shrink 0
+  margin-bottom $space-xl
+
+  &--color
+    flex-basis 22.5rem
+    padding-right $space-xxl
+
+  &__info
+    display flex
+
+    &--top
+      align-items flex-end
+
+  &__info + &__info
+    margin-top $space-xs
+
+  &__label,
+  &__symbol
+    flex 0 0 5.75rem
+    padding-right $space-m
+    text-align right
+
+  &__title
+    flex 1
+    font-family $font-family-regular
+
+  &__label
+    padding-top ($font-size-s - $font-size-xs)
+    color $color-secondary-text
+    font-family $font-family-light
+    font-size $font-size-xs
+
+  &__value
+    flex 1
+    font-size $font-size-s
+
+    &--value,
+    &--variable
+      font-family $font-family-code
+
+  // color
+  &__swatch
+    display inline-block
+    width 4.5rem
+    height 4.5rem
+    border-radius 50%
+    border-bottom-right-radius 0
+    border 1px solid $color-secondary-text
+    padding 2px
+
+    &__inner
+      width 100%
+      height 100%
+      border-radius 50%
+      border-bottom-right-radius 0

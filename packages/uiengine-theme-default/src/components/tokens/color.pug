@@ -1,13 +1,25 @@
 mixin color(token)
+  - const { name, description, value, variable } = token
+  - const { hex, hsl, rgb} = h.colorValues(value)
   dl.token.token--color&attributes(attributes)
-    dt.token__label.token__label--name= h.t('token.name')
-    dd.token__value.token__value--name= token.name
-    if token.type
-      dt.token__label.token__label--type= h.t('token.type')
-      dd.token__value.token__value--type= token.type
-    if token.value
-      dt.token__label.token__label--value= h.t('token.value')
-      dd.token__value.token__value--value= token.value
-    if token.description
-      dt.token__label.token__label--description= h.t('token.description')
-      dd.token__value.token__value--description= token.description
+    .token__info.token__info--top.sob-m
+      .token__symbol: .token__swatch: .token__swatch__inner(style=`background-color:${rgb}`)
+      .token__title= name
+    if description
+      .token__info
+        dt.token__label.token__label--description= h.t('token.description')
+        dd.token__value.token__value--description= description
+    if variable
+      .token__info
+        dt.token__label.token__label--variable= h.t('token.variable')
+        dd.token__value.token__value--variable= variable
+    if value
+      .token__info
+        dt.token__label.token__label--value HEX
+        dd.token__value.token__value--value= hex
+      .token__info
+        dt.token__label.token__label--value RGB
+        dd.token__value.token__value--value= rgb
+      .token__info
+        dt.token__label.token__label--value HSL
+        dd.token__value.token__value--value= hsl

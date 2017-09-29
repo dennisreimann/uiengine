@@ -1,13 +1,18 @@
 mixin token(token)
+  - const { name, description, value, variable } = token
   dl.token.token--default&attributes(attributes)
     dt.token__label.token__label--name= h.t('token.name')
-    dd.token__value.token__value--name= token.name
-    if token.type
+    dd.token__value.token__value--name= name
+    if type
       dt.token__label.token__label--type= h.t('token.type')
-      dd.token__value.token__value--type= token.type
-    if token.value
+      dd.token__value.token__value--type= type
+    if variable
+      .token__info
+        dt.token__label.token__label--variable= h.t('token.variable')
+        dd.token__value.token__value--variable= variable
+    if value
       dt.token__label.token__label--value= h.t('token.value')
-      dd.token__value.token__value--value= token.value
-    if token.description
+      dd.token__value.token__value--value= value
+    if description
       dt.token__label.token__label--description= h.t('token.description')
-      dd.token__value.token__value--description= token.description
+      dd.token__value.token__value--description= description

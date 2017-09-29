@@ -220,7 +220,9 @@ describe('Page', () => {
   })
 
   describe('#fetchAll', () => {
-    it('should return pages object', done => {
+    it('should return pages object', function (done) {
+      this.timeout(5000)
+
       Page.fetchAll(state)
         .then(data => {
           const pageIds = Object.keys(data)

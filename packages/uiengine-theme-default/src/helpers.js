@@ -1,6 +1,7 @@
 import path from 'path'
 import assert from 'assert'
 import highlightjs from 'highlight.js'
+import Color from 'color'
 
 const pageFile = 'index.html'
 const assetsDir = '_uiengine-theme'
@@ -103,6 +104,16 @@ export default function (options, data) {
         return `<a href="${relativePath(target, source)}#${anchor}">${displayName}</a>`
       } else {
         return displayName
+      }
+    },
+
+    colorValues (value) {
+      const color = Color(value)
+
+      return {
+        hex: color.hex(),
+        hsl: color.hsl(),
+        rgb: color.rgb()
       }
     },
 

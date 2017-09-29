@@ -32,6 +32,7 @@ Each token consists of the following attributes:
 - `type`
 - `name`
 - `value`
+- `variable`
 - `description`
 
 ## Theo integration

@@ -35,7 +35,7 @@ gulp.task('watch', () => {
   // additional files that should trigger a rebuild
   uiGulp.watch(['src/data/*.json', 'src/custom/**/*.md'])
 })
-
+```
 
 ## Theo
 
@@ -65,3 +65,25 @@ module.exports = UIintegrations.theo(theo).convert(filePath)
 
 The transformations converts your Theo `props` into a format that can be rendered by the UIengine tokens template.
 For details on the format see the [design token docs](./design-tokens.md).
+
+You can also pass a modification callback to the `convert` function.
+This allows you to further modify the property data:
+
+
+```js
+import path from 'path'
+import theo from 'theo'
+import { integrations as UIintegrations } from 'uiengine'
+
+const filePath = path.resolve(__dirname, 'colors.yml')
+const titleize = string => string.replace(/^color/, '').replace(/([A-Z\d]+)/g, ' $1').replace(/^./, str => str.toUpperCase())
+const kebabCase = string => `$${string.replace(/([a-z])([A-Z\d]+)/g, '$1-$2').replace(/\s+/g, '-').toLowerCase()}`
+const modify = prop => {
+  const { name } = prop
+  prop.name = titleize(name)
+  prop.variable = kebabCase(name)
+  return prop
+}
+
+module.exports = UIintegrations.theo(theo).convert(filePath, modify)
+```
