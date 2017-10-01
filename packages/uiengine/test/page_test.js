@@ -221,7 +221,7 @@ describe('Page', () => {
 
   describe('#fetchAll', () => {
     it('should return pages object', function (done) {
-      this.timeout(5000)
+      this.timeout(10000)
 
       Page.fetchAll(state)
         .then(data => {
