@@ -10,7 +10,7 @@ The design tokens are listed under the `tokens` key of a page:
 ```markdown
 ---
 title: Spaces
-tokens: 
+tokens:
 - type: size
   name: S
   value: .5rem
@@ -34,6 +34,48 @@ Each token consists of the following attributes:
 - `value`
 - `variable`
 - `description`
+- `reference`: The name of the referenced token property
+
+### Categories
+
+The tokens can also be seperated into multiple categories.
+
+```markdown
+---
+title: Colors
+tokens:
+- type: category
+  name: Brand
+  tokens:
+  - type: color
+    name: brandPrimary
+    value: yellow
+  - type: color
+    name: brandSecondary
+    value: blue
+- type: category
+  name: Neutral
+  tokens:
+  - type: color
+    name: neutralWhite
+    value: "#FFF"
+  - type: color
+    name: neutralBlack
+    value: "#000"
+- type: category
+  name: Background
+  tokens:
+  - type: color
+    name: backgroundLight
+    value: "#FFF"
+    reference: neutralWhite
+  - type: color
+    name: backgroundDark
+    value: blue
+    reference: brandSecondary
+---
+Our colors.
+```
 
 ## Theo integration
 

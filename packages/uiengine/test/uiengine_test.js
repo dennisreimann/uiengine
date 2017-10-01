@@ -87,7 +87,7 @@ describe('UIengine', () => {
           assertContentMatches(pagePath, 'Background')
 
           // token values
-          assertContentMatches(pagePath, 'colorBrandPrimary')
+          assertContentMatches(pagePath, 'Brand Primary')
           assertContentMatches(pagePath, '#FF183E')
           assertContentMatches(pagePath, 'Primary brand color')
 

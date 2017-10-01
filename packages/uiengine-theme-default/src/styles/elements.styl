@@ -70,3 +70,27 @@ i strong,
 strong em,
 strong i
   font-family $font-family-bolditalic
+
+table
+  border-collapse collapse
+
+
+th
+  color $color-secondary-text
+  text-align left
+  border-bottom 1px solid $color-border-medium
+  font-family $font-family-light
+  font-size $font-size-xs
+  font-weight normal
+
+td
+  border-bottom 1px solid $color-border-light
+  font-size $font-size-s
+
+th,
+td
+  padding $space-xs $space-s
+  &:first-child
+    padding-left 0
+  &:last-child
+    padding-right 0

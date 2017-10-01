@@ -28,6 +28,7 @@ token:
   value: Value
   variable: Variable
   description: Description
+  reference: Reference
 
 schema:
   copy_permalink: Copy link

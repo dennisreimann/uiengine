@@ -7,44 +7,92 @@ categories:
   text: &text Text
   background: &background Background
 
-aliases: &aliases
+aliases:
   # brand
-  colorBrandPrimary:
-    value: "#FF183E"
+  colorBrandPrimary: &colorBrandPrimary "#FF183E"
+  colorBrandSecondary: &colorBrandSecondary "#331833"
+
+  # neutral
+  colorNeutral100: &colorNeutral100 "#FFF"
+  colorNeutral90: &colorNeutral90 "#E5E5E5"
+  colorNeutral75: &colorNeutral75 "#BFBFBF"
+  colorNeutral50: &colorNeutral50 "#7F7F7F"
+  colorNeutral25: &colorNeutral25 "#404040"
+  colorNeutral10: &colorNeutral10 "#1A1A1A"
+  colorNeutral0: &colorNeutral0 "#000"
+
+props:
+  # brand
+  - name: colorBrandPrimary
+    value: *colorBrandPrimary
     comment: Primary brand color
     category: *brand
 
-  colorBrandSecondary:
-    value: "#331833"
+  - name: colorBrandSecondary
+    value: *colorBrandSecondary
     comment: Secondary brand color
     category: *brand
 
   # neutral
-  colorNeutralWhite:
-    value: "#FFF"
+  - name: colorNeutral100
+    value: *colorNeutral100
     category: *neutral
 
-  colorNeutral50:
-    value: "rgb(0, 0, 0, .5)"
+  - name: colorNeutral90
+    value: *colorNeutral90
     category: *neutral
 
-  colorNeutralBlack:
-    value: "hsl(0, 0%, 0%)"
+  - name: colorNeutral75
+    value: *colorNeutral75
     category: *neutral
 
-props:
-  <<: *aliases
+  - name: colorNeutral50
+    value: *colorNeutral50
+    category: *neutral
+
+  - name: colorNeutral25
+    value: *colorNeutral25
+    category: *neutral
+
+  - name: colorNeutral10
+    value: *colorNeutral10
+    category: *neutral
+
+  - name: colorNeutral0
+    value: *colorNeutral0
+    category: *neutral
+
+  - name: colorNeutralWhite
+    value: "{!colorNeutral100}"
+    category: *neutral
+
+  - name: colorNeutralBlack
+    value: "{!colorNeutral0}"
+    category: *neutral
 
   # text
-  colorTextDefault:
+  - name: colorTextDefault
     value: "{!colorBrandSecondary}"
     category: *text
 
+  - name: colorTextOnDark
+    value: "{!colorNeutral100}"
+    category: *text
+
+  - name: colorTextOnBlack
+    value: "{!colorNeutral90}"
+    category: *text
+
   # background
-  colorBackground:
-    value: "{!colorNeutralWhite}"
+  - name: colorBackgroundWhite
+    value: "{!colorNeutral100}"
     category: *background
 
-  colorBackgroundDark:
+  - name: colorBackgroundDark
     value: "{!colorBrandPrimary}"
     category: *background
+
+  - name: colorBackgroundBlack
+    value: "{!colorNeutral0}"
+    category: *background
+

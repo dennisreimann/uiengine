@@ -2,8 +2,22 @@ include /tokens/color.pug
 include /tokens/token.pug
 
 mixin tokens(tokens)
-  .tokens
-    each token in tokens
-      case token.type
-        when 'color': +color(token)
-        default: +token(token)
+  - const type = tokens[0].type
+  case type
+    when 'color'
+      .colorTokens&attributes(attributes)
+        each token in tokens
+          +color(token)
+
+    default
+      table.defaultTokens&attributes(attributes)
+        thead
+          tr
+            th.defaultToken__label.defaultToken__label--name= h.t('token.name')
+            th.defaultToken__label.defaultToken__label--value= h.t('token.value')
+            th.defaultToken__label.defaultToken__label--variable= h.t('token.variable')
+            th.defaultToken__label.defaultToken__label--description= h.t('token.description')
+            th.defaultToken__label.defaultToken__label--reference= h.t('token.reference')
+        tbody
+          each token in tokens
+            +token(token)
