@@ -35,6 +35,14 @@
   "workspaces": [
     "packages/*"
   ],
+  "nyc": {
+    "exclude": [
+      "packages/**/lib",
+      "packages/**/test",
+      "packages/test-project/**/*.js",
+      "test"
+    ]
+  },
   "standard": {
     "globals": [
       "after",
