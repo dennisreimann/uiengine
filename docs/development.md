@@ -50,17 +50,13 @@ yarn cover
 
 ### 🚀 Release
 
-Build a new release:
+Build and publish new release:
 
 ```bash
-yarn build
+yarn release
 ```
 
-Publish a new release:
-
-```bash
-lerna publish
-```
+This command also accepts the [lerna publish options](https://github.com/lerna/lerna#publish).
 
 ## Notes
 
