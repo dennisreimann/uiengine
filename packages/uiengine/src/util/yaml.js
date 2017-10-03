@@ -21,6 +21,8 @@ const fromExternalFile = (embeddingFilePath, sourcePaths, filePath) => {
     const string = fs.readFileSync(filePath, 'utf8')
     return renderMarkdown(string, filePath, sourcePaths)
   } else if (isJS) {
+    // invalidate require cache so that changes are reflected
+    delete require.cache[require.resolve(filePath)]
     return require(filePath)
   } else {
     return filePath
