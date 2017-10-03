@@ -1,8 +1,11 @@
-mixin token(token)
+mixin token(token, columns)
   - const { name, description, value, variable, reference } = token
   tr.defaultToken&attributes(attributes)
     td.defaultToken__value= name
     td.defaultToken__value.defaultToken__value--value= value
-    td.defaultToken__value.defaultToken__value--variable= variable
-    td.defaultToken__value= description
-    td.defaultToken__value= reference
+    if columns.variable
+      td.defaultToken__value.defaultToken__value--variable= variable
+    if columns.description
+      td.defaultToken__value= description
+    if columns.reference
+      td.defaultToken__value= reference
