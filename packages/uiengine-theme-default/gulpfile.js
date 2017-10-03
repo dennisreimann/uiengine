@@ -1,4 +1,5 @@
 const gulp = require('gulp')
+const path = require('path')
 const mergeStream = require('merge-stream')
 const runSequence = require('run-sequence')
 const autoprefixer = require('autoprefixer')
@@ -21,7 +22,6 @@ const src = {
   pug: ['./src/components/*/*.pug'],
   icons: ['./src/icons/sprite/**/*.svg'],
   styles: ['./src/styles/*.styl', './src/components/**/*.styl'],
-  hljs: ['./node_modules/highlight.js/styles/**'],
   scripts: ['src/scripts/**/*.js', './src/components/**/*.js'],
   static: ['./src/{fonts,images}/**'],
   locales: ['./src/locales/*.yml'],
@@ -102,7 +102,7 @@ gulp.task('locales', () =>
 )
 
 gulp.task('hljs', () =>
-  gulp.src(src.hljs)
+  gulp.src(`${path.dirname(require.resolve('highlight.js/styles/github.css'))}/**`)
     .pipe(theme('styles/hljs'))
 )
 
@@ -115,7 +115,7 @@ gulp.task('scripts', () =>
 )
 
 gulp.task('scripts:preview', cb =>
-  gulp.src('node_modules/iframe-resizer/js/iframeResizer.contentWindow.js')
+  gulp.src(require.resolve('iframe-resizer/js/iframeResizer.contentWindow.js'))
     .pipe(p.plumber())
     .pipe(p.concat('uiengine-preview.js'))
     .pipe(p.uglify())
