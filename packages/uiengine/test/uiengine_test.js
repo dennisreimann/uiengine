@@ -41,7 +41,9 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate state file', done => {
+    it('should generate state file', function (done) {
+      this.timeout(10000)
+
       UIengine.generate(opts)
         .then(state => {
           assertExists(path.join(testProjectTargetPath, 'state.json'))
@@ -51,7 +53,9 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate schema page', done => {
+    it('should generate schema page', function (done) {
+      this.timeout(10000)
+
       UIengine.generate(opts)
         .then(state => {
           assertExists(path.join(testProjectTargetPath, '_schema', 'index.html'))
@@ -61,7 +65,9 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate tokens page with token list', done => {
+    it('should generate tokens page with token list', function (done) {
+      this.timeout(10000)
+
       UIengine.generate(opts)
         .then(state => {
           const pagePath = path.join(testProjectTargetPath, 'documentation', 'tokens', 'spaces', 'index.html')
@@ -76,7 +82,9 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate tokens page with token categories', done => {
+    it('should generate tokens page with token categories', function (done) {
+      this.timeout(10000)
+
       UIengine.generate(opts)
         .then(state => {
           const pagePath = path.join(testProjectTargetPath, 'documentation', 'tokens', 'colors', 'index.html')
@@ -96,7 +104,9 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate variant previews', done => {
+    it('should generate variant previews', function (done) {
+      this.timeout(10000)
+
       UIengine.generate(opts)
         .then(state => {
           assertExists(path.join(testProjectTargetPath, '_variants', 'form', 'form.pug.html'))
@@ -115,7 +125,8 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should copy theme assets', done => {
+    it('should copy theme assets', function (done) {
+      this.timeout(10000)
       const assetsPath = path.join(testProjectTargetPath, '_uiengine-theme')
 
       UIengine.generate(opts)

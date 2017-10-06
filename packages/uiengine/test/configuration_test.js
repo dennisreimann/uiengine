@@ -52,7 +52,7 @@ describe('Configuration', () => {
       Configuration.read(testConfigPath)
         .then(config => {
           assert.equal(config.theme.module, 'uiengine-theme-default')
-          assert.equal(config.theme.options.skin, 'uiengineering')
+          assert.equal(config.theme.options.skin, 'deeplake')
 
           done()
         })
