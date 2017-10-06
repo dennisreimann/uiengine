@@ -3,7 +3,7 @@
   "name": "test-project",
   "description": "UIengine Test Project",
   "license": "MIT",
-  "version": "0.11.0-alpha.1",
+  "version": "0.11.0-alpha.2",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
@@ -30,7 +30,7 @@
     "gulp": "^3.9.1",
     "run-sequence": "^2.1.0",
     "theo": "^6.0.0-beta.7",
-    "uiengine": "^0.11.0-alpha.1",
+    "uiengine": "^0.11.0-alpha.2",
     "uiengine-adapter-handlebars": "^0.11.0-alpha.1",
     "uiengine-adapter-pug": "^0.11.0-alpha.1",
     "uiengine-adapter-react": "^0.11.0-alpha.1"
