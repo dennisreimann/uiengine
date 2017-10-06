@@ -37,6 +37,7 @@ theme:
   module: uiengine-theme-default
   options:
     skin: uiengineering
+    cache: false
 
 breakpoints: !include ./src/lib/breakpoints.json
 
