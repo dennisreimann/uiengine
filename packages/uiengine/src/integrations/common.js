@@ -36,7 +36,7 @@ const watchOptions = {
 // see https://www.browsersync.io/docs/options/
 const browserSyncOptions = {
   notify: false,
-  reloadThrottle: 1000,
+  reloadThrottle: 2500,
   watchOptions
 }
 
