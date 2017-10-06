@@ -2,6 +2,7 @@
 # Here you can overwrite it and add more custom properties.
 name: UIengine Sample Project
 version: '1.0.0'
+copyright: !markdown '[![Generated with UIengine](https://img.shields.io/badge/Generated_with-UIengine-blue.svg)](https://github.com/dennisreimann/uiengine)'
 debug: 1
 
 # Base directories for the input, your raw source files:
@@ -36,7 +37,7 @@ templates:
 theme:
   module: uiengine-theme-default
   options:
-    skin: uiengineering
+    skin: deeplake
     cache: false
 
 breakpoints: !include ./src/lib/breakpoints.json
