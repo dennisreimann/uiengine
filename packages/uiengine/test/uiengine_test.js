@@ -118,6 +118,7 @@ describe('UIengine', () => {
           assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text.hbs.html'))
           assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text.pug.html'))
           assertExists(path.join(testProjectTargetPath, '_variants', 'label', 'label.hbs.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'label', 'label.marko.html'))
           assertExists(path.join(testProjectTargetPath, '_variants', 'label', 'label.pug.html'))
 
           done()

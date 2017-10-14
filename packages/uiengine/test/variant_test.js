@@ -28,6 +28,10 @@ const state = {
       hbs: {
         module: 'uiengine-adapter-handlebars',
         options: {}
+      },
+      marko: {
+        module: 'uiengine-adapter-marko',
+        options: {}
       }
     }
   }
@@ -119,7 +123,7 @@ include /label/label.pug
         .then(data => {
           const variantIds = Object.keys(data)
 
-          assert.equal(variantIds.length, 12);
+          assert.equal(variantIds.length, 13);
 
           [ 'input/checkbox.pug',
             'input/number.pug',
@@ -129,6 +133,7 @@ include /label/label.pug
             'input/text-required.pug',
             'label/label.hbs',
             'label/label.jsx',
+            'label/label.marko',
             'label/label.pug',
             'formrow/text-with-label.pug',
             'formrow/text-without-label.pug',

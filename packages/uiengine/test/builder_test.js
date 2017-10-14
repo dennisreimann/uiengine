@@ -39,6 +39,10 @@ const state = {
       hbs: {
         module: 'uiengine-adapter-handlebars',
         options: {}
+      },
+      marko: {
+        module: 'uiengine-adapter-marko',
+        options: {}
       }
     },
     templates: {

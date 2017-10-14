@@ -6,6 +6,9 @@ node_modules
 npm-debug*
 *log
 
+# Generated files
+*.marko.js
+
 # Test and coverage reports
 .coveralls.yml
 .nyc_output
