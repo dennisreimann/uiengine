@@ -37,6 +37,7 @@ Nevertheless we encourage you to try it out and provide feedback.
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Build Status](https://travis-ci.org/dennisreimann/uiengine.svg?branch=master)](https://travis-ci.org/dennisreimann/uiengine)
 [![Coverage Status](https://coveralls.io/repos/github/dennisreimann/uiengine/badge.svg?branch=master)](https://coveralls.io/github/dennisreimann/uiengine?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/uiengine/badge.svg)](https://snyk.io/test/github/dennisreimann/uiengine)
 [![Maintained with lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 [![npm](https://img.shields.io/npm/v/uiengine.svg)](https://www.npmjs.com/package/uiengine)
 [![npm](https://img.shields.io/npm/dw/uiengine.svg)](https://www.npmjs.com/package/uiengine)
