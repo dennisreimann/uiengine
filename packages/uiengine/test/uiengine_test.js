@@ -18,13 +18,13 @@ const templatesPath = path.resolve(testProjectPath, 'src', 'templates')
 const opts = { config: path.resolve(testProjectPath, 'uiengine.yml'), debug: true }
 
 // "end to end" tests
-describe('UIengine', () => {
+describe('UIengine', function () {
+  this.timeout(10000)
+
   afterEach(() => { fs.removeSync(testProjectTargetPath) })
 
   describe('#generate', () => {
-    it('should generate pages', function (done) {
-      this.timeout(10000)
-
+    it('should generate pages', done => {
       UIengine.generate(opts)
         .then(state => {
           assertExists(path.join(testProjectTargetPath, 'index.html'))
@@ -41,9 +41,7 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate state file', function (done) {
-      this.timeout(10000)
-
+    it('should generate state file', done => {
       UIengine.generate(opts)
         .then(state => {
           assertExists(path.join(testProjectTargetPath, 'state.json'))
@@ -53,9 +51,7 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate schema page', function (done) {
-      this.timeout(10000)
-
+    it('should generate schema page', done => {
       UIengine.generate(opts)
         .then(state => {
           assertExists(path.join(testProjectTargetPath, '_schema', 'index.html'))
@@ -65,9 +61,7 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate tokens page with token list', function (done) {
-      this.timeout(10000)
-
+    it('should generate tokens page with token list', done => {
       UIengine.generate(opts)
         .then(state => {
           const pagePath = path.join(testProjectTargetPath, 'documentation', 'tokens', 'spaces', 'index.html')
@@ -82,9 +76,7 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate tokens page with token categories', function (done) {
-      this.timeout(10000)
-
+    it('should generate tokens page with token categories', done => {
       UIengine.generate(opts)
         .then(state => {
           const pagePath = path.join(testProjectTargetPath, 'documentation', 'tokens', 'colors', 'index.html')
@@ -104,9 +96,7 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should generate variant previews', function (done) {
-      this.timeout(10000)
-
+    it('should generate variant previews', done => {
       UIengine.generate(opts)
         .then(state => {
           assertExists(path.join(testProjectTargetPath, '_variants', 'form', 'form.pug.html'))
@@ -126,8 +116,7 @@ describe('UIengine', () => {
         .catch(done)
     })
 
-    it('should copy theme assets', function (done) {
-      this.timeout(10000)
+    it('should copy theme assets', done => {
       const assetsPath = path.join(testProjectTargetPath, '_uiengine-theme')
 
       UIengine.generate(opts)
@@ -563,8 +552,6 @@ describe('UIengine', () => {
 
   describe('#isGenerating', () => {
     it('should return whether or not a generate is currently running', function (done) {
-      this.timeout(10000)
-
       assert(!UIengine.isGenerating())
 
       UIengine.generate(opts)
