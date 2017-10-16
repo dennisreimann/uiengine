@@ -21,6 +21,12 @@ const state = {
           basedir: componentsPath
         }
       },
+      html: {
+        module: 'uiengine-adapter-html',
+        options: {
+          basedir: componentsPath
+        }
+      },
       jsx: {
         module: 'uiengine-adapter-react',
         options: {}
@@ -123,7 +129,7 @@ include /label/label.pug
         .then(data => {
           const variantIds = Object.keys(data)
 
-          assert.equal(variantIds.length, 13);
+          assert.equal(variantIds.length, 14);
 
           [ 'input/checkbox.pug',
             'input/number.pug',
@@ -132,6 +138,7 @@ include /label/label.pug
             'input/text-disabled.pug',
             'input/text-required.pug',
             'label/label.hbs',
+            'label/label.html',
             'label/label.jsx',
             'label/label.marko',
             'label/label.pug',
