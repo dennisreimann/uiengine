@@ -227,27 +227,58 @@ describe('Page', () => {
         .then(data => {
           const pageIds = Object.keys(data)
 
-          assert.equal(pageIds.length, 17)
+          assert.equal(pageIds.length, 16)
           assert(pageIds.includes('index'), 'missing page "index"')
           assert(pageIds.includes('documentation'), 'missing page "documentation"')
           assert(pageIds.includes('patterns'), 'missing page "patterns"')
           assert(pageIds.includes('patterns/atoms'), 'missing page "patterns/atoms"')
-          assert(pageIds.includes('schema'), 'missing page "schema"')
           done()
         })
         .catch(done)
     })
 
-    it('should return only schema page if pages source is not set', done => {
-      Page.fetchAll({ config: { source: { } } })
-        .then(data => {
-          const pageIds = Object.keys(data)
+    describe('without existing schema', () => {
+      it('should not add schema page', done => {
+        const stateWithoutSchema = Object.assign({}, state, { schema: { } })
 
-          assert.equal(pageIds.length, 1)
-          assert.equal(pageIds[0], 'schema')
-          done()
-        })
-        .catch(done)
+        Page.fetchAll(stateWithoutSchema)
+          .then(data => {
+            const pageIds = Object.keys(data)
+
+            assert(!pageIds.includes('schema'), 'page "schema" exists')
+
+            done()
+          })
+          .catch(done)
+      })
+    })
+
+    describe('with existing schema', () => {
+      it('should add schema page', done => {
+        const stateWithSchema = Object.assign({}, state, { schema: { Test: {} } })
+
+        Page.fetchAll(stateWithSchema)
+          .then(data => {
+            const pageIds = Object.keys(data)
+
+            assert(pageIds.includes('schema'), 'missing page "schema"')
+
+            done()
+          })
+          .catch(done)
+      })
+
+      it('should return only schema page if pages source is not set', done => {
+        Page.fetchAll({ config: { source: { } }, schema: { Test: { } } })
+          .then(data => {
+            const pageIds = Object.keys(data)
+
+            assert.equal(pageIds.length, 1)
+            assert.equal(pageIds[0], 'schema')
+            done()
+          })
+          .catch(done)
+      })
     })
   })
 })

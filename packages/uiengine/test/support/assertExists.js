@@ -1,12 +1,12 @@
 const assert = require('assert')
 const fs = require('fs-extra')
 
-module.exports = (path) => {
+module.exports = filePath => {
   let exists = false
   try {
-    const stat = fs.statSync(path)
+    const stat = fs.statSync(filePath)
     exists = stat.isFile() || stat.isDirectory()
   } catch (err) { }
 
-  assert(exists, `File does not exist: ${path}`)
+  assert(exists, `File does not exist: ${filePath}`)
 }

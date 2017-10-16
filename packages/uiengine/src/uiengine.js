@@ -60,14 +60,15 @@ async function generateContent () {
   debug2(state, 'UIengine.generateContent():start')
 
   // 1. data fetching
+  const schema = await Schema.fetchAll(state)
+  state = R.assoc('schema', schema, state)
+
   const fetchPages = Page.fetchAll(state)
-  const fetchSchema = Schema.fetchAll(state)
   const fetchComponents = Component.fetchAll(state)
   const fetchVariants = Variant.fetchAll(state)
-  const [pages, schema, components, variants] = await Promise.all([fetchPages, fetchSchema, fetchComponents, fetchVariants])
+  const [pages, components, variants] = await Promise.all([fetchPages, fetchComponents, fetchVariants])
 
   state = R.assoc('pages', pages, state)
-  state = R.assoc('schema', schema, state)
   state = R.assoc('components', components, state)
   state = R.assoc('variants', variants, state)
 

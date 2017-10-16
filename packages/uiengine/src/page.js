@@ -76,8 +76,10 @@ async function fetchAll (state) {
   const pageFetches = R.map(pageFetch, pageIds)
   const pageList = await Promise.all(pageFetches)
 
-  // append schema page
-  pageList.push(createSchemaPage(state))
+  // eventually append schema page
+  if (Object.keys(state.schema || {}).length) {
+    pageList.push(createSchemaPage(state))
+  }
 
   const pages = R.reduce(assocPage, {}, pageList)
 
