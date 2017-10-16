@@ -18,10 +18,7 @@ adapters:
   marko:
     module: uiengine-adapter-marko
     options:
-      pretty: true
-      basedir: ./src/components
+      debug: true
 ```
 
-For available options see the [Pug options reference](https://pugjs.org/api/reference.html#options).
-
-In addition to that there is the option `debug` for a more detailed output in case of rendering errors.
+The `debug` option allows for a more detailed output in case of rendering errors.
