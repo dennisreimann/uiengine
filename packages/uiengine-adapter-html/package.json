@@ -1,0 +1,27 @@
+{
+  "name": "uiengine-adapter-html",
+  "description": "UIengine template adapter for HTML.",
+  "license": "MIT",
+  "version": "0.11.0",
+  "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
+  "homepage": "https://github.com/dennisreimann/uiengine",
+  "bugs": "https://github.com/dennisreimann/uiengine",
+  "repository": "dennisreimann/uiengine",
+  "engines": {
+    "node": ">=6.11.0"
+  },
+  "main": "./lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "uiengine-adapter",
+    "uiengine",
+    "html"
+  ],
+  "scripts": {
+    "clean": "rimraf lib",
+    "start": "yarn run clean && yarn run build -w",
+    "build": "yarn run clean && babel src --out-dir lib"
+  }
+}
