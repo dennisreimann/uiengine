@@ -67,3 +67,23 @@ modal-option()
 
     .icon
       fill $color-modal-text-hover
+
+code()
+  font-family $font-family-code
+  font-size $font-size-s
+  white-space pre
+
+code-block()
+  code()
+  overflow-x auto
+  // defaults, will be overriden by hljs
+  color $color-code-text
+  background-color $color-code-bg
+  // use important to override hljs styling which differs per theme
+  padding $space-m !important
+
+code-inline()
+  code()
+  padding $space-xxs $space-xs
+  border-radius $space-xs
+  background-color $color-bg-light

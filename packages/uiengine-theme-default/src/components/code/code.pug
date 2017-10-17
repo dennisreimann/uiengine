@@ -7,8 +7,7 @@ mixin code(extension, raw, context, rendered)
             h4.code__title= h.t('code.raw')
             +icon('caret-down-double').code__expandicon
           .code__content
-            pre.code__raw.hljs(lang=extension)
-              != h.decorateRaw(raw, extension)
+            != h.decorateRaw(raw, extension)
 
       if context
         .code__segment.code__segment--expanded
@@ -16,8 +15,7 @@ mixin code(extension, raw, context, rendered)
             h4.code__title= h.t('code.context')
             +icon('caret-down-double').code__expandicon
           .code__content
-            pre.code__context.hljs(lang="json")
-              != h.decorateContext(context)
+            != h.decorateContext(context)
 
       if rendered
         .code__segment(id=blockId)
@@ -25,5 +23,4 @@ mixin code(extension, raw, context, rendered)
             h4.code__title= h.t('code.rendered')
             +icon('caret-down-double').code__expandicon
           .code__content
-            pre.code__rendered.hljs(lang="html")
-              != h.decorateRendered(rendered)
+            != h.decorateRendered(rendered)

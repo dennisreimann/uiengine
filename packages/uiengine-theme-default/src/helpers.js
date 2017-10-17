@@ -29,13 +29,6 @@ const relativePath = (toPath, fromPath) => {
 const jsonEscape = json =>
   JSON.stringify(json, null, '  ')
 
-const highlight = (code, lang) => {
-  const languages = (lang != null) ? [lang] : undefined
-  const highlighted = highlightjs.highlightAuto(code, languages)
-
-  return highlighted.value
-}
-
 const dasherize = string =>
   String(string)
     .replace(/\W+/gi, '-')
@@ -53,9 +46,17 @@ const decorateContext = json =>
 const decorateRendered = html =>
   highlight(html, 'html')
 
+export const highlight = (code, lang) => {
+  const languages = (lang != null) ? [lang] : undefined
+  const { value } = highlightjs.highlightAuto(code, languages)
+  const highlighted = `<pre class="hljs" lang="${lang}">${value}</pre>`
+
+  return highlighted
+}
+
 // function that binds the current page data and returns
 // an object with helper functions based on that data
-export default function (options, data) {
+export const createHelpers = (options, data) => {
   const { navigationId, navigation, schema } = data
   const currentItem = navigation[navigationId]
   const customPropertyTypes = schema ? Object.keys(schema) : []

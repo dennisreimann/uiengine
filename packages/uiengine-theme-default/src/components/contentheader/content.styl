@@ -35,6 +35,16 @@
     td:not([class])
       > :last-child
         margin-bottom 0
+
+  pre.hljs
+    margin-top $space-m
+    margin-bottom $space-m
+
+  pre.hljs,
+  mark:not([class]),
+  code:not([class])
+    border-radius $space-xs
+
   h1,
   h2,
   h3,
@@ -44,19 +54,23 @@
     &:not([class])
       margin-bottom $space-xs
 
-  p
-  ul
-  ol
-  table
-    &:not([class])
-      +
-        h2
-          &:not([class])
-            margin-top $space-xl
-      +
-        h3
-        h4
-        h5
-        h6
-          &:not([class])
-            margin-top $space-m
+  p:not([class]),
+  ul:not([class]),
+  ol:not([class]),
+  table:not([class]),
+  pre.hljs
+    +
+      h2,
+      h3
+        &:not([class])
+          margin-top $space-xl
+    +
+      h4,
+      h5
+        &:not([class])
+          margin-top $space-l
+
+    +
+      h6
+        &:not([class])
+          margin-top $space-m

@@ -1,6 +1,6 @@
 import path from 'path'
 import pug from 'pug'
-import helpers from './helpers'
+import { createHelpers, highlight } from './helpers'
 
 const componentsPath = path.resolve(__dirname, 'components')
 
@@ -12,10 +12,20 @@ const pugOpts = {
 
 export const staticPath = path.resolve(__dirname, '..', 'static')
 
+export async function setup (options) {
+  return new Promise((resolve, reject) => {
+    const { markdownIt } = options
+
+    markdownIt.set({ highlight })
+
+    resolve()
+  })
+}
+
 export async function render (options, id, data = {}) {
   return new Promise((resolve, reject) => {
     const filePath = path.resolve(componentsPath, 'layout', `${id}.pug`)
-    const theme = { h: helpers(options, data) }
+    const theme = { h: createHelpers(options, data) }
     const context = Object.assign({}, pugOpts, options, data, theme)
 
     try {
