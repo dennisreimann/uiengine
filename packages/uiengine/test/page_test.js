@@ -227,7 +227,7 @@ describe('Page', () => {
         .then(data => {
           const pageIds = Object.keys(data)
 
-          assert.equal(pageIds.length, 16)
+          assert.equal(pageIds.length, 18)
           assert(pageIds.includes('index'), 'missing page "index"')
           assert(pageIds.includes('documentation'), 'missing page "documentation"')
           assert(pageIds.includes('patterns'), 'missing page "patterns"')
