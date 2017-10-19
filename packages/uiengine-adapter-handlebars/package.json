@@ -20,7 +20,7 @@
     "handlebars"
   ],
   "dependencies": {
-    "handlebars": "^4.0.10"
+    "handlebars": "^4.0.11"
   },
   "scripts": {
     "clean": "rimraf lib",

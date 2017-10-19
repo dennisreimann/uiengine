@@ -20,7 +20,7 @@
     "marko"
   ],
   "dependencies": {
-    "marko": "^4.5.0"
+    "marko": "^4.5.2"
   },
   "scripts": {
     "clean": "rimraf lib",

@@ -31,19 +31,19 @@
     "build": "yarn run clean && babel src --out-dir lib"
   },
   "dependencies": {
-    "chalk": "^2.1.0",
-    "fs-extra": "^4.0.1",
+    "chalk": "^2.2.0",
+    "fs-extra": "^4.0.2",
     "globby": "^6.1.0",
-    "js-yaml": "^3.9.1",
+    "js-yaml": "^3.10.0",
     "markdown-it": "^8.4.0",
     "markdown-it-anchor": "^4.0.0",
-    "ramda": "^0.24.1",
+    "ramda": "^0.25.0",
     "uiengine-theme-default": "^0.11.5",
-    "yargs": "^8.0.2"
+    "yargs": "^9.0.1"
   },
   "optionalDependencies": {
     "browser-sync": "^2.18.13",
-    "chokidar": "^1.6.1"
+    "chokidar": "^1.7.0"
   },
   "devDependencies": {
     "babel-register": "^6.26.0",
