@@ -18,7 +18,7 @@ const paths = {
 }
 
 const src = {
-  lib: ['./src/*.js'],
+  lib: ['./src/*.js', './src/{__,lib}/**/*.js'], // FIXME: '__' is a hack that allows for lib to be accepted as dynamic path component
   pug: ['./src/components/*/*.pug'],
   icons: ['./src/icons/sprite/**/*.svg'],
   styles: ['./src/styles/*.styl', './src/components/**/*.styl'],

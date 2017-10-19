@@ -95,4 +95,3 @@ props:
   - name: colorBackgroundBlack
     value: "{!colorNeutral0}"
     category: *background
-

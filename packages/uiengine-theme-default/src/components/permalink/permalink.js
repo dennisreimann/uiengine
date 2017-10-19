@@ -1,5 +1,5 @@
 import Clipboard from 'clipboard'
-import { on } from '../../scripts/lib/util'
+import { on } from '../../lib/util/browser'
 
 const clipboardTextAttr = 'data-clipboard-text'
 const permalinkCopiedClass = 'permalink--copied'

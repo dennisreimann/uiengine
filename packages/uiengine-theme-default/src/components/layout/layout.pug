@@ -17,7 +17,7 @@ html(lang=h.lang)
     link(href=h.stylesPath rel="stylesheet")
     link(href=h.hljsPath rel="stylesheet")
     script
-      | window.UIengine = { breakpoints: !{JSON.stringify(config.breakpoints || {})} }
+      | window.UIengine = { breakpoints: !{JSON.stringify(config.breakpoints || {})}, previewScriptPath: !{JSON.stringify(h.previewScriptPath)} }
     if config.breakpoints
       style
         each width, breakpoint in config.breakpoints

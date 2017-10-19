@@ -1,9 +1,6 @@
 import { iframeResizer } from 'iframe-resizer'
-import { debounce, on } from '../../scripts/lib/util'
-
-// split this up to make the revving work
-const previewScriptPath = 'scripts/uiengine-preview.js'
-const previewScriptSrc = `../../_uiengine-theme/${previewScriptPath}`
+import { debounce, relativePath } from '../../lib/util/common'
+import { on } from '../../lib/util/browser'
 
 // get breakpoints if they are configures
 const breakpoints = window.UIengine.breakpoints || {}
@@ -82,7 +79,8 @@ document.querySelectorAll('.preview__iframe').forEach(iframe => {
     const { contentDocument, contentWindow } = iframe
     const head = contentDocument.getElementsByTagName('head')[0]
     const previewScript = document.createElement('script')
-    previewScript.src = previewScriptSrc
+
+    previewScript.src = relativePath(iframe.getAttribute('src'), window.UIengine.previewScriptPath)
 
     head.appendChild(previewScript)
 

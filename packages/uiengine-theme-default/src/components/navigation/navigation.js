@@ -1,4 +1,4 @@
-import { on } from '../../scripts/lib/util'
+import { on } from '../../lib/util/browser'
 
 on('click', '.navigation__menutoggle', e => {
   e.preventDefault()

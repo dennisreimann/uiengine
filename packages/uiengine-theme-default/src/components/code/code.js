@@ -1,4 +1,4 @@
-import { on } from '../../scripts/lib/util'
+import { on } from '../../lib/util/browser'
 
 on('click', '.code__header', e => {
   let section = e.target.parentNode

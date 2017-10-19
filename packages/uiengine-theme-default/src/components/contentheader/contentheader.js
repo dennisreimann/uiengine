@@ -1,4 +1,4 @@
-import { on } from '../../scripts/lib/util'
+import { on } from '../../lib/util/browser'
 
 const actionlistActiveClass = 'contentheader__actionlist--active'
 

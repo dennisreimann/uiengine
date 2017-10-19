@@ -76,6 +76,7 @@ export const createHelpers = (options, data) => {
   const hljsPath = assetPath(`styles/hljs/${hljs}.css`)
   const stylesPath = assetPath(`styles/uiengine-${skin}.css`)
   const scriptsPath = assetPath('scripts/uiengine.js')
+  const previewScriptPath = assetPath('scripts/uiengine-preview.js')
   const localePath = path.resolve(localesPath, `${lang}.json`)
   const localized = require(localePath)
 
@@ -88,6 +89,7 @@ export const createHelpers = (options, data) => {
     assetPath,
     stylesPath,
     scriptsPath,
+    previewScriptPath,
     hljsPath,
     lang,
 
