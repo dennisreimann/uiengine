@@ -100,6 +100,7 @@ And even though the UIengine is not completely there yet, we strive to evolve it
 - 🎨 [UIengine default theme](./packages/uiengine-theme-default)
 - 🔌 [Pug templating adapter](./packages/uiengine-adapter-pug)
 - 🔌 [React/JSX templating adapter](./packages/uiengine-adapter-react)
+- 🔌 [Vue templating adapter](./packages/uiengine-adapter-vue)
 - 🔌 [Marko templating adapter](./packages/uiengine-adapter-marko)
 - 🔌 [Handlebars templating adapter](./packages/uiengine-adapter-handlebars)
 - 🔌 [HTML templating adapter](./packages/uiengine-adapter-html)

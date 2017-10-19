@@ -22,8 +22,10 @@
     "handlebars": "^4.0.11",
     "marko": "^4.7.4",
     "pug": "^2.0.0-rc.4",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "vue": "^2.5.0",
+    "vue-server-renderer": "^2.5.0"
   },
   "devDependencies": {
     "babel-preset-react": "^6.24.1",
@@ -37,6 +39,7 @@
     "uiengine-adapter-html": "^0.11.3",
     "uiengine-adapter-marko": "^0.11.6",
     "uiengine-adapter-pug": "^0.11.6",
-    "uiengine-adapter-react": "^0.11.6"
+    "uiengine-adapter-react": "^0.11.6",
+    "uiengine-adapter-vue": "^0.11.0"
   }
 }

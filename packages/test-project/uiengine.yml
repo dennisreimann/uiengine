@@ -28,6 +28,8 @@ adapters:
   hbs: uiengine-adapter-handlebars
   marko: uiengine-adapter-marko
   html: uiengine-adapter-html
+  vue: uiengine-adapter-vue
+  js: uiengine-adapter-vue
 
 # Here you can configure the template that the variant preview gets embeded in.
 templates:
