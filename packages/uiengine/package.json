@@ -2,7 +2,7 @@
   "name": "uiengine",
   "description": "Create, document and evolve your design system collaboratively.",
   "license": "MIT",
-  "version": "0.11.5",
+  "version": "0.11.6",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
@@ -38,7 +38,7 @@
     "markdown-it": "^8.4.0",
     "markdown-it-anchor": "^4.0.0",
     "ramda": "^0.25.0",
-    "uiengine-theme-default": "^0.11.5",
+    "uiengine-theme-default": "^0.11.6",
     "yargs": "^9.0.1"
   },
   "optionalDependencies": {
@@ -47,8 +47,8 @@
   },
   "devDependencies": {
     "babel-register": "^6.26.0",
-    "uiengine-adapter-handlebars": "^0.11.0",
-    "uiengine-adapter-pug": "^0.11.0",
-    "uiengine-adapter-react": "^0.11.0"
+    "uiengine-adapter-handlebars": "^0.11.6",
+    "uiengine-adapter-pug": "^0.11.6",
+    "uiengine-adapter-react": "^0.11.6"
   }
 }
