@@ -195,4 +195,56 @@ describe('PageUtil', () => {
       assert.equal(attrs, converted)
     })
   })
+
+  describe('#isTemplatePage', () => {
+    it('should only return true if page type is "template"', () => {
+      assert(PageUtil.isTemplatePage('template'))
+      assert(!PageUtil.isTemplatePage('component'))
+      assert(!PageUtil.isTemplatePage('documentation'))
+    })
+  })
+
+  describe('#isTokensPage', () => {
+    it('should only return true if page type is "tokens"', () => {
+      assert(PageUtil.isTokensPage('tokens'))
+      assert(!PageUtil.isTokensPage('template'))
+      assert(!PageUtil.isTokensPage('documentation'))
+    })
+  })
+
+  describe('#isDocumentationPage', () => {
+    it('should only return true if page type is "documentation"', () => {
+      assert(PageUtil.isDocumentationPage('documentation'))
+      assert(!PageUtil.isDocumentationPage('template'))
+      assert(!PageUtil.isDocumentationPage('tokens'))
+    })
+  })
+
+  describe('#determineType', () => {
+    it('should return "template" if page attributes has template', () => {
+      assert.equal('template', PageUtil.determineType({ template: 'custom' }))
+    })
+
+    it('should return "tokens" if page attributes has tokens', () => {
+      assert.equal('tokens', PageUtil.determineType({ tokens: {} }))
+    })
+
+    it('should return "documentation" if page attributes has neither template nor tokens', () => {
+      assert.equal('documentation', PageUtil.determineType({}))
+    })
+  })
+
+  describe('#determineTitle', () => {
+    it('should use title from page attributes if it has a title', () => {
+      assert.equal('Atoms 2', PageUtil.determineTitle('atoms', { title: 'Atoms 2' }, '<h1 id="atoms-1">Atoms 1</h1>'))
+    })
+
+    it('should resolve title from markdown heading if page attributes has no title', () => {
+      assert.equal('Atoms 1', PageUtil.determineTitle('atoms', {}, '<h1 id="atoms-1">Atoms 1</h1>'))
+    })
+
+    it('should fallback to titleized id if page attributes has no title and there is no markdown heading', () => {
+      assert.equal('Atoms', PageUtil.determineTitle('atoms', {}, ''))
+    })
+  })
 })

@@ -20,16 +20,6 @@ const createSchemaPage = state => (
   }
 )
 
-const determinePageType = ({ template, tokens }) => {
-  if (template) {
-    return 'template'
-  } else if (tokens) {
-    return 'tokens'
-  } else {
-    return 'documentation'
-  }
-}
-
 async function readPageFile (state, filePath) {
   debug4(state, `Page.readPageFile(${filePath}):start`)
 
@@ -106,8 +96,9 @@ async function fetchById (state, id) {
   if (PageUtil.isIndexPage(id)) childIds.push(PageUtil.SCHEMA_ID)
 
   let { attributes, content } = pageData
-  const title = PageUtil.pageIdToTitle(id)
-  const type = determinePageType(attributes)
+
+  const title = PageUtil.determineTitle(id, attributes, content)
+  const type = PageUtil.determineType(attributes)
   attributes = PageUtil.convertUserProvidedChildrenList(id, childIds, attributes)
   attributes = PageUtil.convertUserProvidedComponentsList(id, attributes)
   const baseData = { id, path: pagePath, type, title, childIds, content, files }

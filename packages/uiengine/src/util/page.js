@@ -11,6 +11,11 @@ const INDEX_PAGE_PATH = ''
 const SCHEMA_ID = 'schema'
 const SCHEMA_PAGE_PATH = '_schema'
 
+// types
+const PAGE_TYPE_TOKENS = 'tokens'
+const PAGE_TYPE_TEMPLATE = 'template'
+const PAGE_TYPE_DOCUMENTATION = 'documentation'
+
 const isIndexPage = (pageId) =>
   pageId === INDEX_ID
 
@@ -19,6 +24,15 @@ const isIndexFilePath = (pagePath) =>
 
 const isIndexPagePath = (pagePath) =>
   pagePath === INDEX_PAGE_PATH
+
+const isTokensPage = pageType =>
+  pageType === PAGE_TYPE_TOKENS
+
+const isTemplatePage = pageType =>
+  pageType === PAGE_TYPE_TEMPLATE
+
+const isDocumentationPage = pageType =>
+  pageType === PAGE_TYPE_DOCUMENTATION
 
 const pageIdToPath = (pageId) =>
   isIndexPage(pageId) ? INDEX_PAGE_PATH : pageId
@@ -87,6 +101,26 @@ const parentIdsForPageId = (pageIds, pageId) => {
   return parentIds
 }
 
+const determineType = (attributes) => {
+  if (attributes.template) {
+    return PAGE_TYPE_TEMPLATE
+  } else if (attributes.tokens) {
+    return PAGE_TYPE_TOKENS
+  } else {
+    return PAGE_TYPE_DOCUMENTATION
+  }
+}
+
+// resolve title from attributes, use markdown heading or page id as fallback
+const determineTitle = (id, attributes, content) => {
+  let { title } = attributes
+  if (!title) {
+    const [, heading] = content && content.match(/<h1.*?>(.*?)<\/h1>/) || []
+    title = heading || pageIdToTitle(id)
+  }
+  return title
+}
+
 // turns the list of children from the user provided attributes
 // into a list of correctly named childIds
 const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes = {}) => {
@@ -129,6 +163,9 @@ module.exports = {
   isIndexPage,
   isIndexPagePath,
   isIndexFilePath,
+  isTemplatePage,
+  isTokensPage,
+  isDocumentationPage,
   pageIdToPath,
   pageIdToTitle,
   pageIdToPageFilePath,
@@ -139,6 +176,8 @@ module.exports = {
   parentIdForPageId,
   convertUserProvidedChildrenList,
   convertUserProvidedComponentsList,
+  determineType,
+  determineTitle,
   PAGE_FILENAME,
   INDEX_ID,
   SCHEMA_ID,

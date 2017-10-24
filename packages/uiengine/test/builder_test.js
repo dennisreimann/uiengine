@@ -93,12 +93,12 @@ const state = {
     })
   },
   navigation: {
-    'index': NavigationData('index', 'index', 'Home', '', 'documentation', [], null, ['patterns']),
-    'patterns': NavigationData('patterns', 'patterns', 'Pattern Library', 'pattern-library', 'documentation', ['index'], 'index', { childIds: ['patterns/input'] }),
-    'patterns/input': NavigationData('patterns/input', 'input', 'Awesome Input', 'pattern-library/input', 'component', ['index', 'patterns'], 'patterns'),
-    'prototype': NavigationData('prototype', 'prototype', 'Sandbox', 'prototype', 'documentation', ['index'], 'index'),
-    'prototype/custom-page': NavigationData('prototype/custom-page', 'prototype/custom-page', 'Custom Page', 'prototype/custom-page', 'custom', ['index', 'prototype'], 'prototype'),
-    'schema': NavigationData('schema', 'schema', 'Schema', '_schema', 'schema')
+    'index': NavigationData('index', 'index', 'Home', '', 'documentation', '<h1>Homepage</h1>', [], null, ['patterns']),
+    'patterns': NavigationData('patterns', 'patterns', 'Pattern Library', 'pattern-library', 'documentation', '', ['index'], 'index', { childIds: ['patterns/input'] }),
+    'patterns/input': NavigationData('patterns/input', 'input', 'Awesome Input', 'pattern-library/input', 'component', '', ['index', 'patterns'], 'patterns'),
+    'prototype': NavigationData('prototype', 'prototype', 'Sandbox', 'prototype', 'documentation', '', ['index'], 'index'),
+    'prototype/custom-page': NavigationData('prototype/custom-page', 'prototype/custom-page', 'Custom Page', 'prototype/custom-page', 'custom', '', ['index', 'prototype'], 'prototype'),
+    'schema': NavigationData('schema', 'schema', 'Schema', '_schema', 'schema', '')
   },
   components: {
     input: Factory.component('input', {

@@ -46,10 +46,19 @@ describe('Page', () => {
         .catch(done)
     })
 
-    it('should infer page title if it is not provided', done => {
+    it('should infer page title from folder name if title in frontmatter is not provided', done => {
       Page.fetchById(state, 'patterns/atoms')
         .then(data => {
           assert.equal(data.title, 'Atoms')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should infer page title from markdown headline if title in frontmatter is not provided', done => {
+      Page.fetchById(state, 'patterns/atoms/headlines')
+        .then(data => {
+          assert.equal(data.title, 'Headlines page')
           done()
         })
         .catch(done)
@@ -227,7 +236,7 @@ describe('Page', () => {
         .then(data => {
           const pageIds = Object.keys(data)
 
-          assert.equal(pageIds.length, 18)
+          assert.equal(pageIds.length, 19)
           assert(pageIds.includes('index'), 'missing page "index"')
           assert(pageIds.includes('documentation'), 'missing page "documentation"')
           assert(pageIds.includes('patterns'), 'missing page "patterns"')
