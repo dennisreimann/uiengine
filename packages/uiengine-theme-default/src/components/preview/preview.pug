@@ -3,8 +3,8 @@ mixin preview(id, src)
   - const containerId = `${id}-container`
   .preview&attributes(attributes)
     .preview__container(id=containerId data-preview-id=id)
-      .preview__size
-        if config.breakpoints
+      if config.breakpoints
+        .preview__size
           button.preview__sizer(type="button" data-breakpoints-target=breakpointsId)
       if config.breakpoints
         .preview__breakpoints(id=breakpointsId)
