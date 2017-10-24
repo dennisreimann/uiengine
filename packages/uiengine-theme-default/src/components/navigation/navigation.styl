@@ -40,6 +40,13 @@ nav_inset(level)
   &__item
     position relative
 
+    &--level-0
+      font-size $font-size-s
+
+    @media $mq-l_and_up
+      &:not(&--level-0)
+        font-size $font-size-xs
+
   &__item--collapsed &__tree
     display none
 
@@ -69,11 +76,11 @@ nav_inset(level)
     height 36px
     padding 6px
     @media $mq-up_to_m
-      top 4px
+      top 2px
     @media $mq-m_to_l
-      top 6px
+      top 4px
     @media $mq-l_and_up
-      top 1px
+      top 0
 
     .navigation__icon
       icon-size(.75)
@@ -90,11 +97,9 @@ nav_inset(level)
     text-decoration none
     padding-right $space-m
     @media $mq-up_to_l
-      font-size $font-size-m
       padding-top $space-m
       padding-bottom $space-m
     @media $mq-l_and_up
-      font-size $font-size-s
       padding-top $space-s
       padding-bottom $space-s
 
