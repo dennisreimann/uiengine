@@ -46,6 +46,14 @@ const decorateContext = json =>
 const decorateRendered = html =>
   highlight(html, 'html')
 
+// replace headings which resemble the page title
+const decoratePageContent = page => {
+  const { content, title } = page
+  const regexp = new RegExp(`^<h1.*?>${title}</h1>`)
+
+  return content.replace(regexp, '')
+}
+
 export const highlight = (code, lang) => {
   const languages = (lang != null) ? [lang] : undefined
   const { value } = highlightjs.highlightAuto(code, languages)
@@ -86,6 +94,7 @@ export const createHelpers = (options, data) => {
     decorateRaw,
     decorateContext,
     decorateRendered,
+    decoratePageContent,
     assetPath,
     stylesPath,
     scriptsPath,

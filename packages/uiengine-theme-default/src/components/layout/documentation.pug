@@ -11,4 +11,4 @@ block main
 
     if page.content
       article.content
-        != page.content
+        != h.decoratePageContent(page)

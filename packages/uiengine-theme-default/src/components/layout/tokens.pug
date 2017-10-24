@@ -27,8 +27,8 @@ block main
   section.page(id=h.dasherize(page.id))
     +contentheader(page.title).sob-m
 
-    article.content
-      if page.content
-        != page.content
+    if page.content
+      article.content
+        != h.decoratePageContent(page)
 
-      +categories(categories)
+    +categories(categories)
