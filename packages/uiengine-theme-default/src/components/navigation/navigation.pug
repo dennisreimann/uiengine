@@ -31,8 +31,10 @@ mixin __navigationItem(itemId, level)
         if (window.sessionStorage.getItem('#{id}-collapsed') === 'true') {
           document.getElementById('#{id}').classList.add('navigation__item--collapsed')
         }
-      a.navigation__link(href=h.pageLink(item))
-        = item.title
+      if item.isStructural
+        span.navigation__link= item.title
+      else
+        a.navigation__link(href=h.pageLink(item))= item.title
       if hasChildren
         button.navigation__itemtoggle(data-target=id)
           +icon('caret-down').navigation__icon

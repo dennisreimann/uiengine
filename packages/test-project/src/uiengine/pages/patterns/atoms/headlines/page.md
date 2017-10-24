@@ -1,4 +1,3 @@
----
-title: Headlines
----
+# Headlines page
+
 This is the content

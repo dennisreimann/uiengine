@@ -12,4 +12,3 @@ children:
 # some custom data
 description: Our patterns, elements, and components.
 ---
-This is the content
