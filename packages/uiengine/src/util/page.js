@@ -115,7 +115,7 @@ const determineType = (attributes) => {
 const determineTitle = (id, attributes, content) => {
   let { title } = attributes
   if (!title) {
-    const [, heading] = content && content.match(/<h1.*?>(.*?)<\/h1>/) || []
+    const [, heading] = (content && content.match(/<h1.*?>(.*?)<\/h1>/)) || []
     title = heading || pageIdToTitle(id)
   }
   return title
