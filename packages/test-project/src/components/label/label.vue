@@ -1,12 +1,15 @@
 <template>
-  <label class="label" :for="for">
+  <label class="label" :id="id">
     {{ title }}
   </label>
 </template>
 
 <script>
 export default {
-  name: 'my-label',
-  props: ['for', 'title']
+  name: 'MyLabel',
+  props: {
+    id: String,
+    title: String
+  }
 }
 </script>

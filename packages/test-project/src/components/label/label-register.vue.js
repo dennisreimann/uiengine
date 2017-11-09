@@ -1,5 +1,9 @@
 import Vue from 'vue'
 
 Vue.component('my-label', {
-  template: '<label class="label" :for="for">{{ title }}</label>'
+  props: {
+    id: String,
+    title: String
+  },
+  template: '<label class="label" :for="id">{{ title }}</label>'
 })

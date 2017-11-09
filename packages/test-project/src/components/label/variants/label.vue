@@ -1,5 +1,5 @@
 <template>
-  <my-label :title="title" :for="for" />
+  <my-label :id="id" :title="title" />
 </template>
 
 <script>
@@ -7,6 +7,10 @@ import MyLabel from '../label'
 
 export default {
   name: 'MyVariant',
+  props: {
+    id: String,
+    title: String
+  },
   components: {
     MyLabel
   }

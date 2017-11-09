@@ -34,6 +34,10 @@ const state = {
           basedir: path.resolve(testProjectPath, 'src', 'components')
         }
       },
+      js: {
+        module: 'uiengine-adapter-vue',
+        options: {}
+      },
       jsx: {
         module: 'uiengine-adapter-react',
         options: {}
@@ -44,6 +48,10 @@ const state = {
       },
       marko: {
         module: 'uiengine-adapter-marko',
+        options: {}
+      },
+      vue: {
+        module: 'uiengine-adapter-vue',
         options: {}
       }
     },

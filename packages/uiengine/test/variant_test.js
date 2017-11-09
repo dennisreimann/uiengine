@@ -115,7 +115,7 @@ describe('Variant', () => {
         .then(data => {
           const variantIds = Object.keys(data)
 
-          assert.equal(variantIds.length, 14);
+          assert.equal(variantIds.length, 16);
 
           [ 'input/checkbox.pug',
             'input/number.pug',
@@ -125,11 +125,13 @@ describe('Variant', () => {
             'input/text-required.pug',
             'label/label.hbs',
             'label/label.html',
+            'label/label.js',
             'label/label.jsx',
             'label/label.marko',
             'label/label.pug',
-            'formfield/text-with-label.pug',
-            'formfield/text-without-label.pug',
+            'label/label.vue',
+            'formrow/text-with-label.pug',
+            'formrow/text-without-label.pug',
             'form/form.pug'
           ].map(id => {
             assert(variantIds.includes(id), `missing variant "${id}"`)

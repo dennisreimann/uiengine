@@ -1,5 +1,8 @@
 export default {
   name: 'MyLabel',
-  props: ['for', 'title'],
-  template: '<label class="label" :for="for">{{ title }}</label>'
+  props: {
+    id: String,
+    title: String
+  },
+  template: '<label class="label" :for="id">{{ title }}</label>'
 }

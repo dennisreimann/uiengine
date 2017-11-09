@@ -28,7 +28,10 @@ export async function render (options, filePath, data = {}) {
       const descriptor = templateCompiler.parseComponent(sfc)
 
       vmOpts.template = descriptor.template.content
-      console.log(vmOpts)
+
+      // TODO: descriptor.script.content needs to be handled too
+
+      console.log(filePath, JSON.stringify(vmOpts, null, '  '))
     } else {
       let element = require(filePath)
       if (element.default) {
@@ -38,7 +41,8 @@ export async function render (options, filePath, data = {}) {
       if (element && element.options && element.options.name) { // defined via global register (Vue.component)
         const { name } = element.options
         vmOpts.template = `<${name} ${dataToProps(data)} />`
-      } else if (element && element.name) { // defined via export
+      } else if (element) { // defined via export
+        if (!element.name) element.name = 'UiengineVueAdapter-PleaseSpecifyComponentName'
         const { name } = element
         vmOpts.components[name] = element // register component locally
         vmOpts.template = `<${kebabcase(name)} ${dataToProps(data)} />`
@@ -53,7 +57,10 @@ export async function render (options, filePath, data = {}) {
       if (err) {
         const message = [`Vue could not render "${filePath}"!`, err]
 
-        if (options.debug) message.push(JSON.stringify(data, null, '  '))
+        if (options.debug) {
+          message.push(JSON.stringify(data, null, '  '))
+          message.push(JSON.stringify(vmOpts, null, '  '))
+        }
 
         reject(message.join('\n\n'))
       } else {

@@ -37,12 +37,14 @@ describe('Component', () => {
     it('should infer variantIds if they are not provided', done => {
       Component.fetchById(state, 'label')
         .then(data => {
-          assert.equal(data.variantIds.length, 5)
+          assert.equal(data.variantIds.length, 7)
           assert.equal(data.variantIds[0], 'label/label.hbs')
           assert.equal(data.variantIds[1], 'label/label.html')
-          assert.equal(data.variantIds[2], 'label/label.jsx')
-          assert.equal(data.variantIds[3], 'label/label.marko')
-          assert.equal(data.variantIds[4], 'label/label.pug')
+          assert.equal(data.variantIds[2], 'label/label.js')
+          assert.equal(data.variantIds[3], 'label/label.jsx')
+          assert.equal(data.variantIds[4], 'label/label.marko')
+          assert.equal(data.variantIds[5], 'label/label.pug')
+          assert.equal(data.variantIds[6], 'label/label.vue')
           done()
         })
         .catch(done)

@@ -28,8 +28,10 @@
     "vue-server-renderer": "^2.5.0"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-vue": "^2.0.0",
     "browser-sync": "^2.23.5",
     "connect-history-api-fallback": "^1.5.0",
     "gulp": "^3.9.1",
