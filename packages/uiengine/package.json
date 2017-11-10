@@ -21,8 +21,11 @@
   "keywords": [
     "uiengine",
     "uiengineering",
+    "components",
+    "design-system",
     "pattern-library",
     "style-guide",
+    "brand-manual",
     "static-site"
   ],
   "scripts": {
