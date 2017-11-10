@@ -29,7 +29,7 @@ describe('UIengine', function () {
         .then(state => {
           assertExists(path.join(testProjectTargetPath, 'index.html'))
           assertExists(path.join(testProjectTargetPath, 'documentation', 'index.html'))
-          assertExists(path.join(testProjectTargetPath, 'pattern-library', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'patterns', 'index.html'))
           assertExists(path.join(testProjectTargetPath, 'patterns', 'atoms', 'index.html'))
           assertExists(path.join(testProjectTargetPath, 'patterns', 'molecules', 'index.html'))
           assertExists(path.join(testProjectTargetPath, 'patterns', 'organisms', 'index.html'))
@@ -100,8 +100,8 @@ describe('UIengine', function () {
       UIengine.generate(opts)
         .then(state => {
           assertExists(path.join(testProjectTargetPath, '_variants', 'form', 'form.pug.html'))
-          assertExists(path.join(testProjectTargetPath, '_variants', 'formrow', 'text-with-label.pug.html'))
-          assertExists(path.join(testProjectTargetPath, '_variants', 'formrow', 'text-without-label.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'formfield', 'text-with-label.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'formfield', 'text-without-label.pug.html'))
           assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'number.pug.html'))
           assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text-disabled.pug.html'))
           assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text-required.pug.html'))
@@ -144,7 +144,7 @@ describe('UIengine', function () {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(testProjectTargetPath, 'pattern-library', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'patterns', 'index.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
@@ -166,7 +166,7 @@ describe('UIengine', function () {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'index')
-          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/page.md'))
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'page.md'))
 
           done()
         })
@@ -183,7 +183,7 @@ describe('UIengine', function () {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'patterns/pages/ajax/layer')
-          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/patterns/pages/ajax/layer/page.md'))
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'patterns', 'pages', 'ajax', 'layer', 'page.md'))
 
           done()
         })
@@ -191,16 +191,16 @@ describe('UIengine', function () {
     })
 
     it('should copy page files on change', done => {
-      const filePath = path.join(pagesPath, 'extra-files', 'file-in-folder.txt')
+      const filePath = path.join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt')
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(testProjectTargetPath, 'extra-files', 'file-in-folder.txt'))
+          assertExists(path.join(testProjectTargetPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
-          assert.equal(result.item, 'index')
-          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/extra-files/file-in-folder.txt'))
+          assert.equal(result.item, 'testcases')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'testcases', 'extra-files', 'file-in-folder.txt'))
 
           done()
         })
@@ -208,8 +208,8 @@ describe('UIengine', function () {
     })
 
     it('should generate page on create', done => {
-      const pagePath = path.join(testProjectTargetPath, 'documentation', 'created', 'index.html')
-      const filePath = path.join(pagesPath, 'documentation', 'created', 'page.md')
+      const pagePath = path.join(testProjectTargetPath, 'testcases', 'created', 'index.html')
+      const filePath = path.join(pagesPath, 'testcases', 'created', 'page.md')
       const fileDir = path.dirname(filePath)
 
       fs.mkdirsSync(fileDir)
@@ -218,12 +218,12 @@ describe('UIengine', function () {
       UIengine.generateIncrementForFileChange(filePath, 'created')
         .then(result => {
           assertContentMatches(pagePath, 'Content for created page.')
-          assertExists(path.join(testProjectTargetPath, 'documentation', 'created', 'label', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'testcases', 'created', 'label', 'index.html'))
 
           assert.equal(result.action, 'created')
           assert.equal(result.type, 'page')
-          assert.equal(result.item, 'documentation/created')
-          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/documentation/created/page.md'))
+          assert.equal(result.item, 'testcases/created')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/testcases/created/page.md'))
 
           fs.removeSync(fileDir)
 
@@ -237,8 +237,8 @@ describe('UIengine', function () {
     })
 
     it('should generate page on delete', done => {
-      const parentPagePath = path.join(testProjectTargetPath, 'documentation', 'index.html')
-      const filePath = path.join(pagesPath, 'documentation', 'created', 'page.md')
+      const parentPagePath = path.join(testProjectTargetPath, 'testcases', 'index.html')
+      const filePath = path.join(pagesPath, 'testcases', 'created', 'page.md')
       const fileDir = path.dirname(filePath)
 
       fs.mkdirsSync(fileDir)
@@ -256,8 +256,8 @@ describe('UIengine', function () {
 
               assert.equal(result.action, 'deleted')
               assert.equal(result.type, 'page')
-              assert.equal(result.item, 'documentation/created')
-              assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/pages/documentation/created/page.md'))
+              assert.equal(result.item, 'testcases/created')
+              assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'testcases', 'created', 'page.md'))
 
               fs.removeSync(fileDir)
 
@@ -286,7 +286,7 @@ describe('UIengine', function () {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'schema')
-          assert.equal(result.file, path.join(testProjectRelativePath, 'src/uiengine/schema/Entity.yml'))
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'uiengine', 'schema', 'Entity.yml'))
 
           done()
         })
@@ -303,7 +303,7 @@ describe('UIengine', function () {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'component')
           assert.equal(result.item, 'form')
-          assert.equal(result.file, path.join(testProjectRelativePath, '/src/components/form/form.pug'))
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'components', 'form', 'form.pug'))
 
           done()
         })
@@ -320,7 +320,7 @@ describe('UIengine', function () {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'component')
           assert.equal(result.item, 'input')
-          assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/input/variants/text.md'))
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'components', 'input', 'variants', 'text.md'))
 
           done()
         })
@@ -343,7 +343,7 @@ describe('UIengine', function () {
           assert.equal(result.action, 'created')
           assert.equal(result.type, 'component')
           assert.equal(result.item, 'my-new-component')
-          assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/my-new-component/component.md'))
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'components', 'my-new-component', 'component.md'))
 
           fs.removeSync(fileDir)
 
@@ -378,7 +378,7 @@ describe('UIengine', function () {
               assert.equal(result.action, 'deleted')
               assert.equal(result.type, 'component')
               assert.equal(result.item, 'my-new-component')
-              assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/my-new-component/component.md'))
+              assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'components', 'my-new-component', 'component.md'))
 
               fs.removeSync(componentPath)
 
@@ -390,7 +390,7 @@ describe('UIengine', function () {
                   assert.equal(result.action, 'deleted')
                   assert.equal(result.type, 'component')
                   assert.equal(result.item, 'my-new-component')
-                  assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/my-new-component'))
+                  assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'components', 'my-new-component'))
 
                   fs.removeSync(componentPath)
 
@@ -430,7 +430,7 @@ describe('UIengine', function () {
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'variant')
           assert.equal(result.item, 'form/form.pug')
-          assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/form/variants/form.pug'))
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'components', 'form', 'variants', 'form.pug'))
 
           assertExists(componentPath)
           done()
@@ -453,7 +453,7 @@ describe('UIengine', function () {
           assert.equal(result.action, 'created')
           assert.equal(result.type, 'variant')
           assert.equal(result.item, 'form/form-fieldsets.pug')
-          assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/form/variants/form-fieldsets.pug'))
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'components', 'form', 'variants', 'form-fieldsets.pug'))
 
           fs.removeSync(filePath)
 
@@ -485,7 +485,7 @@ describe('UIengine', function () {
               assert.equal(result.action, 'deleted')
               assert.equal(result.type, 'variant')
               assert.equal(result.item, 'form/form-fieldsets.pug')
-              assert.equal(result.file, path.join(testProjectRelativePath, 'src/components/form/variants/form-fieldsets.pug'))
+              assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'components', 'form', 'variants', 'form-fieldsets.pug'))
 
               done()
             })
@@ -503,12 +503,12 @@ describe('UIengine', function () {
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(testProjectTargetPath, 'documentation', 'custom-template', 'index.html'))
+          assertExists(path.join(testProjectTargetPath, 'testcases', 'custom-template', 'index.html'))
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'template')
           assert.equal(result.item, 'page')
-          assert.equal(result.file, path.join(testProjectRelativePath, 'src/templates/page.pug'))
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'templates', 'page.pug'))
 
           done()
         })

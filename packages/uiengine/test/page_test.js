@@ -1,5 +1,6 @@
 const path = require('path')
 const assert = require('assert')
+const assertMatches = require('./support/assertMatches')
 
 const Page = require('../src/page')
 const { testProjectPath } = require('../../../test/support/paths')
@@ -12,6 +13,8 @@ const state = {
     }
   }
 }
+
+const assertPage = (pageIds, pageId) => assert(pageIds.includes(pageId), `missing page "${pageId}"`)
 
 describe('Page', () => {
   describe('#fetchById', () => {
@@ -30,17 +33,17 @@ describe('Page', () => {
         .then(data => {
           assert.equal(data.id, 'patterns')
           assert.equal(data.title, 'Pattern Library')
-          assert.equal(data.description, 'Our patterns, elements, and components.')
           done()
         })
         .catch(done)
     })
 
     it('should return page object for grand child page', done => {
-      Page.fetchById(state, 'patterns')
+      Page.fetchById(state, 'testcases/custom-data')
         .then(data => {
-          assert.equal(data.id, 'patterns')
-          assert.equal(data.title, 'Pattern Library')
+          assert.equal(data.id, 'testcases/custom-data')
+          assert.equal(data.title, 'Custom Data')
+          assert.equal(data.description, 'This is some custom page data')
           done()
         })
         .catch(done)
@@ -56,21 +59,21 @@ describe('Page', () => {
     })
 
     it('should infer page title from markdown headline if title in frontmatter is not provided', done => {
-      Page.fetchById(state, 'patterns/atoms/headlines')
+      Page.fetchById(state, 'testcases')
         .then(data => {
-          assert.equal(data.title, 'Headlines page')
+          assert.equal(data.title, 'Test Cases')
           done()
         })
         .catch(done)
     })
 
     it('should infer childIds if they are not provided', done => {
-      Page.fetchById(state, 'patterns/atoms')
+      Page.fetchById(state, 'testcases')
         .then(data => {
           assert.equal(data.childIds.length, 3)
-          assert.equal(data.childIds[0], 'patterns/atoms/copytext')
-          assert.equal(data.childIds[1], 'patterns/atoms/form-elements')
-          assert.equal(data.childIds[2], 'patterns/atoms/headlines')
+          assert.equal(data.childIds[0], 'testcases/custom-data')
+          assert.equal(data.childIds[1], 'testcases/custom-path')
+          assert.equal(data.childIds[2], 'testcases/custom-template')
           done()
         })
         .catch(done)
@@ -79,10 +82,11 @@ describe('Page', () => {
     it('should infer childIds for index if they are not provided', done => {
       Page.fetchById(state, 'index')
         .then(data => {
-          assert.equal(data.childIds.length, 3)
+          assert.equal(data.childIds.length, 4)
           assert.equal(data.childIds[0], 'documentation')
           assert.equal(data.childIds[1], 'patterns')
-          assert.equal(data.childIds[2], 'schema')
+          assert.equal(data.childIds[2], 'testcases')
+          assert.equal(data.childIds[3], 'schema')
           done()
         })
         .catch(done)
@@ -122,7 +126,7 @@ describe('Page', () => {
     })
 
     it('should convert componentIds for user provided component list', done => {
-      Page.fetchById(state, 'patterns/atoms/form-elements')
+      Page.fetchById(state, 'patterns/atoms')
         .then(data => {
           assert.equal(data.componentIds.length, 2)
           assert.equal(data.componentIds[0], 'label')
@@ -153,7 +157,7 @@ describe('Page', () => {
     it('should not infer path if it is explicitely provided', done => {
       Page.fetchById(state, 'patterns')
         .then(data => {
-          assert.equal(data.path, 'pattern-library')
+          assert.equal(data.path, 'patterns')
           done()
         })
         .catch(done)
@@ -162,29 +166,29 @@ describe('Page', () => {
     it('should render content from markdown', done => {
       Page.fetchById(state, 'index')
         .then(data => {
-          assert.equal(data.content, '<p>Welcome!</p>')
+          assertMatches(data.content, '<p>Welcome! This is the UIengine Sample Project.')
           done()
         })
         .catch(done)
     })
 
     it('should register files that do not start with an underscore', done => {
-      Page.fetchById(state, 'patterns')
+      Page.fetchById(state, 'testcases')
         .then(data => {
           assert.equal(data.files.length, 2)
-          assert.equal(data.files[0], path.join(pagesPath, 'patterns', 'patterns-file.txt'))
-          assert.equal(data.files[1], path.join(pagesPath, 'patterns', 'some-files', 'file-in-folder.txt'))
+          assert.equal(data.files[0], path.join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
+          assert.equal(data.files[1], path.join(pagesPath, 'testcases', 'index.txt'))
           done()
         })
         .catch(done)
     })
 
     it('should register files in folders that do not start with an underscore', done => {
-      Page.fetchById(state, 'index')
+      Page.fetchById(state, 'testcases')
         .then(data => {
           assert.equal(data.files.length, 2)
-          assert.equal(data.files[0], path.join(pagesPath, 'extra-files', 'file-in-folder.txt'))
-          assert.equal(data.files[1], path.join(pagesPath, 'index.txt'))
+          assert.equal(data.files[0], path.join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
+          assert.equal(data.files[1], path.join(pagesPath, 'testcases', 'index.txt'))
           done()
         })
         .catch(done)
@@ -209,7 +213,7 @@ describe('Page', () => {
     })
 
     it('should determine page type template for pages with custom template', done => {
-      Page.fetchById(state, 'documentation/custom-template')
+      Page.fetchById(state, 'testcases/custom-template')
         .then(data => {
           assert.equal(data.type, 'template')
           assert.equal(data.template, 'page')
@@ -237,10 +241,18 @@ describe('Page', () => {
           const pageIds = Object.keys(data)
 
           assert.equal(pageIds.length, 20)
-          assert(pageIds.includes('index'), 'missing page "index"')
-          assert(pageIds.includes('documentation'), 'missing page "documentation"')
-          assert(pageIds.includes('patterns'), 'missing page "patterns"')
-          assert(pageIds.includes('patterns/atoms'), 'missing page "patterns/atoms"')
+
+          assertPage(pageIds, 'index')
+          assertPage(pageIds, 'documentation')
+          assertPage(pageIds, 'documentation/development')
+          assertPage(pageIds, 'documentation/getting-started')
+          assertPage(pageIds, 'patterns')
+          assertPage(pageIds, 'patterns/atoms')
+          assertPage(pageIds, 'patterns/molecules')
+          assertPage(pageIds, 'patterns/organisms')
+          assertPage(pageIds, 'patterns/templates')
+          assertPage(pageIds, 'patterns/pages')
+
           done()
         })
         .catch(done)

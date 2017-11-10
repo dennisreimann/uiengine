@@ -1,5 +1,7 @@
 const path = require('path')
 const assert = require('assert')
+const assertMatches = require('./support/assertMatches')
+const assertDoesNotMatch = require('./support/assertDoesNotMatch')
 
 const Variant = require('../src/variant')
 
@@ -53,9 +55,11 @@ describe('Variant', () => {
           assert.equal(data.content, '<p>This is documentation for the text input.</p>')
           assert.equal(data.context.id, 'name')
           assert.equal(data.context.name, 'person[name]')
-          assert.equal(data.raw, 'include /input/input.pug\n\n+input(id, name)')
-          assert.equal(data.rendered, '<input class="input input--text" id="name" name="person[name]" type="text"/>')
           assert.equal(data.extension, 'pug')
+
+          assertMatches(data.rendered, /<input class="input input--text" id="name" name="person\[name\]" type="text"\/>/g)
+          assertMatches(data.raw, /include \/input\/input\.pug/)
+          assertMatches(data.raw, /\+input\(id, name\)/)
 
           done()
         })
@@ -85,18 +89,9 @@ describe('Variant', () => {
     it('should omit marked parts in code', done => {
       Variant.fetchById(state, 'form/form.pug')
         .then(data => {
-          assert.equal(data.raw, `
-include /form/form.pug
-include /formrow/formrow.pug
-include /input/input.pug
-include /label/label.pug
+          assertDoesNotMatch(data.raw, /\+input\("username", "person\[username\]"\)/g)
+          assertMatches(data.raw, /\+input\("password", "person\[password\]", "Password"\)/g)
 
-+form("#")
-  +formrow()
-  +formrow()
-    +label("last_name", "Last name")
-    +input("last_name", "person[last_name]")
-  +formrow()`.trim())
           done()
         })
         .catch(done)
@@ -105,18 +100,9 @@ include /label/label.pug
     it('should omit marked parts in preview', done => {
       Variant.fetchById(state, 'form/form.pug')
         .then(data => {
-          assert.equal(data.rendered, `
-<form class="form" action="#" type="GET">
-  <div class="form__row">
-    <label class="label" for="first_name">First name
-    </label>
-    <input class="input input--text" id="first_name" name="person[first_name]" type="text"/>
-  </div>
-  <div class="form__row">
-  </div>
-  <div class="form__row">
-  </div>
-</form>`.trim())
+          assertDoesNotMatch(data.rendered, /<input class="input input--password" id="password" name="person\[password\]" type="password"\/>/g)
+          assertMatches(data.rendered, /<input class="input input--text" id="username" name="person\[username\]" type="text"\/>/g)
+
           done()
         })
         .catch(done)
@@ -142,8 +128,8 @@ include /label/label.pug
             'label/label.jsx',
             'label/label.marko',
             'label/label.pug',
-            'formrow/text-with-label.pug',
-            'formrow/text-without-label.pug',
+            'formfield/text-with-label.pug',
+            'formfield/text-without-label.pug',
             'form/form.pug'
           ].map(id => {
             assert(variantIds.includes(id), `missing variant "${id}"`)

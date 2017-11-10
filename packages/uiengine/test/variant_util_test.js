@@ -32,7 +32,7 @@ describe('VariantUtil', () => {
   describe('#variantIdToTitle', () => {
     it('should return titleized name', () => {
       assert.equal(VariantUtil.variantIdToTitle('form/form.pug'), 'Form')
-      assert.equal(VariantUtil.variantIdToTitle('formrow/formrow-with-label.pug'), 'Formrow With Label')
+      assert.equal(VariantUtil.variantIdToTitle('formfield/formfield-with-label.pug'), 'Formfield With Label')
     })
   })
 

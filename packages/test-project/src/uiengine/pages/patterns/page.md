@@ -1,7 +1,5 @@
 ---
 title: Pattern Library
-# custom path
-path: pattern-library
 # explicitely list children to ensure the correct order
 children:
 - atoms
@@ -9,6 +7,5 @@ children:
 - organisms
 - templates
 - pages
-# some custom data
-description: Our patterns, elements, and components.
 ---
+The test project pattern styles are provided by [Semantic UI](https://semantic-ui.com/collections/form.html).

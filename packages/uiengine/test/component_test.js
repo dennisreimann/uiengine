@@ -11,6 +11,8 @@ const state = {
   }
 }
 
+const assertComponent = (componentIds, componentId) => assert(componentIds.includes(componentId), `missing component "${componentId}"`)
+
 describe('Component', () => {
   describe('#fetchById', () => {
     it('should return component object', done => {
@@ -88,10 +90,12 @@ describe('Component', () => {
           const componentIds = Object.keys(data)
 
           assert.equal(componentIds.length, 4)
-          assert(componentIds.includes('input'), 'missing component "input"')
-          assert(componentIds.includes('label'), 'missing component "label"')
-          assert(componentIds.includes('formrow'), 'missing component "formrow"')
-          assert(componentIds.includes('form'), 'missing component "form"')
+
+          assertComponent(componentIds, 'input')
+          assertComponent(componentIds, 'label')
+          assertComponent(componentIds, 'formfield')
+          assertComponent(componentIds, 'form')
+
           done()
         })
         .catch(done)

@@ -1,3 +1,7 @@
+include /form/form.pug
+include /formfield/formfield.pug
 include /input/input.pug
 
-+input("name", "person[name]")(required=true)
++form()
+  +formfield()
+    +input("name", "person[name]")(required=true)

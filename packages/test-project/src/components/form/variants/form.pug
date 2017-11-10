@@ -1,17 +1,24 @@
 include /form/form.pug
-include /formrow/formrow.pug
+include /formfield/formfield.pug
 include /input/input.pug
 include /label/label.pug
 
 +form("#")
-  +formrow()
-    <!-- omit:code:start -->
+  +formfield()
     +label("first_name", "First name")
-    +input("first_name", "person[first_name]")
-    <!-- omit:code:end -->
-  +formrow()
-    <!-- omit:preview:start -->
+    +input("first_name", "person[first_name]")(placeholder="First Name")
+  +formfield()
     +label("last_name", "Last name")
-    +input("last_name", "person[last_name]")
-    <!-- omit:preview:end -->
-  +formrow()
+    +input("last_name", "person[last_name]")(placeholder="Last Name")
+
+  <!-- omit:code:start -->
+  +formfield()
+    +label("username", "Username")
+    +input("username", "person[username]")
+  <!-- omit:code:end -->
+
+  <!-- omit:preview:start -->
+  +formfield()
+    +label("password", "Password")
+    +input("password", "person[password]", "Password")
+  <!-- omit:preview:end -->

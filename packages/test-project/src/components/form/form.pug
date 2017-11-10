@@ -1,5 +1,5 @@
 mixin form(url, type)
   - var type = (attributes && attributes.type) || 'GET'
-  form.form(action=url type=type)&attributes(attributes)
+  form.ui.form(action=url type=type)&attributes(attributes)
     if block
       block

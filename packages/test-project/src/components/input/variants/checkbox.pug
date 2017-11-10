@@ -1,3 +1,7 @@
+include /form/form.pug
+include /formfield/formfield.pug
 include /input/input.pug
 
-+input("tos", "terms-of-service", "checkbox")
++form()
+  +formfield()
+    +input("tos", "terms-of-service", "checkbox")

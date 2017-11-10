@@ -2,9 +2,7 @@ doctype
 html
   head
     title #{variant.title} • #{config.name} (#{config.version})
-    meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
-    meta(name="viewport" content="width=device-width,initial-scale=1")
-    link(href="/assets/styles/main.css" rel="stylesheet")
+    include common/_head.pug
   body
     !=variant.rendered
-    script(src="/assets/scripts/main.js" defer)
+    include common/_foot.pug

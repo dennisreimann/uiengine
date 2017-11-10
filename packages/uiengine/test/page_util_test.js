@@ -51,7 +51,7 @@ describe('PageUtil', () => {
     })
 
     it('should return page id for file path', () => {
-      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'patterns', 'atoms', 'copytext', 'additional.pdf')), 'patterns/atoms/copytext')
+      assert.equal(PageUtil.pageFilePathToPageId(pagesPath, path.join(pagesPath, 'testcases', 'index.txt')), 'testcases')
     })
 
     it('should return page id for nested file path', () => {
@@ -128,8 +128,8 @@ describe('PageUtil', () => {
     })
 
     it('should convert the component id into a page path based on the parent page path for child page', () => {
-      const pagePath = PageUtil.pagePathForComponentId('pattern-library/atoms', 'button')
-      assert.equal(pagePath, 'pattern-library/atoms/button')
+      const pagePath = PageUtil.pagePathForComponentId('patterns/atoms', 'button')
+      assert.equal(pagePath, 'patterns/atoms/button')
     })
   })
 

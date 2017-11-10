@@ -100,8 +100,9 @@ describe('Configuration', () => {
       Configuration.read(testConfigPath)
         .then(config => {
           assert.equal(config.templates['variant-preview'], path.resolve(testProjectPath, 'src', 'templates', 'variant-preview.pug'))
-          assert.equal(config.templates['other-page'], path.resolve(testProjectPath, 'src', 'templates', 'other-page.pug'))
-          assert.equal(config.templates['common/include'], path.resolve(testProjectPath, 'src', 'templates', 'common', 'include.pug'))
+          assert.equal(config.templates['page'], path.resolve(testProjectPath, 'src', 'templates', 'page.pug'))
+          assert.equal(config.templates['common/_head'], path.resolve(testProjectPath, 'src', 'templates', 'common', '_head.pug'))
+          assert.equal(config.templates['common/_foot'], path.resolve(testProjectPath, 'src', 'templates', 'common', '_foot.pug'))
 
           done()
         })
