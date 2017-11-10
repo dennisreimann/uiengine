@@ -31,7 +31,9 @@
     "test-watch": "yarn test -w --watch-extensions js,jsx,json,md,yml,hbs,pug",
     "test-project": "lerna run start --parallel --scope test-project",
     "cover": "nyc yarn test",
-    "release": "standard && yarn run cover && yarn run build && lerna publish"
+    "release": "standard && yarn run cover && yarn run build && lerna publish",
+    "test-project:build": "lerna run build --parallel --scope test-project",
+    "test-project:deploy": "npm run test-project:build && rsync -ravzulO --chmod=u=rwX,g=rX --delete-after test/tmp/ uiengine-sample-project.uix.space:virtual/uiengine-sample-project.uix.space"
   },
   "workspaces": [
     "packages/*"
