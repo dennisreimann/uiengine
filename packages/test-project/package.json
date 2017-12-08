@@ -18,19 +18,19 @@
     "standalone": "yarn run clean && uiengine generate -s -w -d"
   },
   "dependencies": {
-    "handlebars": "^4.0.11",
-    "marko": "^4.5.2",
-    "pug": "^2.0.0-rc.4",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "handlebars": "4.0.11",
+    "marko": "4.7.1",
+    "pug": "2.0.0-rc.4",
+    "react": "16.2.0",
+    "react-dom": "16.2.0"
   },
   "devDependencies": {
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "browser-sync": "^2.18.13",
-    "gulp": "^3.9.1",
-    "run-sequence": "^2.2.0",
-    "theo": "^6.0.0-beta.7",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "browser-sync": "2.18.13",
+    "gulp": "3.9.1",
+    "run-sequence": "2.2.0",
+    "theo": "6.0.0-beta.8",
     "uiengine": "^0.11.6",
     "uiengine-adapter-handlebars": "^0.11.6",
     "uiengine-adapter-html": "^0.11.3",

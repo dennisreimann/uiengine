@@ -49,7 +49,7 @@
     "chokidar": "^1.7.0"
   },
   "devDependencies": {
-    "babel-register": "^6.26.0",
+    "babel-register": "6.26.0",
     "uiengine-adapter-handlebars": "^0.11.6",
     "uiengine-adapter-pug": "^0.11.6",
     "uiengine-adapter-react": "^0.11.6"
