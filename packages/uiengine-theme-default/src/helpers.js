@@ -5,8 +5,8 @@ import Color from 'color'
 
 const pageFile = 'index.html'
 const assetsDir = '_uiengine-theme'
-const manifestPath = path.resolve(__dirname, '..', 'static', assetsDir, 'rev-manifest.json')
-const localesPath = path.resolve(__dirname, '..', 'static', assetsDir, 'locales')
+const manifestPath = path.resolve(__dirname, '..', 'dist', assetsDir, 'rev-manifest.json')
+const localesPath = path.resolve(__dirname, '..', 'dist', assetsDir, 'locales')
 const supportedLocales = ['en', 'de']
 
 const revvedFile = (filePath) => {
@@ -65,7 +65,8 @@ export const highlight = (code, lang) => {
 // function that binds the current page data and returns
 // an object with helper functions based on that data
 export const createHelpers = (options, data) => {
-  const { navigationId, navigation, schema } = data
+  const { navigationId, state } = data
+  const { navigation, schema } = state
   const currentItem = navigation[navigationId]
   const customPropertyTypes = schema ? Object.keys(schema) : []
 

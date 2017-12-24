@@ -10,26 +10,22 @@ const webpackStream = require('webpack-stream')
 const p = require('gulp-load-plugins')()
 
 const skins = ['default', 'deeplake', 'uiengineering']
+const webpackEnv = process.env.NODE_ENV === 'production' ? 'prod' : 'dev'
+const webpackConfig = require(path.join(__dirname, `build/webpack.${webpackEnv}.conf.js`))
 
 const paths = {
-  stylesLib: './src/styles/lib',
-  theme: './static/_uiengine-theme',
-  lib: './lib'
+  stylesLib: './src/styles/lib'
 }
 
 const src = {
   lib: ['./src/*.js', './src/{__,lib}/**/*.js'], // FIXME: '__' is a hack that allows for lib to be accepted as dynamic path component
-  pug: ['./src/components/*/*.pug'],
   icons: ['./src/icons/sprite/**/*.svg'],
   styles: ['./src/styles/*.styl', './src/components/**/*.styl'],
-  scripts: ['src/scripts/**/*.js', './src/components/**/*.js'],
-  static: ['./src/{fonts,images}/**'],
-  locales: ['./src/locales/*.yml'],
-  rev: [paths.theme + '/**/*.{css,js,map,ico,cur,svg,jpg,jpeg,png,gif,woff,woff2}']
+  webpack: ['src/scripts/**/*.js', './src/components/**/*.js']
 }
 
-const lib = (folder = '') => gulp.dest(`${paths.lib}/${folder}`)
-const theme = (folder = '') => gulp.dest(`${paths.theme}/${folder}`)
+const lib = (folder = '') => gulp.dest(`./lib/${folder}`)
+const theme = (folder = '') => gulp.dest(`./static/${folder}`)
 
 gulp.task('lib', () =>
   gulp.src(src.lib)
@@ -38,44 +34,34 @@ gulp.task('lib', () =>
     .pipe(lib())
 )
 
-gulp.task('pug', () =>
-  gulp.src(src.pug)
-    .pipe(lib('components'))
-)
-
-gulp.task('static', () =>
-  gulp.src(src.static)
-    .pipe(theme())
-)
-
-gulp.task('icons', () =>
-  gulp.src(src.icons)
-    .pipe(p.plumber())
-    .pipe(p.svgSprite({
-      mode: {
-        symbol: {
-          dest: '',
-          sprite: 'icons.svg',
-          inline: true
-        }
-      },
-      shape: {
-        transform: [
-          {
-            svgo: {
-              plugins: [
-                { removeTitle: true },
-                { removeStyleElement: true },
-                { removeUselessStrokeAndFill: true },
-                { removeAttrs: { attrs: '(stroke|fill)' } }
-              ]
-            }
-          }
-        ]
-      }
-    }))
-    .pipe(lib('components/layout'))
-)
+// gulp.task('icons', () =>
+//   gulp.src(src.icons)
+//     .pipe(p.plumber())
+//     .pipe(p.svgSprite({
+//       mode: {
+//         symbol: {
+//           dest: '',
+//           sprite: 'icons.svg',
+//           inline: true
+//         }
+//       },
+//       shape: {
+//         transform: [
+//           {
+//             svgo: {
+//               plugins: [
+//                 { removeTitle: true },
+//                 { removeStyleElement: true },
+//                 { removeUselessStrokeAndFill: true },
+//                 { removeAttrs: { attrs: '(stroke|fill)' } }
+//               ]
+//             }
+//           }
+//         ]
+//       }
+//     }))
+//     .pipe(lib('components/layout'))
+// )
 
 const styles = skin =>
   gulp.src(src.styles)
@@ -95,54 +81,25 @@ const styles = skin =>
 
 gulp.task('styles', () => mergeStream(...skins.map(styles)))
 
-gulp.task('locales', () =>
-  gulp.src(src.locales)
-    .pipe(p.yaml())
-    .pipe(theme('locales'))
-)
-
 gulp.task('hljs', () =>
   gulp.src(`${path.dirname(require.resolve('highlight.js/styles/github.css'))}/**`)
     .pipe(theme('styles/hljs'))
 )
 
-gulp.task('scripts', () =>
+gulp.task('webpack', () =>
   gulp.src('src/scripts/main.js')
     .pipe(p.plumber())
-    .pipe(webpackStream({}, webpack))
-    .pipe(p.concat('uiengine.js'))
-    .pipe(theme('scripts'))
+    .pipe(webpackStream(webpackConfig, webpack))
+    .pipe(gulp.dest('./dist'))
 )
-
-gulp.task('scripts:preview', cb =>
-  gulp.src(require.resolve('iframe-resizer/js/iframeResizer.contentWindow.js'))
-    .pipe(p.plumber())
-    .pipe(p.concat('uiengine-preview.js'))
-    .pipe(p.uglify())
-    .pipe(theme('scripts'))
-)
-
-gulp.task('rev', () => {
-  const RevAll = p.revAll
-  const revAll = new RevAll()
-  return gulp.src(src.rev)
-    .pipe(revAll.revision())
-    .pipe(p.revDeleteOriginal())
-    .pipe(theme())
-    .pipe(revAll.manifestFile())
-    .pipe(theme())
-})
 
 gulp.task('watch', cb => {
   gulp.watch(src.lib, ['lib'])
-  gulp.watch(src.pug, ['pug'])
-  gulp.watch(src.icons, ['icons'])
-  gulp.watch(src.static, ['static'])
-  gulp.watch(src.scripts, ['scripts'])
-  gulp.watch(src.locales, ['locales'])
+  // gulp.watch(src.icons, ['icons'])
+  gulp.watch(src.webpack, ['webpack'])
   gulp.watch(src.styles.concat([`${paths.stylesLib}/**/*.styl`]), ['styles'])
 })
 
-gulp.task('generate', ['lib', 'pug', 'scripts', 'scripts:preview', 'icons', 'styles', 'static', 'hljs', 'locales'])
-gulp.task('build', cb => runSequence('generate', 'rev', cb))
-gulp.task('develop', (cb) => runSequence('generate', 'watch', cb))
+gulp.task('generate', cb => runSequence(['lib', 'styles', 'hljs'], ['webpack'], cb)) //, 'icons'
+gulp.task('build', cb => runSequence('generate', cb)) //, 'rev'
+gulp.task('develop', cb => runSequence('generate', 'watch', cb))

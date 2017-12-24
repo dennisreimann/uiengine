@@ -18,7 +18,4 @@ test/tmp
 # Package specific rules: Specify them here and not in the package path so
 # we can profit from Standard.js ignoring the paths listed in gitignore.
 /packages/*/lib
-
-/packages/test-project/dist
-
-/packages/uiengine-theme-default/static
+/packages/*/dist

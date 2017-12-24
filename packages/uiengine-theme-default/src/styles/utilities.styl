@@ -1,9 +1,9 @@
-$fontsizes = json(pathjoin('..', 'tokens', 'fontsizes.json'), { hash: true })
+$fontsizes = json(pathjoin('tokens', 'fontsizes.json'), { hash: true })
 for $name, $value in $fontsizes
   .fs-{$name}
     font-size $value
 
-$spaces = json(pathjoin('..', 'tokens', 'spaces.json'), { hash: true })
+$spaces = json(pathjoin('tokens', 'spaces.json'), { hash: true })
 for $name, $value in $spaces
   .sot-{$name}
     margin-top $value

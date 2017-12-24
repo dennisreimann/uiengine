@@ -10,7 +10,7 @@ const pugOpts = {
   cache: true
 }
 
-export const staticPath = path.resolve(__dirname, '..', 'static')
+export const staticPath = path.resolve(__dirname, '..', 'dist')
 
 export async function setup (options) {
   return new Promise((resolve, reject) => {

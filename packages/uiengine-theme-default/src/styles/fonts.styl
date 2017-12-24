@@ -1,5 +1,5 @@
 // converts fonts defined in json file to variables:
-fonts = json(pathjoin('..', 'tokens', 'fonts.json'), { hash: true })
+fonts = json(pathjoin('tokens', 'fonts.json'), { hash: true })
 
 for $profile, $font-family in values(fonts)
   @font-face

@@ -12,46 +12,71 @@
   },
   "main": "./lib/index.js",
   "files": [
-    "lib",
-    "static"
+    "dist",
+    "lib"
   ],
   "keywords": [
     "uiengine",
     "uiengine-theme"
   ],
   "scripts": {
-    "clean": "rimraf lib static",
-    "start": "yarn run clean && gulp develop",
-    "build": "yarn run clean && gulp build"
+    "clean": "rimraf lib dist",
+    "start": "yarn run clean && NODE_ENV=development gulp develop",
+    "build": "yarn run clean && NODE_ENV=production gulp build"
   },
   "dependencies": {
     "color": "^2.0.1",
     "highlight.js": "^9.12.0",
-    "pug": "^2.0.0-rc.4"
+    "svg-sprite-loader": "^3.6.0",
+    "vue": "^2.5.13",
+    "vue-meta": "^1.4.0",
+    "vue-notification": "^1.3.4",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.3",
+    "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
     "clipboard": "^1.7.1",
+    "copy-webpack-plugin": "^4.3.1",
+    "css-loader": "^0.28.7",
     "css-mqpacker": "^6.0.1",
     "csswring": "^6.0.2",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
+    "friendly-errors-webpack-plugin": "^1.6.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-load-plugins": "^1.5.0",
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^7.0.0",
-    "gulp-rev-all": "0.8.23",
-    "gulp-rev-delete-original": "^0.2.3",
     "gulp-stylus": "^2.6.0",
     "gulp-svg-sprite": "^1.3.7",
     "gulp-svgo": "^1.2.5",
-    "gulp-uglify": "^3.0.0",
-    "gulp-yaml": "^1.0.1",
+    "html-webpack-plugin": "^2.30.1",
     "iframe-resizer": "^3.5.15",
+    "inject-loader": "^3.0.1",
     "merge-stream": "^1.0.1",
+    "node-notifier": "^5.1.2",
+    "optimize-css-assets-webpack-plugin": "^3.2.0",
+    "postcss-import": "^11.0.0",
+    "postcss-loader": "^2.0.9",
     "run-sequence": "^2.2.0",
+    "url-loader": "^0.6.2",
+    "vue-loader": "^13.6.1",
+    "vue-style-loader": "^3.0.3",
+    "vue-template-compiler": "^2.5.13",
     "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.9.1",
+    "webpack-merge": "^4.1.1",
     "webpack-stream": "^4.0.0"
-  }
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
 }
