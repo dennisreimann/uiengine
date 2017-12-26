@@ -21,7 +21,7 @@ const src = {
   lib: ['./src/*.js', './src/{__,lib}/**/*.js'], // FIXME: '__' is a hack that allows for lib to be accepted as dynamic path component
   icons: ['./src/icons/sprite/**/*.svg'],
   styles: ['./src/styles/*.styl', './src/components/**/*.styl'],
-  webpack: ['src/scripts/**/*.js', './src/components/**/*.js']
+  webpack: ['src/{templates,vue}/**/*']
 }
 
 const lib = (folder = '') => gulp.dest(`./lib/${folder}`)

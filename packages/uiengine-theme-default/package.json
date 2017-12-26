@@ -27,6 +27,7 @@
   "dependencies": {
     "color": "^2.0.1",
     "highlight.js": "^9.12.0",
+    "lodash.template": "^4.4.0",
     "svg-sprite-loader": "^3.6.0",
     "vue": "^2.5.13",
     "vue-meta": "^1.4.0",

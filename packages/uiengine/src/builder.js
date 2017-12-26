@@ -98,15 +98,15 @@ async function copyPageFiles (state, pageId) {
 async function generatePageWithType (state, page, identifier) {
   debug3(state, `Builder.generatePageWithType(${page.id}):start`)
 
-  const { config } = state
-  const data = Object.assign({}, state, { navigationId: page.id })
-  const html = await renderWithFallback(state, page.type, null, data, identifier)
+  // const { config } = state
+  // const data = { navigationId: page.id, state }
+  // const html = await renderWithFallback(state, page.type, null, data, identifier)
 
-  const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
-  const targetPath = path.resolve(config.target, targetPagePath)
-  const htmlPath = path.resolve(targetPath, pageFile)
+  // const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
+  // const targetPath = path.resolve(config.target, targetPagePath)
+  // const htmlPath = path.resolve(targetPath, pageFile)
 
-  await File.write(htmlPath, html)
+  // await File.write(htmlPath, html)
 
   debug3(state, `Builder.generatePageWithType(${page.id}):end`)
 }

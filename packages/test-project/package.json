@@ -28,6 +28,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "browser-sync": "^2.21.0",
+    "connect-history-api-fallback": "^1.5.0",
     "gulp": "^3.9.1",
     "run-sequence": "^2.2.0",
     "theo": "^6.0.0-beta.9",

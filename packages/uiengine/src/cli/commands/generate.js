@@ -68,11 +68,13 @@ const startWatcher = ({ config }) => {
 const startServer = (state, watch) => {
   const { target, browserSync } = state.config
   const server = requireOptional('browser-sync', 'serve').create()
+  const historyApiFallback = require('connect-history-api-fallback', 'serve')
   const defaults = { server: { baseDir: target } }
   const options = browserSync || defaults
 
   options.server = options.server || defaults.server
   options.server.baseDir = options.server.baseDir || defaults.server.baseDir
+  options.server.middleware = options.server.middleware || [ historyApiFallback() ]
 
   if (watch) {
     options.files = options.files || options.server.baseDir

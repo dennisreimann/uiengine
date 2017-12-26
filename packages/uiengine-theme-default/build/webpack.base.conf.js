@@ -1,14 +1,16 @@
 'use strict'
+
 const path = require('path')
 const utils = require('./utils')
 const config = require('./config')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const vueLoaderConfig = require('./vue-loader.conf')
 
 const resolve = dir => path.join(__dirname, '..', dir)
 
 module.exports = {
-  context: resolve('../'),
+  context: resolve(''),
   entry: {
     uiengine: resolve('src/vue/main.js'),
     'uiengine-preview': 'iframe-resizer/js/iframeResizer.contentWindow.js'
@@ -29,11 +31,25 @@ module.exports = {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../static'),
+        from: resolve('static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    // https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: resolve('lib/index.html'),
+      template: resolve('src/templates/index.html'),
+      inject: true,
+      window: {
+        UIengine: {
+          locales: {
+            de: require(resolve('static/locales/de.json')),
+            en: require(resolve('static/locales/en.json'))
+          }
+        }
+      }
+    })
   ],
   module: {
     rules: [

@@ -46,7 +46,8 @@
   },
   "optionalDependencies": {
     "browser-sync": "^2.21.0",
-    "chokidar": "^1.7.0"
+    "chokidar": "^1.7.0",
+    "connect-history-api-fallback": "^1.5.0"
   },
   "devDependencies": {
     "babel-register": "^6.26.0",

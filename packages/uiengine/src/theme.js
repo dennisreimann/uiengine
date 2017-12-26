@@ -23,13 +23,12 @@ async function render (state, templateId, data = {}) {
 async function setup (state) {
   debug3(state, 'Theme.setup():start')
 
-  const { config: { theme: { options } } } = state
+  const { config: { target, theme: { options } } } = state
   const { setup } = getTheme(state)
   const tasks = [copyStatic(state)]
 
   if (typeof setup === 'function') {
-    const markdownIt = require('./util/markdown').markdownIt
-    const opts = Object.assign({}, options, { markdownIt })
+    const opts = Object.assign({}, options, { target })
     tasks.push(setup(opts))
   }
 

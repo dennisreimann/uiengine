@@ -1,8 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= "\<%= lang %\>" %>">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/_uiengine-theme/fonts/merriweathersans-regular.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/_uiengine-theme/fonts/merriweathersans-light.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/_uiengine-theme/fonts/merriweathersans-bold.woff2">
+    <link rel="stylesheet" href="/_uiengine-theme/styles/uiengine-<%= "\<%= skin %\>" %>.css">
+    <link rel="stylesheet" href="/_uiengine-theme/styles/hljs/<%= "\<%= hljs %\>" %>.css">
+    <script type="text/javascript">
+      <% for (let key in htmlWebpackPlugin.options.window) {
+      %>window.<%= key %> = <%= JSON.stringify(htmlWebpackPlugin.options.window[key]) %>;<% }
+      %>
+    </script>
   </head>
   <body>
     <div id="app"></div>
