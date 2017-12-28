@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="/_uiengine-theme/styles/hljs/<%= "\<%= hljs %\>" %>.css">
     <script type="text/javascript">
       <% for (let key in htmlWebpackPlugin.options.window) {
-      %>window.<%= key %> = <%= JSON.stringify(htmlWebpackPlugin.options.window[key]) %>;<% }
-      %>
+      %>window.<%= key %> = <%= JSON.stringify(htmlWebpackPlugin.options.window[key]) %>;<% } %>
     </script>
   </head>
   <body>
+    <% for (let spriteFileName in htmlWebpackPlugin.files.sprites) {
+    %><%= htmlWebpackPlugin.files.sprites[spriteFileName] %><% } %>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>

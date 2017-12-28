@@ -5,6 +5,6 @@
 export default [
   {
     path: '/',
-    component: () => import(/* webpackChunkName: "home" */ './components/AppPage')
+    component: () => import(/* webpackChunkName: "home" */ '../components/AppPage')
   }
 ]

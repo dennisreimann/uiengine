@@ -1,6 +1,6 @@
 <template>
   <ul class="navigation__tree" :class="levelClass">
-    <app-navigation-item v-for="itemId in items.childIds"
+    <app-navigation-item v-for="itemId in items"
       :key="itemId"
       :navigation="navigation"
       :item="navigation[itemId]"
@@ -9,13 +9,7 @@
 </template>
 
 <script>
-import AppNavigationItem from './AppNavigationItem'
-
 export default {
-  components: {
-    AppNavigationItem
-  },
-
   props: {
     navigation: {
       type: Object,
@@ -23,7 +17,7 @@ export default {
     },
 
     items: {
-      type: Object,
+      type: Array,
       required: true
     },
 

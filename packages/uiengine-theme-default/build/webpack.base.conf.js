@@ -5,6 +5,7 @@ const utils = require('./utils')
 const config = require('./config')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 const vueLoaderConfig = require('./vue-loader.conf')
 
 const resolve = dir => path.join(__dirname, '..', dir)
@@ -23,8 +24,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src/vue')
+      'vue$': 'vue/dist/vue.esm.js'
     }
   },
   plugins: [
@@ -44,10 +44,20 @@ module.exports = {
       window: {
         UIengine: {
           locales: {
-            de: require(resolve('static/locales/de.json')),
-            en: require(resolve('static/locales/en.json'))
+            de: require(resolve('src/locales/de.json')),
+            en: require(resolve('src/locales/en.json'))
           }
         }
+      }
+    }),
+    // https://github.com/kisenka/svg-sprite-loader#extract-configuration
+    // https://github.com/kisenka/svg-sprite-loader/blob/master/examples/interop-with-html-webpack-plugin/webpack.config.js
+    new SpriteLoaderPlugin({
+      plainSprite: true,
+      spriteAttrs: {
+        width: 0,
+        height: 0,
+        style: 'position:absolute'
       }
     })
   ],
@@ -92,10 +102,21 @@ module.exports = {
         use: [
           {
             loader: 'svg-sprite-loader',
-            options: {}
+            options: {
+              extract: true
+            }
           },
-          'svg-fill-loader',
-          'svgo-loader'
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [
+                { removeTitle: true },
+                { removeStyleElement: true },
+                { removeUselessStrokeAndFill: true },
+                { removeAttrs: { attrs: '(stroke|fill)' } }
+              ]
+            }
+          }
         ]
       }
     ]

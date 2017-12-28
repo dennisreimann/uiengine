@@ -24,7 +24,6 @@ mixin __navigationItem(itemId, level)
     - const hasChildren = item.childIds.length
     - hasChildren ? classList.push('navigation__item--children') : false
     - h.isCurrentPage(item) ? classList.push('navigation__item--current') : false
-    - h.isActivePage(item) ? classList.push('navigation__item--active') : false
     - const classes = classList.join(' ')
     li.navigation__item(id=id class=classes)
       script.
