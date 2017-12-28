@@ -19,7 +19,6 @@ new Vue({
   template: '<App/>',
   components: { App },
   beforeCreate () {
-    this.$store.commit('setLocale', document.documentElement.getAttribute('lang'))
-    this.$store.dispatch('fetchUiengineState')
+    this.$store.dispatch('state/fetchState')
   }
 })

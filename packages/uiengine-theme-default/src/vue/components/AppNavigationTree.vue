@@ -29,7 +29,7 @@ export default {
 
   computed: {
     levelClass () {
-      return `navigation__tree--level-${ this.level }`
+      return `navigation__tree--level-${this.level}`
     }
   }
 }

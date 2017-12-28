@@ -63,9 +63,9 @@ export default {
     classes () {
       const classes = [`navigation__item--level-${this.level}`]
       this.hasChildren ? classes.push('navigation__item--children') : false
-      this.isCurrentPage ? classes.push('navigation__item--current') : false
       this.isCollapsed ? classes.push('navigation__item--collapsed') : false
-      return classes.join(' ')
+      this.isCurrentPage ? classes.push('navigation__item--current') : false
+      return classes
     }
   }
 }

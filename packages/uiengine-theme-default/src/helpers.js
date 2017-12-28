@@ -148,10 +148,6 @@ export const createHelpers = (options, data) => {
       return item.id === currentItem.id
     },
 
-    isActivePage (item) {
-      return this.isCurrentPage(item) || (currentItem.parentIds.includes(item.id) && item.id !== 'index')
-    },
-
     pageLink (item) {
       const target = path.join(item.path, pageFile)
       const source = path.join(currentItem.path, pageFile)

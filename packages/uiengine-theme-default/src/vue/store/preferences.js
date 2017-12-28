@@ -1,4 +1,7 @@
+import { upcaseFirstChar } from '../util'
+
 const properties = {
+  locale: document.documentElement.getAttribute('lang'),
   navigationCollapsed: false,
   navigationItemsCollapsed: {}
 }
@@ -40,7 +43,7 @@ const propGetters = Object.keys(properties).reduce((obj, property) => {
 }, {})
 
 const propMutations = Object.keys(properties).reduce((obj, property) => {
-  const upcased = property.charAt(0).toUpperCase() + property.slice(1)
+  const upcased = upcaseFirstChar(property)
   const setter = `set${upcased}`
 
   obj[setter] = (state, value) => {

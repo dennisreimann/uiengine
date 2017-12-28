@@ -14,8 +14,8 @@ import burgerIcon from '../../icons/sprite/burger.svg'
 
 export default {
   computed: {
-    ...mapGetters(['config', 'locale', 'navigation']),
-    ...mapGetters('preferences', ['navigationCollapsed'])
+    ...mapGetters('state', ['config', 'navigation']),
+    ...mapGetters('preferences', ['locale', 'navigationCollapsed'])
   },
 
   methods: {
