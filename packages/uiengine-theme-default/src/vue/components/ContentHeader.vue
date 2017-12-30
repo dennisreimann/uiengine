@@ -1,26 +1,12 @@
 <template>
   <header class="contentheader">
-    <content-heading class="contentheader__title" :level="level" v-if="title">{{title}}</content-heading>
+    <content-heading class="contentheader__title" v-if="title">{{ title }}</content-heading>
     <slot />
   </header>
 </template>
 
 <script>
-const ContentHeading = {
-  props: {
-    level: {
-      type: Number,
-      required: true
-    }
-  },
-
-  render (createElement) {
-    return createElement(
-      `h${this.level}`,
-      this.$slots.default
-    )
-  }
-}
+import ContentHeading from './ContentHeading'
 
 export default {
   components: {

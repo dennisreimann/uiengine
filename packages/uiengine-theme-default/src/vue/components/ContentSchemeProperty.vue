@@ -37,7 +37,8 @@ export default {
       let template = `<span>${displayName}</span>`
 
       if (customPropertyTypes.includes(normalizedType)) {
-        template = `<router-link to="/_schema#${normalizedType}">${displayName}</router-link>`
+        const to = JSON.stringify({ path: '/_schema', hash: normalizedType })
+        template = `<router-link :to='${to}' exact>${displayName}</router-link>`
       }
 
       return {

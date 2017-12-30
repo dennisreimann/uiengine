@@ -4,7 +4,7 @@ include /icon/icon.pug
 include /permalink/permalink.pug
 include /preview/preview.pug
 
-mixin variant(variant, includeDetails)
+mixin variant(variant)
   - const variantId = h.dasherize(variant.id)
   - const hasPreview = variant.rendered
   - const hasCode = variant.raw || variant.context || variant.rendered

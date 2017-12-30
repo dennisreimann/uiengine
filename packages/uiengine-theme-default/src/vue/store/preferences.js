@@ -3,7 +3,8 @@ import { upcaseFirstChar } from '../util'
 const properties = {
   locale: document.documentElement.getAttribute('lang'),
   navigationCollapsed: false,
-  navigationItemsCollapsed: {}
+  navigationItemsCollapsed: {},
+  previewWidths: {}
 }
 
 // https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats

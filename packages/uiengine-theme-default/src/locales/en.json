@@ -42,5 +42,9 @@
   "footer": {
     "version": "Version",
     "last_update": "Last updated on"
+  },
+  "not_found": {
+    "title": "Not Found",
+    "content": "This page does not exist."
   }
 }

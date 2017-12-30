@@ -11,7 +11,8 @@
     margin-bottom 0 !important
 
   // markdown element styles, mostly spacings
-  a:not([class])
+  a:not([class]),
+  a[class=""] // router-link can attach empty class
     link-with-hover($color-main-link, $color-main-link-hover)
 
   p:not([class])

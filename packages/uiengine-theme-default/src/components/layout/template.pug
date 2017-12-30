@@ -14,6 +14,7 @@ block main
   - const sectionActiveClass = 'contentsection--active'
   - const hasSchema = schema && Object.keys(schema).length
   - const hasInfo = !!page.content
+  - const previewPath = h.pagePreviewPath(page.path, page.template)
 
   section.page(id=pageId)
     +contentheader().sob-m
@@ -28,7 +29,7 @@ block main
           +icon('tools')
         ul.contentheader__actionlist(id=actionlistId)
           li.contentheader__action
-            a.contentheader__actionlink(href=h.pagePreviewPath(page.path, page.template) target=pageId)
+            a.contentheader__actionlink(href=previewPath target=pageId)
               +icon('open-in-window')
               = h.t('template.open_in_window')
 
@@ -48,5 +49,4 @@ block main
                 +schema(id, item).sob-xl
 
     .sot-xl
-      - const src = h.pagePreviewPath(page.path, page.template)
-      +preview(pageId, src)
+      +preview(pageId, previewPath)
