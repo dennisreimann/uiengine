@@ -1,13 +1,6 @@
 import { createRoutes } from '../router'
 
-const initialState = {
-  config: null,
-  components: null,
-  navigation: null,
-  pages: null,
-  schema: null,
-  variants: null
-}
+const initialState = window.UIengine.state
 
 const getters = {
   config: state => state.config,
@@ -32,6 +25,7 @@ const mutations = {
 }
 
 const actions = {
+  // TODO: Replace this with applying updated state via websockets
   async fetchState ({ commit }) {
     const response = await window.fetch('/state.json')
 

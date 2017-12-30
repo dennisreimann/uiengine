@@ -7,10 +7,10 @@ Vue.use(Router)
 // Dynamically import route components to leverage webpack code splitting.
 // https://dzone.com/articles/code-splitting-with-vuejs-and-webpack
 // https://dzone.com/articles/3-code-splitting-patterns-for-vuejs-and-webpack
-const componentForType = type => {
+const mainComponent = type => {
   const componentName = upcaseFirstChar(type)
 
-  return () => import(`../components/AppMain${componentName}`)
+  return () => import(`../components/Main${componentName}`)
 }
 
 const router = new Router({
@@ -18,7 +18,7 @@ const router = new Router({
   routes: [
     {
       path: '*',
-      component: componentForType('notFound')
+      component: mainComponent('notFound')
     }
   ]
 })
@@ -31,7 +31,7 @@ export const createRoutes = navigation => {
 
     return {
       path: navItem.path,
-      component: componentForType(navItem.type),
+      component: mainComponent(navItem.type),
       meta: navItem,
       props: {
         id: navItem.itemId
@@ -41,3 +41,6 @@ export const createRoutes = navigation => {
 
   router.addRoutes(routes)
 }
+
+// create initial routes
+createRoutes(window.UIengine.state.navigation)

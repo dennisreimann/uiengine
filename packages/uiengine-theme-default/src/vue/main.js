@@ -17,8 +17,5 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App },
-  beforeCreate () {
-    this.$store.dispatch('state/fetchState')
-  }
+  components: { App }
 })

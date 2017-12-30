@@ -42,11 +42,9 @@ module.exports = {
       template: resolve('src/templates/index.html'),
       inject: true,
       window: {
-        UIengine: {
-          locales: {
-            de: require(resolve('src/locales/de.json')),
-            en: require(resolve('src/locales/en.json'))
-          }
+        locales: {
+          de: require(resolve('src/locales/de.json')),
+          en: require(resolve('src/locales/en.json'))
         }
       }
     }),

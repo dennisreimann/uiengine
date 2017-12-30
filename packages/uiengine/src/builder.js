@@ -98,15 +98,19 @@ async function copyPageFiles (state, pageId) {
 async function generatePageWithType (state, page, identifier) {
   debug3(state, `Builder.generatePageWithType(${page.id}):start`)
 
-  // const { config } = state
-  // const data = { navigationId: page.id, state }
-  // const html = await renderWithFallback(state, page.type, null, data, identifier)
+  const { config } = state
+  const data = { state, pageId: page.id }
+  const html = await renderWithFallback(state, page.type, null, data, identifier)
 
-  // const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
-  // const targetPath = path.resolve(config.target, targetPagePath)
-  // const htmlPath = path.resolve(targetPath, pageFile)
+  if (html) {
+    const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
+    const targetPath = path.resolve(config.target, targetPagePath)
+    const htmlPath = path.resolve(targetPath, pageFile)
 
-  // await File.write(htmlPath, html)
+    await File.write(htmlPath, html)
+  } else {
+    debug4(state, `No HTML provided for page "${page.id}", skipping file creation.`)
+  }
 
   debug3(state, `Builder.generatePageWithType(${page.id}):end`)
 }
@@ -117,11 +121,15 @@ async function generatePageWithTemplate (state, page, identifier) {
   const { config } = state
   const html = await renderWithFallback(state, null, page.template, page.context, identifier)
 
-  const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
-  const targetPath = path.resolve(config.target, targetPagePath)
-  const htmlPath = path.resolve(targetPath, `_${page.template}.html`)
+  if (html) {
+    const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
+    const targetPath = path.resolve(config.target, targetPagePath)
+    const htmlPath = path.resolve(targetPath, `_${page.template}.html`)
 
-  await File.write(htmlPath, html)
+    await File.write(htmlPath, html)
+  } else {
+    debug4(state, `No HTML provided for template of page "${page.id}", skipping file creation.`)
+  }
 
   debug3(state, `Builder.generatePageWithTemplate(${page.id}):end`)
 }
@@ -165,12 +173,17 @@ async function generateComponentForPage (state, pageId, componentId) {
   const component = components[componentId]
   if (!component) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
 
-  const data = Object.assign({}, state, { navigationId: PageUtil.pageIdForComponentId(pageId, componentId) })
+  const data = { state, pageId: PageUtil.pageIdForComponentId(pageId, componentId) }
   const html = await renderWithFallback(state, component.type, null, data, identifier)
 
-  const targetPath = path.join(target, PageUtil.pagePathForComponentId(parent.path, component.id))
-  const htmlPath = path.resolve(targetPath, pageFile)
-  await File.write(htmlPath, html)
+  if (html) {
+    const targetPath = path.join(target, PageUtil.pagePathForComponentId(parent.path, component.id))
+    const htmlPath = path.resolve(targetPath, pageFile)
+
+    await File.write(htmlPath, html)
+  } else {
+    debug4(state, `No HTML provided for component page "${component.id}", skipping file creation.`)
+  }
 
   debug4(state, `Builder.generateComponentForPage(${pageId}, ${componentId}):end`)
 }
