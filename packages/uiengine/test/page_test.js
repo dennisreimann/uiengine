@@ -252,54 +252,24 @@ describe('Page', () => {
           assertPage(pageIds, 'patterns/organisms')
           assertPage(pageIds, 'patterns/templates')
           assertPage(pageIds, 'patterns/pages')
+          assertPage(pageIds, 'schema')
 
           done()
         })
         .catch(done)
     })
 
-    describe('without existing schema', () => {
-      it('should not add schema page', done => {
-        const stateWithoutSchema = Object.assign({}, state, { schema: { } })
+    it('should return only schema page if pages source is not set', done => {
+      Page.fetchAll({ config: { source: { } } })
+        .then(data => {
+          const pageIds = Object.keys(data)
 
-        Page.fetchAll(stateWithoutSchema)
-          .then(data => {
-            const pageIds = Object.keys(data)
+          assert.equal(pageIds.length, 1)
+          assert.equal(pageIds[0], 'schema')
 
-            assert(!pageIds.includes('schema'), 'page "schema" exists')
-
-            done()
-          })
-          .catch(done)
-      })
-    })
-
-    describe('with existing schema', () => {
-      it('should add schema page', done => {
-        const stateWithSchema = Object.assign({}, state, { schema: { Test: {} } })
-
-        Page.fetchAll(stateWithSchema)
-          .then(data => {
-            const pageIds = Object.keys(data)
-
-            assert(pageIds.includes('schema'), 'missing page "schema"')
-
-            done()
-          })
-          .catch(done)
-      })
-
-      it('should return only schema page if pages source is not set', done => {
-        Page.fetchAll({ config: { source: { } }, schema: { Test: { } } })
-          .then(data => {
-            const pageIds = Object.keys(data)
-
-            assert.equal(pageIds.length, 1)
-            assert.equal(pageIds[0], 'schema')
-            done()
-          })
-          .catch(done)
-      })
+          done()
+        })
+        .catch(done)
     })
   })
 })

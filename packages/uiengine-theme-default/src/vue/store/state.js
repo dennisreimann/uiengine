@@ -1,6 +1,16 @@
 import { createRoutes } from '../router'
 
-const initialState = window.UIengine.state
+const transformState = uiengineState => {
+  const { schema, navigation } = uiengineState
+
+  if (Object.keys(schema).length === 0 && navigation) {
+    delete navigation.schema
+  }
+
+  return uiengineState
+}
+
+const initialState = transformState(window.UIengine.state)
 
 const getters = {
   config: state => state.config,
@@ -31,8 +41,9 @@ const actions = {
 
     if (response.ok) {
       const data = await response.json()
+      const uiengineState = transformState(data)
 
-      commit('setState', data)
+      commit('setState', uiengineState)
     }
 
     return response

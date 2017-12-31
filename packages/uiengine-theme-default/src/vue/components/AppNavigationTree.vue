@@ -1,6 +1,6 @@
 <template>
   <ul class="navigation__tree" :class="levelClass">
-    <app-navigation-item v-for="itemId in items"
+    <app-navigation-item v-for="itemId in items" v-if="navigation[itemId]"
       :key="itemId"
       :navigation="navigation"
       :item="navigation[itemId]"

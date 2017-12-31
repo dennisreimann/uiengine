@@ -60,15 +60,14 @@ async function generateContent () {
   debug2(state, 'UIengine.generateContent():start')
 
   // 1. data fetching
-  const schema = await Schema.fetchAll(state)
-  state = R.assoc('schema', schema, state)
-
   const fetchPages = Page.fetchAll(state)
+  const fetchSchema = Schema.fetchAll(state)
   const fetchComponents = Component.fetchAll(state)
   const fetchVariants = Variant.fetchAll(state)
-  const [pages, components, variants] = await Promise.all([fetchPages, fetchComponents, fetchVariants])
+  const [pages, schema, components, variants] = await Promise.all([fetchPages, fetchSchema, fetchComponents, fetchVariants])
 
   state = R.assoc('pages', pages, state)
+  state = R.assoc('schema', schema, state)
   state = R.assoc('components', components, state)
   state = R.assoc('variants', variants, state)
 
@@ -87,19 +86,17 @@ async function generateContent () {
 }
 
 async function generateIncrementForFileChange (filePath, action = 'changed') {
-  const { source: { components, pages, templates, data, schema, configFile }, theme, debug } = state.config
+  const { source: { components, pages, templates, data, schema, configFile } } = state.config
   const isDeleted = action === 'deleted'
   const file = path.relative(process.cwd(), filePath)
   const isSchemaFile = !!filePath.startsWith(schema)
   const isDataFile = !isSchemaFile && !!filePath.startsWith(data)
-  const isThemeFile = debug && !!file.match(theme.module)
-  const isStaticThemeFile = isThemeFile && file.match('/static/')
   const isComponentDir = path.dirname(filePath) === components
   let pageId, componentId, templateId, variantId, schemaId
 
-  // Skip generating individual items in case the theme or
-  // data got changed as we need to regenerate everything
-  if (!isDataFile && !isThemeFile) {
+  // Skip generating individual items in case the data
+  // got changed as we need to regenerate everything
+  if (!isDataFile) {
     pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
     schemaId = schema ? SchemaUtil.schemaFilePathToSchemaId(schema, filePath) : undefined
     componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
@@ -149,14 +146,8 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
   } else if (templateId) {
     await regenerateTemplate(templateId)
     return { file, action, type: 'template', item: templateId }
-  } else if (isStaticThemeFile) {
-    await Theme.setup(state)
-    return { file, action, type: 'theme static', item: state.config.theme.module }
-  } else if (isThemeFile) {
-    await generate({ config: configFile })
-    return { file, action, type: 'site', item: state.config.name }
   } else {
-    await generateContent()
+    await generate({ config: configFile })
     return { file, action, type: 'site', item: state.config.name }
   }
 }
