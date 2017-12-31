@@ -19,49 +19,16 @@ const paths = {
 
 const src = {
   lib: ['./src/*.js', './src/{__,lib}/**/*.js'], // FIXME: '__' is a hack that allows for lib to be accepted as dynamic path component
-  icons: ['./src/icons/sprite/**/*.svg'],
   styles: ['./src/styles/*.styl', './src/components/**/*.styl'],
   webpack: ['src/{templates,vue}/**/*']
 }
-
-const lib = (folder = '') => gulp.dest(`./lib/${folder}`)
-const theme = (folder = '') => gulp.dest(`./static/${folder}`)
 
 gulp.task('lib', () =>
   gulp.src(src.lib)
     .pipe(p.plumber())
     .pipe(p.babel())
-    .pipe(lib())
+    .pipe(gulp.dest('./lib'))
 )
-
-// gulp.task('icons', () =>
-//   gulp.src(src.icons)
-//     .pipe(p.plumber())
-//     .pipe(p.svgSprite({
-//       mode: {
-//         symbol: {
-//           dest: '',
-//           sprite: 'icons.svg',
-//           inline: true
-//         }
-//       },
-//       shape: {
-//         transform: [
-//           {
-//             svgo: {
-//               plugins: [
-//                 { removeTitle: true },
-//                 { removeStyleElement: true },
-//                 { removeUselessStrokeAndFill: true },
-//                 { removeAttrs: { attrs: '(stroke|fill)' } }
-//               ]
-//             }
-//           }
-//         ]
-//       }
-//     }))
-//     .pipe(lib('components/layout'))
-// )
 
 const styles = skin =>
   gulp.src(src.styles)
@@ -77,13 +44,13 @@ const styles = skin =>
       autoprefixer({ browsers: ['last 2 versions'] }),
       csswring
     ]))
-    .pipe(theme('styles'))
+    .pipe(gulp.dest('./static/styles'))
 
 gulp.task('styles', () => mergeStream(...skins.map(styles)))
 
 gulp.task('hljs', () =>
   gulp.src(`${path.dirname(require.resolve('highlight.js/styles/github.css'))}/**`)
-    .pipe(theme('styles/hljs'))
+    .pipe(gulp.dest('./static/styles/hljs'))
 )
 
 gulp.task('webpack', () =>
@@ -95,11 +62,9 @@ gulp.task('webpack', () =>
 
 gulp.task('watch', cb => {
   gulp.watch(src.lib, ['lib'])
-  // gulp.watch(src.icons, ['icons'])
   gulp.watch(src.webpack, ['webpack'])
   gulp.watch(src.styles.concat([`${paths.stylesLib}/**/*.styl`]), ['styles'])
 })
 
-gulp.task('generate', cb => runSequence(['lib', 'styles', 'hljs'], ['webpack'], cb)) //, 'icons'
-gulp.task('build', cb => runSequence('generate', cb)) //, 'rev'
-gulp.task('develop', cb => runSequence('generate', 'watch', cb))
+gulp.task('build', cb => runSequence(['lib', 'styles', 'hljs'], ['webpack'], cb))
+gulp.task('develop', cb => runSequence('build', 'watch', cb))

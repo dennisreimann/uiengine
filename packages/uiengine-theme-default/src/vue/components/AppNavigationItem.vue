@@ -11,7 +11,6 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import caretDownIcon from '../../icons/sprite/caret-down.svg'
 
 export default {
   props: {

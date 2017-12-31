@@ -10,7 +10,6 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import burgerIcon from '../../icons/sprite/burger.svg'
 
 export default {
   computed: {

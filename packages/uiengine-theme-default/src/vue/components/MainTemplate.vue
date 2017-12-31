@@ -57,8 +57,6 @@ import ContentPreview from './ContentPreview'
 import ContentScheme from './ContentScheme'
 import ComponentLabel from './ComponentLabel'
 import ComponentVariant from './ComponentVariant'
-import toolsIcon from '../../icons/sprite/tools.svg'
-import openInWindowIcon from '../../icons/sprite/open-in-window.svg'
 
 export default {
   props: {

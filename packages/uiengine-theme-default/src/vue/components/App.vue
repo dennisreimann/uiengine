@@ -31,3 +31,26 @@ export default {
   }
 }
 </script>
+
+<style>
+@font-face {
+  font-family: merriweathersans-bold;
+  src: url(../../fonts/merriweathersans-bold.woff2) format("woff2"),
+       url(../../fonts/merriweathersans-bold.woff) format("woff");
+  font-display: optional
+}
+
+@font-face {
+  font-family: merriweathersans-light;
+  src: url(../../fonts/merriweathersans-light.woff2) format("woff2"),
+       url(../../fonts/merriweathersans-light.woff) format("woff");
+  font-display: optional
+}
+
+@font-face {
+  font-family: merriweathersans-regular;
+  src: url(../../fonts/merriweathersans-regular.woff2) format("woff2"),
+       url(../../fonts/merriweathersans-regular.woff) format("woff");
+  font-display: optional
+}
+</style>
