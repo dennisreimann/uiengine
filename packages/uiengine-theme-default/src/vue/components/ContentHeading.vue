@@ -10,6 +10,7 @@ export default {
   render (createElement) {
     return createElement(
       `h${this.level}`,
+      { class: 'contentheader__title' },
       this.$slots.default
     )
   }

@@ -3,59 +3,54 @@
     <content-header class="sob-m">
       <component-label v-if="variant.label" class="sob-s sor-s">{{ variant.label }}</component-label>
       <content-heading :level="2">{{ variant.title }}</content-heading>
+
+      <div class="contentheader__options" v-if="hasPreview && hasCode">
+        <a href="#" @click.prevent="activeSection = 'preview'" class="contentheader__option" :class="{ 'contentheader__option--active': isPreviewActive }">{{ 'variant.preview' | localize }}</a>
+        <a href="#" @click.prevent="activeSection = 'code'" class="contentheader__option" :class="{ 'contentheader__option--active': isCodeActive }"> {{ 'variant.code' | localize }}</a>
+      </div>
+
+      <div class="contentheader__actions">
+        <button @click.stop="isActionlistActive = !isActionlistActive" class="contentheader__actiontoggle" type="button">
+          <app-icon symbol="tools" />
+        </button>
+        <ul class="contentheader__actionlist" :class="{ 'contentheader__actionlist--active': isActionlistActive }">
+          <li class="contentheader__action">
+            <a :href="permalinkUrl" @click.prevent class="permalink contentheader__actionlink" :data-clipboard-text="permalinkUrl">
+              <app-icon symbol="link-45" class="permalink__icon" />
+              <span class="permalink__text">{{ 'variant.copy_permalink' | localize }}</span>
+            </a>
+          </li>
+          <li class="contentheader__action">
+            <a :href="previewPath" @click.stop class="contentheader__actionlink" :target="variant.id | dasherize">
+              <app-icon symbol="open-in-window" />
+              {{ 'variant.open_in_window' | localize }}
+            </a>
+          </li>
+        </ul>
+      </div>
     </content-header>
+
+    <div class="content" v-if="variant.content" v-html="variant.content" />
+
+    <div v-if="hasPreview || hasCode" class="sot-xl">
+      <div v-if="hasPreview" class="contentsection" :class="{ 'contentsection--active': isPreviewActive }">
+        <content-preview :id="variant.id | dasherize" :src="previewPath" :breakpoints="config.breakpoints" />
+      </div>
+
+      <div v-if="hasCode" class="contentsection" :class="{ 'contentsection--active': isCodeActive }">
+        <content-code :extension="variant.extension" :raw="variant.raw" :context="variant.context" :rendered="variant.rendered" />
+      </div>
+    </div>
   </article>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { dasherize } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
-
-  // - const actionlistId = `${h.dasherize(variant.id)}-actionlist`
-  // article.(id=h.dasherize(variant.id))&attributes(attributes)
-  //   +contentheader().
-  //     if
-  //       +label().
-
-  //     h2.contentheader__title= variant.title
-
-  //     if hasPreview && hasCode
-  //       .contentheader__options
-  //         +contentheaderOption(`${variantId}-preview`, h.t('variant.preview'), true)
-  //         +contentheaderOption(`${variantId}-code`, h.t('variant.code'), false)
-
-  //     .contentheader__actions
-  //       button.contentheader__actiontoggle(type="button" data-actionlist-target=actionlistId)
-  //         +icon('tools')
-  //       ul.contentheader__actionlist(id=actionlistId)
-  //         li.contentheader__action
-  //           +permalink(`#${variantId}`, h.t('variant.copy_permalink')).contentheader__actionlink
-  //         li.contentheader__action
-  //           a.contentheader__actionlink(href=h.variantPreviewPath(variant.id) target=variantId)
-  //             +icon('open-in-window')
-  //             = h.t('variant.open_in_window')
-  //         li.contentheader__action
-  //           form(action="https://codepen.io/pen/define" method="POST" target="_blank")
-  //             input(type="hidden" name="data" data-value=JSON.stringify({ title: variant.title, html: variant.rendered, language: variant.extension, raw: variant.raw }))
-  //             a.contentheader__actionlink.contentheader__actionlink--codepen(href="#" data-variant-target=variantId)
-  //               +icon('globe')
-  //               = h.t('variant.edit_on_codepen')
-
-  //   if variant.content
-  //     .content
-  //       != variant.content
-
-  //   if hasPreview || hasCode
-  //     .contentsections.sot-xl
-  //       if hasPreview
-  //         - const classes = 'contentsection--active'
-  //         - const previewId = h.dasherize(variant.id)
-  //         - const src = h.variantPreviewPath(variant.id)
-  //         +preview(previewId, src).contentsection(id=`${variantId}-preview` class=classes)
-
-  //       if hasCode
-  //         - const classes = !hasPreview ? 'contentsection--active' : null
-  //         +code(variant.extension, variant.raw, variant.context, variant.rendered).contentsection(id=`${variantId}-code` class=classes)
+import ContentPreview from './ContentPreview'
+import ContentCode from './ContentCode'
 
 export default {
   props: {
@@ -67,17 +62,53 @@ export default {
 
   components: {
     ContentHeader,
-    ContentHeading
+    ContentHeading,
+    ContentPreview,
+    ContentCode
+  },
+
+  data () {
+    return {
+      activeSection: null,
+      isActionlistActive: false
+    }
   },
 
   computed: {
+    ...mapGetters('state', ['config', 'pages', 'schema']),
+
     hasPreview () {
-      return !!variant.rendered
+      return !!this.variant.rendered
     },
 
     hasCode () {
-      return !!(variant.raw || variant.context || variant.rendered)
+      return !!(this.variant.raw || this.variant.context || this.variant.rendered)
+    },
+
+    isPreviewActive () {
+      return this.activeSection === 'preview' || (!this.activeSection && this.hasPreview)
+    },
+
+    isCodeActive () {
+      return this.activeSection === 'code' || (!this.activeSection && !this.hasPreview && this.hasCode)
+    },
+
+    previewPath () {
+      return `/_variants/${this.variant.id}.html`
+    },
+
+    permalinkUrl () {
+      const loc = window.location
+      const anchor = dasherize(this.variant.id)
+
+      return `${loc.protocol}//${loc.host}${loc.pathname}#${anchor}`
     }
+  },
+
+  created () {
+    this.$root.$on('modal:close', () => {
+      this.isActionlistActive = false
+    })
   }
 }
 </script>

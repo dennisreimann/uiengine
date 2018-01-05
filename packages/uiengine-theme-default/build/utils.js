@@ -94,7 +94,13 @@ exports.createNotifierCallback = () => {
       title: packageConfig.name,
       message: severity + ': ' + error.name,
       subtitle: filename || '',
+      timeout: 5,
       icon: path.join(__dirname, 'logo.png')
+    })
+
+    notifier.on('click', () => {
+      const exec = require('child_process').exec
+      exec(`$EDITOR ${path.resolve(__dirname, '..', filename)}`)
     })
   }
 }

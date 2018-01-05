@@ -47,7 +47,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { dasherize } from '../util'
+import { dasherize } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentScheme from './ContentScheme'

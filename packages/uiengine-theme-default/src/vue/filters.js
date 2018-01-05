@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Color from 'color'
 import store from './store'
-import { dasherize } from './util'
+import { dasherize } from '../util'
 
 Vue.filter('dasherize', dasherize)
 

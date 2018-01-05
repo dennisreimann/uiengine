@@ -1,4 +1,4 @@
-import { upcaseFirstChar } from '../util'
+import { upcaseFirstChar } from '../../util'
 
 const properties = {
   locale: document.documentElement.getAttribute('lang'),

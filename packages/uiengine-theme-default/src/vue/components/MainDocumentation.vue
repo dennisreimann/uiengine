@@ -8,7 +8,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import ContentHeader from './ContentHeader'
-import { decoratePageContent } from '../util'
+import { decoratePageContent } from '../../util'
 
 export default {
   props: {

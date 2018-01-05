@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import compile from 'lodash.template'
-import highlightjs from 'highlight.js'
+import { highlight } from './util'
 
 const supportedLocales = ['en', 'de']
 const defaultOpts = {
@@ -19,14 +19,6 @@ export async function setup (options) {
   return new Promise((resolve, reject) => {
     // configure markdown renderer
     const { markdownIt } = options
-    const highlight = (code, lang) => {
-      const languages = (lang != null) ? [lang] : undefined
-      const { value } = highlightjs.highlightAuto(code, languages)
-      const highlighted = `<pre class="hljs" lang="${lang}">${value}</pre>`
-
-      return highlighted
-    }
-
     markdownIt.set({ highlight })
 
     // load and assign template

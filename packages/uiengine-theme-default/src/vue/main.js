@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Meta from 'vue-meta'
+import Clipboard from 'clipboard'
 import App from './components/App'
 import router from './router'
 import store from './store'
@@ -19,3 +20,8 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+new Clipboard('[data-clipboard-text]')
+  .on('error', event => {
+    console.error('Clipboard error:', event)
+  })

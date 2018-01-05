@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { upcaseFirstChar } from '../util'
+import { upcaseFirstChar } from '../../util'
 
 Vue.use(Router)
 
