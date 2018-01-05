@@ -10,12 +10,12 @@
         </div>
 
         <div class="contentheader__actions">
-          <button class="contentheader__actiontoggle" type="button">
+          <button @click.stop="isActionlistActive = !isActionlistActive" class="contentheader__actiontoggle" type="button">
             <app-icon symbol="tools" />
           </button>
-          <ul class="contentheader__actionlist">
+          <ul class="contentheader__actionlist" :class="{ 'contentheader__actionlist--active': isActionlistActive }">
             <li class="contentheader__action">
-              <a :href="previewPath" class="contentheader__actionlink" :target="page.id | dasherize">
+              <a :href="previewPath" @click.stop class="contentheader__actionlink" :target="page.id | dasherize">
                 <app-icon symbol="open-in-window" />
                 {{ 'template.open_in_window' | localize }}
               </a>
@@ -50,7 +50,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { dasherize } from '../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentPreview from './ContentPreview'
@@ -77,7 +76,8 @@ export default {
 
   data () {
     return {
-      activeSection: null
+      activeSection: null,
+      isActionlistActive: false
     }
   },
 
@@ -110,8 +110,10 @@ export default {
     }
   },
 
-  methods: {
-    dasherize
+  created () {
+    this.$root.$on('modal:close', () => {
+      this.isActionlistActive = false
+    })
   }
 }
 </script>

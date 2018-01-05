@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import { dasherize } from '../util'
-
 export default {
   props: {
     id: {

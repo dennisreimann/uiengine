@@ -23,27 +23,31 @@ const getSession = (key, defaultValue) => {
 }
 
 const setSession = (key, value) => {
-  window.sessionStorage.setItem(`uiengine/${key}`, JSON.stringify(value))
+  if (value) {
+    window.sessionStorage.setItem(`uiengine/${key}`, JSON.stringify(value))
+  } else {
+    window.sessionStorage.removeItem(`uiengine/${key}`)
+  }
 
   return value
 }
 
 // create state, getters and mutations based on properties;
 // get initial state from session storage
-const propInitialState = Object.keys(properties).reduce((obj, property) => {
+const initialState = Object.keys(properties).reduce((obj, property) => {
   const defaultValue = properties[property]
   obj[property] = getSession(property, defaultValue)
 
   return obj
 }, {})
 
-const propGetters = Object.keys(properties).reduce((obj, property) => {
+const getters = Object.keys(properties).reduce((obj, property) => {
   obj[property] = state => state[property]
 
   return obj
 }, {})
 
-const propMutations = Object.keys(properties).reduce((obj, property) => {
+const mutations = Object.keys(properties).reduce((obj, property) => {
   const upcased = upcaseFirstChar(property)
   const setter = `set${upcased}`
 
@@ -56,18 +60,6 @@ const propMutations = Object.keys(properties).reduce((obj, property) => {
 
   return obj
 }, {})
-
-const initialState = {
-  ...propInitialState
-}
-
-const getters = {
-  ...propGetters
-}
-
-const mutations = {
-  ...propMutations
-}
 
 // preferences are set synchronously, hence no actions
 const actions = {

@@ -61,9 +61,11 @@ export default {
 
     classes () {
       const classes = [`navigation__item--level-${this.level}`]
-      this.hasChildren ? classes.push('navigation__item--children') : false
-      this.isCollapsed ? classes.push('navigation__item--collapsed') : false
-      this.isCurrentPage ? classes.push('navigation__item--current') : false
+
+      if (this.hasChildren) classes.push('navigation__item--children')
+      if (this.isCollapsed) classes.push('navigation__item--collapsed')
+      if (this.isCurrentPage) classes.push('navigation__item--current')
+
       return classes
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="layout">
+  <div id="app" class="layout" @click="closeModals">
     <app-navigation />
     <app-main />
     <app-footer />
@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import AppNavigation from './AppNavigation'
 import AppFooter from './AppFooter'
 import AppMain from './AppMain'
@@ -17,6 +16,12 @@ export default {
     AppNavigation,
     AppFooter,
     AppMain
+  },
+
+  methods: {
+    closeModals () {
+      this.$root.$emit('modal:close')
+    }
   },
 
   metaInfo () {
