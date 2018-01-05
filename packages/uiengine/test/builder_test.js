@@ -5,6 +5,8 @@ const assertExists = require('./support/assertExists')
 const assertContentMatches = require('./support/assertContentMatches')
 const Builder = require('../src/builder')
 const NavigationData = require('../src/data/navigation')
+const Theme = require('../src/theme')
+const Connector = require('../src/connector')
 
 const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
 const target = path.resolve(testTmpPath, 'site')
@@ -162,17 +164,16 @@ const state = {
 
 describe('Builder', () => {
   afterEach(() => { fs.removeSync(testTmpPath) })
+  before(() => Promise.all([
+    Theme.setup(state),
+    Connector.setup(state)
+  ]))
 
-  describe('#generateSite', () => {
-    it('should generate site', function (done) {
-      this.timeout(10000)
-
-      Builder.generateSite(state)
+  describe('#generate', () => {
+    it('should generate index page', done => {
+      Builder.generate(state)
         .then(() => {
           assertExists(path.join(target, 'index.html'))
-          assertExists(path.join(target, 'patterns', 'index.html'))
-          assertExists(path.join(target, 'prototype', 'index.html'))
-          assertExists(path.join(target, 'prototype', 'custom-page', 'index.html'))
 
           done()
         })
@@ -180,39 +181,13 @@ describe('Builder', () => {
     })
   })
 
-  describe('#generatePage', () => {
-    it('should generate page', done => {
-      Builder.generatePage(state, 'index')
-        .then(() => {
-          const pagePath = path.join(target, 'index.html')
-
-          assertContentMatches(pagePath, '<title>Home • Builder Test')
-
-          done()
-        })
-        .catch(done)
-    })
-
-    it('should generate page with custom path', done => {
-      Builder.generatePage(state, 'patterns')
-        .then(() => {
-          const pagePath = path.join(target, 'patterns', 'index.html')
-
-          assertContentMatches(pagePath, '<title>Pattern Library • Builder Test')
-
-          done()
-        })
-        .catch(done)
-    })
-
+  describe('#generatePageWithTemplate', () => {
     it('should generate page with custom template', done => {
-      Builder.generatePage(state, 'prototype/custom-page')
+      Builder.generatePageWithTemplate(state, 'prototype/custom-page')
         .then(() => {
-          const pageTypePath = path.join(target, 'prototype', 'custom-page', 'index.html')
-          const pageTemplatePath = path.join(target, 'prototype', 'custom-page', '_page.html')
+          const pagePath = path.join(target, '_pages', 'prototype', 'custom-page.html')
 
-          assertContentMatches(pageTypePath, '<title>Custom Page • Builder Test')
-          assertContentMatches(pageTemplatePath, 'This is my context')
+          assertContentMatches(pagePath, 'This is my context')
 
           done()
         })
@@ -220,24 +195,9 @@ describe('Builder', () => {
     })
   })
 
-  describe('#generatePage with "schema"', () => {
-    it('should generate schema page', done => {
-      Builder.generatePage(state, 'schema')
-        .then(state => {
-          const pagePath = path.join(target, '_schema', 'index.html')
-
-          assertContentMatches(pagePath, /Entity/)
-          assertContentMatches(pagePath, /CustomObject/)
-
-          done()
-        })
-        .catch(done)
-    })
-  })
-
-  describe('#copyPageFiles', () => {
+  describe('#generatePageFiles', () => {
     it('should copy page files', done => {
-      Builder.copyPageFiles(state, 'testcases')
+      Builder.generatePageFiles(state, 'testcases')
         .then(() => {
           assertExists(path.join(target, 'testcases', 'index.txt'))
           assertExists(path.join(target, 'testcases', 'extra-files', 'file-in-folder.txt'))
@@ -248,7 +208,7 @@ describe('Builder', () => {
     })
 
     it('should copy page files for pages with custom paths', done => {
-      Builder.copyPageFiles(state, 'testcases/custom-path')
+      Builder.generatePageFiles(state, 'testcases/custom-path')
         .then(() => {
           assertExists(path.join(target, 'testcases', 'page-with-custom-path', 'file.txt'))
           assertExists(path.join(target, 'testcases', 'page-with-custom-path', 'extra-files', 'file-in-folder.txt'))
@@ -259,47 +219,11 @@ describe('Builder', () => {
     })
   })
 
-  describe('#generateComponentForPage', () => {
-    it('should generate component page', done => {
-      Builder.generateComponentForPage(state, 'patterns', 'input')
-        .then(() => {
-          assertExists(path.join(target, 'patterns', 'input', 'index.html'))
-
-          done()
-        })
-        .catch(done)
-    })
-  })
-
-  describe('#generateComponentsForPage', () => {
-    it('should generate component pages', done => {
-      Builder.generateComponentsForPage(state, 'patterns')
-        .then(() => {
-          assertExists(path.join(target, 'patterns', 'input', 'index.html'))
-
-          done()
-        })
-        .catch(done)
-    })
-  })
-
-  describe('#generatePagesHavingComponent', () => {
-    it('should generate pages having this component as subpage', done => {
-      Builder.generatePagesHavingComponent(state, 'input')
-        .then(() => {
-          assertExists(path.join(target, 'patterns', 'input', 'index.html'))
-
-          done()
-        })
-        .catch(done)
-    })
-  })
-
-  describe('#generatePagesHavingTemplate', () => {
+  describe('#generatePagesWithTemplate', () => {
     it('should generate pages having this template', done => {
-      Builder.generatePagesHavingTemplate(state, 'page')
+      Builder.generatePagesWithTemplate(state, 'page')
         .then(() => {
-          assertExists(path.join(target, 'prototype', 'custom-page', 'index.html'))
+          assertExists(path.join(target, '_pages', 'prototype', 'custom-page.html'))
 
           done()
         })
@@ -331,11 +255,11 @@ describe('Builder', () => {
     })
   })
 
-  describe('#dumpState', () => {
+  describe('#generateIncrement', () => {
     it('should generate state file', done => {
-      Builder.dumpState(state)
+      Builder.generateIncrement(state)
         .then(() => {
-          assertExists(path.join(target, 'state.json'))
+          assertExists(path.join(target, '_state.json'))
 
           done()
         })

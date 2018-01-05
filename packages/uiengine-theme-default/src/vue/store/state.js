@@ -37,7 +37,7 @@ const mutations = {
 const actions = {
   // TODO: Replace this with applying updated state via websockets
   async fetchState ({ commit }) {
-    const response = await window.fetch('/state.json')
+    const response = await window.fetch('/_state.json')
 
     if (response.ok) {
       const data = await response.json()

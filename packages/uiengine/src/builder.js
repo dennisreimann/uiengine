@@ -8,7 +8,6 @@ const { error } = require('./util/message')
 const { debug2, debug3, debug4 } = require('./util/debug')
 
 const defaultTemplateVariant = 'variant'
-const pageFile = 'index.html'
 
 const getVariantData = ({ variants, config }, variantId) => {
   const variant = variants[variantId]
@@ -24,62 +23,38 @@ const copyPageFile = (targetPath, sourcePath, source) => {
   return File.copy(source, target)
 }
 
-const render = (state, templateType, templateId, data) => {
-  debug4(state, `Builder.render(${templateType},${templateId}):start`)
+async function render (state, templateId, data, identifier) {
+  debug4(state, `Builder.render(${templateId}):start`)
 
-  if (templateId) {
-    const templates = state.config.templates || {}
-    const template = templates[templateId]
+  const templates = state.config.templates || {}
+  const template = templates[templateId]
 
-    if (!template) {
-      throw new Error(error([
-        `Template "${templateId}" does not exist.`,
-        'Add it to the templates source directory or refer to it like this:',
-        `templates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE`
-      ].join('\n\n')), [
-        'Registered templates:',
-        `${JSON.stringify(templates, null, '  ')}`
-      ].join('\n\n'))
-    }
-
-    const rendered = Connector.render(state, template, data)
-
-    debug4(state, `Builder.render(${templateType},${templateId}):end`)
-
-    return rendered
-  } else {
-    const rendered = Theme.render(state, templateType, data)
-
-    debug4(state, `Builder.render(${templateType},${templateId}):end`)
-
-    return rendered
+  if (!template) {
+    throw new Error(error([
+      `Template "${templateId}" does not exist.`,
+      'Add it to the templates source directory or refer to it like this:',
+      `templates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE`
+    ].join('\n\n')), [
+      'Registered templates:',
+      `${JSON.stringify(templates, null, '  ')}`
+    ].join('\n\n'))
   }
-}
 
-async function renderWithFallback (state, templateType, templateId, data, identifier) {
-  let html
+  let rendered
   try {
-    html = await render(state, templateType, templateId, data)
+    rendered = await Connector.render(state, template, data)
   } catch (err) {
-    html = `<!DOCTYPE html><html><body><pre>${err}</pre></body></html>`
+    rendered = `<!DOCTYPE html><html><body><pre>${err}</pre></body></html>`
     console.error(error(`${identifier} could not be generated!`, err))
   }
-  return html
+
+  debug4(state, `Builder.render(${templateId}):end`)
+
+  return rendered
 }
 
-async function dumpState (state) {
-  debug2(state, 'Builder.dumpState():start')
-
-  const json = JSON.stringify(state, null, '  ')
-  const filePath = path.resolve(state.config.target, 'state.json')
-
-  await File.write(filePath, json)
-
-  debug2(state, 'Builder.dumpState():end')
-}
-
-async function copyPageFiles (state, pageId) {
-  debug4(state, `Builder.copyPageFiles(${pageId}):start`)
+async function generatePageFiles (state, pageId) {
+  debug4(state, `Builder.generatePageFiles(${pageId}):start`)
 
   const { pages, config } = state
   const page = pages[pageId]
@@ -92,120 +67,63 @@ async function copyPageFiles (state, pageId) {
 
   await Promise.all(copyFiles)
 
-  debug4(state, `Builder.copyPageFiles(${pageId}):start`)
+  debug4(state, `Builder.generatePageFiles(${pageId}):start`)
 }
 
-async function generatePageWithType (state, page, identifier) {
-  debug3(state, `Builder.generatePageWithType(${page.id}):start`)
+async function generatePageWithTemplate (state, pageId) {
+  debug2(state, `Builder.generatePageWithTemplate(${pageId}):start`)
 
-  const { config } = state
-  const data = { state, pageId: page.id }
-  const html = await renderWithFallback(state, page.type, null, data, identifier)
-
-  if (html) {
-    const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
-    const targetPath = path.resolve(config.target, targetPagePath)
-    const htmlPath = path.resolve(targetPath, pageFile)
-
-    await File.write(htmlPath, html)
-  } else {
-    debug4(state, `No HTML provided for page "${page.id}", skipping file creation.`)
-  }
-
-  debug3(state, `Builder.generatePageWithType(${page.id}):end`)
-}
-
-async function generatePageWithTemplate (state, page, identifier) {
-  debug3(state, `Builder.generatePageWithTemplate(${page.id}):start`)
-
-  const { config } = state
-  const html = await renderWithFallback(state, null, page.template, page.context, identifier)
-
-  if (html) {
-    const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
-    const targetPath = path.resolve(config.target, targetPagePath)
-    const htmlPath = path.resolve(targetPath, `_${page.template}.html`)
-
-    await File.write(htmlPath, html)
-  } else {
-    debug4(state, `No HTML provided for template of page "${page.id}", skipping file creation.`)
-  }
-
-  debug3(state, `Builder.generatePageWithTemplate(${page.id}):end`)
-}
-
-async function generatePage (state, pageId) {
-  debug2(state, `Builder.generatePage(${pageId}):start`)
-
-  const { pages } = state
+  const { pages, config: { target } } = state
   const identifier = `Page "${pageId}"`
   const page = pages[pageId]
   if (!page) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
 
-  const tasks = [generatePageWithType(state, page, identifier)]
-  if (page.template) tasks.push(generatePageWithTemplate(state, page, identifier))
+  if (page.template) {
+    // render template with context
+    const data = page.context
+    const templateId = page.template
+    const html = await render(state, templateId, data, identifier)
 
-  await Promise.all(tasks)
-
-  debug2(state, `Builder.generatePage(${pageId}):end`)
-}
-
-async function generateComponentsForPage (state, pageId) {
-  debug3(state, `Builder.generateComponentsForPage(${pageId}):start`)
-
-  const { pages } = state
-  const page = pages[pageId]
-  const componentIds = page.componentIds || []
-  const build = R.partial(generateComponentForPage, [state, pageId])
-  const builds = R.map(build, componentIds)
-
-  await Promise.all(builds)
-
-  debug3(state, `Builder.generateComponentsForPage(${pageId}):end`)
-}
-
-async function generateComponentForPage (state, pageId, componentId) {
-  debug4(state, `Builder.generateComponentForPage(${pageId}, ${componentId}):start`)
-
-  const { components, pages, config: { target } } = state
-  const identifier = `Component "${componentId}"`
-  const parent = pages[pageId]
-  const component = components[componentId]
-  if (!component) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
-
-  const data = { state, pageId: PageUtil.pageIdForComponentId(pageId, componentId) }
-  const html = await renderWithFallback(state, component.type, null, data, identifier)
-
-  if (html) {
-    const targetPath = path.join(target, PageUtil.pagePathForComponentId(parent.path, component.id))
-    const htmlPath = path.resolve(targetPath, pageFile)
-
+    // write file
+    const htmlPath = path.resolve(target, '_pages', `${page.id}.html`)
     await File.write(htmlPath, html)
-  } else {
-    debug4(state, `No HTML provided for component page "${component.id}", skipping file creation.`)
   }
 
-  debug4(state, `Builder.generateComponentForPage(${pageId}, ${componentId}):end`)
+  debug2(state, `Builder.generatePageWithTemplate(${pageId}):end`)
 }
 
-async function generatePagesHavingComponent (state, componentId) {
-  const { pages } = state
-  const affectedPages = R.filter(page => (page.componentIds || []).includes(componentId), pages)
-  const pageIds = Object.keys(affectedPages)
-  const build = R.partial(generateComponentForPage, [state])
-  const builds = R.map(pageId => build(pageId, componentId), pageIds)
+async function generatePagesWithTemplate (state, templateId) {
+  debug3(state, `Builder.generatePagesWithTemplate(${templateId}):start`)
 
-  await Promise.all(builds)
-}
-
-async function generatePagesHavingTemplate (state, templateId) {
   const { pages } = state
   const affectedPages = R.filter(page => page.template === templateId, pages)
   const pageIds = Object.keys(affectedPages)
-  const build = R.partial(generatePage, [state])
+  const build = R.partial(generatePageWithTemplate, [state])
   const builds = R.map(build, pageIds)
 
   await Promise.all(builds)
+
+  debug3(state, `Builder.generatePagesWithTemplate(${templateId}):end`)
+}
+
+async function generateVariant (state, variantId) {
+  debug2(state, `Builder.generateVariant(${variantId}):start`)
+
+  const { variants, config: { target } } = state
+  const identifier = `Variant "${variantId}"`
+  const variant = variants[variantId]
+  if (!variant) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
+
+  // render variant preview, with layout
+  const data = getVariantData(state, variantId)
+  const templateId = variant.template || defaultTemplateVariant
+  const html = await render(state, templateId, data, identifier)
+
+  // write file
+  const htmlPath = path.resolve(target, '_variants', `${variant.id}.html`)
+  await File.write(htmlPath, html)
+
+  debug2(state, `Builder.generateVariant(${variantId}):end`)
 }
 
 async function generateComponentVariants (state, componentId) {
@@ -222,40 +140,31 @@ async function generateComponentVariants (state, componentId) {
   debug3(state, `Builder.generateComponentVariants(${componentId}):end`)
 }
 
-async function generateVariant (state, variantId) {
-  debug2(state, `Builder.generateVariant(${variantId}):start`)
+async function generateState (state, change) {
+  debug2(state, 'Builder.generateState():start')
 
-  const { variants, config: { target } } = state
-  const identifier = `Variant "${variantId}"`
-  const variant = variants[variantId]
-  if (!variant) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
+  const json = JSON.stringify(state, null, '  ')
+  const filePath = path.resolve(state.config.target, '_state.json')
 
-  // render variant preview, with layout
-  const data = getVariantData(state, variantId)
-  const templateId = variant.template || defaultTemplateVariant
-  const html = await renderWithFallback(state, null, templateId, data, identifier)
+  await Promise.all([
+    File.write(filePath, json),
+    Theme.render(state, change)
+  ])
 
-  // write file
-  const htmlPath = path.resolve(target, '_variants', `${variant.id}.html`)
-  await File.write(htmlPath, html)
-
-  debug2(state, `Builder.generateVariant(${variantId}):end`)
+  debug2(state, 'Builder.generateState():end')
 }
 
-async function generateSite (state) {
-  debug2(state, 'Builder.generateSite():start')
+async function generate (state) {
+  debug2(state, 'Builder.generate():start')
 
   const pageIds = Object.keys(state.pages)
   const variantIds = Object.keys(state.variants)
 
-  const pageBuild = R.partial(generatePage, [state])
+  const pageBuild = R.partial(generatePageWithTemplate, [state])
   const pageBuilds = R.map(pageBuild, pageIds)
 
-  const pageFilesBuild = R.partial(copyPageFiles, [state])
+  const pageFilesBuild = R.partial(generatePageFiles, [state])
   const pageFilesBuilds = R.map(pageFilesBuild, pageIds)
-
-  const pageComponentsBuild = R.partial(generateComponentsForPage, [state])
-  const pageComponentsBuilds = R.map(pageComponentsBuild, pageIds)
 
   const variantBuild = R.partial(generateVariant, [state])
   const variantBuilds = R.map(variantBuild, variantIds)
@@ -263,22 +172,23 @@ async function generateSite (state) {
   await Promise.all([
     ...pageBuilds,
     ...pageFilesBuilds,
-    ...pageComponentsBuilds,
-    ...variantBuilds
+    ...variantBuilds,
+    generateState(state)
   ])
 
-  debug2(state, 'Builder.generateSite():end')
+  debug2(state, 'Builder.generate():end')
 }
 
+// generateIncrement is a better name for the public function,
+// whereas generateState describes it better internally
+const generateIncrement = generateState
+
 module.exports = {
-  generateSite,
-  generatePage,
-  generateComponentForPage,
-  generateComponentsForPage,
-  generatePagesHavingComponent,
-  generatePagesHavingTemplate,
+  generate,
+  generateIncrement,
+  generatePageWithTemplate,
+  generatePagesWithTemplate,
   generateComponentVariants,
   generateVariant,
-  copyPageFiles,
-  dumpState
+  generatePageFiles
 }

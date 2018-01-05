@@ -22,13 +22,11 @@ const CONFIG_FILENAME = 'uiengine.yml'
 // track the state of a running generate process to
 // cancel regenerating during a full generate
 let isCurrentlyGenerating = false
-
 const isGenerating = () => isCurrentlyGenerating
 
 // set the state in this modules scope so that we
 // can access it when handling incremental changes
 let state = {}
-
 const getState = () => state
 
 async function setupStateWithOptions (options = {}) {
@@ -44,20 +42,10 @@ async function generate (options) {
 
   debug2(state, 'UIengine.generate():start')
 
+  // 0. setup
   const setupTheme = Theme.setup(state)
   const setupAdapters = Connector.setup(state)
   await Promise.all([setupTheme, setupAdapters])
-
-  state = await generateContent()
-  isCurrentlyGenerating = false
-
-  debug2(state, 'UIengine.generate():end')
-
-  return state
-}
-
-async function generateContent () {
-  debug2(state, 'UIengine.generateContent():start')
 
   // 1. data fetching
   const fetchPages = Page.fetchAll(state)
@@ -76,18 +64,17 @@ async function generateContent () {
   state = R.assoc('navigation', navigation, state)
 
   // 3. output
-  const generateSite = Builder.generateSite(state)
-  const dumpState = Builder.dumpState(state)
-  await Promise.all([generateSite, dumpState])
+  await Builder.generate(state)
 
-  debug2(state, 'UIengine.generateContent():end')
+  isCurrentlyGenerating = false
+
+  debug2(state, 'UIengine.generate():end')
 
   return state
 }
 
-async function generateIncrementForFileChange (filePath, action = 'changed') {
-  const { source: { components, pages, templates, data, schema, configFile } } = state.config
-  const isDeleted = action === 'deleted'
+const getChangeObject = (filePath, action) => {
+  const { source: { components, pages, templates, data, schema } } = state.config
   const file = path.relative(process.cwd(), filePath)
   const isSchemaFile = !!filePath.startsWith(schema)
   const isDataFile = !isSchemaFile && !!filePath.startsWith(data)
@@ -119,37 +106,61 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
   }
 
   if (pageId) {
-    if (isDeleted) {
-      await removePage(pageId)
-    } else {
-      await regeneratePage(pageId)
-    }
     return { file, action, type: 'page', item: pageId }
   } else if (variantId) {
-    if (isDeleted) {
-      await removeVariant(variantId, componentId)
-    } else {
-      await regenerateVariant(variantId, componentId)
-    }
     return { file, action, type: 'variant', item: variantId }
   } else if (componentId) {
-    if (isDeleted && isComponentDir) {
-      await removeComponent(componentId)
-    } else {
-      await Connector.registerComponentFile(state, filePath)
-      await regenerateComponent(componentId)
-    }
     return { file, action, type: 'component', item: componentId }
   } else if (schemaId) {
-    await regenerateSchemaPage(schemaId)
-    return { file, action, type: 'page', item: 'schema' }
+    return { file, action, type: 'schema', item: schemaId }
   } else if (templateId) {
-    await regenerateTemplate(templateId)
     return { file, action, type: 'template', item: templateId }
   } else {
-    await generate({ config: configFile })
     return { file, action, type: 'site', item: state.config.name }
   }
+}
+
+async function generateIncrementForFileChange (filePath, action = 'changed') {
+  const change = getChangeObject(filePath, action)
+  const isDeleted = action === 'deleted'
+  let fn
+
+  switch (change.type) {
+    case 'page':
+      fn = isDeleted ? removePage : regeneratePage
+      await fn(change.item, change)
+      break
+
+    case 'variant':
+      fn = isDeleted ? removeVariant : regenerateVariant
+      await fn(change.item, change)
+      break
+
+    case 'component':
+      // check whether or not a file was deleted or the component directory
+      const isDirectory = path.basename(filePath) === change.item
+      if (isDeleted && isDirectory) {
+        await removeComponent(change.item, change)
+      } else {
+        await Connector.registerComponentFile(state, filePath)
+        await regenerateComponent(change.item, change)
+      }
+      break
+
+    case 'schema':
+      await regenerateSchema(change.item, change)
+      break
+
+    case 'template':
+      await regenerateTemplate(change.item, change)
+      break
+
+    default:
+      await generate({ config: state.config.source.configFile })
+      break
+  }
+
+  return change
 }
 
 async function fetchAndAssocPage (id) {
@@ -182,7 +193,7 @@ async function fetchAndAssocNavigation () {
   return navigation
 }
 
-async function removePage (id) {
+async function removePage (id, change) {
   const pageIds = Object.keys(state.pages)
   const parentId = PageUtil.parentIdForPageId(pageIds, id)
 
@@ -190,69 +201,68 @@ async function removePage (id) {
 
   await fetchAndAssocPage(parentId)
   await fetchAndAssocNavigation()
-  await Builder.generatePage(state, parentId)
+  await Builder.generateIncrement(state, change)
 }
 
-async function regeneratePage (id) {
+async function regeneratePage (id, change) {
   const pageIds = Object.keys(state.pages)
   const parentId = PageUtil.parentIdForPageId(pageIds, id)
   const fetchTasks = [fetchAndAssocPage(id)]
-
   if (parentId) fetchTasks.push(fetchAndAssocPage(parentId))
+
   await Promise.all(fetchTasks)
-
   await fetchAndAssocNavigation()
-
-  const buildTasks = [
-    Builder.generatePage(state, id),
-    Builder.copyPageFiles(state, id),
-    Builder.generateComponentsForPage(state, id)
-  ]
-  if (parentId) buildTasks.push(Builder.generatePage(state, parentId))
-
-  await Promise.all(buildTasks)
+  await Promise.all([
+    Builder.generatePageWithTemplate(state, id),
+    Builder.generatePageFiles(state, id),
+    Builder.generateIncrement(state, change)
+  ])
 }
 
-async function regenerateSchemaPage (schemaId) {
+async function regenerateSchema (schemaId, change) {
   await fetchAndAssocSchema(schemaId)
-
-  await Builder.generatePage(state, PageUtil.SCHEMA_ID)
+  await Builder.generateIncrement(state, change)
 }
 
-async function regenerateVariant (id, componentId) {
-  const fetchVariant = fetchAndAssocVariant(id)
-  const fetchComponent = fetchAndAssocComponent(componentId)
-  await Promise.all([fetchVariant, fetchComponent])
-
-  const buildVariant = Builder.generateVariant(state, id)
-  const buildPages = Builder.generatePagesHavingComponent(state, componentId)
-  await Promise.all([buildPages, buildVariant])
-}
-
-async function removeVariant (id, componentId) {
-  state = R.dissocPath(['variants', id], state)
+async function regenerateVariant (id, change) {
+  const { componentId } = await fetchAndAssocVariant(id)
   await fetchAndAssocComponent(componentId)
-  await Builder.generatePagesHavingComponent(state, componentId)
+  await Promise.all([
+    Builder.generateVariant(state, id),
+    Builder.generateIncrement(state, change)
+  ])
 }
 
-async function regenerateComponent (id) {
+async function removeVariant (id, change) {
+  const { componentId } = state.variants[id]
+  state = R.dissocPath(['variants', id], state)
+
+  await fetchAndAssocComponent(componentId)
+  await Builder.generateIncrement(state, change)
+}
+
+async function regenerateComponent (id, change) {
   const { variantIds } = await fetchAndAssocComponent(id)
   const fetchAndAssocVariants = R.map(fetchAndAssocVariant, variantIds)
+
   await Promise.all(fetchAndAssocVariants)
-
-  const buildPages = Builder.generatePagesHavingComponent(state, id)
-  const buildVariants = Builder.generateComponentVariants(state, id)
-  await Promise.all([buildPages, buildVariants])
+  await Promise.all([
+    Builder.generateComponentVariants(state, id),
+    Builder.generateIncrement(state, change)
+  ])
 }
 
-async function regenerateTemplate (id) {
-  await Builder.generatePagesHavingTemplate(state, id)
+async function regenerateTemplate (id, change) {
+  await Promise.all([
+    Builder.generatePagesWithTemplate(state, id),
+    Builder.generateIncrement(state, change)
+  ])
 }
 
-async function removeComponent (id) {
+async function removeComponent (id, change) {
   state = R.dissocPath(['components', id], state)
 
-  await Builder.generatePagesHavingComponent(state, id)
+  await Builder.generateIncrement(state, change)
 }
 
 module.exports = {

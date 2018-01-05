@@ -35,7 +35,7 @@ describe('Navigation', () => {
 
           const index = data['index']
           assert.equal(index.id, 'index')
-          assert.equal(index.path, '')
+          assert.equal(index.path, '/')
           assert.equal(index.title, 'Home')
           assert.equal(index.type, 'documentation')
           assert.equal(index.isStructural, false) // has content
@@ -51,7 +51,7 @@ describe('Navigation', () => {
 
           const atoms = data['atoms']
           assert.equal(atoms.id, 'atoms')
-          assert.equal(atoms.path, 'atoms')
+          assert.equal(atoms.path, '/atoms/')
           assert.equal(atoms.title, 'Atoms')
           assert.equal(atoms.type, 'documentation')
           assert.equal(atoms.isStructural, true) // has components, but no content
@@ -71,7 +71,7 @@ describe('Navigation', () => {
 
           const molecules = data['molecules']
           assert.equal(molecules.id, 'molecules')
-          assert.equal(molecules.path, 'molecules')
+          assert.equal(molecules.path, '/molecules/')
           assert.equal(molecules.title, 'Molecules')
           assert.equal(molecules.type, 'documentation')
           assert.equal(molecules.isStructural, true) // has components, but no content
@@ -87,7 +87,7 @@ describe('Navigation', () => {
 
           const atomsDocs = data['atoms/docs']
           assert.equal(atomsDocs.id, 'atoms/docs')
-          assert.equal(atomsDocs.path, 'atoms/docs')
+          assert.equal(atomsDocs.path, '/atoms/docs/')
           assert.equal(atomsDocs.title, 'Atom Docs')
           assert.equal(atomsDocs.isStructural, true)
           assert.equal(atomsDocs.childIds.length, 0)
@@ -105,7 +105,7 @@ describe('Navigation', () => {
 
           const atomsMoreDocs = data['atoms/more-docs']
           assert.equal(atomsMoreDocs.id, 'atoms/more-docs')
-          assert.equal(atomsMoreDocs.path, 'atoms/more-docs')
+          assert.equal(atomsMoreDocs.path, '/atoms/more-docs/')
           assert.equal(atomsMoreDocs.title, 'More Atom Docs')
           assert.equal(atomsMoreDocs.isStructural, true)
           assert.equal(atomsMoreDocs.childIds.length, 0)
@@ -123,7 +123,7 @@ describe('Navigation', () => {
 
           const atomsLink = data['atoms/link']
           assert.equal(atomsLink.id, 'atoms/link')
-          assert.equal(atomsLink.path, 'atoms/link')
+          assert.equal(atomsLink.path, '/atoms/link/')
           assert.equal(atomsLink.title, 'Link')
           assert.equal(atomsLink.isStructural, false)
           assert.equal(atomsLink.childIds.length, 0)
@@ -141,7 +141,7 @@ describe('Navigation', () => {
 
           const atomsButton = data['atoms/button']
           assert.equal(atomsButton.id, 'atoms/button')
-          assert.equal(atomsButton.path, 'atoms/button')
+          assert.equal(atomsButton.path, '/atoms/button/')
           assert.equal(atomsButton.title, 'Awesome Button')
           assert.equal(atomsButton.isStructural, false)
           assert.equal(atomsButton.childIds.length, 0)

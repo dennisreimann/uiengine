@@ -12,7 +12,7 @@
     "node": ">=6.11.0"
   },
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf ../../test/tmp",
     "start": "yarn run clean && gulp develop",
     "build": "yarn run clean && gulp build",
     "standalone": "yarn run clean && uiengine generate -s -w -d"

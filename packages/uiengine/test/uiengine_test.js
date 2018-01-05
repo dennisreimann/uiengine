@@ -15,26 +15,18 @@ const pagesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'pages')
 const schemaPath = path.resolve(testProjectPath, 'src', 'uiengine', 'schema')
 const componentsPath = path.resolve(testProjectPath, 'src', 'components')
 const templatesPath = path.resolve(testProjectPath, 'src', 'templates')
+const statePath = path.join(testProjectTargetPath, '_state.json')
 const opts = { config: path.resolve(testProjectPath, 'uiengine.yml'), debug: true }
 
 // "end to end" tests
-describe('UIengine', function () {
-  this.timeout(10000)
-
+describe('UIengine', () => {
   afterEach(() => { fs.removeSync(testProjectTargetPath) })
 
   describe('#generate', () => {
-    it('should generate pages', done => {
+    it('should generate index page', done => {
       UIengine.generate(opts)
         .then(state => {
           assertExists(path.join(testProjectTargetPath, 'index.html'))
-          assertExists(path.join(testProjectTargetPath, 'documentation', 'index.html'))
-          assertExists(path.join(testProjectTargetPath, 'patterns', 'index.html'))
-          assertExists(path.join(testProjectTargetPath, 'patterns', 'atoms', 'index.html'))
-          assertExists(path.join(testProjectTargetPath, 'patterns', 'molecules', 'index.html'))
-          assertExists(path.join(testProjectTargetPath, 'patterns', 'organisms', 'index.html'))
-          assertExists(path.join(testProjectTargetPath, 'patterns', 'templates', 'index.html'))
-          assertExists(path.join(testProjectTargetPath, 'patterns', 'pages', 'index.html'))
 
           done()
         })
@@ -44,52 +36,39 @@ describe('UIengine', function () {
     it('should generate state file', done => {
       UIengine.generate(opts)
         .then(state => {
-          assertExists(path.join(testProjectTargetPath, 'state.json'))
+          assertExists(path.join(testProjectTargetPath, '_state.json'))
 
           done()
         })
         .catch(done)
     })
 
-    it('should generate schema page', done => {
+    it('should generate state file with token list', done => {
       UIengine.generate(opts)
         .then(state => {
-          assertExists(path.join(testProjectTargetPath, '_schema', 'index.html'))
+          assertContentMatches(statePath, '.5rem')
+          assertContentMatches(statePath, '1rem')
+          assertContentMatches(statePath, '1.5rem')
+          assertContentMatches(statePath, '3rem')
 
           done()
         })
         .catch(done)
     })
 
-    it('should generate tokens page with token list', done => {
+    it('should generate state file with token categories', done => {
       UIengine.generate(opts)
         .then(state => {
-          const pagePath = path.join(testProjectTargetPath, 'documentation', 'tokens', 'spaces', 'index.html')
-
-          assertContentMatches(pagePath, '.5rem')
-          assertContentMatches(pagePath, '1rem')
-          assertContentMatches(pagePath, '1.5rem')
-          assertContentMatches(pagePath, '3rem')
-
-          done()
-        })
-        .catch(done)
-    })
-
-    it('should generate tokens page with token categories', done => {
-      UIengine.generate(opts)
-        .then(state => {
-          const pagePath = path.join(testProjectTargetPath, 'documentation', 'tokens', 'colors', 'index.html')
           // categories
-          assertContentMatches(pagePath, 'Brand')
-          assertContentMatches(pagePath, 'Neutral')
-          assertContentMatches(pagePath, 'Text')
-          assertContentMatches(pagePath, 'Background')
+          assertContentMatches(statePath, 'Brand')
+          assertContentMatches(statePath, 'Neutral')
+          assertContentMatches(statePath, 'Text')
+          assertContentMatches(statePath, 'Background')
 
           // token values
-          assertContentMatches(pagePath, 'Brand Primary')
-          assertContentMatches(pagePath, '#FF183E')
-          assertContentMatches(pagePath, 'Primary brand color')
+          assertContentMatches(statePath, 'Brand Primary')
+          assertContentMatches(statePath, '#FF183E')
+          assertContentMatches(statePath, 'Primary brand color')
 
           done()
         })
@@ -142,9 +121,11 @@ describe('UIengine', function () {
     it('should generate page on change', done => {
       const filePath = path.join(pagesPath, 'patterns', 'page.md')
 
+      fs.removeSync(statePath)
+
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(testProjectTargetPath, 'patterns', 'index.html'))
+          assertContentMatches(statePath, 'patterns')
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
@@ -156,34 +137,19 @@ describe('UIengine', function () {
         .catch(done)
     })
 
-    it('should generate index page on change', done => {
+    it('should generate state file on change', done => {
       const filePath = path.join(pagesPath, 'page.md')
+
+      fs.removeSync(statePath)
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(testProjectTargetPath, 'index.html'))
+          assertExists(statePath)
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'page')
           assert.equal(result.item, 'index')
           assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'page.md'))
-
-          done()
-        })
-        .catch(done)
-    })
-
-    it('should generate page without direct parent on change', done => {
-      const filePath = path.join(pagesPath, 'patterns', 'pages', 'ajax', 'layer', 'page.md')
-
-      UIengine.generateIncrementForFileChange(filePath, 'changed')
-        .then(result => {
-          assertExists(path.join(testProjectTargetPath, 'patterns', 'pages', 'ajax', 'layer', 'index.html'))
-
-          assert.equal(result.action, 'changed')
-          assert.equal(result.type, 'page')
-          assert.equal(result.item, 'patterns/pages/ajax/layer')
-          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'patterns', 'pages', 'ajax', 'layer', 'page.md'))
 
           done()
         })
@@ -208,7 +174,6 @@ describe('UIengine', function () {
     })
 
     it('should generate page on create', done => {
-      const pagePath = path.join(testProjectTargetPath, 'testcases', 'created', 'index.html')
       const filePath = path.join(pagesPath, 'testcases', 'created', 'page.md')
       const fileDir = path.dirname(filePath)
 
@@ -217,8 +182,7 @@ describe('UIengine', function () {
 
       UIengine.generateIncrementForFileChange(filePath, 'created')
         .then(result => {
-          assertContentMatches(pagePath, 'Content for created page.')
-          assertExists(path.join(testProjectTargetPath, 'testcases', 'created', 'label', 'index.html'))
+          assertContentMatches(statePath, 'Content for created page.')
 
           assert.equal(result.action, 'created')
           assert.equal(result.type, 'page')
@@ -237,7 +201,6 @@ describe('UIengine', function () {
     })
 
     it('should generate page on delete', done => {
-      const parentPagePath = path.join(testProjectTargetPath, 'testcases', 'index.html')
       const filePath = path.join(pagesPath, 'testcases', 'created', 'page.md')
       const fileDir = path.dirname(filePath)
 
@@ -246,13 +209,13 @@ describe('UIengine', function () {
 
       UIengine.generateIncrementForFileChange(filePath, 'created')
         .then(result => {
-          assertContentMatches(parentPagePath, 'Created Page')
+          assertContentMatches(statePath, 'Created Page')
 
           fs.removeSync(filePath)
 
           UIengine.generateIncrementForFileChange(filePath, 'deleted')
             .then(result => {
-              assertContentDoesNotMatch(parentPagePath, 'Created Page')
+              assertContentDoesNotMatch(statePath, 'Created Page')
 
               assert.equal(result.action, 'deleted')
               assert.equal(result.type, 'page')
@@ -276,16 +239,18 @@ describe('UIengine', function () {
         })
     })
 
-    it('should generate schema page on change', done => {
+    it('should generate schema update on change', done => {
       const filePath = path.join(schemaPath, 'Entity.yml')
+
+      fs.removeSync(statePath)
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(testProjectTargetPath, '_schema', 'index.html'))
+          assertContentMatches(statePath, 'Entity')
 
           assert.equal(result.action, 'changed')
-          assert.equal(result.type, 'page')
-          assert.equal(result.item, 'schema')
+          assert.equal(result.type, 'schema')
+          assert.equal(result.item, 'Entity')
           assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'uiengine', 'schema', 'Entity.yml'))
 
           done()
@@ -417,11 +382,10 @@ describe('UIengine', function () {
 
     it('should generate variant on change', done => {
       const filePath = path.join(componentsPath, 'form', 'variants', 'form.pug')
-      const componentPath = path.join(testProjectTargetPath, 'patterns', 'organisms', 'form', 'index.html')
       const existingVariantPath = path.join(testProjectTargetPath, '_variants', 'form', 'form.pug.html')
 
       fs.removeSync(existingVariantPath)
-      fs.removeSync(componentPath)
+      fs.removeSync(statePath)
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
@@ -432,7 +396,7 @@ describe('UIengine', function () {
           assert.equal(result.item, 'form/form.pug')
           assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'components', 'form', 'variants', 'form.pug'))
 
-          assertExists(componentPath)
+          assertExists(statePath)
           done()
         })
         .catch(done)
@@ -440,15 +404,13 @@ describe('UIengine', function () {
 
     it('should generate variant on create', done => {
       const filePath = path.join(componentsPath, 'form', 'variants', 'form-fieldsets.pug')
-      const componentPath = path.join(testProjectTargetPath, 'patterns', 'organisms', 'form', 'index.html')
 
-      fs.removeSync(componentPath)
+      fs.removeSync(statePath)
       fs.writeFileSync(filePath, 'p Test')
 
       UIengine.generateIncrementForFileChange(filePath, 'created')
         .then(result => {
-          assertContentMatches(componentPath, '>Form Fieldsets</')
-          assertExists(componentPath)
+          assertContentMatches(statePath, 'Form Fieldsets')
 
           assert.equal(result.action, 'created')
           assert.equal(result.type, 'variant')
@@ -468,19 +430,19 @@ describe('UIengine', function () {
 
     it('should generate variant on delete', done => {
       const filePath = path.join(componentsPath, 'form', 'variants', 'form-fieldsets.pug')
-      const componentPath = path.join(testProjectTargetPath, 'patterns', 'organisms', 'form', 'index.html')
 
+      fs.removeSync(statePath)
       fs.writeFileSync(filePath, 'p Test')
 
       UIengine.generateIncrementForFileChange(filePath, 'created')
         .then(result => {
-          assertContentMatches(componentPath, '>Form Fieldsets</')
+          assertContentMatches(statePath, 'Form Fieldsets')
 
           fs.removeSync(filePath)
 
           UIengine.generateIncrementForFileChange(filePath, 'deleted')
             .then(result => {
-              assertContentDoesNotMatch(componentPath, '>Form Fieldsets</')
+              assertContentDoesNotMatch(statePath, 'Form Fieldsets')
 
               assert.equal(result.action, 'deleted')
               assert.equal(result.type, 'variant')
@@ -498,12 +460,35 @@ describe('UIengine', function () {
         })
     })
 
-    it('should regenerate pages with template on template change', done => {
-      const filePath = path.join(templatesPath, 'page.pug')
+    it('should regenerate pages with template on change', done => {
+      const filePath = path.join(pagesPath, 'testcases', 'custom-template', 'page.md')
+      const templatePath = path.join(testProjectTargetPath, '_pages', 'testcases', 'custom-template.html')
+
+      fs.removeSync(templatePath)
 
       UIengine.generateIncrementForFileChange(filePath, 'changed')
         .then(result => {
-          assertExists(path.join(testProjectTargetPath, 'testcases', 'custom-template', 'index.html'))
+          assertExists(templatePath)
+
+          assert.equal(result.action, 'changed')
+          assert.equal(result.type, 'page')
+          assert.equal(result.item, 'testcases/custom-template')
+          assert.equal(result.file, path.join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'testcases', 'custom-template', 'page.md'))
+
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should regenerate pages with template on template change', done => {
+      const filePath = path.join(templatesPath, 'page.pug')
+      const templatePath = path.join(testProjectTargetPath, '_pages', 'testcases', 'custom-template.html')
+
+      fs.removeSync(templatePath)
+
+      UIengine.generateIncrementForFileChange(filePath, 'changed')
+        .then(result => {
+          assertExists(templatePath)
 
           assert.equal(result.action, 'changed')
           assert.equal(result.type, 'template')
@@ -551,7 +536,7 @@ describe('UIengine', function () {
   })
 
   describe('#isGenerating', () => {
-    it('should return whether or not a generate is currently running', function (done) {
+    it('should return whether or not a generate is currently running', done => {
       assert(!UIengine.isGenerating())
 
       UIengine.generate(opts)

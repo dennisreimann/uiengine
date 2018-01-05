@@ -12,12 +12,11 @@ const getTheme = state => {
   }
 }
 
-async function render (state, templateId, data = {}) {
+async function render (state, change) {
   const { config: { theme: { options } } } = state
   const { render } = getTheme(state)
-  const rendered = await render(options, templateId, data)
 
-  return rendered
+  await render(options, state, change)
 }
 
 async function setup (state) {
@@ -38,6 +37,7 @@ async function setup (state) {
   debug3(state, 'Theme.setup():end')
 }
 
+// TODO: Move copyStatic into themes' setup
 async function copyStatic (state) {
   debug4(state, 'Theme.copyStatic():start')
 

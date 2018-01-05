@@ -233,25 +233,33 @@ describe('Page', () => {
   })
 
   describe('#fetchAll', () => {
-    it('should return pages object', function (done) {
-      this.timeout(10000)
-
+    it('should return pages object', done => {
       Page.fetchAll(state)
         .then(data => {
           const pageIds = Object.keys(data)
 
-          assert.equal(pageIds.length, 20)
+          assert.equal(pageIds.length, 21)
 
           assertPage(pageIds, 'index')
           assertPage(pageIds, 'documentation')
           assertPage(pageIds, 'documentation/development')
           assertPage(pageIds, 'documentation/getting-started')
+          assertPage(pageIds, 'documentation')
+          assertPage(pageIds, 'documentation/tokens')
+          assertPage(pageIds, 'documentation/tokens/colors')
+          assertPage(pageIds, 'documentation/tokens/icons')
+          assertPage(pageIds, 'documentation/tokens/spaces')
+          assertPage(pageIds, 'documentation/tokens/typography')
           assertPage(pageIds, 'patterns')
           assertPage(pageIds, 'patterns/atoms')
           assertPage(pageIds, 'patterns/molecules')
           assertPage(pageIds, 'patterns/organisms')
-          assertPage(pageIds, 'patterns/templates')
           assertPage(pageIds, 'patterns/pages')
+          assertPage(pageIds, 'patterns/pages/ajax/layer')
+          assertPage(pageIds, 'patterns/templates')
+          assertPage(pageIds, 'testcases/custom-data')
+          assertPage(pageIds, 'testcases/custom-path')
+          assertPage(pageIds, 'testcases/custom-template')
           assertPage(pageIds, 'schema')
 
           done()

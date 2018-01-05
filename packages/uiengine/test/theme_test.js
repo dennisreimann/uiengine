@@ -62,16 +62,15 @@ describe('Theme', () => {
   })
 
   describe('#render', () => {
-    it('should call the themes render function with the options, the template id and data', function (done) {
+    it('should call the themes render function with the options, state and change', function (done) {
       this.sinon.stub(TestTheme, 'render').returns('')
 
-      const templateId = 'my-template'
-      const data = { myData: 1 }
+      const change = { file: 'component.md', action: 'created', type: 'component', item: 'componentId' }
 
-      Theme.render(state, templateId, data)
+      Theme.render(state, change)
         .then(() => {
           assert(TestTheme.render.calledOnce)
-          assert(TestTheme.render.calledWith(testThemeOptions, templateId, data))
+          assert(TestTheme.render.calledWith(testThemeOptions, state, change))
 
           done()
         })

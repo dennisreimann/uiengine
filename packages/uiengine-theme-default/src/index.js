@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import compile from 'lodash.template'
 import { highlight } from './util'
+import File from 'uiengine/lib/util/file'
 
 const supportedLocales = ['en', 'de']
 const defaultOpts = {
@@ -26,7 +27,7 @@ export async function setup (options) {
       if (err) {
         const message = [`Theme could not load template "${templatePath}"!`, err]
 
-        if (options.debug) message.push(JSON.stringify(options, null, '  '))
+        if (options.debug) message.push(JSON.stringify(options, null, 2))
 
         reject(message.join('\n\n'))
       } else {
@@ -38,26 +39,25 @@ export async function setup (options) {
   })
 }
 
-export async function render (options, id, data = {}) {
-  return new Promise((resolve, reject) => {
-    // generate only the index page, all other pages are rendered client-side
-    if (data.pageId !== 'index') resolve(null)
+export async function render (options, state, change) {
+  // generate the index page if this is a full render (no change)
+  if (change) return
 
-    // sanitize and prepare options
-    if (!supportedLocales.includes(options.lang)) delete options.lang
-    const opts = Object.assign({}, defaultOpts, options)
-    const context = Object.assign({}, data, opts)
+  // sanitize and prepare options
+  if (!supportedLocales.includes(options.lang)) delete options.lang
+  const opts = Object.assign({}, defaultOpts, options)
+  const context = Object.assign({}, { state }, opts)
 
-    try {
-      const rendered = templateFn(context)
+  try {
+    const rendered = templateFn(context)
+    const filePath = path.resolve(state.config.target, 'index.html')
 
-      resolve(rendered)
-    } catch (err) {
-      const message = [`Theme could not render "${data.pageId}"!`, err]
+    await File.write(filePath, rendered)
+  } catch (err) {
+    const message = ['Theme could not render!', err]
 
-      if (options.debug) message.push(JSON.stringify(context, null, '  '))
+    if (options.debug) message.push(JSON.stringify(context, null, 2))
 
-      reject(message.join('\n\n'))
-    }
-  })
+    throw new Error(message.join('\n\n'))
+  }
 }

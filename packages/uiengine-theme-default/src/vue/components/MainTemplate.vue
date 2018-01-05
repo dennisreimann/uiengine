@@ -106,7 +106,7 @@ export default {
     },
 
     previewPath () {
-      return `_${this.page.template}.html`
+      return `/_pages/${this.page.id}.html`
     }
   },
 
