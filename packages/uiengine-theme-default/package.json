@@ -22,7 +22,8 @@
   "scripts": {
     "clean": "rimraf lib dist",
     "start": "yarn run clean && NODE_ENV=development gulp develop",
-    "build": "yarn run clean && NODE_ENV=production gulp build"
+    "build": "yarn run clean && NODE_ENV=production gulp build",
+    "lint": "eslint --ext .js,.vue src test"
   },
   "dependencies": {
     "color": "^2.0.1",
@@ -35,17 +36,24 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "autoprefixer": "^7.2.3",
+    "autoprefixer": "^7.2.4",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.1.2",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
     "clipboard": "^1.7.1",
     "copy-webpack-plugin": "^4.3.1",
-    "css-loader": "^0.28.7",
+    "css-loader": "^0.28.8",
     "css-mqpacker": "^6.0.1",
     "csswring": "^6.0.2",
+    "eslint": "4.14.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^4.0.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
     "friendly-errors-webpack-plugin": "^1.6.1",

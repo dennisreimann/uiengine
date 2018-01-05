@@ -5,7 +5,7 @@ const actionlistActiveClass = 'contentheader__actionlist--active'
 const toggleActionlist = actionlist =>
   actionlist.classList.toggle(actionlistActiveClass)
 
-on('modal:close', 'body', e => {
+on('modal:close', 'body', () => {
   document.querySelectorAll('.contentheader__actionlist').forEach(actionlist => {
     actionlist.classList.remove(actionlistActiveClass)
   })

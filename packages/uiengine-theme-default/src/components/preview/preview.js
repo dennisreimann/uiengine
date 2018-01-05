@@ -13,7 +13,7 @@ if (breakpoints) {
   const toggleBreakpoints = breakpoints =>
     breakpoints.classList.toggle(activeClass)
 
-  on('modal:close', 'body', e => {
+  on('modal:close', 'body', () => {
     document.querySelectorAll('.preview__breakpoints').forEach(breakpoints => {
       breakpoints.classList.remove(activeClass)
     })
@@ -38,7 +38,7 @@ if (breakpoints) {
 
     if (bpId) {
       // animate resizes
-      const resizedHandler = e => {
+      const resizedHandler = () => {
         container.style.width = `${width}px`
         container.removeAttribute('data-breakpoint')
         container.removeEventListener('transitionend', resizedHandler)
@@ -75,7 +75,7 @@ document.querySelectorAll('.preview__iframe').forEach(iframe => {
   const container = iframe.parentNode
   const sizer = container.firstElementChild.firstElementChild
 
-  iframe.onload = e => {
+  iframe.onload = () => {
     const { contentDocument, contentWindow } = iframe
     const head = contentDocument.getElementsByTagName('head')[0]
     const previewScript = document.createElement('script')

@@ -28,8 +28,8 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrorsPlugin({
       onErrors: config.dev.notifyOnErrors
-      ? utils.createNotifierCallback()
-      : undefined
+        ? utils.createNotifierCallback()
+        : undefined
     })
   ]
 })
