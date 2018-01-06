@@ -19,7 +19,7 @@ const paths = {
 
 const src = {
   lib: ['./src/*.js', './src/{__,lib}/**/*.js'], // FIXME: '__' is a hack that allows for lib to be accepted as dynamic path component
-  styles: ['./src/styles/*.styl', './src/components/**/*.styl'],
+  styles: ['./src/styles/*.styl', './src/styles/components/*.styl'],
   webpack: ['src/{templates,vue}/**/*']
 }
 
@@ -60,7 +60,7 @@ gulp.task('webpack', () =>
     .pipe(gulp.dest('./dist'))
 )
 
-gulp.task('watch', cb => {
+gulp.task('watch', () => {
   gulp.watch(src.lib, ['lib'])
   gulp.watch(src.webpack, ['webpack'])
   gulp.watch(src.styles.concat([`${paths.stylesLib}/**/*.styl`]), ['styles'])

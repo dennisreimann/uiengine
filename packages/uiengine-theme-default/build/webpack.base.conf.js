@@ -49,15 +49,17 @@ module.exports = {
     ]),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: resolve('lib/index.html'),
-      template: resolve('src/templates/index.html'),
+      filename: resolve('lib/template.ejs'),
+      template: resolve('src/template.ejs'),
       inject: true,
       window: {
         locales: {
           de: require(resolve('src/locales/de.json')),
           en: require(resolve('src/locales/en.json'))
         }
-      }
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency'
     }),
     // https://github.com/kisenka/svg-sprite-loader#extract-configuration
     // https://github.com/kisenka/svg-sprite-loader/blob/master/examples/interop-with-html-webpack-plugin/webpack.config.js

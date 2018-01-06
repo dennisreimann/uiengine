@@ -13,7 +13,7 @@ const defaultOpts = {
 
 // template is loaded on setup
 let templateFn = null
-const templatePath = path.resolve(__dirname, '..', 'lib', 'index.html')
+const templatePath = path.resolve(__dirname, '..', 'lib', 'template.ejs')
 export const staticPath = path.resolve(__dirname, '..', 'dist')
 
 export async function setup (options) {
