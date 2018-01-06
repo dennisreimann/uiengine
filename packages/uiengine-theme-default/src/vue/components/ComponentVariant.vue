@@ -49,6 +49,7 @@ import { mapGetters } from 'vuex'
 import { dasherize } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
+import ComponentLabel from './ComponentLabel'
 import ContentPreview from './ContentPreview'
 import ContentCode from './ContentCode'
 
@@ -63,6 +64,7 @@ export default {
   components: {
     ContentHeader,
     ContentHeading,
+    ComponentLabel,
     ContentPreview,
     ContentCode
   },

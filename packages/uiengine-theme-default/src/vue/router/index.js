@@ -15,6 +15,13 @@ const mainComponent = type => {
 
 const router = new Router({
   mode: 'history',
+  scrollBehavior (to) {
+    if (to.hash) {
+      return {
+        selector: to.hash
+      }
+    }
+  },
   routes: [
     {
       path: '*',

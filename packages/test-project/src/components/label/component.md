@@ -1,20 +1,13 @@
 ---
 title: Label
-label: B1
+label: A1
 schema:
-  +episode(episode):
-    episode: 
-      type: Episode
-      required: true
-
-  +cta(title, url):
-    title:
+  Label:
+    id: 
       type: String
-      description: Button-Title
       required: true
-    url:
+    title: 
       type: String
-      description: URL the button leads to
       required: true
 ---
 Test label
