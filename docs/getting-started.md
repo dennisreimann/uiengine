@@ -12,7 +12,7 @@ uiengine init
 uiengine component button
 uiengine page atoms molecules organisms
 mkdir src/templates && echo '!= variant.rendered' > src/templates/variant-preview.pug
-uiengine generate
+uiengine build
 ```
 
 Now you have a basic test project setup and can read about the steps in detail … 
@@ -123,25 +123,25 @@ uiengine page atoms molecules organisms templates pages
 The site can be generated with the following command:
 
 ```bash
-uiengine generate
+uiengine build
 ```
 
 To rebuild on file change you can also leverage the watch mode:
 
 ```bash
-uiengine generate --watch
+uiengine build --watch
 ```
 
 You can also spawn a server for the generated site:
 
 ```bash
-uiengine generate --serve
+uiengine build --serve
 ```
 
 The `watch` and `serve` options can be combined, which makes a good development environment:
 
 ```bash
-uiengine generate --watch --serve
+uiengine build --watch --serve
 ```
 
 Under the hood [BrowserSync](https://www.browsersync.io/) is used to provide serving and watching the files.

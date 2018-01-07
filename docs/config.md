@@ -112,7 +112,7 @@ breakpoints:
 
 ### BrowserSync
 
-The `uiengine generate` command (see the [getting started guide](./getting-started.md) supports modes for serving and watching files.
+The `uiengine build` command (see the [getting started guide](./getting-started.md) supports modes for serving and watching files.
 Here you can pass in the corresponding [BrowserSync configuration](https://www.browsersync.io/docs/options/), either directly or by referencing an external file.
 
 ```yaml

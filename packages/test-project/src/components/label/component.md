@@ -1,6 +1,6 @@
 ---
 title: Label
-label: A1
+label: A1-
 schema:
   Label:
     id: 

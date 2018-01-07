@@ -15,19 +15,34 @@ const ComponentUtil = require('./util/component')
 const TemplateUtil = require('./util/template')
 const VariantUtil = require('./util/variant')
 const { debug2 } = require('./util/debug')
+const debounce = require('./util/debounce')
 const integrations = require('./integrations')
 
 const CONFIG_FILENAME = 'uiengine.yml'
+
+// set the state in this modules scope so that we
+// can access it when handling incremental changes
+let state = {}
+const getState = () => state
 
 // track the state of a running generate process to
 // cancel regenerating during a full generate
 let isCurrentlyGenerating = false
 const isGenerating = () => isCurrentlyGenerating
 
-// set the state in this modules scope so that we
-// can access it when handling incremental changes
-let state = {}
-const getState = () => state
+const handleFileChange = (filePath, type) => debounce('handleFileChange', () => {
+  if (!isGenerating()) generateIncrementForFileChange(filePath, type)
+})
+
+async function build (options = {}) {
+  await generate(options)
+
+  let server, watcher
+  if (options.serve) server = integrations.startServer(state, options.watch)
+  if (options.watch) watcher = integrations.startWatcher(state, options.watch, handleFileChange)
+
+  return { state, server, watcher }
+}
 
 async function setupStateWithOptions (options = {}) {
   const configFilePath = options.config || CONFIG_FILENAME
@@ -269,6 +284,7 @@ module.exports = {
   CONFIG_FILENAME,
   setupStateWithOptions,
   getState,
+  build,
   isGenerating,
   generate,
   generateIncrementForFileChange,

@@ -1,7 +1,7 @@
 ---
 title: Home
 ---
-Welcome! This is the UIengine Sample Project. 
+Welcome! This is the UIengine Sample Project.
 It contains some sample pages to showcase and also test the basic functionality provided by the UIengine.
 
 You can use this project as an overview to look at certain features, like [documentation written in markdown](/documentation/getting-started/) or the [design token templates](/documentation/tokens/colors/).

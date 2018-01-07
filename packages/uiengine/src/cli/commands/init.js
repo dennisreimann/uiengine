@@ -26,7 +26,7 @@ exports.handler = argv => {
   const createIndexPage = File.write(indexPath, indexContent)
 
   Promise.all([createConfigFile, createIndexPage])
-    .then((state) => {
+    .then(state => {
       const configOpt = configFileName !== 'uiengine.yml' ? `--config=${configFileName}` : ''
       console.log(`✅  ${name} initialized!
 
@@ -38,11 +38,11 @@ The following files were created:
 Go ahead and update the config file according to your needs.
 After that you can generate the site using this command:
 
-$ uiengine generate ${configOpt}
+$ uiengine build ${configOpt}
 
 Enjoy! ✌️`)
     })
-    .catch((err) => {
+    .catch(err => {
       console.error([`🚨  initializing ${name} failed!`, err.stack].join('\n\n'))
       process.exit(1)
     })

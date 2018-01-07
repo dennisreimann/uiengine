@@ -5,35 +5,48 @@
 To integrate the UIengine into your Gulp build you have to add the following lines of code to your Gulpfile:
 
 ```js
-// import gulp
-import gulp from 'gulp'
+const gulp = require('gulp')
+const UIengine = require('uiengine')
 
-// import the UIengine gulp integration
-import { integrations as UIintegrations } from 'uiengine'
+const isDev = process.env.NODE_ENV !== 'production'
 
-// initialize the UIengine gulp integration with the gulp instance
-const uiGulp = UIintegrations.gulp(gulp)
+gulp.task('uiengine', done => {
+  const opts = {
+    serve: isDev,
+    watch: isDev
+  }
 
-// create a task that generates the site
-uiGulp.task('uiengine-generate')
-
-// in your regular gulp watch …
-gulp.task('watch', () => {
-  // create a watcher for file changes
-  uiGulp.watch()
+  UIengine.build(opts)
+    .then(() => { done() })
+    .catch(err => { done(err) })
 })
 ```
 
-The `uiGulp.watch()` function generates a `gulp.watch()` for the files and folders referenced in your [project configuration](./config.md).
-It performs the neccessary actions to rebuild the site as efficiently as possible.
+The `UIengine.build()` function accepts an options object with the following optional properties:
 
-In case your project has additional files that should trigger a rebuild you can pass them as a `String` or `Array`, like with `gulp.watch`:
+- `config`: the path to your [project configuration](./config.md) file (default `uiengine.yml`).
+- `debug`: Debug level from `1` (basic) to `4` (very verbose) (default `0`).
+- `serve`: Spawn a development server (default `false`).
+- `watch`: Rebuild the site on changes (default `false`).
+
+Note: To use the `serve` and `watch` options, you will also need to install two optional dependencies.
+You can do so by adding the following packages to you projects `devDependencies`:
+
+- `browser-sync`
+- `chokidar`
+
+In case your project has additional files that should trigger a rebuild you can pass them as a `String` or `Array` for the `watch` option:
 
 ```js
-gulp.task('watch', () => {
-  // create a watcher for file changes and pass
-  // additional files that should trigger a rebuild
-  uiGulp.watch(['src/data/*.json', 'src/custom/**/*.md'])
+gulp.task('uiengine', done => {
+  const opts = {
+    serve: isDev,
+    watch: isDev ? ['src/data/*.json', 'src/custom/**/*.md'] : false
+  }
+
+  UIengine.build(opts)
+    .then(() => { done() })
+    .catch(err => { done(err) })
 })
 ```
 

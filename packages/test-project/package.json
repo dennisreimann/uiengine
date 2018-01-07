@@ -15,7 +15,7 @@
     "clean": "rimraf ../../test/tmp",
     "start": "yarn run clean && gulp develop",
     "build": "yarn run clean && gulp build",
-    "standalone": "yarn run clean && uiengine generate -s -w -d"
+    "standalone": "yarn run clean && uiengine build -s -w -d"
   },
   "dependencies": {
     "handlebars": "^4.0.11",
@@ -27,10 +27,9 @@
   "devDependencies": {
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "browser-sync": "^2.21.0",
+    "browser-sync": "^2.23.3",
     "connect-history-api-fallback": "^1.5.0",
     "gulp": "^3.9.1",
-    "run-sequence": "^2.2.0",
     "theo": "^6.0.0-beta.9",
     "uiengine": "^0.11.6",
     "uiengine-adapter-handlebars": "^0.11.6",
