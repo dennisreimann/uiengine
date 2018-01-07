@@ -28,7 +28,7 @@ exports.handler = argv => {
   Promise.all([createConfigFile, createIndexPage])
     .then(state => {
       const configOpt = configFileName !== 'uiengine.yml' ? `--config=${configFileName}` : ''
-      console.log(`✅  ${name} initialized!
+      console.log(`✅  Initialized ${name}!
 
 The following files were created:
 
@@ -43,7 +43,7 @@ $ uiengine build ${configOpt}
 Enjoy! ✌️`)
     })
     .catch(err => {
-      console.error([`🚨  initializing ${name} failed!`, err.stack].join('\n\n'))
+      console.error([`🚨  Initializing ${name} failed!`, err.stack].join('\n\n'))
       process.exit(1)
     })
 }

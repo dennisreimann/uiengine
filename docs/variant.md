@@ -10,7 +10,7 @@ A variant is a file that gets rendered by the assigned [adapter](./adapters.md).
 
 Here is an example for the variants of a `button` component:
 
-```
+```tree
 components
 |___button
     |___variants

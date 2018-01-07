@@ -69,11 +69,11 @@ The contents of the transforming JavaScript file look something like this:
 ```js
 import path from 'path'
 import theo from 'theo'
-import { integrations as UIintegrations } from 'uiengine'
+import { theo as UItheo } from 'uiengine'
 
 const filePath = path.resolve(__dirname, 'colors.yml')
 
-module.exports = UIintegrations.theo(theo).convert(filePath)
+module.exports = UItheo(theo).convert(filePath)
 ```
 
 The transformations converts your Theo `props` into a format that can be rendered by the UIengine tokens template.
@@ -82,11 +82,10 @@ For details on the format see the [design token docs](./design-tokens.md).
 You can also pass a modification callback to the `convert` function.
 This allows you to further modify the property data:
 
-
 ```js
 import path from 'path'
 import theo from 'theo'
-import { integrations as UIintegrations } from 'uiengine'
+import { theo as UItheo } from 'uiengine'
 
 const filePath = path.resolve(__dirname, 'colors.yml')
 const titleize = string => string.replace(/^color/, '').replace(/([A-Z\d]+)/g, ' $1').replace(/^./, str => str.toUpperCase())
@@ -99,5 +98,5 @@ const modify = prop => {
   return prop
 }
 
-module.exports = UIintegrations.theo(theo).convert(filePath, modify)
+module.exports = UItheo(theo).convert(filePath, modify)
 ```

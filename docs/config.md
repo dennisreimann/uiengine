@@ -18,6 +18,7 @@ version: 1.0.0
 ### Source
 
 The base directories for the input, your raw source files:
+
 - `components` is the root of the directory containing the components
 - `templates` contains the variant preview and application templates
 - `pages` is the directory of the UIengine's site structure and page markdown files
@@ -67,7 +68,7 @@ adapters:
     options:
       pretty: true
       basedir: ./src/components
-  hbs: 
+  hbs:
     module: uiengine-adapter-handlebars
     options:
       namespace: 'my-project'
@@ -91,12 +92,12 @@ templates:
   variant: variant-preview.pug
 ```
 
-### Theme 
+### Theme
 
 Like an adapter, UIengine will require the theme, which has to provide a defined set of functions for setup and rendering.
 See the [theme configuration options](./theme.md) for details and default values.
 
-### Breakpoints 
+### Breakpoints
 
 The breakpoints defined here will be shown in the viewport resizer tool for the variant preview.
 Declare them with the name as key and the minimum media query pixel being the value.
@@ -113,8 +114,13 @@ breakpoints:
 ### BrowserSync
 
 The `uiengine build` command (see the [getting started guide](./getting-started.md) supports modes for serving and watching files.
-Here you can pass in the corresponding [BrowserSync configuration](https://www.browsersync.io/docs/options/), either directly or by referencing an external file.
+Here you can pass in the corresponding [BrowserSync configuration](https://www.browsersync.io/docs/options/):
 
 ```yaml
+# either directly
+browserSync:
+  open: false
+
+# or by referencing an external file:
 browserSync: !include bs-config.js
 ```

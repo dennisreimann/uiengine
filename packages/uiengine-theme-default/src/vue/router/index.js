@@ -39,7 +39,10 @@ export const createRoutes = navigation => {
     return {
       path: navItem.path,
       component: mainComponent(navItem.type),
-      meta: navItem,
+      meta: {
+        navItemId: navItem.id,
+        navItemTitle: navItem.title
+      },
       props: {
         id: navItem.itemId
       }

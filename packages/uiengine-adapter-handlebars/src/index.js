@@ -33,7 +33,7 @@ async function render (options, filePath, data = {}) {
         } catch (err) {
           const message = [`Handlebars could not render "${filePath}"!`, err]
 
-          if (options.debug) message.push(raw, JSON.stringify(data, null, '  '))
+          if (options.debug) message.push(raw, JSON.stringify(data, null, 2))
 
           reject(message.join('\n\n'))
         }

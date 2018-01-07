@@ -47,7 +47,7 @@ schema:
       type: String
       description: URL the button leads to
       required: true
-``` 
+```
 
 The name is an arbitrary value and will be displayed as the title.
 You can use it to describe the code that should be used to render the component – i.e. `+episode(data)` for a Pug component.

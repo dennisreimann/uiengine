@@ -25,7 +25,7 @@ async function render (options, filePath, data = {}) {
     } catch (err) {
       const message = [`React DOM could not render "${filePath}"!`, err.codeFrame]
 
-      if (options.debug) message.push(JSON.stringify(data, null, '  '))
+      if (options.debug) message.push(JSON.stringify(data, null, 2))
 
       reject(message.join('\n\n'))
     }

@@ -6,7 +6,7 @@ Pages are used to generate the documentation.
 
 Here is an example structure for some pages using the [Atomic Design Methodology](http://atomicdesign.bradfrost.com/chapter-2/):
 
-```
+```tree
 pages
 |___atoms
 |   |___page.md
@@ -113,7 +113,7 @@ These templates are read from the directory defined in the [source configuration
 
 Here is an example structure for some templates:
 
-```
+```tree
 templates
 |___home.pug
 |___checkout

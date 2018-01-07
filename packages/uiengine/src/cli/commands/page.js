@@ -1,6 +1,6 @@
 const path = require('path')
 const R = require('ramda')
-const UIengine = require('../../uiengine')
+const Core = require('../../core')
 const File = require('../../util/file')
 const PageUtil = require('../../util/page')
 
@@ -20,7 +20,7 @@ exports.handler = argv => {
   const additionalPageIds = argv._.slice(2)
   const pageIds = additionalPageIds.length ? [pageId, ...additionalPageIds] : [pageId]
 
-  UIengine.setupStateWithOptions(opts)
+  Core.init(opts)
     .then(({ config }) => {
       const pagesDir = config.source.pages
       const pageTemplate = require('../templates/page').template

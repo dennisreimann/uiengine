@@ -2,6 +2,7 @@
 
 A component is a single interface unit.
 In the UIengine terminology it encapsulates everything belonging to the component:
+
 - Markup
 - Styles
 - Scripts
@@ -11,7 +12,7 @@ In the UIengine terminology it encapsulates everything belonging to the componen
 
 Here is an example structure for some components that use Pug as templating engine (see [adapters](./adapters.md)), as well as plain CSS and JavaScript:
 
-```
+```tree
 components
 |___button
 |   |___variants

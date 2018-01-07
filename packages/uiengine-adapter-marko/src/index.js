@@ -21,7 +21,7 @@ export async function render (options, filePath, data = {}) {
       if (err) {
         const message = [`Marko could not render "${filePath}"!`, err]
 
-        if (options.debug) message.push(JSON.stringify(data, null, '  '))
+        if (options.debug) message.push(JSON.stringify(data, null, 2))
 
         reject(message.join('\n\n'))
       } else {

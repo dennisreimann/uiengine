@@ -1,6 +1,6 @@
 const path = require('path')
 const R = require('ramda')
-const UIengine = require('../../uiengine')
+const Core = require('../../core')
 const Connector = require('../../connector')
 const File = require('../../util/file')
 const ComponentUtil = require('../../util/component')
@@ -31,7 +31,7 @@ exports.handler = argv => {
   const variantNames = variants.length ? variants : [componentId]
   const excludeAdapters = argv.exclude || []
 
-  UIengine.setupStateWithOptions(opts).then(state => {
+  Core.init(opts).then(state => {
     const { config } = state
     const files = {}
 

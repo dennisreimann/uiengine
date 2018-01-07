@@ -11,7 +11,7 @@ const render = (options, filePath, data = {}) =>
     } catch (err) {
       const message = [`Pug could not render "${filePath}"!`, err]
 
-      if (options.debug) message.push(JSON.stringify(context, null, '  '))
+      if (options.debug) message.push(JSON.stringify(context, null, 2))
 
       reject(message.join('\n\n'))
     }

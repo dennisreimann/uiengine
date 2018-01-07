@@ -60,14 +60,14 @@ In case you do not want to reference an external markdown file, the `!markdown` 
 ```yaml
 context:
   content: !markdown |
-    # Bacon ipsum dolor amet 
-    
+    # Bacon ipsum dolor amet
+
     Pancetta pastrami boudin tenderloin, turkey bacon brisket ball tip shoulder meatloaf meatball jerky. 
-    
+
     - Strip steak
-    - Picanha 
-    - Pork ham 
-    
+    - Picanha
+    - Pork ham
+
     ## Tasty stuff
 
     Pork belly short loin beef pig filet mignon shank chuck t-bone.

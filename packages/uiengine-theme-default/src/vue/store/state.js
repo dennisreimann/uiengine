@@ -23,6 +23,8 @@ const getters = {
 
 const mutations = {
   setState (state, uiengineState) {
+    uiengineState = transformState(uiengineState)
+
     for (let property in uiengineState) {
       state[property] = uiengineState[property]
     }
@@ -35,19 +37,6 @@ const mutations = {
 }
 
 const actions = {
-  // TODO: Replace this with applying updated state via websockets
-  async fetchState ({ commit }) {
-    const response = await window.fetch('/_state.json')
-
-    if (response.ok) {
-      const data = await response.json()
-      const uiengineState = transformState(data)
-
-      commit('setState', uiengineState)
-    }
-
-    return response
-  }
 }
 
 export default {

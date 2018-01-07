@@ -1,6 +1,6 @@
 import path from 'path'
 import theo from 'theo'
-import { integrations as UIintegrations } from 'uiengine'
+import { theo as UItheo } from 'uiengine'
 
 const filePath = path.resolve(__dirname, '../../tokens/colors.yml')
 const titleize = string => string.replace(/([A-Z\d]+)/g, ' $1').replace(/^./, str => str.toUpperCase()).replace(/^Color /, '')
@@ -13,4 +13,4 @@ const modify = prop => {
   return prop
 }
 
-module.exports = UIintegrations.theo(theo).convert(filePath, modify)
+module.exports = UItheo(theo).convert(filePath, modify)

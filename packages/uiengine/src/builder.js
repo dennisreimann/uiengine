@@ -36,7 +36,7 @@ async function render (state, templateId, data, identifier) {
       `templates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE`
     ].join('\n\n')), [
       'Registered templates:',
-      `${JSON.stringify(templates, null, '  ')}`
+      `${JSON.stringify(templates, null, 2)}`
     ].join('\n\n'))
   }
 
@@ -143,7 +143,7 @@ async function generateComponentVariants (state, componentId) {
 async function generateState (state, change) {
   debug2(state, 'Builder.generateState():start')
 
-  const json = JSON.stringify(state, null, '  ')
+  const json = JSON.stringify(state, null, 2)
   const filePath = path.resolve(state.config.target, '_state.json')
 
   await Promise.all([

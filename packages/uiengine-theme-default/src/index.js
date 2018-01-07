@@ -1,4 +1,3 @@
-import fs from 'fs'
 import path from 'path'
 import compile from 'lodash.template'
 import { highlight } from './util'
@@ -17,32 +16,25 @@ const templatePath = path.resolve(__dirname, '..', 'lib', 'template.ejs')
 export const staticPath = path.resolve(__dirname, '..', 'dist')
 
 export async function setup (options) {
-  return new Promise((resolve, reject) => {
-    // configure markdown renderer
-    const { markdownIt } = options
-    markdownIt.set({ highlight })
+  // configure markdown renderer
+  const { markdownIt } = options
+  markdownIt.set({ highlight })
 
-    // load and assign template
-    fs.readFile(templatePath, 'utf8', (err, templateString) => {
-      if (err) {
-        const message = [`Theme could not load template "${templatePath}"!`, err]
+  // load and assign template
+  try {
+    const templateString = await File.read(templatePath)
 
-        if (options.debug) message.push(JSON.stringify(options, null, 2))
+    templateFn = compile(templateString)
+  } catch (err) {
+    const message = [`Theme could not load template "${templatePath}"!`, err]
 
-        reject(message.join('\n\n'))
-      } else {
-        templateFn = compile(templateString)
+    if (options.debug) message.push(JSON.stringify(options, null, 2))
 
-        resolve()
-      }
-    })
-  })
+    throw new Error(message.join('\n\n'))
+  }
 }
 
-export async function render (options, state, change) {
-  // generate the index page if this is a full render (no change)
-  if (change) return
-
+export async function render (options, state) {
   // sanitize and prepare options
   if (!supportedLocales.includes(options.lang)) delete options.lang
   const opts = Object.assign({}, defaultOpts, options)

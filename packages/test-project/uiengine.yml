@@ -3,7 +3,6 @@
 name: UIengine Sample Project
 version: '1.0.0'
 copyright: !markdown '[![Generated with UIengine](https://img.shields.io/badge/Generated_with-UIengine-blue.svg)](https://github.com/dennisreimann/uiengine)'
-debug: 1
 
 # Base directories for the input, your raw source files:
 # - components is the root of the directory containing the components
@@ -43,4 +42,5 @@ theme:
 
 breakpoints: !include ./src/lib/breakpoints.json
 
-browserSync: !include ./bs-config.js
+browserSync:
+  open: false
