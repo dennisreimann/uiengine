@@ -143,13 +143,17 @@ async function generateComponentVariants (state, componentId) {
 async function generateState (state, change) {
   debug2(state, 'Builder.generateState():start')
 
-  const json = JSON.stringify(state, null, 2)
-  const filePath = path.resolve(state.config.target, '_state.json')
+  const tasks = [Theme.render(state, change)]
 
-  await Promise.all([
-    File.write(filePath, json),
-    Theme.render(state, change)
-  ])
+  if (state.config.debug) {
+    const json = JSON.stringify(state, null, 2)
+    const filePath = path.resolve(state.config.target, '_state.json')
+    const dumpState = File.write(filePath, json)
+
+    tasks.push(dumpState)
+  }
+
+  await Promise.all(tasks)
 
   debug2(state, 'Builder.generateState():end')
 }

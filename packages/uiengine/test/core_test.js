@@ -15,8 +15,9 @@ const pagesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'pages')
 const schemaPath = path.resolve(testProjectPath, 'src', 'uiengine', 'schema')
 const componentsPath = path.resolve(testProjectPath, 'src', 'components')
 const templatesPath = path.resolve(testProjectPath, 'src', 'templates')
+const indexPath = path.join(testProjectTargetPath, 'index.html')
 const statePath = path.join(testProjectTargetPath, '_state.json')
-const opts = { config: path.resolve(testProjectPath, 'uiengine.yml'), debug: true }
+const opts = { config: path.resolve(testProjectPath, 'uiengine.yml') }
 
 // "end to end" tests
 describe('Core', () => {
@@ -26,53 +27,42 @@ describe('Core', () => {
     it('should generate index page', done => {
       Core.generate(opts)
         .then(state => {
-          assertExists(path.join(testProjectTargetPath, 'index.html'))
+          assertExists(indexPath)
+
+          // containing token list
+          assertContentMatches(indexPath, '.5rem')
+          assertContentMatches(indexPath, '1rem')
+          assertContentMatches(indexPath, '1.5rem')
+          assertContentMatches(indexPath, '3rem')
+
+          // containing token categories
+          assertContentMatches(indexPath, 'Brand')
+          assertContentMatches(indexPath, 'Neutral')
+          assertContentMatches(indexPath, 'Text')
+          assertContentMatches(indexPath, 'Background')
+
+          // containing token values
+          assertContentMatches(indexPath, 'Brand Primary')
+          assertContentMatches(indexPath, '#FF183E')
+          assertContentMatches(indexPath, 'Primary brand color')
 
           done()
         })
         .catch(done)
     })
 
-    it('should generate state file', done => {
-      Core.generate(opts)
-        .then(state => {
-          assertExists(path.join(testProjectTargetPath, '_state.json'))
+    describe('with debug level set', () => {
+      it('should generate state file', done => {
+        const optsWithDebug = Object.assign({}, opts, { debug: true })
 
-          done()
-        })
-        .catch(done)
-    })
+        Core.generate(optsWithDebug)
+          .then(state => {
+            assertExists(path.join(testProjectTargetPath, '_state.json'))
 
-    it('should generate state file with token list', done => {
-      Core.generate(opts)
-        .then(state => {
-          assertContentMatches(statePath, '.5rem')
-          assertContentMatches(statePath, '1rem')
-          assertContentMatches(statePath, '1.5rem')
-          assertContentMatches(statePath, '3rem')
-
-          done()
-        })
-        .catch(done)
-    })
-
-    it('should generate state file with token categories', done => {
-      Core.generate(opts)
-        .then(state => {
-          // categories
-          assertContentMatches(statePath, 'Brand')
-          assertContentMatches(statePath, 'Neutral')
-          assertContentMatches(statePath, 'Text')
-          assertContentMatches(statePath, 'Background')
-
-          // token values
-          assertContentMatches(statePath, 'Brand Primary')
-          assertContentMatches(statePath, '#FF183E')
-          assertContentMatches(statePath, 'Primary brand color')
-
-          done()
-        })
-        .catch(done)
+            done()
+          })
+          .catch(done)
+      })
     })
 
     it('should generate variant previews', done => {
@@ -121,11 +111,11 @@ describe('Core', () => {
     it('should generate page on change', done => {
       const filePath = path.join(pagesPath, 'patterns', 'page.md')
 
-      fs.removeSync(statePath)
+      fs.removeSync(indexPath)
 
       Core.generateIncrementForFileChange(filePath, 'changed')
         .then(({ state, change }) => {
-          assertContentMatches(statePath, 'patterns')
+          assertContentMatches(indexPath, 'patterns')
 
           assert.equal(change.action, 'changed')
           assert.equal(change.type, 'page')
@@ -140,11 +130,11 @@ describe('Core', () => {
     it('should generate state file on change', done => {
       const filePath = path.join(pagesPath, 'page.md')
 
-      fs.removeSync(statePath)
+      fs.removeSync(indexPath)
 
       Core.generateIncrementForFileChange(filePath, 'changed')
         .then(({ state, change }) => {
-          assertExists(statePath)
+          assertExists(indexPath)
 
           assert.equal(change.action, 'changed')
           assert.equal(change.type, 'page')
@@ -182,7 +172,7 @@ describe('Core', () => {
 
       Core.generateIncrementForFileChange(filePath, 'created')
         .then(({ state, change }) => {
-          assertContentMatches(statePath, 'Content for created page.')
+          assertContentMatches(indexPath, 'Content for created page.')
 
           assert.equal(change.action, 'created')
           assert.equal(change.type, 'page')
@@ -209,13 +199,13 @@ describe('Core', () => {
 
       Core.generateIncrementForFileChange(filePath, 'created')
         .then(result => {
-          assertContentMatches(statePath, 'Created Page')
+          assertContentMatches(indexPath, 'Created Page')
 
           fs.removeSync(filePath)
 
           Core.generateIncrementForFileChange(filePath, 'deleted')
             .then(({ state, change }) => {
-              assertContentDoesNotMatch(statePath, 'Created Page')
+              assertContentDoesNotMatch(indexPath, 'Created Page')
 
               assert.equal(change.action, 'deleted')
               assert.equal(change.type, 'page')
@@ -242,11 +232,11 @@ describe('Core', () => {
     it('should generate schema update on change', done => {
       const filePath = path.join(schemaPath, 'Entity.yml')
 
-      fs.removeSync(statePath)
+      fs.removeSync(indexPath)
 
       Core.generateIncrementForFileChange(filePath, 'changed')
         .then(({ state, change }) => {
-          assertContentMatches(statePath, 'Entity')
+          assertContentMatches(indexPath, 'Entity')
 
           assert.equal(change.action, 'changed')
           assert.equal(change.type, 'schema')
@@ -381,7 +371,7 @@ describe('Core', () => {
       const existingVariantPath = path.join(testProjectTargetPath, '_variants', 'form', 'form.pug.html')
 
       fs.removeSync(existingVariantPath)
-      fs.removeSync(statePath)
+      fs.removeSync(indexPath)
 
       Core.generateIncrementForFileChange(filePath, 'changed')
         .then(({ state, change }) => {
@@ -392,7 +382,7 @@ describe('Core', () => {
           assert.equal(change.item, 'form/form.pug')
           assert.equal(change.file, path.join(testProjectRelativePath, 'src', 'components', 'form', 'variants', 'form.pug'))
 
-          assertExists(statePath)
+          assertExists(indexPath)
           done()
         })
         .catch(done)
@@ -401,12 +391,12 @@ describe('Core', () => {
     it('should generate variant on create', done => {
       const filePath = path.join(componentsPath, 'form', 'variants', 'form-fieldsets.pug')
 
-      fs.removeSync(statePath)
+      fs.removeSync(indexPath)
       fs.writeFileSync(filePath, 'p Test')
 
       Core.generateIncrementForFileChange(filePath, 'created')
         .then(({ state, change }) => {
-          assertContentMatches(statePath, 'Form Fieldsets')
+          assertContentMatches(indexPath, 'Form Fieldsets')
 
           assert.equal(change.action, 'created')
           assert.equal(change.type, 'variant')
@@ -427,18 +417,18 @@ describe('Core', () => {
     it('should generate variant on delete', done => {
       const filePath = path.join(componentsPath, 'form', 'variants', 'form-fieldsets.pug')
 
-      fs.removeSync(statePath)
+      fs.removeSync(indexPath)
       fs.writeFileSync(filePath, 'p Test')
 
       Core.generateIncrementForFileChange(filePath, 'created')
         .then(({ state, change }) => {
-          assertContentMatches(statePath, 'Form Fieldsets')
+          assertContentMatches(indexPath, 'Form Fieldsets')
 
           fs.removeSync(filePath)
 
           Core.generateIncrementForFileChange(filePath, 'deleted')
             .then(({ state, change }) => {
-              assertContentDoesNotMatch(statePath, 'Form Fieldsets')
+              assertContentDoesNotMatch(indexPath, 'Form Fieldsets')
 
               assert.equal(change.action, 'deleted')
               assert.equal(change.type, 'variant')

@@ -256,14 +256,19 @@ describe('Builder', () => {
   })
 
   describe('#generateIncrement', () => {
-    it('should generate state file', done => {
-      Builder.generateIncrement(state)
-        .then(() => {
-          assertExists(path.join(target, '_state.json'))
+    describe('with debug level set', () => {
+      it('should generate state file', done => {
+        const stateWithDebug = Object.assign({}, state)
+        stateWithDebug.config.debug = true
 
-          done()
-        })
-        .catch(done)
+        Builder.generateIncrement(stateWithDebug)
+          .then(() => {
+            assertExists(path.join(target, '_state.json'))
+
+            done()
+          })
+          .catch(done)
+      })
     })
   })
 })
