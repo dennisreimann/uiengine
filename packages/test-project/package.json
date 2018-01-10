@@ -15,6 +15,7 @@
     "clean": "rimraf ../../test/tmp",
     "start": "yarn run clean && gulp develop",
     "build": "yarn run clean && gulp build",
+    "lint": "eslint --ext .js src test",
     "standalone": "yarn run clean && uiengine build -s -w -d"
   },
   "dependencies": {

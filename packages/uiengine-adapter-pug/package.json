@@ -25,6 +25,7 @@
   "scripts": {
     "clean": "rimraf lib",
     "start": "yarn run clean && yarn run build -w",
-    "build": "yarn run clean && babel src --out-dir lib"
+    "build": "yarn run clean && babel src --out-dir lib",
+    "lint": "eslint --ext .js src test"
   }
 }

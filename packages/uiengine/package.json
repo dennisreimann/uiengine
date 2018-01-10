@@ -31,7 +31,8 @@
   "scripts": {
     "clean": "rimraf lib",
     "start": "yarn run clean && yarn run build -w",
-    "build": "yarn run clean && babel src --out-dir lib"
+    "build": "yarn run clean && babel src --out-dir lib",
+    "lint": "eslint --ext .js src test"
   },
   "dependencies": {
     "chalk": "^2.3.0",
@@ -42,10 +43,10 @@
     "markdown-it-anchor": "^4.0.0",
     "ramda": "^0.25.0",
     "uiengine-theme-default": "^0.11.6",
-    "yargs": "^10.0.3"
+    "yargs": "^10.1.1"
   },
   "optionalDependencies": {
-    "browser-sync": "^2.21.0",
+    "browser-sync": "^2.23.5",
     "chokidar": "^1.7.0",
     "connect-history-api-fallback": "^1.5.0"
   },
