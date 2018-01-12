@@ -1,5 +1,9 @@
 <template>
-  <div id="app" class="layout" @click="closeModals">
+  <div
+    id="app"
+    class="layout"
+    @click="closeModals"
+  >
     <app-navigation />
     <app-main />
     <app-footer />

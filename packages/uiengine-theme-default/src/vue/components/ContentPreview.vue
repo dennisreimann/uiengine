@@ -1,18 +1,46 @@
 <template>
   <div class="preview">
-    <div class="preview__container" :style="containerStyle">
-      <div v-if="breakpoints" class="preview__size">
-        <button class="preview__sizer" type="button" @click.stop="isBreakpointsActive = !isBreakpointsActive">{{ size }}</button>
+    <div
+      class="preview__container"
+      :style="containerStyle"
+    >
+      <div
+        v-if="breakpoints"
+        class="preview__size"
+      >
+        <button
+          class="preview__sizer"
+          type="button"
+          @click.stop="isBreakpointsActive = !isBreakpointsActive"
+        >{{ size }}</button>
       </div>
-      <div v-if="breakpoints" class="preview__breakpoints" :class="{ 'preview__breakpoints--active': isBreakpointsActive }">
+      <div
+        v-if="breakpoints"
+        class="preview__breakpoints"
+        :class="{ 'preview__breakpoints--active': isBreakpointsActive }"
+      >
         <div class="preview__breakpoints-inner">
-          <button class="preview__breakpoint" type="button" v-for="(width, breakpoint) in breakpoints" :key="breakpoint" @click="setPreviewWidth(width)">
-            {{ breakpoint }}: {{width}}px
-          </button>
-          <button class="preview__breakpoint" type="button"  @click="setPreviewWidth(null)">{{ 'breakpoints.reset' | localize }}</button>
+          <button
+            v-for="(width, breakpoint) in breakpoints"
+            :key="breakpoint"
+            class="preview__breakpoint"
+            type="button"
+            @click="setPreviewWidth(width)"
+          >{{ breakpoint }}: {{ width }}px</button>
+          <button
+            class="preview__breakpoint"
+            type="button"
+            @click="setPreviewWidth(null)"
+          >{{ 'breakpoints.reset' | localize }}</button>
         </div>
       </div>
-      <iframe ref="iframe" class="preview__iframe" :src="src" frameborder="0" scrolling="no" />
+      <iframe
+        ref="iframe"
+        :src="src"
+        class="preview__iframe"
+        frameborder="0"
+        scrolling="no"
+      />
     </div>
   </div>
 </template>
@@ -37,7 +65,8 @@ export default {
     },
 
     breakpoints: {
-      type: Object
+      type: Object,
+      default: null
     }
   },
 

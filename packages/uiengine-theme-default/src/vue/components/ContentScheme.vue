@@ -1,5 +1,8 @@
 <template>
-  <table class="schema" :id="title">
+  <table
+    class="schema"
+    :id="title"
+  >
     <caption class="schema__title">{{ title }}</caption>
     <thead>
       <tr>
@@ -11,11 +14,13 @@
       </tr>
     </thead>
     <tbody>
-      <content-scheme-property v-for="(property, propertyId) in properties"
+      <content-scheme-property
+        v-for="(property, propertyId) in properties"
         :key="propertyId"
         :id="propertyId"
         :property="property"
-        :schema="schema" />
+        :schema="schema"
+      />
     </tbody>
   </table>
 </template>
@@ -30,7 +35,8 @@ export default {
 
   props: {
     title: {
-      type: String
+      type: String,
+      default: null
     },
 
     properties: {

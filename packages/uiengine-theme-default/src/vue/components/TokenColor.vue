@@ -3,21 +3,33 @@
     <div class="colorToken__info colorToken__info--top sob-m">
       <div class="colorToken__symbol">
         <div class="colorToken__swatch">
-          <div class="colorToken__swatch__inner" :style="swatchStyle" />
+          <div
+            class="colorToken__swatch__inner"
+            :style="swatchStyle"
+          />
         </div>
       </div>
       <div class="colorToken__title">{{ token.name }}</div>
     </div>
-    <div class="colorToken__info" v-if="token.description">
+    <div
+      v-if="token.description"
+      class="colorToken__info"
+    >
       <dt class="colorToken__label">{{ 'token.description' | localize }}</dt>
       <dd class="colorToken__value">{{ token.description }}</dd>
     </div>
-    <div class="colorToken__info" v-if="token.variable">
+    <div
+      v-if="token.variable"
+      class="colorToken__info"
+    >
       <dt class="colorToken__label">{{ 'token.variable' | localize }}</dt>
       <dd class="colorToken__value colorToken__value--code">{{ token.variable }}</dd>
     </div>
     <!-- if this color references another color only display the reference, otherwise the values -->
-    <div class="colorToken__info" v-if="token.reference">
+    <div
+      v-if="token.reference"
+      class="colorToken__info"
+    >
       <dt class="colorToken__label">{{ 'token.reference' | localize }}</dt>
       <dd class="colorToken__value">{{ token.reference }}</dd>
     </div>

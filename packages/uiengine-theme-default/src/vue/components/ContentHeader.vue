@@ -1,6 +1,9 @@
 <template>
   <header class="contentheader">
-    <content-heading class="contentheader__title" v-if="title">{{ title }}</content-heading>
+    <content-heading
+      v-if="title"
+      class="contentheader__title"
+    >{{ title }}</content-heading>
     <slot />
   </header>
 </template>
@@ -15,7 +18,8 @@ export default {
 
   props: {
     title: {
-      type: String
+      type: String,
+      default: null
     },
 
     level: {

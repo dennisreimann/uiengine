@@ -1,31 +1,55 @@
 <template>
   <div v-if="type === 'color'">
-    <h2 v-if="title" class="sot-xl sob-m">{{ title }}</h2>
+    <h2
+      v-if="title"
+      class="sot-xl sob-m"
+    >{{ title }}</h2>
     <div class="tokens tokens--color sob-xxl">
-      <token-color v-for="token in tokens" :key="token.name" :token="token" />
+      <token-color
+        v-for="token in tokens"
+        :key="token.name"
+        :token="token"
+      />
     </div>
   </div>
 
-  <table v-else class="tokens tokens--default sot-m sob-xxl">
-    <caption v-if="title" class="tokens__title">{{ title }}</caption>
+  <table
+    v-else
+    class="tokens tokens--default sot-m sob-xxl"
+  >
+    <caption
+      v-if="title"
+      class="tokens__title"
+    >{{ title }}</caption>
     <thead>
       <tr>
         <th class="defaultToken__label defaultToken__label--name">{{ 'token.name' | localize }}</th>
         <th class="defaultToken__label defaultToken__label--value">{{ 'token.value' | localize }}</th>
-        <th class="defaultToken__label defaultToken__label--variable" v-if="hasVariableProperty">{{ 'token.variable' | localize }}</th>
-        <th class="defaultToken__label defaultToken__label--description" v-if="hasDescriptionProperty">{{ 'token.description' | localize }}</th>
-        <th class="defaultToken__label defaultToken__label--reference" v-if="hasReferenceProperty">{{ 'token.reference' | localize }}</th>
+        <th
+          v-if="hasVariableProperty"
+          class="defaultToken__label defaultToken__label--variable"
+        >{{ 'token.variable' | localize }}</th>
+        <th
+          v-if="hasDescriptionProperty"
+          class="defaultToken__label defaultToken__label--description"
+        >{{ 'token.description' | localize }}</th>
+        <th
+          v-if="hasReferenceProperty"
+          class="defaultToken__label defaultToken__label--reference"
+        >{{ 'token.reference' | localize }}</th>
       </tr>
     </thead>
     <tbody>
-      <token-default v-for="token in tokens"
+      <token-default
+        v-for="token in tokens"
         :key="token.name"
         :token="token"
         :columns="{
           variable: hasVariableProperty,
           description: hasDescriptionProperty,
           reference: hasReferenceProperty
-        }" />
+        }"
+      />
     </tbody>
   </table>
 </template>
@@ -35,19 +59,21 @@ import TokenColor from './TokenColor'
 import TokenDefault from './TokenDefault'
 
 export default {
+  components: {
+    TokenColor,
+    TokenDefault
+  },
+
   props: {
     tokens: {
+      type: Object,
       required: true
     },
 
     title: {
-      type: String
+      type: String,
+      default: null
     }
-  },
-
-  components: {
-    TokenColor,
-    TokenDefault
   },
 
   computed: {

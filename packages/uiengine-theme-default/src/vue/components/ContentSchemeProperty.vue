@@ -1,8 +1,16 @@
 <template>
   <tr>
     <td class="schema__propertyname">{{ id }}</td>
-    <td class="schema__propertytype"><component v-bind:is="propertyType" v-bind="$props" /></td>
-    <td class="schema__propertydescription" v-html="description" />
+    <td class="schema__propertytype">
+      <component
+        :is="propertyType"
+        v-bind="$props"
+      />
+    </td>
+    <td
+      class="schema__propertydescription"
+      v-html="description"
+    />
     <td class="schema__propertyrequired">{{ required }}</td>
     <td class="schema__propertydefault">{{ defaultValue }}</td>
   </tr>

@@ -1,27 +1,69 @@
 <template>
   <div class="code">
-    <div v-if="raw" @click.prevent="isRawExpanded = !isRawExpanded" :class="{ 'code__segment--expanded': isRawExpanded }" class="code__segment">
-      <header class="code__header" role="button">
+    <div
+      v-if="raw"
+      class="code__segment"
+      :class="{ 'code__segment--expanded': isRawExpanded }"
+      @click.prevent="isRawExpanded = !isRawExpanded"
+    >
+      <header
+        class="code__header"
+        role="button"
+      >
         <h4 class="code__title">{{ 'code.raw' | localize }}</h4>
-        <app-icon symbol="caret-down-double" class="code__expandicon" />
+        <app-icon
+          symbol="caret-down-double"
+          class="code__expandicon"
+        />
       </header>
-      <div class="code__content" v-html="renderedRaw" />
+      <div
+        class="code__content"
+        v-html="renderedRaw"
+      />
     </div>
 
-    <div v-if="context" @click.prevent="isContextExpanded = !isContextExpanded" :class="{ 'code__segment--expanded': isContextExpanded }" class="code__segment">
-      <header class="code__header" role="button">
+    <div
+      v-if="context"
+      class="code__segment"
+      :class="{ 'code__segment--expanded': isContextExpanded }"
+      @click.prevent="isContextExpanded = !isContextExpanded"
+    >
+      <header
+        class="code__header"
+        role="button"
+      >
         <h4 class="code__title">{{ 'code.context' | localize }}</h4>
-        <app-icon symbol="caret-down-double" class="code__expandicon" />
+        <app-icon
+          symbol="caret-down-double"
+          class="code__expandicon"
+        />
       </header>
-      <div class="code__content" v-html="renderedContext" />
+      <div
+        class="code__content"
+        v-html="renderedContext"
+      />
     </div>
 
-    <div v-if="rendered" @click.prevent="isRenderedExpanded = !isRenderedExpanded" :class="{ 'code__segment--expanded': isRenderedExpanded }" class="code__segment">
-      <header class="code__header" role="button">
+    <div
+      v-if="rendered"
+      class="code__segment"
+      :class="{ 'code__segment--expanded': isRenderedExpanded }"
+      @click.prevent="isRenderedExpanded = !isRenderedExpanded"
+    >
+      <header
+        class="code__header"
+        role="button"
+      >
         <h4 class="code__title">{{ 'code.rendered' | localize }}</h4>
-        <app-icon symbol="caret-down-double" class="code__expandicon" />
+        <app-icon
+          symbol="caret-down-double"
+          class="code__expandicon"
+        />
       </header>
-      <div class="code__content" v-html="renderedRendered" />
+      <div
+        class="code__content"
+        v-html="renderedRendered"
+      />
     </div>
   </div>
 </template>
@@ -32,19 +74,23 @@ import { decorateRaw, decorateContext, decorateRendered } from '../../util'
 export default {
   props: {
     extension: {
-      type: String
+      type: String,
+      default: null
     },
 
     raw: {
-      type: String
+      type: String,
+      default: null
     },
 
     context: {
-      type: Object
+      type: Object,
+      default: null
     },
 
     rendered: {
-      type: String
+      type: String,
+      default: null
     }
   },
 

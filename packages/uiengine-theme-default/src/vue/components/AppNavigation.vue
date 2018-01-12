@@ -1,10 +1,29 @@
 <template>
-  <nav id="navigation" class="navigation" :class="{ 'navigation--collapsed': navigationCollapsed }" v-if="navigation">
-    <button class="navigation__menutoggle" data-target='navigation' @click.prevent="setNavigationCollapsed(!navigationCollapsed)">
-      <app-icon symbol="burger" class="navigation__icon" />
+  <nav
+    v-if="navigation"
+    id="navigation"
+    class="navigation"
+    :class="{ 'navigation--collapsed': navigationCollapsed }"
+  >
+    <button
+      class="navigation__menutoggle"
+      data-target="navigation"
+      @click.prevent="setNavigationCollapsed(!navigationCollapsed)"
+    >
+      <app-icon
+        symbol="burger"
+        class="navigation__icon"
+      />
     </button>
-    <router-link class="navigation__home" :to="navigation.index">{{ config.name }}</router-link>
-    <app-navigation-tree :navigation="navigation" :items="navigation.index.childIds" :level="0" />
+    <router-link
+      class="navigation__home"
+      :to="navigation.index"
+    >{{ config.name }}</router-link>
+    <app-navigation-tree
+      :navigation="navigation"
+      :items="navigation.index.childIds"
+      :level="0"
+    />
   </nav>
 </template>
 

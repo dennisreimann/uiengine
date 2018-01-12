@@ -1,13 +1,18 @@
 <template>
   <section class="page">
-    <content-header :title="page.title" class="sob-l" />
+    <content-header
+      class="sob-l"
+      :title="page.title"
+    />
     <article class="content">
-      <content-scheme v-for="(properties, schemeId) in schema"
-        class="sob-xxl"
+      <content-scheme
+        v-for="(properties, schemeId) in schema"
         :key="schemeId"
         :schema="schema"
         :title="schemeId"
-        :properties="properties" />
+        :properties="properties"
+        class="sob-xxl"
+      />
     </article>
   </section>
 </template>
@@ -18,16 +23,16 @@ import ContentHeader from './ContentHeader'
 import ContentScheme from './ContentScheme'
 
 export default {
+  components: {
+    ContentHeader,
+    ContentScheme
+  },
+
   props: {
     id: {
       type: String,
       required: true
     }
-  },
-
-  components: {
-    ContentHeader,
-    ContentScheme
   },
 
   computed: {

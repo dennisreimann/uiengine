@@ -2,9 +2,18 @@
   <tr class="defaultToken">
     <td class="defaultToken__value">{{ token.name }}</td>
     <td class="defaultToken__value defaultToken__value--value">{{ token.value }}</td>
-    <td class="defaultToken__value defaultToken__value--variable" v-if="columns.variable">{{ token.variable }}</td>
-    <td class="defaultToken__value defaultToken__value--description" v-if="columns.description">{{ token.description }}</td>
-    <td class="defaultToken__value defaultToken__value--reference" v-if="columns.reference">{{ token.reference }}</td>
+    <td
+      v-if="columns.variable"
+      class="defaultToken__value defaultToken__value--variable"
+    >{{ token.variable }}</td>
+    <td
+      v-if="columns.description"
+      class="defaultToken__value defaultToken__value--description"
+    >{{ token.description }}</td>
+    <td
+      v-if="columns.reference"
+      class="defaultToken__value defaultToken__value--reference"
+    >{{ token.reference }}</td>
   </tr>
 </template>
 

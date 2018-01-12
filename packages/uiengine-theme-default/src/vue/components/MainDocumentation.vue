@@ -1,7 +1,14 @@
 <template>
   <section class="page">
-    <content-header :title="page.title" class="sob-m" />
-    <article class="content" v-if="page.content" v-html="renderedContent" />
+    <content-header
+      class="sob-m"
+      :title="page.title"
+    />
+    <article
+      v-if="page.content"
+      class="content"
+      v-html="renderedContent"
+    />
   </section>
 </template>
 
@@ -11,15 +18,15 @@ import ContentHeader from './ContentHeader'
 import { decoratePageContent } from '../../util'
 
 export default {
+  components: {
+    ContentHeader
+  },
+
   props: {
     id: {
       type: String,
       required: true
     }
-  },
-
-  components: {
-    ContentHeader
   },
 
   computed: {

@@ -1,5 +1,8 @@
 <template>
-  <span class="label" :class="{ 'label--inverted': inverted }">
+  <span
+    class="label"
+    :class="{ 'label--inverted': inverted }"
+  >
     <slot />
   </span>
 </template>

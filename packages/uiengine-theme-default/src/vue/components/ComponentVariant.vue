@@ -1,27 +1,66 @@
 <template>
-  <article :id="variant.id | dasherize" class="variant">
+  <article
+    class="variant"
+    :id="variant.id | dasherize"
+  >
     <content-header class="sob-m">
-      <component-label v-if="variant.label" class="sob-s sor-s">{{ variant.label }}</component-label>
+      <component-label
+        v-if="variant.label"
+        class="sob-s sor-s"
+      >{{ variant.label }}</component-label>
       <content-heading :level="2">{{ variant.title }}</content-heading>
 
-      <div class="contentheader__options" v-if="hasPreview && hasCode">
-        <a href="#" @click.prevent="activeSection = 'preview'" class="contentheader__option" :class="{ 'contentheader__option--active': isPreviewActive }">{{ 'variant.preview' | localize }}</a>
-        <a href="#" @click.prevent="activeSection = 'code'" class="contentheader__option" :class="{ 'contentheader__option--active': isCodeActive }"> {{ 'variant.code' | localize }}</a>
+      <div
+        v-if="hasPreview && hasCode"
+        class="contentheader__options"
+      >
+        <a
+          href="#"
+          class="contentheader__option"
+          :class="{ 'contentheader__option--active': isPreviewActive }"
+          @click.prevent="activeSection = 'preview'"
+        >{{ 'variant.preview' | localize }}</a>
+        <a
+          href="#"
+          class="contentheader__option"
+          :class="{ 'contentheader__option--active': isCodeActive }"
+          @click.prevent="activeSection = 'code'"
+        > {{ 'variant.code' | localize }}</a>
       </div>
 
       <div class="contentheader__actions">
-        <button @click.stop="isActionlistActive = !isActionlistActive" class="contentheader__actiontoggle" type="button">
+        <button
+          class="contentheader__actiontoggle"
+          type="button"
+          @click.stop="isActionlistActive = !isActionlistActive"
+        >
           <app-icon symbol="tools" />
         </button>
-        <ul class="contentheader__actionlist" :class="{ 'contentheader__actionlist--active': isActionlistActive }">
+        <ul
+          class="contentheader__actionlist"
+          :class="{ 'contentheader__actionlist--active': isActionlistActive }"
+        >
           <li class="contentheader__action">
-            <a :href="permalinkUrl" @click.prevent class="permalink contentheader__actionlink" :data-clipboard-text="permalinkUrl">
-              <app-icon symbol="link-45" class="permalink__icon" />
+            <a
+              class="permalink contentheader__actionlink"
+              :href="permalinkUrl"
+              :data-clipboard-text="permalinkUrl"
+              @click.prevent
+            >
+              <app-icon
+                symbol="link-45"
+                class="permalink__icon"
+              />
               <span class="permalink__text">{{ 'variant.copy_permalink' | localize }}</span>
             </a>
           </li>
           <li class="contentheader__action">
-            <a :href="previewPath" @click.stop class="contentheader__actionlink" :target="variant.id | dasherize">
+            <a
+              class="contentheader__actionlink"
+              :href="previewPath"
+              :target="variant.id | dasherize"
+              @click.stop
+            >
               <app-icon symbol="open-in-window" />
               {{ 'variant.open_in_window' | localize }}
             </a>
@@ -30,15 +69,39 @@
       </div>
     </content-header>
 
-    <div class="content" v-if="variant.content" v-html="variant.content" />
+    <div
+      v-if="variant.content"
+      class="content"
+      v-html="variant.content"
+    />
 
-    <div v-if="hasPreview || hasCode" class="sot-xl">
-      <div v-if="hasPreview" class="contentsection" :class="{ 'contentsection--active': isPreviewActive }">
-        <content-preview :id="variant.id | dasherize" :src="previewPath" :breakpoints="config.breakpoints" />
+    <div
+      v-if="hasPreview || hasCode"
+      class="sot-xl"
+    >
+      <div
+        v-if="hasPreview"
+        class="contentsection"
+        :class="{ 'contentsection--active': isPreviewActive }"
+      >
+        <content-preview
+          :id="variant.id | dasherize"
+          :src="previewPath"
+          :breakpoints="config.breakpoints"
+        />
       </div>
 
-      <div v-if="hasCode" class="contentsection" :class="{ 'contentsection--active': isCodeActive }">
-        <content-code :extension="variant.extension" :raw="variant.raw" :context="variant.context" :rendered="variant.rendered" />
+      <div
+        v-if="hasCode"
+        class="contentsection"
+        :class="{ 'contentsection--active': isCodeActive }"
+      >
+        <content-code
+          :extension="variant.extension"
+          :raw="variant.raw"
+          :context="variant.context"
+          :rendered="variant.rendered"
+        />
       </div>
     </div>
   </article>
@@ -54,19 +117,19 @@ import ContentPreview from './ContentPreview'
 import ContentCode from './ContentCode'
 
 export default {
-  props: {
-    variant: {
-      type: Object,
-      required: true
-    }
-  },
-
   components: {
     ContentHeader,
     ContentHeading,
     ComponentLabel,
     ContentPreview,
     ContentCode
+  },
+
+  props: {
+    variant: {
+      type: Object,
+      required: true
+    }
   },
 
   data () {

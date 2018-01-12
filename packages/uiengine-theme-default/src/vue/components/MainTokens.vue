@@ -1,16 +1,35 @@
 <template>
   <section class="page">
-    <content-header :title="page.title" class="sob-m" />
-    <article class="content" v-if="page.content" v-html="renderedContent" />
+    <content-header
+      :title="page.title"
+      class="sob-m"
+    />
+    <article
+      v-if="page.content"
+      class="content"
+      v-html="renderedContent"
+    />
     <template v-for="category in categories">
       <template v-if="isCategoryList(category.tokens)">
-        <content-heading :key="category.name" v-if="category.name" :title="category.name" :level="1" />
+        <content-heading
+          v-if="category.name"
+          :key="category.name"
+          :title="category.name"
+          :level="1" />
         <template v-for="cat in category.tokens">
-          <content-tokens :key="cat.name" :title="cat.name" :tokens="cat.tokens" />
+          <content-tokens
+            :key="cat.name"
+            :title="cat.name"
+            :tokens="cat.tokens"
+          />
         </template>
       </template>
       <template v-else>
-        <content-tokens :key="category.name" :title="category.name" :tokens="category.tokens" />
+        <content-tokens
+          :key="category.name"
+          :title="category.name"
+          :tokens="category.tokens"
+        />
       </template>
     </template>
   </section>
@@ -24,17 +43,17 @@ import ContentTokens from './ContentTokens'
 import { decoratePageContent } from '../../util'
 
 export default {
+  components: {
+    ContentHeader,
+    ContentHeading,
+    ContentTokens
+  },
+
   props: {
     id: {
       type: String,
       required: true
     }
-  },
-
-  components: {
-    ContentHeader,
-    ContentHeading,
-    ContentTokens
   },
 
   computed: {

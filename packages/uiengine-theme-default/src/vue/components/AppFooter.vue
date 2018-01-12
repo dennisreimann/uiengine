@@ -1,7 +1,17 @@
 <template>
-  <footer class="footer" v-if="config">
-    <p class="footer__copyright" v-if="config.copyright" v-html="config.copyright" />
-    <p class="footer__version" v-if="config.version">
+  <footer
+    v-if="config"
+    class="footer"
+  >
+    <p
+      v-if="config.copyright"
+      class="footer__copyright"
+      v-html="config.copyright"
+    />
+    <p
+      v-if="config.version"
+      class="footer__version"
+    >
       {{ 'footer.version' | localize }} {{ config.version }} –
       {{ 'footer.last_update' | localize }} {{ lastUpdate }}.
     </p>

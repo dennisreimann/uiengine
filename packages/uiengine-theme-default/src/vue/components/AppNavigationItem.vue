@@ -1,11 +1,33 @@
 <template>
-  <li class="navigation__item" :class="classes">
-    <span class="navigation__link" v-if="item.isStructural">{{ item.title }}</span>
-    <router-link :to="item" class="navigation__link" v-else>{{ item.title }}</router-link>
-    <button class="navigation__itemtoggle" v-if="hasChildren" @click.prevent="setCollapsed(!isCollapsed)">
-      <app-icon symbol="caret-down" class="navigation__icon" />
+  <li
+    class="navigation__item"
+    :class="classes"
+  >
+    <span
+      v-if="item.isStructural"
+      class="navigation__link"
+    >{{ item.title }}</span>
+    <router-link
+      v-else
+      :to="item"
+      class="navigation__link"
+    >{{ item.title }}</router-link>
+    <button
+      v-if="hasChildren"
+      class="navigation__itemtoggle"
+      @click.prevent="setCollapsed(!isCollapsed)"
+    >
+      <app-icon
+        symbol="caret-down"
+        class="navigation__icon"
+      />
     </button>
-    <app-navigation-tree :navigation="navigation" :items="children" :level="level + 1" v-if="hasChildren" />
+    <app-navigation-tree
+      v-if="hasChildren"
+      :navigation="navigation"
+      :items="children"
+      :level="level + 1"
+    />
   </li>
 </template>
 
@@ -27,16 +49,6 @@ export default {
     level: {
       type: Number,
       required: true
-    }
-  },
-
-  methods: {
-    ...mapMutations('preferences', ['setNavigationItemsCollapsed']),
-
-    setCollapsed (collapsed) {
-      const itemsCollapsed = this.navigationItemsCollapsed
-      itemsCollapsed[this.item.id] = collapsed
-      this.setNavigationItemsCollapsed(itemsCollapsed)
     }
   },
 
@@ -67,6 +79,16 @@ export default {
       if (this.isCurrentPage) classes.push('navigation__item--current')
 
       return classes
+    }
+  },
+
+  methods: {
+    ...mapMutations('preferences', ['setNavigationItemsCollapsed']),
+
+    setCollapsed (collapsed) {
+      const itemsCollapsed = this.navigationItemsCollapsed
+      itemsCollapsed[this.item.id] = collapsed
+      this.setNavigationItemsCollapsed(itemsCollapsed)
     }
   }
 }

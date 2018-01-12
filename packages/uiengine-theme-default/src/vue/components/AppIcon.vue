@@ -1,6 +1,9 @@
 <template>
-  <svg class="icon"  role="img">
-    <use :href="symbolHref"></use>
+  <svg
+    class="icon"
+    role="img"
+  >
+    <use :href="symbolHref" />
   </svg>
 </template>
 
