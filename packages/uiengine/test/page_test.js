@@ -1,6 +1,6 @@
 const path = require('path')
 const assert = require('assert')
-const assertMatches = require('./support/assertMatches')
+const assertMatches = require('../../../test/support/assertMatches')
 
 const Page = require('../src/page')
 const { testProjectPath } = require('../../../test/support/paths')
@@ -131,6 +131,18 @@ describe('Page', () => {
           assert.equal(data.componentIds.length, 2)
           assert.equal(data.componentIds[0], 'label')
           assert.equal(data.componentIds[1], 'input')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should convert childIds for user provided children list', done => {
+      Page.fetchById(state, 'documentation')
+        .then(data => {
+          assert.equal(data.childIds.length, 3)
+          assert.equal(data.childIds[0], 'documentation/getting-started')
+          assert.equal(data.childIds[1], 'documentation/development')
+          assert.equal(data.childIds[2], 'documentation/tokens')
           done()
         })
         .catch(done)

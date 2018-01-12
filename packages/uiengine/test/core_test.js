@@ -3,9 +3,9 @@ require('mocha-sinon')()
 const fs = require('fs-extra')
 const path = require('path')
 const assert = require('assert')
-const assertExists = require('./support/assertExists')
-const assertContentMatches = require('./support/assertContentMatches')
-const assertContentDoesNotMatch = require('./support/assertContentDoesNotMatch')
+const assertExists = require('../../../test/support/assertExists')
+const assertContentMatches = require('../../../test/support/assertContentMatches')
+const assertContentDoesNotMatch = require('../../../test/support/assertContentDoesNotMatch')
 
 const Core = require('../src/core')
 
@@ -16,7 +16,6 @@ const schemaPath = path.resolve(testProjectPath, 'src', 'uiengine', 'schema')
 const componentsPath = path.resolve(testProjectPath, 'src', 'components')
 const templatesPath = path.resolve(testProjectPath, 'src', 'templates')
 const indexPath = path.join(testProjectTargetPath, 'index.html')
-const statePath = path.join(testProjectTargetPath, '_state.json')
 const opts = { config: path.resolve(testProjectPath, 'uiengine.yml') }
 
 // "end to end" tests

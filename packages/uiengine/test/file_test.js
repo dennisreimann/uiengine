@@ -1,5 +1,5 @@
 const assert = require('assert')
-const assertExists = require('./support/assertExists')
+const assertExists = require('../../../test/support/assertExists')
 const fs = require('fs-extra')
 const path = require('path')
 

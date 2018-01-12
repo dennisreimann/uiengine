@@ -1,7 +1,7 @@
 const path = require('path')
 const assert = require('assert')
-const assertMatches = require('./support/assertMatches')
-const assertDoesNotMatch = require('./support/assertDoesNotMatch')
+const assertMatches = require('../../../test/support/assertMatches')
+const assertDoesNotMatch = require('../../../test/support/assertDoesNotMatch')
 
 const Variant = require('../src/variant')
 

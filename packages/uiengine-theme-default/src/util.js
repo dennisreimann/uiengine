@@ -21,7 +21,7 @@ export const decoratePageContent = page => {
   const { content, title } = page
   const regexp = new RegExp(`^<h1.*?>${title}</h1>`)
 
-  return content.replace(regexp, '')
+  return content.replace(regexp, '').trim()
 }
 
 export const decorateRaw = (code, lang) => {

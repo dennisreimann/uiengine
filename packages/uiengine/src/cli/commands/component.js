@@ -109,8 +109,8 @@ Enjoy! ✌️`)
       })
     })
   })
-  .catch((err) => {
-    console.error([`🚨  creating the component ${componentId} failed!`, err.stack].join('\n\n'))
-    process.exit(1)
-  })
+    .catch((err) => {
+      console.error([`🚨  creating the component ${componentId} failed!`, err.stack].join('\n\n'))
+      process.exit(1)
+    })
 }

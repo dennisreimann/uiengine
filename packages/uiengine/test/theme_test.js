@@ -3,13 +3,12 @@ require('mocha-sinon')()
 const fs = require('fs-extra')
 const path = require('path')
 const assert = require('assert')
-const assertExists = require('./support/assertExists')
 const Theme = require('../src/theme')
 
 const { testTmpPath } = require('../../../test/support/paths')
 const target = path.resolve(testTmpPath, 'site')
 const testThemePath = path.resolve(__dirname, 'fixtures', 'test-theme')
-const testThemeOptions = { opt1: 1, opt2: 2 }
+const testThemeOptions = { opt1: 1, opt2: 2, target }
 const TestTheme = require(testThemePath)
 
 const state = {
@@ -43,17 +42,7 @@ describe('Theme', () => {
           const expectedOptions = Object.assign({}, testThemeOptions, { markdownIt })
 
           assert(TestTheme.setup.calledOnce)
-          assert(TestTheme.setup.calledWith(expectedOptions))
-
-          done()
-        })
-        .catch(done)
-    })
-
-    it('should copy the themes static files', done => {
-      Theme.setup(state)
-        .then(() => {
-          assertExists(path.join(target, '_theme-assets', 'test.css'))
+          assert(TestTheme.setup.calledWithMatch(expectedOptions))
 
           done()
         })
@@ -70,7 +59,7 @@ describe('Theme', () => {
       Theme.render(state, change)
         .then(() => {
           assert(TestTheme.render.calledOnce)
-          assert(TestTheme.render.calledWith(testThemeOptions, state, change))
+          assert(TestTheme.render.calledWithMatch(testThemeOptions, state, change))
 
           done()
         })
@@ -85,7 +74,7 @@ describe('Theme', () => {
       Theme.teardown(state)
         .then(() => {
           assert(TestTheme.teardown.calledOnce)
-          assert(TestTheme.teardown.calledWith(testThemeOptions))
+          assert(TestTheme.teardown.calledWithMatch(testThemeOptions))
 
           done()
         })

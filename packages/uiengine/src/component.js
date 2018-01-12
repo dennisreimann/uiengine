@@ -16,10 +16,11 @@ const convertUserProvidedVariantsList = (componentId, attributes = {}) => {
   let { variants } = attributes
   if (typeof variants !== 'object') return attributes
 
-  const variantIds = R.map((variantId) =>
-    variantId.startsWith(`${componentId}/`) ? variantId : `${componentId}/${variantId}`,
-    variants
-  )
+  const variantIds = R.map(variantId => {
+    return variantId.startsWith(`${componentId}/`)
+      ? variantId
+      : `${componentId}/${variantId}`
+  }, variants)
 
   attributes = R.dissoc('variants', attributes)
   attributes = R.assoc('variantIds', variantIds, attributes)

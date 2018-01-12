@@ -54,6 +54,17 @@ describe('Frontmatter', () => {
         .catch(done)
     })
 
+    it('should work with empty attributes and empty body', done => {
+      const string = `---\n\n---\n`
+      Frontmatter.fromString(string, sourcePaths)
+        .then(data => {
+          assert.equal(Object.keys(data.attributes).length, 0)
+          assert.equal(data.body, '')
+          done()
+        })
+        .catch(done)
+    })
+
     it('should work with only the body', done => {
       const string = 'Hello'
       Frontmatter.fromString(string, sourcePaths)

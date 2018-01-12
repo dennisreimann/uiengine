@@ -52,5 +52,10 @@ describe('ComponentUtil', () => {
       const componentPath = path.join(componentsPath, 'button')
       assert.equal(ComponentUtil.componentPathToComponentId(componentsPath, componentPath), 'button')
     })
+
+    it('should return null for invalid component id', () => {
+      const filePath = path.join(testProjectPath, 'src', 'uiengine', 'pages', 'page.md')
+      assert.equal(ComponentUtil.componentPathToComponentId(componentsPath, filePath), null)
+    })
   })
 })

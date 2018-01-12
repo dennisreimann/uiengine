@@ -33,7 +33,8 @@ var fastmatter = function (str, filename, sourcePaths) {
     if (isSeparator(lines[i])) { // end of attributes
       break
     }
-    attributes.push(lines[i])
+    var line = lines[i]
+    if (line.trim().length) attributes.push(line)
     i += 1
   }
 
