@@ -12,8 +12,7 @@ import './global-components'
 Vue.config.productionTip = false
 Vue.use(Meta)
 
-/* eslint-disable no-new */
-new Vue({
+const vm = new Vue({
   el: '#app',
   router,
   store,
@@ -34,9 +33,15 @@ if (document.getElementById('__bs_script__')) {
   const setupSocket = () => {
     const { socket } = window.___browserSync___ || {}
     if (socket) {
+      // state changes
       socket.on('uiengine:state:update', uiengineState => {
         store.commit('state/setState', uiengineState)
       })
+      // iframe reloads
+      socket.on('uiengine:file:change', filePath => {
+        vm.$emit('file:change', `/${filePath}`)
+      })
+      // report
       console.debug('Connection to browser-sync socket established.')
     } else if (retries <= 10) {
       setTimeout(setupSocket, 100)

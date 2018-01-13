@@ -32,7 +32,6 @@ const watchOptions = {
 // see https://www.browsersync.io/docs/options/
 const browserSyncOptions = {
   notify: false,
-  reloadThrottle: 500,
   watchOptions
 }
 
@@ -90,7 +89,7 @@ const startWatcher = (state, watch, server) => {
 
 const startServer = (state, watch) => {
   const { target, browserSync } = state.config
-  const server = requireOptional('browser-sync', 'serve').create()
+  const server = requireOptional('browser-sync', 'serve').create('UIengine')
   const historyApiFallback = require('connect-history-api-fallback', 'serve')
   const defaults = {
     server: {
@@ -100,9 +99,19 @@ const startServer = (state, watch) => {
     // https://github.com/Browsersync/recipes/tree/master/recipes/html.injection
     middleware: [],
     files: [
-      '_pages/**/*',
-      '_variants/**/*',
-      '_uiengine-theme/**/*'
+      {
+        match: ['**/*'],
+        options: {
+          cwd: target,
+          ignored: [
+            // exculde index.html as it changes on every rebuild and changes are injected via websockets (see handleFileChange)
+            'index.html',
+            // exclude pages and variants as the iframes are reloaded separately (see server.init callback)
+            '_pages/**/*',
+            '_variants/**/*'
+          ]
+        }
+      }
     ]
   }
   const options = browserSync || defaults
@@ -116,12 +125,25 @@ const startServer = (state, watch) => {
     options.files = options.files || defaults.files
     options.watchOptions = options.watchOptions || browserSyncOptions.watchOptions
     options.notify = typeof options.notify !== 'undefined' ? options.notify : browserSyncOptions.notify
-    options.reloadThrottle = typeof options.reloadThrottle !== 'undefined' ? options.reloadThrottle : browserSyncOptions.reloadThrottle
   }
 
   debug3(state, 'BrowserSync options:', JSON.stringify(options, null, 2))
 
-  server.init(options)
+  server.init(options, (err, instance) => {
+    if (err) console.error('Initializing server failed: ', err)
+
+    const _paths = filePath => path.join(target, filePath)
+    // trigger iframe reloads, see
+    // https://github.com/BrowserSync/browser-sync/issues/662#issuecomment-110478137
+    server.watch([
+      _paths('_pages/**/*'),
+      _paths('_variants/**/*')
+    ]).on('change', filePath => {
+      const file = path.relative(target, filePath)
+
+      instance.io.sockets.emit('uiengine:file:change', file)
+    })
+  })
 
   return server
 }

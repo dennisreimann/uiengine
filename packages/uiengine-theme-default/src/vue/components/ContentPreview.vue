@@ -121,9 +121,7 @@ export default {
       const { contentDocument, contentWindow } = iframe
       const head = contentDocument.getElementsByTagName('head')[0]
       const previewScript = document.createElement('script')
-
       previewScript.src = '/_uiengine-theme/' + 'scripts/uiengine-preview.js'
-
       head.appendChild(previewScript)
 
       iframeResizer(iframeResizerOpts, iframe)
@@ -136,7 +134,15 @@ export default {
       }
     }
 
-    iframe.onload = setupIframe.bind(this)
+    // setup on initial load
+    iframe.addEventListener('load', setupIframe.bind(this), { once: true })
+
+    // reload on file change
+    this.$root.$on('file:change', filePath => {
+      if (filePath === this.src && iframe.contentWindow) {
+        iframe.contentWindow.location.reload()
+      }
+    })
   },
 
   methods: {
