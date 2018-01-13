@@ -10,7 +10,7 @@ before_script:
   - yarn run setup
 script:
   # Lint and build all packages
-  - standard
+  - yarn run lint
   # Run tests and coverage
   - yarn run cover
   # Upload coverage data
