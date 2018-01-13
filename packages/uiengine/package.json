@@ -46,7 +46,7 @@
     "yargs": "^10.1.1"
   },
   "optionalDependencies": {
-    "browser-sync": "^2.23.5",
+    "browser-sync": "^2.23.0",
     "chokidar": "^1.7.0",
     "connect-history-api-fallback": "^1.5.0"
   },
