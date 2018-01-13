@@ -67,16 +67,15 @@ If you want to use your own theme instead of the default one, there are two opti
   (case: you use the theme more than once and want to share it across projects)
 
 UIengine will `require` the theme.
-The module has to export an async `render` function as well as a `staticPath`:
+The module has to export an async `render` functions:
 
-- `render(options, templateId, data)` gets the template name and the data for the page that should get rendered.
+- `render(options, state)` gets the theme options and the complete state object for the pages that should get rendered.
   This function is called asynchronously and has to return a `Promise`!
-- `staticPath` is the path to the directory containing static files/assets of the theme (scripts, styles, etc.).
-  They get copied to the `target` path when the project gets generated.
 
 In addition to that there are **optional hooks for `setup` and `teardown`**.
 You can use the setup hook to create a template cache with precompiled templates that `render` can use.
 This makes sense when you are working with i.e. Handlebars and you have to register partials and helpers.
+You might also want to copy the themes assets to the `target` path in the `setup` function.
 
 Apart from that you most likely will not need to provided these hooks.
 But if you do, make sure to return a `Promise`:
