@@ -2,7 +2,7 @@
 # Here you can overwrite it and add more custom properties.
 name: UIengine Sample Project
 version: '1.0.0'
-copyright: !markdown '[![Generated with UIengine](https://img.shields.io/badge/Generated_with-UIengine-blue.svg)](https://github.com/dennisreimann/uiengine)'
+copyright: !markdown '[Generated with UIengine](https://github.com/dennisreimann/uiengine)'
 
 # Base directories for the input, your raw source files:
 # - components is the root of the directory containing the components
