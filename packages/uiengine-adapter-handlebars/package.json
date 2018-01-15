@@ -19,7 +19,7 @@
     "uiengine",
     "handlebars"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "handlebars": "^4.0.0"
   },
   "scripts": {

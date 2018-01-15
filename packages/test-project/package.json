@@ -22,10 +22,10 @@
     "handlebars": "^4.0.11",
     "marko": "^4.7.4",
     "pug": "^2.0.0-rc.4",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "vue": "^2.5.0",
-    "vue-server-renderer": "^2.5.0"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "vue": "^2.5.13",
+    "vue-server-renderer": "^2.5.13"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",

@@ -19,7 +19,7 @@
     "uiengine",
     "pug"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "pug": "^2.0.0-rc.4"
   },
   "scripts": {

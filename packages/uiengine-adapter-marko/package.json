@@ -19,7 +19,7 @@
     "uiengine",
     "marko"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "marko": "^4.5.0"
   },
   "scripts": {
