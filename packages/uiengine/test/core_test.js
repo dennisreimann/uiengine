@@ -22,7 +22,9 @@ const opts = { config: path.resolve(testProjectPath, 'uiengine.yml') }
 describe('Core', () => {
   afterEach(() => { fs.removeSync(testProjectTargetPath) })
 
-  describe('#generate', () => {
+  describe('#generate', function () {
+    this.timeout(5000)
+
     it('should generate index page', done => {
       Core.generate(opts)
         .then(state => {
@@ -75,9 +77,9 @@ describe('Core', () => {
           assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text-required.pug.html'))
           assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text.hbs.html'))
           assertExists(path.join(testProjectTargetPath, '_variants', 'input', 'text.pug.html'))
-          assertExists(path.join(testProjectTargetPath, '_variants', 'label', 'label.hbs.html'))
-          assertExists(path.join(testProjectTargetPath, '_variants', 'label', 'label.marko.html'))
-          assertExists(path.join(testProjectTargetPath, '_variants', 'label', 'label.pug.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'label', 'label-handlebars.hbs.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'label', 'label-marko.marko.html'))
+          assertExists(path.join(testProjectTargetPath, '_variants', 'label', 'label-pug.pug.html'))
 
           done()
         })

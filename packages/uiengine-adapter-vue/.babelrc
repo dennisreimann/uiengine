@@ -6,5 +6,8 @@
       }
     }],
     "vue"
+  ],
+  "plugins": [
+    "transform-runtime"
   ]
 }

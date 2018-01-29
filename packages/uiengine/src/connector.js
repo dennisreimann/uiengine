@@ -5,8 +5,11 @@ const File = require('./util/file')
 const { error } = require('./util/message')
 const { debug3 } = require('./util/debug')
 
-const getModule = ({ config: { adapters } }, ext) => {
-  const { module } = adapters[ext]
+const getModule = ({ config: { adapters } }, ext, filePath) => {
+  const { module } = adapters[ext] || {}
+  if (!module) {
+    throw new Error(error(`You have not configured the "${ext}" adapter.`, `Cannot handle ${filePath}.`))
+  }
 
   try {
     return require(module)
@@ -50,7 +53,7 @@ async function registerComponentFile (state, filePath) {
   const adapter = adapters[ext]
 
   if (adapter) {
-    const { registerComponentFile } = getModule(state, ext)
+    const { registerComponentFile } = getModule(state, ext, filePath)
 
     if (typeof registerComponentFile === 'function') {
       const { options } = adapter
@@ -62,7 +65,7 @@ async function registerComponentFile (state, filePath) {
 async function render (state, templatePath, data = {}) {
   const { config: { adapters } } = state
   const ext = File.extension(templatePath)
-  const { render } = getModule(state, ext)
+  const { render } = getModule(state, ext, templatePath)
 
   if (typeof render === 'function') {
     const { options } = adapters[ext]

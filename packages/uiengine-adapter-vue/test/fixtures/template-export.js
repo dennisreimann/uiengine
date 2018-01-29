@@ -1,5 +1,9 @@
+import props from './props'
+
 export default {
   name: 'TestTemplate',
-  props: ['myData'],
+
+  props,
+
   template: '<p>{{ myData }}</p>'
 }

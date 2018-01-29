@@ -15,12 +15,12 @@
     "clean": "rimraf ../../test/tmp",
     "start": "yarn run clean && gulp develop",
     "build": "yarn run clean && gulp build",
-    "lint": "eslint --ext .js src test",
+    "lint": "eslint --ext .js,.vue src test",
     "standalone": "yarn run clean && uiengine build -s -w -d"
   },
   "dependencies": {
     "handlebars": "^4.0.11",
-    "marko": "^4.7.4",
+    "marko": "^4.7.5",
     "pug": "^2.0.0-rc.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -28,12 +28,14 @@
     "vue-server-renderer": "^2.5.13"
   },
   "devDependencies": {
+    "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-vue": "^2.0.0",
-    "browser-sync": "^2.23.5",
+    "browser-sync": "^2.23.6",
     "connect-history-api-fallback": "^1.5.0",
+    "cross-env": "^5.1.3",
     "gulp": "^3.9.1",
     "theo": "^6.0.0-beta.9",
     "uiengine": "^0.11.6",
@@ -42,6 +44,11 @@
     "uiengine-adapter-marko": "^0.11.6",
     "uiengine-adapter-pug": "^0.11.6",
     "uiengine-adapter-react": "^0.11.6",
-    "uiengine-adapter-vue": "^0.11.0"
+    "uiengine-adapter-vue": "^0.11.0",
+    "vue-loader": "^13.7.0",
+    "webpack": "^3.10.0",
+    "webpack-merge": "^4.1.1",
+    "webpack-node-externals": "^1.6.0",
+    "webpack-stream": "^4.0.0"
   }
 }

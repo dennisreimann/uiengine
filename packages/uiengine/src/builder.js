@@ -44,8 +44,11 @@ async function render (state, templateId, data, identifier) {
   try {
     rendered = await Connector.render(state, template, data)
   } catch (err) {
-    rendered = `<!DOCTYPE html><html><body><pre>${err}</pre></body></html>`
-    console.error(error(`${identifier} could not be generated!`, err))
+    const message = [error(`${identifier} could not be generated!`), err]
+
+    if (state.config.debug) message.push(JSON.stringify(data, null, 2))
+
+    throw new Error(message.join('\n\n'))
   }
 
   debug4(state, `Builder.render(${templateId}):end`)

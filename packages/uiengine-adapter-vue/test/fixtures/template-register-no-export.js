@@ -1,6 +1,8 @@
 import Vue from 'vue'
+import props from './props'
 
 Vue.component('test-template', {
-  props: ['myData'],
+  props,
+
   template: '<p>{{ myData }}</p>'
 })

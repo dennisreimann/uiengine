@@ -19,10 +19,15 @@
     "uiengine",
     "vue"
   ],
+  "dependencies": {
+    "vue-server-renderer": "^2.3.0",
+    "vue-template-compiler": "^2.3.0",
+    "vue-component-compiler": "git+https://github.com/znck/vue-component-compiler.git"
+  },
   "devDependencies": {
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
-    "babel-preset-vue": "^1.2.1",
+    "babel-preset-vue": "^2.0.0",
     "babel-register": "^6.26.0"
   },
   "peerDependencies": {
@@ -30,13 +35,12 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-vue": "^1.2.1",
     "babel-register": "^6.26.0",
-    "vue": "^2.3.0",
-    "vue-server-renderer": "^2.3.0",
-    "vue-template-compiler": "^2.3.0"
+    "vue": "^2.3.0"
   },
   "scripts": {
     "clean": "rimraf lib",
     "start": "yarn run clean && yarn run build -- -w",
-    "build": "yarn run clean && babel src --out-dir lib"
+    "build": "yarn run clean && babel src --out-dir lib",
+    "lint": "eslint --ext .js,.vue src test"
   }
 }

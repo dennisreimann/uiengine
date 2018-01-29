@@ -6,7 +6,7 @@ module.exports = filePath => {
   try {
     const stat = fs.statSync(filePath)
     exists = stat.isFile() || stat.isDirectory()
-  } catch (err) { }
+  } catch (err) {}
 
   assert(exists, `File does not exist: ${filePath}`)
 }

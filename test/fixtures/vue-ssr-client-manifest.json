@@ -1,0 +1,48 @@
+{
+  "publicPath": "",
+  "all": [
+    "assets/scripts/vue-client.js"
+  ],
+  "initial": [
+    "assets/scripts/vue-client.js"
+  ],
+  "async": [],
+  "modules": {
+    "61599408": [
+      0
+    ],
+    "40f7f47a": [
+      0
+    ],
+    "4ab1166b": [
+      0
+    ],
+    "2f8b8c8b": [
+      0
+    ],
+    "b58e67a6": [
+      0
+    ],
+    "35db172f": [
+      0
+    ],
+    "6775f9ca": [
+      0
+    ],
+    "676afea2": [
+      0
+    ],
+    "5ebc738b": [
+      0
+    ],
+    "4e2239d6": [
+      0
+    ],
+    "b5050ba2": [
+      0
+    ],
+    "2ee2b8f9": [
+      0
+    ]
+  }
+}

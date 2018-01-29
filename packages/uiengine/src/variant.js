@@ -99,8 +99,11 @@ async function fetchById (state, id) {
   try {
     [raw, rendered] = await Promise.all([readTemplate, renderTemplate])
   } catch (err) {
-    rendered = `<!DOCTYPE html><html><body><pre>${err}</pre></body></html>`
-    console.error(error(`Variant "${id}" could not be rendered!`, err))
+    const message = [error(`Variant "${id}" could not be rendered!`), err]
+
+    if (state.config.debug) message.push(JSON.stringify(context, null, 2))
+
+    throw new Error(message.join('\n\n'))
   }
 
   // adjust raw and rendered: omit marked parts

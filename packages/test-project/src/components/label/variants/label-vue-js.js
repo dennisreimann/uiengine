@@ -1,18 +1,16 @@
-<template>
-  <my-label :id="id" :title="title" />
-</template>
-
-<script>
-import MyLabel from '../label'
+import MyLabel from '../label-export.vue.js'
 
 export default {
   name: 'MyVariant',
+
   props: {
     id: String,
     title: String
   },
+
   components: {
     MyLabel
-  }
+  },
+
+  template: '<my-label :id="id" :title="title" />'
 }
-</script>

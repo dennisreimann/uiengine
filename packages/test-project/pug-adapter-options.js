@@ -1,6 +1,6 @@
-const path = require('path')
+const { resolve } = require('path')
 
 module.exports = {
   pretty: true,
-  basedir: path.resolve(__dirname, './src/components')
+  basedir: resolve(__dirname, './src/components')
 }

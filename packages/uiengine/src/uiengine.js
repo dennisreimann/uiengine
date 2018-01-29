@@ -16,8 +16,7 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, schema,
 
   if (debug) {
     const themeLibGlob = path.join(path.dirname(require.resolve(theme.module)), '**')
-    const themeStaticGlob = path.join(require(theme.module).staticPath, '**')
-    sourceFiles.push(themeLibGlob, themeStaticGlob)
+    sourceFiles.push(themeLibGlob)
   }
 
   return sourceFiles
@@ -40,6 +39,7 @@ const requireOptional = (module, option) => {
     return require(module)
   } catch (err) {
     console.error(`The optional dependency ${module} failed to install and is required for --${option}.\nIt is likely not supported on your platform.`)
+
     throw err
   }
 }

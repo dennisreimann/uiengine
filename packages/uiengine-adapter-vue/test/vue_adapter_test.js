@@ -1,32 +1,54 @@
 const assert = require('assert')
-const path = require('path')
+const { resolve } = require('path')
 const Adapter = require('../src/index')
 
+const templatePath = file => resolve(__dirname, 'fixtures', file)
+
 describe('Vue adapter', () => {
-  describe.only('#render', () => {
-    describe('vue template', () => {
-      it('should render the vue template with the given data', done => {
-        const templatePath = path.resolve(__dirname, 'fixtures', 'template.vue')
-        const options = {}
-        const data = { myData: 1 }
+  describe('#render', () => {
+    describe('html template', function () {
+      this.timeout(5000)
 
-        Adapter.render(options, templatePath, data)
-          .then(rendered => {
-            assert.equal('<p data-server-rendered="true">1</p>', rendered)
+      describe('with custom bundle', () => {
+        it('should render the vue template with the given data', done => {
+          const tmplPath = templatePath('template.vhtml')
+          const options = { bundle: resolve(__dirname, '../../../test/fixtures/vue-server.js') }
+          const data = { myData: 1 }
 
-            done()
-          })
-          .catch(done)
+          Adapter.render(options, tmplPath, data)
+            .then(rendered => {
+              assert.equal('<p data-server-rendered="true">1</p>', rendered)
+
+              done()
+            })
+            .catch(done)
+        })
+      })
+
+      describe('without custom bundle', () => {
+        it('should render the vue template with the given data', done => {
+          const tmplPath = templatePath('template.vhtml')
+          const options = {}
+          const data = { myData: 1 }
+
+          Adapter.render(options, tmplPath, data)
+            .then(rendered => {
+              assert.equal('<p data-server-rendered="true">1</p>', rendered)
+
+              done()
+            })
+            .catch(done)
+        })
       })
     })
 
     describe('js template', () => {
       it('should render the exported component with the given data', done => {
-        const templatePath = path.resolve(__dirname, 'fixtures', 'template-export.js')
+        const tmplPath = templatePath('template-export.js')
         const options = {}
         const data = { myData: 1 }
 
-        Adapter.render(options, templatePath, data)
+        Adapter.render(options, tmplPath, data)
           .then(rendered => {
             assert.equal('<p data-server-rendered="true">1</p>', rendered)
 
@@ -36,11 +58,11 @@ describe('Vue adapter', () => {
       })
 
       it('should render the globally registered component with the given data', done => {
-        const templatePath = path.resolve(__dirname, 'fixtures', 'template-register.js')
+        const tmplPath = templatePath('template-register.js')
         const options = {}
         const data = { myData: 1 }
 
-        Adapter.render(options, templatePath, data)
+        Adapter.render(options, tmplPath, data)
           .then(rendered => {
             assert.equal('<p data-server-rendered="true">1</p>', rendered)
 
@@ -50,15 +72,26 @@ describe('Vue adapter', () => {
       })
 
       it('should throw error with no exported component', done => {
-        const templatePath = path.resolve(__dirname, 'fixtures', 'template-register-no-export.js')
+        const tmplPath = templatePath('template-register-no-export.js')
         const options = {}
-        const data = { }
+        const data = {}
 
-        Adapter.render(options, templatePath, data)
+        Adapter.render(options, tmplPath, data)
           .catch(error => {
             assert(error)
             done()
           })
+
+        // const options = {}
+        // const data = { myData: 1 }
+
+        // Adapter.render(options, tmplPath, data)
+        //   .then(rendered => {
+        //     assert.equal('<p data-server-rendered="true">1</p>', rendered)
+
+        //     done()
+        //   })
+        //   .catch(done)
       })
     })
   })

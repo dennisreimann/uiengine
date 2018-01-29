@@ -29,6 +29,14 @@ const state = {
           basedir: componentsPath
         }
       },
+      vhtml: {
+        module: 'uiengine-adapter-vue',
+        options: {}
+      },
+      js: {
+        module: 'uiengine-adapter-vue',
+        options: {}
+      },
       jsx: {
         module: 'uiengine-adapter-react',
         options: {}
@@ -123,15 +131,15 @@ describe('Variant', () => {
             'input/text.pug',
             'input/text-disabled.pug',
             'input/text-required.pug',
-            'label/label.hbs',
-            'label/label.html',
-            'label/label.js',
-            'label/label.jsx',
-            'label/label.marko',
-            'label/label.pug',
-            'label/label.vue',
-            'formrow/text-with-label.pug',
-            'formrow/text-without-label.pug',
+            'label/label-handlebars.hbs',
+            'label/label-html.html',
+            'label/label-vue-js.js',
+            'label/label-react.jsx',
+            'label/label-marko.marko',
+            'label/label-pug.pug',
+            'label/label-vue-sfc.vhtml',
+            'formfield/text-with-label.pug',
+            'formfield/text-without-label.pug',
             'form/form.pug'
           ].map(id => {
             assert(variantIds.includes(id), `missing variant "${id}"`)
