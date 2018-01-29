@@ -19,12 +19,12 @@ const indexPath = path.join(testProjectTargetPath, 'index.html')
 const opts = { config: path.resolve(testProjectPath, 'uiengine.yml') }
 
 // "end to end" tests
-describe('Core', () => {
+describe('Core', function () {
+  this.timeout(5000)
+
   afterEach(() => { fs.removeSync(testProjectTargetPath) })
 
-  describe('#generate', function () {
-    this.timeout(5000)
-
+  describe('#generate', () => {
     it('should generate index page', done => {
       Core.generate(opts)
         .then(state => {
