@@ -49,7 +49,7 @@ async function findVariantIds (state, componentPath = '**') {
 
   const variantsPath = VariantUtil.componentIdToVariantsPath(components, componentPath)
   const pattern = path.join(variantsPath, '*')
-  const excludePattern = '!' + path.join(variantsPath, '*.{md,marko.js}')
+  const excludePattern = '!' + path.join(variantsPath, '*.md')
   const variantPaths = await glob([pattern, excludePattern])
 
   const variantFilePathToVariantId = R.partial(VariantUtil.variantFilePathToVariantId, [components])

@@ -36,7 +36,7 @@
     "build": "lerna run build --parallel --scope uiengine*",
     "lint": "lerna run lint --parallel --scope uiengine*",
     "test": "mocha --require babel-register -R dot packages/*/test",
-    "test-watch": "yarn test -w --watch-extensions js,jsx,json,md,yml,hbs,pug,vue",
+    "test-watch": "yarn test -w --watch-extensions hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",
     "test-project": "lerna run start --parallel --scope test-project",
     "cover": "nyc yarn test",
     "release": "yarn run lint && yarn run cover && NODE_ENV=production yarn run build && lerna publish",
