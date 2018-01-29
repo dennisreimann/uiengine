@@ -19,6 +19,7 @@
     "standalone": "yarn run clean && uiengine build -s -w -d"
   },
   "dependencies": {
+    "ejs": "^2.5.7",
     "handlebars": "^4.0.11",
     "marko": "^4.7.5",
     "pug": "^2.0.0-rc.4",

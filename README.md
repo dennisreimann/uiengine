@@ -103,6 +103,7 @@ And even though the UIengine is not completely there yet, we strive to evolve it
 - 🔌 [Vue templating adapter](./packages/uiengine-adapter-vue)
 - 🔌 [Marko templating adapter](./packages/uiengine-adapter-marko)
 - 🔌 [Handlebars templating adapter](./packages/uiengine-adapter-handlebars)
+- 🔌 [EJS templating adapter](./packages/uiengine-adapter-ejs)
 - 🔌 [HTML templating adapter](./packages/uiengine-adapter-html)
 
 ### 🖖 Alternatives

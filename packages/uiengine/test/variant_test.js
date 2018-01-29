@@ -41,6 +41,10 @@ const state = {
         module: 'uiengine-adapter-react',
         options: {}
       },
+      ejs: {
+        module: 'uiengine-adapter-ejs',
+        options: {}
+      },
       hbs: {
         module: 'uiengine-adapter-handlebars',
         options: {}
@@ -123,7 +127,7 @@ describe('Variant', () => {
         .then(data => {
           const variantIds = Object.keys(data)
 
-          assert.equal(variantIds.length, 16);
+          assert.equal(variantIds.length, 17);
 
           [ 'input/checkbox.pug',
             'input/number.pug',
@@ -131,6 +135,7 @@ describe('Variant', () => {
             'input/text.pug',
             'input/text-disabled.pug',
             'input/text-required.pug',
+            'label/label-ejs.ejs',
             'label/label-handlebars.hbs',
             'label/label-html.html',
             'label/label-vue-js.js',
