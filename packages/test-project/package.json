@@ -9,7 +9,7 @@
   "bugs": "https://github.com/dennisreimann/uiengine",
   "repository": "dennisreimann/uiengine",
   "engines": {
-    "node": ">=6.11.0"
+    "node": ">=8.9.0"
   },
   "scripts": {
     "clean": "rimraf ../../test/tmp",
