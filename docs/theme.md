@@ -57,6 +57,10 @@ Available options:
 - `true` (default)
 - `false`
 
+## Deployment
+
+See the [deployment docs](./deployment.md) for details.
+
 ## Custom theme
 
 If you want to use your own theme instead of the default one, there are two options:

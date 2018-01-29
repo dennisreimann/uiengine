@@ -22,7 +22,7 @@ Nevertheless we encourage you to try it out and provide feedback.
 
 To get an idea of what the basics look like, take a glimpse at the 
 [deployed sample project](http://uiengine-sample-project.uix.space/)
-and the 
+and the
 [sample project source code](./packages/test-project).
 
 ### Component documentation and preview
@@ -79,8 +79,9 @@ Technical documentation, with more detailed information:
 - [Schema](./docs/schema.md)
 - [Theme](./docs/theme.md)
 - [YAML](./docs/yaml.md)
+- [Deployment](./docs/deployment.md)
 
-## 🛠 Development 
+## 🛠 Development
 
 You like this project and are interested in participating?
 See the [development docs](./docs/development.md) for an introduction and workflows when hacking on the UIengine.
