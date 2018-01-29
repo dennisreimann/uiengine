@@ -8,6 +8,9 @@
     <script type="text/javascript">
       window.UIengine = {};
       window.UIengine.state = <%= "\<%= JSON.stringify(state) %\>;" %>
+      window.UIengine.previewSrc = <%= JSON.stringify(htmlWebpackPlugin.files.chunks['uiengine-preview'].entry) %>;
+      <% if (htmlWebpackPlugin.files.chunks.manifest) {
+      %>window.UIengine.manifestSrc = <%= JSON.stringify(htmlWebpackPlugin.files.chunks.manifest.entry) %>;<% } %>
       <% for (let key in htmlWebpackPlugin.options.window) {
       %>window.UIengine.<%= key %> = <%= JSON.stringify(htmlWebpackPlugin.options.window[key]) %>;<% } %>
     </script>

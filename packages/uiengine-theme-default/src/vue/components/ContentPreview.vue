@@ -120,9 +120,17 @@ export default {
     const setupIframe = () => {
       const { contentDocument, contentWindow } = iframe
       const head = contentDocument.getElementsByTagName('head')[0]
-      const previewScript = document.createElement('script')
-      previewScript.src = '/_uiengine-theme/' + 'scripts/uiengine-preview.js'
-      head.appendChild(previewScript)
+
+      // dynamically add scripts (manifest and iframe sizer)
+      const addScript = src => {
+        if (!src) return
+        const script = document.createElement('script')
+        script.src = src
+        head.appendChild(script)
+      }
+
+      addScript(window.UIengine.manifestSrc)
+      addScript(window.UIengine.previewSrc)
 
       iframeResizer(iframeResizerOpts, iframe)
 

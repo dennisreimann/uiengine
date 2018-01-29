@@ -40,8 +40,8 @@
     "test-project": "lerna run start --parallel --scope test-project",
     "cover": "nyc yarn test",
     "release": "yarn run lint && yarn run cover && NODE_ENV=production yarn run build && lerna publish",
-    "test-project:build": "lerna run build --parallel --scope test-project",
-    "test-project:deploy": "npm run test-project:build && rsync -ravzulO --chmod=u=rwX,g=rX --delete-after test/tmp/ uiengine-sample-project.uix.space:virtual/uiengine-sample-project.uix.space"
+    "test-project:build": "NODE_ENV=production npm run build && NODE_ENV=production lerna run build --parallel --scope test-project",
+    "test-project:deploy": "npm run test-project:build && rsync -ravzulO --chmod=u=rwX,g=rX --delete-after packages/test-project/deploy/ test/tmp/ uiengine-sample-project.uix.space:virtual/uiengine-sample-project.uix.space"
   },
   "workspaces": [
     "packages/*"
