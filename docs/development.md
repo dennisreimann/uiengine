@@ -27,7 +27,7 @@ yarn start
 Basic linting is done in the project root:
 
 ```bash
-standard
+yarn lint
 ```
 
 Run the tests:
