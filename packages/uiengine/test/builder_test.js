@@ -55,11 +55,7 @@ const state = {
         options: {}
       }
     },
-    templates: {
-      variant: path.resolve(testProjectPath, 'src', 'templates', 'variant-preview.pug'),
-      custom: path.resolve(testProjectPath, 'src', 'templates', 'custom.pug'),
-      page: path.resolve(testProjectPath, 'src', 'templates', 'page.pug')
-    },
+    variantTemplate: 'variant-preview.pug',
     theme: {
       module: 'uiengine-theme-default',
       options: {}
@@ -82,7 +78,7 @@ const state = {
     }),
     'prototype/custom-page': Factory.page('prototype/custom-page', {
       title: 'Custom Page',
-      template: 'page',
+      template: 'page.pug',
       content: 'Content for custom template',
       context: {
         myContextVariable: 'This is my context'
@@ -229,7 +225,7 @@ describe('Builder', () => {
 
   describe('#generatePagesWithTemplate', () => {
     it('should generate pages having this template', done => {
-      Builder.generatePagesWithTemplate(state, 'page')
+      Builder.generatePagesWithTemplate(state, 'page.pug')
         .then(() => {
           assertExists(path.join(target, '_pages', 'prototype', 'custom-page.html'))
 

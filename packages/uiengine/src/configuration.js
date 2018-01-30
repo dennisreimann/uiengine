@@ -50,26 +50,6 @@ const resolvePackage = (basedir, config, type) => {
   }
 }
 
-const resolveTemplates = (templatesPath, config) => {
-  if (!templatesPath || !path.isAbsolute(templatesPath)) return config
-
-  // templates that are explicitely listed in the config
-  const resolveDeclaredTemplates = R.partial(resolvePath, [templatesPath])
-  const declared = R.map(resolveDeclaredTemplates, config)
-
-  // templates that exist inside the templates directory
-  const pattern = path.join(templatesPath, `**/*.*`)
-  const paths = glob.sync(pattern)
-  const templates = R.reduce((tmpl, templatePath) => {
-    const id = TemplateUtil.templateFilePathToTemplateId(templatesPath, templatePath)
-    tmpl[id] = templatePath
-
-    return tmpl
-  }, declared, paths)
-
-  return templates
-}
-
 async function read (configFilePath, flags = {}) {
   const projectConfig = await Yaml.fromFile(configFilePath)
   return _read(configFilePath, flags, projectConfig)
@@ -93,7 +73,7 @@ const _read = (configFilePath, flags, projectConfig) => {
   let data = R.mergeAll([defaults, projectConfig, options])
 
   // resolve paths, adapters, and theme
-  let { source, target, theme, adapters, templates } = projectConfig
+  let { source, target, theme, adapters } = projectConfig
 
   assert(source, 'Please provide a "source" config.')
   assert(target, 'Please provide a "target" config with the destination path for the generated site.')
@@ -107,13 +87,11 @@ const _read = (configFilePath, flags, projectConfig) => {
   target = resolvePath(configPath, target)
   theme = resolveTheme(configPath, theme)
   adapters = R.map(resolveAdapters, adapters || {})
-  templates = resolveTemplates(source.templates, templates || {})
 
   data = R.assoc('source', source, data)
   data = R.assoc('target', target, data)
   data = R.assoc('theme', theme, data)
   data = R.assoc('adapters', adapters, data)
-  data = R.assoc('templates', templates, data)
 
   return data
 }

@@ -1,4 +1,4 @@
-const path = require('path')
+const { join, relative, resolve } = require('path')
 const R = require('ramda')
 const Theme = require('./theme')
 const Connector = require('./connector')
@@ -6,8 +6,6 @@ const File = require('./util/file')
 const PageUtil = require('./util/page')
 const { error } = require('./util/message')
 const { debug2, debug3, debug4 } = require('./util/debug')
-
-const defaultTemplateVariant = 'variant'
 
 const getVariantData = ({ variants, config }, variantId) => {
   const variant = variants[variantId]
@@ -17,32 +15,20 @@ const getVariantData = ({ variants, config }, variantId) => {
 }
 
 const copyPageFile = (targetPath, sourcePath, source) => {
-  const filePath = path.relative(sourcePath, source)
-  const target = path.resolve(targetPath, filePath)
+  const filePath = relative(sourcePath, source)
+  const target = resolve(targetPath, filePath)
 
   return File.copy(source, target)
 }
 
-async function render (state, templateId, data, identifier) {
-  debug4(state, `Builder.render(${templateId}):start`)
+async function render (state, template, data, identifier) {
+  debug4(state, `Builder.render(${template}):start`)
 
-  const templates = state.config.templates || {}
-  const template = templates[templateId]
-
-  if (!template) {
-    throw new Error(error([
-      `Template "${templateId}" does not exist.`,
-      'Add it to the templates source directory or refer to it like this:',
-      `templates:\n  ${templateId}: PATH_RELATIVE_TO_TEMPLATES_SOURCE`
-    ].join('\n\n')), [
-      'Registered templates:',
-      `${JSON.stringify(templates, null, 2)}`
-    ].join('\n\n'))
-  }
+  const templatePath = join(state.config.source.templates, template)
 
   let rendered
   try {
-    rendered = await Connector.render(state, template, data)
+    rendered = await Connector.render(state, templatePath, data)
   } catch (err) {
     const message = [error(`${identifier} could not be generated!`), err]
 
@@ -51,7 +37,7 @@ async function render (state, templateId, data, identifier) {
     throw new Error(message.join('\n\n'))
   }
 
-  debug4(state, `Builder.render(${templateId}):end`)
+  debug4(state, `Builder.render(${template}):end`)
 
   return rendered
 }
@@ -63,8 +49,8 @@ async function generatePageFiles (state, pageId) {
   const page = pages[pageId]
   const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
   const sourcePagePath = PageUtil.pageIdToPath(page.id)
-  const targetPath = path.resolve(config.target, targetPagePath)
-  const sourcePath = path.resolve(config.source.pages, sourcePagePath)
+  const targetPath = resolve(config.target, targetPagePath)
+  const sourcePath = resolve(config.source.pages, sourcePagePath)
   const copyFile = R.partial(copyPageFile, [targetPath, sourcePath])
   const copyFiles = R.map(copyFile, page.files)
 
@@ -83,30 +69,29 @@ async function generatePageWithTemplate (state, pageId) {
 
   if (page.template) {
     // render template with context
-    const data = page.context
-    const templateId = page.template
-    const html = await render(state, templateId, data, identifier)
+    const { id, context, template } = page
+    const html = await render(state, template, context, identifier)
 
     // write file
-    const htmlPath = path.resolve(target, '_pages', `${page.id}.html`)
+    const htmlPath = resolve(target, '_pages', `${id}.html`)
     await File.write(htmlPath, html)
   }
 
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):end`)
 }
 
-async function generatePagesWithTemplate (state, templateId) {
-  debug3(state, `Builder.generatePagesWithTemplate(${templateId}):start`)
+async function generatePagesWithTemplate (state, template) {
+  debug3(state, `Builder.generatePagesWithTemplate(${template}):start`)
 
   const { pages } = state
-  const affectedPages = R.filter(page => page.template === templateId, pages)
+  const affectedPages = R.filter(page => page.template === template, pages)
   const pageIds = Object.keys(affectedPages)
   const build = R.partial(generatePageWithTemplate, [state])
   const builds = R.map(build, pageIds)
 
   await Promise.all(builds)
 
-  debug3(state, `Builder.generatePagesWithTemplate(${templateId}):end`)
+  debug3(state, `Builder.generatePagesWithTemplate(${template}):end`)
 }
 
 async function generateVariant (state, variantId) {
@@ -119,11 +104,11 @@ async function generateVariant (state, variantId) {
 
   // render variant preview, with layout
   const data = getVariantData(state, variantId)
-  const templateId = variant.template || defaultTemplateVariant
-  const html = await render(state, templateId, data, identifier)
+  const template = variant.template || state.config.variantTemplate
+  const html = await render(state, template, data, identifier)
 
   // write file
-  const htmlPath = path.resolve(target, '_variants', `${variant.id}.html`)
+  const htmlPath = resolve(target, '_variants', `${variant.id}.html`)
   await File.write(htmlPath, html)
 
   debug2(state, `Builder.generateVariant(${variantId}):end`)
@@ -150,7 +135,7 @@ async function generateState (state, change) {
 
   if (state.config.debug) {
     const json = JSON.stringify(state, null, 2)
-    const filePath = path.resolve(state.config.target, '_state.json')
+    const filePath = resolve(state.config.target, '_state.json')
     const dumpState = File.write(filePath, json)
 
     tasks.push(dumpState)

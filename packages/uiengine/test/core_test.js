@@ -479,7 +479,7 @@ describe('Core', function () {
 
           assert.equal(change.action, 'changed')
           assert.equal(change.type, 'template')
-          assert.equal(change.item, 'page')
+          assert.equal(change.item, 'page.pug')
           assert.equal(change.file, path.join(testProjectRelativePath, 'src', 'templates', 'page.pug'))
 
           done()

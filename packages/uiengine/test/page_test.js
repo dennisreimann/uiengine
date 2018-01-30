@@ -228,7 +228,7 @@ describe('Page', () => {
       Page.fetchById(state, 'testcases/custom-template')
         .then(data => {
           assert.equal(data.type, 'template')
-          assert.equal(data.template, 'page')
+          assert.equal(data.template, 'page.pug')
           done()
         })
         .catch(done)

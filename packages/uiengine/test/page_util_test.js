@@ -222,7 +222,7 @@ describe('PageUtil', () => {
 
   describe('#determineType', () => {
     it('should return "template" if page attributes has template', () => {
-      assert.equal('template', PageUtil.determineType({ template: 'custom' }))
+      assert.equal('template', PageUtil.determineType({ template: 'custom.pug' }))
     })
 
     it('should return "tokens" if page attributes has tokens', () => {

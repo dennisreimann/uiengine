@@ -81,15 +81,13 @@ In either way the adapter module can be …
 - the name of the npm package that is the adapter
   (case: you use an existing adapter or want to share yours across projects)
 
-### Templates
+### Variant Template
 
-By default the list of templates is generated from the files within the templates source directory – the file path without extension being the key.
-You will need at least a template named `variant` for the variant preview.
-Here you can configure this preview as well as other templates.
+This is the template the variant preview gets rendered into.
+It should contain references to your styles and scripts, so that the rendered variant markup has everything it needs.
 
 ```yaml
-templates:
-  variant: variant-preview.pug
+variantTemplate: variant-preview.pug
 ```
 
 ### Theme

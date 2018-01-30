@@ -9,12 +9,12 @@ describe('TemplateUtil', () => {
   describe('#templateFilePathToTemplateId', () => {
     it('should return template id for template file path', () => {
       const filePath = path.join(templatesPath, 'page.pug')
-      assert.equal(TemplateUtil.templateFilePathToTemplateId(templatesPath, filePath), 'page')
+      assert.equal(TemplateUtil.templateFilePathToTemplateId(templatesPath, filePath), 'page.pug')
     })
 
     it('should return template id for nested template file path', () => {
       const filePath = path.join(templatesPath, 'content', 'landingpage.pug')
-      assert.equal(TemplateUtil.templateFilePathToTemplateId(templatesPath, filePath), 'content/landingpage')
+      assert.equal(TemplateUtil.templateFilePathToTemplateId(templatesPath, filePath), 'content/landingpage.pug')
     })
 
     it('should return null for non-template file path', () => {

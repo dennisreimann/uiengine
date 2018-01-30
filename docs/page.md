@@ -96,20 +96,7 @@ Files and folders that start with an underscore are ignored.
 
 ## Templates
 
-Basically there are two types of pages …
-
-### Theme templates
-
-These templates are predefined in the theme.
-They are used for the standard documentation pages:
-
-- `documentation` – the default page template that contains the title and description (rendered markdown).
-- `component` – the template a component page gets rendered with, listing the component details and its variants.
-- `schema` - the template the schema page gets rendered with: It contains tabular data of the [component schema](./schema.md).
-
-### Your custom templates
-
-These templates are read from the directory defined in the [source configuration](./config.md#source) – the file path without extension being the key/id of the template.
+Custom page templates are expected to be located in the `templates` directory defined in the [source configuration](./config.md#source).
 
 Here is an example structure for some templates:
 
@@ -120,11 +107,9 @@ templates
     |___cart.pug
 ```
 
-Yopu can reference these templates as `home` and `checkout/cart` as the value for the `template` property of the page. 
+You can reference these templates as `home.pug` and `checkout/cart.pug` as the value for the `template` attribute of the page.
 
-In addition to that you can also define custom names for the [templates configuration](./config.md#templates) for details.
-
-#### Providing data
+## Providing data
 
 As you can use these custom templates to render example/prototype pages for your website/application, you might want to provide some [sample data](./yaml.md#include).
 To pass this data into your template, you can use the `context` property of the page:
@@ -132,7 +117,7 @@ To pass this data into your template, you can use the `context` property of the 
 ```markdown
 ---
 title: Sample home page
-template: home
+template: home.pug
 context:
   pageTitle: "Welcome to ACME Corp."
   teasers: !data /teasers/home.json
