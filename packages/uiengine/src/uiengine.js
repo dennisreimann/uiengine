@@ -31,6 +31,7 @@ const watchOptions = {
 // see https://www.browsersync.io/docs/options/
 const browserSyncOptions = {
   notify: false,
+  single: true,
   watchOptions
 }
 
@@ -90,14 +91,10 @@ const startWatcher = (state, watch, server) => {
 const startServer = (state, watch) => {
   const { target, browserSync } = state.config
   const server = requireOptional('browser-sync', 'serve').create('UIengine')
-  const historyApiFallback = require('connect-history-api-fallback', 'serve')
   const defaults = {
     server: {
       baseDir: target
     },
-    // TODO: Add html injection
-    // https://github.com/Browsersync/recipes/tree/master/recipes/html.injection
-    middleware: [],
     files: [
       {
         match: ['**/*'],
@@ -118,13 +115,12 @@ const startServer = (state, watch) => {
 
   options.server = options.server || defaults.server
   options.server.baseDir = options.server.baseDir || defaults.server.baseDir
-  options.middleware = options.middleware || defaults.middleware
-  options.middleware.push(historyApiFallback())
 
   if (watch) {
     options.files = options.files || defaults.files
     options.watchOptions = options.watchOptions || browserSyncOptions.watchOptions
     options.notify = typeof options.notify !== 'undefined' ? options.notify : browserSyncOptions.notify
+    options.single = typeof options.single !== 'undefined' ? options.single : browserSyncOptions.single
   }
 
   debug3(state, 'BrowserSync options:', JSON.stringify(options, null, 2))
