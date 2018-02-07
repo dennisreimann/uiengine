@@ -1,7 +1,7 @@
-const fs = require('fs')
+const { readFile, readFileSync } = require('fs')
 
 function fromFileSync (parseString, filePath, sourcePaths) {
-  const string = fs.readFileSync(filePath, 'utf8')
+  const string = readFileSync(filePath, 'utf8')
   const parsed = parseString(string, filePath, sourcePaths)
 
   return parsed
@@ -9,7 +9,7 @@ function fromFileSync (parseString, filePath, sourcePaths) {
 
 async function fromFile (parseString, filePath, sourcePaths) {
   return new Promise((resolve, reject) => {
-    fs.readFile(filePath, 'utf8', (err, string) => {
+    readFile(filePath, 'utf8', (err, string) => {
       if (err) {
         reject(err)
       } else {

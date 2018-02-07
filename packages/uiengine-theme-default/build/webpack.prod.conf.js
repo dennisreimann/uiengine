@@ -1,6 +1,6 @@
 'use strict'
 
-const path = require('path')
+const { join } = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -70,7 +70,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           module.resource &&
           /\.js$/.test(module.resource) &&
           module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
+            join(__dirname, '../node_modules')
           ) === 0
         )
       }

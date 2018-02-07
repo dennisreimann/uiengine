@@ -1,5 +1,5 @@
 const gulp = require('gulp')
-const path = require('path')
+const { dirname, join } = require('path')
 const mergeStream = require('merge-stream')
 const runSequence = require('run-sequence')
 const autoprefixer = require('autoprefixer')
@@ -11,7 +11,7 @@ const p = require('gulp-load-plugins')()
 
 const skins = ['default', 'deeplake', 'uiengineering']
 const webpackEnv = process.env.NODE_ENV === 'production' ? 'prod' : 'dev'
-const webpackConfig = require(path.join(__dirname, `build/webpack.${webpackEnv}.conf.js`))
+const webpackConfig = require(join(__dirname, `build/webpack.${webpackEnv}.conf.js`))
 
 const paths = {
   stylesLib: './src/styles/lib'
@@ -49,7 +49,7 @@ const styles = skin =>
 gulp.task('styles', () => mergeStream(...skins.map(styles)))
 
 gulp.task('hljs', () =>
-  gulp.src(`${path.dirname(require.resolve('highlight.js/styles/github.css'))}/**`)
+  gulp.src(`${dirname(require.resolve('highlight.js/styles/github.css'))}/**`)
     .pipe(gulp.dest('./static/styles/hljs'))
 )
 

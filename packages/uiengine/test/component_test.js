@@ -1,12 +1,12 @@
-const path = require('path')
 const assert = require('assert')
+const { resolve } = require('path')
 
 const { testProjectPath } = require('../../../test/support/paths')
 const Component = require('../src/component')
 const state = {
   config: {
     source: {
-      components: path.resolve(testProjectPath, 'src', 'components')
+      components: resolve(testProjectPath, 'src', 'components')
     }
   }
 }

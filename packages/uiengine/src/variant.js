@@ -1,4 +1,4 @@
-const path = require('path')
+const { basename, dirname, extname, join } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const Connector = require('./connector')
@@ -24,8 +24,8 @@ async function readVariantFile (state, filePath) {
   debug4(state, `Variant.readVariantFile(${filePath}):start`)
 
   const { source } = state.config
-  const variantName = path.basename(filePath, path.extname(filePath))
-  const variantFile = path.join(path.dirname(filePath), `${variantName}.md`)
+  const variantName = basename(filePath, extname(filePath))
+  const variantFile = join(dirname(filePath), `${variantName}.md`)
   let data = { attributes: {} } // in case there is no variant file
 
   try {
@@ -48,8 +48,8 @@ async function findVariantIds (state, componentPath = '**') {
   if (!components) return []
 
   const variantsPath = VariantUtil.componentIdToVariantsPath(components, componentPath)
-  const pattern = path.join(variantsPath, '*')
-  const excludePattern = '!' + path.join(variantsPath, '*.md')
+  const pattern = join(variantsPath, '*')
+  const excludePattern = '!' + join(variantsPath, '*.md')
   const variantPaths = await glob([pattern, excludePattern])
 
   const variantFilePathToVariantId = R.partial(VariantUtil.variantFilePathToVariantId, [components])

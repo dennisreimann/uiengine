@@ -1,4 +1,4 @@
-const path = require('path')
+const { resolve } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const Yaml = require('./util/yaml')
@@ -9,7 +9,7 @@ async function findEntityIds (state, entitiesPath = '**/*.yml') {
   const { entities } = state.config.source
   if (!entities) return []
 
-  const pattern = path.resolve(entities, entitiesPath)
+  const pattern = resolve(entities, entitiesPath)
   const paths = await glob(pattern)
 
   const entityIdFromEntityFilePath = R.partial(EntityUtil.entityFilePathToEntityId, [entities])

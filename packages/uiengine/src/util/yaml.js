@@ -1,6 +1,6 @@
 const R = require('ramda')
-const fs = require('fs')
-const path = require('path')
+const { readFileSync } = require('fs')
+const { dirname, isAbsolute, join, resolve } = require('path')
 const assert = require('assert')
 const yaml = require('js-yaml')
 const parsing = require('./parsing')
@@ -15,10 +15,10 @@ const fromExternalFile = (embeddingFilePath, sourcePaths, filePath) => {
   const isMarkdown = filePath.match(/\.(md|markdown)?$/)
 
   if (isYAML) {
-    const string = fs.readFileSync(filePath, 'utf8')
+    const string = readFileSync(filePath, 'utf8')
     return parseString(string, filePath, sourcePaths)
   } else if (isMarkdown) {
-    const string = fs.readFileSync(filePath, 'utf8')
+    const string = readFileSync(filePath, 'utf8')
     return renderMarkdown(string, filePath, sourcePaths)
   } else if (isJS) {
     // invalidate require cache so that changes are reflected
@@ -35,10 +35,10 @@ const dataYamlType = (embeddingFilePath, sourcePaths) =>
 
     construct (dataPath) {
       const { data } = sourcePaths
-      assert(path.isAbsolute(data), `YAML Data Schema requires an absolute path (root is ${data})`)
-      const filePath = path.isAbsolute(dataPath)
-        ? path.join(data, dataPath)
-        : path.resolve(path.dirname(embeddingFilePath), dataPath)
+      assert(isAbsolute(data), `YAML Data Schema requires an absolute path (root is ${data})`)
+      const filePath = isAbsolute(dataPath)
+        ? join(data, dataPath)
+        : resolve(dirname(embeddingFilePath), dataPath)
 
       return fromExternalFile(embeddingFilePath, sourcePaths, filePath)
     }
@@ -50,13 +50,13 @@ const includeYamlType = (embeddingFilePath, sourcePaths) =>
 
     construct (includePath) {
       let basedir
-      if (path.isAbsolute(includePath)) {
+      if (isAbsolute(includePath)) {
         basedir = sourcePaths.base
       } else {
-        basedir = path.dirname(path.resolve(embeddingFilePath))
+        basedir = dirname(resolve(embeddingFilePath))
       }
       assert(basedir, `YAML Include Schema requires an absolute path (root is ${basedir})`)
-      const filePath = path.join(basedir, includePath)
+      const filePath = join(basedir, includePath)
       return fromExternalFile(embeddingFilePath, sourcePaths, filePath)
     }
   })

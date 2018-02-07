@@ -1,4 +1,4 @@
-const path = require('path')
+const { join, relative } = require('path')
 const R = require('ramda')
 const Core = require('../../core')
 const Connector = require('../../connector')
@@ -41,11 +41,11 @@ exports.handler = argv => {
 
     // component
     const componentsDir = config.source.components
-    const componentDir = path.relative(process.cwd(), path.join(componentsDir, componentId))
+    const componentDir = relative(process.cwd(), join(componentsDir, componentId))
     const componentTitle = String.titleize(componentId)
     const componentTemplate = getTemplate('component')
     const componentData = componentTemplate(componentTitle).trim()
-    const componentFilePath = path.join(componentDir, ComponentUtil.COMPONENT_FILENAME)
+    const componentFilePath = join(componentDir, ComponentUtil.COMPONENT_FILENAME)
     files[componentFilePath] = File.write(componentFilePath, componentData)
 
     const adapterFilesForComponent = R.map(ext => Connector.filesForComponent(state, ext, componentId), adapters)
@@ -71,7 +71,7 @@ exports.handler = argv => {
       const fileInfos = [].concat.apply([], filesForComponent)
       // turn component adapter fileinfos into tasks
       R.forEach(({ basename, data }) => {
-        const filePath = path.join(componentDir, basename)
+        const filePath = join(componentDir, basename)
         files[filePath] = File.write(filePath, data)
       }, fileInfos)
 
@@ -94,7 +94,7 @@ exports.handler = argv => {
 
 The following files were created:
 
-` + R.map(filePath => '- ' + path.relative(process.cwd(), filePath), filesCreated).join('\n') + `
+` + R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n') + `
 
 Add the component to a page by adding the component id to the page file:
 

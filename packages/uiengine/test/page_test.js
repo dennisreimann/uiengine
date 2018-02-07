@@ -1,10 +1,10 @@
-const path = require('path')
 const assert = require('assert')
 const assertMatches = require('../../../test/support/assertMatches')
+const { join, resolve } = require('path')
 
 const Page = require('../src/page')
 const { testProjectPath } = require('../../../test/support/paths')
-const pagesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'pages')
+const pagesPath = resolve(testProjectPath, 'src', 'uiengine', 'pages')
 const state = {
   config: {
     source: {
@@ -110,7 +110,7 @@ describe('Page', () => {
       const state = {
         config: {
           source: {
-            pages: path.resolve(testProjectPath, 'src', 'uiengine', 'docs')
+            pages: resolve(testProjectPath, 'src', 'uiengine', 'docs')
           }
         }
       }
@@ -188,8 +188,8 @@ describe('Page', () => {
       Page.fetchById(state, 'testcases')
         .then(data => {
           assert.equal(data.files.length, 2)
-          assert.equal(data.files[0], path.join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
-          assert.equal(data.files[1], path.join(pagesPath, 'testcases', 'index.txt'))
+          assert.equal(data.files[0], join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
+          assert.equal(data.files[1], join(pagesPath, 'testcases', 'index.txt'))
           done()
         })
         .catch(done)
@@ -199,8 +199,8 @@ describe('Page', () => {
       Page.fetchById(state, 'testcases')
         .then(data => {
           assert.equal(data.files.length, 2)
-          assert.equal(data.files[0], path.join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
-          assert.equal(data.files[1], path.join(pagesPath, 'testcases', 'index.txt'))
+          assert.equal(data.files[0], join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
+          assert.equal(data.files[1], join(pagesPath, 'testcases', 'index.txt'))
           done()
         })
         .catch(done)

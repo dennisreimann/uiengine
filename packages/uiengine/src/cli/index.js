@@ -1,4 +1,4 @@
-const path = require('path')
+const { join } = require('path')
 const UIengine = require('../uiengine')
 
 module.exports = require('yargs')
@@ -16,7 +16,7 @@ module.exports = require('yargs')
   .alias('c', 'config')
   // command
   .demandCommand(1)
-  .commandDir(path.join(__dirname, 'commands'))
+  .commandDir(join(__dirname, 'commands'))
   // help / usage
   .usage(`Usage: $0 <command> [options]`)
   .help()

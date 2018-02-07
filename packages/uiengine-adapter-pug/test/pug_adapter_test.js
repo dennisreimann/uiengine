@@ -1,11 +1,11 @@
 const assert = require('assert')
-const path = require('path')
+const { resolve } = require('path')
 const Adapter = require('../src/index')
 
 describe('Pug adapter', () => {
   describe('#render', () => {
     it('should render the template with the given data', done => {
-      const templatePath = path.resolve(__dirname, 'fixtures', 'template.pug')
+      const templatePath = resolve(__dirname, 'fixtures', 'template.pug')
       const options = {}
       const data = { myData: 1 }
 

@@ -1,9 +1,9 @@
-const path = require('path')
 const assert = require('assert')
+const { resolve } = require('path')
 
 const Entity = require('../src/entity')
 const { testProjectPath } = require('../../../test/support/paths')
-const entitiesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'entities')
+const entitiesPath = resolve(testProjectPath, 'src', 'uiengine', 'entities')
 const state = {
   config: {
     source: {

@@ -2,7 +2,7 @@
 // Template version: 1.2.7
 // see http://vuejs-templates.github.io/webpack for documentation.
 
-const path = require('path')
+const { resolve } = require('path')
 
 module.exports = {
   dev: {
@@ -38,7 +38,7 @@ module.exports = {
 
   build: {
     // Paths
-    assetsRoot: path.resolve(__dirname, '../static'),
+    assetsRoot: resolve(__dirname, '../static'),
     assetsSubDirectory: '_uiengine-theme',
 
     /**

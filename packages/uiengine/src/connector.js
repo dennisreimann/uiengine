@@ -1,4 +1,4 @@
-const path = require('path')
+const { join } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const File = require('./util/file')
@@ -33,7 +33,7 @@ async function setup (state) {
     if (typeof registerComponentFile === 'function') {
       const { options } = adapters[ext]
 
-      const pattern = path.join(components, `*/*.${ext}`)
+      const pattern = join(components, `*/*.${ext}`)
       const paths = glob.sync(pattern)
       const register = R.partial(registerComponentFile, [options])
       const registers = R.map(register, paths)

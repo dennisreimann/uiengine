@@ -1,4 +1,4 @@
-const path = require('path')
+const { relative } = require('path')
 const R = require('ramda')
 const Core = require('../../core')
 const File = require('../../util/file')
@@ -44,7 +44,7 @@ exports.handler = argv => {
 
 The following files were created:
 
-` + R.map(pageFile => '- ' + path.relative(process.cwd(), pageFile), pageFiles).join('\n') + `
+` + R.map(pageFile => '- ' + relative(process.cwd(), pageFile), pageFiles).join('\n') + `
 
 Enjoy! ✌️`))
     })

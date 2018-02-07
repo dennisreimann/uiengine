@@ -1,4 +1,4 @@
-const path = require('path')
+const { dirname, join, relative, sep } = require('path')
 const StringUtil = require('./string')
 
 const COMPONENT_FILENAME = 'component.md'
@@ -8,24 +8,24 @@ const componentIdToTitle = (componentId) =>
   StringUtil.titleize(componentId)
 
 const componentIdToPath = (componentId) =>
-  path.join(COMPONENTS_DIRNAME, componentId)
+  join(COMPONENTS_DIRNAME, componentId)
 
 const componentIdToComponentFilePath = (componentsPath, componentId) =>
-  path.join(componentsPath, componentId, COMPONENT_FILENAME)
+  join(componentsPath, componentId, COMPONENT_FILENAME)
 
 const componentFilePathToComponentId = (componentsPath, componentFilePath) => {
-  const relativePath = path.relative(componentsPath, componentFilePath)
+  const relativePath = relative(componentsPath, componentFilePath)
 
   // invalid path: this is not a component
   if (relativePath.startsWith('..')) return null
 
-  const dirname = path.dirname(relativePath).split(path.sep)[0]
+  const dir = dirname(relativePath).split(sep)[0]
 
-  return dirname
+  return dir
 }
 
 const componentPathToComponentId = (componentsPath, componentPath) => {
-  const relativePath = path.relative(componentsPath, componentPath)
+  const relativePath = relative(componentsPath, componentPath)
 
   // invalid path: this is not a component
   if (relativePath.startsWith('..')) return null

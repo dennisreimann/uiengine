@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-const path = require('path')
+const { resolve } = require('path')
 
-require(path.resolve(__dirname, '..', 'lib', 'cli'))
+require(resolve(__dirname, '..', 'lib', 'cli'))

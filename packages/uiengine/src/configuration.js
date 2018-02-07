@@ -1,15 +1,13 @@
-const path = require('path')
+const { dirname, resolve } = require('path')
 const R = require('ramda')
 const assert = require('assert')
-const glob = require('globby')
 const Yaml = require('./util/yaml')
-const TemplateUtil = require('./util/template')
 const { error } = require('./util/message')
 
 const readPackageJson = () => {
   let data = {}
   try {
-    const packageJson = path.resolve(process.cwd(), 'package.json')
+    const packageJson = resolve(process.cwd(), 'package.json')
     data = require(packageJson)
   } catch (err) {}
 
@@ -24,10 +22,10 @@ const readFlags = flags => {
 // relative to project config directory (basedir).
 // otherwise assume it's a node module that can be required.
 const resolveModule = (basedir, module) =>
-  module.startsWith('.') ? path.resolve(basedir, module) : module
+  module.startsWith('.') ? resolve(basedir, module) : module
 
 const resolvePath = (basedir, relativePath) =>
-  path.resolve(basedir, relativePath)
+  resolve(basedir, relativePath)
 
 const resolveTheme = (basedir, theme = 'uiengine-theme-default') =>
   resolvePackage(basedir, theme, 'Theme')
@@ -62,7 +60,7 @@ function readSync (configFilePath, flags = {}) {
 
 const _read = (configFilePath, flags, projectConfig) => {
   // retrieve config and options
-  const configPath = path.dirname(configFilePath)
+  const configPath = dirname(configFilePath)
   const packageData = readPackageJson()
   const options = readFlags(flags)
 
@@ -82,7 +80,7 @@ const _read = (configFilePath, flags, projectConfig) => {
   const resolveAdapters = R.partial(resolvePackage, [configPath], 'Adapter')
 
   source = R.map(resolvePaths, source)
-  source.base = path.resolve(configPath)
+  source.base = resolve(configPath)
   source.configFile = resolvePath(configPath, configFilePath)
   target = resolvePath(configPath, target)
   theme = resolveTheme(configPath, theme)

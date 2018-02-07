@@ -1,4 +1,4 @@
-const path = require('path')
+const { resolve } = require('path')
 const assert = require('assert')
 const assertMatches = require('../../../test/support/assertMatches')
 const assertDoesNotMatch = require('../../../test/support/assertDoesNotMatch')
@@ -6,13 +6,13 @@ const assertDoesNotMatch = require('../../../test/support/assertDoesNotMatch')
 const Variant = require('../src/variant')
 
 const { testProjectPath } = require('../../../test/support/paths')
-const componentsPath = path.resolve(testProjectPath, 'src', 'components')
+const componentsPath = resolve(testProjectPath, 'src', 'components')
 
 const state = {
   config: {
     source: {
       components: componentsPath,
-      data: path.resolve(__dirname, 'fixtures'),
+      data: resolve(__dirname, 'fixtures'),
       base: testProjectPath
     },
     adapters: {

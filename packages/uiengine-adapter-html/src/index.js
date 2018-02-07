@@ -1,16 +1,16 @@
-const fs = require('fs')
-const path = require('path')
+const { readFileSync } = require('fs')
+const { dirname, isAbsolute, join, resolve } = require('path')
 const assert = require('assert')
 
 const resolveFilePath = (options, embeddingFilePath, filePath) => {
-  if (path.isAbsolute(filePath)) {
+  if (isAbsolute(filePath)) {
     const { basedir } = options
     assert(basedir, 'Please provide a "basedir" option for the HTML adapter to resolve absolute includes.')
 
-    return path.join(basedir, filePath)
+    return join(basedir, filePath)
   } else {
-    const basedir = path.dirname(embeddingFilePath)
-    return path.resolve(basedir, filePath)
+    const basedir = dirname(embeddingFilePath)
+    return resolve(basedir, filePath)
   }
 }
 
@@ -35,7 +35,7 @@ const renderString = (str, data) =>
   str.replace(/\$\{(.+?)\}/g, (match, varPath) => resolveVariable(data, varPath))
 
 const renderFile = (options, filePath, data) => {
-  const template = fs.readFileSync(filePath, 'utf-8')
+  const template = readFileSync(filePath, 'utf-8')
   const html = renderString(template, data)
 
   const rendered = html.replace(/<!--#\s?include file="(.*?)"(.*?)-->/g, (match, includeFile) => {

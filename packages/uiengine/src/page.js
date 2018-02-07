@@ -1,4 +1,4 @@
-const path = require('path')
+const { join, resolve } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const frontmatter = require('./util/frontmatter')
@@ -35,11 +35,11 @@ async function readPageFile (state, filePath) {
 }
 
 async function findPageFiles (pagesPath, pagePath, childIds = []) {
-  const filesPattern = path.join(pagesPath, pagePath, '{,*/}*.*')
+  const filesPattern = join(pagesPath, pagePath, '{,*/}*.*')
   const pageExcludes = ['**/_{,*/}*.*', `**/${PageUtil.PAGE_FILENAME}`]
-  const childExcludes = R.map(id => path.join(id, '**'), childIds)
+  const childExcludes = R.map(id => join(id, '**'), childIds)
   const excludes = R.concat(pageExcludes, childExcludes)
-  const excludePatterns = R.map((exclude) => '!' + path.join(pagesPath, exclude), excludes)
+  const excludePatterns = R.map((exclude) => '!' + join(pagesPath, exclude), excludes)
   const filePaths = await glob([filesPattern, ...excludePatterns])
 
   return filePaths
@@ -49,7 +49,7 @@ async function findPageIds (state, pagePath = '**') {
   const { pages } = state.config.source
   if (!pages) return []
 
-  const pattern = path.resolve(pages, pagePath, PageUtil.PAGE_FILENAME)
+  const pattern = resolve(pages, pagePath, PageUtil.PAGE_FILENAME)
   const pagePaths = await glob(pattern)
   const pageIdFromPageFilePath = R.partial(PageUtil.pageFilePathToPageId, [pages])
   const pageIds = R.map(pageIdFromPageFilePath, pagePaths)
@@ -82,7 +82,7 @@ async function fetchById (state, id) {
   const { pages } = state.config.source
   const pagePath = PageUtil.pageIdToPath(id)
   const absolutePath = PageUtil.pageIdToPageFilePath(pages, id)
-  const childPattern = path.join(pagePath, '*')
+  const childPattern = join(pagePath, '*')
   const fetchChildIds = findPageIds(state, childPattern)
   const fetchPageData = readPageFile(state, absolutePath)
 

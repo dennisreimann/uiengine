@@ -1,4 +1,4 @@
-const path = require('path')
+const { basename, join, relative, resolve } = require('path')
 const File = require('../../util/file')
 const PageUtil = require('../../util/page')
 
@@ -11,8 +11,8 @@ exports.builder = argv =>
     .describe('dir', 'The base directory')
 
 exports.handler = argv => {
-  const directory = path.resolve(process.cwd(), argv.dir)
-  const name = path.basename(directory)
+  const directory = resolve(process.cwd(), argv.dir)
+  const name = basename(directory)
   const pagesDir = 'src/uiengine/pages'
   const configFileName = argv.config
   const configTemplate = require('../templates/config').template
@@ -20,8 +20,8 @@ exports.handler = argv => {
   const configContent = configTemplate(name, pagesDir).trim()
   const indexContent = pageTemplate('Home').trim()
 
-  const configPath = path.relative(process.cwd(), path.join(directory, configFileName))
-  const indexPath = path.relative(process.cwd(), path.join(directory, pagesDir, PageUtil.PAGE_FILENAME))
+  const configPath = relative(process.cwd(), join(directory, configFileName))
+  const indexPath = relative(process.cwd(), join(directory, pagesDir, PageUtil.PAGE_FILENAME))
   const createConfigFile = File.write(configPath, configContent)
   const createIndexPage = File.write(indexPath, indexContent)
 

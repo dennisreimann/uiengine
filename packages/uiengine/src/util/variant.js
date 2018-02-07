@@ -1,31 +1,31 @@
-const path = require('path')
+const { basename, dirname, extname, join, relative, sep } = require('path')
 const StringUtil = require('./string')
 
 const VARIANTS_DIRNAME = 'variants'
 
 const componentIdToVariantsPath = (componentsPath, componentId) =>
-  path.join(componentsPath, componentId, VARIANTS_DIRNAME)
+  join(componentsPath, componentId, VARIANTS_DIRNAME)
 
 const variantIdToTitle = (id) => {
-  const basename = path.basename(id, path.extname(id))
-  const title = StringUtil.titleize(basename)
+  const base = basename(id, extname(id))
+  const title = StringUtil.titleize(base)
 
   return title
 }
 
 const variantFilePathToComponentId = (componentsPath, variantFilePath) => {
-  const relativePath = path.relative(componentsPath, variantFilePath)
+  const relativePath = relative(componentsPath, variantFilePath)
 
   if (relativePath.match(`/${VARIANTS_DIRNAME}/`)) {
-    const dirname = path.dirname(relativePath).split(path.sep)[0]
-    return dirname
+    const dir = dirname(relativePath).split(sep)[0]
+    return dir
   } else {
     return null
   }
 }
 
 const variantIdToComponentId = (id) => {
-  const componentId = path.dirname(id).split(path.sep)[0]
+  const componentId = dirname(id).split(sep)[0]
 
   return componentId
 }
@@ -33,8 +33,8 @@ const variantIdToComponentId = (id) => {
 const variantIdToVariantFilePath = (componentsPath, id) => {
   const componentId = variantIdToComponentId(id)
   const variantsPath = componentIdToVariantsPath(componentsPath, componentId)
-  const variantFileName = path.basename(id)
-  const variantFile = path.join(variantsPath, variantFileName)
+  const variantFileName = basename(id)
+  const variantFile = join(variantsPath, variantFileName)
 
   return variantFile
 }
@@ -44,9 +44,9 @@ const variantFilePathToVariantId = (componentsPath, variantFilePath) => {
 
   if (componentId) {
     const variantsPath = componentIdToVariantsPath(componentsPath, componentId)
-    const relativePath = path.relative(variantsPath, variantFilePath)
-    const basename = path.basename(relativePath)
-    const variantId = `${componentId}/${basename}`
+    const relativePath = relative(variantsPath, variantFilePath)
+    const base = basename(relativePath)
+    const variantId = `${componentId}/${base}`
 
     return variantId
   } else {

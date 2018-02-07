@@ -1,17 +1,17 @@
 require('mocha-sinon')()
 
-const fs = require('fs')
-const path = require('path')
+const { readFileSync } = require('fs')
+const { join, resolve } = require('path')
 const assert = require('assert')
 
 const Parsing = require('../src/util/parsing')
 
-const filePath = path.resolve(__dirname, 'fixtures', 'yaml.yml')
-const fileContent = fs.readFileSync(filePath, 'utf8')
+const filePath = resolve(__dirname, 'fixtures', 'yaml.yml')
+const fileContent = readFileSync(filePath, 'utf8')
 
 const sourcePaths = {
   base: __dirname,
-  data: path.join(__dirname, 'fixtures')
+  data: join(__dirname, 'fixtures')
 }
 
 describe('Parsing', () => {

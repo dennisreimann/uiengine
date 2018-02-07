@@ -1,5 +1,5 @@
 'use strict'
-const path = require('path')
+const { join, posix, resolve } = require('path')
 const config = require('./config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
@@ -8,7 +8,7 @@ exports.assetsPath = function (_path) {
   const { assetsSubDirectory } = process.env.NODE_ENV === 'production'
     ? config.build
     : config.dev
-  return path.posix.join(assetsSubDirectory, _path)
+  return posix.join(assetsSubDirectory, _path)
 }
 
 exports.cssLoaders = function (options) {
@@ -95,12 +95,12 @@ exports.createNotifierCallback = () => {
       message: severity + ': ' + error.name,
       subtitle: filename || '',
       timeout: 5,
-      icon: path.join(__dirname, 'logo.png')
+      icon: join(__dirname, 'logo.png')
     })
 
     notifier.on('click', () => {
       const exec = require('child_process').exec
-      exec(`$EDITOR ${path.resolve(__dirname, '..', filename)}`)
+      exec(`$EDITOR ${resolve(__dirname, '..', filename)}`)
     })
   }
 }

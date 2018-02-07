@@ -1,6 +1,6 @@
 'use strict'
 
-const path = require('path')
+const { join } = require('path')
 const utils = require('./utils')
 const config = require('./config')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 const vueLoaderConfig = require('./vue-loader.conf')
 
-const resolve = dir => path.join(__dirname, '..', dir)
+const resolve = dir => join(__dirname, '..', dir)
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,

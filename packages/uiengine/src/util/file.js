@@ -1,8 +1,8 @@
-const path = require('path')
+const { dirname, extname } = require('path')
 const fs = require('fs-extra')
 
 const extension = filePath =>
-  path.extname(filePath).replace(/^\./, '')
+  extname(filePath).replace(/^\./, '')
 
 const exists = filePath => {
   try {
@@ -35,7 +35,7 @@ async function read (filePath) {
 
 async function write (filePath, content) {
   return new Promise((resolve, reject) => {
-    const dir = path.dirname(filePath)
+    const dir = dirname(filePath)
     fs.mkdirs(dir, err => {
       if (err) {
         reject(err)
@@ -54,7 +54,7 @@ async function write (filePath, content) {
 
 async function copy (src, dst) {
   return new Promise((resolve, reject) => {
-    const dir = path.dirname(dst)
+    const dir = dirname(dst)
     fs.mkdirs(dir, err => {
       if (err) {
         reject(err)

@@ -1,4 +1,4 @@
-const path = require('path')
+const { dirname, join, relative } = require('path')
 const Core = require('./core')
 const debounce = require('./util/debounce')
 const { debug3 } = require('./util/debug')
@@ -7,15 +7,15 @@ export const CONFIG_FILENAME = 'uiengine.yml'
 
 const sourceFilesFromConfig = ({ source: { configFile, components, data, entities, pages, templates }, adapters, debug, theme }) => {
   const exts = '.{' + Object.keys(adapters).concat('md').join(',') + '}'
-  const componentsGlob = components ? path.join(components, '**/*' + exts) : null
-  const templatesGlob = templates ? path.join(templates, '**/*' + exts) : null
-  const pagesGlob = templates ? path.join(pages, '**') : null
-  const dataGlob = data ? path.join(data, '**') : null
-  const entitiesGlob = data ? path.join(entities, '**/*.yml') : null
+  const componentsGlob = components ? join(components, '**/*' + exts) : null
+  const templatesGlob = templates ? join(templates, '**/*' + exts) : null
+  const pagesGlob = templates ? join(pages, '**') : null
+  const dataGlob = data ? join(data, '**') : null
+  const entitiesGlob = data ? join(entities, '**/*.yml') : null
   const sourceFiles = [configFile, componentsGlob, dataGlob, entitiesGlob, pagesGlob, templatesGlob].filter(a => a)
 
   if (debug) {
-    const themeLibGlob = path.join(path.dirname(require.resolve(theme.module)), '**')
+    const themeLibGlob = join(dirname(require.resolve(theme.module)), '**')
     sourceFiles.push(themeLibGlob)
   }
 
@@ -70,7 +70,7 @@ const startWatcher = (state, watch, server) => {
           }
         })
         .catch(error => {
-          console.error(`🚨  Rebuild for changed file ${path.relative(process.cwd(), filePath)} failed:`, error)
+          console.error(`🚨  Rebuild for changed file ${relative(process.cwd(), filePath)} failed:`, error)
         })
     })
   }
@@ -128,14 +128,14 @@ const startServer = (state, watch) => {
   server.init(options, (err, instance) => {
     if (err) console.error('Initializing server failed: ', err)
 
-    const _paths = filePath => path.join(target, filePath)
+    const _paths = filePath => join(target, filePath)
     // trigger iframe reloads, see
     // https://github.com/BrowserSync/browser-sync/issues/662#issuecomment-110478137
     server.watch([
       _paths('_pages/**/*'),
       _paths('_variants/**/*')
     ]).on('change', filePath => {
-      const file = path.relative(target, filePath)
+      const file = relative(target, filePath)
 
       instance.io.sockets.emit('uiengine:file:change', file)
     })

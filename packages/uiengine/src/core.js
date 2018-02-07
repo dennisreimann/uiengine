@@ -1,4 +1,4 @@
-const path = require('path')
+const { basename, dirname, relative } = require('path')
 const R = require('ramda')
 const Config = require('./configuration')
 const Builder = require('./builder')
@@ -71,10 +71,10 @@ async function generate (options) {
 
 const getChangeObject = (filePath, action) => {
   const { source: { components, pages, templates, data, entities } } = _state.config
-  const file = path.relative(process.cwd(), filePath)
+  const file = relative(process.cwd(), filePath)
   const isEntityFile = !!filePath.startsWith(entities)
   const isDataFile = !isEntityFile && !!filePath.startsWith(data)
-  const isComponentDir = path.dirname(filePath) === components
+  const isComponentDir = dirname(filePath) === components
   let pageId, componentId, templateId, variantId, entityId
 
   // Skip generating individual items in case the data
@@ -134,7 +134,7 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
 
     case 'component':
       // check whether or not a file was deleted or the component directory
-      const isDirectory = path.basename(filePath) === change.item
+      const isDirectory = basename(filePath) === change.item
       if (isDeleted && isDirectory) {
         await removeComponent(change.item, change)
       } else {

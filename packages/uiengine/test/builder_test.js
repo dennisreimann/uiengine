@@ -1,5 +1,5 @@
 const fs = require('fs-extra')
-const path = require('path')
+const { join, resolve } = require('path')
 const Factory = require('./support/factory')
 const assertExists = require('../../../test/support/assertExists')
 const assertContentMatches = require('../../../test/support/assertContentMatches')
@@ -9,7 +9,7 @@ const Theme = require('../src/theme')
 const Connector = require('../src/connector')
 
 const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
-const target = path.resolve(testTmpPath, 'site')
+const target = resolve(testTmpPath, 'site')
 
 const state = {
   config: {
@@ -18,12 +18,12 @@ const state = {
     update: Date.now(),
     source: {
       base: testProjectPath,
-      configFile: path.resolve(testProjectPath, 'uiengine.yml'),
-      components: path.resolve(testProjectPath, 'src', 'components'),
-      templates: path.resolve(testProjectPath, 'src', 'templates'),
-      entities: path.resolve(testProjectPath, 'src', 'uiengine', 'entities'),
-      pages: path.resolve(testProjectPath, 'src', 'uiengine', 'pages'),
-      data: path.resolve(testProjectPath, '..', 'fixtures')
+      configFile: resolve(testProjectPath, 'uiengine.yml'),
+      components: resolve(testProjectPath, 'src', 'components'),
+      templates: resolve(testProjectPath, 'src', 'templates'),
+      entities: resolve(testProjectPath, 'src', 'uiengine', 'entities'),
+      pages: resolve(testProjectPath, 'src', 'uiengine', 'pages'),
+      data: resolve(testProjectPath, '..', 'fixtures')
     },
     target,
     adapters: {
@@ -31,7 +31,7 @@ const state = {
         module: 'uiengine-adapter-pug',
         options: {
           pretty: true,
-          basedir: path.resolve(testProjectPath, 'src', 'components')
+          basedir: resolve(testProjectPath, 'src', 'components')
         }
       },
       js: {
@@ -93,17 +93,17 @@ const state = {
       title: 'Testcases',
       path: 'testcases',
       files: [
-        path.resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'index.txt'),
-        path.resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'extra-files', 'file-in-folder.txt'),
-        path.resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', '_hidden-files', 'file-in-folder.txt')
+        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'index.txt'),
+        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'extra-files', 'file-in-folder.txt'),
+        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', '_hidden-files', 'file-in-folder.txt')
       ]
     }),
     'testcases/custom-path': Factory.page('testcases/custom-path', {
       title: 'Custom Path',
       path: 'testcases/page-with-custom-path',
       files: [
-        path.resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'custom-path', 'file.txt'),
-        path.resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'custom-path', 'extra-files', 'file-in-folder.txt')
+        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'custom-path', 'file.txt'),
+        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'custom-path', 'extra-files', 'file-in-folder.txt')
       ]
     })
   },
@@ -128,7 +128,7 @@ const state = {
     'input/text.pug': {
       id: 'input/text.pug',
       componentId: 'input',
-      path: path.resolve(testProjectPath, 'src', 'components', 'input', 'variants', 'text.pug'),
+      path: resolve(testProjectPath, 'src', 'components', 'input', 'variants', 'text.pug'),
       content: '<p>This is documentation for the text input.</p>',
       rendered: '<input class="input input--text" id="name" name="person[name]" type="text"/>',
       context: { id: 'name', name: 'person[name]' },
@@ -177,7 +177,7 @@ describe('Builder', () => {
     it('should generate index page', done => {
       Builder.generate(state)
         .then(() => {
-          assertExists(path.join(target, 'index.html'))
+          assertExists(join(target, 'index.html'))
 
           done()
         })
@@ -189,7 +189,7 @@ describe('Builder', () => {
     it('should generate page with custom template', done => {
       Builder.generatePageWithTemplate(state, 'prototype/custom-page')
         .then(() => {
-          const pagePath = path.join(target, '_pages', 'prototype', 'custom-page.html')
+          const pagePath = join(target, '_pages', 'prototype', 'custom-page.html')
 
           assertContentMatches(pagePath, 'This is my context')
 
@@ -203,8 +203,8 @@ describe('Builder', () => {
     it('should copy page files', done => {
       Builder.generatePageFiles(state, 'testcases')
         .then(() => {
-          assertExists(path.join(target, 'testcases', 'index.txt'))
-          assertExists(path.join(target, 'testcases', 'extra-files', 'file-in-folder.txt'))
+          assertExists(join(target, 'testcases', 'index.txt'))
+          assertExists(join(target, 'testcases', 'extra-files', 'file-in-folder.txt'))
 
           done()
         })
@@ -214,8 +214,8 @@ describe('Builder', () => {
     it('should copy page files for pages with custom paths', done => {
       Builder.generatePageFiles(state, 'testcases/custom-path')
         .then(() => {
-          assertExists(path.join(target, 'testcases', 'page-with-custom-path', 'file.txt'))
-          assertExists(path.join(target, 'testcases', 'page-with-custom-path', 'extra-files', 'file-in-folder.txt'))
+          assertExists(join(target, 'testcases', 'page-with-custom-path', 'file.txt'))
+          assertExists(join(target, 'testcases', 'page-with-custom-path', 'extra-files', 'file-in-folder.txt'))
 
           done()
         })
@@ -227,7 +227,7 @@ describe('Builder', () => {
     it('should generate pages having this template', done => {
       Builder.generatePagesWithTemplate(state, 'page.pug')
         .then(() => {
-          assertExists(path.join(target, '_pages', 'prototype', 'custom-page.html'))
+          assertExists(join(target, '_pages', 'prototype', 'custom-page.html'))
 
           done()
         })
@@ -239,7 +239,7 @@ describe('Builder', () => {
     it('should generate component variant pages', done => {
       Builder.generateComponentVariants(state, 'input')
         .then(() => {
-          assertExists(path.join(target, '_variants', 'input', 'text.pug.html'))
+          assertExists(join(target, '_variants', 'input', 'text.pug.html'))
 
           done()
         })
@@ -251,7 +251,7 @@ describe('Builder', () => {
     it('should generate variant page', done => {
       Builder.generateVariant(state, 'input/text.pug')
         .then(() => {
-          assertExists(path.join(target, '_variants', 'input', 'text.pug.html'))
+          assertExists(join(target, '_variants', 'input', 'text.pug.html'))
 
           done()
         })
@@ -267,7 +267,7 @@ describe('Builder', () => {
 
         Builder.generateIncrement(stateWithDebug)
           .then(() => {
-            assertExists(path.join(target, '_state.json'))
+            assertExists(join(target, '_state.json'))
 
             done()
           })

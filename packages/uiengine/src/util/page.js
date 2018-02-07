@@ -1,4 +1,4 @@
-const path = require('path')
+const { basename, dirname, join, relative, resolve } = require('path')
 const R = require('ramda')
 const File = require('./file')
 const StringUtil = require('./string')
@@ -46,35 +46,35 @@ const pagePathForComponentId = (parentPagePath, componentId) =>
 const pageIdToTitle = (pageId) => {
   if (isIndexPage(pageId)) return 'Home'
 
-  const basename = path.basename(pageId)
-  const title = StringUtil.titleize(basename)
+  const base = basename(pageId)
+  const title = StringUtil.titleize(base)
 
   return title
 }
 
 const pageIdToPageFilePath = (pagesPath, pageId) => {
   const relativePath = isIndexPage(pageId) ? INDEX_FILE_PATH : pageId
-  const absolutePath = path.join(pagesPath, relativePath, PAGE_FILENAME)
+  const absolutePath = join(pagesPath, relativePath, PAGE_FILENAME)
 
   return absolutePath
 }
 
 const pageFilePathToPageId = (pagesPath, pageFilePath) => {
-  const relativePath = path.relative(pagesPath, pageFilePath)
+  const relativePath = relative(pagesPath, pageFilePath)
 
   // invalid path: this is not a page
   if (relativePath.startsWith('..')) return null
 
-  const dirname = path.dirname(relativePath)
-  const filename = path.basename(relativePath)
+  const dir = dirname(relativePath)
+  const file = basename(relativePath)
 
-  if (filename === PAGE_FILENAME || File.exists(path.resolve(pageFilePath, '..', PAGE_FILENAME))) {
-    const pageId = isIndexFilePath(dirname) ? INDEX_ID : dirname
+  if (file === PAGE_FILENAME || File.exists(resolve(pageFilePath, '..', PAGE_FILENAME))) {
+    const pageId = isIndexFilePath(dir) ? INDEX_ID : dir
 
     return pageId
   } else {
-    const parentPath = path.resolve(pageFilePath, '..', '..')
-    const parentPageFilePath = path.join(parentPath, filename)
+    const parentPath = resolve(pageFilePath, '..', '..')
+    const parentPageFilePath = join(parentPath, file)
 
     return pageFilePathToPageId(pagesPath, parentPageFilePath)
   }
@@ -82,7 +82,7 @@ const pageFilePathToPageId = (pagesPath, pageFilePath) => {
 
 const parentIdForPageId = (pageIds, pageId) => {
   if (isIndexPage(pageId)) return null
-  const parentDir = path.dirname(pageId)
+  const parentDir = dirname(pageId)
   const parentId = isIndexFilePath(parentDir) ? INDEX_ID : parentDir
 
   if (pageIds.includes(parentId)) {

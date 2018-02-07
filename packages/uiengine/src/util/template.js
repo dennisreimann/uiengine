@@ -1,12 +1,12 @@
-const path = require('path')
+const { basename, dirname, join, relative } = require('path')
 
 const templateFilePathToTemplateId = (templatesPath, templateFilePath) => {
   if (!templateFilePath.startsWith(templatesPath)) return null
 
-  const relative = path.relative(templatesPath, templateFilePath)
-  const dirname = path.dirname(relative)
-  const name = path.basename(relative)
-  const id = path.join(dirname, name)
+  const relativePath = relative(templatesPath, templateFilePath)
+  const dir = dirname(relativePath)
+  const name = basename(relativePath)
+  const id = join(dir, name)
 
   return id
 }

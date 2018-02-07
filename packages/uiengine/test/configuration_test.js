@@ -1,10 +1,10 @@
-const path = require('path')
 const assert = require('assert')
+const { resolve } = require('path')
 
 const { testProjectPath, testProjectTargetPath } = require('../../../test/support/paths')
 const Configuration = require('../src/configuration')
 
-const testConfigPath = path.resolve(testProjectPath, 'uiengine.yml')
+const testConfigPath = resolve(testProjectPath, 'uiengine.yml')
 
 describe('Configuration', () => {
   describe('#read', () => {
@@ -35,12 +35,12 @@ describe('Configuration', () => {
       Configuration.read(testConfigPath)
         .then(config => {
           assert.equal(config.target, testProjectTargetPath)
-          assert.equal(config.source.components, path.resolve(testProjectPath, 'src', 'components'))
-          assert.equal(config.source.templates, path.resolve(testProjectPath, 'src', 'templates'))
-          assert.equal(config.source.pages, path.resolve(testProjectPath, 'src', 'uiengine', 'pages'))
-          assert.equal(config.source.entities, path.resolve(testProjectPath, 'src', 'uiengine', 'entities'))
-          assert.equal(config.source.data, path.resolve(testProjectPath, 'src', 'uiengine', 'data'))
-          assert.equal(config.source.base, path.resolve(testProjectPath))
+          assert.equal(config.source.components, resolve(testProjectPath, 'src', 'components'))
+          assert.equal(config.source.templates, resolve(testProjectPath, 'src', 'templates'))
+          assert.equal(config.source.pages, resolve(testProjectPath, 'src', 'uiengine', 'pages'))
+          assert.equal(config.source.entities, resolve(testProjectPath, 'src', 'uiengine', 'entities'))
+          assert.equal(config.source.data, resolve(testProjectPath, 'src', 'uiengine', 'data'))
+          assert.equal(config.source.base, resolve(testProjectPath))
           assert.equal(config.source.configFile, testConfigPath)
 
           done()
@@ -60,7 +60,7 @@ describe('Configuration', () => {
     })
 
     it('should resolve default theme if no theme is given', done => {
-      Configuration.read(path.resolve(testProjectPath, 'uiengine-use-default-theme.yml'))
+      Configuration.read(resolve(testProjectPath, 'uiengine-use-default-theme.yml'))
         .then(config => {
           assert.equal(config.theme.module, 'uiengine-theme-default')
           assert.equal(Object.keys(config.theme.options).length, 0)
@@ -75,7 +75,7 @@ describe('Configuration', () => {
         .then(config => {
           assert.equal(config.adapters.pug.module, 'uiengine-adapter-pug')
           assert.equal(config.adapters.pug.options.pretty, true)
-          assert.equal(config.adapters.pug.options.basedir, path.resolve(testProjectPath, 'src', 'components'))
+          assert.equal(config.adapters.pug.options.basedir, resolve(testProjectPath, 'src', 'components'))
           assert.equal(config.adapters.jsx.module, 'uiengine-adapter-react')
           assert.equal(config.adapters.hbs.module, 'uiengine-adapter-handlebars')
           assert.equal(Object.keys(config.adapters.jsx.options).length, 0)

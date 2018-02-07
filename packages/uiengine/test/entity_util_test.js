@@ -1,5 +1,5 @@
-const { join, resolve } = require('path')
 const assert = require('assert')
+const { join, resolve } = require('path')
 
 const EntityUtil = require('../src/util/entity')
 const { testProjectPath } = require('../../../test/support/paths')

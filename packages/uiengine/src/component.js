@@ -1,4 +1,4 @@
-const path = require('path')
+const { resolve } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const frontmatter = require('./util/frontmatter')
@@ -53,7 +53,7 @@ async function findComponentIds (state) {
   const { components } = state.config.source
   if (!components) return []
 
-  const pattern = path.resolve(components, '*')
+  const pattern = resolve(components, '*')
   const componentPaths = await glob(pattern, { nodir: false })
 
   const componentIdFromComponentPath = R.partial(ComponentUtil.componentPathToComponentId, [components])

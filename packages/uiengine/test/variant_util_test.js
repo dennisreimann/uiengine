@@ -1,29 +1,29 @@
-const path = require('path')
 const assert = require('assert')
+const { join, resolve } = require('path')
 
 const VariantUtil = require('../src/util/variant')
 
 const { testProjectPath } = require('../../../test/support/paths')
-const componentsPath = path.resolve(testProjectPath, 'src', 'components')
+const componentsPath = resolve(testProjectPath, 'src', 'components')
 
 describe('VariantUtil', () => {
   describe('#componentIdToVariantsPath', () => {
     it('should return variants path for component id', () => {
       assert.equal(
         VariantUtil.componentIdToVariantsPath(componentsPath, 'button'),
-        path.join(componentsPath, 'button', 'variants'))
+        join(componentsPath, 'button', 'variants'))
     })
   })
 
   describe('#variantFilePathToVariantId', () => {
     it('should return variant id for variant file path', () => {
-      const variantFilePath = path.join(componentsPath, 'button', 'variants', 'primary-button.pug')
+      const variantFilePath = join(componentsPath, 'button', 'variants', 'primary-button.pug')
       const variantId = VariantUtil.variantFilePathToVariantId(componentsPath, variantFilePath)
       assert.equal(variantId, 'button/primary-button.pug')
     })
 
     it('should return null for invalid variant file path', () => {
-      const variantFilePath = path.join(componentsPath, 'button', 'button.pug')
+      const variantFilePath = join(componentsPath, 'button', 'button.pug')
       const variantId = VariantUtil.variantFilePathToVariantId(componentsPath, variantFilePath)
       assert.equal(variantId, null)
     })
@@ -38,13 +38,13 @@ describe('VariantUtil', () => {
 
   describe('#variantFilePathToComponentId', () => {
     it('should return component id for variant file path', () => {
-      const variantFilePath = path.join(componentsPath, 'button', 'variants', 'primary-button.pug')
+      const variantFilePath = join(componentsPath, 'button', 'variants', 'primary-button.pug')
       const componentId = VariantUtil.variantFilePathToComponentId(componentsPath, variantFilePath)
       assert.equal(componentId, 'button')
     })
 
     it('should return null for invalid variant file path', () => {
-      const variantFilePath = path.join(componentsPath, 'button', 'button.pug')
+      const variantFilePath = join(componentsPath, 'button', 'button.pug')
       const variantId = VariantUtil.variantFilePathToComponentId(componentsPath, variantFilePath)
       assert.equal(variantId, null)
     })
@@ -60,7 +60,7 @@ describe('VariantUtil', () => {
     it('should return variant file path for variant id', () => {
       assert.equal(
         VariantUtil.variantIdToVariantFilePath(componentsPath, 'input/checkbox.pug'),
-        path.join(componentsPath, 'input', 'variants', 'checkbox.pug')
+        join(componentsPath, 'input', 'variants', 'checkbox.pug')
       )
     })
   })

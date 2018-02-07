@@ -1,13 +1,13 @@
 require('mocha-sinon')()
 
 const fs = require('fs-extra')
-const path = require('path')
+const { resolve } = require('path')
 const assert = require('assert')
 const Theme = require('../src/theme')
 
 const { testTmpPath } = require('../../../test/support/paths')
-const target = path.resolve(testTmpPath, 'site')
-const testThemePath = path.resolve(__dirname, 'fixtures', 'test-theme')
+const target = resolve(testTmpPath, 'site')
+const testThemePath = resolve(__dirname, 'fixtures', 'test-theme')
 const testThemeOptions = { opt1: 1, opt2: 2, target }
 const TestTheme = require(testThemePath)
 

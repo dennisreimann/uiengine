@@ -1,14 +1,14 @@
-const fs = require('fs')
-const path = require('path')
+const { readFile } = require('fs')
+const { basename, extname } = require('path')
 const Handlebars = require('handlebars')
 
 async function registerComponentFile (options, filePath) {
   return new Promise((resolve, reject) => {
-    fs.readFile(filePath, 'utf8', (err, raw) => {
+    readFile(filePath, 'utf8', (err, raw) => {
       if (err) {
         reject(err)
       } else {
-        const name = path.basename(filePath, path.extname(filePath))
+        const name = basename(filePath, extname(filePath))
         const id = options.namespace ? `${options.namespace}/${name}` : name
 
         Handlebars.registerPartial(id, raw)
@@ -21,7 +21,7 @@ async function registerComponentFile (options, filePath) {
 
 async function render (options, filePath, data = {}) {
   return new Promise((resolve, reject) => {
-    fs.readFile(filePath, 'utf8', (err, raw) => {
+    readFile(filePath, 'utf8', (err, raw) => {
       if (err) {
         reject(err)
       } else {

@@ -1,16 +1,16 @@
 const assert = require('assert')
-const path = require('path')
+const { join, resolve } = require('path')
 
 const Yaml = require('../src/util/yaml')
 
 const sourcePaths = {
   base: __dirname,
-  data: path.join(__dirname, 'fixtures')
+  data: join(__dirname, 'fixtures')
 }
 
-const yaml = path.join(__dirname, 'fixtures/yaml.yml')
-const yamlWithExtends = path.join(__dirname, 'fixtures/yaml-with-extends.yml')
-const yamlWithIncludes = path.join(__dirname, 'fixtures/yaml-with-includes.yml')
+const yaml = join(__dirname, 'fixtures/yaml.yml')
+const yamlWithExtends = join(__dirname, 'fixtures/yaml-with-extends.yml')
+const yamlWithIncludes = join(__dirname, 'fixtures/yaml-with-includes.yml')
 
 const string = `
 name: Index
@@ -132,7 +132,7 @@ describe('Yaml', () => {
           assert.equal(data.content, '<h1 id="headline">Headline</h1>\n<p>Text paragraph</p>')
           assert.equal(data.data.name, 'JSON')
           assert.equal(data.data.number, 3)
-          assert.equal(data.include_with_incompatible_type, path.resolve(__dirname, 'fixtures', 'layout.psd'))
+          assert.equal(data.include_with_incompatible_type, resolve(__dirname, 'fixtures', 'layout.psd'))
           done()
         })
         .catch(done)

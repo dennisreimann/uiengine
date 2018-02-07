@@ -1,12 +1,12 @@
 const assert = require('assert')
-const path = require('path')
+const { resolve } = require('path')
 const Adapter = require('../src/index')
 
 describe('HTML adapter', () => {
   describe('#render', () => {
     it('should render the template and resolve the includes', done => {
-      const templatePath = path.resolve(__dirname, 'fixtures', 'template.html')
-      const options = { basedir: path.resolve(__dirname, 'fixtures') }
+      const templatePath = resolve(__dirname, 'fixtures', 'template.html')
+      const options = { basedir: resolve(__dirname, 'fixtures') }
       const data = {}
 
       Adapter.render(options, templatePath, data)
@@ -20,7 +20,7 @@ describe('HTML adapter', () => {
     })
 
     it('should throw error on absolute includes if no basedir option is provided', done => {
-      const templatePath = path.resolve(__dirname, 'fixtures', 'template.html')
+      const templatePath = resolve(__dirname, 'fixtures', 'template.html')
       const options = {}
       const data = {}
 
@@ -32,7 +32,7 @@ describe('HTML adapter', () => {
     })
 
     it('should substitute variables', done => {
-      const templatePath = path.resolve(__dirname, 'fixtures', 'template-variables.html')
+      const templatePath = resolve(__dirname, 'fixtures', 'template-variables.html')
       const options = {}
       const data = { myData: 1, nested: { data: 2 } }
 
@@ -47,7 +47,7 @@ describe('HTML adapter', () => {
     })
 
     it('should not substitute non-existing variables', done => {
-      const templatePath = path.resolve(__dirname, 'fixtures', 'template-variables.html')
+      const templatePath = resolve(__dirname, 'fixtures', 'template-variables.html')
       const options = {}
       const data = {}
 

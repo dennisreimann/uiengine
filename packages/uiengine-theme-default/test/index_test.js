@@ -1,7 +1,7 @@
 require('mocha-sinon')()
 
 const fs = require('fs-extra')
-const path = require('path')
+const { join, resolve } = require('path')
 const assert = require('assert')
 const assertExists = require('../../../test/support/assertExists')
 const assertMatches = require('../../../test/support/assertMatches')
@@ -9,8 +9,8 @@ const assertContentMatches = require('../../../test/support/assertContentMatches
 const DefaultTheme = require('../src/index')
 
 const { testTmpPath } = require('../../../test/support/paths')
-const target = path.resolve(testTmpPath, 'site')
-const indexFile = path.join(target, 'index.html')
+const target = resolve(testTmpPath, 'site')
+const indexFile = join(target, 'index.html')
 const testThemeOptions = { target, markdownIt: { set: function () {} } }
 
 describe('DefaultTheme', () => {
@@ -20,7 +20,7 @@ describe('DefaultTheme', () => {
     it('should copy the themes static files', done => {
       DefaultTheme.setup(testThemeOptions)
         .then(() => {
-          assertExists(path.join(target, '_uiengine-theme', 'styles', 'uiengine-default.css'))
+          assertExists(join(target, '_uiengine-theme', 'styles', 'uiengine-default.css'))
 
           done()
         })

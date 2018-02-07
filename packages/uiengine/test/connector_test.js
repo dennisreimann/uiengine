@@ -1,14 +1,15 @@
 require('mocha-sinon')()
 
-const path = require('path')
 const assert = require('assert')
+const { resolve } = require('path')
+
 const Connector = require('../src/connector')
 
 const { testProjectPath } = require('../../../test/support/paths')
-const testAdapterPath = path.resolve(__dirname, 'fixtures', 'test-adapter')
-const noopAdapterPath = path.resolve(__dirname, 'fixtures', 'noop-adapter')
-const componentsPath = path.resolve(testProjectPath, 'src', 'components')
-const testFilePath = path.resolve(componentsPath, 'form', 'form.test')
+const testAdapterPath = resolve(__dirname, 'fixtures', 'test-adapter')
+const noopAdapterPath = resolve(__dirname, 'fixtures', 'noop-adapter')
+const componentsPath = resolve(testProjectPath, 'src', 'components')
+const testFilePath = resolve(componentsPath, 'form', 'form.test')
 const testAdapterOptions = { basedir: componentsPath }
 const TestAdapter = require(testAdapterPath)
 
