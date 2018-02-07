@@ -86,7 +86,7 @@ describe('Page', () => {
           assert.equal(data.childIds[0], 'documentation')
           assert.equal(data.childIds[1], 'patterns')
           assert.equal(data.childIds[2], 'testcases')
-          assert.equal(data.childIds[3], 'schema')
+          assert.equal(data.childIds[3], 'entities')
           done()
         })
         .catch(done)
@@ -272,20 +272,20 @@ describe('Page', () => {
           assertPage(pageIds, 'testcases/custom-data')
           assertPage(pageIds, 'testcases/custom-path')
           assertPage(pageIds, 'testcases/custom-template')
-          assertPage(pageIds, 'schema')
+          assertPage(pageIds, 'entities')
 
           done()
         })
         .catch(done)
     })
 
-    it('should return only schema page if pages source is not set', done => {
-      Page.fetchAll({ config: { source: { } } })
+    it('should return only entities page if pages source is not set', done => {
+      Page.fetchAll({ config: { source: {} } })
         .then(data => {
           const pageIds = Object.keys(data)
 
           assert.equal(pageIds.length, 1)
-          assert.equal(pageIds[0], 'schema')
+          assert.equal(pageIds[0], 'entities')
 
           done()
         })

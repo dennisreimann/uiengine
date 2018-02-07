@@ -4,11 +4,11 @@
   },
   "component": {
     "info": "Info",
-    "schema": "Schema"
+    "properties": "Properties"
   },
   "template": {
     "info": "Info",
-    "schema": "Schema",
+    "properties": "Properties",
     "open_in_window": "Open in separate window"
   },
   "variant": {
@@ -31,7 +31,7 @@
     "description": "Description",
     "reference": "Reference"
   },
-  "schema": {
+  "entities": {
     "copy_permalink": "Copy link",
     "property_name": "Property",
     "property_type": "Type",

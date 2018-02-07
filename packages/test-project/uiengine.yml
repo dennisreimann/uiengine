@@ -11,7 +11,7 @@ copyright: !markdown '[Generated with UIengine](https://github.com/dennisreimann
 source:
   components: ./src/components
   templates: ./src/templates
-  schema: ./src/uiengine/schema
+  entities: ./src/uiengine/entities
   pages: ./src/uiengine/pages
   data: ./src/uiengine/data
 

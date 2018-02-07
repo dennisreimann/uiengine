@@ -1,18 +1,18 @@
 <template>
   <tr>
-    <td class="schema__propertyname">{{ id }}</td>
-    <td class="schema__propertytype">
+    <td class="property__name">{{ id }}</td>
+    <td class="property__type">
       <component
         :is="propertyType"
         v-bind="$props"
       />
     </td>
     <td
-      class="schema__propertydescription"
+      class="property__description"
       v-html="description"
     />
-    <td class="schema__propertyrequired">{{ required }}</td>
-    <td class="schema__propertydefault">{{ defaultValue }}</td>
+    <td class="property__required">{{ required }}</td>
+    <td class="property__default">{{ defaultValue }}</td>
   </tr>
 </template>
 
@@ -29,7 +29,7 @@ export default {
       required: true
     },
 
-    schema: {
+    entities: {
       type: Object,
       required: true
     }
@@ -39,11 +39,11 @@ export default {
     // https://forum.vuejs.org/t/dynamically-compile-router-link/7410
     propertyType () {
       const [displayName, normalizedType] = this.property.type.match(/^\[?([\w\s|]+)\]?$/i)
-      const customPropertyTypes = Object.keys(this.schema)
+      const customPropertyTypes = Object.keys(this.entities)
       let template = `<span>${displayName}</span>`
 
       if (customPropertyTypes.includes(normalizedType)) {
-        const to = JSON.stringify({ path: '/_schema/', hash: normalizedType })
+        const to = JSON.stringify({ path: '/_entities/', hash: normalizedType })
         template = `<router-link :to='${to}' class="" active-class="" exact-active-class="" exact>${displayName}</router-link>`
       }
 

@@ -9,12 +9,12 @@ const { debug2, debug3, debug4 } = require('./util/debug')
 const assocPage = (pages, page) =>
   R.assoc(page.id, page, pages)
 
-const createSchemaPage = state => (
+const createEntitiesPage = state => (
   {
-    id: PageUtil.SCHEMA_ID,
-    path: PageUtil.SCHEMA_PAGE_PATH,
-    type: 'schema',
-    title: 'Schema',
+    id: PageUtil.ENTITIES_ID,
+    path: PageUtil.ENTITIES_PAGE_PATH,
+    type: 'entities',
+    title: 'Entities',
     childIds: [],
     files: []
   }
@@ -66,8 +66,8 @@ async function fetchAll (state) {
   const pageFetches = R.map(pageFetch, pageIds)
   const pageList = await Promise.all(pageFetches)
 
-  // append schema page
-  pageList.push(createSchemaPage(state))
+  // append entities page
+  pageList.push(createEntitiesPage(state))
 
   const pages = R.reduce(assocPage, {}, pageList)
 
@@ -91,7 +91,7 @@ async function fetchById (state, id) {
   const [pageData, childIds] = await Promise.all([fetchPageData, fetchChildIds])
   const files = await findPageFiles(pages, pagePath, childIds)
 
-  if (PageUtil.isIndexPage(id)) childIds.push(PageUtil.SCHEMA_ID)
+  if (PageUtil.isIndexPage(id)) childIds.push(PageUtil.ENTITIES_ID)
 
   let { attributes, content } = pageData
 

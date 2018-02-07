@@ -6,11 +6,11 @@ const Navigation = require('./navigation')
 const Component = require('./component')
 const Variant = require('./variant')
 const Page = require('./page')
-const Schema = require('./schema')
+const Entity = require('./entity')
 const Theme = require('./theme')
 const Connector = require('./connector')
 const PageUtil = require('./util/page')
-const SchemaUtil = require('./util/schema')
+const EntityUtil = require('./util/entity')
 const ComponentUtil = require('./util/component')
 const TemplateUtil = require('./util/template')
 const VariantUtil = require('./util/variant')
@@ -45,13 +45,13 @@ async function generate (options) {
 
   // 1. data fetching
   const fetchPages = Page.fetchAll(_state)
-  const fetchSchema = Schema.fetchAll(_state)
+  const fetchEntities = Entity.fetchAll(_state)
   const fetchComponents = Component.fetchAll(_state)
   const fetchVariants = Variant.fetchAll(_state)
-  const [pages, schema, components, variants] = await Promise.all([fetchPages, fetchSchema, fetchComponents, fetchVariants])
+  const [pages, entities, components, variants] = await Promise.all([fetchPages, fetchEntities, fetchComponents, fetchVariants])
 
   _state = R.assoc('pages', pages, _state)
-  _state = R.assoc('schema', schema, _state)
+  _state = R.assoc('entities', entities, _state)
   _state = R.assoc('components', components, _state)
   _state = R.assoc('variants', variants, _state)
 
@@ -70,18 +70,18 @@ async function generate (options) {
 }
 
 const getChangeObject = (filePath, action) => {
-  const { source: { components, pages, templates, data, schema } } = _state.config
+  const { source: { components, pages, templates, data, entities } } = _state.config
   const file = path.relative(process.cwd(), filePath)
-  const isSchemaFile = !!filePath.startsWith(schema)
-  const isDataFile = !isSchemaFile && !!filePath.startsWith(data)
+  const isEntityFile = !!filePath.startsWith(entities)
+  const isDataFile = !isEntityFile && !!filePath.startsWith(data)
   const isComponentDir = path.dirname(filePath) === components
-  let pageId, componentId, templateId, variantId, schemaId
+  let pageId, componentId, templateId, variantId, entityId
 
   // Skip generating individual items in case the data
   // got changed as we need to regenerate everything
   if (!isDataFile) {
     pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
-    schemaId = schema ? SchemaUtil.schemaFilePathToSchemaId(schema, filePath) : undefined
+    entityId = entities ? EntityUtil.entityFilePathToEntityId(entities, filePath) : undefined
     componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
     variantId = components ? VariantUtil.variantFilePathToVariantId(components, filePath) : undefined
     templateId = templates ? TemplateUtil.templateFilePathToTemplateId(templates, filePath) : undefined
@@ -107,8 +107,8 @@ const getChangeObject = (filePath, action) => {
     return { file, action, type: 'variant', item: variantId }
   } else if (componentId) {
     return { file, action, type: 'component', item: componentId }
-  } else if (schemaId) {
-    return { file, action, type: 'schema', item: schemaId }
+  } else if (entityId) {
+    return { file, action, type: 'entity', item: entityId }
   } else if (templateId) {
     return { file, action, type: 'template', item: templateId }
   } else {
@@ -143,8 +143,8 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
       }
       break
 
-    case 'schema':
-      await regenerateSchema(change.item, change)
+    case 'entity':
+      await regenerateEntity(change.item, change)
       break
 
     case 'template':
@@ -165,10 +165,10 @@ async function fetchAndAssocPage (id) {
   return page
 }
 
-async function fetchAndAssocSchema (id) {
-  const schema = await Schema.fetchById(_state, id)
-  _state = R.assocPath(['schema', id], schema, _state)
-  return schema
+async function fetchAndAssocEntity (id) {
+  const entity = await Entity.fetchById(_state, id)
+  _state = R.assocPath(['entities', id], entity, _state)
+  return entity
 }
 
 async function fetchAndAssocComponent (id) {
@@ -215,8 +215,8 @@ async function regeneratePage (id, change) {
   ])
 }
 
-async function regenerateSchema (schemaId, change) {
-  await fetchAndAssocSchema(schemaId)
+async function regenerateEntity (entityId, change) {
+  await fetchAndAssocEntity(entityId)
   await Builder.generateIncrement(_state, change)
 }
 

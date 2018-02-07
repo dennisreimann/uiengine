@@ -1,10 +1,10 @@
 import { createRoutes } from '../router'
 
 const transformState = uiengineState => {
-  const { schema, navigation } = uiengineState
+  const { entities, navigation } = uiengineState
 
-  if (Object.keys(schema).length === 0 && navigation) {
-    delete navigation.schema
+  if (Object.keys(entities).length === 0 && navigation) {
+    delete navigation.entities
   }
 
   return uiengineState
@@ -17,7 +17,7 @@ const getters = {
   components: state => state.components,
   navigation: state => state.navigation,
   pages: state => state.pages,
-  schema: state => state.schema,
+  entities: state => state.entities,
   variants: state => state.variants
 }
 

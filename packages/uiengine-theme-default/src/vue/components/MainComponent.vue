@@ -9,7 +9,7 @@
         >{{ component.label }}</component-label>
         <content-heading class="contentheader__title">{{ component.title }}</content-heading>
         <div
-          v-if="hasInfo && hasSchema"
+          v-if="hasInfo && hasProperties"
           class="contentheader__options"
         >
           <a
@@ -19,16 +19,16 @@
             @click.prevent="activeSection = 'info'"
           >{{ 'component.info' | localize }}</a>
           <a
-            href="#schema"
+            href="#properties"
             class="contentheader__option"
-            :class="{ 'contentheader__option--active': isSchemaActive }"
-            @click.prevent="activeSection = 'schema'"
-          > {{ 'component.schema' | localize }}</a>
+            :class="{ 'contentheader__option--active': isPropertiesActive }"
+            @click.prevent="activeSection = 'properties'"
+          > {{ 'component.properties' | localize }}</a>
         </div>
       </content-header>
 
       <div
-        v-if="hasInfo || hasSchema"
+        v-if="hasInfo || hasProperties"
         class="sot-xs"
       >
         <div
@@ -62,16 +62,16 @@
         </div>
 
         <div
-          v-if="hasSchema"
+          v-if="hasProperties"
           class="contentsection"
-          :class="{ 'contentsection--active': isSchemaActive }"
+          :class="{ 'contentsection--active': isPropertiesActive }"
         >
           <div class="content">
-            <content-scheme
-              v-for="(properties, schemeId) in component.schema"
-              :key="schemeId"
-              :schema="schema"
-              :title="schemeId"
+            <content-properties
+              v-for="(properties, componentId) in component.properties"
+              :key="componentId"
+              :title="componentId"
+              :entities="entities"
               :properties="properties"
               class="sob-xl"
             />
@@ -98,7 +98,7 @@ import { mapGetters } from 'vuex'
 import { dasherize } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
-import ContentScheme from './ContentScheme'
+import ContentProperties from './ContentProperties'
 import ComponentLabel from './ComponentLabel'
 import ComponentVariant from './ComponentVariant'
 
@@ -106,7 +106,7 @@ export default {
   components: {
     ContentHeader,
     ContentHeading,
-    ContentScheme,
+    ContentProperties,
     ComponentLabel,
     ComponentVariant
   },
@@ -125,7 +125,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['components', 'schema', 'variants']),
+    ...mapGetters('state', ['components', 'entities', 'variants']),
 
     component () {
       return this.components[this.id]
@@ -141,9 +141,9 @@ export default {
       return variantIds && variantIds.length > 1
     },
 
-    hasSchema () {
-      const { schema } = this.component
-      return schema && Object.keys(schema).length > 0
+    hasProperties () {
+      const { properties } = this.component
+      return properties && Object.keys(properties).length > 0
     },
 
     hasInfo () {
@@ -154,8 +154,8 @@ export default {
       return this.activeSection === 'info' || (!this.activeSection && this.hasInfo)
     },
 
-    isSchemaActive () {
-      return this.activeSection === 'schema' || (!this.activeSection && !this.hasInfo && this.hasSchema)
+    isPropertiesActive () {
+      return this.activeSection === 'properties' || (!this.activeSection && !this.hasInfo && this.hasProperties)
     }
   },
 

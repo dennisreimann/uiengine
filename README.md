@@ -76,7 +76,7 @@ Technical documentation, with more detailed information:
 - [Adapters](./docs/adapters.md)
 - [Component](./docs/component.md)
 - [Variant](./docs/variant.md)
-- [Schema](./docs/schema.md)
+- [Entities/Properties](./docs/entities-properties.md)
 - [Theme](./docs/theme.md)
 - [YAML](./docs/yaml.md)
 - [Deployment](./docs/deployment.md)

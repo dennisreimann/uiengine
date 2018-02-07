@@ -1,21 +1,21 @@
 const path = require('path')
 const assert = require('assert')
 
-const Schema = require('../src/schema')
+const Entity = require('../src/entity')
 const { testProjectPath } = require('../../../test/support/paths')
-const schemaPath = path.resolve(testProjectPath, 'src', 'uiengine', 'schema')
+const entitiesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'entities')
 const state = {
   config: {
     source: {
-      schema: schemaPath
+      entities: entitiesPath
     }
   }
 }
 
-describe('Schema', () => {
+describe('Entity', () => {
   describe('#fetchById', () => {
-    it('should return single schema object', done => {
-      Schema.fetchById(state, 'Entity')
+    it('should return single entity object', done => {
+      Entity.fetchById(state, 'Entity')
         .then(data => {
           assert.equal(data.title.type, 'String')
           assert.equal(data.title.description, 'Title')
@@ -32,25 +32,25 @@ describe('Schema', () => {
   })
 
   describe('#fetchAll', () => {
-    it('should return whole schema object', done => {
-      Schema.fetchAll(state)
+    it('should return whole entities object', done => {
+      Entity.fetchAll(state)
         .then(data => {
           assert.equal(Object.keys(data).length, 2)
 
-          assert(data['Entity'], 'missing schema for "Entity"')
-          assert(data['CustomObject'], 'missing schema for "CustomObject"')
+          assert(data['Entity'], 'missing entity for "Entity"')
+          assert(data['CustomObject'], 'missing entity for "CustomObject"')
 
           done()
         })
         .catch(done)
     })
 
-    it('should return empty object if schema source is not set', done => {
-      Schema.fetchAll({ config: { source: { } } })
+    it('should return empty object if entities source is not set', done => {
+      Entity.fetchAll({ config: { source: {} } })
         .then(data => {
-          const schemaIds = Object.keys(data)
+          const ids = Object.keys(data)
 
-          assert.equal(schemaIds.length, 0)
+          assert.equal(ids.length, 0)
           done()
         })
         .catch(done)

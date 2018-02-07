@@ -140,7 +140,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['config', 'pages', 'schema']),
+    ...mapGetters('state', ['config', 'pages', 'entities']),
 
     hasPreview () {
       return !!this.variant.rendered

@@ -5,11 +5,11 @@
       :title="page.title"
     />
     <article class="content">
-      <content-scheme
-        v-for="(properties, schemeId) in schema"
-        :key="schemeId"
-        :schema="schema"
-        :title="schemeId"
+      <content-properties
+        v-for="(properties, entityId) in entities"
+        :key="entityId"
+        :title="entityId"
+        :entities="entities"
         :properties="properties"
         class="sob-xxl"
       />
@@ -20,12 +20,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import ContentHeader from './ContentHeader'
-import ContentScheme from './ContentScheme'
+import ContentProperties from './ContentProperties'
 
 export default {
   components: {
     ContentHeader,
-    ContentScheme
+    ContentProperties
   },
 
   props: {
@@ -36,7 +36,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['pages', 'schema']),
+    ...mapGetters('state', ['pages', 'entities']),
 
     page () {
       return this.pages[this.id]

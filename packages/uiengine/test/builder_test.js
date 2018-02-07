@@ -21,8 +21,8 @@ const state = {
       configFile: path.resolve(testProjectPath, 'uiengine.yml'),
       components: path.resolve(testProjectPath, 'src', 'components'),
       templates: path.resolve(testProjectPath, 'src', 'templates'),
+      entities: path.resolve(testProjectPath, 'src', 'uiengine', 'entities'),
       pages: path.resolve(testProjectPath, 'src', 'uiengine', 'pages'),
-      schema: path.resolve(testProjectPath, 'src', 'uiengine', 'schema'),
       data: path.resolve(testProjectPath, '..', 'fixtures')
     },
     target,
@@ -84,10 +84,10 @@ const state = {
         myContextVariable: 'This is my context'
       }
     }),
-    schema: Factory.page('schema', {
-      title: 'Schema',
-      path: '_schema',
-      type: 'schema'
+    entities: Factory.page('entities', {
+      title: 'Entities',
+      path: '_entities',
+      type: 'entities'
     }),
     testcases: Factory.page('testcases', {
       title: 'Testcases',
@@ -113,7 +113,7 @@ const state = {
     'patterns/input': NavigationData('patterns/input', 'input', 'Awesome Input', 'patterns/input', 'component', '', ['index', 'patterns'], 'patterns'),
     'prototype': NavigationData('prototype', 'prototype', 'Sandbox', 'prototype', 'documentation', '', ['index'], 'index'),
     'prototype/custom-page': NavigationData('prototype/custom-page', 'prototype/custom-page', 'Custom Page', 'prototype/custom-page', 'page', '', ['index', 'prototype'], 'prototype'),
-    'schema': NavigationData('schema', 'schema', 'Schema', '_schema', 'schema', ''),
+    'entities': NavigationData('entities', 'entities', 'Entities', '_entities', 'entities', ''),
     'testcases': NavigationData('testcases', 'testcases', 'Testcases', 'testcases'),
     'testcases/custom-path': NavigationData('testcases/custom-path', 'testcases/custom-path', 'Custom Path', 'documentation')
   },
@@ -135,8 +135,8 @@ const state = {
       title: 'Text Input'
     }
   },
-  schema: {
-    'Entity': {
+  entities: {
+    Entity: {
       title: {
         type: 'String',
         description: 'Title',
@@ -152,7 +152,7 @@ const state = {
         description: 'A custom object'
       }
     },
-    'CustomObject': {
+    CustomObject: {
       tags: {
         type: 'Array',
         description: 'Tags as strings'

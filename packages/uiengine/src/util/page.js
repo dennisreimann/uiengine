@@ -8,8 +8,8 @@ const PAGE_FILENAME = 'page.md'
 const INDEX_ID = 'index'
 const INDEX_FILE_PATH = '.'
 const INDEX_PAGE_PATH = ''
-const SCHEMA_ID = 'schema'
-const SCHEMA_PAGE_PATH = '_schema'
+const ENTITIES_ID = 'entities'
+const ENTITIES_PAGE_PATH = '_entities'
 
 // types
 const PAGE_TYPE_TOKENS = 'tokens'
@@ -180,6 +180,6 @@ module.exports = {
   determineTitle,
   PAGE_FILENAME,
   INDEX_ID,
-  SCHEMA_ID,
-  SCHEMA_PAGE_PATH
+  ENTITIES_ID,
+  ENTITIES_PAGE_PATH
 }

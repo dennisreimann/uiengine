@@ -1,7 +1,7 @@
 ---
 title: Label
 label: A1
-schema:
+properties:
   Label:
     id: 
       type: String

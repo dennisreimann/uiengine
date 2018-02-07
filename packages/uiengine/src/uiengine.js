@@ -5,14 +5,14 @@ const { debug3 } = require('./util/debug')
 
 export const CONFIG_FILENAME = 'uiengine.yml'
 
-const sourceFilesFromConfig = ({ source: { configFile, components, data, schema, pages, templates }, adapters, debug, theme }) => {
+const sourceFilesFromConfig = ({ source: { configFile, components, data, entities, pages, templates }, adapters, debug, theme }) => {
   const exts = '.{' + Object.keys(adapters).concat('md').join(',') + '}'
   const componentsGlob = components ? path.join(components, '**/*' + exts) : null
   const templatesGlob = templates ? path.join(templates, '**/*' + exts) : null
   const pagesGlob = templates ? path.join(pages, '**') : null
   const dataGlob = data ? path.join(data, '**') : null
-  const schemaGlob = data ? path.join(schema, '**/*.yml') : null
-  const sourceFiles = [configFile, componentsGlob, dataGlob, schemaGlob, pagesGlob, templatesGlob].filter(a => a)
+  const entitiesGlob = data ? path.join(entities, '**/*.yml') : null
+  const sourceFiles = [configFile, componentsGlob, dataGlob, entitiesGlob, pagesGlob, templatesGlob].filter(a => a)
 
   if (debug) {
     const themeLibGlob = path.join(path.dirname(require.resolve(theme.module)), '**')

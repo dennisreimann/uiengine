@@ -51,7 +51,7 @@ context:
     - !data /products/02.yml
 ```
 
-You should prefer this to the `!include` schema for referencing your mocks which should be kept in one place (namely `source.data`). 
+You should prefer this to the `!include` schema for referencing your mocks which should be kept in one place (namely `source.data`).
 
 ### !markdown
 
@@ -93,7 +93,7 @@ Let's say `globals.yml` contains this data:
 
 ```yaml
 title: My website
-currentUser: 
+currentUser:
   login: user@example.org
 ```
 

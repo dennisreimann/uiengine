@@ -12,7 +12,7 @@ const Core = require('../src/core')
 const { testProjectPath, testProjectRelativePath, testProjectTargetPath } = require('../../../test/support/paths')
 const dataPath = path.resolve(testProjectPath, 'src', 'uiengine', 'data')
 const pagesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'pages')
-const schemaPath = path.resolve(testProjectPath, 'src', 'uiengine', 'schema')
+const entitiesPath = path.resolve(testProjectPath, 'src', 'uiengine', 'entities')
 const componentsPath = path.resolve(testProjectPath, 'src', 'components')
 const templatesPath = path.resolve(testProjectPath, 'src', 'templates')
 const indexPath = path.join(testProjectTargetPath, 'index.html')
@@ -230,8 +230,8 @@ describe('Core', function () {
         })
     })
 
-    it('should generate schema update on change', done => {
-      const filePath = path.join(schemaPath, 'Entity.yml')
+    it('should generate entity update on change', done => {
+      const filePath = path.join(entitiesPath, 'Entity.yml')
 
       fs.removeSync(indexPath)
 
@@ -240,9 +240,9 @@ describe('Core', function () {
           assertContentMatches(indexPath, 'Entity')
 
           assert.equal(change.action, 'changed')
-          assert.equal(change.type, 'schema')
+          assert.equal(change.type, 'entity')
           assert.equal(change.item, 'Entity')
-          assert.equal(change.file, path.join(testProjectRelativePath, 'src', 'uiengine', 'schema', 'Entity.yml'))
+          assert.equal(change.file, path.join(testProjectRelativePath, 'src', 'uiengine', 'entities', 'Entity.yml'))
 
           done()
         })

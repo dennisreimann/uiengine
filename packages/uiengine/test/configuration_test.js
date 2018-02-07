@@ -38,7 +38,7 @@ describe('Configuration', () => {
           assert.equal(config.source.components, path.resolve(testProjectPath, 'src', 'components'))
           assert.equal(config.source.templates, path.resolve(testProjectPath, 'src', 'templates'))
           assert.equal(config.source.pages, path.resolve(testProjectPath, 'src', 'uiengine', 'pages'))
-          assert.equal(config.source.schema, path.resolve(testProjectPath, 'src', 'uiengine', 'schema'))
+          assert.equal(config.source.entities, path.resolve(testProjectPath, 'src', 'uiengine', 'entities'))
           assert.equal(config.source.data, path.resolve(testProjectPath, 'src', 'uiengine', 'data'))
           assert.equal(config.source.base, path.resolve(testProjectPath))
           assert.equal(config.source.configFile, testConfigPath)
