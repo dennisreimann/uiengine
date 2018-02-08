@@ -31,133 +31,93 @@ const state = stateWithModule(testAdapterPath)
 const stateNoop = stateWithModule(noopAdapterPath)
 
 describe('Connector', () => {
-  it('should throw error if the adapter cannot be resolved', done => {
+  it('should throw error if the adapter cannot be resolved', async () => {
     const stateWithNonExistingAdapter = stateWithModule('doesnotexist')
 
-    Connector.setup(stateWithNonExistingAdapter)
-      .catch(error => {
-        assert(error)
-        done()
-      })
+    try {
+      await Connector.setup(stateWithNonExistingAdapter)
+    } catch (error) {
+      assert(error)
+    }
   })
 
   describe('#setup', () => {
-    it('should call the adapters registerComponentFile function', function (done) {
+    it('should call the adapters registerComponentFile function', async function () {
       this.sinon.stub(TestAdapter, 'registerComponentFile')
+      await Connector.setup(state)
 
-      Connector.setup(state)
-        .then(() => {
-          assert(TestAdapter.registerComponentFile.calledOnce)
-          assert(TestAdapter.registerComponentFile.calledWith(testAdapterOptions, testFilePath))
-
-          done()
-        })
-        .catch(done)
+      assert(TestAdapter.registerComponentFile.calledOnce)
+      assert(TestAdapter.registerComponentFile.calledWith(testAdapterOptions, testFilePath))
     })
 
-    it('should be no op if there are no adapters', function (done) {
+    it('should be no op if there are no adapters', async function () {
       this.sinon.stub(TestAdapter, 'registerComponentFile')
-
       const state = { config: { source: { components: componentsPath }, adapters: { } } }
+      await Connector.setup(state)
 
-      Connector.setup(state)
-        .then(() => {
-          assert(TestAdapter.registerComponentFile.notCalled)
-
-          done()
-        })
-        .catch(done)
+      assert(TestAdapter.registerComponentFile.notCalled)
     })
   })
 
   describe('#registerComponentFile', () => {
-    it('should call the adapters registerComponentFile function', function (done) {
+    it('should call the adapters registerComponentFile function', async function () {
       this.sinon.stub(TestAdapter, 'registerComponentFile')
+      await Connector.registerComponentFile(state, testFilePath)
 
-      Connector.registerComponentFile(state, testFilePath)
-        .then(() => {
-          assert(TestAdapter.registerComponentFile.calledOnce)
-          assert(TestAdapter.registerComponentFile.calledWith(testAdapterOptions, testFilePath))
-
-          done()
-        })
-        .catch(done)
+      assert(TestAdapter.registerComponentFile.calledOnce)
+      assert(TestAdapter.registerComponentFile.calledWith(testAdapterOptions, testFilePath))
     })
   })
 
   describe('#render', () => {
-    it('should call the adapter render function with the options, the template id and data', function (done) {
+    it('should call the adapter render function with the options, the template id and data', async function () {
       this.sinon.stub(TestAdapter, 'render').returns('')
-
       const templatePath = './src/templates/my-template.test'
       const data = { myData: 1 }
+      await Connector.render(state, templatePath, data)
 
-      Connector.render(state, templatePath, data)
-        .then(() => {
-          assert(TestAdapter.render.calledOnce)
-          assert(TestAdapter.render.calledWith(testAdapterOptions, templatePath, data))
-
-          done()
-        })
-        .catch(done)
+      assert(TestAdapter.render.calledOnce)
+      assert(TestAdapter.render.calledWith(testAdapterOptions, templatePath, data))
     })
 
-    it('should throw error if the adapter does not implement the render function', done => {
-      Connector.render(stateNoop, './src/templates/my-template.test', {})
-        .catch(error => {
-          assert(error)
-          done()
-        })
+    it('should throw error if the adapter does not implement the render function', async () => {
+      try {
+        await Connector.render(stateNoop, './src/templates/my-template.test', {})
+      } catch (error) {
+        assert(error)
+      }
     })
   })
 
   describe('#filesForComponent', () => {
-    it('should call the adapters filesForComponent function', function (done) {
+    it('should call the adapters filesForComponent function', async function () {
       this.sinon.stub(TestAdapter, 'filesForComponent')
+      await Connector.filesForComponent(state, 'test', 'button')
 
-      Connector.filesForComponent(state, 'test', 'button')
-        .then(() => {
-          assert(TestAdapter.filesForComponent.calledOnce)
-          assert(TestAdapter.filesForComponent.calledWith('button'))
-
-          done()
-        })
-        .catch(done)
+      assert(TestAdapter.filesForComponent.calledOnce)
+      assert(TestAdapter.filesForComponent.calledWith('button'))
     })
 
-    it('should return an empty array if the adapter does not implement the filesForComponent function', done => {
-      Connector.filesForComponent(stateNoop, 'test', 'button')
-        .then(result => {
-          assert.equal(result.length, 0)
+    it('should return an empty array if the adapter does not implement the filesForComponent function', async () => {
+      const result = await Connector.filesForComponent(stateNoop, 'test', 'button')
 
-          done()
-        })
-        .catch(done)
+      assert.equal(result.length, 0)
     })
   })
 
   describe('#filesForVariant', () => {
-    it('should call the adapters filesForVariant function', function (done) {
+    it('should call the adapters filesForVariant function', async function () {
       this.sinon.stub(TestAdapter, 'filesForVariant')
+      await Connector.filesForVariant(state, 'test', 'button', 'primary')
 
-      Connector.filesForVariant(state, 'test', 'button', 'primary')
-        .then(() => {
-          assert(TestAdapter.filesForVariant.calledOnce)
-          assert(TestAdapter.filesForVariant.calledWith('button', 'primary'))
-
-          done()
-        })
-        .catch(done)
+      assert(TestAdapter.filesForVariant.calledOnce)
+      assert(TestAdapter.filesForVariant.calledWith('button', 'primary'))
     })
 
-    it('should return an empty array if the adapter does not implement the filesForVariant function', done => {
-      Connector.filesForVariant(stateNoop, 'test', 'button', 'primary')
-        .then(result => {
-          assert.equal(result.length, 0)
+    it('should return an empty array if the adapter does not implement the filesForVariant function', async () => {
+      const result = await Connector.filesForVariant(stateNoop, 'test', 'button', 'primary')
 
-          done()
-        })
-        .catch(done)
+      assert.equal(result.length, 0)
     })
   })
 })

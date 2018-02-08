@@ -16,64 +16,49 @@ describe('File', () => {
   })
 
   describe('#read', () => {
-    it('should return file content', done => {
-      File.read(join(__dirname, 'fixtures/markdown.md'))
-        .then(data => {
-          assert.equal(data, '# Homepage\n\nWelcome!')
-          done()
-        })
-        .catch(done)
+    it('should return file content', async () => {
+      const data = await File.read(join(__dirname, 'fixtures/markdown.md'))
+
+      assert.equal(data, '# Homepage\n\nWelcome!')
     })
 
-    it('should throw error in case the file does not exist', done => {
-      File.read(join(__dirname, 'does-not-exist.txt'))
-        .catch(error => {
-          assert(error)
-          done()
-        })
+    it('should throw error in case the file does not exist', async () => {
+      try {
+        await File.read(join(__dirname, 'does-not-exist.txt'))
+      } catch (error) {
+        assert(error)
+      }
     })
   })
 
   describe('#write', () => {
-    it('should write content to file', done => {
+    it('should write content to file', async () => {
       const filePath = join(testTmpPath, 'writeFileTest.txt')
-      File.write(filePath, 'Test')
-        .then(() => {
-          const content = readFileSync(filePath, 'utf8')
-          assert.equal(content, 'Test')
+      await File.write(filePath, 'Test')
+      const content = readFileSync(filePath, 'utf8')
 
-          removeSync(filePath)
-          done()
-        })
-        .catch(done)
+      assert.equal(content, 'Test')
+      removeSync(filePath)
     })
   })
 
   describe('#copy', () => {
-    it('should copy file from source to destination', done => {
+    it('should copy file from source to destination', async () => {
       const src = join(__dirname, 'fixtures/frontmatter.txt')
       const dst = join(testTmpPath, 'frontmatter.txt')
-      File.copy(src, dst)
-        .then(() => {
-          assertExists(dst)
+      await File.copy(src, dst)
 
-          removeSync(dst)
-          done()
-        })
-        .catch(done)
+      assertExists(dst)
+      removeSync(dst)
     })
 
-    it('should copy directory from source to destination', done => {
+    it('should copy directory from source to destination', async () => {
       const src = join(__dirname, 'fixtures')
       const dst = join(testTmpPath, 'fixtures')
-      File.copy(src, dst)
-        .then(() => {
-          assertExists(join(dst, 'yaml.yml'))
+      await File.copy(src, dst)
 
-          removeSync(dst)
-          done()
-        })
-        .catch(done)
+      assertExists(join(dst, 'yaml.yml'))
+      removeSync(dst)
     })
   })
 })

@@ -17,99 +17,72 @@ describe('DefaultTheme', () => {
   afterEach(() => { fs.removeSync(testTmpPath) })
 
   describe('#setup', () => {
-    it('should copy the themes static files', done => {
-      DefaultTheme.setup(testThemeOptions)
-        .then(() => {
-          assertExists(join(target, '_uiengine-theme', 'styles', 'uiengine-default.css'))
+    it('should copy the themes static files', async () => {
+      await DefaultTheme.setup(testThemeOptions)
 
-          done()
-        })
-        .catch(done)
+      assertExists(join(target, '_uiengine-theme', 'styles', 'uiengine-default.css'))
     })
 
-    it('should configure the markdown parser', function (done) {
-      const markdownIt = {
-        set: this.sinon.stub()
-      }
-
+    it('should configure the markdown parser', async function () {
+      const markdownIt = { set: this.sinon.stub() }
       const opts = Object.assign({}, testThemeOptions, { markdownIt })
+      await DefaultTheme.setup(opts)
 
-      DefaultTheme.setup(opts)
-        .then(() => {
-          assert(markdownIt.set.calledOnce)
-
-          done()
-        })
-        .catch(done)
+      assert(markdownIt.set.calledOnce)
     })
 
-    it('should throw error if the target is not set', done => {
+    it('should throw error if the target is not set', async () => {
       const opts = Object.assign({}, testThemeOptions)
       delete opts.target
 
-      DefaultTheme.setup(opts)
-        .catch(error => {
-          assert(error)
-          done()
-        })
+      try {
+        await DefaultTheme.setup(opts)
+      } catch (error) {
+        assert(error)
+      }
     })
 
-    it('should throw error with debug details if the debug flag is set', done => {
+    it('should throw error with debug details if the debug flag is set', async () => {
       const opts = Object.assign({}, testThemeOptions)
       opts.debug = true
       delete opts.target
 
-      DefaultTheme.setup(opts)
-        .catch(error => {
-          assertMatches(error.message, '"debug": true')
-          assertMatches(error.message, '"markdownIt": {}')
-
-          done()
-        })
+      try {
+        await DefaultTheme.setup(opts)
+      } catch (error) {
+        assertMatches(error.message, '"debug": true')
+        assertMatches(error.message, '"markdownIt": {}')
+      }
     })
   })
 
-  describe('#render', () => {
-    it('should render the index.html file including the state', done => {
-      DefaultTheme.render(testThemeOptions, { config: { name: 'Test Render' } })
-        .then(() => {
-          assertContentMatches(indexFile, 'Test Render')
+  describe('#render', async () => {
+    it('should render the index.html file including the state', async () => {
+      await DefaultTheme.render(testThemeOptions, { config: { name: 'Test Render' } })
 
-          done()
-        })
-        .catch(done)
+      assertContentMatches(indexFile, 'Test Render')
     })
 
-    it('should include the set locale if the passed language is available', done => {
+    it('should include the set locale if the passed language is available', async () => {
       const opts = Object.assign({}, testThemeOptions, { lang: 'de' })
+      await DefaultTheme.render(opts, {})
 
-      DefaultTheme.render(opts, {})
-        .then(() => {
-          assertContentMatches(indexFile, 'html lang="de"')
-
-          done()
-        })
-        .catch(done)
+      assertContentMatches(indexFile, 'html lang="de"')
     })
 
-    it('should default to english locale if the passed language is not available', done => {
+    it('should default to english locale if the passed language is not available', async () => {
       const opts = Object.assign({}, testThemeOptions, { lang: 'pl' })
+      await DefaultTheme.render(opts, {})
 
-      DefaultTheme.render(opts, {})
-        .then(() => {
-          assertContentMatches(indexFile, 'html lang="en"')
-
-          done()
-        })
-        .catch(done)
+      assertContentMatches(indexFile, 'html lang="en"')
     })
 
-    it('should throw error if the template cannot be rendered', done => {
-      DefaultTheme.render() // no options and state -> error
-        .catch(error => {
-          assert(error)
-          done()
-        })
+    it('should throw error if the template cannot be rendered', async () => {
+      try {
+        await DefaultTheme.render()
+      } catch (error) {
+        assert(error)
+      }
     })
   })
 })

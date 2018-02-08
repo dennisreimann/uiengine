@@ -27,45 +27,30 @@ describe('Parsing', () => {
   })
 
   describe('#fromFile', () => {
-    it('should call the given parse function with the file content', function (done) {
+    it('should call the given parse function with the file content', async function () {
       const parseFn = this.sinon.stub()
+      await Parsing.fromFile(parseFn, filePath, sourcePaths)
 
-      Parsing.fromFile(parseFn, filePath, sourcePaths)
-        .then(() => {
-          assert(parseFn.calledOnce)
-          assert(parseFn.calledWith(fileContent, filePath, sourcePaths))
-
-          done()
-        })
-        .catch(done)
+      assert(parseFn.calledOnce)
+      assert(parseFn.calledWith(fileContent, filePath, sourcePaths))
     })
   })
 
   describe('#fromString', () => {
-    it('should call the given parse function with the string', function (done) {
+    it('should call the given parse function with the string', async function () {
       const parseFn = this.sinon.stub()
+      await Parsing.fromString(parseFn, '123', sourcePaths)
 
-      Parsing.fromString(parseFn, '123', sourcePaths)
-        .then(() => {
-          assert(parseFn.calledOnce)
-          assert(parseFn.calledWith('123', null, sourcePaths))
-
-          done()
-        })
-        .catch(done)
+      assert(parseFn.calledOnce)
+      assert(parseFn.calledWith('123', null, sourcePaths))
     })
 
-    it('should resolve with undefined if the string is empty', function (done) {
+    it('should resolve with undefined if the string is empty', async function () {
       const parseFn = this.sinon.stub()
+      const result = await Parsing.fromString(parseFn, '', sourcePaths)
 
-      Parsing.fromString(parseFn, '', sourcePaths)
-        .then(result => {
-          assert(parseFn.notCalled)
-          assert.equal(typeof result, 'undefined')
-
-          done()
-        })
-        .catch(done)
+      assert(parseFn.notCalled)
+      assert.equal(typeof result, 'undefined')
     })
   })
 })

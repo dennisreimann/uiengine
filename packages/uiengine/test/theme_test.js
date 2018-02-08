@@ -22,63 +22,46 @@ const state = {
 }
 
 describe('Theme', () => {
-  it('should throw error if the theme cannot be resolved', done => {
-    Theme.setup({ config: { theme: { module: 'doesnotexist' } } })
-      .catch(error => {
-        assert(error)
-        done()
-      })
+  it('should throw error if the theme cannot be resolved', async () => {
+    try {
+      await Theme.setup({ config: { theme: { module: 'doesnotexist' } } })
+    } catch (error) {
+      assert(error)
+    }
   })
 
   describe('#setup', () => {
     afterEach(() => { fs.removeSync(testTmpPath) })
 
-    it('should call the themes setup function', function (done) {
+    it('should call the themes setup function', async function () {
       this.sinon.stub(TestTheme, 'setup')
+      await Theme.setup(state)
+      const markdownIt = require('../src/util/markdown').markdownIt
+      const expectedOptions = Object.assign({}, testThemeOptions, { markdownIt })
 
-      Theme.setup(state)
-        .then(() => {
-          const markdownIt = require('../src/util/markdown').markdownIt
-          const expectedOptions = Object.assign({}, testThemeOptions, { markdownIt })
-
-          assert(TestTheme.setup.calledOnce)
-          assert(TestTheme.setup.calledWithMatch(expectedOptions))
-
-          done()
-        })
-        .catch(done)
+      assert(TestTheme.setup.calledOnce)
+      assert(TestTheme.setup.calledWithMatch(expectedOptions))
     })
   })
 
   describe('#render', () => {
-    it('should call the themes render function with the options, state and change', function (done) {
+    it('should call the themes render function with the options, state and change', async function () {
       this.sinon.stub(TestTheme, 'render').returns('')
-
       const change = { file: 'component.md', action: 'created', type: 'component', item: 'componentId' }
+      await Theme.render(state, change)
 
-      Theme.render(state, change)
-        .then(() => {
-          assert(TestTheme.render.calledOnce)
-          assert(TestTheme.render.calledWithMatch(testThemeOptions, state, change))
-
-          done()
-        })
-        .catch(done)
+      assert(TestTheme.render.calledOnce)
+      assert(TestTheme.render.calledWithMatch(testThemeOptions, state, change))
     })
   })
 
   describe('#teardown', () => {
-    it('should call the themes teardown function', function (done) {
+    it('should call the themes teardown function', async function () {
       this.sinon.stub(TestTheme, 'teardown')
+      await Theme.teardown(state)
 
-      Theme.teardown(state)
-        .then(() => {
-          assert(TestTheme.teardown.calledOnce)
-          assert(TestTheme.teardown.calledWithMatch(testThemeOptions))
-
-          done()
-        })
-        .catch(done)
+      assert(TestTheme.teardown.calledOnce)
+      assert(TestTheme.teardown.calledWithMatch(testThemeOptions))
     })
   })
 })

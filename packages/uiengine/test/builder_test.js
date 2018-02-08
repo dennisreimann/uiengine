@@ -174,104 +174,71 @@ describe('Builder', () => {
   ]))
 
   describe('#generate', () => {
-    it('should generate index page', done => {
-      Builder.generate(state)
-        .then(() => {
-          assertExists(join(target, 'index.html'))
+    it('should generate index page', async () => {
+      await Builder.generate(state)
 
-          done()
-        })
-        .catch(done)
+      assertExists(join(target, 'index.html'))
     })
   })
 
   describe('#generatePageWithTemplate', () => {
-    it('should generate page with custom template', done => {
-      Builder.generatePageWithTemplate(state, 'prototype/custom-page')
-        .then(() => {
-          const pagePath = join(target, '_pages', 'prototype', 'custom-page.html')
+    it('should generate page with custom template', async () => {
+      await Builder.generatePageWithTemplate(state, 'prototype/custom-page')
 
-          assertContentMatches(pagePath, 'This is my context')
-
-          done()
-        })
-        .catch(done)
+      const pagePath = join(target, '_pages', 'prototype', 'custom-page.html')
+      assertContentMatches(pagePath, 'This is my context')
     })
   })
 
   describe('#generatePageFiles', () => {
-    it('should copy page files', done => {
-      Builder.generatePageFiles(state, 'testcases')
-        .then(() => {
-          assertExists(join(target, 'testcases', 'index.txt'))
-          assertExists(join(target, 'testcases', 'extra-files', 'file-in-folder.txt'))
+    it('should copy page files', async () => {
+      await Builder.generatePageFiles(state, 'testcases')
 
-          done()
-        })
-        .catch(done)
+      assertExists(join(target, 'testcases', 'index.txt'))
+      assertExists(join(target, 'testcases', 'extra-files', 'file-in-folder.txt'))
     })
 
-    it('should copy page files for pages with custom paths', done => {
-      Builder.generatePageFiles(state, 'testcases/custom-path')
-        .then(() => {
-          assertExists(join(target, 'testcases', 'page-with-custom-path', 'file.txt'))
-          assertExists(join(target, 'testcases', 'page-with-custom-path', 'extra-files', 'file-in-folder.txt'))
+    it('should copy page files for pages with custom paths', async () => {
+      await Builder.generatePageFiles(state, 'testcases/custom-path')
 
-          done()
-        })
-        .catch(done)
+      assertExists(join(target, 'testcases', 'page-with-custom-path', 'file.txt'))
+      assertExists(join(target, 'testcases', 'page-with-custom-path', 'extra-files', 'file-in-folder.txt'))
     })
   })
 
   describe('#generatePagesWithTemplate', () => {
-    it('should generate pages having this template', done => {
-      Builder.generatePagesWithTemplate(state, 'page.pug')
-        .then(() => {
-          assertExists(join(target, '_pages', 'prototype', 'custom-page.html'))
+    it('should generate pages having this template', async () => {
+      await Builder.generatePagesWithTemplate(state, 'page.pug')
 
-          done()
-        })
-        .catch(done)
+      assertExists(join(target, '_pages', 'prototype', 'custom-page.html'))
     })
   })
 
   describe('#generateComponentVariants', () => {
-    it('should generate component variant pages', done => {
-      Builder.generateComponentVariants(state, 'input')
-        .then(() => {
-          assertExists(join(target, '_variants', 'input', 'text.pug.html'))
+    it('should generate component variant pages', async () => {
+      await Builder.generateComponentVariants(state, 'input')
 
-          done()
-        })
-        .catch(done)
+      assertExists(join(target, '_variants', 'input', 'text.pug.html'))
     })
   })
 
   describe('#generateVariant', () => {
-    it('should generate variant page', done => {
-      Builder.generateVariant(state, 'input/text.pug')
-        .then(() => {
-          assertExists(join(target, '_variants', 'input', 'text.pug.html'))
+    it('should generate variant page', async () => {
+      await Builder.generateVariant(state, 'input/text.pug')
 
-          done()
-        })
-        .catch(done)
+      assertExists(join(target, '_variants', 'input', 'text.pug.html'))
     })
   })
 
   describe('#generateIncrement', () => {
     describe('with debug level set', () => {
-      it('should generate state file', done => {
+      it('should generate state file', async () => {
         const stateWithDebug = Object.assign({}, state)
         stateWithDebug.config.debug = true
 
-        Builder.generateIncrement(stateWithDebug)
-          .then(() => {
-            assertExists(join(target, '_state.json'))
+        await Builder.generateIncrement(stateWithDebug)
 
-            done()
-          })
-          .catch(done)
+        assertExists(join(target, '_state.json'))
       })
     })
   })

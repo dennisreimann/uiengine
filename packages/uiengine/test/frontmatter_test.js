@@ -20,83 +20,62 @@ const sourcePaths = {
 
 describe('Frontmatter', () => {
   describe('#fromFile', () => {
-    it('should return attributes and body', done => {
-      Frontmatter.fromFile(join(__dirname, 'fixtures/frontmatter.txt'), sourcePaths)
-        .then(data => {
-          assert.equal(data.attributes.name, 'Index')
-          assert.equal(data.body, 'Hello')
-          done()
-        })
-        .catch(done)
+    it('should return attributes and body', async () => {
+      const data = await Frontmatter.fromFile(join(__dirname, 'fixtures/frontmatter.txt'), sourcePaths)
+
+      assert.equal(data.attributes.name, 'Index')
+      assert.equal(data.body, 'Hello')
     })
   })
 
   describe('#fromString', () => {
-    it('should return attributes and body', done => {
+    it('should return attributes and body', async () => {
       const string = `---\nname: Index\n---\nHello`
-      Frontmatter.fromString(string, sourcePaths)
-        .then(data => {
-          assert.equal(data.attributes.name, 'Index')
-          assert.equal(data.body, 'Hello')
-          done()
-        })
-        .catch(done)
+      const data = await Frontmatter.fromString(string, sourcePaths)
+
+      assert.equal(data.attributes.name, 'Index')
+      assert.equal(data.body, 'Hello')
     })
 
-    it('should work with only the attributes', done => {
+    it('should work with only the attributes', async () => {
       const string = `---\nname: Index\n---`
-      Frontmatter.fromString(string, sourcePaths)
-        .then(data => {
-          assert.equal(data.attributes.name, 'Index')
-          assert.equal(data.body, '')
-          done()
-        })
-        .catch(done)
+      const data = await Frontmatter.fromString(string, sourcePaths)
+
+      assert.equal(data.attributes.name, 'Index')
+      assert.equal(data.body, '')
     })
 
-    it('should work with empty attributes and empty body', done => {
+    it('should work with empty attributes and empty body', async () => {
       const string = `---\n\n---\n`
-      Frontmatter.fromString(string, sourcePaths)
-        .then(data => {
-          assert.equal(Object.keys(data.attributes).length, 0)
-          assert.equal(data.body, '')
-          done()
-        })
-        .catch(done)
+      const data = await Frontmatter.fromString(string, sourcePaths)
+
+      assert.equal(Object.keys(data.attributes).length, 0)
+      assert.equal(data.body, '')
     })
 
-    it('should work with only the body', done => {
+    it('should work with only the body', async () => {
       const string = 'Hello'
-      Frontmatter.fromString(string, sourcePaths)
-        .then(data => {
-          assert.equal(Object.keys(data.attributes).length, 0)
-          assert.equal(data.body, 'Hello')
-          done()
-        })
-        .catch(done)
+      const data = await Frontmatter.fromString(string, sourcePaths)
+
+      assert.equal(Object.keys(data.attributes).length, 0)
+      assert.equal(data.body, 'Hello')
     })
 
-    it('should work with malformed string', done => {
+    it('should work with malformed string', async () => {
       const string = '---\nHello'
-      Frontmatter.fromString(string, sourcePaths)
-        .then(data => {
-          assert.equal(Object.keys(data.attributes).length, 0)
-          assert.equal(data.body, '---\nHello')
-          done()
-        })
-        .catch(done)
+      const data = await Frontmatter.fromString(string, sourcePaths)
+
+      assert.equal(Object.keys(data.attributes).length, 0)
+      assert.equal(data.body, '---\nHello')
     })
 
-    it('should work with custom yaml types', done => {
-      Frontmatter.fromString(string, sourcePaths)
-        .then(data => {
-          assert.equal(data.attributes.included_md, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
-          assert.equal(data.attributes.content, '<h1 id="headline">Headline</h1>\n<p>Text paragraph</p>')
-          assert.equal(data.attributes.data.name, 'JSON')
-          assert.equal(data.attributes.data.number, 3)
-          done()
-        })
-        .catch(done)
+    it('should work with custom yaml types', async () => {
+      const data = await Frontmatter.fromString(string, sourcePaths)
+
+      assert.equal(data.attributes.included_md, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
+      assert.equal(data.attributes.content, '<h1 id="headline">Headline</h1>\n<p>Text paragraph</p>')
+      assert.equal(data.attributes.data.name, 'JSON')
+      assert.equal(data.attributes.data.number, 3)
     })
   })
 })
