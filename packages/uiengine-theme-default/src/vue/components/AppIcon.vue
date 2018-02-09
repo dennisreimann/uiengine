@@ -23,3 +23,8 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.icon
+  display inline-block
+</style>

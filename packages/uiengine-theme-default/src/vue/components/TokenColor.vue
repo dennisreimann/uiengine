@@ -84,3 +84,57 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.colorToken
+  flex 0 0 22.5rem
+  margin-bottom var(--space-xl)
+  padding-right var(--space-xxl)
+
+  &__swatch
+    display inline-block
+    width 4.5rem
+    height 4.5rem
+    border-radius 50%
+    border-bottom-right-radius 0
+    border 1px solid var(--color-secondary-text)
+    padding 2px
+
+    &__inner
+      width 100%
+      height 100%
+      border-radius 50%
+      border-bottom-right-radius 0
+
+  &__info
+    display flex
+
+    &--top
+      align-items flex-end
+
+  &__info + &__info
+    margin-top var(--space-xs)
+
+  &__label,
+  &__symbol
+    flex 0 0 5.75rem
+    padding-right var(--space-m)
+    text-align right
+
+  &__title
+    flex 1
+    font-family var(--font-family-regular)
+
+  &__label
+    padding-top calc(var(--font-size-s) - var(--font-size-xs))
+    color var(--color-secondary-text)
+    font-family var(--font-family-light)
+    font-size var(--font-size-xs)
+
+  &__value
+    flex 1
+    font-size var(--font-size-s)
+
+    &--code
+      font-family var(--font-family-code)
+</style>

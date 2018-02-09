@@ -101,3 +101,14 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.tokens
+  &__title
+    font-family var(--font-family-regular)
+    font-size var(--font-size-m)
+
+  &--color
+    display flex
+    flex-wrap wrap
+</style>

@@ -12,3 +12,7 @@
 
 - Wording changed from "schema" to "entities" and "properties"
   - This reflects the actual use case and intention of the feature better 
+
+- The theme is now extendible via CSS custom properties
+  - The `skin` option for the theme has been removed
+  - You can now style the theme using the [`customStylesFile` option](./docs/theme.md)

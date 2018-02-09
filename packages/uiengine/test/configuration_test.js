@@ -39,7 +39,7 @@ describe('Configuration', () => {
       const config = await Configuration.read(testConfigPath)
 
       assert.equal(config.theme.module, 'uiengine-theme-default')
-      assert.equal(config.theme.options.skin, 'deeplake')
+      assert.equal(config.theme.options.customStylesFile, '/assets/styles/uiengine-custom-styles.css')
     })
 
     it('should resolve default theme if no theme is given', async () => {

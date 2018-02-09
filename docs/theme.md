@@ -11,8 +11,8 @@ theme:
   module: uiengine-theme-default
   options:
     lang: en
-    skin: default
     hljs: atom-one-dark
+    customStylesFile: /custom-styles-file.css
     debug: false
     cache: true
 ```
@@ -26,18 +26,15 @@ Localization language for the interface. Available options:
 
 Feel free to send a pull request with additional [localizations](../packages/theme/src/locales)!
 
-### `skin`
-
-The color scheme for the interface. Available options:
-
-- [`default`](./media/skin-default.png) (default)
-- [`deeplake`](./media/skin-deeplake.png)
-- [`uiengineering`](./media/skin-uiengineering.png)
-
 ### `hljs`
 
 The highlight.js theme for the code blocks, defaults to `atom-one-dark`.
 For a list of available options see the [highlight.js demo](https://highlightjs.org/static/demo/).
+
+### `customStylesFile`
+
+The path to a css files containing variable overrides and extensions for the theme.
+For an example see the [custom styles file of the test project](../packages/test-project/src/assets/styles/uiengine-custom-styles.css).
 
 ### `debug`
 

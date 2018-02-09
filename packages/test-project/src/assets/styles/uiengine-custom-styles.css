@@ -1,0 +1,13 @@
+/*
+  You most likely want to configure the accent colors to fit your needs.
+  For a full reference of available custom properties see this file:
+  https://github.com/dennisreimann/uiengine/blob/master/packages/uiengine-theme-default/src/styles/settings.styl
+*/
+:root {
+  /*
+  --color-accent-light: #D797B3;
+  --color-accent-medium: #D72A47;
+  --color-accent-middark: #323;
+  --color-accent-dark: #221022;
+  */
+}

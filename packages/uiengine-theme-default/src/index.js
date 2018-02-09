@@ -6,9 +6,9 @@ import { highlight } from './util'
 const supportedLocales = ['en', 'de']
 const defaultOpts = {
   lang: 'en',
-  skin: 'default',
   hljs: 'atom-one-dark',
-  cache: true
+  cache: true,
+  customStylesFile: null
 }
 
 // template is loaded on setup

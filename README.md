@@ -55,7 +55,7 @@ In development mode the output is regenerated on file change and synced to the b
 - **Best practice approach**: The tool guides you towards best practices like not using application logic in the view layer (i.e. having crazy amounts of helpers or global variables) by proposing a separation of data and template.
 - **In sync with the end product**: Since the docs are generated from the code that will be used in your application, you get a living pattern library – not a thing that needs to be looked after as a separate task.
 - **Covers green- and brownfield projects**: Whether you start out with a pattern library or want to transition your process and refactor your existing UI into modular components, the UIengine has you covered.
-- **Flexible integrations**: The theme can be configured with different skins or can be completely swapped out so you can fit it to your needs. Same goes for the markdown parsing/rendering which is configurable too.
+- **Flexible integrations**: Templating engines and the theme can be configured or completely swapped out so you can fit it to your needs. Same goes for the markdown parsing/rendering which is configurable too.
 
 For the evaluation process you might also want to have a look at the [alternatives](#-alternatives).
 

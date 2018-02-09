@@ -170,3 +170,85 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.preview
+  position relative
+
+  &__container
+    min-width 250px
+    resize horizontal
+    overflow scroll
+    margin 0 auto
+    text-align center
+    // leave space for the resize handle
+    padding-bottom var(--space-m)
+
+    &[data-breakpoint]
+      transition-property width
+      transition-duration var(--transition-duration-medium)
+      transition-timing-function ease-out
+
+  &__size
+    position relative
+    margin-bottom var(--space-s)
+
+    &:before
+    &:after
+      width 40px
+      height 15px
+      position absolute
+      top calc(50% - 8px)
+      content ''
+      background-color var(--color-white)
+      background-size 40px 15px
+      background-repeat none
+
+    &:before
+      left 0
+      background-image embedurl('../../icons/preview-left.svg')
+
+    &:after
+      right 0
+      background-image embedurl('../../icons/preview-right.svg')
+
+  &__sizer
+    padding-left var(--space-m)
+    padding-right var(--space-m)
+    color var(--color-modal-text)
+    background var(--color-main-bg)
+    display inline-block
+    font-size var(--font-size-s)
+    font-family var(--font-family-light)
+    cursor pointer
+
+  &__iframe
+    display block
+    width 100%
+    border 0
+
+  &__breakpoints
+    position absolute
+    z-index 5
+    left calc(50% - 5rem)
+    width 10rem
+    max-height 0
+    transition-duration var(--transition-duration-medium)
+    transition-property max-height
+    transition-timing-function ease-out
+    overflow hidden
+
+    &--active
+      max-height 20rem
+      transition-timing-function ease-in
+
+  &__breakpoints-inner
+    border 1px solid var(--color-modal-border-outer)
+
+  &__breakpoint
+    modal-option()
+    text-align center
+
+  &__breakpoint + &__breakpoint
+    border-top 1px solid var(--color-modal-border-inner)
+</style>

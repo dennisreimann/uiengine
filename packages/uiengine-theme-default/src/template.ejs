@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" href="/_uiengine-theme/styles/uiengine-<%= "\<%= skin %\>" %>.css">
+    <link rel="stylesheet" href="/_uiengine-theme/styles/uiengine.css">
     <link rel="stylesheet" href="/_uiengine-theme/styles/hljs/<%= "\<%= hljs %\>" %>.css">
+    <%= "\<% if (customStylesFile) {" %>
+    <%= "%\>" %><link rel="stylesheet" href="<%= "\<%= customStylesFile %\>" %>"><%= "\<% } %\>" %>
     <script type="text/javascript">
       window.UIengine = {};
       window.UIengine.state = <%= "\<%= JSON.stringify(state) %\>;" %>

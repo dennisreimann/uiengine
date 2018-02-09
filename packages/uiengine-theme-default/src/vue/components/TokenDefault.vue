@@ -32,3 +32,12 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.defaultToken
+  &__value
+    &--value,
+    &--variable
+      font-family var(--font-family-code)
+</style>
+

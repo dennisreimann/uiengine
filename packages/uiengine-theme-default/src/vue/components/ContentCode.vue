@@ -117,3 +117,45 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.code
+  &__segment
+    .code__expandicon
+      fill var(--color-code-header)
+    .code__header
+      color var(--color-code-header)
+      &:hover
+        color var(--color-code-header-hover)
+        .code__expandicon
+          fill var(--color-code-header-hover)
+
+    &--expanded
+      .code__header
+        color var(--color-code-header-current)
+      .code__expandicon
+        fill var(--color-code-header-current)
+        transform rotate(-180deg)
+
+  &__segment:not(&--expanded) + &__segment &__header
+    border-top 0
+
+  &__header
+    display flex
+    align-items center
+    justify-content space-between
+    border 1px solid var(--color-border-medium)
+    padding var(--space-s) var(--space-m)
+    cursor pointer
+    color var(--color-code-header)
+
+  &__expandicon
+    transition-property transform
+    transition-duration var(--transition-duration-fast)
+    icon-size(1)
+
+  &__content
+    display none
+    .code__segment--expanded &
+      display block
+</style>

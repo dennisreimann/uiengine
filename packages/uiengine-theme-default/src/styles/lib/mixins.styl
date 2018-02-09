@@ -1,5 +1,5 @@
 icon-size($factor = 1)
-  $size = $icon-size-original * $factor
+  $size = 24px * $factor
   width $size
   height $size
 
@@ -12,9 +12,8 @@ icon-position($top = null, $left = null)
     left $left
 
 link-with-hover($color-base, $color-hover, $animate-underline = true)
-  $transition-duration = $transition-duration-fast
   color $color-base
-  transition-duration $transition-duration
+  transition-duration var(--transition-duration-fast)
   text-decoration none
 
   &:hover
@@ -24,7 +23,7 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
       fill $color-hover
 
   .icon
-    transition-duration $transition-duration
+    transition-duration var(--transition-duration-fast)
     fill $color-base
 
   if $animate-underline
@@ -37,7 +36,7 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
       left 0
       width 0%
       border-bottom 1px solid $color-base
-      transition-duration $transition-duration
+      transition-duration var(--transition-duration-fast)
 
     &:hover:after
       width 100%
@@ -46,44 +45,44 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
 modal-option()
   display block
   width 100%
-  padding $space-s $space-m
+  padding var(--space-s) var(--space-m)
   cursor pointer
-  color $color-modal-text
-  background $color-modal-bg
-  font-size $font-size-s
-  font-family $font-family-light
+  color var(--color-modal-text)
+  background var(--color-modal-bg)
+  font-size var(--font-size-s)
+  font-family var(--font-family-light)
   text-decoration none
 
   .icon
     margin-top -6px
-    margin-right $space-s
-    fill $color-modal-text
+    margin-right var(--space-s)
+    fill var(--color-modal-text)
     icon-size(.875)
     icon-position(6px)
 
   &:hover
-    color $color-modal-text-hover
-    background $color-modal-bg-hover
+    color var(--color-modal-text-hover)
+    background var(--color-modal-bg-hover)
 
     .icon
-      fill $color-modal-text-hover
+      fill var(--color-modal-text-hover)
 
 code()
-  font-family $font-family-code
-  font-size $font-size-s
+  font-family var(--font-family-code)
+  font-size var(--font-size-s)
   white-space pre
 
 code-block()
   code()
   overflow-x auto
   // defaults, will be overriden by hljs
-  color $color-code-text
-  background-color $color-code-bg
+  color var(--color-code-text)
+  background-color var(--color-code-bg)
   // use important to override hljs styling which differs per theme
-  padding $space-m !important
+  padding var(--space-m) !important
 
 code-inline()
   code()
-  padding $space-xxs $space-xs
-  border-radius $space-xs
-  background-color $color-bg-light
+  padding var(--space-xxs) var(--space-xs)
+  border-radius var(--space-xs)
+  background-color var(--color-bg-light)

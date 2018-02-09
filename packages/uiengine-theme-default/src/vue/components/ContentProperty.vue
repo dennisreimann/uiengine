@@ -67,3 +67,32 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.property
+  &__name
+    width 10em
+
+  &__type
+    width 6em
+
+  &__description
+    width auto
+
+  &__name,
+  &__type,
+  &__description code,
+  &__default,
+  &__required
+    td&
+      font-family var(--font-family-code)
+
+  &__required
+    width 4em
+    th&,
+    td&
+      text-align center
+
+  &__default
+    width 6em
+</style>

@@ -39,8 +39,8 @@ variantTemplate: variant-preview.pug
 #   module: uiengine-theme-default
 #   options:
 #     lang: en
-#     skin: default
 #     hljs: atom-one-dark
+#     customStylesFile: /path-to-theme-overrides.css
 
 # Here you can configure the breakpoints for your project.
 # Declare them with the name as key and the minimum media query pixel being the value.

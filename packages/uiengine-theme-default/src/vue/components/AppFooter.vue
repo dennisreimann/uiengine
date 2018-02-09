@@ -33,6 +33,25 @@ export default {
 }
 </script>
 
+<style lang="stylus">
+.footer
+  color var(--color-footer-text)
+  background var(--color-footer-bg)
+  font-size var(--font-size-xs)
+
+  @media $mq-up_to_m
+    padding var(--space-l) var(--space-m)
+  @media $mq-m_to_l
+    padding var(--space-l) var(--space-l)
+  @media $mq-l_to_xl
+    padding var(--space-l) var(--space-xl)
+  @media $mq-xl_and_up
+    padding var(--space-l) var(--space-xxl)
+
+  a
+    color var(--color-footer-text)
+</style>
+
 <docs>
 Appears at the bottom of each page.
 Contains the copyright and version information, as well as the date of the last update.

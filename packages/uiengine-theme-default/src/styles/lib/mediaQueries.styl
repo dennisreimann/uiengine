@@ -7,6 +7,15 @@ mq_from_to($from, $to)
 mq_from_and_print($from)
   s("screen and (min-width: %s), print", $from)
 
+// converts breakpoints defined in json file to variables:
+// { "S": 320 } -> $breakpoint-S = 320
+json(pathjoin('tokens', 'breakpoints.json'), null, '$breakpoint-')
+
+$breakpoint-s = unit($breakpoint-S, 'px')
+$breakpoint-m = unit($breakpoint-M, 'px')
+$breakpoint-l = unit($breakpoint-L, 'px')
+$breakpoint-xl = unit($breakpoint-XL, 'px')
+
 $mq-up_to_m = mq_to($breakpoint-m)
 $mq-up_to_l = mq_to($breakpoint-l)
 $mq-up_to_xl = mq_to($breakpointmq-xl)

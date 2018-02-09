@@ -45,7 +45,7 @@ variantTemplate: variant-preview.pug
 theme:
   module: uiengine-theme-default
   options:
-    skin: deeplake
+    customStylesFile: /assets/styles/uiengine-custom-styles.css
 
 breakpoints: !include ./src/lib/breakpoints.json
 

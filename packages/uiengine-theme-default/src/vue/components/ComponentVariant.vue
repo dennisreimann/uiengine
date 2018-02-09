@@ -221,3 +221,21 @@ export default {
 //   form.submit()
 // })
 </script>
+
+<style lang="stylus" scoped>
+.variant
+  margin-top var(--space-xxl)
+  padding-top var(--space-xxl)
+  border-top 1px solid var(--color-neutral-60)
+
+.permalink
+  cursor pointer
+
+  &--copied
+    &:after
+      content "📋"
+      margin-left var(--space-xs)
+
+  &__icon
+    icon-position(2px)
+</style>

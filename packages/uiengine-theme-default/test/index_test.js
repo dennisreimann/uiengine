@@ -20,7 +20,7 @@ describe('DefaultTheme', () => {
     it('should copy the themes static files', async () => {
       await DefaultTheme.setup(testThemeOptions)
 
-      assertExists(join(target, '_uiengine-theme', 'styles', 'uiengine-default.css'))
+      assertExists(join(target, '_uiengine-theme', 'styles', 'uiengine.css'))
     })
 
     it('should configure the markdown parser', async function () {
