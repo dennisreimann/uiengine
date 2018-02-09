@@ -1,4 +1,4 @@
-export const template = (title) =>
+export const template = title =>
   `
 ---
 title: ${title}

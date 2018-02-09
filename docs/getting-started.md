@@ -1,21 +1,20 @@
 # Getting Started
 
 This guide assumes you have set up your `PATH` in a way that the installed node module binaries are available.
-If that is not the case and you get errors when running the `uiengine` command, please use prefixed path `./node_modules/.bin/uiengine` to execute the command. 
+If that is not the case and you get errors when running the `uiengine` command, please use prefixed path `./node_modules/.bin/uiengine` to execute the command.
 
 ## 🏎 TL;DR – The fast lane
 
 ```bash
 mkdir uiengine-test && cd uiengine-test && npm init
-npm install --save-dev uiengine uiengine-adapter-pug
+npm install --save-dev uiengine uiengine-adapter-html
 uiengine init
 uiengine component button
 uiengine page atoms molecules organisms
-mkdir src/templates && echo '!= variant.rendered' > src/templates/variant-preview.pug
 uiengine build
 ```
 
-Now you have a basic test project setup and can read about the steps in detail … 
+Now you have a basic test project setup and can read about the steps in detail …
 
 ## 📦 How to install the UIengine?
 
@@ -75,27 +74,13 @@ You create a variant by adding a file renderable by one of the configured adapte
 In addition to the raw render file, you can also add a markdown file containing the metadata for the variant.
 This markdown file can contain [YAML frontmatter](yaml.md) and has to be named like the variant, but must have the file extension `.md`.
 
-To render a variant, we also need a layout:
+To render a variant, we also need a layout.
+The `uiengine init` command created a basic html layout file in `src/templates/variant-preview.html`.
+It includes the variable `variant.rendered`, which contains the HTML of the rendered variant (hence the name 😉).
+You can go ahead and extend the layout to fit your needs and include the correct HTML and style and script references.
 
-```bash
-mkdir src/templates && echo '!= variant.rendered' > src/templates/variant-preview.pug
-```
-
-The output of the variable `variant.rendered` will be the rendered HTML of the variant (hence the name 😉).
-You can go ahead and wrap it in a proper layout with corect HTML and style and script references, like so:
-
-```pug
-doctype
-html(class=`preview-${variant.id}`)
-  head
-    title= variant.title
-    link(rel="stylesheet" href="/style/my.css")
-  body
-    != variant.rendered
-    script(src="/scripts/my.js")
-```
-
-As you can see the template also gets some variant meta data for the rendering, like `variant.title` and `variant.id`.
+This layout file is just there to get you started.
+Feel free to change its content and use an other adapter to fit your projects needs.
 
 ## ➕ How to create a page?
 
@@ -112,7 +97,7 @@ In case you want to directly add some pages, you can list them like so:
 uiengine page PAGE_1_ID PAGE_2_ID PAGE_3_ID
 ```
 
-Example: Say you would like to create pages for grouping your components with the [Atomic Design Methodology](http://atomicdesign.bradfrost.com/chapter-2/):
+Say you would like to create pages for grouping your components with the [Atomic Design Methodology](http://atomicdesign.bradfrost.com/chapter-2/):
 
 ```bash
 uiengine page atoms molecules organisms templates pages

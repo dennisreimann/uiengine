@@ -24,6 +24,8 @@ To get an idea of what the basics look like, take a glimpse at the
 [deployed sample project](http://uiengine-sample-project.uix.space/)
 and the
 [sample project source code](./packages/test-project).
+There is also an
+[introduction video](https://www.youtube.com/watch?v=OKHAhIQLvjU).
 
 ### Component documentation and preview
 

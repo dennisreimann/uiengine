@@ -25,13 +25,10 @@ target: ./dist
 # Adapters are used for templating/rendering. Each adapter is a module that gets required
 # and needs to provide functions for setup and rendering. For details see the adapters docs.
 adapters:
-  pug:
-    module: uiengine-adapter-pug
-    options:
-      pretty: true
+  html: uiengine-adapter-html
 
 # Here you can configure the template that the variant preview gets embeded in.
-variantTemplate: variant-preview.pug
+variantTemplate: variant-preview.html
 
 # UIengine will require the theme, which has to provide a defined set of functions
 # for setup and rendering. For details see the theme docs.
