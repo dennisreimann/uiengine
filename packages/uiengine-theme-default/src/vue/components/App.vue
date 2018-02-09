@@ -42,6 +42,9 @@ export default {
 </script>
 
 <style lang="stylus">
+@require "settings"
+@require "utilities"
+
 @font-face
   font-family "Merriweathersans bold"
   src url(../../fonts/merriweathersans-bold.woff2) format("woff2"),

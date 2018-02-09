@@ -57,12 +57,9 @@ exports.cssLoaders = function (options) {
   return {
     css: generateLoaders(),
     postcss: generateLoaders(),
-    less: generateLoaders('less'),
-    sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
     stylus: generateLoaders('stylus', {
-      paths: [resolve(__dirname, '..', 'src/styles/lib')],
-      import: ['mediaQueries', 'mixins'],
+      paths: [resolve(__dirname, '..', 'src/styles')],
+      import: ['lib/mediaQueries', 'lib/mixins'],
       url: { name: 'embedurl' }
     })
   }

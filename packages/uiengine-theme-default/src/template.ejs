@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" href="/_uiengine-theme/styles/uiengine.css">
+    <% for (index in htmlWebpackPlugin.files.css) {
+    %><link href="<%= htmlWebpackPlugin.files.css[index] %>" rel="stylesheet"><% } %>
     <link rel="stylesheet" href="/_uiengine-theme/styles/hljs/<%= "\<%= hljs %\>" %>.css">
     <%= "\<% if (customStylesFile) {" %>
     <%= "%\>" %><link rel="stylesheet" href="<%= "\<%= customStylesFile %\>" %>"><%= "\<% } %\>" %>
@@ -29,5 +30,10 @@
       </defs>
     </svg>
     <div id="app"></div>
+    <% if (htmlWebpackPlugin.files.chunks.manifest) {
+    %><script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.manifest.entry %>"></script><% } %>
+    <% if (htmlWebpackPlugin.files.chunks.vendor) {
+    %><script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.vendor.entry %>"></script><% } %>
+    <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.uiengine.entry %>"></script>
   </body>
 </html>

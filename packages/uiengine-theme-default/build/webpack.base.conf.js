@@ -3,12 +3,13 @@
 const { join } = require('path')
 const utils = require('./utils')
 const config = require('./config')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 const vueLoaderConfig = require('./vue-loader.conf')
 
 const resolve = dir => join(__dirname, '..', dir)
+const isProduction = process.env.NODE_ENV === 'production'
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
@@ -39,6 +40,15 @@ module.exports = {
     }
   },
   plugins: [
+    // extract css into its own file
+    new ExtractTextPlugin({
+      filename: utils.assetsPath(`styles/[name]${isProduction ? '.[contenthash:20]' : ''}.css`),
+      // Setting the following option to `false` will not extract CSS from codesplit chunks.
+      // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
+      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
+      // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
+      allChunks: true
+    }),
     // copy custom static assets
     new CopyWebpackPlugin([
       {
@@ -51,7 +61,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: resolve('lib/template.ejs'),
       template: resolve('src/template.ejs'),
-      inject: true,
+      inject: false,
       window: {
         locales: {
           de: require(resolve('src/locales/de.json')),
@@ -60,16 +70,6 @@ module.exports = {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
-    }),
-    // https://github.com/kisenka/svg-sprite-loader#extract-configuration
-    // https://github.com/kisenka/svg-sprite-loader/blob/master/examples/interop-with-html-webpack-plugin/webpack.config.js
-    new SpriteLoaderPlugin({
-      plainSprite: true,
-      spriteAttrs: {
-        width: 0,
-        height: 0,
-        style: 'position:absolute'
-      }
     })
   ],
   module: {
@@ -108,28 +108,6 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      },
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'svg-sprite-loader',
-            options: {
-              extract: true
-            }
-          },
-          {
-            loader: 'svgo-loader',
-            options: {
-              plugins: [
-                { removeTitle: true },
-                { removeStyleElement: true },
-                { removeUselessStrokeAndFill: true },
-                { removeAttrs: { attrs: '(stroke|fill)' } }
-              ]
-            }
-          }
-        ]
       }
     ]
   },

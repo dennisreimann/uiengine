@@ -20,7 +20,7 @@
     "uiengine-theme"
   ],
   "scripts": {
-    "clean": "rimraf lib dist",
+    "clean": "rimraf lib dist static",
     "start": "yarn run clean && NODE_ENV=development gulp develop",
     "build": "yarn run clean && NODE_ENV=production gulp build",
     "lint": "eslint --ext .js,.vue src test"
@@ -68,9 +68,6 @@
     "postcss-loader": "^2.1.0",
     "run-sequence": "^2.2.1",
     "stylus-loader": "^3.0.1",
-    "svg-sprite-loader": "^3.6.2",
-    "svgo": "^1.0.4",
-    "svgo-loader": "^2.1.0",
     "url-loader": "^0.6.2",
     "vue-loader": "^14.1.1",
     "vue-style-loader": "^3.1.2",
