@@ -4,7 +4,8 @@ export const template = title =>
 title: ${title}
 ---
 
-Hey! It looks like you have just set up this project – here are some first tips to get started.
+Hey! It looks like you have just set up this project.
+Here are some first tips to get started.
 Feel free to replace these hints with the actual content for your homepage once you got going …
 
 ## How to create a component?
