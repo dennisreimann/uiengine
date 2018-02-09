@@ -66,7 +66,7 @@ export default {
 
   props: {
     tokens: {
-      type: Object,
+      type: Array,
       required: true
     },
 

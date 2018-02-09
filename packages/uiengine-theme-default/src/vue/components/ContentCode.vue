@@ -4,18 +4,19 @@
       v-if="raw"
       class="code__segment"
       :class="{ 'code__segment--expanded': isRawExpanded }"
-      @click.prevent="isRawExpanded = !isRawExpanded"
     >
-      <header
+      <button
         class="code__header"
-        role="button"
+        type="button"
+        :title="'navigation.toggle' | localize"
+        @click.prevent="isRawExpanded = !isRawExpanded"
       >
         <h4 class="code__title">{{ 'code.raw' | localize }}</h4>
         <app-icon
           symbol="caret-down-double"
           class="code__expandicon"
         />
-      </header>
+      </button>
       <div
         class="code__content"
         v-html="renderedRaw"
@@ -26,18 +27,19 @@
       v-if="context"
       class="code__segment"
       :class="{ 'code__segment--expanded': isContextExpanded }"
-      @click.prevent="isContextExpanded = !isContextExpanded"
     >
-      <header
+      <button
         class="code__header"
-        role="button"
+        type="button"
+        :title="'navigation.toggle' | localize"
+        @click.prevent="isContextExpanded = !isContextExpanded"
       >
         <h4 class="code__title">{{ 'code.context' | localize }}</h4>
         <app-icon
           symbol="caret-down-double"
           class="code__expandicon"
         />
-      </header>
+      </button>
       <div
         class="code__content"
         v-html="renderedContext"
@@ -48,18 +50,19 @@
       v-if="rendered"
       class="code__segment"
       :class="{ 'code__segment--expanded': isRenderedExpanded }"
-      @click.prevent="isRenderedExpanded = !isRenderedExpanded"
     >
-      <header
+      <button
         class="code__header"
-        role="button"
+        type="button"
+        :title="'navigation.toggle' | localize"
+        @click.prevent="isRenderedExpanded = !isRenderedExpanded"
       >
         <h4 class="code__title">{{ 'code.rendered' | localize }}</h4>
         <app-icon
           symbol="caret-down-double"
           class="code__expandicon"
         />
-      </header>
+      </button>
       <div
         class="code__content"
         v-html="renderedRendered"
@@ -125,7 +128,9 @@ export default {
       fill var(--color-code-header)
     .code__header
       color var(--color-code-header)
-      &:hover
+      &:focus,
+      &:hover,
+      &:active
         color var(--color-code-header-hover)
         .code__expandicon
           fill var(--color-code-header-hover)
@@ -142,6 +147,8 @@ export default {
 
   &__header
     display flex
+    width 100%
+    background transparent
     align-items center
     justify-content space-between
     border 1px solid var(--color-border-medium)

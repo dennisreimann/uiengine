@@ -11,6 +11,7 @@
         <button
           class="preview__sizer"
           type="button"
+          :title="'breakpoints.toggle' | localize"
           @click.stop="isBreakpointsActive = !isBreakpointsActive"
         >{{ size }}</button>
       </div>
@@ -37,6 +38,7 @@
       <iframe
         ref="iframe"
         :src="src"
+        :title="title"
         class="preview__iframe"
         frameborder="0"
         scrolling="no"
@@ -54,7 +56,7 @@ const iframeResizerOpts = { resizeFrom: 'child' }
 
 export default {
   props: {
-    id: {
+    title: {
       type: String,
       required: true
     },

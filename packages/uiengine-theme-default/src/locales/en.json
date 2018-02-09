@@ -1,6 +1,10 @@
 {
+  "navigation": {
+    "toggle": "toggle"
+  },
   "breakpoints": {
-    "reset": "reset"
+    "reset": "reset",
+    "toggle": "toggle"
   },
   "component": {
     "info": "Info",

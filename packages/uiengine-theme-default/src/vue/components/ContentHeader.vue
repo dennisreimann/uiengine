@@ -61,6 +61,7 @@ export default {
 
     &--active
       color var(--color-contentheader-link-current)
+      font-family var(--font-family-bold)
 
   &__option + &__option
     margin-left var(--space-l)
@@ -77,7 +78,9 @@ export default {
     cursor pointer
     icon-size(.875)
 
-    &:hover
+    &:focus,
+    &:hover,
+    &:active
       .icon
         fill var(--color-contentheader-link-hover)
 

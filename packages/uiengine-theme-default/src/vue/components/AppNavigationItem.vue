@@ -14,7 +14,9 @@
     >{{ item.title }}</router-link>
     <button
       v-if="hasChildren"
+      type="button"
       class="navigation__itemtoggle"
+      :title="'navigation.toggle' | localize"
       @click.prevent="setCollapsed(!isCollapsed)"
     >
       <app-icon

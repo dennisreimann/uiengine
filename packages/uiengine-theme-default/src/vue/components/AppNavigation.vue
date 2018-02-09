@@ -7,7 +7,8 @@
   >
     <button
       class="navigation__menutoggle"
-      data-target="navigation"
+      type="button"
+      :title="'navigation.toggle' | localize"
       @click.prevent="setNavigationCollapsed(!navigationCollapsed)"
     >
       <app-icon
@@ -57,6 +58,10 @@ export default {
     text-decoration none
     text-align center
     font-family var(--font-family-regular)
+    &:focus,
+    &:hover,
+    &:active
+      color var(--color-navigation-text-hover)
     @media $mq-up_to_l
       padding var(--space-m) var(--space-xxl)
     @media $mq-l_and_up
@@ -89,6 +94,11 @@ export default {
     cursor pointer
     background transparent
     position absolute
+    &:focus,
+    &:hover,
+    &:active
+      .navigation__icon
+        fill var(--color-navigation-text-hover)
 
   &__menutoggle
     width 40px
@@ -137,6 +147,11 @@ export default {
     text-decoration none
     border-left var(--space-xs) solid transparent
     padding-right var(--space-m)
+    &[href]
+      &:focus,
+      &:hover,
+      &:active
+        color var(--color-navigation-text-hover)
     @media $mq-up_to_l
       padding-top var(--space-m)
       padding-bottom var(--space-m)

@@ -32,6 +32,7 @@
         <button
           class="contentheader__actiontoggle"
           type="button"
+          :title="'navigation.toggle' | localize"
           @click.stop="isActionlistActive = !isActionlistActive"
         >
           <app-icon symbol="tools" />
@@ -85,8 +86,8 @@
         :class="{ 'contentsection--active': isPreviewActive }"
       >
         <content-preview
-          :id="variant.id | dasherize"
           :src="previewPath"
+          :title="variant.title"
           :breakpoints="config.breakpoints"
         />
       </div>

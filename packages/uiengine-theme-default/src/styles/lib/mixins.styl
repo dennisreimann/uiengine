@@ -16,7 +16,9 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
   transition-duration var(--transition-duration-fast)
   text-decoration none
 
-  &:hover
+  &:focus,
+  &:hover,
+  &:active
     color $color-hover
 
     .icon
@@ -38,9 +40,12 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
       border-bottom 1px solid $color-base
       transition-duration var(--transition-duration-fast)
 
-    &:hover:after
-      width 100%
-      border-bottom 1px solid $color-hover
+    &:focus,
+    &:hover,
+    &:active
+      &:after
+        width 100%
+        border-bottom 1px solid $color-hover
 
 modal-option()
   display block
@@ -60,7 +65,9 @@ modal-option()
     icon-size(.875)
     icon-position(6px)
 
-  &:hover
+  &:focus,
+  &:hover,
+  &:active
     color var(--color-modal-text-hover)
     background var(--color-modal-bg-hover)
 

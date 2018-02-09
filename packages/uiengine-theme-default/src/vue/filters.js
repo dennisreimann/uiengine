@@ -9,5 +9,10 @@ Vue.filter('localize', key => {
   const dict = window.UIengine.locales[locale]
   const localized = key.split('.').reduce((a, b) => a && a[b], dict)
 
-  return localized || `[${key}]`
+  if (localized) {
+    return localized
+  } else {
+    console.warn(`Missing localization for key "${key}"!`)
+    return `[${key}]`
+  }
 })

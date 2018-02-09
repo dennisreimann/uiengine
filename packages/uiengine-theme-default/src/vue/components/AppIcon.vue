@@ -1,7 +1,8 @@
 <template>
   <svg
     class="icon"
-    role="img"
+    role="presentation"
+    :title="symbol"
   >
     <use :href="symbolHref" />
   </svg>
