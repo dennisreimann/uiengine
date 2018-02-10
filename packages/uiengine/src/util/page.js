@@ -16,13 +16,13 @@ const PAGE_TYPE_TOKENS = 'tokens'
 const PAGE_TYPE_TEMPLATE = 'template'
 const PAGE_TYPE_DOCUMENTATION = 'documentation'
 
-const isIndexPage = (pageId) =>
+const isIndexPage = pageId =>
   pageId === INDEX_ID
 
-const isIndexFilePath = (pagePath) =>
+const isIndexFilePath = pagePath =>
   pagePath === INDEX_FILE_PATH
 
-const isIndexPagePath = (pagePath) =>
+const isIndexPagePath = pagePath =>
   pagePath === INDEX_PAGE_PATH
 
 const isTokensPage = pageType =>
@@ -34,7 +34,7 @@ const isTemplatePage = pageType =>
 const isDocumentationPage = pageType =>
   pageType === PAGE_TYPE_DOCUMENTATION
 
-const pageIdToPath = (pageId) =>
+const pageIdToPath = pageId =>
   isIndexPage(pageId) ? INDEX_PAGE_PATH : pageId
 
 const pageIdForComponentId = (parentPageId, componentId) =>
@@ -43,7 +43,7 @@ const pageIdForComponentId = (parentPageId, componentId) =>
 const pagePathForComponentId = (parentPagePath, componentId) =>
   isIndexPagePath(parentPagePath) ? componentId : `${parentPagePath}/${componentId}`
 
-const pageIdToTitle = (pageId) => {
+const pageIdToTitle = pageId => {
   if (isIndexPage(pageId)) return 'Home'
 
   const base = basename(pageId)
@@ -101,7 +101,7 @@ const parentIdsForPageId = (pageIds, pageId) => {
   return parentIds
 }
 
-const determineType = (attributes) => {
+const determineType = attributes => {
   if (attributes.template) {
     return PAGE_TYPE_TEMPLATE
   } else if (attributes.tokens) {
@@ -119,6 +119,10 @@ const determineTitle = (id, attributes, content) => {
     title = heading || pageIdToTitle(id)
   }
   return title
+}
+
+const hasContent = content => {
+  return !!content && content.replace(/^<h1.*?>(.*?)<\/h1>/, '').trim().length > 0
 }
 
 // turns the list of children from the user provided attributes
@@ -178,6 +182,7 @@ module.exports = {
   convertUserProvidedComponentsList,
   determineType,
   determineTitle,
+  hasContent,
   PAGE_FILENAME,
   INDEX_ID,
   ENTITIES_ID,

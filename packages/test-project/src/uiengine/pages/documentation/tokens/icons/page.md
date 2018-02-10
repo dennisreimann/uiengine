@@ -1,6 +1,5 @@
----
-title: Icons
----
+# Icons
+
 Our icons. Usage: `<i class="ID icon"></i>`
 
 <link rel="stylesheet" type="text/css" href="../../../assets/semantic/components/icon.min.css">

@@ -1,6 +1,5 @@
----
-title: Home
----
+# Home
+
 Welcome! This is the UIengine Sample Project.
 It contains some sample pages to showcase and also test the basic functionality provided by the UIengine.
 

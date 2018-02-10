@@ -247,4 +247,18 @@ describe('PageUtil', () => {
       assert.equal('Atoms', PageUtil.determineTitle('atoms', {}, ''))
     })
   })
+
+  describe('#hasContent', () => {
+    it('should return true if it has a title', () => {
+      assert.equal(true, PageUtil.hasContent('<h1 id="atoms">Atoms</h1>\n<p>This is content.</p>'))
+    })
+
+    it('should return false if it has only a title', () => {
+      assert.equal(false, PageUtil.hasContent('<h1 id="atoms">Atoms</h1>'))
+    })
+
+    it('should return false if content is not set', () => {
+      assert.equal(false, PageUtil.hasContent(null))
+    })
+  })
 })

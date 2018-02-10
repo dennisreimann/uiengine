@@ -10,7 +10,7 @@ const state = {
     'link': Factory.component('link', { title: 'Link' })
   },
   pages: {
-    'index': Factory.page('index', { title: 'Home', childIds: ['atoms', 'molecules'], content: '<h1>Homepage</h1>' }),
+    'index': Factory.page('index', { title: 'Home', childIds: ['atoms', 'molecules'], content: '<h1>Homepage</h1>\n<p>This is some content.</p>' }),
     'atoms': Factory.page('atoms', { title: 'Atoms', childIds: ['atoms/docs', 'atoms/more-docs'], componentIds: ['link', 'button'] }),
     'molecules': Factory.page('molecules', { title: 'Molecules' }),
     'atoms/docs': Factory.page('atoms/docs', { title: 'Atom Docs' }),

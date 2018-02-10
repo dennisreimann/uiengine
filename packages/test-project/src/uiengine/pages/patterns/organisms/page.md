@@ -1,5 +1,5 @@
 ---
-title: Organisms
 components:
 - form
 ---
+# Organisms

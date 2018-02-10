@@ -1,5 +1,4 @@
 ---
-title: Pattern Library
 # explicitely list children to ensure the correct order
 children:
 - atoms
@@ -8,4 +7,6 @@ children:
 - templates
 - pages
 ---
+# Pattern Library
+
 The test project pattern styles are provided by [Semantic UI](https://semantic-ui.com/collections/form.html).

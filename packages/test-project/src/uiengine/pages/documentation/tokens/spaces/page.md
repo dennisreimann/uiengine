@@ -1,5 +1,4 @@
 ---
-title: Spaces
 tokens: 
 - type: size
   name: S
@@ -18,4 +17,6 @@ tokens:
   value: 3rem
   variable: $space-xl
 ---
+# Spaces
+
 Our spacings.

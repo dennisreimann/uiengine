@@ -1,4 +1,3 @@
----
-title: AJAX-Layer
----
+# AJAX-Layer
+
 This is the content
