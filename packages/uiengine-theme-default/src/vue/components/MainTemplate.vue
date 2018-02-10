@@ -86,6 +86,7 @@
 
     <div class="sot-xl">
       <content-preview
+        :id="id"
         :src="previewPath"
         :title="page.title"
         :breakpoints="config.breakpoints"

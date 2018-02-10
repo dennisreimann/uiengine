@@ -86,6 +86,7 @@
         :class="{ 'contentsection--active': isPreviewActive }"
       >
         <content-preview
+          :id="variant.id | dasherize"
           :src="previewPath"
           :title="variant.title"
           :breakpoints="config.breakpoints"
