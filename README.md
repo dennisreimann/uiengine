@@ -30,6 +30,7 @@ There is also an
 ### Component documentation and preview
 
 ![Component 01](./docs/media/screenshot-01.png)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdennisreimann%2Fuiengine.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdennisreimann%2Fuiengine?ref=badge_shield)
 
 ### Component schema, code view and options
 
@@ -124,3 +125,7 @@ Here are some other projects that you might want to evaluate:
 - - - - -
 
 👨🏻‍💻 Brought to you by the nice people behind [UIengineering](https://www.uiengineering.de). 👨🏻‍💻
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdennisreimann%2Fuiengine.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdennisreimann%2Fuiengine?ref=badge_large)
