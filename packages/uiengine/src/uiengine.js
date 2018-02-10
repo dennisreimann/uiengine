@@ -3,8 +3,6 @@ const Core = require('./core')
 const debounce = require('./util/debounce')
 const { debug3 } = require('./util/debug')
 
-export const CONFIG_FILENAME = 'uiengine.yml'
-
 const sourceFilesFromConfig = ({ source: { configFile, components, data, entities, pages, templates }, adapters, debug, theme }) => {
   const exts = '.{' + Object.keys(adapters).concat('md').join(',') + '}'
   const componentsGlob = components ? join(components, '**/*' + exts) : null
@@ -151,8 +149,6 @@ export async function build (options = {}) {
   console.log('🚧  Building …')
 
   try {
-    options.config = options.config || CONFIG_FILENAME
-
     const state = await Core.generate(options)
 
     console.log('✅  Build done!')

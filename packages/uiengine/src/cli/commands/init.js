@@ -16,7 +16,7 @@ exports.handler = argv => {
   const name = titleize(basename(directory))
   const pagesDir = 'src/uiengine/pages'
   const previewFileName = 'src/templates/variant-preview.html'
-  const configFileName = argv.config
+  const configFileName = 'uiengine.config.js'
   const configTemplate = require('../templates/config').template
   const previewTemplate = require('../templates/preview').template
   const pageTemplate = require('../templates/initial_page').template
@@ -32,7 +32,6 @@ exports.handler = argv => {
 
   Promise.all([createConfigFile, createIndexPage, createPreviewFile])
     .then(state => {
-      const configOpt = configFileName !== 'uiengine.yml' ? `--config=${configFileName}` : ''
       console.log(`✅  Initialized ${name}!
 
 The following files were created:
@@ -44,7 +43,7 @@ The following files were created:
 Go ahead and update the config file according to your needs.
 After that you can generate the site using this command:
 
-$ uiengine build ${configOpt}
+$ uiengine build
 
 Enjoy! ✌️`)
     })

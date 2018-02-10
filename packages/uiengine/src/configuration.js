@@ -1,7 +1,7 @@
 const { dirname, resolve } = require('path')
 const R = require('ramda')
 const assert = require('assert')
-const Yaml = require('./util/yaml')
+const cosmiconfig = require('cosmiconfig')
 const { error } = require('./util/message')
 
 const readPackageJson = () => {
@@ -48,17 +48,24 @@ const resolvePackage = (basedir, config, type) => {
   }
 }
 
-async function read (configFilePath, flags = {}) {
-  const projectConfig = await Yaml.fromFile(configFilePath)
-  return _read(configFilePath, flags, projectConfig)
+async function read (flags = {}) {
+  const configPath = flags.config || 'uiengine.config.js'
+  const explorer = cosmiconfig('uiengine', { rcExtensions: true, configPath })
+
+  try {
+    const result = await explorer.load()
+
+    if (result) {
+      return _read(result.filepath, result.config, flags)
+    } else {
+      throw new Error(`No configuration found. Please specify it in ${configPath}`)
+    }
+  } catch (err) {
+    throw new Error(error(`Could not read UIengine configuration:`, err.message))
+  }
 }
 
-function readSync (configFilePath, flags = {}) {
-  const projectConfig = Yaml.fromFileSync(configFilePath)
-  return _read(configFilePath, flags, projectConfig)
-}
-
-const _read = (configFilePath, flags, projectConfig) => {
+const _read = (configFilePath, projectConfig, flags) => {
   // retrieve config and options
   const configPath = dirname(configFilePath)
   const packageData = readPackageJson()
@@ -95,6 +102,5 @@ const _read = (configFilePath, flags, projectConfig) => {
 }
 
 module.exports = {
-  read,
-  readSync
+  read
 }

@@ -16,7 +16,7 @@ const entitiesPath = resolve(testProjectPath, 'src', 'uiengine', 'entities')
 const componentsPath = resolve(testProjectPath, 'src', 'components')
 const templatesPath = resolve(testProjectPath, 'src', 'templates')
 const indexPath = join(testProjectTargetPath, 'index.html')
-const opts = { config: resolve(testProjectPath, 'uiengine.yml') }
+const opts = { config: resolve(testProjectPath, 'uiengine.config.js') }
 
 // "end to end" tests
 describe('Core', function () {

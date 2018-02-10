@@ -18,7 +18,7 @@ const state = {
     update: Date.now(),
     source: {
       base: testProjectPath,
-      configFile: resolve(testProjectPath, 'uiengine.yml'),
+      configFile: resolve(testProjectPath, 'uiengine.config.js'),
       components: resolve(testProjectPath, 'src', 'components'),
       templates: resolve(testProjectPath, 'src', 'templates'),
       entities: resolve(testProjectPath, 'src', 'uiengine', 'entities'),

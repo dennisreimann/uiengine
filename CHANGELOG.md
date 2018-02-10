@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.14.0]
+
+### Changed
+
+- More flexible configuration lookup
+  - The config file is now retrieved via [cosmiconfig](https://github.com/davidtheclark/cosmiconfig)
+  - The default config file is `uiengine.config.js`
+  - FOr alternative ways to store your config (i.e. in package.json) see the cosmiconfig docs
+
 ## [0.13.0]
 
 ### Changed
@@ -11,7 +20,7 @@
   - Templates are still resolved relative to `source.templates`
 
 - Wording changed from "schema" to "entities" and "properties"
-  - This reflects the actual use case and intention of the feature better 
+  - This reflects the actual use case and intention of the feature better
 
 - The theme is now extendible via CSS custom properties
   - The `skin` option for the theme has been removed

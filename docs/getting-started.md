@@ -41,13 +41,13 @@ You should initialize the UIengine in the directory that also contains your `pac
 uiengine init
 ```
 
-This command creates a config file named `uiengine.yml`, which contains the basic configuration.
+This command creates a config file named `uiengine.config.js`, which contains the basic configuration.
 It also creates the folder `pages` containing a `page.md` file.
 This is the page file for the index page of the documentation.
 
 ## ⚙️ How to configure the project?
 
-The config file `uiengine.yml` contains the basic configuration for your project.
+The config file `uiengine.config.js` contains the basic configuration for your project.
 If you generated the file with the `init` command it contains comments for the individual sections.
 See the [config documentation](./config.md) for details.
 

@@ -1,5 +1,4 @@
 const { join } = require('path')
-const UIengine = require('../uiengine')
 
 module.exports = require('yargs')
   // debug
@@ -8,12 +7,6 @@ module.exports = require('yargs')
   .default('debug', 0)
   .describe('debug', 'Flag to enable debug mode')
   .alias('d', 'debug')
-  // config
-  .string('config')
-  .global('config')
-  .default('config', UIengine.CONFIG_FILENAME)
-  .describe('config', 'Path to config file')
-  .alias('c', 'config')
   // command
   .demandCommand(1)
   .commandDir(join(__dirname, 'commands'))

@@ -24,7 +24,6 @@ gulp.task('uiengine', done => {
 
 The `UIengine.build()` function accepts an options object with the following optional properties:
 
-- `config`: the path to your [project configuration](./config.md) file (default `uiengine.yml`).
 - `debug`: Debug level from `1` (basic) to `4` (very verbose) (default `0`).
 - `serve`: Spawn a development server (default `false`).
 - `watch`: Rebuild the site on changes (default `false`).

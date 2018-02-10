@@ -18,7 +18,7 @@ describe('TemplateUtil', () => {
     })
 
     it('should return null for non-template file path', () => {
-      const configFilePath = resolve(testProjectPath, 'uiengine.yml')
+      const configFilePath = resolve(testProjectPath, 'uiengine.config.js')
       assert.equal(TemplateUtil.templateFilePathToTemplateId(templatesPath, configFilePath), null)
     })
   })

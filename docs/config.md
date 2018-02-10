@@ -1,7 +1,6 @@
 # Configuration
 
-The project configuration lives in a file named `uiengine.yml`.
-This file is written in YAML and you can use the custom UIengine extensions that are described in the [YAML documentation](./yaml.md).
+The project configuration lives in a file named `uiengine.config.js`.
 
 ## Sections
 
@@ -10,9 +9,11 @@ This file is written in YAML and you can use the custom UIengine extensions that
 Defaults to `name` and `version` from your package.json file.
 Here you can overwrite it and add more custom properties.
 
-```yaml
-name: ACME Design System
-version: 1.0.0
+```js
+{
+  name: 'ACME Design System',
+  version: '1.0.0'
+}
 ```
 
 ### Source
@@ -25,21 +26,26 @@ The base directories for the input, your raw source files:
 - `data` contains sample data that can be referenced in variants and pages
 - `entities` contains the optional [entity definitions](./entities-properties.md) for the components
 
-```yaml
-source:
-  components: ./src/components
-  templates: ./src/templates
-  pages: ./src/uiengine/pages
-  data: ./src/uiengine/data
-  entities: ./src/uiengine/entities
+```js
+{
+  source: {
+    components: './src/components',
+    templates: './src/templates',
+    pages: './src/uiengine/pages',
+    data: './src/uiengine/data',
+    entities: './src/uiengine/entities'
+  }
+}
 ```
 
 ### Target
 
 Destination paths for the generated output.
 
-```yaml
-target: ./dist
+```js
+{
+  target: './dist'
+}
 ```
 
 ### Adapters
@@ -51,27 +57,37 @@ Each adapter is a module that gets required, for details see the [adapters docum
 There are two slightly different ways to configure the value:
 The first way is to directly reference the module or path that will get required:
 
-```yaml
-adapters:
-  pug: uiengine-adapter-pug
-  hbs: uiengine-adapter-handlebars
-  jsx: uiengine-adapter-react
+```js
+{
+  adapters: {
+    pug: 'uiengine-adapter-pug',
+    hbs: 'uiengine-adapter-handlebars',
+    jsx: 'uiengine-adapter-react'
+  }
+}
 ```
 
 In case you need to provide additional options that will be passed to the adapter, you need to
 explicitely reference the module and its options:
 
-```yaml
-adapters:
-  pug:
-    module: uiengine-adapter-pug
-    options:
-      pretty: true
-      basedir: ./src/components
-  hbs:
-    module: uiengine-adapter-handlebars
-    options:
-      namespace: 'my-project'
+```js
+{
+  adapters: {
+    pug: {
+      module: 'uiengine-adapter-pug',
+      options: {
+        pretty: true,
+        basedir: './src/components'
+      }
+    },
+    hbs: {
+      module: 'uiengine-adapter-handlebars',
+      options: {
+        namespace: 'my-project'
+      }
+    }
+  }
+}
 ```
 
 In either way the adapter module can be …
@@ -86,8 +102,10 @@ In either way the adapter module can be …
 This is the template the variant preview gets rendered into.
 It should contain references to your styles and scripts, so that the rendered variant markup has everything it needs.
 
-```yaml
-variantTemplate: variant-preview.pug
+```js
+{
+  variantTemplate: 'variant-preview.html'
+}
 ```
 
 ### Theme
@@ -100,13 +118,16 @@ See the [theme configuration options](./theme.md) for details and default values
 The breakpoints defined here will be shown in the viewport resizer tool for the variant preview.
 Declare them with the name as key and the minimum media query pixel being the value.
 
-```yaml
-breakpoints:
-  XS: 320
-  S: 560
-  M: 760
-  L: 960
-  XL: 1280
+```js
+{
+  breakpoints: {
+    XS: 320,
+    S: 560,
+    M: 760,
+    L: 960,
+    XL: 1280
+  }
+}
 ```
 
 ### BrowserSync
@@ -114,11 +135,14 @@ breakpoints:
 The `uiengine build` command (see the [getting started guide](./getting-started.md) supports modes for serving and watching files.
 Here you can pass in the corresponding [BrowserSync configuration](https://www.browsersync.io/docs/options/):
 
-```yaml
-# either directly
-browserSync:
-  open: false
+```js
+{
+  // either directly
+  browserSync: {
+    open: false
+  },
 
-# or by referencing an external file:
-browserSync: !include bs-config.js
+  // or by referencing an external file:
+  browserSync: require('./bs-config.js')
+}
 ```

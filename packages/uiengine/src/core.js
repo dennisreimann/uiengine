@@ -26,8 +26,7 @@ let _isGenerating = false
 const isGenerating = () => _isGenerating
 
 async function init (options = {}) {
-  const configFilePath = options.config
-  const config = await Config.read(configFilePath, options)
+  const config = await Config.read(options)
 
   return { config }
 }
