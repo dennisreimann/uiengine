@@ -3,12 +3,12 @@
     <div
       v-if="raw"
       class="code__segment"
-      :class="{ 'code__segment--expanded': isRawExpanded }"
     >
       <button
         class="code__header"
         type="button"
         :title="'navigation.toggle' | localize"
+        :aria-expanded="isRawExpanded | bool2string"
         @click.prevent="isRawExpanded = !isRawExpanded"
       >
         <h4 class="code__title">{{ 'code.raw' | localize }}</h4>
@@ -18,7 +18,7 @@
         />
       </button>
       <div
-        class="code__content"
+        :hidden="!isRawExpanded"
         v-html="renderedRaw"
       />
     </div>
@@ -26,12 +26,12 @@
     <div
       v-if="context"
       class="code__segment"
-      :class="{ 'code__segment--expanded': isContextExpanded }"
     >
       <button
         class="code__header"
         type="button"
         :title="'navigation.toggle' | localize"
+        :aria-expanded="isContextExpanded | bool2string"
         @click.prevent="isContextExpanded = !isContextExpanded"
       >
         <h4 class="code__title">{{ 'code.context' | localize }}</h4>
@@ -41,7 +41,7 @@
         />
       </button>
       <div
-        class="code__content"
+        :hidden="!isContextExpanded"
         v-html="renderedContext"
       />
     </div>
@@ -49,12 +49,12 @@
     <div
       v-if="rendered"
       class="code__segment"
-      :class="{ 'code__segment--expanded': isRenderedExpanded }"
     >
       <button
         class="code__header"
         type="button"
         :title="'navigation.toggle' | localize"
+        :aria-expanded="isRenderedExpanded | bool2string"
         @click.prevent="isRenderedExpanded = !isRenderedExpanded"
       >
         <h4 class="code__title">{{ 'code.rendered' | localize }}</h4>
@@ -64,7 +64,7 @@
         />
       </button>
       <div
-        class="code__content"
+        :hidden="!isRenderedExpanded"
         v-html="renderedRendered"
       />
     </div>
@@ -134,16 +134,11 @@ export default {
         color var(--color-code-header-hover)
         .code__expandicon
           fill var(--color-code-header-hover)
-
-    &--expanded
-      .code__header
+      &[aria-expanded="true"]
         color var(--color-code-header-current)
-      .code__expandicon
-        fill var(--color-code-header-current)
-        transform rotate(-180deg)
-
-  &__segment:not(&--expanded) + &__segment &__header
-    border-top 0
+        .code__expandicon
+          fill var(--color-code-header-current)
+          transform rotate(-180deg)
 
   &__header
     display flex
@@ -156,13 +151,11 @@ export default {
     cursor pointer
     color var(--color-code-header)
 
+  &__segment + &__segment &__header
+    border-top 0
+
   &__expandicon
     transition-property transform
     transition-duration var(--transition-duration-fast)
     icon-size(1)
-
-  &__content
-    display none
-    .code__segment--expanded &
-      display block
 </style>

@@ -16,3 +16,5 @@ Vue.filter('localize', key => {
     return `[${key}]`
   }
 })
+
+Vue.filter('bool2string', bool => bool ? 'true' : 'false')
