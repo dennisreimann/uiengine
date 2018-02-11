@@ -56,10 +56,10 @@ export default {
     transition-property color
     transition-duration var(--transition-duration-fast)
 
-    &:not(&--active):hover
+    &:not(&[aria-selected]):hover
       color var(--color-contentheader-link-hover)
 
-    &--active
+    &[aria-selected]
       color var(--color-contentheader-link-current)
       font-family var(--font-family-bold)
 

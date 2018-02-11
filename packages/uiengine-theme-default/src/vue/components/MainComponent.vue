@@ -10,19 +10,30 @@
         <content-heading class="contentheader__title">{{ component.title }}</content-heading>
         <div
           v-if="hasInfo && hasProperties"
+          role="tablist"
           class="contentheader__options"
         >
           <a
+            role="tab"
+            ref="info-tab"
             href="#info"
             class="contentheader__option"
-            :class="{ 'contentheader__option--active': isInfoActive }"
+            :id="tabId('info')"
+            :aria-selected="isInfoActive"
+            :tabindex="isInfoActive ? false : '-1'"
             @click.prevent="activeSection = 'info'"
+            @keydown.right="switchTab('properties')"
           >{{ 'component.info' | localize }}</a>
           <a
+            role="tab"
+            ref="properties-tab"
             href="#properties"
             class="contentheader__option"
-            :class="{ 'contentheader__option--active': isPropertiesActive }"
+            :id="tabId('properties')"
+            :aria-selected="isPropertiesActive"
+            :tabindex="isPropertiesActive ? false : '-1'"
             @click.prevent="activeSection = 'properties'"
+            @keydown.left="switchTab('info')"
           > {{ 'component.properties' | localize }}</a>
         </div>
       </content-header>
@@ -34,7 +45,9 @@
         <div
           v-if="hasInfo"
           class="contentsection"
-          :class="{ 'contentsection--active': isInfoActive }"
+          role="tabpanel"
+          :aria-labelledby="tabId('info')"
+          :hidden="!isInfoActive"
         >
           <div
             v-if="component.content"
@@ -64,7 +77,9 @@
         <div
           v-if="hasProperties"
           class="contentsection"
-          :class="{ 'contentsection--active': isPropertiesActive }"
+          role="tabpanel"
+          :aria-labelledby="tabId('properties')"
+          :hidden="!isPropertiesActive"
         >
           <div class="content">
             <content-properties
@@ -160,7 +175,16 @@ export default {
   },
 
   methods: {
-    dasherize
+    dasherize,
+
+    tabId (section) {
+      return `${dasherize(this.component.id)}-${section}`
+    },
+
+    switchTab (section) {
+      this.activeSection = section
+      this.$refs[`${section}-tab`].focus()
+    }
   }
 }
 </script>

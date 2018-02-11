@@ -12,19 +12,30 @@
 
       <div
         v-if="hasPreview && hasCode"
+        role="tablist"
         class="contentheader__options"
       >
         <a
           href="#"
+          ref="preview-tab"
+          role="tab"
           class="contentheader__option"
-          :class="{ 'contentheader__option--active': isPreviewActive }"
+          :id="tabId('preview')"
+          :aria-selected="isPreviewActive"
+          :tabindex="isPreviewActive ? false : '-1'"
           @click.prevent="activeSection = 'preview'"
+          @keydown.right="switchTab('code')"
         >{{ 'variant.preview' | localize }}</a>
         <a
           href="#"
+          ref="code-tab"
+          role="tab"
           class="contentheader__option"
-          :class="{ 'contentheader__option--active': isCodeActive }"
+          :id="tabId('code')"
+          :aria-selected="isCodeActive"
+          :tabindex="isCodeActive ? false : '-1'"
           @click.prevent="activeSection = 'code'"
+          @keydown.left="switchTab('preview')"
         > {{ 'variant.code' | localize }}</a>
       </div>
 
@@ -83,7 +94,9 @@
       <div
         v-if="hasPreview"
         class="contentsection"
-        :class="{ 'contentsection--active': isPreviewActive }"
+        role="tabpanel"
+        :aria-labelledby="tabId('preview')"
+        :hidden="!isPreviewActive"
       >
         <content-preview
           :id="variant.id | dasherize"
@@ -96,7 +109,9 @@
       <div
         v-if="hasCode"
         class="contentsection"
-        :class="{ 'contentsection--active': isCodeActive }"
+        role="tabpanel"
+        :aria-labelledby="tabId('code')"
+        :hidden="!isCodeActive"
       >
         <content-code
           :extension="variant.extension"
@@ -176,6 +191,17 @@ export default {
     this.$root.$on('modal:close', () => {
       this.isActionlistActive = false
     })
+  },
+
+  methods: {
+    tabId (section) {
+      return `${dasherize(this.variant.id)}-${section}`
+    },
+
+    switchTab (section) {
+      this.activeSection = section
+      this.$refs[`${section}-tab`].focus()
+    }
   }
 }
 

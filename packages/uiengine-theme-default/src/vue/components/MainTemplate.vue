@@ -6,19 +6,30 @@
 
         <div
           v-if="hasInfo && hasProperties"
+          role="tablist"
           class="contentheader__options"
         >
           <a
+            role="tab"
+            ref="info-tab"
             href="#info"
             class="contentheader__option"
-            :class="{ 'contentheader__option--active': isInfoActive }"
+            :id="tabId('info')"
+            :aria-selected="isInfoActive"
+            :tabindex="isInfoActive ? false : '-1'"
             @click.prevent="activeSection = 'info'"
+            @keydown.right="switchTab('properties')"
           >{{ 'template.info' | localize }}</a>
           <a
+            role="tab"
+            ref="properties-tab"
             href="#properties"
             class="contentheader__option"
-            :class="{ 'contentheader__option--active': isPropertiesActive }"
+            :id="tabId('properties')"
+            :aria-selected="isPropertiesActive"
+            :tabindex="isPropertiesActive ? false : '-1'"
             @click.prevent="activeSection = 'properties'"
+            @keydown.left="switchTab('info')"
           >{{ 'template.properties' | localize }}</a>
         </div>
 
@@ -56,7 +67,9 @@
         <div
           v-if="hasInfo"
           class="contentsection"
-          :class="{ 'contentsection--active': isInfoActive }"
+          role="tabpanel"
+          :aria-labelledby="tabId('info')"
+          :hidden="!isInfoActive"
         >
           <div
             v-if="page.content"
@@ -68,7 +81,9 @@
         <div
           v-if="hasProperties"
           class="contentsection"
-          :class="{ 'contentsection--active': isPropertiesActive }"
+          role="tabpanel"
+          :aria-labelledby="tabId('properties')"
+          :hidden="!isPropertiesActive"
         >
           <div class="content">
             <content-properties
@@ -97,6 +112,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { dasherize } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentPreview from './ContentPreview'
@@ -161,6 +177,19 @@ export default {
     this.$root.$on('modal:close', () => {
       this.isActionlistActive = false
     })
+  },
+
+  methods: {
+    dasherize,
+
+    tabId (section) {
+      return `${dasherize(this.page.id)}-${section}`
+    },
+
+    switchTab (section) {
+      this.activeSection = section
+      this.$refs[`${section}-tab`].focus()
+    }
   }
 }
 </script>

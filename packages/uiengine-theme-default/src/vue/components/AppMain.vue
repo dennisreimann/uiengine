@@ -37,11 +37,6 @@ export default {
   @media $mq-xl_and_up
     padding var(--space-xxl) var(--space-xxl)
 
-.contentsection
-  display none
-  &--active
-    display block
-
 .content
   max-width 55rem
 
