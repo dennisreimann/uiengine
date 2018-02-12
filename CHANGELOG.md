@@ -1,6 +1,11 @@
 # Changelog
 
-## [0.14.0]
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+## [0.14.0] - 2018-02-10
 
 ### Changed
 
@@ -9,7 +14,7 @@
   - The default config file is `uiengine.config.js`
   - FOr alternative ways to store your config (i.e. in package.json) see the cosmiconfig docs
 
-## [0.13.0]
+## [0.13.0] - 2018-02-09
 
 ### Changed
 
