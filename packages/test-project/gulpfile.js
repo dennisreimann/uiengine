@@ -20,7 +20,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 gulp.task('uiengine', ['webpack'], done => {
   const opts = {
     serve: isDev,
-    watch: isDev ? src.tokens : false
+    watch: isDev ? src.tokens.concat(['../uiengine-theme-default/dist/_uiengine-theme/**/*']) : false
   }
 
   UIengine.build(opts)
