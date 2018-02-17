@@ -187,17 +187,20 @@ code
 pre
   code-block()
 
+.layout
+  display flex
+  flex-direction column
+  height 100%
+
+.main
+  flex 1
+
 $navigation-width = 300px
 
 @media $mq-up_to_l
   .navigation
     position relative
 @media $mq-l_and_up
-  .layout
-    display flex
-    flex-direction column
-    height 100%
-
   .navigation
     position fixed
     top 0
@@ -206,10 +209,7 @@ $navigation-width = 300px
     width $navigation-width
     overflow-y scroll
 
-  .main
-    flex 1
-    margin-left $navigation-width
-
+  .main,
   .footer
     margin-left $navigation-width
 </style>
