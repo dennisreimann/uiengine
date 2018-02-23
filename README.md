@@ -25,19 +25,9 @@ To get an idea of what the basics look like, take a glimpse at the
 and the
 [sample project source code](./test/project).
 There is also an
-[introduction video](https://www.youtube.com/watch?v=OKHAhIQLvjU).
-
-### Component documentation and preview
-
-![Component 01](./docs/media/screenshot-01.png)
-
-### Component schema, code view and options
-
-![Component 02](./docs/media/screenshot-02.png)
-
-### Mobile UI
-
-![Mobile UI](./docs/media/screenshot-03.png)
+[introduction video](https://www.youtube.com/watch?v=OKHAhIQLvjU)
+and some
+[screenshots](./docs/media/) to give you a first impression.
 
 ## 🔩 Technical TL;DR
 
