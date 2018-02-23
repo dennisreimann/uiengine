@@ -1,29 +1,21 @@
 # UIengine
 
-The UIengine is a tool *for developers, designers and product owners* to *create, document and evolve a design system* collaboratively.
-It generates your *design system documentation* (i.e. pattern library, styleguide or brand manual) and brings *the tools to implement the design system* in your web site or application.
+Workbench for UI-driven development:
+A tool for developers and designers to build and document web sites and apps.
 
 ## 🚀  What it enables
 
-- Establishes a *component driven workflow* and structures your web UI into modular patterns/components.
-- Gives your team and stakeholders a central spot to *develop and document* the UI of the web site/application.
-- Produces production ready code from day one and *aims to replace most deliverables* with usable and testable output.
-- *Makes documentation fun and easy* by providing the tools to create and structure the docs in a way that fits your project.
-
-## ☝️ Disclaimer
-
-This project is currently under active development.
-Some of the concepts and APIs are subject to change.
-
-Please do not to rely on it for production use until we provide a stable v1.0 release (see the [roadmap](https://github.com/dennisreimann/uiengine/milestones) for details).
-Nevertheless we encourage you to try it out and provide feedback.
+- Establish a UI-driven workflow and structure your web UI into modular components.
+- Give your team and stakeholders a central spot to develop and discuss the UI.
+- Replace deliverables with usable, testable and production ready output/code.
+- Make documentation fun and easy by providing structure and nice looking pages.
 
 ## 🖥 Examples and Screenshots
 
-To get an idea of what the basics look like, take a glimpse at the
+To get an idea of what this looks like, see the
 [deployed sample project](http://uiengine-sample-project.uix.space/)
 and the
-[sample project source code](./test/project).
+[sample project source code](./test/project/).
 There is also an
 [introduction video](https://www.youtube.com/watch?v=OKHAhIQLvjU)
 and some
@@ -33,27 +25,47 @@ and some
 
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Build Status](https://travis-ci.org/dennisreimann/uiengine.svg?branch=master)](https://travis-ci.org/dennisreimann/uiengine)
-[![Coverage Status](https://coveralls.io/repos/github/dennisreimann/uiengine/badge.svg?branch=master)](https://coveralls.io/github/dennisreimann/uiengine?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/uiengine/badge.svg)](https://snyk.io/test/github/dennisreimann/uiengine)
+[![Coverage Status](https://coveralls.io/repos/github/dennisreimann/uiengine/badge.svg?branch=master)](https://coveralls.io/github/dennisreimann/uiengine?branch=master)
+[![npm](https://img.shields.io/npm/dw/uiengine.svg)](https://www.npmjs.com/package/uiengine)
 [![Maintained with lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 [![npm](https://img.shields.io/npm/v/uiengine.svg)](https://www.npmjs.com/package/uiengine)
-[![npm](https://img.shields.io/npm/dw/uiengine.svg)](https://www.npmjs.com/package/uiengine)
+
+### ⚒ How does it work?
 
 At its core, the UIengine is a static site generator.
-It consumes the data by parsing the files and structure of your project and generates the documentation site based on this data.
-In development mode the output is regenerated on file change and synced to the browser, giving you a comfortable experience creating the components and docs.
+It can be used in standalone mode or integrated into your build process.
 
-- **Template agnostic**: Various templating engines are integrated via the concept of adapters, giving you flexibility of choice and the option to integrate custom ones. It works best with whatever can be rendered via JavaScript, which includes popular solutions like JSX, Pug/Jade, Handlebars, etc.
-- **Best practice approach**: The tool guides you towards best practices like not using application logic in the view layer (i.e. having crazy amounts of helpers or global variables) by proposing a separation of data and template.
-- **In sync with the end product**: Since the docs are generated from the code that will be used in your application, you get a living pattern library – not a thing that needs to be looked after as a separate task.
-- **Covers green- and brownfield projects**: Whether you start out with a pattern library or want to transition your process and refactor your existing UI into modular components, the UIengine has you covered.
+➡️ Input: Your projects components, templates, pages and documentation
+
+⬅️ Output: A static site that can be used as a workbench for development and deployed documentation
+
+It consumes the files and structure of your project and generates the documentation based on this.
+In development mode the output is regenerated on file change and synced to the browser.
+This provides you with a development environment for creating the components, prototyping and writing the docs.
+
+### 💯 Main features
+
+- **Templating agnostic**: Various templating engines are integrated via adapters, giving you flexibility of choice and the option to integrate custom ones. It works with whatever can be rendered via JavaScript, which includes popular solutions like JSX, Vue, EJS, Pug/Jade, Handlebars, etc.
+- **Prototyping environment**: Build your UI without the need for an existing backend/API. Render your templates and components with mock data and build various variants for pages by providing different data to your views.
+- **Best practice approach**: The tool guides you towards best practices like not using application logic in the view layer by proposing a separation of data and template/component.
+- **In sync with the end product**: Since the docs are generated from the code that is used in your application, you get a living pattern library – not a separate thing that needs to be looked after regularly.
 - **Flexible integrations**: Templating engines and the theme can be configured or completely swapped out so you can fit it to your needs. Same goes for the markdown parsing/rendering which is configurable too.
+- **Covers green- and brownfield projects**: Whether you start out with a pattern library or want to transition your process and refactor your existing UI into modular components, the UIengine has you covered.
 
 For the evaluation process you might also want to have a look at the [alternatives](#-alternatives).
 
 ### 🗜 Prerequisites
 
 UIengine requires at least Node.js 6.9. Future versions will track the latest active Node.js LTS version, which guarantees a reasonable level of backwards compatibility.
+
+## ☝️ Disclaimer
+
+This project is currently under active development.
+Some of the concepts and APIs are subject to change.
+
+Please do not to rely on it for production use until we provide a stable v1.0 release (see the [roadmap](https://github.com/dennisreimann/uiengine/milestones) for details).
+Nevertheless we encourage you to try it out and provide feedback.
 
 ## 📘 Documentation
 
@@ -72,20 +84,6 @@ Technical documentation, with more detailed information:
 - [Theme](./docs/theme.md)
 - [YAML](./docs/yaml.md)
 - [Deployment](./docs/deployment.md)
-
-## 🛠 Development
-
-You like this project and are interested in participating?
-See the [development docs](./docs/development.md) for an introduction and workflows when hacking on the UIengine.
-
-### 👩‍💻👨‍🎨  The Vision: An Interface Exchange for everyone involved in UI 👩‍🔬👨‍💼
-
-The terms *pattern library* or *styleguide* suggest an association with a particular craft that affects the UI.
-Pattern libraries are understood as a tool that is primarily used by developers, whereas styleguides are associated with the creative output of the designers.
-In contrast to that, the term *Interface Exchange* describes a place where everyone involved in the UI comes together:
-Concept and user experience, product owners, as well as designers and developers.
-
-And even though the UIengine is not completely there yet, we strive to evolve it into a tool that fits the needs of all crafts.
 
 ## 💁 Individual packages
 
@@ -110,6 +108,11 @@ Here are some other projects that you might want to evaluate:
 - [patternplate](https://github.com/sinnerschrader/patternplate/)
 
 … or have a look at [the ever growing list of similar tools](https://github.com/davidhund/styleguide-generators).
+
+## 🛠 Development
+
+You like this project and are interested in participating?
+See the [development docs](./docs/development.md) for an introduction and workflows when hacking on the UIengine.
 
 - - - - -
 
