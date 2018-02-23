@@ -6,4 +6,4 @@ source:
   data: ./src/uiengine/data
 
 # Destination path for the generated site.
-target: ../../test/tmp
+target: ../tmp

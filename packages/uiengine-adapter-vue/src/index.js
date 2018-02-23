@@ -6,8 +6,6 @@ const { createRenderer } = require('vue-server-renderer')
 // const compiler = require('vue-component-compiler')
 // const defaultsdeep = require('lodash.defaultsdeep')
 
-require('babel-register')({})
-
 const requireModule = filePath => {
   // invalidate require cache so we get updates as well
   delete require.cache[require.resolve(filePath)]

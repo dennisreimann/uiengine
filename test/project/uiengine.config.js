@@ -22,7 +22,7 @@ module.exports = {
   },
 
   // Destination path for the generated site.
-  target: '../../test/tmp',
+  target: '../tmp',
 
   // Adapters are used for templating/rendering. Each adapter is a module that gets required
   // and needs to provide functions for setup and rendering. For details see the adapters docs.

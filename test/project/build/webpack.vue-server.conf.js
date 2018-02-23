@@ -16,7 +16,7 @@ module.exports = merge(baseConfig, {
   output: {
     libraryTarget: 'commonjs2',
     filename: 'vue-server.js',
-    path: resolve(__dirname, '../../../test/fixtures')
+    path: resolve(__dirname, '../../fixtures')
   },
 
   // https://webpack.js.org/configuration/externals/#function

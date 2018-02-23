@@ -19,6 +19,9 @@
     "uiengine",
     "ejs"
   ],
+  "devDependencies": {
+    "ejs": "^2.5.0"
+  },
   "peerDependencies": {
     "ejs": "^2.5.0"
   },

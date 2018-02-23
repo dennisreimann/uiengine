@@ -5,7 +5,7 @@ const { testProjectPath, testProjectTargetPath } = require('../../../test/suppor
 const Configuration = require('../src/configuration')
 
 // in the tests we have to provide the config option, because the cwd is
-// the project root and cosmiconf does not search packages/test-project.
+// the project root and cosmiconf does not search test/project.
 const testConfigPath = resolve(testProjectPath, 'uiengine.config.js')
 const opts = { config: testConfigPath }
 

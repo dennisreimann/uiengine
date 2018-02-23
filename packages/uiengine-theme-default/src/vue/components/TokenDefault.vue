@@ -40,4 +40,3 @@ export default {
     &--variable
       font-family var(--font-family-code)
 </style>
-

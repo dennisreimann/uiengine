@@ -1,6 +1,6 @@
 const { join } = require('path')
 
-const resolve = dir => join(__dirname, '../../../test/tmp', dir)
+const resolve = dir => join(__dirname, '../../tmp', dir)
 
 module.exports = {
   resolve: {

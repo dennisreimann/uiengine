@@ -34,7 +34,7 @@ For a list of available options see the [highlight.js demo](https://highlightjs.
 ### `customStylesFile`
 
 The path to a css files containing variable overrides and extensions for the theme.
-For an example see the [custom styles file of the test project](../packages/test-project/src/assets/styles/uiengine-custom-styles.css).
+For an example see the [custom styles file of the test project](../test/project/src/assets/styles/uiengine-custom-styles.css).
 
 ### `debug`
 

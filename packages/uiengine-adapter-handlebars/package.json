@@ -19,6 +19,9 @@
     "uiengine",
     "handlebars"
   ],
+  "devDependencies": {
+    "handlebars": "^4.0.0"
+  },
   "peerDependencies": {
     "handlebars": "^4.0.0"
   },

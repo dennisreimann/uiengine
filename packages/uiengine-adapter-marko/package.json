@@ -19,6 +19,9 @@
     "uiengine",
     "marko"
   ],
+  "devDependencies": {
+    "marko": "^4.5.0"
+  },
   "peerDependencies": {
     "marko": "^4.5.0"
   },

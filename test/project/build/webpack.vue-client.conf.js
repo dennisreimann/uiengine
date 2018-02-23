@@ -9,7 +9,7 @@ module.exports = merge(baseConfig, {
 
   output: {
     filename: 'assets/scripts/vue-client.js',
-    path: resolve(__dirname, '../../../test/tmp')
+    path: resolve(__dirname, '../../tmp')
   },
 
   plugins: [

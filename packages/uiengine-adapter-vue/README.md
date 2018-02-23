@@ -42,4 +42,4 @@ export default function createApp (options = {}) {
 }
 ```
 
-See the [sample project vue folder](../test-project/src/vue) for examples.
+See the [sample project vue folder](../../test/project/src/vue) for examples.

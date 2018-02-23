@@ -9,8 +9,8 @@ const src = {
 }
 
 const dist = {
-  root: '../../test/tmp',
-  assets: '../../test/tmp/assets'
+  root: '../tmp',
+  assets: '../tmp/assets'
 }
 
 const isDev = process.env.NODE_ENV !== 'production'

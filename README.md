@@ -13,17 +13,17 @@ It generates your *design system documentation* (i.e. pattern library, styleguid
 ## ☝️ Disclaimer
 
 This project is currently under active development.
-Some of the concepts and APIs are subject to change. 
+Some of the concepts and APIs are subject to change.
 
 Please do not to rely on it for production use until we provide a stable v1.0 release (see the [roadmap](https://github.com/dennisreimann/uiengine/milestones) for details).
 Nevertheless we encourage you to try it out and provide feedback.
 
 ## 🖥 Examples and Screenshots
 
-To get an idea of what the basics look like, take a glimpse at the 
+To get an idea of what the basics look like, take a glimpse at the
 [deployed sample project](http://uiengine-sample-project.uix.space/)
 and the
-[sample project source code](./packages/test-project).
+[sample project source code](./test/project).
 There is also an
 [introduction video](https://www.youtube.com/watch?v=OKHAhIQLvjU).
 

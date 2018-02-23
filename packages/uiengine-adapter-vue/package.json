@@ -28,13 +28,12 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-vue": "^2.0.0",
-    "babel-register": "^6.26.0"
+    "vue": "^2.3.0"
   },
   "peerDependencies": {
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-vue": "^2.0.0",
-    "babel-register": "^6.26.0",
     "vue": "^2.3.0"
   },
   "scripts": {
