@@ -9,6 +9,7 @@ const Theme = require('../src/theme')
 const Connector = require('../src/connector')
 
 const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
+const { adapters } = require('./support/adapters')
 const target = resolve(testTmpPath, 'site')
 
 const state = {
@@ -26,35 +27,7 @@ const state = {
       data: resolve(testProjectPath, '..', 'fixtures')
     },
     target,
-    adapters: {
-      pug: {
-        module: 'uiengine-adapter-pug',
-        options: {
-          pretty: true,
-          basedir: resolve(testProjectPath, 'src', 'components')
-        }
-      },
-      js: {
-        module: 'uiengine-adapter-vue',
-        options: {}
-      },
-      jsx: {
-        module: 'uiengine-adapter-react',
-        options: {}
-      },
-      hbs: {
-        module: 'uiengine-adapter-handlebars',
-        options: {}
-      },
-      marko: {
-        module: 'uiengine-adapter-marko',
-        options: {}
-      },
-      vue: {
-        module: 'uiengine-adapter-vue',
-        options: {}
-      }
-    },
+    adapters,
     variantTemplate: 'variant-preview.pug',
     theme: {
       module: 'uiengine-theme-default',
@@ -120,20 +93,20 @@ const state = {
   components: {
     input: Factory.component('input', {
       title: 'Awesome Input',
-      variantIds: ['input/text.pug'],
-      content: '<p>An input field that can be used inside a form.</p>'
+      content: '<p>An input field that can be used inside a form.</p>',
+      variants: [
+        {
+          id: 'input/text.pug',
+          componentId: 'input',
+          file: 'text.pug',
+          path: resolve(testProjectPath, 'src', 'components', 'input', 'variants', 'text.pug'),
+          content: '<p>This is documentation for the text input.</p>',
+          rendered: '<input class="input input--text" id="name" name="person[name]" type="text"/>',
+          context: { id: 'name', name: 'person[name]' },
+          title: 'Text Input'
+        }
+      ]
     })
-  },
-  variants: {
-    'input/text.pug': {
-      id: 'input/text.pug',
-      componentId: 'input',
-      path: resolve(testProjectPath, 'src', 'components', 'input', 'variants', 'text.pug'),
-      content: '<p>This is documentation for the text input.</p>',
-      rendered: '<input class="input input--text" id="name" name="person[name]" type="text"/>',
-      context: { id: 'name', name: 'person[name]' },
-      title: 'Text Input'
-    }
   },
   entities: {
     Entity: {
@@ -224,7 +197,8 @@ describe('Builder', () => {
 
   describe('#generateVariant', () => {
     it('should generate variant page', async () => {
-      await Builder.generateVariant(state, 'input/text.pug')
+      const variant = state.components.input.variants[0]
+      await Builder.generateVariant(state, variant)
 
       assertExists(join(target, '_variants', 'input', 'text.pug.html'))
     })

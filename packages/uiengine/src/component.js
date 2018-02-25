@@ -7,27 +7,6 @@ const ComponentUtil = require('./util/component')
 const Variant = require('./variant')
 const { debug2, debug3, debug4, debug5 } = require('./util/debug')
 
-const assocComponent = (components, component) =>
-  R.assoc(component.id, component, components)
-
-// turns the list of variants from the user provided attributes
-// into a list of correctly named variantIds
-const convertUserProvidedVariantsList = (componentId, attributes = {}) => {
-  let { variants } = attributes
-  if (typeof variants !== 'object') return attributes
-
-  const variantIds = R.map(variantId => {
-    return variantId.startsWith(`${componentId}/`)
-      ? variantId
-      : `${componentId}/${variantId}`
-  }, variants)
-
-  attributes = R.dissoc('variants', attributes)
-  attributes = R.assoc('variantIds', variantIds, attributes)
-
-  return attributes
-}
-
 async function readComponentFile (state, filePath) {
   debug4(state, `Component.readComponentFile(${filePath}):start`)
 
@@ -55,7 +34,6 @@ async function findComponentIds (state) {
 
   const pattern = resolve(components, '*')
   const componentPaths = await glob(pattern, { nodir: false })
-
   const componentIdFromComponentPath = R.partial(ComponentUtil.componentPathToComponentId, [components])
   const componentIds = R.map(componentIdFromComponentPath, componentPaths)
 
@@ -66,12 +44,10 @@ async function fetchAll (state) {
   debug2(state, `Component.fetchAll():start`)
 
   const componentIds = await findComponentIds(state)
-
-  const componentFetch = R.partial(fetchById, [state])
-  const componentFetches = R.map(componentFetch, componentIds)
-  const componentList = await Promise.all(componentFetches)
-
-  const components = R.reduce(assocComponent, {}, componentList)
+  const fetch = R.partial(fetchById, [state])
+  const fetches = R.map(fetch, componentIds)
+  const list = await Promise.all(fetches)
+  const components = R.reduce((components, component) => R.assoc(component.id, component, components), {}, list)
 
   debug2(state, `Component.fetchAll():end`)
 
@@ -84,15 +60,15 @@ async function fetchById (state, id) {
   const componentsPath = state.config.source.components
   const componentPath = ComponentUtil.componentIdToPath(id)
   const componentFilePath = ComponentUtil.componentIdToComponentFilePath(componentsPath, id)
-  const fetchVariantIds = Variant.findVariantIds(state, id)
-  const fetchComponentData = readComponentFile(state, componentFilePath)
-  const [ componentData, variantIds ] = await Promise.all([fetchComponentData, fetchVariantIds])
+  const componentData = await readComponentFile(state, componentFilePath)
 
-  let { attributes, content } = componentData
-  attributes = convertUserProvidedVariantsList(id, attributes)
+  let { attributes, content, attributes: { context, variants } } = componentData
+  variants = await Variant.fetchObjects(state, id, context, variants)
+
   const title = ComponentUtil.componentIdToTitle(id)
-  const baseData = { id, path: componentPath, type: 'component', title, variantIds, content }
-  const data = R.mergeAll([baseData, attributes])
+  const baseData = { title }
+  const fixData = { id, content, variants, path: componentPath, type: 'component' }
+  const data = R.mergeAll([baseData, attributes, fixData])
 
   debug3(state, `Component.fetchById(${id}):end`)
 

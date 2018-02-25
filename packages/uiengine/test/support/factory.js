@@ -2,7 +2,7 @@ export function component (id, attrs = {}) {
   attrs.title = attrs.title || id
   attrs.content = attrs.content || ''
   attrs.type = attrs.type || 'component'
-  attrs.variantIds = attrs.variantIds || []
+  attrs.variants = attrs.variants || []
 
   return Object.assign({}, attrs, { id })
 }

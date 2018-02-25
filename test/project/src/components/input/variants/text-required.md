@@ -1,3 +1,0 @@
----
-title: Required Text Input
----

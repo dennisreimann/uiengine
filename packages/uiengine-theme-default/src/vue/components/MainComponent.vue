@@ -60,15 +60,15 @@
           >
             <ul>
               <li
-                v-for="variantId in component.variantIds"
-                :key="variantId"
+                v-for="variant in component.variants"
+                :key="variant.id"
               >
                 <router-link
-                  :to="{ hash: dasherize(variants[variantId].id) }"
+                  :to="{ hash: dasherize(variant.id) }"
                   class=""
                   active-class=""
                   exact-active-class=""
-                >{{ variants[variantId].title }}</router-link>
+                >{{ variant.title }}</router-link>
               </li>
             </ul>
           </div>
@@ -100,9 +100,9 @@
       class="variants"
     >
       <component-variant
-        v-for="variantId in component.variantIds"
-        :key="variantId"
-        :variant="variants[variantId]"
+        v-for="variant in component.variants"
+        :key="variant.id"
+        :variant="variant"
       />
     </section>
   </div>
@@ -140,20 +140,18 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['components', 'entities', 'variants']),
+    ...mapGetters('state', ['components', 'entities']),
 
     component () {
       return this.components[this.id]
     },
 
     hasVariants () {
-      const { variantIds } = this.component
-      return variantIds && variantIds.length > 0
+      return this.component.variants.length > 0
     },
 
     hasManyVariants () {
-      const { variantIds } = this.component
-      return variantIds && variantIds.length > 1
+      return this.component.variants.length > 1
     },
 
     hasProperties () {

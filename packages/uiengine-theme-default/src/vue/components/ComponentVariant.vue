@@ -82,9 +82,9 @@
     </content-header>
 
     <div
-      v-if="variant.content"
+      v-if="variant.description"
       class="content"
-      v-html="variant.content"
+      v-html="variant.description"
     />
 
     <div

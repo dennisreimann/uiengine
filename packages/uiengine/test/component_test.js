@@ -1,19 +1,28 @@
 const assert = require('assert')
+const fs = require('fs-extra')
 const { resolve } = require('path')
+const Connector = require('../src/connector')
 
-const { testProjectPath } = require('../../../test/support/paths')
+const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
+const { adapters } = require('./support/adapters')
 const Component = require('../src/component')
 const state = {
   config: {
     source: {
-      components: resolve(testProjectPath, 'src', 'components')
-    }
+      components: resolve(testProjectPath, 'src', 'components'),
+      data: resolve(__dirname, 'fixtures'),
+      base: testProjectPath
+    },
+    adapters
   }
 }
 
 const assertComponent = (componentIds, componentId) => assert(componentIds.includes(componentId), `missing component "${componentId}"`)
 
 describe('Component', () => {
+  afterEach(() => { fs.removeSync(testTmpPath) })
+  before(() => { Connector.setup(state) })
+
   describe('#fetchById', () => {
     it('should return component object', async () => {
       const data = await Component.fetchById(state, 'input')
@@ -28,29 +37,26 @@ describe('Component', () => {
       assert.equal(data.title, 'Form')
     })
 
-    it('should infer variantIds if they are not provided', async () => {
-      const data = await Component.fetchById(state, 'label')
+    it('should infer variants if they are not provided', async () => {
+      const data = await Component.fetchById(state, 'formfield')
 
-      assert.equal(data.variantIds.length, 8)
-      assert.equal(data.variantIds[0], 'label/label-ejs.ejs')
-      assert.equal(data.variantIds[1], 'label/label-handlebars.hbs')
-      assert.equal(data.variantIds[2], 'label/label-html.html')
-      assert.equal(data.variantIds[3], 'label/label-marko.marko')
-      assert.equal(data.variantIds[4], 'label/label-pug.pug')
-      assert.equal(data.variantIds[5], 'label/label-react.jsx')
-      assert.equal(data.variantIds[6], 'label/label-vue-js.js')
-      assert.equal(data.variantIds[7], 'label/label-vue-sfc.vhtml')
+      assert.equal(Object.keys(data.variants).length, 2)
+      assert.equal(data.variants[0].id, 'formfield/text-with-label.pug')
+      assert.equal(data.variants[1].id, 'formfield/text-without-label.pug')
     })
 
-    it('should not infer variantIds if they are explicitely provided by variants attribute', async () => {
-      const data = await Component.fetchById(state, 'input')
+    it('should not infer variants if they are explicitely provided by variants attribute', async () => {
+      const data = await Component.fetchById(state, 'label')
 
-      assert.equal(data.variantIds.length, 5)
-      assert.equal(data.variantIds[0], 'input/text.hbs')
-      assert.equal(data.variantIds[1], 'input/text.pug')
-      assert.equal(data.variantIds[2], 'input/text-required.pug')
-      assert.equal(data.variantIds[3], 'input/text-disabled.pug')
-      assert.equal(data.variantIds[4], 'input/number.pug')
+      assert.equal(Object.keys(data.variants).length, 8)
+      assert.equal(data.variants[0].id, 'label/label.ejs')
+      assert.equal(data.variants[1].id, 'label/label.hbs')
+      assert.equal(data.variants[2].id, 'label/label.html')
+      assert.equal(data.variants[3].id, 'label/label.marko')
+      assert.equal(data.variants[4].id, 'label/label.pug')
+      assert.equal(data.variants[5].id, 'label/label.jsx')
+      assert.equal(data.variants[6].id, 'label/label-vue.js')
+      assert.equal(data.variants[7].id, 'label/label-vue-sfc.vhtml')
     })
 
     it('should render content from markdown', async () => {

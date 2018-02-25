@@ -68,9 +68,9 @@ describe('Core', function () {
       assertExists(join(testProjectTargetPath, '_variants', 'input', 'text-required.pug.html'))
       assertExists(join(testProjectTargetPath, '_variants', 'input', 'text.hbs.html'))
       assertExists(join(testProjectTargetPath, '_variants', 'input', 'text.pug.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label-handlebars.hbs.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label-marko.marko.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label-pug.pug.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.hbs.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.marko.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.pug.html'))
     })
 
     it('should copy theme assets', async () => {
@@ -190,17 +190,6 @@ describe('Core', function () {
       assert.equal(change.type, 'component')
       assert.equal(change.item, 'form')
       assert.equal(change.file, join(testProjectRelativePath, 'src', 'components', 'form', 'form.pug'))
-    })
-
-    it('should generate component on variant meta file change', async () => {
-      const filePath = join(componentsPath, 'input', 'variants', 'text.md')
-      const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
-
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text.pug.html'))
-      assert.equal(change.action, 'changed')
-      assert.equal(change.type, 'component')
-      assert.equal(change.item, 'input')
-      assert.equal(change.file, join(testProjectRelativePath, 'src', 'components', 'input', 'variants', 'text.md'))
     })
 
     it('should generate component on create', async () => {

@@ -6,9 +6,6 @@ const markdown = require('./util/markdown')
 const PageUtil = require('./util/page')
 const { debug2, debug3, debug4 } = require('./util/debug')
 
-const assocPage = (pages, page) =>
-  R.assoc(page.id, page, pages)
-
 const createEntitiesPage = state => (
   {
     id: PageUtil.ENTITIES_ID,
@@ -69,7 +66,7 @@ async function fetchAll (state) {
   // append entities page
   pageList.push(createEntitiesPage(state))
 
-  const pages = R.reduce(assocPage, {}, pageList)
+  const pages = R.reduce((pages, page) => R.assoc(page.id, page, pages), {}, pageList)
 
   debug2(state, `Page.fetchAll():end`)
 
@@ -99,8 +96,9 @@ async function fetchById (state, id) {
   const type = PageUtil.determineType(attributes)
   attributes = PageUtil.convertUserProvidedChildrenList(id, childIds, attributes)
   attributes = PageUtil.convertUserProvidedComponentsList(id, attributes)
-  const baseData = { id, path: pagePath, type, title, childIds, content, files }
-  const data = R.mergeAll([baseData, attributes])
+  const baseData = { title, childIds }
+  const fixData = { id, path: pagePath, type, content, files }
+  const data = R.mergeAll([baseData, attributes, fixData])
 
   debug3(state, `Page.fetchById(${id}):end`)
 

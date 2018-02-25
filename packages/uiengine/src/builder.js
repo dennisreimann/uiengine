@@ -7,13 +7,6 @@ const PageUtil = require('./util/page')
 const { error } = require('./util/message')
 const { debug2, debug3, debug4 } = require('./util/debug')
 
-const getVariantData = ({ variants, config }, variantId) => {
-  const variant = variants[variantId]
-  const data = { variant, config }
-
-  return data
-}
-
 const copyPageFile = (targetPath, sourcePath, source) => {
   const filePath = relative(sourcePath, source)
   const target = resolve(targetPath, filePath)
@@ -94,34 +87,31 @@ async function generatePagesWithTemplate (state, template) {
   debug3(state, `Builder.generatePagesWithTemplate(${template}):end`)
 }
 
-async function generateVariant (state, variantId) {
-  debug2(state, `Builder.generateVariant(${variantId}):start`)
+async function generateVariant (state, variant) {
+  debug2(state, `Builder.generateVariant(${variant.id}):start`)
 
-  const { variants, config: { target } } = state
-  const identifier = `Variant "${variantId}"`
-  const variant = variants[variantId]
-  if (!variant) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
+  const { config } = state
+  const identifier = `Variant "${variant.id}"`
 
   // render variant preview, with layout
-  const data = getVariantData(state, variantId)
-  const template = variant.template || state.config.variantTemplate
+  const data = { variant, config }
+  const template = variant.template || config.variantTemplate
   const html = await render(state, template, data, identifier)
 
   // write file
-  const htmlPath = resolve(target, '_variants', `${variant.id}.html`)
+  const htmlPath = resolve(config.target, '_variants', `${variant.id}.html`)
   await File.write(htmlPath, html)
 
-  debug2(state, `Builder.generateVariant(${variantId}):end`)
+  debug2(state, `Builder.generateVariant(${variant.id}):end`)
 }
 
 async function generateComponentVariants (state, componentId) {
   debug3(state, `Builder.generateComponentVariants(${componentId}):start`)
 
-  const { components } = state
-  const component = components[componentId]
-  const variantIds = component.variantIds || []
+  const component = state.components[componentId]
+  const variants = component.variants || []
   const build = R.partial(generateVariant, [state])
-  const builds = R.map(build, variantIds)
+  const builds = R.map(build, variants)
 
   await Promise.all(builds)
 
@@ -150,7 +140,9 @@ async function generate (state) {
   debug2(state, 'Builder.generate():start')
 
   const pageIds = Object.keys(state.pages)
-  const variantIds = Object.keys(state.variants)
+  const variants = R.reduce((list, component) => {
+    return R.concat(list, component.variants)
+  }, [], Object.values(state.components))
 
   const pageBuild = R.partial(generatePageWithTemplate, [state])
   const pageBuilds = R.map(pageBuild, pageIds)
@@ -159,7 +151,7 @@ async function generate (state) {
   const pageFilesBuilds = R.map(pageFilesBuild, pageIds)
 
   const variantBuild = R.partial(generateVariant, [state])
-  const variantBuilds = R.map(variantBuild, variantIds)
+  const variantBuilds = R.map(variantBuild, variants)
 
   await Promise.all([
     ...pageBuilds,

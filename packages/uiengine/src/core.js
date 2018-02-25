@@ -4,7 +4,6 @@ const Config = require('./configuration')
 const Builder = require('./builder')
 const Navigation = require('./navigation')
 const Component = require('./component')
-const Variant = require('./variant')
 const Page = require('./page')
 const Entity = require('./entity')
 const Theme = require('./theme')
@@ -46,16 +45,15 @@ async function generate (options) {
   const fetchPages = Page.fetchAll(_state)
   const fetchEntities = Entity.fetchAll(_state)
   const fetchComponents = Component.fetchAll(_state)
-  const fetchVariants = Variant.fetchAll(_state)
-  const [pages, entities, components, variants] = await Promise.all([fetchPages, fetchEntities, fetchComponents, fetchVariants])
+  const [pages, entities, components] = await Promise.all([fetchPages, fetchEntities, fetchComponents])
 
   _state = R.assoc('pages', pages, _state)
   _state = R.assoc('entities', entities, _state)
   _state = R.assoc('components', components, _state)
-  _state = R.assoc('variants', variants, _state)
 
   // 2. transformations
   const navigation = await Navigation.fetch(_state)
+
   _state = R.assoc('navigation', navigation, _state)
 
   // 3. output
@@ -71,9 +69,9 @@ async function generate (options) {
 const getChangeObject = (filePath, action) => {
   const { source: { components, pages, templates, data, entities } } = _state.config
   const file = relative(process.cwd(), filePath)
-  const isEntityFile = !!filePath.startsWith(entities)
-  const isDataFile = !isEntityFile && !!filePath.startsWith(data)
   const isComponentDir = dirname(filePath) === components
+  const isEntityFile = entities && !!filePath.startsWith(entities)
+  const isDataFile = !isEntityFile && data && !!filePath.startsWith(data)
   let pageId, componentId, templateId, variantId, entityId
 
   // Skip generating individual items in case the data
@@ -81,23 +79,15 @@ const getChangeObject = (filePath, action) => {
   if (!isDataFile) {
     pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
     entityId = entities ? EntityUtil.entityFilePathToEntityId(entities, filePath) : undefined
-    componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
     variantId = components ? VariantUtil.variantFilePathToVariantId(components, filePath) : undefined
     templateId = templates ? TemplateUtil.templateFilePathToTemplateId(templates, filePath) : undefined
+    componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
   }
 
   // In case a component directory has been deleted we
   // need to reset the component id with the dirname
   if (componentId && isComponentDir) {
     componentId = ComponentUtil.componentPathToComponentId(components, filePath)
-  }
-
-  // It is more efficient to rebuild the whole component
-  // in case a variant meta file changes, as we would
-  // have to find affected variant ids and rebuild
-  // them individually.
-  if (variantId && variantId.endsWith('.md')) {
-    variantId = undefined
   }
 
   if (pageId) {
@@ -131,8 +121,13 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
       await fn(change.item, change)
       break
 
+    case 'entity':
+      fn = isDeleted ? removeEntity : regenerateEntity
+      await regenerateEntity(change.item, change)
+      break
+
     case 'component':
-      // check whether or not a file was deleted or the component directory
+      // check whether a file has been deleted or the component directory
       const isDirectory = basename(filePath) === change.item
       if (isDeleted && isDirectory) {
         await removeComponent(change.item, change)
@@ -140,10 +135,6 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
         await Connector.registerComponentFile(_state, filePath)
         await regenerateComponent(change.item, change)
       }
-      break
-
-    case 'entity':
-      await regenerateEntity(change.item, change)
       break
 
     case 'template':
@@ -176,27 +167,10 @@ async function fetchAndAssocComponent (id) {
   return component
 }
 
-async function fetchAndAssocVariant (id) {
-  const variant = await Variant.fetchById(_state, id)
-  _state = R.assocPath(['variants', id], variant, _state)
-  return variant
-}
-
 async function fetchAndAssocNavigation () {
   const navigation = await Navigation.fetch(_state)
   _state = R.assoc('navigation', navigation, _state)
   return navigation
-}
-
-async function removePage (id, change) {
-  const pageIds = Object.keys(_state.pages)
-  const parentId = PageUtil.parentIdForPageId(pageIds, id)
-
-  _state = R.dissocPath(['pages', id], _state)
-
-  await fetchAndAssocPage(parentId)
-  await fetchAndAssocNavigation()
-  await Builder.generateIncrement(_state, change)
 }
 
 async function regeneratePage (id, change) {
@@ -214,37 +188,54 @@ async function regeneratePage (id, change) {
   ])
 }
 
-async function regenerateEntity (entityId, change) {
-  await fetchAndAssocEntity(entityId)
+async function removePage (id, change) {
+  const pageIds = Object.keys(_state.pages)
+  const parentId = PageUtil.parentIdForPageId(pageIds, id)
+
+  _state = R.dissocPath(['pages', id], _state)
+
+  await fetchAndAssocPage(parentId)
+  await fetchAndAssocNavigation()
+  await Builder.generateIncrement(_state, change)
+}
+
+async function regenerateEntity (id, change) {
+  await fetchAndAssocEntity(id)
+  await Builder.generateIncrement(_state, change)
+}
+
+async function removeEntity (id, change) {
+  _state = R.dissocPath(['entities', id], _state)
+  await Builder.generateIncrement(_state, change)
+}
+
+async function regenerateComponent (id, change) {
+  await fetchAndAssocComponent(id)
+  await Promise.all([
+    Builder.generateComponentVariants(_state, id),
+    Builder.generateIncrement(_state, change)
+  ])
+}
+
+async function removeComponent (id, change) {
+  _state = R.dissocPath(['components', id], _state)
   await Builder.generateIncrement(_state, change)
 }
 
 async function regenerateVariant (id, change) {
-  const { componentId } = await fetchAndAssocVariant(id)
-  await fetchAndAssocComponent(componentId)
+  const componentId = VariantUtil.variantIdToComponentId(id)
+  const component = await fetchAndAssocComponent(componentId)
+  const variant = R.find(variant => variant.id === id)(component.variants)
   await Promise.all([
-    Builder.generateVariant(_state, id),
+    Builder.generateVariant(_state, variant),
     Builder.generateIncrement(_state, change)
   ])
 }
 
 async function removeVariant (id, change) {
-  const { componentId } = _state.variants[id]
-  _state = R.dissocPath(['variants', id], _state)
-
+  const componentId = VariantUtil.variantIdToComponentId(id)
   await fetchAndAssocComponent(componentId)
   await Builder.generateIncrement(_state, change)
-}
-
-async function regenerateComponent (id, change) {
-  const { variantIds } = await fetchAndAssocComponent(id)
-  const fetchAndAssocVariants = R.map(fetchAndAssocVariant, variantIds)
-
-  await Promise.all(fetchAndAssocVariants)
-  await Promise.all([
-    Builder.generateComponentVariants(_state, id),
-    Builder.generateIncrement(_state, change)
-  ])
 }
 
 async function regenerateTemplate (id, change) {
@@ -252,12 +243,6 @@ async function regenerateTemplate (id, change) {
     Builder.generatePagesWithTemplate(_state, id),
     Builder.generateIncrement(_state, change)
   ])
-}
-
-async function removeComponent (id, change) {
-  _state = R.dissocPath(['components', id], _state)
-
-  await Builder.generateIncrement(_state, change)
 }
 
 module.exports = {

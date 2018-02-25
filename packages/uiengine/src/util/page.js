@@ -129,7 +129,7 @@ const hasContent = content => {
 // into a list of correctly named childIds
 const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes = {}) => {
   let { children } = attributes
-  if (typeof children !== 'object') return attributes
+  if (!(children instanceof Array)) return attributes
 
   const prefix = pageIdToPath(pageId)
   const childIds = R.map(id => {

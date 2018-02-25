@@ -1,95 +1,66 @@
-const { basename, dirname, extname, join } = require('path')
+const { basename, join } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const Connector = require('./connector')
-const Markdown = require('./util/markdown')
-const Frontmatter = require('./util/frontmatter')
 const VariantUtil = require('./util/variant')
 const File = require('./util/file')
 const { error } = require('./util/message')
-const { debug2, debug3, debug4, debug5 } = require('./util/debug')
+const { debug2, debug3 } = require('./util/debug')
 
 const regexpClean = new RegExp('([\\s]*?<!--\\s?omit:.*?\\s?-->)', 'gi')
 
 const omit = (mark, string) => {
   const regexpOmit = new RegExp(`([\\s]*?<!--\\s?omit:${mark}:start\\s?-->[\\s\\S]*?<!--\\s?omit:${mark}:end\\s?-->)`, 'gi')
-
   return string.replace(regexpOmit, '').replace(regexpClean, '')
 }
 
-const assocVariant = (variants, variant) =>
-  R.assoc(variant.id, variant, variants)
+// convert list of filenames to list of objects
+const convertUserProvidedVariants = list =>
+  R.map(item => typeof item === 'string' ? { file: item } : item, list)
 
-async function readVariantFile (state, filePath) {
-  debug4(state, `Variant.readVariantFile(${filePath}):start`)
-
-  const { source } = state.config
-  const variantName = basename(filePath, extname(filePath))
-  const variantFile = join(dirname(filePath), `${variantName}.md`)
-  let data = { attributes: {} } // in case there is no variant file
-
-  try {
-    const variant = await Frontmatter.fromFile(variantFile, source)
-    const { attributes, body } = variant
-    const content = await Markdown.fromString(body)
-
-    data = { attributes, content }
-  } catch (err) {
-    debug5(state, 'Could not read variant file', filePath, err)
-  }
-
-  debug4(state, `Variant.readVariantFile(${filePath}):end`)
-
-  return data
-}
-
-async function findVariantIds (state, componentPath = '**') {
+async function findVariants (state, componentId) {
   const { components } = state.config.source
   if (!components) return []
 
-  const variantsPath = VariantUtil.componentIdToVariantsPath(components, componentPath)
+  const variantsPath = VariantUtil.componentIdToVariantsPath(components, componentId)
   const pattern = join(variantsPath, '*')
-  const excludePattern = '!' + join(variantsPath, '*.md')
-  const variantPaths = await glob([pattern, excludePattern])
-
-  const variantFilePathToVariantId = R.partial(VariantUtil.variantFilePathToVariantId, [components])
-  const variantIds = R.map(variantFilePathToVariantId, variantPaths)
-
-  return variantIds
-}
-
-async function fetchAll (state) {
-  debug2(state, `Variant.fetchAll():start`)
-
-  const componentsPath = state.config.source.components
-  if (!componentsPath) return {}
-
-  const variantIds = await findVariantIds(state)
-
-  const variantFetch = R.partial(fetchById, [state])
-  const variantFetches = R.map(variantFetch, variantIds)
-  const variantList = await Promise.all(variantFetches)
-
-  const variants = R.reduce(assocVariant, {}, variantList)
-
-  debug2(state, `Variant.fetchAll():end`)
+  const variantPaths = await glob(pattern)
+  const variants = R.map(variantPath => ({ file: basename(variantPath) }), variantPaths)
 
   return variants
 }
 
-async function fetchById (state, id) {
-  debug3(state, `Variant.fetchById(${id}):start`)
+async function fetchObjects (state, componentId, context, variants) {
+  debug2(state, `Variant.fetchObjects(${componentId}):start`)
 
-  const componentsPath = state.config.source.components
-  const componentId = VariantUtil.variantIdToComponentId(id)
-  const filePath = VariantUtil.variantIdToVariantFilePath(componentsPath, id)
+  // variants might be populated from the component attributes.
+  if (variants) {
+    // ensure a list of objects, convert list of filenames
+    variants = convertUserProvidedVariants(variants)
+  } else {
+    // look up variants from folder if they are not specified.
+    variants = await findVariants(state, componentId)
+  }
+
+  const fetch = R.partial(fetchObject, [state, componentId, context])
+  const fetches = R.map(fetch, variants)
+  const list = await Promise.all(fetches)
+
+  debug2(state, `Variant.fetchObjects(${componentId}):end`)
+
+  return list
+}
+
+async function fetchObject (state, componentId, componentContext, data) {
+  const { file } = data
+  const id = `${componentId}/${file}`
+  debug3(state, `Variant.fetchObject(${id}):start`)
+
+  const { components } = state.config.source
+  const filePath = VariantUtil.variantIdToVariantFilePath(components, id)
   const extension = File.extension(filePath)
-  let { attributes, content } = await readVariantFile(state, filePath)
-
-  const title = VariantUtil.variantIdToTitle(id)
-  const context = attributes.context
-  attributes = R.dissoc('context', attributes)
-  attributes = R.merge({ title }, attributes)
+  const context = data.context || componentContext
+  const title = data.title || VariantUtil.variantIdToTitle(id)
 
   // render raw variant, without layout
   let raw, rendered
@@ -110,16 +81,16 @@ async function fetchById (state, id) {
   if (raw) raw = omit('code', raw)
   if (rendered) rendered = omit('preview', rendered)
 
-  const baseData = { id, componentId, path: filePath, content, raw, rendered, context, extension }
-  const data = R.mergeAll([attributes, baseData])
+  const fixData = { id, componentId, title, file, extension, raw, rendered, context }
+  const variant = R.mergeAll([data, fixData])
 
-  debug3(state, `Variant.fetchById(${id}):end`)
+  debug3(state, `Variant.fetchObject(${id}):end`)
 
-  return data
+  return variant
 }
 
 module.exports = {
-  findVariantIds,
-  fetchAll,
-  fetchById
+  findVariants,
+  fetchObjects,
+  fetchObject
 }

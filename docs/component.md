@@ -17,7 +17,6 @@ components
 |___button
 |   |___variants
 |   |   |___button.pug
-|   |   |___button-primary.md
 |   |   |___button-primary.pug
 |   |___button.css
 |   |___button.pug
@@ -26,7 +25,6 @@ components
     |___tests
     |   |___slider_test.js
     |___variants
-    |   |___slider.md
     |   |___slider.pug
     |___component.md
     |___slider.css
@@ -34,9 +32,9 @@ components
     |___slider.pug
 ```
 
-A component directory most likely also has a directory named [variants](./variant.md), which contains some usage samples.  
+A component directory most likely also has a directory named [variants](./variant.md), which contains some usage samples.
 
-To add some meta data to the component, there is the `component.md` markdown file.
+To add meta data to the component, there is the `component.md` markdown file.
 This meta data can supply the title, and description as well as a label for the component.
 
 ## Component file
@@ -51,5 +49,6 @@ label: B1
 The different button styles that are used on our website.
 ````
 
-The `title` and `label` get displayed in the documentation. 
-The `label` is an individual marker that can be used as a reference in mockups or wireframes to reference components. 
+The `title` and `label` get displayed in the documentation.
+The `label` is an individual marker that can be used as a reference in mockups or wireframes to reference components.
+The `variants` attribute is documented in the [variant documentation](./variant.md).

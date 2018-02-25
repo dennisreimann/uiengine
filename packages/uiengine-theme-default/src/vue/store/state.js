@@ -17,8 +17,7 @@ const getters = {
   components: state => state.components,
   navigation: state => state.navigation,
   pages: state => state.pages,
-  entities: state => state.entities,
-  variants: state => state.variants
+  entities: state => state.entities
 }
 
 const mutations = {

@@ -6,28 +6,20 @@ const VARIANTS_DIRNAME = 'variants'
 const componentIdToVariantsPath = (componentsPath, componentId) =>
   join(componentsPath, componentId, VARIANTS_DIRNAME)
 
-const variantIdToTitle = (id) => {
-  const base = basename(id, extname(id))
-  const title = StringUtil.titleize(base)
+const variantIdToComponentId = id =>
+  dirname(id).split(sep)[0]
 
-  return title
+const variantIdToTitle = id => {
+  const base = basename(id, extname(id))
+  return StringUtil.titleize(base)
 }
 
 const variantFilePathToComponentId = (componentsPath, variantFilePath) => {
   const relativePath = relative(componentsPath, variantFilePath)
 
-  if (relativePath.match(`/${VARIANTS_DIRNAME}/`)) {
-    const dir = dirname(relativePath).split(sep)[0]
-    return dir
-  } else {
-    return null
-  }
-}
-
-const variantIdToComponentId = (id) => {
-  const componentId = dirname(id).split(sep)[0]
-
-  return componentId
+  return relativePath.match(`/${VARIANTS_DIRNAME}/`)
+    ? dirname(relativePath).split(sep)[0]
+    : null
 }
 
 const variantIdToVariantFilePath = (componentsPath, id) => {
