@@ -3,6 +3,13 @@
 Workbench for UI-driven development:
 A tool for developers and designers to build and document web sites and apps.
 
+Useful if you want to …
+
+- Create a living pattern library
+- Document your design system
+- Prototype with your apps components and templates
+- Use code as a single source of truth
+
 ## 🚀  What it enables
 
 - Establish a UI-driven workflow and structure your web UI into modular components.
@@ -72,18 +79,18 @@ Nevertheless we encourage you to try it out and provide feedback.
 How To and Quick Start:
 
 - [Getting Started](./docs/getting-started.md)
-- [Integrations](./docs/integrations.md)
+- [Configuration](./docs/config.md)
+- [Component](./docs/component.md)
+- [Variant](./docs/variant.md)
 
 Technical documentation, with more detailed information:
 
-- [Configuration](./docs/config.md)
-- [Adapters](./docs/adapters.md)
-- [Component](./docs/component.md)
-- [Variant](./docs/variant.md)
 - [Entities/Properties](./docs/entities-properties.md)
+- [Adapters](./docs/adapters.md)
 - [Theme](./docs/theme.md)
 - [YAML](./docs/yaml.md)
 - [Deployment](./docs/deployment.md)
+- [Integrations](./docs/integrations.md)
 
 ## 💁 Individual packages
 
@@ -105,6 +112,7 @@ Here are some other projects that you might want to evaluate:
 
 - [Pattern Lab](http://patternlab.io/)
 - [Fractal](http://fractal.build/)
+- [Storybook](https://storybook.js.org/)
 - [patternplate](https://github.com/sinnerschrader/patternplate/)
 
 … or have a look at [the ever growing list of similar tools](https://github.com/davidhund/styleguide-generators).
