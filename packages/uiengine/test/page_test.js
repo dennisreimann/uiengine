@@ -40,16 +40,16 @@ describe('Page', () => {
       assert.equal(data.description, 'This is some custom page data')
     })
 
-    it('should infer page title from folder name if title in frontmatter is not provided', async () => {
-      const data = await Page.fetchById(state, 'patterns/atoms')
-
-      assert.equal(data.title, 'Atoms')
-    })
-
-    it('should infer page title from markdown headline if title in frontmatter is not provided', async () => {
+    it('should resolve title from content heading if there is no title in attributes', async () => {
       const data = await Page.fetchById(state, 'testcases')
 
       assert.equal(data.title, 'Test Cases')
+    })
+
+    it('should resolve title from component id if there is no title in attributes or content', async () => {
+      const data = await Page.fetchById(state, 'patterns/atoms')
+
+      assert.equal(data.title, 'Atoms')
     })
 
     it('should infer childIds if they are not provided', async () => {

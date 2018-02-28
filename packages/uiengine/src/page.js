@@ -4,6 +4,7 @@ const glob = require('globby')
 const frontmatter = require('./util/frontmatter')
 const markdown = require('./util/markdown')
 const PageUtil = require('./util/page')
+const StringUtil = require('./util/string')
 const { debug2, debug3, debug4 } = require('./util/debug')
 
 const createEntitiesPage = state => (
@@ -92,12 +93,12 @@ async function fetchById (state, id) {
 
   let { attributes, content } = pageData
 
-  const title = PageUtil.determineTitle(id, attributes, content)
+  const title = attributes.title || StringUtil.titleFromContentHeading(content) || PageUtil.pageIdToTitle(id)
   const type = PageUtil.determineType(attributes)
   attributes = PageUtil.convertUserProvidedChildrenList(id, childIds, attributes)
   attributes = PageUtil.convertUserProvidedComponentsList(id, attributes)
-  const baseData = { title, childIds }
-  const fixData = { id, path: pagePath, type, content, files }
+  const baseData = { childIds }
+  const fixData = { id, title, path: pagePath, type, content, files }
   const data = R.mergeAll([baseData, attributes, fixData])
 
   debug3(state, `Page.fetchById(${id}):end`)

@@ -65,11 +65,28 @@ describe('Component', () => {
       assert.equal(data.content, '<p>An input field that can be used inside a form.</p>')
     })
 
-    it('should return empty object if components source is not set', async () => {
-      const data = await Component.fetchAll({ config: { source: { } } })
-      const componentIds = Object.keys(data)
+    it('should return null if components source is not set', async () => {
+      const data = await Component.fetchById({ config: { source: { } } }, 'input')
 
-      assert.equal(componentIds.length, 0)
+      assert.equal(null, data)
+    })
+
+    it('should resolve title from attributes', async () => {
+      const data = await Component.fetchById(state, 'input')
+
+      assert.equal('Inputs', data.title)
+    })
+
+    it('should resolve title from content heading if there is no title in attributes', async () => {
+      const data = await Component.fetchById(state, 'formfield')
+
+      assert.equal('Formfields', data.title)
+    })
+
+    it('should resolve title from component id if there is no title in attributes or content', async () => {
+      const data = await Component.fetchById(state, 'label')
+
+      assert.equal('Label', data.title)
     })
   })
 

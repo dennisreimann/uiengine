@@ -111,16 +111,6 @@ const determineType = attributes => {
   }
 }
 
-// resolve title from attributes, use markdown heading or page id as fallback
-const determineTitle = (id, attributes, content) => {
-  let { title } = attributes
-  if (!title) {
-    const [, heading] = (content && content.match(/<h1.*?>(.*?)<\/h1>/)) || []
-    title = heading || pageIdToTitle(id)
-  }
-  return title
-}
-
 const hasContent = content => {
   return !!content && content.replace(/^<h1.*?>(.*?)<\/h1>/, '').trim().length > 0
 }
@@ -181,7 +171,6 @@ module.exports = {
   convertUserProvidedChildrenList,
   convertUserProvidedComponentsList,
   determineType,
-  determineTitle,
   hasContent,
   PAGE_FILENAME,
   INDEX_ID,

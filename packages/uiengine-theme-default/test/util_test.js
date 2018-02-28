@@ -21,14 +21,14 @@ describe('Util', () => {
     })
   })
 
-  describe('#decoratePageContent', () => {
+  describe('#decorateContent', () => {
     it('should remove the rendered title from content if it matches the page title', () => {
       const page = {
         title: 'The page title',
         content: '<h1>The page title</h1>\n<p>This is the page content.</p>'
       }
 
-      const content = Util.decoratePageContent(page)
+      const content = Util.decorateContent(page)
 
       assert.equal(content, '<p>This is the page content.</p>')
     })
@@ -39,7 +39,7 @@ describe('Util', () => {
         content: '<h1>The page title</h1>\n<p>This is the page content.</p>'
       }
 
-      const content = Util.decoratePageContent(page)
+      const content = Util.decorateContent(page)
 
       assert.equal(content, '<h1>The page title</h1>\n<p>This is the page content.</p>')
     })

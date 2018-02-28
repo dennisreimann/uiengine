@@ -40,7 +40,7 @@ import { mapGetters } from 'vuex'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentTokens from './ContentTokens'
-import { decoratePageContent } from '../../util'
+import { decorateContent } from '../../util'
 
 export default {
   components: {
@@ -75,7 +75,7 @@ export default {
 
     renderedContent () {
       return this.page.content
-        ? decoratePageContent(this.page)
+        ? decorateContent(this.page)
         : null
     }
   },

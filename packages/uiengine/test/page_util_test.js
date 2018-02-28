@@ -234,20 +234,6 @@ describe('PageUtil', () => {
     })
   })
 
-  describe('#determineTitle', () => {
-    it('should use title from page attributes if it has a title', () => {
-      assert.equal('Atoms 2', PageUtil.determineTitle('atoms', { title: 'Atoms 2' }, '<h1 id="atoms-1">Atoms 1</h1>'))
-    })
-
-    it('should resolve title from markdown heading if page attributes has no title', () => {
-      assert.equal('Atoms 1', PageUtil.determineTitle('atoms', {}, '<h1 id="atoms-1">Atoms 1</h1>'))
-    })
-
-    it('should fallback to titleized id if page attributes has no title and there is no markdown heading', () => {
-      assert.equal('Atoms', PageUtil.determineTitle('atoms', {}, ''))
-    })
-  })
-
   describe('#hasContent', () => {
     it('should return true if it has a title', () => {
       assert.equal(true, PageUtil.hasContent('<h1 id="atoms">Atoms</h1>\n<p>This is content.</p>'))

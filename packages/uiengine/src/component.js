@@ -4,6 +4,7 @@ const glob = require('globby')
 const frontmatter = require('./util/frontmatter')
 const markdown = require('./util/markdown')
 const ComponentUtil = require('./util/component')
+const StringUtil = require('./util/string')
 const Variant = require('./variant')
 const { debug2, debug3, debug4, debug5 } = require('./util/debug')
 
@@ -57,18 +58,19 @@ async function fetchAll (state) {
 async function fetchById (state, id) {
   debug3(state, `Component.fetchById(${id}):start`)
 
-  const componentsPath = state.config.source.components
+  const { components } = state.config.source
+  if (!components) return null
+
   const componentPath = ComponentUtil.componentIdToPath(id)
-  const componentFilePath = ComponentUtil.componentIdToComponentFilePath(componentsPath, id)
+  const componentFilePath = ComponentUtil.componentIdToComponentFilePath(components, id)
   const componentData = await readComponentFile(state, componentFilePath)
 
   let { attributes, content, attributes: { context, variants } } = componentData
   variants = await Variant.fetchObjects(state, id, context, variants)
 
-  const title = ComponentUtil.componentIdToTitle(id)
-  const baseData = { title }
-  const fixData = { id, content, variants, path: componentPath, type: 'component' }
-  const data = R.mergeAll([baseData, attributes, fixData])
+  const title = attributes.title || StringUtil.titleFromContentHeading(content) || ComponentUtil.componentIdToTitle(id)
+  const fixData = { id, title, content, variants, path: componentPath, type: 'component' }
+  const data = R.mergeAll([attributes, fixData])
 
   debug3(state, `Component.fetchById(${id}):end`)
 

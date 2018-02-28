@@ -52,7 +52,7 @@
           <div
             v-if="component.content"
             class="content"
-            v-html="component.content"
+            v-html="renderedContent"
           />
           <div
             v-if="hasManyVariants"
@@ -110,7 +110,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { dasherize } from '../../util'
+import { dasherize, decorateContent } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentProperties from './ContentProperties'
@@ -169,6 +169,12 @@ export default {
 
     isPropertiesActive () {
       return this.activeSection === 'properties' || (!this.activeSection && !this.hasInfo && this.hasProperties)
+    },
+
+    renderedContent () {
+      return this.component.content
+        ? decorateContent(this.component)
+        : null
     }
   },
 

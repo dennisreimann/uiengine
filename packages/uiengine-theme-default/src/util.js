@@ -16,9 +16,9 @@ export const dasherize = string => {
   return String(string).replace(/\W+/gi, '-')
 }
 
-// replace headings which resemble the page title
-export const decoratePageContent = page => {
-  const { content, title } = page
+// replace headings which resemble the component/page title
+export const decorateContent = pageOrComponent => {
+  const { content, title } = pageOrComponent
   const regexp = new RegExp(`^<h1.*?>${title}</h1>`)
 
   return content.replace(regexp, '').trim()

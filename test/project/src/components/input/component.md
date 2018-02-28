@@ -1,5 +1,5 @@
 ---
-title: Input
+title: Inputs
 
 # This context is applied to all variants
 context:
