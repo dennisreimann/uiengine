@@ -31,13 +31,14 @@
     "standard": "^11.0.0"
   },
   "scripts": {
-    "setup": "lerna bootstrap && yarn run build && cd test/project && yarn install",
+    "setup": "lerna bootstrap && yarn run build && yarn link-packages && cd test/project && yarn setup",
     "start": "lerna run start --parallel",
     "build": "lerna run build --parallel",
+    "link-packages": "for pkg in $(ls -1FA packages | grep / | tr -d /); do yarn --cwd packages/$pkg link; done",
     "lint": "lerna run lint --parallel && eslint test/support && cd test/project && yarn run lint",
     "test": "mocha --require babel-register -R dot packages/*/test",
     "test-watch": "yarn test -w --watch-extensions ejs,hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",
-    "test-project": "cd test/project && yarn install && NODE_ENV=development yarn start",
+    "test-project": "cd test/project && NODE_ENV=development yarn start",
     "cover": "nyc yarn test",
     "release": "yarn run lint && yarn run cover && NODE_ENV=production yarn run build && lerna publish",
     "test-project:build": "NODE_ENV=production yarn run build && cd test/project && yarn install && NODE_ENV=production yarn build",
