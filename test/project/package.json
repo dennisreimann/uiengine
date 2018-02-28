@@ -56,6 +56,7 @@
     "uiengine-adapter-pug": "file:../../packages/uiengine-adapter-pug",
     "uiengine-adapter-react": "file:../../packages/uiengine-adapter-react",
     "uiengine-adapter-vue": "file:../../packages/uiengine-adapter-vue",
+    "uiengine-theme-default": "file:../../packages/uiengine-theme-default",
     "vue-loader": "^14.1.1",
     "webpack": "^3.11.0",
     "webpack-merge": "^4.1.2",

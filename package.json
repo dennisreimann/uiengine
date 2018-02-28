@@ -34,13 +34,13 @@
     "setup": "lerna bootstrap && yarn run build && cd test/project && yarn install",
     "start": "lerna run start --parallel",
     "build": "lerna run build --parallel",
-    "lint": "lerna run lint --parallel && eslint test/support && yarn --cwd test/project run lint ",
+    "lint": "lerna run lint --parallel && eslint test/support && cd test/project && yarn run lint",
     "test": "mocha --require babel-register -R dot packages/*/test",
     "test-watch": "yarn test -w --watch-extensions ejs,hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",
-    "test-project": "yarn --cwd test/project start",
+    "test-project": "cd test/project && yarn install && NODE_ENV=development yarn start",
     "cover": "nyc yarn test",
     "release": "yarn run lint && yarn run cover && NODE_ENV=production yarn run build && lerna publish",
-    "test-project:build": "NODE_ENV=production yarn run build && NODE_ENV=production yarn --cwd test/project build",
+    "test-project:build": "NODE_ENV=production yarn run build && cd test/project && yarn install && NODE_ENV=production yarn build",
     "test-project:deploy": "yarn run test-project:build && rsync -ravzulO --chmod=u=rwX,g=rX --delete-after test/project/deploy/ test/tmp/ uiengine-sample-project.uix.space:virtual/uiengine-sample-project.uix.space"
   },
   "workspaces": [

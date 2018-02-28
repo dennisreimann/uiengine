@@ -6659,6 +6659,17 @@ uiengine-theme-default@^0.14.0:
     vue-router "^3.0.1"
     vuex "^3.0.1"
 
+"uiengine-theme-default@file:../../packages/uiengine-theme-default":
+  version "0.14.0"
+  dependencies:
+    color "^3.0.0"
+    highlight.js "^9.12.0"
+    lodash.template "^4.4.0"
+    vue "^2.5.13"
+    vue-meta "^1.4.2"
+    vue-router "^3.0.1"
+    vuex "^3.0.1"
+
 "uiengine@file:../../packages/uiengine":
   version "0.14.0"
   dependencies:
