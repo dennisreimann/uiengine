@@ -3,23 +3,8 @@
     v-if="navigation"
     id="navigation"
     class="navigation"
-    :class="{ 'navigation--collapsed': navigationCollapsed }"
+    :hidden="navigationCollapsed"
   >
-    <button
-      class="navigation__menutoggle"
-      type="button"
-      :title="'navigation.toggle' | localize"
-      @click.prevent="setNavigationCollapsed(!navigationCollapsed)"
-    >
-      <app-icon
-        symbol="burger"
-        class="navigation__icon"
-      />
-    </button>
-    <router-link
-      class="navigation__home"
-      :to="navigation.index"
-    >{{ config.name }}</router-link>
     <app-navigation-tree
       :navigation="navigation"
       :items="navigation.index.childIds"
@@ -29,16 +14,12 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('state', ['config', 'navigation']),
+    ...mapGetters('state', ['navigation']),
     ...mapGetters('preferences', ['locale', 'navigationCollapsed'])
-  },
-
-  methods: {
-    ...mapMutations('preferences', ['setNavigationCollapsed'])
   }
 }
 </script>
@@ -48,26 +29,13 @@ export default {
   color var(--color-navigation-text)
   background var(--color-navigation-bg)
 
-  &--collapsed &__tree
-    @media $mq-up_to_l
-      display none
-
-  &__home
-    display block
-    color inherit
-    text-decoration none
-    text-align center
-    font-family var(--font-family-regular)
-    &:focus,
-    &:hover,
-    &:active
-      color var(--color-navigation-text-hover)
-    @media $mq-up_to_l
-      padding var(--space-m) var(--space-xxl)
-    @media $mq-l_and_up
-      font-size var(--font-size-l)
-      margin-top var(--space-xxs)
-      padding var(--space-xxl) var(--space-m)
+  @media $mq-up_to_l
+    padding-top var(--space-s)
+    padding-bottom var(--space-s)
+  @media $mq-l_and_up
+    // align it with the content heading
+    padding-top calc(var(--space-xxl) - var(--space-xs))
+    padding-bottom var(--space-xl)
 
   &__tree
     list-style none
@@ -77,6 +45,12 @@ export default {
 
     &--level-0
       font-size var(--font-size-s)
+
+    &--level-0 + &--level-0
+      margin-top var(--space-xs)
+
+    &--level-0:not(&--collapsed) + &--level-0
+      margin-top var(--space-l)
 
     @media $mq-l_and_up
       &:not(&--level-0)
@@ -88,39 +62,26 @@ export default {
   &__item--collapsed &__icon
     transform rotate(-90deg)
 
-  &__menutoggle,
   &__itemtoggle
     appearance none
     cursor pointer
     background transparent
     position absolute
+    left 4px
+    width 30px
+    height 30px
+    padding 6px
     &:focus,
     &:hover,
     &:active
       .navigation__icon
         fill var(--color-navigation-text-hover)
-
-  &__menutoggle
-    width 40px
-    height 40px
-    padding 8px
     @media $mq-up_to_m
-      top 1px
+      top 5px
     @media $mq-m_to_l
+      top 7px
+    @media $mq-l_and_up
       top 3px
-    @media $mq-l_and_up
-      display none
-
-  &__itemtoggle
-    width 36px
-    height 36px
-    padding 6px
-    @media $mq-up_to_m
-      top 2px
-    @media $mq-m_to_l
-      top 4px
-    @media $mq-l_and_up
-      top 0
 
     .navigation__icon
       icon-size(.75)
@@ -160,12 +121,12 @@ export default {
       padding-bottom var(--space-s)
 
     .navigation__item--level-0 &
-      padding-left var(--space-xxl)
+      padding-left calc(var(--space-xxl) + var(--space-xs))
       color var(--color-navigation-text)
       background-color var(--color-navigation-bg)
 
     .navigation__item--level-1 &
-      padding-left var(--space-xxl)
+      padding-left calc(var(--space-xxl) + var(--space-xs))
       color var(--color-navigation-text-subnav)
       background-color var(--color-navigation-bg-subnav)
 

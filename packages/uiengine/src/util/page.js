@@ -111,10 +111,6 @@ const determineType = attributes => {
   }
 }
 
-const hasContent = content => {
-  return !!content && content.replace(/^<h1.*?>(.*?)<\/h1>/, '').trim().length > 0
-}
-
 // turns the list of children from the user provided attributes
 // into a list of correctly named childIds
 const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes = {}) => {
@@ -171,7 +167,6 @@ module.exports = {
   convertUserProvidedChildrenList,
   convertUserProvidedComponentsList,
   determineType,
-  hasContent,
   PAGE_FILENAME,
   INDEX_ID,
   ENTITIES_ID,

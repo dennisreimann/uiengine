@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "toggle": "toggle"
+    "toggle": "Toggle navigation"
   },
   "breakpoints": {
     "reset": "reset",
@@ -46,6 +46,11 @@
   "footer": {
     "version": "Version",
     "last_update": "Last updated on"
+  },
+  "search": {
+    "toggle": "Toggle search",
+    "title": "Search results for \"%{query}\"",
+    "no_results": "Unfortunately there is no content matching your search query."
   },
   "not_found": {
     "title": "Not Found",

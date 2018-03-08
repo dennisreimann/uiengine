@@ -24,6 +24,12 @@ const router = new Router({
   },
   routes: [
     {
+      name: 'search',
+      path: '/_search/:query',
+      props: true,
+      component: mainComponent('search')
+    },
+    {
       path: '*',
       component: mainComponent('notFound')
     }

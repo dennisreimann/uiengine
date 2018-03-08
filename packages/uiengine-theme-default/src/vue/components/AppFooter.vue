@@ -38,15 +38,8 @@ export default {
   color var(--color-footer-text)
   background var(--color-footer-bg)
   font-size var(--font-size-xs)
-
-  @media $mq-up_to_m
-    padding var(--space-l) var(--space-m)
-  @media $mq-m_to_l
-    padding var(--space-l) var(--space-l)
-  @media $mq-l_to_xl
-    padding var(--space-l) var(--space-xl)
-  @media $mq-xl_and_up
-    padding var(--space-l) var(--space-xxl)
+  padding-top var(--space-l)
+  padding-bottom var(--space-l)
 
   a
     color var(--color-footer-text)

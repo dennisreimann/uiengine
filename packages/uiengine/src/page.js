@@ -7,17 +7,6 @@ const PageUtil = require('./util/page')
 const StringUtil = require('./util/string')
 const { debug2, debug3, debug4 } = require('./util/debug')
 
-const createEntitiesPage = state => (
-  {
-    id: PageUtil.ENTITIES_ID,
-    path: PageUtil.ENTITIES_PAGE_PATH,
-    type: 'entities',
-    title: 'Entities',
-    childIds: [],
-    files: []
-  }
-)
-
 async function readPageFile (state, filePath) {
   debug4(state, `Page.readPageFile(${filePath}):start`)
 
@@ -64,9 +53,6 @@ async function fetchAll (state) {
   const pageFetches = R.map(pageFetch, pageIds)
   const pageList = await Promise.all(pageFetches)
 
-  // append entities page
-  pageList.push(createEntitiesPage(state))
-
   const pages = R.reduce((pages, page) => R.assoc(page.id, page, pages), {}, pageList)
 
   debug2(state, `Page.fetchAll():end`)
@@ -106,7 +92,20 @@ async function fetchById (state, id) {
   return data
 }
 
+async function fetchEntitiesPage (state) {
+  return {
+    id: PageUtil.ENTITIES_ID,
+    path: PageUtil.ENTITIES_PAGE_PATH,
+    type: 'entities',
+    title: 'Entities',
+    content: `<ul>${Object.keys(state.entities || []).map(name => `<li>${name}</li>`).join('')}</ul>`,
+    childIds: [],
+    files: []
+  }
+}
+
 module.exports = {
   fetchAll,
-  fetchById
+  fetchById,
+  fetchEntitiesPage
 }

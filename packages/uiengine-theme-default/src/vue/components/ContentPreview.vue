@@ -209,7 +209,7 @@ export default {
       content ''
       background-color var(--color-white)
       background-size 40px 15px
-      background-repeat none
+      background-repeat no-repeat
 
     &:before
       left 0

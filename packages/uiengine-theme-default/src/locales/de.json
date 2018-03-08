@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "toggle": "umschalten"
+    "toggle": "Navigation umschalten"
   },
   "breakpoints": {
     "reset": "zurücksetzen",
@@ -46,6 +46,11 @@
   "footer": {
     "version": "Version",
     "last_update": "Letztes Update am"
+  },
+  "search": {
+    "toggle": "Suche umschalten",
+    "title": "Suchergebnisse für \"%{query}\"",
+    "no_results": "Leider konnten keine passenden Suchergebnisse gefunden werden."
   },
   "not_found": {
     "title": "Nicht gefunden",

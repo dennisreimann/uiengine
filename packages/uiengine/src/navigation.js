@@ -44,7 +44,7 @@ const dataForPage = (state, page) => {
   const parent = pages[parentId]
   const childIds = page.childIds.concat(componentPageIds)
   const relations = dataForPageRelations(pageIds, pageId, parent)
-  const data = NavigationData(pageId, pageId, page.title, page.path, page.type, page.content, childIds, parentId, relations)
+  const data = NavigationData(pageId, pageId, page.title, page.path, page.type, page.content, page.tags, childIds, parentId, relations)
 
   return data
 }
@@ -58,7 +58,7 @@ const dataForPageComponentId = (state, parent, id) => {
   const parentId = PageUtil.parentIdForPageId(pageIds, pageId)
   const childIds = []
   const relations = dataForPageRelations(pageIds, pageId, parent)
-  const data = NavigationData(pageId, component.id, component.title, pagePath, component.type, component.content, childIds, parentId, relations)
+  const data = NavigationData(pageId, component.id, component.title, pagePath, component.type, component.content, component.tags, childIds, parentId, relations)
 
   return data
 }

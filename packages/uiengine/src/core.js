@@ -52,8 +52,10 @@ async function generate (options) {
   _state = R.assoc('components', components, _state)
 
   // 2. transformations
-  const navigation = await Navigation.fetch(_state)
+  const entitiesPage = await Page.fetchEntitiesPage(_state)
+  _state = R.assocPath(['pages', entitiesPage.id], entitiesPage, _state)
 
+  const navigation = await Navigation.fetch(_state)
   _state = R.assoc('navigation', navigation, _state)
 
   // 3. output
@@ -155,6 +157,12 @@ async function fetchAndAssocPage (id) {
   return page
 }
 
+async function fetchAndAssocEntitiesPage () {
+  const page = await Page.fetchEntitiesPage(_state)
+  _state = R.assocPath(['pages', page.id], page, _state)
+  return page
+}
+
 async function fetchAndAssocEntity (id) {
   const entity = await Entity.fetchById(_state, id)
   _state = R.assocPath(['entities', id], entity, _state)
@@ -201,6 +209,7 @@ async function removePage (id, change) {
 
 async function regenerateEntity (id, change) {
   await fetchAndAssocEntity(id)
+  await fetchAndAssocEntitiesPage()
   await Builder.generateIncrement(_state, change)
 }
 

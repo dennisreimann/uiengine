@@ -184,7 +184,7 @@ describe('Page', () => {
       const data = await Page.fetchAll(state)
       const pageIds = Object.keys(data)
 
-      assert.equal(pageIds.length, 21)
+      assert.equal(pageIds.length, 20)
 
       assertPage(pageIds, 'index')
       assertPage(pageIds, 'documentation')
@@ -206,15 +206,14 @@ describe('Page', () => {
       assertPage(pageIds, 'testcases/custom-data')
       assertPage(pageIds, 'testcases/custom-path')
       assertPage(pageIds, 'testcases/custom-template')
-      assertPage(pageIds, 'entities')
     })
+  })
 
-    it('should return only entities page if pages source is not set', async () => {
-      const data = await Page.fetchAll({ config: { source: {} } })
-      const pageIds = Object.keys(data)
+  describe('#fetchEntitiesPage', () => {
+    it('should return entities page object', async () => {
+      const page = await Page.fetchEntitiesPage(state)
 
-      assert.equal(pageIds.length, 1)
-      assert.equal(pageIds[0], 'entities')
+      assertPage(page.id, 'entities')
     })
   })
 })

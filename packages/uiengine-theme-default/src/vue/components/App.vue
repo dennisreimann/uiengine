@@ -4,6 +4,7 @@
     class="layout"
     @click="closeModals"
   >
+    <app-topbar />
     <app-navigation />
     <app-main />
     <app-footer />
@@ -11,12 +12,14 @@
 </template>
 
 <script>
+import AppTopbar from './AppTopbar'
 import AppNavigation from './AppNavigation'
 import AppFooter from './AppFooter'
 import AppMain from './AppMain'
 
 export default {
   components: {
+    AppTopbar,
     AppNavigation,
     AppFooter,
     AppMain
@@ -195,21 +198,87 @@ pre
 .main
   flex 1
 
-$navigation-width = 300px
+  @media $mq-up_to_l
+    padding-top var(--space-xl)
+    padding-bottom var(--space-xl)
+  @media $mq-l_and_up
+    padding-top var(--space-xxl)
+    padding-bottom var(--space-xxl)
 
+// general layout
 @media $mq-up_to_l
+  .topbar
+    flex 0 0 40px
   .navigation
     position relative
+
 @media $mq-l_and_up
-  .navigation
+  .layout
+    --topbar-height 3rem
+    --navigation-width 300px
+
+  .topbar
     position fixed
+    z-index 1
     top 0
     left 0
+    right 0
+    height var(--topbar-height)
+
+  .navigation
+    position fixed
+    top var(--topbar-height)
+    left 0
     bottom 0
-    width $navigation-width
+    width var(--navigation-width)
     overflow-y scroll
 
-  .main,
+  .main
+    margin-top var(--topbar-height)
+    margin-left var(--navigation-width)
+
   .footer
-    margin-left $navigation-width
+    margin-left var(--navigation-width)
+
+  .navigation[hidden] + .main,
+  .navigation[hidden] + .main + .footer
+    margin-left 0
+
+// aligned container paddings
+.topbar,
+.main,
+.footer
+  @media $mq-up_to_m
+    padding-left var(--space-m)
+    padding-right var(--space-m)
+
+  @media $mq-m_to_l
+    padding-left var(--space-l)
+    padding-right var(--space-l)
+
+.topbar
+  @media $mq-l_to_xl
+    padding-left var(--space-m)
+    padding-right var(--space-xl)
+  @media $mq-xl_and_up
+    padding-left var(--space-m)
+    padding-right var(--space-xxl)
+  @media $mq-xxl_and_up
+    padding-left var(--space-m)
+    padding-right var(--space-xxxl)
+
+.main,
+.main + .footer
+  @media $mq-l_and_up
+    .navigation[hidden] + &
+      padding-left calc(var(--space-xxl) + var(--space-s))
+  @media $mq-l_to_xl
+    padding-left var(--space-xl)
+    padding-right var(--space-xl)
+  @media $mq-xl_to_xxl
+    padding-left var(--space-xxl)
+    padding-right var(--space-xxl)
+  @media $mq-xxl_and_up
+    padding-left var(--space-xxxl)
+    padding-right var(--space-xxxl)
 </style>

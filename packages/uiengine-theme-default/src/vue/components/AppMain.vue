@@ -28,15 +28,6 @@ export default {
   color var(--color-main-text)
   background var(--color-main-bg)
 
-  @media $mq-up_to_m
-    padding var(--space-xl) var(--space-m)
-  @media $mq-m_to_l
-    padding var(--space-xl) var(--space-l)
-  @media $mq-l_to_xl
-    padding var(--space-xxl) var(--space-xl)
-  @media $mq-xl_and_up
-    padding var(--space-xxl) var(--space-xxl)
-
 .content
   max-width 55rem
 

@@ -4,6 +4,7 @@ const properties = {
   locale: document.documentElement.getAttribute('lang'),
   navigationCollapsed: false,
   navigationItemsCollapsed: {},
+  searchCollapsed: true,
   previewWidths: {}
 }
 
@@ -23,7 +24,7 @@ const getSession = (key, defaultValue) => {
 }
 
 const setSession = (key, value) => {
-  if (value) {
+  if (value || typeof value === 'boolean') {
     window.sessionStorage.setItem(`uiengine/${key}`, JSON.stringify(value))
   } else {
     window.sessionStorage.removeItem(`uiengine/${key}`)

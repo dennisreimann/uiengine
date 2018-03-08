@@ -81,11 +81,11 @@ const state = {
     })
   },
   navigation: {
-    'index': NavigationData('index', 'index', 'Home', '', 'documentation', '<h1>Homepage</h1>', [], null, ['patterns', 'testcases']),
-    'patterns': NavigationData('patterns', 'patterns', 'Pattern Library', 'patterns', 'documentation', '', ['index'], 'index', { childIds: ['patterns/input'] }),
-    'patterns/input': NavigationData('patterns/input', 'input', 'Awesome Input', 'patterns/input', 'component', '', ['index', 'patterns'], 'patterns'),
-    'prototype': NavigationData('prototype', 'prototype', 'Sandbox', 'prototype', 'documentation', '', ['index'], 'index'),
-    'prototype/custom-page': NavigationData('prototype/custom-page', 'prototype/custom-page', 'Custom Page', 'prototype/custom-page', 'page', '', ['index', 'prototype'], 'prototype'),
+    'index': NavigationData('index', 'index', 'Home', '', 'documentation', '<h1>Homepage</h1>', null, [], null, ['patterns', 'testcases']),
+    'patterns': NavigationData('patterns', 'patterns', 'Pattern Library', 'patterns', 'documentation', '', null, ['index'], 'index', { childIds: ['patterns/input'] }),
+    'patterns/input': NavigationData('patterns/input', 'input', 'Awesome Input', 'patterns/input', 'component', '', null, ['index', 'patterns'], 'patterns'),
+    'prototype': NavigationData('prototype', 'prototype', 'Sandbox', 'prototype', 'documentation', '', null, ['index'], 'index'),
+    'prototype/custom-page': NavigationData('prototype/custom-page', 'prototype/custom-page', 'Custom Page', 'prototype/custom-page', 'page', '', null, ['index', 'prototype'], 'prototype'),
     'entities': NavigationData('entities', 'entities', 'Entities', '_entities', 'entities', ''),
     'testcases': NavigationData('testcases', 'testcases', 'Testcases', 'testcases'),
     'testcases/custom-path': NavigationData('testcases/custom-path', 'testcases/custom-path', 'Custom Path', 'documentation')
