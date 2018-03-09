@@ -34,18 +34,4 @@ describe('StringUtil', () => {
       assert.equal(false, StringUtil.hasContent(null))
     })
   })
-
-  describe('#excerptFromContent', () => {
-    it('should resolve first paragraph from content', () => {
-      assert.equal('<p>First paragraph</p>', StringUtil.excerptFromContent('<h1 id="atoms-1">Atoms 1</h1>\n<p>First paragraph</p>\n<p>Second paragraph</p>'))
-    })
-
-    it('should resolve first list from content', () => {
-      assert.equal('<ul><li>First list item</li></ul>', StringUtil.excerptFromContent('<ul><li>First list item</li></ul>\n<p>First paragraph</p>'))
-    })
-
-    it('should return null if there is no content', () => {
-      assert.equal(null, StringUtil.excerptFromContent(''))
-    })
-  })
 })

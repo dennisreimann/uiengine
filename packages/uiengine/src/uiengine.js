@@ -7,9 +7,9 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, entitie
   const exts = '.{' + Object.keys(adapters).concat('md').join(',') + '}'
   const componentsGlob = components ? join(components, '**/*' + exts) : null
   const templatesGlob = templates ? join(templates, '**/*' + exts) : null
-  const pagesGlob = templates ? join(pages, '**') : null
+  const pagesGlob = pages ? join(pages, '**') : null
   const dataGlob = data ? join(data, '**') : null
-  const entitiesGlob = data ? join(entities, '**/*.yml') : null
+  const entitiesGlob = entities ? join(entities, '**/*.yml') : null
   const sourceFiles = [configFile, componentsGlob, dataGlob, entitiesGlob, pagesGlob, templatesGlob].filter(a => a)
 
   if (debug) {

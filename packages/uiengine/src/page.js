@@ -87,6 +87,8 @@ async function fetchById (state, id) {
   const fixData = { id, title, path: pagePath, type, content, files }
   const data = R.mergeAll([baseData, attributes, fixData])
 
+  if (data.files.length === 0) delete data.files
+
   debug3(state, `Page.fetchById(${id}):end`)
 
   return data
@@ -98,9 +100,8 @@ async function fetchEntitiesPage (state) {
     path: PageUtil.ENTITIES_PAGE_PATH,
     type: 'entities',
     title: 'Entities',
-    content: `<ul>${Object.keys(state.entities || []).map(name => `<li>${name}</li>`).join('')}</ul>`,
-    childIds: [],
-    files: []
+    keywords: Object.keys(state.entities || []),
+    childIds: []
   }
 }
 

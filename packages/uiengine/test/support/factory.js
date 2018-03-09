@@ -1,3 +1,6 @@
+const PageUtil = require('../../src/util/page')
+const StringUtil = require('../../src/util/string')
+
 export function component (id, attrs = {}) {
   attrs.title = attrs.title || id
   attrs.content = attrs.content || ''
@@ -17,4 +20,24 @@ export function page (id, attrs = {}) {
   attrs.componentIds = attrs.componentIds || []
 
   return Object.assign({}, attrs, { id })
+}
+
+export function navigation (id, { itemId, title, path, type = 'documentation', content = '', tags = [], childIds = [], parentId = null, parentIds = [], siblingBeforeId = null, siblingsBeforeIds = [], siblingAfterId = null, siblingsAfterIds = [] }) {
+  return {
+    isStructural: PageUtil.isDocumentationPage(type) && !StringUtil.hasContent(content),
+    path: PageUtil.isIndexPage(id) ? '/' : `/${path}/`,
+    id,
+    itemId,
+    title,
+    type,
+    tags,
+    content,
+    childIds,
+    parentId,
+    parentIds,
+    siblingBeforeId,
+    siblingsBeforeIds,
+    siblingAfterId,
+    siblingsAfterIds
+  }
 }

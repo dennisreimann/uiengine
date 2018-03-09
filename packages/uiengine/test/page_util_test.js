@@ -196,22 +196,6 @@ describe('PageUtil', () => {
     })
   })
 
-  describe('#isTemplatePage', () => {
-    it('should only return true if page type is "template"', () => {
-      assert(PageUtil.isTemplatePage('template'))
-      assert(!PageUtil.isTemplatePage('component'))
-      assert(!PageUtil.isTemplatePage('documentation'))
-    })
-  })
-
-  describe('#isTokensPage', () => {
-    it('should only return true if page type is "tokens"', () => {
-      assert(PageUtil.isTokensPage('tokens'))
-      assert(!PageUtil.isTokensPage('template'))
-      assert(!PageUtil.isTokensPage('documentation'))
-    })
-  })
-
   describe('#isDocumentationPage', () => {
     it('should only return true if page type is "documentation"', () => {
       assert(PageUtil.isDocumentationPage('documentation'))

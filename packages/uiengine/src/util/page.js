@@ -25,12 +25,6 @@ const isIndexFilePath = pagePath =>
 const isIndexPagePath = pagePath =>
   pagePath === INDEX_PAGE_PATH
 
-const isTokensPage = pageType =>
-  pageType === PAGE_TYPE_TOKENS
-
-const isTemplatePage = pageType =>
-  pageType === PAGE_TYPE_TEMPLATE
-
 const isDocumentationPage = pageType =>
   pageType === PAGE_TYPE_DOCUMENTATION
 
@@ -151,10 +145,6 @@ const convertUserProvidedComponentsList = (pageId, attributes = {}) => {
 
 module.exports = {
   isIndexPage,
-  isIndexPagePath,
-  isIndexFilePath,
-  isTemplatePage,
-  isTokensPage,
   isDocumentationPage,
   pageIdToPath,
   pageIdToTitle,

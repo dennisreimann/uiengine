@@ -1,5 +1,4 @@
 const HEADING_REGEXP = /^<h1.*?>(.*?)<\/h1>/
-const EXCERPT_REGEXP = /(<(p|ul|ol).*?>(.*?)<\/\2>)/
 
 const titleize = string =>
   string
@@ -16,15 +15,8 @@ const titleFromContentHeading = content => {
   return title
 }
 
-const excerptFromContent = content => {
-  const [, excerpt] = (content && content.match(EXCERPT_REGEXP)) || []
-
-  return excerpt
-}
-
 module.exports = {
   titleize,
   titleFromContentHeading,
-  hasContent,
-  excerptFromContent
+  hasContent
 }

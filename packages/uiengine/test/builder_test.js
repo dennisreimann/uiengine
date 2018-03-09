@@ -4,7 +4,6 @@ const Factory = require('./support/factory')
 const assertExists = require('../../../test/support/assertExists')
 const assertContentMatches = require('../../../test/support/assertContentMatches')
 const Builder = require('../src/builder')
-const NavigationData = require('../src/data/navigation')
 const Theme = require('../src/theme')
 const Connector = require('../src/connector')
 
@@ -35,20 +34,25 @@ const state = {
     }
   },
   pages: {
-    index: Factory.page('index', {
+    'index': Factory.page('index', {
       title: 'Home',
+      path: '',
+      content: '<h1>Homepage</h1>',
       childIds: ['patterns', 'testcases']
     }),
-    patterns: Factory.page('patterns', {
+
+    'patterns': Factory.page('patterns', {
       title: 'Pattern Library',
       path: 'patterns',
       componentIds: ['input']
     }),
-    prototype: Factory.page('prototype', {
+
+    'prototype': Factory.page('prototype', {
       title: 'Sandbox',
       path: 'prototype',
       childIds: ['prototype/custom-page']
     }),
+
     'prototype/custom-page': Factory.page('prototype/custom-page', {
       title: 'Custom Page',
       template: 'page.pug',
@@ -57,12 +61,8 @@ const state = {
         myContextVariable: 'This is my context'
       }
     }),
-    entities: Factory.page('entities', {
-      title: 'Entities',
-      path: '_entities',
-      type: 'entities'
-    }),
-    testcases: Factory.page('testcases', {
+
+    'testcases': Factory.page('testcases', {
       title: 'Testcases',
       path: 'testcases',
       files: [
@@ -71,6 +71,7 @@ const state = {
         resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', '_hidden-files', 'file-in-folder.txt')
       ]
     }),
+
     'testcases/custom-path': Factory.page('testcases/custom-path', {
       title: 'Custom Path',
       path: 'testcases/page-with-custom-path',
@@ -78,18 +79,89 @@ const state = {
         resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'custom-path', 'file.txt'),
         resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'custom-path', 'extra-files', 'file-in-folder.txt')
       ]
+    }),
+
+    'entities': Factory.page('entities', {
+      title: 'Entities',
+      path: '_entities',
+      type: 'entities'
     })
   },
   navigation: {
-    'index': NavigationData('index', 'index', 'Home', '', 'documentation', '<h1>Homepage</h1>', null, [], null, ['patterns', 'testcases']),
-    'patterns': NavigationData('patterns', 'patterns', 'Pattern Library', 'patterns', 'documentation', '', null, ['index'], 'index', { childIds: ['patterns/input'] }),
-    'patterns/input': NavigationData('patterns/input', 'input', 'Awesome Input', 'patterns/input', 'component', '', null, ['index', 'patterns'], 'patterns'),
-    'prototype': NavigationData('prototype', 'prototype', 'Sandbox', 'prototype', 'documentation', '', null, ['index'], 'index'),
-    'prototype/custom-page': NavigationData('prototype/custom-page', 'prototype/custom-page', 'Custom Page', 'prototype/custom-page', 'page', '', null, ['index', 'prototype'], 'prototype'),
-    'entities': NavigationData('entities', 'entities', 'Entities', '_entities', 'entities', ''),
-    'testcases': NavigationData('testcases', 'testcases', 'Testcases', 'testcases'),
-    'testcases/custom-path': NavigationData('testcases/custom-path', 'testcases/custom-path', 'Custom Path', 'documentation')
+    'index': Factory.navigation('index', {
+      itemId: 'index',
+      title: 'Home',
+      path: '/',
+      content: '<h1>Homepage</h1>',
+      childIds: ['patterns', 'testcases']
+    }),
+
+    'patterns': Factory.navigation('patterns', {
+      itemId: 'patterns',
+      title: 'Pattern Library',
+      path: '/patterns/',
+      parentId: 'index',
+      parentIds: ['index'],
+      childIds: ['patterns/input']
+    }),
+
+    'patterns/input': Factory.navigation('patterns/input', {
+      itemId: 'input',
+      title: 'Awesome Input',
+      path: 'patterns/input',
+      type: 'component',
+      parentId: 'patterns',
+      parentIds: ['index', 'patterns']
+    }),
+
+    'prototype': Factory.navigation('prototype', {
+      itemId: 'prototype',
+      title: 'Sandbox',
+      path: 'prototype',
+      parentId: 'index',
+      parentIds: ['index']
+    }),
+
+    'prototype/custom-page': Factory.navigation('prototype/custom-page', {
+      itemId: 'prototype/custom-page',
+      title: 'Custom Page',
+      path: 'prototype/custom-page',
+      type: 'page',
+      template: 'page.pug',
+      content: 'Content for custom template',
+      context: {
+        myContextVariable: 'This is my context'
+      },
+      parentId: 'prototype',
+      parentIds: ['index', 'prototype']
+    }),
+
+    'entities': Factory.navigation('entities', {
+      itemId: 'entities',
+      title: 'Entities',
+      path: '_entities',
+      type: 'entities',
+      parentId: 'index',
+      parentIds: ['index']
+    }),
+
+    'testcases': Factory.navigation('testcases', {
+      itemId: 'testcases',
+      title: 'Testcases',
+      path: 'testcases',
+      parentId: 'index',
+      parentIds: ['index']
+    }),
+
+    'testcases/custom-path': Factory.navigation('testcases/custom-path', {
+      itemId: 'testcases/custom-path',
+      title: 'Custom Path',
+      path: 'documentation',
+      parentId: 'testcases',
+      parentIds: ['index', 'testcases']
+    })
   },
+
   components: {
     input: Factory.component('input', {
       title: 'Awesome Input',

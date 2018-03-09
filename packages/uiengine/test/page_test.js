@@ -153,10 +153,10 @@ describe('Page', () => {
       assert.equal(data.files[1], join(pagesPath, 'testcases', 'index.txt'))
     })
 
-    it('should register empty array if no files are present', async () => {
+    it('should have no files property if no files are present', async () => {
       const data = await Page.fetchById(state, 'patterns/atoms')
 
-      assert.equal(data.files.length, 0)
+      assert.equal(data.files, undefined)
     })
 
     it('should determine page type documentation for standard pages', async () => {

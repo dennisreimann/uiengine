@@ -1,102 +1,103 @@
 const R = require('ramda')
 const PageUtil = require('./util/page')
+const StringUtil = require('./util/string')
 const { error } = require('./util/message')
-const NavigationData = require('./data/navigation')
 
 const assocNavigation = (navigation, entry) =>
   R.assoc(entry.id, entry, navigation)
 
-const dataForPageId = (state, id) => {
-  const { pages } = state
-  const page = pages[id]
+const dataForDocumentId = (state, id) => {
+  const { pages, components } = state
 
   // page
-  const pageData = dataForPage(state, page)
-
-  // component childpages
-  const componentIds = page.componentIds || []
-  const componentData = R.partial(dataForPageComponentId, [state, page])
-  const componentsData = R.map(componentData, componentIds)
-
-  const data = [pageData, ...componentsData]
-
-  return data
-}
-
-const dataForPage = (state, page) => {
-  const { pages, components } = state
-  const pageId = page.id
-  const pageIds = Object.keys(pages)
+  const page = pages[id]
   const availableComponentIds = components ? Object.keys(components) : []
   const componentIds = page.componentIds || []
   const componentPageIds = R.map(componentId => {
     if (availableComponentIds.includes(componentId)) {
-      return PageUtil.pageIdForComponentId(pageId, componentId)
+      return PageUtil.pageIdForComponentId(id, componentId)
     } else {
       throw new Error(error([
-        `Component "${componentId}" does not exist, but was inserted on page "${pageId}".`,
+        `Component "${componentId}" does not exist, but was inserted on page "${id}".`,
         'Here is a list of available components:',
         `${availableComponentIds.map(id => `- ${id}`).join('\n')}`
       ].join('\n')))
     }
   }, componentIds)
-  const parentId = PageUtil.parentIdForPageId(pageIds, pageId)
-  const parent = pages[parentId]
-  const childIds = page.childIds.concat(componentPageIds)
-  const relations = dataForPageRelations(pageIds, pageId, parent)
-  const data = NavigationData(pageId, pageId, page.title, page.path, page.type, page.content, page.tags, childIds, parentId, relations)
+  const relations = dataForRelations(pages, id, page.childIds.concat(componentPageIds))
+  const data = R.merge(relations, {
+    id: id,
+    itemId: id,
+    isStructural: PageUtil.isDocumentationPage(page.type) && !StringUtil.hasContent(page.content),
+    path: PageUtil.isIndexPage(id) ? '/' : `/${page.path}/`,
+    type: page.type,
+    title: page.title,
+    keywords: (page.keywords || []).concat(page.tags || [])
+  })
 
-  return data
+  if (data.keywords.length === 0) delete data.keywords
+
+  // component childpages
+  const componentData = R.partial(dataForComponentId, [state, page])
+  const componentsData = R.map(componentData, componentIds)
+
+  return [data, ...componentsData]
 }
 
-const dataForPageComponentId = (state, parent, id) => {
+const dataForComponentId = (state, doc, id) => {
   const { components, pages } = state
   const component = components[id]
-  const pageIds = Object.keys(pages)
-  const pageId = PageUtil.pageIdForComponentId(parent.id, component.id)
-  const pagePath = PageUtil.pagePathForComponentId(parent.path, component.id)
-  const parentId = PageUtil.parentIdForPageId(pageIds, pageId)
-  const childIds = []
-  const relations = dataForPageRelations(pageIds, pageId, parent)
-  const data = NavigationData(pageId, component.id, component.title, pagePath, component.type, component.content, component.tags, childIds, parentId, relations)
+  const pageId = PageUtil.pageIdForComponentId(doc.id, component.id)
+  const pagePath = PageUtil.pagePathForComponentId(doc.path, component.id)
+  const relations = dataForRelations(pages, pageId, [])
+  const data = R.merge(relations, {
+    id: pageId,
+    itemId: id,
+    isStructural: false,
+    path: `/${pagePath}/`,
+    type: component.type,
+    title: component.title,
+    keywords: (component.keywords || []).concat(component.tags || [])
+  })
+
+  if (data.keywords.length === 0) delete data.keywords
 
   return data
 }
 
-const dataForPageRelations = (pageIds, pageId, parent) => {
+const dataForRelations = (pages, id, childIds) => {
   let siblings = []
+  const docIds = Object.keys(pages)
+  const parentId = PageUtil.parentIdForPageId(docIds, id)
+  const parent = pages[parentId]
+
   if (parent) {
     const parentPrefix = PageUtil.pageIdToPath(parent.id)
-    const parentComponentPageIds = R.map((componentId) => `${parentPrefix}/${componentId}`, parent.componentIds || [])
+    const parentComponentPageIds = R.map(componentId => `${parentPrefix}/${componentId}`, parent.componentIds || [])
     siblings = (parent.childIds || []).concat(parentComponentPageIds)
   }
 
-  const parentIds = PageUtil.parentIdsForPageId(pageIds, pageId)
-  const indexInSiblings = R.indexOf(pageId, siblings)
+  const parentIds = PageUtil.parentIdsForPageId(docIds, id)
+  const indexInSiblings = R.indexOf(id, siblings)
   const siblingsBeforeIds = R.dropLast(siblings.length - indexInSiblings, siblings)
   const siblingsAfterIds = R.drop(indexInSiblings + 1, siblings)
   const siblingBeforeId = R.last(siblingsBeforeIds)
   const siblingAfterId = R.head(siblingsAfterIds)
 
-  return { parentIds, siblingBeforeId, siblingsBeforeIds, siblingAfterId, siblingsAfterIds }
+  return { parentId, parentIds, siblingBeforeId, siblingsBeforeIds, siblingAfterId, siblingsAfterIds, childIds }
 }
 
 async function fetch (state) {
-  return new Promise((resolve, reject) => {
-    const pageIds = Object.keys(state.pages)
-    const pageNavigationData = R.partial(dataForPageId, [state])
-    const navigationData = R.chain(pageNavigationData, pageIds)
-    const navigation = R.reduce(assocNavigation, {}, navigationData)
+  const ids = Object.keys(state.pages)
+  const data = R.partial(dataForDocumentId, [state])
+  const navigationData = R.chain(data, ids)
+  const navigation = R.reduce(assocNavigation, {}, navigationData)
 
-    resolve(navigation)
-  })
+  return navigation
 }
 
 async function fetchForPageId (state, id) {
-  return new Promise((resolve, reject) => {
-    const navigation = dataForPageId(state, id)
-    resolve(navigation)
-  })
+  return dataForDocumentId(state, id)
 }
 
 module.exports = {

@@ -14,10 +14,10 @@ const initialState = transformState(window.UIengine.state)
 
 const getters = {
   config: state => state.config,
-  components: state => state.components,
-  navigation: state => state.navigation,
   pages: state => state.pages,
-  entities: state => state.entities
+  entities: state => state.entities,
+  components: state => state.components,
+  navigation: state => state.navigation
 }
 
 const mutations = {

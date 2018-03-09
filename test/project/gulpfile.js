@@ -20,6 +20,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 // is required for the vue adapter (see adapter options)
 gulp.task('uiengine', ['webpack'], done => {
   const opts = {
+    debug: isDev,
     serve: isDev,
     watch: isDev ? src.tokens.concat([`${dist.themeAssets}/**/*`]) : false
   }

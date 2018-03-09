@@ -10,15 +10,9 @@
         <li
           v-for="result in results"
           :key="result.id"
-          class="sob-l"
         >
-          <h2>
-            <router-link :to="result">{{ result.title }}</router-link>
-          </h2>
-          <div
-            v-if="result.excerpt"
-            v-html="result.excerpt"
-          />
+          <router-link :to="result">{{ result.title }}</router-link>
+          ({{ result.type | upcaseFirstChar }})
         </li>
       </ul>
     </article>
@@ -28,7 +22,6 @@
 <script>
 import Fuse from 'fuse.js'
 import { mapGetters } from 'vuex'
-import { decorateContent } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentProperties from './ContentProperties'
 
@@ -40,11 +33,8 @@ const searchOptions = {
       name: 'title',
       weight: 0.7
     }, {
-      name: 'tags',
+      name: 'keywords',
       weight: 0.5
-    }, {
-      name: 'excerpt',
-      weight: 0.3
     }
   ]
 }
@@ -53,14 +43,6 @@ export default {
   components: {
     ContentHeader,
     ContentProperties
-  },
-
-  filters: {
-    renderedContent (item) {
-      return item.content
-        ? decorateContent(item)
-        : null
-    }
   },
 
   props: {
@@ -77,7 +59,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['navigation', 'components', 'pages']),
+    ...mapGetters('state', ['navigation']),
     ...mapGetters('preferences', ['locale']),
 
     repo () {

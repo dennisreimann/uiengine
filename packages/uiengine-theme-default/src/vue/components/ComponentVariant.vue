@@ -157,7 +157,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['config', 'pages', 'entities']),
+    ...mapGetters('state', ['config']),
 
     hasPreview () {
       return !!this.variant.rendered

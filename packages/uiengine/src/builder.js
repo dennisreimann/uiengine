@@ -40,10 +40,13 @@ async function generatePageFiles (state, pageId) {
 
   const { pages, config } = state
   const page = pages[pageId]
-  const targetPagePath = PageUtil.isIndexPagePath(page.path) ? '' : page.path
+
+  if (!page.files) return
+
+  const targetPagePath = page.path
   const sourcePagePath = PageUtil.pageIdToPath(page.id)
-  const targetPath = resolve(config.target, targetPagePath)
-  const sourcePath = resolve(config.source.pages, sourcePagePath)
+  const targetPath = join(config.target, targetPagePath)
+  const sourcePath = join(config.source.pages, sourcePagePath)
   const copyFile = R.partial(copyPageFile, [targetPath, sourcePath])
   const copyFiles = R.map(copyFile, page.files)
 
@@ -76,8 +79,7 @@ async function generatePageWithTemplate (state, pageId) {
 async function generatePagesWithTemplate (state, template) {
   debug3(state, `Builder.generatePagesWithTemplate(${template}):start`)
 
-  const { pages } = state
-  const affectedPages = R.filter(page => page.template === template, pages)
+  const affectedPages = R.filter(page => page.template === template, state.pages)
   const pageIds = Object.keys(affectedPages)
   const build = R.partial(generatePageWithTemplate, [state])
   const builds = R.map(build, pageIds)
@@ -144,19 +146,19 @@ async function generate (state) {
     return R.concat(list, component.variants)
   }, [], Object.values(state.components))
 
-  const pageBuild = R.partial(generatePageWithTemplate, [state])
-  const pageBuilds = R.map(pageBuild, pageIds)
+  const templateBuild = R.partial(generatePageWithTemplate, [state])
+  const templateBuilds = R.map(templateBuild, pageIds)
 
-  const pageFilesBuild = R.partial(generatePageFiles, [state])
-  const pageFilesBuilds = R.map(pageFilesBuild, pageIds)
+  const fileBuild = R.partial(generatePageFiles, [state])
+  const fileBuilds = R.map(fileBuild, pageIds)
 
   const variantBuild = R.partial(generateVariant, [state])
   const variantBuilds = R.map(variantBuild, variants)
 
   await Promise.all([
-    ...pageBuilds,
-    ...pageFilesBuilds,
+    ...fileBuilds,
     ...variantBuilds,
+    ...templateBuilds,
     generateState(state)
   ])
 
