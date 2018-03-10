@@ -16,6 +16,8 @@ Here you can overwrite it and add more custom properties.
 }
 ```
 
+Optionally you can provide an `analyticsId` (from Google Analytics `UA-XXX-X`) to track the site.
+
 ### Source
 
 The base directories for the input, your raw source files:

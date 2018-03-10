@@ -31,6 +31,7 @@
     "highlight.js": "^9.12.0",
     "lodash.template": "^4.4.0",
     "vue": "^2.5.13",
+    "vue-analytics": "^5.9.1",
     "vue-meta": "^1.4.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

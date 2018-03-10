@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Meta from 'vue-meta'
+import Analytics from 'vue-analytics'
 import Clipboard from 'clipboard'
 import App from './components/App'
 import router from './router'
@@ -9,8 +10,25 @@ import store from './store'
 import './filters'
 import './global-components'
 
+const { analyticsId } = window.UIengine.state.config
+const isProd = process.env.NODE_ENV === 'production'
+
 Vue.config.productionTip = false
 Vue.use(Meta)
+
+if (analyticsId) {
+  Vue.use(Analytics, {
+    id: analyticsId,
+    router,
+    autoTracking: {
+      exception: true,
+      exceptionLogs: false
+    },
+    debug: {
+      sendHitTask: isProd
+    }
+  })
+}
 
 const vm = new Vue({
   el: '#app',

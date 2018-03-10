@@ -9225,6 +9225,10 @@ void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
+vue-analytics@^5.9.1:
+  version "5.9.1"
+  resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.9.1.tgz#3ac9810f56dbe54bca4fd1c3ee42354b433d932b"
+
 "vue-component-compiler@git+https://github.com/znck/vue-component-compiler.git":
   version "3.0.0"
   resolved "git+https://github.com/znck/vue-component-compiler.git#0ba6e8bc74e97d53e137f557d7e632c3686edef1"

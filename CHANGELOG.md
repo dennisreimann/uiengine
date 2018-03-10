@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Search for pages and components title, tags and content excerpt
 - Ability for toggling the navigation on desktop breakpoints
+- Integration for Google Analytics
+  - Provide your `analyticsId` (`UA-XXX-X`) in the [project config](./docs/config.md)
 
 ## [0.15.0] - 2018-03-01
 
