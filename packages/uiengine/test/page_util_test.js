@@ -85,30 +85,6 @@ describe('PageUtil', () => {
     })
   })
 
-  describe('#parentIdsForPageId', () => {
-    it('should return empty array for index file path', () => {
-      const pageIds = ['index']
-      const parentIds = PageUtil.parentIdsForPageId(pageIds, 'index')
-      assert.equal(parentIds.length, 0)
-    })
-
-    it('should return array with parent page ids for page file path', () => {
-      const pageIds = ['index', 'patterns', 'patterns/atoms', 'patterns/atoms/buttons']
-      const parentIds = PageUtil.parentIdsForPageId(pageIds, 'patterns/atoms/buttons')
-      assert.equal(parentIds.length, 3)
-      assert.equal(parentIds[0], 'index')
-      assert.equal(parentIds[1], 'patterns')
-      assert.equal(parentIds[2], 'patterns/atoms')
-    })
-
-    it('should return correct array with parent page ids for page id with no intermediate parent', () => {
-      const pageIds = ['index', 'patterns/atoms/buttons']
-      const parentIds = PageUtil.parentIdsForPageId(pageIds, 'patterns/atoms/buttons')
-      assert.equal(parentIds.length, 1)
-      assert.equal(parentIds[0], 'index')
-    })
-  })
-
   describe('#pageIdForComponentId', () => {
     it('should convert the component id into a page id based on the parent page id for index page', () => {
       const pageId = PageUtil.pageIdForComponentId('index', 'button')

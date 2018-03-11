@@ -22,7 +22,7 @@ export function page (id, attrs = {}) {
   return Object.assign({}, attrs, { id })
 }
 
-export function navigation (id, { itemId, title, path, type = 'documentation', content = '', tags = [], childIds = [], parentId = null, parentIds = [], siblingBeforeId = null, siblingsBeforeIds = [], siblingAfterId = null, siblingsAfterIds = [] }) {
+export function navigation (id, { itemId, title, path, type = 'documentation', content = '', tags = [], childIds = [], parentId = null, prevSiblingId = null, nextSiblingId = null }) {
   return {
     isStructural: PageUtil.isDocumentationPage(type) && !StringUtil.hasContent(content),
     path: PageUtil.isIndexPage(id) ? '/' : `/${path}/`,
@@ -34,10 +34,7 @@ export function navigation (id, { itemId, title, path, type = 'documentation', c
     content,
     childIds,
     parentId,
-    parentIds,
-    siblingBeforeId,
-    siblingsBeforeIds,
-    siblingAfterId,
-    siblingsAfterIds
+    prevSiblingId,
+    nextSiblingId
   }
 }

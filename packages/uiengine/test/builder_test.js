@@ -101,7 +101,6 @@ const state = {
       title: 'Pattern Library',
       path: '/patterns/',
       parentId: 'index',
-      parentIds: ['index'],
       childIds: ['patterns/input']
     }),
 
@@ -110,16 +109,14 @@ const state = {
       title: 'Awesome Input',
       path: 'patterns/input',
       type: 'component',
-      parentId: 'patterns',
-      parentIds: ['index', 'patterns']
+      parentId: 'patterns'
     }),
 
     'prototype': Factory.navigation('prototype', {
       itemId: 'prototype',
       title: 'Sandbox',
       path: 'prototype',
-      parentId: 'index',
-      parentIds: ['index']
+      parentId: 'index'
     }),
 
     'prototype/custom-page': Factory.navigation('prototype/custom-page', {
@@ -132,8 +129,7 @@ const state = {
       context: {
         myContextVariable: 'This is my context'
       },
-      parentId: 'prototype',
-      parentIds: ['index', 'prototype']
+      parentId: 'prototype'
     }),
 
     'entities': Factory.navigation('entities', {
@@ -141,24 +137,21 @@ const state = {
       title: 'Entities',
       path: '_entities',
       type: 'entities',
-      parentId: 'index',
-      parentIds: ['index']
+      parentId: 'index'
     }),
 
     'testcases': Factory.navigation('testcases', {
       itemId: 'testcases',
       title: 'Testcases',
       path: 'testcases',
-      parentId: 'index',
-      parentIds: ['index']
+      parentId: 'index'
     }),
 
     'testcases/custom-path': Factory.navigation('testcases/custom-path', {
       itemId: 'testcases/custom-path',
       title: 'Custom Path',
       path: 'documentation',
-      parentId: 'testcases',
-      parentIds: ['index', 'testcases']
+      parentId: 'testcases'
     })
   },
 

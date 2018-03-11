@@ -13,7 +13,7 @@
       class="navigation__link"
     >{{ item.title }}</router-link>
     <button
-      v-if="hasChildren"
+      v-if="children"
       type="button"
       class="navigation__itemtoggle"
       :title="'navigation.toggle' | localize"
@@ -25,7 +25,7 @@
       />
     </button>
     <app-navigation-tree
-      v-if="hasChildren"
+      v-if="children"
       :navigation="navigation"
       :items="children"
       :level="level + 1"
@@ -61,10 +61,6 @@ export default {
       return this.item.childIds
     },
 
-    hasChildren () {
-      return this.children.length
-    },
-
     isCurrentPage () {
       return this.$route.path === this.item.path
     },
@@ -76,7 +72,7 @@ export default {
     classes () {
       const classes = [`navigation__item--level-${this.level}`]
 
-      if (this.hasChildren) classes.push('navigation__item--children')
+      if (this.children) classes.push('navigation__item--children')
       if (this.isCollapsed) classes.push('navigation__item--collapsed')
       if (this.isCurrentPage) classes.push('navigation__item--current')
 

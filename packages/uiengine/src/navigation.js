@@ -24,7 +24,8 @@ const dataForDocumentId = (state, id) => {
       ].join('\n')))
     }
   }, componentIds)
-  const relations = dataForRelations(pages, id, page.childIds.concat(componentPageIds))
+  const childIds = page.childIds.concat(componentPageIds)
+  const relations = dataForRelations(pages, id, childIds)
   const data = R.merge(relations, {
     id: id,
     itemId: id,
@@ -35,6 +36,7 @@ const dataForDocumentId = (state, id) => {
     keywords: (page.keywords || []).concat(page.tags || [])
   })
 
+  if (!data.isStructural) delete data.isStructural
   if (data.keywords.length === 0) delete data.keywords
 
   // component childpages
@@ -53,7 +55,6 @@ const dataForComponentId = (state, doc, id) => {
   const data = R.merge(relations, {
     id: pageId,
     itemId: id,
-    isStructural: false,
     path: `/${pagePath}/`,
     type: component.type,
     title: component.title,
@@ -67,8 +68,9 @@ const dataForComponentId = (state, doc, id) => {
 
 const dataForRelations = (pages, id, childIds) => {
   let siblings = []
-  const docIds = Object.keys(pages)
-  const parentId = PageUtil.parentIdForPageId(docIds, id)
+  const data = {}
+  const pageIds = Object.keys(pages)
+  const parentId = PageUtil.parentIdForPageId(pageIds, id)
   const parent = pages[parentId]
 
   if (parent) {
@@ -77,14 +79,13 @@ const dataForRelations = (pages, id, childIds) => {
     siblings = (parent.childIds || []).concat(parentComponentPageIds)
   }
 
-  const parentIds = PageUtil.parentIdsForPageId(docIds, id)
   const indexInSiblings = R.indexOf(id, siblings)
-  const siblingsBeforeIds = R.dropLast(siblings.length - indexInSiblings, siblings)
-  const siblingsAfterIds = R.drop(indexInSiblings + 1, siblings)
-  const siblingBeforeId = R.last(siblingsBeforeIds)
-  const siblingAfterId = R.head(siblingsAfterIds)
+  if (indexInSiblings > 0) data.prevSiblingId = siblings[indexInSiblings - 1]
+  if (indexInSiblings < siblings.length - 1) data.nextSiblingId = siblings[indexInSiblings + 1]
+  if (childIds.length) data.childIds = childIds
+  if (parentId) data.parentId = parentId
 
-  return { parentId, parentIds, siblingBeforeId, siblingsBeforeIds, siblingAfterId, siblingsAfterIds, childIds }
+  return data
 }
 
 async function fetch (state) {

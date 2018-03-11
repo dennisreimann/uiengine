@@ -86,15 +86,6 @@ const parentIdForPageId = (pageIds, pageId) => {
   }
 }
 
-const parentIdsForPageId = (pageIds, pageId) => {
-  if (isIndexPage(pageId)) return []
-  const parentId = parentIdForPageId(pageIds, pageId)
-  const parentIds = parentIdsForPageId(pageIds, parentId)
-  parentIds.push(parentId)
-
-  return parentIds
-}
-
 const determineType = attributes => {
   if (attributes.template) {
     return PAGE_TYPE_TEMPLATE
@@ -152,7 +143,6 @@ module.exports = {
   pageIdForComponentId,
   pagePathForComponentId,
   pageFilePathToPageId,
-  parentIdsForPageId,
   parentIdForPageId,
   convertUserProvidedChildrenList,
   convertUserProvidedComponentsList,

@@ -53,13 +53,13 @@ export default {
     findPrevPage (navItemId, skipSelf = false, skipChildren = true) {
       if (!navItemId) return
       const navItem = this.navigation[navItemId]
-      const { childIds, siblingBeforeId, parentId } = navItem
-      if (!skipChildren && childIds.length) {
+      const { childIds, prevSiblingId, parentId } = navItem
+      if (!skipChildren && childIds) {
         return this.findPrevPage(childIds[childIds.length - 1], false, false)
       } else if (!skipSelf && !navItem.isStructural) {
         return navItem
-      } else if (siblingBeforeId) {
-        return this.findPrevPage(siblingBeforeId, false, false)
+      } else if (prevSiblingId) {
+        return this.findPrevPage(prevSiblingId, false, false)
       } else if (parentId) {
         return this.findPrevPage(parentId, false, true)
       }
@@ -68,13 +68,13 @@ export default {
     findNextPage (navItemId, skipSelf = false, skipChildren = false) {
       if (!navItemId) return
       const navItem = this.navigation[navItemId]
-      const { childIds, siblingAfterId, parentId } = navItem
+      const { childIds, nextSiblingId, parentId } = navItem
       if (!skipSelf && !navItem.isStructural) {
         return navItem
-      } else if (!skipChildren && childIds.length) {
+      } else if (!skipChildren && childIds) {
         return this.findNextPage(childIds[0])
-      } else if (siblingAfterId) {
-        return this.findNextPage(siblingAfterId)
+      } else if (nextSiblingId) {
+        return this.findNextPage(nextSiblingId)
       } else if (parentId) {
         return this.findNextPage(parentId, true, true)
       }
