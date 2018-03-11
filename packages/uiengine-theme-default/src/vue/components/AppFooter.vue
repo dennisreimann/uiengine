@@ -1,25 +1,40 @@
 <template>
   <footer class="footer">
-    <router-link
-      :to="prevPage"
-      v-if="prevPage"
-    >&lt; {{ prevPage.title }}</router-link>
-    <router-link
-      :to="nextPage"
-      v-if="nextPage"
-    >{{ nextPage.title }} &gt;</router-link>
     <p
-      v-if="config.copyright"
-      class="footer__copyright"
-      v-html="config.copyright"
-    />
-    <p
-      v-if="config.version"
-      class="footer__version"
+      v-if="prevPage || nextPage"
+      class="footer__nav"
     >
-      {{ 'footer.version' | localize }} {{ config.version }} –
-      {{ 'footer.last_update' | localize }} {{ lastUpdate }}.
+      <router-link
+        :to="prevPage"
+        v-if="prevPage"
+        class="footer__prevlink"
+      >
+        <app-icon symbol="caret-left" />
+        {{ prevPage.title }}
+      </router-link>
+      <router-link
+        :to="nextPage"
+        v-if="nextPage"
+        class="footer__nextlink"
+      >
+        {{ nextPage.title }}
+        <app-icon symbol="caret-right" />
+      </router-link>
     </p>
+    <div>
+      <p
+        v-if="config.copyright"
+        class="footer__copyright"
+        v-html="config.copyright"
+      />
+      <p
+        v-if="config.version"
+        class="footer__version"
+      >
+        {{ 'footer.version' | localize }} {{ config.version }} –
+        {{ 'footer.last_update' | localize }} {{ lastUpdate }}.
+      </p>
+    </div>
   </footer>
 </template>
 
@@ -92,7 +107,20 @@ export default {
   padding-bottom var(--space-l)
 
   a
-    color var(--color-footer-text)
+    link-with-hover(var(--color-footer-link), var(--color-footer-link-hover))
+    .icon
+      icon-size(18px)
+      position relative
+      top .4em
+      margin 0 -.3rem
+
+  &__nav
+    display flex
+    justify-content space-between
+    margin-bottom var(--space-m)
+
+    a + a
+      margin-left var(--space-l)
 </style>
 
 <docs>

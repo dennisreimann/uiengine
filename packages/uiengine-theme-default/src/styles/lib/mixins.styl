@@ -1,5 +1,4 @@
-icon-size($factor = 1)
-  $size = 24px * $factor
+icon-size($size)
   width $size
   height $size
 
@@ -16,9 +15,7 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
   transition-duration var(--transition-duration-fast)
   text-decoration none
 
-  &:focus,
-  &:hover,
-  &:active
+  &:hover
     color $color-hover
 
     .icon
@@ -40,9 +37,7 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
       border-bottom 1px solid $color-base
       transition-duration var(--transition-duration-fast)
 
-    &:focus,
-    &:hover,
-    &:active
+    &:hover
       &:after
         width 100%
         border-bottom 1px solid $color-hover
@@ -62,7 +57,7 @@ modal-option()
     margin-top -6px
     margin-right var(--space-s)
     fill var(--color-modal-text)
-    icon-size(.875)
+    icon-size(21px)
     icon-position(6px)
 
   &:focus,

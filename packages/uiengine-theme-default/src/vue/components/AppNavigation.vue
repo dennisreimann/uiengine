@@ -85,7 +85,7 @@ export default {
       top 3px
 
     .navigation__icon
-      icon-size(.75)
+      icon-size(18px)
 
     .navigation__item--level-0 &,
     .navigation__item--level-1 &
@@ -98,7 +98,7 @@ export default {
       left calc(var(--space-s) + var(--space-xl))
 
   &__icon
-    icon-size(1)
+    icon-size(24px)
     fill var(--color-navigation-text)
     transition-property transform
     transition-duration var(--transition-duration-fast)

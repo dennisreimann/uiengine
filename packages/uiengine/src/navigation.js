@@ -6,7 +6,7 @@ const { error } = require('./util/message')
 const assocNavigation = (navigation, entry) =>
   R.assoc(entry.id, entry, navigation)
 
-const dataForDocumentId = (state, id) => {
+const dataForPageId = (state, id) => {
   const { pages, components } = state
 
   // page
@@ -90,7 +90,7 @@ const dataForRelations = (pages, id, childIds) => {
 
 async function fetch (state) {
   const ids = Object.keys(state.pages)
-  const data = R.partial(dataForDocumentId, [state])
+  const data = R.partial(dataForPageId, [state])
   const navigationData = R.chain(data, ids)
   const navigation = R.reduce(assocNavigation, {}, navigationData)
 
@@ -98,7 +98,7 @@ async function fetch (state) {
 }
 
 async function fetchForPageId (state, id) {
-  return dataForDocumentId(state, id)
+  return dataForPageId(state, id)
 }
 
 module.exports = {

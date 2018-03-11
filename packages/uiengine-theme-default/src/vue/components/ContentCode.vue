@@ -157,5 +157,5 @@ export default {
   &__expandicon
     transition-property transform
     transition-duration var(--transition-duration-fast)
-    icon-size(1)
+    icon-size(24px)
 </style>

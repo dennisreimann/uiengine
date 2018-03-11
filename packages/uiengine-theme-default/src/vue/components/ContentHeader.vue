@@ -76,7 +76,7 @@ export default {
     color var(--color-contentheader-link)
     background transparent
     cursor pointer
-    icon-size(.875)
+    icon-size(21px)
 
     &:focus,
     &:hover,
@@ -87,7 +87,7 @@ export default {
     .icon
       transition-duration var(--transition-duration-fast)
       fill var(--color-contentheader-link)
-      icon-size(.875)
+      icon-size(21px)
 
   &__actionlist
     display none

@@ -139,7 +139,7 @@ export default {
         display none
 
   &__icon
-    icon-size(1)
+    icon-size(24px)
     fill var(--color-topbar-text)
     transition-property transform
     transition-duration var(--transition-duration-fast)

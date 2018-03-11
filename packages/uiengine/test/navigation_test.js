@@ -38,7 +38,7 @@ describe('Navigation', () => {
       assert.equal(index.path, '/')
       assert.equal(index.title, 'Home')
       assert.equal(index.type, 'documentation')
-      assert.equal(index.isStructural, false) // has content
+      assert.equal(index.isStructural, undefined) // has content
       assert.equal(index.childIds.length, 2)
       assert.equal(index.childIds[0], 'atoms')
       assert.equal(index.childIds[1], 'molecules')
@@ -96,7 +96,7 @@ describe('Navigation', () => {
       assert.equal(atomsLink.id, 'atoms/link')
       assert.equal(atomsLink.path, '/atoms/link/')
       assert.equal(atomsLink.title, 'Link')
-      assert.equal(atomsLink.isStructural, false)
+      assert.equal(atomsLink.isStructural, undefined)
       assert.equal(atomsLink.childIds, undefined)
       assert.equal(atomsLink.parentId, 'atoms')
       assert.equal(atomsLink.prevSiblingId, 'atoms/more-docs')
@@ -106,7 +106,7 @@ describe('Navigation', () => {
       assert.equal(atomsButton.id, 'atoms/button')
       assert.equal(atomsButton.path, '/atoms/button/')
       assert.equal(atomsButton.title, 'Awesome Button')
-      assert.equal(atomsButton.isStructural, false)
+      assert.equal(atomsButton.isStructural, undefined)
       assert.equal(atomsButton.childIds, undefined)
       assert.equal(atomsButton.parentId, 'atoms')
       assert.equal(atomsButton.prevSiblingId, 'atoms/link')
