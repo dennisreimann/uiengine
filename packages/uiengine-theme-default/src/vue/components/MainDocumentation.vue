@@ -3,7 +3,14 @@
     <content-header
       class="sob-m"
       :title="page.title"
-    />
+    >
+      <content-tag
+        v-for="tag in page.tags"
+        :key="tag"
+        :tag="tag"
+        class="sob-m"
+      />
+    </content-header>
     <article
       v-if="page.content"
       class="content"
@@ -15,11 +22,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import ContentHeader from './ContentHeader'
+import ContentTag from './ContentTag'
 import { decorateContent } from '../../util'
 
 export default {
   components: {
-    ContentHeader
+    ContentHeader,
+    ContentTag
   },
 
   props: {

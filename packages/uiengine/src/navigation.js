@@ -46,19 +46,20 @@ const dataForPageId = (state, id) => {
   return [data, ...componentsData]
 }
 
-const dataForComponentId = (state, doc, id) => {
+const dataForComponentId = (state, parent, id) => {
   const { components, pages } = state
   const component = components[id]
-  const pageId = PageUtil.pageIdForComponentId(doc.id, component.id)
-  const pagePath = PageUtil.pagePathForComponentId(doc.path, component.id)
+  const pageId = PageUtil.pageIdForComponentId(parent.id, component.id)
+  const pagePath = PageUtil.pagePathForComponentId(parent.path, component.id)
   const relations = dataForRelations(pages, pageId, [])
+  const variantTags = R.uniq(R.flatten(R.pluck('tags', component.variants)))
   const data = R.merge(relations, {
     id: pageId,
     itemId: id,
     path: `/${pagePath}/`,
     type: component.type,
     title: component.title,
-    keywords: (component.keywords || []).concat(component.tags || [])
+    keywords: (component.keywords || []).concat(component.tags || []).concat(variantTags)
   })
 
   if (data.keywords.length === 0) delete data.keywords

@@ -4,12 +4,17 @@
     :id="variant.id | dasherize"
   >
     <content-header class="sob-m">
-      <component-label
-        v-if="variant.label"
-        class="sob-s sor-s"
-      >{{ variant.label }}</component-label>
       <content-heading :level="2">{{ variant.title }}</content-heading>
-
+      <content-label
+        v-if="variant.label"
+        class="sob-s"
+      >{{ variant.label }}</content-label>
+      <content-tag
+        v-for="tag in variant.tags"
+        :key="tag"
+        :tag="tag"
+        class="sob-s"
+      />
       <div
         v-if="hasPreview && hasCode"
         role="tablist"
@@ -129,7 +134,8 @@ import { mapGetters } from 'vuex'
 import { dasherize } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
-import ComponentLabel from './ComponentLabel'
+import ContentLabel from './ContentLabel'
+import ContentTag from './ContentTag'
 import ContentPreview from './ContentPreview'
 import ContentCode from './ContentCode'
 
@@ -137,7 +143,8 @@ export default {
   components: {
     ContentHeader,
     ContentHeading,
-    ComponentLabel,
+    ContentLabel,
+    ContentTag,
     ContentPreview,
     ContentCode
   },

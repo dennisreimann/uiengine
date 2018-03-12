@@ -1,5 +1,8 @@
 ---
-tokens: 
+tags:
+- Token
+
+tokens:
 - type: size
   name: S
   value: .5rem

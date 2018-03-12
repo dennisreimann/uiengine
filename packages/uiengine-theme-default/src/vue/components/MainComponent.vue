@@ -1,13 +1,18 @@
 <template>
   <div>
     <section class="component">
-      <content-header>
-        <component-label
+      <content-header :title="component.title">
+        <content-label
           v-if="component.label"
-          class="sob-m sor-s"
           inverted
-        >{{ component.label }}</component-label>
-        <content-heading class="contentheader__title">{{ component.title }}</content-heading>
+          class="sob-m"
+        >{{ component.label }}</content-label>
+        <content-tag
+          v-for="tag in component.tags"
+          :key="tag"
+          :tag="tag"
+          class="sob-m"
+        />
         <div
           v-if="hasInfo && hasProperties"
           role="tablist"
@@ -114,7 +119,8 @@ import { dasherize, decorateContent } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentProperties from './ContentProperties'
-import ComponentLabel from './ComponentLabel'
+import ContentLabel from './ContentLabel'
+import ContentTag from './ContentTag'
 import ComponentVariant from './ComponentVariant'
 
 export default {
@@ -122,7 +128,8 @@ export default {
     ContentHeader,
     ContentHeading,
     ContentProperties,
-    ComponentLabel,
+    ContentLabel,
+    ContentTag,
     ComponentVariant
   },
 

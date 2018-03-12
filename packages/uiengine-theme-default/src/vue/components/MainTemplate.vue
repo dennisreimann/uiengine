@@ -1,9 +1,16 @@
 <template>
   <div>
     <section class="page">
-      <content-header class="sob-m">
-        <content-heading class="contentheader__title">{{ page.title }}</content-heading>
-
+      <content-header
+        class="sob-m"
+        :title="page.title"
+      >
+        <content-tag
+          v-for="tag in page.tags"
+          :key="tag"
+          :tag="tag"
+          class="sob-m"
+        />
         <div
           v-if="hasInfo && hasProperties"
           role="tablist"
@@ -117,17 +124,18 @@ import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentPreview from './ContentPreview'
 import ContentProperties from './ContentProperties'
-import ComponentLabel from './ComponentLabel'
-import ComponentVariant from './ComponentVariant'
+import ContentLabel from './ContentLabel'
+import ContentTag from './ContentTag'
+import ContentCode from './ContentCode'
 
 export default {
   components: {
     ContentHeader,
     ContentHeading,
-    ContentPreview,
+    ContentLabel,
+    ContentTag,
     ContentProperties,
-    ComponentLabel,
-    ComponentVariant
+    ContentPreview,
   },
 
   props: {

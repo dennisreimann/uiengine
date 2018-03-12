@@ -35,17 +35,19 @@ export default {
   position relative
   display flex
   flex-wrap wrap
-  justify-content space-between
   align-items flex-end
 
   &__title
-    margin-right var(--space-l)
+    margin-right var(--space-s)
     margin-bottom var(--space-s)
-    flex 1
+
+  .label,
+  .tag
+    margin-left var(--space-s)
 
   &__options
     display flex
-    align-items flex-end
+    margin-left auto
     margin-bottom var(--space-s)
     font-size var(--font-size-s)
 
@@ -67,7 +69,11 @@ export default {
     margin-left var(--space-l)
 
   &__actions
+    margin-left auto
     margin-bottom var(--space-xxs)
+
+  &__options + &__actions
+    margin-left 0
 
   &__actiontoggle
     appearance none

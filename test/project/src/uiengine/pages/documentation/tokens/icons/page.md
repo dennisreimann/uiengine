@@ -1,3 +1,7 @@
+---
+tags:
+- Token
+---
 # Icons
 
 Our icons. Usage: `<i class="ID icon"></i>`

@@ -10,7 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Search for pages and components title, tags and content excerpt
+- Tags for pages, components and variants
+  - Can be used to cross-reference and search items
 - Ability for toggling the navigation on desktop breakpoints
+- Links in footer to navigate to the previous and next page
 - Integration for Google Analytics
   - Provide your `analyticsId` (`UA-XXX-X`) in the [project config](./docs/config.md)
 
