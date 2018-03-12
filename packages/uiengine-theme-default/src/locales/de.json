@@ -6,21 +6,14 @@
     "reset": "zurücksetzen",
     "toggle": "umschalten"
   },
-  "component": {
-    "info": "Info",
-    "properties": "Properties"
-  },
-  "template": {
+  "options": {
     "info": "Info",
     "properties": "Properties",
-    "open_in_window": "In separatem Fenster öffnen"
-  },
-  "variant": {
+    "preview": "Vorschau",
+    "code": "Code",
     "copy_permalink": "Variantenlink kopieren",
     "open_in_window": "In separatem Fenster öffnen",
-    "edit_on_codepen": "In Codepen öffnen",
-    "preview": "Vorschau",
-    "code": "Code"
+    "edit_on_codepen": "In Codepen öffnen"
   },
   "code": {
     "raw": "Code",
@@ -36,7 +29,6 @@
     "reference": "Referenz"
   },
   "entities": {
-    "copy_permalink": "Link kopieren",
     "property_name": "Property",
     "property_type": "Typ",
     "property_description": "Beschreibung",

@@ -24,9 +24,9 @@
             :id="tabId('info')"
             :aria-selected="isInfoActive"
             :tabindex="isInfoActive ? false : '-1'"
-            @click.prevent="activeSection = 'info'"
-            @keydown.right="switchTab('properties')"
-          >{{ 'template.info' | localize }}</a>
+            @click.prevent="activeSectionTop = 'info'"
+            @keydown.right="switchTabTop('properties')"
+          >{{ 'options.info' | localize }}</a>
           <a
             role="tab"
             ref="properties-tab"
@@ -35,35 +35,9 @@
             :id="tabId('properties')"
             :aria-selected="isPropertiesActive"
             :tabindex="isPropertiesActive ? false : '-1'"
-            @click.prevent="activeSection = 'properties'"
-            @keydown.left="switchTab('info')"
-          >{{ 'template.properties' | localize }}</a>
-        </div>
-
-        <div class="contentheader__actions">
-          <button
-            class="contentheader__actiontoggle"
-            type="button"
-            @click.stop="isActionlistActive = !isActionlistActive"
-          >
-            <app-icon symbol="tools" />
-          </button>
-          <ul
-            class="contentheader__actionlist"
-            :class="{ 'contentheader__actionlist--active': isActionlistActive }"
-          >
-            <li class="contentheader__action">
-              <a
-                class="contentheader__actionlink"
-                :href="previewPath"
-                :target="page.id | dasherize"
-                @click.stop
-              >
-                <app-icon symbol="open-in-window" />
-                {{ 'template.open_in_window' | localize }}
-              </a>
-            </li>
-          </ul>
+            @click.prevent="activeSectionTop = 'properties'"
+            @keydown.left="switchTabTop('info')"
+          >{{ 'options.properties' | localize }}</a>
         </div>
       </content-header>
 
@@ -104,15 +78,98 @@
           </div>
         </div>
       </div>
+
+      <content-header class="sob-m">
+        <div
+          v-if="hasPreview && hasCode"
+          role="tablist"
+          class="contentheader__options"
+        >
+          <a
+            href="#"
+            ref="preview-tab"
+            role="tab"
+            class="contentheader__option"
+            :id="tabId('preview')"
+            :aria-selected="isPreviewActive"
+            :tabindex="isPreviewActive ? false : '-1'"
+            @click.prevent="activeSectionBottom = 'preview'"
+            @keydown.right="switchTabBottom('code')"
+          >{{ 'options.preview' | localize }}</a>
+          <a
+            href="#"
+            ref="code-tab"
+            role="tab"
+            class="contentheader__option"
+            :id="tabId('code')"
+            :aria-selected="isCodeActive"
+            :tabindex="isCodeActive ? false : '-1'"
+            @click.prevent="activeSectionBottom = 'code'"
+            @keydown.left="switchTabBottom('preview')"
+          > {{ 'options.code' | localize }}</a>
+        </div>
+
+        <div class="contentheader__actions">
+          <button
+            class="contentheader__actiontoggle"
+            type="button"
+            @click.stop="isActionlistActive = !isActionlistActive"
+          >
+            <app-icon symbol="tools" />
+          </button>
+          <ul
+            class="contentheader__actionlist"
+            :class="{ 'contentheader__actionlist--active': isActionlistActive }"
+          >
+            <li class="contentheader__action">
+              <a
+                class="contentheader__actionlink"
+                :href="previewPath"
+                :target="page.id | dasherize"
+                @click.stop
+              >
+                <app-icon symbol="open-in-window" />
+                {{ 'options.open_in_window' | localize }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </content-header>
     </section>
 
-    <div class="sot-xl">
-      <content-preview
-        :id="id"
-        :src="previewPath"
-        :title="page.title"
-        :breakpoints="config.breakpoints"
-      />
+    <div
+      v-if="hasPreview || hasCode"
+      class="sot-xl"
+    >
+      <div
+        v-if="hasPreview"
+        class="contentsection"
+        role="tabpanel"
+        :aria-labelledby="tabId('preview')"
+        :hidden="!isPreviewActive"
+      >
+        <content-preview
+          :id="id"
+          :src="previewPath"
+          :title="page.title"
+          :breakpoints="config.breakpoints"
+        />
+      </div>
+
+      <div
+        v-if="hasCode"
+        class="contentsection"
+        role="tabpanel"
+        :aria-labelledby="tabId('code')"
+        :hidden="!isCodeActive"
+      >
+        <content-code
+          :extension="page.extension"
+          :raw="page.raw"
+          :context="page.context"
+          :rendered="page.rendered"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -136,6 +193,7 @@ export default {
     ContentTag,
     ContentProperties,
     ContentPreview,
+    ContentCode
   },
 
   props: {
@@ -147,7 +205,8 @@ export default {
 
   data () {
     return {
-      activeSection: null,
+      activeSectionTop: null,
+      activeSectionBottom: null,
       isActionlistActive: false
     }
   },
@@ -169,11 +228,27 @@ export default {
     },
 
     isInfoActive () {
-      return this.activeSection === 'info' || (!this.activeSection && this.hasInfo)
+      return this.activeSectionTop === 'info' || (!this.activeSectionTop && this.hasInfo)
     },
 
     isPropertiesActive () {
-      return this.activeSection === 'properties' || (!this.activeSection && !this.hasInfo && this.hasProperties)
+      return this.activeSectionTop === 'properties' || (!this.activeSectionTop && !this.hasInfo && this.hasProperties)
+    },
+
+    hasPreview () {
+      return !!this.page.template
+    },
+
+    hasCode () {
+      return !!this.page.context
+    },
+
+    isPreviewActive () {
+      return this.activeSectionBottom === 'preview' || (!this.activeSectionBottom && this.hasPreview)
+    },
+
+    isCodeActive () {
+      return this.activeSectionBottom === 'code' || (!this.activeSectionBottom && !this.hasPreview && this.hasCode)
     },
 
     previewPath () {
@@ -194,8 +269,13 @@ export default {
       return `${dasherize(this.page.id)}-${section}`
     },
 
-    switchTab (section) {
-      this.activeSection = section
+    switchTabTop (section) {
+      this.activeSectionTop = section
+      this.$refs[`${section}-tab`].focus()
+    },
+
+    switchTabBottom (section) {
+      this.activeSectionBottom = section
       this.$refs[`${section}-tab`].focus()
     }
   }

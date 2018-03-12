@@ -28,7 +28,7 @@
             :tabindex="isInfoActive ? false : '-1'"
             @click.prevent="activeSection = 'info'"
             @keydown.right="switchTab('properties')"
-          >{{ 'component.info' | localize }}</a>
+          >{{ 'options.info' | localize }}</a>
           <a
             role="tab"
             ref="properties-tab"
@@ -39,7 +39,7 @@
             :tabindex="isPropertiesActive ? false : '-1'"
             @click.prevent="activeSection = 'properties'"
             @keydown.left="switchTab('info')"
-          > {{ 'component.properties' | localize }}</a>
+          > {{ 'options.properties' | localize }}</a>
         </div>
       </content-header>
 

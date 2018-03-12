@@ -6,21 +6,14 @@
     "reset": "reset",
     "toggle": "toggle"
   },
-  "component": {
-    "info": "Info",
-    "properties": "Properties"
-  },
-  "template": {
+  "options": {
     "info": "Info",
     "properties": "Properties",
-    "open_in_window": "Open in separate window"
-  },
-  "variant": {
+    "preview": "Preview",
+    "code": "Code",
     "copy_permalink": "Copy link to variant",
     "open_in_window": "Open in separate window",
-    "edit_on_codepen": "Edit on Codepen",
-    "preview": "Preview",
-    "code": "Code"
+    "edit_on_codepen": "Edit on Codepen"
   },
   "code": {
     "raw": "Code",
@@ -36,7 +29,6 @@
     "reference": "Reference"
   },
   "entities": {
-    "copy_permalink": "Copy link",
     "property_name": "Property",
     "property_type": "Type",
     "property_description": "Description",

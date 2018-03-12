@@ -30,7 +30,7 @@
           :tabindex="isPreviewActive ? false : '-1'"
           @click.prevent="activeSection = 'preview'"
           @keydown.right="switchTab('code')"
-        >{{ 'variant.preview' | localize }}</a>
+        >{{ 'options.preview' | localize }}</a>
         <a
           href="#"
           ref="code-tab"
@@ -41,7 +41,7 @@
           :tabindex="isCodeActive ? false : '-1'"
           @click.prevent="activeSection = 'code'"
           @keydown.left="switchTab('preview')"
-        > {{ 'variant.code' | localize }}</a>
+        > {{ 'options.code' | localize }}</a>
       </div>
 
       <div class="contentheader__actions">
@@ -68,7 +68,7 @@
                 symbol="link-45"
                 class="permalink__icon"
               />
-              <span class="permalink__text">{{ 'variant.copy_permalink' | localize }}</span>
+              <span class="permalink__text">{{ 'options.copy_permalink' | localize }}</span>
             </a>
           </li>
           <li class="contentheader__action">
@@ -79,7 +79,7 @@
               @click.stop
             >
               <app-icon symbol="open-in-window" />
-              {{ 'variant.open_in_window' | localize }}
+              {{ 'options.open_in_window' | localize }}
             </a>
           </li>
         </ul>
