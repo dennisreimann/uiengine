@@ -66,14 +66,6 @@ For the evaluation process you might also want to have a look at the [alternativ
 
 UIengine requires at least Node.js 6.9. Future versions will track the latest active Node.js LTS version, which guarantees a reasonable level of backwards compatibility.
 
-## ☝️ Disclaimer
-
-This project is currently under active development.
-Some of the concepts and APIs are subject to change.
-
-Please do not to rely on it for production use until we provide a stable v1.0 release (see the [roadmap](https://github.com/dennisreimann/uiengine/milestones) for details).
-Nevertheless we encourage you to try it out and provide feedback.
-
 ## 📘 Documentation
 
 How To and Quick Start:
