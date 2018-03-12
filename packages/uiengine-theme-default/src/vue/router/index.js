@@ -30,6 +30,11 @@ const router = new Router({
       component: mainComponent('search')
     },
     {
+      name: 'settings',
+      path: '/_settings/',
+      component: mainComponent('settings')
+    },
+    {
       path: '*',
       component: mainComponent('notFound')
     }

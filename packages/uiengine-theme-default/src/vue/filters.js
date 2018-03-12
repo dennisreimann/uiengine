@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import store from './store'
-import { dasherize, upcaseFirstChar } from '../util'
+import { dasherize, titleize, upcaseFirstChar } from '../util'
 
 Vue.filter('dasherize', dasherize)
 
 Vue.filter('upcaseFirstChar', upcaseFirstChar)
+
+Vue.filter('titleize', titleize)
 
 Vue.filter('localize', (key, interpolations) => {
   const locale = store.getters['preferences/locale']

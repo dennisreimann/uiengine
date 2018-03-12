@@ -44,6 +44,11 @@
     "title": "Search results for \"%{query}\"",
     "no_results": "Unfortunately there is no content matching your search query."
   },
+  "settings": {
+    "title": "Settings",
+    "locale": "Locale",
+    "hljs": "Highlight-Theme"
+  },
   "not_found": {
     "title": "Not Found",
     "content": "This page does not exist."

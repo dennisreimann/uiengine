@@ -11,14 +11,29 @@
       :items="navigation.index.childIds"
       :navigation="navigation"
       :level="0"
-    />
+    >
+      <li
+        class="navigation__item navigation__item--level-0"
+        :class="{ 'navigation__item--current': this.$route.path === '/_settings' }"
+      >
+        <router-link
+          :to="{ name: 'settings' }"
+          class="navigation__link"
+        >{{ 'settings.title' | localize }}</router-link>
+      </li>
+    </app-navigation-tree>
   </nav>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import AppNavigationItem from './AppNavigationItem'
 
 export default {
+  components: {
+    AppNavigationItem
+  },
+
   computed: {
     ...mapGetters('state', ['navigation']),
     ...mapGetters('preferences', ['locale', 'navigationCollapsed'])

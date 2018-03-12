@@ -16,6 +16,13 @@ export const dasherize = string => {
   return String(string).replace(/\W+/gi, '-')
 }
 
+export const titleize = string => {
+  return string
+    .split(/\W+/gi)
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ')
+}
+
 // replace headings which resemble the component/page title
 export const decorateContent = pageOrComponent => {
   const { content, title } = pageOrComponent

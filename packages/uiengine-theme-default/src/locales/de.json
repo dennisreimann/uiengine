@@ -44,6 +44,11 @@
     "title": "Suchergebnisse für \"%{query}\"",
     "no_results": "Leider konnten keine passenden Suchergebnisse gefunden werden."
   },
+  "settings": {
+    "title": "Einstellungen",
+    "locale": "Sprache",
+    "hljs": "Highlight-Theme"
+  },
   "not_found": {
     "title": "Nicht gefunden",
     "content": "Diese Seite existiert leider nicht."

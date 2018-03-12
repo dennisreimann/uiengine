@@ -1,6 +1,7 @@
 import { upcaseFirstChar } from '../../util'
 
 const properties = {
+  hljs: document.getElementById('hljs').getAttribute('data-default'),
   locale: document.documentElement.getAttribute('lang'),
   navigationCollapsed: false,
   navigationItemsCollapsed: {},

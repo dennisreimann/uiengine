@@ -17,6 +17,9 @@ import AppNavigation from './AppNavigation'
 import AppFooter from './AppFooter'
 import AppMain from './AppMain'
 
+const $hljs = document.getElementById('hljs')
+const HLJS_TMPL = $hljs.getAttribute('data-tmpl')
+
 export default {
   components: {
     AppTopbar,
@@ -25,9 +28,20 @@ export default {
     AppMain
   },
 
+  created () {
+    this.$root.$on('setting:hljs', this.setHljs)
+
+    const theme = this.$store.getters['preferences/hljs']
+    if (theme) this.setHljs(theme)
+  },
+
   methods: {
     closeModals () {
       this.$root.$emit('modal:close')
+    },
+
+    setHljs (theme) {
+      $hljs.setAttribute('href', HLJS_TMPL.replace('%s', theme))
     }
   },
 

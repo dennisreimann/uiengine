@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <% for (index in htmlWebpackPlugin.files.css) {
     %><link href="<%= htmlWebpackPlugin.files.css[index] %>" rel="stylesheet"><% } %>
-    <link rel="stylesheet" href="/_uiengine-theme/styles/hljs/<%= "\<%= hljs %\>" %>.css">
+    <link rel="stylesheet" href="/_uiengine-theme/styles/hljs/<%= "\<%= hljs %\>" %>.css" id="hljs" data-default="<%= "\<%= hljs %\>" %>" data-tmpl="/_uiengine-theme/styles/hljs/%s.css">
     <%= "\<% if (customStylesFile) {" %>
     <%= "%\>" %><link rel="stylesheet" href="<%= "\<%= customStylesFile %\>" %>"><%= "\<% } %\>" %>
     <script type="text/javascript">

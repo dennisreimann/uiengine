@@ -11,6 +11,7 @@
       :item="navigation[itemId]"
       :level="level"
     />
+    <slot />
   </ul>
 </template>
 
