@@ -6,6 +6,7 @@
     :hidden="navigationCollapsed"
   >
     <app-navigation-tree
+      id="navigation-root"
       v-if="navigation.index.childIds"
       :items="navigation.index.childIds"
       :navigation="navigation"

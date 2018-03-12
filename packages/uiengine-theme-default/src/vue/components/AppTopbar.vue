@@ -4,6 +4,8 @@
       type="button"
       class="topbar__toggle topbar__toggle--menu"
       :title="'navigation.toggle' | localize"
+      aria-controls="navigation-root"
+      :aria-expanded="!navigationCollapsed | bool2string"
       @click.prevent="setNavigationCollapsed(!navigationCollapsed)"
     >
       <app-icon

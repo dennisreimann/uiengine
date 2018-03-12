@@ -16,6 +16,8 @@
       v-if="children"
       type="button"
       class="navigation__itemtoggle"
+      aria-haspopup="true"
+      :aria-expanded="!isCollapsed | bool2string"
       :title="'navigation.toggle' | localize"
       @click.prevent="setCollapsed(!isCollapsed)"
     >
@@ -25,6 +27,7 @@
       />
     </button>
     <app-navigation-tree
+      ref="children"
       v-if="children"
       :navigation="navigation"
       :items="children"
@@ -87,6 +90,10 @@ export default {
       const itemsCollapsed = this.navigationItemsCollapsed
       itemsCollapsed[this.item.id] = collapsed
       this.setNavigationItemsCollapsed(itemsCollapsed)
+
+      if (!collapsed) {
+        this.$refs.children.$el.querySelector('a.navigation__link').focus()
+      }
     }
   }
 }
