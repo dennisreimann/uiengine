@@ -86,6 +86,15 @@
           class="contentheader__options"
         >
           <a
+            class="contentheader__action"
+            :href="previewPath"
+            :target="page.id | dasherize"
+            :title="'options.open_in_window' | localize"
+            @click.stop
+          >
+            <app-icon symbol="open-in-window" />
+          </a>
+          <a
             href="#"
             ref="preview-tab"
             role="tab"
@@ -107,32 +116,6 @@
             @click.prevent="activeSectionBottom = 'code'"
             @keydown.left="switchTabBottom('preview')"
           > {{ 'options.code' | localize }}</a>
-        </div>
-
-        <div class="contentheader__actions">
-          <button
-            class="contentheader__actiontoggle"
-            type="button"
-            @click.stop="isActionlistActive = !isActionlistActive"
-          >
-            <app-icon symbol="tools" />
-          </button>
-          <ul
-            class="contentheader__actionlist"
-            :class="{ 'contentheader__actionlist--active': isActionlistActive }"
-          >
-            <li class="contentheader__action">
-              <a
-                class="contentheader__actionlink"
-                :href="previewPath"
-                :target="page.id | dasherize"
-                @click.stop
-              >
-                <app-icon symbol="open-in-window" />
-                {{ 'options.open_in_window' | localize }}
-              </a>
-            </li>
-          </ul>
         </div>
       </content-header>
     </section>
@@ -206,8 +189,7 @@ export default {
   data () {
     return {
       activeSectionTop: null,
-      activeSectionBottom: null,
-      isActionlistActive: false
+      activeSectionBottom: null
     }
   },
 
@@ -254,12 +236,6 @@ export default {
     previewPath () {
       return `/_pages/${this.page.id}.html`
     }
-  },
-
-  created () {
-    this.$root.$on('modal:close', () => {
-      this.isActionlistActive = false
-    })
   },
 
   methods: {

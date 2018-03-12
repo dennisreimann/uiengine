@@ -7,19 +7,39 @@
       <content-heading :level="2">{{ variant.title }}</content-heading>
       <content-label
         v-if="variant.label"
-        class="sob-s"
       >{{ variant.label }}</content-label>
       <content-tag
         v-for="tag in variant.tags"
         :key="tag"
         :tag="tag"
-        class="sob-s"
       />
       <div
         v-if="hasPreview && hasCode"
         role="tablist"
         class="contentheader__options"
       >
+        <a
+          class="permalink contentheader__action"
+          :href="permalinkUrl"
+          :data-clipboard-text="permalinkUrl"
+          :title="'options.copy_permalink' | localize"
+          @click.prevent
+        >
+          <app-icon
+            symbol="link-45"
+            class="permalink__icon"
+          />
+        </a>
+        <a
+          class="contentheader__action"
+          :href="previewPath"
+          :target="variant.id | dasherize"
+          :title="'options.open_in_window' | localize"
+          @click.stop
+        >
+          <app-icon symbol="open-in-window" />
+        </a>
+
         <a
           href="#"
           ref="preview-tab"
@@ -42,47 +62,6 @@
           @click.prevent="activeSection = 'code'"
           @keydown.left="switchTab('preview')"
         > {{ 'options.code' | localize }}</a>
-      </div>
-
-      <div class="contentheader__actions">
-        <button
-          class="contentheader__actiontoggle"
-          type="button"
-          :title="'navigation.toggle' | localize"
-          @click.stop="isActionlistActive = !isActionlistActive"
-        >
-          <app-icon symbol="tools" />
-        </button>
-        <ul
-          class="contentheader__actionlist"
-          :class="{ 'contentheader__actionlist--active': isActionlistActive }"
-        >
-          <li class="contentheader__action">
-            <a
-              class="permalink contentheader__actionlink"
-              :href="permalinkUrl"
-              :data-clipboard-text="permalinkUrl"
-              @click.prevent
-            >
-              <app-icon
-                symbol="link-45"
-                class="permalink__icon"
-              />
-              <span class="permalink__text">{{ 'options.copy_permalink' | localize }}</span>
-            </a>
-          </li>
-          <li class="contentheader__action">
-            <a
-              class="contentheader__actionlink"
-              :href="previewPath"
-              :target="variant.id | dasherize"
-              @click.stop
-            >
-              <app-icon symbol="open-in-window" />
-              {{ 'options.open_in_window' | localize }}
-            </a>
-          </li>
-        </ul>
       </div>
     </content-header>
 
@@ -158,8 +137,7 @@ export default {
 
   data () {
     return {
-      activeSection: null,
-      isActionlistActive: false
+      activeSection: null
     }
   },
 
@@ -194,12 +172,6 @@ export default {
     }
   },
 
-  created () {
-    this.$root.$on('modal:close', () => {
-      this.isActionlistActive = false
-    })
-  },
-
   methods: {
     tabId (section) {
       return `${dasherize(this.variant.id)}-${section}`
@@ -211,50 +183,6 @@ export default {
     }
   }
 }
-
-// CodePen API documentation:
-// https://blog.codepen.io/documentation/api/prefill/
-// on('click', '.contentheader__actionlink--codepen', e => {
-//   e.preventDefault()
-
-//   const link = e.target
-//   const variantId = link.getAttribute('data-variant-target')
-//   const variantNode = document.getElementById(variantId)
-//   const iframeDocument = variantNode.querySelector('iframe').contentDocument
-//   const { styleSheets, scripts } = iframeDocument
-//   const form = link.parentNode
-//   const input = link.previousSibling
-//   const value = JSON.parse(input.dataset.value)
-
-//   let css = ''
-//   let cssExt = ''
-//   let js = ''
-//   let jsExt = ''
-
-//   for (let i = 0; i < styleSheets.length; i++) {
-//     const styleSheet = styleSheets[i]
-//     if (styleSheet.href) {
-//       cssExt += `${styleSheet.href};`
-//     } else {
-//       css += [].slice.call(styleSheet.cssRules).reduce((prev, cssRule) => prev + cssRule.cssText, '')
-//     }
-//   }
-
-//   for (let i = 0; i < scripts.length; i++) {
-//     const script = scripts[i]
-//     if (script.src) {
-//       jsExt += `${script.src};`
-//     } else if (script.id !== '__bs_script__') {
-//       js += script.innerHTML
-//     }
-//   }
-
-//   const data = Object.assign({}, value, { css, css_external: cssExt, js, js_external: jsExt })
-
-//   input.setAttribute('value', JSON.stringify(data))
-
-//   form.submit()
-// })
 </script>
 
 <style lang="stylus" scoped>
@@ -262,15 +190,4 @@ export default {
   margin-top var(--space-xxl)
   padding-top var(--space-xxl)
   border-top 1px solid var(--color-neutral-60)
-
-.permalink
-  cursor pointer
-
-  &--copied
-    &:after
-      content "📋"
-      margin-left var(--space-xs)
-
-  &__icon
-    icon-position(2px)
 </style>

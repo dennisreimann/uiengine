@@ -5,13 +5,11 @@
         <content-label
           v-if="component.label"
           inverted
-          class="sob-m"
         >{{ component.label }}</content-label>
         <content-tag
           v-for="tag in component.tags"
           :key="tag"
           :tag="tag"
-          class="sob-m"
         />
         <div
           v-if="hasInfo && hasProperties"

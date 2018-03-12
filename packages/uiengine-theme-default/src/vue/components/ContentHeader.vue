@@ -44,9 +44,14 @@ export default {
   .label,
   .tag
     margin-left var(--space-s)
+    margin-bottom calc(var(--space-s) + var(--space-xxs))
+
+    .variant &
+      margin-bottom var(--space-s)
 
   &__options
     display flex
+    align-items center
     margin-left auto
     margin-bottom var(--space-s)
     font-size var(--font-size-s)
@@ -65,24 +70,15 @@ export default {
       color var(--color-contentheader-link-current)
       font-family var(--font-family-bold)
 
-  &__option + &__option
+  &__option + &__option,
+  &__action + &__option,
+  &__action + &__action
     margin-left var(--space-l)
 
-  &__actions
-    margin-left auto
-    margin-bottom var(--space-xxs)
-
-  &__options + &__actions
-    margin-left 0
-
-  &__actiontoggle
-    appearance none
-    margin-left var(--space-xl)
+  &__action
     transition-duration var(--transition-duration-fast)
     color var(--color-contentheader-link)
-    background transparent
-    cursor pointer
-    icon-size(21px)
+    icon-size(24px)
 
     &:focus,
     &:hover,
@@ -93,23 +89,5 @@ export default {
     .icon
       transition-duration var(--transition-duration-fast)
       fill var(--color-contentheader-link)
-      icon-size(21px)
-
-  &__actionlist
-    display none
-    list-style none
-    position absolute
-    z-index 10
-    right 0
-    width 280px
-    border 1px solid var(--color-modal-border-outer)
-
-    &--active
-      display block
-
-  &__actionlink
-    modal-option()
-
-  &__action + &__action
-    border-top 1px solid var(--color-modal-border-inner)
+      icon-size(24px)
 </style>
