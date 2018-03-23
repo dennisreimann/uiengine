@@ -64,7 +64,7 @@ For the evaluation process you might also want to have a look at the [alternativ
 
 ### 🗜 Prerequisites
 
-UIengine requires at least Node.js 6.9. Future versions will track the latest active Node.js LTS version, which guarantees a reasonable level of backwards compatibility.
+UIengine requires at least Node.js 8.9. Future versions will track the latest active Node.js LTS version, which guarantees a reasonable level of backwards compatibility.
 
 ## 📘 Documentation
 
