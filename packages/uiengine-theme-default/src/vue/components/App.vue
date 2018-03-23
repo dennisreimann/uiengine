@@ -60,44 +60,8 @@ export default {
 
 <style lang="stylus">
 @require "settings"
+@require "global"
 @require "utilities"
-
-@font-face
-  font-family "Merriweathersans bold"
-  src url(../../fonts/merriweathersans-bold.woff2) format("woff2"),
-      url(../../fonts/merriweathersans-bold.woff) format("woff")
-  font-display optional
-
-@font-face
-  font-family "Merriweathersans light"
-  src url(../../fonts/merriweathersans-light.woff2) format("woff2"),
-      url(../../fonts/merriweathersans-light.woff) format("woff")
-  font-display optional
-
-@font-face
-  font-family "Merriweathersans regular"
-  src url(../../fonts/merriweathersans-regular.woff2) format("woff2"),
-      url(../../fonts/merriweathersans-regular.woff) format("woff")
-  font-display optional
-
-@font-face
-  font-family "Merriweathersans bolditalic"
-  src url(../../fonts/merriweathersans-bolditalic.woff2) format("woff2"),
-      url(../../fonts/merriweathersans-bolditalic.woff) format("woff")
-  font-display optional
-
-@font-face
-  font-family "Merriweathersans lightitalic"
-  src url(../../fonts/merriweathersans-lightitalic.woff2) format("woff2"),
-      url(../../fonts/merriweathersans-lightitalic.woff) format("woff")
-  font-display optional
-
-*
-  margin 0
-  padding 0
-  border 0
-  box-sizing border-box
-  vertical-align baseline
 
 html
   height 100%
