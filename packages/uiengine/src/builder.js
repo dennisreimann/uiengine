@@ -7,6 +7,12 @@ const PageUtil = require('./util/page')
 const { error } = require('./util/message')
 const { debug2, debug3, debug4 } = require('./util/debug')
 
+const replaceComment = (mark, html, content) => {
+  const regexp = new RegExp(`<!--\\s?uiengine:${mark}\\s?-->`, 'gi')
+
+  return html.replace(regexp, content)
+}
+
 const copyPageFile = (targetPath, sourcePath, source) => {
   const filePath = relative(sourcePath, source)
   const target = resolve(targetPath, filePath)
@@ -69,8 +75,8 @@ async function generatePageWithTemplate (state, pageId) {
     const html = await render(state, template, context, identifier)
 
     // write file
-    const htmlPath = resolve(target, '_pages', `${id}.html`)
-    await File.write(htmlPath, html)
+    const filePath = resolve(target, '_pages', `${id}.html`)
+    await File.write(filePath, html)
   }
 
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):end`)
@@ -92,17 +98,20 @@ async function generatePagesWithTemplate (state, template) {
 async function generateVariant (state, variant) {
   debug2(state, `Builder.generateVariant(${variant.id}):start`)
 
-  const { config } = state
+  const { config, components } = state
   const identifier = `Variant "${variant.id}"`
+  const component = components[variant.componentId]
 
   // render variant preview, with layout
-  const data = { variant, config }
-  const template = variant.template || config.variantTemplate
-  const html = await render(state, template, data, identifier)
+  const data = state
+  const template = variant.template || config.template
+  let html = await render(state, template, data, identifier)
+  html = replaceComment('content', html, variant.rendered)
+  html = replaceComment('title', html, `${component.title}: ${variant.title} • ${config.name} (${config.version})`)
 
   // write file
-  const htmlPath = resolve(config.target, '_variants', `${variant.id}.html`)
-  await File.write(htmlPath, html)
+  const filePath = resolve(config.target, '_variants', `${variant.id}.html`)
+  await File.write(filePath, html)
 
   debug2(state, `Builder.generateVariant(${variant.id}):end`)
 }
@@ -141,17 +150,19 @@ async function generateState (state, change) {
 async function generateSketch (state) {
   debug2(state, `Builder.generateSketch():start`)
 
-  const { config, components, variants, pages } = state
+  const { config } = state
   const identifier = 'HTML Sketchapp Export'
 
   // render variant preview, with layout
-  const data = { components, variants, config, pages }
-  const template = 'sketch.pug'
-  const html = await render(state, template, data, identifier)
+  const data = state
+  const template = config.template
+  let html = await render(state, template, data, identifier)
+  html = replaceComment('content', html, 'HERE_GOES_THE_SKETCH_CONTENT')
+  html = replaceComment('title', html, `HTML Sketchapp Export • ${config.name} (${config.version})`)
 
   // write file
-  const htmlPath = resolve(config.target, '_sketch.html')
-  await File.write(htmlPath, html)
+  const filePath = resolve(config.target, '_sketch.html')
+  await File.write(filePath, html)
 
   debug2(state, `Builder.generateSketch():end`)
 }

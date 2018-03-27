@@ -15,7 +15,7 @@ exports.handler = argv => {
   const directory = resolve(process.cwd(), argv.dir)
   const name = titleize(basename(directory))
   const pagesDir = 'src/uiengine/pages'
-  const previewFileName = 'src/templates/variant-preview.html'
+  const previewFileName = 'src/templates/uiengine.html'
   const configFileName = 'uiengine.config.js'
   const configTemplate = require('../templates/config').template
   const previewTemplate = require('../templates/preview').template

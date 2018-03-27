@@ -27,7 +27,7 @@ const state = {
     },
     target,
     adapters,
-    variantTemplate: 'variant-preview.pug',
+    template: 'uiengine.pug',
     theme: {
       module: 'uiengine-theme-default',
       options: {}

@@ -99,16 +99,18 @@ In either way the adapter module can be …
 - the name of the npm package that is the adapter
   (case: you use an existing adapter or want to share yours across projects)
 
-### Variant Template
+### Template
 
-This is the template the variant preview gets rendered into.
-It should contain references to your styles and scripts, so that the rendered variant markup has everything it needs.
+This is the template the previews gets rendered into.
+It should contain references to your styles and scripts, so that the rendered markup has the asset context it needs.
 
 ```js
 {
-  variantTemplate: 'variant-preview.html'
+  template: 'uiengine.html'
 }
 ```
+
+It must also include the `<!-- uiengine:content -->` comment, which will be replaced with the rendered markup.
 
 ### Theme
 

@@ -30,8 +30,8 @@ In addition to the raw render file, you can also add a markdown file containing 
 This markdown file can contain [YAML frontmatter](https://github.com/dennisreimann/uiengine/tree/master/docs/docs/yaml.md) and has to be named like the variant, but must have the file extension \`.md\`.
 
 To render a variant, we also need a layout.
-The \`uiengine init\` command created a basic html layout file in \`src/templates/variant-preview.html\`.
-It includes the variable \`variant.rendered\`, which contains the HTML of the rendered variant (hence the name 😉).
+The \`uiengine init\` command created a basic html layout file in \`src/templates/uiengine.html\`.
+It includes the \`<!-- uiengine:content -->\` comment, which will be replaced with the HTML of the rendered variant.
 You can go ahead and extend the layout to fit your needs and include the correct HTML and style and script references.
 
 This layout file is just there to get you started.

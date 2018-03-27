@@ -3,7 +3,7 @@ export const template = title =>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>\${variant.title}</title>
+    <title><!-- uiengine:title --></title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <!-- add you custom styles here:
@@ -11,7 +11,7 @@ export const template = title =>
     -->
   </head>
   <body>
-    \${variant.rendered}
+    <!-- uiengine:content -->
 
     <!-- add you custom styles here:
     <script src="/scripts/my.js" defer></script>
