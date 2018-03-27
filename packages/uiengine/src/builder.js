@@ -138,6 +138,24 @@ async function generateState (state, change) {
   debug2(state, 'Builder.generateState():end')
 }
 
+async function generateSketch (state) {
+  debug2(state, `Builder.generateSketch():start`)
+
+  const { config, components, variants, pages } = state
+  const identifier = 'HTML Sketchapp Export'
+
+  // render variant preview, with layout
+  const data = { components, variants, config, pages }
+  const template = 'sketch.pug'
+  const html = await render(state, template, data, identifier)
+
+  // write file
+  const htmlPath = resolve(config.target, '_sketch.html')
+  await File.write(htmlPath, html)
+
+  debug2(state, `Builder.generateSketch():end`)
+}
+
 async function generate (state) {
   debug2(state, 'Builder.generate():start')
 
@@ -159,6 +177,7 @@ async function generate (state) {
     ...fileBuilds,
     ...variantBuilds,
     ...templateBuilds,
+    generateSketch(state),
     generateState(state)
   ])
 

@@ -50,6 +50,7 @@
     "eslint-plugin-promise": "3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "gulp": "^3.9.1",
+    "html-sketchapp-cli": "0.3.0",
     "theo": "^6.0.0-beta.9",
     "uiengine": "file:../../packages/uiengine",
     "uiengine-adapter-ejs": "file:../../packages/uiengine-adapter-ejs",
