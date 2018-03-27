@@ -1,8 +1,11 @@
 const { join } = require('path')
 
 const resolve = dir => join(__dirname, '../../tmp', dir)
+const mode = process.env.NODE_ENV || 'development'
 
 module.exports = {
+  mode,
+
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
@@ -16,10 +19,6 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // loaders: utils.cssLoaders({
-          //   sourceMap: true,
-          //   extract: true // isProd
-          // }),
           sourceMaps: true,
           cacheBusting: true,
           transformToRequire: {
