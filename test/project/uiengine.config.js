@@ -7,7 +7,6 @@ module.exports = {
   // Here you can overwrite it and add more custom properties.
   name: 'UIengine Sample Project',
   version: '1.0.0',
-  analyticsId: 'UA-376258-30',
   copyright: '<a href="https://github.com/dennisreimann/uiengine">Generated with UIengine</a>',
 
   // Base directories for the input, your raw source files:
