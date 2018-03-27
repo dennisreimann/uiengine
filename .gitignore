@@ -14,6 +14,7 @@ npm-debug*
 .nyc_output
 coverage
 test/tmp
+test/project/dist
 
 # Package specific rules: Specify them here and not in the package path so
 # we can profit from Standard.js ignoring the paths listed in gitignore.

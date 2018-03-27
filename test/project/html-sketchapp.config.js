@@ -2,7 +2,7 @@ const breakpoints = require('./src/lib/breakpoints.json')
 
 module.exports = {
   url: 'http://localhost:3000/_sketch.html',
-  outDir: 'dist',
+  outDir: '../tmp',
   viewports: {
     Mobile: '320x568'
   }
