@@ -8,7 +8,7 @@ This is what the options and their defaults look like:
 
 ```yaml
 theme:
-  module: uiengine-theme-default
+  module: uiengine-theme
   options:
     lang: en
     hljs: atom-one-dark

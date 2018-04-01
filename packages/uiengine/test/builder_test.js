@@ -29,7 +29,7 @@ const state = {
     adapters,
     template: 'uiengine.pug',
     theme: {
-      module: 'uiengine-theme-default',
+      module: 'uiengine-theme',
       options: {}
     }
   },

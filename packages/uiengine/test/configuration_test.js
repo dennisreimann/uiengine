@@ -41,7 +41,7 @@ describe('Configuration', () => {
     it('should resolve theme', async () => {
       const config = await Configuration.read(opts)
 
-      assert.equal(config.theme.module, 'uiengine-theme-default')
+      assert.equal(config.theme.module, 'uiengine-theme')
       assert.equal(config.theme.options.customStylesFile, '/assets/styles/uiengine-custom-styles.css')
     })
 
@@ -56,7 +56,7 @@ describe('Configuration', () => {
       const opts = { config: resolve(testProjectPath, 'uiengine-use-default-theme.yml') }
       const config = await Configuration.read(opts)
 
-      assert.equal(config.theme.module, 'uiengine-theme-default')
+      assert.equal(config.theme.module, 'uiengine-theme')
       assert.equal(Object.keys(config.theme.options).length, 0)
     })
 

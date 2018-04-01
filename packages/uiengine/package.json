@@ -43,7 +43,7 @@
     "markdown-it": "^8.4.0",
     "markdown-it-anchor": "^4.0.0",
     "ramda": "^0.25.0",
-    "uiengine-theme-default": "^0.16.0",
+    "uiengine-theme": "^0.16.0",
     "yargs": "^11.0.0"
   },
   "optionalDependencies": {

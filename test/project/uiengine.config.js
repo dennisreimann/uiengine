@@ -53,7 +53,7 @@ module.exports = {
   // UIengine will `require` the theme, which has to provide a defined set of functions
   // for setup and rendering. For details see the theme docs.
   theme: {
-    module: 'uiengine-theme-default',
+    module: 'uiengine-theme',
     options: {
       customStylesFile: '/assets/styles/uiengine-custom-styles.css'
     }

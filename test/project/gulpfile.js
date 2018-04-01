@@ -11,7 +11,7 @@ const src = {
 const dist = {
   root: '../tmp',
   assets: '../tmp/assets',
-  themeAssets: '../../packages/uiengine-theme-default/dist/_uiengine-theme'
+  themeAssets: '../../packages/uiengine-theme/dist/_uiengine-theme'
 }
 
 const isDev = process.env.NODE_ENV !== 'production'

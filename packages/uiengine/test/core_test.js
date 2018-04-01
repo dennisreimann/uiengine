@@ -329,14 +329,14 @@ describe('Core', function () {
     })
 
     it('should regenerate everything on theme file change', async () => {
-      const filePath = resolve(testProjectPath, 'node_modules', 'uiengine-theme-default', 'lib', 'index.js')
+      const filePath = resolve(testProjectPath, 'node_modules', 'uiengine-theme', 'lib', 'index.js')
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
       assertExists(join(testProjectTargetPath, 'index.html'))
       assert.equal(change.action, 'changed')
       assert.equal(change.type, 'site')
       assert.equal(change.item, 'UIengine Sample Project')
-      assert.equal(change.file, join(testProjectRelativePath, 'node_modules/uiengine-theme-default/lib/index.js'))
+      assert.equal(change.file, join(testProjectRelativePath, 'node_modules/uiengine-theme/lib/index.js'))
     })
   })
 

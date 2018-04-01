@@ -27,7 +27,7 @@ const resolveModule = (basedir, module) =>
 const resolvePath = (basedir, relativePath) =>
   resolve(basedir, relativePath)
 
-const resolveTheme = (basedir, theme = 'uiengine-theme-default') =>
+const resolveTheme = (basedir, theme = 'uiengine-theme') =>
   resolvePackage(basedir, theme, 'Theme')
 
 const resolvePackage = (basedir, config, type) => {

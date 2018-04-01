@@ -87,7 +87,7 @@ Technical documentation, with more detailed information:
 ## 💁 Individual packages
 
 - 🚀 [UIengine core](./packages/uiengine)
-- 🎨 [UIengine default theme](./packages/uiengine-theme-default)
+- 🎨 [UIengine theme](./packages/uiengine-theme)
 - 🔌 [Pug templating adapter](./packages/uiengine-adapter-pug)
 - 🔌 [React/JSX templating adapter](./packages/uiengine-adapter-react)
 - 🔌 [Vue templating adapter](./packages/uiengine-adapter-vue)
