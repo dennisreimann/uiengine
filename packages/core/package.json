@@ -38,20 +38,20 @@
     "lint": "eslint --ext .js src test"
   },
   "dependencies": {
-    "@uiengine/theme": "^0.17.0",
-    "chalk": "^2.3.0",
+    "@uiengine/theme": "^0.18.0-1",
+    "chalk": "^2.3.2",
     "cosmiconfig": "^4.0.0",
     "fs-extra": "^5.0.0",
     "globby": "^7.1.1",
-    "js-yaml": "^3.10.0",
-    "markdown-it": "^8.4.0",
+    "js-yaml": "^3.11.0",
+    "markdown-it": "^8.4.1",
     "markdown-it-anchor": "^4.0.0",
     "ramda": "^0.25.0",
     "yargs": "^11.0.0"
   },
   "optionalDependencies": {
     "browser-sync": "^2.23.6",
-    "chokidar": "^2.0.1"
+    "chokidar": "^2.0.3"
   },
   "devDependencies": {
     "babel-register": "^6.26.0"

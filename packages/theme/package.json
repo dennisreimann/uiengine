@@ -34,7 +34,7 @@
     "fuse.js": "^3.2.0",
     "highlight.js": "^9.12.0",
     "vue": "^2.5.16",
-    "vue-analytics": "^5.9.1",
+    "vue-analytics": "^5.10.0",
     "vue-meta": "^1.5.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -76,12 +76,15 @@
     "stylus-loader": "^3.0.2",
     "url-loader": "^1.0.1",
     "vue-loader": "^14.2.2",
-    "vue-style-loader": "^4.0.2",
+    "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^3.11.0",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-merge": "^4.1.2",
     "webpack-stream": "^4.0.3"
+  },
+  "peerDependencies": {
+    "@uiengine/core": "^0.18.0-1"
   },
   "browserslist": [
     "last 2 versions"
