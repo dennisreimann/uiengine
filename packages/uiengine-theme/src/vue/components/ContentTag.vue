@@ -1,7 +1,7 @@
 <template>
   <router-link
-    class="tag"
     :to="target"
+    class="tag"
   >{{ tag }}</router-link>
 </template>
 

@@ -5,16 +5,16 @@
       class="footer__nav"
     >
       <router-link
-        :to="prevPage"
         v-if="prevPage"
+        :to="prevPage"
         class="footer__prevlink"
       >
         <app-icon symbol="caret-left" />
         {{ prevPage.title }}
       </router-link>
       <router-link
-        :to="nextPage"
         v-if="nextPage"
+        :to="nextPage"
         class="footer__nextlink"
       >
         {{ nextPage.title }}

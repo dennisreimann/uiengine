@@ -1,7 +1,7 @@
 <template>
   <ul
-    class="navigation__tree"
     :class="levelClass"
+    class="navigation__tree"
   >
     <app-navigation-item
       v-for="itemId in items"

@@ -4,8 +4,8 @@
       <div class="colorToken__symbol">
         <div class="colorToken__swatch">
           <div
-            class="colorToken__swatch__inner"
             :style="swatchStyle"
+            class="colorToken__swatch__inner"
           />
         </div>
       </div>

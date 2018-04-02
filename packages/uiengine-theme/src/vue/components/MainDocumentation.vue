@@ -1,8 +1,8 @@
 <template>
   <section class="page">
     <content-header
-      class="sob-m"
       :title="page.title"
+      class="sob-m"
     >
       <content-tag
         v-for="tag in page.tags"

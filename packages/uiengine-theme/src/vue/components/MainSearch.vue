@@ -1,8 +1,8 @@
 <template>
   <section class="page">
     <content-header
-      class="sob-l"
       :title="title"
+      class="sob-l"
     />
     <article class="content">
       <p v-if="results.length === 0">{{ 'search.no_results' | localize }}</p>

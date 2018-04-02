@@ -1,8 +1,8 @@
 <template>
   <section class="page">
     <content-header
-      class="sob-m"
       :title="'not_found.title' | localize"
+      class="sob-m"
     />
     <article class="content">{{ 'not_found.content' | localize }}</article>
   </section>

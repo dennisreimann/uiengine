@@ -1,11 +1,11 @@
 <template>
   <div class="topbar">
     <button
+      :title="'navigation.toggle' | localize"
+      :aria-expanded="!navigationCollapsed | bool2string"
       type="button"
       class="topbar__toggle topbar__toggle--menu"
-      :title="'navigation.toggle' | localize"
       aria-controls="navigation-root"
-      :aria-expanded="!navigationCollapsed | bool2string"
       @click.prevent="setNavigationCollapsed(!navigationCollapsed)"
     >
       <app-icon
@@ -15,14 +15,14 @@
     </button>
 
     <router-link
-      class="topbar__home"
       :to="navigation.index"
+      class="topbar__home"
     >{{ config.name }}</router-link>
 
     <button
-      type="button"
-      class="topbar__toggle topbar__toggle--search"
       :title="'search.toggle' | localize"
+      class="topbar__toggle topbar__toggle--search"
+      type="button"
       @click.prevent="toggleSearch"
     >
       <app-icon
@@ -32,16 +32,16 @@
     </button>
 
     <form
-      class="topbar__search"
       :class="{'topbar__search--collapsed': searchCollapsed}"
+      class="topbar__search"
       @submit.prevent="search"
     >
       <input
+        ref="searchfield"
+        v-model="query"
         type="search"
         class="topbar__searchfield"
-        ref="searchfield"
         name="query"
-        v-model="query"
       >
     </form>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <label
-    class="label"
     :id="id"
+    class="label"
   >
     {{ title }}
   </label>

@@ -1,24 +1,24 @@
 <template>
   <div class="preview">
     <div
-      class="preview__container"
       :style="containerStyle"
+      class="preview__container"
     >
       <div
         v-if="breakpoints"
         class="preview__size"
       >
         <button
+          :title="'breakpoints.toggle' | localize"
           class="preview__sizer"
           type="button"
-          :title="'breakpoints.toggle' | localize"
           @click.stop="isBreakpointsActive = !isBreakpointsActive"
         >{{ size }}</button>
       </div>
       <div
         v-if="breakpoints"
-        class="preview__breakpoints"
         :class="{ 'preview__breakpoints--active': isBreakpointsActive }"
+        class="preview__breakpoints"
       >
         <div class="preview__breakpoints-inner">
           <button

@@ -1,8 +1,8 @@
 <template>
   <section class="page">
     <content-header
-      class="sob-l"
       :title="title"
+      class="sob-l"
     />
     <article class="content">
       <div class="row">

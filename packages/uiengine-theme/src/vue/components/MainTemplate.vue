@@ -2,8 +2,8 @@
   <div>
     <section class="page">
       <content-header
-        class="sob-m"
         :title="page.title"
+        class="sob-m"
       >
         <content-tag
           v-for="tag in page.tags"
@@ -17,24 +17,24 @@
           class="contentheader__options"
         >
           <a
-            role="tab"
             ref="info-tab"
-            href="#info"
-            class="contentheader__option"
             :id="tabId('info')"
             :aria-selected="isInfoActive"
             :tabindex="isInfoActive ? false : '-1'"
+            role="tab"
+            href="#info"
+            class="contentheader__option"
             @click.prevent="activeSectionTop = 'info'"
             @keydown.right="switchTabTop('properties')"
           >{{ 'options.info' | localize }}</a>
           <a
-            role="tab"
             ref="properties-tab"
-            href="#properties"
-            class="contentheader__option"
             :id="tabId('properties')"
             :aria-selected="isPropertiesActive"
             :tabindex="isPropertiesActive ? false : '-1'"
+            role="tab"
+            href="#properties"
+            class="contentheader__option"
             @click.prevent="activeSectionTop = 'properties'"
             @keydown.left="switchTabTop('info')"
           >{{ 'options.properties' | localize }}</a>
@@ -47,10 +47,10 @@
       >
         <div
           v-if="hasInfo"
-          class="contentsection"
-          role="tabpanel"
           :aria-labelledby="tabId('info')"
           :hidden="!isInfoActive"
+          class="contentsection"
+          role="tabpanel"
         >
           <div
             v-if="page.content"
@@ -61,10 +61,10 @@
 
         <div
           v-if="hasProperties"
-          class="contentsection"
-          role="tabpanel"
           :aria-labelledby="tabId('properties')"
           :hidden="!isPropertiesActive"
+          class="contentsection"
+          role="tabpanel"
         >
           <div class="content">
             <content-properties
@@ -86,33 +86,33 @@
           class="contentheader__options"
         >
           <a
-            class="contentheader__action"
-            :href="previewPath"
             :target="page.id | dasherize"
             :title="'options.open_in_window' | localize"
+            :href="previewPath"
+            class="contentheader__action"
             @click.stop
           >
             <app-icon symbol="open-in-window" />
           </a>
           <a
-            href="#"
             ref="preview-tab"
-            role="tab"
-            class="contentheader__option"
             :id="tabId('preview')"
             :aria-selected="isPreviewActive"
             :tabindex="isPreviewActive ? false : '-1'"
+            href="#"
+            role="tab"
+            class="contentheader__option"
             @click.prevent="activeSectionBottom = 'preview'"
             @keydown.right="switchTabBottom('code')"
           >{{ 'options.preview' | localize }}</a>
           <a
-            href="#"
             ref="code-tab"
-            role="tab"
-            class="contentheader__option"
             :id="tabId('code')"
             :aria-selected="isCodeActive"
             :tabindex="isCodeActive ? false : '-1'"
+            href="#"
+            role="tab"
+            class="contentheader__option"
             @click.prevent="activeSectionBottom = 'code'"
             @keydown.left="switchTabBottom('preview')"
           > {{ 'options.code' | localize }}</a>
@@ -126,10 +126,10 @@
     >
       <div
         v-if="hasPreview"
-        class="contentsection"
-        role="tabpanel"
         :aria-labelledby="tabId('preview')"
         :hidden="!isPreviewActive"
+        class="contentsection"
+        role="tabpanel"
       >
         <content-preview
           :id="id"
@@ -141,10 +141,10 @@
 
       <div
         v-if="hasCode"
-        class="contentsection"
-        role="tabpanel"
         :aria-labelledby="tabId('code')"
         :hidden="!isCodeActive"
+        class="contentsection"
+        role="tabpanel"
       >
         <content-code
           :extension="page.extension"

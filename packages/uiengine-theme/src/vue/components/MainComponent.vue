@@ -17,24 +17,24 @@
           class="contentheader__options"
         >
           <a
-            role="tab"
             ref="info-tab"
-            href="#info"
-            class="contentheader__option"
             :id="tabId('info')"
             :aria-selected="isInfoActive"
             :tabindex="isInfoActive ? false : '-1'"
+            role="tab"
+            href="#info"
+            class="contentheader__option"
             @click.prevent="activeSection = 'info'"
             @keydown.right="switchTab('properties')"
           >{{ 'options.info' | localize }}</a>
           <a
-            role="tab"
             ref="properties-tab"
-            href="#properties"
-            class="contentheader__option"
             :id="tabId('properties')"
             :aria-selected="isPropertiesActive"
             :tabindex="isPropertiesActive ? false : '-1'"
+            role="tab"
+            href="#properties"
+            class="contentheader__option"
             @click.prevent="activeSection = 'properties'"
             @keydown.left="switchTab('info')"
           > {{ 'options.properties' | localize }}</a>
@@ -47,10 +47,10 @@
       >
         <div
           v-if="hasInfo"
-          class="contentsection"
-          role="tabpanel"
           :aria-labelledby="tabId('info')"
           :hidden="!isInfoActive"
+          class="contentsection"
+          role="tabpanel"
         >
           <div
             v-if="component.content"
@@ -79,10 +79,10 @@
 
         <div
           v-if="hasProperties"
-          class="contentsection"
-          role="tabpanel"
           :aria-labelledby="tabId('properties')"
           :hidden="!isPropertiesActive"
+          class="contentsection"
+          role="tabpanel"
         >
           <div class="content">
             <content-properties

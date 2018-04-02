@@ -1,7 +1,7 @@
 <template>
   <li
-    class="navigation__item"
     :class="classes"
+    class="navigation__item"
   >
     <span
       v-if="item.isStructural"
@@ -14,21 +14,21 @@
     >{{ item.title }}</router-link>
     <button
       v-if="children"
+      :aria-expanded="!isCollapsed | bool2string"
+      :title="'navigation.toggle' | localize"
       type="button"
       class="navigation__itemtoggle"
       aria-haspopup="true"
-      :aria-expanded="!isCollapsed | bool2string"
-      :title="'navigation.toggle' | localize"
       @click.prevent="setCollapsed(!isCollapsed)"
     >
       <app-icon
-        symbol="caret-down"
         class="navigation__icon"
+        symbol="caret-down"
       />
     </button>
     <app-navigation-tree
-      ref="children"
       v-if="children"
+      ref="children"
       :navigation="navigation"
       :items="children"
       :level="level + 1"

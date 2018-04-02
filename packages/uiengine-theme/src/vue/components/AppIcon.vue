@@ -1,10 +1,10 @@
 <template>
   <svg
+    :title="symbol"
     class="icon"
     role="presentation"
     aria-hidden="true"
     focusable="false"
-    :title="symbol"
   >
     <use :href="symbolHref" />
   </svg>

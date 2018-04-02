@@ -1,7 +1,7 @@
 <template>
   <article
-    class="variant"
     :id="variant.id | dasherize"
+    class="variant"
   >
     <content-header class="sob-m">
       <content-heading :level="2">{{ variant.title }}</content-heading>
@@ -19,10 +19,10 @@
         class="contentheader__options"
       >
         <a
-          class="permalink contentheader__action"
           :href="permalinkUrl"
           :data-clipboard-text="permalinkUrl"
           :title="'options.copy_permalink' | localize"
+          class="permalink contentheader__action"
           @click.prevent
         >
           <app-icon
@@ -31,34 +31,34 @@
           />
         </a>
         <a
-          class="contentheader__action"
           :href="previewPath"
           :target="variant.id | dasherize"
           :title="'options.open_in_window' | localize"
+          class="contentheader__action"
           @click.stop
         >
           <app-icon symbol="open-in-window" />
         </a>
 
         <a
-          href="#"
           ref="preview-tab"
-          role="tab"
-          class="contentheader__option"
           :id="tabId('preview')"
           :aria-selected="isPreviewActive"
           :tabindex="isPreviewActive ? false : '-1'"
+          href="#"
+          role="tab"
+          class="contentheader__option"
           @click.prevent="activeSection = 'preview'"
           @keydown.right="switchTab('code')"
         >{{ 'options.preview' | localize }}</a>
         <a
-          href="#"
           ref="code-tab"
-          role="tab"
-          class="contentheader__option"
           :id="tabId('code')"
           :aria-selected="isCodeActive"
           :tabindex="isCodeActive ? false : '-1'"
+          href="#"
+          role="tab"
+          class="contentheader__option"
           @click.prevent="activeSection = 'code'"
           @keydown.left="switchTab('preview')"
         > {{ 'options.code' | localize }}</a>
@@ -77,10 +77,10 @@
     >
       <div
         v-if="hasPreview"
-        class="contentsection"
-        role="tabpanel"
         :aria-labelledby="tabId('preview')"
         :hidden="!isPreviewActive"
+        class="contentsection"
+        role="tabpanel"
       >
         <content-preview
           :id="variant.id | dasherize"
@@ -92,10 +92,10 @@
 
       <div
         v-if="hasCode"
-        class="contentsection"
-        role="tabpanel"
         :aria-labelledby="tabId('code')"
         :hidden="!isCodeActive"
+        class="contentsection"
+        role="tabpanel"
       >
         <content-code
           :extension="variant.extension"

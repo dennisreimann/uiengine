@@ -5,10 +5,10 @@
       class="code__segment"
     >
       <button
-        class="code__header"
-        type="button"
         :title="'navigation.toggle' | localize"
         :aria-expanded="isRawExpanded | bool2string"
+        class="code__header"
+        type="button"
         @click.prevent="isRawExpanded = !isRawExpanded"
       >
         <h4 class="code__title">{{ 'code.raw' | localize }}</h4>
@@ -28,10 +28,10 @@
       class="code__segment"
     >
       <button
-        class="code__header"
-        type="button"
         :title="'navigation.toggle' | localize"
         :aria-expanded="isContextExpanded | bool2string"
+        class="code__header"
+        type="button"
         @click.prevent="isContextExpanded = !isContextExpanded"
       >
         <h4 class="code__title">{{ 'code.context' | localize }}</h4>
@@ -51,10 +51,10 @@
       class="code__segment"
     >
       <button
-        class="code__header"
-        type="button"
         :title="'navigation.toggle' | localize"
         :aria-expanded="isRenderedExpanded | bool2string"
+        class="code__header"
+        type="button"
         @click.prevent="isRenderedExpanded = !isRenderedExpanded"
       >
         <h4 class="code__title">{{ 'code.rendered' | localize }}</h4>

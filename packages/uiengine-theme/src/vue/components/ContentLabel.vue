@@ -1,7 +1,7 @@
 <template>
   <span
-    class="label"
     :class="{ 'label--inverted': inverted }"
+    class="label"
   >
     <slot />
   </span>

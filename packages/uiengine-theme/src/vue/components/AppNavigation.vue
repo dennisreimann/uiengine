@@ -2,19 +2,19 @@
   <nav
     v-if="navigation"
     id="navigation"
-    class="navigation"
     :hidden="navigationCollapsed"
+    class="navigation"
   >
     <app-navigation-tree
-      id="navigation-root"
       v-if="navigation.index.childIds"
+      id="navigation-root"
       :items="navigation.index.childIds"
       :navigation="navigation"
       :level="0"
     >
       <li
-        class="navigation__item navigation__item--level-0"
         :class="{ 'navigation__item--current': this.$route.path === '/_settings' }"
+        class="navigation__item navigation__item--level-0"
       >
         <router-link
           :to="{ name: 'settings' }"
