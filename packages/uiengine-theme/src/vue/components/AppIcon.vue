@@ -6,7 +6,7 @@
     aria-hidden="true"
     focusable="false"
   >
-    <use :href="symbolHref" />
+    <use :xlink:href="symbolHref" />
   </svg>
 </template>
 
