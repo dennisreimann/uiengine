@@ -26,6 +26,7 @@
     "marko": "^4.5.0"
   },
   "peerDependencies": {
+    "@uiengine/core": "^0.18.0",
     "marko": "^4.5.0"
   },
   "scripts": {

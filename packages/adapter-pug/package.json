@@ -26,6 +26,7 @@
     "pug": "^2.0.0"
   },
   "peerDependencies": {
+    "@uiengine/core": "^0.18.0",
     "pug": "^2.0.0"
   },
   "scripts": {
