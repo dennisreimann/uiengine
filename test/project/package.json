@@ -16,6 +16,7 @@
     "setup": "yarn install && yarn link-packages",
     "start": "yarn run clean && gulp develop",
     "build": "yarn run clean && gulp build",
+    "sketch": "html-sketchapp --config html-sketchapp.config.js && open -a Sketch",
     "lint": "eslint --ext .js,.vue build src test",
     "link-packages": "for pkg in $(ls -1FA ../../packages | grep / | tr -d /); do yarn link $pkg; done",
     "standalone": "yarn run clean && uiengine build -s -w -d"

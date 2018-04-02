@@ -217,6 +217,12 @@ describe('Builder', () => {
 
       assertExists(join(target, 'index.html'))
     })
+
+    it('should generate the sketch page', async () => {
+      await Builder.generate(state)
+
+      assertExists(join(target, '_sketch.html'))
+    })
   })
 
   describe('#generatePageWithTemplate', () => {

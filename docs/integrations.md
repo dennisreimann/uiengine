@@ -49,6 +49,13 @@ gulp.task('uiengine', done => {
 })
 ```
 
+## html-sketchapp
+
+The [html-sketchapp](https://github.com/brainly/html-sketchapp) functionality is integrated via a [html-sketchapp-cli](https://github.com/seek-oss/html-sketchapp-cli) compatible export.
+It generates Sketch libraries for your component variants.
+
+The UIengine generates the `/_sketch.html` file which can be used with `html-sketchapp-cli`.
+
 ## Theo
 
 You can integrate and consume design tokens defined with the [Theo](https://github.com/salesforce-ux/theo#spec) tokens spec.

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.17.0]
 
+### Added
+
+- Integration for [html-sketchapp]
+  - Generates Sketch libraries via html-sketchapp-cli compatible export
+  - For details see the [integration docs](./docs/integrations.md#html-sketchapp)
+
 ### Changed
 
 - Replace the `variantTemplate` config entry key name with `template`

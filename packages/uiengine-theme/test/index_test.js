@@ -64,6 +64,46 @@ describe('DefaultTheme', () => {
       assertContentMatches(indexFile, 'Test Render')
     })
 
+    it('should render the sketch output including the colors', async () => {
+      const state = {
+        pages: {
+          colors: {
+            tokens: [
+              {
+                type: 'color',
+                name: 'Blanched Almond',
+                value: 'BlanchedAlmond'
+              }
+            ]
+          }
+        }
+      }
+      const sketch = await DefaultTheme.render(testThemeOptions, state, null, 'sketch')
+
+      assertMatches(sketch, 'BlanchedAlmond')
+      assertMatches(sketch, 'Blanched Almond')
+    })
+
+    it('should render the sketch output including the variants', async () => {
+      const state = {
+        components: {
+          button: {
+            title: 'Button',
+            variants: [
+              {
+                title: 'Primary',
+                rendered: '<button class="button button--primary">Call To Action</button>'
+              }
+            ]
+          }
+        }
+      }
+      const sketch = await DefaultTheme.render(testThemeOptions, state, null, 'sketch')
+
+      assertMatches(sketch, 'Button/Primary')
+      assertMatches(sketch, '<button class="button button--primary">Call To Action</button>')
+    })
+
     it('should include the set locale if the passed language is available', async () => {
       const opts = Object.assign({}, testThemeOptions, { lang: 'de' })
       await DefaultTheme.render(opts, {})
