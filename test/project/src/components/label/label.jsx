@@ -1,9 +1,11 @@
 import React from 'react'
 
-export function Label ({ children, ...props }) {
+const Label = props => {
   return (
     <label className='label' htmlFor={props.for}>
       {props.title}
     </label>
   )
 }
+
+export default Label

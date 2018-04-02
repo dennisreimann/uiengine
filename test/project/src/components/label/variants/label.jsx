@@ -1,6 +1,6 @@
 import React from 'react'
-import { Label } from '../label'
+import Label from '../label.jsx'
 
-export default (props) => {
-  return <Label for='name' title='Name' />
-}
+export default props => (
+  <Label for='name' title='Name' />
+)
