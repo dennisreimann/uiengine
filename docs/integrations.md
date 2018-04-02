@@ -6,7 +6,7 @@ To integrate the UIengine into your Gulp build you have to add the following lin
 
 ```js
 const gulp = require('gulp')
-const UIengine = require('uiengine')
+const UIengine = require('@uiengine/core')
 
 const isDev = process.env.NODE_ENV !== 'production'
 
@@ -75,7 +75,7 @@ The contents of the transforming JavaScript file look something like this:
 ```js
 import path from 'path'
 import theo from 'theo'
-import { theo as UItheo } from 'uiengine'
+import { theo as UItheo } from '@uiengine/core'
 
 const filePath = path.resolve(__dirname, 'colors.yml')
 
@@ -91,7 +91,7 @@ This allows you to further modify the property data:
 ```js
 import path from 'path'
 import theo from 'theo'
-import { theo as UItheo } from 'uiengine'
+import { theo as UItheo } from '@uiengine/core'
 
 const filePath = path.resolve(__dirname, 'colors.yml')
 const titleize = string => string.replace(/^color/, '').replace(/([A-Z\d]+)/g, ' $1').replace(/^./, str => str.toUpperCase())

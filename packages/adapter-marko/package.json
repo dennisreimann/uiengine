@@ -1,0 +1,37 @@
+{
+  "name": "@uiengine/adapter-marko",
+  "description": "UIengine template adapter for Marko.",
+  "license": "MIT",
+  "version": "0.18.0-0",
+  "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
+  "homepage": "https://github.com/dennisreimann/uiengine",
+  "bugs": "https://github.com/dennisreimann/uiengine",
+  "repository": "dennisreimann/uiengine",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "main": "./lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "uiengine-adapter",
+    "uiengine",
+    "marko"
+  ],
+  "devDependencies": {
+    "marko": "^4.5.0"
+  },
+  "peerDependencies": {
+    "marko": "^4.5.0"
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "start": "yarn run clean && yarn run build -w",
+    "build": "yarn run clean && babel src --out-dir lib",
+    "lint": "eslint --ext .js src test"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "uiengine-monorepo",
+  "name": "@uiengine/monorepo",
   "description": "UIengine Monorepo",
   "license": "MIT",
   "version": "0.12.0",
@@ -31,10 +31,12 @@
     "standard": "^11.0.1"
   },
   "scripts": {
-    "setup": "lerna bootstrap && yarn run build && yarn link-packages && yarn run test-project:setup",
+    "clean": "lerna clean --yes && rimraf test/project/node_modules && yarn run packages:unlink",
+    "setup": "lerna bootstrap && yarn run packages:link && yarn run test-project:setup",
     "start": "lerna run start --parallel",
     "build": "lerna run build --parallel",
-    "link-packages": "for pkg in $(ls -1FA packages | grep / | tr -d /); do yarn --cwd packages/$pkg link; done",
+    "packages:link": "for pkg in $(ls -1FA packages | grep / | tr -d /); do yarn --cwd packages/$pkg link; done",
+    "packages:unlink": "for pkg in $(ls -1FA packages | grep / | tr -d /); do yarn --cwd packages/$pkg unlink; done",
     "lint": "lerna run lint --parallel && eslint test/support && cd test/project && yarn run lint",
     "test": "mocha --require babel-register -R dot packages/*/test",
     "test-watch": "yarn test -w --watch-extensions ejs,hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",

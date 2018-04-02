@@ -1,7 +1,7 @@
 const gulp = require('gulp')
 const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
-const UIengine = require('uiengine')
+const UIengine = require('@uiengine/core')
 
 const src = {
   assets: ['./src/assets/**/*'],
@@ -11,7 +11,7 @@ const src = {
 const dist = {
   root: '../tmp',
   assets: '../tmp/assets',
-  themeAssets: '../../packages/uiengine-theme/dist/_uiengine-theme'
+  themeAssets: '../../packages/@uiengine/theme/dist/_uiengine-theme'
 }
 
 const isDev = process.env.NODE_ENV !== 'production'

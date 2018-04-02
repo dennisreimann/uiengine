@@ -62,9 +62,9 @@ The first way is to directly reference the module or path that will get required
 ```js
 {
   adapters: {
-    pug: 'uiengine-adapter-pug',
-    hbs: 'uiengine-adapter-handlebars',
-    jsx: 'uiengine-adapter-react'
+    pug: '@uiengine/adapter-pug',
+    hbs: '@uiengine/adapter-handlebars',
+    jsx: '@uiengine/adapter-react'
   }
 }
 ```
@@ -76,14 +76,14 @@ explicitely reference the module and its options:
 {
   adapters: {
     pug: {
-      module: 'uiengine-adapter-pug',
+      module: '@uiengine/adapter-pug',
       options: {
         pretty: true,
         basedir: './src/components'
       }
     },
     hbs: {
-      module: 'uiengine-adapter-handlebars',
+      module: '@uiengine/adapter-handlebars',
       options: {
         namespace: 'my-project'
       }

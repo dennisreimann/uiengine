@@ -39,7 +39,7 @@ Adapters can also provide async functions to be used when scaffolding components
 Both functions should resolve with an array containing information about the files that need to be created.
 For each file the array should contain an object providing a `basename` and `data`.
 
-Here is an example from the [Pug adapter](https://github.com/dennisreimann/uiengine-adapter-pug/blob/master/src/index.js):
+Here is an example from the [Pug adapter](https://github.com/dennisreimann/uiengine/packages/uiengine-adapter-pug/blob/master/src/index.js):
 
 ```js
 const filesForComponent = (componentName) =>

@@ -1,6 +1,6 @@
 import path from 'path'
 import theo from 'theo'
-import { theo as UItheo } from 'uiengine'
+import { theo as UItheo } from '@uiengine/core'
 
 const filePath = path.resolve(__dirname, '../../tokens/colors.yml')
 const titleize = string => string.replace(/([A-Z\d]+)/g, ' $1').replace(/^./, str => str.toUpperCase()).replace(/^Color /, '')

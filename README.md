@@ -86,15 +86,15 @@ Technical documentation, with more detailed information:
 
 ## 💁 Individual packages
 
-- 🚀 [UIengine core](./packages/uiengine)
-- 🎨 [UIengine theme](./packages/uiengine-theme)
-- 🔌 [Pug templating adapter](./packages/uiengine-adapter-pug)
-- 🔌 [React/JSX templating adapter](./packages/uiengine-adapter-react)
-- 🔌 [Vue templating adapter](./packages/uiengine-adapter-vue)
-- 🔌 [Marko templating adapter](./packages/uiengine-adapter-marko)
-- 🔌 [Handlebars templating adapter](./packages/uiengine-adapter-handlebars)
-- 🔌 [EJS templating adapter](./packages/uiengine-adapter-ejs)
-- 🔌 [HTML templating adapter](./packages/uiengine-adapter-html)
+- 🚀 [UIengine core](./packages/core)
+- 🎨 [UIengine theme](./packages/theme)
+- 🔌 [Pug templating adapter](./packages/adapter-pug)
+- 🔌 [React/JSX templating adapter](./packages/adapter-react)
+- 🔌 [Vue templating adapter](./packages/adapter-vue)
+- 🔌 [Marko templating adapter](./packages/adapter-marko)
+- 🔌 [Handlebars templating adapter](./packages/adapter-handlebars)
+- 🔌 [EJS templating adapter](./packages/adapter-ejs)
+- 🔌 [HTML templating adapter](./packages/adapter-html)
 
 ### 🖖 Alternatives
 

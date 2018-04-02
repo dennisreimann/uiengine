@@ -7,7 +7,7 @@ If that is not the case and you get errors when running the `uiengine` command, 
 
 ```bash
 mkdir uiengine-test && cd uiengine-test && npm init
-npm install --save-dev uiengine uiengine-adapter-html
+npm install --save-dev @uiengine/core @uiengine/adapter-html
 uiengine init
 uiengine component button
 uiengine page atoms molecules organisms
@@ -21,14 +21,14 @@ Now you have a basic test project setup and can read about the steps in detail â
 The UIengine should be installed as a dependency for a project.
 
 ```bash
-npm install --save-dev uiengine
+npm install --save-dev @uiengine/core
 ```
 
 You will also need at least one adapter to render your components.
-Here we will use Pug as an example, so go ahead and install it:
+Here we will use the HTML adapter as an example, so go ahead and install it:
 
 ```bash
-npm install --save-dev uiengine-adapter-pug
+npm install --save-dev @uiengine/adapter-html
 ```
 
 See the [adapter docs](./adapters.md) for details and a list of available adapters.

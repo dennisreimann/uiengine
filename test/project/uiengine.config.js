@@ -28,23 +28,23 @@ module.exports = {
   // and needs to provide functions for setup and rendering. For details see the adapters docs.
   adapters: {
     pug: {
-      module: 'uiengine-adapter-pug',
+      module: '@uiengine/adapter-pug',
       options: pugAdapterOptions
     },
     vue: {
-      module: 'uiengine-adapter-vue',
+      module: '@uiengine/adapter-vue',
       options: vueAdapterOptions
     },
     vhtml: {
-      module: 'uiengine-adapter-vue',
+      module: '@uiengine/adapter-vue',
       options: vueAdapterOptions
     },
-    js: 'uiengine-adapter-vue',
-    jsx: 'uiengine-adapter-react',
-    hbs: 'uiengine-adapter-handlebars',
-    marko: 'uiengine-adapter-marko',
-    html: 'uiengine-adapter-html',
-    ejs: 'uiengine-adapter-ejs'
+    js: '@uiengine/adapter-vue',
+    jsx: '@uiengine/adapter-react',
+    hbs: '@uiengine/adapter-handlebars',
+    marko: '@uiengine/adapter-marko',
+    html: '@uiengine/adapter-html',
+    ejs: '@uiengine/adapter-ejs'
   },
 
   // Here you can configure the template that the variant preview gets embeded in.
@@ -53,7 +53,7 @@ module.exports = {
   // UIengine will `require` the theme, which has to provide a defined set of functions
   // for setup and rendering. For details see the theme docs.
   theme: {
-    module: 'uiengine-theme',
+    module: '@uiengine/theme',
     options: {
       customStylesFile: '/assets/styles/uiengine-custom-styles.css'
     }

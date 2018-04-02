@@ -1,0 +1,46 @@
+{
+  "name": "@uiengine/adapter-vue",
+  "description": "UIengine template adapter for Vue.js",
+  "license": "MIT",
+  "version": "0.18.0-0",
+  "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
+  "homepage": "https://github.com/dennisreimann/uiengine",
+  "bugs": "https://github.com/dennisreimann/uiengine",
+  "repository": "dennisreimann/uiengine",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "main": "./lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "uiengine-adapter",
+    "uiengine",
+    "vue"
+  ],
+  "dependencies": {
+    "vue-component-compiler": "git+https://github.com/znck/vue-component-compiler.git",
+    "vue-server-renderer": "^2.3.0",
+    "vue-template-compiler": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-vue": "^2.0.0",
+    "vue": "^2.3.0"
+  },
+  "peerDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-vue": "^2.0.0",
+    "vue": "^2.3.0"
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "start": "yarn run clean && yarn run build -w",
+    "build": "yarn run clean && babel src --out-dir lib",
+    "lint": "eslint --ext .js,.vue src test"
+  }
+}
