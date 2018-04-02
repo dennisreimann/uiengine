@@ -9,7 +9,9 @@ before_install:
 before_script:
   - yarn run setup
 script:
-  # Lint and build all packages
+  # Build all packages
+  - yarn run build
+  # Lint all packages
   - yarn run lint
   # Run tests and coverage
   - yarn run cover
