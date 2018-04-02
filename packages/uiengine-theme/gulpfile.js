@@ -10,7 +10,7 @@ const webpackConfig = require(join(__dirname, `build/webpack.${webpackEnv}.conf.
 
 const src = {
   lib: ['./src/*.js'],
-  webpack: ['src/{templates,vue}/**/*']
+  webpack: ['src/{styles,templates,vue}/**/*']
 }
 
 gulp.task('lib', () =>

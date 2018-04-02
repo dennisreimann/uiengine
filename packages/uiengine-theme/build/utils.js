@@ -54,14 +54,17 @@ exports.cssLoaders = function (options) {
   }
 
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
+  const stylus = generateLoaders('stylus', {
+    paths: [resolve(__dirname, '..', 'src/styles')],
+    import: ['lib/mediaQueries', 'lib/mixins'],
+    url: { name: 'embedurl' }
+  })
+
   return {
     css: generateLoaders(),
     postcss: generateLoaders(),
-    stylus: generateLoaders('stylus', {
-      paths: [resolve(__dirname, '..', 'src/styles')],
-      import: ['lib/mediaQueries', 'lib/mixins'],
-      url: { name: 'embedurl' }
-    })
+    styl: stylus,
+    stylus
   }
 }
 

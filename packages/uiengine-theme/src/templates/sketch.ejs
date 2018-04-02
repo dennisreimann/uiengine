@@ -1,0 +1,20 @@
+<%_ for (index in htmlWebpackPlugin.files.css) { _%>
+<link href="<%= htmlWebpackPlugin.files.css[index] %>" rel="stylesheet">
+<%_ } _%>
+
+<div class="uie-html-sketchapp-export">
+  <%%_ Object.values(state.components).forEach(component => { %>
+  <section class="uie-component">
+    <h2><%%= component.title %></h2>
+
+    <%% component.variants.forEach(variant => { %>
+    <article class="uie-variant">
+      <h3><%%= variant.title %></h3>
+      <div data-sketch-symbol="<%%= component.title %>/<%%= variant.title %>">
+        <%%- variant.rendered %>
+      </div>
+    </article>
+    <%%_ }) _%%>
+  </section>
+  <%%_ }) _%%>
+</div>

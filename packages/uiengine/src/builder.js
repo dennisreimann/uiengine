@@ -147,7 +147,7 @@ async function generateState (state, change) {
   debug2(state, 'Builder.generateState():end')
 }
 
-async function generateSketch (state) {
+async function generateSketch (state, change) {
   debug2(state, `Builder.generateSketch():start`)
 
   const { config } = state
@@ -156,8 +156,9 @@ async function generateSketch (state) {
   // render variant preview, with layout
   const data = state
   const template = config.template
+  const sketch = await Theme.render(state, change, 'sketch')
   let html = await render(state, template, data, identifier)
-  html = replaceComment('content', html, 'HERE_GOES_THE_SKETCH_CONTENT')
+  html = replaceComment('content', html, sketch)
   html = replaceComment('title', html, `HTML Sketchapp Export • ${config.name} (${config.version})`)
 
   // write file

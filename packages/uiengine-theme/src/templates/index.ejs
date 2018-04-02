@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="<%= "\<%= lang %\>" %>">
+<html lang="<%%= lang %>">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <% for (index in htmlWebpackPlugin.files.css) {
-    %><link href="<%= htmlWebpackPlugin.files.css[index] %>" rel="stylesheet"><% } %>
-    <link rel="stylesheet" href="/_uiengine-theme/styles/hljs/<%= "\<%= hljs %\>" %>.css" id="hljs" data-default="<%= "\<%= hljs %\>" %>" data-tmpl="/_uiengine-theme/styles/hljs/%s.css">
-    <%= "\<% if (customStylesFile) {" %>
-    <%= "%\>" %><link rel="stylesheet" href="<%= "\<%= customStylesFile %\>" %>"><%= "\<% } %\>" %>
+    <%_ for (index in htmlWebpackPlugin.files.css) { _%>
+    <link href="<%= htmlWebpackPlugin.files.css[index] %>" rel="stylesheet">
+    <%_ } _%>
+    <link rel="stylesheet" href="/_uiengine-theme/styles/hljs/<%%= hljs %>.css" id="hljs" data-default="<%%= hljs %>" data-tmpl="/_uiengine-theme/styles/hljs/%s.css">
+    <%%_ if (customStylesFile) { _%%>
+    <link rel="stylesheet" href="<%%= customStylesFile %>">
+    <%%_ } _%%>
     <script type="text/javascript">
       window.UIengine = {};
-      window.UIengine.state = <%= "\<%= JSON.stringify(state) %\>;" %>
-      window.UIengine.previewSrc = <%= JSON.stringify(htmlWebpackPlugin.files.chunks['uiengine-preview'].entry) %>;
-      <% if (htmlWebpackPlugin.files.chunks.manifest) {
-      %>window.UIengine.manifestSrc = <%= JSON.stringify(htmlWebpackPlugin.files.chunks.manifest.entry) %>;<% } %>
-      <% for (let key in htmlWebpackPlugin.options.window) {
-      %>window.UIengine.<%= key %> = <%= JSON.stringify(htmlWebpackPlugin.options.window[key]) %>;<% } %>
+      window.UIengine.state = <%%- JSON.stringify(state) %>;
+      window.UIengine.previewSrc = <%- JSON.stringify(htmlWebpackPlugin.files.chunks['uiengine-preview'].entry) %>;
+      <%_ if (htmlWebpackPlugin.files.chunks.manifest) { _%>
+      window.UIengine.manifestSrc = <%- JSON.stringify(htmlWebpackPlugin.files.chunks.manifest.entry) %>;
+      <%_ } _%>
+      <%_ for (key in htmlWebpackPlugin.options.window) { _%>
+      window.UIengine.<%= key %> = <%- JSON.stringify(htmlWebpackPlugin.options.window[key]) %>;
+      <%_ } _%>
     </script>
   </head>
   <body>
@@ -33,10 +37,12 @@
       </defs>
     </svg>
     <div id="app"></div>
-    <% if (htmlWebpackPlugin.files.chunks.manifest) {
-    %><script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.manifest.entry %>"></script><% } %>
-    <% if (htmlWebpackPlugin.files.chunks.vendor) {
-    %><script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.vendor.entry %>"></script><% } %>
+    <%_ if (htmlWebpackPlugin.files.chunks.manifest) { _%>
+    <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.manifest.entry %>"></script>
+    <%_ } _%>
+    <%_ if (htmlWebpackPlugin.files.chunks.vendor) { _%>
+    <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.vendor.entry %>"></script>
+    <%_ } _%>
     <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.uiengine.entry %>"></script>
   </body>
 </html>

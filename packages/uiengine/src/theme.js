@@ -32,11 +32,13 @@ async function setup (state) {
   debug3(state, 'Theme.setup():end')
 }
 
-async function render (state, change) {
+async function render (state, change, template) {
   const { render } = getTheme(state)
   const options = getOptions(state)
 
-  await render(options, state, change)
+  const rendered = await render(options, state, change, template)
+
+  return rendered
 }
 
 async function teardown (state) {

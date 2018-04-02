@@ -1,5 +1,5 @@
-import path from 'path'
-import compile from 'lodash.template'
+import { join, resolve } from 'path'
+import { compile } from 'ejs'
 import File from 'uiengine/lib/util/file'
 import { highlight } from './util'
 
@@ -11,19 +11,20 @@ const defaultOpts = {
   customStylesFile: null
 }
 
-// template is loaded on setup
-let templateFn = null
-const templatePath = path.resolve(__dirname, '..', 'lib', 'template.ejs')
-const staticPath = path.resolve(__dirname, '..', 'dist')
+// templates are loaded on setup
+const templates = {}
+const templatesPath = resolve(__dirname, '..', 'lib', 'templates')
+const staticPath = resolve(__dirname, '..', 'dist')
 
 async function copyStatic (target) {
   await File.copy(staticPath, target)
 }
 
-async function compileTemplate () {
+async function compileTemplate (name) {
+  const templatePath = join(templatesPath, `${name}.ejs`)
   const templateString = await File.read(templatePath)
 
-  templateFn = compile(templateString)
+  templates[name] = compile(templateString)
 }
 
 export async function setup (options) {
@@ -34,7 +35,8 @@ export async function setup (options) {
   // load and assign template
   try {
     await Promise.all([
-      compileTemplate(),
+      compileTemplate('index'),
+      compileTemplate('sketch'),
       copyStatic(target)
     ])
   } catch (err) {
@@ -46,22 +48,28 @@ export async function setup (options) {
   }
 }
 
-export async function render (options, state) {
+export async function render (options, state, change, template = 'index') {
   // sanitize and prepare options
   if (!supportedLocales.includes(options.lang)) delete options.lang
   const opts = Object.assign({}, defaultOpts, options)
   const context = Object.assign({}, { state }, opts)
 
   try {
-    if (!options.cache) await compileTemplate()
+    if (!options.cache) await compileTemplate(template)
 
+    const templateFn = templates[template]
     const rendered = templateFn(context)
-    const { target } = options
-    const filePath = path.resolve(target, 'index.html')
 
-    await File.write(filePath, rendered)
+    if (template === 'index') {
+      const { target } = options
+      const filePath = resolve(target, 'index.html')
+
+      await File.write(filePath, rendered)
+    }
+
+    return rendered
   } catch (err) {
-    const message = ['Theme could not render!', err]
+    const message = [`Theme could not render template "${template}":`, err]
 
     if (options.debug) message.push(JSON.stringify(context, null, 2))
 

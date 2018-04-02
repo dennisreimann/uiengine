@@ -26,6 +26,7 @@ module.exports = {
   context: resolve(''),
   entry: {
     uiengine: resolve('src/vue/main.js'),
+    'uiengine-inject': resolve('src/scripts/inject.js'),
     'uiengine-preview': 'iframe-resizer/js/iframeResizer.contentWindow.js'
   },
   output: {
@@ -59,8 +60,9 @@ module.exports = {
     ]),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: resolve('lib/template.ejs'),
-      template: resolve('src/template.ejs'),
+      filename: resolve('lib/templates/index.ejs'),
+      template: resolve('src/templates/index.ejs'),
+      excludeChunks: ['uiengine-inject'],
       inject: false,
       window: {
         locales: {
@@ -68,8 +70,13 @@ module.exports = {
           en: require(resolve('src/locales/en.json'))
         }
       },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
+    }),
+    new HtmlWebpackPlugin({
+      filename: resolve('lib/templates/sketch.ejs'),
+      template: resolve('src/templates/sketch.ejs'),
+      excludeChunks: ['uiengine'],
+      inject: false
     })
   ],
   module: {
@@ -84,6 +91,10 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
+      },
+      {
+        test: /\.ejs$/,
+        loader: 'ejs-compiled-loader?compileDebug'
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
