@@ -3,17 +3,18 @@ const Core = require('./core')
 const debounce = require('./util/debounce')
 const { debug3 } = require('./util/debug')
 
+const globPattern = '**/*'
+
 const sourceFilesFromConfig = ({ source: { configFile, components, data, entities, pages, templates }, adapters, debug, theme }) => {
-  const exts = '.{' + Object.keys(adapters).concat('md').join(',') + '}'
-  const componentsGlob = components ? join(components, '**/*' + exts) : null
-  const templatesGlob = templates ? join(templates, '**/*' + exts) : null
-  const pagesGlob = pages ? join(pages, '**') : null
-  const dataGlob = data ? join(data, '**') : null
-  const entitiesGlob = entities ? join(entities, '**/*.yml') : null
+  const componentsGlob = components ? join(components, globPattern) : null
+  const templatesGlob = templates ? join(templates, globPattern) : null
+  const pagesGlob = pages ? join(pages, globPattern) : null
+  const dataGlob = data ? join(data, globPattern) : null
+  const entitiesGlob = entities ? join(entities, globPattern) : null
   const sourceFiles = [configFile, componentsGlob, dataGlob, entitiesGlob, pagesGlob, templatesGlob].filter(a => a)
 
   if (debug) {
-    const themeLibGlob = join(dirname(require.resolve(theme.module)), '**')
+    const themeLibGlob = join(dirname(require.resolve(theme.module)), globPattern)
     sourceFiles.push(themeLibGlob)
   }
 
@@ -89,21 +90,23 @@ const startWatcher = (state, watch, server) => {
 const startServer = (state, watch) => {
   const { target, browserSync } = state.config
   const server = requireOptional('browser-sync', 'serve').create('UIengine')
+  const pagesPattern = '_pages/**/*'
+  const variantsPattern = '_variants/**/*'
   const defaults = {
     server: {
       baseDir: target
     },
     files: [
       {
-        match: ['**/*'],
+        match: [globPattern],
         options: {
           cwd: target,
           ignored: [
-            // exculde index.html as it changes on every rebuild and changes are injected via websockets (see handleFileChange)
+            // exclude index.html as it changes on every rebuild and changes are injected via websockets (see handleFileChange)
             'index.html',
             // exclude pages and variants as the iframes are reloaded separately (see server.init callback)
-            '_pages/**/*',
-            '_variants/**/*'
+            pagesPattern,
+            variantsPattern
           ]
         }
       }
@@ -130,8 +133,8 @@ const startServer = (state, watch) => {
     // trigger iframe reloads, see
     // https://github.com/BrowserSync/browser-sync/issues/662#issuecomment-110478137
     server.watch([
-      _paths('_pages/**/*'),
-      _paths('_variants/**/*')
+      _paths(pagesPattern),
+      _paths(variantsPattern)
     ]).on('change', filePath => {
       const file = relative(target, filePath)
 
