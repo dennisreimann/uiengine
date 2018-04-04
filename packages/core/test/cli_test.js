@@ -2,10 +2,7 @@ const assert = require('assert')
 const { join } = require('path')
 const { ensureDirSync, removeSync } = require('fs-extra')
 const { runCommand } = require('./support/util')
-const assertExists = require('../../../test/support/assertExists')
-const assertMatches = require('../../../test/support/assertMatches')
-const assertContentMatches = require('../../../test/support/assertContentMatches')
-
+const { assertContentMatches, assertExists, assertMatches } = require('../../../test/support/asserts')
 const { testTmpPath } = require('../../../test/support/paths')
 const testPath = join(testTmpPath, 'cli-project')
 

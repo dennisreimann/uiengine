@@ -1,5 +1,5 @@
 const assert = require('assert')
-const assertMatches = require('../../../test/support/assertMatches')
+const { assertMatches } = require('../../../test/support/asserts')
 const { join, resolve } = require('path')
 
 const Page = require('../src/page')

@@ -1,5 +1,5 @@
 const assert = require('assert')
-const assertExists = require('../../../test/support/assertExists')
+const { assertExists } = require('../../../test/support/asserts')
 const { readFileSync, removeSync } = require('fs-extra')
 const { join } = require('path')
 

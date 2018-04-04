@@ -2,9 +2,7 @@ require('mocha-sinon')()
 
 const fs = require('fs-extra')
 const assert = require('assert')
-const assertExists = require('../../../test/support/assertExists')
-const assertContentMatches = require('../../../test/support/assertContentMatches')
-const assertContentDoesNotMatch = require('../../../test/support/assertContentDoesNotMatch')
+const { assertContentMatches, assertContentDoesNotMatch, assertExists } = require('../../../test/support/asserts')
 const { dirname, join, resolve } = require('path')
 
 const Core = require('../src/core')

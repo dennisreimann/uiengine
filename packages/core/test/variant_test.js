@@ -1,8 +1,7 @@
 const { resolve } = require('path')
 const R = require('ramda')
 const assert = require('assert')
-const assertMatches = require('../../../test/support/assertMatches')
-const assertDoesNotMatch = require('../../../test/support/assertDoesNotMatch')
+const { assertMatches, assertDoesNotMatch } = require('../../../test/support/asserts')
 
 const Variant = require('../src/variant')
 

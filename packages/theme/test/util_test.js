@@ -1,7 +1,7 @@
 require('mocha-sinon')()
 
 const assert = require('assert')
-const assertMatches = require('../../../test/support/assertMatches')
+const { assertMatches } = require('../../../test/support/asserts')
 const Util = require('../src/util')
 
 describe('Util', () => {
