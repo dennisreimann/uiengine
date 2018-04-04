@@ -27,7 +27,7 @@ You can use this hook to i.e. register partials when working with Handlebars:
 
 In case you provided this hook, make sure to return a `Promise`!
 
-See the list of available adapters (on [NPM](https://www.npmjs.com/search?q=uiengine-adapter) or [GitHub](https://github.com/search?q=topic%3Auiengine-adapter&type=Repositories)) either to find an existing one or for a starting point to create a custom one.
+See the list of available adapters (on [NPM](https://www.npmjs.com/search?q=uiengine-adapter) or [GitHub](https://github.com/dennisreimann/uiengine/tree/master/packages)) either to find an existing one or for a starting point to create a custom one.
 
 ## Scaffolding
 
