@@ -31,7 +31,7 @@ module.exports = {
   },
 
   // Here you can configure the template that the variant preview gets embeded in.
-  template: 'uiengine.html',
+  template: 'uiengine.html'
 
   // UIengine will require the theme, which has to provide a defined set of functions
   // for setup and rendering. For details see the theme docs.

@@ -38,7 +38,7 @@
     "packages:link": "for pkg in $(ls -1FA packages | grep / | tr -d /); do yarn --cwd packages/$pkg link; done",
     "packages:unlink": "for pkg in $(ls -1FA packages | grep / | tr -d /); do yarn --cwd packages/$pkg unlink; done",
     "lint": "lerna run lint --parallel && eslint test/support && cd test/project && yarn run lint",
-    "test": "mocha --require babel-register -R dot packages/*/test",
+    "test": "cd packages && mocha --require babel-register -R dot */test",
     "test-watch": "yarn test -w --watch-extensions ejs,hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",
     "cover": "nyc yarn test",
     "release": "yarn run lint && yarn run cover && NODE_ENV=production yarn run build && lerna publish",

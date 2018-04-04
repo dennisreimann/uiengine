@@ -5,7 +5,7 @@ const Connector = require('../../connector')
 const File = require('../../util/file')
 const ComponentUtil = require('../../util/component')
 const VariantUtil = require('../../util/variant')
-const String = require('../../util/string')
+const { titleize } = require('../../util/string')
 
 const getTemplate = id =>
   require(`../templates/${id}`).template
@@ -42,7 +42,7 @@ exports.handler = argv => {
     // component
     const componentsDir = config.source.components
     const componentDir = relative(process.cwd(), join(componentsDir, componentId))
-    const componentTitle = String.titleize(componentId)
+    const componentTitle = titleize(componentId)
     const componentTemplate = getTemplate('component')
     const componentData = componentTemplate(componentTitle).trim()
     const componentFilePath = join(componentDir, ComponentUtil.COMPONENT_FILENAME)
@@ -83,7 +83,7 @@ exports.handler = argv => {
 
         Promise.all(fileTasks).then(state => {
           const filesCreated = filePaths.sort().reverse()
-          console.log(`✅  ${componentId} created!
+          console.log(`✅  ${componentTitle} created!
 
 The following files were created:
 
