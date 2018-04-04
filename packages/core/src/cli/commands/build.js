@@ -1,10 +1,10 @@
 const UIengine = require('../../uiengine')
 
-exports.describe = 'Generate the site'
+exports.describe = 'Build the site'
 
 exports.builder = argv =>
   argv
-    .example('$0 generate')
+    .example('$0 build')
     // watch
     .boolean('watch')
     .default('watch', false)

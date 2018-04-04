@@ -53,13 +53,6 @@ exports.handler = argv => {
 
     // variants
     R.forEach(variantName => {
-      const variantId = `${componentId}/${variantName}.md`
-      const title = String.titleize(variantName)
-      const template = getTemplate('variant')
-      const data = template(title).trim()
-      const filePath = VariantUtil.variantIdToVariantFilePath(componentsDir, variantId)
-      files[filePath] = File.write(filePath, data)
-
       const filesForVariant = R.map(ext => Connector.filesForVariant(state, ext, componentId, variantName), adapters)
       adapterFilesForVariants.push(...filesForVariant)
     }, variantNames)
