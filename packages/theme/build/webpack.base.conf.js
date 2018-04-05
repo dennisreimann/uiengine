@@ -3,13 +3,16 @@
 const { join } = require('path')
 const utils = require('./utils')
 const config = require('./config')
+const VueLoaderOptionsPlugin = require('vue-loader-options-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const vueLoaderConfig = require('./vue-loader.conf')
 
 const resolve = dir => join(__dirname, '..', dir)
 const isProduction = process.env.NODE_ENV === 'production'
+const sourceMapEnabled = isProduction
+  ? config.build.productionSourceMap
+  : config.dev.cssSourceMap
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
@@ -21,6 +24,21 @@ const createLintingRule = () => ({
     emitWarning: true
   }
 })
+
+// we keep the babel options in this webpack config because the babelrc
+// needs to be configured with the node compile options. this makes this
+// file more complex, because we also need to configure the vue-loader
+// separately, see https://github.com/vuejs/vue-loader/issues/350
+const babelOptions = {
+  presets: [
+    ['env', {
+      targets: {
+        browsers: ['last 2 versions']
+      }
+    }],
+    'stage-2'
+  ]
+}
 
 module.exports = {
   context: resolve(''),
@@ -77,6 +95,11 @@ module.exports = {
       template: resolve('src/templates/sketch.ejs'),
       excludeChunks: ['uiengine'],
       inject: false
+    }),
+    // use babel options in .vue files, see
+    // https://github.com/vuejs/vue-loader/issues/673
+    new VueLoaderOptionsPlugin({
+      babel: babelOptions
     })
   ],
   module: {
@@ -85,12 +108,30 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueLoaderConfig
+        options: {
+          loaders: {
+            js: 'babel-loader',
+            // styles
+            ...utils.cssLoaders({
+              sourceMap: sourceMapEnabled,
+              extract: true
+            })
+          },
+          cssSourceMap: sourceMapEnabled,
+          cacheBusting: config.dev.cacheBusting,
+          transformToRequire: {
+            video: ['src', 'poster'],
+            source: 'src',
+            img: 'src',
+            image: 'xlink:href'
+          }
+        }
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        include: [resolve('src'), resolve('test')],
+        options: babelOptions
       },
       {
         test: /\.ejs$/,
