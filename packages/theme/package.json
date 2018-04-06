@@ -2,7 +2,7 @@
   "name": "@uiengine/theme",
   "description": "UIengine theme.",
   "license": "MIT",
-  "version": "0.18.1",
+  "version": "0.18.2",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
@@ -85,7 +85,7 @@
     "webpack-stream": "^4.0.3"
   },
   "peerDependencies": {
-    "@uiengine/core": "^0.18.0"
+    "@uiengine/core": "^0.18.2"
   },
   "browserslist": [
     "last 2 versions"
