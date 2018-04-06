@@ -15,7 +15,8 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, entitie
 
   if (debug) {
     const themeLibGlob = join(dirname(require.resolve(theme.module)), globPattern)
-    sourceFiles.push(themeLibGlob)
+    const themeDistGlob = themeLibGlob.replace('theme/lib/', 'theme/dist/')
+    sourceFiles.push(themeLibGlob, themeDistGlob)
   }
 
   return sourceFiles
