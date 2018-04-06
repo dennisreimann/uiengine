@@ -72,11 +72,11 @@ async function generatePageWithTemplate (state, pageId) {
   if (page.template) {
     // render template with context
     const { id, context, template } = page
-    const html = await render(state, template, context, identifier)
+    const { rendered } = await render(state, template, context, identifier)
 
     // write file
     const filePath = resolve(target, '_pages', `${id}.html`)
-    await File.write(filePath, html)
+    await File.write(filePath, rendered)
   }
 
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):end`)
@@ -105,13 +105,13 @@ async function generateVariant (state, variant) {
   // render variant preview, with layout
   const data = state
   const template = variant.template || config.template
-  let html = await render(state, template, data, identifier)
-  html = replaceComment('content', html, variant.rendered)
-  html = replaceComment('title', html, `${component.title}: ${variant.title} • ${config.name} (${config.version})`)
+  let { rendered } = await render(state, template, data, identifier)
+  rendered = replaceComment('content', rendered, variant.rendered)
+  rendered = replaceComment('title', rendered, `${component.title}: ${variant.title} • ${config.name} (${config.version})`)
 
   // write file
   const filePath = resolve(config.target, '_variants', `${variant.id}.html`)
-  await File.write(filePath, html)
+  await File.write(filePath, rendered)
 
   debug2(state, `Builder.generateVariant(${variant.id}):end`)
 }
@@ -157,13 +157,13 @@ async function generateSketch (state, change) {
   const data = state
   const template = config.template
   const sketch = await Theme.render(state, change, 'sketch')
-  let html = await render(state, template, data, identifier)
-  html = replaceComment('content', html, sketch)
-  html = replaceComment('title', html, `HTML Sketchapp Export • ${config.name} (${config.version})`)
+  let { rendered } = await render(state, template, data, identifier)
+  rendered = replaceComment('content', rendered, sketch)
+  rendered = replaceComment('title', rendered, `HTML Sketchapp Export • ${config.name} (${config.version})`)
 
   // write file
   const filePath = resolve(config.target, '_sketch.html')
-  await File.write(filePath, html)
+  await File.write(filePath, rendered)
 
   debug2(state, `Builder.generateSketch():end`)
 }

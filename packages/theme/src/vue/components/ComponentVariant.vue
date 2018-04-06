@@ -101,7 +101,7 @@
           :extension="variant.extension"
           :raw="variant.raw"
           :context="variant.context"
-          :rendered="variant.rendered"
+          :parts="variant.parts"
         />
       </div>
     </div>
@@ -149,7 +149,7 @@ export default {
     },
 
     hasCode () {
-      return !!(this.variant.raw || this.variant.context || this.variant.rendered)
+      return !!(this.variant.raw || this.variant.context || this.variant.parts)
     },
 
     isPreviewActive () {

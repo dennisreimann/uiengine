@@ -1,7 +1,7 @@
 const { resolve } = require('path')
 const R = require('ramda')
 const assert = require('assert')
-const { assertMatches, assertDoesNotMatch } = require('../../../test/support/asserts')
+const { assertMatches } = require('../../../test/support/asserts')
 
 const Variant = require('../src/variant')
 
@@ -60,20 +60,6 @@ describe('Variant', () => {
       const data = await Variant.fetchObject(state, 'label', { number: 3 }, { file: 'label.html', context: { number: 4 } })
 
       assert.equal(data.context.number, 4)
-    })
-
-    it('should omit marked parts in code', async () => {
-      const data = await Variant.fetchObject(state, 'form', {}, { file: 'form.pug' })
-
-      assertDoesNotMatch(data.raw, /\+input\("username", "person\[username\]"\)/g)
-      assertMatches(data.raw, /\+input\("password", "person\[password\]", "Password"\)/g)
-    })
-
-    it('should omit marked parts in preview', async () => {
-      const data = await Variant.fetchObject(state, 'form', {}, { file: 'form.pug' })
-
-      assertDoesNotMatch(data.rendered, /<input class="input input--password" id="password" name="person\[password\]" type="password"\/>/g)
-      assertMatches(data.rendered, /<input class="input input--text" id="username" name="person\[username\]" type="text"\/>/g)
     })
   })
 

@@ -70,8 +70,9 @@ async function render (state, templatePath, data = {}) {
   if (typeof render === 'function') {
     const { options } = adapters[ext]
     const rendered = await render(options, templatePath, data)
+    const result = typeof rendered === 'string' ? { rendered, parts: [{ title: 'HTML', lang: 'html', content: rendered }] } : rendered
 
-    return rendered.trim()
+    return result
   } else {
     throw new Error(error(`The "${ext}" adapter does not support rendering.`))
   }

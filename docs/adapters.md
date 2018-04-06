@@ -17,6 +17,14 @@ A templating adapter module has to export an async `render` function:
   This function is called asynchronously and has to return a `Promise`!
   The incoming `data` depends on the file that gets rendered:
   For variants this is the context that is provided via the [variant metadata](./variant.md).
+- `render` should either return the rendered HTML, or a structured object containing the `rendered` HTML and an optional array of `parts`:
+    - `String` -> `<div>rendered html</div>`
+    - `Object` -> `{ rendered: "<div>rendered html</div>", parts: [{ title: 'HTML', content: "<div>rendered html</div>", lang: 'html' }, { title: 'CSS', content: "div { background: yellow; }", lang: 'css' }] }`
+      - The `rendered` HTML is required and is used to display the preview
+      - The `parts` are optional and get displayed in the code view:
+          - `title`: The title of the code block
+          - `content`: The content of the code block
+          - `lang`: The language of the code block, used for syntax highlighting
 
 In addition to that there is an **optional hooks for `registerComponentFile`**.
 You can use this hook to i.e. register partials when working with Handlebars:

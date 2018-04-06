@@ -45,11 +45,17 @@ describe('Util', () => {
     })
   })
 
-  describe('#decorateRaw', () => {
+  describe('#decorateCode', () => {
     it('should return the highlighted raw code', () => {
-      const decorated = Util.decorateRaw('var = "test"', 'js')
+      const decorated = Util.decorateCode('var = "test"', 'js')
 
       assertMatches(decorated, '<pre class="hljs" lang="js"><span class="hljs-keyword">var</span> = <span class="hljs-string">"test"</span></pre>')
+    })
+
+    it('should return the highlighted rendered html', () => {
+      const decorated = Util.decorateCode('<h1>Title</h1>', 'html')
+
+      assertMatches(decorated, '<pre class="hljs" lang="html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></pre>')
     })
   })
 
@@ -58,14 +64,6 @@ describe('Util', () => {
       const decorated = Util.decorateContext({ data: true })
 
       assertMatches(decorated, '<pre class="hljs" lang="json">{\n  <span class="hljs-attr">"data"</span>: <span class="hljs-literal">true</span>\n}</pre>')
-    })
-  })
-
-  describe('#decorateRendered', () => {
-    it('should return the highlighted rendered code', () => {
-      const decorated = Util.decorateRendered('<h1>Title</h1>')
-
-      assertMatches(decorated, '<pre class="hljs" lang="html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></pre>')
     })
   })
 })

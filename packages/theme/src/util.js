@@ -31,14 +31,10 @@ export const decorateContent = pageOrComponent => {
   return content.replace(regexp, '').trim()
 }
 
-export const decorateRaw = (code, lang) => {
+export const decorateCode = (code, lang) => {
   return highlight(code, lang)
 }
 
 export const decorateContext = json => {
   return highlight(JSON.stringify(json, null, 2), 'json')
-}
-
-export const decorateRendered = html => {
-  return highlight(html, 'html')
 }

@@ -7,13 +7,6 @@ const File = require('./util/file')
 const { error } = require('./util/message')
 const { debug2, debug3 } = require('./util/debug')
 
-const regexpClean = new RegExp('([\\s]*?<!--\\s?omit:.*?\\s?-->)', 'gi')
-
-const omit = (mark, string) => {
-  const regexpOmit = new RegExp(`([\\s]*?<!--\\s?omit:${mark}:start\\s?-->[\\s\\S]*?<!--\\s?omit:${mark}:end\\s?-->)`, 'gi')
-  return string.replace(regexpOmit, '').replace(regexpClean, '')
-}
-
 // convert list of filenames to list of objects
 const convertUserProvidedVariants = list =>
   R.map(item => typeof item === 'string' ? { file: item } : item, list)
@@ -63,12 +56,12 @@ async function fetchObject (state, componentId, componentContext, data) {
   const title = data.title || VariantUtil.variantIdToTitle(id)
 
   // render raw variant, without layout
-  let raw, rendered
+  let raw, render
   const readTemplate = File.read(filePath)
   const renderTemplate = Connector.render(state, filePath, context)
 
   try {
-    [raw, rendered] = await Promise.all([readTemplate, renderTemplate])
+    [raw, render] = await Promise.all([readTemplate, renderTemplate])
   } catch (err) {
     const message = [error(`Variant "${id}" could not be rendered!`), err]
 
@@ -77,12 +70,8 @@ async function fetchObject (state, componentId, componentContext, data) {
     throw new Error(message.join('\n\n'))
   }
 
-  // adjust raw and rendered: omit marked parts
-  if (raw) raw = omit('code', raw)
-  if (rendered) rendered = omit('preview', rendered)
-
-  const fixData = { id, componentId, title, file, extension, raw, rendered, context }
-  const variant = R.mergeAll([data, fixData])
+  const fixData = { id, componentId, title, file, extension, raw, context }
+  const variant = R.mergeAll([data, fixData, render])
 
   debug3(state, `Variant.fetchObject(${id}):end`)
 

@@ -6,10 +6,10 @@
     >
       <button
         :title="'navigation.toggle' | localize"
-        :aria-expanded="isRawExpanded | bool2string"
+        :aria-expanded="isExpanded('raw') | bool2string"
         class="code__header"
         type="button"
-        @click.prevent="isRawExpanded = !isRawExpanded"
+        @click.prevent="toggleExpanded('raw')"
       >
         <h4 class="code__title">{{ 'code.raw' | localize }}</h4>
         <app-icon
@@ -18,7 +18,7 @@
         />
       </button>
       <div
-        :hidden="!isRawExpanded"
+        :hidden="!isExpanded('raw')"
         v-html="renderedRaw"
       />
     </div>
@@ -29,10 +29,10 @@
     >
       <button
         :title="'navigation.toggle' | localize"
-        :aria-expanded="isContextExpanded | bool2string"
+        :aria-expanded="isExpanded('context') | bool2string"
         class="code__header"
         type="button"
-        @click.prevent="isContextExpanded = !isContextExpanded"
+        @click.prevent="toggleExpanded('context')"
       >
         <h4 class="code__title">{{ 'code.context' | localize }}</h4>
         <app-icon
@@ -41,38 +41,47 @@
         />
       </button>
       <div
-        :hidden="!isContextExpanded"
+        :hidden="!isExpanded('context')"
         v-html="renderedContext"
       />
     </div>
 
     <div
-      v-if="rendered"
+      v-for="part in parts"
+      v-if="part.title && part.content"
+      :key="part.title"
       class="code__segment"
     >
       <button
         :title="'navigation.toggle' | localize"
-        :aria-expanded="isRenderedExpanded | bool2string"
+        :aria-expanded="isExpanded(part.title) | bool2string"
         class="code__header"
         type="button"
-        @click.prevent="isRenderedExpanded = !isRenderedExpanded"
+        @click.prevent="toggleExpanded(part.title)"
       >
-        <h4 class="code__title">{{ 'code.rendered' | localize }}</h4>
+        <h4 class="code__title">{{ part.title }}</h4>
         <app-icon
           symbol="caret-down-double"
           class="code__expandicon"
         />
       </button>
       <div
-        :hidden="!isRenderedExpanded"
-        v-html="renderedRendered"
+        :hidden="!isExpanded(part.title)"
+        v-html="renderPart(part)"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { decorateRaw, decorateContext, decorateRendered } from '../../util'
+import { decorateContext, decorateCode } from '../../util'
+
+const regexpClean = new RegExp('([\\s]*?<!--\\s?omit:.*?\\s?-->)', 'gi')
+
+const omit = (mark, string) => {
+  const regexpOmit = new RegExp(`([\\s]*?<!--\\s?omit:${mark}:start\\s?-->[\\s\\S]*?<!--\\s?omit:${mark}:end\\s?-->)`, 'gi')
+  return string.replace(regexpOmit, '').replace(regexpClean, '')
+}
 
 export default {
   props: {
@@ -91,31 +100,46 @@ export default {
       default: null
     },
 
-    rendered: {
-      type: String,
+    parts: {
+      type: Array,
       default: null
     }
   },
 
   data () {
     return {
-      isRawExpanded: true,
-      isContextExpanded: true,
-      isRenderedExpanded: false
+      expanded: {
+        raw: true,
+        context: true
+      }
     }
   },
 
   computed: {
     renderedRaw () {
-      return decorateRaw(this.raw)
+      const raw = omit('code', this.raw)
+
+      return decorateCode(raw)
     },
 
     renderedContext () {
       return decorateContext(this.context)
+    }
+  },
+
+  methods: {
+    renderPart ({ content, lang }) {
+      const code = omit('preview', content).trim()
+
+      return decorateCode(code, lang)
     },
 
-    renderedRendered () {
-      return decorateRendered(this.rendered)
+    isExpanded (key) {
+      return !!this.expanded[key]
+    },
+
+    toggleExpanded (key) {
+      this.$set(this.expanded, key, !this.expanded[key])
     }
   }
 }
