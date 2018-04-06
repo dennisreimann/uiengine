@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - The adapter `render` function can now return structured data
-  - For details see the [adapter docs](./docs/adapter.md)
+  - For details see the [adapter docs](./docs/adapters.md)
 
 ## [0.18.0] - 2018-04-02
 
