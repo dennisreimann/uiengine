@@ -12,7 +12,7 @@
     <%%_ } _%%>
     <script type="text/javascript">
       window.UIengine = {};
-      window.UIengine.state = <%%- JSON.stringify(state) %%>;
+      window.UIengine.state = <%%- htmlescape(state) %%>;
       window.UIengine.previewSrc = <%- JSON.stringify(htmlWebpackPlugin.files.chunks['uiengine-preview'].entry) %>;
       <%_ if (htmlWebpackPlugin.files.chunks.manifest) { _%>
       window.UIengine.manifestSrc = <%- JSON.stringify(htmlWebpackPlugin.files.chunks.manifest.entry) %>;

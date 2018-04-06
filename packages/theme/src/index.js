@@ -1,5 +1,6 @@
 import { join, resolve } from 'path'
 import { compile } from 'ejs'
+import htmlescape from 'htmlescape'
 import File from '@uiengine/core/lib/util/file'
 import { highlight } from './util'
 
@@ -52,7 +53,7 @@ export async function render (options, state, change, template = 'index') {
   // sanitize and prepare options
   if (!supportedLocales.includes(options.lang)) delete options.lang
   const opts = Object.assign({}, defaultOpts, options)
-  const context = Object.assign({}, { state }, opts)
+  const context = Object.assign({ htmlescape }, { state }, opts)
 
   try {
     if (!options.cache) await compileTemplate(template)
