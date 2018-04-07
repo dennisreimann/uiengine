@@ -10,12 +10,17 @@ icon-position($top = null, $left = null)
   if $left
     left $left
 
-link-with-hover($color-base, $color-hover, $animate-underline = true)
+link-with-hover($color-base, $color-hover, $underline = true)
   color $color-base
   transition-duration var(--transition-duration-fast)
-  text-decoration none
+
+  if $underline
+    text-decoration underline
+  else
+    text-decoration none
 
   &:hover
+    text-decoration underline
     color $color-hover
 
     .icon
@@ -24,23 +29,6 @@ link-with-hover($color-base, $color-hover, $animate-underline = true)
   .icon
     transition-duration var(--transition-duration-fast)
     fill $color-base
-
-  if $animate-underline
-    position relative
-
-    &:after
-      content ''
-      position absolute
-      bottom 0
-      left 0
-      width 0%
-      border-bottom 1px solid $color-base
-      transition-duration var(--transition-duration-fast)
-
-    &:hover
-      &:after
-        width 100%
-        border-bottom 1px solid $color-hover
 
 modal-option()
   display block

@@ -168,32 +168,22 @@ code
 pre
   code-block()
 
-.layout
-  display flex
-  flex-direction column
-  height 100%
-
-.main
-  flex 1
-
-  @media $mq-up_to_l
-    padding-top var(--space-xl)
-    padding-bottom var(--space-xl)
-  @media $mq-l_and_up
-    padding-top var(--space-xxl)
-    padding-bottom var(--space-xxl)
-
 // general layout
 @media $mq-up_to_l
-  .topbar
-    flex 0 0 40px
   .navigation
     position relative
+
+  .main
+    padding-top var(--space-xl)
+    padding-bottom var(--space-xl)
 
 @media $mq-l_and_up
   .layout
     --topbar-height 3rem
     --navigation-width 300px
+    display flex
+    flex-direction column
+    height 100%
 
   .topbar
     position fixed
@@ -212,8 +202,11 @@ pre
     overflow-y scroll
 
   .main
+    flex 1
     margin-top var(--topbar-height)
     margin-left var(--navigation-width)
+    padding-top var(--space-xxl)
+    padding-bottom var(--space-xxl)
 
   .footer
     margin-left var(--navigation-width)

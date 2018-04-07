@@ -107,7 +107,7 @@ export default {
   padding-bottom var(--space-l)
 
   a
-    link-with-hover(var(--color-footer-link), var(--color-footer-link-hover))
+    link-with-hover(var(--color-footer-link), var(--color-footer-link-hover), false)
     .icon
       icon-size(18px)
       position relative
