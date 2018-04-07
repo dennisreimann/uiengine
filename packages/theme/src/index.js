@@ -8,6 +8,7 @@ const supportedLocales = ['en', 'de']
 const defaultOpts = {
   lang: 'en',
   hljs: 'atom-one-dark',
+  base: '/',
   cache: true,
   customStylesFile: null
 }
@@ -53,7 +54,8 @@ export async function render (options, state, change, template = 'index') {
   // sanitize and prepare options
   if (!supportedLocales.includes(options.lang)) delete options.lang
   const opts = Object.assign({}, defaultOpts, options)
-  const context = Object.assign({ htmlescape }, { state }, opts)
+  const basePath = opts.base.replace(/\/$/, '')
+  const context = Object.assign({ htmlescape, basePath }, { state }, opts)
 
   try {
     if (!options.cache) await compileTemplate(template)

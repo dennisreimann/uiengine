@@ -13,6 +13,8 @@ import './global-components'
 const { analyticsId } = window.UIengine.state.config
 const isProd = process.env.NODE_ENV === 'production'
 
+__webpack_public_path__ = window.UIengine.base // eslint-disable-line
+
 Vue.config.productionTip = false
 Vue.use(Meta)
 

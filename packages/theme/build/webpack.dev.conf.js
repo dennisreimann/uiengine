@@ -18,8 +18,7 @@ module.exports = merge(baseWebpackConfig, {
   devtool: config.dev.devtool,
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('scripts/[name].js'),
-    publicPath: '/'
+    filename: utils.assetsPath('scripts/[name].js')
   },
   plugins: [
     new webpack.DefinePlugin({

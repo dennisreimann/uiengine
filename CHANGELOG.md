@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - The adapter `render` function can now return structured data
   - For details see the [adapter docs](./docs/adapters.md)
+- The output can be served from a subdirectory
+  - For details see the new `base` [theme option](./docs/theme.md)
 
 ## [0.18.0] - 2018-04-02
 

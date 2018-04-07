@@ -161,7 +161,9 @@ export default {
     },
 
     previewPath () {
-      return `/_variants/${this.variant.id}.html`
+      const { base } = window.UIengine
+
+      return `${base}_variants/${this.variant.id}.html`
     },
 
     permalinkUrl () {

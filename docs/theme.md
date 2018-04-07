@@ -36,6 +36,11 @@ For a list of available options see the [highlight.js demo](https://highlightjs.
 The path to a css files containing variable overrides and extensions for the theme.
 For an example see the [custom styles file of the test project](../test/project/src/assets/styles/uiengine-custom-styles.css).
 
+### `base`
+
+Sets the base path for the output.
+Defaults to `/`.
+
 ### `debug`
 
 Enable debug output, most likely to be used during theme development.

@@ -1,3 +1,7 @@
+<%_
+assetPath = htmlWebpackPlugin.options.assetPath
+css = htmlWebpackPlugin.files.css
+_%>
 <%%_ const renderColorToken = token => { _%%>
   <article class="uie-html-sketchapp-export__article uie-html-sketchapp-export__token uie-html-sketchapp-export__token--color">
     <h3><%%= token.name %%></h3>
@@ -38,8 +42,8 @@
   </section>
 <%%_ } _%%>
 
-<%_ for (index in htmlWebpackPlugin.files.css) { _%>
-<link href="<%= htmlWebpackPlugin.files.css[index] %>" rel="stylesheet">
+<%_ for (index in css) { _%>
+<link href="<%- assetPath(css[index]) %>" rel="stylesheet">
 <%_ } _%>
 
 <div class="uie-html-sketchapp-export">

@@ -89,8 +89,9 @@ const startWatcher = (state, watch, server) => {
 }
 
 const startServer = (state, watch) => {
-  const { target, browserSync } = state.config
+  const { browserSync, target, theme } = state.config
   const server = requireOptional('browser-sync', 'serve').create('UIengine')
+  const history = requireOptional('connect-history-api-fallback')
   const pagesPattern = '_pages/**/*'
   const variantsPattern = '_variants/**/*'
   const defaults = {
@@ -111,18 +112,25 @@ const startServer = (state, watch) => {
           ]
         }
       }
-    ]
+    ],
+    middleware: []
   }
   const options = browserSync || defaults
 
   options.server = options.server || defaults.server
   options.server.baseDir = options.server.baseDir || defaults.server.baseDir
+  options.middleware = options.middleware || defaults.middleware
+
+  const basePath = (theme.options.base || '/').replace(/\/$/, '')
+  options.middleware.push({
+    route: basePath,
+    handle: history()
+  })
 
   if (watch) {
     options.files = options.files || defaults.files
     options.watchOptions = options.watchOptions || browserSyncOptions.watchOptions
     options.notify = typeof options.notify !== 'undefined' ? options.notify : browserSyncOptions.notify
-    options.single = typeof options.single !== 'undefined' ? options.single : browserSyncOptions.single
   }
 
   debug3(state, 'BrowserSync options:', JSON.stringify(options, null, 2))

@@ -13,8 +13,11 @@ const mainComponent = type => {
   return () => import(`../components/Main${componentName}`)
 }
 
+const { base, mode } = window.UIengine.state.config.theme.options
+
 const router = new Router({
-  mode: 'history',
+  mode: mode || 'history',
+  base: base || '/',
   scrollBehavior (to) {
     if (to.hash) {
       return {

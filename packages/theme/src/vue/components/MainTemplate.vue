@@ -234,7 +234,9 @@ export default {
     },
 
     previewPath () {
-      return `/_pages/${this.page.id}.html`
+      const { base } = window.UIengine
+
+      return `${base}_pages/${this.page.id}.html`
     }
   },
 

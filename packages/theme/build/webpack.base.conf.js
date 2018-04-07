@@ -40,6 +40,8 @@ const babelOptions = {
   ]
 }
 
+const assetPath = filePath => `<%= basePath %>${filePath}`
+
 module.exports = {
   context: resolve(''),
   entry: {
@@ -88,13 +90,15 @@ module.exports = {
           en: require(resolve('src/locales/en.json'))
         }
       },
-      chunksSortMode: 'dependency'
+      chunksSortMode: 'dependency',
+      assetPath
     }),
     new HtmlWebpackPlugin({
       filename: resolve('lib/templates/sketch.ejs'),
       template: resolve('src/templates/sketch.ejs'),
       excludeChunks: ['uiengine'],
-      inject: false
+      inject: false,
+      assetPath
     }),
     // use babel options in .vue files, see
     // https://github.com/vuejs/vue-loader/issues/673
