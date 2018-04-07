@@ -38,7 +38,7 @@
     "lint": "eslint --ext .js src test"
   },
   "dependencies": {
-    "@uiengine/theme": "^0.18.3",
+    "@uiengine/theme": "^0.18.4",
     "chalk": "^2.3.2",
     "cosmiconfig": "^4.0.0",
     "fs-extra": "^5.0.0",
