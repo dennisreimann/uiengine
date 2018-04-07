@@ -25,10 +25,10 @@
   "dependencies": {
     "ejs": "^2.5.8",
     "handlebars": "^4.0.11",
-    "marko": "^4.9.4",
+    "marko": "^4.9.6",
     "pug": "^2.0.3",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
     "vue": "^2.5.16",
     "vue-server-renderer": "^2.5.16"
   },
@@ -52,7 +52,7 @@
     "eslint-plugin-promise": "3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "gulp": "^3.9.1",
-    "html-sketchapp-cli": "0.4.0",
+    "html-sketchapp-cli": "0.4.1",
     "theo": "^7.0.1",
     "@uiengine/adapter-ejs": "file:../../packages/adapter-ejs",
     "@uiengine/adapter-handlebars": "file:../../packages/adapter-handlebars",
@@ -65,7 +65,7 @@
     "@uiengine/theme": "file:../../packages/theme",
     "vue-loader": "^14.2.2",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.4.1",
+    "webpack": "^4.5.0",
     "webpack-merge": "^4.1.2",
     "webpack-node-externals": "^1.7.2",
     "webpack-stream": "^4.0.3"
