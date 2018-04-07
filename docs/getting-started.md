@@ -72,7 +72,7 @@ A variant needs at least a file to render.
 You create a variant by adding a file renderable by one of the configured adapters to the `variants` directory of a component.
 
 In addition to the raw render file, you can also add a markdown file containing the metadata for the variant.
-This markdown file can contain [YAML frontmatter](yaml.md) and has to be named like the variant, but must have the file extension `.md`.
+This markdown file can contain [YAML frontmatter](./yaml.md) and has to be named like the variant, but must have the file extension `.md`.
 
 To render a variant, we also need a layout.
 The `uiengine init` command created a basic html layout file in `src/templates/uiengine.html`.
