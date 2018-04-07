@@ -61,6 +61,17 @@ module.exports = {
 
   breakpoints,
 
+  themes: [
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'funky',
+      title: 'Funky crazy awesome'
+    }
+  ],
+
   browserSync: {
     open: false
   }

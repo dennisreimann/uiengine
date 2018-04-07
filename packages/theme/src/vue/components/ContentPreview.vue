@@ -6,35 +6,36 @@
     >
       <div
         v-if="breakpoints"
-        class="preview__size"
+        class="preview__toggles"
       >
         <button
-          :title="'breakpoints.toggle' | localize"
-          class="preview__sizer"
+          :title="'options.toggle' | localize"
+          class="preview__toggle"
           type="button"
           @click.stop="isBreakpointsActive = !isBreakpointsActive"
         >{{ size }}</button>
       </div>
       <div
         v-if="breakpoints"
-        :class="{ 'preview__breakpoints--active': isBreakpointsActive }"
-        class="preview__breakpoints"
+        :class="{ 'preview__options--active': isBreakpointsActive }"
+        class="preview__options"
       >
-        <div class="preview__breakpoints-inner">
+        <div class="preview__options-inner">
           <button
             v-for="(width, breakpoint) in breakpoints"
             :key="breakpoint"
-            class="preview__breakpoint"
+            class="preview__option"
             type="button"
-            @click="setPreviewWidth(width)"
+            @click="setWidth(width)"
           >{{ breakpoint }}: {{ width }}px</button>
           <button
-            class="preview__breakpoint"
+            class="preview__option"
             type="button"
-            @click="setPreviewWidth(null)"
-          >{{ 'breakpoints.reset' | localize }}</button>
+            @click="setWidth(null)"
+          >{{ 'options.reset' | localize }}</button>
         </div>
       </div>
+
       <iframe
         ref="iframe"
         :src="src"
@@ -66,7 +67,7 @@ export default {
       required: true
     },
 
-    src: {
+    path: {
       type: String,
       required: true
     },
@@ -85,7 +86,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('preferences', ['previewWidths']),
+    ...mapGetters('preferences', ['previewWidths', 'currentTheme']),
 
     breakpointNames () {
       return Object.keys(this.breakpoints)
@@ -113,6 +114,18 @@ export default {
       const width = this.previewWidths[this.id]
 
       return width ? { width: `${width}px` } : {}
+    },
+
+    src () {
+      const { base } = window.UIengine
+      const { protocol, host } = window.location
+      const urlBase = `${protocol}//${host}${base}`
+      const url = new URL(this.path, urlBase)
+      const theme = this.currentTheme
+
+      if (theme) url.hash = theme.id
+
+      return url
     }
   },
 
@@ -163,16 +176,16 @@ export default {
   methods: {
     ...mapMutations('preferences', ['setPreviewWidths']),
 
-    setPreviewWidth (width) {
-      const previewWidths = this.previewWidths
+    setWidth (width) {
+      const widths = this.previewWidths
 
       if (width) {
-        previewWidths[this.id] = width
+        widths[this.id] = width
       } else {
-        delete previewWidths[this.id]
+        delete widths[this.id]
       }
 
-      this.setPreviewWidths(previewWidths)
+      this.setPreviewWidths(widths)
     }
   }
 }
@@ -196,11 +209,11 @@ export default {
       transition-duration var(--transition-duration-medium)
       transition-timing-function ease-out
 
-  &__size
+  &__toggles
     position relative
     margin-bottom var(--space-s)
 
-    &:before
+    &:before,
     &:after
       width 40px
       height 15px
@@ -219,7 +232,7 @@ export default {
       right 0
       background-image embedurl('../../icons/preview-right.svg')
 
-  &__sizer
+  &__toggle
     padding-left var(--space-m)
     padding-right var(--space-m)
     color var(--color-modal-text)
@@ -229,12 +242,7 @@ export default {
     font-family var(--font-family-light)
     cursor pointer
 
-  &__iframe
-    display block
-    width 100%
-    border 0
-
-  &__breakpoints
+  &__options
     position absolute
     z-index 5
     left calc(50% - 5rem)
@@ -249,13 +257,17 @@ export default {
       max-height 20rem
       transition-timing-function ease-in
 
-  &__breakpoints-inner
+  &__options-inner
     border 1px solid var(--color-modal-border-outer)
 
-  &__breakpoint
+  &__option
     modal-option()
-    text-align center
 
-  &__breakpoint + &__breakpoint
+  &__option + &__option
     border-top 1px solid var(--color-modal-border-inner)
+
+  &__iframe
+    display block
+    width 100%
+    border 0
 </style>

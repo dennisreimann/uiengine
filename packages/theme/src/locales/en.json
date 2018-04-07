@@ -2,10 +2,6 @@
   "navigation": {
     "toggle": "Toggle navigation"
   },
-  "breakpoints": {
-    "reset": "reset",
-    "toggle": "toggle"
-  },
   "options": {
     "info": "Info",
     "properties": "Properties",
@@ -13,7 +9,9 @@
     "code": "Code",
     "copy_permalink": "Copy link to variant",
     "open_in_window": "Open in separate window",
-    "edit_on_codepen": "Edit on Codepen"
+    "edit_on_codepen": "Edit on Codepen",
+    "reset": "reset",
+    "toggle": "toggle"
   },
   "code": {
     "raw": "Code",

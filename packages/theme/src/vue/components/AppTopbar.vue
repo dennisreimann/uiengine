@@ -19,6 +19,35 @@
       class="topbar__home"
     >{{ config.name }}</router-link>
 
+    <div
+      v-if="themes"
+      class="topbar__theme"
+    >
+      <button
+        :title="'options.toggle' | localize"
+        class="topbar__theme-toggle"
+        type="button"
+        @click.stop="isThemesActive = !isThemesActive"
+      >{{ currentTheme.title }}</button>
+
+      <div
+        :class="{ 'topbar__theme-options--active': isThemesActive }"
+        class="topbar__theme-options"
+      >
+        <div class="topbar__theme-options-inner">
+          <button
+            v-for="theme in themes"
+            :key="theme.id"
+            class="topbar__theme-option"
+            type="button"
+            @click="setCurrentTheme(theme)"
+          >{{ theme.title }}</button>
+        </div>
+      </div>
+    </div>
+
+    <span class="topbar__spacer" />
+
     <button
       :title="'search.toggle' | localize"
       class="topbar__toggle topbar__toggle--search"
@@ -53,17 +82,28 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      query: ''
+      query: '',
+      isThemesActive: false
     }
   },
 
   computed: {
     ...mapGetters('state', ['config', 'navigation']),
-    ...mapGetters('preferences', ['locale', 'navigationCollapsed', 'searchCollapsed'])
+    ...mapGetters('preferences', ['locale', 'navigationCollapsed', 'searchCollapsed', 'currentTheme']),
+
+    themes () {
+      return this.config.themes
+    }
+  },
+
+  created () {
+    this.$root.$on('modal:close', () => {
+      this.isThemesActive = false
+    })
   },
 
   methods: {
-    ...mapMutations('preferences', ['setNavigationCollapsed', 'setSearchCollapsed']),
+    ...mapMutations('preferences', ['setNavigationCollapsed', 'setSearchCollapsed', 'setCurrentTheme']),
 
     search () {
       this.$router.push({
@@ -102,18 +142,64 @@ export default {
     display block
     text-decoration none
     font-family var(--font-family-regular)
+    margin-right var(--space-m)
     &:focus,
     &:hover,
     &:active
       color var(--color-topbar-text-hover)
     @media $mq-up_to_l
-      flex 1
-      margin-left var(--space-s)
-      margin-right var(--space-s)
-      text-align center
+      font-size var(--font-size-m)
     @media $mq-l_and_up
       font-size var(--font-size-l)
-      margin-right auto
+
+  &__theme
+    position relative
+
+    &-toggle
+      appearance none
+      cursor pointer
+      background transparent
+      display inline-block
+      padding-top var(--space-xs)
+      font-family var(--font-family-light)
+      color var(--color-topbar-text)
+      &:focus,
+      &:hover,
+      &:active
+        color var(--color-topbar-text-hover)
+      @media $mq-up_to_l
+        font-size var(--font-size-s)
+      @media $mq-l_and_up
+        font-size var(--font-size-m)
+
+    &-options
+      position absolute
+      z-index 5
+      top 2.35rem
+      left calc(var(--space-m) * -1)
+
+      max-height 0
+      transition-duration var(--transition-duration-medium)
+      transition-property max-height
+      transition-timing-function ease-out
+      overflow hidden
+
+      &--active
+        max-height 20rem
+        transition-timing-function ease-in
+
+      &-inner
+        border 1px solid var(--color-modal-border-outer)
+
+    &-option
+      modal-option()
+      text-align left
+
+    &-option + &-option
+      border-top 1px solid var(--color-modal-border-inner)
+
+  &__spacer
+    margin-right auto
 
   &__toggle
     flex 0 0 var(--button-size)

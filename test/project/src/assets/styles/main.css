@@ -1,3 +1,14 @@
+:root {
+  --text-color: #111;
+  --background-color: #EEE;
+}
+
+.theme-funky:root {
+  --text-color: purple;
+  --background-color: yellow;
+}
+
 body {
-  background: #EEE;
+  color: var(--text-color);
+  background: var(--background-color);
 }

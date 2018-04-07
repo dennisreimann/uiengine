@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Optional theme switch for your projects themes
+  - For details see the [config docs](./docs/config.md#themes)
 - The adapter `render` function can now return structured data
   - For details see the [adapter docs](./docs/adapters.md)
 - The output can be served from a subdirectory

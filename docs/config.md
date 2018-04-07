@@ -119,7 +119,7 @@ See the [theme configuration options](./theme.md) for details and default values
 
 ### Breakpoints
 
-The breakpoints defined here will be shown in the viewport resizer tool for the variant preview.
+The breakpoints defined here will be shown in the preview settings.
 Declare them with the name as key and the minimum media query pixel being the value.
 
 ```js
@@ -133,6 +133,32 @@ Declare them with the name as key and the minimum media query pixel being the va
   }
 }
 ```
+
+### Themes
+
+The themes defined here will be shown in the topbar.
+
+```js
+{
+  themes: [
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'funky',
+      title: 'Bright colors'
+    },
+    {
+      id: 'awesome',
+      title: 'Crazy awesome'
+    }
+  ]
+}
+```
+
+The first theme is selected by default.
+The iframe is loaded with the theme id being the hash part of the url (i.e. `#funky`).
 
 ### BrowserSync
 

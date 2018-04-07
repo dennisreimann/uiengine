@@ -11,7 +11,7 @@ const src = {
 const dist = {
   root: '../tmp',
   assets: '../tmp/assets',
-  themeAssets: '../../packages/@uiengine/theme/dist/_uiengine-theme'
+  themeAssets: '../../packages/theme/dist/_uiengine-theme'
 }
 
 const isDev = process.env.NODE_ENV !== 'production'
@@ -22,7 +22,7 @@ gulp.task('uiengine', ['webpack'], done => {
   const opts = {
     debug: isDev,
     serve: isDev,
-    watch: isDev ? src.tokens.concat([`${dist.themeAssets}/**/*`]) : false
+    watch: isDev ? src.tokens : false
   }
 
   UIengine.build(opts)

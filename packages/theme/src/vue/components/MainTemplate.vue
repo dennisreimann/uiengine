@@ -133,7 +133,7 @@
       >
         <content-preview
           :id="id"
-          :src="previewPath"
+          :path="previewPath"
           :title="page.title"
           :breakpoints="config.breakpoints"
         />
@@ -234,9 +234,7 @@ export default {
     },
 
     previewPath () {
-      const { base } = window.UIengine
-
-      return `${base}_pages/${this.page.id}.html`
+      return `_pages/${this.page.id}.html`
     }
   },
 

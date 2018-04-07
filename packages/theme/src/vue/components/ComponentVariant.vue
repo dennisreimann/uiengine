@@ -84,7 +84,7 @@
       >
         <content-preview
           :id="variant.id | dasherize"
-          :src="previewPath"
+          :path="previewPath"
           :title="variant.title"
           :breakpoints="config.breakpoints"
         />
@@ -161,9 +161,7 @@ export default {
     },
 
     previewPath () {
-      const { base } = window.UIengine
-
-      return `${base}_variants/${this.variant.id}.html`
+      return `_variants/${this.variant.id}.html`
     },
 
     permalinkUrl () {
