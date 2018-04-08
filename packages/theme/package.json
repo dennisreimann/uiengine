@@ -85,7 +85,7 @@
     "webpack-stream": "^4.0.3"
   },
   "peerDependencies": {
-    "@uiengine/core": "^0.18.4"
+    "@uiengine/core": "^0.18.5"
   },
   "browserslist": [
     "last 2 versions"
