@@ -117,10 +117,9 @@ export default {
     },
 
     src () {
-      const { base } = window.UIengine
       const { protocol, host } = window.location
-      const urlBase = `${protocol}//${host}${base}`
-      const url = new URL(this.path, urlBase)
+      const base = `${protocol}//${host}`
+      const url = new URL(this.path, base)
       const theme = this.currentTheme
 
       if (theme) url.hash = theme.id
