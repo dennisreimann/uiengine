@@ -1,6 +1,6 @@
 # Deployment
 
-As the output of the [default theme](./theme.md) is a single-page website, the deployment requires some server configuration.
+As the output is a single-page website, the deployment requires some server configuration.
 
 Without a proper server configuration, the users will get a 404 error if they access pages ther than the homepage directly in their browser.
 To fix the issue, all you need to do is add a simple catch-all fallback route to your server.

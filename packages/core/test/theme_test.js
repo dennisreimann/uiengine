@@ -3,7 +3,7 @@ require('mocha-sinon')()
 const fs = require('fs-extra')
 const { resolve } = require('path')
 const assert = require('assert')
-const Theme = require('../src/theme')
+const Theme = require('../src/theme') // TODO: Refactor "theme" to "UI"
 
 const { testTmpPath } = require('../../../test/support/paths')
 const target = resolve(testTmpPath, 'site')

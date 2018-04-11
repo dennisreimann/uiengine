@@ -1,6 +1,6 @@
 const { join, relative, resolve } = require('path')
 const R = require('ramda')
-const Theme = require('./theme')
+const Theme = require('./theme') // TODO: Refactor "theme" to "UI"
 const Connector = require('./connector')
 const File = require('./util/file')
 const PageUtil = require('./util/page')

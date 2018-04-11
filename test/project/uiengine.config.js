@@ -52,8 +52,9 @@ module.exports = {
 
   // UIengine will `require` the theme, which has to provide a defined set of functions
   // for setup and rendering. For details see the theme docs.
+  // TODO: Refactor "theme" to "UI"
   theme: {
-    module: '@uiengine/theme',
+    module: '@uiengine/ui',
     options: {
       customStylesFile: '/assets/styles/uiengine-custom-styles.css'
     }

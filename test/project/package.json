@@ -62,7 +62,7 @@
     "@uiengine/adapter-react": "file:../../packages/adapter-react",
     "@uiengine/adapter-vue": "file:../../packages/adapter-vue",
     "@uiengine/core": "file:../../packages/core",
-    "@uiengine/theme": "file:../../packages/theme",
+    "@uiengine/ui": "file:../../packages/ui",
     "vue-loader": "^14.2.2",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.5.0",

@@ -10,11 +10,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Optional theme switch for your projects themes
-  - For details see the [config docs](./docs/config.md#themes)
+  - For details see the [config docs](./docs/config.md#ui)
 - The adapter `render` function can now return structured data
   - For details see the [adapter docs](./docs/adapters.md)
 - The output can be served from a subdirectory
-  - For details see the new `base` [theme option](./docs/theme.md)
+  - For details see the new `base` [theme option](./docs/ui.md)
+
+### Changed
+
+- Rename the `@uiengine/theme` package to `@uiengine/ui`
 
 ## [0.18.0] - 2018-04-02
 
@@ -22,7 +26,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Use scoped packages on npm:
   - `uiengine` -> `@uiengine/core`
-  - `uiengine-theme` -> `@uiengine/theme`
+  - `uiengine-theme` -> `@uiengine/theme` (note: renamed to `@uiengine/ui` with v0.19.0)
   - `uiengine-adapter-XYZ` -> `@uiengine/adapter-XYZ`
 
 ## [0.17.0] - 2018-04-02
@@ -80,6 +84,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Wording changed from "schema" to "entities" and "properties"
   - This reflects the actual use case and intention of the feature better
 
-- The theme is now extendible via CSS custom properties
-  - The `skin` option for the theme has been removed
-  - You can now style the theme using the [`customStylesFile` option](./docs/theme.md)
+- The UI is now extendible via CSS custom properties
+  - The `skin` option for the UI has been removed
+  - You can now style the UI using the [`customStylesFile` option](./docs/ui.md)

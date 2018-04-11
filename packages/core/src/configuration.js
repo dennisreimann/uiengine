@@ -27,8 +27,9 @@ const resolveModule = (basedir, module) =>
 const resolvePath = (basedir, relativePath) =>
   resolve(basedir, relativePath)
 
-const resolveTheme = (basedir, theme = '@uiengine/theme') =>
-  resolvePackage(basedir, theme, 'Theme')
+// TODO: Refactor "theme" to "UI"
+const resolveTheme = (basedir, ui = '@uiengine/ui') =>
+  resolvePackage(basedir, ui, 'UI')
 
 const resolvePackage = (basedir, config, type) => {
   if (typeof config === 'object' && typeof config.module === 'string') {

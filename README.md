@@ -79,15 +79,15 @@ Technical documentation, with more detailed information:
 
 - [Entities/Properties](./docs/entities-properties.md)
 - [Adapters](./docs/adapters.md)
-- [Theme](./docs/theme.md)
 - [YAML](./docs/yaml.md)
+- [UI](./docs/ui.md)
 - [Deployment](./docs/deployment.md)
 - [Integrations](./docs/integrations.md)
 
 ## 💁 Individual packages
 
 - 🚀 [UIengine core](./packages/core)
-- 🎨 [UIengine theme](./packages/theme)
+- 🎨 [UIengine user interface](./packages/ui)
 - 🔌 [Pug templating adapter](./packages/adapter-pug)
 - 🔌 [React/JSX templating adapter](./packages/adapter-react)
 - 🔌 [Vue templating adapter](./packages/adapter-vue)

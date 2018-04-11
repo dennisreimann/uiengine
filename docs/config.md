@@ -112,11 +112,6 @@ It should contain references to your styles and scripts, so that the rendered ma
 
 It must also include the `<!-- uiengine:content -->` comment, which will be replaced with the rendered markup.
 
-### Theme
-
-Like an adapter, UIengine will require the theme, which has to provide a defined set of functions for setup and rendering.
-See the [theme configuration options](./theme.md) for details and default values.
-
 ### Breakpoints
 
 The breakpoints defined here will be shown in the preview settings.

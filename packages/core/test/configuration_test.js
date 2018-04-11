@@ -38,10 +38,10 @@ describe('Configuration', () => {
       assert.equal(config.source.configFile, resolve(testProjectPath, 'uiengine.config.js'))
     })
 
-    it('should resolve theme', async () => {
+    it('should resolve UI', async () => {
       const config = await Configuration.read(opts)
 
-      assert.equal(config.theme.module, '@uiengine/theme')
+      assert.equal(config.theme.module, '@uiengine/ui')
       assert.equal(config.theme.options.customStylesFile, '/assets/styles/uiengine-custom-styles.css')
     })
 
@@ -56,7 +56,8 @@ describe('Configuration', () => {
       const opts = { config: resolve(testProjectPath, 'uiengine-use-default-theme.yml') }
       const config = await Configuration.read(opts)
 
-      assert.equal(config.theme.module, '@uiengine/theme')
+      // TODO: Refactor "theme" to "UI"
+      assert.equal(config.theme.module, '@uiengine/ui')
       assert.equal(Object.keys(config.theme.options).length, 0)
     })
 
