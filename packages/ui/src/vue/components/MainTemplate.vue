@@ -55,7 +55,7 @@
           <div
             v-if="page.content"
             class="content"
-            v-html="page.content"
+            v-html="renderedContent"
           />
         </div>
 
@@ -159,7 +159,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { dasherize } from '../../util'
+import { dasherize, decorateContent } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentPreview from './ContentPreview'
@@ -235,6 +235,12 @@ export default {
 
     previewPath () {
       return `${window.UIengine.base}_pages/${this.page.id}.html`
+    },
+
+    renderedContent () {
+      return this.page.content
+        ? decorateContent(this.page)
+        : null
     }
   },
 
