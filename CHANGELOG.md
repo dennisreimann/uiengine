@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Optional theme switch for your projects themes
-  - For details see the [config docs](./docs/config.md#ui)
+  - For details see the [UI docs](./docs/ui.md)
 - The adapter `render` function can now return structured data
   - For details see the [adapter docs](./docs/adapters.md)
 - The output can be served from a subdirectory
@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Rename the `@uiengine/theme` package to `@uiengine/ui`
+- Changed the main config object `theme` to `ui`:
+  - The former `theme.options` moved into the `ui` config object.
+  - Moved the `breakpoints` into the new `ui` config object.
+  - Removed the `module` option.
+  - For details see the [UI docs](./docs/ui.md)
 
 ## [0.18.0] - 2018-04-02
 

@@ -86,7 +86,7 @@
           :id="variant.id | dasherize"
           :path="previewPath"
           :title="variant.title"
-          :breakpoints="config.breakpoints"
+          :breakpoints="config.ui.breakpoints"
         />
       </div>
 

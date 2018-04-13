@@ -42,7 +42,7 @@ export async function setup (options) {
       copyStatic(target)
     ])
   } catch (err) {
-    const message = ['Theme setup failed:', err]
+    const message = ['UI setup failed:', err]
 
     if (options.debug) message.push(JSON.stringify(options, null, 2))
 
@@ -72,7 +72,7 @@ export async function render (options, state, change, template = 'index') {
 
     return rendered
   } catch (err) {
-    const message = [`Theme could not render template "${template}":`, err]
+    const message = [`UI could not render template "${template}":`, err]
 
     if (options.debug) message.push(JSON.stringify(context, null, 2))
 

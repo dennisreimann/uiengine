@@ -96,12 +96,12 @@ describe('CLI', () => {
       const indexPath = join(testPath, 'dist/index.html')
       assertExists(indexPath)
       assertContentMatches(indexPath, 'window.UIengine.state = {"config":{"name":"Cli Project"')
-      assertContentMatches(indexPath, '/_uiengine-theme/scripts/uiengine')
-      assertContentMatches(indexPath, '/_uiengine-theme/styles/uiengine')
+      assertContentMatches(indexPath, '/_assets/scripts/uiengine')
+      assertContentMatches(indexPath, '/_assets/styles/uiengine')
 
-      // theme
-      assertExists(join(testPath, 'dist/_uiengine-theme/scripts'))
-      assertExists(join(testPath, 'dist/_uiengine-theme/styles'))
+      // ui
+      assertExists(join(testPath, 'dist/_assets/scripts'))
+      assertExists(join(testPath, 'dist/_assets/styles'))
 
       // sketch file
       assertExists(join(testPath, 'dist/_sketch.html'))

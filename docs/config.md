@@ -112,48 +112,9 @@ It should contain references to your styles and scripts, so that the rendered ma
 
 It must also include the `<!-- uiengine:content -->` comment, which will be replaced with the rendered markup.
 
-### Breakpoints
+### UI
 
-The breakpoints defined here will be shown in the preview settings.
-Declare them with the name as key and the minimum media query pixel being the value.
-
-```js
-{
-  breakpoints: {
-    XS: 320,
-    S: 560,
-    M: 760,
-    L: 960,
-    XL: 1280
-  }
-}
-```
-
-### Themes
-
-The themes defined here will be shown in the topbar.
-
-```js
-{
-  themes: [
-    {
-      id: 'default',
-      title: 'Default'
-    },
-    {
-      id: 'funky',
-      title: 'Bright colors'
-    },
-    {
-      id: 'awesome',
-      title: 'Crazy awesome'
-    }
-  ]
-}
-```
-
-The first theme is selected by default.
-The iframe is loaded with the theme id being the hash part of the url (i.e. `#funky`).
+See the [UI docs](./ui.md) for details.
 
 ### BrowserSync
 

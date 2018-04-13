@@ -5,17 +5,33 @@
 This is what the options and their defaults look like:
 
 ```js
-// TODO: Refactor "theme" to "UI"
 {
-  theme: {
-    module: '@uiengine/ui'
-    options: {
-      lang: 'en',
-      hljs: 'atom-one-dark',
-      customStylesFile: '/custom-styles-file.css',
-      debug: false,
-      cache: true
-    }
+  ui: {
+    lang: 'en',
+    hljs: 'atom-one-dark',
+    base: '/',
+    customStylesFile: '/custom-styles-file.css',
+    debug: false,
+    cache: true
+
+    breakpoints: {
+      XS: 320,
+      S: 560,
+      M: 760,
+      L: 960,
+      XL: 1280
+    },
+
+    themes: [
+      {
+        id: 'default',
+        title: 'Default'
+      },
+      {
+        id: 'funky',
+        title: 'Bright colors'
+      }
+    ]
   }
 }
 ```
@@ -36,7 +52,7 @@ For a list of available options see the [highlight.js demo](https://highlightjs.
 
 ### `customStylesFile`
 
-The path to a css files containing variable overrides and extensions for the theme.
+The path to a css files containing variable overrides and extensions for the UI.
 For an example see the [custom styles file of the test project](../test/project/src/assets/styles/uiengine-custom-styles.css).
 
 ### `base`
@@ -46,7 +62,7 @@ Defaults to `/`.
 
 ### `debug`
 
-Enable debug output, most likely to be used during theme development.
+Enable debug output, most likely to be used during UI development.
 
 Available options:
 
@@ -55,12 +71,24 @@ Available options:
 
 ### `cache`
 
-Enable template cache, most likely to be disabled during theme development.
+Enable template cache, most likely to be disabled during UI development.
 
 Available options:
 
 - `true` (default)
 - `false`
+
+### `breakpoints`
+
+The breakpoints defined here will be shown in the preview settings.
+Declare them with the name as key and the minimum media query pixel being the value.
+
+### `themes`
+
+The themes defined here will be shown in the topbar.
+
+The first theme is selected by default.
+The iframe is loaded with the theme id being the hash part of the url (i.e. `#funky`).
 
 ## Deployment
 

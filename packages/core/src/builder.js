@@ -1,6 +1,6 @@
 const { join, relative, resolve } = require('path')
 const R = require('ramda')
-const Theme = require('./theme') // TODO: Refactor "theme" to "UI"
+const UI = require('./ui')
 const Connector = require('./connector')
 const File = require('./util/file')
 const PageUtil = require('./util/page')
@@ -132,7 +132,7 @@ async function generateComponentVariants (state, componentId) {
 async function generateState (state, change) {
   debug2(state, 'Builder.generateState():start')
 
-  const tasks = [Theme.render(state, change)]
+  const tasks = [UI.render(state, change)]
 
   if (state.config.debug) {
     const json = JSON.stringify(state, null, 2)
@@ -156,7 +156,7 @@ async function generateSketch (state, change) {
   // render variant preview, with layout
   const data = state
   const template = config.template
-  const sketch = await Theme.render(state, change, 'sketch')
+  const sketch = await UI.render(state, change, 'sketch')
   let { rendered } = await render(state, template, data, identifier)
   rendered = replaceComment('content', rendered, sketch)
   rendered = replaceComment('title', rendered, `HTML Sketchapp Export • ${config.name} (${config.version})`)

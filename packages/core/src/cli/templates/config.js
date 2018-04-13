@@ -31,28 +31,19 @@ module.exports = {
   },
 
   // Here you can configure the template that the variant preview gets embeded in.
-  template: 'uiengine.html'
+  template: 'uiengine.html',
 
-  // UIengine will require the theme, which has to provide a defined set of functions
-  // for setup and rendering. For details see the theme docs.
-  // TODO: Refactor "theme" to "UI"
-  // theme: {
-  //   module: '@uiengine/ui',
-  //   options: {
-  //     lang: 'en',
-  //     hljs: 'atom-one-dark',
-  //     customStylesFile: '/path-to-theme-overrides.css'
-  //   }
-  // },
-
-  // Here you can configure the breakpoints for your project.
-  // Declare them with the name as key and the minimum media query pixel being the value.
-  // breakpoints: {
-  //   XS: 320,
-  //   S: 560,
-  //   M: 760,
-  //   L: 960,
-  //   XL: 1280
-  // }
+  ui: {
+    lang: 'en',
+    // hljs: 'atom-one-dark',
+    // customStylesFile: '/path-to-overrides.css',
+    // breakpoints: {
+    //   XS: 320,
+    //   S: 560,
+    //   M: 760,
+    //   L: 960,
+    //   XL: 1280
+    // }
+  }
 }
 `

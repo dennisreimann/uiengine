@@ -27,10 +27,6 @@ const resolveModule = (basedir, module) =>
 const resolvePath = (basedir, relativePath) =>
   resolve(basedir, relativePath)
 
-// TODO: Refactor "theme" to "UI"
-const resolveTheme = (basedir, ui = '@uiengine/ui') =>
-  resolvePackage(basedir, ui, 'UI')
-
 const resolvePackage = (basedir, config, type) => {
   if (typeof config === 'object' && typeof config.module === 'string') {
     const options = typeof config.options === 'object' ? config.options : {}
@@ -78,8 +74,8 @@ const _read = (configFilePath, projectConfig, flags) => {
   const defaults = { name, version, update }
   let data = R.mergeAll([defaults, projectConfig, options])
 
-  // resolve paths, adapters, and theme
-  let { source, target, theme, adapters } = projectConfig
+  // resolve paths, adapters, and ui
+  let { source, target, ui, adapters } = projectConfig
 
   assert(source, 'Please provide a "source" config.')
   assert(target, 'Please provide a "target" config with the destination path for the generated site.')
@@ -91,12 +87,12 @@ const _read = (configFilePath, projectConfig, flags) => {
   source.base = resolve(configPath)
   source.configFile = resolvePath(configPath, configFilePath)
   target = resolvePath(configPath, target)
-  theme = resolveTheme(configPath, theme)
   adapters = R.map(resolveAdapters, adapters || {})
+  ui = ui || {}
 
   data = R.assoc('source', source, data)
   data = R.assoc('target', target, data)
-  data = R.assoc('theme', theme, data)
+  data = R.assoc('ui', ui, data)
   data = R.assoc('adapters', adapters, data)
 
   return data

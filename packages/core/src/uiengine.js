@@ -5,7 +5,7 @@ const { debug3 } = require('./util/debug')
 
 const globPattern = '**/*'
 
-const sourceFilesFromConfig = ({ source: { configFile, components, data, entities, pages, templates }, adapters, debug, theme }) => {
+const sourceFilesFromConfig = ({ source: { configFile, components, data, entities, pages, templates }, adapters, debug, ui }) => {
   const componentsGlob = components ? join(components, globPattern) : null
   const templatesGlob = templates ? join(templates, globPattern) : null
   const pagesGlob = pages ? join(pages, globPattern) : null
@@ -14,9 +14,9 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, entitie
   const sourceFiles = [configFile, componentsGlob, dataGlob, entitiesGlob, pagesGlob, templatesGlob].filter(a => a)
 
   if (debug) {
-    const themeLibGlob = join(dirname(require.resolve(theme.module)), globPattern)
-    const themeDistGlob = themeLibGlob.replace('theme/lib/', 'theme/dist/')
-    sourceFiles.push(themeLibGlob, themeDistGlob)
+    const uiLibGlob = join(dirname(require.resolve('@uiengine/ui')), globPattern)
+    const uiDistGlob = uiLibGlob.replace('ui/lib/', 'ui/dist/')
+    sourceFiles.push(uiLibGlob, uiDistGlob)
   }
 
   return sourceFiles
@@ -89,7 +89,7 @@ const startWatcher = (state, watch, server) => {
 }
 
 const startServer = (state, watch) => {
-  const { browserSync, target, theme } = state.config
+  const { browserSync, target, ui } = state.config
   const server = requireOptional('browser-sync', 'serve').create('UIengine')
   const history = requireOptional('connect-history-api-fallback')
   const pagesPattern = '_pages/**/*'
@@ -121,7 +121,7 @@ const startServer = (state, watch) => {
   options.server.baseDir = options.server.baseDir || defaults.server.baseDir
   options.middleware = options.middleware || defaults.middleware
 
-  const basePath = (theme.options.base || '/').replace(/\/$/, '')
+  const basePath = (ui.base || '/').replace(/\/$/, '')
   options.middleware.push({
     route: basePath,
     handle: history()

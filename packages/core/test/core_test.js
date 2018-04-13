@@ -71,8 +71,8 @@ describe('Core', function () {
       assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.pug.html'))
     })
 
-    it('should copy theme assets', async () => {
-      const assetsPath = join(testProjectTargetPath, '_uiengine-theme')
+    it('should copy UI assets', async () => {
+      const assetsPath = join(testProjectTargetPath, '_assets')
       await Core.generate(opts)
 
       assertExists(join(assetsPath, 'styles'))

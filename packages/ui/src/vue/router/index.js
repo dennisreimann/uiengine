@@ -13,7 +13,7 @@ const mainComponent = type => {
   return () => import(`../components/Main${componentName}`)
 }
 
-const { base, mode } = window.UIengine.state.config.theme.options
+const { base, mode } = window.UIengine.state.config.ui
 
 const router = new Router({
   mode: mode || 'history',

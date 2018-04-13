@@ -12,7 +12,7 @@ _%>
     <%_ for (index in css) { _%>
     <link href="<%- assetPath(css[index]) %>" rel="stylesheet">
     <%_ } _%>
-    <link rel="stylesheet" href="<%- assetPath('/_uiengine-theme/styles/hljs/') %><%%= hljs %%>.css" id="hljs" data-default="<%%= hljs %%>" data-tmpl="<%- assetPath('/_uiengine-theme/styles/hljs/%s.css') %>">
+    <link rel="stylesheet" href="<%- assetPath('/_assets/styles/hljs/') %><%%= hljs %%>.css" id="hljs" data-default="<%%= hljs %%>" data-tmpl="<%- assetPath('/_assets/styles/hljs/%s.css') %>">
     <%%_ if (customStylesFile) { _%%>
     <link rel="stylesheet" href="<%%= customStylesFile %%>">
     <%%_ } _%%>

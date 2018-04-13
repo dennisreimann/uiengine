@@ -50,28 +50,20 @@ module.exports = {
   // Here you can configure the template that the variant preview gets embeded in.
   template: 'uiengine.pug',
 
-  // UIengine will `require` the theme, which has to provide a defined set of functions
-  // for setup and rendering. For details see the theme docs.
-  // TODO: Refactor "theme" to "UI"
-  theme: {
-    module: '@uiengine/ui',
-    options: {
-      customStylesFile: '/assets/styles/uiengine-custom-styles.css'
-    }
+  ui: {
+    customStylesFile: '/assets/styles/uiengine-custom-styles.css',
+    themes: [
+      {
+        id: 'default',
+        title: 'Default'
+      },
+      {
+        id: 'funky',
+        title: 'Funky crazy awesome'
+      }
+    ],
+    breakpoints
   },
-
-  breakpoints,
-
-  themes: [
-    {
-      id: 'default',
-      title: 'Default'
-    },
-    {
-      id: 'funky',
-      title: 'Funky crazy awesome'
-    }
-  ],
 
   browserSync: {
     open: false

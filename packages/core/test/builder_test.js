@@ -3,7 +3,7 @@ const { join, resolve } = require('path')
 const Factory = require('./support/factory')
 const { assertContentMatches, assertExists } = require('../../../test/support/asserts')
 const Builder = require('../src/builder')
-const Theme = require('../src/theme') // TODO: Refactor "theme" to "UI"
+const UI = require('../src/ui')
 const Connector = require('../src/connector')
 
 const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
@@ -26,12 +26,7 @@ const state = {
     },
     target,
     adapters,
-    template: 'uiengine.pug',
-    // TODO: Refactor "theme" to "UI"
-    theme: {
-      module: '@uiengine/ui',
-      options: {}
-    }
+    template: 'uiengine.pug'
   },
   pages: {
     'index': Factory.page('index', {
@@ -207,7 +202,7 @@ const state = {
 describe('Builder', () => {
   afterEach(() => { fs.removeSync(testTmpPath) })
   before(() => Promise.all([
-    Theme.setup(state),
+    UI.setup(state),
     Connector.setup(state)
   ]))
 

@@ -135,7 +135,7 @@
           :id="id"
           :path="previewPath"
           :title="page.title"
-          :breakpoints="config.breakpoints"
+          :breakpoints="config.ui.breakpoints"
         />
       </div>
 

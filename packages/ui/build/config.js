@@ -7,7 +7,7 @@ const { resolve } = require('path')
 module.exports = {
   dev: {
     // Paths
-    assetsSubDirectory: '_uiengine-theme',
+    assetsSubDirectory: '_assets',
 
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and
@@ -39,7 +39,7 @@ module.exports = {
   build: {
     // Paths
     assetsRoot: resolve(__dirname, '../static'),
-    assetsSubDirectory: '_uiengine-theme',
+    assetsSubDirectory: '_assets',
 
     /**
      * Source Maps

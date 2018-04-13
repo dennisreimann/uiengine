@@ -6,7 +6,7 @@ const Navigation = require('./navigation')
 const Component = require('./component')
 const Page = require('./page')
 const Entity = require('./entity')
-const Theme = require('./theme') // TODO: Refactor "theme" to "UI"
+const UI = require('./ui')
 const Connector = require('./connector')
 const PageUtil = require('./util/page')
 const EntityUtil = require('./util/entity')
@@ -37,9 +37,9 @@ async function generate (options) {
   debug2(_state, 'Core.generate():start')
 
   // 0. setup
-  const setupTheme = Theme.setup(_state)
+  const setupUI = UI.setup(_state)
   const setupAdapters = Connector.setup(_state)
-  await Promise.all([setupTheme, setupAdapters])
+  await Promise.all([setupUI, setupAdapters])
 
   // 1. data fetching
   const fetchPages = Page.fetchAll(_state)

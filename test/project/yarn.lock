@@ -133,9 +133,9 @@
     vue-template-compiler "^2.3.0"
 
 "@uiengine/core@file:../../packages/core":
-  version "0.18.4"
+  version "0.18.5"
   dependencies:
-    "@uiengine/theme" "^0.18.4"
+    "@uiengine/ui" "^0.19.0-0"
     chalk "^2.3.2"
     cosmiconfig "^4.0.0"
     fs-extra "^5.0.0"
@@ -149,9 +149,9 @@
     browser-sync "^2.23.6"
     chokidar "^2.0.3"
 
-"@uiengine/theme@^0.18.4":
-  version "0.18.4"
-  resolved "https://registry.yarnpkg.com/@uiengine/theme/-/theme-0.18.4.tgz#bd3fccadeefa755bd72642603af95defcee0d698"
+"@uiengine/ui@^0.19.0-0":
+  version "0.19.0-0"
+  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-0.19.0-0.tgz#d4c66c56ecf45bd825d09f1db83f308521b3c43b"
   dependencies:
     color "^3.0.0"
     ejs "^2.5.8"
@@ -164,8 +164,8 @@
     vue-router "^3.0.1"
     vuex "^3.0.1"
 
-"@uiengine/theme@file:../../packages/theme":
-  version "0.18.4"
+"@uiengine/ui@file:../../packages/ui":
+  version "0.19.0-0"
   dependencies:
     color "^3.0.0"
     ejs "^2.5.8"

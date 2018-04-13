@@ -4,50 +4,50 @@ const fs = require('fs-extra')
 const { join, resolve } = require('path')
 const assert = require('assert')
 const { assertContentMatches, assertExists, assertMatches } = require('../../../test/support/asserts')
-const DefaultTheme = require('../src/index')
+const UI = require('../src/index')
 
 const { testTmpPath } = require('../../../test/support/paths')
 const target = resolve(testTmpPath, 'site')
 const indexFile = join(target, 'index.html')
-const testThemeOptions = { target, markdownIt: { set: function () {} } }
+const testOptions = { target, markdownIt: { set: function () {} } }
 
-describe('DefaultTheme', () => {
+describe('UI', () => {
   afterEach(() => { fs.removeSync(testTmpPath) })
 
   describe('#setup', () => {
-    it('should copy the themes static files', async () => {
-      await DefaultTheme.setup(testThemeOptions)
+    it('should copy the UI static files', async () => {
+      await UI.setup(testOptions)
 
-      assertExists(join(target, '_uiengine-theme', 'scripts'))
-      assertExists(join(target, '_uiengine-theme', 'styles'))
+      assertExists(join(target, '_assets', 'scripts'))
+      assertExists(join(target, '_assets', 'styles'))
     })
 
     it('should configure the markdown parser', async function () {
       const markdownIt = { set: this.sinon.stub() }
-      const opts = Object.assign({}, testThemeOptions, { markdownIt })
-      await DefaultTheme.setup(opts)
+      const opts = Object.assign({}, testOptions, { markdownIt })
+      await UI.setup(opts)
 
       assert(markdownIt.set.calledOnce)
     })
 
     it('should throw error if the target is not set', async () => {
-      const opts = Object.assign({}, testThemeOptions)
+      const opts = Object.assign({}, testOptions)
       delete opts.target
 
       try {
-        await DefaultTheme.setup(opts)
+        await UI.setup(opts)
       } catch (error) {
         assert(error)
       }
     })
 
     it('should throw error with debug details if the debug flag is set', async () => {
-      const opts = Object.assign({}, testThemeOptions)
+      const opts = Object.assign({}, testOptions)
       opts.debug = true
       delete opts.target
 
       try {
-        await DefaultTheme.setup(opts)
+        await UI.setup(opts)
       } catch (error) {
         assertMatches(error.message, '"debug": true')
         assertMatches(error.message, '"markdownIt": {}')
@@ -57,7 +57,7 @@ describe('DefaultTheme', () => {
 
   describe('#render', async () => {
     it('should render the index.html file including the state', async () => {
-      await DefaultTheme.render(testThemeOptions, { config: { name: 'Test Render' } })
+      await UI.render(testOptions, { config: { name: 'Test Render' } })
 
       assertContentMatches(indexFile, 'Test Render')
     })
@@ -76,7 +76,7 @@ describe('DefaultTheme', () => {
           }
         }
       }
-      const sketch = await DefaultTheme.render(testThemeOptions, state, null, 'sketch')
+      const sketch = await UI.render(testOptions, state, null, 'sketch')
 
       assertMatches(sketch, 'BlanchedAlmond')
       assertMatches(sketch, 'Blanched Almond')
@@ -96,29 +96,29 @@ describe('DefaultTheme', () => {
           }
         }
       }
-      const sketch = await DefaultTheme.render(testThemeOptions, state, null, 'sketch')
+      const sketch = await UI.render(testOptions, state, null, 'sketch')
 
       assertMatches(sketch, 'Button/Primary')
       assertMatches(sketch, '<button class="button button--primary">Call To Action</button>')
     })
 
     it('should include the set locale if the passed language is available', async () => {
-      const opts = Object.assign({}, testThemeOptions, { lang: 'de' })
-      await DefaultTheme.render(opts, {})
+      const opts = Object.assign({}, testOptions, { lang: 'de' })
+      await UI.render(opts, {})
 
       assertContentMatches(indexFile, 'html lang="de"')
     })
 
     it('should default to english locale if the passed language is not available', async () => {
-      const opts = Object.assign({}, testThemeOptions, { lang: 'pl' })
-      await DefaultTheme.render(opts, {})
+      const opts = Object.assign({}, testOptions, { lang: 'pl' })
+      await UI.render(opts, {})
 
       assertContentMatches(indexFile, 'html lang="en"')
     })
 
     it('should throw error if the template cannot be rendered', async () => {
       try {
-        await DefaultTheme.render()
+        await UI.render()
       } catch (error) {
         assert(error)
       }

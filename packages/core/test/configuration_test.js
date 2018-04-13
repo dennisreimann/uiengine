@@ -41,8 +41,7 @@ describe('Configuration', () => {
     it('should resolve UI', async () => {
       const config = await Configuration.read(opts)
 
-      assert.equal(config.theme.module, '@uiengine/ui')
-      assert.equal(config.theme.options.customStylesFile, '/assets/styles/uiengine-custom-styles.css')
+      assert.equal(config.ui.customStylesFile, '/assets/styles/uiengine-custom-styles.css')
     })
 
     it('should resolve adapters', async () => {
@@ -52,13 +51,11 @@ describe('Configuration', () => {
       assert.equal(config.adapters.pug.options.pretty, true)
     })
 
-    it('should resolve default theme if no theme is given', async () => {
-      const opts = { config: resolve(testProjectPath, 'uiengine-use-default-theme.yml') }
+    it('should resolve default UI if no object is given', async () => {
+      const opts = { config: resolve(testProjectPath, 'uiengine-default-ui.yml') }
       const config = await Configuration.read(opts)
 
-      // TODO: Refactor "theme" to "UI"
-      assert.equal(config.theme.module, '@uiengine/ui')
-      assert.equal(Object.keys(config.theme.options).length, 0)
+      assert.equal(Object.keys(config.ui).length, 0)
     })
 
     it('should resolve adapters', async () => {

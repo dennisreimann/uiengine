@@ -57,7 +57,7 @@ This provides you with a development environment for creating the components, pr
 - **Prototyping environment**: Build your UI without the need for an existing backend/API. Render your templates and components with mock data and build various variants for pages by providing different data to your views.
 - **Best practice approach**: The tool guides you towards best practices like not using application logic in the view layer by proposing a separation of data and template/component.
 - **In sync with the end product**: Since the docs are generated from the code that is used in your application, you get a living pattern library – not a separate thing that needs to be looked after regularly.
-- **Flexible integrations**: Templating engines and the theme can be configured or completely swapped out so you can fit it to your needs. Same goes for the markdown parsing/rendering which is configurable too.
+- **Flexible integrations**: Templating engines can be configured so you can fit it to your needs. Same goes for the markdown parsing/rendering which is configurable too.
 - **Covers green- and brownfield projects**: Whether you start out with a pattern library or want to transition your process and refactor your existing UI into modular components, the UIengine has you covered.
 
 For the evaluation process you might also want to have a look at the [alternatives](#-alternatives).
