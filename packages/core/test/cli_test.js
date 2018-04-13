@@ -6,7 +6,9 @@ const { assertContentMatches, assertExists, assertMatches } = require('../../../
 const { testTmpPath } = require('../../../test/support/paths')
 const testPath = join(testTmpPath, 'cli-project')
 
-describe('CLI', () => {
+describe('CLI', function () {
+  this.timeout(5000)
+
   before(() => { ensureDirSync(testPath) })
   after(() => { removeSync(testTmpPath) })
 
