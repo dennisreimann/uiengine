@@ -44,7 +44,7 @@ async function findPageIds (state, pagePath = '**') {
   return pageIds
 }
 
-async function fetchAll (state) {
+export async function fetchAll (state) {
   debug2(state, `Page.fetchAll():start`)
 
   const pageIds = await findPageIds(state)
@@ -60,7 +60,7 @@ async function fetchAll (state) {
   return pages
 }
 
-async function fetchById (state, id) {
+export async function fetchById (state, id) {
   debug3(state, `Page.fetchById(${id}):start`)
 
   const { pages } = state.config.source
@@ -94,7 +94,7 @@ async function fetchById (state, id) {
   return data
 }
 
-async function fetchEntitiesPage (state) {
+export async function fetchEntitiesPage (state) {
   return {
     id: PageUtil.ENTITIES_ID,
     path: PageUtil.ENTITIES_PAGE_PATH,
@@ -103,10 +103,4 @@ async function fetchEntitiesPage (state) {
     keywords: Object.keys(state.entities || []),
     childIds: []
   }
-}
-
-module.exports = {
-  fetchAll,
-  fetchById,
-  fetchEntitiesPage
 }

@@ -4,40 +4,40 @@ const File = require('./file')
 const StringUtil = require('./string')
 const { error } = require('./message')
 
-const PAGE_FILENAME = 'page.md'
-const INDEX_ID = 'index'
 const INDEX_FILE_PATH = '.'
 const INDEX_PAGE_PATH = ''
-const ENTITIES_ID = 'entities'
-const ENTITIES_PAGE_PATH = '_entities'
+export const PAGE_FILENAME = 'page.md'
+export const INDEX_ID = 'index'
+export const ENTITIES_ID = 'entities'
+export const ENTITIES_PAGE_PATH = '_entities'
 
 // types
 const PAGE_TYPE_TOKENS = 'tokens'
 const PAGE_TYPE_TEMPLATE = 'template'
 const PAGE_TYPE_DOCUMENTATION = 'documentation'
 
-const isIndexPage = pageId =>
+export const isIndexPage = pageId =>
   pageId === INDEX_ID
 
-const isIndexFilePath = pagePath =>
+export const isIndexFilePath = pagePath =>
   pagePath === INDEX_FILE_PATH
 
-const isIndexPagePath = pagePath =>
+export const isIndexPagePath = pagePath =>
   pagePath === INDEX_PAGE_PATH
 
-const isDocumentationPage = pageType =>
+export const isDocumentationPage = pageType =>
   pageType === PAGE_TYPE_DOCUMENTATION
 
-const pageIdToPath = pageId =>
+export const pageIdToPath = pageId =>
   isIndexPage(pageId) ? INDEX_PAGE_PATH : pageId
 
-const pageIdForComponentId = (parentPageId, componentId) =>
+export const pageIdForComponentId = (parentPageId, componentId) =>
   isIndexPage(parentPageId) ? componentId : `${pageIdToPath(parentPageId)}/${componentId}`
 
-const pagePathForComponentId = (parentPagePath, componentId) =>
+export const pagePathForComponentId = (parentPagePath, componentId) =>
   isIndexPagePath(parentPagePath) ? componentId : `${parentPagePath}/${componentId}`
 
-const pageIdToTitle = pageId => {
+export const pageIdToTitle = pageId => {
   if (isIndexPage(pageId)) return 'Home'
 
   const base = basename(pageId)
@@ -46,14 +46,14 @@ const pageIdToTitle = pageId => {
   return title
 }
 
-const pageIdToPageFilePath = (pagesPath, pageId) => {
+export const pageIdToPageFilePath = (pagesPath, pageId) => {
   const relativePath = isIndexPage(pageId) ? INDEX_FILE_PATH : pageId
   const absolutePath = join(pagesPath, relativePath, PAGE_FILENAME)
 
   return absolutePath
 }
 
-const pageFilePathToPageId = (pagesPath, pageFilePath) => {
+export const pageFilePathToPageId = (pagesPath, pageFilePath) => {
   const relativePath = relative(pagesPath, pageFilePath)
 
   // invalid path: this is not a page
@@ -74,7 +74,7 @@ const pageFilePathToPageId = (pagesPath, pageFilePath) => {
   }
 }
 
-const parentIdForPageId = (pageIds, pageId) => {
+export const parentIdForPageId = (pageIds, pageId) => {
   if (isIndexPage(pageId)) return null
   const parentDir = dirname(pageId)
   const parentId = isIndexFilePath(parentDir) ? INDEX_ID : parentDir
@@ -86,7 +86,7 @@ const parentIdForPageId = (pageIds, pageId) => {
   }
 }
 
-const determineType = attributes => {
+export const determineType = attributes => {
   if (attributes.template) {
     return PAGE_TYPE_TEMPLATE
   } else if (attributes.tokens) {
@@ -98,7 +98,7 @@ const determineType = attributes => {
 
 // turns the list of children from the user provided attributes
 // into a list of correctly named childIds
-const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes = {}) => {
+export const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes = {}) => {
   let { children } = attributes
   if (!(children instanceof Array)) return attributes
 
@@ -124,7 +124,7 @@ const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes =
 
 // turns the list of components from the user provided attributes
 // into a list of correctly named componentIds
-const convertUserProvidedComponentsList = (pageId, attributes = {}) => {
+export const convertUserProvidedComponentsList = (pageId, attributes = {}) => {
   let { components } = attributes
   if (typeof components !== 'object') return attributes
 
@@ -132,23 +132,4 @@ const convertUserProvidedComponentsList = (pageId, attributes = {}) => {
   attributes = R.assoc('componentIds', components, attributes)
 
   return attributes
-}
-
-module.exports = {
-  isIndexPage,
-  isDocumentationPage,
-  pageIdToPath,
-  pageIdToTitle,
-  pageIdToPageFilePath,
-  pageIdForComponentId,
-  pagePathForComponentId,
-  pageFilePathToPageId,
-  parentIdForPageId,
-  convertUserProvidedChildrenList,
-  convertUserProvidedComponentsList,
-  determineType,
-  PAGE_FILENAME,
-  INDEX_ID,
-  ENTITIES_ID,
-  ENTITIES_PAGE_PATH
 }

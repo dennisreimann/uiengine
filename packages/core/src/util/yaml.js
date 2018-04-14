@@ -73,7 +73,7 @@ const MarkdownYamlType = new yaml.Type('!markdown', {
   }
 })
 
-const parseString = (string, filename, sourcePaths) => {
+export const parseString = (string, filename, sourcePaths) => {
   try {
     const IncludeYamlType = includeYamlType(filename, sourcePaths)
     const DataYamlType = dataYamlType(filename, sourcePaths)
@@ -86,9 +86,6 @@ const parseString = (string, filename, sourcePaths) => {
   }
 }
 
-module.exports = {
-  parseString,
-  fromFileSync: R.partial(parsing.fromFileSync, [parseString]),
-  fromFile: R.partial(parsing.fromFile, [parseString]),
-  fromString: R.partial(parsing.fromString, [parseString])
-}
+export const fromFileSync = R.partial(parsing.fromFileSync, [parseString])
+export const fromFile = R.partial(parsing.fromFile, [parseString])
+export const fromString = R.partial(parsing.fromString, [parseString])

@@ -11,7 +11,7 @@ const { debug2, debug3 } = require('./util/debug')
 const convertUserProvidedVariants = list =>
   R.map(item => typeof item === 'string' ? { file: item } : item, list)
 
-async function findVariants (state, componentId) {
+export async function findVariants (state, componentId) {
   const { components } = state.config.source
   if (!components) return []
 
@@ -23,7 +23,7 @@ async function findVariants (state, componentId) {
   return variants
 }
 
-async function fetchObjects (state, componentId, context, variants) {
+export async function fetchObjects (state, componentId, context, variants) {
   debug2(state, `Variant.fetchObjects(${componentId}):start`)
 
   // variants might be populated from the component attributes.
@@ -44,7 +44,7 @@ async function fetchObjects (state, componentId, context, variants) {
   return list
 }
 
-async function fetchObject (state, componentId, componentContext, data) {
+export async function fetchObject (state, componentId, componentContext, data) {
   const { file } = data
   const id = `${componentId}/${file}`
   debug3(state, `Variant.fetchObject(${id}):start`)
@@ -76,10 +76,4 @@ async function fetchObject (state, componentId, componentContext, data) {
   debug3(state, `Variant.fetchObject(${id}):end`)
 
   return variant
-}
-
-module.exports = {
-  findVariants,
-  fetchObjects,
-  fetchObject
 }

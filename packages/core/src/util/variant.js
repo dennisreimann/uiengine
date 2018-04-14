@@ -1,20 +1,20 @@
 const { basename, dirname, extname, join, relative, sep } = require('path')
 const StringUtil = require('./string')
 
-const VARIANTS_DIRNAME = 'variants'
+export const VARIANTS_DIRNAME = 'variants'
 
-const componentIdToVariantsPath = (componentsPath, componentId) =>
+export const componentIdToVariantsPath = (componentsPath, componentId) =>
   join(componentsPath, componentId, VARIANTS_DIRNAME)
 
-const variantIdToComponentId = id =>
+export const variantIdToComponentId = id =>
   dirname(id).split(sep)[0]
 
-const variantIdToTitle = id => {
+export const variantIdToTitle = id => {
   const base = basename(id, extname(id))
   return StringUtil.titleize(base)
 }
 
-const variantFilePathToComponentId = (componentsPath, variantFilePath) => {
+export const variantFilePathToComponentId = (componentsPath, variantFilePath) => {
   const relativePath = relative(componentsPath, variantFilePath)
 
   return relativePath.match(`/${VARIANTS_DIRNAME}/`)
@@ -22,7 +22,7 @@ const variantFilePathToComponentId = (componentsPath, variantFilePath) => {
     : null
 }
 
-const variantIdToVariantFilePath = (componentsPath, id) => {
+export const variantIdToVariantFilePath = (componentsPath, id) => {
   const componentId = variantIdToComponentId(id)
   const variantsPath = componentIdToVariantsPath(componentsPath, componentId)
   const variantFileName = basename(id)
@@ -31,7 +31,7 @@ const variantIdToVariantFilePath = (componentsPath, id) => {
   return variantFile
 }
 
-const variantFilePathToVariantId = (componentsPath, variantFilePath) => {
+export const variantFilePathToVariantId = (componentsPath, variantFilePath) => {
   const componentId = variantFilePathToComponentId(componentsPath, variantFilePath)
 
   if (componentId) {
@@ -44,14 +44,4 @@ const variantFilePathToVariantId = (componentsPath, variantFilePath) => {
   } else {
     return null
   }
-}
-
-module.exports = {
-  componentIdToVariantsPath,
-  variantFilePathToComponentId,
-  variantIdToComponentId,
-  variantIdToTitle,
-  variantIdToVariantFilePath,
-  variantFilePathToVariantId,
-  VARIANTS_DIRNAME
 }

@@ -22,15 +22,15 @@ let _state = {}
 // track the state of a running generate process to
 // cancel regenerating during a full generate
 let _isGenerating = false
-const isGenerating = () => _isGenerating
+export const isGenerating = () => _isGenerating
 
-async function init (options = {}) {
+export async function init (options = {}) {
   const config = await Config.read(options)
 
   return { config }
 }
 
-async function generate (options) {
+export async function generate (options) {
   _isGenerating = true
   _state = await init(options)
 
@@ -107,7 +107,7 @@ const getChangeObject = (filePath, action) => {
   }
 }
 
-async function generateIncrementForFileChange (filePath, action = 'changed') {
+export async function generateIncrementForFileChange (filePath, action = 'changed') {
   const change = getChangeObject(filePath, action)
   const isDeleted = action === 'deleted'
   let fn
@@ -252,11 +252,4 @@ async function regenerateTemplate (id, change) {
     Builder.generatePagesWithTemplate(_state, id),
     Builder.generateIncrement(_state, change)
   ])
-}
-
-module.exports = {
-  init,
-  isGenerating,
-  generate,
-  generateIncrementForFileChange
 }

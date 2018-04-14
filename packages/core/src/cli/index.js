@@ -1,6 +1,6 @@
 const { join } = require('path')
 
-module.exports = require('yargs')
+export default require('yargs')
   // debug
   .boolean('number')
   .global('debug')

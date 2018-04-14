@@ -1,20 +1,20 @@
 const { join, basename, relative } = require('path')
 const StringUtil = require('./string')
 
-const entityIdToTitle = id => {
+export const entityIdToTitle = id => {
   const base = basename(id)
   const title = StringUtil.titleize(base)
 
   return title
 }
 
-const entityIdToEntityFilePath = (path, id) => {
+export const entityIdToEntityFilePath = (path, id) => {
   const absolutePath = join(path, `${id}.yml`)
 
   return absolutePath
 }
 
-const entityFilePathToEntityId = (path, filePath) => {
+export const entityFilePathToEntityId = (path, filePath) => {
   const relativePath = relative(path, filePath)
 
   // invalid path: this is not an entity
@@ -23,10 +23,4 @@ const entityFilePathToEntityId = (path, filePath) => {
   const id = basename(relativePath, '.yml')
 
   return id
-}
-
-module.exports = {
-  entityIdToTitle,
-  entityIdToEntityFilePath,
-  entityFilePathToEntityId
 }

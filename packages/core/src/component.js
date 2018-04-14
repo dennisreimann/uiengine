@@ -41,7 +41,7 @@ async function findComponentIds (state) {
   return componentIds
 }
 
-async function fetchAll (state) {
+export async function fetchAll (state) {
   debug2(state, `Component.fetchAll():start`)
 
   const componentIds = await findComponentIds(state)
@@ -55,7 +55,7 @@ async function fetchAll (state) {
   return components
 }
 
-async function fetchById (state, id) {
+export async function fetchById (state, id) {
   debug3(state, `Component.fetchById(${id}):start`)
 
   const { components } = state.config.source
@@ -75,9 +75,4 @@ async function fetchById (state, id) {
   debug3(state, `Component.fetchById(${id}):end`)
 
   return data
-}
-
-module.exports = {
-  fetchAll,
-  fetchById
 }

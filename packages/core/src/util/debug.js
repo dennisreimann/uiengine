@@ -1,6 +1,6 @@
 const message = require('./message')
 
-const debug = (level, state, label, ...additional) => {
+const _debug = (level, state, label, ...additional) => {
   const { debug } = state.config
   if (!debug || level > debug) return
 
@@ -13,10 +13,8 @@ const debug = (level, state, label, ...additional) => {
   }
 }
 
-module.exports = {
-  debug: (...args) => debug(1, ...args),
-  debug2: (...args) => debug(2, ...args),
-  debug3: (...args) => debug(3, ...args),
-  debug4: (...args) => debug(4, ...args),
-  debug5: (...args) => debug(5, ...args)
-}
+export const debug = (...args) => _debug(1, ...args)
+export const debug2 = (...args) => _debug(2, ...args)
+export const debug3 = (...args) => _debug(3, ...args)
+export const debug4 = (...args) => _debug(4, ...args)
+export const debug5 = (...args) => _debug(5, ...args)

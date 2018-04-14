@@ -1,10 +1,10 @@
 const { dirname, extname } = require('path')
 const fs = require('fs-extra')
 
-const extension = filePath =>
+export const extension = filePath =>
   extname(filePath).replace(/^\./, '')
 
-const exists = filePath => {
+export const exists = filePath => {
   try {
     const stat = fs.statSync(filePath)
     return stat.isFile() || stat.isDirectory()
@@ -13,7 +13,7 @@ const exists = filePath => {
   }
 }
 
-const isDirectory = filePath => {
+export const isDirectory = filePath => {
   try {
     return fs.lstatSync(filePath).isDirectory()
   } catch (err) {
@@ -21,7 +21,7 @@ const isDirectory = filePath => {
   }
 }
 
-async function read (filePath) {
+export async function read (filePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, string) => {
       if (err) {
@@ -33,7 +33,7 @@ async function read (filePath) {
   })
 }
 
-async function write (filePath, content) {
+export async function write (filePath, content) {
   return new Promise((resolve, reject) => {
     const dir = dirname(filePath)
     fs.mkdirs(dir, err => {
@@ -52,7 +52,7 @@ async function write (filePath, content) {
   })
 }
 
-async function copy (src, dst) {
+export async function copy (src, dst) {
   return new Promise((resolve, reject) => {
     const dir = dirname(dst)
     fs.mkdirs(dir, err => {
@@ -71,7 +71,7 @@ async function copy (src, dst) {
   })
 }
 
-module.exports = {
+export default {
   read,
   write,
   copy,

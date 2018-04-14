@@ -7,14 +7,12 @@ const parsing = require('./parsing')
 
 // this is "forked" to enable custom js-yaml instance with custom types.
 
-var isSeparator = function (line) {
-  // the '---' separator can have trailing whitespace but not leading whitespace
-  return line[0] === '-' && line.trim() === '---'
-}
+// the '---' separator can have trailing whitespace but not leading whitespace
+const isSeparator = line => line[0] === '-' && line.trim() === '---'
 
-var NEWLINE = '\n'
+const NEWLINE = '\n'
 
-var fastmatter = function (str, filename, sourcePaths) {
+const fastmatter = function (str, filename, sourcePaths) {
   var bodyOnly = {
     attributes: {},
     body: str
@@ -48,11 +46,9 @@ var fastmatter = function (str, filename, sourcePaths) {
   }
 }
 
-const parseString = (string, filename, sourcePaths) =>
+export const parseString = (string, filename, sourcePaths) =>
   fastmatter(string.trim(), filename, sourcePaths)
 
-module.exports = {
-  parseString,
-  fromFile: R.partial(parsing.fromFile, [parseString]),
-  fromString: R.partial(parsing.fromString, [parseString])
-}
+export const fromFile = R.partial(parsing.fromFile, [parseString])
+
+export const fromString = R.partial(parsing.fromString, [parseString])

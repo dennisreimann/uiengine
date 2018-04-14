@@ -89,7 +89,7 @@ const dataForRelations = (pages, id, childIds) => {
   return data
 }
 
-async function fetch (state) {
+export async function fetch (state) {
   const ids = Object.keys(state.pages)
   const data = R.partial(dataForPageId, [state])
   const navigationData = R.chain(data, ids)
@@ -98,11 +98,6 @@ async function fetch (state) {
   return navigation
 }
 
-async function fetchForPageId (state, id) {
+export async function fetchForPageId (state, id) {
   return dataForPageId(state, id)
-}
-
-module.exports = {
-  fetch,
-  fetchForPageId
 }

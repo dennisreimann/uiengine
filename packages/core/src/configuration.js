@@ -45,7 +45,7 @@ const resolvePackage = (basedir, config, type) => {
   }
 }
 
-async function read (flags = {}) {
+export async function read (flags = {}) {
   const configPath = flags.config || 'uiengine.config.js'
   const explorer = cosmiconfig('uiengine', { rcExtensions: true, configPath })
 
@@ -96,8 +96,4 @@ const _read = (configFilePath, projectConfig, flags) => {
   data = R.assoc('adapters', adapters, data)
 
   return data
-}
-
-module.exports = {
-  read
 }

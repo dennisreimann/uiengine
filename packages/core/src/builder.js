@@ -41,7 +41,7 @@ async function render (state, template, data, identifier) {
   return rendered
 }
 
-async function generatePageFiles (state, pageId) {
+export async function generatePageFiles (state, pageId) {
   debug4(state, `Builder.generatePageFiles(${pageId}):start`)
 
   const { pages, config } = state
@@ -61,7 +61,7 @@ async function generatePageFiles (state, pageId) {
   debug4(state, `Builder.generatePageFiles(${pageId}):start`)
 }
 
-async function generatePageWithTemplate (state, pageId) {
+export async function generatePageWithTemplate (state, pageId) {
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):start`)
 
   const { pages, config: { target } } = state
@@ -82,7 +82,7 @@ async function generatePageWithTemplate (state, pageId) {
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):end`)
 }
 
-async function generatePagesWithTemplate (state, template) {
+export async function generatePagesWithTemplate (state, template) {
   debug3(state, `Builder.generatePagesWithTemplate(${template}):start`)
 
   const affectedPages = R.filter(page => page.template === template, state.pages)
@@ -95,7 +95,7 @@ async function generatePagesWithTemplate (state, template) {
   debug3(state, `Builder.generatePagesWithTemplate(${template}):end`)
 }
 
-async function generateVariant (state, variant) {
+export async function generateVariant (state, variant) {
   debug2(state, `Builder.generateVariant(${variant.id}):start`)
 
   const { config, components } = state
@@ -116,7 +116,7 @@ async function generateVariant (state, variant) {
   debug2(state, `Builder.generateVariant(${variant.id}):end`)
 }
 
-async function generateComponentVariants (state, componentId) {
+export async function generateComponentVariants (state, componentId) {
   debug3(state, `Builder.generateComponentVariants(${componentId}):start`)
 
   const component = state.components[componentId]
@@ -147,6 +147,10 @@ async function generateState (state, change) {
   debug2(state, 'Builder.generateState():end')
 }
 
+// generateIncrement is a better name for the public function,
+// whereas generateState describes it better internally
+export const generateIncrement = generateState
+
 async function generateSketch (state, change) {
   debug2(state, `Builder.generateSketch():start`)
 
@@ -168,7 +172,7 @@ async function generateSketch (state, change) {
   debug2(state, `Builder.generateSketch():end`)
 }
 
-async function generate (state) {
+export async function generate (state) {
   debug2(state, 'Builder.generate():start')
 
   const pageIds = Object.keys(state.pages)
@@ -194,18 +198,4 @@ async function generate (state) {
   ])
 
   debug2(state, 'Builder.generate():end')
-}
-
-// generateIncrement is a better name for the public function,
-// whereas generateState describes it better internally
-const generateIncrement = generateState
-
-module.exports = {
-  generate,
-  generateIncrement,
-  generatePageWithTemplate,
-  generatePagesWithTemplate,
-  generateComponentVariants,
-  generateVariant,
-  generatePageFiles
 }

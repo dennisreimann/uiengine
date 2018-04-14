@@ -18,7 +18,7 @@ const getModule = ({ config: { adapters } }, ext, filePath) => {
   }
 }
 
-async function setup (state) {
+export async function setup (state) {
   debug3(state, 'Connector.setup():start')
 
   const { config: { adapters, source: { components } } } = state
@@ -47,7 +47,7 @@ async function setup (state) {
   debug3(state, 'Connector.setup():end')
 }
 
-async function registerComponentFile (state, filePath) {
+export async function registerComponentFile (state, filePath) {
   const { config: { adapters } } = state
   const ext = File.extension(filePath)
   const adapter = adapters[ext]
@@ -62,7 +62,7 @@ async function registerComponentFile (state, filePath) {
   }
 }
 
-async function render (state, templatePath, data = {}) {
+export async function render (state, templatePath, data = {}) {
   const { config: { adapters } } = state
   const ext = File.extension(templatePath)
   const { render } = getModule(state, ext, templatePath)
@@ -78,7 +78,7 @@ async function render (state, templatePath, data = {}) {
   }
 }
 
-async function filesForComponent (state, ext, componentName) {
+export async function filesForComponent (state, ext, componentName) {
   const { filesForComponent } = getModule(state, ext)
 
   if (typeof filesForComponent === 'function') {
@@ -90,7 +90,7 @@ async function filesForComponent (state, ext, componentName) {
   }
 }
 
-async function filesForVariant (state, ext, componentName, variantName) {
+export async function filesForVariant (state, ext, componentName, variantName) {
   const { filesForVariant } = getModule(state, ext)
 
   if (typeof filesForVariant === 'function') {
@@ -100,12 +100,4 @@ async function filesForVariant (state, ext, componentName, variantName) {
   } else {
     return []
   }
-}
-
-module.exports = {
-  setup,
-  registerComponentFile,
-  render,
-  filesForComponent,
-  filesForVariant
 }

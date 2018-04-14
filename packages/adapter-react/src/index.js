@@ -5,35 +5,24 @@ require('babel-register')({})
 // invalidate require cache so we get template updates as well
 const invalidateModuleCache = filePath => delete require.cache[require.resolve(filePath)]
 
-async function registerComponentFile (options, filePath) {
-  return new Promise((resolve, reject) => {
-    invalidateModuleCache(filePath)
-    resolve()
-  })
+export async function registerComponentFile (options, filePath) {
+  invalidateModuleCache(filePath)
 }
 
-async function render (options, filePath, data = {}) {
-  return new Promise((resolve, reject) => {
-    invalidateModuleCache(filePath)
+export async function render (options, filePath, data = {}) {
+  invalidateModuleCache(filePath)
 
-    try {
-      let template = require(filePath)
-      if (template.default) template = template.default
-      const vdom = template(data)
-      const rendered = ReactDOMServer.renderToString(vdom)
+  try {
+    let template = require(filePath)
+    if (template.default) template = template.default
+    const vdom = template(data)
 
-      resolve(rendered)
-    } catch (err) {
-      const message = [`React DOM could not render "${filePath}"!`, err]
+    return ReactDOMServer.renderToString(vdom)
+  } catch (err) {
+    const message = [`React DOM could not render "${filePath}"!`, err]
 
-      if (options.debug) message.push(JSON.stringify(data, null, 2))
+    if (options.debug) message.push(JSON.stringify(data, null, 2))
 
-      reject(message.join('\n\n'))
-    }
-  })
-}
-
-module.exports = {
-  registerComponentFile,
-  render
+    throw new Error(message.join('\n\n'))
+  }
 }
