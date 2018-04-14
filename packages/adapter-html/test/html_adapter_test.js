@@ -46,4 +46,22 @@ describe('HTML adapter', () => {
       assert(rendered.match(/<p>include with variable: \${nested.data}<\/p>/), `Variable string "\${nested.data}" missing:\n\n${rendered}`)
     })
   })
+
+  describe('#filesForComponent', () => {
+    it('should return the component file', () => {
+      const files = Adapter.filesForComponent('button')
+
+      assert.equal(files.length, 1)
+      assert.equal(files[0].basename, 'button.html')
+    })
+  })
+
+  describe('#filesForVariant', () => {
+    it('should return the variant file', () => {
+      const files = Adapter.filesForVariant('button', 'primary')
+
+      assert.equal(files.length, 1)
+      assert.equal(files[0].basename, 'primary.html')
+    })
+  })
 })
