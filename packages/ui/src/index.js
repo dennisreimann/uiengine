@@ -17,14 +17,14 @@ const defaultOpts = {
 const templates = {}
 const templatesPath = resolve(__dirname, '..', 'lib', 'templates')
 const staticPath = resolve(__dirname, '..', 'dist')
+const templatePath = template => join(templatesPath, `${template}.ejs`)
 
 async function copyStatic (target) {
   await File.copy(staticPath, target)
 }
 
 async function compileTemplate (name) {
-  const templatePath = join(templatesPath, `${name}.ejs`)
-  const templateString = await File.read(templatePath)
+  const templateString = await File.read(templatePath(name))
 
   templates[name] = compile(templateString)
 }
@@ -50,7 +50,7 @@ export async function setup (options) {
   }
 }
 
-export async function render (options, state, change, template = 'index') {
+export async function render (options, state, template = 'index') {
   // sanitize and prepare options
   if (!supportedLocales.includes(options.lang)) delete options.lang
   const opts = Object.assign({}, defaultOpts, options)
@@ -76,6 +76,10 @@ export async function render (options, state, change, template = 'index') {
 
     if (options.debug) message.push(JSON.stringify(context, null, 2))
 
-    throw new Error(message.join('\n\n'))
+    const error = new Error(message.join('\n\n'))
+    error.code = err.code
+    error.path = templatePath(template)
+
+    throw error
   }
 }

@@ -76,7 +76,7 @@ describe('UI', () => {
           }
         }
       }
-      const sketch = await UI.render(testOptions, state, null, 'sketch')
+      const sketch = await UI.render(testOptions, state, 'sketch')
 
       assertMatches(sketch, 'BlanchedAlmond')
       assertMatches(sketch, 'Blanched Almond')
@@ -96,7 +96,7 @@ describe('UI', () => {
           }
         }
       }
-      const sketch = await UI.render(testOptions, state, null, 'sketch')
+      const sketch = await UI.render(testOptions, state, 'sketch')
 
       assertMatches(sketch, 'Button/Primary')
       assertMatches(sketch, '<button class="button button--primary">Call To Action</button>')
@@ -118,9 +118,21 @@ describe('UI', () => {
 
     it('should throw error if the template cannot be rendered', async () => {
       try {
-        await UI.render()
+        await UI.render({}, {}, 'does-not-exist')
       } catch (error) {
         assert(error)
+
+        assertMatches(error.message, 'UI could not render template "does-not-exist"')
+      }
+    })
+
+    it('should throw detailed error if the debug option is set', async () => {
+      try {
+        await UI.render({ debug: true }, {})
+      } catch (error) {
+        assert(error)
+
+        assertMatches(error.message, '"state": {}')
       }
     })
   })

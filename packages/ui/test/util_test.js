@@ -21,6 +21,14 @@ describe('Util', () => {
     })
   })
 
+  describe('#titleize', () => {
+    it('should return titleized string', () => {
+      assert.equal(Util.titleize('form'), 'Form')
+      assert.equal(Util.titleize('formfield-with-label'), 'Formfield With Label')
+      assert.equal(Util.titleize('This    is some .   text'), 'This Is Some Text')
+    })
+  })
+
   describe('#decorateContent', () => {
     it('should remove the rendered title from content if it matches the page title', () => {
       const page = {
@@ -47,9 +55,9 @@ describe('Util', () => {
 
   describe('#decorateCode', () => {
     it('should return the highlighted raw code', () => {
-      const decorated = Util.decorateCode('var = "test"', 'js')
+      const decorated = Util.decorateCode('.className { color: blue; }')
 
-      assertMatches(decorated, '<pre class="hljs" lang="js"><span class="hljs-keyword">var</span> = <span class="hljs-string">"test"</span></pre>')
+      assertMatches(decorated, '<pre class="hljs" lang="css"><span class="hljs-selector-class">.className</span> { <span class="hljs-attribute">color</span>: blue; }</pre>')
     })
 
     it('should return the highlighted rendered html', () => {

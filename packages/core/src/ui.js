@@ -17,11 +17,11 @@ export async function setup (state) {
   debug3(state, 'UI.setup():end')
 }
 
-export async function render (state, change, template) {
+export async function render (state, template) {
   debug3(state, 'UI.render():start')
 
   const options = getOptions(state)
-  const rendered = await UI.render(options, state, change, template)
+  const rendered = await UI.render(options, state, template)
 
   debug3(state, 'UI.render():end')
 

@@ -33,13 +33,12 @@ describe('UI', () => {
   })
 
   describe('#render', () => {
-    it('should call the UIs render function with the options, state and change', async function () {
+    it('should call the UIs render function with the options and state', async function () {
       this.sinon.stub(TestUI, 'render').returns('')
-      const change = { file: 'component.md', action: 'created', type: 'component', item: 'componentId' }
-      await UI.render(state, change)
+      await UI.render(state)
 
       assert(TestUI.render.calledOnce)
-      assert(TestUI.render.calledWithMatch(testUiOptions, state, change))
+      assert(TestUI.render.calledWithMatch(testUiOptions, state))
     })
   })
 })
