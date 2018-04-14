@@ -1,4 +1,5 @@
 const assert = require('assert')
+const { assertMatches } = require('../../../test/support/asserts')
 const { resolve } = require('path')
 const Adapter = require('../src/index')
 
@@ -21,6 +22,29 @@ describe('EJS adapter', () => {
 
       assert(rendered.match('<p>relative include</p>'), 'Relative include could not be resolved.')
       assert(rendered.match('<p>absolute include</p>'), 'Absolute include could not be resolved.')
+    })
+
+    it('should throw error if the file does not exist', async () => {
+      try {
+        await Adapter.render({}, 'does-not-exist.ejs')
+      } catch (error) {
+        assert(error)
+
+        assertMatches(error.message, 'EJS could not render "does-not-exist.ejs"')
+      }
+    })
+
+    it('should throw detailed error if the debug option is set', async () => {
+      try {
+        const templatePath = resolve(__dirname, 'fixtures', 'invalid-template.ejs')
+        const data = { myData: 1 }
+        await Adapter.render({ debug: true }, templatePath, data)
+      } catch (error) {
+        assert(error)
+
+        assertMatches(error.message, 'Could not find matching close tag for "<%="')
+        assertMatches(error.message, '"myData": 1')
+      }
     })
   })
 

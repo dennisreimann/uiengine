@@ -8,7 +8,11 @@ export async function render (options, filePath, data = {}) {
 
         if (options.debug) message.push(JSON.stringify(data, null, 2))
 
-        reject(message.join('\n\n'))
+        const error = new Error(message.join('\n\n'))
+        error.code = err.code
+        error.path = filePath
+
+        reject(error)
       } else {
         resolve(rendered)
       }
