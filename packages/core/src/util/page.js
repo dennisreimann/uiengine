@@ -98,7 +98,7 @@ export const determineType = attributes => {
 
 // turns the list of children from the user provided attributes
 // into a list of correctly named childIds
-export const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes = {}) => {
+export const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes) => {
   let { children } = attributes
   if (!(children instanceof Array)) return attributes
 
@@ -124,7 +124,7 @@ export const convertUserProvidedChildrenList = (pageId, availableChildIds, attri
 
 // turns the list of components from the user provided attributes
 // into a list of correctly named componentIds
-export const convertUserProvidedComponentsList = (pageId, attributes = {}) => {
+export const convertUserProvidedComponentsList = (pageId, attributes) => {
   let { components } = attributes
   if (typeof components !== 'object') return attributes
 

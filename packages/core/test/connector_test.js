@@ -87,6 +87,14 @@ describe('Connector', () => {
         assert(error)
       }
     })
+
+    it('should throw error if the adapter for the filetype is missing', async () => {
+      try {
+        await Connector.render(stateNoop, './src/templates/my-template.unknown', {})
+      } catch (error) {
+        assert(error)
+      }
+    })
   })
 
   describe('#filesForComponent', () => {

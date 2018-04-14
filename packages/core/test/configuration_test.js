@@ -69,5 +69,14 @@ describe('Configuration', () => {
       assert.equal(Object.keys(config.adapters.jsx.options).length, 0)
       assert.equal(Object.keys(config.adapters.hbs.options).length, 0)
     })
+
+    it('should throw error if config is invalid', async () => {
+      try {
+        const invalidOpts = Object.assign({}, opts, { adapters: { html: null } })
+        await Configuration.read(invalidOpts)
+      } catch (error) {
+        assert(error)
+      }
+    })
   })
 })
