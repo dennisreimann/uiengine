@@ -10,7 +10,11 @@ export async function render (options, filePath, data = {}) {
 
     if (options.debug) message.push(JSON.stringify(context, null, 2))
 
-    throw new Error(message.join('\n\n'))
+    const error = new Error(message.join('\n\n'))
+    error.code = err.code
+    error.path = filePath
+
+    throw error
   }
 }
 
