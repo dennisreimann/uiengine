@@ -108,34 +108,34 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.38.tgz#c1be40aa933723c608820a99a373a16d215a1ca2"
 
 "@uiengine/adapter-ejs@file:../../packages/adapter-ejs":
-  version "0.18.1"
+  version "0.19.0"
 
 "@uiengine/adapter-handlebars@file:../../packages/adapter-handlebars":
-  version "0.18.1"
+  version "0.19.0"
 
 "@uiengine/adapter-html@file:../../packages/adapter-html":
-  version "0.18.1"
+  version "0.19.0"
 
 "@uiengine/adapter-marko@file:../../packages/adapter-marko":
-  version "0.18.1"
+  version "0.19.0"
 
 "@uiengine/adapter-pug@file:../../packages/adapter-pug":
-  version "0.18.1"
+  version "0.19.0"
 
 "@uiengine/adapter-react@file:../../packages/adapter-react":
-  version "0.18.1"
+  version "0.19.0"
 
 "@uiengine/adapter-vue@file:../../packages/adapter-vue":
-  version "0.18.2"
+  version "0.19.0"
   dependencies:
     vue-component-compiler "git+https://github.com/znck/vue-component-compiler.git"
     vue-server-renderer "^2.3.0"
     vue-template-compiler "^2.3.0"
 
 "@uiengine/core@file:../../packages/core":
-  version "0.18.5"
+  version "0.19.0"
   dependencies:
-    "@uiengine/ui" "^0.19.0-0"
+    "@uiengine/ui" "^0.19.0"
     chalk "^2.3.2"
     cosmiconfig "^4.0.0"
     fs-extra "^5.0.0"
@@ -149,9 +149,9 @@
     browser-sync "^2.23.6"
     chokidar "^2.0.3"
 
-"@uiengine/ui@^0.19.0-0":
-  version "0.19.0-0"
-  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-0.19.0-0.tgz#d4c66c56ecf45bd825d09f1db83f308521b3c43b"
+"@uiengine/ui@^0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-0.19.0.tgz#b37f32f0f7543fa8a85cadec3ec0e4fa8cfe9c73"
   dependencies:
     color "^3.0.0"
     ejs "^2.5.8"
@@ -165,7 +165,7 @@
     vuex "^3.0.1"
 
 "@uiengine/ui@file:../../packages/ui":
-  version "0.19.0-0"
+  version "0.19.0"
   dependencies:
     color "^3.0.0"
     ejs "^2.5.8"
