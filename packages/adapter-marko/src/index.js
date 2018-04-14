@@ -8,30 +8,38 @@ require('marko/node-require').install({
 const invalidateModuleCache = (filePath) =>
   delete require.cache[require.resolve(filePath)]
 
+const handleError = (options, err, reject, filePath, data) => {
+  const message = [`Marko could not render "${filePath}"!`, err]
+
+  if (options.debug) message.push(JSON.stringify(data, null, 2))
+
+  const error = new Error(message.join('\n\n'))
+  error.code = err.code
+  error.path = filePath
+
+  reject(error)
+}
+
 export async function registerComponentFile (options, filePath) {
-  return new Promise((resolve, reject) => {
-    invalidateModuleCache(filePath)
-    resolve()
-  })
+  invalidateModuleCache(filePath)
 }
 
 export async function render (options, filePath, data = {}) {
   return new Promise((resolve, reject) => {
-    invalidateModuleCache(filePath)
+    try {
+      invalidateModuleCache(filePath)
+      const template = require(filePath)
 
-    const template = require(filePath)
-
-    template.renderToString(data, (err, rendered) => {
-      if (err) {
-        const message = [`Marko could not render "${filePath}"!`, err]
-
-        if (options.debug) message.push(JSON.stringify(data, null, 2))
-
-        reject(message.join('\n\n'))
-      } else {
-        resolve(rendered)
-      }
-    })
+      template.renderToString(data, (err, rendered) => {
+        if (err) {
+          handleError(options, err, reject, filePath, data)
+        } else {
+          resolve(rendered)
+        }
+      })
+    } catch (err) {
+      handleError(options, err, reject, filePath, data)
+    }
   })
 }
 
