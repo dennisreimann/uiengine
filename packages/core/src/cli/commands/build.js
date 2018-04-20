@@ -15,6 +15,10 @@ exports.builder = argv =>
     .default('serve', false)
     .describe('serve', 'Spawn a server')
     .alias('s', 'serve')
+    // quiet
+    .boolean('info')
+    .default('info', true)
+    .describe('info', 'Log info output')
 
 exports.handler = argv => {
   UIengine.build(argv)

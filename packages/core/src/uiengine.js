@@ -35,18 +35,22 @@ const browserSyncOptions = {
   watchOptions
 }
 
+const optionWithDefault = (def, value) =>
+  typeof value !== 'undefined' ? value : def
+
 const requireOptional = (module, option) => {
   try {
     return require(module)
   } catch (err) {
-    console.error(`The optional dependency ${module} failed to install and is required for --${option}.\nIt is likely not supported on your platform.`)
+    console.error(`The optional dependency ${module} failed to install and is required for --${option}.`, 'It is likely not supported on your platform.')
 
     throw err
   }
 }
 
-const startWatcher = (state, watch, server) => {
+const startWatcher = (state, opts, server) => {
   const { config } = state
+  const { watch, info } = opts
   const chokidar = requireOptional('chokidar', 'watch')
   const sourceFiles = sourceFilesFromConfig(config)
 
@@ -63,14 +67,11 @@ const startWatcher = (state, watch, server) => {
 
       Core.generateIncrementForFileChange(filePath, type)
         .then(({ state, change }) => {
-          console.log(`✨  Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`)
-
-          if (server) {
-            server.sockets.emit('uiengine:state:update', state)
-          }
+          if (info) console.info(`✨  Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`)
+          if (server) server.sockets.emit('uiengine:state:update', state)
         })
-        .catch(error => {
-          console.error(`🚨  Rebuild for changed file ${relative(process.cwd(), filePath)} failed:`, error)
+        .catch(err => {
+          console.error(`🚨  Rebuild for changed file ${relative(process.cwd(), filePath)} failed:`, err)
         })
     })
   }
@@ -88,8 +89,9 @@ const startWatcher = (state, watch, server) => {
   return watcher
 }
 
-const startServer = (state, watch) => {
+const startServer = (state, opts) => {
   const { browserSync, target, ui } = state.config
+  const { watch, info } = opts
   const server = requireOptional('browser-sync', 'serve').create('UIengine')
   const history = requireOptional('connect-history-api-fallback')
   const pagesPattern = '_pages/**/*'
@@ -115,22 +117,23 @@ const startServer = (state, watch) => {
     ],
     middleware: []
   }
-  const options = browserSync || defaults
+  const options = optionWithDefault(defaults, browserSync)
 
-  options.server = options.server || defaults.server
-  options.server.baseDir = options.server.baseDir || defaults.server.baseDir
-  options.middleware = options.middleware || defaults.middleware
+  options.server = optionWithDefault(defaults.server, options.server)
+  options.server.baseDir = optionWithDefault(defaults.server.baseDir, options.server.baseDir)
+  options.middleware = optionWithDefault(defaults.middleware, options.middleware)
+  options.logLevel = optionWithDefault((info ? 'info' : 'silent'), options.logLevel)
 
-  const basePath = (ui.base || '/').replace(/\/$/, '')
+  const basePath = (optionWithDefault('/', ui.base)).replace(/\/$/, '')
   options.middleware.push({
     route: basePath,
     handle: history()
   })
 
   if (watch) {
-    options.files = options.files || defaults.files
-    options.watchOptions = options.watchOptions || browserSyncOptions.watchOptions
-    options.notify = typeof options.notify !== 'undefined' ? options.notify : browserSyncOptions.notify
+    options.files = optionWithDefault(defaults.files, options.files)
+    options.watchOptions = optionWithDefault(browserSyncOptions.watchOptions, options.watchOptions)
+    options.notify = optionWithDefault(browserSyncOptions.notify, options.notify)
   }
 
   debug3(state, 'BrowserSync options:', JSON.stringify(options, null, 2))
@@ -158,16 +161,20 @@ export const theo = (theo, options = {}) =>
   require('./integrations/theo')(theo, options)
 
 export async function build (options = {}) {
-  console.log('🚧  Building …')
+  options.info = optionWithDefault(true, options.info)
+  options.serve = optionWithDefault(false, options.serve)
+  options.watch = optionWithDefault(false, options.watch)
+
+  if (options.info) console.info('🚧  Building …')
 
   try {
     const state = await Core.generate(options)
 
-    console.log('✅  Build done!')
+    if (options.info) console.info('✅  Build done!')
 
     let server, watcher
-    if (options.serve) server = startServer(state, options.watch)
-    if (options.watch) watcher = startWatcher(state, options.watch, server)
+    if (options.serve) server = startServer(state, options)
+    if (options.watch) watcher = startWatcher(state, options, server)
 
     return { state, server, watcher }
   } catch (err) {

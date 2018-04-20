@@ -25,8 +25,8 @@ gulp.task('uiengine', ['webpack'], done => {
   }
 
   UIengine.build(opts)
-    .then(() => { done() })
-    .catch(err => { done(err) })
+    .then(state => { done() })
+    .catch(done)
 })
 
 gulp.task('assets', () =>
