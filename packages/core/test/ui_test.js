@@ -18,11 +18,16 @@ const state = {
 }
 
 describe('UI', () => {
+  afterEach(function () {
+    this.sinon.restore()
+  })
+
   describe('#setup', () => {
     afterEach(() => { fs.removeSync(testTmpPath) })
 
     it('should call the UIs setup function', async function () {
       this.sinon.stub(TestUI, 'setup')
+
       await UI.setup(state)
       const markdownIt = require('../src/util/markdown').markdownIt
       const expectedOptions = Object.assign({}, testUiOptions, { markdownIt })
@@ -35,6 +40,7 @@ describe('UI', () => {
   describe('#render', () => {
     it('should call the UIs render function with the options and state', async function () {
       this.sinon.stub(TestUI, 'render').returns('')
+
       await UI.render(state)
 
       assert(TestUI.render.calledOnce)

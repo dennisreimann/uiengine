@@ -12,6 +12,10 @@ const state4 = stateWithDebugLevel(4)
 const state5 = stateWithDebugLevel(5)
 
 describe('Debug', () => {
+  afterEach(function () {
+    this.sinon.restore()
+  })
+
   describe('statements', () => {
     it('should be printed according to the configured level', function () {
       this.sinon.stub(console, 'info')

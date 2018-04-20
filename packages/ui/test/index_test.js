@@ -28,6 +28,8 @@ describe('UI', () => {
       await UI.setup(opts)
 
       assert(markdownIt.set.calledOnce)
+
+      this.sinon.restore()
     })
 
     it('should throw error if the target is not set', async () => {

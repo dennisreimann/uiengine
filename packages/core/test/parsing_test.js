@@ -15,6 +15,10 @@ const sourcePaths = {
 }
 
 describe('Parsing', () => {
+  afterEach(function () {
+    this.sinon.restore()
+  })
+
   describe('#fromFileSync', () => {
     it('should call the given parse function with the file content', function () {
       const parseFn = this.sinon.stub()

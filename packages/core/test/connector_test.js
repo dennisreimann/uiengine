@@ -31,6 +31,10 @@ const state = stateWithModule(testAdapterPath)
 const stateNoop = stateWithModule(noopAdapterPath)
 
 describe('Connector', () => {
+  afterEach(function () {
+    this.sinon.restore()
+  })
+
   it('should throw error if the adapter cannot be resolved', async () => {
     const stateWithNonExistingAdapter = stateWithModule('doesnotexist')
 

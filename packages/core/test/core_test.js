@@ -1,5 +1,3 @@
-require('mocha-sinon')()
-
 const fs = require('fs-extra')
 const assert = require('assert')
 const { assertContentMatches, assertContentDoesNotMatch, assertExists } = require('../../../test/support/asserts')
