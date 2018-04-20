@@ -1,6 +1,6 @@
 const { dirname, join, relative } = require('path')
 const Core = require('./core')
-const debounce = require('./util/debounce')
+const { debounce } = require('./util/debounce')
 const { debug3 } = require('./util/debug')
 
 const globPattern = '**/*'
@@ -62,17 +62,17 @@ const startWatcher = (state, opts, server) => {
   }
 
   const handleFileChange = (filePath, type) => {
-    return debounce('handleFileChange', () => {
+    return debounce('handleFileChange', async () => {
       if (Core.isGenerating()) return
 
-      Core.generateIncrementForFileChange(filePath, type)
-        .then(({ state, change }) => {
-          if (info) console.info(`✨  Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`)
-          if (server) server.sockets.emit('uiengine:state:update', state)
-        })
-        .catch(err => {
-          console.error(`🚨  Rebuild for changed file ${relative(process.cwd(), filePath)} failed:`, err)
-        })
+      try {
+        const { state, change } = await Core.generateIncrementForFileChange(filePath, type)
+
+        if (info) console.info(`✨  Rebuilt ${change.type} ${change.item}`, `(${change.action} ${change.file})`)
+        if (server) server.sockets.emit('uiengine:state:update', state)
+      } catch (err) {
+        console.error(`🚨  Rebuild for changed file ${relative(process.cwd(), filePath)} failed:`, err)
+      }
     })
   }
 

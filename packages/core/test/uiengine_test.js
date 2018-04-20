@@ -80,6 +80,23 @@ describe('UIengine', function () {
 
         watcher.close()
       })
+
+      it('should report file changes', done => {
+        UIengine.build(optsWith({ watch: true })).then(({ watcher }) => {
+          const pagesPath = resolve(testProjectPath, 'src', 'uiengine', 'pages')
+          const filePath = join(pagesPath, 'testcases', 'created', 'page.md')
+          const fileDir = dirname(filePath)
+
+          fs.mkdirsSync(fileDir)
+          fs.writeFileSync(filePath, '---\ntitle: Created Page\n---\nContent for created page.')
+
+          setTimeout(function () {
+            assert(console.info.calledWithMatch('✨  Rebuilt page testcases/created'))
+            watcher.close()
+            fs.removeSync(fileDir)
+            done()
+          }, 5000)
+        })
       })
     })
   })
