@@ -106,10 +106,14 @@ export default {
     ...mapMutations('preferences', ['setNavigationCollapsed', 'setSearchCollapsed', 'setCurrentTheme']),
 
     search () {
-      this.$router.push({
-        name: 'search',
-        params: { query: this.query }
-      })
+      const query = this.query.trim()
+
+      if (query.length) {
+        this.$router.push({
+          name: 'search',
+          params: { query }
+        })
+      }
     },
 
     toggleSearch () {
