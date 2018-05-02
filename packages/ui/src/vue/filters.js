@@ -20,14 +20,14 @@ Vue.filter('localize', (key, interpolations) => {
       if (str) {
         return str
       } else {
-        console.warn(`Missing interpolation "${name}" for key "${key}"!`)
+        console.warn('[UIengine]', `Missing interpolation "${name}" for key "${key}"!`)
         return `[${name}]`
       }
     })
   } else if (localized) {
     return localized
   } else {
-    console.warn(`Missing localization for key "${key}"!`)
+    console.warn('[UIengine]', `Missing localization for key "${key}"!`)
     return `[${key}]`
   }
 })

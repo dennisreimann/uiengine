@@ -42,7 +42,7 @@ const vm = new Vue({
 
 new Clipboard('[data-clipboard-text]')
   .on('error', event => {
-    console.error('Clipboard error:', event)
+    console.error('[UIengine]', 'Clipboard error:', event)
   })
 
 // apply state changes via socket connection in development
@@ -62,12 +62,12 @@ if (document.getElementById('__bs_script__')) {
         vm.$emit('file:change', `${window.UIengine.base}${filePath}`)
       })
       // report
-      console.debug('Connection to browser-sync socket established.')
+      console.debug('[UIengine]', 'Connection to browser-sync socket established.')
     } else if (retries <= 10) {
       setTimeout(setupSocket, 100)
       retries++
     } else {
-      console.warn('Could not connect to browser-sync socket.')
+      console.warn('[UIengine]', 'Could not connect to browser-sync socket.')
     }
   }
   setupSocket()

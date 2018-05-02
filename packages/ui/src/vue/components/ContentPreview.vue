@@ -168,7 +168,7 @@ export default {
     this.$root.$on('file:change', filePath => {
       if (filePath === this.path && iframe.contentWindow) {
         iframe.contentWindow.location.reload()
-        console.debug('Reload on file change', filePath)
+        console.debug('[UIengine]', 'Reload on file change', filePath)
       }
     })
   },
