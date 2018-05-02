@@ -106,9 +106,13 @@ const startServer = (state, opts) => {
         options: {
           cwd: target,
           ignored: [
-            // exclude index.html as it changes on every rebuild and changes are injected via websockets (see handleFileChange)
+            // exclude files with state as they change on every rebuild.
+            // changes are injected via websockets (see handleFileChange)
             'index.html',
-            // exclude pages and variants as the iframes are reloaded separately (see server.init callback)
+            '_sketch.html',
+            '_state.json',
+            // exclude pages and variants as the iframes are reloaded
+            // separately (see server.init callback)
             pagesPattern,
             variantsPattern
           ]

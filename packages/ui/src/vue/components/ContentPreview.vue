@@ -162,12 +162,13 @@ export default {
     }
 
     // setup on initial load
-    iframe.addEventListener('load', setupIframe.bind(this), { once: true })
+    iframe.addEventListener('load', setupIframe.bind(this))
 
     // reload on file change
     this.$root.$on('file:change', filePath => {
-      if (filePath === this.src && iframe.contentWindow) {
+      if (filePath === this.path && iframe.contentWindow) {
         iframe.contentWindow.location.reload()
+        console.debug('Reload on file change', filePath)
       }
     })
   },

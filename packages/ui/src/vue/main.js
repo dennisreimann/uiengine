@@ -59,7 +59,7 @@ if (document.getElementById('__bs_script__')) {
       })
       // iframe reloads
       socket.on('uiengine:file:change', filePath => {
-        vm.$emit('file:change', `/${filePath}`)
+        vm.$emit('file:change', `${window.UIengine.base}${filePath}`)
       })
       // report
       console.debug('Connection to browser-sync socket established.')
