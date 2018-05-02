@@ -34,9 +34,8 @@ and some
 [![Build Status](https://travis-ci.org/dennisreimann/uiengine.svg?branch=master)](https://travis-ci.org/dennisreimann/uiengine)
 [![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/uiengine/badge.svg)](https://snyk.io/test/github/dennisreimann/uiengine)
 [![Coverage Status](https://coveralls.io/repos/github/dennisreimann/uiengine/badge.svg?branch=master)](https://coveralls.io/github/dennisreimann/uiengine?branch=master)
-[![npm](https://img.shields.io/npm/dw/uiengine.svg)](https://www.npmjs.com/package/uiengine)
 [![Maintained with lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
-[![npm](https://img.shields.io/npm/v/uiengine.svg)](https://www.npmjs.com/package/uiengine)
+
 
 ### ⚒ How does it work?
 
@@ -86,15 +85,17 @@ Technical documentation, with more detailed information:
 
 ## 💁 Individual packages
 
-- 🚀 [UIengine core](./packages/core)
-- 🎨 [UIengine user interface](./packages/ui)
-- 🔌 [Pug templating adapter](./packages/adapter-pug)
-- 🔌 [React/JSX templating adapter](./packages/adapter-react)
-- 🔌 [Vue templating adapter](./packages/adapter-vue)
-- 🔌 [Marko templating adapter](./packages/adapter-marko)
-- 🔌 [Handlebars templating adapter](./packages/adapter-handlebars)
-- 🔌 [EJS templating adapter](./packages/adapter-ejs)
-- 🔌 [HTML templating adapter](./packages/adapter-html)
+| Name | Type | NPM |
+| ---- | ---- | --- |
+| [Core](./packages/core)                             | 🚀 | [![npm](https://img.shields.io/npm/v/@uiengine/core.svg)](https://www.npmjs.com/package/@uiengine/core)                             |
+| [User Interface](./packages/ui)                     | 🎨 | [![npm](https://img.shields.io/npm/v/@uiengine/ui.svg)](https://www.npmjs.com/package/@uiengine/ui)                                 |
+| [Pug adapter](./packages/adapter-pug)               | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-pug.svg)](https://www.npmjs.com/package/@uiengine/adapter-pug)               |
+| [React/JSX adapter](./packages/adapter-react)       | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-react.svg)](https://www.npmjs.com/package/@uiengine/adapter-react)           |
+| [Vue adapter](./packages/adapter-vue)               | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-vue.svg)](https://www.npmjs.com/package/@uiengine/adapter-vue)               |
+| [Marko adapter](./packages/adapter-marko)           | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-marko.svg)](https://www.npmjs.com/package/@uiengine/adapter-marko)           |
+| [Handlebars adapter](./packages/adapter-handlebars) | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-handlebars.svg)](https://www.npmjs.com/package/@uiengine/adapter-handlebars) |
+| [EJS adapter](./packages/adapter-ejs)               | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-ejs.svg)](https://www.npmjs.com/package/@uiengine/adapter-ejs)               |
+| [HTML adapter](./packages/adapter-html)             | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-html.svg)](https://www.npmjs.com/package/@uiengine/adapter-html)             |
 
 ### 🖖 Alternatives
 
@@ -102,9 +103,9 @@ OK, the UIengine looks really cool but it's not quite what you are looking for?
 Or you want to first compare a few solutions to see which one is the right fit?
 Here are some other projects that you might want to evaluate:
 
-- [Pattern Lab](http://patternlab.io/)
 - [Fractal](http://fractal.build/)
 - [Storybook](https://storybook.js.org/)
+- [Pattern Lab](http://patternlab.io/)
 - [patternplate](https://github.com/sinnerschrader/patternplate/)
 
 … or have a look at [the ever growing list of similar tools](https://github.com/davidhund/styleguide-generators).
