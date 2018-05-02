@@ -26,9 +26,8 @@
     "@uiengine/core": "^0.19.0"
   },
   "scripts": {
-    "clean": "rimraf lib",
-    "start": "yarn run clean && yarn run build -w",
-    "build": "yarn run clean && babel src --out-dir lib",
+    "start": "yarn run build -w",
+    "build": "rimraf lib && babel src --out-dir lib",
     "lint": "eslint --ext .js src test"
   }
 }
