@@ -25,7 +25,10 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, entitie
 // see https://github.com/paulmillr/chokidar#api
 const watchOptions = {
   ignoreInitial: true,
-  awaitWriteFinish: true
+  awaitWriteFinish: {
+    stabilityThreshold: 200,
+    pollInterval: 50
+  }
 }
 
 // see https://www.browsersync.io/docs/options/
