@@ -14,8 +14,7 @@ const state = {
   }
 }
 
-const assertPage = (pageIds, pageId) => assert(pageIds.includes(pageId), `missing page "${pageId}"`)
-const assertFile = (pageFiles, file) => assert(pageFiles.includes(file), `missing file "${file}"`)
+const assertItem = (items, item) => assert(items.includes(item), `missing "${item}"`)
 
 describe('Page', () => {
   describe('#fetchById', () => {
@@ -57,30 +56,30 @@ describe('Page', () => {
       const data = await Page.fetchById(state, 'testcases')
 
       assert.equal(data.childIds.length, 3)
-      assert.equal(data.childIds[0], 'testcases/custom-data')
-      assert.equal(data.childIds[1], 'testcases/custom-path')
-      assert.equal(data.childIds[2], 'testcases/custom-template')
+      assertItem(data.childIds, 'testcases/custom-data')
+      assertItem(data.childIds, 'testcases/custom-path')
+      assertItem(data.childIds, 'testcases/custom-template')
     })
 
     it('should infer childIds for index if they are not provided', async () => {
       const data = await Page.fetchById(state, 'index')
 
       assert.equal(data.childIds.length, 4)
-      assert.equal(data.childIds[0], 'documentation')
-      assert.equal(data.childIds[1], 'patterns')
-      assert.equal(data.childIds[2], 'testcases')
-      assert.equal(data.childIds[3], 'entities')
+      assertItem(data.childIds, 'documentation')
+      assertItem(data.childIds, 'patterns')
+      assertItem(data.childIds, 'testcases')
+      assertItem(data.childIds, 'entities')
     })
 
     it('should not infer childIds if they are explicitely provided', async () => {
       const data = await Page.fetchById(state, 'patterns')
 
       assert.equal(data.childIds.length, 5)
-      assert.equal(data.childIds[0], 'patterns/atoms')
-      assert.equal(data.childIds[1], 'patterns/molecules')
-      assert.equal(data.childIds[2], 'patterns/organisms')
-      assert.equal(data.childIds[3], 'patterns/templates')
-      assert.equal(data.childIds[4], 'patterns/pages')
+      assertItem(data.childIds, 'patterns/atoms')
+      assertItem(data.childIds, 'patterns/molecules')
+      assertItem(data.childIds, 'patterns/organisms')
+      assertItem(data.childIds, 'patterns/templates')
+      assertItem(data.childIds, 'patterns/pages')
     })
 
     it('should not infer childIds for index if they are provided', async () => {
@@ -94,25 +93,25 @@ describe('Page', () => {
       const data = await Page.fetchById(state, 'index')
 
       assert.equal(data.childIds.length, 2)
-      assert.equal(data.childIds[0], 'patterns')
-      assert.equal(data.childIds[1], 'documentation')
+      assertItem(data.childIds, 'patterns')
+      assertItem(data.childIds, 'documentation')
     })
 
     it('should convert componentIds for user provided component list', async () => {
       const data = await Page.fetchById(state, 'patterns/atoms')
 
       assert.equal(data.componentIds.length, 2)
-      assert.equal(data.componentIds[0], 'label')
-      assert.equal(data.componentIds[1], 'input')
+      assertItem(data.componentIds, 'label')
+      assertItem(data.componentIds, 'input')
     })
 
     it('should convert childIds for user provided children list', async () => {
       const data = await Page.fetchById(state, 'documentation')
 
       assert.equal(data.childIds.length, 3)
-      assert.equal(data.childIds[0], 'documentation/getting-started')
-      assert.equal(data.childIds[1], 'documentation/development')
-      assert.equal(data.childIds[2], 'documentation/tokens')
+      assertItem(data.childIds, 'documentation/getting-started')
+      assertItem(data.childIds, 'documentation/development')
+      assertItem(data.childIds, 'documentation/tokens')
     })
 
     it('should infer path for index if it is not provided', async () => {
@@ -142,18 +141,18 @@ describe('Page', () => {
       const data = await Page.fetchById(state, 'testcases')
 
       assert.equal(data.files.length, 3)
-      assertFile(data.files, join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
-      assertFile(data.files, join(pagesPath, 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'))
-      assertFile(data.files, join(pagesPath, 'testcases', 'index.txt'))
+      assertItem(data.files, join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
+      assertItem(data.files, join(pagesPath, 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'))
+      assertItem(data.files, join(pagesPath, 'testcases', 'index.txt'))
     })
 
     it('should register files in folders that do not start with an underscore', async () => {
       const data = await Page.fetchById(state, 'testcases')
 
       assert.equal(data.files.length, 3)
-      assertFile(data.files, join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
-      assertFile(data.files, join(pagesPath, 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'))
-      assertFile(data.files, join(pagesPath, 'testcases', 'index.txt'))
+      assertItem(data.files, join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
+      assertItem(data.files, join(pagesPath, 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'))
+      assertItem(data.files, join(pagesPath, 'testcases', 'index.txt'))
     })
 
     it('should have no files property if no files are present', async () => {
@@ -189,26 +188,26 @@ describe('Page', () => {
 
       assert.equal(pageIds.length, 20)
 
-      assertPage(pageIds, 'index')
-      assertPage(pageIds, 'documentation')
-      assertPage(pageIds, 'documentation/development')
-      assertPage(pageIds, 'documentation/getting-started')
-      assertPage(pageIds, 'documentation')
-      assertPage(pageIds, 'documentation/tokens')
-      assertPage(pageIds, 'documentation/tokens/colors')
-      assertPage(pageIds, 'documentation/tokens/icons')
-      assertPage(pageIds, 'documentation/tokens/spaces')
-      assertPage(pageIds, 'documentation/tokens/typography')
-      assertPage(pageIds, 'patterns')
-      assertPage(pageIds, 'patterns/atoms')
-      assertPage(pageIds, 'patterns/molecules')
-      assertPage(pageIds, 'patterns/organisms')
-      assertPage(pageIds, 'patterns/pages')
-      assertPage(pageIds, 'patterns/pages/ajax/layer')
-      assertPage(pageIds, 'patterns/templates')
-      assertPage(pageIds, 'testcases/custom-data')
-      assertPage(pageIds, 'testcases/custom-path')
-      assertPage(pageIds, 'testcases/custom-template')
+      assertItem(pageIds, 'index')
+      assertItem(pageIds, 'documentation')
+      assertItem(pageIds, 'documentation/development')
+      assertItem(pageIds, 'documentation/getting-started')
+      assertItem(pageIds, 'documentation')
+      assertItem(pageIds, 'documentation/tokens')
+      assertItem(pageIds, 'documentation/tokens/colors')
+      assertItem(pageIds, 'documentation/tokens/icons')
+      assertItem(pageIds, 'documentation/tokens/spaces')
+      assertItem(pageIds, 'documentation/tokens/typography')
+      assertItem(pageIds, 'patterns')
+      assertItem(pageIds, 'patterns/atoms')
+      assertItem(pageIds, 'patterns/molecules')
+      assertItem(pageIds, 'patterns/organisms')
+      assertItem(pageIds, 'patterns/pages')
+      assertItem(pageIds, 'patterns/pages/ajax/layer')
+      assertItem(pageIds, 'patterns/templates')
+      assertItem(pageIds, 'testcases/custom-data')
+      assertItem(pageIds, 'testcases/custom-path')
+      assertItem(pageIds, 'testcases/custom-template')
     })
   })
 
@@ -216,7 +215,7 @@ describe('Page', () => {
     it('should return entities page object', async () => {
       const page = await Page.fetchEntitiesPage(state)
 
-      assertPage(page.id, 'entities')
+      assertItem(page.id, 'entities')
     })
   })
 })
