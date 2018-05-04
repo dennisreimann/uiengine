@@ -63,6 +63,7 @@ const state = {
       files: [
         resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'index.txt'),
         resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'extra-files', 'file-in-folder.txt'),
+        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'),
         resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', '_hidden-files', 'file-in-folder.txt')
       ]
     }),
@@ -235,6 +236,7 @@ describe('Builder', () => {
 
       assertExists(join(target, 'testcases', 'index.txt'))
       assertExists(join(target, 'testcases', 'extra-files', 'file-in-folder.txt'))
+      assertExists(join(target, 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'))
     })
 
     it('should copy page files for pages with custom paths', async () => {

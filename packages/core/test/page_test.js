@@ -15,6 +15,7 @@ const state = {
 }
 
 const assertPage = (pageIds, pageId) => assert(pageIds.includes(pageId), `missing page "${pageId}"`)
+const assertFile = (pageFiles, file) => assert(pageFiles.includes(file), `missing file "${file}"`)
 
 describe('Page', () => {
   describe('#fetchById', () => {
@@ -140,17 +141,19 @@ describe('Page', () => {
     it('should register files that do not start with an underscore', async () => {
       const data = await Page.fetchById(state, 'testcases')
 
-      assert.equal(data.files.length, 2)
-      assert.equal(data.files[0], join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
-      assert.equal(data.files[1], join(pagesPath, 'testcases', 'index.txt'))
+      assert.equal(data.files.length, 3)
+      assertFile(data.files, join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
+      assertFile(data.files, join(pagesPath, 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'))
+      assertFile(data.files, join(pagesPath, 'testcases', 'index.txt'))
     })
 
     it('should register files in folders that do not start with an underscore', async () => {
       const data = await Page.fetchById(state, 'testcases')
 
-      assert.equal(data.files.length, 2)
-      assert.equal(data.files[0], join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
-      assert.equal(data.files[1], join(pagesPath, 'testcases', 'index.txt'))
+      assert.equal(data.files.length, 3)
+      assertFile(data.files, join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
+      assertFile(data.files, join(pagesPath, 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'))
+      assertFile(data.files, join(pagesPath, 'testcases', 'index.txt'))
     })
 
     it('should have no files property if no files are present', async () => {
