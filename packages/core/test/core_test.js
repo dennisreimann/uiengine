@@ -130,14 +130,13 @@ describe('Core', function () {
       fs.writeFileSync(filePath, '---\ntitle: Created\ncomponents:\n- label\n---\nContent for created page.')
 
       const { change } = await Core.generateIncrementForFileChange(filePath, 'created')
+      fs.removeSync(fileDir)
 
       assertContentMatches(indexPath, 'Content for created page.')
       assert.equal(change.action, 'created')
       assert.equal(change.type, 'page')
       assert.equal(change.item, 'testcases/created')
       assert.equal(change.file, join(testProjectRelativePath, 'src/uiengine/pages/testcases/created/page.md'))
-
-      fs.removeSync(fileDir)
     })
 
     it('should generate page on delete', async () => {
@@ -154,6 +153,7 @@ describe('Core', function () {
       fs.removeSync(filePath)
 
       const { change } = await Core.generateIncrementForFileChange(filePath, 'deleted')
+      fs.removeSync(fileDir)
 
       assertContentDoesNotMatch(indexPath, 'Created Page')
 
@@ -161,8 +161,6 @@ describe('Core', function () {
       assert.equal(change.type, 'page')
       assert.equal(change.item, 'testcases/created')
       assert.equal(change.file, join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'testcases', 'created', 'page.md'))
-
-      fs.removeSync(fileDir)
     })
 
     it('should generate entity update on change', async () => {
@@ -195,14 +193,13 @@ describe('Core', function () {
       fs.mkdirsSync(fileDir)
       fs.writeFileSync(filePath, '---\ntitle: New component\n---\n')
       const { change, state } = await Core.generateIncrementForFileChange(filePath, 'created')
+      fs.removeSync(fileDir)
 
       assert.equal(state.components['my-new-component'].title, 'New component')
       assert.equal(change.action, 'created')
       assert.equal(change.type, 'component')
       assert.equal(change.item, 'my-new-component')
       assert.equal(change.file, join(testProjectRelativePath, 'src', 'components', 'my-new-component', 'component.md'))
-
-      fs.removeSync(fileDir)
     })
 
     it('should generate component on delete', async () => {
@@ -211,11 +208,12 @@ describe('Core', function () {
       fs.mkdirsSync(componentPath)
       fs.writeFileSync(filePath, '---\ntitle: New component\n---\n')
       const result1 = await Core.generateIncrementForFileChange(filePath, 'created')
+      fs.removeSync(filePath)
 
       assert.equal(result1.state.components['my-new-component'].title, 'New component')
 
-      fs.removeSync(filePath)
       const result2 = await Core.generateIncrementForFileChange(filePath, 'deleted')
+      fs.removeSync(componentPath)
 
       assert.equal(result2.state.components['my-new-component'].title, 'My New Component')
       assert.equal(result2.change.action, 'deleted')
@@ -223,16 +221,14 @@ describe('Core', function () {
       assert.equal(result2.change.item, 'my-new-component')
       assert.equal(result2.change.file, join(testProjectRelativePath, 'src', 'components', 'my-new-component', 'component.md'))
 
-      fs.removeSync(componentPath)
       const result3 = await Core.generateIncrementForFileChange(componentPath, 'deleted')
+      fs.removeSync(componentPath)
 
       assert.equal(result3.state.components['my-new-component'], null)
       assert.equal(result3.change.action, 'deleted')
       assert.equal(result3.change.type, 'component')
       assert.equal(result3.change.item, 'my-new-component')
       assert.equal(result3.change.file, join(testProjectRelativePath, 'src', 'components', 'my-new-component'))
-
-      fs.removeSync(componentPath)
     })
 
     it('should generate variant on change', async () => {
@@ -255,14 +251,13 @@ describe('Core', function () {
       fs.removeSync(indexPath)
       fs.writeFileSync(filePath, 'p Test')
       const { change } = await Core.generateIncrementForFileChange(filePath, 'created')
+      fs.removeSync(filePath)
 
       assertContentMatches(indexPath, 'Form Fieldsets')
       assert.equal(change.action, 'created')
       assert.equal(change.type, 'variant')
       assert.equal(change.item, 'form/form-fieldsets.pug')
       assert.equal(change.file, join(testProjectRelativePath, 'src', 'components', 'form', 'variants', 'form-fieldsets.pug'))
-
-      fs.removeSync(filePath)
     })
 
     it('should generate variant on delete', async () => {
@@ -270,19 +265,18 @@ describe('Core', function () {
       fs.removeSync(indexPath)
       fs.writeFileSync(filePath, 'p Test')
       await Core.generateIncrementForFileChange(filePath, 'created')
+      fs.removeSync(filePath)
 
       assertContentMatches(indexPath, 'Form Fieldsets')
 
-      fs.removeSync(filePath)
       const { change } = await Core.generateIncrementForFileChange(filePath, 'deleted')
+      fs.removeSync(filePath)
 
       assertContentDoesNotMatch(indexPath, 'Form Fieldsets')
       assert.equal(change.action, 'deleted')
       assert.equal(change.type, 'variant')
       assert.equal(change.item, 'form/form-fieldsets.pug')
       assert.equal(change.file, join(testProjectRelativePath, 'src', 'components', 'form', 'variants', 'form-fieldsets.pug'))
-
-      fs.removeSync(filePath)
     })
 
     it('should regenerate pages with template on change', async () => {
@@ -301,7 +295,6 @@ describe('Core', function () {
     it('should regenerate pages with template on template change', async () => {
       const filePath = join(templatesPath, 'page.pug')
       const templatePath = join(testProjectTargetPath, '_pages', 'testcases', 'custom-template.html')
-
       fs.removeSync(templatePath)
 
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')

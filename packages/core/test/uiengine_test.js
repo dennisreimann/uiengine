@@ -114,8 +114,8 @@ describe('UIengine', function () {
           watchProcess.on('all', (changeType, changedFilePath) => {
             if (changedFilePath === filePath) {
               setTimeout(() => {
-                assert(console.info.calledWithMatch('✨  Rebuilt page testcases/created'))
                 fs.removeSync(fileDir)
+                assert(console.info.calledWithMatch('✨  Rebuilt page testcases/created'))
                 done()
               }, 2500)
             }
