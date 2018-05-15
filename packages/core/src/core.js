@@ -6,7 +6,7 @@ const Navigation = require('./navigation')
 const Component = require('./component')
 const Page = require('./page')
 const Entity = require('./entity')
-const UI = require('./ui')
+const Interface = require('./interface')
 const Connector = require('./connector')
 const PageUtil = require('./util/page')
 const EntityUtil = require('./util/entity')
@@ -37,9 +37,9 @@ export async function generate (options) {
   debug2(_state, 'Core.generate():start')
 
   // 0. setup
-  const setupUI = UI.setup(_state)
+  const setupInterface = Interface.setup(_state)
   const setupAdapters = Connector.setup(_state)
-  await Promise.all([setupUI, setupAdapters])
+  await Promise.all([setupInterface, setupAdapters])
 
   // 1. data fetching
   const fetchPages = Page.fetchAll(_state)
@@ -191,6 +191,7 @@ async function regeneratePage (id, change) {
   await fetchAndAssocNavigation()
   await Promise.all([
     Builder.generatePageWithTemplate(_state, id),
+    Builder.generatePageWithTokens(_state, id),
     Builder.generatePageFiles(_state, id),
     Builder.generateIncrement(_state, change)
   ])

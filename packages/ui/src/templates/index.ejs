@@ -5,7 +5,7 @@ css = htmlWebpackPlugin.files.css
 chunks = htmlWebpackPlugin.files.chunks
 _%>
 <!DOCTYPE html>
-<html lang="<%%= lang %>">
+<html lang="<%%= lang %>" class="uie">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -18,8 +18,8 @@ _%>
     <%%_ } _%%>
     <script type="text/javascript">
       window.UIengine = {};
-      window.UIengine.base = <%%- htmlescape(base) %%>;
-      window.UIengine.state = <%%- htmlescape(state) %%>;
+      window.UIengine.base = <%%- helpers.htmlescape(base) %%>;
+      window.UIengine.state = <%%- helpers.htmlescape(state) %%>;
       window.UIengine.previewSrc = <%- JSON.stringify(assetPath(chunks['uiengine-preview'].entry)) %>;
       <%_ if (chunks.manifest) { _%>
       window.UIengine.manifestSrc = <%- JSON.stringify(assetPath(chunks.manifest.entry)) %>;

@@ -1,0 +1,233 @@
+<%_
+assetPath = htmlWebpackPlugin.options.assetPath
+css = htmlWebpackPlugin.files.css
+_%>
+
+<%%_ const renderTokens = (tokens, level) => { _%%>
+  <%%_ const type = ((tokens && tokens[0].type) || 'default').split('/')[0] _%%>
+
+  <%%_ if (type === 'category' && tokens && tokens.length) { _%%>
+    <%%_ Object.values(tokens).forEach(category => { _%%>
+      <section class="uie-tokens__category" id="<%%= category.id || helpers.dasherize(category.name) %%>">
+        <h<%%= level + 1 %%> class="uie-tokens__title"><%%= category.name %%></h<%%= level + 1 %%>>
+        <%%= renderTokens(category.tokens, level + 1) _%%>
+      </section>
+    <%%_ }) _%%>
+  <%%_ } else if (type === 'color') { _%%>
+    <div class="uie-tokens__container uie-tokens__container--<%%= type %%>">
+      <%%_ Object.values(tokens).forEach(token => { _%%>
+        <%%_ const color = helpers.color(token.value) _%%>
+        <dl class="uie-color-token" id="<%%= helpers.dasherize(token.name) %%>">
+          <div class="uie-color-token__info uie-color-token__info--top">
+            <div class="uie-color-token__example">
+              <div class="uie-color-token__swatch">
+                <div class="uie-color-token__swatch__inner" style="background:<%%= color.hex %%>"></div>
+              </div>
+            </div>
+            <div class="uie-color-token__name"><%%= token.name %%></div>
+          </div>
+          <%% if (token.description) { %%>
+            <div class="uie-color-token__info">
+              <dt class="uie-color-token__label"><%%= helpers.localize(lang, 'token.description') %%></dt>
+              <dd class="uie-color-token__value"><%%= token.description %%></dd>
+            </div>
+          <%% } %%>
+          <%% if (token.variable) { %%>
+            <div class="uie-color-token__info">
+              <dt class="uie-color-token__label"><%%= helpers.localize(lang, 'token.variable') %%></dt>
+              <dd class="uie-color-token__value uie-color-token__value--code"><%%= token.variable %%></dd>
+            </div>
+          <%% } %%>
+          <%# if this color references another color only display the reference, otherwise the values %>
+          <%% if (token.reference) { %%>
+            <div class="uie-color-token__info">
+              <dt class="uie-color-token__label"><%%= helpers.localize(lang, 'token.reference') %%></dt>
+              <dd class="uie-color-token__value"><%%= token.reference %%></dd>
+            </div>
+          <%% } else if (token.value) { %%>
+            <div class="uie-color-token__info">
+              <dt class="uie-color-token__label">HEX</dt>
+              <dd class="uie-color-token__value uie-color-token__value--code"><%%= color.hex %%></dd>
+            </div>
+            <div class="uie-color-token__info">
+              <dt class="uie-color-token__label">RGB</dt>
+              <dd class="uie-color-token__value uie-color-token__value--code"><%%= color.rgb %%></dd>
+            </div>
+            <div class="uie-color-token__info">
+              <dt class="uie-color-token__label">HSL</dt>
+              <dd class="uie-color-token__value uie-color-token__value--code"><%%= color.hsl %%></dd>
+            </div>
+          <%% } %%>
+        </dl>
+      <%%_ }) _%%>
+    </div>
+  <%%_ } else if (type === 'font') { _%%>
+    <div class="uie-tokens__container uie-tokens__container--<%%= type %%>">
+      <%%_ Object.values(tokens).forEach(token => { _%%>
+        <dl class="uie-font-token" id="<%%= helpers.dasherize(token.name) %%>">
+          <%% if (token.name) { %%>
+            <div class="uie-font-token__info">
+              <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.fontface') %%></dt>
+              <dd class="uie-font-token__value"><%%= token.name %%></dd>
+            </div>
+          <%% } %%>
+          <%% if (token.fontweight) { %%>
+            <div class="uie-font-token__info" >
+              <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.fontweight') %%></dt>
+              <dd class="uie-font-token__value"><%%= token.fontweight %%></dd>
+            </div>
+          <%% } %%>
+          <div class="uie-font-token__info uie-font-token__info--example">
+            <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.demo') %%></dt>
+            <dd class="uie-font-token__value">
+              <p class="uie-font-token__example" style="<%%= token.value %%>">
+                A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Ü Ä Ö<br />
+                a b c d e f g h i j k l m n o p q r s t u v w x y z ü ä ö ß<br />
+                1 2 3 4 5 6 7 8 9 0 & @ . , ? ! ’ “ ” ( ) × € $ ‹ › „ “
+              </p>
+            </dd>
+          </div>
+          <%% if (token.sizes) { %%>
+            <%%_ Object.values(token.sizes).forEach(size => { _%%>
+              <div class="uie-font-token__info uie-font-token__info--example">
+                <dt class="uie-font-token__label"><%%= size %%></dt>
+                <dd class="uie-font-token__value">
+                  <p class="uie-font-token__example" style="font-size:<%%= size %%>;<%%= token.value %%>">
+                    <%%= token.text || 'The quick brown fox jumps over the lazy dog' %%>
+                  </p>
+                </dd>
+              </div>
+            <%%_ }) _%%>
+          <%% } else { %%>
+            <div class="uie-font-token__info uie-font-token__info--example">
+              <dt class="uie-font-token__label">&nbsp;</dt>
+              <dd class="uie-font-token__value">
+                <p class="uie-font-token__example" style="<%%= token.value %%>">
+                  <%%= token.text || 'The quick brown fox jumps over the lazy dog' %%>
+                </p>
+              </dd>
+            </div>
+          <%% } %%>
+          <%% if (token.description) { %%>
+            <div class="uie-font-token__info">
+              <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.description') %%></dt>
+              <dd class="uie-font-token__value"><%%= token.description %%></dd>
+            </div>
+          <%% } %%>
+          <%% if (token.variable) { %%>
+            <div class="uie-font-token__info">
+              <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.variable') %%></dt>
+              <dd class="uie-font-token__value"><%%= token.variable %%></dd>
+            </div>
+          <%% } %%>
+          <%% if (token.license) { %%>
+            <div class="uie-font-token__info" >
+              <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.license') %%></dt>
+              <dd class="uie-font-token__value"><%%= token.license %%></dd>
+            </div>
+          <%% } %%>
+        </dl>
+      <%%_ }) _%%>
+    </div>
+  <%%_ } else if (type === 'icon') { _%%>
+    <%%_
+      const haveProperty = property => element => element[property]
+      const columns = {
+        variable: tokens.some(haveProperty('variable')),
+        reference: tokens.some(haveProperty('reference')),
+        description: tokens.some(haveProperty('description'))
+      }
+    _%%>
+    <table class="uie-tokens__container uie-tokens__container--icon">
+      <thead>
+        <tr>
+          <th class="uie-icon-token__label uie-icon-token__label--icon"><%%= helpers.localize(lang, 'token.icon') %%></th>
+          <th class="uie-icon-token__label uie-icon-token__label--name"><%%= helpers.localize(lang, 'token.name') %%></th>
+          <th class="uie-icon-token__label uie-icon-token__label--value"><%%= helpers.localize(lang, 'token.usage') %%></th>
+          <%%_ if (columns.variable) { _%%>
+            <th class="uie-icon-token__label uie-icon-token__label--variable"><%%= helpers.localize(lang, 'token.variable') %%></th>
+          <%%_ } _%%>
+          <%%_ if (columns.description) { _%%>
+            <th class="uie-icon-token__label uie-icon-token__label--description"><%%= helpers.localize(lang, 'token.description') %%></th>
+          <%%_ } _%%>
+          <%%_ if (columns.reference) { _%%>
+            <th class="uie-icon-token__label uie-icon-token__label--reference"><%%= helpers.localize(lang, 'token.reference') %%></th>
+          <%%_ } _%%>
+        </tr>
+      </thead>
+      <tbody>
+        <%%_ Object.values(tokens).forEach(token => { _%%>
+          <tr class="uie-icon-token">
+            <td class="uie-icon-token__value uie-icon-token__value--icon"><%%- token.value %%></td>
+            <td class="uie-icon-token__value"><%%= token.name %%></td>
+            <td class="uie-icon-token__value uie-icon-token__value--value"><%%= token.value %%></td>
+            <%% if (columns.variable) { %%>
+              <td class="uie-icon-token__value uie-icon-token__value--variable"><%%= token.variable %%></td>
+            <%% } %%>
+            <%% if (columns.description) { %%>
+              <td class="uie-icon-token__value uie-icon-token__value--description"><%%= token.description %%></td>
+            <%% } %%>
+            <%% if (columns.reference) { %%>
+              <td class="uie-icon-token__value uie-icon-token__value--reference"><%%= token.reference %%></td>
+            <%% } %%>
+          </tr>
+        <%%_ }) _%%>
+      </tbody>
+    </table>
+  <%%_ } else { _%%>
+    <%%_
+      const haveProperty = property => element => element[property]
+      const columns = {
+        variable: tokens.some(haveProperty('variable')),
+        reference: tokens.some(haveProperty('reference')),
+        description: tokens.some(haveProperty('description'))
+      }
+    _%%>
+    <table class="uie-tokens__container uie-tokens__container--default">
+      <thead>
+        <tr>
+          <th class="uie-default-token__label uie-default-token__label--name"><%%= helpers.localize(lang, 'token.name') %%></th>
+          <th class="uie-default-token__label uie-default-token__label--value"><%%= helpers.localize(lang, 'token.value') %%></th>
+          <%%_ if (columns.variable) { _%%>
+            <th class="uie-default-token__label uie-default-token__label--variable"><%%= helpers.localize(lang, 'token.variable') %%></th>
+          <%%_ } _%%>
+          <%%_ if (columns.description) { _%%>
+            <th class="uie-default-token__label uie-default-token__label--description"><%%= helpers.localize(lang, 'token.description') %%></th>
+          <%%_ } _%%>
+          <%%_ if (columns.reference) { _%%>
+            <th class="uie-default-token__label uie-default-token__label--reference"><%%= helpers.localize(lang, 'token.reference') %%></th>
+          <%%_ } _%%>
+        </tr>
+      </thead>
+      <tbody>
+        <%%_ Object.values(tokens).forEach(token => { _%%>
+          <tr class="uie-default-token">
+            <td class="uie-default-token__value"><%%= token.name %%></td>
+            <td class="uie-default-token__value uie-default-token__value--value"><%%= token.value %%></td>
+            <%% if (columns.variable) { %%>
+              <td class="uie-default-token__value uie-default-token__value--variable"><%%= token.variable %%></td>
+            <%% } %%>
+            <%% if (columns.description) { %%>
+              <td class="uie-default-token__value uie-default-token__value--description"><%%= token.description %%></td>
+            <%% } %%>
+            <%% if (columns.reference) { %%>
+              <td class="uie-default-token__value uie-default-token__value--reference"><%%= token.reference %%></td>
+            <%% } %%>
+          </tr>
+        <%%_ }) _%%>
+      </tbody>
+    </table>
+  <%%_ } _%%>
+<%%_ } _%%>
+
+<%_ for (index in css) { _%>
+<link href="<%- assetPath(css[index]) %>" rel="stylesheet">
+<%_ } _%>
+
+<div class="uie">
+  <div class="uie-tokens">
+    <%%_ if (tokens) { %%>
+      <%%= renderTokens(tokens, 1) _%%>
+    <%%_ } _%%>
+  </div>
+</div>

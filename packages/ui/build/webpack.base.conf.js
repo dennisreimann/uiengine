@@ -3,6 +3,7 @@
 const { join } = require('path')
 const utils = require('./utils')
 const config = require('./config')
+const locales = require('./../src/locales')
 const VueLoaderOptionsPlugin = require('vue-loader-options-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -84,18 +85,20 @@ module.exports = {
       template: resolve('src/templates/index.ejs'),
       excludeChunks: ['uiengine-inject'],
       inject: false,
-      window: {
-        locales: {
-          de: require(resolve('src/locales/de.json')),
-          en: require(resolve('src/locales/en.json'))
-        }
-      },
+      window: { locales },
       chunksSortMode: 'dependency',
       assetPath
     }),
     new HtmlWebpackPlugin({
       filename: resolve('lib/templates/sketch.ejs'),
       template: resolve('src/templates/sketch.ejs'),
+      excludeChunks: ['uiengine'],
+      inject: false,
+      assetPath
+    }),
+    new HtmlWebpackPlugin({
+      filename: resolve('lib/templates/tokens.ejs'),
+      template: resolve('src/templates/tokens.ejs'),
       excludeChunks: ['uiengine'],
       inject: false,
       assetPath

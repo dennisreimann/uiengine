@@ -1,8 +1,10 @@
 import { join, resolve } from 'path'
 import { compile } from 'ejs'
 import htmlescape from 'htmlescape'
+import Color from 'color'
 import File from '@uiengine/core/lib/util/file'
-import { highlight } from './util'
+import locales from './locales'
+import { highlight, localize, dasherize, titleize } from './util'
 
 const supportedLocales = ['en', 'de']
 const defaultOpts = {
@@ -18,6 +20,29 @@ const templates = {}
 const templatesPath = resolve(__dirname, '..', 'lib', 'templates')
 const staticPath = resolve(__dirname, '..', 'dist')
 const templatePath = template => join(templatesPath, `${template}.ejs`)
+
+// template helpers
+const helpers = {
+  htmlescape,
+  dasherize,
+  titleize,
+
+  color (value) {
+    const color = Color(value)
+
+    return {
+      hex: color.hex().toString(),
+      rgb: color.rgb().toString(),
+      hsl: color.hsl().toString()
+    }
+  },
+
+  localize (locale, key, interpolations) {
+    const dict = locales[locale]
+
+    return localize(dict, key, interpolations)
+  }
+}
 
 async function copyStatic (target) {
   await File.copy(staticPath, target)
@@ -50,12 +75,12 @@ export async function setup (options) {
   }
 }
 
-export async function render (options, state, template = 'index') {
+export async function render (options, template = 'index', data = null) {
   // sanitize and prepare options
   if (!supportedLocales.includes(options.lang)) delete options.lang
   const opts = Object.assign({}, defaultOpts, options)
   const basePath = opts.base.replace(/\/$/, '')
-  const context = Object.assign({ htmlescape, basePath }, { state }, opts)
+  const context = Object.assign({ basePath, helpers }, data, opts)
 
   try {
     if (!options.cache) await compileTemplate(template)

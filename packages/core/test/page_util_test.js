@@ -180,6 +180,14 @@ describe('PageUtil', () => {
     })
   })
 
+  describe('#isTokensPage', () => {
+    it('should only return true if page type is "tokens"', () => {
+      assert(PageUtil.isTokensPage('tokens'))
+      assert(!PageUtil.isTokensPage('template'))
+      assert(!PageUtil.isTokensPage('documentation'))
+    })
+  })
+
   describe('#determineType', () => {
     it('should return "template" if page attributes has template', () => {
       assert.equal('template', PageUtil.determineType({ template: 'custom.pug' }))

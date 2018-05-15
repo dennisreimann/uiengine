@@ -1,61 +1,53 @@
 <template>
-  <section class="page">
-    <content-header
-      :title="page.title"
-      class="sob-m"
-    >
-      <content-tag
-        v-for="tag in page.tags"
-        :key="tag"
-        :tag="tag"
+  <div>
+    <section class="page">
+      <content-header
+        :title="page.title"
         class="sob-m"
-      />
-    </content-header>
-    <article
-      v-if="page.content"
-      class="content"
-      v-html="renderedContent"
-    />
-    <template v-for="category in categories">
-      <template v-if="isCategoryList(category.tokens)">
-        <content-heading
-          v-if="category.name"
-          :key="category.name"
-          :title="category.name"
-          :level="1" />
-        <template v-for="cat in category.tokens">
-          <content-tokens
-            :key="cat.name"
-            :title="cat.name"
-            :tokens="cat.tokens"
-          />
-        </template>
-      </template>
-      <template v-else>
-        <content-tokens
-          :key="category.name"
-          :title="category.name"
-          :tokens="category.tokens"
+      >
+        <content-tag
+          v-for="tag in page.tags"
+          :key="tag"
+          :tag="tag"
+          class="sob-m"
         />
-      </template>
-    </template>
-  </section>
+      </content-header>
+
+      <div class="sot-xs">
+        <div
+          v-if="page.content"
+          class="content"
+          v-html="renderedContent"
+        />
+      </div>
+    </section>
+
+    <div class="sot-xl">
+      <content-preview
+        :id="id"
+        :path="previewPath"
+        :title="page.title"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { dasherize, decorateContent } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
-import ContentTokens from './ContentTokens'
+import ContentPreview from './ContentPreview'
+import ContentLabel from './ContentLabel'
 import ContentTag from './ContentTag'
-import { decorateContent } from '../../util'
 
 export default {
   components: {
     ContentHeader,
     ContentHeading,
-    ContentTokens,
-    ContentTag
+    ContentLabel,
+    ContentTag,
+    ContentPreview
   },
 
   props: {
@@ -66,20 +58,14 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['pages']),
+    ...mapGetters('state', ['config', 'pages']),
 
     page () {
       return this.pages[this.id]
     },
 
-    tokens () {
-      return this.page.tokens
-    },
-
-    categories () {
-      return this.isCategoryList(this.tokens)
-        ? this.tokens
-        : [{ tokens: this.tokens }]
+    previewPath () {
+      return `${window.UIengine.base}_tokens/${this.page.id}.html`
     },
 
     renderedContent () {
@@ -90,9 +76,7 @@ export default {
   },
 
   methods: {
-    isCategoryList (tokens) {
-      return tokens && tokens[0].type === 'category'
-    }
+    dasherize
   }
 }
 </script>

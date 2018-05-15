@@ -28,6 +28,9 @@ export const isIndexPagePath = pagePath =>
 export const isDocumentationPage = pageType =>
   pageType === PAGE_TYPE_DOCUMENTATION
 
+export const isTokensPage = pageType =>
+  pageType === PAGE_TYPE_TOKENS
+
 export const pageIdToPath = pageId =>
   isIndexPage(pageId) ? INDEX_PAGE_PATH : pageId
 

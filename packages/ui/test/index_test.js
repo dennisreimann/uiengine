@@ -59,7 +59,7 @@ describe('UI', () => {
 
   describe('#render', async () => {
     it('should render the index.html file including the state', async () => {
-      await UI.render(testOptions, { config: { name: 'Test Render' } })
+      await UI.render(testOptions, 'index', { state: { config: { name: 'Test Render' } } })
 
       assertContentMatches(indexFile, 'Test Render')
     })
@@ -78,7 +78,7 @@ describe('UI', () => {
           }
         }
       }
-      const sketch = await UI.render(testOptions, state, 'sketch')
+      const sketch = await UI.render(testOptions, 'sketch', { state })
 
       assertMatches(sketch, 'BlanchedAlmond')
       assertMatches(sketch, 'Blanched Almond')
@@ -98,7 +98,7 @@ describe('UI', () => {
           }
         }
       }
-      const sketch = await UI.render(testOptions, state, 'sketch')
+      const sketch = await UI.render(testOptions, 'sketch', { state })
 
       assertMatches(sketch, 'Button/Primary')
       assertMatches(sketch, '<button class="button button--primary">Call To Action</button>')
@@ -106,21 +106,21 @@ describe('UI', () => {
 
     it('should include the set locale if the passed language is available', async () => {
       const opts = Object.assign({}, testOptions, { lang: 'de' })
-      await UI.render(opts, {})
+      await UI.render(opts, 'index', { state: {} })
 
       assertContentMatches(indexFile, 'html lang="de"')
     })
 
     it('should default to english locale if the passed language is not available', async () => {
       const opts = Object.assign({}, testOptions, { lang: 'pl' })
-      await UI.render(opts, {})
+      await UI.render(opts, 'index', { state: {} })
 
       assertContentMatches(indexFile, 'html lang="en"')
     })
 
     it('should throw error if the template cannot be rendered', async () => {
       try {
-        await UI.render({}, {}, 'does-not-exist')
+        await UI.render({}, 'does-not-exist', { state: {} })
       } catch (error) {
         assert(error)
 
@@ -130,7 +130,7 @@ describe('UI', () => {
 
     it('should throw detailed error if the debug option is set', async () => {
       try {
-        await UI.render({ debug: true }, {})
+        await UI.render({ debug: true }, 'index', { state: {} })
       } catch (error) {
         assert(error)
 

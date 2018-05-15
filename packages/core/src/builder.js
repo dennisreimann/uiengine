@@ -1,6 +1,6 @@
 const { join, relative, resolve } = require('path')
 const R = require('ramda')
-const UI = require('./ui')
+const Interface = require('./interface')
 const Connector = require('./connector')
 const File = require('./util/file')
 const PageUtil = require('./util/page')
@@ -95,6 +95,31 @@ export async function generatePagesWithTemplate (state, template) {
   debug3(state, `Builder.generatePagesWithTemplate(${template}):end`)
 }
 
+export async function generatePageWithTokens (state, pageId) {
+  debug2(state, `Builder.generatePageWithTokens(${pageId}):start`)
+
+  const { pages, config: { name, target, template, version } } = state
+  const identifier = `Page "${pageId}"`
+  const page = pages[pageId]
+  if (!page) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
+
+  if (PageUtil.isTokensPage(page.type)) {
+    // render tokens with context, in preview layout
+    const { id, title } = page
+    const data = page
+    const content = await Interface.render(state, 'tokens', page)
+    let { rendered } = await render(state, template, data, identifier)
+    rendered = replaceComment('content', rendered, content)
+    rendered = replaceComment('title', rendered, `${title} • ${name} (${version})`)
+
+    // write file
+    const filePath = resolve(target, '_tokens', `${id}.html`)
+    await File.write(filePath, rendered)
+  }
+
+  debug2(state, `Builder.generatePageWithTokens(${pageId}):end`)
+}
+
 export async function generateVariant (state, variant) {
   debug2(state, `Builder.generateVariant(${variant.id}):start`)
 
@@ -103,7 +128,7 @@ export async function generateVariant (state, variant) {
   const component = components[variant.componentId]
 
   // render variant preview, with layout
-  const data = state
+  const data = { state }
   const template = variant.template || config.template
   let { rendered } = await render(state, template, data, identifier)
   rendered = replaceComment('content', rendered, variant.rendered)
@@ -132,7 +157,8 @@ export async function generateComponentVariants (state, componentId) {
 async function generateState (state, change) {
   debug2(state, 'Builder.generateState():start')
 
-  const tasks = [UI.render(state)]
+  const data = { state }
+  const tasks = [Interface.render(state, 'index', data)]
 
   if (state.config.debug) {
     const json = JSON.stringify(state, null, 2)
@@ -154,19 +180,18 @@ export const generateIncrement = generateState
 async function generateSketch (state, change) {
   debug2(state, `Builder.generateSketch():start`)
 
-  const { config } = state
+  const { config: { name, target, template, version } } = state
   const identifier = 'HTML Sketchapp Export'
 
   // render variant preview, with layout
-  const data = state
-  const template = config.template
-  const sketch = await UI.render(state, 'sketch')
+  const data = { state }
+  const content = await Interface.render(state, 'sketch', data)
   let { rendered } = await render(state, template, data, identifier)
-  rendered = replaceComment('content', rendered, sketch)
-  rendered = replaceComment('title', rendered, `HTML Sketchapp Export • ${config.name} (${config.version})`)
+  rendered = replaceComment('content', rendered, content)
+  rendered = replaceComment('title', rendered, `HTML Sketchapp Export • ${name} (${version})`)
 
   // write file
-  const filePath = resolve(config.target, '_sketch.html')
+  const filePath = resolve(target, '_sketch.html')
   await File.write(filePath, rendered)
 
   debug2(state, `Builder.generateSketch():end`)
@@ -183,6 +208,9 @@ export async function generate (state) {
   const templateBuild = R.partial(generatePageWithTemplate, [state])
   const templateBuilds = R.map(templateBuild, pageIds)
 
+  const tokenBuild = R.partial(generatePageWithTokens, [state])
+  const tokenBuilds = R.map(tokenBuild, pageIds)
+
   const fileBuild = R.partial(generatePageFiles, [state])
   const fileBuilds = R.map(fileBuild, pageIds)
 
@@ -191,6 +219,7 @@ export async function generate (state) {
 
   await Promise.all([
     ...fileBuilds,
+    ...tokenBuilds,
     ...variantBuilds,
     ...templateBuilds,
     generateSketch(state),

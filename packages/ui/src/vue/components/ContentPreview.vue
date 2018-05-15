@@ -2,6 +2,7 @@
   <div class="preview">
     <div
       :style="containerStyle"
+      :class="{ 'preview__container--resizable': !!breakpoints }"
       class="preview__container"
     >
       <div
@@ -197,12 +198,14 @@ export default {
 
   &__container
     min-width 250px
-    resize horizontal
     overflow scroll
-    margin 0 auto
-    text-align center
-    // leave space for the resize handle
-    padding-bottom var(--space-m)
+
+    &--resizable
+      margin 0 auto
+      text-align center
+      resize horizontal
+      // leave space for the resize handle
+      padding-bottom var(--space-m)
 
     &[data-breakpoint]
       transition-property width

@@ -1,7 +1,4 @@
 ---
-tags:
-- Token
-
 tokens:
 - type: size
   name: S
@@ -19,7 +16,8 @@ tokens:
   name: XL
   value: 3rem
   variable: $space-xl
----
-# Spaces
 
+tags:
+- Token
+---
 Our spacings.

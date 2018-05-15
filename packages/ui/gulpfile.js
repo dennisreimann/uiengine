@@ -9,7 +9,7 @@ const webpackEnv = process.env.NODE_ENV === 'production' ? 'prod' : 'dev'
 const webpackConfig = require(join(__dirname, `build/webpack.${webpackEnv}.conf.js`))
 
 const src = {
-  lib: ['./src/*.js'],
+  lib: ['./src/{locales,}/*.js'],
   webpack: ['src/{styles,templates,vue}/**/*']
 }
 

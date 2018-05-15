@@ -1,15 +1,26 @@
 ---
+tokens:
+- name: General
+  type: category
+  tokens:
+  - type: icon
+    name: Search
+    value: '<i class="search icon"></i>'
+    variable: search
+- name: Form
+  type: category
+  tokens:
+  - type: icon
+    name: Check
+    value: '<i class="green check icon"></i>'
+    description: Display successful user input
+    variable: green check
+  - type: icon
+    name: Error
+    value: '<i class="red remove icon icon"></i>'
+    description: Error hints and messages
+    variable: red remove
+
 tags:
 - Token
 ---
-# Icons
-
-Our icons. Usage: `<i class="ID icon"></i>`
-
-<link rel="stylesheet" type="text/css" href="../../../assets/semantic/components/icon.min.css">
-
-| Icon                             | ID        | Use Case                      | Color  |
-|----------------------------------|-----------|-------------------------------|--------|
-| <i class="green check icon"></i> | `check`   | Display successful user input | green  |
-| <i class="red remove icon"></i>  | `remove`  | Error hints and messages      | red    |
-| <i class="search icon"></i>      | `search`  | Search                        |        |

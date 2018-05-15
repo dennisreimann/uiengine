@@ -69,6 +69,15 @@ describe('Core', function () {
       assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.pug.html'))
     })
 
+    it('should generate token previews', async () => {
+      await Core.generate(opts)
+
+      assertExists(join(testProjectTargetPath, '_tokens', 'documentation', 'tokens', 'colors.html'))
+      assertExists(join(testProjectTargetPath, '_tokens', 'documentation', 'tokens', 'icons.html'))
+      assertExists(join(testProjectTargetPath, '_tokens', 'documentation', 'tokens', 'spaces.html'))
+      assertExists(join(testProjectTargetPath, '_tokens', 'documentation', 'tokens', 'typography.html'))
+    })
+
     it('should copy UI assets', async () => {
       const assetsPath = join(testProjectTargetPath, '_assets')
       await Core.generate(opts)
@@ -277,6 +286,19 @@ describe('Core', function () {
       assert.equal(change.type, 'variant')
       assert.equal(change.item, 'form/form-fieldsets.pug')
       assert.equal(change.file, join(testProjectRelativePath, 'src', 'components', 'form', 'variants', 'form-fieldsets.pug'))
+    })
+
+    it('should regenerate pages with tokens on change', async () => {
+      const filePath = join(pagesPath, 'documentation', 'tokens', 'colors', 'page.md')
+      const templatePath = join(testProjectTargetPath, '_tokens', 'documentation', 'tokens', 'colors.html')
+      fs.removeSync(templatePath)
+      const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
+
+      assertExists(templatePath)
+      assert.equal(change.action, 'changed')
+      assert.equal(change.type, 'page')
+      assert.equal(change.item, 'documentation/tokens/colors')
+      assert.equal(change.file, join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'documentation', 'tokens', 'colors', 'page.md'))
     })
 
     it('should regenerate pages with template on change', async () => {

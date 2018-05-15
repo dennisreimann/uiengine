@@ -3,7 +3,7 @@ const { join, resolve } = require('path')
 const Factory = require('./support/factory')
 const { assertContentMatches, assertExists } = require('../../../test/support/asserts')
 const Builder = require('../src/builder')
-const UI = require('../src/ui')
+const Interface = require('../src/interface')
 const Connector = require('../src/connector')
 
 const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
@@ -40,6 +40,18 @@ const state = {
       title: 'Pattern Library',
       path: 'patterns',
       componentIds: ['input']
+    }),
+
+    'tokens': Factory.page('tokens', {
+      title: 'Tokens',
+      path: 'tokens',
+      tokens: [
+        {
+          name: 'Test',
+          type: 'color',
+          value: '#123456'
+        }
+      ]
     }),
 
     'prototype': Factory.page('prototype', {
@@ -203,7 +215,7 @@ const state = {
 describe('Builder', () => {
   afterEach(() => { fs.removeSync(testTmpPath) })
   before(() => Promise.all([
-    UI.setup(state),
+    Interface.setup(state),
     Connector.setup(state)
   ]))
 
@@ -227,6 +239,15 @@ describe('Builder', () => {
 
       const pagePath = join(target, '_pages', 'prototype', 'custom-page.html')
       assertContentMatches(pagePath, 'This is my context')
+    })
+  })
+
+  describe('#generatePageWithTokens', () => {
+    it('should generate page with tokens', async () => {
+      await Builder.generatePageWithTokens(state, 'tokens')
+
+      const pagePath = join(target, '_tokens', 'tokens.html')
+      assertContentMatches(pagePath, '#123456')
     })
   })
 

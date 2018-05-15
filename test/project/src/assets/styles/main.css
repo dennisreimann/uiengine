@@ -1,11 +1,15 @@
 :root {
   --text-color: #111;
-  --background-color: #EEE;
+  --background-color: #FFF;
 }
 
 .theme-funky:root {
   --text-color: purple;
   --background-color: yellow;
+}
+
+html {
+  font-size: 16px;
 }
 
 body {

@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.20.0]
+
+### Changed
+
+- Design token rendering:
+  - The tokens are now rendered as part of the preview template
+  - Added the token types `font` and `icon`
+  - For details see the [design token docs](./docs/ui.md)
+- Reduced file watching delay for faster refreshes
+- Copy page files in subfolders
+
 ## [0.19.0] - 2018-04-14
 
 ### Added

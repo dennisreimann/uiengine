@@ -98,6 +98,7 @@ const startServer = (state, opts) => {
   const server = requireOptional('browser-sync', 'serve').create('UIengine')
   const history = requireOptional('connect-history-api-fallback')
   const pagesPattern = '_pages/**/*'
+  const tokensPattern = '_tokens/**/*'
   const variantsPattern = '_variants/**/*'
   const defaults = {
     server: {
@@ -114,9 +115,10 @@ const startServer = (state, opts) => {
             'index.html',
             '_sketch.html',
             '_state.json',
-            // exclude pages and variants as the iframes are reloaded
-            // separately (see server.init callback)
+            // exclude pages, tokens and variants as the iframes are
+            // reloaded separately (see server.init callback)
             pagesPattern,
+            tokensPattern,
             variantsPattern
           ]
         }
@@ -153,6 +155,7 @@ const startServer = (state, opts) => {
     // https://github.com/BrowserSync/browser-sync/issues/662#issuecomment-110478137
     server.watch([
       _paths(pagesPattern),
+      _paths(tokensPattern),
       _paths(variantsPattern)
     ]).on('change', filePath => {
       const file = relative(target, filePath)

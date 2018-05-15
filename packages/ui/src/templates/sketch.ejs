@@ -3,7 +3,7 @@ assetPath = htmlWebpackPlugin.options.assetPath
 css = htmlWebpackPlugin.files.css
 _%>
 <%%_ const renderColorToken = token => { _%%>
-  <article class="uie-html-sketchapp-export__article uie-html-sketchapp-export__token uie-html-sketchapp-export__token--color">
+  <article class="uie-html-sketchapp-export__article">
     <h3><%%= token.name %%></h3>
     <div class="uie-token__color" data-sketch-color="<%%= token.value %%>" style="background:<%%= token.value %%>;">&nbsp;</div>
   </article>
@@ -12,7 +12,7 @@ _%>
 <%%_ const renderTokens = tokens => { _%%>
   <%%_ Object.values(tokens).forEach(token => { _%%>
     <%%_ if (token.type === 'category' && token.tokens && token.tokens.length && token.tokens[0].type === 'color' && !token.tokens[0].reference) { _%%>
-      <section class="uie-html-sketchapp-export__section uie-html-sketchapp-export__tokens">
+      <section class="uie-html-sketchapp-export__section">
         <h2><%%= token.name %%></h2>
         <div class="uie-html-sketchapp-export__tokenlist">
           <%%= renderTokens(token.tokens) _%%>
@@ -25,7 +25,7 @@ _%>
 <%%_ } _%%>
 
 <%%_ const renderVariant = (component, variant) => { _%%>
-  <article class="uie-html-sketchapp-export__article uie-html-sketchapp-export__variant">
+  <article class="uie-html-sketchapp-export__article">
     <h3><%%= variant.title %%></h3>
     <div data-sketch-symbol="<%%= component.title %>/<%%= variant.title %>">
       <%%- variant.rendered %%>
@@ -34,7 +34,7 @@ _%>
 <%%_ } _%%>
 
 <%%_ const renderComponent = component => { _%%>
-  <section class="uie-html-sketchapp-export__section uie-html-sketchapp-export__component">
+  <section class="uie-html-sketchapp-export__section">
   <h2><%%= component.title %%></h2>
   <%% component.variants.forEach(variant => { %>
     <%%= renderVariant(component, variant) _%%>
@@ -46,23 +46,25 @@ _%>
 <link href="<%- assetPath(css[index]) %>" rel="stylesheet">
 <%_ } _%>
 
-<div class="uie-html-sketchapp-export">
-  <section class="uie-html-sketchapp-export__section">
-    <h1>Export for html-sketchapp</h1>
-    <p>
-      For details see the
-      <a href="https://github.com/seek-oss/html-sketchapp-cli">html-sketchapp-cli</a>
-      documentation.
-    </p>
-  </section>
+<div class="uie">
+  <div class="uie-html-sketchapp-export">
+    <section class="uie-html-sketchapp-export__section">
+      <h1>Export for html-sketchapp</h1>
+      <p>
+        For details see the
+        <a href="https://github.com/seek-oss/html-sketchapp-cli">html-sketchapp-cli</a>
+        documentation.
+      </p>
+    </section>
 
-  <%%_ Object.values(state.pages || {}).forEach(page => { %%>
-    <%%_ if (page.tokens) { %%>
-      <%%= renderTokens(page.tokens) _%%>
-    <%%_ } _%%>
-  <%%_ }) _%%>
+    <%%_ Object.values(state.pages || {}).forEach(page => { %%>
+      <%%_ if (page.tokens) { %%>
+        <%%= renderTokens(page.tokens) _%%>
+      <%%_ } _%%>
+    <%%_ }) _%%>
 
-  <%%_ Object.values(state.components || {}).forEach(component => { _%%>
-    <%%= renderComponent(component) _%%>
-  <%%_ }) _%%>
+    <%%_ Object.values(state.components || {}).forEach(component => { _%%>
+      <%%= renderComponent(component) _%%>
+    <%%_ }) _%%>
+  </div>
 </div>
