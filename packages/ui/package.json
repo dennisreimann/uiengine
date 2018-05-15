@@ -29,12 +29,12 @@
   },
   "dependencies": {
     "color": "^3.0.0",
-    "ejs": "^2.5.9",
+    "ejs": "^2.6.1",
     "fuse.js": "^3.2.0",
     "highlight.js": "^9.12.0",
     "htmlescape": "^1.1.1",
     "vue": "^2.5.16",
-    "vue-analytics": "^5.10.4",
+    "vue-analytics": "^5.10.6",
     "vue-meta": "^1.5.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -43,7 +43,7 @@
     "autoprefixer": "^8.4.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
     "clipboard": "^2.0.1",
     "copy-webpack-plugin": "^4.5.1",
@@ -56,7 +56,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "fs-extra": "^6.0.0",
+    "fs-extra": "^6.0.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
     "gulp-concat": "^2.6.1",
@@ -84,7 +84,7 @@
     "webpack-stream": "^4.0.3"
   },
   "peerDependencies": {
-    "@uiengine/core": "^0.19.2"
+    "@uiengine/core": "^0.19.3"
   },
   "browserslist": [
     "last 2 versions"

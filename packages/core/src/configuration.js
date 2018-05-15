@@ -46,11 +46,11 @@ const resolvePackage = (basedir, config, type) => {
 }
 
 export async function read (flags = {}) {
-  const configPath = flags.config || 'uiengine.config.js'
-  const explorer = cosmiconfig('uiengine', { rcExtensions: true, configPath })
+  const configPath = resolvePath(process.cwd(), flags.config || 'uiengine.config.js')
+  const explorer = cosmiconfig('uiengine', { rcExtensions: true })
 
   try {
-    const result = await explorer.load()
+    const result = await explorer.load(configPath)
 
     if (result) {
       return _read(result.filepath, result.config, flags)
