@@ -1,6 +1,7 @@
 <template>
   <div
     id="app"
+    :data-theme="currentTheme.id"
     class="layout"
     @click="closeModals"
   >
@@ -12,6 +13,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AppTopbar from './AppTopbar'
 import AppNavigation from './AppNavigation'
 import AppFooter from './AppFooter'
@@ -26,6 +28,10 @@ export default {
     AppNavigation,
     AppFooter,
     AppMain
+  },
+
+  computed: {
+    ...mapGetters('preferences', ['currentTheme'])
   },
 
   created () {

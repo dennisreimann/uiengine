@@ -189,7 +189,7 @@ export default {
       overflow hidden
 
       &--active
-        max-height 20rem
+        max-height 30rem
         transition-timing-function ease-in
 
       &-inner
