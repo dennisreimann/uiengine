@@ -2,24 +2,41 @@
 assetPath = htmlWebpackPlugin.options.assetPath
 css = htmlWebpackPlugin.files.css
 _%>
-<%%_ const renderColorToken = token => { _%%>
-  <article class="uie-html-sketchapp-export__article">
-    <h3><%%= token.name %%></h3>
-    <div class="uie-token__color" data-sketch-color="<%%= token.value %%>" style="background:<%%= token.value %%>;">&nbsp;</div>
-  </article>
-<%%_ } _%%>
 
-<%%_ const renderTokens = tokens => { _%%>
+<%%_ const renderTokens = (tokens, parentName) => { _%%>
   <%%_ Object.values(tokens).forEach(token => { _%%>
-    <%%_ if (token.type === 'category' && token.tokens && token.tokens.length && token.tokens[0].type === 'color' && !token.tokens[0].reference) { _%%>
+    <%%_ if (token.type === 'category' && token.tokens && token.tokens.length && (token.tokens[0].type === 'color' || token.tokens[0].type === 'font') && !token.tokens[0].reference) { _%%>
       <section class="uie-html-sketchapp-export__section">
         <h2><%%= token.name %%></h2>
         <div class="uie-html-sketchapp-export__tokenlist">
-          <%%= renderTokens(token.tokens) _%%>
+          <%%= renderTokens(token.tokens, token.name) _%%>
         </div>
       </section>
     <%%_ } else if (token.type === 'color' && !token.reference) { _%%>
-      <%%= renderColorToken(token) %%>
+      <article class="uie-html-sketchapp-export__article">
+        <h3><%%= token.name %%></h3>
+        <div class="uie-token__color" data-sketch-color="<%%= token.value %%>" style="background:<%%= token.value %%>;">&nbsp;</div>
+      </article>
+    <%%_ } else if (token.type === 'font' && !token.reference) { _%%>
+      <%% if (token.sizes) { %%>
+        <%%_ Object.values(token.sizes).forEach(size => { _%%>
+          <%%_ const title = `${token.name || parentName} ${token.fontweight} ${size}`.trim() _%%>
+          <article class="uie-html-sketchapp-export__article">
+            <h3><%%= title %%></h3>
+            <div class="uie-token__font" data-sketch-text="<%%= title %%>" style="font-size:<%%= size %%>;<%%= token.value %%>;">
+              <%%= token.text || 'The quick brown fox jumps over the lazy dog' %%>
+            </div>
+          </article>
+        <%%_ }) _%%>
+      <%% } else { %%>
+        <%%_ const title = `${token.name || parentName} ${token.fontweight}`.trim() _%%>
+        <article class="uie-html-sketchapp-export__article">
+          <h3><%%= title %%></h3>
+          <div class="uie-token__font" data-sketch-text="<%%= title %%>" style="<%%= token.value %%>;">
+            <%%= token.text || 'The quick brown fox jumps over the lazy dog' %%>
+          </div>
+        </article>
+      <%% } %%>
     <%%_ } _%%>
   <%%_ }) _%%>
 <%%_ } _%%>
@@ -46,25 +63,23 @@ _%>
 <link href="<%- assetPath(css[index]) %>" rel="stylesheet">
 <%_ } _%>
 
-<div class="uie">
-  <div class="uie-html-sketchapp-export">
-    <section class="uie-html-sketchapp-export__section">
-      <h1>Export for html-sketchapp</h1>
-      <p>
-        For details see the
-        <a href="https://github.com/seek-oss/html-sketchapp-cli">html-sketchapp-cli</a>
-        documentation.
-      </p>
-    </section>
+<div class="uie-html-sketchapp-export">
+  <section class="uie-html-sketchapp-export__section">
+    <h1>Export for html-sketchapp</h1>
+    <p>
+      For details see the
+      <a href="https://github.com/seek-oss/html-sketchapp-cli">html-sketchapp-cli</a>
+      documentation.
+    </p>
+  </section>
 
-    <%%_ Object.values(state.pages || {}).forEach(page => { %%>
-      <%%_ if (page.tokens) { %%>
-        <%%= renderTokens(page.tokens) _%%>
-      <%%_ } _%%>
-    <%%_ }) _%%>
+  <%%_ Object.values(state.pages || {}).forEach(page => { %%>
+    <%%_ if (page.tokens) { %%>
+      <%%= renderTokens(page.tokens) _%%>
+    <%%_ } _%%>
+  <%%_ }) _%%>
 
-    <%%_ Object.values(state.components || {}).forEach(component => { _%%>
-      <%%= renderComponent(component) _%%>
-    <%%_ }) _%%>
-  </div>
+  <%%_ Object.values(state.components || {}).forEach(component => { _%%>
+    <%%= renderComponent(component) _%%>
+  <%%_ }) _%%>
 </div>

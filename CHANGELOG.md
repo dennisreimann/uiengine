@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.20.0]
 
+### Added
+
+- Fonts are now part of the html-sketchapp export
+- Copy page files in subfolders
+
 ### Changed
 
 - Design token rendering:
@@ -14,7 +19,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Added the token types `font` and `icon`
   - For details see the [design token docs](./docs/ui.md)
 - Reduced file watching delay for faster refreshes
-- Copy page files in subfolders
 
 ## [0.19.0] - 2018-04-14
 
