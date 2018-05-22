@@ -3,6 +3,7 @@ const R = require('ramda')
 const assert = require('assert')
 const cosmiconfig = require('cosmiconfig')
 const { error } = require('./util/message')
+const { invalidateRequireCache } = require('./util/file')
 
 const readPackageJson = () => {
   let data = {}
@@ -46,10 +47,12 @@ const resolvePackage = (basedir, config, type) => {
 }
 
 export async function read (flags = {}) {
+  // do not cache and clesar require cache, because of incremental builds
+  const explorer = cosmiconfig('uiengine', { cache: false, rcExtensions: true })
   const configPath = resolvePath(process.cwd(), flags.config || 'uiengine.config.js')
-  const explorer = cosmiconfig('uiengine', { rcExtensions: true })
 
   try {
+    invalidateRequireCache(configPath)
     const result = await explorer.load(configPath)
 
     if (result) {

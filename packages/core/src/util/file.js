@@ -21,6 +21,10 @@ export const isDirectory = filePath => {
   }
 }
 
+export const invalidateRequireCache = filePath => {
+  delete require.cache[require.resolve(filePath)]
+}
+
 export async function read (filePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, string) => {
