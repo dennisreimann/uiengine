@@ -139,6 +139,39 @@ const startServer = (state, opts) => {
     handle: history()
   })
 
+  options.snippetOptions = {
+    rule: {
+      fn: function (snippet, match) {
+        // browser-sync: append this script to reload pages on change in development.
+        // we solve this via a manual socket connection to prevent reloading the
+        // whole iframe host in case just the iframe content changes.
+        // as the browser-sync client scripts loads asynchronously, we may need to
+        // retrigger this function a few times.
+        return match + snippet + `<script>
+        let retries = 0;
+        const setupSocket = () => {
+          const { socket } = window.___browserSync___ || {};
+          if (socket) {
+            socket.on('uiengine:file:change', filePath => {
+              if (window.location.pathname.endsWith(filePath)) {
+                window.location.reload();
+                console.debug('[UIengine]', 'Reload on file change', filePath);
+              }
+            })
+            console.debug('[UIengine]', 'Connection to browser-sync socket established.');
+          } else if (retries <= 10) {
+            setTimeout(setupSocket, 100);
+            retries++;
+          } else {
+            console.warn('[UIengine]', 'Could not connect to browser-sync socket.');
+          }
+        }
+        setupSocket();
+        </script>`
+      }
+    }
+  }
+
   if (watch) {
     options.files = optionWithDefault(defaults.files, options.files)
     options.watchOptions = optionWithDefault(browserSyncOptions.watchOptions, options.watchOptions)

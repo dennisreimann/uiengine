@@ -57,10 +57,6 @@ if (document.getElementById('__bs_script__')) {
       socket.on('uiengine:state:update', uiengineState => {
         store.commit('state/setState', uiengineState)
       })
-      // iframe reloads
-      socket.on('uiengine:file:change', filePath => {
-        vm.$emit('file:change', `${window.UIengine.base}${filePath}`)
-      })
       // report
       console.debug('[UIengine]', 'Connection to browser-sync socket established.')
     } else if (retries <= 10) {

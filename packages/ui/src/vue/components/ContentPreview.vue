@@ -164,14 +164,6 @@ export default {
 
     // setup on initial load
     iframe.addEventListener('load', setupIframe.bind(this))
-
-    // reload on file change
-    this.$root.$on('file:change', filePath => {
-      if (filePath === this.path && iframe.contentWindow) {
-        iframe.contentWindow.location.reload()
-        console.debug('[UIengine]', 'Reload on file change', filePath)
-      }
-    })
   },
 
   methods: {
