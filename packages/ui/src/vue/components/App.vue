@@ -1,7 +1,7 @@
 <template>
   <div
     id="app"
-    :data-theme="currentTheme.id"
+    :data-theme="themeId"
     class="layout"
     @click="closeModals"
   >
@@ -31,14 +31,18 @@ export default {
   },
 
   computed: {
-    ...mapGetters('preferences', ['currentTheme'])
+    ...mapGetters('preferences', ['currentTheme']),
+
+    themeId () {
+      return this.currentTheme && this.currentTheme.id
+    }
   },
 
   created () {
     this.$root.$on('setting:hljs', this.setHljs)
 
-    const theme = this.$store.getters['preferences/hljs']
-    if (theme) this.setHljs(theme)
+    const hljs = this.$store.getters['preferences/hljs']
+    if (hljs) this.setHljs(hljs)
   },
 
   methods: {
@@ -46,8 +50,8 @@ export default {
       this.$root.$emit('modal:close')
     },
 
-    setHljs (theme) {
-      $hljs.setAttribute('href', HLJS_TMPL.replace('%s', theme))
+    setHljs (hljs) {
+      $hljs.setAttribute('href', HLJS_TMPL.replace('%s', hljs))
     }
   },
 
