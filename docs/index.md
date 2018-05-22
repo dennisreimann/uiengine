@@ -75,12 +75,14 @@ How To and Quick Start:
 
 Technical documentation, with more detailed information:
 
-- [Entities/Properties](https://dennisreimann.github.io/uiengine/entities-properties.html)
 - [Adapters](https://dennisreimann.github.io/uiengine/adapters.html)
+- [Design Tokens](https://dennisreimann.github.io/uiengine/design-tokens.html)
+- [Entities/Properties](https://dennisreimann.github.io/uiengine/entities-properties.html)
 - [YAML](https://dennisreimann.github.io/uiengine/yaml.html)
 - [UI](https://dennisreimann.github.io/uiengine/ui.html)
-- [Deployment](https://dennisreimann.github.io/uiengine/deployment.html)
 - [Integrations](https://dennisreimann.github.io/uiengine/integrations.html)
+- [Deployment](https://dennisreimann.github.io/uiengine/deployment.html)
+- [Development](https://dennisreimann.github.io/uiengine/development.html)
 
 ## 💁 Individual packages
 

@@ -134,6 +134,20 @@ tokens:
   - type: font
     fontweight: bold / 800
     value: "font-family: Arial; font-weight: 800;"
+- name: Lato
+  type: category
+  tokens:
+  - type: font
+    fontweight: regular
+    value: "font-family: Lato;"
+    variable: Lato
+    description: "Use wisely."
+    text: "Just some custom sample text to show the usage of this font."
+    license: Google Fonts
+    sizes:
+      - 24px
+      - 18px
+      - 14px
 ---
 ```
 
@@ -149,7 +163,7 @@ The icon type supports the following attributes:
 
 ```markdown
 ---
-title: Fonts
+title: Icons
 tokens:
 - type: icon
   name: Search
