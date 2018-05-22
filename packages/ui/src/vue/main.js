@@ -32,7 +32,8 @@ if (analyticsId) {
   })
 }
 
-const vm = new Vue({
+// eslint-disable-next-line no-new
+new Vue({
   el: '#app',
   router,
   store,
