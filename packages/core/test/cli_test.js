@@ -133,7 +133,7 @@ describe('CLI', function () {
       assertExists(join(testPath, 'dist/_variants/button/primary.html.html'))
     })
 
-    it.only('should build the demo', async () => {
+    it('should build the demo', async () => {
       await runCommand(testPath, 'uiengine init --demo')
 
       const stdout = await runCommand(testPath, 'uiengine build')
