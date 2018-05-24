@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+html {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.heading--title {
+  font-size: 1.75em;
+  font-weight: bold;
+}
+
+.heading--subtitle {
+  font-size: 1.25em;
+  font-weight: normal;
+}
+
+.copytext {
+  max-width: 40em;
+  margin-bottom: .75em;
+}
+
+.button {
+  padding: .5rem 1rem;
+}
+
+.button--primary {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+  background: orange;
+}
+
+.teaser {
+  border: 2px solid orange;
+  padding: 1.5em;
+  text-align: center;
+}
+
+.teaser .copytext {
+  margin: .5em auto;
+}

@@ -19,6 +19,7 @@
   },
   "files": [
     "bin",
+    "demo",
     "lib"
   ],
   "keywords": [

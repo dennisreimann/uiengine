@@ -42,6 +42,7 @@
     "test-watch": "yarn test -w --watch-extensions ejs,hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",
     "cover": "nyc yarn test",
     "release": "yarn run lint && yarn run cover && NODE_ENV=production yarn run build && lerna publish",
+    "demo": "rimraf test/demo && sleep 1 && uiengine init --dir test/demo --demo && cd test/demo && uiengine build -s -w",
     "test-project": "cd test/project && NODE_ENV=development yarn start",
     "test-project:setup": "cd test/project && yarn setup",
     "test-project:build": "NODE_ENV=production yarn run build && cd test/project && yarn install && NODE_ENV=production yarn build",

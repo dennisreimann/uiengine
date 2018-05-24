@@ -16,6 +16,15 @@ uiengine build
 
 Now you have a basic test project setup and can read about the steps in detail …
 
+You can also use the demo flag when initializing the project:
+
+```bash
+uiengine init --demo
+```
+
+This generates some demo pages and components to give a basic overview for some of the features.
+Beware: It uses the html adapter, hence the components are very simplistic!
+
 ## 📦 How to install the UIengine?
 
 The UIengine should be installed as a dependency for a project.
@@ -44,6 +53,15 @@ uiengine init
 This command creates a config file named `uiengine.config.js`, which contains the basic configuration.
 It also creates the folder `pages` containing a `page.md` file.
 This is the page file for the index page of the documentation.
+
+You can also use the demo flag when initializing the project:
+
+```bash
+uiengine init --demo
+```
+
+This generates some demo pages and components to give a basic overview for some of the features.
+Beware: It uses the html adapter, hence the components are very simplistic!
 
 ## ⚙️ How to configure the project?
 

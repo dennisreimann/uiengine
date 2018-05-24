@@ -1,4 +1,4 @@
-export const template = (name, pagesDir) =>
+export const template = (name, directories, files) =>
   `
 module.exports = {
   // Project config: Defaults to name and version from package.json.
@@ -14,9 +14,9 @@ module.exports = {
   // - data contains sample data that can be referenced in variants and pages
   // - entities contains the optional entity definitions for the components
   source: {
-    components: './src/components',
-    templates: './src/templates',
-    pages: './${pagesDir}',
+    components: './${directories.components}',
+    templates: './${directories.templates}',
+    pages: './${directories.pages}',
     data: './src/uiengine/data',
     entities: './src/uiengine/entities'
   },
@@ -31,19 +31,19 @@ module.exports = {
   },
 
   // Here you can configure the template that the variant preview gets embeded in.
-  template: 'uiengine.html',
+  template: '${files.preview}',
 
   ui: {
     lang: 'en',
     // hljs: 'atom-one-dark',
     // customStylesFile: '/path-to-overrides.css',
-    // breakpoints: {
-    //   XS: 320,
-    //   S: 560,
-    //   M: 760,
-    //   L: 960,
-    //   XL: 1280
-    // }
+    breakpoints: {
+      XS: 320,
+      S: 560,
+      M: 760,
+      L: 960,
+      XL: 1280
+    }
   }
 }
 `

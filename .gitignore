@@ -13,6 +13,7 @@ npm-debug*
 .coveralls.yml
 .nyc_output
 coverage
+test/demo
 test/tmp
 test/project/dist
 

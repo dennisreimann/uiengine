@@ -49,6 +49,26 @@ describe('CLI', function () {
       assertContentMatches(previewPath, 'add your custom styles here')
       assertContentMatches(previewPath, 'add your custom scripts here')
     })
+
+    describe('with demo flag', () => {
+      it('should create the demo files', async () => {
+        const stdout = await runCommand(testPath, 'uiengine init --demo')
+
+        // stdout
+        assertMatches(stdout, 'In addition to these we also created some demo components and pages.')
+
+        // page files
+        assertExists(join(testPath, 'src/uiengine/pages/patterns/page.md'))
+        assertExists(join(testPath, 'src/uiengine/pages/patterns/elements/page.md'))
+        assertExists(join(testPath, 'src/uiengine/pages/patterns/components/page.md'))
+
+        // component files
+        assertExists(join(testPath, 'src/components/button'))
+        assertExists(join(testPath, 'src/components/copytext'))
+        assertExists(join(testPath, 'src/components/heading'))
+        assertExists(join(testPath, 'src/components/teaser'))
+      })
+    })
   })
 
   describe('page command', () => {
@@ -111,6 +131,19 @@ describe('CLI', function () {
       // variants
       assertExists(join(testPath, 'dist/_variants/button/default.html.html'))
       assertExists(join(testPath, 'dist/_variants/button/primary.html.html'))
+    })
+
+    it.only('should build the demo', async () => {
+      await runCommand(testPath, 'uiengine init --demo')
+
+      const stdout = await runCommand(testPath, 'uiengine build')
+
+      // stdout
+      assertMatches(stdout, 'Build done')
+
+      // variants
+      assertExists(join(testPath, 'dist/_variants/heading/title.html.html'))
+      assertExists(join(testPath, 'dist/_variants/heading/subtitle.html.html'))
     })
 
     describe('with debug flag', () => {
