@@ -1,0 +1,1 @@
+../../packages/adapter-handlebars/README.md

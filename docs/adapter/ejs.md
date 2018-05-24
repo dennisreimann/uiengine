@@ -1,0 +1,1 @@
+../../packages/adapter-ejs/README.md

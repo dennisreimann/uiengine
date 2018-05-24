@@ -86,17 +86,17 @@ Technical documentation, with more detailed information:
 
 ## 💁 Individual packages
 
-| Name | Type | NPM |
-| ---- | ---- | --- |
-| [Core](https://github.com/dennisreimann/uiengine/tree/master/packages/core)                             | 🚀 | [![npm](https://img.shields.io/npm/v/@uiengine/core.svg)](https://www.npmjs.com/package/@uiengine/core)                             |
-| [User Interface](https://github.com/dennisreimann/uiengine/tree/master/packages/ui)                     | 🎨 | [![npm](https://img.shields.io/npm/v/@uiengine/ui.svg)](https://www.npmjs.com/package/@uiengine/ui)                                 |
-| [Pug adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-pug)               | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-pug.svg)](https://www.npmjs.com/package/@uiengine/adapter-pug)               |
-| [React/JSX adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-react)       | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-react.svg)](https://www.npmjs.com/package/@uiengine/adapter-react)           |
-| [Vue adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-vue)               | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-vue.svg)](https://www.npmjs.com/package/@uiengine/adapter-vue)               |
-| [Marko adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-marko)           | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-marko.svg)](https://www.npmjs.com/package/@uiengine/adapter-marko)           |
-| [Handlebars adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-handlebars) | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-handlebars.svg)](https://www.npmjs.com/package/@uiengine/adapter-handlebars) |
-| [EJS adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-ejs)               | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-ejs.svg)](https://www.npmjs.com/package/@uiengine/adapter-ejs)               |
-| [HTML adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-html)             | 🔌 | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-html.svg)](https://www.npmjs.com/package/@uiengine/adapter-html)             |
+| Name | Type | Docs | NPM |
+| ---- | ---- | ---- | --- |
+| [Core](https://github.com/dennisreimann/uiengine/tree/master/packages/core)                             | 🚀 | [📖](https://dennisreimann.github.io/uiengine/index.html) | [![npm](https://img.shields.io/npm/v/@uiengine/core.svg)](https://www.npmjs.com/package/@uiengine/core)                             |
+| [User Interface](https://github.com/dennisreimann/uiengine/tree/master/packages/ui)                     | 🎨 | [📖](https://dennisreimann.github.io/uiengine/ui.html)| [![npm](https://img.shields.io/npm/v/@uiengine/ui.svg)](https://www.npmjs.com/package/@uiengine/ui)                                 |
+| [Pug adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-pug)               | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/pug.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-pug.svg)](https://www.npmjs.com/package/@uiengine/adapter-pug)               |
+| [React/JSX adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-react)       | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/react.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-react.svg)](https://www.npmjs.com/package/@uiengine/adapter-react)           |
+| [Vue adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-vue)               | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/vue.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-vue.svg)](https://www.npmjs.com/package/@uiengine/adapter-vue)               |
+| [Marko adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-marko)           | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/marko.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-marko.svg)](https://www.npmjs.com/package/@uiengine/adapter-marko)           |
+| [Handlebars adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-handlebars) | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/handlebars.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-handlebars.svg)](https://www.npmjs.com/package/@uiengine/adapter-handlebars) |
+| [EJS adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-ejs)               | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/ejs.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-ejs.svg)](https://www.npmjs.com/package/@uiengine/adapter-ejs)               |
+| [HTML adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-html)             | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/html.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-html.svg)](https://www.npmjs.com/package/@uiengine/adapter-html)             |
 
 ### 🖖 Alternatives
 
