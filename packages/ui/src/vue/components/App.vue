@@ -57,7 +57,8 @@ export default {
 
   metaInfo () {
     const config = this.$store.getters['state/config']
-    const siteTitle = config ? `${config.name} (${config.version})` : ''
+    let siteTitle = config ? config.name : ''
+    if (config && config.version) siteTitle += ` (${config.version})`
 
     return {
       titleTemplate (pageTitle) {
