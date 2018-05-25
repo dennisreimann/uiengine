@@ -73,7 +73,7 @@ How To and Quick Start:
 - [Variant](https://dennisreimann.github.io/uiengine/variant.html)
 - [Page](https://dennisreimann.github.io/uiengine/page.html)
 
-Technical documentation, with more detailed information:
+Advanced topics:
 
 - [Adapters](https://dennisreimann.github.io/uiengine/adapters.html)
 - [Design Tokens](https://dennisreimann.github.io/uiengine/design-tokens.html)
@@ -81,8 +81,12 @@ Technical documentation, with more detailed information:
 - [YAML](https://dennisreimann.github.io/uiengine/yaml.html)
 - [UI](https://dennisreimann.github.io/uiengine/ui.html)
 - [Integrations](https://dennisreimann.github.io/uiengine/integrations.html)
+
+Technical topics:
+
 - [Deployment](https://dennisreimann.github.io/uiengine/deployment.html)
 - [Development](https://dennisreimann.github.io/uiengine/development.html)
+- [Changelog](https://dennisreimann.github.io/uiengine/changelog.html)
 
 ## 💁 Individual packages
 
