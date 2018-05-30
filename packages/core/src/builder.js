@@ -154,6 +154,28 @@ export async function generateComponentVariants (state, componentId) {
   debug3(state, `Builder.generateComponentVariants(${componentId}):end`)
 }
 
+export async function generateVariantsWithTemplate (state, template) {
+  debug3(state, `Builder.generateVariantsWithTemplate(${template}):start`)
+
+  const isPreviewTemplate = template === state.config.template
+  const affectedVariants = R.reduce((list, component) => {
+    return R.concat(list, R.filter(variant => {
+      // the variant must be regenerated in two cases:
+      // 1.) the template is the general preview template and
+      //     the variant does not use a custom template
+      // 2.) the template matches the variant template
+      return (isPreviewTemplate && variant.template === undefined) ||
+        variant.template === template
+    }, component.variants))
+  }, [], Object.values(state.components))
+  const build = R.partial(generateVariant, [state])
+  const builds = R.map(build, affectedVariants)
+
+  await Promise.all(builds)
+
+  debug3(state, `Builder.generateVariantsWithTemplate(${template}):end`)
+}
+
 async function generateState (state, change) {
   debug2(state, 'Builder.generateState():start')
 

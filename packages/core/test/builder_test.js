@@ -1,7 +1,7 @@
 const fs = require('fs-extra')
 const { join, resolve } = require('path')
 const Factory = require('./support/factory')
-const { assertContentMatches, assertExists } = require('../../../test/support/asserts')
+const { assertContentMatches, assertExists, assertDoesNotExist } = require('../../../test/support/asserts')
 const Builder = require('../src/builder')
 const Interface = require('../src/interface')
 const Connector = require('../src/connector')
@@ -177,6 +177,17 @@ const state = {
           rendered: '<input class="input input--text" id="name" name="person[name]" type="text"/>',
           context: { id: 'name', name: 'person[name]' },
           title: 'Text Input'
+        },
+        {
+          id: 'input/number.pug',
+          componentId: 'input',
+          file: 'number.pug',
+          path: resolve(testProjectPath, 'src', 'components', 'input', 'variants', 'number.pug'),
+          template: 'page.pug', // custom template
+          content: '<p>This is documentation for the number input.</p>',
+          rendered: '<input class="input input--number" id="amount" name="person[amount]" type="text"/>',
+          context: { id: 'amount', name: 'person[amount]' },
+          title: 'Number Input'
         }
       ]
     })
@@ -273,6 +284,22 @@ describe('Builder', () => {
       await Builder.generatePagesWithTemplate(state, 'page.pug')
 
       assertExists(join(target, '_pages', 'prototype', 'custom-page.html'))
+    })
+  })
+
+  describe('#generateVariantsWithTemplate', () => {
+    it('should generate variants using the default preview template', async () => {
+      await Builder.generateVariantsWithTemplate(state, 'uiengine.pug')
+
+      assertExists(join(target, '_variants', 'input', 'text.pug.html'))
+      assertDoesNotExist(join(target, '_variants', 'input', 'number.pug.html'))
+    })
+
+    it('should generate variants having a custom template', async () => {
+      await Builder.generateVariantsWithTemplate(state, 'page.pug')
+
+      assertExists(join(target, '_variants', 'input', 'number.pug.html'))
+      assertDoesNotExist(join(target, '_variants', 'input', 'text.pug.html'))
     })
   })
 

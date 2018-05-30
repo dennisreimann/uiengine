@@ -1,20 +1,27 @@
 const assert = require('assert')
 const { readFileSync, statSync } = require('fs-extra')
 
+const exists = filePath => {
+  try {
+    const stat = statSync(filePath)
+    return stat.isFile() || stat.isDirectory()
+  } catch (err) {
+    return false
+  }
+}
+
+export const assertExists = filePath => {
+  assert(exists(filePath), `File does not exist: ${filePath}`)
+}
+
+export const assertDoesNotExist = filePath => {
+  assert(!exists(filePath), `File exist: ${filePath}`)
+}
+
 export const assertMatches = (content, regexp) => {
   const match = content.match(regexp)
 
   assert(match, `\n\n${content}\n\ndoes not match\n\n${regexp}`)
-}
-
-export const assertExists = filePath => {
-  let exists = false
-  try {
-    const stat = statSync(filePath)
-    exists = stat.isFile() || stat.isDirectory()
-  } catch (err) {}
-
-  assert(exists, `File does not exist: ${filePath}`)
 }
 
 export const assertDoesNotMatch = (content, regexp) => {

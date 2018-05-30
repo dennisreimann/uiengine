@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.21.0]
+
+### Added
+
+- Rebuild variants on preview template change
+
 ## [0.20.0] - 2018-05-24
 
 ### Added
