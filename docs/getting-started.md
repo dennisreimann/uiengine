@@ -6,24 +6,16 @@ If that is not the case and you get errors when running the `uiengine` command, 
 ## 🏎 TL;DR – The fast lane
 
 ```bash
-mkdir uiengine-test && cd uiengine-test && npm init
+mkdir uiengine-demo && cd uiengine-demo && npm init
 npm install --save-dev @uiengine/core @uiengine/adapter-html
-uiengine init
-uiengine component button
-uiengine page atoms molecules organisms
-uiengine build
-```
-
-Now you have a basic test project setup and can read about the steps in detail …
-
-You can also use the demo flag when initializing the project:
-
-```bash
 uiengine init --demo
+uiengine build --serve --watch
 ```
 
 This generates some demo pages and components to give a basic overview for some of the features.
 Beware: It uses the html adapter, hence the components are very simplistic!
+
+Now you have a basic demo project setup and can read about the steps in detail …
 
 ## 📦 How to install the UIengine?
 

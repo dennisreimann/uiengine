@@ -26,6 +26,20 @@ and the
 There is also an
 [introduction video](https://www.youtube.com/watch?v=OKHAhIQLvjU).
 
+## 🏎 Quickstart
+
+To explore the features yourself you can quickly initialize a project with some demo content:
+
+```bash
+mkdir uiengine-demo && cd uiengine-demo && npm init
+npm install --save-dev @uiengine/core @uiengine/adapter-html
+uiengine init --demo
+uiengine build --serve --watch
+```
+
+See the [getting started guide](https://dennisreimann.github.io/uiengine/getting-started.html)
+for further details.
+
 ## 🔩 Technical TL;DR
 
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
@@ -33,7 +47,6 @@ There is also an
 [![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/uiengine/badge.svg)](https://snyk.io/test/github/dennisreimann/uiengine)
 [![Coverage Status](https://coveralls.io/repos/github/dennisreimann/uiengine/badge.svg?branch=master)](https://coveralls.io/github/dennisreimann/uiengine?branch=master)
 [![Maintained with lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
-
 
 ### ⚒ How does it work?
 
