@@ -26,7 +26,6 @@
     "handlebars": "^4.0.0"
   },
   "peerDependencies": {
-    "@uiengine/core": "^0.19.0",
     "handlebars": "^4.0.0"
   },
   "scripts": {
