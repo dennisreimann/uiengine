@@ -98,7 +98,8 @@ export async function generatePagesWithTemplate (state, template) {
 export async function generatePageWithTokens (state, pageId) {
   debug2(state, `Builder.generatePageWithTokens(${pageId}):start`)
 
-  const { pages, config: { name, target, template, version } } = state
+  const { pages, config } = state
+  const { name, target, version } = config
   const identifier = `Page "${pageId}"`
   const page = pages[pageId]
   if (!page) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
@@ -108,6 +109,7 @@ export async function generatePageWithTokens (state, pageId) {
     const { id, title } = page
     const data = page
     const content = await Interface.render(state, 'tokens', page)
+    const template = page.template || config.template
     let { rendered } = await render(state, template, data, identifier)
     rendered = replaceComment('content', rendered, content)
     rendered = replaceComment('title', rendered, `${title} • ${name} (${version})`)
@@ -174,6 +176,30 @@ export async function generateVariantsWithTemplate (state, template) {
   await Promise.all(builds)
 
   debug3(state, `Builder.generateVariantsWithTemplate(${template}):end`)
+}
+
+export async function generateTokensWithTemplate (state, template) {
+  debug3(state, `Builder.generateTokensWithTemplate(${template}):start`)
+
+  const isPreviewTemplate = template === state.config.template
+  const affectedPages = R.filter(page => {
+    // the page must be regenerated in two cases:
+    // 1.) the template is the general preview template and
+    //     the variant does not use a custom template
+    // 2.) the template matches the page template
+    return PageUtil.isTokensPage(page.type) &&
+      (
+        (isPreviewTemplate && page.template === undefined) ||
+        page.template === template
+      )
+  }, state.pages)
+  const pageIds = Object.keys(affectedPages)
+  const build = R.partial(generatePageWithTokens, [state])
+  const builds = R.map(build, pageIds)
+
+  await Promise.all(builds)
+
+  debug3(state, `Builder.generateTokensWithTemplate(${template}):end`)
 }
 
 async function generateState (state, change) {

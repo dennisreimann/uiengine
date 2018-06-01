@@ -119,34 +119,34 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.38.tgz#c1be40aa933723c608820a99a373a16d215a1ca2"
 
 "@uiengine/adapter-ejs@file:../../packages/adapter-ejs":
-  version "0.19.3"
+  version "0.20.0"
 
 "@uiengine/adapter-handlebars@file:../../packages/adapter-handlebars":
-  version "0.19.3"
+  version "0.20.0"
 
 "@uiengine/adapter-html@file:../../packages/adapter-html":
-  version "0.19.3"
+  version "0.20.0"
 
 "@uiengine/adapter-marko@file:../../packages/adapter-marko":
-  version "0.19.3"
+  version "0.20.0"
 
 "@uiengine/adapter-pug@file:../../packages/adapter-pug":
-  version "0.19.3"
+  version "0.20.0"
 
 "@uiengine/adapter-react@file:../../packages/adapter-react":
-  version "0.19.3"
+  version "0.20.0"
 
 "@uiengine/adapter-vue@file:../../packages/adapter-vue":
-  version "0.19.3"
+  version "0.20.0"
   dependencies:
     vue-component-compiler "git+https://github.com/znck/vue-component-compiler.git"
     vue-server-renderer "^2.3.0"
     vue-template-compiler "^2.3.0"
 
 "@uiengine/core@file:../../packages/core":
-  version "0.19.3"
+  version "0.20.0"
   dependencies:
-    "@uiengine/ui" "^0.19.3"
+    "@uiengine/ui" "^0.20.0"
     chalk "^2.4.1"
     cosmiconfig "^5.0.3"
     fs-extra "^6.0.1"
@@ -160,23 +160,9 @@
     browser-sync "^2.24.4"
     chokidar "^2.0.3"
 
-"@uiengine/ui@^0.19.3":
-  version "0.19.3"
-  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-0.19.3.tgz#bbaf981639793b7eb548d689d6f7aebc68005545"
-  dependencies:
-    color "^3.0.0"
-    ejs "^2.5.9"
-    fuse.js "^3.2.0"
-    highlight.js "^9.12.0"
-    htmlescape "^1.1.1"
-    vue "^2.5.16"
-    vue-analytics "^5.10.4"
-    vue-meta "^1.5.0"
-    vue-router "^3.0.1"
-    vuex "^3.0.1"
-
-"@uiengine/ui@file:../../packages/ui":
-  version "0.19.3"
+"@uiengine/ui@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-0.20.0.tgz#e756365701212acddeaf8919e092749108a13803"
   dependencies:
     color "^3.0.0"
     ejs "^2.6.1"
@@ -184,7 +170,21 @@
     highlight.js "^9.12.0"
     htmlescape "^1.1.1"
     vue "^2.5.16"
-    vue-analytics "^5.10.6"
+    vue-analytics "^5.12.2"
+    vue-meta "^1.5.0"
+    vue-router "^3.0.1"
+    vuex "^3.0.1"
+
+"@uiengine/ui@file:../../packages/ui":
+  version "0.20.0"
+  dependencies:
+    color "^3.0.0"
+    ejs "^2.6.1"
+    fuse.js "^3.2.0"
+    highlight.js "^9.12.0"
+    htmlescape "^1.1.1"
+    vue "^2.5.16"
+    vue-analytics "^5.12.2"
     vue-meta "^1.5.0"
     vue-router "^3.0.1"
     vuex "^3.0.1"
@@ -2935,10 +2935,6 @@ editorconfig@^0.13.2:
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
-
-ejs@^2.5.9:
-  version "2.5.9"
-  resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.9.tgz#7ba254582a560d267437109a68354112475b0ce5"
 
 ejs@^2.6.1:
   version "2.6.1"
@@ -8410,13 +8406,9 @@ void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
-vue-analytics@^5.10.4:
-  version "5.10.4"
-  resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.10.4.tgz#fb812b71e6136c0b9aa4ebe00f5928167f410e4c"
-
-vue-analytics@^5.10.6:
-  version "5.10.6"
-  resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.10.6.tgz#49b1a1de634ea9ca6be573dde88028124bbdcad8"
+vue-analytics@^5.12.2:
+  version "5.12.2"
+  resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.12.2.tgz#6318be3cfa0ce7fa6b00cb8a9fcd42268e75fab8"
 
 "vue-component-compiler@git+https://github.com/znck/vue-component-compiler.git":
   version "3.0.0"

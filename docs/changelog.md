@@ -4,7 +4,7 @@
 
 ### Added
 
-- Rebuild variants on preview template change
+- Rebuild variants and tokens on preview template change
 
 ## [0.20.0] - 2018-05-24
 

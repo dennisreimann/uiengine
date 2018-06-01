@@ -251,6 +251,7 @@ async function removeVariant (id, change) {
 async function regenerateTemplate (id, change) {
   await Promise.all([
     Builder.generateVariantsWithTemplate(_state, id),
+    Builder.generateTokensWithTemplate(_state, id),
     Builder.generatePagesWithTemplate(_state, id),
     Builder.generateIncrement(_state, change)
   ])

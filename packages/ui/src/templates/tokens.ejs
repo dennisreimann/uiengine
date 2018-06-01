@@ -77,6 +77,12 @@ _%>
               <dd class="uie-font-token__value"><%%= token.fontweight %%></dd>
             </div>
           <%% } %%>
+          <%% if (token.variable) { %%>
+            <div class="uie-font-token__info">
+              <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.variable') %%></dt>
+              <dd class="uie-font-token__value uie-color-token__value--code"><%%= token.variable %%></dd>
+            </div>
+          <%% } %%>
           <div class="uie-font-token__info uie-font-token__info--example">
             <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.demo') %%></dt>
             <dd class="uie-font-token__value">
@@ -112,12 +118,6 @@ _%>
             <div class="uie-font-token__info">
               <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.description') %%></dt>
               <dd class="uie-font-token__value"><%%= token.description %%></dd>
-            </div>
-          <%% } %%>
-          <%% if (token.variable) { %%>
-            <div class="uie-font-token__info">
-              <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.variable') %%></dt>
-              <dd class="uie-font-token__value"><%%= token.variable %%></dd>
             </div>
           <%% } %%>
           <%% if (token.license) { %%>

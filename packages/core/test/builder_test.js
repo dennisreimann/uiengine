@@ -33,7 +33,7 @@ const state = {
       title: 'Home',
       path: '',
       content: '<h1>Homepage</h1>',
-      childIds: ['patterns', 'testcases']
+      childIds: ['patterns', 'testcases', 'tokens', 'tokens-with-custom-template']
     }),
 
     'patterns': Factory.page('patterns', {
@@ -45,6 +45,19 @@ const state = {
     'tokens': Factory.page('tokens', {
       title: 'Tokens',
       path: 'tokens',
+      tokens: [
+        {
+          name: 'Test',
+          type: 'color',
+          value: '#123456'
+        }
+      ]
+    }),
+
+    'tokens-with-custom-template': Factory.page('tokens-with-custom-template', {
+      title: 'Tokens with custom template',
+      path: 'tokens-with-custom-template',
+      template: 'page.pug',
       tokens: [
         {
           name: 'Test',
@@ -95,6 +108,7 @@ const state = {
       type: 'entities'
     })
   },
+
   navigation: {
     'index': Factory.navigation('index', {
       itemId: 'index',
@@ -192,6 +206,7 @@ const state = {
       ]
     })
   },
+
   entities: {
     Entity: {
       title: {
@@ -284,6 +299,22 @@ describe('Builder', () => {
       await Builder.generatePagesWithTemplate(state, 'page.pug')
 
       assertExists(join(target, '_pages', 'prototype', 'custom-page.html'))
+    })
+  })
+
+  describe('#generateTokensWithTemplate', () => {
+    it('should generate tokens using the default preview template', async () => {
+      await Builder.generateTokensWithTemplate(state, 'uiengine.pug')
+
+      assertExists(join(target, '_tokens', 'tokens.html'))
+      assertDoesNotExist(join(target, '_tokens', 'tokens-with-custom-template.html'))
+    })
+
+    it('should generate tokens having a custom template', async () => {
+      await Builder.generateTokensWithTemplate(state, 'page.pug')
+
+      assertExists(join(target, '_tokens', 'tokens-with-custom-template.html'))
+      assertDoesNotExist(join(target, '_tokens', 'tokens.html'))
     })
   })
 

@@ -90,10 +90,10 @@ export const parentIdForPageId = (pageIds, pageId) => {
 }
 
 export const determineType = attributes => {
-  if (attributes.template) {
-    return PAGE_TYPE_TEMPLATE
-  } else if (attributes.tokens) {
+  if (attributes.tokens) {
     return PAGE_TYPE_TOKENS
+  } else if (attributes.template) {
+    return PAGE_TYPE_TEMPLATE
   } else {
     return PAGE_TYPE_DOCUMENTATION
   }
