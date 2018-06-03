@@ -160,7 +160,7 @@ _%>
           <tr class="uie-icon-token">
             <td class="uie-icon-token__value uie-icon-token__value--icon"><%%- token.value %%></td>
             <td class="uie-icon-token__value"><%%= token.name %%></td>
-            <td class="uie-icon-token__value uie-icon-token__value--value"><%%= token.value %%></td>
+            <td class="uie-icon-token__value uie-icon-token__value--value"><%%= token.usage || token.value %%></td>
             <%% if (columns.variable) { %%>
               <td class="uie-icon-token__value uie-icon-token__value--variable"><%%= token.variable %%></td>
             <%% } %%>

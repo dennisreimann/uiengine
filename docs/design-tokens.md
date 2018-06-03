@@ -81,7 +81,7 @@ tokens:
 The color type supports the following attributes:
 
 - `name`: The color name
-- `value`: The CSS to render the font
+- `value`: The CSS value of the color
 - `text`: An optional text for the sample. Defaults to "The quick brown fox jumps over the lazy dog"
 - `variable`
 - `reference`
@@ -156,7 +156,8 @@ tokens:
 The icon type supports the following attributes:
 
 - `name`: The icon name
-- `value`: The CSS to render the font
+- `value`: The HTML to render the icon
+- `usage`: Alternative usage info, replaces `value`
 - `description`
 - `variable`
 - `reference`
