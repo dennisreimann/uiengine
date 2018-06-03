@@ -12,7 +12,7 @@ icon-position($top = null, $left = null)
 
 link-with-hover($color-base, $color-hover, $underline = true)
   color $color-base
-  transition-duration var(--transition-duration-fast)
+  transition-duration var(--uie-transition-duration-fast)
 
   if $underline
     text-decoration underline
@@ -27,53 +27,53 @@ link-with-hover($color-base, $color-hover, $underline = true)
       fill $color-hover
 
   .icon
-    transition-duration var(--transition-duration-fast)
+    transition-duration var(--uie-transition-duration-fast)
     fill $color-base
 
 modal-option()
   display block
   width 100%
-  padding var(--space-s) var(--space-m)
+  padding var(--uie-space-s) var(--uie-space-m)
   cursor pointer
-  color var(--color-modal-text)
-  background var(--color-modal-bg)
-  font-size var(--font-size-s)
-  font-family var(--font-family-light)
+  color var(--uie-color-modal-text)
+  background var(--uie-color-modal-bg)
+  font-size var(--uie-font-size-s)
+  font-family var(--uie-font-family-light)
   text-decoration none
   white-space nowrap
 
   .icon
     margin-top -6px
-    margin-right var(--space-s)
-    fill var(--color-modal-text)
+    margin-right var(--uie-space-s)
+    fill var(--uie-color-modal-text)
     icon-size(21px)
     icon-position(6px)
 
   &:focus,
   &:hover,
   &:active
-    color var(--color-modal-text-hover)
-    background var(--color-modal-bg-hover)
+    color var(--uie-color-modal-text-hover)
+    background var(--uie-color-modal-bg-hover)
 
     .icon
-      fill var(--color-modal-text-hover)
+      fill var(--uie-color-modal-text-hover)
 
 code()
-  font-family var(--font-family-code)
-  font-size var(--font-size-s)
+  font-family var(--uie-font-family-code)
+  font-size var(--uie-font-size-s)
   white-space pre
 
 code-block()
   code()
   overflow-x auto
   // defaults, will be overriden by hljs
-  color var(--color-code-text)
-  background-color var(--color-code-bg)
+  color var(--uie-color-code-text)
+  background-color var(--uie-color-code-bg)
   // use important to override hljs styling which differs per theme
-  padding var(--space-m) !important
+  padding var(--uie-space-m) !important
 
 code-inline()
   code()
-  padding var(--space-xxs) var(--space-xs)
-  border-radius var(--space-xs)
-  background-color var(--color-bg-light)
+  padding var(--uie-space-xxs) var(--uie-space-xs)
+  border-radius var(--uie-space-xs)
+  background-color var(--uie-color-bg-light)

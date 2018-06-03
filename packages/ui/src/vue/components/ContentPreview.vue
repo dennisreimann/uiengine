@@ -197,16 +197,16 @@ export default {
       text-align center
       resize horizontal
       // leave space for the resize handle
-      padding-bottom var(--space-m)
+      padding-bottom var(--uie-space-m)
 
     &[data-breakpoint]
       transition-property width
-      transition-duration var(--transition-duration-medium)
+      transition-duration var(--uie-transition-duration-medium)
       transition-timing-function ease-out
 
   &__toggles
     position relative
-    margin-bottom var(--space-s)
+    margin-bottom var(--uie-space-s)
 
     &:before,
     &:after
@@ -215,7 +215,7 @@ export default {
       position absolute
       top calc(50% - 8px)
       content ''
-      background-color var(--color-white)
+      background-color var(--uie-color-white)
       background-size 40px 15px
       background-repeat no-repeat
 
@@ -228,13 +228,13 @@ export default {
       background-image embedurl('../../icons/preview-right.svg')
 
   &__toggle
-    padding-left var(--space-m)
-    padding-right var(--space-m)
-    color var(--color-modal-text)
-    background var(--color-main-bg)
+    padding-left var(--uie-space-m)
+    padding-right var(--uie-space-m)
+    color var(--uie-color-modal-text)
+    background var(--uie-color-main-bg)
     display inline-block
-    font-size var(--font-size-s)
-    font-family var(--font-family-light)
+    font-size var(--uie-font-size-s)
+    font-family var(--uie-font-family-light)
     cursor pointer
 
   &__options
@@ -243,7 +243,7 @@ export default {
     left calc(50% - 5rem)
     width 10rem
     max-height 0
-    transition-duration var(--transition-duration-medium)
+    transition-duration var(--uie-transition-duration-medium)
     transition-property max-height
     transition-timing-function ease-out
     overflow hidden
@@ -253,13 +253,13 @@ export default {
       transition-timing-function ease-in
 
   &__options-inner
-    border 1px solid var(--color-modal-border-outer)
+    border 1px solid var(--uie-color-modal-border-outer)
 
   &__option
     modal-option()
 
   &__option + &__option
-    border-top 1px solid var(--color-modal-border-inner)
+    border-top 1px solid var(--uie-color-modal-border-inner)
 
   &__iframe
     display block

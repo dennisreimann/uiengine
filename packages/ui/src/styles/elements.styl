@@ -1,7 +1,7 @@
 .uie
   height 100%
   line-height 1.5
-  font-family var(--font-family-light)
+  font-family var(--uie-font-family-light)
   @media print
     font-size 10pt
   @media $mq-up_to_m
@@ -29,25 +29,25 @@
   h1
   h2
   h3
-    font-family var(--font-family-bold)
+    font-family var(--uie-font-family-bold)
     font-weight 400
 
   h1
-    font-size var(--font-size-xl)
+    font-size var(--uie-font-size-xl)
     line-height 1.25
 
   h2
-    font-size var(--font-size-l)
+    font-size var(--uie-font-size-l)
     line-height 1.35
 
   h3
-    font-size var(--font-size-m)
+    font-size var(--uie-font-size-m)
 
   h4
   h5
   h6
-    font-family var(--font-family-regular)
-    font-size var(--font-size-m)
+    font-family var(--uie-font-family-regular)
+    font-size var(--uie-font-size-m)
     font-weight normal
 
   em,
@@ -56,48 +56,48 @@
     font-weight normal
 
   em
-    font-family var(--font-family-lightitalic)
+    font-family var(--uie-font-family-lightitalic)
 
   strong
-    font-family var(--font-family-bold)
+    font-family var(--uie-font-family-bold)
 
   em strong,
   strong em
-    font-family var(--font-family-bolditalic)
+    font-family var(--uie-font-family-bolditalic)
 
   table
     border-collapse collapse
 
     caption
-      font-family var(--font-family-regular)
-      font-size var(--font-size-m)
+      font-family var(--uie-font-family-regular)
+      font-size var(--uie-font-size-m)
       text-align left
-      margin-bottom var(--space-s)
+      margin-bottom var(--uie-space-s)
 
     th
-      color var(--color-secondary-text)
+      color var(--uie-color-secondary-text)
       text-align left
-      border-bottom 1px solid var(--color-border-medium)
-      font-family var(--font-family-light)
-      font-size var(--font-size-xs)
+      border-bottom 1px solid var(--uie-color-border-medium)
+      font-family var(--uie-font-family-light)
+      font-size var(--uie-font-size-xs)
       font-weight normal
 
     td
-      border-bottom 1px solid var(--color-border-light)
-      font-size var(--font-size-s)
+      border-bottom 1px solid var(--uie-color-border-light)
+      font-size var(--uie-font-size-s)
 
     th,
     td
-      padding var(--space-xs) var(--space-m)
+      padding var(--uie-space-xs) var(--uie-space-m)
       &:first-child
         padding-left 0
       &:last-child
         padding-right 0
 
   mark
-    padding var(--space-xxs) var(--space-xs)
-    border-radius var(--space-xs)
-    background-color var(--color-accent-light)
+    padding var(--uie-space-xxs) var(--uie-space-xs)
+    border-radius var(--uie-space-xs)
+    background-color var(--uie-color-accent-light)
 
   code
     code-inline()

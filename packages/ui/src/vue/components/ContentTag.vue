@@ -28,11 +28,11 @@ export default {
 <style lang="stylus" scoped>
 .tag
   position relative
-  padding var(--space-xxs) var(--space-s)
-  border 1px solid var(--color-contentheader-tag-text)
-  border-radius var(--space-m)
+  padding var(--uie-space-xxs) var(--uie-space-s)
+  border 1px solid var(--uie-color-contentheader-tag-text)
+  border-radius var(--uie-space-m)
   border-bottom-left-radius 0
-  color var(--color-contentheader-tag-text)
-  font-size var(--font-size-s)
+  color var(--uie-color-contentheader-tag-text)
+  font-size var(--uie-font-size-s)
   text-decoration none
 </style>

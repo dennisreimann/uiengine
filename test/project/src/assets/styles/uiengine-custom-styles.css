@@ -5,13 +5,13 @@
 */
 :root {
   /*
-  --color-accent-light: #D797B3;
-  --color-accent-medium: #D72A47;
-  --color-accent-middark: #323;
-  --color-accent-dark: #221022;
+  --uie-color-accent-light: #D797B3;
+  --uie-color-accent-medium: #D72A47;
+  --uie-color-accent-middark: #323;
+  --uie-color-accent-dark: #221022;
   */
 }
 
 [data-theme="funky"] {
-  --color-topbar-bg: purple;
+  --uie-color-topbar-bg: purple;
 }

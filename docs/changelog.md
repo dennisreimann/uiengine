@@ -6,6 +6,11 @@
 
 - Rebuild variants and tokens on preview template change
 
+### Changed
+
+- CSS custom properties used by UIengine are now prefixed with `--uie-`
+  - In case you are using the [`ui.customStylesFile`](./docs/ui.md#customStylesFile) you need to update the UIengine custom properties.
+
 ## [0.20.0] - 2018-05-24
 
 ### Added

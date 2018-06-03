@@ -149,19 +149,19 @@ export default {
 .code
   &__segment
     .code__expandicon
-      fill var(--color-code-header)
+      fill var(--uie-color-code-header)
     .code__header
-      color var(--color-code-header)
+      color var(--uie-color-code-header)
       &:focus,
       &:hover,
       &:active
-        color var(--color-code-header-hover)
+        color var(--uie-color-code-header-hover)
         .code__expandicon
-          fill var(--color-code-header-hover)
+          fill var(--uie-color-code-header-hover)
       &[aria-expanded="true"]
-        color var(--color-code-header-current)
+        color var(--uie-color-code-header-current)
         .code__expandicon
-          fill var(--color-code-header-current)
+          fill var(--uie-color-code-header-current)
           transform rotate(-180deg)
 
   &__header
@@ -170,16 +170,16 @@ export default {
     background transparent
     align-items center
     justify-content space-between
-    border 1px solid var(--color-border-medium)
-    padding var(--space-s) var(--space-m)
+    border 1px solid var(--uie-color-border-medium)
+    padding var(--uie-space-s) var(--uie-space-m)
     cursor pointer
-    color var(--color-code-header)
+    color var(--uie-color-code-header)
 
   &__segment + &__segment &__header
     border-top 0
 
   &__expandicon
     transition-property transform
-    transition-duration var(--transition-duration-fast)
+    transition-duration var(--uie-transition-duration-fast)
     icon-size(24px)
 </style>

@@ -181,13 +181,13 @@ export default {
 
 <style lang="stylus" scoped>
 .row + .row
-  margin-top var(--space-xl)
+  margin-top var(--uie-space-xl)
 
 select
   display block
   width 260px
-  margin-top var(--space-xs)
-  padding var(--space-s) var(--space-m)
-  font-family var(--font-family-light)
-  font-size var(--font-size-m)
+  margin-top var(--uie-space-xs)
+  padding var(--uie-space-s) var(--uie-space-m)
+  font-family var(--uie-font-family-light)
+  font-size var(--uie-font-size-m)
 </style>

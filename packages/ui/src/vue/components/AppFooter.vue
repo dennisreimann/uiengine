@@ -100,14 +100,14 @@ export default {
 
 <style lang="stylus">
 .footer
-  color var(--color-footer-text)
-  background var(--color-footer-bg)
-  font-size var(--font-size-xs)
-  padding-top var(--space-l)
-  padding-bottom var(--space-l)
+  color var(--uie-color-footer-text)
+  background var(--uie-color-footer-bg)
+  font-size var(--uie-font-size-xs)
+  padding-top var(--uie-space-l)
+  padding-bottom var(--uie-space-l)
 
   a
-    link-with-hover(var(--color-footer-link), var(--color-footer-link-hover), false)
+    link-with-hover(var(--uie-color-footer-link), var(--uie-color-footer-link-hover), false)
     .icon
       icon-size(18px)
       position relative
@@ -117,10 +117,10 @@ export default {
   &__nav
     display flex
     justify-content space-between
-    margin-bottom var(--space-m)
+    margin-bottom var(--uie-space-m)
 
     a + a
-      margin-left var(--space-l)
+      margin-left var(--uie-space-l)
 </style>
 
 <docs>

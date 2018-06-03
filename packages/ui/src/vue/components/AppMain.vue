@@ -25,8 +25,8 @@ export default {
 
 <style lang="stylus">
 .main
-  color var(--color-main-text)
-  background var(--color-main-bg)
+  color var(--uie-color-main-text)
+  background var(--uie-color-main-bg)
 
 .content
   max-width 55rem
@@ -38,38 +38,38 @@ export default {
   // markdown element styles, mostly spacings
   a:not([class]),
   a[class=""] // router-link can attach empty class
-    link-with-hover(var(--color-main-link), var(--color-main-link-hover))
+    link-with-hover(var(--uie-color-main-link), var(--uie-color-main-link-hover))
 
   p:not([class])
-    margin-bottom var(--space-m)
+    margin-bottom var(--uie-space-m)
 
   img:not([class])
     max-width 100%
 
   ol:not([class]),
   ul:not([class])
-    margin-left var(--space-l)
-    margin-bottom var(--space-m)
+    margin-left var(--uie-space-l)
+    margin-bottom var(--uie-space-m)
 
   li:not([class]) + li:not([class])
-    margin-top var(--space-xs)
+    margin-top var(--uie-space-xs)
 
   table:not([class])
-    margin-top var(--space-m)
-    margin-bottom var(--space-xl)
+    margin-top var(--uie-space-m)
+    margin-bottom var(--uie-space-xl)
 
     td:not([class])
       > :last-child
         margin-bottom 0
 
   pre.hljs
-    margin-top var(--space-m)
-    margin-bottom var(--space-m)
+    margin-top var(--uie-space-m)
+    margin-bottom var(--uie-space-m)
 
   pre.hljs,
   mark:not([class]),
   code:not([class])
-    border-radius var(--space-xs)
+    border-radius var(--uie-space-xs)
 
   h1,
   h2,
@@ -78,7 +78,7 @@ export default {
   h5,
   h6
     &:not([class])
-      margin-bottom var(--space-xs)
+      margin-bottom var(--uie-space-xs)
 
   p:not([class]),
   ul:not([class]),
@@ -89,15 +89,15 @@ export default {
       h2,
       h3
         &:not([class])
-          margin-top var(--space-xl)
+          margin-top var(--uie-space-xl)
     +
       h4,
       h5
         &:not([class])
-          margin-top var(--space-l)
+          margin-top var(--uie-space-l)
 
     +
       h6
         &:not([class])
-          margin-top var(--space-m)
+          margin-top var(--uie-space-m)
 </style>

@@ -81,8 +81,8 @@ export default {
     position relative
 
   .main
-    padding-top var(--space-xl)
-    padding-bottom var(--space-xl)
+    padding-top var(--uie-space-xl)
+    padding-bottom var(--uie-space-xl)
 
 @media $mq-l_and_up
   .layout
@@ -112,8 +112,8 @@ export default {
     flex 1
     margin-top var(--topbar-height)
     margin-left var(--navigation-width)
-    padding-top var(--space-xxl)
-    padding-bottom var(--space-xxl)
+    padding-top var(--uie-space-xxl)
+    padding-bottom var(--uie-space-xxl)
 
   .footer
     margin-left var(--navigation-width)
@@ -127,36 +127,36 @@ export default {
 .main,
 .footer
   @media $mq-up_to_m
-    padding-left var(--space-m)
-    padding-right var(--space-m)
+    padding-left var(--uie-space-m)
+    padding-right var(--uie-space-m)
 
   @media $mq-m_to_l
-    padding-left var(--space-l)
-    padding-right var(--space-l)
+    padding-left var(--uie-space-l)
+    padding-right var(--uie-space-l)
 
 .topbar
   @media $mq-l_to_xl
-    padding-left var(--space-m)
-    padding-right var(--space-xl)
+    padding-left var(--uie-space-m)
+    padding-right var(--uie-space-xl)
   @media $mq-xl_and_up
-    padding-left var(--space-m)
-    padding-right var(--space-xxl)
+    padding-left var(--uie-space-m)
+    padding-right var(--uie-space-xxl)
   @media $mq-xxl_and_up
-    padding-left var(--space-m)
-    padding-right var(--space-xxxl)
+    padding-left var(--uie-space-m)
+    padding-right var(--uie-space-xxxl)
 
 .main,
 .main + .footer
   @media $mq-l_and_up
     .navigation[hidden] + &
-      padding-left calc(var(--space-xxl) + var(--space-s))
+      padding-left calc(var(--uie-space-xxl) + var(--uie-space-s))
   @media $mq-l_to_xl
-    padding-left var(--space-xl)
-    padding-right var(--space-xl)
+    padding-left var(--uie-space-xl)
+    padding-right var(--uie-space-xl)
   @media $mq-xl_to_xxl
-    padding-left var(--space-xxl)
-    padding-right var(--space-xxl)
+    padding-left var(--uie-space-xxl)
+    padding-right var(--uie-space-xxl)
   @media $mq-xxl_and_up
-    padding-left var(--space-xxxl)
-    padding-right var(--space-xxxl)
+    padding-left var(--uie-space-xxxl)
+    padding-right var(--uie-space-xxxl)
 </style>

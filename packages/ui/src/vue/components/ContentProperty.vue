@@ -85,7 +85,7 @@ export default {
   &__default,
   &__required
     td&
-      font-family var(--font-family-code)
+      font-family var(--uie-font-family-code)
 
   &__required
     width 4em

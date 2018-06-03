@@ -43,16 +43,16 @@ export default {
 
 <style lang="stylus">
 .navigation
-  color var(--color-navigation-text)
-  background var(--color-navigation-bg)
+  color var(--uie-color-navigation-text)
+  background var(--uie-color-navigation-bg)
 
   @media $mq-up_to_l
-    padding-top var(--space-s)
-    padding-bottom var(--space-s)
+    padding-top var(--uie-space-s)
+    padding-bottom var(--uie-space-s)
   @media $mq-l_and_up
     // align it with the content heading
-    padding-top calc(var(--space-xxl) - var(--space-xs))
-    padding-bottom var(--space-xl)
+    padding-top calc(var(--uie-space-xxl) - var(--uie-space-xs))
+    padding-bottom var(--uie-space-xl)
 
   &__tree
     list-style none
@@ -61,17 +61,17 @@ export default {
     position relative
 
     &--level-0
-      font-size var(--font-size-s)
+      font-size var(--uie-font-size-s)
 
     &--level-0 + &--level-0
-      margin-top var(--space-xs)
+      margin-top var(--uie-space-xs)
 
     &--level-0:not(&--collapsed) + &--level-0
-      margin-top var(--space-l)
+      margin-top var(--uie-space-l)
 
     @media $mq-l_and_up
       &:not(&--level-0)
-        font-size var(--font-size-xs)
+        font-size var(--uie-font-size-xs)
 
   &__item--collapsed &__tree
     display none
@@ -92,7 +92,7 @@ export default {
     &:hover,
     &:active
       .navigation__icon
-        fill var(--color-navigation-text-hover)
+        fill var(--uie-color-navigation-text-hover)
     @media $mq-up_to_m
       top 5px
     @media $mq-m_to_l
@@ -105,62 +105,62 @@ export default {
 
     .navigation__item--level-0 &,
     .navigation__item--level-1 &
-      left var(--space-s)
+      left var(--uie-space-s)
 
     .navigation__item--level-2 &,
     .navigation__item--level-3 &,
     .navigation__item--level-4 &,
     .navigation__item--level-5 &
-      left calc(var(--space-s) + var(--space-xl))
+      left calc(var(--uie-space-s) + var(--uie-space-xl))
 
   &__icon
     icon-size(24px)
-    fill var(--color-navigation-text)
+    fill var(--uie-color-navigation-text)
     transition-property transform
-    transition-duration var(--transition-duration-fast)
+    transition-duration var(--uie-transition-duration-fast)
 
   &__link
     display block
     color inherit
     text-decoration none
-    border-left var(--space-xs) solid transparent
-    padding-right var(--space-m)
+    border-left var(--uie-space-xs) solid transparent
+    padding-right var(--uie-space-m)
     &[href]
       &:focus,
       &:hover,
       &:active
-        color var(--color-navigation-text-hover)
+        color var(--uie-color-navigation-text-hover)
     @media $mq-up_to_l
-      padding-top var(--space-m)
-      padding-bottom var(--space-m)
+      padding-top var(--uie-space-m)
+      padding-bottom var(--uie-space-m)
     @media $mq-l_and_up
-      padding-top var(--space-s)
-      padding-bottom var(--space-s)
+      padding-top var(--uie-space-s)
+      padding-bottom var(--uie-space-s)
 
     .navigation__item--level-0 &
-      padding-left calc(var(--space-xxl) + var(--space-xs))
-      color var(--color-navigation-text)
-      background-color var(--color-navigation-bg)
+      padding-left calc(var(--uie-space-xxl) + var(--uie-space-xs))
+      color var(--uie-color-navigation-text)
+      background-color var(--uie-color-navigation-bg)
 
     .navigation__item--level-1 &
-      padding-left calc(var(--space-xxl) + var(--space-xs))
-      color var(--color-navigation-text-subnav)
-      background-color var(--color-navigation-bg-subnav)
+      padding-left calc(var(--uie-space-xxl) + var(--uie-space-xs))
+      color var(--uie-color-navigation-text-subnav)
+      background-color var(--uie-color-navigation-bg-subnav)
 
     .navigation__item--level-2 &,
     .navigation__item--level-3 &,
     .navigation__item--level-4 &,
     .navigation__item--level-5 &
-      padding-left calc(var(--space-xxl) + var(--space-xl))
-      color var(--color-navigation-text-subnav)
-      background-color var(--color-navigation-bg-subnav)
+      padding-left calc(var(--uie-space-xxl) + var(--uie-space-xl))
+      color var(--uie-color-navigation-text-subnav)
+      background-color var(--uie-color-navigation-bg-subnav)
 
   &__item--current > &__link
-    font-family var(--font-family-bold)
-    color var(--color-navigation-text-current) !important
-    background-color var(--color-navigation-bg-current) !important
-    border-left-color var(--color-navigation-border-current)
+    font-family var(--uie-font-family-bold)
+    color var(--uie-color-navigation-text-current) !important
+    background-color var(--uie-color-navigation-bg-current) !important
+    border-left-color var(--uie-color-navigation-border-current)
 
   &__item--current > &__itemtoggle &__icon
-    fill var(--color-navigation-text-current) !important
+    fill var(--uie-color-navigation-text-current) !important
 </style>
