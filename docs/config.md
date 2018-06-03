@@ -112,6 +112,11 @@ It should contain references to your styles and scripts, so that the rendered ma
 
 It must also include the `<!-- uiengine:content -->` comment, which will be replaced with the rendered markup.
 
+Other comments that also get replaced:
+
+- `<!-- uiengine:title -->` is the page title: `<title><!-- uiengine:title --></title>`
+- `<!-- uiengine:class -->` is the page class: `<html class="<!-- uiengine:class -->">`
+
 ### UI
 
 See the [UI docs](./ui.md) for details.

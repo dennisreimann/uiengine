@@ -45,6 +45,8 @@ describe('CLI', function () {
 
       // preview
       const previewPath = join(testPath, 'src/templates/uiengine.html')
+      assertContentMatches(previewPath, '<!-- uiengine:title -->')
+      assertContentMatches(previewPath, '<!-- uiengine:class -->')
       assertContentMatches(previewPath, '<!-- uiengine:content -->')
       assertContentMatches(previewPath, 'add your custom styles here')
       assertContentMatches(previewPath, 'add your custom scripts here')

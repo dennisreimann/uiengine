@@ -5,6 +5,8 @@
 ### Added
 
 - Rebuild variants and tokens on preview template change
+- The comment `<!-- uiengine:class -->` now also gets replaced in the preview template
+  - This should be added to the `html` tag and can be used for customizing special previews.
 
 ### Changed
 

@@ -147,7 +147,7 @@ const startServer = (state, opts) => {
         // whole iframe host in case just the iframe content changes.
         // as the browser-sync client scripts loads asynchronously, we may need to
         // retrigger this function a few times.
-        return match + snippet + `<script>
+        return match + `\n<!-- UIengine: inject start -->\n${snippet}\n<script>
         let retries = 0;
         const setupSocket = () => {
           const { socket } = window.___browserSync___ || {};
@@ -167,7 +167,7 @@ const startServer = (state, opts) => {
           }
         }
         setupSocket();
-        </script>`
+        </script>\n<!-- UIengine: inject end -->`
       }
     }
   }

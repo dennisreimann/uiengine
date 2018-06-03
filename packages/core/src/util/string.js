@@ -6,6 +6,9 @@ export const titleize = string =>
     .map(w => w.charAt(0).toUpperCase() + w.slice(1))
     .join(' ')
 
+export const dasherize = string =>
+  String(string).replace(/\W+/gi, '-')
+
 export const hasContent = content =>
   !!content && content.replace(HEADING_REGEXP, '').trim().length > 0
 

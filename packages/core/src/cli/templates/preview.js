@@ -1,7 +1,7 @@
 export const template = title =>
   `
 <!DOCTYPE html>
-<html>
+<html class="<!-- uiengine:class -->">
   <head>
     <title><!-- uiengine:title --></title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -14,7 +14,7 @@ export const template = title =>
     <!-- uiengine:content -->
 
     <!-- add your custom scripts here:
-    <script src="/scripts/my.js" defer></script>
+    <script src="/scripts/my.js"></script>
     -->
   </body>
 </html>

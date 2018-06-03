@@ -4,6 +4,7 @@ const Interface = require('./interface')
 const Connector = require('./connector')
 const File = require('./util/file')
 const PageUtil = require('./util/page')
+const { dasherize } = require('./util/string')
 const { error } = require('./util/message')
 const { debug2, debug3, debug4 } = require('./util/debug')
 
@@ -112,6 +113,7 @@ export async function generatePageWithTokens (state, pageId) {
     const template = page.template || config.template
     let { rendered } = await render(state, template, data, identifier)
     rendered = replaceComment('content', rendered, content)
+    rendered = replaceComment('class', rendered, `uie-tokens uie-tokens--${dasherize(id)}`)
     rendered = replaceComment('title', rendered, `${title} • ${name} (${version})`)
 
     // write file
@@ -135,6 +137,7 @@ export async function generateVariant (state, variant) {
   let { rendered } = await render(state, template, data, identifier)
   rendered = replaceComment('content', rendered, variant.rendered)
   rendered = replaceComment('title', rendered, `${component.title}: ${variant.title} • ${config.name} (${config.version})`)
+  rendered = replaceComment('class', rendered, `uie-variant uie-variant--${dasherize(variant.componentId)} uie-variant--${dasherize(variant.id)}`)
 
   // write file
   const filePath = resolve(config.target, '_variants', `${variant.id}.html`)
@@ -237,6 +240,7 @@ async function generateSketch (state, change) {
   let { rendered } = await render(state, template, data, identifier)
   rendered = replaceComment('content', rendered, content)
   rendered = replaceComment('title', rendered, `HTML Sketchapp Export • ${name} (${version})`)
+  rendered = replaceComment('class', rendered, 'uie-html-sketchapp')
 
   // write file
   const filePath = resolve(target, '_sketch.html')
