@@ -2,7 +2,7 @@
   <section class="page">
     <content-header
       :title="title"
-      class="sob-l"
+      class="uie-sob-l"
     />
     <article class="content">
       <p v-if="results.length === 0">{{ 'search.no_results' | localize }}</p>

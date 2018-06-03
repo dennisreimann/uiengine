@@ -3,13 +3,13 @@
     <section class="page">
       <content-header
         :title="page.title"
-        class="sob-m"
+        class="uie-sob-m"
       >
         <content-tag
           v-for="tag in page.tags"
           :key="tag"
           :tag="tag"
-          class="sob-m"
+          class="uie-sob-m"
         />
         <div
           v-if="hasInfo && hasProperties"
@@ -43,7 +43,7 @@
 
       <div
         v-if="hasInfo || hasProperties"
-        class="sot-xs"
+        class="uie-sot-xs"
       >
         <div
           v-if="hasInfo"
@@ -73,13 +73,13 @@
               :title="templateId"
               :entities="entities"
               :properties="properties"
-              class="sob-xl"
+              class="uie-sob-xl"
             />
           </div>
         </div>
       </div>
 
-      <content-header class="sob-m">
+      <content-header class="uie-sob-m">
         <div
           v-if="hasPreview && hasCode"
           role="tablist"
@@ -122,7 +122,7 @@
 
     <div
       v-if="hasPreview || hasCode"
-      class="sot-xl"
+      class="uie-sot-xl"
     >
       <div
         v-if="hasPreview"

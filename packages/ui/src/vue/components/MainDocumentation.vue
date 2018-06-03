@@ -2,13 +2,13 @@
   <section class="page">
     <content-header
       :title="page.title"
-      class="sob-m"
+      class="uie-sob-m"
     >
       <content-tag
         v-for="tag in page.tags"
         :key="tag"
         :tag="tag"
-        class="sob-m"
+        class="uie-sob-m"
       />
     </content-header>
     <article

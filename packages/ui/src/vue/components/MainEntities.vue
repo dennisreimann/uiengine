@@ -2,7 +2,7 @@
   <section class="page">
     <content-header
       :title="page.title"
-      class="sob-l"
+      class="uie-sob-l"
     />
     <article class="content">
       <content-properties
@@ -11,7 +11,7 @@
         :title="entityId"
         :entities="entities"
         :properties="properties"
-        class="sob-xxl"
+        class="uie-sob-xxl"
       />
     </article>
   </section>

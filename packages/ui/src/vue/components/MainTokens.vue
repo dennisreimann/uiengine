@@ -3,17 +3,17 @@
     <section class="page">
       <content-header
         :title="page.title"
-        class="sob-m"
+        class="uie-sob-m"
       >
         <content-tag
           v-for="tag in page.tags"
           :key="tag"
           :tag="tag"
-          class="sob-m"
+          class="uie-sob-m"
         />
       </content-header>
 
-      <div class="sot-xs">
+      <div class="uie-sot-xs">
         <div
           v-if="page.content"
           class="content"
@@ -22,7 +22,7 @@
       </div>
     </section>
 
-    <div class="sot-xl">
+    <div class="uie-sot-xl">
       <content-preview
         :id="id"
         :path="previewPath"

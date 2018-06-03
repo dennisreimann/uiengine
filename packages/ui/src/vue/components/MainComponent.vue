@@ -43,7 +43,7 @@
 
       <div
         v-if="hasInfo || hasProperties"
-        class="sot-xs"
+        class="uie-sot-xs"
       >
         <div
           v-if="hasInfo"
@@ -59,7 +59,7 @@
           />
           <div
             v-if="hasManyVariants"
-            class="content sot-l fs-s"
+            class="content uie-uie-sot-l uie-fs-s"
           >
             <ul>
               <li
@@ -91,7 +91,7 @@
               :title="componentId"
               :entities="entities"
               :properties="properties"
-              class="sob-xl"
+              class="uie-sob-xl"
             />
           </div>
         </div>

@@ -2,7 +2,7 @@
   <section class="page">
     <content-header
       :title="'not_found.title' | localize"
-      class="sob-m"
+      class="uie-sob-m"
     />
     <article class="content">{{ 'not_found.content' | localize }}</article>
   </section>

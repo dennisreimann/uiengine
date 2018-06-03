@@ -3,7 +3,7 @@
   --background-color: #FFF;
 }
 
-.theme-funky:root {
+[data-theme="funky"]:root {
   --text-color: purple;
   --background-color: yellow;
 }
