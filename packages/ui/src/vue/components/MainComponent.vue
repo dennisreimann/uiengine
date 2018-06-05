@@ -59,7 +59,7 @@
           />
           <div
             v-if="hasManyVariants"
-            class="content uie-uie-sot-l uie-fs-s"
+            class="content uie-sot-l uie-fs-s"
           >
             <ul>
               <li
