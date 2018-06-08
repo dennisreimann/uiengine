@@ -135,7 +135,9 @@
           :id="id"
           :path="previewPath"
           :title="page.title"
+          :viewports="config.ui.viewports"
           :breakpoints="config.ui.breakpoints"
+          type="template"
         />
       </div>
 

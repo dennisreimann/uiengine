@@ -4,6 +4,8 @@
 
 ### Added
 
+- Viewports are a new preview mode in addition to breakpoints
+  - See the [`ui.viewports`](./docs/ui.md#viewports) documentation for details
 - Rebuild variants and tokens on preview template change
 - The comment `<!-- uiengine:class -->` now also gets replaced in the preview template
   - This should be added to the `html` tag and can be used for customizing special previews.

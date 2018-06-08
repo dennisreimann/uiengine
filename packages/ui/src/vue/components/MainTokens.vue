@@ -27,6 +27,7 @@
         :id="id"
         :path="previewPath"
         :title="page.title"
+        type="tokens"
       />
     </div>
   </div>

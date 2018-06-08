@@ -81,7 +81,51 @@ Available options:
 ### `breakpoints`
 
 The breakpoints defined here will be shown in the preview settings.
-Declare them with the name as key and the minimum media query pixel being the value.
+Declare the breakpoints with the name as key and the minimum media query pixel being the value:
+
+```js
+breakpoints: {
+  XS: 320,
+  S: 560,
+  M: 768,
+  L: 960,
+  XL: 1280
+}
+```
+
+### `viewports`
+
+The viewports defined here will be shown in the preview settings.
+Declare the viewports with the name as key and the `width` (required) and `height` (optional) being the value:
+
+```js
+viewports: {
+  Phone: {
+    width: 320
+  },
+  Tablet: {
+    width: 768
+  },
+  Desktop: {
+    width: 1280
+  }
+}
+```
+
+If the height is defined, the preview container will be scrollable.
+It the height is omitted, the preview content will define the height – just like with `breakpoints`.
+
+### `defaultPreviewMode`
+
+When viewports and breakpoints are defined, breakpoints take precedence.
+You can also define `defaultPreviewMode: 'viewports'` to switch this default.
+
+Available options:
+
+- `breakpoints` (default)
+- `viewports`
+
+The preview mode can also be switched in the preference settings.
 
 ### `themes`
 

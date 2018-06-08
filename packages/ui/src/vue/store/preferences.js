@@ -1,15 +1,17 @@
 import { upcaseFirstChar } from '../../util'
 
 const appState = window.UIengine.state
+const ui = appState.config && appState.config.ui
 
 const properties = {
   hljs: document.getElementById('hljs').getAttribute('data-default'),
   locale: document.documentElement.getAttribute('lang'),
-  currentTheme: (appState.config && appState.config.ui && appState.config.ui.themes && appState.config.ui.themes[0]),
+  currentTheme: (ui && ui.themes && ui.themes[0]),
   navigationCollapsed: false,
   navigationItemsCollapsed: {},
   searchCollapsed: true,
-  previewWidths: {}
+  previewWidths: {},
+  previewMode: (ui && ui.defaultPreviewMode) || 'breakpoints'
 }
 
 // https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats

@@ -197,7 +197,6 @@ export default {
 
     &-option
       modal-option()
-      text-align left
 
     &-option + &-option
       border-top 1px solid var(--uie-color-modal-border-inner)

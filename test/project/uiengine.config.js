@@ -1,4 +1,5 @@
 const breakpoints = require('./src/lib/breakpoints.json')
+const viewports = require('./src/lib/viewports.json')
 const pugAdapterOptions = require('./src/lib/pug-adapter-options')
 const vueAdapterOptions = require('./src/lib/vue-adapter-options')
 
@@ -62,7 +63,9 @@ module.exports = {
         title: 'Funky crazy awesome'
       }
     ],
-    breakpoints
+    breakpoints,
+    viewports,
+    defaultPreviewMode: 'viewports'
   },
 
   browserSync: {

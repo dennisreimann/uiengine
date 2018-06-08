@@ -37,10 +37,21 @@ module.exports = {
     lang: 'en',
     // hljs: 'atom-one-dark',
     // customStylesFile: '/path-to-overrides.css',
+    viewports: {
+      Phone: {
+        width: 320
+      },
+      Tablet: {
+        width: 768
+      },
+      Desktop: {
+        width: 1280
+      }
+    },
     breakpoints: {
       XS: 320,
       S: 560,
-      M: 760,
+      M: 768,
       L: 960,
       XL: 1280
     }

@@ -51,7 +51,8 @@ module.exports = {
   'settings': {
     'title': 'Einstellungen',
     'locale': 'Sprache',
-    'hljs': 'Highlight-Theme'
+    'hljs': 'Highlight-Theme',
+    'preview_mode': 'Vorschaumodus'
   },
   'not_found': {
     'title': 'Nicht gefunden',

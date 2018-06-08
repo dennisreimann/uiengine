@@ -125,11 +125,11 @@ export default {
 // aligned container paddings
 .topbar,
 .main,
-.footer
+.footer,
+.sih--main
   @media $mq-up_to_m
     padding-left var(--uie-space-m)
     padding-right var(--uie-space-m)
-
   @media $mq-m_to_l
     padding-left var(--uie-space-l)
     padding-right var(--uie-space-l)
@@ -146,7 +146,8 @@ export default {
     padding-right var(--uie-space-xxxl)
 
 .main,
-.main + .footer
+.main + .footer,
+.sih--main
   @media $mq-l_and_up
     .navigation[hidden] + &
       padding-left calc(var(--uie-space-xxl) + var(--uie-space-s))
@@ -159,4 +160,24 @@ export default {
   @media $mq-xxl_and_up
     padding-left var(--uie-space-xxxl)
     padding-right var(--uie-space-xxxl)
+
+.soh--main-escape
+  @media $mq-up_to_m
+    margin-left calc(var(--uie-space-m) * -1)
+    margin-right calc(var(--uie-space-m) * -1)
+  @media $mq-m_to_l
+    margin-left calc(var(--uie-space-l) * -1)
+    margin-right calc(var(--uie-space-l) * -1)
+  @media $mq-l_and_up
+    .navigation[hidden] + &
+      margin-left calc((var(--uie-space-xxl) + var(--uie-space-s)) * -1)
+  @media $mq-l_to_xl
+    margin-left calc(var(--uie-space-xl) * -1)
+    margin-right calc(var(--uie-space-xl) * -1)
+  @media $mq-xl_to_xxl
+    margin-left calc(var(--uie-space-xxl) * -1)
+    margin-right calc(var(--uie-space-xxl) * -1)
+  @media $mq-xxl_and_up
+    margin-left calc(var(--uie-space-xxxl) * -1)
+    margin-right calc(var(--uie-space-xxxl) * -1)
 </style>

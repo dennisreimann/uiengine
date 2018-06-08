@@ -1,0 +1,12 @@
+{
+  "Phone": {
+    "width": 320,
+    "height": 568
+  },
+  "Tablet": {
+    "width": 768
+  },
+  "Desktop": {
+    "width": 1200
+  }
+}

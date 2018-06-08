@@ -20,6 +20,26 @@
           </option>
         </select>
       </div>
+
+      <div
+        v-if="hasPreviewModes"
+        class="row"
+      >
+        <label for="previewMode">{{ 'settings.preview_mode' | localize }}</label>
+        <select
+          id="previewMode"
+          v-model="previewMode"
+        >
+          <option
+            v-for="(title, value) in previewModeOptions"
+            :key="value"
+            :value="value"
+            :selected="previewMode === value">
+            {{ title }}
+          </option>
+        </select>
+      </div>
+
       <div class="row">
         <label for="hljs">{{ 'settings.hljs' | localize }}</label>
         <select
@@ -56,8 +76,13 @@ export default {
   data () {
     return {
       localeOptions: {
-        en: 'English',
-        de: 'Deutsch'
+        'en': 'English',
+        'de': 'Deutsch'
+      },
+
+      previewModeOptions: {
+        'breakpoints': 'Breakpoints',
+        'viewports': 'Viewports'
       },
 
       hljsOptions: [
@@ -145,11 +170,21 @@ export default {
   },
 
   computed: {
+    ...mapGetters('state', ['config']),
+
     locale: {
       get: mapGetters('preferences', ['locale']).locale,
 
       set (newValue) {
         this.setLocale(newValue)
+      }
+    },
+
+    previewMode: {
+      get: mapGetters('preferences', ['previewMode']).previewMode,
+
+      set (newValue) {
+        this.setPreviewMode(newValue)
       }
     },
 
@@ -164,11 +199,16 @@ export default {
 
     title () {
       return this.$options.filters.localize('settings.title')
+    },
+
+    hasPreviewModes () {
+      const { ui } = this.config
+      return !!(ui && ui.breakpoints && ui.viewports)
     }
   },
 
   methods: {
-    ...mapMutations('preferences', ['setLocale', 'setHljs'])
+    ...mapMutations('preferences', ['setLocale', 'setPreviewMode', 'setHljs'])
   },
 
   metaInfo () {

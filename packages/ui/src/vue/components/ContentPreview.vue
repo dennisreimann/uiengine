@@ -1,50 +1,86 @@
 <template>
   <div class="preview">
-    <div
-      :style="containerStyle"
-      :class="{ 'preview__container--resizable': !!breakpoints }"
-      class="preview__container"
-    >
-      <div
-        v-if="breakpoints"
-        class="preview__toggles"
-      >
-        <button
-          :title="'options.toggle' | localize"
-          class="preview__toggle"
-          type="button"
-          @click.stop="isBreakpointsActive = !isBreakpointsActive"
-        >{{ size }}</button>
-      </div>
-      <div
-        v-if="breakpoints"
-        :class="{ 'preview__options--active': isBreakpointsActive }"
-        class="preview__options"
-      >
-        <div class="preview__options-inner">
-          <button
-            v-for="(width, breakpoint) in breakpoints"
-            :key="breakpoint"
-            class="preview__option"
-            type="button"
-            @click="setWidth(width)"
-          >{{ breakpoint }}: {{ width }}px</button>
-          <button
-            class="preview__option"
-            type="button"
-            @click="setWidth(null)"
-          >{{ 'options.reset' | localize }}</button>
+    <div class="preview__viewports sih--main soh--main-escape">
+      <template v-if="isModeViewports">
+        <div
+          v-for="({ width, height }, name) in viewports"
+          :key="name"
+          :style="viewportStyle"
+          :class="viewportClass"
+          class="preview__viewport"
+        >
+          <div class="preview__title">
+            {{ previewTitle(name, width) }}
+          </div>
+          <div
+            :class="iframeContainerClass"
+            class="preview__iframe-container"
+          >
+            <iframe
+              ref="iframes"
+              :src="src"
+              :title="title"
+              :style="{ width: `${iframeSize(width)}px` }"
+              :width="iframeSize(width)"
+              :height="iframeSize(height)"
+              :scrolling="height ? 'yes' : 'no'"
+              class="preview__iframe"
+              frameborder="0"
+            />
+          </div>
         </div>
-      </div>
-
-      <iframe
-        ref="iframe"
-        :src="src"
-        :title="title"
-        class="preview__iframe"
-        frameborder="0"
-        scrolling="no"
-      />
+      </template>
+      <template v-else>
+        <div
+          ref="viewport"
+          :style="viewportStyle"
+          :class="viewportClass"
+          class="preview__viewport"
+        >
+          <template v-if="breakpoints">
+            <div class="preview__title">
+              <button
+                :title="'options.toggle' | localize"
+                class="preview__toggle"
+                type="button"
+                @click.stop="isBreakpointsActive = !isBreakpointsActive"
+              >{{ size }}</button>
+            </div>
+            <div
+              :class="{ 'preview__options--active': isBreakpointsActive }"
+              class="preview__options"
+            >
+              <div class="preview__options-inner">
+                <button
+                  v-for="(width, breakpoint) in breakpoints"
+                  :key="breakpoint"
+                  class="preview__option"
+                  type="button"
+                  @click="setWidth(width)"
+                >{{ previewTitle(breakpoint, width) }}</button>
+                <button
+                  class="preview__option"
+                  type="button"
+                  @click="setWidth(null)"
+                >{{ 'options.reset' | localize }}</button>
+              </div>
+            </div>
+          </template>
+          <div
+            :class="iframeContainerClass"
+            class="preview__iframe-container"
+          >
+            <iframe
+              ref="iframes"
+              :src="src"
+              :title="title"
+              class="preview__iframe"
+              frameborder="0"
+              scrolling="no"
+            />
+          </div>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -63,6 +99,11 @@ export default {
       required: true
     },
 
+    type: {
+      type: String,
+      required: true
+    },
+
     title: {
       type: String,
       required: true
@@ -76,6 +117,11 @@ export default {
     breakpoints: {
       type: Object,
       default: null
+    },
+
+    viewports: {
+      type: Object,
+      default: null
     }
   },
 
@@ -87,7 +133,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters('preferences', ['previewWidths', 'currentTheme']),
+    ...mapGetters('preferences', ['currentTheme', 'previewWidths', 'previewMode']),
+
+    isModeViewports () {
+      return this.type !== 'tokens' && this.previewMode === 'viewports'
+    },
 
     breakpointNames () {
       return Object.keys(this.breakpoints)
@@ -105,16 +155,26 @@ export default {
       } else if (this.breakpoints) {
         const bps = this.breakpointWidths.filter(width => width <= this.iframeWidth)
         const name = bps.length ? this.breakpointNames[bps.length - 1] : `< ${this.breakpointNames[0]}`
-        return `${name} @ ${this.iframeWidth}px`
+        return this.previewTitle(name, this.iframeWidth)
       } else {
         return `${this.iframeWidth}px`
       }
     },
 
-    containerStyle () {
+    viewportClass () {
+      return `preview__viewport--${this.previewMode} preview__viewport--${this.type}`
+    },
+
+    viewportStyle () {
+      if (this.previewMode === 'viewports') return {}
+
       const width = this.previewWidths[this.id]
 
-      return width ? { width: `${width}px` } : {}
+      return width ? { 'width': `calc(${width}px + var(--uie-preview-border-width) * 2)` } : {}
+    },
+
+    iframeContainerClass () {
+      return `preview__iframe-container--${this.type}`
     },
 
     src () {
@@ -136,34 +196,13 @@ export default {
   },
 
   mounted () {
-    const { iframe } = this.$refs
-    const setupIframe = () => {
-      const { contentDocument, contentWindow } = iframe
-      const head = contentDocument.getElementsByTagName('head')[0]
-
-      // dynamically add scripts (manifest and iframe sizer)
-      const addScript = src => {
-        if (!src) return
-        const script = document.createElement('script')
-        script.src = src
-        head.appendChild(script)
-      }
-
-      addScript(window.UIengine.manifestSrc)
-      addScript(window.UIengine.previewSrc)
-
-      iframeResizer(iframeResizerOpts, iframe)
-
-      // set initial iframe width and update it on resize
-      this.iframeWidth = contentWindow.innerWidth
-      contentWindow.onresize = event => {
-        const { innerWidth } = event.target
-        this.iframeWidth = innerWidth
-      }
-    }
-
-    // setup on initial load
-    iframe.addEventListener('load', setupIframe.bind(this))
+    let { iframes } = this.$refs
+    // convert single brakpoints iframe into array
+    if (iframes instanceof HTMLElement) iframes = [iframes]
+    // setup iframes on their initial load
+    iframes.forEach(iframe => {
+      iframe.addEventListener('load', this.setupIframe.bind(this))
+    })
   },
 
   methods: {
@@ -176,9 +215,54 @@ export default {
         widths[this.id] = width
       } else {
         delete widths[this.id]
+        this.$refs.viewport.style.width = null
       }
 
       this.setPreviewWidths(widths)
+    },
+
+    iframeSize (value) {
+      const int = parseInt(value)
+
+      return isNaN(int) ? null : int
+    },
+
+    previewTitle (name, width) {
+      return `${name} @ ${width}px`
+    },
+
+    setupIframe (event) {
+      const iframe = event.currentTarget
+      const height = iframe.getAttribute('height')
+
+      if (!height) {
+        const { contentWindow } = iframe
+
+        // dynamically add manifest and iframe sizer scripts
+        this.addScriptToIframe(window.UIengine.manifestSrc, iframe)
+        this.addScriptToIframe(window.UIengine.previewSrc, iframe)
+
+        // initialize iframe sizer
+        iframeResizer(iframeResizerOpts, iframe)
+
+        // set initial iframe width and update it on resize
+        this.iframeWidth = contentWindow.innerWidth
+        contentWindow.onresize = this.iframeResizeHandler.bind(this)
+      }
+    },
+
+    iframeResizeHandler (event) {
+      const { innerWidth } = event.target
+      this.iframeWidth = innerWidth
+    },
+
+    addScriptToIframe (scriptSrc, iframe) {
+      if (!scriptSrc) return // guard against manifest src being undefined in dev build
+      const { contentDocument } = iframe
+      const head = contentDocument.getElementsByTagName('head')[0]
+      const script = document.createElement('script')
+      script.src = scriptSrc
+      head.appendChild(script)
     }
   }
 }
@@ -188,48 +272,44 @@ export default {
 .preview
   position relative
 
-  &__container
-    min-width 250px
-    overflow scroll
+  &__viewports
+    overflow auto
+    white-space nowrap
 
-    &--resizable
-      margin 0 auto
-      text-align center
+  &__viewport
+    vertical-align top
+
+    &--breakpoints,
+    &--viewports
+      display inline-block
+      overflow auto
+      &:last-child
+        @media $mq-up_to_m
+          margin-right var(--uie-space-m)
+        @media $mq-m_to_l
+          margin-right var(--uie-space-l)
+        @media $mq-l_to_xl
+          margin-right var(--uie-space-xl)
+        @media $mq-xl_to_xxl
+          margin-right var(--uie-space-xxl)
+        @media $mq-xxl_and_up
+          margin-right var(--uie-space-xxxl)
+
+    &--viewports + &--viewports
+      margin-left var(--uie-space-xxl)
+
+    &--breakpoints
       resize horizontal
-      // leave space for the resize handle
-      padding-bottom var(--uie-space-m)
+      width 100%
 
-    &[data-breakpoint]
-      transition-property width
-      transition-duration var(--uie-transition-duration-medium)
-      transition-timing-function ease-out
+    &--tokens
+      display block
+      resize none
 
-  &__toggles
-    position relative
-    margin-bottom var(--uie-space-s)
-
-    &:before,
-    &:after
-      width 40px
-      height 15px
-      position absolute
-      top calc(50% - 8px)
-      content ''
-      background-color var(--uie-color-white)
-      background-size 40px 15px
-      background-repeat no-repeat
-
-    &:before
-      left 0
-      background-image embedurl('../../icons/preview-left.svg')
-
-    &:after
-      right 0
-      background-image embedurl('../../icons/preview-right.svg')
+  &__title
+    padding-bottom var(--uie-space-s)
 
   &__toggle
-    padding-left var(--uie-space-m)
-    padding-right var(--uie-space-m)
     color var(--uie-color-modal-text)
     background var(--uie-color-main-bg)
     display inline-block
@@ -240,8 +320,7 @@ export default {
   &__options
     position absolute
     z-index 5
-    left calc(50% - 5rem)
-    width 10rem
+    left calc(var(--uie-space-m) * -1)
     max-height 0
     transition-duration var(--uie-transition-duration-medium)
     transition-property max-height
@@ -261,8 +340,14 @@ export default {
   &__option + &__option
     border-top 1px solid var(--uie-color-modal-border-inner)
 
+  &__iframe-container
+    &--variant,
+    &--template
+      box-sizing content-box
+      border var(--uie-preview-border-width) solid var(--uie-color-border-preview)
+      border-radius var(--uie-preview-border-width)
+
   &__iframe
     display block
     width 100%
-    border 0
 </style>
