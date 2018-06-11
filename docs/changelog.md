@@ -5,7 +5,7 @@
 ### Added
 
 - Viewports are a new preview mode in addition to breakpoints
-  - See the [`ui.viewports`](./docs/ui.md#viewports) documentation for details
+  - See the [`ui.viewports`](./ui.md#viewports) documentation for details
 - Rebuild variants and tokens on preview template change
 - The comment `<!-- uiengine:class -->` now also gets replaced in the preview template
   - This should be added to the `html` tag and can be used for customizing special previews.
@@ -13,7 +13,7 @@
 ### Changed
 
 - CSS custom properties used by UIengine are now prefixed with `--uie-`
-  - In case you are using the [`ui.customStylesFile`](./docs/ui.md#customStylesFile) you need to update the UIengine custom properties.
+  - In case you are using the [`ui.customStylesFile`](./ui.md#customStylesFile) you need to update the UIengine custom properties.
 
 ### Fixed
 
@@ -35,7 +35,7 @@
 - Design token rendering:
   - The tokens are now rendered as part of the preview template
   - Added the token types `font` and `icon`
-  - For details see the [design token docs](./docs/ui.md)
+  - For details see the [design token docs](./ui.md)
 - Reduced file watching delay for faster refreshes
 
 ## [0.19.0] - 2018-04-14
@@ -43,11 +43,11 @@
 ### Added
 
 - Optional theme switch for your projects themes
-  - For details see the [UI docs](./docs/ui.md)
+  - For details see the [UI docs](./ui.md)
 - The adapter `render` function can now return structured data
-  - For details see the [adapter docs](./docs/adapters.md)
+  - For details see the [adapter docs](./adapters.md)
 - The output can be served from a subdirectory
-  - For details see the new `base` [theme option](./docs/ui.md)
+  - For details see the new `base` [theme option](./ui.md)
 
 ### Changed
 
@@ -56,7 +56,7 @@
   - The former `theme.options` moved into the `ui` config object.
   - Moved the `breakpoints` into the new `ui` config object.
   - Removed the `module` option.
-  - For details see the [UI docs](./docs/ui.md)
+  - For details see the [UI docs](./ui.md)
 
 ## [0.18.0] - 2018-04-02
 
@@ -73,7 +73,7 @@
 
 - Integration for [html-sketchapp]
   - Generates Sketch libraries via html-sketchapp-cli compatible export
-  - For details see the [integration docs](./docs/integrations.md#html-sketchapp)
+  - For details see the [integration docs](./integrations.md#html-sketchapp)
 
 ### Changed
 
@@ -91,14 +91,14 @@
 - Links in footer to navigate to the previous and next page
 - Settings for locale and highlight.js theme
 - Integration for Google Analytics
-  - Provide your `analyticsId` (`UA-XXX-X`) in the [project config](./docs/config.md)
+  - Provide your `analyticsId` (`UA-XXX-X`) in the [project config](./config.md)
 
 ## [0.15.0] - 2018-03-01
 
 ### Changed
 
 - Variant data moved into component config
-  - For details see the [variant docs](./docs/variant.md)
+  - For details see the [variant docs](./variant.md)
 
 ## [0.14.0] - 2018-02-10
 
@@ -124,7 +124,7 @@
 
 - The UI is now extendible via CSS custom properties
   - The `skin` option for the UI has been removed
-  - You can now style the UI using the [`customStylesFile` option](./docs/ui.md)
+  - You can now style the UI using the [`customStylesFile` option](./ui.md)
 
 - - - - -
 
