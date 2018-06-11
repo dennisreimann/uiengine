@@ -64,7 +64,7 @@ export default {
 
   pre.hljs
     margin-top var(--uie-space-m)
-    margin-bottom var(--uie-space-m)
+    margin-bottom var(--uie-space-l)
 
   pre.hljs,
   mark:not([class]),
@@ -89,15 +89,15 @@ export default {
       h2,
       h3
         &:not([class])
-          margin-top var(--uie-space-xl)
+          margin-top calc(var(--uie-space-xl) + var(--uie-space-s))
     +
       h4,
       h5
         &:not([class])
-          margin-top var(--uie-space-l)
+          margin-top var(--uie-space-xl)
 
     +
       h6
         &:not([class])
-          margin-top var(--uie-space-m)
+          margin-top var(--uie-space-l)
 </style>

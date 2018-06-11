@@ -63,18 +63,3 @@ code()
   font-family var(--uie-font-family-code)
   font-size var(--uie-font-size-s)
   white-space pre
-
-code-block()
-  code()
-  overflow-x auto
-  // defaults, will be overriden by hljs
-  color var(--uie-color-code-text)
-  background-color var(--uie-color-code-bg)
-  // use important to override hljs styling which differs per theme
-  padding var(--uie-space-m) !important
-
-code-inline()
-  code()
-  padding var(--uie-space-xxs) var(--uie-space-xs)
-  border-radius var(--uie-space-xs)
-  background-color var(--uie-color-bg-light)

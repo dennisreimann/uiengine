@@ -100,7 +100,16 @@
     background-color var(--uie-color-accent-light)
 
   code
-    code-inline()
+    code()
+    padding var(--uie-space-xxs) var(--uie-space-xs)
+    border-radius var(--uie-space-xs)
+    background-color var(--uie-color-bg-light)
 
   pre
-    code-block()
+    code()
+    overflow-x auto
+    // defaults, will be overriden by hljs
+    color var(--uie-color-code-text)
+    background-color var(--uie-color-code-bg)
+    // use important to override hljs styling which differs per theme
+    padding var(--uie-space-m) !important
