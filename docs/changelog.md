@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.21.0]
+## [0.21.0] - 2018-06-11
 
 ### Added
 
@@ -14,6 +14,10 @@
 
 - CSS custom properties used by UIengine are now prefixed with `--uie-`
   - In case you are using the [`ui.customStylesFile`](./docs/ui.md#customStylesFile) you need to update the UIengine custom properties.
+
+### Fixed
+
+- Hide inactive scrollbars on Windows
 
 ## [0.20.0] - 2018-05-24
 

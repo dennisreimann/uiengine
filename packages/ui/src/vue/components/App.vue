@@ -106,7 +106,7 @@ export default {
     left 0
     bottom 0
     width var(--navigation-width)
-    overflow-y scroll
+    overflow-y auto
 
   .main
     flex 1
