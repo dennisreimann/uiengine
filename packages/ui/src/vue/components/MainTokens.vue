@@ -14,11 +14,7 @@
       </content-header>
 
       <div class="uie-sot-xs">
-        <div
-          v-if="page.content"
-          class="content"
-          v-html="renderedContent"
-        />
+        <content-text :item="page" />
       </div>
     </section>
 
@@ -35,9 +31,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { dasherize, decorateContent } from '../../util'
+import { dasherize } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
+import ContentText from './ContentText'
 import ContentPreview from './ContentPreview'
 import ContentLabel from './ContentLabel'
 import ContentTag from './ContentTag'
@@ -46,6 +43,7 @@ export default {
   components: {
     ContentHeader,
     ContentHeading,
+    ContentText,
     ContentLabel,
     ContentTag,
     ContentPreview
@@ -67,12 +65,6 @@ export default {
 
     previewPath () {
       return `${window.UIengine.base}_tokens/${this.page.id}.html`
-    },
-
-    renderedContent () {
-      return this.page.content
-        ? decorateContent(this.page)
-        : null
     }
   },
 

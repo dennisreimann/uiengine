@@ -52,11 +52,7 @@
           class="contentsection"
           role="tabpanel"
         >
-          <div
-            v-if="page.content"
-            class="content"
-            v-html="renderedContent"
-          />
+          <content-text :item="page" />
         </div>
 
         <div
@@ -161,9 +157,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { dasherize, decorateContent } from '../../util'
+import { dasherize } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
+import ContentText from './ContentText'
 import ContentPreview from './ContentPreview'
 import ContentProperties from './ContentProperties'
 import ContentLabel from './ContentLabel'
@@ -174,6 +171,7 @@ export default {
   components: {
     ContentHeader,
     ContentHeading,
+    ContentText,
     ContentLabel,
     ContentTag,
     ContentProperties,
@@ -237,12 +235,6 @@ export default {
 
     previewPath () {
       return `${window.UIengine.base}_pages/${this.page.id}.html`
-    },
-
-    renderedContent () {
-      return this.page.content
-        ? decorateContent(this.page)
-        : null
     }
   },
 

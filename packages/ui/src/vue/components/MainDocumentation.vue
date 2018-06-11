@@ -11,23 +11,20 @@
         class="uie-sob-m"
       />
     </content-header>
-    <article
-      v-if="page.content"
-      class="content"
-      v-html="renderedContent"
-    />
+    <content-text :item="page" />
   </section>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import ContentHeader from './ContentHeader'
+import ContentText from './ContentText'
 import ContentTag from './ContentTag'
-import { decorateContent } from '../../util'
 
 export default {
   components: {
     ContentHeader,
+    ContentText,
     ContentTag
   },
 
@@ -43,12 +40,6 @@ export default {
 
     page () {
       return this.pages[this.id]
-    },
-
-    renderedContent () {
-      return this.page.content
-        ? decorateContent(this.page)
-        : null
     }
   }
 }

@@ -52,11 +52,7 @@
           class="contentsection"
           role="tabpanel"
         >
-          <div
-            v-if="component.content"
-            class="content"
-            v-html="renderedContent"
-          />
+          <content-text :item="component" />
           <div
             v-if="hasManyVariants"
             class="content uie-sot-l uie-fs-s"
@@ -113,9 +109,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { dasherize, decorateContent } from '../../util'
+import { dasherize } from '../../util'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
+import ContentText from './ContentText'
 import ContentProperties from './ContentProperties'
 import ContentLabel from './ContentLabel'
 import ContentTag from './ContentTag'
@@ -125,6 +122,7 @@ export default {
   components: {
     ContentHeader,
     ContentHeading,
+    ContentText,
     ContentProperties,
     ContentLabel,
     ContentTag,
@@ -174,12 +172,6 @@ export default {
 
     isPropertiesActive () {
       return this.activeSection === 'properties' || (!this.activeSection && !this.hasInfo && this.hasProperties)
-    },
-
-    renderedContent () {
-      return this.component.content
-        ? decorateContent(this.component)
-        : null
     }
   },
 
