@@ -158,6 +158,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { dasherize } from '../../util'
+import Preview from '../mixins/preview'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentText from './ContentText'
@@ -178,6 +179,10 @@ export default {
     ContentPreview,
     ContentCode
   },
+
+  mixins: [
+    Preview
+  ],
 
   props: {
     id: {
@@ -234,7 +239,7 @@ export default {
     },
 
     previewPath () {
-      return `${window.UIengine.base}_pages/${this.page.id}.html`
+      return this.expandPreviewPath(`_pages/${this.page.id}.html`)
     }
   },
 

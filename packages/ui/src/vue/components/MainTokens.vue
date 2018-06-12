@@ -32,6 +32,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { dasherize } from '../../util'
+import Preview from '../mixins/preview'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentText from './ContentText'
@@ -49,6 +50,10 @@ export default {
     ContentPreview
   },
 
+  mixins: [
+    Preview
+  ],
+
   props: {
     id: {
       type: String,
@@ -64,7 +69,7 @@ export default {
     },
 
     previewPath () {
-      return `${window.UIengine.base}_tokens/${this.page.id}.html`
+      return this.expandPreviewPath(`_tokens/${this.page.id}.html`)
     }
   },
 

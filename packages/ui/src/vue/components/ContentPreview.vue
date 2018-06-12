@@ -18,7 +18,7 @@
           >
             <iframe
               ref="iframes"
-              :src="src"
+              :src="path"
               :title="title"
               :style="{ width: `${iframeSize(width)}px` }"
               :width="iframeSize(width)"
@@ -72,7 +72,7 @@
           >
             <iframe
               ref="iframes"
-              :src="src"
+              :src="path"
               :title="title"
               class="preview__iframe"
               frameborder="0"
@@ -133,7 +133,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('preferences', ['currentTheme', 'previewWidths', 'previewMode']),
+    ...mapGetters('preferences', ['previewWidths', 'previewMode']),
 
     isModeViewports () {
       return this.type !== 'tokens' && this.previewMode === 'viewports'
@@ -175,17 +175,6 @@ export default {
 
     iframeContainerClass () {
       return `preview__iframe-container--${this.type}`
-    },
-
-    src () {
-      const { protocol, host } = window.location
-      const base = `${protocol}//${host}`
-      const url = new URL(this.path, base)
-      const theme = this.currentTheme
-
-      if (theme) url.hash = theme.id
-
-      return url
     }
   },
 

@@ -113,6 +113,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { dasherize } from '../../util'
+import Preview from '../mixins/preview'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentLabel from './ContentLabel'
@@ -130,6 +131,10 @@ export default {
     ContentCode
   },
 
+  mixins: [
+    Preview
+  ],
+
   props: {
     variant: {
       type: Object,
@@ -145,6 +150,7 @@ export default {
 
   computed: {
     ...mapGetters('state', ['config']),
+    ...mapGetters('preferences', ['currentTheme']),
 
     hasPreview () {
       return !!this.variant.rendered
@@ -163,7 +169,7 @@ export default {
     },
 
     previewPath () {
-      return `${window.UIengine.base}_variants/${this.variant.id}.html`
+      return this.expandPreviewPath(`_variants/${this.variant.id}.html`)
     },
 
     permalinkUrl () {
