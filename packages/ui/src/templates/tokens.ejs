@@ -64,7 +64,7 @@ _%>
   <%%_ } else if (type === 'font') { _%%>
     <div class="uie-tokens__container uie-tokens__container--<%%= type %%>">
       <%%_ Object.values(tokens).forEach(token => { _%%>
-        <dl class="uie-font-token" id="<%%= helpers.dasherize(token.name) %%>">
+        <dl class="uie-font-token"<%% if (token.name) { %%> id="<%%= helpers.dasherize(token.name) %%>"<%% } %%>>
           <%% if (token.name) { %%>
             <div class="uie-font-token__info">
               <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.fontface') %%></dt>

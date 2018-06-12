@@ -33,7 +33,7 @@ const helpers = {
     return {
       hex: color.hex().toString(),
       rgb: color.rgb().toString(),
-      hsl: color.hsl().toString()
+      hsl: color.hsl().toString().replace(/(\(\d+\.(\d{1,3}))\d+/, '$1') // shorten the first values decimal places
     }
   },
 
