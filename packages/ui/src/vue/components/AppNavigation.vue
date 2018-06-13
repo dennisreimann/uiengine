@@ -84,33 +84,36 @@ export default {
     cursor pointer
     background transparent
     position absolute
-    left 4px
     width 30px
     height 30px
     padding 6px
+
+    @media $mq-up_to_m
+      top 4px
+    @media $mq-m_to_l
+      top 5px
+    @media $mq-l_and_up
+      top 1px
+      .navigation__item--level-0 > &
+        top 2px
+
     &:focus,
     &:hover,
     &:active
       .navigation__icon
         fill var(--uie-color-navigation-text-hover)
-    @media $mq-up_to_m
-      top 5px
-    @media $mq-m_to_l
-      top 7px
-    @media $mq-l_and_up
-      top 3px
 
     .navigation__icon
       icon-size(18px)
 
-    .navigation__item--level-0 &,
-    .navigation__item--level-1 &
+    .navigation__item--level-0 > &,
+    .navigation__item--level-1 > &
       left var(--uie-space-s)
 
-    .navigation__item--level-2 &,
-    .navigation__item--level-3 &,
-    .navigation__item--level-4 &,
-    .navigation__item--level-5 &
+    .navigation__item--level-2 > &,
+    .navigation__item--level-3 > &,
+    .navigation__item--level-4 > &,
+    .navigation__item--level-5 > &
       left calc(var(--uie-space-s) + var(--uie-space-xl))
 
   &__icon
