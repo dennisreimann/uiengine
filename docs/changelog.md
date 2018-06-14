@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.22.0]
+
+### Added
+
+- Option to wrap the content of a [custom page template](./page.md#templates) in the preview template
+  - In case you want to provide only the content of the `<body>`.
+  - Works like with variants, whose content replaces the `uiengine:content` comment.
+- Internal links in documentation are now handled via the UI router
+
+### Fixed
+
+- Use theme hash across all previews and links
+
 ## [0.21.0] - 2018-06-11
 
 ### Added

@@ -65,15 +65,28 @@ export async function generatePageFiles (state, pageId) {
 export async function generatePageWithTemplate (state, pageId) {
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):start`)
 
-  const { pages, config: { target } } = state
+  const { pages, config } = state
+  const { name, target, version } = config
   const identifier = `Page "${pageId}"`
   const page = pages[pageId]
   if (!page) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
 
   if (page.template) {
     // render template with context
-    const { id, context, template } = page
-    const { rendered } = await render(state, template, context, identifier)
+    const { id, title, context, wrapTemplate } = page
+    const pageRender = await render(state, page.template, context, identifier)
+    const content = pageRender.rendered
+    let rendered = content
+
+    if (wrapTemplate) {
+      // wrap template content in preview layout
+      const data = { state }
+      const templateRender = await render(state, config.template, data, identifier)
+      rendered = templateRender.rendered
+      rendered = replaceComment('content', rendered, content)
+      rendered = replaceComment('class', rendered, `uie-page uie-page--${dasherize(id)}`)
+      rendered = replaceComment('title', rendered, `${title} • ${name} (${version})`)
+    }
 
     // write file
     const filePath = resolve(target, '_pages', `${id}.html`)
