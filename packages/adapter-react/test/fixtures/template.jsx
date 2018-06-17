@@ -1,9 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default function Template (props) {
+const Template = props => {
   return (
     <p>
       {props.myData}
     </p>
   )
 }
+
+Template.propTypes = {
+  myData: PropTypes.string.isRequired
+}
+
+export default Template

@@ -88,6 +88,17 @@ describe('Component', () => {
 
       assert.equal('Label', data.title)
     })
+
+    it('should register component files and extract information from them', async () => {
+      const data = await Component.fetchById(state, 'label')
+      const labelProps = data.properties['<Label>']
+
+      assert(labelProps, 'React Label properties are not defined')
+      assert.equal(labelProps.title.type, 'String')
+      assert.equal(labelProps.title.required, true)
+      assert.equal(labelProps.for.type, 'String')
+      assert.equal(labelProps.for.required, true)
+    })
   })
 
   describe('#fetchAll', () => {

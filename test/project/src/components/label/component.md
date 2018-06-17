@@ -9,9 +9,11 @@ properties:
   Label:
     id:
       type: String
+      description: The label text
       required: true
     title:
       type: String
+      description: The id of the referenced form element
       required: true
 
 # This context is applied to all variants

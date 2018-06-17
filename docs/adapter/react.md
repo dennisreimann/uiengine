@@ -19,6 +19,16 @@ adapters:
     module: @uiengine/adapter-react
     options:
       debug: true
+      # babel options that get passed to
+      # `require('babel-register')()
+      # default: none
+      babel:
+        presets:
+          - @babel/preset-env
+          - @babel/preset-stage-2
+          - @babel/preset-react
+        plugins:
+          - css-modules-transform
 ```
 
-Right now there is only the option `debug` for a more detailed output in case of rendering errors.
+The `debug` option allows for a more detailed output in case of rendering errors.

@@ -5,19 +5,24 @@ const { resolve } = require('path')
 
 const Connector = require('../src/connector')
 
-const { testProjectPath } = require('../../../test/support/paths')
+const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
 const testAdapterPath = resolve(__dirname, 'fixtures', 'test-adapter')
 const noopAdapterPath = resolve(__dirname, 'fixtures', 'noop-adapter')
-const componentsPath = resolve(testProjectPath, 'src', 'components')
-const testFilePath = resolve(componentsPath, 'form', 'form.test')
-const testAdapterOptions = { basedir: componentsPath }
+const components = resolve(testProjectPath, 'src', 'components')
+const templates = resolve(testProjectPath, 'src', 'templates')
+const target = testTmpPath
+const testFilePath = resolve(components, 'form', 'form.test')
+const testAdapterOptions = { basedir: components }
+const expandedAdapterOptions = Object.assign({}, testAdapterOptions, { components, templates, target, ext: 'test' })
 const TestAdapter = require(testAdapterPath)
 
 const stateWithModule = module => ({
   config: {
     source: {
-      components: componentsPath
+      components,
+      templates
     },
+    target,
     adapters: {
       test: {
         module,
@@ -46,20 +51,20 @@ describe('Connector', () => {
   })
 
   describe('#setup', () => {
-    it('should call the adapters registerComponentFile function', async function () {
-      this.sinon.stub(TestAdapter, 'registerComponentFile')
+    it('should call the adapters setup function', async function () {
+      this.sinon.stub(TestAdapter, 'setup')
       await Connector.setup(state)
 
-      assert(TestAdapter.registerComponentFile.calledOnce)
-      assert(TestAdapter.registerComponentFile.calledWith(testAdapterOptions, testFilePath))
+      this.sinon.assert.calledOnce(TestAdapter.setup)
+      this.sinon.assert.calledWith(TestAdapter.setup, expandedAdapterOptions)
     })
 
     it('should be no op if there are no adapters', async function () {
-      this.sinon.stub(TestAdapter, 'registerComponentFile')
-      const state = { config: { source: { components: componentsPath }, adapters: { } } }
+      this.sinon.stub(TestAdapter, 'setup')
+      const state = { config: { source: { components, templates }, adapters: { } } }
       await Connector.setup(state)
 
-      assert(TestAdapter.registerComponentFile.notCalled)
+      assert(TestAdapter.setup.notCalled)
     })
   })
 
@@ -68,8 +73,8 @@ describe('Connector', () => {
       this.sinon.stub(TestAdapter, 'registerComponentFile')
       await Connector.registerComponentFile(state, testFilePath)
 
-      assert(TestAdapter.registerComponentFile.calledOnce)
-      assert(TestAdapter.registerComponentFile.calledWith(testAdapterOptions, testFilePath))
+      this.sinon.assert.calledOnce(TestAdapter.registerComponentFile)
+      this.sinon.assert.calledWith(TestAdapter.registerComponentFile, expandedAdapterOptions, testFilePath)
     })
   })
 
@@ -80,8 +85,8 @@ describe('Connector', () => {
       const data = { myData: 1 }
       await Connector.render(state, templatePath, data)
 
-      assert(TestAdapter.render.calledOnce)
-      assert(TestAdapter.render.calledWith(testAdapterOptions, templatePath, data))
+      this.sinon.assert.calledOnce(TestAdapter.render)
+      this.sinon.assert.calledWith(TestAdapter.render, expandedAdapterOptions, templatePath, data)
     })
 
     it('should throw error if the adapter does not implement the render function', async () => {
@@ -106,8 +111,8 @@ describe('Connector', () => {
       this.sinon.stub(TestAdapter, 'filesForComponent')
       await Connector.filesForComponent(state, 'test', 'button')
 
-      assert(TestAdapter.filesForComponent.calledOnce)
-      assert(TestAdapter.filesForComponent.calledWith('button'))
+      this.sinon.assert.calledOnce(TestAdapter.filesForComponent)
+      this.sinon.assert.calledWith(TestAdapter.filesForComponent, 'button')
     })
 
     it('should return an empty array if the adapter does not implement the filesForComponent function', async () => {
@@ -122,8 +127,8 @@ describe('Connector', () => {
       this.sinon.stub(TestAdapter, 'filesForVariant')
       await Connector.filesForVariant(state, 'test', 'button', 'primary')
 
-      assert(TestAdapter.filesForVariant.calledOnce)
-      assert(TestAdapter.filesForVariant.calledWith('button', 'primary'))
+      this.sinon.assert.calledOnce(TestAdapter.filesForVariant)
+      this.sinon.assert.calledWith(TestAdapter.filesForVariant, 'button', 'primary')
     })
 
     it('should return an empty array if the adapter does not implement the filesForVariant function', async () => {

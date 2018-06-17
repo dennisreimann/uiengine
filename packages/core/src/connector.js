@@ -2,6 +2,7 @@ const { join } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const File = require('./util/file')
+const ComponentUtil = require('./util/component')
 const { error } = require('./util/message')
 const { debug3 } = require('./util/debug')
 
@@ -18,27 +19,26 @@ const getModule = ({ config: { adapters } }, ext, filePath) => {
   }
 }
 
+const getOptions = (state, ext) => {
+  const { config: { adapters, target, source: { components, templates } } } = state
+  const { options } = adapters[ext]
+
+  return Object.assign({}, options, { ext, components, templates, target })
+}
+
 export async function setup (state) {
   debug3(state, 'Connector.setup():start')
 
-  const { config: { adapters, source: { components } } } = state
+  const { config: { adapters } } = state
   const exts = Object.keys(adapters) || []
   const tasks = []
 
-  exts.map((ext) => {
-    const { registerComponentFile } = getModule(state, ext)
+  exts.map(ext => {
+    const { setup } = getModule(state, ext)
 
-    // register components: only files with the extension
-    // in the components source folder root. No variants!
-    if (typeof registerComponentFile === 'function') {
-      const { options } = adapters[ext]
-
-      const pattern = join(components, `*/*.${ext}`)
-      const paths = glob.sync(pattern)
-      const register = R.partial(registerComponentFile, [options])
-      const registers = R.map(register, paths)
-
-      tasks.push(...registers)
+    if (typeof setup === 'function') {
+      const options = getOptions(state, ext)
+      tasks.push(setup(options))
     }
   })
 
@@ -48,7 +48,7 @@ export async function setup (state) {
 }
 
 export async function registerComponentFile (state, filePath) {
-  const { config: { adapters } } = state
+  const { config: { adapters, source: { components } } } = state
   const ext = File.extension(filePath)
   const adapter = adapters[ext]
 
@@ -56,19 +56,24 @@ export async function registerComponentFile (state, filePath) {
     const { registerComponentFile } = getModule(state, ext, filePath)
 
     if (typeof registerComponentFile === 'function') {
-      const { options } = adapter
-      await registerComponentFile(options, filePath)
+      const options = getOptions(state, ext)
+      const data = await registerComponentFile(options, filePath)
+
+      if (data) {
+        const id = ComponentUtil.componentFilePathToComponentId(components, filePath)
+
+        return { id, filePath, data }
+      }
     }
   }
 }
 
 export async function render (state, templatePath, data = {}) {
-  const { config: { adapters } } = state
   const ext = File.extension(templatePath)
   const { render } = getModule(state, ext, templatePath)
 
   if (typeof render === 'function') {
-    const { options } = adapters[ext]
+    const options = getOptions(state, ext)
     const rendered = await render(options, templatePath, data)
     const result = typeof rendered === 'string' ? { rendered, parts: [{ title: 'HTML', lang: 'html', content: rendered }] } : rendered
 

@@ -1,9 +1,3 @@
-require('marko/node-require').install({
-  compilerOptions: {
-    writeToDisk: false
-  }
-})
-
 // invalidate require cache so we get template updates as well
 const invalidateModuleCache = (filePath) =>
   delete require.cache[require.resolve(filePath)]
@@ -18,6 +12,16 @@ const handleError = (options, err, reject, filePath, data) => {
   error.path = filePath
 
   reject(error)
+}
+
+export async function setup (options) {
+  const install = options.install || {
+    compilerOptions: {
+      writeToDisk: false
+    }
+  }
+
+  require('marko/node-require').install(install)
 }
 
 export async function registerComponentFile (options, filePath) {

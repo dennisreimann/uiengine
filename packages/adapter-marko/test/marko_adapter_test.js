@@ -1,11 +1,37 @@
+require('mocha-sinon')()
+
 const assert = require('assert')
 const { assertMatches } = require('../../../test/support/asserts')
 const { resolve } = require('path')
 const Adapter = require('../src/index')
 
 const templatePath = resolve(__dirname, 'fixtures', 'template.marko')
+const defaultOptions = {
+  install: {
+    compilerOptions: {
+      writeToDisk: false
+    }
+  }
+}
 
 describe('Marko adapter', () => {
+  before(() => Adapter.setup(defaultOptions))
+  afterEach(function () {
+    this.sinon.restore()
+  })
+
+  describe('#setup', () => {
+    it('should invoke the require hook install function with the given options', async function () {
+      const nodeRequire = require('marko/node-require')
+
+      this.sinon.stub(nodeRequire, 'install')
+      await Adapter.setup(defaultOptions)
+
+      this.sinon.assert.calledOnce(nodeRequire.install)
+      this.sinon.assert.calledWith(nodeRequire.install, defaultOptions.install)
+    })
+  })
+
   describe('#render', () => {
     it('should render the template with the given data', async () => {
       const options = {}

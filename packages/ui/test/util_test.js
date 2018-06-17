@@ -55,13 +55,13 @@ describe('Util', () => {
     it('should return the highlighted raw code', () => {
       const decorated = Util.decorateCode('.className { color: blue; }')
 
-      assertMatches(decorated, '<pre class="hljs" lang="css"><span class="hljs-selector-class">.className</span> { <span class="hljs-attribute">color</span>: blue; }</pre>')
+      assertMatches(decorated, '<pre class="hljs" lang="css"><code><span class="hljs-selector-class">.className</span> { <span class="hljs-attribute">color</span>: blue; }</code></pre>')
     })
 
     it('should return the highlighted rendered html', () => {
       const decorated = Util.decorateCode('<h1>Title</h1>', 'html')
 
-      assertMatches(decorated, '<pre class="hljs" lang="html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></pre>')
+      assertMatches(decorated, '<pre class="hljs" lang="html"><code><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></code></pre>')
     })
   })
 
@@ -69,7 +69,7 @@ describe('Util', () => {
     it('should return the highlighted and pretty-printed json', () => {
       const decorated = Util.decorateContext({ data: true })
 
-      assertMatches(decorated, '<pre class="hljs" lang="json">{\n  <span class="hljs-attr">"data"</span>: <span class="hljs-literal">true</span>\n}</pre>')
+      assertMatches(decorated, '<pre class="hljs" lang="json"><code>{\n  <span class="hljs-attr">"data"</span>: <span class="hljs-literal">true</span>\n}</code></pre>')
     })
   })
 })

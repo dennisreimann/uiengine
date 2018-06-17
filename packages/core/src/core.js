@@ -38,8 +38,8 @@ export async function generate (options) {
 
   // 0. setup
   const setupInterface = Interface.setup(_state)
-  const setupAdapters = Connector.setup(_state)
-  await Promise.all([setupInterface, setupAdapters])
+  const setupConnector = Connector.setup(_state)
+  await Promise.all([setupInterface, setupConnector])
 
   // 1. data fetching
   const fetchPages = Page.fetchAll(_state)
@@ -93,17 +93,17 @@ const getChangeObject = (filePath, action) => {
   }
 
   if (pageId) {
-    return { file, action, type: 'page', item: pageId }
+    return { file, filePath, action, type: 'page', item: pageId }
   } else if (variantId) {
-    return { file, action, type: 'variant', item: variantId }
+    return { file, filePath, action, type: 'variant', item: variantId }
   } else if (componentId) {
-    return { file, action, type: 'component', item: componentId }
+    return { file, filePath, action, type: 'component', item: componentId }
   } else if (entityId) {
-    return { file, action, type: 'entity', item: entityId }
+    return { file, filePath, action, type: 'entity', item: entityId }
   } else if (templateId) {
-    return { file, action, type: 'template', item: templateId }
+    return { file, filePath, action, type: 'template', item: templateId }
   } else {
-    return { file, action, type: 'site', item: _state.config.name }
+    return { file, filePath, action, type: 'site', item: _state.config.name }
   }
 }
 
@@ -134,7 +134,6 @@ export async function generateIncrementForFileChange (filePath, action = 'change
       if (isDeleted && isDirectory) {
         await removeComponent(change.item, change)
       } else {
-        await Connector.registerComponentFile(_state, filePath)
         await regenerateComponent(change.item, change)
       }
       break

@@ -32,8 +32,8 @@ describe('UI', () => {
       const markdownIt = require('../src/util/markdown').markdownIt
       const expectedOptions = Object.assign({}, testUiOptions, { markdownIt })
 
-      assert(TestUI.setup.calledOnce)
-      assert(TestUI.setup.calledWithMatch(expectedOptions))
+      this.sinon.assert.calledOnce(TestUI.setup)
+      this.sinon.assert.calledWithMatch(TestUI.setup, expectedOptions)
     })
   })
 
@@ -44,8 +44,8 @@ describe('UI', () => {
       const data = { test: 1 }
       await Interface.render(state, template, data)
 
-      assert(TestUI.render.calledOnce)
-      assert(TestUI.render.calledWithMatch(testUiOptions, template, data))
+      this.sinon.assert.calledOnce(TestUI.render)
+      this.sinon.assert.calledWithMatch(TestUI.render, testUiOptions, template, data)
     })
   })
 })

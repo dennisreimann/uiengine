@@ -1,3 +1,8 @@
+export async function setup (options) {
+  return new Promise((resolve, reject) => {
+    resolve()
+  })
+}
 export async function registerComponentFile (options, filePath) {
   return new Promise((resolve, reject) => {
     resolve()

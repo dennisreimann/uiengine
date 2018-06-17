@@ -1,5 +1,6 @@
 const { readFile } = require('fs')
-const { basename, extname } = require('path')
+const { basename, extname, join } = require('path')
+const glob = require('globby')
 const Handlebars = require('handlebars')
 
 const handleError = (options, err, reject, filePath, raw, data) => {
@@ -12,6 +13,21 @@ const handleError = (options, err, reject, filePath, raw, data) => {
   error.path = filePath
 
   reject(error)
+}
+
+export async function setup (options) {
+  const { components, ext } = options
+
+  // register all components files, but no variants!
+  const pattern = join(components, '*', `*.${ext}`)
+  const paths = await glob(pattern, { onlyFiles: true })
+  const registers = []
+
+  paths.forEach(filePath => {
+    registers.push(registerComponentFile(options, filePath))
+  })
+
+  await Promise.all(registers)
 }
 
 export async function registerComponentFile (options, filePath) {

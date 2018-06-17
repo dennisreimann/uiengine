@@ -121,7 +121,7 @@ wrapTemplate: true
 ---
 ```
 
-## Providing data
+### Providing data
 
 As you can use these custom templates to render example/prototype pages for your website/application, you might want to provide some [sample data](./yaml.md#include).
 To pass this data into your template, you can use the `context` property of the page:

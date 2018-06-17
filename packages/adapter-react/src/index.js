@@ -1,14 +1,18 @@
 const ReactDOMServer = require('react-dom/server')
+const { extractProperties, invalidateModuleCache, upcaseFirstChar } = require('./util')
 
-require('babel-register')({})
+export async function setup (options) {
+  const babel = options.babel || {}
 
-// invalidate require cache so we get template updates as well
-const invalidateModuleCache = filePath => delete require.cache[require.resolve(filePath)]
-
-const upcaseFirstChar = string => string.charAt(0).toUpperCase() + string.slice(1)
+  require('babel-register')(babel)
+}
 
 export async function registerComponentFile (options, filePath) {
   invalidateModuleCache(filePath)
+
+  const properties = extractProperties(filePath)
+
+  return Object.keys(properties).length ? { properties } : null
 }
 
 export async function render (options, filePath, data = {}) {

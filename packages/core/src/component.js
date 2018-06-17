@@ -1,11 +1,12 @@
 const { resolve } = require('path')
 const R = require('ramda')
 const glob = require('globby')
+const { registerComponentFile } = require('./connector')
+const Variant = require('./variant')
 const frontmatter = require('./util/frontmatter')
 const markdown = require('./util/markdown')
 const ComponentUtil = require('./util/component')
 const StringUtil = require('./util/string')
-const Variant = require('./variant')
 const { debug2, debug3, debug4, debug5 } = require('./util/debug')
 
 async function readComponentFile (state, filePath) {
@@ -27,6 +28,25 @@ async function readComponentFile (state, filePath) {
   debug4(state, `Component.readComponentFile(${filePath}):end`)
 
   return data
+}
+
+async function registerComponentFiles (state, id) {
+  debug4(state, `Component.registerComponentFiles(${id}):start`)
+
+  // register only files with adapter extensions
+  // in the component folder root. No variants!
+  const { config: { adapters, source: { components } } } = state
+  const exts = Object.keys(adapters).join(',')
+  const pattern = ComponentUtil.componentIdToComponentFilePath(components, id, `*.{${exts}}`)
+  const paths = await glob(pattern, { onlyFiles: true })
+
+  const register = R.partial(registerComponentFile, [state])
+  const registers = R.map(register, paths)
+  const registrations = await Promise.all(registers)
+
+  debug4(state, `Component.registerComponentFiles(${id}):end`)
+
+  return R.reject(R.isNil, registrations)
 }
 
 async function findComponentIds (state) {
@@ -63,14 +83,18 @@ export async function fetchById (state, id) {
 
   const componentPath = ComponentUtil.componentIdToPath(id)
   const componentFilePath = ComponentUtil.componentIdToComponentFilePath(components, id)
-  const componentData = await readComponentFile(state, componentFilePath)
+  const [componentData, fileRegistrations] = await Promise.all([
+    readComponentFile(state, componentFilePath),
+    registerComponentFiles(state, id)
+  ])
 
   let { attributes, content, attributes: { context, variants } } = componentData
   variants = await Variant.fetchObjects(state, id, context, variants)
 
   const title = attributes.title || StringUtil.titleFromContentHeading(content) || ComponentUtil.componentIdToTitle(id)
-  const fixData = { id, title, content, variants, path: componentPath, type: 'component' }
-  const data = R.mergeAll([attributes, fixData])
+  const baseData = { id, title, content, variants, path: componentPath, type: 'component' }
+  const fileData = R.reduce(R.mergeDeepLeft, attributes, R.pluck('data', fileRegistrations))
+  const data = R.mergeDeepLeft(baseData, fileData)
 
   debug3(state, `Component.fetchById(${id}):end`)
 

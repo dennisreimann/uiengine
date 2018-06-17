@@ -59,3 +59,4 @@ The `title` and `label` get displayed in the documentation.
 The `label` is an individual marker that can be used as a reference in mockups or wireframes to reference components.
 The `tags` list is optional and can be used to search for pages.
 The `variants` attribute is documented in the [variant documentation](./variant.md).
+The `properties` attribute is documented in the [properties documentation](entities-properties.md#Component-properties).

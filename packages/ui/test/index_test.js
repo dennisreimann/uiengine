@@ -27,7 +27,7 @@ describe('UI', () => {
       const opts = Object.assign({}, testOptions, { markdownIt })
       await UI.setup(opts)
 
-      assert(markdownIt.set.calledOnce)
+      this.sinon.assert.calledOnce(markdownIt.set)
 
       this.sinon.restore()
     })

@@ -25,8 +25,8 @@ describe('Parsing', () => {
 
       Parsing.fromFileSync(parseFn, filePath, sourcePaths)
 
-      assert(parseFn.calledOnce)
-      assert(parseFn.calledWith(fileContent, filePath, sourcePaths))
+      this.sinon.assert.calledOnce(parseFn)
+      this.sinon.assert.calledWith(parseFn, fileContent, filePath, sourcePaths)
     })
   })
 
@@ -35,8 +35,8 @@ describe('Parsing', () => {
       const parseFn = this.sinon.stub()
       await Parsing.fromFile(parseFn, filePath, sourcePaths)
 
-      assert(parseFn.calledOnce)
-      assert(parseFn.calledWith(fileContent, filePath, sourcePaths))
+      this.sinon.assert.calledOnce(parseFn)
+      this.sinon.assert.calledWith(parseFn, fileContent, filePath, sourcePaths)
     })
   })
 
@@ -45,15 +45,15 @@ describe('Parsing', () => {
       const parseFn = this.sinon.stub()
       await Parsing.fromString(parseFn, '123', sourcePaths)
 
-      assert(parseFn.calledOnce)
-      assert(parseFn.calledWith('123', null, sourcePaths))
+      this.sinon.assert.calledOnce(parseFn)
+      this.sinon.assert.calledWith(parseFn, '123', null, sourcePaths)
     })
 
     it('should resolve with undefined if the string is empty', async function () {
       const parseFn = this.sinon.stub()
       const result = await Parsing.fromString(parseFn, '', sourcePaths)
 
-      assert(parseFn.notCalled)
+      this.sinon.assert.notCalled(parseFn)
       assert.equal(typeof result, 'undefined')
     })
   })

@@ -10,8 +10,8 @@ export const componentIdToTitle = (componentId) =>
 export const componentIdToPath = (componentId) =>
   join(COMPONENTS_DIRNAME, componentId)
 
-export const componentIdToComponentFilePath = (componentsPath, componentId) =>
-  join(componentsPath, componentId, COMPONENT_FILENAME)
+export const componentIdToComponentFilePath = (componentsPath, componentId, fileName = COMPONENT_FILENAME) =>
+  join(componentsPath, componentId, fileName)
 
 export const componentFilePathToComponentId = (componentsPath, componentFilePath) => {
   const relativePath = relative(componentsPath, componentFilePath)
