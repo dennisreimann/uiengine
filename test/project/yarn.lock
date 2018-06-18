@@ -119,34 +119,34 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.38.tgz#c1be40aa933723c608820a99a373a16d215a1ca2"
 
 "@uiengine/adapter-ejs@file:../../packages/adapter-ejs":
-  version "0.20.0"
+  version "0.21.0"
 
 "@uiengine/adapter-handlebars@file:../../packages/adapter-handlebars":
-  version "0.20.0"
+  version "0.21.0"
 
 "@uiengine/adapter-html@file:../../packages/adapter-html":
-  version "0.20.0"
+  version "0.21.0"
 
 "@uiengine/adapter-marko@file:../../packages/adapter-marko":
-  version "0.20.0"
+  version "0.21.0"
 
 "@uiengine/adapter-pug@file:../../packages/adapter-pug":
-  version "0.20.0"
+  version "0.21.0"
 
 "@uiengine/adapter-react@file:../../packages/adapter-react":
-  version "0.20.0"
+  version "0.21.0"
 
 "@uiengine/adapter-vue@file:../../packages/adapter-vue":
-  version "0.20.0"
+  version "0.21.0"
   dependencies:
     vue-component-compiler "git+https://github.com/znck/vue-component-compiler.git"
     vue-server-renderer "^2.3.0"
     vue-template-compiler "^2.3.0"
 
 "@uiengine/core@file:../../packages/core":
-  version "0.20.0"
+  version "0.21.2"
   dependencies:
-    "@uiengine/ui" "^0.20.0"
+    "@uiengine/ui" "^0.21.2"
     chalk "^2.4.1"
     cosmiconfig "^5.0.5"
     fs-extra "^6.0.1"
@@ -160,13 +160,13 @@
     browser-sync "^2.24.4"
     chokidar "^2.0.3"
 
-"@uiengine/ui@^0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-0.20.0.tgz#e756365701212acddeaf8919e092749108a13803"
+"@uiengine/ui@^0.21.2":
+  version "0.21.2"
+  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-0.21.2.tgz#55a9650a0565a5a9ae6b246bf0104f14bcffb9c8"
   dependencies:
     color "^3.0.0"
     ejs "^2.6.1"
-    fuse.js "^3.2.0"
+    fuse.js "^3.2.1"
     highlight.js "^9.12.0"
     htmlescape "^1.1.1"
     vue "^2.5.16"
@@ -176,7 +176,7 @@
     vuex "^3.0.1"
 
 "@uiengine/ui@file:../../packages/ui":
-  version "0.20.0"
+  version "0.21.2"
   dependencies:
     color "^3.0.0"
     ejs "^2.6.1"
@@ -3769,10 +3769,6 @@ function-bind@^1.0.2:
 functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
-
-fuse.js@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-3.2.0.tgz#f0448e8069855bf2a3e683cdc1d320e7e2a07ef4"
 
 fuse.js@^3.2.1:
   version "3.2.1"
