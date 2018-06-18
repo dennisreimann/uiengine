@@ -12,6 +12,7 @@
 ### Fixed
 
 - Use theme hash across all previews and links
+- Display of indented code blocks
 
 ## [0.21.0] - 2018-06-11
 

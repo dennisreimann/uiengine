@@ -113,3 +113,8 @@
     background-color var(--uie-color-code-bg)
     // use important to override hljs styling which differs per theme
     padding var(--uie-space-m) !important
+    // reset inline code styles when nested in pre
+    code
+      padding 0
+      border-radius none
+      background-color transparent

@@ -62,11 +62,11 @@ export default {
       > :last-child
         margin-bottom 0
 
-  pre.hljs
+  pre
     margin-top var(--uie-space-m)
     margin-bottom var(--uie-space-l)
 
-  pre.hljs,
+  pre,
   mark:not([class]),
   code:not([class])
     border-radius var(--uie-space-xs)
@@ -84,7 +84,7 @@ export default {
   ul:not([class]),
   ol:not([class]),
   table:not([class]),
-  pre.hljs
+  pre:not([class])
     +
       h2,
       h3
