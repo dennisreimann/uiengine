@@ -1,6 +1,3 @@
-const { join } = require('path')
-const R = require('ramda')
-const glob = require('globby')
 const File = require('./util/file')
 const ComponentUtil = require('./util/component')
 const { error } = require('./util/message')

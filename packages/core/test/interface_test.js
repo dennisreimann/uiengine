@@ -2,7 +2,6 @@ require('mocha-sinon')()
 
 const fs = require('fs-extra')
 const { resolve } = require('path')
-const assert = require('assert')
 const Interface = require('../src/interface')
 
 const { testTmpPath } = require('../../../test/support/paths')
