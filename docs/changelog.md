@@ -4,10 +4,13 @@
 
 ### Added
 
+- Adapters `registerComponentFile` functions can extract and return information from component files
+  - Use this to generate documentation from your #React PropType definitions etc.
+  - See the [adapters documentation](./adapters.md) for details.
 - Option to wrap the content of a [custom page template](./page.md#templates) in the preview template
   - In case you want to provide only the content of the `<body>`.
   - Works like with variants, whose content replaces the `uiengine:content` comment.
-- Internal links in documentation are now handled via the UI router
+- Internal links in documentation are now handled via the UI router.
 
 ### Fixed
 

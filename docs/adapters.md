@@ -120,7 +120,6 @@ Use this function to generate documentation from your components, i.e.
 
 When generating incremental changes during development you can also use this to update the registered component files.
 
-
 ### Scaffolding
 
 Adapters can also provide async functions to be used when scaffolding components and variants:
