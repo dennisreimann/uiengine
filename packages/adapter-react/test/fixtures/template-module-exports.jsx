@@ -8,4 +8,4 @@ const Template = props => {
   )
 }
 
-export default Template
+module.exports = Template

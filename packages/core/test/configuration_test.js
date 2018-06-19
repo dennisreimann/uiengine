@@ -1,4 +1,5 @@
 const assert = require('assert')
+const { assertMatches } = require('../../../test/support/asserts')
 const { resolve } = require('path')
 
 const { testProjectPath, testProjectTargetPath } = require('../../../test/support/paths')
@@ -70,12 +71,13 @@ describe('Configuration', () => {
       assert.equal(Object.keys(config.adapters.hbs.options).length, 0)
     })
 
-    it('should throw error if config is invalid', async () => {
+    it('should throw error if config does not exist', async () => {
       try {
-        const invalidOpts = Object.assign({}, opts, { adapters: { html: null } })
-        await Configuration.read(invalidOpts)
+        await Configuration.read({ config: 'doesnotexist.config.js' })
       } catch (error) {
         assert(error)
+
+        assertMatches(error.message, 'Could not read UIengine configuration')
       }
     })
   })

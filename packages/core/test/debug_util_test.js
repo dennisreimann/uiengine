@@ -1,7 +1,5 @@
 require('mocha-sinon')()
 
-const assert = require('assert')
-
 const { debug, debug2, debug3, debug4, debug5 } = require('../src/util/debug')
 
 const stateWithDebugLevel = debug => ({ config: { debug } })

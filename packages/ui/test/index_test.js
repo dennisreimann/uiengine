@@ -11,6 +11,18 @@ const target = resolve(testTmpPath, 'site')
 const indexFile = join(target, 'index.html')
 const testOptions = { target, markdownIt: { set: function () {} } }
 
+const tokensPage = {
+  tokens: [
+    {
+      type: 'color',
+      name: 'Red',
+      value: '#F00',
+      variable: 'var(--color-red)',
+      description: 'Our own version of red.'
+    }
+  ]
+}
+
 describe('UI', () => {
   afterEach(() => { fs.removeSync(testTmpPath) })
 
@@ -62,6 +74,22 @@ describe('UI', () => {
       await UI.render(testOptions, 'index', { state: { config: { name: 'Test Render' } } })
 
       assertContentMatches(indexFile, 'Test Render')
+    })
+
+    it('should render the tokens including the colors', async () => {
+      const tokens = await UI.render(testOptions, 'tokens', tokensPage)
+
+      assertMatches(tokens, 'Red')
+      assertMatches(tokens, '#FF0000')
+      assertMatches(tokens, /rgb\(255, 0, 0\)/)
+      assertMatches(tokens, /hsl\(0, 100%, 50%\)/)
+    })
+
+    it('should render the tokens including the localizations', async () => {
+      const tokens = await UI.render(testOptions, 'tokens', tokensPage)
+
+      assertMatches(tokens, '<dt class="uie-color-token__label">Description</dt>')
+      assertMatches(tokens, '<dt class="uie-color-token__label">Variable</dt>')
     })
 
     it('should render the sketch output including the colors', async () => {

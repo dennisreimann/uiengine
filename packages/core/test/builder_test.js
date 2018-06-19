@@ -1,7 +1,8 @@
 const fs = require('fs-extra')
 const { join, resolve } = require('path')
 const Factory = require('./support/factory')
-const { assertContentMatches, assertExists, assertDoesNotExist } = require('../../../test/support/asserts')
+const assert = require('assert')
+const { assertContentMatches, assertContentDoesNotMatch, assertMatches, assertExists, assertDoesNotExist } = require('../../../test/support/asserts')
 const Builder = require('../src/builder')
 const Interface = require('../src/interface')
 const Connector = require('../src/connector')
@@ -82,6 +83,16 @@ const state = {
       }
     }),
 
+    'prototype/custom-page-wrapped': Factory.page('prototype/custom-page-wrapped', {
+      title: 'Custom Page',
+      template: 'page-body.pug',
+      wrapTemplate: true,
+      content: 'Content for custom template that is wrapped',
+      context: {
+        myContextVariable: 'This is my context'
+      }
+    }),
+
     'testcases': Factory.page('testcases', {
       title: 'Testcases',
       path: 'testcases',
@@ -147,6 +158,20 @@ const state = {
       path: 'prototype/custom-page',
       type: 'page',
       template: 'page.pug',
+      content: 'Content for custom template',
+      context: {
+        myContextVariable: 'This is my context'
+      },
+      parentId: 'prototype'
+    }),
+
+    'prototype/custom-page-wrapped': Factory.navigation('prototype/custom-page-wrapped', {
+      itemId: 'prototype/custom-page-wrapped',
+      title: 'Custom Page Wrapped',
+      path: 'prototype/custom-page-wrapped',
+      type: 'page',
+      template: 'page-body.pug',
+      wrapTemplate: true,
       content: 'Content for custom template',
       context: {
         myContextVariable: 'This is my context'
@@ -265,6 +290,59 @@ describe('Builder', () => {
 
       const pagePath = join(target, '_pages', 'prototype', 'custom-page.html')
       assertContentMatches(pagePath, 'This is my context')
+      assertContentDoesNotMatch(pagePath, 'uie-page uie-page--prototype-custom-page-wrapped')
+    })
+
+    it('should generate page with custom template that is wrapped', async () => {
+      await Builder.generatePageWithTemplate(state, 'prototype/custom-page-wrapped')
+
+      const pagePath = join(target, '_pages', 'prototype', 'custom-page-wrapped.html')
+      assertContentMatches(pagePath, 'This is my context')
+      assertContentMatches(pagePath, 'uie-page uie-page--prototype-custom-page-wrapped')
+    })
+
+    it('should throw error if the page does not exist', async () => {
+      try {
+        await Builder.generatePageWithTemplate(state, 'prototype/unknown-page')
+      } catch (error) {
+        assert(error)
+
+        assertMatches(error.message, 'Page "prototype/unknown-page" does not exist or has not been fetched yet.')
+      }
+    })
+
+    it('should throw error if the custom template does not exist', async () => {
+      try {
+        const erroneousState = Object.assign({}, state, {
+          pages: {
+            'prototype/custom-page-erroneous': Factory.page('prototype/custom-page-erroneous', {
+              title: 'Custom Erroneous Page',
+              template: 'doesnotexist.pug',
+              content: 'Content for custom template that does not exist',
+              context: {}
+            })
+          }
+        })
+        await Builder.generatePageWithTemplate(erroneousState, 'prototype/custom-page-erroneous')
+      } catch (error) {
+        assert(error)
+
+        assertMatches(error.message, 'Page "prototype/custom-page-erroneous" could not be generated!')
+      }
+    })
+
+    it('should throw error with additional debug output if the template cannot be rendered', async () => {
+      try {
+        const debugState = JSON.parse(JSON.stringify(state))
+        debugState.config.debug = true
+        debugState.pages['prototype/custom-page'].template = 'doesnotexist.pug'
+        debugState.pages['prototype/custom-page'].context = { variable: 'Test' }
+        await Builder.generatePageWithTemplate(debugState, 'prototype/custom-page')
+      } catch (error) {
+        assert(error)
+
+        assertMatches(error.message, '"variable": "Test"')
+      }
     })
   })
 
@@ -274,6 +352,16 @@ describe('Builder', () => {
 
       const pagePath = join(target, '_tokens', 'tokens.html')
       assertContentMatches(pagePath, '#123456')
+    })
+
+    it('should throw error if the page does not exist', async () => {
+      try {
+        await Builder.generatePageWithTokens(state, 'unknown-tokens')
+      } catch (error) {
+        assert(error)
+
+        assertMatches(error.message, 'Page "unknown-tokens" does not exist or has not been fetched yet.')
+      }
     })
   })
 
@@ -340,6 +428,14 @@ describe('Builder', () => {
 
       assertExists(join(target, '_variants', 'input', 'text.pug.html'))
     })
+
+    it('should not throw an error if the component has no', async () => {
+      const stateWithNoVariants = JSON.parse(JSON.stringify(state))
+      delete stateWithNoVariants.components.input.variants
+      await Builder.generateComponentVariants(stateWithNoVariants, 'input')
+
+      assertDoesNotExist(join(target, '_variants', 'input', 'text.pug.html'))
+    })
   })
 
   describe('#generateVariant', () => {
@@ -354,7 +450,7 @@ describe('Builder', () => {
   describe('#generateIncrement', () => {
     describe('with debug level set', () => {
       it('should generate state file', async () => {
-        const stateWithDebug = Object.assign({}, state)
+        const stateWithDebug = JSON.parse(JSON.stringify(state))
         stateWithDebug.config.debug = true
 
         await Builder.generateIncrement(stateWithDebug)

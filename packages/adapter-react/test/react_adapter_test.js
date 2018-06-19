@@ -18,6 +18,21 @@ describe('React adapter', () => {
   })
 
   describe('#setup', () => {
+    it('should invoke the babel-register hook function with the default options if none are given', async function () {
+      // sinon cannot stub modules which export only a function,
+      // hence we have to jump through hoops, see the details:
+      // https://github.com/sinonjs/sinon/issues/562
+      const babelRegisterStub = this.sinon.stub()
+      require.cache[require.resolve('babel-register')] = {
+        default: babelRegisterStub,
+        exports: babelRegisterStub
+      }
+      await Adapter.setup({})
+
+      this.sinon.assert.calledOnce(babelRegisterStub)
+      this.sinon.assert.calledWith(babelRegisterStub, defaultOptions.babel)
+    })
+
     it('should invoke the babel-register hook function with the given options', async function () {
       // sinon cannot stub modules which export only a function,
       // hence we have to jump through hoops, see the details:
@@ -27,18 +42,28 @@ describe('React adapter', () => {
         default: babelRegisterStub,
         exports: babelRegisterStub
       }
-      await Adapter.setup(defaultOptions)
+      const options = { babel: { presets: ['@babel/preset-react'] } }
+      await Adapter.setup(options)
 
       this.sinon.assert.calledOnce(babelRegisterStub)
-      this.sinon.assert.calledWith(babelRegisterStub, defaultOptions.babel)
+      this.sinon.assert.calledWith(babelRegisterStub, options.babel)
     })
   })
 
   describe('#render', () => {
-    it('should render the template with the given data', async () => {
+    it('should render the export default template with the given data', async () => {
       const options = {}
       const data = { myData: 1 }
       const rendered = await Adapter.render(options, templatePath, data)
+
+      assert(rendered.match(/<p data-react(.*?)>1<\/p>/))
+    })
+
+    it('should render the module.export template with the given data', async () => {
+      const options = {}
+      const data = { myData: 1 }
+      const moduleExportsTemplatePath = resolve(__dirname, 'fixtures', 'template-module-exports.jsx')
+      const rendered = await Adapter.render(options, moduleExportsTemplatePath, data)
 
       assert(rendered.match(/<p data-react(.*?)>1<\/p>/))
     })
@@ -165,6 +190,11 @@ describe('React adapter', () => {
       assert(props.customArrayProp)
       assert.equal(props.customArrayProp.type, '[Custom]')
       assert.equal(props.customArrayProp.required, false)
+    })
+
+    it('should return null if there are no component properties', async () => {
+      const result = await Adapter.registerComponentFile({}, templatePath)
+      assert.equal(result, null)
     })
   })
 

@@ -7,8 +7,17 @@ const Adapter = require('../src/index')
 const options = {}
 const data = { myData: 1 }
 const templatePath = resolve(__dirname, 'fixtures', 'template.hbs')
+const componentsPath = resolve(__dirname, 'fixtures', 'components')
 
 describe('Handlebars adapter', () => {
+  describe('#setup', () => {
+    it('should register all components files', async () => {
+      await Adapter.setup({ components: componentsPath, ext: 'hbs' })
+
+      assert.equal(Handlebars.partials['button'], '<button>{{title}}</button>\n')
+    })
+  })
+
   describe('#render', () => {
     it('should render the template with the given data', async () => {
       const rendered = await Adapter.render(options, templatePath, data)

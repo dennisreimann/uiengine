@@ -30,7 +30,7 @@ export async function setup (state) {
   debug3(state, 'Connector.setup():start')
 
   const { config: { adapters } } = state
-  const exts = Object.keys(adapters) || []
+  const exts = Object.keys(adapters || {})
   const tasks = []
 
   exts.map(ext => {

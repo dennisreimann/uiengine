@@ -61,7 +61,7 @@ describe('Connector', () => {
 
     it('should be no op if there are no adapters', async function () {
       this.sinon.stub(TestAdapter, 'setup')
-      const state = { config: { source: { components, templates }, adapters: { } } }
+      const state = { config: { source: { components, templates }, adapters: null } }
       await Connector.setup(state)
 
       assert(TestAdapter.setup.notCalled)
@@ -76,6 +76,13 @@ describe('Connector', () => {
       this.sinon.assert.calledOnce(TestAdapter.registerComponentFile)
       this.sinon.assert.calledWith(TestAdapter.registerComponentFile, expandedAdapterOptions, testFilePath)
     })
+
+    it('should be no op if there is not such an adapter', async function () {
+      const noAdapterFilePath = resolve(components, 'form', 'form.foo')
+      const result = await Connector.registerComponentFile(state, noAdapterFilePath)
+
+      assert.equal(result, undefined)
+    })
   })
 
   describe('#render', () => {
@@ -87,6 +94,40 @@ describe('Connector', () => {
 
       this.sinon.assert.calledOnce(TestAdapter.render)
       this.sinon.assert.calledWith(TestAdapter.render, expandedAdapterOptions, templatePath, data)
+    })
+
+    it('should return structured object for rendered string', async function () {
+      const rendered = '<div>rendered html</div>'
+      this.sinon.stub(TestAdapter, 'render').returns(rendered)
+      const templatePath = './src/templates/my-template.test'
+      const data = { myData: 1 }
+      const result = await Connector.render(state, templatePath, data)
+
+      assert.equal(result.rendered, rendered)
+      assert.equal(result.parts.length, 1)
+      assert.equal(result.parts[0].lang, 'html')
+      assert.equal(result.parts[0].title, 'HTML')
+      assert.equal(result.parts[0].content, rendered)
+    })
+
+    it('should return structured object for rendered object', async function () {
+      const rendered = '<div>rendered html</div>'
+      const renderResult = {
+        rendered,
+        parts: [
+          {
+            lang: 'html',
+            title: 'HTML',
+            content: rendered
+          }
+        ]
+      }
+      this.sinon.stub(TestAdapter, 'render').returns(renderResult)
+      const templatePath = './src/templates/my-template.test'
+      const data = { myData: 1 }
+      const result = await Connector.render(state, templatePath, data)
+
+      assert.equal(result, renderResult)
     })
 
     it('should throw error if the adapter does not implement the render function', async () => {
