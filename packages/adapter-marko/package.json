@@ -2,7 +2,7 @@
   "name": "@uiengine/adapter-marko",
   "description": "UIengine template adapter for Marko.",
   "license": "MIT",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
