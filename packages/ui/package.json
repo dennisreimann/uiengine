@@ -2,7 +2,7 @@
   "name": "@uiengine/ui",
   "description": "UIengine user interface.",
   "license": "MIT",
-  "version": "0.22.0",
+  "version": "0.22.1",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
@@ -84,7 +84,7 @@
     "webpack-stream": "^4.0.3"
   },
   "peerDependencies": {
-    "@uiengine/core": "^0.22.0"
+    "@uiengine/core": "^0.22.1"
   },
   "browserslist": [
     "last 2 versions"
