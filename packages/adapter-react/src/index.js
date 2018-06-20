@@ -2,9 +2,10 @@ const ReactDOMServer = require('react-dom/server')
 const { extractProperties, invalidateModuleCache, upcaseFirstChar } = require('./util')
 
 export async function setup (options) {
+  const babelRegisterModule = options.babelRegisterModule || 'babel-register'
   const babel = options.babel || {}
 
-  require('babel-register')(babel)
+  require(babelRegisterModule)(babel)
 }
 
 export async function registerComponentFile (options, filePath) {

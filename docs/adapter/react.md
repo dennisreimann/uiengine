@@ -19,6 +19,9 @@ adapters:
     module: @uiengine/adapter-react
     options:
       debug: true
+      # the babel register module that is used.
+      # default: 'babel-register'
+      babelRegisterModule: @babel/register
       # babel options that get passed to
       # `require('babel-register')()
       # default: none
