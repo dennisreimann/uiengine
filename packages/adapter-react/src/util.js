@@ -7,34 +7,44 @@ export const invalidateModuleCache = filePath => delete require.cache[require.re
 export const upcaseFirstChar = string => string.charAt(0).toUpperCase() + string.slice(1)
 
 export const extractPropertyDisplayType = type => {
-  if (type.value) {
-    if (type.value instanceof Array) {
-      return type.value
-        .map(subType => extractPropertyDisplayType(subType))
-        .join('|')
-        .replace(/["']/g, '')
-    } else if (type.value instanceof Object) {
-      if (type.name === 'arrayOf') {
-        return `[${extractPropertyDisplayType(type.value)}]`
-      } else if (type.name === 'shape') {
-        return `{${Object.keys(type.value).map(key =>
-          `${key}:${extractPropertyDisplayType(type.value[key])}`
-        ).join(', ')}}`
+  if (type) {
+    if (type.value) {
+      if (type.value instanceof Array) {
+        return type.value
+          .map(subType => extractPropertyDisplayType(subType))
+          .join('|')
+          .replace(/["']/g, '')
+      } else if (type.value instanceof Object) {
+        if (type.name === 'arrayOf') {
+          return `[${extractPropertyDisplayType(type.value)}]`
+        } else if (type.name === 'shape') {
+          return `{${Object.keys(type.value).map(key =>
+            `${key}:${extractPropertyDisplayType(type.value[key])}`
+          ).join(', ')}}`
+        } else {
+          return extractPropertyDisplayType(type.value)
+        }
       } else {
-        return extractPropertyDisplayType(type.value)
+        return upcaseFirstChar(type.value)
       }
-    } else {
-      return upcaseFirstChar(type.value)
+    } else if (type.name) {
+      return upcaseFirstChar(type.name)
     }
-  } else if (type.name) {
-    return upcaseFirstChar(type.name)
+  } else {
+    return null
   }
 }
 
 export const extractProperties = filePath => {
   const source = readFileSync(filePath)
   const resolver = reactDocs.resolver.findAllExportedComponentDefinitions
-  const reactDefinitions = reactDocs.parse(source, resolver)
+  let reactDefinitions
+  try {
+    reactDefinitions = reactDocs.parse(source, resolver)
+  } catch (err) {
+    reactDefinitions = []
+  }
+
   const uieProperties = reactDefinitions.reduce((result, reactDefinition) => {
     const reactProps = reactDefinition.props || {}
     const uiengineProps = Object.keys(reactProps).reduce((component, propertyKey) => {

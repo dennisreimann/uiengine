@@ -38,17 +38,26 @@ export default {
   computed: {
     // https://forum.vuejs.org/t/dynamically-compile-router-link/7410
     propertyType () {
-      const [displayName, normalizedType] = this.property.type.match(/^\[?([\w\s|]+)\]?$/i)
+      const typesSeparator = '|'
+      const propsSeparator = ', '
       const customPropertyTypes = Object.keys(this.entities)
-      let template = `<span>${displayName}</span>`
-
-      if (customPropertyTypes.includes(normalizedType)) {
-        const to = JSON.stringify({ path: '/_entities/', hash: normalizedType })
-        template = `<router-link :to='${to}' class="" active-class="" exact-active-class="" exact>${displayName}</router-link>`
-      }
+      const [, wrapStart, normalizedType, wrapEnd] = this.property.type.match(/^([[\\{])?([\w\s|,:]+)([\]\\}])?$/i)
+      const normalizedTypes = normalizedType.split(typesSeparator)
+      const template = normalizedTypes.map(normalizedType => {
+        const subTypes = normalizedType.split(propsSeparator)
+        return subTypes.map(subType => {
+          const [, propName, propType] = subType.match(/(\w*?:)?([\w]+)*/i)
+          if (customPropertyTypes.includes(propType)) {
+            const to = JSON.stringify({ path: '/_entities/', hash: normalizedType })
+            return `${propName || ''}<router-link :to='${to}' class="" active-class="" exact-active-class="" exact>${propType}</router-link>`
+          } else {
+            return `${propName || ''}${propType}`
+          }
+        }).join(propsSeparator)
+      }).join(typesSeparator)
 
       return {
-        template,
+        template: `<span>${wrapStart || ''}${template}${wrapEnd || ''}</span>`,
         props: this.$options.props
       }
     },

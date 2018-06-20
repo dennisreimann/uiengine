@@ -120,19 +120,21 @@
   version "0.21.0"
 
 "@uiengine/adapter-handlebars@file:../../packages/adapter-handlebars":
-  version "0.21.0"
+  version "0.22.0"
+  dependencies:
+    globby "^8.0.1"
 
 "@uiengine/adapter-html@file:../../packages/adapter-html":
   version "0.21.0"
 
 "@uiengine/adapter-marko@file:../../packages/adapter-marko":
-  version "0.21.0"
+  version "0.22.0"
 
 "@uiengine/adapter-pug@file:../../packages/adapter-pug":
   version "0.21.0"
 
 "@uiengine/adapter-react@file:../../packages/adapter-react":
-  version "0.21.0"
+  version "0.22.0"
   dependencies:
     react-docgen "^2.20.1"
   optionalDependencies:
@@ -146,9 +148,9 @@
     vue-template-compiler "^2.3.0"
 
 "@uiengine/core@file:../../packages/core":
-  version "0.21.2"
+  version "0.22.0"
   dependencies:
-    "@uiengine/ui" "^0.21.2"
+    "@uiengine/ui" "^0.22.0"
     chalk "^2.4.1"
     cosmiconfig "^5.0.5"
     fs-extra "^6.0.1"
@@ -162,9 +164,9 @@
     browser-sync "^2.24.4"
     chokidar "^2.0.3"
 
-"@uiengine/ui@^0.21.2":
-  version "0.21.2"
-  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-0.21.2.tgz#55a9650a0565a5a9ae6b246bf0104f14bcffb9c8"
+"@uiengine/ui@^0.22.0":
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-0.22.0.tgz#eff95e149db9111a9e64848cb9fb5cf05efdf644"
   dependencies:
     color "^3.0.0"
     ejs "^2.6.1"
@@ -178,7 +180,7 @@
     vuex "^3.0.1"
 
 "@uiengine/ui@file:../../packages/ui":
-  version "0.21.2"
+  version "0.22.0"
   dependencies:
     color "^3.0.0"
     ejs "^2.6.1"
