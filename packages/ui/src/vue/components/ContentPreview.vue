@@ -251,6 +251,9 @@ export default {
       const head = contentDocument.getElementsByTagName('head')[0]
       const script = document.createElement('script')
       script.src = scriptSrc
+      // script tags inserted via js load async by default. prevent this by explicitly
+      // turning off async loading to ensure the correct loading order.
+      script.async = false
       head.appendChild(script)
     }
   }
