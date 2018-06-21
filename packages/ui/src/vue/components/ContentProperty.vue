@@ -36,28 +36,24 @@ export default {
   },
 
   computed: {
-    // https://forum.vuejs.org/t/dynamically-compile-router-link/7410
     propertyType () {
-      const typesSeparator = '|'
-      const propsSeparator = ', '
-      const customPropertyTypes = Object.keys(this.entities)
-      const [, wrapStart, normalizedType, wrapEnd] = this.property.type.match(/^([[\\{])?([\w\s|,:]+)([\]\\}])?$/i)
-      const normalizedTypes = normalizedType.split(typesSeparator)
-      const template = normalizedTypes.map(normalizedType => {
-        const subTypes = normalizedType.split(propsSeparator)
-        return subTypes.map(subType => {
-          const [, propName, propType] = subType.match(/(\w*?:)?([\w]+)*/i)
-          if (customPropertyTypes.includes(propType)) {
-            const to = JSON.stringify({ path: '/_entities/', hash: normalizedType })
-            return `${propName || ''}<router-link :to='${to}' class="" active-class="" exact-active-class="" exact>${propType}</router-link>`
-          } else {
-            return `${propName || ''}${propType}`
-          }
-        }).join(propsSeparator)
-      }).join(typesSeparator)
+      const regexp = new RegExp(
+        // before: either the start of the string or a bounding character,
+        // this is optional to make it non-greedy
+        `(^|([[|:]))?` +
+        // the type name match options
+        `(${Object.keys(this.entities).join('|')})` +
+        // after: either the end of the string or a bounding character
+        `(([\\]|,}])|$)`, 'g')
+
+      const output = this.property.type.replace(regexp, (match, before, unused, typeName, after) => {
+        // https://forum.vuejs.org/t/dynamically-compile-router-link/7410
+        const to = JSON.stringify({ path: '/_entities/', hash: typeName })
+        return `${before || ''}<router-link :to='${to}' class="" active-class="" exact-active-class="" exact>${typeName}</router-link>${after || ''}`
+      })
 
       return {
-        template: `<span>${wrapStart || ''}${template}${wrapEnd || ''}</span>`,
+        template: `<span>${output}</span>`,
         props: this.$options.props
       }
     },

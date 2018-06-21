@@ -27,6 +27,8 @@ export const extractPropertyDisplayType = type => {
       } else {
         return upcaseFirstChar(type.value)
       }
+    } else if (type.raw) {
+      return upcaseFirstChar(type.raw)
     } else if (type.name) {
       return upcaseFirstChar(type.name)
     }
