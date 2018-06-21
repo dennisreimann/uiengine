@@ -27,9 +27,10 @@ export const extractPropertyDisplayType = type => {
       } else {
         return upcaseFirstChar(type.value)
       }
-    } else if (type.raw) {
-      return upcaseFirstChar(type.raw)
     } else if (type.name) {
+      if (type.name === 'custom' && type.raw && type.raw.match(/^\w+$/)) {
+        return upcaseFirstChar(type.raw)
+      }
       return upcaseFirstChar(type.name)
     }
   } else {

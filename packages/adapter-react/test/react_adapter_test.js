@@ -183,6 +183,10 @@ describe('React adapter', () => {
       assert.equal(props.requiredAny.type, 'Any')
       assert.equal(props.requiredAny.required, true)
 
+      assert(props.customType)
+      assert.equal(props.customType.type, 'Message')
+      assert.equal(props.customType.required, false)
+
       assert(props.customProp)
       assert.equal(props.customProp.type, 'Custom')
       assert.equal(props.customProp.required, false)
