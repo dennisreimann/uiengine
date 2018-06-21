@@ -1,9 +1,9 @@
-# Development
+# Contributing
 
-- [Workflows](#workflows)
+- [Development Workflow](#development-workflow)
 - [Important Notes and Guidelines](#notes)
 
-## Workflows
+## Development workflow
 
 ### 📦 Setup
 
