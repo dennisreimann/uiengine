@@ -1,4 +1,4 @@
-const ReactDOMServer = require('react-dom/server')
+const { renderToString } = require('react-dom/server')
 const { extractProperties, invalidateModuleCache, upcaseFirstChar } = require('./util')
 
 export async function setup (options) {
@@ -16,15 +16,21 @@ export async function registerComponentFile (options, filePath) {
   return Object.keys(properties).length ? { properties } : null
 }
 
+// this is a hook function which can be overwritten by custom adapters.
+export function wrapElementBeforeRender (Element) {
+  return Element
+}
+
 export async function render (options, filePath, data = {}) {
   try {
     invalidateModuleCache(filePath)
 
-    let template = require(filePath)
-    if (template.default) template = template.default
-    const vdom = template(data)
+    let Element = require(filePath)
+    if (Element.default) Element = Element.default
+    Element = wrapElementBeforeRender(Element)
+    const vdom = Element(data)
 
-    return ReactDOMServer.renderToString(vdom)
+    return renderToString(vdom)
   } catch (err) {
     const message = [`React DOM could not render "${filePath}"!`, err]
 
