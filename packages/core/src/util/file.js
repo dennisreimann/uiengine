@@ -26,53 +26,18 @@ export const invalidateRequireCache = filePath => {
 }
 
 export async function read (filePath) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(filePath, 'utf8', (err, string) => {
-      if (err) {
-        reject(err)
-      } else {
-        resolve(string.trim())
-      }
-    })
-  })
+  const string = await fs.readFile(filePath, 'utf8')
+  return string.trim()
 }
 
 export async function write (filePath, content) {
-  return new Promise((resolve, reject) => {
-    const dir = dirname(filePath)
-    fs.mkdirs(dir, err => {
-      if (err) {
-        reject(err)
-      } else {
-        fs.writeFile(filePath, content, err => {
-          if (err) {
-            reject(err)
-          } else {
-            resolve()
-          }
-        })
-      }
-    })
-  })
+  await fs.outputFile(filePath, content)
 }
 
 export async function copy (src, dst) {
-  return new Promise((resolve, reject) => {
-    const dir = dirname(dst)
-    fs.mkdirs(dir, err => {
-      if (err) {
-        reject(err)
-      } else {
-        fs.copy(src, dst, err => {
-          if (err) {
-            reject(err)
-          } else {
-            resolve()
-          }
-        })
-      }
-    })
-  })
+  const dir = dirname(dst)
+  await fs.mkdirs(dir)
+  await fs.copy(src, dst)
 }
 
 export default {
