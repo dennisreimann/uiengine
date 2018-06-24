@@ -115,31 +115,31 @@ export async function generateIncrementForFileChange (filePath, action = 'change
   switch (change.type) {
     case 'page':
       fn = isDeleted ? removePage : regeneratePage
-      await fn(change.item, change)
+      await fn(change.item)
       break
 
     case 'variant':
       fn = isDeleted ? removeVariant : regenerateVariant
-      await fn(change.item, change)
+      await fn(change.item)
       break
 
     case 'entity':
       fn = isDeleted ? removeEntity : regenerateEntity
-      await regenerateEntity(change.item, change)
+      await regenerateEntity(change.item)
       break
 
     case 'component':
       // check whether a file has been deleted or the component directory
       const isDirectory = basename(filePath) === change.item
       if (isDeleted && isDirectory) {
-        await removeComponent(change.item, change)
+        await removeComponent(change.item)
       } else {
-        await regenerateComponent(change.item, change)
+        await regenerateComponent(change.item)
       }
       break
 
     case 'template':
-      await regenerateTemplate(change.item, change)
+      await regenerateTemplate(change.item)
       break
 
     default:
@@ -180,7 +180,7 @@ async function fetchAndAssocNavigation () {
   return navigation
 }
 
-async function regeneratePage (id, change) {
+async function regeneratePage (id) {
   const pageIds = Object.keys(_state.pages)
   const parentId = PageUtil.parentIdForPageId(pageIds, id)
   const fetchTasks = [fetchAndAssocPage(id)]
@@ -192,11 +192,11 @@ async function regeneratePage (id, change) {
     Builder.generatePageWithTemplate(_state, id),
     Builder.generatePageWithTokens(_state, id),
     Builder.generatePageFiles(_state, id),
-    Builder.generateIncrement(_state, change)
+    Builder.generateIncrement(_state)
   ])
 }
 
-async function removePage (id, change) {
+async function removePage (id) {
   const pageIds = Object.keys(_state.pages)
   const parentId = PageUtil.parentIdForPageId(pageIds, id)
 
@@ -204,54 +204,54 @@ async function removePage (id, change) {
 
   await fetchAndAssocPage(parentId)
   await fetchAndAssocNavigation()
-  await Builder.generateIncrement(_state, change)
+  await Builder.generateIncrement(_state)
 }
 
-async function regenerateEntity (id, change) {
+async function regenerateEntity (id) {
   await fetchAndAssocEntity(id)
   await fetchAndAssocEntitiesPage()
-  await Builder.generateIncrement(_state, change)
+  await Builder.generateIncrement(_state)
 }
 
-async function removeEntity (id, change) {
+async function removeEntity (id) {
   _state = R.dissocPath(['entities', id], _state)
-  await Builder.generateIncrement(_state, change)
+  await Builder.generateIncrement(_state)
 }
 
-async function regenerateComponent (id, change) {
+async function regenerateComponent (id) {
   await fetchAndAssocComponent(id)
   await Promise.all([
     Builder.generateComponentVariants(_state, id),
-    Builder.generateIncrement(_state, change)
+    Builder.generateIncrement(_state)
   ])
 }
 
-async function removeComponent (id, change) {
+async function removeComponent (id) {
   _state = R.dissocPath(['components', id], _state)
-  await Builder.generateIncrement(_state, change)
+  await Builder.generateIncrement(_state)
 }
 
-async function regenerateVariant (id, change) {
+async function regenerateVariant (id) {
   const componentId = VariantUtil.variantIdToComponentId(id)
   const component = await fetchAndAssocComponent(componentId)
   const variant = R.find(variant => variant.id === id)(component.variants)
   await Promise.all([
     Builder.generateVariant(_state, variant),
-    Builder.generateIncrement(_state, change)
+    Builder.generateIncrement(_state)
   ])
 }
 
-async function removeVariant (id, change) {
+async function removeVariant (id) {
   const componentId = VariantUtil.variantIdToComponentId(id)
   await fetchAndAssocComponent(componentId)
-  await Builder.generateIncrement(_state, change)
+  await Builder.generateIncrement(_state)
 }
 
-async function regenerateTemplate (id, change) {
+async function regenerateTemplate (id) {
   await Promise.all([
     Builder.generateVariantsWithTemplate(_state, id),
     Builder.generateTokensWithTemplate(_state, id),
     Builder.generatePagesWithTemplate(_state, id),
-    Builder.generateIncrement(_state, change)
+    Builder.generateIncrement(_state)
   ])
 }

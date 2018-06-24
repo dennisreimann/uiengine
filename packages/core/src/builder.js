@@ -166,7 +166,6 @@ export async function generateComponentVariants (state, componentId) {
   const variants = component.variants || []
   const build = R.partial(generateVariant, [state])
   const builds = R.map(build, variants)
-
   await Promise.all(builds)
 
   debug3(state, `Builder.generateComponentVariants(${componentId}):end`)
@@ -175,6 +174,7 @@ export async function generateComponentVariants (state, componentId) {
 export async function generateVariantsWithTemplate (state, template) {
   debug3(state, `Builder.generateVariantsWithTemplate(${template}):start`)
 
+  const components = Object.values(state.components)
   const isPreviewTemplate = template === state.config.template
   const affectedVariants = R.reduce((list, component) => {
     return R.concat(list, R.filter(variant => {
@@ -185,7 +185,7 @@ export async function generateVariantsWithTemplate (state, template) {
       return (isPreviewTemplate && variant.template === undefined) ||
         variant.template === template
     }, component.variants))
-  }, [], Object.values(state.components))
+  }, [], components)
   const build = R.partial(generateVariant, [state])
   const builds = R.map(build, affectedVariants)
 
@@ -218,20 +218,32 @@ export async function generateTokensWithTemplate (state, template) {
   debug3(state, `Builder.generateTokensWithTemplate(${template}):end`)
 }
 
-async function generateState (state, change) {
-  debug2(state, 'Builder.generateState():start')
+async function generateStateHTML (state) {
+  debug3(state, 'Builder.generateStateHTML():start')
 
   const data = { state }
-  const tasks = [Interface.render(state, 'index', data)]
+  const rendered = await Interface.render(state, 'index', data)
+  const filePath = resolve(state.config.target, 'index.html')
+  await File.write(filePath, rendered)
 
-  if (state.config.debug) {
-    const json = JSON.stringify(state, null, 2)
-    const filePath = resolve(state.config.target, '_state.json')
-    const dumpState = File.write(filePath, json)
+  debug3(state, 'Builder.generateStateHTML():end')
+}
 
-    tasks.push(dumpState)
-  }
+async function generateStateJSON (state) {
+  debug3(state, 'Builder.generateStateJSON():start')
 
+  const json = JSON.stringify(state, null, 2)
+  const filePath = resolve(state.config.target, '_state.json')
+  await File.write(filePath, json)
+
+  debug3(state, 'Builder.generateStateJSON():end')
+}
+
+async function generateState (state) {
+  debug2(state, 'Builder.generateState():start')
+
+  const tasks = [generateStateHTML(state)]
+  if (state.config.debug) tasks.push(generateStateJSON(state))
   await Promise.all(tasks)
 
   debug2(state, 'Builder.generateState():end')
@@ -241,7 +253,7 @@ async function generateState (state, change) {
 // whereas generateState describes it better internally
 export const generateIncrement = generateState
 
-async function generateSketch (state, change) {
+async function generateSketch (state) {
   debug2(state, `Builder.generateSketch():start`)
 
   const { config: { name, target, template, version } } = state

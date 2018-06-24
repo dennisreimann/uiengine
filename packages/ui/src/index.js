@@ -2,8 +2,8 @@ import { join, resolve } from 'path'
 import { compile } from 'ejs'
 import htmlescape from 'htmlescape'
 import Color from 'color'
-import File from '@uiengine/core/lib/util/file'
 import locales from './locales'
+import { copyFile, readFile } from './file'
 import { highlight, localize, dasherize, titleize } from './util'
 
 const supportedLocales = ['en', 'de']
@@ -45,11 +45,11 @@ const helpers = {
 }
 
 async function copyStatic (target) {
-  await File.copy(staticPath, target)
+  await copyFile(staticPath, target)
 }
 
 async function compileTemplate (name) {
-  const templateString = await File.read(templatePath(name))
+  const templateString = await readFile(templatePath(name))
 
   templates[name] = compile(templateString)
 }
@@ -87,13 +87,6 @@ export async function render (options, template = 'index', data = null) {
 
     const templateFn = templates[template]
     const rendered = templateFn(context)
-
-    if (template === 'index') {
-      const { target } = options
-      const filePath = resolve(target, 'index.html')
-
-      await File.write(filePath, rendered)
-    }
 
     return rendered
   } catch (err) {

@@ -89,7 +89,7 @@ const state = {
       wrapTemplate: true,
       content: 'Content for custom template that is wrapped',
       context: {
-        myContextVariable: 'This is my context'
+        myContextVariable: 'This is my context, wrapped.'
       }
     }),
 
@@ -290,14 +290,14 @@ describe('Builder', () => {
 
       const pagePath = join(target, '_pages', 'prototype', 'custom-page.html')
       assertContentMatches(pagePath, 'This is my context')
-      assertContentDoesNotMatch(pagePath, 'uie-page uie-page--prototype-custom-page-wrapped')
+      assertContentDoesNotMatch(pagePath, 'uie-page uie-page--prototype-custom-page')
     })
 
     it('should generate page with custom template that is wrapped', async () => {
       await Builder.generatePageWithTemplate(state, 'prototype/custom-page-wrapped')
 
       const pagePath = join(target, '_pages', 'prototype', 'custom-page-wrapped.html')
-      assertContentMatches(pagePath, 'This is my context')
+      assertContentMatches(pagePath, 'This is my context, wrapped.')
       assertContentMatches(pagePath, 'uie-page uie-page--prototype-custom-page-wrapped')
     })
 
