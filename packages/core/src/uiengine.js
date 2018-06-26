@@ -132,6 +132,7 @@ const startServer = (state, opts) => {
   options.server.baseDir = optionWithDefault(defaults.server.baseDir, options.server.baseDir)
   options.middleware = optionWithDefault(defaults.middleware, options.middleware)
   options.logLevel = optionWithDefault((info ? 'info' : 'silent'), options.logLevel)
+  options.startPath = optionWithDefault(ui.base, options.startPath)
 
   const basePath = (optionWithDefault('/', ui.base)).replace(/\/$/, '')
   options.middleware.push({
