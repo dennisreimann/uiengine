@@ -1,4 +1,4 @@
-# UIengine template adapter for HTML
+# UIengine adapter for HTML
 
 🚦 *State:* Production ready
 

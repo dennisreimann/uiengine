@@ -63,18 +63,35 @@ This provides you with a development environment for creating the components, pr
 
 ### 💯 Main features
 
-- **Templating agnostic**: Various templating engines are integrated via adapters, giving you flexibility of choice and the option to integrate custom ones. It works with whatever can be rendered via JavaScript, which includes popular solutions like JSX, Vue, EJS, Pug/Jade, Handlebars, etc.
-- **Prototyping environment**: Build your UI without the need for an existing backend/API. Render your templates and components with mock data and build various variants for pages by providing different data to your views.
-- **Best practice approach**: The tool guides you towards best practices like not using application logic in the view layer by proposing a separation of data and template/component.
-- **In sync with the end product**: Since the docs are generated from the code that is used in your application, you get a living pattern library – not a separate thing that needs to be looked after regularly.
-- **Flexible integrations**: Templating engines can be configured so you can fit it to your needs. Same goes for the markdown parsing/rendering which is configurable too.
-- **Covers green- and brownfield projects**: Whether you start out with a pattern library or want to transition your process and refactor your existing UI into modular components, the UIengine has you covered.
+- **Templating agnostic**:
+  Various templating engines are integrated via adapters.
+  This gives you flexibility of choice and the option to integrate custom ones.
+  It works with whatever can be rendered via JavaScript, i.e. JSX, Vue, EJS, Pug/Jade, Handlebars.
+- **Prototyping environment**:
+  Build your UI without the need for an existing backend/API.
+  Render your templates and components with mock data.
+  Build various variants for pages by providing different data to your views.
+- **Best practice approach**:
+  The tool guides you towards best practices like
+  [the component folder pattern](https://medium.com/styled-components/component-folder-pattern-ee42df37ec68),
+  [the modlet workflow](https://css-tricks.com/key-building-large-javascript-apps-modlet-workflow/)
+  and by proposing a separation of data and template/component.
+- **In sync with the end product**:
+  The docs are generated from the code that is used in your application.
+  Hence you get a living pattern library – not a separate thing that needs to be looked after regularly.
+- **Flexible integrations**:
+  Templating engines can be configured so you can fit it to your needs.
+  Same goes for the markdown parsing/rendering which is configurable too.
+- **Covers green- and brownfield projects**:
+  Whether you start out with a pattern library or want to transition your process and refactor your existing UI into modular components, the UIengine has you covered.
 
 For the evaluation process you might also want to have a look at the [alternatives](#-alternatives).
 
 ### 🗜 Prerequisites
 
-UIengine requires at least Node.js 8.9. Future versions will track the latest active Node.js LTS version, which guarantees a reasonable level of backwards compatibility.
+UIengine requires at least Node.js 8.9.
+Future versions will track the latest active Node.js LTS version.
+This guarantees a reasonable level of backwards compatibility.
 
 ## 📘 Documentation
 

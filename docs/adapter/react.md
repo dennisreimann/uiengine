@@ -1,6 +1,6 @@
-# UIengine template adapter for React/JSX
+# UIengine adapter for React/JSX
 
-🚦 *State:* Proof of concept
+🚦 *State:* Production ready
 
 ## Configuration
 

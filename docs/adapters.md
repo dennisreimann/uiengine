@@ -1,7 +1,7 @@
 # Adapters
 
 UIengine supports multiple templating engines by abstracting them with adapters.
-This offers a template agnostic way for rendering and additional functionality.
+This offers a templating language agnostic way for rendering and additional functionality.
 
 Adapters are registered for a particular file extension.
 UIengine will `require` an adapter when it needs to process a file with the given extension.

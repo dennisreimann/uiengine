@@ -1,4 +1,4 @@
-# UIengine template adapter for Vue.js
+# UIengine adapter for Vue.js
 
 🚦 *State:* Proof of concept
 

@@ -1,4 +1,4 @@
-# UIengine template adapter for EJS
+# UIengine adapter for EJS
 
 🚦 *State:* Production ready
 

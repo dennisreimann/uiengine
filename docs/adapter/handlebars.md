@@ -1,4 +1,4 @@
-# UIengine template adapter for Handlebars
+# UIengine adapter for Handlebars
 
 🚦 *State:* Proof of concept
 

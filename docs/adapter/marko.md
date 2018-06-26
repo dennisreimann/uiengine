@@ -1,4 +1,4 @@
-# UIengine template adapter for Marko
+# UIengine adapter for Marko
 
 🚦 *State:* Proof of concept
 
