@@ -19,12 +19,13 @@ Useful if you want to …
 
 ## 🖥 Examples and Screenshots
 
-To get an idea of what this looks like, see the
-[deployed sample project](http://uiengine-sample-project.uix.space/)
-and the
-[sample project source code](https://github.com/dennisreimann/uiengine/tree/master/test/project/).
-There is also an
-[introduction video](https://www.youtube.com/watch?v=OKHAhIQLvjU).
+To get an idea of what this looks like, see the React sample project:
+
+- [Tasty BBQ Design System](https://uiengine-sample-react.uix.space/design-system/): The UIengine output for this sample project
+- [Tasty BBQ Website](https://uiengine-sample-react.uix.space/): The corresponding website, built with React and Next.js.
+- [Tasty BBQ Source Code](https://github.com/dennisreimann/uiengine-sample-react).
+
+There is also an [introduction video](https://www.youtube.com/watch?v=OKHAhIQLvjU).
 
 ## 🏎 Quickstart
 
