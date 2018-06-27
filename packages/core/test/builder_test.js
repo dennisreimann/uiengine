@@ -83,16 +83,6 @@ const state = {
       }
     }),
 
-    'prototype/custom-page-wrapped': Factory.page('prototype/custom-page-wrapped', {
-      title: 'Custom Page',
-      template: 'page-body.pug',
-      wrapTemplate: true,
-      content: 'Content for custom template that is wrapped',
-      context: {
-        myContextVariable: 'This is my context, wrapped.'
-      }
-    }),
-
     'testcases': Factory.page('testcases', {
       title: 'Testcases',
       path: 'testcases',
@@ -158,20 +148,6 @@ const state = {
       path: 'prototype/custom-page',
       type: 'page',
       template: 'page.pug',
-      content: 'Content for custom template',
-      context: {
-        myContextVariable: 'This is my context'
-      },
-      parentId: 'prototype'
-    }),
-
-    'prototype/custom-page-wrapped': Factory.navigation('prototype/custom-page-wrapped', {
-      itemId: 'prototype/custom-page-wrapped',
-      title: 'Custom Page Wrapped',
-      path: 'prototype/custom-page-wrapped',
-      type: 'page',
-      template: 'page-body.pug',
-      wrapTemplate: true,
       content: 'Content for custom template',
       context: {
         myContextVariable: 'This is my context'
@@ -291,14 +267,6 @@ describe('Builder', () => {
       const pagePath = join(target, '_pages', 'prototype', 'custom-page.html')
       assertContentMatches(pagePath, 'This is my context')
       assertContentDoesNotMatch(pagePath, 'uie-page uie-page--prototype-custom-page')
-    })
-
-    it('should generate page with custom template that is wrapped', async () => {
-      await Builder.generatePageWithTemplate(state, 'prototype/custom-page-wrapped')
-
-      const pagePath = join(target, '_pages', 'prototype', 'custom-page-wrapped.html')
-      assertContentMatches(pagePath, 'This is my context, wrapped.')
-      assertContentMatches(pagePath, 'uie-page uie-page--prototype-custom-page-wrapped')
     })
 
     it('should throw error if the page does not exist', async () => {

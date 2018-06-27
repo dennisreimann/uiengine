@@ -1,6 +1,15 @@
 const { renderToString } = require('react-dom/server')
 const { extractProperties, invalidateModuleCache, upcaseFirstChar } = require('./util')
 
+// hook functions which can be overwritten by custom adapters.
+export function wrapElementBeforeRender (Element, filePath, data) {
+  return Element
+}
+
+export function wrapHtmlAfterRender (html, filePath, data) {
+  return html
+}
+
 export async function setup (options) {
   const babelRegisterModule = options.babelRegisterModule || 'babel-register'
   const babel = options.babel || {}
@@ -16,21 +25,18 @@ export async function registerComponentFile (options, filePath) {
   return Object.keys(properties).length ? { properties } : null
 }
 
-// this is a hook function which can be overwritten by custom adapters.
-export function wrapElementBeforeRender (Element) {
-  return Element
-}
-
 export async function render (options, filePath, data = {}) {
   try {
     invalidateModuleCache(filePath)
 
     let Element = require(filePath)
     if (Element.default) Element = Element.default
-    Element = wrapElementBeforeRender(Element)
+    Element = wrapElementBeforeRender(Element, filePath, data)
     const vdom = Element(data)
+    const html = renderToString(vdom)
+    const rendered = wrapHtmlAfterRender(html, filePath, data)
 
-    return renderToString(vdom)
+    return rendered
   } catch (err) {
     const message = [`React DOM could not render "${filePath}"!`, err]
 

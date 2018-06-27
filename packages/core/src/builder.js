@@ -4,15 +4,9 @@ const Interface = require('./interface')
 const Connector = require('./connector')
 const File = require('./util/file')
 const PageUtil = require('./util/page')
-const { dasherize } = require('./util/string')
+const { dasherize, replaceTemplateComments } = require('./util/string')
 const { error } = require('./util/message')
 const { debug2, debug3, debug4 } = require('./util/debug')
-
-const replaceComment = (mark, html, content) => {
-  const regexp = new RegExp(`<!--\\s?uiengine:${mark}\\s?-->`, 'gi')
-
-  return html.replace(regexp, content)
-}
 
 const copyPageFile = (targetPath, sourcePath, source) => {
   const filePath = relative(sourcePath, source)
@@ -65,28 +59,15 @@ export async function generatePageFiles (state, pageId) {
 export async function generatePageWithTemplate (state, pageId) {
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):start`)
 
-  const { pages, config } = state
-  const { name, target, version } = config
+  const { pages, config: { target } } = state
   const identifier = `Page "${pageId}"`
   const page = pages[pageId]
   if (!page) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
 
   if (page.template) {
     // render template with context
-    const { id, title, context, wrapTemplate } = page
-    const pageRender = await render(state, page.template, context, identifier)
-    const content = pageRender.rendered
-    let rendered = content
-
-    if (wrapTemplate) {
-      // wrap template content in preview layout
-      const data = { state }
-      const templateRender = await render(state, config.template, data, identifier)
-      rendered = templateRender.rendered
-      rendered = replaceComment('content', rendered, content)
-      rendered = replaceComment('class', rendered, `uie-page uie-page--${dasherize(id)}`)
-      rendered = replaceComment('title', rendered, `${title} • ${name} (${version})`)
-    }
+    const { id, context, template } = page
+    const { rendered } = await render(state, template, context, identifier)
 
     // write file
     const filePath = resolve(target, '_pages', `${id}.html`)
@@ -122,12 +103,13 @@ export async function generatePageWithTokens (state, pageId) {
     // render tokens with context, in preview layout
     const { id, title } = page
     const data = page
-    const content = await Interface.render(state, 'tokens', page)
     const template = page.template || config.template
     let { rendered } = await render(state, template, data, identifier)
-    rendered = replaceComment('content', rendered, content)
-    rendered = replaceComment('class', rendered, `uie-tokens uie-tokens--${dasherize(id)}`)
-    rendered = replaceComment('title', rendered, `${title} • ${name} (${version})`)
+    rendered = replaceTemplateComments(rendered, {
+      'content': await Interface.render(state, 'tokens', page),
+      'class': `uie-tokens uie-tokens--${dasherize(id)}`,
+      'title': `${title} • ${name} (${version})`
+    })
 
     // write file
     const filePath = resolve(target, '_tokens', `${id}.html`)
@@ -148,9 +130,11 @@ export async function generateVariant (state, variant) {
   const data = { state }
   const template = variant.template || config.template
   let { rendered } = await render(state, template, data, identifier)
-  rendered = replaceComment('content', rendered, variant.rendered)
-  rendered = replaceComment('title', rendered, `${component.title}: ${variant.title} • ${config.name} (${config.version})`)
-  rendered = replaceComment('class', rendered, `uie-variant uie-variant--${dasherize(variant.componentId)} uie-variant--${dasherize(variant.id)}`)
+  rendered = replaceTemplateComments(rendered, {
+    'content': variant.rendered,
+    'class': `uie-variant uie-variant--${dasherize(variant.componentId)} uie-variant--${dasherize(variant.id)}`,
+    'title': `${component.title}: ${variant.title} • ${config.name} (${config.version})`
+  })
 
   // write file
   const filePath = resolve(config.target, '_variants', `${variant.id}.html`)
@@ -261,11 +245,12 @@ async function generateSketch (state) {
 
   // render variant preview, with layout
   const data = { state }
-  const content = await Interface.render(state, 'sketch', data)
   let { rendered } = await render(state, template, data, identifier)
-  rendered = replaceComment('content', rendered, content)
-  rendered = replaceComment('title', rendered, `HTML Sketchapp Export • ${name} (${version})`)
-  rendered = replaceComment('class', rendered, 'uie-html-sketchapp')
+  rendered = replaceTemplateComments(rendered, {
+    'content': await Interface.render(state, 'sketch', data),
+    'class': 'uie-html-sketchapp',
+    'title': `HTML Sketchapp Export • ${name} (${version})`
+  })
 
   // write file
   const filePath = resolve(target, '_sketch.html')

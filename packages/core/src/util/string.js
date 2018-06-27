@@ -12,6 +12,13 @@ export const dasherize = string =>
 export const hasContent = content =>
   !!content && content.replace(HEADING_REGEXP, '').trim().length > 0
 
+export const replaceTemplateComments = (html, marks) =>
+  Object.keys(marks).reduce((current, key) => {
+    const regexp = new RegExp(`<!--\\s?uiengine:${key}\\s?-->`, 'gi')
+    const content = marks[key]
+    return current.replace(regexp, content)
+  }, html)
+
 export const titleFromContentHeading = content => {
   const [, title] = (content && content.match(HEADING_REGEXP)) || []
 

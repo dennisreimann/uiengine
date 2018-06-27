@@ -109,17 +109,7 @@ templates
 ```
 
 You can reference these templates as `home.pug` and `checkout/cart.pug` as the value for the `template` attribute of the page.
-By default the templates are expected to return the whole content of the page, from `DOCTYPE` to `</html>`.
-
-In case you want to provide only the content of the `<body>` and wrap it inside the [`config.template`](./config.md#template), you can use the `wrapTemplate` option:
-
-```markdown
----
-title: Sample home page
-template: home.pug
-wrapTemplate: true
----
-```
+Templates are expected to return the whole content of the page, from `DOCTYPE` to `</html>`.
 
 ### Providing data
 
