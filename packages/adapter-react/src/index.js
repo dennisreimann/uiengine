@@ -31,10 +31,10 @@ export async function render (options, filePath, data = {}) {
 
     let Element = require(filePath)
     if (Element.default) Element = Element.default
-    Element = wrapElementBeforeRender(Element, filePath, data)
+    Element = exports.wrapElementBeforeRender(Element, filePath, data)
     const vdom = Element(data)
     const html = renderToString(vdom)
-    const rendered = wrapHtmlAfterRender(html, filePath, data)
+    const rendered = exports.wrapHtmlAfterRender(html, filePath, data)
 
     return rendered
   } catch (err) {

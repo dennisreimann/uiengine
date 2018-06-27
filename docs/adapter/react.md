@@ -49,24 +49,27 @@ To do so, define your own adapter which imports this one and overrides the funct
 
 ```js
 const ReactAdapter = require('@uiengine/adapter-react')
-
-// wrap all components and templates in a custom context provider.
+const { readFileSync } = require('fs')
+const { resolve, join } = require('path')
 const { createElement } = require('react')
-const { MyContext, CONTEXT_VALUE } = require('./context')
+const { MyContext, MY_CONTEXT_VALUE } = require('../routes')
 
+// wrap all components and templates in a context provider.
 ReactAdapter.wrapElementBeforeRender = (Element, filePath, data) => {
-  return (props, children) => MyContext.Provider({
-     value: CONTEXT_VALUE,
-     children: createElement(Element, props, children)
-  })
+  return (props, children) =>
+    createElement(MyContext.Provider, {
+      value: MY_CONTEXT_VALUE,
+      children: createElement(Element, props, children)
+    })
 }
 
 // wrap all templates in the preview templates to provide the full html page.
-const { readFileSync } = require('fs')
-const template = readFileSync('../templates/uiengine.html', 'utf-8')
+const templatesPath = resolve(__dirname, '..', 'templates')
+const templatePath = join(templatesPath, 'uiengine.html')
+const template = readFileSync(templatePath, 'utf-8')
 
 ReactAdapter.wrapHtmlAfterRender = (html, filePath, data) => {
-  if (filePath.matches('/templates/')) {
+  if (filePath.startsWith(templatesPath)) {
     let wrapped = template
     wrapped = wrapped.replace(`<!-- uiengine:class -->`, data.class)
     wrapped = wrapped.replace(`<!-- uiengine:title -->`, data.title)
