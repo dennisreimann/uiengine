@@ -1,6 +1,12 @@
 # Changelog
 
-## [0.22.0]
+## [0.23.0]
+
+### Added
+
+- Set browser-sync `startPath` for custom UI base
+
+## [0.22.0] - 2018-06-19
 
 ### Added
 
