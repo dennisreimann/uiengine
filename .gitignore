@@ -1,5 +1,6 @@
 # General
 .DS_Store
+deploy_rsa
 node_modules
 
 # Logs
