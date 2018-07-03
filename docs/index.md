@@ -32,10 +32,10 @@ There is also an [introduction video](https://www.youtube.com/watch?v=OKHAhIQLvj
 To explore the features yourself you can quickly initialize a project with some demo content:
 
 ```bash
-mkdir uiengine-demo && cd uiengine-demo && npm init
+mkdir uiengine-demo && cd uiengine-demo && npm init -y
 npm install --save-dev @uiengine/core @uiengine/adapter-html
-uiengine init --demo
-uiengine build --serve --watch
+npx uiengine init --demo
+npx uiengine build --serve --watch
 ```
 
 See the [getting started guide](https://dennisreimann.github.io/uiengine/getting-started.html)
