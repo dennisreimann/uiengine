@@ -243,18 +243,20 @@ async function generateSketch (state) {
   const { config: { name, target, template, version } } = state
   const identifier = 'HTML Sketchapp Export'
 
-  // render variant preview, with layout
-  const data = { state }
-  let { rendered } = await render(state, template, data, identifier)
-  rendered = replaceTemplateComments(rendered, {
-    'content': await Interface.render(state, 'sketch', data),
-    'class': 'uie-html-sketchapp',
-    'title': `HTML Sketchapp Export • ${name} (${version})`
-  })
+  if (template) {
+    // render variant preview, with layout
+    const data = { state }
+    let { rendered } = await render(state, template, data, identifier)
+    rendered = replaceTemplateComments(rendered, {
+      'content': await Interface.render(state, 'sketch', data),
+      'class': 'uie-html-sketchapp',
+      'title': `HTML Sketchapp Export • ${name} (${version})`
+    })
 
-  // write file
-  const filePath = resolve(target, '_sketch.html')
-  await File.write(filePath, rendered)
+    // write file
+    const filePath = resolve(target, '_sketch.html')
+    await File.write(filePath, rendered)
+  }
 
   debug2(state, `Builder.generateSketch():end`)
 }
