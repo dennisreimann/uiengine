@@ -23,13 +23,13 @@
     "handlebars"
   ],
   "dependencies": {
-    "globby": "^8.0.1"
+    "globby": "8.0.1"
   },
   "devDependencies": {
-    "handlebars": "^4.0.0"
+    "handlebars": "4.0.11"
   },
   "peerDependencies": {
-    "handlebars": "^4.0.0"
+    "handlebars": "^4.0"
   },
   "scripts": {
     "start": "yarn run build -w",

@@ -23,10 +23,10 @@
     "marko"
   ],
   "devDependencies": {
-    "marko": "^4.5.0"
+    "marko": "4.12.0"
   },
   "peerDependencies": {
-    "marko": "^4.5.0"
+    "marko": "^4.5"
   },
   "scripts": {
     "start": "yarn run build -w",

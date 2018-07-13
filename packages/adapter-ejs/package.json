@@ -23,10 +23,10 @@
     "ejs"
   ],
   "devDependencies": {
-    "ejs": "^2.5.0"
+    "ejs": "2.6.1"
   },
   "peerDependencies": {
-    "ejs": "^2.5.0"
+    "ejs": "^2.5"
   },
   "scripts": {
     "start": "yarn run build -w",

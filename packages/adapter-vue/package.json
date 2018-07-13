@@ -24,18 +24,18 @@
   ],
   "dependencies": {
     "vue-component-compiler": "git+https://github.com/znck/vue-component-compiler.git",
-    "vue-server-renderer": "^2.3.0",
-    "vue-template-compiler": "^2.3.0"
+    "vue-server-renderer": "2.5.16",
+    "vue-template-compiler": "2.5.16"
   },
   "devDependencies": {
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-vue": "^2.0.0",
-    "vue": "^2.3.0"
+    "babel-preset-env": "1.7.0",
+    "babel-preset-vue": "2.0.2",
+    "vue": "2.5.16"
   },
   "peerDependencies": {
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-vue": "^2.0.0",
-    "vue": "^2.3.0"
+    "babel-preset-env": "^1.6",
+    "babel-preset-vue": "^2.0",
+    "vue": "^2.3"
   },
   "scripts": {
     "start": "yarn run build -w",
