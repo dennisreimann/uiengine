@@ -9,6 +9,7 @@ npm-debug*
 
 # Generated files
 *.marko.js
+deploy/v
 
 # Test and coverage reports
 .coveralls.yml

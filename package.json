@@ -43,16 +43,17 @@
     "cover": "nyc yarn test",
     "release": "yarn run lint && yarn run cover && NODE_ENV=production yarn run build && lerna publish",
     "demo": "rimraf test/demo && sleep 1 && uiengine init --dir test/demo --demo && cd test/demo && uiengine build -s -w",
+    "docs:deploy": "yarn run docs:deploy_latest && yarn run docs:deploy_version",
+    "docs:deploy_latest": "cd docs && uiengine build && cd .. && $npm_package_config_deployment_command --exclude=v/ deploy/ docs/dist/ uiengine@uiengine.uix.space:virtual/uiengine.uix.space",
+    "docs:deploy_version": "VERSION=`echo \"console.log(require('./packages/core/package.json').version);\" | node` && VERSION_PATH=/v/$VERSION && cd docs && uiengine build --override.ui.base=\"$VERSION_PATH/\" && cd .. && mkdir -p deploy/v && sed 's!RewriteBase /!RewriteBase '$VERSION_PATH'/!' deploy/.htaccess > deploy/v/.htaccess && $npm_package_config_deployment_command --rsync-path=\"mkdir -p virtual/uiengine.uix.space/$VERSION_PATH && rsync\" deploy/v/ docs/dist/ uiengine@uiengine.uix.space:virtual/uiengine.uix.space/$VERSION_PATH",
     "test-project": "cd test/project && NODE_ENV=development yarn start",
     "test-project:setup": "cd test/project && yarn setup",
-    "test-project:build": "NODE_ENV=production yarn run build && cd test/project && yarn install && NODE_ENV=production yarn build",
-    "test-project:deploy": "yarn run test-project:build && $npm_package_config_deployment_command $npm_package_config_deployment_source $npm_package_config_deployment_target"
+    "test-project:build": "cd test/project && yarn install && NODE_ENV=production yarn build",
+    "test-project:deploy": "yarn run test-project:build && $npm_package_config_deployment_command deploy/ test/tmp/ uiengine@uiengine-sample-project.uix.space:virtual/uiengine-sample-project.uix.space"
   },
   "config": {
     "deployment": {
-      "command": "rsync -ravzulO --chmod=u=rwX,g=rX --delete-after",
-      "source": "test/project/deploy/ test/tmp/",
-      "target": "uiengine@uiengine-sample-project.uix.space:virtual/uiengine-sample-project.uix.space"
+      "command": "rsync -ravzulO --chmod=u=rwX,g=rX --delete-after"
     }
   },
   "workspaces": [
