@@ -16,7 +16,7 @@ const readPackageJson = () => {
 }
 
 const readFlags = flags => {
-  return flags.debug ? { debug: flags.debug } : {}
+  return Object.assign({}, (flags.debug ? { debug: flags.debug } : {}), flags.override)
 }
 
 // if module is a relative path, resolve the absolute path,
@@ -91,7 +91,7 @@ const _read = (configFilePath, projectConfig, flags) => {
   source.configFile = resolvePath(configPath, configFilePath)
   target = resolvePath(configPath, target)
   adapters = R.map(resolveAdapters, adapters || {})
-  ui = ui || {}
+  ui = data.ui || {}
 
   data = R.assoc('source', source, data)
   data = R.assoc('target', target, data)
