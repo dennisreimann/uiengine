@@ -1,6 +1,8 @@
-# UIengine adapter for Vue.js
+# Vue
 
 🚦 *State:* Proof of concept
+
+[![npm](https://img.shields.io/npm/v/@uiengine/adapter-vue.svg)](https://www.npmjs.com/package/@uiengine/adapter-vue)
 
 ## Configuration
 

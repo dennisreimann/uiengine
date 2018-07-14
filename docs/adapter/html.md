@@ -1,6 +1,8 @@
-# UIengine adapter for HTML
+# HTML
 
 🚦 *State:* Production ready
+
+[![npm](https://img.shields.io/npm/v/@uiengine/adapter-html.svg)](https://www.npmjs.com/package/@uiengine/adapter-html)
 
 ## Configuration
 

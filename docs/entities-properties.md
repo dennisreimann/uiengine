@@ -27,7 +27,7 @@ isShipped:
 
 ### Component properties
 
-You can document the component properties in the [frontmatter](./yaml.md#frontmatter) of a [component file](./component.md#component-file).
+You can document the component properties in the [frontmatter](/advanced/yaml/#frontmatter) of a [component file](/basics/component/#component-file).
 
 List the components using the name as key and the definition for each property as value:
 
@@ -54,5 +54,5 @@ You can use it to describe the code that should be used to render the component 
 
 ## Entity files
 
-An entity can be stored in a file inside the [entities directory](./config.md#source).
+An entity can be stored in a file inside the [entities directory(/basics/config/#source).
 Each file contains the definition for the type referenced via the filename – i.e. `Episode.yml` for the entity type `Episode`.

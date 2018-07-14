@@ -1,4 +1,4 @@
-# UIengine User Interface
+# User Interface
 
 ## Configuration
 
@@ -36,7 +36,7 @@ This is what the options and their defaults look like:
 }
 ```
 
-### `lang`
+### lang
 
 Localization language for the interface. Available options:
 
@@ -45,22 +45,22 @@ Localization language for the interface. Available options:
 
 Feel free to send a pull request with additional [localizations](../packages/ui/src/locales)!
 
-### `hljs`
+### hljs
 
 The highlight.js theme for the code blocks, defaults to `atom-one-dark`.
 For a list of available options see the [highlight.js demo](https://highlightjs.org/static/demo/).
 
-### `customStylesFile`
+### customStylesFile
 
 The path to a css files containing variable overrides and extensions for the UI.
 For an example see the [custom styles file of the test project](../test/project/src/assets/styles/uiengine-custom-styles.css).
 
-### `base`
+### base
 
 Sets the base path for the output.
 Defaults to `/`.
 
-### `debug`
+### debug
 
 Enable debug output, most likely to be used during UI development.
 
@@ -69,7 +69,7 @@ Available options:
 - `false` (default)
 - `true`
 
-### `cache`
+### cache
 
 Enable template cache, most likely to be disabled during UI development.
 
@@ -78,7 +78,7 @@ Available options:
 - `true` (default)
 - `false`
 
-### `breakpoints`
+### breakpoints
 
 The breakpoints defined here will be shown in the preview settings.
 Declare the breakpoints with the name as key and the minimum media query pixel being the value:
@@ -93,7 +93,7 @@ breakpoints: {
 }
 ```
 
-### `viewports`
+### viewports
 
 The viewports defined here will be shown in the preview settings.
 Declare the viewports with the name as key and the `width` (required) and `height` (optional) being the value:
@@ -115,7 +115,7 @@ viewports: {
 If the height is defined, the preview container will be scrollable.
 It the height is omitted, the preview content will define the height – just like with `breakpoints`.
 
-### `defaultPreviewMode`
+### defaultPreviewMode
 
 When viewports and breakpoints are defined, breakpoints take precedence.
 You can also define `defaultPreviewMode: 'viewports'` to switch this default.
@@ -127,13 +127,9 @@ Available options:
 
 The preview mode can also be switched in the preference settings.
 
-### `themes`
+### themes
 
 The themes defined here will be shown in the topbar.
 
 The first theme is selected by default.
 The iframe is loaded with the theme id being the hash part of the url (i.e. `#funky`).
-
-## Deployment
-
-See the [deployment docs](./deployment.md) for details.

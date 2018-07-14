@@ -1,6 +1,8 @@
-# UIengine adapter for Pug
+# Pug
 
 🚦 *State:* Production ready
+
+[![npm](https://img.shields.io/npm/v/@uiengine/adapter-pug.svg)](https://www.npmjs.com/package/@uiengine/adapter-pug)
 
 ## Configuration
 

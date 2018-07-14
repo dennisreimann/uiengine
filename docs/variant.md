@@ -6,7 +6,7 @@ In the UIengine terminology it offers a preview of the component and the data it
 ## Directory Structure
 
 Variants are stored per component in the components `variants` folder.
-A variant is a file that gets rendered by the assigned [adapter](./adapters.md).
+A variant is a file that gets rendered by the assigned [adapter](/adapters/).
 
 Here is an example for the variants of a `button` component:
 
@@ -18,7 +18,7 @@ components
         |___button-primary.pug
 ```
 
-To add meta data to the variant, just use the `variants` list in the [component file](./component.md#component-file).
+To add meta data to the variant, just use the `variants` list in the [component file](/basics/component/#component-file).
 The meta data can supply the `file`, `title`, `description` and `label` for the variant.
 You might also want to provide the `context` (data and variables) for rendering the variant.
 

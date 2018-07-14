@@ -6,7 +6,6 @@ We will use `npx` to run the locally installed `uiengine` in the following.
 >
  `npx` is bundled with `npm` since [v5.2.0](https://github.com/npm/npm/releases/tag/v5.2.0).
  It allows us to easily run locally installed packages like `uiengine`, which must have been installed globally otherwise, setup in the `$PATH` variable or called with a path prefix.
- In this case, `npx uiengine` will execute `./node_modules/.bin/uiengine` which is a [symlink](https://en.wikipedia.org/wiki/Symbolic_link) to `./node_modules/@uiengine/core/bin/uiengine.js`.
 
 ## 🏎 TL;DR – The fast lane
 
@@ -16,7 +15,7 @@ Initialize a new npm project:
 mkdir uiengine-demo && cd uiengine-demo && npm init
 ```
 
-You will be prompted for the npm project information.
+You will be prompted for the project information.
 To skip the prompt and use some empty defaults, run `npm init -y` instead.
 
 Next, install the UIengine development dependencies locally:
@@ -37,7 +36,7 @@ Serve the project locally and watch for changes:
 npx uiengine build --serve --watch
 ```
 
-🎉 Congratulations!
+Congratulations! 🎉
 Now you have a basic UIengine demo project running.
 
 In the following you can read about the steps in more detail.
@@ -57,7 +56,7 @@ Here we will use the HTML adapter as an example, so go ahead and install it:
 npm install --save-dev @uiengine/adapter-html
 ```
 
-See the [adapter docs](./adapters.md) for details and a list of available adapters.
+See the [adapter docs](/adapters/) for details and a list of available adapters.
 
 ## 🔰 How to setup the UIengine in a project?
 
@@ -84,7 +83,7 @@ Beware: It uses the HTML adapter, hence the components are very simplistic.
 
 The config file `uiengine.config.js` contains the basic configuration for your project.
 If you generated the file with the `init` command it contains comments for the individual sections.
-See the [config documentation](./config.md) for details.
+See the [config documentation](/basics/config/) for details.
 
 ## ➕ How to create a component?
 
@@ -107,7 +106,7 @@ A variant needs at least a file to render.
 You create a variant by adding a file renderable by one of the configured adapters to the `variants` directory of a component.
 
 In addition to the raw render file, you can also add a markdown file containing the metadata for the variant.
-This markdown file can contain [YAML frontmatter](./yaml.md) and has to be named like the variant, but must have the file extension `.md`.
+This markdown file can contain [YAML frontmatter](/advanced/yaml/) and has to be named like the variant, but must have the file extension `.md`.
 
 To render a variant, we also need a layout.
 The `npx uiengine init` command created a basic html layout file in `src/templates/uiengine.html`.
@@ -165,4 +164,4 @@ npx uiengine build --watch --serve
 ```
 
 Under the hood [BrowserSync](https://www.browsersync.io/) is used to provide serving and watching the files.
-For information on how to configure the server and pass additional options, see the [configuration documentation](./config.md#BrowserSync).
+For information on how to configure the server and pass additional options, see the [configuration documentation(/basics/config/#BrowserSync).

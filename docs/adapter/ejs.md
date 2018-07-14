@@ -1,6 +1,8 @@
-# UIengine adapter for EJS
+# EJS
 
 🚦 *State:* Production ready
+
+[![npm](https://img.shields.io/npm/v/@uiengine/adapter-ejs.svg)](https://www.npmjs.com/package/@uiengine/adapter-ejs)
 
 ## Configuration
 

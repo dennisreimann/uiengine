@@ -1,7 +1,7 @@
 # Design Tokens
 
 The UIengine interface includes templates for displaying various types of design tokens.
-These tokens can be referenced in the [YAML frontmatter](./yaml.md#frontmatter) of a [page file](./page.md#page-file).
+These tokens can be referenced in the [YAML frontmatter](/advanced/yaml/#frontmatter) of a [page file](/basics/page/#page-file).
 
 ## Tokens definition
 
@@ -186,4 +186,4 @@ tokens:
 ## Theo integration
 
 You can integrate and consume design tokens defined with the [Theo](https://github.com/salesforce-ux/theo#spec) tokens spec.
-For details on the format see the [integrations docs](./integrations.md#theo).
+For details on the format see the [integrations docs](/advanced/integrations/#theo).

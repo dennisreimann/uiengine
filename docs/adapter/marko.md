@@ -1,6 +1,8 @@
-# UIengine adapter for Marko
+# Marko
 
 🚦 *State:* Proof of concept
+
+[![npm](https://img.shields.io/npm/v/@uiengine/adapter-marko.svg)](https://www.npmjs.com/package/@uiengine/adapter-marko)
 
 ## Configuration
 

@@ -86,7 +86,7 @@ Think of the components parent page as a kind of category – here we are using
 ### Referencing design tokens
 
 The `page.md` can also reference design tokens.
-For details see the [design token docs](./design-tokens.md).
+For details see the [design token docs](/advanced/design-tokens/).
 
 ## Additional page files
 
@@ -97,7 +97,7 @@ Files and folders that start with an underscore are ignored.
 
 ## Templates
 
-Custom page templates are expected to be located in the `templates` directory defined in the [source configuration](./config.md#source).
+Custom page templates are expected to be located in the `templates` directory defined in the [source configuration](/basics/config/#source).
 
 Here is an example structure for some templates:
 
@@ -113,7 +113,7 @@ Templates are expected to return the whole content of the page, from `DOCTYPE` t
 
 ### Providing data
 
-As you can use these custom templates to render example/prototype pages for your website/application, you might want to provide some [sample data](./yaml.md#include).
+As you can use these custom templates to render example/prototype pages for your website/application, you might want to provide some [sample data](/advanced/yaml/#include).
 To pass this data into your template, you can use the `context` property of the page:
 
 ```markdown

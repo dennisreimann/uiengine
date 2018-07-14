@@ -8,6 +8,7 @@ export const markdownIt = new MarkdownIt({
   typographer: true
 })
   .use(require('markdown-it-anchor'))
+  .use(require('markdown-it-include'))
 
 export const parseString = (string, filename, sourcePaths) =>
   markdownIt.render(string.trim()).trim()

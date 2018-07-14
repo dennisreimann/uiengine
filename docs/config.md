@@ -26,7 +26,7 @@ The base directories for the input, your raw source files:
 - `templates` contains the variant preview and application templates
 - `pages` is the directory of the UIengine's site structure and page markdown files
 - `data` contains sample data that can be referenced in variants and pages
-- `entities` contains the optional [entity definitions](./entities-properties.md) for the components
+- `entities` contains the optional [entity definitions](/advanced/entities-properties/) for the components
 
 ```js
 {
@@ -54,7 +54,7 @@ Destination paths for the generated output.
 
 Adapters are used for templating/rendering.
 You configure the adapters using the file extension of the template file as the adapter key.
-Each adapter is a module that gets required, for details see the [adapters documentation](./adapters.md).
+Each adapter is a module that gets required, for details see the [adapters documentation](/adapters/).
 
 There are two slightly different ways to configure the value:
 The first way is to directly reference the module or path that will get required:
@@ -119,11 +119,11 @@ Other comments that also get replaced:
 
 ### UI
 
-See the [UI docs](./ui.md) for details.
+See the [UI docs](/advanced/ui/) for details.
 
 ### BrowserSync
 
-The `uiengine build` command (see the [getting started guide](./getting-started.md) supports modes for serving and watching files.
+The `uiengine build` command (see the [getting started guide](/basics/getting-started/) supports modes for serving and watching files.
 Here you can pass in the corresponding [BrowserSync configuration](https://www.browsersync.io/docs/options/):
 
 ```js

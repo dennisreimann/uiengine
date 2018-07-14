@@ -83,7 +83,7 @@ module.exports = UItheo(theo).convert(filePath)
 ```
 
 The transformations converts your Theo `props` into a format that can be rendered by the UIengine tokens template.
-For details on the format see the [design token docs](./design-tokens.md).
+For details on the format see the [design token docs](/advanced/design-tokens/).
 
 You can also pass a modification callback to the `convert` function.
 This allows you to further modify the property data:

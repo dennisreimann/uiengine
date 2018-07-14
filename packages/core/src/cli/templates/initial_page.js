@@ -27,7 +27,7 @@ A variant needs at least a file to render.
 You create a variant by adding a file renderable by one of the configured adapters to the \`variants\` directory of a component.
 
 In addition to the raw render file, you can also add a markdown file containing the metadata for the variant.
-This markdown file can contain [YAML frontmatter](https://github.com/dennisreimann/uiengine/tree/master/docs/docs/yaml.md) and has to be named like the variant, but must have the file extension \`.md\`.
+This markdown file can contain [YAML frontmatter](https://uiengine.uix.space/advanced/yaml/) and has to be named like the variant, but must have the file extension \`.md\`.
 
 To render a variant, we also need a layout.
 The \`uiengine init\` command created a basic html layout file in \`src/templates/uiengine.html\`.
@@ -85,6 +85,6 @@ uiengine build --watch --serve
 \`\`\`
 
 Under the hood [BrowserSync](https://www.browsersync.io/) is used to provide serving and watching the files.
-For information on how to configure the server and pass additional options, see the [configuration documentation](https://github.com/dennisreimann/uiengine/tree/master/docs/config.md#BrowserSync).
+For information on how to configure the server and pass additional options, see the [configuration documentation](https://uiengine.uix.space/basics/config/#BrowserSync).
 
 `

@@ -38,11 +38,16 @@ npx uiengine init --demo
 npx uiengine build --serve --watch
 ```
 
-See the [getting started guide](https://dennisreimann.github.io/uiengine/getting-started.html)
+See the [getting started guide](https://uiengine.uix.space/basics/getting-started/)
 for further details.
+
+## 📘 Documentation
+
+See the [documentation](https://uiengine.uix.space/) site, which is also generated with the UIengine.
 
 ## 🔩 Technical TL;DR
 
+[![npm](https://img.shields.io/npm/v/@uiengine/core.svg)](https://www.npmjs.com/package/@uiengine/core)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Build Status](https://travis-ci.org/dennisreimann/uiengine.svg?branch=master)](https://travis-ci.org/dennisreimann/uiengine)
 [![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/uiengine/badge.svg)](https://snyk.io/test/github/dennisreimann/uiengine)
@@ -94,45 +99,6 @@ UIengine requires at least Node.js 8.9.
 Future versions will track the latest active Node.js LTS version.
 This guarantees a reasonable level of backwards compatibility.
 
-## 📘 Documentation
-
-How To and Quick Start:
-
-- [Getting Started](https://dennisreimann.github.io/uiengine/getting-started.html)
-- [Configuration](https://dennisreimann.github.io/uiengine/config.html)
-- [Component](https://dennisreimann.github.io/uiengine/component.html)
-- [Variant](https://dennisreimann.github.io/uiengine/variant.html)
-- [Page](https://dennisreimann.github.io/uiengine/page.html)
-
-Advanced topics:
-
-- [Adapters](https://dennisreimann.github.io/uiengine/adapters.html)
-- [Design Tokens](https://dennisreimann.github.io/uiengine/design-tokens.html)
-- [Entities/Properties](https://dennisreimann.github.io/uiengine/entities-properties.html)
-- [YAML](https://dennisreimann.github.io/uiengine/yaml.html)
-- [UI](https://dennisreimann.github.io/uiengine/ui.html)
-- [Integrations](https://dennisreimann.github.io/uiengine/integrations.html)
-
-Technical topics:
-
-- [Deployment](https://dennisreimann.github.io/uiengine/deployment.html)
-- [Development](https://dennisreimann.github.io/uiengine/development.html)
-- [Changelog](https://dennisreimann.github.io/uiengine/changelog.html)
-
-## 💁 Individual packages
-
-| Name | Type | Docs | NPM |
-| ---- | ---- | ---- | --- |
-| [Core](https://github.com/dennisreimann/uiengine/tree/master/packages/core)                             | 🚀 | [📖](https://dennisreimann.github.io/uiengine/index.html) | [![npm](https://img.shields.io/npm/v/@uiengine/core.svg)](https://www.npmjs.com/package/@uiengine/core)                             |
-| [User Interface](https://github.com/dennisreimann/uiengine/tree/master/packages/ui)                     | 🎨 | [📖](https://dennisreimann.github.io/uiengine/ui.html)| [![npm](https://img.shields.io/npm/v/@uiengine/ui.svg)](https://www.npmjs.com/package/@uiengine/ui)                                 |
-| [Pug adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-pug)               | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/pug.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-pug.svg)](https://www.npmjs.com/package/@uiengine/adapter-pug)               |
-| [React/JSX adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-react)       | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/react.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-react.svg)](https://www.npmjs.com/package/@uiengine/adapter-react)           |
-| [Vue adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-vue)               | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/vue.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-vue.svg)](https://www.npmjs.com/package/@uiengine/adapter-vue)               |
-| [Marko adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-marko)           | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/marko.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-marko.svg)](https://www.npmjs.com/package/@uiengine/adapter-marko)           |
-| [Handlebars adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-handlebars) | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/handlebars.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-handlebars.svg)](https://www.npmjs.com/package/@uiengine/adapter-handlebars) |
-| [EJS adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-ejs)               | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/ejs.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-ejs.svg)](https://www.npmjs.com/package/@uiengine/adapter-ejs)               |
-| [HTML adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-html)             | 🔌 | [📖](https://dennisreimann.github.io/uiengine/adapter/html.html) | [![npm](https://img.shields.io/npm/v/@uiengine/adapter-html.svg)](https://www.npmjs.com/package/@uiengine/adapter-html)             |
-
 ### 🖖 Alternatives
 
 OK, the UIengine looks really cool but it's not quite what you are looking for?
@@ -149,7 +115,7 @@ Here are some other projects that you might want to evaluate:
 ## 🛠 Development
 
 You like this project and are interested in participating?
-See the [development docs](https://dennisreimann.github.io/uiengine/development.html) for an introduction and workflows when hacking on the UIengine.
+See the [development docs](https://uiengine.uix.space/development/contributing/) for an introduction and workflows when hacking on the UIengine.
 
 - - - - -
 

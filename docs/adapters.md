@@ -6,7 +6,7 @@ This offers a templating language agnostic way for rendering and additional func
 Adapters are registered for a particular file extension.
 UIengine will `require` an adapter when it needs to process a file with the given extension.
 
-You configure the adapters for your project in the [project configuration file](./config.md#adapters),
+You configure the adapters for your project in the [project configuration file(/basics/config/#adapters),
 using the file extension as the adapter key:
 
 ```js
@@ -60,9 +60,9 @@ __Note:__ All of these functions are expected to work asynchronously and should 
 All the functions get called with the adapter options that are defined in the adapter config.
 This set of `opts` is also extended with the following properties:
 
-- `components`: The absolute path of the components directory referenced in the [`config.sources.components`](./config.md#sources) property.
-- `templates`: The absolute path of the templates directory referenced in the [`config.sources.templates`](./config.md#sources) property.
-- `target`: The absolute path of the target directory referenced in the [`config.target`](./config.md#target) property.
+- `components`: The absolute path of the components directory referenced in the [`config.sources.components`(/basics/config/#sources) property.
+- `templates`: The absolute path of the templates directory referenced in the [`config.sources.templates`(/basics/config/#sources) property.
+- `target`: The absolute path of the target directory referenced in the [`config.target`(/basics/config/#target) property.
 - `ext`: The file extension of the adapter.
 
 #### `render(opts, filePath, data)`
@@ -72,8 +72,8 @@ This function should render the file at `filePath` with the given `data` and ret
 - `opts` are the extended adapter options explained above.
 - `filePath` is the absolute path of the file that should be rendered.
 - `data` is the `context` that is provided via the
-  [variant metadata](./variant.md) or for
-  [pages with custom templates](./page.md#templates).
+  [variant metadata](/basics/variant/) or for
+  [pages with custom templates](/basics/page/#templates).
 
 The return value can either be a string of HTML or a structured object containing the `rendered` HTML and an optional array of `parts`:
 

@@ -1,6 +1,8 @@
-# UIengine adapter for Handlebars
+# Handlebars
 
 🚦 *State:* Proof of concept
+
+[![npm](https://img.shields.io/npm/v/@uiengine/adapter-handlebars.svg)](https://www.npmjs.com/package/@uiengine/adapter-handlebars)
 
 ## Configuration
 

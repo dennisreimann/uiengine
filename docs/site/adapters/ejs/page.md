@@ -1,0 +1,1 @@
+!!!include(adapter/ejs.md)!!!

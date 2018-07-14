@@ -9,9 +9,9 @@ The noteworthy part about this are the [custom schema](#custom-schema) the UIeng
 
 For the details on how to configure the individual items, see the information in the specific documentation:
 
-- [Page](./page.md)
-- [Component](./component.md)
-- [variant](./variant.md)
+- [Page](/basics/page/)
+- [Component](/basics/component/)
+- [Variant](/basics/variant/)
 
 ## Custom schema
 
@@ -28,7 +28,7 @@ Includes the content of external YAML, JSON, JS or Markdown files.
 - **Markdown**: The content gets rendered before embedding the content, so you get HTML as the value.
 
 The root for the included file path is the directory of the file that is including it (this enables relative references).
-In case you use an absolute reference (file path starting with `/`) the root is the directory the [configuration file](./config.md) is living in.
+In case you use an absolute reference (file path starting with `/`) the root is the directory the [configuration file](/basics/config/) is living in.
 
 ```yaml
 yaml_data: !include data.yml
@@ -41,7 +41,7 @@ In case the file is not a YAML, JSON, JS or Markdown file, the file path is left
 
 ### !data
 
-Like `!include` but uses the `source.data` directory configured in the [configuration file](./config.md) as the root of the file path.
+Like `!include` but uses the `source.data` directory configured in the [configuration file](/basics/config/) as the root of the file path.
 Think of it as a convenience helper for including your mock data.
 
 ```yaml
@@ -62,7 +62,7 @@ context:
   content: !markdown |
     # Bacon ipsum dolor amet
 
-    Pancetta pastrami boudin tenderloin, turkey bacon brisket ball tip shoulder meatloaf meatball jerky. 
+    Pancetta pastrami boudin tenderloin, turkey bacon brisket ball tip shoulder meatloaf meatball jerky.
 
     - Strip steak
     - Picanha
