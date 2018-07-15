@@ -2,20 +2,20 @@ const { join } = require('path')
 
 export default require('yargs')
   // config
-  .string('config')
   .global('config')
+  .string('config')
   .default('config', 'uiengine.config.js')
   .describe('config', 'Path to config file')
   .alias('c', 'config')
   // config overrides
-  .array('override')
   .global('override')
+  .array('override')
   .describe('override', 'Config overrides, i.e. override.ui.base="/patterns/"')
   // debug
-  .number('debug')
   .global('debug')
+  .choices('debug', [0, 1, 2, 3, 4])
   .default('debug', 0)
-  .describe('debug', 'Flag to enable debug mode')
+  .describe('debug', 'Flag to set the debug level')
   .alias('d', 'debug')
   // command
   .demandCommand(1)

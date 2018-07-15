@@ -150,7 +150,7 @@ describe('CLI', function () {
 
     describe('with debug flag', () => {
       it('should create the state file', async () => {
-        await runCommand(testPath, 'uiengine build -d')
+        await runCommand(testPath, 'uiengine build -d=1')
 
         // state file
         assertExists(join(testPath, 'dist/_state.json'))
