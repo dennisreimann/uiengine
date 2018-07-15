@@ -3,6 +3,7 @@ const R = require('ramda')
 const Core = require('../../core')
 const File = require('../../util/file')
 const PageUtil = require('../../util/page')
+const { reportSuccess, reportError } = require('../../util/message')
 
 exports.describe = 'Create basic files for a new page'
 
@@ -39,17 +40,17 @@ exports.handler = argv => {
       tasks.push(...createPages)
 
       Promise.all(tasks)
-        .then((state) =>
-          console.log(`✅  ${pageIds.length === 1 ? pageId : 'Pages'} created!
-
-The following files were created:
-
-` + R.map(pageFile => '- ' + relative(process.cwd(), pageFile), pageFiles).join('\n') + `
-
-Enjoy! ✌️`))
-    })
-    .catch((err) => {
-      console.error([`🚨  creating the ${pageIds.length === 1 ? 'page' : 'pages'} failed!`, err.stack].join('\n\n'))
-      process.exit(1)
+        .then(state => {
+          reportSuccess([
+            `${pageIds.length === 1 ? pageId : 'Pages'} created!`,
+            'The following files were created:',
+            R.map(pageFile => '- ' + relative(process.cwd(), pageFile), pageFiles).join('\n'),
+            'Enjoy! ✌️'
+          ])
+        })
+        .catch((err) => {
+          reportError(`Creating the ${pageIds.length === 1 ? 'page' : 'pages'} failed!`, err)
+          process.exit(1)
+        })
     })
 }

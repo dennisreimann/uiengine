@@ -5,7 +5,8 @@ const assert = require('assert')
 const yaml = require('js-yaml')
 const parsing = require('./parsing')
 const Markdown = require('./markdown')
-const { error } = require('./message')
+const { markSample } = require('./message')
+const { UiengineInputError } = require('./error')
 
 const renderMarkdown = Markdown.parseString
 
@@ -82,7 +83,7 @@ export const parseString = (string, filename, sourcePaths) => {
 
     return yaml.safeLoad(string.trim(), { schema, filename, json })
   } catch (err) {
-    throw new Error(error(`Could not parse YAML: ${err.stack}`, string))
+    throw new UiengineInputError(`Could not parse YAML: ${err.message}\n\n${markSample(string)}`)
   }
 }
 

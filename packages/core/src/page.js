@@ -11,14 +11,18 @@ async function readPageFile (state, filePath) {
   debug4(state, `Page.readPageFile(${filePath}):start`)
 
   const { source } = state.config
-  let { attributes, body } = await frontmatter.fromFile(filePath, source)
-  const content = await markdown.fromString(body)
-  // prevent empty attributes from being null
-  attributes = attributes || {}
+  try {
+    let { attributes, body } = await frontmatter.fromFile(filePath, source)
+    const content = await markdown.fromString(body)
+    // prevent empty attributes from being null
+    attributes = attributes || {}
 
-  debug4(state, `Page.readPageFile(${filePath}):end`)
+    debug4(state, `Page.readPageFile(${filePath}):end`)
 
-  return { attributes, content }
+    return { attributes, content }
+  } catch (err) {
+    throw err
+  }
 }
 
 async function findPageFiles (pagesPath, pagePath, childIds = []) {

@@ -12,7 +12,7 @@ export default require('yargs')
   .global('override')
   .describe('override', 'Config overrides, i.e. override.ui.base="/patterns/"')
   // debug
-  .boolean('debug')
+  .number('debug')
   .global('debug')
   .default('debug', 0)
   .describe('debug', 'Flag to enable debug mode')

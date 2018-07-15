@@ -2,8 +2,9 @@ const { dirname, resolve } = require('path')
 const R = require('ramda')
 const assert = require('assert')
 const cosmiconfig = require('cosmiconfig')
-const { error } = require('./util/message')
+const { markSample } = require('./util/message')
 const { invalidateRequireCache } = require('./util/file')
+const { UiengineInputError } = require('./util/error')
 
 const readPackageJson = () => {
   let data = {}
@@ -42,7 +43,7 @@ const resolvePackage = (basedir, config, type) => {
       options: {}
     }
   } else {
-    throw new Error(error(`${type} needs to be a configuration object (with module and options keys) or a module string (requireable path or name):`, config))
+    throw new UiengineInputError(`${type} needs to be a configuration object (with module and options keys) or a module string (requireable path or name):`, markSample(config))
   }
 }
 
@@ -58,10 +59,10 @@ export async function read (flags = {}) {
     if (result) {
       return _read(result.filepath, result.config, flags)
     } else {
-      throw new Error(`No configuration found. Please specify it in ${configPath}`)
+      throw new UiengineInputError(`No configuration found. Please specify it in ${configPath}`)
     }
   } catch (err) {
-    throw new Error(error(`Could not read UIengine configuration:`, err.message))
+    throw new UiengineInputError(`Could not read UIengine configuration:\n\n${err.message}`)
   }
 }
 

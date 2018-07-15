@@ -1,7 +1,7 @@
 const R = require('ramda')
 const PageUtil = require('./util/page')
 const StringUtil = require('./util/string')
-const { error } = require('./util/message')
+const { UiengineInputError } = require('./util/error')
 
 const assocNavigation = (navigation, entry) =>
   R.assoc(entry.id, entry, navigation)
@@ -17,11 +17,11 @@ const dataForPageId = (state, id) => {
     if (availableComponentIds.includes(componentId)) {
       return PageUtil.pageIdForComponentId(id, componentId)
     } else {
-      throw new Error(error([
+      throw new UiengineInputError([
         `Component "${componentId}" does not exist, but was inserted on page "${id}".`,
         'Here is a list of available components:',
         `${availableComponentIds.map(id => `- ${id}`).join('\n')}`
-      ].join('\n')))
+      ].join('\n'))
     }
   }, componentIds)
   const childIds = page.childIds.concat(componentPageIds)

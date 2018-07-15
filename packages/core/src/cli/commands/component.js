@@ -6,6 +6,7 @@ const File = require('../../util/file')
 const ComponentUtil = require('../../util/component')
 const VariantUtil = require('../../util/variant')
 const { titleize } = require('../../util/string')
+const { reportSuccess, reportError } = require('../../util/message')
 
 const getTemplate = id =>
   require(`../templates/${id}`).template
@@ -83,27 +84,24 @@ exports.handler = argv => {
 
         Promise.all(fileTasks).then(state => {
           const filesCreated = filePaths.sort().reverse()
-          console.log(`✅  ${componentTitle} created!
-
-The following files were created:
-
-` + R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n') + `
-
-Add the component to a page by adding the component id to the page file:
-
----
+          reportSuccess([
+            `${componentTitle} created!`,
+            'The following files were created:',
+            R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
+            'Add the component to a page by adding the component id to the page file:',
+            `---
 title: PAGE_TITLE
 components:
 - ${componentId}
----
-
-Enjoy! ✌️`)
+---`,
+            'Enjoy! ✌️'
+          ])
         })
       })
     })
   })
     .catch((err) => {
-      console.error([`🚨  creating the component ${componentId} failed!`, err.stack].join('\n\n'))
+      reportError(`Creating the component ${componentId} failed!`, err)
       process.exit(1)
     })
 }

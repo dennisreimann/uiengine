@@ -13,9 +13,13 @@ export async function fromFile (parseString, filePath, sourcePaths) {
       if (err) {
         reject(err)
       } else {
-        const parsed = parseString(string, filePath, sourcePaths)
+        try {
+          const parsed = parseString(string, filePath, sourcePaths)
 
-        resolve(parsed)
+          resolve(parsed)
+        } catch (err) {
+          reject(err)
+        }
       }
     })
   })
@@ -26,9 +30,13 @@ export async function fromString (parseString, string, sourcePaths) {
     if (string.length === 0) {
       resolve(undefined)
     } else {
-      const parsed = parseString(string, null, sourcePaths)
+      try {
+        const parsed = parseString(string, null, sourcePaths)
 
-      resolve(parsed)
+        resolve(parsed)
+      } catch (err) {
+        reject(err)
+      }
     }
   })
 }

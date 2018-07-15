@@ -1,4 +1,4 @@
-const message = require('./message')
+const { yellow } = require('chalk')
 
 const _debug = (level, state, label, ...additional) => {
   const { debug } = state.config
@@ -7,9 +7,9 @@ const _debug = (level, state, label, ...additional) => {
   const [, timingLabel, timingEvent] = label.match(/(.*):(start|end)$/) || []
   if (timingLabel) {
     const action = timingEvent === 'start' ? 'time' : 'timeEnd'
-    console[action](message.info(timingLabel))
+    console[action](yellow(timingLabel))
   } else {
-    console.info(message.info(label, additional.join(['\n\n'])))
+    console.info(yellow(label, additional.join(['\n\n'])))
   }
 }
 

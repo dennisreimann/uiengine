@@ -1,18 +1,18 @@
 const File = require('./util/file')
 const ComponentUtil = require('./util/component')
-const { error } = require('./util/message')
 const { debug3 } = require('./util/debug')
+const { UiengineInputError } = require('./util/error')
 
 const getModule = ({ config: { adapters } }, ext, filePath) => {
   const { module } = adapters[ext] || {}
   if (!module) {
-    throw new Error(error(`You have not configured the "${ext}" adapter.`, `Cannot handle ${filePath}.`))
+    throw new UiengineInputError(`Cannot handle ${filePath}: No "${ext}" adapter configured.`)
   }
 
   try {
     return require(module)
   } catch (err) {
-    throw new Error(error(`Could not load "${ext}" adapter:`, err.stack))
+    throw new Error(`Cannot load "${ext}" adapter:\n\n${err}`)
   }
 }
 
@@ -76,7 +76,7 @@ export async function render (state, templatePath, data = {}) {
 
     return result
   } else {
-    throw new Error(error(`The "${ext}" adapter does not support rendering.`))
+    throw new UiengineInputError(`The "${ext}" adapter does not support rendering.`)
   }
 }
 

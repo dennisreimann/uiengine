@@ -4,7 +4,7 @@ const glob = require('globby')
 const Connector = require('./connector')
 const VariantUtil = require('./util/variant')
 const File = require('./util/file')
-const { error } = require('./util/message')
+const { markSample } = require('./util/message')
 const { debug2, debug3 } = require('./util/debug')
 
 // convert list of filenames to list of objects
@@ -63,9 +63,9 @@ export async function fetchObject (state, componentId, componentContext, data) {
   try {
     [raw, render] = await Promise.all([readTemplate, renderTemplate])
   } catch (err) {
-    const message = [error(`Variant "${id}" could not be rendered!`), err]
+    const message = [`Variant "${id}" could not be rendered!`, err]
 
-    if (state.config.debug) message.push(JSON.stringify(context, null, 2))
+    if (state.config.debug) message.push(markSample(JSON.stringify(context, null, 2)))
 
     throw new Error(message.join('\n\n'))
   }

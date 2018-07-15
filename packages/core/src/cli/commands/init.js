@@ -2,6 +2,7 @@ const { basename, join, relative, resolve } = require('path')
 const { PAGE_FILENAME } = require('../../util/page')
 const { copy, write } = require('../../util/file')
 const { titleize } = require('../../util/string')
+const { reportSuccess, reportError } = require('../../util/message')
 
 exports.desc = 'Create a basic structure and config file'
 
@@ -47,22 +48,17 @@ exports.handler = async argv => {
 
       await Promise.all([copyDemoComponents, copyDemoPages, copyDemoTemplates])
     }
-    console.log(`✅  Initialized ${name}!
-
-The following files were created:
-
-- ${configPath} (config file)
-- ${indexPath} (index page)
-- ${previewPath} (preview file)
-${argv.demo ? '\nIn addition to these we also created some demo components and pages.\nThese use the html adapter to showcase just the very basics.\n' : ''}
-Go ahead and update the config file according to your needs.
-After that you can generate the site using this command:
-
-$ uiengine build
-
-Enjoy! ✌️`)
+    reportSuccess([
+      `Initialized ${name}!`,
+      'The following files were created:',
+      `- ${configPath} (config file)\n- ${indexPath} (index page)\n- ${previewPath} (preview file)`,
+      argv.demo ? '\nIn addition to these we also created some demo components and pages.\nThese use the html adapter to showcase just the very basics.\n' : '',
+      'Go ahead and update the config file according to your needs.\nAfter that you can generate the site using this command:',
+      '$ uiengine build',
+      'Enjoy! ✌️'
+    ])
   } catch (err) {
-    console.error([`🚨  Initializing ${name} failed!`, err.stack].join('\n\n'))
+    reportError(`Initializing ${name} failed!`, err)
     process.exit(1)
   }
 }

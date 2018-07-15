@@ -2,7 +2,7 @@ const { basename, dirname, join, relative, resolve } = require('path')
 const R = require('ramda')
 const File = require('./file')
 const StringUtil = require('./string')
-const { error } = require('./message')
+const { UiengineInputError } = require('./error')
 
 const INDEX_FILE_PATH = '.'
 const INDEX_PAGE_PATH = ''
@@ -111,11 +111,11 @@ export const convertUserProvidedChildrenList = (pageId, availableChildIds, attri
     if (availableChildIds.includes(childId)) {
       return childId
     } else {
-      throw new Error(error([
+      throw new UiengineInputError([
         `Child page "${id}" does not exist for page "${pageId}".`,
         'Here is a list of available child pages:',
         `${availableChildIds.map(childId => `- ${childId}`).join('\n')}`
-      ].join('\n')))
+      ].join('\n'))
     }
   }, children)
 

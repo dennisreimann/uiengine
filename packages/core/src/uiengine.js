@@ -2,6 +2,7 @@ const { dirname, join, relative } = require('path')
 const Core = require('./core')
 const { debounce } = require('./util/debounce')
 const { debug3 } = require('./util/debug')
+const { reportError } = require('./util/message')
 
 const globPattern = '**/*'
 
@@ -45,7 +46,7 @@ const requireOptional = (module, option) => {
   try {
     return require(module)
   } catch (err) {
-    console.error(`The optional dependency ${module} failed to install and is required for --${option}.`, 'It is likely not supported on your platform.')
+    reportError('Missing dependency', new Error(`The optional dependency ${module} failed to install and is required for --${option}. It is likely not supported on your platform.`))
 
     throw err
   }
@@ -74,7 +75,7 @@ const startWatcher = (state, opts, server) => {
         if (info) console.info(`✨  Rebuilt ${change.type} ${change.item}`, `(${change.action} ${change.file})`)
         if (server) server.sockets.emit('uiengine:state:update', state)
       } catch (err) {
-        console.error(`🚨  Rebuild for changed file ${relative(process.cwd(), filePath)} failed:`, err)
+        reportError(`Rebuild for changed file ${relative(process.cwd(), filePath)} failed:`, err)
       }
     })
   }
@@ -182,7 +183,7 @@ const startServer = (state, opts) => {
   debug3(state, 'BrowserSync options:', JSON.stringify(options, null, 2))
 
   server.init(options, (err, instance) => {
-    if (err) console.error('Initializing server failed: ', err)
+    if (err) reportError('Initializing server failed:', err)
 
     const _paths = filePath => join(target, filePath)
     // trigger iframe reloads, see
@@ -222,7 +223,7 @@ export async function build (options = {}) {
 
     return { state, server, watcher }
   } catch (err) {
-    console.error(['🚨  Build failed!', err.stack].join('\n\n'))
+    reportError('Build failed!', err)
 
     throw err
   }

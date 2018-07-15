@@ -5,8 +5,9 @@ const Connector = require('./connector')
 const File = require('./util/file')
 const PageUtil = require('./util/page')
 const { dasherize, replaceTemplateComments } = require('./util/string')
-const { error } = require('./util/message')
+const { markSample } = require('./util/message')
 const { debug2, debug3, debug4 } = require('./util/debug')
+const { UiengineInputError } = require('./util/error')
 
 const copyPageFile = (targetPath, sourcePath, source) => {
   const filePath = relative(sourcePath, source)
@@ -24,9 +25,9 @@ async function render (state, template, data, identifier) {
   try {
     rendered = await Connector.render(state, templatePath, data)
   } catch (err) {
-    const message = [error(`${identifier} could not be generated!`), err]
+    const message = [`${identifier} could not be generated!`, err]
 
-    if (state.config.debug) message.push(JSON.stringify(data, null, 2))
+    if (state.config.debug) message.push(markSample(JSON.stringify(data, null, 2)))
 
     throw new Error(message.join('\n\n'))
   }
@@ -62,7 +63,10 @@ export async function generatePageWithTemplate (state, pageId) {
   const { pages, config: { target } } = state
   const identifier = `Page "${pageId}"`
   const page = pages[pageId]
-  if (!page) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
+
+  if (!page) {
+    throw new UiengineInputError(`${identifier} does not exist or has not been fetched yet.`)
+  }
 
   if (page.template) {
     // render template with context
@@ -97,7 +101,10 @@ export async function generatePageWithTokens (state, pageId) {
   const { name, target, version } = config
   const identifier = `Page "${pageId}"`
   const page = pages[pageId]
-  if (!page) throw new Error(`${identifier} does not exist or has not been fetched yet.`)
+
+  if (!page) {
+    throw new UiengineInputError(`${identifier} does not exist or has not been fetched yet.`)
+  }
 
   if (PageUtil.isTokensPage(page.type)) {
     // render tokens with context, in preview layout
