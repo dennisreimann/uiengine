@@ -5,7 +5,7 @@ node_modules
 
 # Logs
 npm-debug*
-*log
+*.log
 
 # Generated files
 *.marko.js
