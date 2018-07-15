@@ -32,38 +32,43 @@ export async function init (options = {}) {
 
 export async function generate (options) {
   _isGenerating = true
-  _state = await init(options)
 
-  debug2(_state, 'Core.generate():start')
+  try {
+    _state = await init(options)
 
-  // 0. setup
-  const setupInterface = Interface.setup(_state)
-  const setupConnector = Connector.setup(_state)
-  await Promise.all([setupInterface, setupConnector])
+    debug2(_state, 'Core.generate():start')
 
-  // 1. data fetching
-  const fetchPages = Page.fetchAll(_state)
-  const fetchEntities = Entity.fetchAll(_state)
-  const fetchComponents = Component.fetchAll(_state)
-  const [pages, entities, components] = await Promise.all([fetchPages, fetchEntities, fetchComponents])
+    // 0. setup
+    const setupInterface = Interface.setup(_state)
+    const setupConnector = Connector.setup(_state)
+    await Promise.all([setupInterface, setupConnector])
 
-  _state = R.assoc('pages', pages, _state)
-  _state = R.assoc('entities', entities, _state)
-  _state = R.assoc('components', components, _state)
+    // 1. data fetching
+    const fetchPages = Page.fetchAll(_state)
+    const fetchEntities = Entity.fetchAll(_state)
+    const fetchComponents = Component.fetchAll(_state)
+    const [pages, entities, components] = await Promise.all([fetchPages, fetchEntities, fetchComponents])
 
-  // 2. transformations
-  const entitiesPage = await Page.fetchEntitiesPage(_state)
-  _state = R.assocPath(['pages', entitiesPage.id], entitiesPage, _state)
+    _state = R.assoc('pages', pages, _state)
+    _state = R.assoc('entities', entities, _state)
+    _state = R.assoc('components', components, _state)
 
-  const navigation = await Navigation.fetch(_state)
-  _state = R.assoc('navigation', navigation, _state)
+    // 2. transformations
+    const entitiesPage = await Page.fetchEntitiesPage(_state)
+    _state = R.assocPath(['pages', entitiesPage.id], entitiesPage, _state)
 
-  // 3. output
-  await Builder.generate(_state)
+    const navigation = await Navigation.fetch(_state)
+    _state = R.assoc('navigation', navigation, _state)
 
-  _isGenerating = false
+    // 3. output
+    await Builder.generate(_state)
+  } catch (err) {
+    throw err
+  } finally {
+    _isGenerating = false
 
-  debug2(_state, 'Core.generate():end')
+    debug2(_state, 'Core.generate():end')
+  }
 
   return _state
 }
