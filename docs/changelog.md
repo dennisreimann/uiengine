@@ -1,10 +1,21 @@
 # Changelog
 
-## [0.23.0]
+## [0.23.0] - 2018-07-15
 
 ### Added
 
 - Set browser-sync `startPath` for custom UI base
+- New [documentation site](https://uiengine.uix.space/), generated with the UIengine itself
+
+### Changed
+
+- Improved the CLI flags and usage docs
+- Improved [React adapter hooks](/adapters/react/)
+- Improved React adapter Properties extraction
+
+### Fixed
+
+- Skip generating HTML Sketchapp export if template is missing
 
 ## [0.22.0] - 2018-06-19
 
