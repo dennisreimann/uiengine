@@ -17,8 +17,8 @@ describe('UIengine', function () {
   this.timeout(5000)
 
   beforeEach(function () {
-    this.sinon.stub(console, 'info')
-    this.sinon.stub(console, 'error')
+    this.sinon.stub(process.stdout, 'write')
+    this.sinon.stub(process.stderr, 'write')
   })
 
   afterEach(function () {
@@ -30,8 +30,8 @@ describe('UIengine', function () {
     it('should generate the site', async () => {
       await UIengine.build(opts)
 
-      assert(console.info.calledWithMatch('🚧  Building …'))
-      assert(console.info.calledWithMatch('✅  Build done!'))
+      assert(process.stdout.write.calledWithMatch('🚧  Building …\r'))
+      assert(process.stdout.write.calledWithMatch('✅  Build done!'))
 
       assertExists(join(testProjectTargetPath, 'index.html'))
     })
@@ -49,15 +49,15 @@ describe('UIengine', function () {
       it('should not log the info output', async () => {
         await UIengine.build(optsWith({ info: false }))
 
-        assert(!console.info.calledWithMatch('🚧  Building …'))
-        assert(!console.info.calledWithMatch('✅  Build done!'))
+        assert(!process.stdout.write.calledWithMatch('🚧  Building …\r'))
+        assert(!process.stdout.write.calledWithMatch('✅  Build done!\r'))
       })
 
       it('should log the error output', async () => {
         try {
           await UIengine.build(optsWith({ info: false }))
         } catch (err) {
-          assert(console.error.calledWithMatch('🚨  Build failed!'))
+          assert(process.stderr.write.calledWithMatch('🚨  Build failed!'))
         }
       })
     })
@@ -83,7 +83,8 @@ describe('UIengine', function () {
       let watchProcess
 
       before(function (done) {
-        this.sinon.stub(console, 'info')
+        // suppress output during tests
+        this.sinon.stub(process.stdout, 'write')
 
         UIengine.build(optsWith({ watch: true, serve: false })).then(({ watcher }) => {
           watchProcess = watcher
@@ -115,7 +116,7 @@ describe('UIengine', function () {
             if (changedFilePath === filePath) {
               setTimeout(() => {
                 fs.removeSync(fileDir)
-                assert(console.info.calledWithMatch('✨  Rebuilt page testcases/created'))
+                assert(process.stdout.write.calledWithMatch('✨  Rebuilt page testcases/created'))
                 done()
               }, 2500)
             }

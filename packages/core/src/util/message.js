@@ -7,12 +7,19 @@ const getText = msg =>
   msg instanceof Array ? msg.join('\n\n') : msg
 
 export const reportSuccess = msg => {
-  console.log('✅ ', getText(msg))
+  reportInfo(msg, { icon: '✅', transient: false })
+}
+
+export const reportInfo = (msg, opts = { icon: 'ℹ️', transient: true }) => {
+  process.stdout.write(`${opts.icon}  ${getText(msg)}${opts.transient ? '\r' : '\n'}`)
 }
 
 export const reportError = (msg, err) => {
   const text = getText(msg)
-  const error = err instanceof UiengineInputError ? err.message : err
+  const { message, stack } = err || {}
+  const output = `🚨  ${red(text)}` +
+    (message ? `\n\n${message}\n\n` : '') +
+    (stack && !(err instanceof UiengineInputError) ? `\n\n${stack}\n\n` : '')
 
-  console.error('🚨 ', red(text), '\n\n', error)
+  process.stderr.write(output)
 }

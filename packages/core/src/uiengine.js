@@ -2,7 +2,7 @@ const { dirname, join, relative } = require('path')
 const Core = require('./core')
 const { debounce } = require('./util/debounce')
 const { debug3 } = require('./util/debug')
-const { reportError } = require('./util/message')
+const { reportSuccess, reportInfo, reportError } = require('./util/message')
 
 const globPattern = '**/*'
 
@@ -70,9 +70,11 @@ const startWatcher = (state, opts, server) => {
       if (Core.isGenerating()) return
 
       try {
+        if (info) reportInfo('Rebuiling …', { icon: '🚧', transient: true })
+
         const { state, change } = await Core.generateIncrementForFileChange(filePath, type)
 
-        if (info) console.info(`✨  Rebuilt ${change.type} ${change.item}`, `(${change.action} ${change.file})`)
+        if (info) reportInfo(`Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`, { icon: '✨', transient: false })
         if (server) server.sockets.emit('uiengine:state:update', state)
       } catch (err) {
         reportError(`Rebuild for changed file ${relative(process.cwd(), filePath)} failed:`, err)
@@ -210,12 +212,12 @@ export async function build (options = {}) {
   options.serve = optionWithDefault(false, options.serve)
   options.watch = optionWithDefault(false, options.watch)
 
-  if (options.info) console.info('🚧  Building …')
+  if (options.info) reportInfo('Building …', { icon: '🚧', transient: true })
 
   try {
     const state = await Core.generate(options)
 
-    if (options.info) console.info('✅  Build done!')
+    if (options.info) reportSuccess('Build done!')
 
     let server, watcher
     if (options.serve) server = startServer(state, options)
