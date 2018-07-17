@@ -7,6 +7,40 @@ const File = require('../src/util/file')
 const { testTmpPath } = require('../../../test/support/paths')
 
 describe('File', () => {
+  describe('#exists', () => {
+    it('should return true for existing files', () => {
+      assert.equal(true, File.exists(join(__dirname, 'fixtures/markdown.md')))
+    })
+
+    it('should return false for non-existing files', () => {
+      assert.equal(false, File.exists(join(__dirname, 'fixtures/does-not-exist.md')))
+    })
+
+    it('should return true for directories', () => {
+      assert.equal(true, File.exists(join(__dirname, 'fixtures')))
+    })
+  })
+
+  describe('#isDirectory', () => {
+    it('should return true for directories', () => {
+      assert.equal(true, File.isDirectory(join(__dirname, 'fixtures')))
+    })
+
+    it('should return false for files', () => {
+      assert.equal(false, File.isDirectory(join(__dirname, 'fixtures/markdown.md')))
+    })
+  })
+
+  describe('#exists', () => {
+    it('should return true for existing files', () => {
+      assert.equal(true, File.exists(join(__dirname, 'fixtures/markdown.md')))
+    })
+
+    it('should return false for non-existing files', () => {
+      assert.equal(false, File.exists(join(__dirname, 'fixtures/does-not-exist.md')))
+    })
+  })
+
   describe('#extension', () => {
     it('should return file extension', () => {
       const ext = File.extension(join(__dirname, 'fixtures/markdown.md'))

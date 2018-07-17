@@ -6,7 +6,6 @@ const { assertExists } = require('../../../test/support/asserts')
 const { dirname, join, resolve } = require('path')
 
 const UIengine = require('../src/uiengine')
-
 const { testProjectPath, testProjectTargetPath } = require('../../../test/support/paths')
 
 const opts = { config: resolve(testProjectPath, 'uiengine.config.js') }
@@ -27,11 +26,11 @@ describe('UIengine', function () {
   })
 
   describe('#build', () => {
-    it('should generate the site', async () => {
+    it('should generate the site', async function () {
       await UIengine.build(opts)
 
-      assert(process.stdout.write.calledWithMatch('🚧  Building …\r'))
-      assert(process.stdout.write.calledWithMatch('✅  Build done!'))
+      this.sinon.assert.calledWithMatch(process.stdout.write, '🚧  Building …')
+      this.sinon.assert.calledWithMatch(process.stdout.write, '✅  Build done!')
 
       assertExists(join(testProjectTargetPath, 'index.html'))
     })
@@ -46,18 +45,18 @@ describe('UIengine', function () {
     })
 
     describe('with no info option', () => {
-      it('should not log the info output', async () => {
+      it('should not log the info output', async function () {
         await UIengine.build(optsWith({ info: false }))
 
-        assert(!process.stdout.write.calledWithMatch('🚧  Building …\r'))
-        assert(!process.stdout.write.calledWithMatch('✅  Build done!\r'))
+        this.sinon.assert.neverCalledWithMatch(process.stdout.write, '🚧  Building …')
+        this.sinon.assert.neverCalledWithMatch(process.stdout.write, '✅  Build done!')
       })
 
       it('should log the error output', async () => {
         try {
           await UIengine.build(optsWith({ info: false }))
         } catch (err) {
-          assert(process.stderr.write.calledWithMatch('🚨  Build failed!'))
+          this.sinon.assert.calledWithMatch(process.stderr.write, '🚨  Build failed!')
         }
       })
     })
@@ -106,7 +105,7 @@ describe('UIengine', function () {
 
       // skip this test on CI as file watching does not seem to work in this environment
       const itFn = process.env.CI === 'true' ? it.skip : it
-      itFn('should report file changes', done => {
+      itFn('should report file changes', function (done) {
         const pagesPath = resolve(testProjectPath, 'src', 'uiengine', 'pages')
         const filePath = join(pagesPath, 'testcases', 'created', 'page.md')
         const fileDir = dirname(filePath)
@@ -116,7 +115,7 @@ describe('UIengine', function () {
             if (changedFilePath === filePath) {
               setTimeout(() => {
                 fs.removeSync(fileDir)
-                assert(process.stdout.write.calledWithMatch('✨  Rebuilt page testcases/created'))
+                this.sinon.assert.calledWithMatch(process.stdout.write, '✨  Rebuilt page testcases/created')
                 done()
               }, 2500)
             }

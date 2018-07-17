@@ -26,6 +26,14 @@ describe('Frontmatter', () => {
       assert.equal(data.attributes.name, 'Index')
       assert.equal(data.body, 'Hello')
     })
+
+    it('should throw an error if frontmatter cannot be read', async () => {
+      try {
+        await Frontmatter.fromFile(join(__dirname, 'fixtures/invalid-frontmatter.txt'), sourcePaths)
+      } catch (error) {
+        assert(error)
+      }
+    })
   })
 
   describe('#fromString', () => {
