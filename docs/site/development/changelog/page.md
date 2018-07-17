@@ -1,1 +1,1 @@
-!!!include(changelog.md)!!!
+!!!include(../CHANGELOG.md)!!!

@@ -5,4 +5,4 @@ children:
 - adapters
 - development
 ---
-!!!include(index.md)!!!
+!!!include(../README.md)!!!
