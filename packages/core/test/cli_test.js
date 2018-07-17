@@ -156,5 +156,17 @@ describe('CLI', function () {
         assertExists(join(testPath, 'dist/_state.json'))
       })
     })
+
+    describe('with override flag', () => {
+      it('should override config parameters', async () => {
+        await runCommand(testPath, 'uiengine build --override.version=123.456.789 --override.target=./dist/override-target --override.ui.lang=de')
+
+        const indexPath = join(testPath, 'dist/override-target/index.html')
+
+        assertExists(indexPath)
+        assertContentMatches(indexPath, '123.456.789')
+        assertContentMatches(indexPath, 'html lang="de"')
+      })
+    })
   })
 })

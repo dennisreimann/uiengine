@@ -79,7 +79,7 @@ const _read = (configFilePath, projectConfig, flags) => {
   let data = R.mergeAll([defaults, projectConfig, options])
 
   // resolve paths, adapters, and ui
-  let { source, target, ui, adapters } = projectConfig
+  let { source, target, ui, adapters } = data
 
   assert(source, 'Please provide a "source" config.')
   assert(target, 'Please provide a "target" config with the destination path for the generated site.')
