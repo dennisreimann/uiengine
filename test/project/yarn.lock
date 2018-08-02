@@ -117,10 +117,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.3.tgz#8798d9e39af2fa604f715ee6a6b19796528e46c3"
 
 "@uiengine/adapter-ejs@file:../../packages/adapter-ejs":
-  version "0.21.0"
+  version "0.22.5"
 
 "@uiengine/adapter-handlebars@file:../../packages/adapter-handlebars":
-  version "0.22.0"
+  version "0.22.5"
   dependencies:
     globby "8.0.1"
 
@@ -128,29 +128,29 @@
   version "0.21.0"
 
 "@uiengine/adapter-marko@file:../../packages/adapter-marko":
-  version "0.22.0"
+  version "0.22.5"
 
 "@uiengine/adapter-pug@file:../../packages/adapter-pug":
-  version "0.21.0"
+  version "0.22.5"
 
 "@uiengine/adapter-react@file:../../packages/adapter-react":
-  version "0.22.4"
+  version "0.22.5"
   dependencies:
     react-docgen "2.21.0"
   optionalDependencies:
     prop-types "15.6.2"
 
 "@uiengine/adapter-vue@file:../../packages/adapter-vue":
-  version "0.21.0"
+  version "0.22.5"
   dependencies:
     vue-component-compiler "git+https://github.com/znck/vue-component-compiler.git"
     vue-server-renderer "2.5.16"
     vue-template-compiler "2.5.16"
 
 "@uiengine/core@file:../../packages/core":
-  version "0.22.3"
+  version "1.0.0"
   dependencies:
-    "@uiengine/ui" "0.22.3"
+    "@uiengine/ui" "^0.22.5"
     chalk "2.4.1"
     cosmiconfig "5.0.5"
     fs-extra "6.0.1"
@@ -165,23 +165,23 @@
     browser-sync "2.24.5"
     chokidar "2.0.4"
 
-"@uiengine/ui@0.22.3":
-  version "0.22.3"
-  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-0.22.3.tgz#deaf8a85ba2eed6f40c7171a84a60ecb111920b2"
+"@uiengine/ui@^0.22.5":
+  version "0.22.5"
+  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-0.22.5.tgz#b49cd59c97961ee163177e7fc5386c42257cd4ba"
   dependencies:
-    color "^3.0.0"
-    ejs "^2.6.1"
-    fuse.js "^3.2.1"
-    highlight.js "^9.12.0"
-    htmlescape "^1.1.1"
-    vue "^2.5.16"
-    vue-analytics "^5.12.2"
-    vue-meta "^1.5.0"
-    vue-router "^3.0.1"
-    vuex "^3.0.1"
+    color "3.0.0"
+    ejs "2.6.1"
+    fuse.js "3.2.1"
+    highlight.js "9.12.0"
+    htmlescape "1.1.1"
+    vue "2.5.16"
+    vue-analytics "5.12.2"
+    vue-meta "1.5.2"
+    vue-router "3.0.1"
+    vuex "3.0.1"
 
 "@uiengine/ui@file:../../packages/ui":
-  version "0.22.3"
+  version "0.22.5"
   dependencies:
     color "3.0.0"
     ejs "2.6.1"
@@ -2095,7 +2095,7 @@ color-support@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-support/-/color-support-1.1.3.tgz#93834379a1cc9a0c61f82f52f0d04322251bd5a2"
 
-color@3.0.0, color@^3.0.0:
+color@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/color/-/color-3.0.0.tgz#d920b4328d534a3ac8295d68f7bd4ba6c427be9a"
   dependencies:
@@ -2690,7 +2690,7 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-ejs@2.6.1, ejs@^2.6.1:
+ejs@2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.6.1.tgz#498ec0d495655abc6f23cd61868d926464071aa0"
 
@@ -3519,7 +3519,7 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
 
-fuse.js@3.2.1, fuse.js@^3.2.1:
+fuse.js@3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-3.2.1.tgz#6320cb94ce56ec9755c89ade775bcdbb0358d425"
 
@@ -4029,7 +4029,7 @@ html-tags@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-2.0.0.tgz#10b30a386085f43cede353cc8fa7cb0deeea668b"
 
-htmlescape@1.1.1, htmlescape@^1.1.1:
+htmlescape@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/htmlescape/-/htmlescape-1.1.1.tgz#3a03edc2214bca3b66424a3e7959349509cb0351"
 
@@ -7637,7 +7637,7 @@ void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
-vue-analytics@5.12.2, vue-analytics@^5.12.2:
+vue-analytics@5.12.2:
   version "5.12.2"
   resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.12.2.tgz#6318be3cfa0ce7fa6b00cb8a9fcd42268e75fab8"
 
@@ -7687,15 +7687,7 @@ vue-meta@1.5.2:
     lodash.isplainobject "^4.0.6"
     object-assign "^4.1.1"
 
-vue-meta@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/vue-meta/-/vue-meta-1.5.0.tgz#02a9f166a1e87763a87bfd47431122ed575bcdde"
-  dependencies:
-    deepmerge "^2.0.0"
-    lodash.isplainobject "^4.0.6"
-    object-assign "^4.1.1"
-
-vue-router@3.0.1, vue-router@^3.0.1:
+vue-router@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
 
@@ -7730,11 +7722,11 @@ vue-template-es2015-compiler@^1.5.3, vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@2.5.16, vue@^2.5.16:
+vue@2.5.16:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
 
-vuex@3.0.1, vuex@^3.0.1:
+vuex@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.0.1.tgz#e761352ebe0af537d4bb755a9b9dc4be3df7efd2"
 
