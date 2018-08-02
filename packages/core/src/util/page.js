@@ -66,7 +66,7 @@ export const pageFilePathToPageId = (pagesPath, pageFilePath) => {
   const file = basename(relativePath)
 
   if (file === PAGE_FILENAME || File.exists(resolve(pageFilePath, '..', PAGE_FILENAME))) {
-    const pageId = isIndexFilePath(dir) ? INDEX_ID : dir
+    const pageId = isIndexFilePath(dir) ? INDEX_ID : dir.replace('\\', '/')
 
     return pageId
   } else {

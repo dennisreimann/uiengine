@@ -29,7 +29,7 @@ async function findPageFiles (pagesPath, pagePath, childIds = []) {
   // see the glob option descreibed here for details:
   // https://github.com/mrmlnc/fast-glob#how-to-exclude-directory-from-reading
   const filesPattern = join(pagesPath, pagePath, '**')
-  const pageExcludes = ['**/_*/**', `**/${PageUtil.PAGE_FILENAME}`]
+  const pageExcludes = [join('**', '_*', '**'), join('**', PageUtil.PAGE_FILENAME)]
   const childExcludes = R.map(id => join('**', id, '**'), childIds)
   const ignore = R.concat(pageExcludes, childExcludes)
   const filePaths = await glob(filesPattern, { ignore })

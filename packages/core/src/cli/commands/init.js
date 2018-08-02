@@ -19,16 +19,18 @@ exports.builder = argv =>
 exports.handler = async argv => {
   const directory = resolve(process.cwd(), argv.dir)
   const name = titleize(basename(directory))
-  const components = 'src/components'
-  const templates = 'src/templates'
-  const pages = 'src/uiengine/pages'
+  const components = join('src', 'components')
+  const templates = join('src', 'templates')
+  const data = join('src', 'uiengine', 'data')
+  const pages = join('src', 'uiengine', 'pages')
+  const entities = join('src', 'uiengine', 'entities')
   const preview = 'uiengine.html'
   const config = 'uiengine.config.js'
   const configTemplate = require('../templates/config').template
   const previewTemplate = require('../templates/preview').template
   const pageTemplate = require('../templates/initial_page').template
   const previewContent = previewTemplate(name).trim()
-  const configContent = configTemplate(name, { components, pages, templates }, { preview }).trim()
+  const configContent = configTemplate(name, { components, pages, templates, data, entities }, { preview }).trim()
   const indexContent = pageTemplate(name).trim()
   const previewPath = relative(process.cwd(), join(directory, templates, preview))
   const configPath = relative(process.cwd(), join(directory, config))
@@ -41,7 +43,7 @@ exports.handler = async argv => {
     await Promise.all([createConfigFile, createIndexPage, createPreviewFile])
 
     if (argv.demo) {
-      const demoPath = resolve(__dirname, '../../../demo')
+      const demoPath = resolve(__dirname, '..', '..', '..', 'demo')
       const copyDemoPages = copy(join(demoPath, 'pages'), join(directory, pages))
       const copyDemoComponents = copy(join(demoPath, 'components'), join(directory, components))
       const copyDemoTemplates = copy(join(demoPath, 'templates'), join(directory, templates))

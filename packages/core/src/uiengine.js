@@ -4,7 +4,7 @@ const { debounce } = require('./util/debounce')
 const { debug3 } = require('./util/debug')
 const { reportSuccess, reportInfo, reportError } = require('./util/message')
 
-const globPattern = '**/*'
+const globPattern = join('**', '*')
 
 const sourceFilesFromConfig = ({ source: { configFile, components, data, entities, pages, templates }, adapters, debug, ui }) => {
   const componentsGlob = components ? join(components, globPattern) : null
@@ -16,7 +16,7 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, entitie
 
   if (debug) {
     const uiLibGlob = join(dirname(require.resolve('@uiengine/ui')), globPattern)
-    const uiDistGlob = uiLibGlob.replace('ui/lib/', 'ui/dist/')
+    const uiDistGlob = uiLibGlob.replace(join('ui', 'lib'), join('ui', 'dist'))
     sourceFiles.push(uiLibGlob, uiDistGlob)
   }
 
@@ -100,9 +100,9 @@ const startServer = (state, opts) => {
   const { watch, info } = opts
   const server = requireOptional('browser-sync', 'serve').create('UIengine')
   const history = requireOptional('connect-history-api-fallback')
-  const pagesPattern = '_pages/**/*'
-  const tokensPattern = '_tokens/**/*'
-  const variantsPattern = '_variants/**/*'
+  const pagesPattern = join('_pages', '**', '*')
+  const tokensPattern = join('_tokens', '**', '*')
+  const variantsPattern = join('_variants', '**', '*')
   const defaults = {
     server: {
       baseDir: target

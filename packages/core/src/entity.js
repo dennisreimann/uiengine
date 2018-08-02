@@ -1,11 +1,11 @@
-const { resolve } = require('path')
+const { join, resolve } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const Yaml = require('./util/yaml')
 const EntityUtil = require('./util/entity')
 const { debug2, debug3 } = require('./util/debug')
 
-async function findEntityIds (state, entitiesPath = '**/*.yml') {
+async function findEntityIds (state, entitiesPath = join('**', '*.yml')) {
   const { entities } = state.config.source
   if (!entities) return []
 
