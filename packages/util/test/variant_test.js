@@ -1,7 +1,7 @@
 const assert = require('assert')
 const { join, resolve } = require('path')
 
-const VariantUtil = require('../src/util/variant')
+const VariantUtil = require('../src/variant')
 
 const { testProjectPath } = require('../../../test/support/paths')
 const componentsPath = resolve(testProjectPath, 'src', 'components')

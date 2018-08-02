@@ -28,7 +28,7 @@ describe('UI', () => {
       this.sinon.stub(TestUI, 'setup')
 
       await Interface.setup(state)
-      const markdownIt = require('../src/util/markdown').markdownIt
+      const markdownIt = require('@uiengine/util/lib/markdown').markdownIt
       const expectedOptions = Object.assign({}, testUiOptions, { markdownIt })
 
       this.sinon.assert.calledOnce(TestUI.setup)

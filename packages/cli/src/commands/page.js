@@ -1,9 +1,11 @@
 const { relative } = require('path')
 const R = require('ramda')
-const Core = require('../../core')
-const File = require('../../util/file')
-const PageUtil = require('../../util/page')
-const { reportSuccess, reportError } = require('../../util/message')
+const Core = require('@uiengine/core/lib/core')
+const {
+  FileUtil: { write },
+  MessageUtil: { reportSuccess, reportError },
+  PageUtil: { pageIdToPageFilePath, pageIdToTitle }
+} = require('@uiengine/util')
 
 exports.describe = 'Create basic files for a new page'
 
@@ -29,12 +31,12 @@ exports.handler = argv => {
       const tasks = []
       const pageFiles = []
       const createPages = R.map(pageId => {
-        const pageTitle = PageUtil.pageIdToTitle(pageId)
+        const pageTitle = pageIdToTitle(pageId)
         const pageContent = pageTemplate(pageTitle).trim()
-        const pageFilePath = PageUtil.pageIdToPageFilePath(pagesDir, pageId)
+        const pageFilePath = pageIdToPageFilePath(pagesDir, pageId)
         pageFiles.push(pageFilePath)
 
-        return File.write(pageFilePath, pageContent)
+        return write(pageFilePath, pageContent)
       }, pageIds)
 
       tasks.push(...createPages)

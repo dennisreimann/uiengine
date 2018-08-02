@@ -1,19 +1,21 @@
 const { join, resolve } = require('path')
 const R = require('ramda')
 const glob = require('globby')
-const frontmatter = require('./util/frontmatter')
-const markdown = require('./util/markdown')
-const PageUtil = require('./util/page')
-const StringUtil = require('./util/string')
-const { debug2, debug3, debug4 } = require('./util/debug')
+const {
+  FrontmatterUtil,
+  MarkdownUtil,
+  PageUtil,
+  StringUtil,
+  DebugUtil: { debug2, debug3, debug4 }
+} = require('@uiengine/util')
 
 async function readPageFile (state, filePath) {
   debug4(state, `Page.readPageFile(${filePath}):start`)
 
   const { source } = state.config
   try {
-    let { attributes, body } = await frontmatter.fromFile(filePath, source)
-    const content = await markdown.fromString(body)
+    let { attributes, body } = await FrontmatterUtil.fromFile(filePath, source)
+    const content = await MarkdownUtil.fromString(body)
     // prevent empty attributes from being null
     attributes = attributes || {}
 

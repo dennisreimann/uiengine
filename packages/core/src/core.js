@@ -8,12 +8,14 @@ const Page = require('./page')
 const Entity = require('./entity')
 const Interface = require('./interface')
 const Connector = require('./connector')
-const PageUtil = require('./util/page')
-const EntityUtil = require('./util/entity')
-const ComponentUtil = require('./util/component')
-const TemplateUtil = require('./util/template')
-const VariantUtil = require('./util/variant')
-const { debug2 } = require('./util/debug')
+const {
+  EntityUtil: { entityFilePathToEntityId },
+  ComponentUtil: { componentFilePathToComponentId, componentPathToComponentId },
+  PageUtil: { pageFilePathToPageId, parentIdForPageId },
+  TemplateUtil: { templateFilePathToTemplateId },
+  VariantUtil: { variantFilePathToVariantId, variantIdToComponentId },
+  DebugUtil: { debug2 }
+} = require('@uiengine/util')
 
 // set the state in this modules scope so that we
 // can access it when handling incremental changes
@@ -84,17 +86,17 @@ const getChangeObject = (filePath, action) => {
   // Skip generating individual items in case the data
   // got changed as we need to regenerate everything
   if (!isDataFile) {
-    pageId = pages ? PageUtil.pageFilePathToPageId(pages, filePath) : undefined
-    entityId = entities ? EntityUtil.entityFilePathToEntityId(entities, filePath) : undefined
-    variantId = components ? VariantUtil.variantFilePathToVariantId(components, filePath) : undefined
-    templateId = templates ? TemplateUtil.templateFilePathToTemplateId(templates, filePath) : undefined
-    componentId = components ? ComponentUtil.componentFilePathToComponentId(components, filePath) : undefined
+    pageId = pages ? pageFilePathToPageId(pages, filePath) : undefined
+    entityId = entities ? entityFilePathToEntityId(entities, filePath) : undefined
+    variantId = components ? variantFilePathToVariantId(components, filePath) : undefined
+    templateId = templates ? templateFilePathToTemplateId(templates, filePath) : undefined
+    componentId = components ? componentFilePathToComponentId(components, filePath) : undefined
   }
 
   // In case a component directory has been deleted we
   // need to reset the component id with the dirname
   if (componentId && isComponentDir) {
-    componentId = ComponentUtil.componentPathToComponentId(components, filePath)
+    componentId = componentPathToComponentId(components, filePath)
   }
 
   if (pageId) {
@@ -187,7 +189,7 @@ async function fetchAndAssocNavigation () {
 
 async function regeneratePage (id) {
   const pageIds = Object.keys(_state.pages)
-  const parentId = PageUtil.parentIdForPageId(pageIds, id)
+  const parentId = parentIdForPageId(pageIds, id)
   const fetchTasks = [fetchAndAssocPage(id)]
   if (parentId) fetchTasks.push(fetchAndAssocPage(parentId))
 
@@ -203,7 +205,7 @@ async function regeneratePage (id) {
 
 async function removePage (id) {
   const pageIds = Object.keys(_state.pages)
-  const parentId = PageUtil.parentIdForPageId(pageIds, id)
+  const parentId = parentIdForPageId(pageIds, id)
 
   _state = R.dissocPath(['pages', id], _state)
 
@@ -237,7 +239,7 @@ async function removeComponent (id) {
 }
 
 async function regenerateVariant (id) {
-  const componentId = VariantUtil.variantIdToComponentId(id)
+  const componentId = variantIdToComponentId(id)
   const component = await fetchAndAssocComponent(componentId)
   const variant = R.find(variant => variant.id === id)(component.variants)
   await Promise.all([
@@ -247,7 +249,7 @@ async function regenerateVariant (id) {
 }
 
 async function removeVariant (id) {
-  const componentId = VariantUtil.variantIdToComponentId(id)
+  const componentId = variantIdToComponentId(id)
   await fetchAndAssocComponent(componentId)
   await Builder.generateIncrement(_state)
 }

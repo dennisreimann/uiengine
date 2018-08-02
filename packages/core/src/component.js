@@ -3,11 +3,13 @@ const R = require('ramda')
 const glob = require('globby')
 const { registerComponentFile } = require('./connector')
 const Variant = require('./variant')
-const frontmatter = require('./util/frontmatter')
-const markdown = require('./util/markdown')
-const ComponentUtil = require('./util/component')
-const StringUtil = require('./util/string')
-const { debug2, debug3, debug4, debug5 } = require('./util/debug')
+const {
+  ComponentUtil,
+  FrontmatterUtil,
+  MarkdownUtil,
+  StringUtil,
+  DebugUtil: { debug2, debug3, debug4, debug5 }
+} = require('@uiengine/util')
 
 async function readComponentFile (state, filePath) {
   debug4(state, `Component.readComponentFile(${filePath}):start`)
@@ -16,9 +18,9 @@ async function readComponentFile (state, filePath) {
   let data = { attributes: {} } // in case there is no component file
 
   try {
-    const component = await frontmatter.fromFile(filePath, source)
+    const component = await FrontmatterUtil.fromFile(filePath, source)
     const { attributes, body } = component
-    const content = await markdown.fromString(body)
+    const content = await MarkdownUtil.fromString(body)
 
     data = { attributes, content }
   } catch (err) {

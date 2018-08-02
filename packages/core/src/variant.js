@@ -2,10 +2,13 @@ const { basename, join } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const Connector = require('./connector')
-const VariantUtil = require('./util/variant')
-const File = require('./util/file')
-const { markSample } = require('./util/message')
-const { debug2, debug3 } = require('./util/debug')
+
+const {
+  DebugUtil: { debug2, debug3 },
+  MessageUtil: { markSample },
+  VariantUtil,
+  FileUtil
+} = require('@uiengine/util')
 
 // convert list of filenames to list of objects
 const convertUserProvidedVariants = list =>
@@ -51,13 +54,13 @@ export async function fetchObject (state, componentId, componentContext, data) {
 
   const { components } = state.config.source
   const filePath = VariantUtil.variantIdToVariantFilePath(components, id)
-  const extension = File.extension(filePath)
+  const extension = FileUtil.extension(filePath)
   const context = data.context || componentContext
   const title = data.title || VariantUtil.variantIdToTitle(id)
 
   // render raw variant, without layout
   let raw, render
-  const readTemplate = File.read(filePath)
+  const readTemplate = FileUtil.read(filePath)
   const renderTemplate = Connector.render(state, filePath, context)
 
   try {

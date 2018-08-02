@@ -1,7 +1,7 @@
 const assert = require('assert')
 const { join, resolve } = require('path')
 
-const PageUtil = require('../src/util/page')
+const PageUtil = require('../src/page')
 
 const { testProjectPath } = require('../../../test/support/paths')
 const pagesPath = resolve(testProjectPath, 'src', 'uiengine', 'pages')

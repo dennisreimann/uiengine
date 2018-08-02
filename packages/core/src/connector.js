@@ -1,7 +1,9 @@
-const File = require('./util/file')
-const ComponentUtil = require('./util/component')
-const { debug3 } = require('./util/debug')
-const { UiengineInputError } = require('./util/error')
+const {
+  UiengineInputError,
+  ComponentUtil: { componentFilePathToComponentId },
+  DebugUtil: { debug3 },
+  FileUtil: { extension }
+} = require('@uiengine/util')
 
 const getModule = ({ config: { adapters } }, ext, filePath) => {
   const { module } = adapters[ext] || {}
@@ -46,7 +48,7 @@ export async function setup (state) {
 
 export async function registerComponentFile (state, filePath) {
   const { config: { adapters, source: { components } } } = state
-  const ext = File.extension(filePath)
+  const ext = extension(filePath)
   const adapter = adapters[ext]
 
   if (adapter) {
@@ -57,7 +59,7 @@ export async function registerComponentFile (state, filePath) {
       const data = await registerComponentFile(options, filePath)
 
       if (data) {
-        const id = ComponentUtil.componentFilePathToComponentId(components, filePath)
+        const id = componentFilePathToComponentId(components, filePath)
 
         return { id, filePath, data }
       }
@@ -66,7 +68,7 @@ export async function registerComponentFile (state, filePath) {
 }
 
 export async function render (state, templatePath, data = {}) {
-  const ext = File.extension(templatePath)
+  const ext = extension(templatePath)
   const { render } = getModule(state, ext, templatePath)
 
   if (typeof render === 'function') {

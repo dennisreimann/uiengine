@@ -1,8 +1,10 @@
 const { basename, join, relative, resolve } = require('path')
-const { PAGE_FILENAME } = require('../../util/page')
-const { copy, write } = require('../../util/file')
-const { titleize } = require('../../util/string')
-const { reportSuccess, reportError } = require('../../util/message')
+const {
+  FileUtil: { copy, write },
+  MessageUtil: { reportSuccess, reportError },
+  PageUtil: { PAGE_FILENAME },
+  StringUtil: { titleize }
+} = require('@uiengine/util')
 
 exports.desc = 'Create a basic structure and config file'
 
@@ -43,7 +45,7 @@ exports.handler = async argv => {
     await Promise.all([createConfigFile, createIndexPage, createPreviewFile])
 
     if (argv.demo) {
-      const demoPath = resolve(__dirname, '..', '..', '..', 'demo')
+      const demoPath = resolve(__dirname, '..', '..', 'demo')
       const copyDemoPages = copy(join(demoPath, 'pages'), join(directory, pages))
       const copyDemoComponents = copy(join(demoPath, 'components'), join(directory, components))
       const copyDemoTemplates = copy(join(demoPath, 'templates'), join(directory, templates))

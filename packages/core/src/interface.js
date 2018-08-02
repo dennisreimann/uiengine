@@ -1,6 +1,8 @@
-const markdownIt = require('./util/markdown').markdownIt
-const { debug3 } = require('./util/debug')
 const UI = require('@uiengine/ui')
+const {
+  DebugUtil: { debug3 },
+  MarkdownUtil: { markdownIt }
+} = require('@uiengine/util')
 
 const getOptions = state => {
   const { config: { ui, target } } = state

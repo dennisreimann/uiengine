@@ -1,5 +1,5 @@
-const PageUtil = require('../../src/util/page')
-const StringUtil = require('../../src/util/string')
+const PageUtil = require('@uiengine/util/lib/page')
+const StringUtil = require('@uiengine/util/lib/string')
 
 export function component (id, attrs = {}) {
   attrs.title = attrs.title || id

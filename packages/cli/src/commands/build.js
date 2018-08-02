@@ -1,4 +1,4 @@
-const UIengine = require('../../uiengine')
+const UIengine = require('@uiengine/core')
 
 exports.describe = 'Build the site'
 

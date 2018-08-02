@@ -1,8 +1,8 @@
 {
-  "name": "@uiengine/core",
-  "description": "Create, document and evolve your design system collaboratively.",
+  "name": "@uiengine/util",
+  "description": "UIengine utilities.",
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "0.22.0",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
@@ -13,19 +13,12 @@
   "engines": {
     "node": ">=8.9.0"
   },
-  "main": "./lib/uiengine.js",
+  "main": "./lib/index.js",
   "files": [
     "lib"
   ],
   "keywords": [
-    "uiengine",
-    "uiengineering",
-    "components",
-    "design-system",
-    "pattern-library",
-    "style-guide",
-    "brand-manual",
-    "static-site"
+    "uiengine"
   ],
   "scripts": {
     "start": "yarn run build -w",
@@ -33,19 +26,12 @@
     "lint": "eslint --ext .js src test"
   },
   "dependencies": {
-    "@uiengine/cli": "^0.22.0",
-    "@uiengine/ui": "^0.22.5",
-    "@uiengine/util": "^0.22.0",
-    "cosmiconfig": "5.0.5",
+    "chalk": "2.4.1",
     "fs-extra": "6.0.1",
-    "globby": "8.0.1",
+    "js-yaml": "3.12.0",
+    "markdown-it": "8.4.1",
+    "markdown-it-anchor": "5.0.2",
+    "markdown-it-include": "1.0.0",
     "ramda": "0.25.0"
-  },
-  "optionalDependencies": {
-    "browser-sync": "2.24.5",
-    "chokidar": "2.0.4"
-  },
-  "devDependencies": {
-    "babel-register": "6.26.0"
   }
 }

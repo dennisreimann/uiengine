@@ -2,9 +2,15 @@ const { dirname, resolve } = require('path')
 const R = require('ramda')
 const assert = require('assert')
 const cosmiconfig = require('cosmiconfig')
-const { markSample } = require('./util/message')
-const { invalidateRequireCache } = require('./util/file')
-const { UiengineInputError } = require('./util/error')
+const {
+  UiengineInputError,
+  FileUtil: {
+    invalidateRequireCache
+  },
+  MessageUtil: {
+    markSample
+  }
+} = require('@uiengine/util')
 
 const readPackageJson = () => {
   let data = {}

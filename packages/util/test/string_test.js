@@ -1,6 +1,6 @@
 const assert = require('assert')
 
-const StringUtil = require('../src/util/string')
+const StringUtil = require('../src/string')
 
 describe('StringUtil', () => {
   describe('#titleize', () => {

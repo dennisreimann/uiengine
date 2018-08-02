@@ -1,6 +1,6 @@
 require('mocha-sinon')()
 
-const { debug, debug2, debug3, debug4, debug5 } = require('../src/util/debug')
+const { debug, debug2, debug3, debug4, debug5 } = require('../src/debug')
 
 const stateWithDebugLevel = debug => ({ config: { debug } })
 const state1 = stateWithDebugLevel(1)
@@ -9,7 +9,7 @@ const state3 = stateWithDebugLevel(3)
 const state4 = stateWithDebugLevel(4)
 const state5 = stateWithDebugLevel(5)
 
-describe('Debug', () => {
+describe('DebugUtil', () => {
   afterEach(function () {
     this.sinon.restore()
   })

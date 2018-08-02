@@ -1,6 +1,6 @@
 const { basename, dirname, join, relative, resolve } = require('path')
 const R = require('ramda')
-const File = require('./file')
+const FileUtil = require('./file')
 const StringUtil = require('./string')
 const { UiengineInputError } = require('./error')
 
@@ -65,7 +65,7 @@ export const pageFilePathToPageId = (pagesPath, pageFilePath) => {
   const dir = dirname(relativePath)
   const file = basename(relativePath)
 
-  if (file === PAGE_FILENAME || File.exists(resolve(pageFilePath, '..', PAGE_FILENAME))) {
+  if (file === PAGE_FILENAME || FileUtil.exists(resolve(pageFilePath, '..', PAGE_FILENAME))) {
     const pageId = isIndexFilePath(dir) ? INDEX_ID : dir.replace('\\', '/')
 
     return pageId

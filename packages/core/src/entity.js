@@ -1,9 +1,11 @@
 const { join, resolve } = require('path')
 const R = require('ramda')
 const glob = require('globby')
-const Yaml = require('./util/yaml')
-const EntityUtil = require('./util/entity')
-const { debug2, debug3 } = require('./util/debug')
+const {
+  EntityUtil,
+  YamlUtil,
+  DebugUtil: { debug2, debug3 }
+} = require('@uiengine/util')
 
 async function findEntityIds (state, entitiesPath = join('**', '*.yml')) {
   const { entities } = state.config.source
@@ -42,7 +44,7 @@ export async function fetchById (state, id) {
 
   const { entities } = state.config.source
   const absolutePath = EntityUtil.entityIdToEntityFilePath(entities, id)
-  const data = await Yaml.fromFile(absolutePath)
+  const data = await YamlUtil.fromFile(absolutePath)
 
   debug3(state, `Entity.fetchById(${id}):end`)
 

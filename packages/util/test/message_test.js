@@ -1,7 +1,7 @@
 require('mocha-sinon')()
 
-const { reportSuccess, reportInfo, reportError } = require('../src/util/message')
-const { UiengineInputError } = require('../src/util/error')
+const { reportSuccess, reportInfo, reportError } = require('../src/message')
+const { UiengineInputError } = require('../src/error')
 
 describe('MessageUtil', () => {
   beforeEach(function () {

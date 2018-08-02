@@ -124,7 +124,7 @@
   dependencies:
     globby "8.0.1"
 
-"@uiengine/adapter-html@file:../../packages/adapter-html":
+"@uiengine/adapter-html@^0.21.0", "@uiengine/adapter-html@file:../../packages/adapter-html":
   version "0.21.0"
 
 "@uiengine/adapter-marko@file:../../packages/adapter-marko":
@@ -147,20 +147,22 @@
     vue-server-renderer "2.5.16"
     vue-template-compiler "2.5.16"
 
-"@uiengine/core@file:../../packages/core":
-  version "1.0.0"
+"@uiengine/cli@^0.22.0", "@uiengine/cli@file:../../packages/cli":
+  version "0.22.0"
   dependencies:
+    fs-extra "6.0.1"
+    ramda "0.25.0"
+    yargs "12.0.1"
+
+"@uiengine/core@^1.0.0", "@uiengine/core@file:../../packages/core":
+  version "1.0.1"
+  dependencies:
+    "@uiengine/cli" "^0.22.0"
     "@uiengine/ui" "^0.22.5"
-    chalk "2.4.1"
     cosmiconfig "5.0.5"
     fs-extra "6.0.1"
     globby "8.0.1"
-    js-yaml "3.12.0"
-    markdown-it "8.4.1"
-    markdown-it-anchor "5.0.2"
-    markdown-it-include "1.0.0"
     ramda "0.25.0"
-    yargs "12.0.1"
   optionalDependencies:
     browser-sync "2.24.5"
     chokidar "2.0.4"
@@ -193,6 +195,16 @@
     vue-meta "1.5.2"
     vue-router "3.0.1"
     vuex "3.0.1"
+
+"@uiengine/util@file:../../packages/util":
+  version "0.22.0"
+  dependencies:
+    chalk "2.4.1"
+    js-yaml "3.12.0"
+    markdown-it "8.4.1"
+    markdown-it-anchor "5.0.2"
+    markdown-it-include "1.0.0"
+    ramda "0.25.0"
 
 "@webassemblyjs/ast@1.5.13":
   version "1.5.13"
@@ -7448,6 +7460,12 @@ uglifyjs-webpack-plugin@^1.2.4:
     uglify-es "^3.3.4"
     webpack-sources "^1.1.0"
     worker-farm "^1.5.2"
+
+"uiengine@file:../../packages/uiengine":
+  version "1.0.0"
+  dependencies:
+    "@uiengine/adapter-html" "^0.21.0"
+    "@uiengine/core" "^1.0.0"
 
 ultron@~1.1.0:
   version "1.1.1"

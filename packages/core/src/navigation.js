@@ -1,7 +1,18 @@
 const R = require('ramda')
-const PageUtil = require('./util/page')
-const StringUtil = require('./util/string')
-const { UiengineInputError } = require('./util/error')
+const {
+  UiengineInputError,
+  StringUtil: {
+    hasContent
+  },
+  PageUtil: {
+    isDocumentationPage,
+    isIndexPage,
+    pageIdForComponentId,
+    pageIdToPath,
+    pagePathForComponentId,
+    parentIdForPageId
+  }
+} = require('@uiengine/util')
 
 const assocNavigation = (navigation, entry) =>
   R.assoc(entry.id, entry, navigation)
@@ -15,7 +26,7 @@ const dataForPageId = (state, id) => {
   const componentIds = page.componentIds || []
   const componentPageIds = R.map(componentId => {
     if (availableComponentIds.includes(componentId)) {
-      return PageUtil.pageIdForComponentId(id, componentId)
+      return pageIdForComponentId(id, componentId)
     } else {
       throw new UiengineInputError([
         `Component "${componentId}" does not exist, but was inserted on page "${id}".`,
@@ -29,8 +40,8 @@ const dataForPageId = (state, id) => {
   const data = R.merge(relations, {
     id: id,
     itemId: id,
-    isStructural: PageUtil.isDocumentationPage(page.type) && !StringUtil.hasContent(page.content),
-    path: PageUtil.isIndexPage(id) ? '/' : `/${page.path}/`,
+    isStructural: isDocumentationPage(page.type) && !hasContent(page.content),
+    path: isIndexPage(id) ? '/' : `/${page.path}/`,
     type: page.type,
     title: page.title,
     keywords: (page.keywords || []).concat(page.tags || [])
@@ -49,8 +60,8 @@ const dataForPageId = (state, id) => {
 const dataForComponentId = (state, parent, id) => {
   const { components, pages } = state
   const component = components[id]
-  const pageId = PageUtil.pageIdForComponentId(parent.id, component.id)
-  const pagePath = PageUtil.pagePathForComponentId(parent.path, component.id)
+  const pageId = pageIdForComponentId(parent.id, component.id)
+  const pagePath = pagePathForComponentId(parent.path, component.id)
   const relations = dataForRelations(pages, pageId, [])
   const variantTags = R.uniq(R.flatten(R.pluck('tags', component.variants)))
   const data = R.merge(relations, {
@@ -71,11 +82,11 @@ const dataForRelations = (pages, id, childIds) => {
   let siblings = []
   const data = {}
   const pageIds = Object.keys(pages)
-  const parentId = PageUtil.parentIdForPageId(pageIds, id)
+  const parentId = parentIdForPageId(pageIds, id)
   const parent = pages[parentId]
 
   if (parent) {
-    const parentPrefix = PageUtil.pageIdToPath(parent.id)
+    const parentPrefix = pageIdToPath(parent.id)
     const parentComponentPageIds = R.map(componentId => `${parentPrefix}/${componentId}`, parent.componentIds || [])
     siblings = (parent.childIds || []).concat(parentComponentPageIds)
   }

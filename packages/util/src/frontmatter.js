@@ -1,6 +1,6 @@
 const R = require('ramda')
-const Yaml = require('./yaml')
-const parsing = require('./parsing')
+const YamlUtil = require('./yaml')
+const ParsingUtil = require('./parsing')
 
 // taken from the fastmatter source code, see
 // https://github.com/yuanqing/fastmatter/blob/master/index.js
@@ -41,7 +41,7 @@ const fastmatter = function (str, filename, sourcePaths) {
   }
 
   return {
-    attributes: attributes.length ? Yaml.parseString(attributes.join(NEWLINE), filename, sourcePaths) : {},
+    attributes: attributes.length ? YamlUtil.parseString(attributes.join(NEWLINE), filename, sourcePaths) : {},
     body: lines.slice(i + 1).join(NEWLINE)
   }
 }
@@ -49,6 +49,6 @@ const fastmatter = function (str, filename, sourcePaths) {
 export const parseString = (string, filename, sourcePaths) =>
   fastmatter(string.trim(), filename, sourcePaths)
 
-export const fromFile = R.partial(parsing.fromFile, [parseString])
+export const fromFile = R.partial(ParsingUtil.fromFile, [parseString])
 
-export const fromString = R.partial(parsing.fromString, [parseString])
+export const fromString = R.partial(ParsingUtil.fromString, [parseString])

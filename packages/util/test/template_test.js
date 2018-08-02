@@ -1,7 +1,7 @@
 const assert = require('assert')
 const { join, resolve } = require('path')
 
-const TemplateUtil = require('../src/util/template')
+const TemplateUtil = require('../src/template')
 const { testProjectPath } = require('../../../test/support/paths')
 const templatesPath = resolve(testProjectPath, 'src', 'templates')
 

@@ -4,7 +4,7 @@ const { readFileSync } = require('fs')
 const { join, resolve } = require('path')
 const assert = require('assert')
 
-const Parsing = require('../src/util/parsing')
+const ParsingUtil = require('../src/parsing')
 
 const filePath = resolve(__dirname, 'fixtures', 'yaml.yml')
 const fileContent = readFileSync(filePath, 'utf8')
@@ -14,7 +14,7 @@ const sourcePaths = {
   data: join(__dirname, 'fixtures')
 }
 
-describe('Parsing', () => {
+describe('ParsingUtil', () => {
   afterEach(function () {
     this.sinon.restore()
   })
@@ -23,7 +23,7 @@ describe('Parsing', () => {
     it('should call the given parse function with the file content', function () {
       const parseFn = this.sinon.stub()
 
-      Parsing.fromFileSync(parseFn, filePath, sourcePaths)
+      ParsingUtil.fromFileSync(parseFn, filePath, sourcePaths)
 
       this.sinon.assert.calledOnce(parseFn)
       this.sinon.assert.calledWith(parseFn, fileContent, filePath, sourcePaths)
@@ -33,7 +33,7 @@ describe('Parsing', () => {
   describe('#fromFile', () => {
     it('should call the given parse function with the file content', async function () {
       const parseFn = this.sinon.stub()
-      await Parsing.fromFile(parseFn, filePath, sourcePaths)
+      await ParsingUtil.fromFile(parseFn, filePath, sourcePaths)
 
       this.sinon.assert.calledOnce(parseFn)
       this.sinon.assert.calledWith(parseFn, fileContent, filePath, sourcePaths)
@@ -43,7 +43,7 @@ describe('Parsing', () => {
   describe('#fromString', () => {
     it('should call the given parse function with the string', async function () {
       const parseFn = this.sinon.stub()
-      await Parsing.fromString(parseFn, '123', sourcePaths)
+      await ParsingUtil.fromString(parseFn, '123', sourcePaths)
 
       this.sinon.assert.calledOnce(parseFn)
       this.sinon.assert.calledWith(parseFn, '123', null, sourcePaths)
@@ -51,7 +51,7 @@ describe('Parsing', () => {
 
     it('should resolve with undefined if the string is empty', async function () {
       const parseFn = this.sinon.stub()
-      const result = await Parsing.fromString(parseFn, '', sourcePaths)
+      const result = await ParsingUtil.fromString(parseFn, '', sourcePaths)
 
       this.sinon.assert.notCalled(parseFn)
       assert.equal(typeof result, 'undefined')

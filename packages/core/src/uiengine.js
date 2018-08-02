@@ -1,8 +1,9 @@
 const { dirname, join, relative } = require('path')
 const Core = require('./core')
-const { debounce } = require('./util/debounce')
-const { debug3 } = require('./util/debug')
-const { reportSuccess, reportInfo, reportError } = require('./util/message')
+const {
+  DebugUtil: { debug3 },
+  MessageUtil: { reportSuccess, reportInfo, reportError }
+} = require('@uiengine/util')
 
 const globPattern = join('**', '*')
 
@@ -63,6 +64,12 @@ const startWatcher = (state, opts, server) => {
     additionalFiles = [watch]
   } else if (Array.isArray(watch)) {
     additionalFiles = watch
+  }
+
+  const timers = {}
+  const debounce = (key, fn, delay = 250) => {
+    clearTimeout(timers[key])
+    timers[key] = setTimeout(fn, delay)
   }
 
   const handleFileChange = (filePath, type) => {

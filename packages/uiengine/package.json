@@ -1,8 +1,8 @@
 {
-  "name": "@uiengine/core",
+  "name": "uiengine",
   "description": "Create, document and evolve your design system collaboratively.",
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
@@ -13,10 +13,6 @@
   "engines": {
     "node": ">=8.9.0"
   },
-  "main": "./lib/uiengine.js",
-  "files": [
-    "lib"
-  ],
   "keywords": [
     "uiengine",
     "uiengineering",
@@ -27,25 +23,8 @@
     "brand-manual",
     "static-site"
   ],
-  "scripts": {
-    "start": "yarn run build -w",
-    "build": "rimraf lib && babel src --out-dir lib",
-    "lint": "eslint --ext .js src test"
-  },
   "dependencies": {
-    "@uiengine/cli": "^0.22.0",
-    "@uiengine/ui": "^0.22.5",
-    "@uiengine/util": "^0.22.0",
-    "cosmiconfig": "5.0.5",
-    "fs-extra": "6.0.1",
-    "globby": "8.0.1",
-    "ramda": "0.25.0"
-  },
-  "optionalDependencies": {
-    "browser-sync": "2.24.5",
-    "chokidar": "2.0.4"
-  },
-  "devDependencies": {
-    "babel-register": "6.26.0"
+    "@uiengine/core": "^1.0.1",
+    "@uiengine/adapter-html": "^0.21.0"
   }
 }

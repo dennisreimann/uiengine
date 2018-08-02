@@ -2,18 +2,20 @@ const { join, relative, resolve } = require('path')
 const R = require('ramda')
 const Interface = require('./interface')
 const Connector = require('./connector')
-const File = require('./util/file')
-const PageUtil = require('./util/page')
-const { dasherize, replaceTemplateComments } = require('./util/string')
-const { markSample } = require('./util/message')
-const { debug2, debug3, debug4 } = require('./util/debug')
-const { UiengineInputError } = require('./util/error')
+const {
+  UiengineInputError,
+  PageUtil,
+  FileUtil: { copy, write },
+  MessageUtil: { markSample },
+  StringUtil: { dasherize, replaceTemplateComments },
+  DebugUtil: { debug2, debug3, debug4 }
+} = require('@uiengine/util')
 
 const copyPageFile = (targetPath, sourcePath, source) => {
   const filePath = relative(sourcePath, source)
   const target = resolve(targetPath, filePath)
 
-  return File.copy(source, target)
+  return copy(source, target)
 }
 
 async function render (state, template, data, identifier) {
@@ -75,7 +77,7 @@ export async function generatePageWithTemplate (state, pageId) {
 
     // write file
     const filePath = resolve(target, '_pages', `${id}.html`)
-    await File.write(filePath, rendered)
+    await write(filePath, rendered)
   }
 
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):end`)
@@ -120,7 +122,7 @@ export async function generatePageWithTokens (state, pageId) {
 
     // write file
     const filePath = resolve(target, '_tokens', `${id}.html`)
-    await File.write(filePath, rendered)
+    await write(filePath, rendered)
   }
 
   debug2(state, `Builder.generatePageWithTokens(${pageId}):end`)
@@ -145,7 +147,7 @@ export async function generateVariant (state, variant) {
 
   // write file
   const filePath = resolve(config.target, '_variants', `${variant.id}.html`)
-  await File.write(filePath, rendered)
+  await write(filePath, rendered)
 
   debug2(state, `Builder.generateVariant(${variant.id}):end`)
 }
@@ -215,7 +217,7 @@ async function generateStateHTML (state) {
   const data = { state }
   const rendered = await Interface.render(state, 'index', data)
   const filePath = resolve(state.config.target, 'index.html')
-  await File.write(filePath, rendered)
+  await write(filePath, rendered)
 
   debug3(state, 'Builder.generateStateHTML():end')
 }
@@ -225,7 +227,7 @@ async function generateStateJSON (state) {
 
   const json = JSON.stringify(state, null, 2)
   const filePath = resolve(state.config.target, '_state.json')
-  await File.write(filePath, json)
+  await write(filePath, json)
 
   debug3(state, 'Builder.generateStateJSON():end')
 }
@@ -262,7 +264,7 @@ async function generateSketch (state) {
 
     // write file
     const filePath = resolve(target, '_sketch.html')
-    await File.write(filePath, rendered)
+    await write(filePath, rendered)
   }
 
   debug2(state, `Builder.generateSketch():end`)

@@ -1,7 +1,7 @@
 const assert = require('assert')
 const { join, resolve } = require('path')
 
-const EntityUtil = require('../src/util/entity')
+const EntityUtil = require('../src/entity')
 const { testProjectPath } = require('../../../test/support/paths')
 const entitiesPath = resolve(testProjectPath, 'src', 'uiengine', 'entities')
 

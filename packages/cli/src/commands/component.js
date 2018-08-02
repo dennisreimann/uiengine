@@ -1,12 +1,20 @@
 const { join, relative } = require('path')
 const R = require('ramda')
-const Core = require('../../core')
-const Connector = require('../../connector')
-const File = require('../../util/file')
-const ComponentUtil = require('../../util/component')
-const VariantUtil = require('../../util/variant')
-const { titleize } = require('../../util/string')
-const { reportSuccess, reportError } = require('../../util/message')
+const Core = require('@uiengine/core/lib/core')
+const Connector = require('@uiengine/core/lib/connector')
+const {
+  ComponentUtil,
+  VariantUtil,
+  FileUtil: {
+    write
+  },
+  StringUtil: {
+    titleize
+  },
+  MessageUtil: {
+    reportSuccess, reportError
+  }
+} = require('@uiengine/util')
 
 const getTemplate = id =>
   require(`../templates/${id}`).template
@@ -47,7 +55,7 @@ exports.handler = argv => {
     const componentTemplate = getTemplate('component')
     const componentData = componentTemplate(componentTitle).trim()
     const componentFilePath = join(componentDir, ComponentUtil.COMPONENT_FILENAME)
-    files[componentFilePath] = File.write(componentFilePath, componentData)
+    files[componentFilePath] = write(componentFilePath, componentData)
 
     const adapterFilesForComponent = R.map(ext => Connector.filesForComponent(state, ext, componentId), adapters)
     const adapterFilesForVariants = []
@@ -66,7 +74,7 @@ exports.handler = argv => {
       // turn component adapter fileinfos into tasks
       R.forEach(({ basename, data }) => {
         const filePath = join(componentDir, basename)
-        files[filePath] = File.write(filePath, data)
+        files[filePath] = write(filePath, data)
       }, fileInfos)
 
       Promise.all(adapterFilesForVariants).then(filesForVariants => {
@@ -76,7 +84,7 @@ exports.handler = argv => {
         R.forEach(({ basename, data }) => {
           const variantId = `${componentId}/${basename}`
           const filePath = VariantUtil.variantIdToVariantFilePath(componentsDir, variantId)
-          files[filePath] = File.write(filePath, data)
+          files[filePath] = write(filePath, data)
         }, fileInfos)
 
         const filePaths = Object.keys(files)
