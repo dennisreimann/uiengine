@@ -1,11 +1,11 @@
-export const template = (name, directories, files) =>
+export const template = (values) =>
   `
 module.exports = {
   // Project config: Defaults to name and version from package.json.
   // Here you can overwrite it and add more custom properties.
   // For a detailed documentation of all the options in here see
   // https://uiengine.uix.space/basics/config/
-  name: '${name}',
+  name: '${values.name}',
 
   // Base directories for the input, your raw source files:
   // - components is the root of the directory containing the components
@@ -14,15 +14,15 @@ module.exports = {
   // - data contains sample data that can be referenced in variants and pages
   // - entities contains the optional entity definitions for the components
   source: {
-    components: '${directories.components}',
-    templates: '${directories.templates}',
-    pages: '${directories.pages}',
-    data: '${directories.data}',
-    entities: '${directories.entities}'
+    components: '${values.source.components}',
+    templates: '${values.source.templates}',
+    pages: '${values.source.pages}',
+    data: '${values.source.data}',
+    entities: '${values.source.entities}'
   },
 
   // Destination paths for the generated output.
-  target: 'dist',
+  target: '${values.target}',
 
   // Adapters are used for templating/rendering. Each adapter is a module that gets required
   // and needs to provide functions for setup and rendering. For details see the adapters docs.
@@ -31,12 +31,12 @@ module.exports = {
   },
 
   // Here you can configure the template that the variant preview gets embeded in.
-  template: '${files.preview}',
+  template: '${values.template}',
 
   ui: {
-    lang: 'en',
-    // hljs: 'atom-one-dark',
-    // customStylesFile: '/path-to-overrides.css',
+    lang: '${values.ui.lang}',
+    // hljs: '${values.ui.lang}',
+    // customStylesFile: '${values.ui.customStylesFile}',
     viewports: {
       Phone: {
         width: 320

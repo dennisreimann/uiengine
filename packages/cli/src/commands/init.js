@@ -1,4 +1,5 @@
 const { basename, join, relative, resolve } = require('path')
+const R = require('ramda')
 const {
   FileUtil: { copy, write },
   MessageUtil: { reportSuccess, reportError },
@@ -20,23 +21,34 @@ exports.builder = argv =>
 
 exports.handler = async argv => {
   const directory = resolve(process.cwd(), argv.dir)
-  const name = titleize(basename(directory))
-  const components = join('src', 'components')
-  const templates = join('src', 'templates')
-  const data = join('src', 'uiengine', 'data')
-  const pages = join('src', 'uiengine', 'pages')
-  const entities = join('src', 'uiengine', 'entities')
-  const preview = 'uiengine.html'
-  const config = 'uiengine.config.js'
   const configTemplate = require('../templates/config').template
   const previewTemplate = require('../templates/preview').template
   const pageTemplate = require('../templates/initial_page').template
-  const previewContent = previewTemplate(name).trim()
-  const configContent = configTemplate(name, { components, pages, templates, data, entities }, { preview }).trim()
-  const indexContent = pageTemplate(name).trim()
-  const previewPath = relative(process.cwd(), join(directory, templates, preview))
-  const configPath = relative(process.cwd(), join(directory, config))
-  const indexPath = relative(process.cwd(), join(directory, pages, PAGE_FILENAME))
+  const defaults = {
+    name: titleize(basename(directory)),
+    source: {
+      components: join('src', 'components'),
+      pages: join('src', 'uiengine', 'pages'),
+      templates: join('src', 'templates'),
+      data: join('src', 'uiengine', 'data'),
+      entities: join('src', 'uiengine', 'entities')
+    },
+    target: 'dist',
+    template: 'uiengine.html',
+    ui: {
+      lang: 'en',
+      hljs: 'atom-one-dark',
+      customStylesFile: '/path-to-overrides.css'
+    }
+  }
+
+  const config = argv.override ? R.mergeDeepRight(defaults, argv.override) : defaults
+  const previewContent = previewTemplate(config.name).trim()
+  const configContent = configTemplate(config).trim()
+  const indexContent = pageTemplate(config.name).trim()
+  const previewPath = relative(process.cwd(), join(directory, config.source.templates, config.template))
+  const indexPath = relative(process.cwd(), join(directory, config.source.pages, PAGE_FILENAME))
+  const configPath = relative(process.cwd(), join(directory, argv.config))
   const createPreviewFile = write(previewPath, previewContent)
   const createConfigFile = write(configPath, configContent)
   const createIndexPage = write(indexPath, indexContent)
@@ -46,14 +58,14 @@ exports.handler = async argv => {
 
     if (argv.demo) {
       const demoPath = resolve(__dirname, '..', '..', 'demo')
-      const copyDemoPages = copy(join(demoPath, 'pages'), join(directory, pages))
-      const copyDemoComponents = copy(join(demoPath, 'components'), join(directory, components))
-      const copyDemoTemplates = copy(join(demoPath, 'templates'), join(directory, templates))
+      const copyDemoPages = copy(join(demoPath, 'pages'), join(directory, config.source.pages))
+      const copyDemoComponents = copy(join(demoPath, 'components'), join(directory, config.source.components))
+      const copyDemoTemplates = copy(join(demoPath, 'templates'), join(directory, config.source.templates))
 
       await Promise.all([copyDemoComponents, copyDemoPages, copyDemoTemplates])
     }
     reportSuccess([
-      `Initialized ${name}!`,
+      `Initialized ${config.name}!`,
       'The following files were created:',
       `- ${configPath} (config file)\n- ${indexPath} (index page)\n- ${previewPath} (preview file)`,
       argv.demo ? '\nIn addition to these we also created some demo components and pages.\nThese use the html adapter to showcase just the very basics.\n' : '',
@@ -62,7 +74,7 @@ exports.handler = async argv => {
       'Enjoy! ✌️'
     ])
   } catch (err) {
-    reportError(`Initializing ${name} failed!`, err)
+    reportError(`Initializing ${config.name} failed!`, err)
     process.exit(1)
   }
 }

@@ -6,6 +6,11 @@ const { assertContentMatches, assertExists, assertMatches } = require('../../../
 const { testTmpPath } = require('../../../test/support/paths')
 const testPath = join(testTmpPath, 'cli-project')
 
+const readConfigFile = configPath => {
+  delete require.cache[require.resolve(configPath)]
+  return require(configPath)
+}
+
 describe('CLI', function () {
   this.timeout(5000)
 
@@ -27,7 +32,7 @@ describe('CLI', function () {
       const configPath = join(testPath, 'uiengine.config.js')
       assertExists(configPath)
 
-      const config = require(configPath)
+      const config = readConfigFile(configPath)
 
       assert.equal(config.name, 'Cli Project')
       assert.equal(config.source.components, 'src/components')
@@ -50,6 +55,20 @@ describe('CLI', function () {
       assertContentMatches(previewPath, '<!-- uiengine:content -->')
       assertContentMatches(previewPath, 'add your custom styles here')
       assertContentMatches(previewPath, 'add your custom scripts here')
+    })
+
+    describe('with override flag', () => {
+      it('should override config parameters', async () => {
+        await runCommand(testPath, 'uiengine init --override.name=OVERRIDE --override.source.pages=uiengine/pages --override.target=./dist/override-target --override.ui.lang=de')
+
+        const configPath = join(testPath, 'uiengine.config.js')
+        const config = readConfigFile(configPath)
+
+        assert.equal(config.name, 'OVERRIDE')
+        assert.equal(config.source.pages, 'uiengine/pages')
+        assert.equal(config.target, './dist/override-target')
+        assert.equal(config.ui.lang, 'de')
+      })
     })
 
     describe('with demo flag', () => {
