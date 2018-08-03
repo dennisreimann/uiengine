@@ -27,13 +27,13 @@ exports.handler = async argv => {
   const defaults = {
     name: titleize(basename(directory)),
     source: {
-      components: join('src', 'components'),
-      pages: join('src', 'uiengine', 'pages'),
-      templates: join('src', 'templates'),
-      data: join('src', 'uiengine', 'data'),
-      entities: join('src', 'uiengine', 'entities')
+      components: './src/components',
+      templates: './src/templates',
+      pages: './src/uiengine/pages',
+      data: './src/uiengine/data',
+      entities: './src/uiengine/entities'
     },
-    target: 'dist',
+    target: './dist',
     template: 'uiengine.html',
     ui: {
       lang: 'en',

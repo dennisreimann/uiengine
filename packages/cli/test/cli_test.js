@@ -35,12 +35,12 @@ describe('CLI', function () {
       const config = readConfigFile(configPath)
 
       assert.equal(config.name, 'Cli Project')
-      assert.equal(config.source.components, 'src/components')
-      assert.equal(config.source.templates, 'src/templates')
-      assert.equal(config.source.pages, 'src/uiengine/pages')
-      assert.equal(config.source.data, 'src/uiengine/data')
-      assert.equal(config.source.entities, 'src/uiengine/entities')
-      assert.equal(config.target, 'dist')
+      assert.equal(config.source.components, './src/components')
+      assert.equal(config.source.templates, './src/templates')
+      assert.equal(config.source.pages, './src/uiengine/pages')
+      assert.equal(config.source.data, './src/uiengine/data')
+      assert.equal(config.source.entities, './src/uiengine/entities')
+      assert.equal(config.target, './dist')
       assert.equal(config.adapters.html, '@uiengine/adapter-html')
       assert.equal(config.template, 'uiengine.html')
 
