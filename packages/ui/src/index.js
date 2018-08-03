@@ -4,7 +4,8 @@ import htmlescape from 'htmlescape'
 import Color from 'color'
 import locales from './locales'
 import { copyFile, readFile } from './file'
-import { highlight, localize, dasherize, titleize } from './util'
+import { highlight, localize } from './util'
+import { dasherize, titleize } from '@uiengine/util/lib/string'
 
 const supportedLocales = ['en', 'de']
 const defaultOpts = {

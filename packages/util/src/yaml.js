@@ -5,6 +5,7 @@ const assert = require('assert')
 const yaml = require('js-yaml')
 const parsing = require('./parsing')
 const Markdown = require('./markdown')
+const { invalidateRequireCache } = require('./file')
 const { markSample } = require('./message')
 const { UiengineInputError } = require('./error')
 
@@ -23,7 +24,7 @@ const fromExternalFile = (embeddingFilePath, sourcePaths, filePath) => {
     return renderMarkdown(string, filePath, sourcePaths)
   } else if (isJS) {
     // invalidate require cache so that changes are reflected
-    delete require.cache[require.resolve(filePath)]
+    invalidateRequireCache(filePath)
     return require(filePath)
   } else {
     return filePath

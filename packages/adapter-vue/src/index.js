@@ -1,14 +1,16 @@
 const Vue = require('vue')
-// const { resolve } = require('path')
 const { readFileSync } = require('fs')
 const { createRenderer } = require('vue-server-renderer')
+const {
+  FileUtil: { invalidateRequireCache }
+} = require('@uiengine/util')
 // const templateCompiler = require('vue-template-compiler')
 // const compiler = require('vue-component-compiler')
 // const defaultsdeep = require('lodash.defaultsdeep')
 
 const requireModule = filePath => {
   // invalidate require cache so we get updates as well
-  delete require.cache[require.resolve(filePath)]
+  invalidateRequireCache(filePath)
 
   let module = require(filePath)
   if (module.default) {

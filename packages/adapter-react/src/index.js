@@ -1,5 +1,9 @@
 const { renderToString } = require('react-dom/server')
-const { extractProperties, invalidateModuleCache, upcaseFirstChar } = require('./util')
+const { extractProperties } = require('./util')
+const {
+  FileUtil: { invalidateRequireCache },
+  StringUtil: { upcaseFirstChar }
+} = require('@uiengine/util')
 
 // hook functions which can be overwritten by custom adapters.
 export function wrapElementBeforeRender (Element, filePath, data) {
@@ -18,7 +22,7 @@ export async function setup (options) {
 }
 
 export async function registerComponentFile (options, filePath) {
-  invalidateModuleCache(filePath)
+  invalidateRequireCache(filePath)
 
   const properties = extractProperties(filePath)
 
@@ -27,7 +31,7 @@ export async function registerComponentFile (options, filePath) {
 
 export async function render (options, filePath, data = {}) {
   try {
-    invalidateModuleCache(filePath)
+    invalidateRequireCache(filePath)
 
     let Element = require(filePath)
     if (Element.default) Element = Element.default

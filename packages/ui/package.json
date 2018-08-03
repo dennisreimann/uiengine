@@ -28,6 +28,7 @@
     "lint": "eslint --ext .js,.vue build src test"
   },
   "dependencies": {
+    "@uiengine/util": "0.22.0",
     "color": "3.0.0",
     "ejs": "2.6.1",
     "fuse.js": "3.2.1",

@@ -8,21 +8,6 @@ export const highlight = (code, lang) => {
   return highlighted
 }
 
-export const upcaseFirstChar = string => {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
-export const dasherize = string => {
-  return String(string).replace(/\W+/gi, '-')
-}
-
-export const titleize = string => {
-  return string
-    .split(/\W+/gi)
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ')
-}
-
 export const localize = (dict, key, interpolations) => {
   const localized = key.split('.').reduce((a, b) => a && a[b], dict)
 

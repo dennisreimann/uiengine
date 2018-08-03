@@ -1,4 +1,4 @@
-import { upcaseFirstChar } from '../../util'
+import { upcaseFirstChar } from '@uiengine/util/lib/string'
 
 const appState = window.UIengine.state
 const ui = appState.config && appState.config.ui

@@ -129,6 +129,8 @@
 
 "@uiengine/adapter-marko@file:../../packages/adapter-marko":
   version "0.22.5"
+  dependencies:
+    "@uiengine/util" "0.22.0"
 
 "@uiengine/adapter-pug@file:../../packages/adapter-pug":
   version "0.22.5"
@@ -136,6 +138,7 @@
 "@uiengine/adapter-react@file:../../packages/adapter-react":
   version "0.22.5"
   dependencies:
+    "@uiengine/util" "0.22.0"
     react-docgen "2.21.0"
   optionalDependencies:
     prop-types "15.6.2"
@@ -143,6 +146,7 @@
 "@uiengine/adapter-vue@file:../../packages/adapter-vue":
   version "0.22.5"
   dependencies:
+    "@uiengine/util" "0.22.0"
     vue-component-compiler "git+https://github.com/znck/vue-component-compiler.git"
     vue-server-renderer "2.5.16"
     vue-template-compiler "2.5.16"
@@ -150,15 +154,17 @@
 "@uiengine/cli@^0.22.0", "@uiengine/cli@file:../../packages/cli":
   version "0.22.0"
   dependencies:
+    "@uiengine/cli" "^0.22.0"
     fs-extra "6.0.1"
     ramda "0.25.0"
     yargs "12.0.1"
 
-"@uiengine/core@^1.0.0", "@uiengine/core@file:../../packages/core":
+"@uiengine/core@^1.0.1", "@uiengine/core@file:../../packages/core":
   version "1.0.1"
   dependencies:
     "@uiengine/cli" "^0.22.0"
     "@uiengine/ui" "^0.22.5"
+    "@uiengine/util" "^0.22.0"
     cosmiconfig "5.0.5"
     fs-extra "6.0.1"
     globby "8.0.1"
@@ -185,6 +191,7 @@
 "@uiengine/ui@file:../../packages/ui":
   version "0.22.5"
   dependencies:
+    "@uiengine/util" "0.22.0"
     color "3.0.0"
     ejs "2.6.1"
     fuse.js "3.2.1"
@@ -196,10 +203,23 @@
     vue-router "3.0.1"
     vuex "3.0.1"
 
+"@uiengine/util@0.22.0", "@uiengine/util@^0.22.0":
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/@uiengine/util/-/util-0.22.0.tgz#0a2f84893da7ca1536afe4f743b14bc5a115dd1e"
+  dependencies:
+    chalk "2.4.1"
+    fs-extra "6.0.1"
+    js-yaml "3.12.0"
+    markdown-it "8.4.1"
+    markdown-it-anchor "5.0.2"
+    markdown-it-include "1.0.0"
+    ramda "0.25.0"
+
 "@uiengine/util@file:../../packages/util":
   version "0.22.0"
   dependencies:
     chalk "2.4.1"
+    fs-extra "6.0.1"
     js-yaml "3.12.0"
     markdown-it "8.4.1"
     markdown-it-anchor "5.0.2"
@@ -7465,7 +7485,7 @@ uglifyjs-webpack-plugin@^1.2.4:
   version "1.0.0"
   dependencies:
     "@uiengine/adapter-html" "^0.21.0"
-    "@uiengine/core" "^1.0.0"
+    "@uiengine/core" "^1.0.1"
 
 ultron@~1.1.0:
   version "1.1.1"

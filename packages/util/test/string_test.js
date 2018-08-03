@@ -3,6 +3,22 @@ const assert = require('assert')
 const StringUtil = require('../src/string')
 
 describe('StringUtil', () => {
+  describe('#upcaseFirstChar', () => {
+    it('should convert the first character of the string to uppercase', () => {
+      assert.equal(StringUtil.upcaseFirstChar('test'), 'Test')
+    })
+
+    it('should not convert other characters to uppercase', () => {
+      assert.equal(StringUtil.upcaseFirstChar('test test test'), 'Test test test')
+    })
+  })
+
+  describe('#dasherize', () => {
+    it('should convert non-word character to dashes', () => {
+      assert.equal(StringUtil.dasherize('this is a test. does/it.work?'), 'this-is-a-test-does-it-work-')
+    })
+  })
+
   describe('#titleize', () => {
     it('should return titleized string', () => {
       assert.equal(StringUtil.titleize('form'), 'Form')

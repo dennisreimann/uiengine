@@ -23,6 +23,7 @@
     "react"
   ],
   "dependencies": {
+    "@uiengine/util": "0.22.0",
     "react-docgen": "2.21.0"
   },
   "devDependencies": {

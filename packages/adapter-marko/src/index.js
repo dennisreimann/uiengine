@@ -1,6 +1,6 @@
-// invalidate require cache so we get template updates as well
-const invalidateModuleCache = (filePath) =>
-  delete require.cache[require.resolve(filePath)]
+const {
+  FileUtil: { invalidateRequireCache }
+} = require('@uiengine/util')
 
 const handleError = (options, err, reject, filePath, data) => {
   const message = [`Marko could not render "${filePath}"!`, err]
@@ -25,13 +25,13 @@ export async function setup (options) {
 }
 
 export async function registerComponentFile (options, filePath) {
-  invalidateModuleCache(filePath)
+  invalidateRequireCache(filePath)
 }
 
 export async function render (options, filePath, data = {}) {
   return new Promise((resolve, reject) => {
     try {
-      invalidateModuleCache(filePath)
+      invalidateRequireCache(filePath)
       const template = require(filePath)
 
       template.renderToString(data, (err, rendered) => {

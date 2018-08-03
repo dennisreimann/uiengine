@@ -5,30 +5,6 @@ const { assertMatches } = require('../../../test/support/asserts')
 const Util = require('../src/util')
 
 describe('Util', () => {
-  describe('#upcaseFirstChar', () => {
-    it('should convert the first character of the string to uppercase', () => {
-      assert.equal(Util.upcaseFirstChar('test'), 'Test')
-    })
-
-    it('should not convert other characters to uppercase', () => {
-      assert.equal(Util.upcaseFirstChar('test test test'), 'Test test test')
-    })
-  })
-
-  describe('#dasherize', () => {
-    it('should convert non-word character to dashes', () => {
-      assert.equal(Util.dasherize('this is a test. does/it.work?'), 'this-is-a-test-does-it-work-')
-    })
-  })
-
-  describe('#titleize', () => {
-    it('should return titleized string', () => {
-      assert.equal(Util.titleize('form'), 'Form')
-      assert.equal(Util.titleize('formfield-with-label'), 'Formfield With Label')
-      assert.equal(Util.titleize('This    is some .   text'), 'This Is Some Text')
-    })
-  })
-
   describe('#decorateContent', () => {
     it('should remove the rendered title from content if it matches the page title', () => {
       const page = {

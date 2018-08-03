@@ -22,6 +22,9 @@
     "uiengine",
     "marko"
   ],
+  "dependencies": {
+    "@uiengine/util": "0.22.0"
+  },
   "devDependencies": {
     "marko": "4.12.0"
   },

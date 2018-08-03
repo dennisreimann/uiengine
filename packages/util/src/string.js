@@ -9,6 +9,9 @@ export const titleize = string =>
 export const dasherize = string =>
   String(string).replace(/\W+/gi, '-')
 
+export const upcaseFirstChar = string =>
+  string.charAt(0).toUpperCase() + string.slice(1)
+
 export const hasContent = content =>
   !!content && content.replace(HEADING_REGEXP, '').trim().length > 0
 

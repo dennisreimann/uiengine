@@ -1,10 +1,8 @@
 const { readFileSync } = require('fs')
 const reactDocs = require('react-docgen')
-
-// invalidate require cache so we get template updates as well
-export const invalidateModuleCache = filePath => delete require.cache[require.resolve(filePath)]
-
-export const upcaseFirstChar = string => string.charAt(0).toUpperCase() + string.slice(1)
+const {
+  StringUtil: { upcaseFirstChar }
+} = require('@uiengine/util')
 
 export const extractPropertyDisplayType = type => {
   if (type) {
