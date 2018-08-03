@@ -62,21 +62,3 @@ export async function render (options, filePath, data = {}) {
     }
   })
 }
-
-export function filesForComponent (componentName) {
-  return [
-    {
-      basename: `${componentName}.html`,
-      data: `<div class="${componentName}">\n  <!-- TODO: implement -->\n</div>\n`
-    }
-  ]
-}
-
-export function filesForVariant (componentName, variantName) {
-  return [
-    {
-      basename: `${variantName}.html`,
-      data: `<!--#include file="../${componentName}.html" -->\n`
-    }
-  ]
-}

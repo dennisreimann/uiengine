@@ -118,9 +118,6 @@ describe('CLI', function () {
       assertMatches(stdout, 'Button created')
       assertMatches(stdout, 'The following files were created:')
       assertMatches(stdout, 'src/components/button/component.md')
-      assertMatches(stdout, 'src/components/button/button.html')
-      assertMatches(stdout, 'src/components/button/variants/default.html')
-      assertMatches(stdout, 'src/components/button/variants/primary.html')
 
       // component file
       const markdownPath = join(testPath, 'src/components/button/component.md')
@@ -148,10 +145,6 @@ describe('CLI', function () {
 
       // sketch file
       assertExists(join(testPath, 'dist/_sketch.html'))
-
-      // variants
-      assertExists(join(testPath, 'dist/_variants/button/default.html.html'))
-      assertExists(join(testPath, 'dist/_variants/button/primary.html.html'))
     })
 
     it('should build the demo', async () => {
