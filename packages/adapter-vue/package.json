@@ -2,7 +2,7 @@
   "name": "@uiengine/adapter-vue",
   "description": "UIengine template adapter for Vue.js",
   "license": "MIT",
-  "version": "0.22.5",
+  "version": "1.0.2",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
@@ -23,7 +23,7 @@
     "vue"
   ],
   "dependencies": {
-    "@uiengine/util": "0.22.0",
+    "@uiengine/util": "^1.0.2",
     "vue-component-compiler": "git+https://github.com/znck/vue-component-compiler.git",
     "vue-server-renderer": "2.5.16",
     "vue-template-compiler": "2.5.16"

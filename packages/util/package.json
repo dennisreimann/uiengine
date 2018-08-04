@@ -2,7 +2,7 @@
   "name": "@uiengine/util",
   "description": "UIengine utilities.",
   "license": "MIT",
-  "version": "0.22.0",
+  "version": "1.0.2",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
