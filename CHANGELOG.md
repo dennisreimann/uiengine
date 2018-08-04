@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.0]
+
+### Added
+
+- Config overrides for CLI (see CLI help/usage for details)
+
+### Changed
+
+- Removed filesFor hooks from html adapter
+  - The html adapter is part of the standard install, but it is unlikely that you would want to generate the files for every new component.
+
+### Fixed
+
+- Windows compatibility
+
 ## [1.0.0] - 2018-07-17
 
 First public stable release. 🎉

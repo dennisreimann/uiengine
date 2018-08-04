@@ -42,7 +42,7 @@
     "test": "cd packages && mocha --require babel-register -R dot */test",
     "test-watch": "yarn test -w --watch-extensions ejs,hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",
     "cover": "nyc yarn test",
-    "release": "yarn run lint && yarn run cover && NODE_ENV=production yarn run build && echo 'Please enter the NPM OTP:' && read npm_otp && NPM_CONFIG_OTP=$npm_otp lerna publish",
+    "release": "yarn run lint && yarn run cover && NODE_ENV=production yarn run build && lerna publish; for pkg in $(ls -1FA packages | grep / | tr -d /); do cd packages/$pkg; npm publish; cd ../..; done",
     "demo": "rimraf test/demo && sleep 1 && uiengine init --dir test/demo --demo && cd test/demo && uiengine build -s -w",
     "docs:deploy": "yarn run docs:deploy_latest && yarn run docs:deploy_version",
     "docs:deploy_latest": "cd docs && uiengine build && cd .. && $npm_package_config_deployment_command --exclude=v/ deploy/ docs/dist/ uiengine@uiengine.uix.space:virtual/uiengine.uix.space",
