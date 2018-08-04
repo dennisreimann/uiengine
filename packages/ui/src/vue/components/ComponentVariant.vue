@@ -112,7 +112,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { dasherize } from '../../util'
+import { dasherize } from '@uiengine/util/lib/string'
 import Preview from '../mixins/preview'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'

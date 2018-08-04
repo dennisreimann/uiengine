@@ -109,7 +109,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { dasherize } from '../../util'
+import { dasherize } from '@uiengine/util/lib/string'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentText from './ContentText'

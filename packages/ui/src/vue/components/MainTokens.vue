@@ -31,7 +31,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { dasherize } from '../../util'
 import Preview from '../mixins/preview'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
@@ -71,10 +70,6 @@ export default {
     previewPath () {
       return this.expandPreviewPath(`_tokens/${this.page.id}.html`)
     }
-  },
-
-  methods: {
-    dasherize
   }
 }
 </script>
