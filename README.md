@@ -33,7 +33,7 @@ To explore the features yourself you can quickly initialize a project with some 
 
 ```bash
 mkdir uiengine-demo && cd uiengine-demo && npm init -y
-npm install --save-dev @uiengine/core @uiengine/adapter-html
+npm install uiengine --save-dev
 npx uiengine init --demo
 npx uiengine build --serve --watch
 ```

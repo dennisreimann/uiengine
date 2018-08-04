@@ -84,9 +84,6 @@
     "webpack-merge": "4.1.2",
     "webpack-stream": "4.0.3"
   },
-  "peerDependencies": {
-    "@uiengine/core": "1.0.1"
-  },
   "browserslist": [
     "last 2 versions"
   ]

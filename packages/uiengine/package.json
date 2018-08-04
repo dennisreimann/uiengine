@@ -13,9 +13,6 @@
   "engines": {
     "node": ">=8.9.0"
   },
-  "bin": {
-    "uiengine": "./bin/uiengine.js"
-  },
   "keywords": [
     "uiengine",
     "uiengineering",
