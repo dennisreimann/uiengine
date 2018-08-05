@@ -9,7 +9,7 @@ const componentsPath = resolve(testProjectPath, 'src', 'components')
 describe('ComponentUtil', () => {
   describe('#componentIdToPath', () => {
     it('should return path for component', () => {
-      assert.equal(ComponentUtil.componentIdToPath('button'), 'components/button')
+      assert.strictEqual(ComponentUtil.componentIdToPath('button'), 'components/button')
     })
   })
 
@@ -17,7 +17,7 @@ describe('ComponentUtil', () => {
     it('should return component file path for component', () => {
       const filePath = ComponentUtil.componentIdToComponentFilePath(componentsPath, 'button')
 
-      assert.equal(filePath, join(componentsPath, 'button', 'component.md'))
+      assert.strictEqual(filePath, join(componentsPath, 'button', 'component.md'))
     })
   })
 
@@ -26,28 +26,28 @@ describe('ComponentUtil', () => {
       const filePath = join(componentsPath, 'button', 'component.md')
       const componentId = ComponentUtil.componentFilePathToComponentId(componentsPath, filePath)
 
-      assert.equal(componentId, 'button')
+      assert.strictEqual(componentId, 'button')
     })
 
     it('should return component id for file path', () => {
       const filePath = join(componentsPath, 'button', 'additional.pdf')
       const componentId = ComponentUtil.componentFilePathToComponentId(componentsPath, filePath)
 
-      assert.equal(componentId, 'button')
+      assert.strictEqual(componentId, 'button')
     })
 
     it('should return component id for variant file path', () => {
       const filePath = join(componentsPath, 'button', 'variants', 'button.pug')
       const componentId = ComponentUtil.componentFilePathToComponentId(componentsPath, filePath)
 
-      assert.equal(componentId, 'button')
+      assert.strictEqual(componentId, 'button')
     })
 
     it('should return null for invalid file path', () => {
       const filePath = join(testProjectPath, 'src', 'uiengine', 'pages', 'page.md')
       const componentId = ComponentUtil.componentFilePathToComponentId(componentsPath, filePath)
 
-      assert.equal(componentId, null)
+      assert.strictEqual(componentId, null)
     })
   })
 
@@ -56,14 +56,14 @@ describe('ComponentUtil', () => {
       const componentPath = join(componentsPath, 'button')
       const componentId = ComponentUtil.componentPathToComponentId(componentsPath, componentPath)
 
-      assert.equal(componentId, 'button')
+      assert.strictEqual(componentId, 'button')
     })
 
     it('should return null for invalid component id', () => {
       const filePath = join(testProjectPath, 'src', 'uiengine', 'pages', 'page.md')
       const componentId = ComponentUtil.componentPathToComponentId(componentsPath, filePath)
 
-      assert.equal(componentId, null)
+      assert.strictEqual(componentId, null)
     })
   })
 })

@@ -14,7 +14,7 @@ describe('Util', () => {
 
       const content = Util.decorateContent(page)
 
-      assert.equal(content, '<p>This is the page content.</p>')
+      assert.strictEqual(content, '<p>This is the page content.</p>')
     })
 
     it('should not remove the rendered title from content if it does not match the page title', () => {
@@ -25,7 +25,7 @@ describe('Util', () => {
 
       const content = Util.decorateContent(page)
 
-      assert.equal(content, '<h1>The page title</h1>\n<p>This is the page content.</p>')
+      assert.strictEqual(content, '<h1>The page title</h1>\n<p>This is the page content.</p>')
     })
   })
 
@@ -53,22 +53,22 @@ describe('Util', () => {
 
   describe('#localize', () => {
     it('should return the localized string', () => {
-      assert.equal(Util.localize({ key: 'Test' }, 'key'), 'Test')
-      assert.equal(Util.localize({ key: { nested: 'Nested Test' } }, 'key.nested'), 'Nested Test')
+      assert.strictEqual(Util.localize({ key: 'Test' }, 'key'), 'Test')
+      assert.strictEqual(Util.localize({ key: { nested: 'Nested Test' } }, 'key.nested'), 'Nested Test')
     })
 
     it('should return the localized string with interpolations', () => {
-      assert.equal(Util.localize({ search: 'Search results for "%{query}"' }, 'search', { query: 'Test' }), 'Search results for "Test"')
-      assert.equal(Util.localize({ search: { query: 'Search results for "%{query}"' } }, 'search.query', { query: 'Nested' }), 'Search results for "Nested"')
+      assert.strictEqual(Util.localize({ search: 'Search results for "%{query}"' }, 'search', { query: 'Test' }), 'Search results for "Test"')
+      assert.strictEqual(Util.localize({ search: { query: 'Search results for "%{query}"' } }, 'search.query', { query: 'Nested' }), 'Search results for "Nested"')
     })
 
     it('should return the key and print a warning if there is no localized string', function () {
       this.sinon.stub(console, 'warn')
 
-      assert.equal(Util.localize({}, 'doesnotexist'), '[doesnotexist]')
+      assert.strictEqual(Util.localize({}, 'doesnotexist'), '[doesnotexist]')
       this.sinon.assert.calledWith(console.warn, '[UIengine]', 'Missing localization for key "doesnotexist"!')
 
-      assert.equal(Util.localize({}, 'doesnotexist.nested'), '[doesnotexist.nested]')
+      assert.strictEqual(Util.localize({}, 'doesnotexist.nested'), '[doesnotexist.nested]')
       this.sinon.assert.calledWith(console.warn, '[UIengine]', 'Missing localization for key "doesnotexist.nested"!')
 
       this.sinon.restore()
@@ -77,7 +77,7 @@ describe('Util', () => {
     it('should return the key and print a warning if there is a missing interpolation', function () {
       this.sinon.stub(console, 'warn')
 
-      assert.equal(Util.localize({ search: 'Search results for "%{query}"' }, 'search', {}), 'Search results for "[query]"')
+      assert.strictEqual(Util.localize({ search: 'Search results for "%{query}"' }, 'search', {}), 'Search results for "[query]"')
       this.sinon.assert.calledWith(console.warn, '[UIengine]', 'Missing interpolation "query" for key "search"!')
 
       this.sinon.restore()

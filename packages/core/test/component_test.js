@@ -27,66 +27,66 @@ describe('Component', () => {
     it('should return component object', async () => {
       const data = await Component.fetchById(state, 'input')
 
-      assert.equal(data.id, 'input')
+      assert.strictEqual(data.id, 'input')
     })
 
     it('should return component object for components without component.md file', async () => {
       const data = await Component.fetchById(state, 'form')
 
-      assert.equal(data.id, 'form')
-      assert.equal(data.title, 'Form')
+      assert.strictEqual(data.id, 'form')
+      assert.strictEqual(data.title, 'Form')
     })
 
     it('should infer variants if they are not provided', async () => {
       const data = await Component.fetchById(state, 'formfield')
 
-      assert.equal(Object.keys(data.variants).length, 2)
-      assert.equal(data.variants[0].id, 'formfield/text-with-label.pug')
-      assert.equal(data.variants[1].id, 'formfield/text-without-label.pug')
+      assert.strictEqual(Object.keys(data.variants).length, 2)
+      assert.strictEqual(data.variants[0].id, 'formfield/text-with-label.pug')
+      assert.strictEqual(data.variants[1].id, 'formfield/text-without-label.pug')
     })
 
     it('should not infer variants if they are explicitely provided by variants attribute', async () => {
       const data = await Component.fetchById(state, 'label')
 
-      assert.equal(Object.keys(data.variants).length, 8)
-      assert.equal(data.variants[0].id, 'label/label.ejs')
-      assert.equal(data.variants[1].id, 'label/label.hbs')
-      assert.equal(data.variants[2].id, 'label/label.html')
-      assert.equal(data.variants[3].id, 'label/label.marko')
-      assert.equal(data.variants[4].id, 'label/label.pug')
-      assert.equal(data.variants[5].id, 'label/label.jsx')
-      assert.equal(data.variants[6].id, 'label/label-vue.js')
-      assert.equal(data.variants[7].id, 'label/label-vue-sfc.vhtml')
+      assert.strictEqual(Object.keys(data.variants).length, 8)
+      assert.strictEqual(data.variants[0].id, 'label/label.ejs')
+      assert.strictEqual(data.variants[1].id, 'label/label.hbs')
+      assert.strictEqual(data.variants[2].id, 'label/label.html')
+      assert.strictEqual(data.variants[3].id, 'label/label.marko')
+      assert.strictEqual(data.variants[4].id, 'label/label.pug')
+      assert.strictEqual(data.variants[5].id, 'label/label.jsx')
+      assert.strictEqual(data.variants[6].id, 'label/label-vue.js')
+      assert.strictEqual(data.variants[7].id, 'label/label-vue-sfc.vhtml')
     })
 
     it('should render content from markdown', async () => {
       const data = await Component.fetchById(state, 'input')
 
-      assert.equal(data.content, '<p>An input field that can be used inside a form.</p>')
+      assert.strictEqual(data.content, '<p>An input field that can be used inside a form.</p>')
     })
 
     it('should return null if components source is not set', async () => {
       const data = await Component.fetchById({ config: { source: { } } }, 'input')
 
-      assert.equal(null, data)
+      assert.strictEqual(null, data)
     })
 
     it('should resolve title from attributes', async () => {
       const data = await Component.fetchById(state, 'input')
 
-      assert.equal('Inputs', data.title)
+      assert.strictEqual('Inputs', data.title)
     })
 
     it('should resolve title from content heading if there is no title in attributes', async () => {
       const data = await Component.fetchById(state, 'formfield')
 
-      assert.equal('Formfields', data.title)
+      assert.strictEqual('Formfields', data.title)
     })
 
     it('should resolve title from component id if there is no title in attributes or content', async () => {
       const data = await Component.fetchById(state, 'label')
 
-      assert.equal('Label', data.title)
+      assert.strictEqual('Label', data.title)
     })
 
     it('should register component files and extract information from them', async () => {
@@ -94,10 +94,10 @@ describe('Component', () => {
       const labelProps = data.properties['<Label>']
 
       assert(labelProps, 'React Label properties are not defined')
-      assert.equal(labelProps.title.type, 'String')
-      assert.equal(labelProps.title.required, true)
-      assert.equal(labelProps.for.type, 'String')
-      assert.equal(labelProps.for.required, true)
+      assert.strictEqual(labelProps.title.type, 'String')
+      assert.strictEqual(labelProps.title.required, true)
+      assert.strictEqual(labelProps.for.type, 'String')
+      assert.strictEqual(labelProps.for.required, true)
     })
   })
 
@@ -106,7 +106,7 @@ describe('Component', () => {
       const data = await Component.fetchAll(state)
       const componentIds = Object.keys(data)
 
-      assert.equal(componentIds.length, 4)
+      assert.strictEqual(componentIds.length, 4)
       assertComponent(componentIds, 'input')
       assertComponent(componentIds, 'label')
       assertComponent(componentIds, 'formfield')
@@ -117,7 +117,7 @@ describe('Component', () => {
       const data = await Component.fetchAll({ config: { source: { } } })
       const componentIds = Object.keys(data)
 
-      assert.equal(componentIds.length, 0)
+      assert.strictEqual(componentIds.length, 0)
     })
   })
 })

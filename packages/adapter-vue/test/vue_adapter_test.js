@@ -16,7 +16,7 @@ describe('Vue adapter', () => {
           const data = { myData: 1 }
           const rendered = await Adapter.render(options, tmplPath, data)
 
-          assert.equal('<p data-server-rendered="true">1</p>', rendered)
+          assert.strictEqual('<p data-server-rendered="true">1</p>', rendered)
         })
       })
 
@@ -27,7 +27,7 @@ describe('Vue adapter', () => {
           const data = { myData: 1 }
           const rendered = await Adapter.render(options, tmplPath, data)
 
-          assert.equal('<p data-server-rendered="true">1</p>', rendered)
+          assert.strictEqual('<p data-server-rendered="true">1</p>', rendered)
         })
       })
     })
@@ -39,7 +39,7 @@ describe('Vue adapter', () => {
         const data = { myData: 1 }
         const rendered = await Adapter.render(options, tmplPath, data)
 
-        assert.equal('<p data-server-rendered="true">1</p>', rendered)
+        assert.strictEqual('<p data-server-rendered="true">1</p>', rendered)
       })
 
       it('should render the globally registered component with the given data', async () => {
@@ -48,7 +48,7 @@ describe('Vue adapter', () => {
         const data = { myData: 1 }
         const rendered = await Adapter.render(options, tmplPath, data)
 
-        assert.equal('<p data-server-rendered="true">1</p>', rendered)
+        assert.strictEqual('<p data-server-rendered="true">1</p>', rendered)
       })
 
       it('should throw error with no exported component', async () => {

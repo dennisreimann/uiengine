@@ -17,12 +17,12 @@ describe('Entity', () => {
     it('should return single entity object', async () => {
       const data = await Entity.fetchById(state, 'Entity')
 
-      assert.equal(data.title.type, 'String')
-      assert.equal(data.title.description, 'Title')
-      assert.equal(data.title.required, true)
-      assert.equal(data.date.type, 'Date')
-      assert.equal(data.date.description, 'Publising date')
-      assert.equal(data.date.required, true)
+      assert.strictEqual(data.title.type, 'String')
+      assert.strictEqual(data.title.description, 'Title')
+      assert.strictEqual(data.title.required, true)
+      assert.strictEqual(data.date.type, 'Date')
+      assert.strictEqual(data.date.description, 'Publising date')
+      assert.strictEqual(data.date.required, true)
     })
   })
 
@@ -30,7 +30,7 @@ describe('Entity', () => {
     it('should return whole entities object', async () => {
       const data = await Entity.fetchAll(state)
 
-      assert.equal(Object.keys(data).length, 2)
+      assert.strictEqual(Object.keys(data).length, 2)
       assert(data['Entity'], 'missing entity for "Entity"')
       assert(data['CustomObject'], 'missing entity for "CustomObject"')
     })
@@ -39,7 +39,7 @@ describe('Entity', () => {
       const data = await Entity.fetchAll({ config: { source: {} } })
       const ids = Object.keys(data)
 
-      assert.equal(ids.length, 0)
+      assert.strictEqual(ids.length, 0)
     })
   })
 })

@@ -9,35 +9,35 @@ const { testTmpPath } = require('../../../test/support/paths')
 describe('FileUtil', () => {
   describe('#exists', () => {
     it('should return true for existing files', () => {
-      assert.equal(true, FileUtil.exists(join(__dirname, 'fixtures/markdown.md')))
+      assert.strictEqual(true, FileUtil.exists(join(__dirname, 'fixtures/markdown.md')))
     })
 
     it('should return false for non-existing files', () => {
-      assert.equal(false, FileUtil.exists(join(__dirname, 'fixtures/does-not-exist.md')))
+      assert.strictEqual(false, FileUtil.exists(join(__dirname, 'fixtures/does-not-exist.md')))
     })
 
     it('should return true for directories', () => {
-      assert.equal(true, FileUtil.exists(join(__dirname, 'fixtures')))
+      assert.strictEqual(true, FileUtil.exists(join(__dirname, 'fixtures')))
     })
   })
 
   describe('#isDirectory', () => {
     it('should return true for directories', () => {
-      assert.equal(true, FileUtil.isDirectory(join(__dirname, 'fixtures')))
+      assert.strictEqual(true, FileUtil.isDirectory(join(__dirname, 'fixtures')))
     })
 
     it('should return false for files', () => {
-      assert.equal(false, FileUtil.isDirectory(join(__dirname, 'fixtures/markdown.md')))
+      assert.strictEqual(false, FileUtil.isDirectory(join(__dirname, 'fixtures/markdown.md')))
     })
   })
 
   describe('#exists', () => {
     it('should return true for existing files', () => {
-      assert.equal(true, FileUtil.exists(join(__dirname, 'fixtures/markdown.md')))
+      assert.strictEqual(true, FileUtil.exists(join(__dirname, 'fixtures/markdown.md')))
     })
 
     it('should return false for non-existing files', () => {
-      assert.equal(false, FileUtil.exists(join(__dirname, 'fixtures/does-not-exist.md')))
+      assert.strictEqual(false, FileUtil.exists(join(__dirname, 'fixtures/does-not-exist.md')))
     })
   })
 
@@ -45,7 +45,7 @@ describe('FileUtil', () => {
     it('should return file extension', () => {
       const ext = FileUtil.extension(join(__dirname, 'fixtures/markdown.md'))
 
-      assert.equal(ext, 'md')
+      assert.strictEqual(ext, 'md')
     })
   })
 
@@ -53,7 +53,7 @@ describe('FileUtil', () => {
     it('should return file content', async () => {
       const data = await FileUtil.read(join(__dirname, 'fixtures/markdown.md'))
 
-      assert.equal(data, '# Homepage\n\nWelcome!')
+      assert.strictEqual(data, '# Homepage\n\nWelcome!')
     })
 
     it('should throw error in case the file does not exist', async () => {
@@ -71,7 +71,7 @@ describe('FileUtil', () => {
       await FileUtil.write(filePath, 'Test')
       const content = readFileSync(filePath, 'utf8')
 
-      assert.equal(content, 'Test')
+      assert.strictEqual(content, 'Test')
       removeSync(filePath)
     })
   })

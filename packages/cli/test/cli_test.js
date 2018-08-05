@@ -34,15 +34,15 @@ describe('CLI', function () {
 
       const config = readConfigFile(configPath)
 
-      assert.equal(config.name, 'Cli Project')
-      assert.equal(config.source.components, './src/components')
-      assert.equal(config.source.templates, './src/templates')
-      assert.equal(config.source.pages, './src/uiengine/pages')
-      assert.equal(config.source.data, './src/uiengine/data')
-      assert.equal(config.source.entities, './src/uiengine/entities')
-      assert.equal(config.target, './dist')
-      assert.equal(config.adapters.html, '@uiengine/adapter-html')
-      assert.equal(config.template, 'uiengine.html')
+      assert.strictEqual(config.name, 'Cli Project')
+      assert.strictEqual(config.source.components, './src/components')
+      assert.strictEqual(config.source.templates, './src/templates')
+      assert.strictEqual(config.source.pages, './src/uiengine/pages')
+      assert.strictEqual(config.source.data, './src/uiengine/data')
+      assert.strictEqual(config.source.entities, './src/uiengine/entities')
+      assert.strictEqual(config.target, './dist')
+      assert.strictEqual(config.adapters.html, '@uiengine/adapter-html')
+      assert.strictEqual(config.template, 'uiengine.html')
 
       // homepage
       const homepagePath = join(testPath, 'src/uiengine/pages/page.md')
@@ -64,10 +64,10 @@ describe('CLI', function () {
         const configPath = join(testPath, 'uiengine.config.js')
         const config = readConfigFile(configPath)
 
-        assert.equal(config.name, 'OVERRIDE')
-        assert.equal(config.source.pages, 'uiengine/pages')
-        assert.equal(config.target, './dist/override-target')
-        assert.equal(config.ui.lang, 'de')
+        assert.strictEqual(config.name, 'OVERRIDE')
+        assert.strictEqual(config.source.pages, 'uiengine/pages')
+        assert.strictEqual(config.target, './dist/override-target')
+        assert.strictEqual(config.ui.lang, 'de')
       })
     })
 

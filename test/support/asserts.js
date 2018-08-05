@@ -27,7 +27,7 @@ export const assertMatches = (content, regexp) => {
 export const assertDoesNotMatch = (content, regexp) => {
   const match = content.match(regexp)
 
-  assert.equal(match, null, `\n\n${content}\n\nmatches\n\n${regexp}`)
+  assert.strictEqual(match, null, `\n\n${content}\n\nmatches\n\n${regexp}`)
 }
 
 export const assertContentMatches = (filePath, regexp) => {
@@ -45,5 +45,5 @@ export const assertContentDoesNotMatch = (filePath, regexp) => {
   const content = readFileSync(filePath, 'utf8')
   const match = content.match(regexp)
 
-  assert.equal(match, null, `Content in file ${filePath} matches\n\n${regexp}\n\n${content}`)
+  assert.strictEqual(match, null, `Content in file ${filePath} matches\n\n${regexp}\n\n${content}`)
 }

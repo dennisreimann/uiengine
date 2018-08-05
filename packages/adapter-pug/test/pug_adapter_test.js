@@ -10,7 +10,7 @@ describe('Pug adapter', () => {
       const data = { myData: 1 }
       const rendered = await Adapter.render({}, templatePath, data)
 
-      assert.equal(rendered, '<p>1</p>')
+      assert.strictEqual(rendered, '<p>1</p>')
     })
 
     it('should throw error if the file does not exist', async () => {
@@ -41,8 +41,8 @@ describe('Pug adapter', () => {
     it('should return the component file', () => {
       const files = Adapter.filesForComponent('button')
 
-      assert.equal(files.length, 1)
-      assert.equal(files[0].basename, 'button.pug')
+      assert.strictEqual(files.length, 1)
+      assert.strictEqual(files[0].basename, 'button.pug')
     })
   })
 
@@ -50,8 +50,8 @@ describe('Pug adapter', () => {
     it('should return the variant file', () => {
       const files = Adapter.filesForVariant('button', 'primary')
 
-      assert.equal(files.length, 1)
-      assert.equal(files[0].basename, 'primary.pug')
+      assert.strictEqual(files.length, 1)
+      assert.strictEqual(files[0].basename, 'primary.pug')
     })
   })
 })

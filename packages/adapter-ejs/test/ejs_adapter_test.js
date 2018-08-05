@@ -11,7 +11,7 @@ describe('EJS adapter', () => {
       const data = { myData: 1 }
       const rendered = await Adapter.render(options, templatePath, data)
 
-      assert.equal(rendered, '<p>1</p>\n')
+      assert.strictEqual(rendered, '<p>1</p>\n')
     })
 
     it('should resolve the includes', async () => {
@@ -52,8 +52,8 @@ describe('EJS adapter', () => {
     it('should return the component file', () => {
       const files = Adapter.filesForComponent('button')
 
-      assert.equal(files.length, 1)
-      assert.equal(files[0].basename, 'button.ejs')
+      assert.strictEqual(files.length, 1)
+      assert.strictEqual(files[0].basename, 'button.ejs')
     })
   })
 
@@ -61,8 +61,8 @@ describe('EJS adapter', () => {
     it('should return the variant file', () => {
       const files = Adapter.filesForVariant('button', 'primary')
 
-      assert.equal(files.length, 1)
-      assert.equal(files[0].basename, 'primary.ejs')
+      assert.strictEqual(files.length, 1)
+      assert.strictEqual(files[0].basename, 'primary.ejs')
     })
   })
 })

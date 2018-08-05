@@ -81,7 +81,7 @@ describe('Connector', () => {
       const noAdapterFilePath = resolve(components, 'form', 'form.foo')
       const result = await Connector.registerComponentFile(state, noAdapterFilePath)
 
-      assert.equal(result, undefined)
+      assert.strictEqual(result, undefined)
     })
   })
 
@@ -103,11 +103,11 @@ describe('Connector', () => {
       const data = { myData: 1 }
       const result = await Connector.render(state, templatePath, data)
 
-      assert.equal(result.rendered, rendered)
-      assert.equal(result.parts.length, 1)
-      assert.equal(result.parts[0].lang, 'html')
-      assert.equal(result.parts[0].title, 'HTML')
-      assert.equal(result.parts[0].content, rendered)
+      assert.strictEqual(result.rendered, rendered)
+      assert.strictEqual(result.parts.length, 1)
+      assert.strictEqual(result.parts[0].lang, 'html')
+      assert.strictEqual(result.parts[0].title, 'HTML')
+      assert.strictEqual(result.parts[0].content, rendered)
     })
 
     it('should return structured object for rendered object', async function () {
@@ -127,7 +127,7 @@ describe('Connector', () => {
       const data = { myData: 1 }
       const result = await Connector.render(state, templatePath, data)
 
-      assert.equal(result, renderResult)
+      assert.strictEqual(result, renderResult)
     })
 
     it('should throw error if the adapter does not implement the render function', async () => {
@@ -159,7 +159,7 @@ describe('Connector', () => {
     it('should return an empty array if the adapter does not implement the filesForComponent function', async () => {
       const result = await Connector.filesForComponent(stateNoop, 'test', 'button')
 
-      assert.equal(result.length, 0)
+      assert.strictEqual(result.length, 0)
     })
   })
 
@@ -175,7 +175,7 @@ describe('Connector', () => {
     it('should return an empty array if the adapter does not implement the filesForVariant function', async () => {
       const result = await Connector.filesForVariant(stateNoop, 'test', 'button', 'primary')
 
-      assert.equal(result.length, 0)
+      assert.strictEqual(result.length, 0)
     })
   })
 })

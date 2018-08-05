@@ -33,12 +33,12 @@ describe('Variant', () => {
         }
       })
 
-      assert.equal(data.id, 'input/text.pug')
-      assert.equal(data.title, 'Text Input')
-      assert.equal(data.description, '<p>This is documentation for the text input.</p>')
-      assert.equal(data.extension, 'pug')
-      assert.equal(data.context.id, 'name')
-      assert.equal(data.context.name, 'person[name]')
+      assert.strictEqual(data.id, 'input/text.pug')
+      assert.strictEqual(data.title, 'Text Input')
+      assert.strictEqual(data.description, '<p>This is documentation for the text input.</p>')
+      assert.strictEqual(data.extension, 'pug')
+      assert.strictEqual(data.context.id, 'name')
+      assert.strictEqual(data.context.name, 'person[name]')
       assertMatches(data.rendered, /<input class="input input--text" id="name" name="person\[name\]" type="text"\/>/g)
       assertMatches(data.raw, /include \/input\/input\.pug/)
       assertMatches(data.raw, /\+input\(id, name\)/)
@@ -47,19 +47,19 @@ describe('Variant', () => {
     it('should infer variant title if it is not provided', async () => {
       const data = await Variant.fetchObject(state, 'form', {}, { file: 'form.pug' })
 
-      assert.equal(data.title, 'Form')
+      assert.strictEqual(data.title, 'Form')
     })
 
     it('should use component context if variant context is not present', async () => {
       const data = await Variant.fetchObject(state, 'label', { number: 3 }, { file: 'label.html' })
 
-      assert.equal(data.context.number, 3)
+      assert.strictEqual(data.context.number, 3)
     })
 
     it('should prefer variant context over component context', async () => {
       const data = await Variant.fetchObject(state, 'label', { number: 3 }, { file: 'label.html', context: { number: 4 } })
 
-      assert.equal(data.context.number, 4)
+      assert.strictEqual(data.context.number, 4)
     })
   })
 
@@ -67,7 +67,7 @@ describe('Variant', () => {
     it('should find variants if list is not provided', async () => {
       const variants = await Variant.fetchObjects(state, 'input')
 
-      assert.equal(variants.length, 6);
+      assert.strictEqual(variants.length, 6);
 
       [ 'input/checkbox.pug',
         'input/number.pug',
@@ -83,7 +83,7 @@ describe('Variant', () => {
     it('should convert variants to objects if list consists of filenames', async () => {
       const variants = await Variant.fetchObjects(state, 'input', {}, ['checkbox.pug', 'text.pug'])
 
-      assert.equal(variants.length, 2);
+      assert.strictEqual(variants.length, 2);
 
       [ 'input/checkbox.pug',
         'input/text.pug'
@@ -98,7 +98,7 @@ describe('Variant', () => {
         { file: 'text.pug' }
       ])
 
-      assert.equal(variants.length, 2);
+      assert.strictEqual(variants.length, 2);
 
       [ 'input/checkbox.pug',
         'input/text.pug'
@@ -110,7 +110,7 @@ describe('Variant', () => {
     it('should return empty list if components source is not set', async () => {
       const variants = await Variant.fetchObjects({ config: { source: { } } })
 
-      assert.equal(variants.length, 0)
+      assert.strictEqual(variants.length, 0)
     })
   })
 })

@@ -54,7 +54,7 @@ describe('ParsingUtil', () => {
       const result = await ParsingUtil.fromString(parseFn, '', sourcePaths)
 
       this.sinon.assert.notCalled(parseFn)
-      assert.equal(typeof result, 'undefined')
+      assert.strictEqual(typeof result, 'undefined')
     })
   })
 })

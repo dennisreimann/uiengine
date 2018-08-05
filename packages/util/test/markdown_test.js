@@ -8,7 +8,7 @@ describe('MarkdownUtil', () => {
     it('should return rendered markdown', async () => {
       const data = await MarkdownUtil.fromFile(join(__dirname, 'fixtures/markdown.md'))
 
-      assert.equal(data, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
+      assert.strictEqual(data, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
     })
   })
 
@@ -16,7 +16,7 @@ describe('MarkdownUtil', () => {
     it('should return rendered markdown', async () => {
       const data = await MarkdownUtil.fromString('# Homepage\n\nWelcome!')
 
-      assert.equal(data, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
+      assert.strictEqual(data, '<h1 id="homepage">Homepage</h1>\n<p>Welcome!</p>')
     })
   })
 })
