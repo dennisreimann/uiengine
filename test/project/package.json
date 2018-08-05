@@ -25,13 +25,13 @@
   "dependencies": {
     "ejs": "2.6.1",
     "handlebars": "4.0.11",
-    "marko": "4.12.0",
+    "marko": "4.12.4",
     "prop-types": "15.6.2",
     "pug": "2.0.3",
-    "react": "16.4.1",
-    "react-dom": "16.4.1",
-    "vue": "2.5.16",
-    "vue-server-renderer": "2.5.16"
+    "react": "16.4.2",
+    "react-dom": "16.4.2",
+    "vue": "2.5.17",
+    "vue-server-renderer": "2.5.17"
   },
   "devDependencies": {
     "@uiengine/adapter-ejs": "file:../../packages/adapter-ejs",
@@ -53,25 +53,25 @@
     "babel-preset-stage-2": "6.24.1",
     "babel-preset-vue": "2.0.2",
     "babel-register": "6.26.0",
-    "browser-sync": "2.24.5",
+    "browser-sync": "2.24.6",
     "connect-history-api-fallback": "1.5.0",
     "cross-env": "5.2.0",
     "css-loader": "1.0.0",
     "eslint": "4.19.1",
     "eslint-config-standard": "11.0.0",
     "eslint-plugin-import": "2.13.0",
-    "eslint-plugin-node": "6.0.1",
+    "eslint-plugin-node": "7.0.1",
     "eslint-plugin-promise": "3.8.0",
     "eslint-plugin-standard": "3.1.0",
     "gulp": "3.9.1",
-    "html-sketchapp-cli": "0.6.0",
+    "html-sketchapp-cli": "0.6.1",
     "theo": "7.0.1",
     "uiengine": "file:../../packages/uiengine",
     "vue-loader": "14.2.2",
-    "vue-template-compiler": "2.5.16",
-    "webpack": "4.16.0",
-    "webpack-merge": "4.1.3",
+    "vue-template-compiler": "2.5.17",
+    "webpack": "4.16.4",
+    "webpack-merge": "4.1.4",
     "webpack-node-externals": "1.7.2",
-    "webpack-stream": "4.0.3"
+    "webpack-stream": "5.1.0"
   }
 }
