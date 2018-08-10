@@ -132,7 +132,7 @@ export async function generateIncrementForFileChange (filePath, action = 'change
 
     case 'entity':
       fn = isDeleted ? removeEntity : regenerateEntity
-      await regenerateEntity(change.item)
+      await fn(change.item)
       break
 
     case 'component':
