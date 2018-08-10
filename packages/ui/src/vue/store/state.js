@@ -5,6 +5,9 @@ const transformState = uiengineState => {
 
   if (Object.keys(entities).length === 0 && navigation) {
     delete navigation.entities
+
+    const entitiesIndex = navigation.index.childIds.indexOf('entities')
+    navigation.index.childIds.splice(entitiesIndex, 1)
   }
 
   return uiengineState
