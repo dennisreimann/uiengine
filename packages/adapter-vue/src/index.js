@@ -23,7 +23,7 @@ const requireModule = filePath => {
 const kebabcase = string => string.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 const dataToProps = data => Object.keys(data).map(name => `:${kebabcase(name)}="$data.${name}"`).join(' ')
 
-// export async function registerComponentFile (options, filePath) {
+// async function registerComponentFile (options, filePath) {
 //   return new Promise((resolve, reject) => {
 //     invalidateModuleCache(filePath)
 //     resolve()
@@ -132,11 +132,15 @@ async function renderVm (options, filePath, data, vm) {
   })
 }
 
-export async function render (options, filePath, data = {}) {
+async function render (options, filePath, data = {}) {
   const isJS = filePath.endsWith('.js')
   const isVue = filePath.endsWith('.vue')
   const renderFn = isJS ? renderJS : (isVue ? renderVue : renderHTML)
   const rendered = await renderFn(options, filePath, data)
 
   return rendered
+}
+
+module.exports = {
+  render
 }

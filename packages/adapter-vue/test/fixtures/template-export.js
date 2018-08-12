@@ -1,6 +1,6 @@
 import props from './props'
 
-export default {
+module.exports = {
   name: 'TestTemplate',
 
   props,

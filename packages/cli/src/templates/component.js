@@ -1,4 +1,4 @@
-export const template = title =>
+const template = title =>
   `
 ---
 title: ${title}
@@ -16,3 +16,7 @@ Examples and scenarios; maybe an explanation when not to use it.
 
 Explain UX concerns or technical details.
 `
+
+module.exports = {
+  template
+}

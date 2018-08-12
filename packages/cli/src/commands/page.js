@@ -1,6 +1,6 @@
 const { relative } = require('path')
 const R = require('ramda')
-const Core = require('@uiengine/core/lib/core')
+const Core = require('@uiengine/core/src/core')
 const {
   FileUtil: { write },
   MessageUtil: { reportSuccess, reportError },

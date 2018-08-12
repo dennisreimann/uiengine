@@ -1,11 +1,13 @@
-import { join, resolve } from 'path'
-import { compile } from 'ejs'
-import htmlescape from 'htmlescape'
-import Color from 'color'
-import locales from './locales'
-import { highlight, localize } from './util'
-import { read, copy } from '@uiengine/util/lib/file'
-import { dasherize, titleize } from '@uiengine/util/lib/string'
+const { join, resolve } = require('path')
+const { compile } = require('ejs')
+const htmlescape = require('htmlescape')
+const Color = require('color')
+const locales = require('./locales')
+const { highlight, localize } = require('./util')
+const {
+  FileUtil: { read, copy },
+  StringUtil: { dasherize, titleize }
+} = require('@uiengine/util')
 
 const supportedLocales = ['en', 'de']
 const defaultOpts = {
@@ -55,7 +57,7 @@ async function compileTemplate (name) {
   templates[name] = compile(templateString)
 }
 
-export async function setup (options) {
+async function setup (options) {
   // configure markdown renderer
   const { markdownIt, target } = options
   markdownIt.set({ highlight })
@@ -76,7 +78,7 @@ export async function setup (options) {
   }
 }
 
-export async function render (options, template = 'index', data = null) {
+async function render (options, template = 'index', data = null) {
   // sanitize and prepare options
   if (!supportedLocales.includes(options.lang)) delete options.lang
   const opts = Object.assign({}, defaultOpts, options)
@@ -101,4 +103,9 @@ export async function render (options, template = 'index', data = null) {
 
     throw error
   }
+}
+
+module.exports = {
+  setup,
+  render
 }

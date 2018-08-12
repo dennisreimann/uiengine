@@ -15,7 +15,7 @@ const handleError = (options, err, reject, filePath, raw, data) => {
   reject(error)
 }
 
-export async function setup (options) {
+async function setup (options) {
   const { components, ext } = options
 
   if (!components) return
@@ -32,7 +32,7 @@ export async function setup (options) {
   await Promise.all(registers)
 }
 
-export async function registerComponentFile (options, filePath) {
+async function registerComponentFile (options, filePath) {
   return new Promise((resolve, reject) => {
     readFile(filePath, 'utf8', (err, raw) => {
       if (err) {
@@ -49,7 +49,7 @@ export async function registerComponentFile (options, filePath) {
   })
 }
 
-export async function render (options, filePath, data = {}) {
+async function render (options, filePath, data = {}) {
   return new Promise((resolve, reject) => {
     readFile(filePath, 'utf8', (err, raw) => {
       if (err) {
@@ -66,4 +66,10 @@ export async function render (options, filePath, data = {}) {
       }
     })
   })
+}
+
+module.exports = {
+  setup,
+  render,
+  registerComponentFile
 }

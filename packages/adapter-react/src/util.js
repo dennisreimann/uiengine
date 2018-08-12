@@ -4,7 +4,7 @@ const {
   StringUtil: { upcaseFirstChar }
 } = require('@uiengine/util')
 
-export const extractPropertyDisplayType = type => {
+const extractPropertyDisplayType = type => {
   if (type) {
     if (type.value) {
       if (type.value instanceof Array) {
@@ -36,7 +36,7 @@ export const extractPropertyDisplayType = type => {
   }
 }
 
-export const extractProperties = filePath => {
+const extractProperties = filePath => {
   const source = readFileSync(filePath)
   const resolver = reactDocs.resolver.findAllExportedComponentDefinitions
   let reactDefinitions
@@ -70,4 +70,9 @@ export const extractProperties = filePath => {
   }, {})
 
   return uieProperties
+}
+
+module.exports = {
+  extractPropertyDisplayType,
+  extractProperties
 }

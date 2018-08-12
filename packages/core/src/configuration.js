@@ -49,7 +49,7 @@ const resolvePackage = (basedir, config, type) => {
   }
 }
 
-export async function read (flags = {}) {
+async function read (flags = {}) {
   // do not cache and clesar require cache, because of incremental builds
   const explorer = cosmiconfig('uiengine', { cache: false, rcExtensions: true })
   const configPath = resolvePath(process.cwd(), flags.config || 'uiengine.config.js')
@@ -102,4 +102,8 @@ const _read = (configFilePath, projectConfig, flags) => {
   data = R.assoc('adapters', adapters, data)
 
   return data
+}
+
+module.exports = {
+  read
 }

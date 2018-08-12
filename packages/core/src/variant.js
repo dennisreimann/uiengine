@@ -16,7 +16,7 @@ const mapIndexed = R.addIndex(R.map)
 const convertUserProvidedVariants = list =>
   R.map(item => typeof item === 'string' ? { file: item } : item, list)
 
-export async function findVariants (state, componentId) {
+async function findVariants (state, componentId) {
   const { components } = state.config.source
   if (!components) return []
 
@@ -28,7 +28,7 @@ export async function findVariants (state, componentId) {
   return variants
 }
 
-export async function fetchObjects (state, componentId, context, variants) {
+async function fetchObjects (state, componentId, context, variants) {
   debug2(state, `Variant.fetchObjects(${componentId}):start`)
 
   // variants might be populated from the component attributes.
@@ -49,7 +49,7 @@ export async function fetchObjects (state, componentId, context, variants) {
   return list
 }
 
-export async function fetchObject (state, componentId, componentContext, data, index) {
+async function fetchObject (state, componentId, componentContext, data, index) {
   const { file } = data
 
   const id = `${componentId}/${file}-${index + 1}`
@@ -82,4 +82,10 @@ export async function fetchObject (state, componentId, componentContext, data, i
   debug3(state, `Variant.fetchObject(${id}):end`)
 
   return variant
+}
+
+module.exports = {
+  fetchObjects,
+  fetchObject,
+  findVariants
 }

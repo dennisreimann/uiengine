@@ -2,4 +2,4 @@
 
 const { resolve } = require('path')
 
-require(resolve(__dirname, '..', 'lib'))
+require(resolve(__dirname, '..', 'src'))

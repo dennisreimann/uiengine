@@ -1,6 +1,6 @@
 const pug = require('pug')
 
-export async function render (options, filePath, data = {}) {
+async function render (options, filePath, data = {}) {
   const context = Object.assign({}, options, data)
 
   try {
@@ -18,7 +18,7 @@ export async function render (options, filePath, data = {}) {
   }
 }
 
-export const filesForComponent = (componentName) =>
+const filesForComponent = (componentName) =>
   [
     {
       basename: `${componentName}.pug`,
@@ -26,10 +26,16 @@ export const filesForComponent = (componentName) =>
     }
   ]
 
-export const filesForVariant = (componentName, variantName) =>
+const filesForVariant = (componentName, variantName) =>
   [
     {
       basename: `${variantName}.pug`,
       data: `include ../${componentName}.pug\n\n+${componentName}()\n`
     }
   ]
+
+module.exports = {
+  filesForComponent,
+  filesForVariant,
+  render
+}

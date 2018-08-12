@@ -13,9 +13,9 @@
   "engines": {
     "node": ">=8.9.0"
   },
-  "main": "./lib/uiengine.js",
+  "main": "./src/uiengine.js",
   "files": [
-    "lib"
+    "src"
   ],
   "keywords": [
     "uiengine",
@@ -28,8 +28,6 @@
     "static-site"
   ],
   "scripts": {
-    "start": "yarn run build -w",
-    "build": "rimraf lib && babel src --out-dir lib",
     "lint": "eslint --ext .js src test"
   },
   "dependencies": {
@@ -44,8 +42,5 @@
   "optionalDependencies": {
     "browser-sync": "2.24.6",
     "chokidar": "2.0.4"
-  },
-  "devDependencies": {
-    "babel-register": "6.26.0"
   }
 }

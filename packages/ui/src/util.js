@@ -1,6 +1,6 @@
-import highlightjs from 'highlight.js'
+const highlightjs = require('highlight.js')
 
-export const highlight = (code, lang) => {
+const highlight = (code, lang) => {
   const languages = (lang != null) ? [lang] : undefined
   const { value, language } = highlightjs.highlightAuto(code, languages)
   const highlighted = `<pre class="hljs" lang="${lang || language}"><code>${value}</code></pre>`
@@ -8,7 +8,7 @@ export const highlight = (code, lang) => {
   return highlighted
 }
 
-export const localize = (dict, key, interpolations) => {
+const localize = (dict, key, interpolations) => {
   const localized = key.split('.').reduce((a, b) => a && a[b], dict)
 
   if (localized && interpolations) {
@@ -31,17 +31,25 @@ export const localize = (dict, key, interpolations) => {
 }
 
 // replace headings which resemble the component/page title
-export const decorateContent = pageOrComponent => {
+const decorateContent = pageOrComponent => {
   const { content, title } = pageOrComponent
   const regexp = new RegExp(`^<h1.*?>${title}</h1>`)
 
   return content.replace(regexp, '').trim()
 }
 
-export const decorateCode = (code, lang) => {
+const decorateCode = (code, lang) => {
   return highlight(code, lang)
 }
 
-export const decorateContext = json => {
+const decorateContext = json => {
   return highlight(JSON.stringify(json, null, 2), 'json')
+}
+
+module.exports = {
+  decorateCode,
+  decorateContent,
+  decorateContext,
+  highlight,
+  localize
 }

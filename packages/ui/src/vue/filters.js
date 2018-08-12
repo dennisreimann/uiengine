@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import store from './store'
-import { dasherize, titleize, upcaseFirstChar } from '@uiengine/util/lib/string'
+import { dasherize, titleize, upcaseFirstChar } from '@uiengine/util/src/string'
 import { localize } from '../util'
 
 Vue.filter('dasherize', dasherize)

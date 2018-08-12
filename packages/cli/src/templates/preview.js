@@ -1,4 +1,4 @@
-export const template = title =>
+const template = title =>
   `
 <!DOCTYPE html>
 <html class="<!-- uiengine:class -->">
@@ -19,3 +19,7 @@ export const template = title =>
   </body>
 </html>
 `
+
+module.exports = {
+  template
+}

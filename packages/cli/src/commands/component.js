@@ -1,7 +1,7 @@
 const { join, relative } = require('path')
 const R = require('ramda')
-const Core = require('@uiengine/core/lib/core')
-const Connector = require('@uiengine/core/lib/connector')
+const Core = require('@uiengine/core/src/core')
+const Connector = require('@uiengine/core/src/connector')
 const {
   ComponentUtil: { COMPONENT_FILENAME },
   VariantUtil: { variantIdToFilePath },

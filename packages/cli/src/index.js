@@ -1,6 +1,6 @@
 const { join } = require('path')
 
-export default require('yargs')
+module.exports = require('yargs')
   // config
   .global('config')
   .string('config')

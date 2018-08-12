@@ -1,6 +1,6 @@
 const { renderFile } = require('ejs')
 
-export async function render (options, filePath, data = {}) {
+async function render (options, filePath, data = {}) {
   return new Promise((resolve, reject) => {
     renderFile(filePath, data, options, (err, rendered) => {
       if (err) {
@@ -20,7 +20,7 @@ export async function render (options, filePath, data = {}) {
   })
 }
 
-export function filesForComponent (componentName) {
+function filesForComponent (componentName) {
   return [
     {
       basename: `${componentName}.ejs`,
@@ -29,11 +29,17 @@ export function filesForComponent (componentName) {
   ]
 }
 
-export function filesForVariant (componentName, variantName) {
+function filesForVariant (componentName, variantName) {
   return [
     {
       basename: `${variantName}.ejs`,
       data: `<%- include ../${componentName} -%>\n`
     }
   ]
+}
+
+module.exports = {
+  render,
+  filesForComponent,
+  filesForVariant
 }

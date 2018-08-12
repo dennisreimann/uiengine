@@ -13,8 +13,16 @@ const _debug = (level, state, label, ...additional) => {
   }
 }
 
-export const debug = (...args) => _debug(1, ...args)
-export const debug2 = (...args) => _debug(2, ...args)
-export const debug3 = (...args) => _debug(3, ...args)
-export const debug4 = (...args) => _debug(4, ...args)
-export const debug5 = (...args) => _debug(5, ...args)
+const debug = (...args) => _debug(1, ...args)
+const debug2 = (...args) => _debug(2, ...args)
+const debug3 = (...args) => _debug(3, ...args)
+const debug4 = (...args) => _debug(4, ...args)
+const debug5 = (...args) => _debug(5, ...args)
+
+module.exports = {
+  debug,
+  debug2,
+  debug3,
+  debug4,
+  debug5
+}

@@ -1,4 +1,8 @@
-export const template = title =>
+const template = title =>
   `
 # ${title}
 `
+
+module.exports = {
+  template
+}

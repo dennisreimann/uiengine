@@ -2,7 +2,7 @@ const { resolve } = require('path')
 const { testProjectPath } = require('../../../../test/support/paths')
 const componentsPath = resolve(testProjectPath, 'src', 'components')
 
-export const adapters = {
+const adapters = {
   pug: {
     module: '@uiengine/adapter-pug',
     options: {
@@ -40,4 +40,8 @@ export const adapters = {
     module: '@uiengine/adapter-marko',
     options: {}
   }
+}
+
+module.exports = {
+  adapters
 }

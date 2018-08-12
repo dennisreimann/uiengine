@@ -1,5 +1,10 @@
-export async function setup (options) {
+async function setup (options) {
 }
 
-export async function render (options, state) {
+async function render (options, state) {
+}
+
+module.exports = {
+  setup,
+  render
 }

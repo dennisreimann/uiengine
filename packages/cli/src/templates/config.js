@@ -1,4 +1,4 @@
-export const template = (values) =>
+const template = (values) =>
   `
 module.exports = {
   // Project config: Defaults to name and version from package.json.
@@ -58,3 +58,7 @@ module.exports = {
   }
 }
 `
+
+module.exports = {
+  template
+}

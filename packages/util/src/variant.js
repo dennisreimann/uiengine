@@ -1,20 +1,20 @@
 const { basename, dirname, extname, join, relative, sep } = require('path')
 const StringUtil = require('./string')
 
-export const VARIANTS_DIRNAME = 'variants'
+const VARIANTS_DIRNAME = 'variants'
 
-export const componentIdToVariantsPath = (componentsPath, componentId) =>
+const componentIdToVariantsPath = (componentsPath, componentId) =>
   join(componentsPath, componentId, VARIANTS_DIRNAME)
 
-export const variantIdToComponentId = id =>
+const variantIdToComponentId = id =>
   dirname(id).split(sep)[0]
 
-export const variantIdToTitle = id => {
+const variantIdToTitle = id => {
   const base = basename(id, extname(id))
   return StringUtil.titleize(base)
 }
 
-export const variantFilePathToComponentId = (componentsPath, variantFilePath) => {
+const variantFilePathToComponentId = (componentsPath, variantFilePath) => {
   const relativePath = relative(componentsPath, variantFilePath)
 
   return relativePath.match(`/${VARIANTS_DIRNAME}/`)
@@ -22,7 +22,7 @@ export const variantFilePathToComponentId = (componentsPath, variantFilePath) =>
     : null
 }
 
-export const variantIdToFilePath = (componentsPath, id) => {
+const variantIdToFilePath = (componentsPath, id) => {
   const componentId = variantIdToComponentId(id)
   const variantsPath = componentIdToVariantsPath(componentsPath, componentId)
   const variantFileName = basename(id).replace(/(-\d+)$/, '')
@@ -31,7 +31,7 @@ export const variantIdToFilePath = (componentsPath, id) => {
   return variantFile
 }
 
-export const variantFilePathToIdPrefix = (componentsPath, variantFilePath) => {
+const variantFilePathToIdPrefix = (componentsPath, variantFilePath) => {
   const componentId = variantFilePathToComponentId(componentsPath, variantFilePath)
 
   if (componentId) {
@@ -44,4 +44,14 @@ export const variantFilePathToIdPrefix = (componentsPath, variantFilePath) => {
   } else {
     return null
   }
+}
+
+module.exports = {
+  VARIANTS_DIRNAME,
+  componentIdToVariantsPath,
+  variantIdToComponentId,
+  variantIdToTitle,
+  variantFilePathToComponentId,
+  variantIdToFilePath,
+  variantFilePathToIdPrefix
 }

@@ -1,13 +1,13 @@
 const { readFile, readFileSync } = require('fs')
 
-export function fromFileSync (parseString, filePath, sourcePaths) {
+function fromFileSync (parseString, filePath, sourcePaths) {
   const string = readFileSync(filePath, 'utf8')
   const parsed = parseString(string, filePath, sourcePaths)
 
   return parsed
 }
 
-export async function fromFile (parseString, filePath, sourcePaths) {
+async function fromFile (parseString, filePath, sourcePaths) {
   return new Promise((resolve, reject) => {
     readFile(filePath, 'utf8', (err, string) => {
       if (err) {
@@ -25,7 +25,7 @@ export async function fromFile (parseString, filePath, sourcePaths) {
   })
 }
 
-export async function fromString (parseString, string, sourcePaths) {
+async function fromString (parseString, string, sourcePaths) {
   return new Promise((resolve, reject) => {
     if (string.length === 0) {
       resolve(undefined)
@@ -41,7 +41,7 @@ export async function fromString (parseString, string, sourcePaths) {
   })
 }
 
-export default {
+module.exports = {
   fromFileSync,
   fromFile,
   fromString

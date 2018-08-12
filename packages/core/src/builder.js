@@ -41,7 +41,7 @@ async function render (state, template, data, identifier) {
   return rendered
 }
 
-export async function generatePageFiles (state, pageId) {
+async function generatePageFiles (state, pageId) {
   debug4(state, `Builder.generatePageFiles(${pageId}):start`)
 
   const { pages, config } = state
@@ -61,7 +61,7 @@ export async function generatePageFiles (state, pageId) {
   debug4(state, `Builder.generatePageFiles(${pageId}):start`)
 }
 
-export async function generatePageWithTemplate (state, pageId) {
+async function generatePageWithTemplate (state, pageId) {
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):start`)
 
   const { pages, config: { target } } = state
@@ -85,7 +85,7 @@ export async function generatePageWithTemplate (state, pageId) {
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):end`)
 }
 
-export async function generatePagesWithTemplate (state, template) {
+async function generatePagesWithTemplate (state, template) {
   debug3(state, `Builder.generatePagesWithTemplate(${template}):start`)
 
   const affectedPages = R.filter(page => page.template === template, state.pages)
@@ -98,7 +98,7 @@ export async function generatePagesWithTemplate (state, template) {
   debug3(state, `Builder.generatePagesWithTemplate(${template}):end`)
 }
 
-export async function generatePageWithTokens (state, pageId) {
+async function generatePageWithTokens (state, pageId) {
   debug2(state, `Builder.generatePageWithTokens(${pageId}):start`)
 
   const { pages, config } = state
@@ -130,7 +130,7 @@ export async function generatePageWithTokens (state, pageId) {
   debug2(state, `Builder.generatePageWithTokens(${pageId}):end`)
 }
 
-export async function generateVariant (state, variant) {
+async function generateVariant (state, variant) {
   debug2(state, `Builder.generateVariant(${variant.id}):start`)
 
   const { config, components } = state
@@ -154,7 +154,7 @@ export async function generateVariant (state, variant) {
   debug2(state, `Builder.generateVariant(${variant.id}):end`)
 }
 
-export async function generateComponentVariants (state, componentId) {
+async function generateComponentVariants (state, componentId) {
   debug3(state, `Builder.generateComponentVariants(${componentId}):start`)
 
   const component = state.components[componentId]
@@ -166,7 +166,7 @@ export async function generateComponentVariants (state, componentId) {
   debug3(state, `Builder.generateComponentVariants(${componentId}):end`)
 }
 
-export async function generateVariantsWithTemplate (state, template) {
+async function generateVariantsWithTemplate (state, template) {
   debug3(state, `Builder.generateVariantsWithTemplate(${template}):start`)
 
   const components = Object.values(state.components)
@@ -189,7 +189,7 @@ export async function generateVariantsWithTemplate (state, template) {
   debug3(state, `Builder.generateVariantsWithTemplate(${template}):end`)
 }
 
-export async function generateTokensWithTemplate (state, template) {
+async function generateTokensWithTemplate (state, template) {
   debug3(state, `Builder.generateTokensWithTemplate(${template}):start`)
 
   const isPreviewTemplate = template === state.config.template
@@ -246,7 +246,7 @@ async function generateState (state) {
 
 // generateIncrement is a better name for the public function,
 // whereas generateState describes it better internally
-export const generateIncrement = generateState
+const generateIncrement = generateState
 
 async function generateSketch (state) {
   debug2(state, `Builder.generateSketch():start`)
@@ -272,7 +272,7 @@ async function generateSketch (state) {
   debug2(state, `Builder.generateSketch():end`)
 }
 
-export async function generate (state) {
+async function generate (state) {
   debug2(state, 'Builder.generate():start')
 
   const pageIds = Object.keys(state.pages)
@@ -302,4 +302,17 @@ export async function generate (state) {
   ])
 
   debug2(state, 'Builder.generate():end')
+}
+
+module.exports = {
+  generate,
+  generateIncrement,
+  generateComponentVariants,
+  generatePageFiles,
+  generatePageWithTemplate,
+  generatePagesWithTemplate,
+  generatePageWithTokens,
+  generateVariant,
+  generateVariantsWithTemplate,
+  generateTokensWithTemplate
 }

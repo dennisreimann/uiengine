@@ -6,22 +6,22 @@ const {
 } = require('@uiengine/util')
 
 // hook functions which can be overwritten by custom adapters.
-export function wrapElementBeforeRender (Element, filePath, data) {
+function wrapElementBeforeRender (Element, filePath, data) {
   return Element
 }
 
-export function wrapHtmlAfterRender (html, filePath, data) {
+function wrapHtmlAfterRender (html, filePath, data) {
   return html
 }
 
-export async function setup (options) {
+async function setup (options) {
   const babelRegisterModule = options.babelRegisterModule || 'babel-register'
   const babel = options.babel || {}
 
   require(babelRegisterModule)(babel)
 }
 
-export async function registerComponentFile (options, filePath) {
+async function registerComponentFile (options, filePath) {
   invalidateRequireCache(filePath)
 
   const properties = extractProperties(filePath)
@@ -29,16 +29,16 @@ export async function registerComponentFile (options, filePath) {
   return Object.keys(properties).length ? { properties } : null
 }
 
-export async function render (options, filePath, data = {}) {
+async function render (options, filePath, data = {}) {
   try {
     invalidateRequireCache(filePath)
 
     let Element = require(filePath)
     if (Element.default) Element = Element.default
-    Element = exports.wrapElementBeforeRender(Element, filePath, data)
+    Element = module.exports.wrapElementBeforeRender(Element, filePath, data)
     const vdom = Element(data)
     const html = renderToString(vdom)
-    const rendered = exports.wrapHtmlAfterRender(html, filePath, data)
+    const rendered = module.exports.wrapHtmlAfterRender(html, filePath, data)
 
     return rendered
   } catch (err) {
@@ -50,7 +50,7 @@ export async function render (options, filePath, data = {}) {
   }
 }
 
-export function filesForComponent (componentName) {
+function filesForComponent (componentName) {
   const name = upcaseFirstChar(componentName)
 
   return [
@@ -72,7 +72,7 @@ export default ${name}
   ]
 }
 
-export function filesForVariant (componentName, variantName) {
+function filesForVariant (componentName, variantName) {
   const cName = upcaseFirstChar(componentName)
   const vName = upcaseFirstChar(variantName)
 
@@ -81,6 +81,7 @@ export function filesForVariant (componentName, variantName) {
       basename: `${vName}.jsx`,
       data: `import React from 'react'
 import ${cName} from '../${cName}.jsx'
+import { wrapElementBeforeRender } from './index';
 
 export default props => (
   <${cName} />
@@ -88,4 +89,14 @@ export default props => (
 `
     }
   ]
+}
+
+module.exports = {
+  setup,
+  render,
+  registerComponentFile,
+  filesForComponent,
+  filesForVariant,
+  wrapElementBeforeRender,
+  wrapHtmlAfterRender
 }

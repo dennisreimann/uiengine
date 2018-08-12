@@ -1,4 +1,4 @@
-export const template = title =>
+const template = title =>
   `
 # ${title}
 
@@ -88,3 +88,7 @@ Under the hood [BrowserSync](https://www.browsersync.io/) is used to provide ser
 For information on how to configure the server and pass additional options, see the [configuration documentation](https://uiengine.uix.space/basics/config/#BrowserSync).
 
 `
+
+module.exports = {
+  template
+}

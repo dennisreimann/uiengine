@@ -9,16 +9,8 @@ const webpackEnv = process.env.NODE_ENV === 'production' ? 'prod' : 'dev'
 const webpackConfig = require(join(__dirname, `build/webpack.${webpackEnv}.conf.js`))
 
 const src = {
-  lib: ['./src/{locales,}/*.js'],
   webpack: ['src/{scripts,styles,templates,vue}/**/*']
 }
-
-gulp.task('lib', () =>
-  gulp.src(src.lib)
-    .pipe(p.plumber())
-    .pipe(p.babel())
-    .pipe(gulp.dest('./lib'))
-)
 
 gulp.task('hljs', () =>
   gulp.src(`${dirname(require.resolve('highlight.js/styles/github.css'))}/**`)
@@ -33,9 +25,8 @@ gulp.task('webpack', () =>
 )
 
 gulp.task('watch', () => {
-  gulp.watch(src.lib, ['lib'])
   gulp.watch(src.webpack, ['webpack'])
 })
 
-gulp.task('build', cb => runSequence(['lib', 'hljs'], ['webpack'], cb))
+gulp.task('build', cb => runSequence(['hljs'], ['webpack'], cb))
 gulp.task('develop', cb => runSequence('build', 'watch', cb))

@@ -1,6 +1,6 @@
 const { basename, dirname, join, relative } = require('path')
 
-export const templateFilePathToId = (templatesPath, templateFilePath) => {
+const templateFilePathToId = (templatesPath, templateFilePath) => {
   if (!templateFilePath.startsWith(templatesPath)) return null
 
   const relativePath = relative(templatesPath, templateFilePath)
@@ -9,4 +9,8 @@ export const templateFilePathToId = (templatesPath, templateFilePath) => {
   const id = join(dir, name)
 
   return id
+}
+
+module.exports = {
+  templateFilePathToId
 }

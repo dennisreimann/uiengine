@@ -1,6 +1,6 @@
 const { exec } = require('child_process')
 
-export const runCommand = async (workingDir, command) => {
+const runCommand = async (workingDir, command) => {
   return new Promise((resolve, reject) => {
     exec(`cd ${workingDir} && ${command}`, 'utf8', (err, stdout, stderr) => {
       if (err) {
@@ -10,4 +10,8 @@ export const runCommand = async (workingDir, command) => {
       }
     })
   })
+}
+
+module.exports = {
+  runCommand
 }

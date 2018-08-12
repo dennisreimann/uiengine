@@ -20,7 +20,7 @@ async function findEntityIds (state, entitiesPath = join('**', '*.yml')) {
   return entityIds
 }
 
-export async function fetchAll (state) {
+async function fetchAll (state) {
   debug2(state, 'Entity.fetchAll():start')
 
   const entityIds = await findEntityIds(state)
@@ -39,7 +39,7 @@ export async function fetchAll (state) {
   return entities
 }
 
-export async function fetchById (state, id) {
+async function fetchById (state, id) {
   debug3(state, `Entity.fetchById(${id}):start`)
 
   const { entities } = state.config.source
@@ -49,4 +49,9 @@ export async function fetchById (state, id) {
   debug3(state, `Entity.fetchById(${id}):end`)
 
   return data
+}
+
+module.exports = {
+  fetchAll,
+  fetchById
 }

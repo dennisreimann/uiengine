@@ -14,7 +14,7 @@ const handleError = (options, err, reject, filePath, data) => {
   reject(error)
 }
 
-export async function setup (options) {
+async function setup (options) {
   const install = options.install || {
     compilerOptions: {
       writeToDisk: false
@@ -24,11 +24,11 @@ export async function setup (options) {
   require('marko/node-require').install(install)
 }
 
-export async function registerComponentFile (options, filePath) {
+async function registerComponentFile (options, filePath) {
   invalidateRequireCache(filePath)
 }
 
-export async function render (options, filePath, data = {}) {
+async function render (options, filePath, data = {}) {
   return new Promise((resolve, reject) => {
     try {
       invalidateRequireCache(filePath)
@@ -47,7 +47,7 @@ export async function render (options, filePath, data = {}) {
   })
 }
 
-export function filesForComponent (componentName) {
+function filesForComponent (componentName) {
   return [
     {
       basename: `${componentName}.marko`,
@@ -56,11 +56,19 @@ export function filesForComponent (componentName) {
   ]
 }
 
-export function filesForVariant (componentName, variantName) {
+function filesForVariant (componentName, variantName) {
   return [
     {
       basename: `${variantName}.marko`,
       data: `<include('../${componentName}.marko', input)/>\n`
     }
   ]
+}
+
+module.exports = {
+  setup,
+  render,
+  registerComponentFile,
+  filesForComponent,
+  filesForVariant
 }

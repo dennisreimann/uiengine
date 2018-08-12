@@ -46,9 +46,15 @@ const fastmatter = function (str, filename, sourcePaths) {
   }
 }
 
-export const parseString = (string, filename, sourcePaths) =>
+const parseString = (string, filename, sourcePaths) =>
   fastmatter(string.trim(), filename, sourcePaths)
 
-export const fromFile = R.partial(ParsingUtil.fromFile, [parseString])
+const fromFile = R.partial(ParsingUtil.fromFile, [parseString])
 
-export const fromString = R.partial(ParsingUtil.fromString, [parseString])
+const fromString = R.partial(ParsingUtil.fromString, [parseString])
+
+module.exports = {
+  parseString,
+  fromFile,
+  fromString
+}

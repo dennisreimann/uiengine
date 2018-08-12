@@ -47,7 +47,7 @@ const renderFile = (options, filePath, data) => {
   return rendered
 }
 
-export async function render (options, filePath, data = {}) {
+async function render (options, filePath, data = {}) {
   return new Promise((resolve, reject) => {
     try {
       const rendered = renderFile(options, filePath, data)
@@ -61,4 +61,8 @@ export async function render (options, filePath, data = {}) {
       reject(message.join('\n\n'))
     }
   })
+}
+
+module.exports = {
+  render
 }

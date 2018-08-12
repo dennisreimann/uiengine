@@ -1,7 +1,6 @@
-const PageUtil = require('@uiengine/util/lib/page')
-const StringUtil = require('@uiengine/util/lib/string')
+const { PageUtil, StringUtil } = require('@uiengine/util')
 
-export function component (id, attrs = {}) {
+function component (id, attrs = {}) {
   attrs.title = attrs.title || id
   attrs.content = attrs.content || ''
   attrs.type = attrs.type || 'component'
@@ -10,7 +9,7 @@ export function component (id, attrs = {}) {
   return Object.assign({}, attrs, { id })
 }
 
-export function page (id, attrs = {}) {
+function page (id, attrs = {}) {
   attrs.path = attrs.path || (id === 'index' ? '' : id)
   attrs.title = attrs.title || id
   attrs.content = attrs.content || ''
@@ -22,7 +21,7 @@ export function page (id, attrs = {}) {
   return Object.assign({}, attrs, { id })
 }
 
-export function navigation (id, { itemId, title, path, type = 'documentation', content = '', tags = [], childIds = [], parentId = null, prevSiblingId = null, nextSiblingId = null }) {
+function navigation (id, { itemId, title, path, type = 'documentation', content = '', tags = [], childIds = [], parentId = null, prevSiblingId = null, nextSiblingId = null }) {
   return {
     isStructural: PageUtil.isDocumentationPage(type) && !StringUtil.hasContent(content),
     path: PageUtil.isIndexPage(id) ? '/' : `/${path}/`,
@@ -37,4 +36,10 @@ export function navigation (id, { itemId, title, path, type = 'documentation', c
     prevSiblingId,
     nextSiblingId
   }
+}
+
+module.exports = {
+  component,
+  page,
+  navigation
 }

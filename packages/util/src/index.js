@@ -1,16 +1,16 @@
-import * as ComponentUtil from './component'
-import * as DebugUtil from './debug'
-import * as EntityUtil from './entity'
-import * as FileUtil from './file'
-import * as FrontmatterUtil from './frontmatter'
-import * as MarkdownUtil from './markdown'
-import * as MessageUtil from './message'
-import * as PageUtil from './page'
-import * as StringUtil from './string'
-import * as TemplateUtil from './template'
-import * as VariantUtil from './variant'
-import * as YamlUtil from './yaml'
-import { UiengineInputError } from './error'
+const ComponentUtil = require('./component')
+const DebugUtil = require('./debug')
+const EntityUtil = require('./entity')
+const FileUtil = require('./file')
+const FrontmatterUtil = require('./frontmatter')
+const MarkdownUtil = require('./markdown')
+const MessageUtil = require('./message')
+const PageUtil = require('./page')
+const StringUtil = require('./string')
+const TemplateUtil = require('./template')
+const VariantUtil = require('./variant')
+const YamlUtil = require('./yaml')
+const { UiengineInputError } = require('./error')
 
 module.exports = {
   ComponentUtil,

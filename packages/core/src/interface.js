@@ -10,7 +10,7 @@ const getOptions = state => {
   return Object.assign({}, ui, { markdownIt, target })
 }
 
-export async function setup (state) {
+async function setup (state) {
   debug3(state, 'UI.setup():start')
 
   const options = getOptions(state)
@@ -19,7 +19,7 @@ export async function setup (state) {
   debug3(state, 'UI.setup():end')
 }
 
-export async function render (state, template, data) {
+async function render (state, template, data) {
   debug3(state, 'UI.render():start')
 
   const options = getOptions(state)
@@ -28,4 +28,9 @@ export async function render (state, template, data) {
   debug3(state, 'UI.render():end')
 
   return rendered
+}
+
+module.exports = {
+  setup,
+  render
 }

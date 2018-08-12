@@ -25,7 +25,7 @@ const getOptions = (state, ext) => {
   return Object.assign({}, options, { ext, components, templates, target })
 }
 
-export async function setup (state) {
+async function setup (state) {
   debug3(state, 'Connector.setup():start')
 
   const { config: { adapters } } = state
@@ -46,7 +46,7 @@ export async function setup (state) {
   debug3(state, 'Connector.setup():end')
 }
 
-export async function registerComponentFile (state, filePath) {
+async function registerComponentFile (state, filePath) {
   const { config: { adapters, source: { components } } } = state
   const ext = extension(filePath)
   const adapter = adapters[ext]
@@ -67,7 +67,7 @@ export async function registerComponentFile (state, filePath) {
   }
 }
 
-export async function render (state, templatePath, data = {}) {
+async function render (state, templatePath, data = {}) {
   const ext = extension(templatePath)
   const { render } = getModule(state, ext, templatePath)
 
@@ -82,7 +82,7 @@ export async function render (state, templatePath, data = {}) {
   }
 }
 
-export async function filesForComponent (state, ext, componentName) {
+async function filesForComponent (state, ext, componentName) {
   const { filesForComponent } = getModule(state, ext)
 
   if (typeof filesForComponent === 'function') {
@@ -94,7 +94,7 @@ export async function filesForComponent (state, ext, componentName) {
   }
 }
 
-export async function filesForVariant (state, ext, componentName, variantName) {
+async function filesForVariant (state, ext, componentName, variantName) {
   const { filesForVariant } = getModule(state, ext)
 
   if (typeof filesForVariant === 'function') {
@@ -104,4 +104,12 @@ export async function filesForVariant (state, ext, componentName, variantName) {
   } else {
     return []
   }
+}
+
+module.exports = {
+  setup,
+  render,
+  registerComponentFile,
+  filesForComponent,
+  filesForVariant
 }

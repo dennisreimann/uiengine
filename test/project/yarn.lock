@@ -117,53 +117,53 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.3.tgz#8798d9e39af2fa604f715ee6a6b19796528e46c3"
 
 "@uiengine/adapter-ejs@file:../../packages/adapter-ejs":
-  version "0.22.5"
+  version "1.0.4"
 
 "@uiengine/adapter-handlebars@file:../../packages/adapter-handlebars":
-  version "0.22.5"
+  version "1.0.4"
   dependencies:
     globby "8.0.1"
 
-"@uiengine/adapter-html@^1.0.2", "@uiengine/adapter-html@file:../../packages/adapter-html":
-  version "1.0.2"
+"@uiengine/adapter-html@^1.0.4", "@uiengine/adapter-html@file:../../packages/adapter-html":
+  version "1.0.4"
 
 "@uiengine/adapter-marko@file:../../packages/adapter-marko":
-  version "1.0.2"
+  version "1.0.4"
   dependencies:
-    "@uiengine/util" "^1.0.2"
+    "@uiengine/util" "^1.0.4"
 
 "@uiengine/adapter-pug@file:../../packages/adapter-pug":
-  version "0.22.5"
+  version "1.0.4"
 
 "@uiengine/adapter-react@file:../../packages/adapter-react":
-  version "1.0.2"
+  version "1.0.4"
   dependencies:
-    "@uiengine/util" "^1.0.2"
+    "@uiengine/util" "^1.0.4"
     react-docgen "2.21.0"
   optionalDependencies:
     prop-types "15.6.2"
 
 "@uiengine/adapter-vue@file:../../packages/adapter-vue":
-  version "1.0.2"
+  version "1.0.4"
   dependencies:
-    "@uiengine/util" "^1.0.2"
+    "@uiengine/util" "^1.0.4"
     vue-component-compiler "git+https://github.com/znck/vue-component-compiler.git"
     vue-server-renderer "2.5.17"
     vue-template-compiler "2.5.17"
 
-"@uiengine/cli@^1.0.2", "@uiengine/cli@file:../../packages/cli":
-  version "1.0.2"
+"@uiengine/cli@^1.0.4", "@uiengine/cli@file:../../packages/cli":
+  version "1.0.4"
   dependencies:
     fs-extra "7.0.0"
     ramda "0.25.0"
     yargs "12.0.1"
 
-"@uiengine/core@^1.0.2", "@uiengine/core@file:../../packages/core":
-  version "1.0.2"
+"@uiengine/core@^1.0.4", "@uiengine/core@file:../../packages/core":
+  version "1.0.4"
   dependencies:
-    "@uiengine/cli" "^1.0.2"
-    "@uiengine/ui" "^1.0.2"
-    "@uiengine/util" "^1.0.2"
+    "@uiengine/cli" "^1.0.4"
+    "@uiengine/ui" "^1.0.4"
+    "@uiengine/util" "^1.0.4"
     cosmiconfig "5.0.5"
     fs-extra "7.0.0"
     globby "8.0.1"
@@ -172,26 +172,11 @@
     browser-sync "2.24.6"
     chokidar "2.0.4"
 
-"@uiengine/ui@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-1.0.2.tgz#1198674f17fe6618ba447e7b2bf73d71718fb68e"
+"@uiengine/ui@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@uiengine/ui/-/ui-1.0.4.tgz#5f0e532bf0407801cae1d940a80d8394c31dd97d"
   dependencies:
-    "@uiengine/util" "^1.0.2"
-    color "3.0.0"
-    ejs "2.6.1"
-    fuse.js "3.2.1"
-    highlight.js "9.12.0"
-    htmlescape "1.1.1"
-    vue "2.5.16"
-    vue-analytics "5.12.2"
-    vue-meta "1.5.2"
-    vue-router "3.0.1"
-    vuex "3.0.1"
-
-"@uiengine/ui@file:../../packages/ui":
-  version "1.0.2"
-  dependencies:
-    "@uiengine/util" "^1.0.2"
+    "@uiengine/util" "^1.0.4"
     color "3.0.0"
     ejs "2.6.1"
     fuse.js "3.2.1"
@@ -203,20 +188,35 @@
     vue-router "3.0.1"
     vuex "3.0.1"
 
-"@uiengine/util@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@uiengine/util/-/util-1.0.2.tgz#0a19c70c979034fb30726345ee23670b2ac848d4"
+"@uiengine/ui@file:../../packages/ui":
+  version "1.0.4"
+  dependencies:
+    "@uiengine/util" "^1.0.4"
+    color "3.0.0"
+    ejs "2.6.1"
+    fuse.js "3.2.1"
+    highlight.js "9.12.0"
+    htmlescape "1.1.1"
+    vue "2.5.17"
+    vue-analytics "5.12.3"
+    vue-meta "1.5.2"
+    vue-router "3.0.1"
+    vuex "3.0.1"
+
+"@uiengine/util@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@uiengine/util/-/util-1.0.4.tgz#3332f80b3da583e10d4051498161264ef379a3e5"
   dependencies:
     chalk "2.4.1"
-    fs-extra "6.0.1"
+    fs-extra "7.0.0"
     js-yaml "3.12.0"
-    markdown-it "8.4.1"
+    markdown-it "8.4.2"
     markdown-it-anchor "5.0.2"
     markdown-it-include "1.0.0"
     ramda "0.25.0"
 
 "@uiengine/util@file:../../packages/util":
-  version "1.0.2"
+  version "1.0.4"
   dependencies:
     chalk "2.4.1"
     fs-extra "7.0.0"
@@ -3439,14 +3439,6 @@ fs-extra@5.0.0:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
-fs-extra@6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-6.0.1.tgz#8abc128f7946e310135ddc93b98bddb410e7a34b"
-  dependencies:
-    graceful-fs "^4.1.2"
-    jsonfile "^4.0.0"
-    universalify "^0.1.0"
-
 fs-extra@7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.0.tgz#8cc3f47ce07ef7b3593a11b9fb245f7e34c041d6"
@@ -4950,16 +4942,6 @@ markdown-it-anchor@5.0.2:
 markdown-it-include@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/markdown-it-include/-/markdown-it-include-1.0.0.tgz#b76b51026d7e5e9c715a77bca464799719346c20"
-
-markdown-it@8.4.1:
-  version "8.4.1"
-  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.1.tgz#206fe59b0e4e1b78a7c73250af9b34a4ad0aaf44"
-  dependencies:
-    argparse "^1.0.7"
-    entities "~1.1.1"
-    linkify-it "^2.0.0"
-    mdurl "^1.0.1"
-    uc.micro "^1.0.5"
 
 markdown-it@8.4.2:
   version "8.4.2"
@@ -7408,10 +7390,10 @@ uglifyjs-webpack-plugin@^1.2.4:
     worker-farm "^1.5.2"
 
 "uiengine@file:../../packages/uiengine":
-  version "1.0.3"
+  version "1.0.4"
   dependencies:
-    "@uiengine/adapter-html" "^1.0.2"
-    "@uiengine/core" "^1.0.2"
+    "@uiengine/adapter-html" "^1.0.4"
+    "@uiengine/core" "^1.0.4"
 
 ultron@~1.1.0:
   version "1.1.1"
@@ -7601,10 +7583,6 @@ void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
-vue-analytics@5.12.2:
-  version "5.12.2"
-  resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.12.2.tgz#6318be3cfa0ce7fa6b00cb8a9fcd42268e75fab8"
-
 vue-analytics@5.12.3:
   version "5.12.3"
   resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.12.3.tgz#599bd05f9e69efd51645e9e74add81d8a26a88ea"
@@ -7696,10 +7674,6 @@ vue-template-compiler@^2.4.4:
 vue-template-es2015-compiler@^1.5.3, vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
-
-vue@2.5.16:
-  version "2.5.16"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
 
 vue@2.5.17:
   version "2.5.17"

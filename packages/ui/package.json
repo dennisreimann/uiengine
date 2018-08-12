@@ -13,16 +13,17 @@
   "engines": {
     "node": ">=8.9.0"
   },
-  "main": "./lib/index.js",
+  "main": "./src/index.js",
   "files": [
     "dist",
-    "lib"
+    "lib",
+    "src"
   ],
   "keywords": [
     "uiengine"
   ],
   "scripts": {
-    "clean": "rimraf lib dist static",
+    "clean": "rimraf dist static",
     "start": "yarn run clean && NODE_ENV=development gulp develop",
     "build": "yarn run clean && NODE_ENV=production gulp build",
     "lint": "eslint --ext .js,.vue build src test"
@@ -44,7 +45,6 @@
     "autoprefixer": "9.1.0",
     "babel-core": "6.26.3",
     "babel-loader": "7.1.5",
-    "babel-preset-env": "1.7.0",
     "babel-preset-stage-2": "6.24.1",
     "clipboard": "2.0.1",
     "copy-webpack-plugin": "4.5.2",
