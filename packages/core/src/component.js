@@ -4,10 +4,10 @@ const glob = require('globby')
 const { registerComponentFile } = require('./connector')
 const Variant = require('./variant')
 const {
-  ComponentUtil,
   FrontmatterUtil,
   MarkdownUtil,
-  StringUtil,
+  ComponentUtil: { componentIdToFilePath, componentIdToPath, componentIdToTitle, componentPathToId },
+  StringUtil: { titleFromContentHeading },
   DebugUtil: { debug2, debug3, debug4, debug5 }
 } = require('@uiengine/util')
 
@@ -39,7 +39,7 @@ async function registerComponentFiles (state, id) {
   // in the component folder root. No variants!
   const { config: { adapters, source: { components } } } = state
   const exts = Object.keys(adapters).join(',')
-  const pattern = ComponentUtil.componentIdToComponentFilePath(components, id, `*.{${exts}}`)
+  const pattern = componentIdToFilePath(components, id, `*.{${exts}}`)
   const paths = await glob(pattern, { onlyFiles: true })
 
   const register = R.partial(registerComponentFile, [state])
@@ -57,7 +57,7 @@ async function findComponentIds (state) {
 
   const pattern = resolve(components, '**')
   const componentPaths = await glob(pattern, { onlyDirectories: true, deep: false })
-  const componentIdFromComponentPath = R.partial(ComponentUtil.componentPathToComponentId, [components])
+  const componentIdFromComponentPath = R.partial(componentPathToId, [components])
   const componentIds = R.map(componentIdFromComponentPath, componentPaths)
 
   return componentIds
@@ -83,8 +83,8 @@ export async function fetchById (state, id) {
   const { components } = state.config.source
   if (!components) return null
 
-  const componentPath = ComponentUtil.componentIdToPath(id)
-  const componentFilePath = ComponentUtil.componentIdToComponentFilePath(components, id)
+  const componentPath = componentIdToPath(id)
+  const componentFilePath = componentIdToFilePath(components, id)
   const [componentData, fileRegistrations] = await Promise.all([
     readComponentFile(state, componentFilePath),
     registerComponentFiles(state, id)
@@ -93,7 +93,7 @@ export async function fetchById (state, id) {
   let { attributes, content, attributes: { context, variants } } = componentData
   variants = await Variant.fetchObjects(state, id, context, variants)
 
-  const title = attributes.title || StringUtil.titleFromContentHeading(content) || ComponentUtil.componentIdToTitle(id)
+  const title = attributes.title || titleFromContentHeading(content) || componentIdToTitle(id)
   const baseData = { id, title, content, variants, path: componentPath, type: 'component' }
   const fileData = R.reduce(R.mergeDeepLeft, attributes, R.pluck('data', fileRegistrations))
   const data = R.mergeDeepLeft(baseData, fileData)

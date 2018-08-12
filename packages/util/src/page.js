@@ -49,14 +49,14 @@ export const pageIdToTitle = pageId => {
   return title
 }
 
-export const pageIdToPageFilePath = (pagesPath, pageId) => {
+export const pageIdToFilePath = (pagesPath, pageId) => {
   const relativePath = isIndexPage(pageId) ? INDEX_FILE_PATH : pageId
   const absolutePath = join(pagesPath, relativePath, PAGE_FILENAME)
 
   return absolutePath
 }
 
-export const pageFilePathToPageId = (pagesPath, pageFilePath) => {
+export const pageFilePathToId = (pagesPath, pageFilePath) => {
   const relativePath = relative(pagesPath, pageFilePath)
 
   // invalid path: this is not a page
@@ -73,7 +73,7 @@ export const pageFilePathToPageId = (pagesPath, pageFilePath) => {
     const parentPath = resolve(pageFilePath, '..', '..')
     const parentPageFilePath = join(parentPath, file)
 
-    return pageFilePathToPageId(pagesPath, parentPageFilePath)
+    return pageFilePathToId(pagesPath, parentPageFilePath)
   }
 }
 

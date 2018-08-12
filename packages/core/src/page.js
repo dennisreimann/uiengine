@@ -4,8 +4,8 @@ const glob = require('globby')
 const {
   FrontmatterUtil,
   MarkdownUtil,
-  PageUtil,
-  StringUtil,
+  PageUtil: { ENTITIES_ID, ENTITIES_PAGE_PATH, PAGE_FILENAME, pageFilePathToId, pageIdToFilePath, pageIdToPath, pageIdToTitle, isIndexPage, determineType, convertUserProvidedChildrenList, convertUserProvidedComponentsList },
+  StringUtil: { titleFromContentHeading },
   DebugUtil: { debug2, debug3, debug4 }
 } = require('@uiengine/util')
 
@@ -31,7 +31,7 @@ async function findPageFiles (pagesPath, pagePath, childIds = []) {
   // see the glob option descreibed here for details:
   // https://github.com/mrmlnc/fast-glob#how-to-exclude-directory-from-reading
   const filesPattern = join(pagesPath, pagePath, '**')
-  const pageExcludes = [join('**', '_*', '**'), join('**', PageUtil.PAGE_FILENAME)]
+  const pageExcludes = [join('**', '_*', '**'), join('**', PAGE_FILENAME)]
   const childExcludes = R.map(id => join('**', id, '**'), childIds)
   const ignore = R.concat(pageExcludes, childExcludes)
   const filePaths = await glob(filesPattern, { ignore })
@@ -43,9 +43,9 @@ async function findPageIds (state, pagePath = '**') {
   const { pages } = state.config.source
   if (!pages) return []
 
-  const pattern = resolve(pages, pagePath, PageUtil.PAGE_FILENAME)
+  const pattern = resolve(pages, pagePath, PAGE_FILENAME)
   const pagePaths = await glob(pattern)
-  const pageIdFromPageFilePath = R.partial(PageUtil.pageFilePathToPageId, [pages])
+  const pageIdFromPageFilePath = R.partial(pageFilePathToId, [pages])
   const pageIds = R.map(pageIdFromPageFilePath, pagePaths)
 
   return pageIds
@@ -71,8 +71,8 @@ export async function fetchById (state, id) {
   debug3(state, `Page.fetchById(${id}):start`)
 
   const { pages } = state.config.source
-  const pagePath = PageUtil.pageIdToPath(id)
-  const absolutePath = PageUtil.pageIdToPageFilePath(pages, id)
+  const pagePath = pageIdToPath(id)
+  const absolutePath = pageIdToFilePath(pages, id)
   const childPattern = join(pagePath, '*')
   const fetchChildIds = findPageIds(state, childPattern)
   const fetchPageData = readPageFile(state, absolutePath)
@@ -82,14 +82,14 @@ export async function fetchById (state, id) {
   const [pageData, childIds] = await Promise.all([fetchPageData, fetchChildIds])
   const files = await findPageFiles(pages, pagePath, childIds)
 
-  if (PageUtil.isIndexPage(id)) childIds.push(PageUtil.ENTITIES_ID)
+  if (isIndexPage(id)) childIds.push(ENTITIES_ID)
 
   let { attributes, content } = pageData
 
-  const title = attributes.title || StringUtil.titleFromContentHeading(content) || PageUtil.pageIdToTitle(id)
-  const type = PageUtil.determineType(attributes)
-  attributes = PageUtil.convertUserProvidedChildrenList(id, childIds, attributes)
-  attributes = PageUtil.convertUserProvidedComponentsList(id, attributes)
+  const title = attributes.title || titleFromContentHeading(content) || pageIdToTitle(id)
+  const type = determineType(attributes)
+  attributes = convertUserProvidedChildrenList(id, childIds, attributes)
+  attributes = convertUserProvidedComponentsList(id, attributes)
   const baseData = { childIds }
   const fixData = { id, title, path: pagePath, type, content, files }
   const data = R.mergeAll([baseData, attributes, fixData])
@@ -103,8 +103,8 @@ export async function fetchById (state, id) {
 
 export async function fetchEntitiesPage (state) {
   return {
-    id: PageUtil.ENTITIES_ID,
-    path: PageUtil.ENTITIES_PAGE_PATH,
+    id: ENTITIES_ID,
+    path: ENTITIES_PAGE_PATH,
     type: 'entities',
     title: 'Entities',
     keywords: Object.keys(state.entities || []),

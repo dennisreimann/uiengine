@@ -4,7 +4,7 @@ const Core = require('@uiengine/core/lib/core')
 const {
   FileUtil: { write },
   MessageUtil: { reportSuccess, reportError },
-  PageUtil: { pageIdToPageFilePath, pageIdToTitle }
+  PageUtil: { pageIdToFilePath, pageIdToTitle }
 } = require('@uiengine/util')
 
 exports.describe = 'Create basic files for a new page'
@@ -33,7 +33,7 @@ exports.handler = argv => {
       const createPages = R.map(pageId => {
         const pageTitle = pageIdToTitle(pageId)
         const pageContent = pageTemplate(pageTitle).trim()
-        const pageFilePath = pageIdToPageFilePath(pagesDir, pageId)
+        const pageFilePath = pageIdToFilePath(pagesDir, pageId)
         pageFiles.push(pageFilePath)
 
         return write(pageFilePath, pageContent)

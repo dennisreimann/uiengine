@@ -8,13 +8,13 @@ export const entityIdToTitle = id => {
   return title
 }
 
-export const entityIdToEntityFilePath = (path, id) => {
+export const entityIdToFilePath = (path, id) => {
   const absolutePath = join(path, `${id}.yml`)
 
   return absolutePath
 }
 
-export const entityFilePathToEntityId = (path, filePath) => {
+export const entityFilePathToId = (path, filePath) => {
   const relativePath = relative(path, filePath)
 
   // invalid path: this is not an entity

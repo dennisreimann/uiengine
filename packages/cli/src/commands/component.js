@@ -3,17 +3,11 @@ const R = require('ramda')
 const Core = require('@uiengine/core/lib/core')
 const Connector = require('@uiengine/core/lib/connector')
 const {
-  ComponentUtil,
-  VariantUtil,
-  FileUtil: {
-    write
-  },
-  StringUtil: {
-    titleize
-  },
-  MessageUtil: {
-    reportSuccess, reportError
-  }
+  ComponentUtil: { COMPONENT_FILENAME },
+  VariantUtil: { variantIdToFilePath },
+  FileUtil: { write },
+  StringUtil: { titleize },
+  MessageUtil: { reportSuccess, reportError }
 } = require('@uiengine/util')
 
 const getTemplate = id =>
@@ -54,7 +48,7 @@ exports.handler = argv => {
     const componentTitle = titleize(componentId)
     const componentTemplate = getTemplate('component')
     const componentData = componentTemplate(componentTitle).trim()
-    const componentFilePath = join(componentDir, ComponentUtil.COMPONENT_FILENAME)
+    const componentFilePath = join(componentDir, COMPONENT_FILENAME)
     files[componentFilePath] = write(componentFilePath, componentData)
 
     const adapterFilesForComponent = R.map(ext => Connector.filesForComponent(state, ext, componentId), adapters)
@@ -83,7 +77,7 @@ exports.handler = argv => {
         // turn variant adapter fileinfos into tasks
         R.forEach(({ basename, data }) => {
           const variantId = `${componentId}/${basename}-0`
-          const filePath = VariantUtil.variantIdToFilePath(componentsDir, variantId)
+          const filePath = variantIdToFilePath(componentsDir, variantId)
           files[filePath] = write(filePath, data)
         }, fileInfos)
 

@@ -2,8 +2,8 @@ const { join, resolve } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const {
-  EntityUtil,
   YamlUtil,
+  EntityUtil: { entityIdToFilePath, entityFilePathToId },
   DebugUtil: { debug2, debug3 }
 } = require('@uiengine/util')
 
@@ -14,7 +14,7 @@ async function findEntityIds (state, entitiesPath = join('**', '*.yml')) {
   const pattern = resolve(entities, entitiesPath)
   const paths = await glob(pattern)
 
-  const entityIdFromEntityFilePath = R.partial(EntityUtil.entityFilePathToEntityId, [entities])
+  const entityIdFromEntityFilePath = R.partial(entityFilePathToId, [entities])
   const entityIds = R.map(entityIdFromEntityFilePath, paths)
 
   return entityIds
@@ -43,7 +43,7 @@ export async function fetchById (state, id) {
   debug3(state, `Entity.fetchById(${id}):start`)
 
   const { entities } = state.config.source
-  const absolutePath = EntityUtil.entityIdToEntityFilePath(entities, id)
+  const absolutePath = entityIdToFilePath(entities, id)
   const data = await YamlUtil.fromFile(absolutePath)
 
   debug3(state, `Entity.fetchById(${id}):end`)

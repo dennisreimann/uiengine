@@ -4,7 +4,7 @@ const Interface = require('./interface')
 const Connector = require('./connector')
 const {
   UiengineInputError,
-  PageUtil,
+  PageUtil: { isTokensPage, pageIdToPath },
   FileUtil: { copy, write },
   MessageUtil: { markSample },
   StringUtil: { dasherize, replaceTemplateComments },
@@ -50,7 +50,7 @@ export async function generatePageFiles (state, pageId) {
   if (!page.files) return
 
   const targetPagePath = page.path
-  const sourcePagePath = PageUtil.pageIdToPath(page.id)
+  const sourcePagePath = pageIdToPath(page.id)
   const targetPath = join(config.target, targetPagePath)
   const sourcePath = join(config.source.pages, sourcePagePath)
   const copyFile = R.partial(copyPageFile, [targetPath, sourcePath])
@@ -110,7 +110,7 @@ export async function generatePageWithTokens (state, pageId) {
     throw new UiengineInputError(`${identifier} does not exist or has not been fetched yet.`)
   }
 
-  if (PageUtil.isTokensPage(page.type)) {
+  if (isTokensPage(page.type)) {
     // render tokens with context, in preview layout
     const { id, title } = page
     const data = page
@@ -198,7 +198,7 @@ export async function generateTokensWithTemplate (state, template) {
     // 1.) the template is the general preview template and
     //     the variant does not use a custom template
     // 2.) the template matches the page template
-    return PageUtil.isTokensPage(page.type) &&
+    return isTokensPage(page.type) &&
       (
         (isPreviewTemplate && page.template === undefined) ||
         page.template === template

@@ -25,46 +25,46 @@ describe('PageUtil', () => {
     })
   })
 
-  describe('#pageIdToPageFilePath', () => {
+  describe('#pageIdToFilePath', () => {
     it('should return page file path for index page', () => {
       assert.strictEqual(
-        PageUtil.pageIdToPageFilePath(pagesPath, 'index'),
+        PageUtil.pageIdToFilePath(pagesPath, 'index'),
         join(pagesPath, 'page.md')
       )
     })
 
     it('should return page file path for page', () => {
       assert.strictEqual(
-        PageUtil.pageIdToPageFilePath(pagesPath, 'patterns/atoms/buttons'),
+        PageUtil.pageIdToFilePath(pagesPath, 'patterns/atoms/buttons'),
         join(pagesPath, 'patterns', 'atoms', 'buttons', 'page.md')
       )
     })
   })
 
-  describe('#pageFilePathToPageId', () => {
+  describe('#pageFilePathToId', () => {
     it('should return page id for index file path', () => {
-      assert.strictEqual(PageUtil.pageFilePathToPageId(pagesPath, join(pagesPath, 'page.md')), 'index')
+      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, join(pagesPath, 'page.md')), 'index')
     })
 
     it('should return page id for page file path', () => {
-      assert.strictEqual(PageUtil.pageFilePathToPageId(pagesPath, join(pagesPath, 'patterns', 'atoms', 'copytext', 'page.md')), 'patterns/atoms/copytext')
+      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, join(pagesPath, 'patterns', 'atoms', 'copytext', 'page.md')), 'patterns/atoms/copytext')
     })
 
     it('should return page id for file path', () => {
-      assert.strictEqual(PageUtil.pageFilePathToPageId(pagesPath, join(pagesPath, 'testcases', 'index.txt')), 'testcases')
+      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, join(pagesPath, 'testcases', 'index.txt')), 'testcases')
     })
 
     it('should return page id for nested file path', () => {
-      assert.strictEqual(PageUtil.pageFilePathToPageId(pagesPath, join(pagesPath, 'static', 'additional.pdf')), 'index')
+      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, join(pagesPath, 'static', 'additional.pdf')), 'index')
     })
 
     it('should return page id for nested file path without direct parent', () => {
-      assert.strictEqual(PageUtil.pageFilePathToPageId(pagesPath, join(pagesPath, 'static', 'test', 'nested', 'additional.pdf')), 'index')
+      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, join(pagesPath, 'static', 'test', 'nested', 'additional.pdf')), 'index')
     })
 
     it('should return null for invalid file path', () => {
       const filePath = resolve(testProjectPath, 'src', 'components', 'component.md')
-      assert.strictEqual(PageUtil.pageFilePathToPageId(pagesPath, filePath), null)
+      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, filePath), null)
     })
   })
 

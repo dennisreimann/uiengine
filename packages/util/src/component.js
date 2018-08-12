@@ -10,10 +10,10 @@ export const componentIdToTitle = (componentId) =>
 export const componentIdToPath = (componentId) =>
   join(COMPONENTS_DIRNAME, componentId)
 
-export const componentIdToComponentFilePath = (componentsPath, componentId, fileName = COMPONENT_FILENAME) =>
+export const componentIdToFilePath = (componentsPath, componentId, fileName = COMPONENT_FILENAME) =>
   join(componentsPath, componentId, fileName)
 
-export const componentFilePathToComponentId = (componentsPath, componentFilePath) => {
+export const componentFilePathToId = (componentsPath, componentFilePath) => {
   const relativePath = relative(componentsPath, componentFilePath)
 
   // invalid path: this is not a component
@@ -24,7 +24,7 @@ export const componentFilePathToComponentId = (componentsPath, componentFilePath
   return dir
 }
 
-export const componentPathToComponentId = (componentsPath, componentPath) => {
+export const componentPathToId = (componentsPath, componentPath) => {
   const relativePath = relative(componentsPath, componentPath)
 
   // invalid path: this is not a component

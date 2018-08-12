@@ -1,6 +1,6 @@
 const {
   UiengineInputError,
-  ComponentUtil: { componentFilePathToComponentId },
+  ComponentUtil: { componentFilePathToId },
   DebugUtil: { debug3 },
   FileUtil: { extension }
 } = require('@uiengine/util')
@@ -59,7 +59,7 @@ export async function registerComponentFile (state, filePath) {
       const data = await registerComponentFile(options, filePath)
 
       if (data) {
-        const id = componentFilePathToComponentId(components, filePath)
+        const id = componentFilePathToId(components, filePath)
 
         return { id, filePath, data }
       }

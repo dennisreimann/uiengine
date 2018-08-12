@@ -9,10 +9,10 @@ const Entity = require('./entity')
 const Interface = require('./interface')
 const Connector = require('./connector')
 const {
-  EntityUtil: { entityFilePathToEntityId },
-  ComponentUtil: { componentFilePathToComponentId, componentPathToComponentId },
-  PageUtil: { pageFilePathToPageId, parentIdForPageId },
-  TemplateUtil: { templateFilePathToTemplateId },
+  EntityUtil: { entityFilePathToId },
+  ComponentUtil: { componentFilePathToId, componentPathToId },
+  PageUtil: { pageFilePathToId, parentIdForPageId },
+  TemplateUtil: { templateFilePathToId },
   VariantUtil: { variantFilePathToIdPrefix, variantIdToComponentId },
   DebugUtil: { debug2 }
 } = require('@uiengine/util')
@@ -86,17 +86,17 @@ const getChangeObject = (filePath, action) => {
   // Skip generating individual items in case the data
   // got changed as we need to regenerate everything
   if (!isDataFile) {
-    pageId = pages ? pageFilePathToPageId(pages, filePath) : undefined
-    entityId = entities ? entityFilePathToEntityId(entities, filePath) : undefined
-    templateId = templates ? templateFilePathToTemplateId(templates, filePath) : undefined
-    componentId = components ? componentFilePathToComponentId(components, filePath) : undefined
+    pageId = pages ? pageFilePathToId(pages, filePath) : undefined
+    entityId = entities ? entityFilePathToId(entities, filePath) : undefined
+    templateId = templates ? templateFilePathToId(templates, filePath) : undefined
+    componentId = components ? componentFilePathToId(components, filePath) : undefined
     variantIdPrefix = components ? variantFilePathToIdPrefix(components, filePath) : undefined
   }
 
   // In case a component directory has been deleted we
   // need to reset the component id with the dirname
   if (componentId && isComponentDir) {
-    componentId = componentPathToComponentId(components, filePath)
+    componentId = componentPathToId(components, filePath)
   }
 
   if (pageId) {

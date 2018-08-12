@@ -1,17 +1,8 @@
 const R = require('ramda')
 const {
   UiengineInputError,
-  StringUtil: {
-    hasContent
-  },
-  PageUtil: {
-    isDocumentationPage,
-    isIndexPage,
-    pageIdForComponentId,
-    pageIdToPath,
-    pagePathForComponentId,
-    parentIdForPageId
-  }
+  StringUtil: { hasContent },
+  PageUtil: { isDocumentationPage, isIndexPage, pageIdForComponentId, pageIdToPath, pagePathForComponentId, parentIdForPageId }
 } = require('@uiengine/util')
 
 const assocNavigation = (navigation, entry) =>

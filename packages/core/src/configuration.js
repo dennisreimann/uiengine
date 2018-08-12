@@ -4,12 +4,8 @@ const assert = require('assert')
 const cosmiconfig = require('cosmiconfig')
 const {
   UiengineInputError,
-  FileUtil: {
-    invalidateRequireCache
-  },
-  MessageUtil: {
-    markSample
-  }
+  FileUtil: { invalidateRequireCache },
+  MessageUtil: { markSample }
 } = require('@uiengine/util')
 
 const readPackageJson = () => {
