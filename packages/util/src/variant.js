@@ -22,25 +22,25 @@ export const variantFilePathToComponentId = (componentsPath, variantFilePath) =>
     : null
 }
 
-export const variantIdToVariantFilePath = (componentsPath, id) => {
+export const variantIdToFilePath = (componentsPath, id) => {
   const componentId = variantIdToComponentId(id)
   const variantsPath = componentIdToVariantsPath(componentsPath, componentId)
-  const variantFileName = basename(id)
+  const variantFileName = basename(id).replace(/(-\d+)$/, '')
   const variantFile = join(variantsPath, variantFileName)
 
   return variantFile
 }
 
-export const variantFilePathToVariantId = (componentsPath, variantFilePath) => {
+export const variantFilePathToIdPrefix = (componentsPath, variantFilePath) => {
   const componentId = variantFilePathToComponentId(componentsPath, variantFilePath)
 
   if (componentId) {
     const variantsPath = componentIdToVariantsPath(componentsPath, componentId)
     const relativePath = relative(variantsPath, variantFilePath)
     const base = basename(relativePath)
-    const variantId = `${componentId}/${base}`
+    const variantIdPrefix = `${componentId}/${base}`
 
-    return variantId
+    return variantIdPrefix
   } else {
     return null
   }

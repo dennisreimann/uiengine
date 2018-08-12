@@ -50,9 +50,17 @@ variants:
       - Pug
   - file: label.jsx
     title: Label (React)
-    label: A1.5
+    label: A1.5.1
     tags:
       - React
+  - file: label.jsx
+    title: Label (React)
+    label: A1.5.2
+    tags:
+      - React
+    context:
+      id: surname
+      title: Surname
   - file: label-vue.js
     title: Label (Vue JS)
     label: A1.6

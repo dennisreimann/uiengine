@@ -6,9 +6,11 @@ const Connector = require('./connector')
 const {
   DebugUtil: { debug2, debug3 },
   MessageUtil: { markSample },
-  VariantUtil,
-  FileUtil
+  VariantUtil: { componentIdToVariantsPath, variantIdToFilePath, variantIdToTitle },
+  FileUtil: { extension: fileExtension, read: readFile }
 } = require('@uiengine/util')
+
+const mapIndexed = R.addIndex(R.map)
 
 // convert list of filenames to list of objects
 const convertUserProvidedVariants = list =>
@@ -18,7 +20,7 @@ export async function findVariants (state, componentId) {
   const { components } = state.config.source
   if (!components) return []
 
-  const variantsPath = VariantUtil.componentIdToVariantsPath(components, componentId)
+  const variantsPath = componentIdToVariantsPath(components, componentId)
   const pattern = join(variantsPath, '*')
   const variantPaths = await glob(pattern)
   const variants = R.map(variantPath => ({ file: basename(variantPath) }), variantPaths)
@@ -39,7 +41,7 @@ export async function fetchObjects (state, componentId, context, variants) {
   }
 
   const fetch = R.partial(fetchObject, [state, componentId, context])
-  const fetches = R.map(fetch, variants)
+  const fetches = mapIndexed(fetch, variants)
   const list = await Promise.all(fetches)
 
   debug2(state, `Variant.fetchObjects(${componentId}):end`)
@@ -47,20 +49,21 @@ export async function fetchObjects (state, componentId, context, variants) {
   return list
 }
 
-export async function fetchObject (state, componentId, componentContext, data) {
+export async function fetchObject (state, componentId, componentContext, data, index) {
   const { file } = data
-  const id = `${componentId}/${file}`
+
+  const id = `${componentId}/${file}-${index + 1}`
   debug3(state, `Variant.fetchObject(${id}):start`)
 
   const { components } = state.config.source
-  const filePath = VariantUtil.variantIdToVariantFilePath(components, id)
-  const extension = FileUtil.extension(filePath)
+  const filePath = variantIdToFilePath(components, id)
+  const extension = fileExtension(filePath)
   const context = data.context || componentContext
-  const title = data.title || VariantUtil.variantIdToTitle(id)
+  const title = data.title || variantIdToTitle(id)
 
   // render raw variant, without layout
   let raw, render
-  const readTemplate = FileUtil.read(filePath)
+  const readTemplate = readFile(filePath)
   const renderTemplate = Connector.render(state, filePath, context)
 
   try {

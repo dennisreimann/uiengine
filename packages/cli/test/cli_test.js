@@ -156,8 +156,8 @@ describe('CLI', function () {
       assertMatches(stdout, 'Build done')
 
       // variants
-      assertExists(join(testPath, 'dist/_variants/heading/title.html.html'))
-      assertExists(join(testPath, 'dist/_variants/heading/subtitle.html.html'))
+      assertExists(join(testPath, 'dist/_variants/heading/title.html-1.html'))
+      assertExists(join(testPath, 'dist/_variants/heading/subtitle.html-2.html'))
     })
 
     describe('with debug flag', () => {

@@ -10,6 +10,8 @@
 
 - Removed filesFor hooks from html adapter
   - The html adapter is part of the standard install, but it is unlikely that you would want to generate the files for every new component.
+- Variant ID and filename contain the index
+  - allows for rendering multiple variants based on the same file
 
 ### Fixed
 

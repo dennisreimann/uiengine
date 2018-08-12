@@ -82,8 +82,8 @@ exports.handler = argv => {
         const fileInfos = [].concat.apply([], filesForVariants)
         // turn variant adapter fileinfos into tasks
         R.forEach(({ basename, data }) => {
-          const variantId = `${componentId}/${basename}`
-          const filePath = VariantUtil.variantIdToVariantFilePath(componentsDir, variantId)
+          const variantId = `${componentId}/${basename}-0`
+          const filePath = VariantUtil.variantIdToFilePath(componentsDir, variantId)
           files[filePath] = write(filePath, data)
         }, fileInfos)
 

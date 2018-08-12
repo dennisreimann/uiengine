@@ -56,17 +56,24 @@ describe('Core', function () {
     it('should generate variant previews', async () => {
       await Core.generate(opts)
 
-      assertExists(join(testProjectTargetPath, '_variants', 'form', 'form.pug.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'formfield', 'text-with-label.pug.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'formfield', 'text-without-label.pug.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'number.pug.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text-disabled.pug.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text-required.pug.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text.hbs.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text.pug.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.hbs.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.marko.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.pug.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'form', 'form.pug-1.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'formfield', 'text-with-label.pug-1.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'formfield', 'text-without-label.pug-2.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text.hbs-1.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text.pug-2.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text-required.pug-3.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text-disabled.pug-4.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'input', 'number.pug-5.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text-required.pug-3.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text-disabled.pug-4.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.ejs-1.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.hbs-2.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.marko-4.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.pug-5.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.jsx-6.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.jsx-7.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label-vue.js-8.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label-vue-sfc.vhtml-9.html'))
     })
 
     it('should generate token previews', async () => {
@@ -188,7 +195,7 @@ describe('Core', function () {
       const filePath = join(componentsPath, 'form', 'form.pug')
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
-      assertExists(join(testProjectTargetPath, '_variants', 'form', 'form.pug.html'))
+      assertExists(join(testProjectTargetPath, '_variants', 'form', 'form.pug-1.html'))
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'component')
       assert.strictEqual(change.item, 'form')
@@ -242,7 +249,7 @@ describe('Core', function () {
 
     it('should generate variant on change', async () => {
       const filePath = join(componentsPath, 'form', 'variants', 'form.pug')
-      const existingVariantPath = join(testProjectTargetPath, '_variants', 'form', 'form.pug.html')
+      const existingVariantPath = join(testProjectTargetPath, '_variants', 'form', 'form.pug-1.html')
       fs.removeSync(existingVariantPath)
       fs.removeSync(indexPath)
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')

@@ -15,24 +15,24 @@ describe('VariantUtil', () => {
     })
   })
 
-  describe('#variantFilePathToVariantId', () => {
+  describe('#variantFilePathToIdPrefix', () => {
     it('should return variant id for variant file path', () => {
       const variantFilePath = join(componentsPath, 'button', 'variants', 'primary-button.pug')
-      const variantId = VariantUtil.variantFilePathToVariantId(componentsPath, variantFilePath)
-      assert.strictEqual(variantId, 'button/primary-button.pug')
+      const variantIdPrefix = VariantUtil.variantFilePathToIdPrefix(componentsPath, variantFilePath)
+      assert.strictEqual(variantIdPrefix, 'button/primary-button.pug')
     })
 
     it('should return null for invalid variant file path', () => {
       const variantFilePath = join(componentsPath, 'button', 'button.pug')
-      const variantId = VariantUtil.variantFilePathToVariantId(componentsPath, variantFilePath)
+      const variantId = VariantUtil.variantFilePathToIdPrefix(componentsPath, variantFilePath)
       assert.strictEqual(variantId, null)
     })
   })
 
   describe('#variantIdToTitle', () => {
     it('should return titleized name', () => {
-      assert.strictEqual(VariantUtil.variantIdToTitle('form/form.pug'), 'Form')
-      assert.strictEqual(VariantUtil.variantIdToTitle('formfield/formfield-with-label.pug'), 'Formfield With Label')
+      assert.strictEqual(VariantUtil.variantIdToTitle('form/form.pug-1'), 'Form')
+      assert.strictEqual(VariantUtil.variantIdToTitle('formfield/formfield-with-label.pug-1'), 'Formfield With Label')
     })
   })
 
@@ -52,14 +52,14 @@ describe('VariantUtil', () => {
 
   describe('#variantIdToComponentId', () => {
     it('should return component id for variant id', () => {
-      assert.strictEqual(VariantUtil.variantIdToComponentId('button/primary-button.pug'), 'button')
+      assert.strictEqual(VariantUtil.variantIdToComponentId('button/primary-button.pug-1'), 'button')
     })
   })
 
-  describe('#variantIdToVariantFilePath', () => {
+  describe('#variantIdToFilePath', () => {
     it('should return variant file path for variant id', () => {
       assert.strictEqual(
-        VariantUtil.variantIdToVariantFilePath(componentsPath, 'input/checkbox.pug'),
+        VariantUtil.variantIdToFilePath(componentsPath, 'input/checkbox.pug-1'),
         join(componentsPath, 'input', 'variants', 'checkbox.pug')
       )
     })

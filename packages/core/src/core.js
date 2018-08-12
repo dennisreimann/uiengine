@@ -13,7 +13,7 @@ const {
   ComponentUtil: { componentFilePathToComponentId, componentPathToComponentId },
   PageUtil: { pageFilePathToPageId, parentIdForPageId },
   TemplateUtil: { templateFilePathToTemplateId },
-  VariantUtil: { variantFilePathToVariantId, variantIdToComponentId },
+  VariantUtil: { variantFilePathToIdPrefix, variantIdToComponentId },
   DebugUtil: { debug2 }
 } = require('@uiengine/util')
 
@@ -81,16 +81,16 @@ const getChangeObject = (filePath, action) => {
   const isComponentDir = dirname(filePath) === components
   const isEntityFile = entities && !!filePath.startsWith(entities)
   const isDataFile = !isEntityFile && data && !!filePath.startsWith(data)
-  let pageId, componentId, templateId, variantId, entityId
+  let pageId, componentId, templateId, entityId, variantIdPrefix
 
   // Skip generating individual items in case the data
   // got changed as we need to regenerate everything
   if (!isDataFile) {
     pageId = pages ? pageFilePathToPageId(pages, filePath) : undefined
     entityId = entities ? entityFilePathToEntityId(entities, filePath) : undefined
-    variantId = components ? variantFilePathToVariantId(components, filePath) : undefined
     templateId = templates ? templateFilePathToTemplateId(templates, filePath) : undefined
     componentId = components ? componentFilePathToComponentId(components, filePath) : undefined
+    variantIdPrefix = components ? variantFilePathToIdPrefix(components, filePath) : undefined
   }
 
   // In case a component directory has been deleted we
@@ -101,8 +101,8 @@ const getChangeObject = (filePath, action) => {
 
   if (pageId) {
     return { file, filePath, action, type: 'page', item: pageId }
-  } else if (variantId) {
-    return { file, filePath, action, type: 'variant', item: variantId }
+  } else if (variantIdPrefix) {
+    return { file, filePath, action, type: 'variant', item: variantIdPrefix }
   } else if (componentId) {
     return { file, filePath, action, type: 'component', item: componentId }
   } else if (entityId) {
@@ -238,18 +238,21 @@ async function removeComponent (id) {
   await Builder.generateIncrement(_state)
 }
 
-async function regenerateVariant (id) {
-  const componentId = variantIdToComponentId(id)
+async function regenerateVariant (idPrefix) {
+  const componentId = variantIdToComponentId(idPrefix)
   const component = await fetchAndAssocComponent(componentId)
-  const variant = R.find(variant => variant.id === id)(component.variants)
+  const variants = R.filter(variant => variant.id.startsWith(idPrefix))(component.variants)
+  const variantBuild = R.partial(Builder.generateVariant, [_state])
+  const variantBuilds = R.map(variantBuild, variants)
+
   await Promise.all([
-    Builder.generateVariant(_state, variant),
+    ...variantBuilds,
     Builder.generateIncrement(_state)
   ])
 }
 
-async function removeVariant (id) {
-  const componentId = variantIdToComponentId(id)
+async function removeVariant (idPrefix) {
+  const componentId = variantIdToComponentId(idPrefix)
   await fetchAndAssocComponent(componentId)
   await Builder.generateIncrement(_state)
 }

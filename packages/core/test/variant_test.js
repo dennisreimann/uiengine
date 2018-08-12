@@ -31,9 +31,9 @@ describe('Variant', () => {
           id: 'name',
           name: 'person[name]'
         }
-      })
+      }, 0)
 
-      assert.strictEqual(data.id, 'input/text.pug')
+      assert.strictEqual(data.id, 'input/text.pug-1')
       assert.strictEqual(data.title, 'Text Input')
       assert.strictEqual(data.description, '<p>This is documentation for the text input.</p>')
       assert.strictEqual(data.extension, 'pug')
@@ -45,19 +45,19 @@ describe('Variant', () => {
     })
 
     it('should infer variant title if it is not provided', async () => {
-      const data = await Variant.fetchObject(state, 'form', {}, { file: 'form.pug' })
+      const data = await Variant.fetchObject(state, 'form', {}, { file: 'form.pug' }, 1)
 
       assert.strictEqual(data.title, 'Form')
     })
 
     it('should use component context if variant context is not present', async () => {
-      const data = await Variant.fetchObject(state, 'label', { number: 3 }, { file: 'label.html' })
+      const data = await Variant.fetchObject(state, 'label', { number: 3 }, { file: 'label.html' }, 1)
 
       assert.strictEqual(data.context.number, 3)
     })
 
     it('should prefer variant context over component context', async () => {
-      const data = await Variant.fetchObject(state, 'label', { number: 3 }, { file: 'label.html', context: { number: 4 } })
+      const data = await Variant.fetchObject(state, 'label', { number: 3 }, { file: 'label.html', context: { number: 4 } }, 1)
 
       assert.strictEqual(data.context.number, 4)
     })
@@ -69,12 +69,12 @@ describe('Variant', () => {
 
       assert.strictEqual(variants.length, 6);
 
-      [ 'input/checkbox.pug',
-        'input/number.pug',
-        'input/text.hbs',
-        'input/text.pug',
-        'input/text-disabled.pug',
-        'input/text-required.pug'
+      [ 'input/checkbox.pug-1',
+        'input/number.pug-2',
+        'input/text-disabled.pug-3',
+        'input/text-required.pug-4',
+        'input/text.hbs-5',
+        'input/text.pug-6'
       ].map(id => {
         assert(R.find(variant => variant.id === id, variants), `missing variant "${id}"`)
       })
@@ -85,8 +85,8 @@ describe('Variant', () => {
 
       assert.strictEqual(variants.length, 2);
 
-      [ 'input/checkbox.pug',
-        'input/text.pug'
+      [ 'input/checkbox.pug-1',
+        'input/text.pug-2'
       ].map(id => {
         assert(R.find(variant => variant.id === id, variants), `missing variant "${id}"`)
       })
@@ -100,8 +100,8 @@ describe('Variant', () => {
 
       assert.strictEqual(variants.length, 2);
 
-      [ 'input/checkbox.pug',
-        'input/text.pug'
+      [ 'input/checkbox.pug-1',
+        'input/text.pug-2'
       ].map(id => {
         assert(R.find(variant => variant.id === id, variants), `missing variant "${id}"`)
       })
