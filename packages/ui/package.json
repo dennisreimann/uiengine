@@ -11,7 +11,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=8.11"
   },
   "main": "./src/index.js",
   "files": [
@@ -23,7 +23,7 @@
     "uiengine"
   ],
   "scripts": {
-    "clean": "rimraf dist static",
+    "clean": "rimraf dist lib static",
     "start": "yarn run clean && NODE_ENV=development gulp develop",
     "build": "yarn run clean && NODE_ENV=production gulp build",
     "lint": "eslint --ext .js,.vue build src test"
@@ -44,7 +44,9 @@
   "devDependencies": {
     "autoprefixer": "9.1.0",
     "babel-core": "6.26.3",
+    "babel-eslint": "8.2.6",
     "babel-loader": "7.1.5",
+    "babel-preset-env": "1.7.0",
     "babel-preset-stage-2": "6.24.1",
     "clipboard": "2.0.1",
     "copy-webpack-plugin": "4.5.2",

@@ -2,7 +2,7 @@
   "presets": [
     ["env", {
       "targets": {
-        "node": "8.9.0"
+        "node": "8.11"
       }
     }],
     "vue"

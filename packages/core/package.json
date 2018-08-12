@@ -11,7 +11,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=8.11"
   },
   "main": "./src/uiengine.js",
   "files": [
@@ -34,7 +34,7 @@
     "@uiengine/cli": "^1.0.4",
     "@uiengine/ui": "^1.0.4",
     "@uiengine/util": "^1.0.4",
-    "cosmiconfig": "5.0.5",
+    "cosmiconfig": "5.0.6",
     "fs-extra": "7.0.0",
     "globby": "8.0.1",
     "ramda": "0.25.0"
