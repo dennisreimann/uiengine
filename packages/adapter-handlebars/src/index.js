@@ -18,6 +18,8 @@ const handleError = (options, err, reject, filePath, raw, data) => {
 export async function setup (options) {
   const { components, ext } = options
 
+  if (!components) return
+
   // register all components files, but no variants!
   const pattern = join(components, '*', `*.${ext}`)
   const paths = await glob(pattern, { onlyFiles: true })

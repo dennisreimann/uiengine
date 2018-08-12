@@ -21,7 +21,9 @@ const copyPageFile = (targetPath, sourcePath, source) => {
 async function render (state, template, data, identifier) {
   debug4(state, `Builder.render(${template}):start`)
 
-  const templatePath = join(state.config.source.templates, template)
+  const { templates } = state.config.source
+  if (!templates) throw new UiengineInputError('Templates source directory must be defined!')
+  const templatePath = join(templates, template)
 
   let rendered
   try {
@@ -31,7 +33,7 @@ async function render (state, template, data, identifier) {
 
     if (state.config.debug) message.push(markSample(JSON.stringify(data, null, 2)))
 
-    throw new Error(message.join('\n\n'))
+    throw new UiengineInputError(message.join('\n\n'))
   }
 
   debug4(state, `Builder.render(${template}):end`)
@@ -249,10 +251,10 @@ export const generateIncrement = generateState
 async function generateSketch (state) {
   debug2(state, `Builder.generateSketch():start`)
 
-  const { config: { name, target, template, version } } = state
+  const { config: { name, target, template, version, source: { templates } } } = state
   const identifier = 'HTML Sketchapp Export'
 
-  if (template) {
+  if (templates && template) {
     // render variant preview, with layout
     const data = { state }
     let { rendered } = await render(state, template, data, identifier)
