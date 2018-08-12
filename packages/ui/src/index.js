@@ -3,8 +3,8 @@ import { compile } from 'ejs'
 import htmlescape from 'htmlescape'
 import Color from 'color'
 import locales from './locales'
-import { copyFile, readFile } from './file'
 import { highlight, localize } from './util'
+import { read, copy } from '@uiengine/util/lib/file'
 import { dasherize, titleize } from '@uiengine/util/lib/string'
 
 const supportedLocales = ['en', 'de']
@@ -46,11 +46,11 @@ const helpers = {
 }
 
 async function copyStatic (target) {
-  await copyFile(staticPath, target)
+  await copy(staticPath, target)
 }
 
 async function compileTemplate (name) {
-  const templateString = await readFile(templatePath(name))
+  const templateString = await read(templatePath(name))
 
   templates[name] = compile(templateString)
 }
