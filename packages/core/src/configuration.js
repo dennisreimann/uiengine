@@ -28,8 +28,19 @@ const readFlags = flags => {
 const resolveModule = (basedir, module) =>
   module.startsWith('.') ? resolve(basedir, module) : module
 
-const resolvePath = (basedir, relativePath) =>
-  resolve(basedir, relativePath)
+const resolvePath = (basedir, relativePath) => {
+  if (relativePath instanceof Array) {
+    return relativePath.map(thePath => resolvePath(basedir, thePath))
+  } else {
+    return resolve(basedir, relativePath)
+  }
+}
+
+const resolvePathAsArray = (basedir, relativePath) => {
+  if (!(relativePath instanceof Array)) relativePath = [relativePath]
+
+  return relativePath.map(p => resolvePath(basedir, p))
+}
 
 const resolvePackage = (basedir, config, type) => {
   if (typeof config === 'object' && typeof config.module === 'string') {
@@ -92,6 +103,7 @@ const _read = (configFilePath, projectConfig, flags) => {
   source = R.map(resolvePaths, source)
   source.base = resolve(configPath)
   source.configFile = resolvePath(configPath, configFilePath)
+  source.components = resolvePathAsArray(configPath, source.components)
   target = resolvePath(configPath, target)
   adapters = R.map(resolveAdapters, adapters || {})
   ui = data.ui || {}

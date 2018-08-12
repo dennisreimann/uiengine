@@ -22,7 +22,7 @@ Optionally you can provide an `analyticsId` (from Google Analytics `UA-XXX-X`) t
 
 The base directories for the input, your raw source files:
 
-- `components` is the root of the directory containing the components
+- `components` is the root of the directory (or directories) containing the components
 - `templates` contains the variant preview and application templates
 - `pages` is the directory of the UIengine's site structure and page markdown files
 - `data` contains sample data that can be referenced in variants and pages
@@ -36,6 +36,20 @@ The base directories for the input, your raw source files:
     pages: './src/uiengine/pages',
     data: './src/uiengine/data',
     entities: './src/uiengine/entities'
+  }
+}
+```
+
+The `source.components` config can also be an array of paths:
+
+```js
+{
+  source: {
+    components: [
+      './src/elements',
+      './src/modules',
+    ]
+    // ...
   }
 }
 ```

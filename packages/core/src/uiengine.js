@@ -8,12 +8,12 @@ const {
 const globPattern = join('**', '*')
 
 const sourceFilesFromConfig = ({ source: { configFile, components, data, entities, pages, templates }, adapters, debug, ui }) => {
-  const componentsGlob = components ? join(components, globPattern) : null
+  const componentGlobs = components ? components.map(dir => join(dir, globPattern)) : null
   const templatesGlob = templates ? join(templates, globPattern) : null
   const pagesGlob = pages ? join(pages, globPattern) : null
   const dataGlob = data ? join(data, globPattern) : null
   const entitiesGlob = entities ? join(entities, globPattern) : null
-  const sourceFiles = [configFile, componentsGlob, dataGlob, entitiesGlob, pagesGlob, templatesGlob].filter(a => a)
+  const sourceFiles = [...componentGlobs, configFile, dataGlob, entitiesGlob, pagesGlob, templatesGlob].filter(a => a)
 
   if (debug) {
     const uiLibGlob = join(dirname(require.resolve('@uiengine/ui')), globPattern)

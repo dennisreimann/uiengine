@@ -51,7 +51,8 @@ exports.handler = argv => {
     }
 
     // component
-    const componentsDir = config.source.components
+    const componentDirs = config.source.components
+    const componentsDir = componentDirs[0] // create component in first folder
     const componentDir = relative(process.cwd(), join(componentsDir, componentId))
     const componentTitle = titleize(componentId)
     const componentTemplate = getTemplate('component')

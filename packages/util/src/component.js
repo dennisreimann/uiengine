@@ -1,36 +1,33 @@
 const { dirname, join, relative, sep } = require('path')
-const StringUtil = require('./string')
+const { titleize } = require('./string')
+const { exists } = require('./file')
 
 const COMPONENT_FILENAME = 'component.md'
 const COMPONENTS_DIRNAME = 'components'
 
 const componentIdToTitle = (componentId) =>
-  StringUtil.titleize(componentId)
+  titleize(componentId)
 
 const componentIdToPath = (componentId) =>
   join(COMPONENTS_DIRNAME, componentId)
 
-const componentIdToFilePath = (componentsPath, componentId, fileName = COMPONENT_FILENAME) =>
-  join(componentsPath, componentId, fileName)
+const componentIdToFilePath = (componentPaths, componentId, fileName = COMPONENT_FILENAME) => {
+  const componentPath = componentPaths.find(componentPath => exists(join(componentPath, componentId)))
 
-const componentFilePathToId = (componentsPath, componentFilePath) => {
-  const relativePath = relative(componentsPath, componentFilePath)
-
-  // invalid path: this is not a component
-  if (relativePath.startsWith('..')) return null
-
-  const dir = dirname(relativePath).split(sep)[0]
-
-  return dir
+  return join(componentPath, componentId, fileName)
 }
 
-const componentPathToId = (componentsPath, componentPath) => {
-  const relativePath = relative(componentsPath, componentPath)
+const componentFilePathToId = (componentPaths, componentFilePath) => {
+  const relativePath = componentPathToId(componentPaths, componentFilePath)
 
-  // invalid path: this is not a component
-  if (relativePath.startsWith('..')) return null
+  return relativePath && dirname(relativePath).split(sep)[0]
+}
 
-  return relativePath
+const componentPathToId = (componentPaths, componentPath) => {
+  const relativePaths = componentPaths.map(basePath => relative(basePath, componentPath))
+
+  // paths starting with '..' are invalid: not a file/dir in the base dir
+  return relativePaths.find(relPath => !relPath.startsWith('..'))
 }
 
 module.exports = {

@@ -6,12 +6,12 @@ const Adapter = require('../src/index')
 const options = {}
 const data = { myData: 1 }
 const templatePath = resolve(__dirname, 'fixtures', 'template.hbs')
-const componentsPath = resolve(__dirname, 'fixtures', 'components')
+const components = [resolve(__dirname, 'fixtures', 'components')]
 
 describe('Handlebars adapter', () => {
   describe('#setup', () => {
     it('should register all components files', async () => {
-      await Adapter.setup({ components: componentsPath, ext: 'hbs' })
+      await Adapter.setup({ components, ext: 'hbs' })
 
       assert.strictEqual(Handlebars.partials['button'], '<button>{{title}}</button>\n')
     })

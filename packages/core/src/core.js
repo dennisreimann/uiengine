@@ -78,7 +78,7 @@ async function generate (options) {
 const getChangeObject = (filePath, action) => {
   const { source: { components, pages, templates, data, entities } } = _state.config
   const file = relative(process.cwd(), filePath)
-  const isComponentDir = dirname(filePath) === components
+  const isComponentDir = !!components.find(coponentDir => dirname(filePath) === coponentDir)
   const isEntityFile = entities && !!filePath.startsWith(entities)
   const isDataFile = !isEntityFile && data && !!filePath.startsWith(data)
   let pageId, componentId, templateId, entityId, variantIdPrefix

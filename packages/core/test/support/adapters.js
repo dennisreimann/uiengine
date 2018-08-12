@@ -1,19 +1,19 @@
 const { resolve } = require('path')
 const { testProjectPath } = require('../../../../test/support/paths')
-const componentsPath = resolve(testProjectPath, 'src', 'components')
+const srcPath = resolve(testProjectPath, 'src')
 
 const adapters = {
   pug: {
     module: '@uiengine/adapter-pug',
     options: {
       pretty: true,
-      basedir: componentsPath
+      basedir: srcPath
     }
   },
   html: {
     module: '@uiengine/adapter-html',
     options: {
-      basedir: componentsPath
+      basedir: srcPath
     }
   },
   vhtml: {

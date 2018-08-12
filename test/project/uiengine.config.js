@@ -15,7 +15,7 @@ module.exports = {
   // - templates contains the variant preview and application templates
   // - pages is the directory of the UIengine's site structure and page markdown files
   source: {
-    components: './src/components',
+    components: ['./src/elements', './src/modules'],
     templates: './src/templates',
     entities: './src/uiengine/entities',
     pages: './src/uiengine/pages',

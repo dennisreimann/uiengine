@@ -19,7 +19,7 @@ const state = {
     source: {
       base: testProjectPath,
       configFile: resolve(testProjectPath, 'uiengine.config.js'),
-      components: resolve(testProjectPath, 'src', 'components'),
+      components: [resolve(testProjectPath, 'src', 'elements'), resolve(testProjectPath, 'src', 'modules')],
       templates: resolve(testProjectPath, 'src', 'templates'),
       entities: resolve(testProjectPath, 'src', 'uiengine', 'entities'),
       pages: resolve(testProjectPath, 'src', 'uiengine', 'pages'),

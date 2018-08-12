@@ -9,7 +9,10 @@ const Component = require('../src/component')
 const state = {
   config: {
     source: {
-      components: resolve(testProjectPath, 'src', 'components'),
+      components: [
+        resolve(testProjectPath, 'src', 'elements'),
+        resolve(testProjectPath, 'src', 'modules')
+      ],
       data: resolve(__dirname, 'fixtures'),
       base: testProjectPath
     },

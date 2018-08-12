@@ -26,17 +26,42 @@ describe('Configuration', () => {
       assert(config.debug)
     })
 
-    it('should resolve target and source paths', async () => {
+    it('should resolve target', async () => {
       const config = await Configuration.read(opts)
 
       assert.strictEqual(config.target, testProjectTargetPath)
-      assert.strictEqual(config.source.components, resolve(testProjectPath, 'src', 'components'))
+    })
+
+    it('should resolve base and configFile source paths', async () => {
+      const config = await Configuration.read(opts)
+
+      assert.strictEqual(config.source.base, resolve(testProjectPath))
+      assert.strictEqual(config.source.configFile, resolve(testProjectPath, 'uiengine.config.js'))
+    })
+
+    it('should resolve source paths', async () => {
+      const config = await Configuration.read(opts)
+
       assert.strictEqual(config.source.templates, resolve(testProjectPath, 'src', 'templates'))
       assert.strictEqual(config.source.pages, resolve(testProjectPath, 'src', 'uiengine', 'pages'))
       assert.strictEqual(config.source.entities, resolve(testProjectPath, 'src', 'uiengine', 'entities'))
       assert.strictEqual(config.source.data, resolve(testProjectPath, 'src', 'uiengine', 'data'))
-      assert.strictEqual(config.source.base, resolve(testProjectPath))
-      assert.strictEqual(config.source.configFile, resolve(testProjectPath, 'uiengine.config.js'))
+    })
+
+    it('should resolve components source paths as array', async () => {
+      const config = await Configuration.read(opts)
+
+      assert.strictEqual(config.source.components.length, 2)
+      assert.strictEqual(config.source.components[0], resolve(testProjectPath, 'src', 'elements'))
+      assert.strictEqual(config.source.components[1], resolve(testProjectPath, 'src', 'modules'))
+    })
+
+    it('should resolve components source paths as array if string is given', async () => {
+      const opts = { config: resolve(testProjectPath, 'uiengine-default-ui.yml') }
+      const config = await Configuration.read(opts)
+
+      assert.strictEqual(config.source.components.length, 1)
+      assert.strictEqual(config.source.components[0], resolve(testProjectPath, 'src', 'components'))
     })
 
     it('should resolve UI', async () => {
@@ -64,7 +89,7 @@ describe('Configuration', () => {
 
       assert.strictEqual(config.adapters.pug.module, '@uiengine/adapter-pug')
       assert.strictEqual(config.adapters.pug.options.pretty, true)
-      assert.strictEqual(config.adapters.pug.options.basedir, resolve(testProjectPath, 'src', 'components'))
+      assert.strictEqual(config.adapters.pug.options.basedir, resolve(testProjectPath, 'src'))
       assert.strictEqual(config.adapters.jsx.module, '@uiengine/adapter-react')
       assert.strictEqual(config.adapters.hbs.module, '@uiengine/adapter-handlebars')
       assert.strictEqual(Object.keys(config.adapters.jsx.options).length, 0)

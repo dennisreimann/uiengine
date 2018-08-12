@@ -1,0 +1,9 @@
+include /modules/form/form.pug
+include /modules/formfield/formfield.pug
+include /elements/input/input.pug
+include /elements/label/label.pug
+
++form()
+  +formfield()
+    +label("name", "Name")
+    +input("name", "person[name]")(placeholder="Name")

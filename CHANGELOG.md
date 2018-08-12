@@ -4,6 +4,7 @@
 
 ### Added
 
+- Allow `source.components` config to define lists of directories
 - Config overrides for CLI (see CLI help/usage for details)
 - Option `skipScaffold` for adapters
   - Prevents creation of files for components and variants

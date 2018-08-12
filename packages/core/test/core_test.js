@@ -9,7 +9,7 @@ const { testProjectPath, testProjectRelativePath, testProjectTargetPath } = requ
 const dataPath = resolve(testProjectPath, 'src', 'uiengine', 'data')
 const pagesPath = resolve(testProjectPath, 'src', 'uiengine', 'pages')
 const entitiesPath = resolve(testProjectPath, 'src', 'uiengine', 'entities')
-const componentsPath = resolve(testProjectPath, 'src', 'components')
+const modulesPath = resolve(testProjectPath, 'src', 'modules')
 const templatesPath = resolve(testProjectPath, 'src', 'templates')
 const indexPath = join(testProjectTargetPath, 'index.html')
 const opts = { config: resolve(testProjectPath, 'uiengine.config.js') }
@@ -192,18 +192,18 @@ describe('Core', function () {
     })
 
     it('should generate component on change', async () => {
-      const filePath = join(componentsPath, 'form', 'form.pug')
+      const filePath = join(modulesPath, 'form', 'form.pug')
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
       assertExists(join(testProjectTargetPath, '_variants', 'form', 'form.pug-1.html'))
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'component')
       assert.strictEqual(change.item, 'form')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'components', 'form', 'form.pug'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'modules', 'form', 'form.pug'))
     })
 
     it('should generate component on create', async () => {
-      const componentPath = join(componentsPath, 'my-new-component')
+      const componentPath = join(modulesPath, 'my-new-component')
       const filePath = join(componentPath, 'component.md')
       const fileDir = dirname(filePath)
       fs.mkdirsSync(fileDir)
@@ -215,11 +215,11 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'created')
       assert.strictEqual(change.type, 'component')
       assert.strictEqual(change.item, 'my-new-component')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'components', 'my-new-component', 'component.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'modules', 'my-new-component', 'component.md'))
     })
 
     it('should generate component on delete', async () => {
-      const componentPath = join(componentsPath, 'my-new-component')
+      const componentPath = join(modulesPath, 'my-new-component')
       const filePath = join(componentPath, 'component.md')
       fs.mkdirsSync(componentPath)
       fs.writeFileSync(filePath, '---\ntitle: New component\n---\n')
@@ -235,7 +235,7 @@ describe('Core', function () {
       assert.strictEqual(result2.change.action, 'deleted')
       assert.strictEqual(result2.change.type, 'component')
       assert.strictEqual(result2.change.item, 'my-new-component')
-      assert.strictEqual(result2.change.file, join(testProjectRelativePath, 'src', 'components', 'my-new-component', 'component.md'))
+      assert.strictEqual(result2.change.file, join(testProjectRelativePath, 'src', 'modules', 'my-new-component', 'component.md'))
 
       const result3 = await Core.generateIncrementForFileChange(componentPath, 'deleted')
       fs.removeSync(componentPath)
@@ -244,11 +244,11 @@ describe('Core', function () {
       assert.strictEqual(result3.change.action, 'deleted')
       assert.strictEqual(result3.change.type, 'component')
       assert.strictEqual(result3.change.item, 'my-new-component')
-      assert.strictEqual(result3.change.file, join(testProjectRelativePath, 'src', 'components', 'my-new-component'))
+      assert.strictEqual(result3.change.file, join(testProjectRelativePath, 'src', 'modules', 'my-new-component'))
     })
 
     it('should generate variant on change', async () => {
-      const filePath = join(componentsPath, 'form', 'variants', 'form.pug')
+      const filePath = join(modulesPath, 'form', 'variants', 'form.pug')
       const existingVariantPath = join(testProjectTargetPath, '_variants', 'form', 'form.pug-1.html')
       fs.removeSync(existingVariantPath)
       fs.removeSync(indexPath)
@@ -258,12 +258,12 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'variant')
       assert.strictEqual(change.item, 'form/form.pug')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'components', 'form', 'variants', 'form.pug'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'modules', 'form', 'variants', 'form.pug'))
       assertExists(indexPath)
     })
 
     it('should generate variant on create', async () => {
-      const filePath = join(componentsPath, 'form', 'variants', 'form-fieldsets.pug')
+      const filePath = join(modulesPath, 'form', 'variants', 'form-fieldsets.pug')
       fs.removeSync(indexPath)
       fs.writeFileSync(filePath, 'p Test')
       const { change } = await Core.generateIncrementForFileChange(filePath, 'created')
@@ -273,11 +273,11 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'created')
       assert.strictEqual(change.type, 'variant')
       assert.strictEqual(change.item, 'form/form-fieldsets.pug')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'components', 'form', 'variants', 'form-fieldsets.pug'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'modules', 'form', 'variants', 'form-fieldsets.pug'))
     })
 
     it('should generate variant on delete', async () => {
-      const filePath = join(componentsPath, 'form', 'variants', 'form-fieldsets.pug')
+      const filePath = join(modulesPath, 'form', 'variants', 'form-fieldsets.pug')
       fs.removeSync(indexPath)
       fs.writeFileSync(filePath, 'p Test')
       await Core.generateIncrementForFileChange(filePath, 'created')
@@ -292,7 +292,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'deleted')
       assert.strictEqual(change.type, 'variant')
       assert.strictEqual(change.item, 'form/form-fieldsets.pug')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'components', 'form', 'variants', 'form-fieldsets.pug'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'modules', 'form', 'variants', 'form-fieldsets.pug'))
     })
 
     it('should regenerate pages with tokens on change', async () => {

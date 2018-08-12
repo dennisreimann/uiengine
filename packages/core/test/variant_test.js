@@ -7,12 +7,14 @@ const Variant = require('../src/variant')
 
 const { testProjectPath } = require('../../../test/support/paths')
 const { adapters } = require('./support/adapters')
-const componentsPath = resolve(testProjectPath, 'src', 'components')
 
 const state = {
   config: {
     source: {
-      components: componentsPath,
+      components: [
+        resolve(testProjectPath, 'src', 'elements'),
+        resolve(testProjectPath, 'src', 'modules')
+      ],
       data: resolve(__dirname, 'fixtures'),
       base: testProjectPath
     },
@@ -40,7 +42,7 @@ describe('Variant', () => {
       assert.strictEqual(data.context.id, 'name')
       assert.strictEqual(data.context.name, 'person[name]')
       assertMatches(data.rendered, /<input class="input input--text" id="name" name="person\[name\]" type="text"\/>/g)
-      assertMatches(data.raw, /include \/input\/input\.pug/)
+      assertMatches(data.raw, 'include /elements/input/input.pug')
       assertMatches(data.raw, /\+input\(id, name\)/)
     })
 

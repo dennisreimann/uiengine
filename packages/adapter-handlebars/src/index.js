@@ -9,8 +9,8 @@ async function setup (options) {
   if (!components) return
 
   // register all components files, but no variants!
-  const pattern = join(components, '*', `*.${ext}`)
-  const paths = await glob(pattern, { onlyFiles: true })
+  const patterns = components.map(componentPath => join(componentPath, '*', `*.${ext}`))
+  const paths = await glob(patterns, { onlyFiles: true })
   const registers = []
 
   paths.forEach(filePath => {

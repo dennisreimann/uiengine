@@ -55,8 +55,8 @@ async function findComponentIds (state) {
   const { components } = state.config.source
   if (!components) return []
 
-  const pattern = resolve(components, '**')
-  const componentPaths = await glob(pattern, { onlyDirectories: true, deep: false })
+  const patterns = components.map(componentPath => resolve(componentPath, '**'))
+  const componentPaths = await glob(patterns, { onlyDirectories: true, deep: false })
   const componentIdFromComponentPath = R.partial(componentPathToId, [components])
   const componentIds = R.map(componentIdFromComponentPath, componentPaths)
 

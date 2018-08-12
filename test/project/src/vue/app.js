@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 // import and assign all components that should be used for variant previews
-import MyLabel from '../components/label/label.vue'
+import MyLabel from '../elements/label/label.vue'
 
 Vue.config.productionTip = false
 
