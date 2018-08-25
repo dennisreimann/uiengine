@@ -18,11 +18,13 @@ const { base, mode } = window.UIengine.state.config.ui
 const router = new Router({
   mode: mode || 'history',
   base: base || '/',
-  scrollBehavior (to) {
+  scrollBehavior (to, _from, savedPosition) {
     if (to.hash) {
-      return {
-        selector: to.hash
-      }
+      return { selector: to.hash }
+    } else if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
     }
   },
   routes: [

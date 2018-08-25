@@ -16,6 +16,7 @@
 ### Fixed
 
 - Windows compatibility
+- Proper handling of scroll position on navigation
 
 ## [1.0.0] - 2018-07-17
 
