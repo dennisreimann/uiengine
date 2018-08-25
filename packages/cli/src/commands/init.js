@@ -1,7 +1,7 @@
 const { basename, join, relative, resolve } = require('path')
 const R = require('ramda')
 const {
-  FileUtil: { copy, write },
+  FileUtil: { copy, exists, write },
   MessageUtil: { reportSuccess, reportError },
   PageUtil: { PAGE_FILENAME },
   StringUtil: { titleize }
@@ -18,6 +18,11 @@ exports.builder = argv =>
     // demo
     .boolean('demo')
     .describe('demo', 'Add some demo content')
+    // force
+    .boolean('force')
+    .describe('force', 'Overwrite existing files')
+    .alias('f', 'force')
+    .default('force', false)
 
 exports.handler = async argv => {
   const directory = resolve(process.cwd(), argv.dir)
@@ -49,12 +54,26 @@ exports.handler = async argv => {
   const previewPath = relative(process.cwd(), join(directory, config.source.templates, config.template))
   const indexPath = relative(process.cwd(), join(directory, config.source.pages, PAGE_FILENAME))
   const configPath = relative(process.cwd(), join(directory, argv.config))
-  const createPreviewFile = write(previewPath, previewContent)
-  const createConfigFile = write(configPath, configContent)
-  const createIndexPage = write(indexPath, indexContent)
+
+  const tasks = []
+  const filesCreated = []
+  const filesExisted = []
+
+  const eventuallyWriteFile = (filePath, content) => {
+    if (exists(filePath) && !argv.force) {
+      filesExisted.push(filePath)
+    } else {
+      tasks.push(write(filePath, content))
+      filesCreated.push(filePath)
+    }
+  }
+
+  eventuallyWriteFile(configPath, configContent)
+  eventuallyWriteFile(previewPath, previewContent)
+  eventuallyWriteFile(indexPath, indexContent)
 
   try {
-    await Promise.all([createConfigFile, createIndexPage, createPreviewFile])
+    await Promise.all(tasks)
 
     if (argv.demo) {
       const demoPath = resolve(__dirname, '..', '..', 'demo')
@@ -64,15 +83,29 @@ exports.handler = async argv => {
 
       await Promise.all([copyDemoComponents, copyDemoPages, copyDemoTemplates])
     }
-    reportSuccess([
-      `Initialized ${config.name}!`,
-      'The following files were created:',
-      `- ${configPath} (config file)\n- ${indexPath} (index page)\n- ${previewPath} (preview file)`,
-      argv.demo ? '\nIn addition to these we also created some demo components and pages.\nThese use the html adapter to showcase just the very basics.\n' : '',
+
+    const message = [`Initialized ${config.name}!`]
+    if (filesExisted.length) {
+      message.push(
+        'The following files already existed:',
+        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesExisted).join('\n')
+      )
+    }
+    if (filesCreated.length) {
+      message.push(
+        'The following files were created:',
+        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
+        'Enjoy! ✌️'
+      )
+    }
+    if (argv.demo) {
+      message.push('\nIn addition to these we also created some demo components and pages.\nThese use the html adapter to showcase just the very basics.\n')
+    }
+    message.push(
       'Go ahead and update the config file according to your needs.\nAfter that you can generate the site using this command:',
-      '$ uiengine build',
-      'Enjoy! ✌️'
-    ])
+      '$ uiengine build'
+    )
+    reportSuccess(message)
   } catch (err) {
     reportError(`Initializing ${config.name} failed!`, err)
     process.exit(1)

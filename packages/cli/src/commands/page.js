@@ -2,7 +2,7 @@ const { relative } = require('path')
 const R = require('ramda')
 const Core = require('@uiengine/core/src/core')
 const {
-  FileUtil: { write },
+  FileUtil: { exists, write },
   MessageUtil: { reportSuccess, reportError },
   PageUtil: { pageIdToFilePath, pageIdToTitle }
 } = require('@uiengine/util')
@@ -13,6 +13,11 @@ exports.builder = argv =>
   argv
     .demandCommand(1)
     .example('$0 page <page_id> [page2_id page3_id ...]')
+    // force
+    .boolean('force')
+    .describe('force', 'Overwrite existing files')
+    .alias('f', 'force')
+    .default('force', false)
 
 exports.handler = argv => {
   const opts = {
@@ -29,26 +34,44 @@ exports.handler = argv => {
       const pageTemplate = require('../templates/page').template
 
       const tasks = []
-      const pageFiles = []
+      const filesCreated = []
+      const filesExisted = []
+
       const createPages = R.map(pageId => {
         const pageTitle = pageIdToTitle(pageId)
         const pageContent = pageTemplate(pageTitle).trim()
         const pageFilePath = pageIdToFilePath(pagesDir, pageId)
-        pageFiles.push(pageFilePath)
 
-        return write(pageFilePath, pageContent)
+        if (exists(pageFilePath) && !argv.force) {
+          filesExisted.push(pageFilePath)
+
+          return null
+        } else {
+          filesCreated.push(pageFilePath)
+
+          return write(pageFilePath, pageContent)
+        }
       }, pageIds)
 
       tasks.push(...createPages)
 
       Promise.all(tasks)
         .then(state => {
-          reportSuccess([
-            `${pageIds.length === 1 ? pageId : 'Pages'} created!`,
-            'The following files were created:',
-            R.map(pageFile => '- ' + relative(process.cwd(), pageFile), pageFiles).join('\n'),
-            'Enjoy! ✌️'
-          ])
+          const message = [`${pageIds.length === 1 ? pageId : 'Pages'} created!`]
+          if (filesExisted.length) {
+            message.push(
+              'The following files already existed:',
+              R.map(filePath => '- ' + relative(process.cwd(), filePath), filesExisted).join('\n')
+            )
+          }
+          if (filesCreated.length) {
+            message.push(
+              'The following files were created:',
+              R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
+              'Enjoy! ✌️'
+            )
+          }
+          reportSuccess(message)
         })
         .catch((err) => {
           reportError(`Creating the ${pageIds.length === 1 ? 'page' : 'pages'} failed!`, err)

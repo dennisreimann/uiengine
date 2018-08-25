@@ -5,7 +5,7 @@ const Connector = require('@uiengine/core/src/connector')
 const {
   ComponentUtil: { COMPONENT_FILENAME },
   VariantUtil: { variantIdToFilePath },
-  FileUtil: { write },
+  FileUtil: { exists, write },
   StringUtil: { titleize },
   MessageUtil: { reportSuccess, reportError }
 } = require('@uiengine/util')
@@ -19,6 +19,11 @@ exports.builder = argv =>
   argv
     .demandCommand(1)
     .example('$0 component <component_id> [variant1 variant2 ...]')
+    // force
+    .boolean('force')
+    .describe('force', 'Overwrite existing files')
+    .alias('f', 'force')
+    .default('force', false)
     // adapters
     .array('exclude')
     .describe('exclude', 'Exclude generating files for adapters')
@@ -36,7 +41,19 @@ exports.handler = argv => {
 
   Core.init(opts).then(state => {
     const { config } = state
-    const files = {}
+
+    const tasks = []
+    const filesCreated = []
+    const filesExisted = []
+
+    const eventuallyWriteFile = (filePath, content) => {
+      if (exists(filePath) && !argv.force) {
+        filesExisted.push(filePath)
+      } else {
+        tasks.push(write(filePath, content))
+        filesCreated.push(filePath)
+      }
+    }
 
     // adapters
     const availableAdapters = Object.keys(config.adapters)
@@ -49,7 +66,8 @@ exports.handler = argv => {
     const componentTemplate = getTemplate('component')
     const componentData = componentTemplate(componentTitle).trim()
     const componentFilePath = join(componentDir, COMPONENT_FILENAME)
-    files[componentFilePath] = write(componentFilePath, componentData)
+
+    eventuallyWriteFile(componentFilePath, componentData)
 
     const adapterFilesForComponent = R.map(ext => Connector.filesForComponent(state, ext, componentId), adapters)
     const adapterFilesForVariants = []
@@ -68,7 +86,8 @@ exports.handler = argv => {
       // turn component adapter fileinfos into tasks
       R.forEach(({ basename, data }) => {
         const filePath = join(componentDir, basename)
-        files[filePath] = write(filePath, data)
+
+        eventuallyWriteFile(filePath, data)
       }, fileInfos)
 
       Promise.all(adapterFilesForVariants).then(filesForVariants => {
@@ -78,26 +97,32 @@ exports.handler = argv => {
         R.forEach(({ basename, data }) => {
           const variantId = `${componentId}/${basename}-0`
           const filePath = variantIdToFilePath(componentsDir, variantId)
-          files[filePath] = write(filePath, data)
+
+          eventuallyWriteFile(filePath, data)
         }, fileInfos)
 
-        const filePaths = Object.keys(files)
-        const fileTasks = Object.values(files)
-
-        Promise.all(fileTasks).then(state => {
-          const filesCreated = filePaths.sort().reverse()
-          reportSuccess([
-            `${componentTitle} created!`,
-            'The following files were created:',
-            R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
-            'Add the component to a page by adding the component id to the page file:',
+        Promise.all(tasks).then(state => {
+          const message = [`${componentTitle} created!`]
+          if (filesExisted.length) {
+            message.push(
+              'The following files already existed:',
+              R.map(filePath => '- ' + relative(process.cwd(), filePath), filesExisted).join('\n')
+            )
+          }
+          if (filesCreated.length) {
+            message.push(
+              'The following files were created:',
+              R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
+              'Enjoy! ✌️'
+            )
+          }
+          message.push('Add the component to a page by adding the component id to the page file:',
             `---
 title: PAGE_TITLE
 components:
 - ${componentId}
----`,
-            'Enjoy! ✌️'
-          ])
+---`)
+          reportSuccess(message)
         })
       })
     })
