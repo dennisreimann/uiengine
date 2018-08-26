@@ -84,8 +84,10 @@ async function render (state, templatePath, data = {}) {
 
 async function filesForComponent (state, ext, componentName) {
   const { filesForComponent } = getModule(state, ext)
+  const options = getOptions(state, ext)
+  const fnExists = typeof filesForComponent === 'function'
 
-  if (typeof filesForComponent === 'function') {
+  if (fnExists && !options.skipScaffold) {
     const files = await filesForComponent(componentName)
 
     return files
@@ -96,8 +98,10 @@ async function filesForComponent (state, ext, componentName) {
 
 async function filesForVariant (state, ext, componentName, variantName) {
   const { filesForVariant } = getModule(state, ext)
+  const options = getOptions(state, ext)
+  const fnExists = typeof filesForVariant === 'function'
 
-  if (typeof filesForVariant === 'function') {
+  if (fnExists && !options.skipScaffold) {
     const files = await filesForVariant(componentName, variantName)
 
     return files

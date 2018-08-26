@@ -149,3 +149,18 @@ const filesForVariant = (componentName, variantName) =>
     }
   ]
 ```
+
+To skip scaffolding for certain adapters, provide the `skipScaffold` option in the adapter configuration:
+
+```js
+{
+  adapters: {
+    jsx: {
+      module: '@uiengine/adapter-react',
+      options: {
+        skipScaffold: true
+      }
+    }
+  }
+}
+```

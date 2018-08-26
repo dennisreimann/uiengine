@@ -24,10 +24,6 @@ exports.builder = argv =>
     .describe('force', 'Overwrite existing files')
     .alias('f', 'force')
     .default('force', false)
-    // adapters
-    .array('exclude')
-    .describe('exclude', 'Exclude generating files for adapters')
-    .alias('e', 'exclude')
 
 exports.handler = argv => {
   const opts = {
@@ -37,7 +33,6 @@ exports.handler = argv => {
   const componentId = argv._[1]
   const variants = argv._.slice(2)
   const variantNames = variants.length ? variants : [componentId]
-  const excludeAdapters = argv.exclude || []
 
   Core.init(opts).then(state => {
     const { config } = state
@@ -55,10 +50,6 @@ exports.handler = argv => {
       }
     }
 
-    // adapters
-    const availableAdapters = Object.keys(config.adapters)
-    const adapters = R.difference(availableAdapters, excludeAdapters)
-
     // component
     const componentsDir = config.source.components
     const componentDir = relative(process.cwd(), join(componentsDir, componentId))
@@ -69,6 +60,8 @@ exports.handler = argv => {
 
     eventuallyWriteFile(componentFilePath, componentData)
 
+    // adapters
+    const adapters = Object.keys(config.adapters)
     const adapterFilesForComponent = R.map(ext => Connector.filesForComponent(state, ext, componentId), adapters)
     const adapterFilesForVariants = []
 

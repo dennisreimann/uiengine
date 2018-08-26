@@ -5,6 +5,10 @@
 ### Added
 
 - Config overrides for CLI (see CLI help/usage for details)
+- Option `skipScaffold` for adapters
+  - Prevents creation of files for components and variants
+  - Replaces the cli `--exclude` flag for the `uiengine component` command
+  - See the [adapters documentation](/adapters/) for details.
 
 ### Changed
 
