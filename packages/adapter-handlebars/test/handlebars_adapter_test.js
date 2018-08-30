@@ -1,5 +1,4 @@
 const assert = require('assert')
-const { assertMatches } = require('../../../test/support/asserts')
 const { resolve } = require('path')
 const Handlebars = require('handlebars')
 const Adapter = require('../src/index')
@@ -30,20 +29,6 @@ describe('Handlebars adapter', () => {
         await Adapter.render(options, 'does-not-exist.hbs')
       } catch (error) {
         assert(error)
-
-        assertMatches(error.message, 'Handlebars could not handle "does-not-exist.hbs"')
-      }
-    })
-
-    it('should throw detailed error if the debug option is set', async () => {
-      try {
-        const templatePath = resolve(__dirname, 'fixtures', 'invalid-template.hbs')
-        await Adapter.render({ debug: true }, templatePath, data)
-      } catch (error) {
-        assert(error)
-
-        assertMatches(error.message, '<p>{{myData')
-        assertMatches(error.message, '"myData": 1')
       }
     })
   })
@@ -66,19 +51,6 @@ describe('Handlebars adapter', () => {
         await Adapter.registerComponentFile(options, 'does-not-exist.hbs')
       } catch (error) {
         assert(error)
-
-        assertMatches(error.message, 'Handlebars could not handle "does-not-exist.hbs"')
-      }
-    })
-
-    it('should throw detailed error if the debug option is set', async () => {
-      try {
-        const templatePath = resolve(__dirname, 'fixtures', 'invalid-template.hbs')
-        await Adapter.registerComponentFile({ debug: true }, templatePath)
-      } catch (error) {
-        assert(error)
-
-        assertMatches(error.message, '<p>{{myData')
       }
     })
   })

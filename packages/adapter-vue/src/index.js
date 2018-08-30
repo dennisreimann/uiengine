@@ -115,16 +115,9 @@ async function renderVm (options, filePath, data, vm) {
   return new Promise((resolve, reject) => {
     const renderer = createRenderer()
 
-    renderer.renderToString(vm, (err, html) => {
-      if (err) {
-        const message = [`Vue could not render "${filePath}"!`, err]
-
-        if (options.debug) {
-          message.push(JSON.stringify(data, null, 2))
-          message.push(JSON.stringify(vm.$options, null, 2))
-        }
-
-        reject(message.join('\n\n'))
+    renderer.renderToString(vm, (error, html) => {
+      if (error) {
+        reject(error)
       } else {
         resolve(html)
       }

@@ -20,7 +20,7 @@
     "lint": "eslint --ext .js,.vue build src",
     "packages:link": "for pkg in $(ls -1FA ../../packages | grep / | tr -d /); do if [ $pkg = 'uiengine' ] ; then yarn link uiengine ; else yarn link @uiengine/$pkg; fi; done",
     "packages:unlink": "for pkg in $(ls -1FA ../../packages | grep / | tr -d /); do if [ $pkg = 'uiengine' ] ; then yarn unlink uiengine ; else yarn unlink @uiengine/$pkg; fi; done",
-    "standalone": "yarn run clean && uiengine build -s -w -d"
+    "standalone": "yarn run clean && uiengine build -s -w"
   },
   "dependencies": {
     "ejs": "2.6.1",

@@ -1,5 +1,4 @@
 const assert = require('assert')
-const { assertMatches } = require('../../../test/support/asserts')
 const { resolve } = require('path')
 const Adapter = require('../src/index')
 
@@ -18,21 +17,6 @@ describe('Pug adapter', () => {
         await Adapter.render({}, 'does-not-exist.pug')
       } catch (error) {
         assert(error)
-
-        assertMatches(error.message, 'Pug could not render "does-not-exist.pug"')
-      }
-    })
-
-    it('should throw detailed error if the debug option is set', async () => {
-      try {
-        const templatePath = resolve(__dirname, 'fixtures', 'invalid-template.pug')
-        const data = { myData: 1 }
-        await Adapter.render({ debug: true }, templatePath, data)
-      } catch (error) {
-        assert(error)
-
-        assertMatches(error.message, 'p!!= myData')
-        assertMatches(error.message, '"myData": 1')
       }
     })
   })

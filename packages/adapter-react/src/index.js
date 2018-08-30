@@ -30,24 +30,16 @@ async function registerComponentFile (options, filePath) {
 }
 
 async function render (options, filePath, data = {}) {
-  try {
-    invalidateRequireCache(filePath)
+  invalidateRequireCache(filePath)
 
-    let Element = require(filePath)
-    if (Element.default) Element = Element.default
-    Element = module.exports.wrapElementBeforeRender(Element, filePath, data)
-    const vdom = Element(data)
-    const html = renderToString(vdom)
-    const rendered = module.exports.wrapHtmlAfterRender(html, filePath, data)
+  let Element = require(filePath)
+  if (Element.default) Element = Element.default
+  Element = module.exports.wrapElementBeforeRender(Element, filePath, data)
+  const vdom = Element(data)
+  const html = renderToString(vdom)
+  const rendered = module.exports.wrapHtmlAfterRender(html, filePath, data)
 
-    return rendered
-  } catch (err) {
-    const message = [`React DOM could not render "${filePath}"!`, err]
-
-    if (options.debug) message.push(JSON.stringify(data, null, 2))
-
-    throw new Error(message.join('\n\n'))
-  }
+  return rendered
 }
 
 function filesForComponent (componentName) {

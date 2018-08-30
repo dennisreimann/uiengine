@@ -1,7 +1,6 @@
 require('mocha-sinon')()
 
 const assert = require('assert')
-const { assertMatches } = require('../../../test/support/asserts')
 const { resolve } = require('path')
 const Adapter = require('../src/index')
 
@@ -73,21 +72,6 @@ describe('React adapter', () => {
         await Adapter.render({}, 'does-not-exist.jsx')
       } catch (error) {
         assert(error)
-
-        assertMatches(error.message, 'React DOM could not render "does-not-exist.jsx"')
-      }
-    })
-
-    it('should throw detailed error if the debug option is set', async () => {
-      try {
-        const templatePath = resolve(__dirname, 'fixtures', 'invalid-template.jsx')
-        const data = { myData: 1 }
-        await Adapter.render({ debug: true }, templatePath, data)
-      } catch (error) {
-        assert(error)
-
-        assertMatches(error.message, 'invalid-template.jsx')
-        assertMatches(error.message, '"myData": 1')
       }
     })
   })

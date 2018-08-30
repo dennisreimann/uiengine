@@ -3,18 +3,6 @@ const { basename, extname, join } = require('path')
 const glob = require('globby')
 const Handlebars = require('handlebars')
 
-const handleError = (options, err, reject, filePath, raw, data) => {
-  const message = [`Handlebars could not handle "${filePath}"!`, err]
-
-  if (options.debug) message.push(raw, JSON.stringify(data, null, 2))
-
-  const error = new Error(message.join('\n\n'))
-  error.code = err.code
-  error.path = filePath
-
-  reject(error)
-}
-
 async function setup (options) {
   const { components, ext } = options
 
@@ -34,9 +22,9 @@ async function setup (options) {
 
 async function registerComponentFile (options, filePath) {
   return new Promise((resolve, reject) => {
-    readFile(filePath, 'utf8', (err, raw) => {
-      if (err) {
-        handleError(options, err, reject, filePath, raw)
+    readFile(filePath, 'utf8', (error, raw) => {
+      if (error) {
+        reject(error)
       } else {
         const name = basename(filePath, extname(filePath))
         const id = options.namespace ? `${options.namespace}/${name}` : name
@@ -51,18 +39,14 @@ async function registerComponentFile (options, filePath) {
 
 async function render (options, filePath, data = {}) {
   return new Promise((resolve, reject) => {
-    readFile(filePath, 'utf8', (err, raw) => {
-      if (err) {
-        handleError(options, err, reject, filePath, raw, data)
+    readFile(filePath, 'utf8', (error, raw) => {
+      if (error) {
+        reject(error)
       } else {
-        try {
-          const template = Handlebars.compile(raw)
-          const rendered = template(data)
+        const template = Handlebars.compile(raw)
+        const rendered = template(data)
 
-          resolve(rendered)
-        } catch (err) {
-          handleError(options, err, reject, filePath, raw, data)
-        }
+        resolve(rendered)
       }
     })
   })

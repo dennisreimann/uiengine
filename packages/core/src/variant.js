@@ -1,4 +1,4 @@
-const { basename, join } = require('path')
+const { basename, join, relative } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const Connector = require('./connector')
@@ -69,7 +69,12 @@ async function fetchObject (state, componentId, componentContext, data, index) {
   try {
     [raw, render] = await Promise.all([readTemplate, renderTemplate])
   } catch (err) {
-    const message = [`Variant "${id}" could not be rendered!`, err]
+    const relativeFilePath = relative(process.cwd(), filePath)
+    const message = [
+      `Variant "${title}" could not be rendered!`,
+      `Component: ${componentId}\nFile: ${relativeFilePath}`,
+      err.message
+    ]
 
     if (state.config.debug) message.push(markSample(JSON.stringify(context, null, 2)))
 

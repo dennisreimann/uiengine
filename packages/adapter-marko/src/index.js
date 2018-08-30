@@ -2,18 +2,6 @@ const {
   FileUtil: { invalidateRequireCache }
 } = require('@uiengine/util')
 
-const handleError = (options, err, reject, filePath, data) => {
-  const message = [`Marko could not render "${filePath}"!`, err]
-
-  if (options.debug) message.push(JSON.stringify(data, null, 2))
-
-  const error = new Error(message.join('\n\n'))
-  error.code = err.code
-  error.path = filePath
-
-  reject(error)
-}
-
 async function setup (options) {
   const install = options.install || {
     compilerOptions: {
@@ -34,15 +22,15 @@ async function render (options, filePath, data = {}) {
       invalidateRequireCache(filePath)
       const template = require(filePath)
 
-      template.renderToString(data, (err, rendered) => {
-        if (err) {
-          handleError(options, err, reject, filePath, data)
+      template.renderToString(data, (error, rendered) => {
+        if (error) {
+          reject(error)
         } else {
           resolve(rendered)
         }
       })
-    } catch (err) {
-      handleError(options, err, reject, filePath, data)
+    } catch (error) {
+      reject(error)
     }
   })
 }
