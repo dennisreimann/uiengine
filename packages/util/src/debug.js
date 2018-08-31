@@ -1,7 +1,7 @@
 const { yellow } = require('chalk')
 
 const _debug = (level, state, label, ...additional) => {
-  const { debug } = state.config
+  const { debug } = state.config || {}
   if (!debug || level > debug) return
 
   const [, timingLabel, timingEvent] = label.match(/(.*):(start|end)$/) || []
