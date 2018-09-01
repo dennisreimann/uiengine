@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch test-project in Chrome",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/test/tmp/"
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Launch tests",
