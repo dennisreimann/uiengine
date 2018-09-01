@@ -73,7 +73,7 @@ async function fetchObject (state, componentId, componentContext, data, index) {
     const message = [
       `Variant "${title}" could not be rendered!`,
       `Component: ${componentId}\nFile: ${relativeFilePath}`,
-      err.message
+      err
     ]
 
     if (state.config.debug) message.push(markSample(JSON.stringify(context, null, 2)))
