@@ -28,7 +28,8 @@
     "static-site"
   ],
   "scripts": {
-    "lint": "eslint --ext .js src test"
+    "lint": "eslint src test",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "@uiengine/cli": "^1.0.6",
@@ -42,5 +43,11 @@
   "optionalDependencies": {
     "browser-sync": "2.24.7",
     "chokidar": "2.0.4"
+  },
+  "devDependencies": {
+    "lint-staged": "^7.2.2"
+  },
+  "lint-staged": {
+    "*.js": ["yarn run lint --fix", "git add"]
   }
 }

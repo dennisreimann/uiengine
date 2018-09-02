@@ -30,6 +30,7 @@
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
     "babel-register": "6.26.0",
+    "lint-staged": "^7.2.2",
     "prop-types": "15.6.2",
     "react": "16.4.2",
     "react-dom": "16.4.2"
@@ -42,6 +43,10 @@
     "react-dom": "^16.0"
   },
   "scripts": {
-    "lint": "eslint --ext .js src test"
+    "lint": "eslint src test",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": ["yarn run lint --fix", "git add"]
   }
 }
