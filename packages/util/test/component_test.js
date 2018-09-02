@@ -46,7 +46,7 @@ describe('ComponentUtil', () => {
     })
 
     it('should return undefined for invalid file path', () => {
-      const filePath = join(testProjectPath, 'src', 'uiengine', 'pages', 'page.md')
+      const filePath = join(testProjectPath, 'uiengine', 'pages', 'page.md')
       const componentId = ComponentUtil.componentFilePathToId(componentPaths, filePath)
 
       assert.strictEqual(componentId, undefined)
@@ -67,7 +67,7 @@ describe('ComponentUtil', () => {
     })
 
     it('should return undefined for invalid component id', () => {
-      const filePath = join(testProjectPath, 'src', 'uiengine', 'pages', 'page.md')
+      const filePath = join(testProjectPath, 'uiengine', 'pages', 'page.md')
       const componentId = ComponentUtil.componentPathToId(componentPaths, filePath)
 
       assert.strictEqual(componentId, undefined)

@@ -21,8 +21,8 @@ const state = {
       configFile: resolve(testProjectPath, 'uiengine.config.js'),
       components: [resolve(testProjectPath, 'src', 'elements'), resolve(testProjectPath, 'src', 'modules')],
       templates: resolve(testProjectPath, 'src', 'templates'),
-      entities: resolve(testProjectPath, 'src', 'uiengine', 'entities'),
-      pages: resolve(testProjectPath, 'src', 'uiengine', 'pages'),
+      entities: resolve(testProjectPath, 'uiengine', 'entities'),
+      pages: resolve(testProjectPath, 'uiengine', 'pages'),
       data: resolve(testProjectPath, '..', 'fixtures')
     },
     target,
@@ -87,10 +87,10 @@ const state = {
       title: 'Testcases',
       path: 'testcases',
       files: [
-        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'index.txt'),
-        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'extra-files', 'file-in-folder.txt'),
-        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'),
-        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', '_hidden-files', 'file-in-folder.txt')
+        resolve(testProjectPath, 'uiengine', 'pages', 'testcases', 'index.txt'),
+        resolve(testProjectPath, 'uiengine', 'pages', 'testcases', 'extra-files', 'file-in-folder.txt'),
+        resolve(testProjectPath, 'uiengine', 'pages', 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'),
+        resolve(testProjectPath, 'uiengine', 'pages', 'testcases', '_hidden-files', 'file-in-folder.txt')
       ]
     }),
 
@@ -98,8 +98,8 @@ const state = {
       title: 'Custom Path',
       path: 'testcases/page-with-custom-path',
       files: [
-        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'custom-path', 'file.txt'),
-        resolve(testProjectPath, 'src', 'uiengine', 'pages', 'testcases', 'custom-path', 'extra-files', 'file-in-folder.txt')
+        resolve(testProjectPath, 'uiengine', 'pages', 'testcases', 'custom-path', 'file.txt'),
+        resolve(testProjectPath, 'uiengine', 'pages', 'testcases', 'custom-path', 'extra-files', 'file-in-folder.txt')
       ]
     }),
 

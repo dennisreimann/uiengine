@@ -106,7 +106,7 @@ describe('UIengine', function () {
       // skip this test on CI as file watching does not seem to work in this environment
       const itFn = process.env.CI === 'true' ? it.skip : it
       itFn('should report file changes', function (done) {
-        const pagesPath = resolve(testProjectPath, 'src', 'uiengine', 'pages')
+        const pagesPath = resolve(testProjectPath, 'uiengine', 'pages')
         const filePath = join(pagesPath, 'testcases', 'created', 'page.md')
         const fileDir = dirname(filePath)
 

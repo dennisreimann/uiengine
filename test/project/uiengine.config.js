@@ -1,7 +1,7 @@
-const breakpoints = require('./src/lib/breakpoints.json')
-const viewports = require('./src/lib/viewports.json')
-const pugAdapterOptions = require('./src/lib/pug-adapter-options')
-const vueAdapterOptions = require('./src/lib/vue-adapter-options')
+const breakpoints = require('./lib/breakpoints.json')
+const viewports = require('./lib/viewports.json')
+const pugAdapterOptions = require('./lib/pug-adapter-options')
+const vueAdapterOptions = require('./lib/vue-adapter-options')
 
 module.exports = {
   // Project config: Defaults to name and version from package.json.
@@ -17,9 +17,9 @@ module.exports = {
   source: {
     components: ['./src/elements', './src/modules'],
     templates: './src/templates',
-    entities: './src/uiengine/entities',
-    pages: './src/uiengine/pages',
-    data: './src/uiengine/data'
+    entities: './uiengine/entities',
+    pages: './uiengine/pages',
+    data: './uiengine/data'
   },
 
   // Destination path for the generated site.

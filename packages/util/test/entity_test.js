@@ -3,7 +3,7 @@ const { join, resolve } = require('path')
 
 const EntityUtil = require('../src/entity')
 const { testProjectPath } = require('../../../test/support/paths')
-const entitiesPath = resolve(testProjectPath, 'src', 'uiengine', 'entities')
+const entitiesPath = resolve(testProjectPath, 'uiengine', 'entities')
 
 describe('EntityUtil', () => {
   describe('#entityIdToTitle', () => {

@@ -4,7 +4,7 @@ const { join, resolve } = require('path')
 const PageUtil = require('../src/page')
 
 const { testProjectPath } = require('../../../test/support/paths')
-const pagesPath = resolve(testProjectPath, 'src', 'uiengine', 'pages')
+const pagesPath = resolve(testProjectPath, 'uiengine', 'pages')
 
 describe('PageUtil', () => {
   describe('#pageIdToPath', () => {

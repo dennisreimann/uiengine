@@ -6,9 +6,9 @@ const { dirname, join, resolve } = require('path')
 const Core = require('../src/core')
 
 const { testProjectPath, testProjectRelativePath, testProjectTargetPath } = require('../../../test/support/paths')
-const dataPath = resolve(testProjectPath, 'src', 'uiengine', 'data')
-const pagesPath = resolve(testProjectPath, 'src', 'uiengine', 'pages')
-const entitiesPath = resolve(testProjectPath, 'src', 'uiengine', 'entities')
+const dataPath = resolve(testProjectPath, 'uiengine', 'data')
+const pagesPath = resolve(testProjectPath, 'uiengine', 'pages')
+const entitiesPath = resolve(testProjectPath, 'uiengine', 'entities')
 const modulesPath = resolve(testProjectPath, 'src', 'modules')
 const templatesPath = resolve(testProjectPath, 'src', 'templates')
 const indexPath = join(testProjectTargetPath, 'index.html')
@@ -112,7 +112,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'patterns')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src/uiengine/pages/patterns/page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'patterns', 'page.md'))
     })
 
     it('should generate state file on change', async () => {
@@ -124,7 +124,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'index')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'page.md'))
     })
 
     it('should copy page files on change', async () => {
@@ -135,7 +135,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'testcases')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'testcases', 'extra-files', 'file-in-folder.txt'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'testcases', 'extra-files', 'file-in-folder.txt'))
     })
 
     it('should generate page on create', async () => {
@@ -152,7 +152,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'created')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'testcases/created')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src/uiengine/pages/testcases/created/page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine/pages/testcases/created/page.md'))
     })
 
     it('should generate page on delete', async () => {
@@ -176,7 +176,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'deleted')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'testcases/created')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'testcases', 'created', 'page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'testcases', 'created', 'page.md'))
     })
 
     it('should generate entity update on change', async () => {
@@ -188,7 +188,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'entity')
       assert.strictEqual(change.item, 'Entity')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'uiengine', 'entities', 'Entity.yml'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'entities', 'Entity.yml'))
     })
 
     it('should generate component on change', async () => {
@@ -305,7 +305,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'documentation/tokens/colors')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'documentation', 'tokens', 'colors', 'page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'documentation', 'tokens', 'colors', 'page.md'))
     })
 
     it('should regenerate pages with template on change', async () => {
@@ -318,7 +318,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'testcases/custom-template')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'uiengine', 'pages', 'testcases', 'custom-template', 'page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'testcases', 'custom-template', 'page.md'))
     })
 
     it('should regenerate pages with template on template change', async () => {
@@ -343,7 +343,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'site')
       assert.strictEqual(change.item, 'UIengine Sample Project')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src/uiengine/data/items.yml'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine/data/items.yml'))
     })
 
     it('should regenerate everything on UI file change', async () => {

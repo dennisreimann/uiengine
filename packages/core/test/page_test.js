@@ -4,7 +4,7 @@ const { join, resolve } = require('path')
 
 const Page = require('../src/page')
 const { testProjectPath } = require('../../../test/support/paths')
-const pagesPath = resolve(testProjectPath, 'src', 'uiengine', 'pages')
+const pagesPath = resolve(testProjectPath, 'uiengine', 'pages')
 const state = {
   config: {
     source: {
@@ -86,7 +86,7 @@ describe('Page', () => {
       const state = {
         config: {
           source: {
-            pages: resolve(testProjectPath, 'src', 'uiengine', 'docs')
+            pages: resolve(testProjectPath, 'uiengine', 'docs')
           }
         }
       }

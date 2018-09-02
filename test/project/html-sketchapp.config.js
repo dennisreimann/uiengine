@@ -1,5 +1,5 @@
 // https://github.com/seek-oss/html-sketchapp-cli#viewport-sizes-and-responsive-design
-const viewports = require('./src/lib/viewports.json')
+const viewports = require('./lib/viewports.json')
 
 const viewportsSketch = Object.keys(viewports).reduce((result, name) => {
   const { width, height } = viewports[name]

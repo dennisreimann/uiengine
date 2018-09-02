@@ -1,9 +1,9 @@
 source:
   components: ./src/components
   templates: ./src/templates
-  entities: ./src/uiengine/entities
-  pages: ./src/uiengine/pages
-  data: ./src/uiengine/data
+  entities: ./uiengine/entities
+  pages: ./uiengine/pages
+  data: ./uiengine/data
 
 # Destination path for the generated site.
 target: ../tmp

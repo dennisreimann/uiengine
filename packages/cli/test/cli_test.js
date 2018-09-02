@@ -25,7 +25,7 @@ describe('CLI', function () {
 
       // stdout
       assertMatches(stdout, 'Initialized Cli Project')
-      assertMatches(stdout, 'The following files were created:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- src/uiengine/pages/page.md')
+      assertMatches(stdout, 'The following files were created:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- uiengine/pages/page.md')
 
       // config
       const configPath = join(testPath, 'uiengine.config.js')
@@ -36,15 +36,15 @@ describe('CLI', function () {
       assert.strictEqual(config.name, 'Cli Project')
       assert.strictEqual(config.source.components, './src/components')
       assert.strictEqual(config.source.templates, './src/templates')
-      assert.strictEqual(config.source.pages, './src/uiengine/pages')
-      assert.strictEqual(config.source.data, './src/uiengine/data')
-      assert.strictEqual(config.source.entities, './src/uiengine/entities')
+      assert.strictEqual(config.source.pages, './uiengine/pages')
+      assert.strictEqual(config.source.data, './uiengine/data')
+      assert.strictEqual(config.source.entities, './uiengine/entities')
       assert.strictEqual(config.target, './dist')
       assert.strictEqual(config.adapters.html, '@uiengine/adapter-html')
       assert.strictEqual(config.template, 'uiengine.html')
 
       // homepage
-      const homepagePath = join(testPath, 'src/uiengine/pages/page.md')
+      const homepagePath = join(testPath, 'uiengine/pages/page.md')
       assertContentMatches(homepagePath, 'It looks like you have just set up this project.')
 
       // preview
@@ -60,7 +60,7 @@ describe('CLI', function () {
       const stdout = await runCommand(testPath, 'uiengine init')
 
       // stdout
-      assertMatches(stdout, 'The following files already existed:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- src/uiengine/pages/page.md')
+      assertMatches(stdout, 'The following files already existed:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- uiengine/pages/page.md')
     })
 
     describe('with force flag', () => {
@@ -68,7 +68,7 @@ describe('CLI', function () {
         const stdout = await runCommand(testPath, 'uiengine init -f')
 
         // stdout
-        assertMatches(stdout, 'The following files were created:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- src/uiengine/pages/page.md')
+        assertMatches(stdout, 'The following files were created:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- uiengine/pages/page.md')
       })
     })
 
@@ -102,9 +102,9 @@ describe('CLI', function () {
         assertMatches(stdout, 'In addition to these we also created some demo components and pages.')
 
         // page files
-        assertExists(join(testPath, 'src/uiengine/pages/patterns/page.md'))
-        assertExists(join(testPath, 'src/uiengine/pages/patterns/elements/page.md'))
-        assertExists(join(testPath, 'src/uiengine/pages/patterns/components/page.md'))
+        assertExists(join(testPath, 'uiengine/pages/patterns/page.md'))
+        assertExists(join(testPath, 'uiengine/pages/patterns/elements/page.md'))
+        assertExists(join(testPath, 'uiengine/pages/patterns/components/page.md'))
 
         // component files
         assertExists(join(testPath, 'src/components/button'))
@@ -118,8 +118,8 @@ describe('CLI', function () {
   describe('page command', () => {
     it('should create the page files', async () => {
       const stdout = await runCommand(testPath, 'uiengine page atoms molecules')
-      const atomsPagePath = 'src/uiengine/pages/atoms/page.md'
-      const moleculesPagePath = 'src/uiengine/pages/molecules/page.md'
+      const atomsPagePath = 'uiengine/pages/atoms/page.md'
+      const moleculesPagePath = 'uiengine/pages/molecules/page.md'
 
       // stdout
       assertMatches(stdout, 'Pages created')
@@ -132,9 +132,9 @@ describe('CLI', function () {
 
     it('should not overwrite existing files', async () => {
       const stdout = await runCommand(testPath, 'uiengine page atoms molecules organisms')
-      const atomsPagePath = 'src/uiengine/pages/atoms/page.md'
-      const moleculesPagePath = 'src/uiengine/pages/molecules/page.md'
-      const organismsPagePath = 'src/uiengine/pages/organisms/page.md'
+      const atomsPagePath = 'uiengine/pages/atoms/page.md'
+      const moleculesPagePath = 'uiengine/pages/molecules/page.md'
+      const organismsPagePath = 'uiengine/pages/organisms/page.md'
 
       // stdout
       assertMatches(stdout, `The following files already existed:\n\n- ${atomsPagePath}\n- ${moleculesPagePath}`)
@@ -144,8 +144,8 @@ describe('CLI', function () {
     describe('with force flag', () => {
       it('should overwrite existing files ', async () => {
         const stdout = await runCommand(testPath, 'uiengine page atoms molecules --force')
-        const atomsPagePath = 'src/uiengine/pages/atoms/page.md'
-        const moleculesPagePath = 'src/uiengine/pages/molecules/page.md'
+        const atomsPagePath = 'uiengine/pages/atoms/page.md'
+        const moleculesPagePath = 'uiengine/pages/molecules/page.md'
 
         // stdout
         assertMatches(stdout, `The following files were created:\n\n- ${atomsPagePath}\n- ${moleculesPagePath}`)
