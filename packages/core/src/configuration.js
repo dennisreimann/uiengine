@@ -75,7 +75,7 @@ async function read (flags = {}) {
       throw new UiengineInputError(`No configuration found. Please specify it in ${configPath}`)
     }
   } catch (err) {
-    throw new UiengineInputError(`Could not read UIengine configuration:\n\n${err.message}`)
+    throw new UiengineInputError('Could not read UIengine configuration!', err)
   }
 }
 

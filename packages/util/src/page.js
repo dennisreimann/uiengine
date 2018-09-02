@@ -114,8 +114,8 @@ const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes) 
       throw new UiengineInputError([
         `Child page "${id}" does not exist for page "${pageId}".`,
         'Here is a list of available child pages:',
-        `${availableChildIds.map(childId => `- ${childId}`).join('\n')}`
-      ].join('\n'))
+        availableChildIds.map(childId => `- ${childId}`).join('\n')
+      ])
     }
   }, children)
 

@@ -22,8 +22,8 @@ const dataForPageId = (state, id) => {
       throw new UiengineInputError([
         `Component "${componentId}" does not exist, but was inserted on page "${id}".`,
         'Here is a list of available components:',
-        `${availableComponentIds.map(id => `- ${id}`).join('\n')}`
-      ].join('\n'))
+        availableComponentIds.map(id => `- ${id}`).join('\n')
+      ])
     }
   }, componentIds)
   const childIds = page.childIds.concat(componentPageIds)

@@ -16,11 +16,16 @@ const reportInfo = (msg, opts = { icon: 'ℹ️', transient: true }) => {
 
 const reportError = (msg, err) => {
   const text = getText(msg)
-  const { message, stack } = err || {}
 
-  process.stderr.write(`🚨  ${red(text)}\n\n` +
-    ((stack && !(err instanceof UiengineInputError)) ? stack : message) +
-    '\n\n')
+  let errMessage = ''
+  if (err instanceof UiengineInputError) {
+    const { message, stack } = err.originalError || {}
+    errMessage = `\n\n${err.message}\n\n${stack || message}`
+  } else if (err) {
+    errMessage = `\n\n${err.stack || err.message}`
+  }
+
+  process.stderr.write(`🚨  ${red(text)}${errMessage}\n\n`)
 }
 
 module.exports = {

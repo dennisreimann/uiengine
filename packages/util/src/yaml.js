@@ -84,7 +84,7 @@ const parseString = (string, filename, sourcePaths) => {
 
     return yaml.safeLoad(string.trim(), { schema, filename, json })
   } catch (err) {
-    throw new UiengineInputError(`Could not parse YAML: ${err.message}\n\n${markSample(string)}`)
+    throw new UiengineInputError(['Could not parse YAML!', markSample(string)], err)
   }
 }
 

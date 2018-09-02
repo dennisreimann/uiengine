@@ -29,11 +29,11 @@ async function render (state, template, data, identifier) {
   try {
     rendered = await Connector.render(state, templatePath, data)
   } catch (err) {
-    const message = [`${identifier} could not be generated!`, err]
+    const message = [`${identifier} could not be generated!`]
 
     if (state.config.debug) message.push(markSample(JSON.stringify(data, null, 2)))
 
-    throw new UiengineInputError(message.join('\n\n'))
+    throw new UiengineInputError(message, err)
   }
 
   debug4(state, `Builder.render(${template}):end`)
