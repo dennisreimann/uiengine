@@ -4,7 +4,7 @@ const Core = require('@uiengine/core/src/core')
 const Connector = require('@uiengine/core/src/connector')
 const {
   ComponentUtil: { COMPONENT_FILENAME },
-  VariantUtil: { variantIdToFilePath },
+  VariantUtil: { VARIANTS_DIRNAME },
   FileUtil: { exists, write },
   StringUtil: { titleize },
   MessageUtil: { reportSuccess, reportError }
@@ -25,7 +25,7 @@ exports.builder = argv =>
     .alias('f', 'force')
     .default('force', false)
 
-exports.handler = argv => {
+exports.handler = async argv => {
   const opts = {
     config: argv.config,
     debug: argv.debug
@@ -34,7 +34,8 @@ exports.handler = argv => {
   const variants = argv._.slice(2)
   const variantNames = variants.length ? variants : [componentId]
 
-  Core.init(opts).then(state => {
+  try {
+    const state = await Core.init(opts)
     const { config } = state
 
     const tasks = []
@@ -58,7 +59,6 @@ exports.handler = argv => {
     const componentTemplate = getTemplate('component')
     const componentData = componentTemplate(componentTitle).trim()
     const componentFilePath = join(componentDir, COMPONENT_FILENAME)
-
     eventuallyWriteFile(componentFilePath, componentData)
 
     // adapters
@@ -74,55 +74,52 @@ exports.handler = argv => {
 
     // opposed to the `files` the adapter files are promises,
     // so we have to wait until they are resolved
-    Promise.all(adapterFilesForComponent).then(filesForComponent => {
-      // flatten adapter arrays
-      const fileInfos = [].concat.apply([], filesForComponent)
-      // turn component adapter fileinfos into tasks
-      R.forEach(({ basename, data }) => {
-        const filePath = join(componentDir, basename)
+    const filesForComponent = await Promise.all(adapterFilesForComponent)
+    // flatten adapter arrays
+    const componentFileInfos = [].concat.apply([], filesForComponent)
+    // turn component adapter fileinfos into tasks
+    R.forEach(({ basename, data }) => {
+      const filePath = join(componentDir, basename)
 
-        eventuallyWriteFile(filePath, data)
-      }, fileInfos)
+      eventuallyWriteFile(filePath, data)
+    }, componentFileInfos)
 
-      Promise.all(adapterFilesForVariants).then(filesForVariants => {
-        // flatten adapter arrays
-        const fileInfos = [].concat.apply([], filesForVariants)
-        // turn variant adapter fileinfos into tasks
-        R.forEach(({ basename, data }) => {
-          const variantId = `${componentId}/${basename}-0`
-          const filePath = variantIdToFilePath(componentsDir, variantId)
+    const filesForVariants = await Promise.all(adapterFilesForVariants)
+    // flatten adapter arrays
+    const variantFileInfos = [].concat.apply([], filesForVariants)
 
-          eventuallyWriteFile(filePath, data)
-        }, fileInfos)
+    // turn variant adapter fileinfos into tasks
+    R.forEach(({ basename, data }) => {
+      const filePath = join(componentDir, VARIANTS_DIRNAME, basename)
 
-        Promise.all(tasks).then(state => {
-          const message = [`${componentTitle} created!`]
-          if (filesExisted.length) {
-            message.push(
-              'The following files already existed:',
-              R.map(filePath => '- ' + relative(process.cwd(), filePath), filesExisted).join('\n')
-            )
-          }
-          if (filesCreated.length) {
-            message.push(
-              'The following files were created:',
-              R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
-              'Enjoy! ✌️'
-            )
-          }
-          message.push('Add the component to a page by adding the component id to the page file:',
-            `---
+      eventuallyWriteFile(filePath, data)
+    }, variantFileInfos)
+
+    await Promise.all(tasks)
+
+    const message = [`${componentTitle} created!`]
+    if (filesExisted.length) {
+      message.push(
+        'The following files already existed:',
+        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesExisted).join('\n')
+      )
+    }
+    if (filesCreated.length) {
+      message.push(
+        'The following files were created:',
+        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
+        'Enjoy! ✌️'
+      )
+    }
+    message.push('Add the component to a page by adding the component id to the page file:',
+      `---
 title: PAGE_TITLE
 components:
 - ${componentId}
 ---`)
-          reportSuccess(message)
-        })
-      })
-    })
-  })
-    .catch((err) => {
-      reportError(`Creating the component ${componentId} failed!`, err)
-      process.exit(1)
-    })
+    reportSuccess(message)
+  } catch (err) {
+    reportError(`Creating the component ${componentId} failed!`, err)
+    process.exit(1)
+  }
 }

@@ -19,7 +19,7 @@ exports.builder = argv =>
     .alias('f', 'force')
     .default('force', false)
 
-exports.handler = argv => {
+exports.handler = async argv => {
   const opts = {
     config: argv.config,
     debug: argv.debug
@@ -28,54 +28,52 @@ exports.handler = argv => {
   const additionalPageIds = argv._.slice(2)
   const pageIds = additionalPageIds.length ? [pageId, ...additionalPageIds] : [pageId]
 
-  Core.init(opts)
-    .then(({ config }) => {
-      const pagesDir = config.source.pages
-      const pageTemplate = require('../templates/page').template
+  try {
+    const { config } = await Core.init(opts)
+    const pagesDir = config.source.pages
+    const pageTemplate = require('../templates/page').template
 
-      const tasks = []
-      const filesCreated = []
-      const filesExisted = []
+    const tasks = []
+    const filesCreated = []
+    const filesExisted = []
 
-      const createPages = R.map(pageId => {
-        const pageTitle = pageIdToTitle(pageId)
-        const pageContent = pageTemplate(pageTitle).trim()
-        const pageFilePath = pageIdToFilePath(pagesDir, pageId)
+    const createPages = R.map(pageId => {
+      const pageTitle = pageIdToTitle(pageId)
+      const pageContent = pageTemplate(pageTitle).trim()
+      const pageFilePath = pageIdToFilePath(pagesDir, pageId)
 
-        if (exists(pageFilePath) && !argv.force) {
-          filesExisted.push(pageFilePath)
+      if (exists(pageFilePath) && !argv.force) {
+        filesExisted.push(pageFilePath)
 
-          return null
-        } else {
-          filesCreated.push(pageFilePath)
+        return null
+      } else {
+        filesCreated.push(pageFilePath)
 
-          return write(pageFilePath, pageContent)
-        }
-      }, pageIds)
+        return write(pageFilePath, pageContent)
+      }
+    }, pageIds)
 
-      tasks.push(...createPages)
+    tasks.push(...createPages)
 
-      Promise.all(tasks)
-        .then(state => {
-          const message = [`${pageIds.length === 1 ? pageId : 'Pages'} created!`]
-          if (filesExisted.length) {
-            message.push(
-              'The following files already existed:',
-              R.map(filePath => '- ' + relative(process.cwd(), filePath), filesExisted).join('\n')
-            )
-          }
-          if (filesCreated.length) {
-            message.push(
-              'The following files were created:',
-              R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
-              'Enjoy! ✌️'
-            )
-          }
-          reportSuccess(message)
-        })
-        .catch((err) => {
-          reportError(`Creating the ${pageIds.length === 1 ? 'page' : 'pages'} failed!`, err)
-          process.exit(1)
-        })
-    })
+    await Promise.all(tasks)
+
+    const message = [`${pageIds.length === 1 ? pageId : 'Pages'} created!`]
+    if (filesExisted.length) {
+      message.push(
+        'The following files already existed:',
+        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesExisted).join('\n')
+      )
+    }
+    if (filesCreated.length) {
+      message.push(
+        'The following files were created:',
+        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
+        'Enjoy! ✌️'
+      )
+    }
+    reportSuccess(message)
+  } catch (err) {
+    reportError(`Creating the ${pageIds.length === 1 ? 'page' : 'pages'} failed!`, err)
+    process.exit(1)
+  }
 }
