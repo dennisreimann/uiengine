@@ -2,7 +2,7 @@
   "name": "@uiengine/cli",
   "description": "UIengine command line interface.",
   "license": "MIT",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",

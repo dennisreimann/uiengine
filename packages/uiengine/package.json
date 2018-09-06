@@ -2,7 +2,7 @@
   "name": "uiengine",
   "description": "Create, document and evolve your design system collaboratively.",
   "license": "MIT",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
@@ -25,8 +25,8 @@
   ],
   "dependencies": {
     "@uiengine/adapter-html": "^1.1.0",
-    "@uiengine/cli": "^1.1.0",
-    "@uiengine/core": "^1.1.0",
+    "@uiengine/cli": "^1.1.1",
+    "@uiengine/core": "^1.1.1",
     "@uiengine/ui": "^1.1.0",
     "@uiengine/util": "^1.1.0"
   }
