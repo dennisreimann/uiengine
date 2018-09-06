@@ -21,7 +21,7 @@ To skip the prompt and use some empty defaults, run `npm init -y` instead.
 Next, install the UIengine development dependencies locally:
 
 ```bash
-npm install uiengine --save-dev
+npm install @uiengine/core @uiengine/adapter-html --save-dev
 ```
 
 Now initialize an empty UIengine demo project:
