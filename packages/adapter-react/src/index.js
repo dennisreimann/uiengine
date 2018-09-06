@@ -15,10 +15,14 @@ function wrapHtmlAfterRender (html, filePath, data) {
 }
 
 async function setup (options) {
-  const babelRegisterModule = options.babelRegisterModule || 'babel-register'
-  const babel = options.babel || {}
+  const babelRegisterModule = options.babelRegisterModule || '@babel/register'
+  const { babel } = options
 
-  require(babelRegisterModule)(babel)
+  if (babel) {
+    require(babelRegisterModule)(babel)
+  } else {
+    require(babelRegisterModule)
+  }
 }
 
 async function registerComponentFile (options, filePath) {
@@ -73,10 +77,9 @@ function filesForVariant (componentName, variantName) {
       basename: `${vName}.jsx`,
       data: `import React from 'react'
 import ${cName} from '../${cName}.jsx'
-import { wrapElementBeforeRender } from './index';
 
 export default props => (
-  <${cName} />
+  <${cName} {...props} />
 )
 `
     }

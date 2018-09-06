@@ -1,4 +1,4 @@
-const { resolve } = require('path')
+const { join, resolve } = require('path')
 const { testProjectPath } = require('../../../../test/support/paths')
 const srcPath = resolve(testProjectPath, 'src')
 
@@ -26,7 +26,9 @@ const adapters = {
   },
   jsx: {
     module: '@uiengine/adapter-react',
-    options: {}
+    options: {
+      babel: require(join(testProjectPath, 'babel.config'))
+    }
   },
   ejs: {
     module: '@uiengine/adapter-ejs',

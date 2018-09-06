@@ -3,12 +3,11 @@ require('mocha-sinon')()
 const assert = require('assert')
 const { resolve } = require('path')
 const Adapter = require('../src/index')
+const babel = require('../babel.config')
 
 const templatePath = resolve(__dirname, 'fixtures', 'template.jsx')
 const componentPath = resolve(__dirname, 'fixtures', 'component-with-props.jsx')
-const defaultOptions = {
-  babel: {}
-}
+const defaultOptions = { babel }
 
 describe('React adapter', () => {
   before(() => Adapter.setup(defaultOptions))
@@ -17,27 +16,27 @@ describe('React adapter', () => {
   })
 
   describe('#setup', () => {
-    it('should invoke the babel-register hook function with the default options if none are given', async function () {
+    it('should not invoke the @babel/register hook function if no options are given', async function () {
       // sinon cannot stub modules which export only a function,
       // hence we have to jump through hoops, see the details:
       // https://github.com/sinonjs/sinon/issues/562
       const babelRegisterStub = this.sinon.stub()
-      require.cache[require.resolve('babel-register')] = {
+      delete require.cache[require.resolve('@babel/register')]
+      require.cache[require.resolve('@babel/register')] = {
         default: babelRegisterStub,
         exports: babelRegisterStub
       }
       await Adapter.setup({})
 
-      this.sinon.assert.calledOnce(babelRegisterStub)
-      this.sinon.assert.calledWith(babelRegisterStub, defaultOptions.babel)
+      this.sinon.assert.notCalled(babelRegisterStub)
     })
 
-    it('should invoke the babel-register hook function with the given options', async function () {
+    it('should invoke the @babel/register hook function with the given options', async function () {
       // sinon cannot stub modules which export only a function,
       // hence we have to jump through hoops, see the details:
       // https://github.com/sinonjs/sinon/issues/562
       const babelRegisterStub = this.sinon.stub()
-      require.cache[require.resolve('babel-register')] = {
+      require.cache[require.resolve('@babel/register')] = {
         default: babelRegisterStub,
         exports: babelRegisterStub
       }

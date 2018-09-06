@@ -23,8 +23,8 @@ const state = {
 const assertComponent = (componentIds, componentId) => assert(componentIds.includes(componentId), `missing component "${componentId}"`)
 
 describe('Component', () => {
-  afterEach(() => { fs.removeSync(testTmpPath) })
   before(() => { Connector.setup(state) })
+  afterEach(() => { fs.removeSync(testTmpPath) })
 
   describe('#fetchById', () => {
     it('should return component object', async () => {

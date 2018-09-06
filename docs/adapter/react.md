@@ -22,15 +22,14 @@ adapters:
     options:
       debug: true
       # the babel register module that is used.
-      # default: 'babel-register'
+      # default: '@babel/register'
       babelRegisterModule: @babel/register
       # babel options that get passed to
-      # `require('babel-register')()
+      # `require('@babel/register')()
       # default: none
       babel:
         presets:
           - @babel/preset-env
-          - @babel/preset-stage-2
           - @babel/preset-react
         plugins:
           - css-modules-transform

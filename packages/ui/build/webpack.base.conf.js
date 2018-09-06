@@ -32,12 +32,15 @@ const createLintingRule = () => ({
 // separately, see https://github.com/vuejs/vue-loader/issues/350
 const babelOptions = {
   presets: [
-    ['env', {
+    ['@babel/preset-env', {
       targets: {
         browsers: ['last 2 versions']
       }
-    }],
-    'stage-2'
+    }]
+  ],
+  plugins: [
+    '@babel/plugin-proposal-object-rest-spread',
+    '@babel/plugin-syntax-dynamic-import'
   ]
 }
 

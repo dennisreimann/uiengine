@@ -28,7 +28,6 @@ You can also provide a set of adapter specific options – see the individual a
         babel: {
           presets: [
             '@babel/preset-env',
-            '@babel/preset-stage-2',
             '@babel/preset-react'
           ],
           plugins: [
