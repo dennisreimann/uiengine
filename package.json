@@ -36,14 +36,12 @@
     "vue": "2.5.17"
   },
   "scripts": {
-    "clean": "lerna clean --yes && rimraf node_modules test/project/node_modules && yarn run packages:unlink",
-    "setup": "yarn install && lerna bootstrap && yarn run packages:link && yarn run test-project:setup",
+    "clean": "lerna clean --yes && rimraf node_modules test/project/node_modules",
+    "setup": "yarn install && lerna bootstrap",
     "start": "lerna run start --parallel",
     "build": "lerna run build --parallel",
-    "packages:link": "for pkg in $(ls -1FA packages | grep / | tr -d /); do cd packages/$pkg && yarn link && cd ../..; done",
-    "packages:unlink": "for pkg in $(ls -1FA packages | grep / | tr -d /); do cd packages/$pkg && yarn unlink && cd ../..; done",
     "lint": "lerna run lint --parallel && eslint test/support && cd test/project && yarn run lint",
-    "precommit": "lerna run --concurrency 1 --stream precommit",
+    "precommit": "lerna run --parallel precommit",
     "test": "mocha -R dot packages/*/test",
     "test-watch": "yarn test -w --watch-extensions ejs,hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",
     "cover": "nyc yarn test",
@@ -52,9 +50,8 @@
     "docs:deploy": "yarn run docs:deploy_latest && yarn run docs:deploy_version",
     "docs:deploy_latest": "cd docs && uiengine build && cd .. && $npm_package_config_deployment_command --exclude=v/ deploy/ docs/dist/ uiengine@uiengine.uix.space:virtual/uiengine.uix.space",
     "docs:deploy_version": "VERSION=`echo \"console.log(require('./packages/core/package.json').version);\" | node` && VERSION_PATH=/v/$VERSION && cd docs && uiengine build --override.ui.base=\"$VERSION_PATH/\" && cd .. && mkdir -p deploy/v && sed 's!RewriteBase /!RewriteBase '$VERSION_PATH'/!' deploy/.htaccess > deploy/v/.htaccess && $npm_package_config_deployment_command --rsync-path=\"mkdir -p virtual/uiengine.uix.space/$VERSION_PATH && rsync\" deploy/v/ docs/dist/ uiengine@uiengine.uix.space:virtual/uiengine.uix.space/$VERSION_PATH",
-    "test-project": "cd test/project && NODE_ENV=development yarn start",
-    "test-project:setup": "cd test/project && yarn setup",
-    "test-project:build": "cd test/project && yarn install && NODE_ENV=production yarn build",
+    "test-project": "cd test/project && NODE_ENV=development yarn run dev",
+    "test-project:build": "cd test/project && yarn install && NODE_ENV=production yarn run prod",
     "test-project:deploy": "yarn run test-project:build && $npm_package_config_deployment_command deploy/ test/tmp/ uiengine@uiengine-sample-project.uix.space:virtual/uiengine-sample-project.uix.space"
   },
   "config": {
@@ -68,7 +65,8 @@
     }
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "test/project"
   ],
   "nyc": {
     "exclude": [
