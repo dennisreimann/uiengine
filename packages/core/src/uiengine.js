@@ -8,7 +8,7 @@ const {
 const globPattern = join('**', '*')
 
 const sourceFilesFromConfig = ({ source: { configFile, components, data, entities, pages, templates }, adapters, debug, ui }) => {
-  const componentGlobs = components ? components.map(dir => join(dir, globPattern)) : null
+  const componentGlobs = components ? components.map(dir => join(dir, '*', globPattern)) : null
   const templatesGlob = templates ? join(templates, globPattern) : null
   const pagesGlob = pages ? join(pages, globPattern) : null
   const dataGlob = data ? join(data, globPattern) : null
