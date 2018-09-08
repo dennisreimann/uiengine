@@ -16,9 +16,9 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, entitie
   const sourceFiles = [...componentGlobs, configFile, dataGlob, entitiesGlob, pagesGlob, templatesGlob].filter(a => a)
 
   if (debug) {
-    const uiLibGlob = join(dirname(require.resolve('@uiengine/ui')), globPattern)
-    const uiDistGlob = uiLibGlob.replace(join('ui', 'lib'), join('ui', 'dist'))
-    sourceFiles.push(uiLibGlob, uiDistGlob)
+    const uiSrc = dirname(require.resolve('@uiengine/ui'))
+    const uiGlob = join(uiSrc.replace(join('ui', 'src'), join('ui', '{dist,lib}')), globPattern)
+    sourceFiles.push(uiGlob)
   }
 
   return sourceFiles
