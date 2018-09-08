@@ -1,4 +1,4 @@
-const { join, resolve } = require('path')
+const { dirname, join, relative, resolve } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const {
@@ -70,9 +70,11 @@ async function fetchAll (state) {
 async function fetchById (state, id) {
   debug3(state, `Page.fetchById(${id}):start`)
 
-  const { pages } = state.config.source
+  const { pages, base } = state.config.source
   const pagePath = pageIdToPath(id)
   const absolutePath = pageIdToFilePath(pages, id)
+  const sourceFile = relative(base, absolutePath)
+  const sourcePath = dirname(sourceFile)
   const childPattern = join(pagePath, '*')
   const fetchChildIds = findPageIds(state, childPattern)
   const fetchPageData = readPageFile(state, absolutePath)
@@ -91,7 +93,7 @@ async function fetchById (state, id) {
   attributes = convertUserProvidedChildrenList(id, childIds, attributes)
   attributes = convertUserProvidedComponentsList(id, attributes)
   const baseData = { childIds }
-  const fixData = { id, title, path: pagePath, type, content, files }
+  const fixData = { id, title, path: pagePath, sourcePath, sourceFile, type, content, files }
   const data = R.mergeAll([baseData, attributes, fixData])
 
   if (data.files.length === 0) delete data.files

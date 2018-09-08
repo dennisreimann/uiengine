@@ -23,6 +23,8 @@ describe('Page', () => {
 
       assert.strictEqual(data.id, 'index')
       assert.strictEqual(data.title, 'Home')
+      assert.strictEqual(data.sourcePath, 'uiengine/pages')
+      assert.strictEqual(data.sourceFile, 'uiengine/pages/page.md')
     })
 
     it('should return page object for child page', async () => {
@@ -30,6 +32,8 @@ describe('Page', () => {
 
       assert.strictEqual(data.id, 'patterns')
       assert.strictEqual(data.title, 'Pattern Library')
+      assert.strictEqual(data.sourcePath, 'uiengine/pages/patterns')
+      assert.strictEqual(data.sourceFile, 'uiengine/pages/patterns/page.md')
     })
 
     it('should return page object for grand child page', async () => {
@@ -86,6 +90,7 @@ describe('Page', () => {
       const state = {
         config: {
           source: {
+            base: testProjectPath,
             pages: resolve(testProjectPath, 'uiengine', 'docs')
           }
         }

@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0]
+
+### Added
+
+- Option `ui.repoBaseUrl` for linking components and pages to the repo
+  - For details see the [UI docs](/advanced/ui/).
+
+
 ## [1.1.0] - 2018-09-02
 
 ### Added

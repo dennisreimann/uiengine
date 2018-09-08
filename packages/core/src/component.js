@@ -1,4 +1,4 @@
-const { resolve } = require('path')
+const { dirname, relative, resolve } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const { registerComponentFile } = require('./connector')
@@ -6,7 +6,7 @@ const Variant = require('./variant')
 const {
   FrontmatterUtil,
   MarkdownUtil,
-  ComponentUtil: { componentIdToFilePath, componentIdToPath, componentIdToTitle, componentPathToId },
+  ComponentUtil: { componentIdToFilePath, componentIdToTitle, componentPathToId },
   StringUtil: { titleFromContentHeading },
   DebugUtil: { debug2, debug3, debug4, debug5 }
 } = require('@uiengine/util')
@@ -15,14 +15,14 @@ async function readComponentFile (state, filePath) {
   debug4(state, `Component.readComponentFile(${filePath}):start`)
 
   const { source } = state.config
-  let data = { attributes: {} } // in case there is no component file
+  let data = { attributes: {}, hasComponentFile: false } // in case there is no component file
 
   try {
     const component = await FrontmatterUtil.fromFile(filePath, source)
     const { attributes, body } = component
     const content = await MarkdownUtil.fromString(body)
 
-    data = { attributes, content }
+    data = { attributes, content, hasComponentFile: true }
   } catch (err) {
     debug5(state, 'Could not read component file', filePath, err)
   }
@@ -80,21 +80,23 @@ async function fetchAll (state) {
 async function fetchById (state, id) {
   debug3(state, `Component.fetchById(${id}):start`)
 
-  const { components } = state.config.source
+  const { components, base } = state.config.source
   if (!components) return null
 
-  const componentPath = componentIdToPath(id)
   const componentFilePath = componentIdToFilePath(components, id)
   const [componentData, fileRegistrations] = await Promise.all([
     readComponentFile(state, componentFilePath),
     registerComponentFiles(state, id)
   ])
 
-  let { attributes, content, attributes: { context, variants } } = componentData
+  let { attributes, content, attributes: { context, variants }, hasComponentFile } = componentData
   variants = await Variant.fetchObjects(state, id, context, variants)
 
+  const componentFile = relative(base, componentFilePath)
+  const sourcePath = dirname(componentFile)
+  const sourceFile = hasComponentFile ? componentFile : undefined
   const title = attributes.title || titleFromContentHeading(content) || componentIdToTitle(id)
-  const baseData = { id, title, content, variants, path: componentPath, type: 'component' }
+  const baseData = { id, title, content, variants, sourcePath, sourceFile, type: 'component' }
   const fileData = R.reduce(R.mergeDeepLeft, attributes, R.pluck('data', fileRegistrations))
   const data = R.mergeDeepLeft(baseData, fileData)
 

@@ -3,6 +3,7 @@ module.exports = {
     'toggle': 'Navigation umschalten'
   },
   'options': {
+    'edit': 'Bearbeiten',
     'info': 'Info',
     'properties': 'Properties',
     'preview': 'Vorschau',

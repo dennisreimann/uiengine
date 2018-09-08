@@ -1,6 +1,6 @@
 <template>
   <svg
-    :title="symbol"
+    :title="title"
     class="icon"
     role="presentation"
     aria-hidden="true"
@@ -13,6 +13,11 @@
 <script>
 export default {
   props: {
+    title: {
+      type: String,
+      default: ''
+    },
+
     symbol: {
       type: String,
       required: true

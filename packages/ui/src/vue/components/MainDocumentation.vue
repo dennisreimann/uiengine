@@ -10,6 +10,20 @@
         :tag="tag"
         class="uie-sob-m"
       />
+      <div
+        v-if="repoLink"
+        class="contentheader__options"
+      >
+        <a
+          :href="repoLink"
+          class="contentheader__action"
+        >
+          <app-icon
+            :title="'options.edit' | localize"
+            symbol="pencil"
+          />
+        </a>
+      </div>
     </content-header>
     <content-text :item="page" />
   </section>
@@ -36,10 +50,19 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['pages']),
+    ...mapGetters('state', ['pages', 'config']),
 
     page () {
       return this.pages[this.id]
+    },
+
+    repoLink () {
+      const { repoBaseUrl } = this.config.ui
+      if (!repoBaseUrl) return null
+
+      const { sourceFile, sourcePath } = this.page
+
+      return `${repoBaseUrl}${sourceFile || sourcePath}`
     }
   }
 }

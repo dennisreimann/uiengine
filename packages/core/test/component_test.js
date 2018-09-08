@@ -31,6 +31,9 @@ describe('Component', () => {
       const data = await Component.fetchById(state, 'input')
 
       assert.strictEqual(data.id, 'input')
+      assert.strictEqual(data.title, 'Inputs')
+      assert.strictEqual(data.sourcePath, 'src/elements/input')
+      assert.strictEqual(data.sourceFile, 'src/elements/input/component.md')
     })
 
     it('should return component object for components without component.md file', async () => {
@@ -38,6 +41,8 @@ describe('Component', () => {
 
       assert.strictEqual(data.id, 'form')
       assert.strictEqual(data.title, 'Form')
+      assert.strictEqual(data.sourcePath, 'src/modules/form')
+      assert.strictEqual(data.sourceFile, undefined)
     })
 
     it('should infer variants if they are not provided', async () => {

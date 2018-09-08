@@ -9,6 +9,7 @@ module.exports = {
   name: 'UIengine Sample Project',
   version: '1.0.0',
   copyright: '<a href="https://github.com/dennisreimann/uiengine">Generated with UIengine</a>',
+  debug: 1,
 
   // Base directories for the input, your raw source files:
   // - components is the root of the directory containing the components
@@ -52,6 +53,7 @@ module.exports = {
   template: 'uiengine.pug',
 
   ui: {
+    repoBaseUrl: 'https://github.com/dennisreimann/uiengine/blob/master/test/project/',
     customStylesFile: '/assets/styles/uiengine-custom-styles.css',
     themes: [
       {

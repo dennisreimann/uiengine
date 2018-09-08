@@ -3,6 +3,7 @@ module.exports = {
     'toggle': 'Toggle navigation'
   },
   'options': {
+    'edit': 'Edit',
     'info': 'Info',
     'properties': 'Properties',
     'preview': 'Preview',

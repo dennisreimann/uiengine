@@ -12,10 +12,20 @@
           :tag="tag"
         />
         <div
-          v-if="hasInfo && hasProperties"
+          v-if="repoLink || (hasInfo && hasProperties)"
           role="tablist"
           class="contentheader__options"
         >
+          <a
+            v-if="repoLink"
+            :href="repoLink"
+            class="contentheader__action"
+          >
+            <app-icon
+              :title="'options.edit' | localize"
+              symbol="pencil"
+            />
+          </a>
           <a
             ref="info-tab"
             :id="tabId('info')"
@@ -143,7 +153,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['components', 'entities']),
+    ...mapGetters('state', ['components', 'config', 'entities']),
 
     component () {
       return this.components[this.id]
@@ -172,6 +182,15 @@ export default {
 
     isPropertiesActive () {
       return this.activeSection === 'properties' || (!this.activeSection && !this.hasInfo && this.hasProperties)
+    },
+
+    repoLink () {
+      const { repoBaseUrl } = this.config.ui
+      if (!repoBaseUrl) return null
+
+      const { sourceFile, sourcePath } = this.component
+
+      return `${repoBaseUrl}${sourceFile || sourcePath}`
     }
   },
 

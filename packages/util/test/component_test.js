@@ -9,12 +9,6 @@ const modulesPath = resolve(testProjectPath, 'src', 'modules')
 const componentPaths = [elementsPath, modulesPath]
 
 describe('ComponentUtil', () => {
-  describe('#componentIdToPath', () => {
-    it('should return path for component', () => {
-      assert.strictEqual(ComponentUtil.componentIdToPath('button'), 'components/button')
-    })
-  })
-
   describe('#componentIdToFilePath', () => {
     it('should return component file path for component', () => {
       const filePath = ComponentUtil.componentIdToFilePath(componentPaths, 'formfield')

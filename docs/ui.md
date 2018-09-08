@@ -2,7 +2,7 @@
 
 ## Configuration
 
-This is what the options and their defaults look like:
+This is what the full options look like:
 
 ```js
 {
@@ -10,9 +10,10 @@ This is what the options and their defaults look like:
     lang: 'en',
     hljs: 'atom-one-dark',
     base: '/',
+    repoBaseUrl: 'https://github.com/dennisreimann/uiengine/blob/master/test/project/',
     customStylesFile: '/custom-styles-file.css',
     debug: false,
-    cache: true
+    cache: true,
 
     breakpoints: {
       XS: 320,
@@ -59,6 +60,12 @@ For an example see the [custom styles file of the test project](../test/project/
 
 Sets the base path for the output.
 Defaults to `/`.
+
+### repoBaseUrl
+
+Sets the repository web view base URL (i.e. for GitHub/GitLab).
+This adds a link for components and pages to view/edit the corresponding files in the repo.
+Set this to the blob resource for a particular branch, i.e. `https://github.com/dennisreimann/uiengine/blob/master/test/project/`.
 
 ### debug
 
