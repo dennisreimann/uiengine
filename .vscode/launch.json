@@ -11,6 +11,21 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Launch test-project",
+      "cwd": "${workspaceFolder}/test/project",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--inspect",
+        "./node_modules/.bin/uiengine",
+        "build",
+        "-s",
+        "-w"
+      ],
+      "port": 9229
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Launch tests",
       "runtimeExecutable": "yarn",
       "runtimeArgs": [
