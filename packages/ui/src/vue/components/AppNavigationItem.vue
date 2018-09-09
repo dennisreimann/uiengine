@@ -6,12 +6,12 @@
     <span
       v-if="item.isStructural"
       class="navigation__link"
-    >{{ item.title }}</span>
+    >{{ title }}</span>
     <router-link
       v-else
       :to="item"
       class="navigation__link"
-    >{{ item.title }}</router-link>
+    >{{ title }}</router-link>
     <button
       v-if="children"
       :aria-expanded="!isCollapsed | bool2string"
@@ -70,6 +70,13 @@ export default {
 
     isCollapsed () {
       return this.navigationItemsCollapsed[this.item.id] || false
+    },
+
+    title () {
+      const { title, localizedTitleKey } = this.item
+      return localizedTitleKey
+        ? this.$options.filters.localize(localizedTitleKey)
+        : title
     },
 
     classes () {

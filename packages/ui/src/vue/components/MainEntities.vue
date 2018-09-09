@@ -1,7 +1,7 @@
 <template>
   <section class="page">
     <content-header
-      :title="page.title"
+      :title="title"
       class="uie-sob-l"
     />
     <article class="content">
@@ -36,10 +36,16 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['pages', 'entities']),
+    ...mapGetters('state', ['entities']),
 
-    page () {
-      return this.pages[this.id]
+    title () {
+      return this.$options.filters.localize('entities.title')
+    }
+  },
+
+  metaInfo () {
+    return {
+      title: this.title
     }
   }
 }

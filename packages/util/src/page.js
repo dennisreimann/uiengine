@@ -8,8 +8,6 @@ const INDEX_FILE_PATH = '.'
 const INDEX_PAGE_PATH = ''
 const PAGE_FILENAME = 'page.md'
 const INDEX_ID = 'index'
-const ENTITIES_ID = 'entities'
-const ENTITIES_PAGE_PATH = '_entities'
 
 // types
 const PAGE_TYPE_TOKENS = 'tokens'
@@ -140,8 +138,6 @@ const convertUserProvidedComponentsList = (pageId, attributes) => {
 module.exports = {
   PAGE_FILENAME,
   INDEX_ID,
-  ENTITIES_ID,
-  ENTITIES_PAGE_PATH,
   convertUserProvidedChildrenList,
   convertUserProvidedComponentsList,
   isIndexPage,

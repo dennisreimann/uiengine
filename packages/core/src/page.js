@@ -4,7 +4,7 @@ const glob = require('globby')
 const {
   FrontmatterUtil,
   MarkdownUtil,
-  PageUtil: { ENTITIES_ID, ENTITIES_PAGE_PATH, PAGE_FILENAME, pageFilePathToId, pageIdToFilePath, pageIdToPath, pageIdToTitle, isIndexPage, determineType, convertUserProvidedChildrenList, convertUserProvidedComponentsList },
+  PageUtil: { PAGE_FILENAME, pageFilePathToId, pageIdToFilePath, pageIdToPath, pageIdToTitle, determineType, convertUserProvidedChildrenList, convertUserProvidedComponentsList },
   StringUtil: { titleFromContentHeading },
   DebugUtil: { debug2, debug3, debug4 }
 } = require('@uiengine/util')
@@ -84,8 +84,6 @@ async function fetchById (state, id) {
   const [pageData, childIds] = await Promise.all([fetchPageData, fetchChildIds])
   const files = await findPageFiles(pages, pagePath, childIds)
 
-  if (isIndexPage(id)) childIds.push(ENTITIES_ID)
-
   let { attributes, content } = pageData
 
   const title = attributes.title || titleFromContentHeading(content) || pageIdToTitle(id)
@@ -103,19 +101,7 @@ async function fetchById (state, id) {
   return data
 }
 
-function fetchEntitiesPage (state) {
-  return {
-    id: ENTITIES_ID,
-    path: ENTITIES_PAGE_PATH,
-    type: 'entities',
-    title: 'Entities',
-    keywords: Object.keys(state.entities || []),
-    childIds: []
-  }
-}
-
 module.exports = {
   fetchAll,
-  fetchEntitiesPage,
   fetchById
 }

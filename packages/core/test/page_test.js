@@ -68,11 +68,10 @@ describe('Page', () => {
     it('should infer childIds for index if they are not provided', async () => {
       const data = await Page.fetchById(state, 'index')
 
-      assert.strictEqual(data.childIds.length, 4)
+      assert.strictEqual(data.childIds.length, 3)
       assertItem(data.childIds, 'documentation')
       assertItem(data.childIds, 'patterns')
       assertItem(data.childIds, 'testcases')
-      assertItem(data.childIds, 'entities')
     })
 
     it('should not infer childIds if they are explicitely provided', async () => {
@@ -213,14 +212,6 @@ describe('Page', () => {
       assertItem(pageIds, 'testcases/custom-data')
       assertItem(pageIds, 'testcases/custom-path')
       assertItem(pageIds, 'testcases/custom-template')
-    })
-  })
-
-  describe('#fetchEntitiesPage', () => {
-    it('should return entities page object', async () => {
-      const page = await Page.fetchEntitiesPage(state)
-
-      assertItem(page.id, 'entities')
     })
   })
 })

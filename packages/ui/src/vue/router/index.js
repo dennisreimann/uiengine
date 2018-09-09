@@ -35,6 +35,11 @@ const router = new Router({
       component: mainComponent('search')
     },
     {
+      name: 'entities',
+      path: '/_entities/',
+      component: mainComponent('entities')
+    },
+    {
       name: 'settings',
       path: '/_settings/',
       component: mainComponent('settings')

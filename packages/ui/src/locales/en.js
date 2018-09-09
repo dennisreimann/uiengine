@@ -34,6 +34,7 @@ module.exports = {
     'reference': 'Reference'
   },
   'entities': {
+    'title': 'Datatypes',
     'property_name': 'Property',
     'property_type': 'Type',
     'property_description': 'Description',
