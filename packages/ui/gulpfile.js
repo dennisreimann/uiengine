@@ -3,7 +3,6 @@ const { dirname, join } = require('path')
 const runSequence = require('run-sequence')
 const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
-const p = require('gulp-load-plugins')()
 
 const webpackEnv = process.env.NODE_ENV === 'production' ? 'prod' : 'dev'
 const webpackConfig = require(join(__dirname, `build/webpack.${webpackEnv}.conf.js`))
@@ -12,6 +11,7 @@ const src = {
   webpack: ['src/{scripts,styles,templates,vue}/**/*']
 }
 
+// TODO: Move this to npm script and eliminate gulp build
 gulp.task('hljs', () =>
   gulp.src(`${dirname(require.resolve('highlight.js/styles/github.css'))}/**`)
     .pipe(gulp.dest('./static/styles/hljs'))
@@ -19,7 +19,6 @@ gulp.task('hljs', () =>
 
 gulp.task('webpack', () =>
   gulp.src('src/scripts/main.js')
-    .pipe(p.plumber())
     .pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest('./dist'))
 )
