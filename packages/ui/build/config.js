@@ -26,14 +26,7 @@ module.exports = {
     // If you have problems debugging vue-files in devtools,
     // set this to false - it *may* help
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
-    cacheBusting: true,
-
-    // CSS Sourcemaps off by default because relative paths are "buggy"
-    // with this option, according to the CSS-Loader README
-    // (https://github.com/webpack/css-loader#sourcemaps)
-    // In our experience, they generally work as expected,
-    // just be aware of this issue when enabling this option.
-    cssSourceMap: false
+    cacheBusting: true
   },
 
   build: {
@@ -41,11 +34,6 @@ module.exports = {
     assetsRoot: resolve(__dirname, '../static'),
     assetsSubDirectory: '_assets',
 
-    /**
-     * Source Maps
-     */
-
-    productionSourceMap: true,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

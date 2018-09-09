@@ -41,3 +41,9 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.navigation
+  &__tree
+    list-style none
+</style>

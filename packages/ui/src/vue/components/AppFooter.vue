@@ -98,7 +98,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .footer
   color var(--uie-color-footer-text)
   background var(--uie-color-footer-bg)
@@ -121,6 +121,13 @@ export default {
 
     a + a
       margin-left var(--uie-space-l)
+</style>
+
+<style lang="stylus">
+// add this in case the copyright contains a link
+.footer
+  a
+    link-with-hover(var(--uie-color-footer-link), var(--uie-color-footer-link-hover), false)
 </style>
 
 <docs>

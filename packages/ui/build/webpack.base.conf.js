@@ -4,16 +4,13 @@ const { join } = require('path')
 const utils = require('./utils')
 const config = require('./config')
 const locales = require('./../src/locales')
-const VueLoaderOptionsPlugin = require('vue-loader-options-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const resolve = dir => join(__dirname, '..', dir)
 const isProduction = process.env.NODE_ENV === 'production'
-const sourceMapEnabled = isProduction
-  ? config.build.productionSourceMap
-  : config.dev.cssSourceMap
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
@@ -65,6 +62,7 @@ module.exports = {
     }
   },
   plugins: [
+    new VueLoaderPlugin(),
     // extract css into its own file
     new ExtractTextPlugin({
       filename: utils.assetsPath(`styles/[name]${isProduction ? '.[contenthash:20]' : ''}.css`),
@@ -105,11 +103,6 @@ module.exports = {
       excludeChunks: ['uiengine'],
       inject: false,
       assetPath
-    }),
-    // use babel options in .vue files, see
-    // https://github.com/vuejs/vue-loader/issues/673
-    new VueLoaderOptionsPlugin({
-      babel: babelOptions
     })
   ],
   module: {
@@ -117,31 +110,73 @@ module.exports = {
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            js: 'babel-loader',
-            // styles
-            ...utils.cssLoaders({
-              sourceMap: sourceMapEnabled,
-              extract: true
-            })
-          },
-          cssSourceMap: sourceMapEnabled,
-          cacheBusting: config.dev.cacheBusting,
-          transformToRequire: {
-            video: ['src', 'poster'],
-            source: 'src',
-            img: 'src',
-            image: 'xlink:href'
-          }
-        }
+        loader: 'vue-loader'
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')],
         options: babelOptions
+      },
+      {
+        test: /\.(styl|stylus)$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'vue-style-loader',
+          publicPath: '../../',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'stylus-loader',
+              options: {
+                sourceMap: true,
+                paths: [resolve('src/styles')],
+                import: ['lib/mediaQueries', 'lib/mixins'],
+                url: { name: 'embedurl' }
+              }
+            }
+          ]
+        })
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'vue-style-loader',
+          publicPath: '../../',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'stylus-loader',
+              options: {
+                sourceMap: true,
+                paths: [resolve('src/styles')],
+                import: ['lib/mediaQueries', 'lib/mixins'],
+                url: { name: 'embedurl' }
+              }
+            }
+          ]
+        })
       },
       {
         test: /\.ejs$/,
