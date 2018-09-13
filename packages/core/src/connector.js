@@ -14,7 +14,7 @@ const getModule = ({ config: { adapters } }, ext, filePath) => {
   try {
     return require(module)
   } catch (err) {
-    throw new Error(`Cannot load "${ext}" adapter`, err)
+    throw new UiengineInputError(`Cannot load "${ext}" adapter`, err)
   }
 }
 
