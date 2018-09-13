@@ -160,10 +160,10 @@ const startServer = (state, opts) => {
         // retrigger this function a few times.
         return match + `\n<!-- UIengine: inject start -->\n${snippet}\n<script>
         let retries = 0;
-        const setupSocket = () => {
-          const { socket } = window.___browserSync___ || {};
+        function setupSocket () {
+          const socket = window.___browserSync___ && window.___browserSync___.socket;
           if (socket) {
-            socket.on('uiengine:file:change', filePath => {
+            socket.on('uiengine:file:change', function(filePath) {
               if (window.location.pathname.endsWith(filePath)) {
                 window.location.reload();
                 console.debug('[UIengine]', 'Reload on file change', filePath);
