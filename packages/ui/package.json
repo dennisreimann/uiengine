@@ -17,15 +17,15 @@
   "files": [
     "dist",
     "lib",
-    "src"
+    "src/*.js"
   ],
   "keywords": [
     "uiengine"
   ],
   "scripts": {
-    "clean": "rimraf dist lib static",
-    "start": "yarn run clean && NODE_ENV=development gulp develop",
-    "build": "yarn run clean && NODE_ENV=production gulp build",
+    "clean": "rimraf dist lib",
+    "start": "yarn run clean && NODE_ENV=development webpack --config build/webpack.dev.conf.js --watch",
+    "build": "yarn run clean && NODE_ENV=production webpack --config build/webpack.prod.conf.js",
     "lint": "eslint --ext .js,.vue build src test",
     "precommit": "lint-staged"
   },
@@ -68,7 +68,6 @@
     "file-loader": "2.0.0",
     "friendly-errors-webpack-plugin": "1.7.0",
     "fs-extra": "7.0.0",
-    "gulp": "3.9.1",
     "html-webpack-plugin": "2.30.1",
     "iframe-resizer": "3.6.1",
     "lint-staged": "^7.2.2",

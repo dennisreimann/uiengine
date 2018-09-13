@@ -31,7 +31,7 @@ module.exports = {
 
   build: {
     // Paths
-    assetsRoot: resolve(__dirname, '../static'),
+    assetsRoot: resolve(__dirname, '../dist'),
     assetsSubDirectory: '_assets',
 
     // https://webpack.js.org/configuration/devtool/#production

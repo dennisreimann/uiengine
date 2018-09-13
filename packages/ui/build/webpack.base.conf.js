@@ -1,6 +1,6 @@
 'use strict'
 
-const { join } = require('path')
+const { dirname, join } = require('path')
 const utils = require('./utils')
 const config = require('./config')
 const locales = require('./../src/locales')
@@ -42,12 +42,13 @@ const babelOptions = {
 }
 
 const assetPath = filePath => `<%= basePath %>${filePath}`
+const highlightjsStyles = dirname(require.resolve('highlight.js/styles/github.css'))
 
 module.exports = {
   context: resolve(''),
   entry: {
     uiengine: resolve('src/vue/main.js'),
-    'uiengine-inject': resolve('src/scripts/inject.js'),
+    'uiengine-inject': resolve('src/styles/entry/inject.styl'),
     'uiengine-preview': 'iframe-resizer/js/iframeResizer.contentWindow.js'
   },
   output: {
@@ -75,8 +76,8 @@ module.exports = {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: resolve('static'),
-        to: config.build.assetsSubDirectory,
+        from: highlightjsStyles,
+        to: utils.assetsPath('styles/hljs'),
         ignore: ['.*']
       }
     ]),
@@ -199,8 +200,8 @@ module.exports = {
         }
       },
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
+        test: /\.woff2?$/,
+        loader: 'file-loader',
         options: {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')

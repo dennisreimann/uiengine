@@ -70,10 +70,10 @@ export default {
 </script>
 
 <style lang="stylus">
-@require "settings"
-@require "fonts"
-@require "utilities"
-@require "elements"
+@require "base/settings"
+@require "base/fonts"
+@require "base/utilities"
+@require "base/elements"
 
 // general layout
 @media $mq-up_to_l
