@@ -193,9 +193,10 @@ describe('CLI', function () {
       // index file
       const indexPath = join(testPath, 'dist/index.html')
       assertExists(indexPath)
-      assertContentMatches(indexPath, 'window.UIengine.state = {"config":{"name":"Cli Project"')
-      assertContentMatches(indexPath, '/_assets/scripts/uiengine')
-      assertContentMatches(indexPath, '/_assets/styles/uiengine')
+      assertContentMatches(indexPath, 'window.UIengine = {')
+      assertContentMatches(indexPath, 'state: {"config":{"name":"Cli Project"')
+      assertContentMatches(indexPath, '/_assets/scripts/main')
+      assertContentMatches(indexPath, '/_assets/styles/main')
 
       // ui
       assertExists(join(testPath, 'dist/_assets/scripts'))

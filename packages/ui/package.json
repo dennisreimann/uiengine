@@ -24,9 +24,9 @@
   ],
   "scripts": {
     "clean": "rimraf dist lib",
-    "start": "yarn run clean && NODE_ENV=development webpack --config build/webpack.dev.conf.js --watch",
-    "build": "yarn run clean && NODE_ENV=production webpack --config build/webpack.prod.conf.js",
-    "lint": "eslint --ext .js,.vue build src test",
+    "start": "yarn run clean && NODE_ENV=development webpack --watch",
+    "build": "yarn run clean && NODE_ENV=production webpack",
+    "lint": "eslint --ext .js,.vue src test",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -49,7 +49,7 @@
     "vuex": "3.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/core": "^7.0.1",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
@@ -57,37 +57,34 @@
     "babel-eslint": "9.0.0",
     "babel-loader": "^8.0.2",
     "clipboard": "2.0.1",
+    "compile-ejs-loader": "0.0.1",
     "copy-webpack-plugin": "4.5.2",
     "css-loader": "1.0.0",
     "css-mqpacker": "7.0.0",
     "csswring": "7.0.0",
-    "ejs-compiled-loader": "2.2.0",
     "eslint-loader": "2.1.0",
     "eslint-plugin-vue": "4.7.1",
-    "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "2.0.0",
     "friendly-errors-webpack-plugin": "1.7.0",
     "fs-extra": "7.0.0",
-    "html-webpack-plugin": "2.30.1",
+    "html-webpack-plugin": "3.2.0",
     "iframe-resizer": "3.6.1",
-    "lint-staged": "^7.2.2",
+    "lint-staged": "7.2.2",
+    "mini-css-extract-plugin": "0.4.1",
     "node-notifier": "5.2.1",
-    "optimize-css-assets-webpack-plugin": "3.2.0",
-    "postcss-import": "11.1.0",
-    "postcss-loader": "2.1.6",
+    "optimize-css-assets-webpack-plugin": "5.0.1",
+    "postcss-import": "12.0.0",
+    "postcss-loader": "3.0.0",
     "run-sequence": "2.2.1",
     "stylus": "0.54.5",
     "stylus-loader": "3.0.2",
     "url-loader": "1.1.1",
-    "vue-loader": "15.4.1",
+    "vue-loader": "15.4.2",
     "vue-style-loader": "4.1.2",
     "vue-template-compiler": "2.5.17",
-    "webpack": "3.11.0",
-    "webpack-bundle-analyzer": "2.13.1",
-    "webpack-merge": "4.1.4",
-    "webpack-stream": "4.0.3"
-  },
-  "browserslist": [
-    "last 2 versions"
-  ]
+    "webpack": "4.19.0",
+    "webpack-bundle-analyzer": "3.0.2",
+    "webpack-cli": "3.1.0",
+    "webpack-merge": "4.1.4"
+  }
 }

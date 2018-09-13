@@ -1,32 +1,27 @@
 <%_
 assetPath = htmlWebpackPlugin.options.assetPath
-win = htmlWebpackPlugin.options.window
-css = htmlWebpackPlugin.files.css
-chunks = htmlWebpackPlugin.files.chunks
+files = htmlWebpackPlugin.files
 _%>
 <!DOCTYPE html>
 <html lang="<%%= lang %>" class="uie">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <%_ for (index in css) { _%>
-    <link href="<%- assetPath(css[index]) %>" rel="stylesheet">
+    <%_ for (index in files.css) { _%>
+    <link href="<%- assetPath(files.css[index]) %>" rel="stylesheet">
     <%_ } _%>
     <link rel="stylesheet" href="<%- assetPath('/_assets/styles/hljs/') %><%%= hljs %%>.css" id="hljs" data-default="<%%= hljs %%>" data-tmpl="<%- assetPath('/_assets/styles/hljs/%s.css') %>">
     <%%_ if (customStylesFile) { _%%>
     <link rel="stylesheet" href="<%%= customStylesFile %%>">
     <%%_ } _%%>
-    <script type="text/javascript">
-      window.UIengine = {};
-      window.UIengine.base = <%%- helpers.htmlescape(base) %%>;
-      window.UIengine.state = <%%- helpers.htmlescape(state) %%>;
-      window.UIengine.previewSrc = <%- JSON.stringify(assetPath(chunks['uiengine-preview'].entry)) %>;
-      <%_ if (chunks.manifest) { _%>
-      window.UIengine.manifestSrc = <%- JSON.stringify(assetPath(chunks.manifest.entry)) %>;
-      <%_ } _%>
-      <%_ for (key in win) { _%>
-      window.UIengine.<%= key %> = <%- JSON.stringify(win[key]) %>;
-      <%_ } _%>
+    <script>
+      window.UIengine = {
+        base: <%%- helpers.htmlescape(base) %%>,
+        state: <%%- helpers.htmlescape(state) %%>,
+        previewSrc: <%- JSON.stringify(assetPath(files.chunks.preview.entry)) %>,
+        runtimeSrc: <%- JSON.stringify(assetPath(files.chunks.runtime.entry)) %>,
+        locales: <%- JSON.stringify(htmlWebpackPlugin.options.locales) %>
+      };
     </script>
   </head>
   <body>
@@ -46,12 +41,7 @@ _%>
       </defs>
     </svg>
     <div id="app"></div>
-    <%_ if (chunks.manifest) { _%>
-    <script type="text/javascript" src="<%- assetPath(chunks.manifest.entry) %>"></script>
-    <%_ } _%>
-    <%_ if (chunks.vendor) { _%>
-    <script type="text/javascript" src="<%- assetPath(chunks.vendor.entry) %>"></script>
-    <%_ } _%>
-    <script type="text/javascript" src="<%- assetPath(chunks.uiengine.entry) %>"></script>
+    <script src="<%- assetPath(files.chunks.runtime.entry) %>"></script>
+    <script src="<%- assetPath(files.chunks.main.entry) %>"></script>
   </body>
 </html>

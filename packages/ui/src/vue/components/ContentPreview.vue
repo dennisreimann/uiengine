@@ -227,8 +227,8 @@ export default {
       if (!height) {
         const { contentWindow } = iframe
 
-        // dynamically add manifest and iframe sizer scripts
-        this.addScriptToIframe(window.UIengine.manifestSrc, iframe)
+        // dynamically add runtime and iframe sizer scripts
+        this.addScriptToIframe(window.UIengine.runtimeSrc, iframe)
         this.addScriptToIframe(window.UIengine.previewSrc, iframe)
 
         // initialize iframe sizer
@@ -246,7 +246,6 @@ export default {
     },
 
     addScriptToIframe (scriptSrc, iframe) {
-      if (!scriptSrc) return // guard against manifest src being undefined in dev build
       const { contentDocument } = iframe
       const head = contentDocument.getElementsByTagName('head')[0]
       const script = document.createElement('script')
