@@ -2,6 +2,7 @@ const { basename, join, relative } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const Connector = require('./connector')
+const { UiengineInputError } = require('@uiengine/util')
 
 const {
   DebugUtil: { debug2, debug3 },
@@ -78,7 +79,7 @@ async function fetchObject (state, componentId, componentContext, data, index) {
 
     if (state.config.debug) message.push(markSample(JSON.stringify(context, null, 2)))
 
-    throw new Error(message.join('\n\n'))
+    throw new UiengineInputError(message, err)
   }
 
   const fixData = { id, componentId, title, file, extension, raw, context }

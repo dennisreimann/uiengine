@@ -20,9 +20,11 @@ const reportError = (msg, err) => {
   let errMessage = ''
   if (err instanceof UiengineInputError) {
     const { message, stack } = err.originalError || {}
-    errMessage = `\n\n${err.message}\n\n${stack || message}`
+    const original = stack || message
+    errMessage = `\n\n${err.message}` + (original ? `\n\n${original}` : '')
   } else if (err) {
-    errMessage = `\n\n${err.stack || err.message}`
+    const { message, stack } = err
+    errMessage = `\n\n${stack || message}`
   }
 
   process.stderr.write(`🚨  ${red(text)}${errMessage}\n\n`)

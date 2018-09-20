@@ -56,7 +56,10 @@ const resolvePackage = (basedir, config, type) => {
       options: {}
     }
   } else {
-    throw new UiengineInputError(`${type} needs to be a configuration object (with module and options keys) or a module string (requireable path or name):`, markSample(config))
+    throw new UiengineInputError([
+      `${type} needs to be a configuration object (with module and options keys) or a module string (requireable path or name):`,
+      markSample(config)
+    ])
   }
 }
 
@@ -72,7 +75,7 @@ async function read (flags = {}) {
     if (result) {
       return _read(result.filepath, result.config, flags)
     } else {
-      throw new UiengineInputError(`No configuration found. Please specify it in ${configPath}`)
+      throw new UiengineInputError(`No configuration found. Please specify it in "${configPath}".`)
     }
   } catch (err) {
     throw new UiengineInputError('Could not read UIengine configuration!', err)
