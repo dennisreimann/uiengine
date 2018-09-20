@@ -23,25 +23,26 @@
     "react"
   ],
   "dependencies": {
-    "@uiengine/util": "^1.1.2",
+    "@uiengine/util": "1.1.2",
+    "deps-report": "0.5.0",
     "react-docgen": "2.21.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/register": "^7.0.0",
-    "lint-staged": "^7.2.2",
+    "@babel/core": "7.1.0",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-react": "7.0.0",
+    "@babel/register": "7.0.0",
+    "lint-staged": "7.3.0",
     "prop-types": "15.6.2",
-    "react": "16.5.0",
-    "react-dom": "16.5.0"
+    "react": "16.5.2",
+    "react-dom": "16.5.2"
   },
   "optionalDependencies": {
     "prop-types": "15.6.2"
   },
   "peerDependencies": {
-    "react": "^16.0",
-    "react-dom": "^16.0"
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
   },
   "scripts": {
     "lint": "eslint src test",

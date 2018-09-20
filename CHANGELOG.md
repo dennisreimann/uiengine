@@ -7,6 +7,10 @@
 - Option `ui.repoBaseUrl` for linking components and pages to the repo
   - For details see the [UI docs](/advanced/ui/).
 
+### Changed
+
+- Removed parent package `uiengine`
+  - use scoped packages directly, i.e. `@uiengine/core` plus `@uiengine/adapter-html`
 
 ## [1.1.0] - 2018-09-02
 

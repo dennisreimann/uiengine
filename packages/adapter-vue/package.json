@@ -29,13 +29,13 @@
     "vue-template-compiler": "2.5.17"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "lint-staged": "^7.2.2",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "lint-staged": "^7.3.0",
     "vue": "2.5.17"
   },
   "peerDependencies": {
-    "vue": "^2.3"
+    "vue": "^2.5.17"
   },
   "scripts": {
     "lint": "eslint --ext .js,.vue src test",
