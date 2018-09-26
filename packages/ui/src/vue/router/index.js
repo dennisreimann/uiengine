@@ -32,17 +32,20 @@ const router = new Router({
       name: 'search',
       path: '/_search/:query',
       props: true,
-      component: mainComponent('search')
+      component: mainComponent('search'),
+      meta: { navItemId: '_search' }
     },
     {
       name: 'entities',
       path: '/_entities/',
-      component: mainComponent('entities')
+      component: mainComponent('entities'),
+      meta: { navItemId: '_entities' }
     },
     {
       name: 'settings',
       path: '/_settings/',
-      component: mainComponent('settings')
+      component: mainComponent('settings'),
+      meta: { navItemId: '_settings' }
     },
     {
       path: '*',

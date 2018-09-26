@@ -22,7 +22,10 @@ That's it.
 ## Relative links
 
 - [Existing file, but not a UIengine page](/_pages/testcases/custom-template.html)
-- [Existing file, but not a UIengine page](/_pages/testcases/custom-template.html)
+- [Custom Template](/testcases/custom-template/)
+- [Entities page](/_entities/)
+- [Settings page](/_settings/)
+- [Non existing page](/doesnotexist/)
 
 ---
 

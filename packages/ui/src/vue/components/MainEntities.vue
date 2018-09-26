@@ -28,13 +28,6 @@ export default {
     ContentProperties
   },
 
-  props: {
-    id: {
-      type: String,
-      required: true
-    }
-  },
-
   computed: {
     ...mapGetters('state', ['entities']),
 

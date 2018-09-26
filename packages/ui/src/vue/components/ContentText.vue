@@ -45,10 +45,14 @@ export default {
           const linkTarget = target.getAttribute('target')
           if (/\b_blank\b/i.test(linkTarget)) return
         }
-        // don't handle same page links/anchors
+        // try to resolve url and see if it is internal
         const url = new URL(target.href)
         const to = url.pathname
-        if (window.location.pathname !== to && $event.preventDefault) {
+        const route = this.$router.resolve(to)
+        const isInNavigation = route.resolved.meta.navItemId !== undefined
+        const isSamePage = window.location.pathname !== to
+        // don't handle same page links/anchors or non-internal urls
+        if (isInNavigation && !isSamePage && $event.preventDefault) {
           $event.preventDefault()
           this.$router.push(to)
         }
