@@ -62,6 +62,10 @@ export default {
       > :last-child
         margin-bottom 0
 
+  hr
+    margin-top var(--uie-space-l)
+    margin-bottom var(--uie-space-l)
+
   pre
     margin-top var(--uie-space-m)
     margin-bottom var(--uie-space-l)
@@ -72,7 +76,10 @@ export default {
     border-radius var(--uie-space-xs)
 
   h1,
-  h2,
+  h2
+    &:not([class])
+      margin-bottom var(--uie-space-m)
+
   h3,
   h4,
   h5,

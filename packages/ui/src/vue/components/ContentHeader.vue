@@ -1,3 +1,4 @@
+
 <template>
   <header class="contentheader">
     <content-heading
@@ -63,7 +64,7 @@ export default {
     transition-property color
     transition-duration var(--uie-transition-duration-fast)
 
-    &:not(&[aria-selected]):hover
+    &:not([aria-selected]):hover
       color var(--uie-color-contentheader-link-hover)
 
     &[aria-selected]
