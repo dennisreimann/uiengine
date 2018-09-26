@@ -68,6 +68,7 @@ export default {
     findPrevPage (navItemId, skipSelf = false, skipChildren = true) {
       if (!navItemId) return
       const navItem = this.navigation[navItemId]
+      if (!navItem) return
       const { childIds, prevSiblingId, parentId } = navItem
       if (!skipChildren && childIds) {
         return this.findPrevPage(childIds[childIds.length - 1], false, false)
@@ -83,6 +84,7 @@ export default {
     findNextPage (navItemId, skipSelf = false, skipChildren = false) {
       if (!navItemId) return
       const navItem = this.navigation[navItemId]
+      if (!navItem) return
       const { childIds, nextSiblingId, parentId } = navItem
       if (!skipSelf && !navItem.isStructural) {
         return navItem

@@ -38,7 +38,7 @@
   "scripts": {
     "clean": "lerna clean --yes && rimraf node_modules test/project/node_modules",
     "setup": "yarn install && lerna bootstrap",
-    "start": "lerna run start --parallel",
+    "start": "cd packages/ui && yarn start",
     "build": "lerna run build --parallel",
     "lint": "lerna run lint --parallel && eslint test/support && cd test/project && yarn run lint",
     "precommit": "lerna run --parallel precommit",

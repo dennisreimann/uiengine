@@ -3,6 +3,12 @@ const viewports = require('./lib/viewports.json')
 const pugAdapterOptions = require('./lib/pug-adapter-options')
 const vueAdapterOptions = require('./lib/vue-adapter-options')
 
+// option to simulate base - mainly for debugging and development purposes
+const simulateBase = false
+const base = simulateBase ? '/design-system/' : '/'
+const target = simulateBase ? `../tmp${base}` : '../tmp'
+const baseDir = simulateBase ? '../tmp' : undefined
+
 module.exports = {
   // Project config: Defaults to name and version from package.json.
   // Here you can overwrite it and add more custom properties.
@@ -24,7 +30,7 @@ module.exports = {
   },
 
   // Destination path for the generated site.
-  target: '../tmp',
+  target,
 
   // Adapters are used for templating/rendering. Each adapter is a module that gets required
   // and needs to provide functions for setup and rendering. For details see the adapters docs.
@@ -53,6 +59,9 @@ module.exports = {
   template: 'uiengine.pug',
 
   ui: {
+    base,
+    breakpoints,
+    viewports,
     repoBaseUrl: 'https://github.com/dennisreimann/uiengine/blob/master/test/project/',
     customStylesFile: '/assets/styles/uiengine-custom-styles.css',
     themes: [
@@ -65,12 +74,13 @@ module.exports = {
         title: 'Funky crazy awesome'
       }
     ],
-    breakpoints,
-    viewports,
     defaultPreviewMode: 'viewports'
   },
 
   browserSync: {
-    open: false
+    open: false,
+    server: {
+      baseDir
+    }
   }
 }

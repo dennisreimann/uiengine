@@ -46,11 +46,16 @@ export default {
           if (/\b_blank\b/i.test(linkTarget)) return
         }
         // try to resolve url and see if it is internal
+        const { base } = window.UIengine.state.config.ui
+        const baseRegex = new RegExp(`^${base}`)
         const url = new URL(target.href)
-        const to = url.pathname
+        const targetPath = url.pathname
+        const windowPath = window.location.pathname
+        const to = targetPath.replace(baseRegex, '/')
+        const from = windowPath.replace(baseRegex, '/')
         const route = this.$router.resolve(to)
         const isInNavigation = route.resolved.meta.navItemId !== undefined
-        const isSamePage = window.location.pathname !== to
+        const isSamePage = from === to
         // don't handle same page links/anchors or non-internal urls
         if (isInNavigation && !isSamePage && $event.preventDefault) {
           $event.preventDefault()

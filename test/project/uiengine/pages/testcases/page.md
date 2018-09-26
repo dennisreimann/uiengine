@@ -21,11 +21,15 @@ That's it.
 
 ## Relative links
 
-- [Existing file, but not a UIengine page](/_pages/testcases/custom-template.html)
-- [Custom Template](/testcases/custom-template/)
-- [Entities page](/_entities/)
-- [Settings page](/_settings/)
-- [Non existing page](/doesnotexist/)
+### With base not being set
+
+| Type                                   | Default base                                     | Base being set to `/design-system/`                          |
+| -------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------|
+| Existing, but not a documentation page | [Link](/_pages/testcases/custom-template.html)   | [Link](/design-system/_pages/testcases/custom-template.html) |
+| Custom Template                        | [Link](/testcases/custom-template/)              | [Link](/design-system/testcases/custom-template/)            |
+| Entities page                          | [Link](/_entities/)                              | [Link](/design-system/_entities/)                            |
+| Settings page                          | [Link](/_settings/)                              | [Link](/design-system/_settings/)                            |
+| Non existing page                      | [Link](/doesnotexist/)                           | [Link](/design-system/doesnotexist/)                         |
 
 ---
 

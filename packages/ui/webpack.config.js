@@ -12,7 +12,8 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 const highlightjsStyles = dirname(require.resolve('highlight.js/styles/github.css'))
 const resolve = dir => join(__dirname, dir)
-const publicPath = filePath => join('_assets', filePath)
+const assetsPath = '_assets'
+const publicPath = filePath => join(assetsPath, filePath)
 const assetPath = filePath => `<%= basePath %>${filePath}`
 const fileNameTmpl = `[name]${isProduction ? '.[contenthash:7]' : ''}`
 const plugins = [
@@ -208,7 +209,11 @@ module.exports = {
         loader: 'file-loader',
         options: {
           limit: 10000,
-          name: publicPath('fonts/[name].[hash:7].[ext]')
+          // useRelativePath: true did not work, hence the dance
+          // name: publicPath('fonts/[name].[hash:7].[ext]'),
+          name: 'fonts/[name].[hash:7].[ext]',
+          outputPath: assetsPath,
+          publicPath: '..'
         }
       }
     ]
