@@ -82,6 +82,20 @@
           class="contentheader__options"
         >
           <a
+            v-for="action in customActions"
+            :key="action.title"
+            :title="action.title"
+            href="#"
+            class="contentheader__action"
+            @click.prevent="handleCustomAction(action)"
+          >
+            <app-icon
+              v-if="action.icon"
+              :symbol="action.icon"
+            />
+            <span v-else>{{ action.title }}</span>
+          </a>
+          <a
             :target="page.id | dasherize"
             :title="'options.open_in_window' | localize"
             :href="previewPath"
@@ -128,6 +142,7 @@
         role="tabpanel"
       >
         <content-preview
+          ref="preview"
           :id="id"
           :path="previewPath"
           :title="page.title"
@@ -205,6 +220,10 @@ export default {
       return this.pages[this.id]
     },
 
+    customActions () {
+      return this.config.ui && this.config.ui.customActions
+    },
+
     hasProperties () {
       const { properties } = this.page
       return properties && Object.keys(properties).length > 0
@@ -256,6 +275,10 @@ export default {
     switchTabBottom (section) {
       this.activeSectionBottom = section
       this.$refs[`${section}-tab`].focus()
+    },
+
+    handleCustomAction (action) {
+      this.$refs.preview.handleCustomAction(action)
     }
   }
 }

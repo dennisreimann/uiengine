@@ -175,6 +175,14 @@ export default {
 
     iframeContainerClass () {
       return `preview__iframe-container--${this.type}`
+    },
+
+    iframes () {
+      let { iframes } = this.$refs
+      // convert single brakpoints iframe into array
+      if (iframes instanceof HTMLElement) iframes = [iframes]
+
+      return iframes
     }
   },
 
@@ -185,11 +193,8 @@ export default {
   },
 
   mounted () {
-    let { iframes } = this.$refs
-    // convert single brakpoints iframe into array
-    if (iframes instanceof HTMLElement) iframes = [iframes]
     // setup iframes on their initial load
-    iframes.forEach(iframe => {
+    this.iframes.forEach(iframe => {
       iframe.addEventListener('load', this.setupIframe.bind(this))
     })
   },
@@ -254,6 +259,27 @@ export default {
       // turning off async loading to ensure the correct loading order.
       script.async = false
       head.appendChild(script)
+    },
+
+    handleCustomAction (action) {
+      let { type, elem, className } = action
+      elem = elem || 'body'
+
+      if (type === 'TOGGLE_CLASS') {
+        if (!className) {
+          return console.error('Please specify a className to toggle.')
+        }
+        this.iframes.forEach(iframe => {
+          const el = iframe.contentDocument.querySelector(elem)
+          if (el) {
+            el.classList.toggle(className)
+          } else {
+            console.warn(`Element with selector "${el}" could not be found in preview.`)
+          }
+        })
+      } else {
+        console.error(`Custom action of type "${type}" does not exist.`)
+      }
     }
   }
 }

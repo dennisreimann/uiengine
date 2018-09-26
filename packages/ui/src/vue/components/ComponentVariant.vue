@@ -19,6 +19,20 @@
         class="contentheader__options"
       >
         <a
+          v-for="action in customActions"
+          :key="action.title"
+          :title="action.title"
+          href="#"
+          class="contentheader__action"
+          @click.prevent="handleCustomAction(action)"
+        >
+          <app-icon
+            v-if="action.icon"
+            :symbol="action.icon"
+          />
+          <span v-else>{{ action.title }}</span>
+        </a>
+        <a
           :href="permalinkUrl"
           :data-clipboard-text="permalinkUrl"
           :title="'options.copy_permalink' | localize"
@@ -83,6 +97,7 @@
         role="tabpanel"
       >
         <content-preview
+          ref="preview"
           :id="variant.id | dasherize"
           :path="previewPath"
           :title="variant.title"
@@ -152,6 +167,10 @@ export default {
     ...mapGetters('state', ['config']),
     ...mapGetters('preferences', ['currentTheme']),
 
+    customActions () {
+      return this.config.ui && this.config.ui.customActions
+    },
+
     hasPreview () {
       return !!this.variant.rendered
     },
@@ -188,6 +207,10 @@ export default {
     switchTab (section) {
       this.activeSection = section
       this.$refs[`${section}-tab`].focus()
+    },
+
+    handleCustomAction (action) {
+      this.$refs.preview.handleCustomAction(action)
     }
   }
 }

@@ -62,8 +62,18 @@ module.exports = {
     base,
     breakpoints,
     viewports,
+    defaultPreviewMode: 'viewports',
     repoBaseUrl: 'https://github.com/dennisreimann/uiengine/blob/master/test/project/',
     customStylesFile: '/assets/styles/uiengine-custom-styles.css',
+    customActions: [
+      {
+        title: 'Toggle Grid',
+        icon: 'grid',
+        type: 'TOGGLE_CLASS',
+        selector: 'body',
+        className: 'show-grid'
+      }
+    ],
     themes: [
       {
         id: 'default',
@@ -73,8 +83,7 @@ module.exports = {
         id: 'funky',
         title: 'Funky crazy awesome'
       }
-    ],
-    defaultPreviewMode: 'viewports'
+    ]
   },
 
   browserSync: {

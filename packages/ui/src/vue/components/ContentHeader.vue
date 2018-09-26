@@ -77,13 +77,14 @@ export default {
     margin-left var(--uie-space-l)
 
   &__action
-    transition-duration var(--uie-transition-duration-fast)
     color var(--uie-color-contentheader-link)
-    icon-size(24px)
+    transition-duration var(--uie-transition-duration-fast)
+    text-decoration none
 
     &:focus,
     &:hover,
     &:active
+      color var(--uie-color-contentheader-link-hover)
       .icon
         fill var(--uie-color-contentheader-link-hover)
 
