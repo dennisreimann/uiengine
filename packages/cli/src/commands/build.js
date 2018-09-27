@@ -7,7 +7,6 @@ exports.builder = argv =>
     .example('$0 build')
     // watch
     .array('watch')
-    .default('watch', [])
     .describe('watch', 'Rebuild on file change')
     .alias('w', 'watch')
     // server
