@@ -23,8 +23,11 @@
     "react"
   ],
   "dependencies": {
+    "@babel/parser": "7.1.0",
     "@uiengine/util": "1.1.2",
-    "deps-report": "0.5.0",
+    "commondir": "1.0.1",
+    "fs-extra": "7.0.0",
+    "globby": "8.0.1",
     "react-docgen": "2.21.0"
   },
   "devDependencies": {

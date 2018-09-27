@@ -11,14 +11,16 @@ const noopAdapterPath = resolve(__dirname, 'fixtures', 'noop-adapter')
 const components = resolve(testProjectPath, 'src', 'components')
 const templates = resolve(testProjectPath, 'src', 'templates')
 const target = testTmpPath
+const base = testProjectPath
 const testFilePath = resolve(components, 'form', 'form.test')
 const testAdapterOptions = { basedir: components }
-const expandedAdapterOptions = Object.assign({}, testAdapterOptions, { components, templates, target, ext: 'test' })
+const expandedAdapterOptions = Object.assign({}, testAdapterOptions, { base, components, templates, target, ext: 'test' })
 const TestAdapter = require(testAdapterPath)
 
 const stateWithModule = module => ({
   config: {
     source: {
+      base,
       components,
       templates
     },

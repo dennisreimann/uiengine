@@ -1,4 +1,4 @@
-const fs = require('fs-extra')
+const { removeSync } = require('fs-extra')
 const { join, resolve } = require('path')
 const Factory = require('./support/factory')
 const assert = require('assert')
@@ -240,7 +240,7 @@ const state = {
 }
 
 describe('Builder', () => {
-  afterEach(() => { fs.removeSync(testTmpPath) })
+  afterEach(() => { removeSync(testTmpPath) })
   before(() => Promise.all([
     Interface.setup(state),
     Connector.setup(state)

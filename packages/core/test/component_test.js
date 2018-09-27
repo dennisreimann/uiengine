@@ -1,5 +1,5 @@
 const assert = require('assert')
-const fs = require('fs-extra')
+const { removeSync } = require('fs-extra')
 const { resolve } = require('path')
 const Connector = require('../src/connector')
 
@@ -24,7 +24,7 @@ const assertComponent = (componentIds, componentId) => assert(componentIds.inclu
 
 describe('Component', () => {
   before(() => { Connector.setup(state) })
-  afterEach(() => { fs.removeSync(testTmpPath) })
+  afterEach(() => { removeSync(testTmpPath) })
 
   describe('#fetchById', () => {
     it('should return component object', async () => {

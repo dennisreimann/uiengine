@@ -19,10 +19,10 @@ const getModule = ({ config: { adapters } }, ext, filePath) => {
 }
 
 const getOptions = (state, ext) => {
-  const { config: { adapters, target, source: { components, templates } } } = state
+  const { config: { adapters, target, source: { base, components, templates } } } = state
   const { options } = adapters[ext]
 
-  return Object.assign({}, options, { ext, components, templates, target })
+  return Object.assign({}, options, { ext, base, components, templates, target })
 }
 
 async function setup (state) {

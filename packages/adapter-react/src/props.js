@@ -1,4 +1,4 @@
-const { readFileSync } = require('fs')
+const { readFile } = require('fs-extra')
 const reactDocs = require('react-docgen')
 const {
   StringUtil: { upcaseFirstChar }
@@ -36,8 +36,9 @@ const extractPropertyDisplayType = type => {
   }
 }
 
-const extractProperties = filePath => {
-  const source = readFileSync(filePath)
+async function extractProperties (filePath) {
+  const source = await readFile(filePath, 'utf-8')
+
   const resolver = reactDocs.resolver.findAllExportedComponentDefinitions
   let reactDefinitions
   try {
@@ -73,6 +74,5 @@ const extractProperties = filePath => {
 }
 
 module.exports = {
-  extractPropertyDisplayType,
   extractProperties
 }

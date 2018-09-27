@@ -1,6 +1,6 @@
 require('mocha-sinon')()
 
-const fs = require('fs-extra')
+const { removeSync } = require('fs-extra')
 const { resolve } = require('path')
 const Interface = require('../src/interface')
 
@@ -22,7 +22,7 @@ describe('UI', () => {
   })
 
   describe('#setup', () => {
-    afterEach(() => { fs.removeSync(testTmpPath) })
+    afterEach(() => { removeSync(testTmpPath) })
 
     it('should call the UIs setup function', async function () {
       this.sinon.stub(TestUI, 'setup')

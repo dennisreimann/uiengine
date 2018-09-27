@@ -5,9 +5,20 @@ const { resolve } = require('path')
 const Adapter = require('../src/index')
 const babel = require('../babel.config')
 
-const templatePath = resolve(__dirname, 'fixtures', 'template.jsx')
-const componentPath = resolve(__dirname, 'fixtures', 'component-with-props.jsx')
 const defaultOptions = { babel }
+
+const basePath = resolve(__dirname, 'fixtures')
+const elementsPath = resolve(basePath, 'elements')
+const modulesPath = resolve(basePath, 'modules')
+const atomFilePath = resolve(elementsPath, 'Atom/index.js')
+const moleculeFilePath = resolve(modulesPath, 'Molecule/index.js')
+const organismFilePath = resolve(modulesPath, 'Organism/index.js')
+const templatePath = resolve(basePath, 'template.jsx')
+const reactPath = require.resolve('react')
+
+const adapterOptions = {
+  components: [elementsPath, modulesPath]
+}
 
 describe('React adapter', () => {
   before(() => Adapter.setup(defaultOptions))
@@ -50,25 +61,23 @@ describe('React adapter', () => {
 
   describe('#render', () => {
     it('should render the export default template with the given data', async () => {
-      const options = {}
       const data = { myData: 1 }
-      const rendered = await Adapter.render(options, templatePath, data)
+      const rendered = await Adapter.render(adapterOptions, templatePath, data)
 
       assert(rendered.match(/<p data-react(.*?)>1<\/p>/))
     })
 
     it('should render the module.export template with the given data', async () => {
-      const options = {}
       const data = { myData: 1 }
       const moduleExportsTemplatePath = resolve(__dirname, 'fixtures', 'template-module-exports.jsx')
-      const rendered = await Adapter.render(options, moduleExportsTemplatePath, data)
+      const rendered = await Adapter.render(adapterOptions, moduleExportsTemplatePath, data)
 
       assert(rendered.match(/<p data-react(.*?)>1<\/p>/))
     })
 
     it('should throw error if the file does not exist', async () => {
       try {
-        await Adapter.render({}, 'does-not-exist.jsx')
+        await Adapter.render(adapterOptions, 'does-not-exist.jsx')
       } catch (error) {
         assert(error)
       }
@@ -80,13 +89,14 @@ describe('React adapter', () => {
       // is set by previous render test
       assert(require.cache[require.resolve(templatePath)])
 
-      await Adapter.registerComponentFile({}, templatePath)
+      await Adapter.registerComponentFile(adapterOptions, templatePath)
 
       assert(!require.cache[require.resolve(templatePath)])
     })
 
     it('should extract the component properties', async () => {
-      const { properties } = await Adapter.registerComponentFile({}, componentPath)
+      const componentPath = resolve(__dirname, 'fixtures', 'component-with-props.jsx')
+      const { properties } = await Adapter.registerComponentFile(adapterOptions, componentPath)
       assert(properties)
 
       const props = properties['<ComponentWithProps>']
@@ -179,9 +189,32 @@ describe('React adapter', () => {
       assert.strictEqual(props.customArrayProp.required, false)
     })
 
-    it('should return null if there are no component properties', async () => {
-      const result = await Adapter.registerComponentFile({}, templatePath)
-      assert.strictEqual(result, null)
+    it('should return undefined properties if there are no component properties', async () => {
+      const { properties } = await Adapter.registerComponentFile(adapterOptions, templatePath)
+      assert.strictEqual(properties, undefined)
+    })
+
+    it('should extract the component dependencies and dependents', async () => {
+      const { dependentFiles, dependencyFiles } = await Adapter.registerComponentFile(adapterOptions, moleculeFilePath)
+
+      assert.strictEqual(dependentFiles.length, 1)
+      assert(dependentFiles.includes(organismFilePath))
+
+      assert.strictEqual(dependencyFiles.length, 2)
+      assert(dependencyFiles.includes(reactPath))
+      assert(dependencyFiles.includes(atomFilePath))
+    })
+
+    it('should return undefined dependentFiles if there are no component dependents', async () => {
+      const { dependentFiles } = await Adapter.registerComponentFile(adapterOptions, organismFilePath)
+
+      assert.strictEqual(dependentFiles, undefined)
+    })
+
+    it('should return undefined dependencyFiles if there are no component dependents', async () => {
+      const { dependencyFiles } = await Adapter.registerComponentFile(adapterOptions, atomFilePath)
+
+      assert.strictEqual(dependencyFiles, undefined)
     })
   })
 

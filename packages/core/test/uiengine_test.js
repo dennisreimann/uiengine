@@ -1,6 +1,6 @@
 require('mocha-sinon')()
 
-const fs = require('fs-extra')
+const { mkdirsSync, removeSync, writeFileSync } = require('fs-extra')
 const assert = require('assert')
 const { assertExists } = require('../../../test/support/asserts')
 const { dirname, join, resolve } = require('path')
@@ -21,7 +21,7 @@ describe('UIengine', function () {
   })
 
   afterEach(function () {
-    fs.removeSync(testProjectTargetPath)
+    removeSync(testProjectTargetPath)
     this.sinon.restore()
   })
 
@@ -114,17 +114,17 @@ describe('UIengine', function () {
           watchProcess.on('all', (changeType, changedFilePath) => {
             if (changedFilePath === filePath) {
               setTimeout(() => {
-                fs.removeSync(fileDir)
+                removeSync(fileDir)
                 this.sinon.assert.calledWithMatch(process.stdout.write, '✨  Rebuilt page testcases/created')
                 done()
               }, 2500)
             }
           })
 
-          fs.mkdirsSync(fileDir)
-          fs.writeFileSync(filePath, '---\ntitle: Created Page\n---\nContent for created page.')
+          mkdirsSync(fileDir)
+          writeFileSync(filePath, '---\ntitle: Created Page\n---\nContent for created page.')
         } catch (err) {
-          fs.removeSync(fileDir)
+          removeSync(fileDir)
           done(err)
         }
       })

@@ -1,5 +1,6 @@
 const { renderToString } = require('react-dom/server')
-const { extractProperties } = require('./util')
+const { extractProperties } = require('./props')
+const { extractDependentFiles, extractDependencyFiles } = require('./deps')
 const {
   FileUtil: { invalidateRequireCache },
   StringUtil: { upcaseFirstChar }
@@ -28,9 +29,18 @@ async function setup (options) {
 async function registerComponentFile (options, filePath) {
   invalidateRequireCache(filePath)
 
-  const properties = extractProperties(filePath)
+  const [properties, dependentFiles, dependencyFiles] = await Promise.all([
+    extractProperties(filePath),
+    extractDependentFiles(options, filePath),
+    extractDependencyFiles(options, filePath)
+  ])
 
-  return Object.keys(properties).length ? { properties } : null
+  const info = {}
+  if (Object.keys(properties).length > 0) info.properties = properties
+  if (Object.keys(dependentFiles).length > 0) info.dependentFiles = dependentFiles
+  if (Object.keys(dependencyFiles).length > 0) info.dependencyFiles = dependencyFiles
+
+  return info
 }
 
 async function render (options, filePath, data = {}) {
