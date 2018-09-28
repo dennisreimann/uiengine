@@ -71,14 +71,14 @@ describe('Variant', () => {
 
       assert.strictEqual(variants.length, 6);
 
-      [ 'input/checkbox.pug-1',
-        'input/number.pug-2',
-        'input/text-disabled.pug-3',
-        'input/text-required.pug-4',
-        'input/text.hbs-5',
-        'input/text.pug-6'
-      ].map(id => {
-        assert(R.find(variant => variant.id === id, variants), `missing variant "${id}"`)
+      [ 'checkbox.pug',
+        'number.pug',
+        'text-disabled.pug',
+        'text-required.pug',
+        'text.hbs',
+        'text.pug'
+      ].map(file => {
+        assert(R.find(variant => variant.file === file, variants), `missing variant "${file}"`)
       })
     })
 

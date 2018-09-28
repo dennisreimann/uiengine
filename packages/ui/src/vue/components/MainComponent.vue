@@ -27,6 +27,7 @@
             />
           </a>
           <a
+            v-if="(hasInfo && hasProperties)"
             ref="info-tab"
             :id="tabId('info')"
             :aria-selected="isInfoActive"
@@ -38,6 +39,7 @@
             @keydown.right="switchTab('properties')"
           >{{ 'options.info' | localize }}</a>
           <a
+            v-if="(hasInfo && hasProperties)"
             ref="properties-tab"
             :id="tabId('properties')"
             :aria-selected="isPropertiesActive"
@@ -63,23 +65,59 @@
           role="tabpanel"
         >
           <content-text :item="component" />
+
           <div
-            v-if="hasManyVariants"
             class="content uie-sot-l uie-fs-s"
           >
-            <ul>
-              <li
-                v-for="variant in component.variants"
-                :key="variant.id"
-              >
-                <router-link
-                  :to="{ hash: dasherize(variant.id) }"
-                  class=""
-                  active-class=""
-                  exact-active-class=""
-                >{{ variant.title }}</router-link>
-              </li>
-            </ul>
+            <template v-if="hasManyVariants">
+              <ul>
+                <li
+                  v-for="variant in component.variants"
+                  :key="variant.id"
+                >
+                  <router-link
+                    :to="{ hash: dasherize(variant.id) }"
+                    class=""
+                    active-class=""
+                    exact-active-class=""
+                  >{{ variant.title }}</router-link>
+                </li>
+              </ul>
+            </template>
+
+            <template v-if="hasDependencies">
+              <h3>{{ 'component.dependencies' | localize }}</h3>
+              <ul>
+                <li
+                  v-for="dependency in component.dependencies"
+                  :key="dependency"
+                >
+                  <router-link
+                    :to="componentLink(dependency)"
+                    class=""
+                    active-class=""
+                    exact-active-class=""
+                  >{{ componentTitle(dependency) }}</router-link>
+                </li>
+              </ul>
+            </template>
+
+            <template v-if="hasDependentComponents">
+              <h3>{{ 'component.dependents' | localize }}</h3>
+              <ul>
+                <li
+                  v-for="dependent in component.dependentComponents"
+                  :key="dependent"
+                >
+                  <router-link
+                    :to="componentLink(dependent)"
+                    class=""
+                    active-class=""
+                    exact-active-class=""
+                  >{{ componentTitle(dependent) }}</router-link>
+                </li>
+              </ul>
+            </template>
           </div>
         </div>
 
@@ -153,10 +191,18 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['components', 'config', 'entities']),
+    ...mapGetters('state', ['components', 'config', 'entities', 'navigation']),
 
     component () {
       return this.components[this.id]
+    },
+
+    hasDependencies () {
+      return !!this.component.dependencies
+    },
+
+    hasDependentComponents () {
+      return !!this.component.dependentComponents
     },
 
     hasVariants () {
@@ -173,7 +219,7 @@ export default {
     },
 
     hasInfo () {
-      return !!(this.component.content || this.hasManyVariants)
+      return !!(this.component.content || this.hasManyVariants || this.hasDependencies || this.hasDependentComponents)
     },
 
     isInfoActive () {
@@ -196,6 +242,14 @@ export default {
 
   methods: {
     dasherize,
+
+    componentLink (componentId) {
+      return Object.values(this.navigation).find(item => item.type === 'component' && item.itemId === componentId)
+    },
+
+    componentTitle (componentId) {
+      return this.components[componentId].title
+    },
 
     tabId (section) {
       return `${dasherize(this.component.id)}-${section}`

@@ -13,6 +13,7 @@ const state = {
         resolve(testProjectPath, 'src', 'elements'),
         resolve(testProjectPath, 'src', 'modules')
       ],
+      templates: resolve(testProjectPath, 'src', 'templates'),
       data: resolve(__dirname, 'fixtures'),
       base: testProjectPath
     },
@@ -98,7 +99,7 @@ describe('Component', () => {
       assert.strictEqual('Label', data.title)
     })
 
-    it('should register component files and extract information from them', async () => {
+    it('should register component files and extract properties', async () => {
       const data = await Component.fetchById(state, 'label')
       const labelProps = data.properties['<Label>']
 
@@ -107,6 +108,29 @@ describe('Component', () => {
       assert.strictEqual(labelProps.title.required, true)
       assert.strictEqual(labelProps.for.type, 'String')
       assert.strictEqual(labelProps.for.required, true)
+    })
+
+    it('should register component files and extract dependencies', async () => {
+      const data = await Component.fetchById(state, 'formfield')
+      const { dependencies } = data
+
+      assert(dependencies, 'Formfield dependencies are not defined')
+      assert.strictEqual(dependencies.length, 2)
+      assert(dependencies.includes('label'), 'Formfield dependencies do not include "label".')
+      assert(dependencies.includes('input'), 'Formfield dependencies do not include "input".')
+    })
+
+    it('should register component files and extract dependents', async () => {
+      const data = await Component.fetchById(state, 'label')
+      const { dependentComponents, dependentTemplates } = data
+      
+      assert(dependentComponents, 'Dependent components for label are not defined')
+      assert.strictEqual(dependentComponents.length, 1)
+      assert(dependentComponents.includes('formfield'), 'Dependent components for label do not include "formfield".')
+
+      assert(dependentTemplates, 'Dependent templates for label are not defined')
+      assert.strictEqual(dependentTemplates.length, 1)
+      assert(dependentTemplates.includes('page.pug'), 'Dependent templates for label do not include "page.pug".')
     })
   })
 

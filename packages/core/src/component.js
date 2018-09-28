@@ -6,7 +6,8 @@ const Variant = require('./variant')
 const {
   FrontmatterUtil,
   MarkdownUtil,
-  ComponentUtil: { componentIdToFilePath, componentIdToTitle, componentPathToId },
+  ComponentUtil: { componentFilePathToId, componentIdToFilePath, componentIdToTitle, componentPathToId },
+  TemplateUtil: { templateFilePathToId },
   StringUtil: { titleFromContentHeading },
   DebugUtil: { debug2, debug3, debug4, debug5 }
 } = require('@uiengine/util')
@@ -80,7 +81,7 @@ async function fetchAll (state) {
 async function fetchById (state, id) {
   debug3(state, `Component.fetchById(${id}):start`)
 
-  const { components, base } = state.config.source
+  const { base, components, templates } = state.config.source
   if (!components) return null
 
   const componentFilePath = componentIdToFilePath(components, id)
@@ -98,6 +99,19 @@ async function fetchById (state, id) {
   const title = attributes.title || titleFromContentHeading(content) || componentIdToTitle(id)
   const baseData = { id, title, content, variants, sourcePath, sourceFile, type: 'component' }
   const fileData = R.reduce(R.mergeDeepLeft, attributes, R.pluck('data', fileRegistrations))
+
+  // resolve dependencies and dependents
+  const filePathToComponentId = R.partial(componentFilePathToId, [components])
+  const filePathToTemplateId = R.partial(templateFilePathToId, [templates])
+  const resolveComponents = filePaths => filePaths && R.reject(R.isNil, R.uniq(R.map(filePathToComponentId, filePaths)))
+  const resolveTemplates = filePaths => filePaths && R.reject(R.isNil, R.uniq(R.map(filePathToTemplateId, filePaths)))
+  const dependencies = resolveComponents(fileData.dependencyFiles)
+  const dependentComponents = resolveComponents(fileData.dependentFiles)
+  const dependentTemplates = resolveTemplates(fileData.dependentFiles)
+  if (dependentTemplates && dependentTemplates.length) fileData.dependentTemplates = dependentTemplates
+  if (dependentComponents && dependentComponents.length) fileData.dependentComponents = dependentComponents
+  if (dependencies && dependencies.length) fileData.dependencies = dependencies
+
   const data = R.mergeDeepLeft(baseData, fileData)
 
   debug3(state, `Component.fetchById(${id}):end`)

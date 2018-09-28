@@ -1,3 +1,5 @@
+include /modules/formfield/formfield.pug
+
 mixin form(url, type)
   - var type = (attributes && attributes.type) || 'GET'
   form.ui.form(action=url type=type)&attributes(attributes)

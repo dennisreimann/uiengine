@@ -19,6 +19,10 @@ module.exports = {
     'context': 'Data',
     'rendered': 'HTML'
   },
+  'component': {
+    'dependencies': 'Composed of',
+    'dependents': 'Used within'
+  },
   'token': {
     'name': 'Name',
     'type': 'Type',

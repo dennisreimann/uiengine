@@ -23,9 +23,12 @@
     "pug"
   ],
   "dependencies": {
-    "commondir": "1.0.1",
+    "@uiengine/util": "^1.1.2",
+    "fs-extra": "7.0.0",
     "globby": "8.0.1",
-    "pug-dependencies": "1.0.2"
+    "pug-lexer": "^4.0.0",
+    "pug-parser": "^5.0.0",
+    "pug-walk": "^1.1.7"
   },
   "devDependencies": {
     "lint-staged": "^7.3.0",

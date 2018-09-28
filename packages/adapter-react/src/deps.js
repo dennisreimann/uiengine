@@ -2,7 +2,9 @@ const { readFile } = require('fs-extra')
 const { dirname, join } = require('path')
 const { parse } = require('@babel/parser')
 const glob = require('globby')
-const commondir = require('commondir')
+const {
+  VariantUtil: { VARIANTS_DIRNAME }
+} = require('@uiengine/util')
 
 // parse in strict mode and allow module declarations, enable jsx syntax
 const parserOpts = {
@@ -46,25 +48,25 @@ async function getDependencyFiles (parserOpts, filePath, cache) {
   return filePaths
 }
 
-async function getDependentFiles (parserOpts, filePath, root, cache) {
-  const filePaths = await glob([join(root, '**', '*.{js,jsx,ts}')], {
-    ignore: [filePath]
-  })
-  const dependantFiles = await filter(filePaths, async file => {
+async function getDependentFiles (parserOpts, filePath, dirs, cache) {
+  const patterns = dirs.map(dir => join(dir, '**', '*.{js,jsx,ts}'))
+  const variantPaths = dirs.map(dir => join(dir, '**', VARIANTS_DIRNAME))
+  const ignore = [filePath, ...variantPaths]
+  const filePaths = await glob(patterns, { ignore })
+  const dependentFiles = await filter(filePaths, async file => {
     const dependencies = await getDependencyFiles(parserOpts, file, cache)
     return dependencies.includes(filePath)
   })
 
-  return dependantFiles
+  return dependentFiles
 }
 
 module.exports = {
   async extractDependentFiles (options, filePath) {
-    const { base, components, templates } = options
+    const { components, templates } = options
     const dirs = [...components]
     if (templates) dirs.push(templates)
-    const root = dirs.length ? commondir(dirs) : base
-    const files = await getDependentFiles(parserOpts, filePath, root, DEPENDENCY_CACHE)
+    const files = await getDependentFiles(parserOpts, filePath, dirs, DEPENDENCY_CACHE)
     return files
   },
 
