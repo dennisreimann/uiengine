@@ -4,6 +4,7 @@ const Config = require('./configuration')
 const Builder = require('./builder')
 const Navigation = require('./navigation')
 const Component = require('./component')
+const Variant = require('./variant')
 const Page = require('./page')
 const Entity = require('./entity')
 const Interface = require('./interface')
@@ -25,6 +26,17 @@ let _state = {}
 // cancel regenerating during a full generate
 let _isGenerating = false
 const isGenerating = () => _isGenerating
+
+// recursively get dependents and their dependents
+const aggregateDependentComponents = (components, id) => {
+  const aggregate = componentId => {
+    const { dependentComponents } = components[componentId]
+    return dependentComponents
+      ? dependentComponents.concat(...R.map(aggregate, dependentComponents))
+      : []
+  }
+  return R.reject(componentId => componentId === id, R.uniq(aggregate(id)))
+}
 
 async function init (options = {}) {
   const config = await Config.read(options)
@@ -172,6 +184,12 @@ async function fetchAndAssocComponent (id) {
   return component
 }
 
+async function fetchAndAssocVariants (id) {
+  const variants = await Component.refetchVariants(_state, id)
+  _state = R.assocPath(['components', id, 'variants'], variants, _state)
+  return variants
+}
+
 async function fetchAndAssocNavigation () {
   const navigation = await Navigation.fetch(_state)
   _state = R.assoc('navigation', navigation, _state)
@@ -216,16 +234,39 @@ async function removeEntity (id) {
 }
 
 async function regenerateComponent (id) {
-  await fetchAndAssocComponent(id)
-  await Promise.all([
+  const { dependentComponents, dependentTemplates } = await fetchAndAssocComponent(id)
+
+  // the component
+  const tasks = [
     Builder.generateComponentVariants(_state, id),
     Builder.generateIncrement(_state)
-  ])
+  ]
+
+  // its dependent components and recursively their dependents
+  if (dependentComponents) {
+    const allDependentComponents = aggregateDependentComponents(_state.components, id)
+    const variantsBuilds = R.map(regenerateVariants, allDependentComponents)
+    tasks.push(...variantsBuilds)
+  }
+
+  // its dependent templates
+  if (dependentTemplates) {
+    const pageBuild = R.partial(Builder.generatePagesWithTemplate, [_state])
+    const pageBuilds = R.map(pageBuild, dependentTemplates)
+    tasks.push(...pageBuilds)
+  }
+
+  await Promise.all(tasks)
 }
 
 async function removeComponent (id) {
   _state = R.dissocPath(['components', id], _state)
   await Builder.generateIncrement(_state)
+}
+
+async function regenerateVariants (id) {
+  await fetchAndAssocVariants(id)
+  await Builder.generateComponentVariants(_state, id)
 }
 
 async function regenerateVariant (idPrefix) {

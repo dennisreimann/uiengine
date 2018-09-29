@@ -64,6 +64,12 @@ async function findComponentIds (state) {
   return componentIds
 }
 
+async function refetchVariants (state, id) {
+  // in case of a refetch we use the current context and variants
+  const { context, variants } = state.components[id]
+  return Variant.fetchObjects(state, id, context, variants)
+}
+
 async function fetchAll (state) {
   debug2(state, `Component.fetchAll():start`)
 
@@ -121,5 +127,6 @@ async function fetchById (state, id) {
 
 module.exports = {
   fetchAll,
-  fetchById
+  fetchById,
+  refetchVariants
 }
