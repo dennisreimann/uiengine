@@ -1,5 +1,5 @@
 import React from 'react'
-import Atom from '../../elements/Atom'
+import Atom from '@uiengine/adapter-react/test/fixtures/elements/Atom'
 
 export default props => (
   <div className='molecule'>

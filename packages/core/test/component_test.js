@@ -123,7 +123,7 @@ describe('Component', () => {
     it('should register component files and extract dependents', async () => {
       const data = await Component.fetchById(state, 'label')
       const { dependentComponents, dependentTemplates } = data
-      
+
       assert(dependentComponents, 'Dependent components for label are not defined')
       assert.strictEqual(dependentComponents.length, 1)
       assert(dependentComponents.includes('formfield'), 'Dependent components for label do not include "formfield".')

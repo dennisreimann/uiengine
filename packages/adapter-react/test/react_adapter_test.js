@@ -10,9 +10,9 @@ const defaultOptions = { babel }
 const basePath = resolve(__dirname, 'fixtures')
 const elementsPath = resolve(basePath, 'elements')
 const modulesPath = resolve(basePath, 'modules')
-const atomFilePath = resolve(elementsPath, 'Atom/index.js')
-const moleculeFilePath = resolve(modulesPath, 'Molecule/index.js')
-const organismFilePath = resolve(modulesPath, 'Organism/index.js')
+const atomFilePath = resolve(elementsPath, 'Atom/index.jsx')
+const moleculeFilePath = resolve(modulesPath, 'Molecule/index.jsx')
+const organismFilePath = resolve(modulesPath, 'Organism/index.jsx')
 const templatePath = resolve(basePath, 'template.jsx')
 const reactPath = require.resolve('react')
 
