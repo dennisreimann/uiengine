@@ -23,14 +23,14 @@
     "react"
   ],
   "dependencies": {
-    "@babel/parser": "7.1.0",
+    "@babel/parser": "7.1.2",
     "@uiengine/util": "1.1.2",
     "fs-extra": "7.0.0",
     "globby": "8.0.1",
     "react-docgen": "2.21.0"
   },
   "devDependencies": {
-    "@babel/core": "7.1.0",
+    "@babel/core": "7.1.2",
     "@babel/preset-env": "7.1.0",
     "@babel/preset-react": "7.0.0",
     "@babel/register": "7.0.0",

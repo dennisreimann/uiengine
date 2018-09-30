@@ -44,18 +44,18 @@
     "htmlescape": "1.1.1",
     "vue": "2.5.17",
     "vue-analytics": "5.16.0",
-    "vue-meta": "1.5.3",
+    "vue-meta": "1.5.5",
     "vue-router": "3.0.1",
     "vuex": "3.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.0",
+    "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "autoprefixer": "9.1.5",
-    "babel-eslint": "9.0.0",
-    "babel-loader": "^8.0.2",
+    "babel-eslint": "10.0.1",
+    "babel-loader": "^8.0.4",
     "clipboard": "2.0.1",
     "compile-ejs-loader": "0.0.1",
     "copy-webpack-plugin": "4.5.2",
@@ -82,9 +82,9 @@
     "vue-loader": "15.4.2",
     "vue-style-loader": "4.1.2",
     "vue-template-compiler": "2.5.17",
-    "webpack": "4.19.1",
+    "webpack": "4.20.2",
     "webpack-bundle-analyzer": "3.0.2",
-    "webpack-cli": "3.1.0",
+    "webpack-cli": "3.1.2",
     "webpack-merge": "4.1.4"
   }
 }
