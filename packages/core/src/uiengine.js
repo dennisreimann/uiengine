@@ -66,27 +66,19 @@ const startWatcher = (state, opts, server) => {
     additionalFiles = watch
   }
 
-  const timers = {}
-  const debounce = (key, fn, delay = 250) => {
-    clearTimeout(timers[key])
-    timers[key] = setTimeout(fn, delay)
-  }
+  const handleFileChange = async (filePath, type) => {
+    if (Core.isGenerating()) return
 
-  const handleFileChange = (filePath, type) => {
-    return debounce('handleFileChange', async () => {
-      if (Core.isGenerating()) return
+    try {
+      if (info) reportInfo('Rebuiling …', { icon: '🚧', transient: true })
 
-      try {
-        if (info) reportInfo('Rebuiling …', { icon: '🚧', transient: true })
+      const { state, change } = await Core.generateIncrementForFileChange(filePath, type)
 
-        const { state, change } = await Core.generateIncrementForFileChange(filePath, type)
-
-        if (info) reportInfo(`Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`, { icon: '✨', transient: false })
-        if (server) server.sockets.emit('uiengine:state:update', state)
-      } catch (err) {
-        reportError(`Rebuild for changed file ${relative(process.cwd(), filePath)} failed:`, err)
-      }
-    })
+      if (info) reportInfo(`Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`, { icon: '✨', transient: false })
+      if (server) server.sockets.emit('uiengine:state:update', state)
+    } catch (err) {
+      reportError(`Rebuild for changed file ${relative(process.cwd(), filePath)} failed:`, err)
+    }
   }
 
   const watchFiles = sourceFiles.concat(additionalFiles)
