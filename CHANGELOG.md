@@ -1,9 +1,14 @@
 # Changelog
 
-## [1.2.0]
+## [1.2.0] - 2018-09-30
 
 ### Added
 
+- Dependency graph for components
+  - Adapters can extract the dependencies and dependents in `registerComponentFile`
+  - Component dependencies and dependents get displayed in the UI
+  - Component changes rebuild the dependent variants and templates automatically
+  - The React and Pug adapters support this already
 - Option `ui.repoBaseUrl` for linking components and pages to the repo
   - For details see the [UI docs](/advanced/ui/).
 
