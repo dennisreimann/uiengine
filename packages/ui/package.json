@@ -17,7 +17,8 @@
   "files": [
     "dist",
     "lib",
-    "src/*.js"
+    "src/*.js",
+    "src/locales"
   ],
   "keywords": [
     "uiengine"
