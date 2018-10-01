@@ -1,8 +1,11 @@
 import React from 'react'
-import Atom from '@uiengine/adapter-react/test/fixtures/elements/Atom'
+import Atom from '../../elements/Atom'
+
+// simulate the use of css modules
+import s from './Molecule.css'
 
 export default props => (
-  <div className='molecule'>
+  <div className={s.molecule}>
     <Atom />
   </div>
 )

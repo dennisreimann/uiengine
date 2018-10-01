@@ -1,5 +1,5 @@
 const { readFile } = require('fs-extra')
-const { dirname, join } = require('path')
+const { dirname, join, resolve } = require('path')
 const { parse } = require('@babel/parser')
 const glob = require('globby')
 const {
@@ -39,9 +39,16 @@ async function getDependencyFiles (parserOpts, filePath, cache) {
   // resolve imports
   const { body } = parsed.program
   const imports = body.filter(node => node.type === 'ImportDeclaration')
-  const filePaths = imports.map(imp => require.resolve(imp.source.value, {
-    paths: [dirname(filePath)]
-  }))
+  const filePaths = imports.map(imp => {
+    const importPath = imp.source.value
+    const fileDir = dirname(filePath)
+    try {
+      return require.resolve(importPath, { paths: [fileDir] })
+    } catch (err) {
+      // require.resolve does not work for non-js files, i.e. when using css modules
+      return resolve(fileDir, importPath)
+    }
+  })
 
   if (cache) cache[filePath] = filePaths
 

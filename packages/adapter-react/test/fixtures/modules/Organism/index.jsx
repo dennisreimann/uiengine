@@ -1,6 +1,6 @@
 import React from 'react'
 import Atom from '@uiengine/adapter-react/test/fixtures/elements/Atom'
-import Molecule from '@uiengine/adapter-react/test/fixtures/modules/Molecule'
+import Molecule from '../Molecule'
 
 export default props => (
   <div className='organism'>

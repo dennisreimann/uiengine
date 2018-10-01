@@ -12,6 +12,7 @@ const elementsPath = resolve(basePath, 'elements')
 const modulesPath = resolve(basePath, 'modules')
 const atomFilePath = resolve(elementsPath, 'Atom/index.jsx')
 const moleculeFilePath = resolve(modulesPath, 'Molecule/index.jsx')
+const moleculeCssFilePath = resolve(modulesPath, 'Molecule/Molecule.css')
 const organismFilePath = resolve(modulesPath, 'Organism/index.jsx')
 const templatePath = resolve(basePath, 'template.jsx')
 const reactPath = require.resolve('react')
@@ -200,9 +201,10 @@ describe('React adapter', () => {
       assert.strictEqual(dependentFiles.length, 1)
       assert(dependentFiles.includes(organismFilePath))
 
-      assert.strictEqual(dependencyFiles.length, 2)
+      assert.strictEqual(dependencyFiles.length, 3)
       assert(dependencyFiles.includes(reactPath))
       assert(dependencyFiles.includes(atomFilePath))
+      assert(dependencyFiles.includes(moleculeCssFilePath))
     })
 
     it('should return undefined dependentFiles if there are no component dependents', async () => {
