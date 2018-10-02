@@ -19,7 +19,7 @@
     "eslint-plugin-standard": "4.0.0",
     "fs-extra": "7.0.0",
     "handlebars": "4.0.12",
-    "husky": "1.0.1",
+    "husky": "1.1.0",
     "lerna": "3.4.0",
     "lint-staged": "^7.3.0",
     "marko": "4.13.5",
@@ -41,7 +41,6 @@
     "start": "cd packages/ui && yarn start",
     "build": "cd packages/ui && yarn build",
     "lint": "lerna run lint --parallel && eslint test/support && cd test/project && yarn run lint",
-    "precommit": "lerna run --parallel precommit",
     "test": "mocha -R dot packages/*/test",
     "test-watch": "yarn test -w --watch-extensions ejs,hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",
     "cover": "nyc yarn test",
@@ -61,7 +60,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run precommit"
+      "pre-commit": "lerna run --parallel precommit"
     }
   },
   "workspaces": [
