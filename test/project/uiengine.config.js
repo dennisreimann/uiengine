@@ -47,6 +47,7 @@ module.exports = {
       module: '@uiengine/adapter-vue',
       options: vueAdapterOptions
     },
+    css: '@uiengine/adapter-css',
     js: '@uiengine/adapter-vue',
     jsx: '@uiengine/adapter-react',
     hbs: '@uiengine/adapter-handlebars',

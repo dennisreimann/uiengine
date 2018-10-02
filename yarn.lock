@@ -2516,6 +2516,14 @@ babel-loader@8.0.4, babel-loader@^8.0.4:
     mkdirp "^0.5.1"
     util.promisify "^1.0.0"
 
+babel-plugin-transform-postcss@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-postcss/-/babel-plugin-transform-postcss-0.3.0.tgz#1f2e5d047bbd0ce84ac443c4715003d3796ee237"
+  integrity sha512-Sn4coeHvw3PCc22KVWtrkFFTh/K3G1ZCl26O3HZyLBgna987oHqTjJui+ofVUmglaWqydmFiEQd999uXWrmQLQ==
+  dependencies:
+    debug "^2.6.0"
+    postcss-load-config "^1.1.0"
+
 babel-runtime@^6.26.0, babel-runtime@^6.9.2:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"

@@ -1,0 +1,12 @@
+:root {
+  // Text Color
+  --text-color: white;
+
+  // Background Color
+  --background-color: orange;
+}
+
+.button {
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
