@@ -23,7 +23,7 @@ export default {
   padding var(--uie-space-xxs) var(--uie-space-s)
   border 1px solid var(--uie-color-contentheader-label-bg)
   border-radius var(--uie-space-m)
-  border-bottom-left-radius 0
+  border-bottom-left-radius 0 !important
   color var(--uie-color-contentheader-label-text)
   background var(--uie-color-contentheader-label-bg)
   font-size var(--uie-font-size-s)

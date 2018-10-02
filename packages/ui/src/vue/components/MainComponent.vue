@@ -94,11 +94,13 @@
                   :key="dependency"
                 >
                   <router-link
+                    v-if="componentLink(dependency)"
                     :to="componentLink(dependency)"
                     class=""
                     active-class=""
                     exact-active-class=""
                   >{{ componentById(dependency).title }}</router-link>
+                  <template v-else>{{ componentById(dependency).title }}</template>
                 </li>
               </ul>
             </template>
@@ -112,11 +114,13 @@
                   :key="dependent"
                 >
                   <router-link
+                    v-if="componentLink(dependent)"
                     :to="componentLink(dependent)"
                     class=""
                     active-class=""
                     exact-active-class=""
                   >{{ componentById(dependent).title }}</router-link>
+                  <template v-else>{{ componentById(dependency).title }}</template>
                 </li>
               </ul>
             </template>

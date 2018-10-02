@@ -31,7 +31,7 @@ export default {
   padding var(--uie-space-xxs) var(--uie-space-s)
   border 1px solid var(--uie-color-contentheader-tag-text)
   border-radius var(--uie-space-m)
-  border-bottom-left-radius 0
+  border-bottom-left-radius 0 !important
   color var(--uie-color-contentheader-tag-text)
   font-size var(--uie-font-size-s)
   text-decoration none
