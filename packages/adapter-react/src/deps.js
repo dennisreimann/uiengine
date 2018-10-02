@@ -42,11 +42,12 @@ async function getDependencyFiles (parserOpts, filePath, cache) {
   const filePaths = imports.map(imp => {
     const importPath = imp.source.value
     const fileDir = dirname(filePath)
+    const modulePathOrName = importPath.startsWith('.') ? resolve(fileDir, importPath) : importPath
     try {
-      return require.resolve(importPath, { paths: [fileDir] })
+      return require.resolve(modulePathOrName)
     } catch (err) {
       // require.resolve does not work for non-js files, i.e. when using css modules
-      return resolve(fileDir, importPath)
+      return modulePathOrName
     }
   })
 

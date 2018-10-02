@@ -90,6 +90,7 @@
               <ul>
                 <li
                   v-for="dependency in component.dependencies"
+                  v-if="componentById(dependency)"
                   :key="dependency"
                 >
                   <router-link
@@ -97,7 +98,7 @@
                     class=""
                     active-class=""
                     exact-active-class=""
-                  >{{ componentTitle(dependency) }}</router-link>
+                  >{{ componentById(dependency).title }}</router-link>
                 </li>
               </ul>
             </template>
@@ -107,6 +108,7 @@
               <ul>
                 <li
                   v-for="dependent in component.dependentComponents"
+                  v-if="componentById(dependent)"
                   :key="dependent"
                 >
                   <router-link
@@ -114,7 +116,7 @@
                     class=""
                     active-class=""
                     exact-active-class=""
-                  >{{ componentTitle(dependent) }}</router-link>
+                  >{{ componentById(dependent).title }}</router-link>
                 </li>
               </ul>
             </template>
@@ -198,11 +200,13 @@ export default {
     },
 
     hasDependencies () {
-      return !!this.component.dependencies
+      return this.component.dependencies &&
+        this.component.dependencies.filter(this.componentById).length > 0
     },
 
     hasDependentComponents () {
-      return !!this.component.dependentComponents
+      return !!this.component.dependentComponents &&
+        this.component.dependentComponents.filter(this.componentById).length > 0
     },
 
     hasVariants () {
@@ -247,8 +251,8 @@ export default {
       return Object.values(this.navigation).find(item => item.type === 'component' && item.itemId === componentId)
     },
 
-    componentTitle (componentId) {
-      return this.components[componentId].title
+    componentById (componentId) {
+      return this.components[componentId]
     },
 
     tabId (section) {

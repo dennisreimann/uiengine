@@ -109,7 +109,7 @@ async function fetchById (state, id) {
   // resolve dependencies and dependents
   const filePathToComponentId = R.partial(componentFilePathToId, [components])
   const filePathToTemplateId = R.partial(templateFilePathToId, [templates])
-  const resolveComponents = filePaths => filePaths && R.reject(R.isNil, R.uniq(R.map(filePathToComponentId, filePaths)))
+  const resolveComponents = filePaths => filePaths && R.reject(componentId => (R.isNil(componentId) || componentId === id), R.uniq(R.map(filePathToComponentId, filePaths)))
   const resolveTemplates = filePaths => filePaths && R.reject(R.isNil, R.uniq(R.map(filePathToTemplateId, filePaths)))
   const dependencies = resolveComponents(fileData.dependencyFiles)
   const dependentComponents = resolveComponents(fileData.dependentFiles)
