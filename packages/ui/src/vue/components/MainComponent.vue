@@ -12,7 +12,6 @@
           :tag="tag"
         />
         <div
-          v-if="repoLink || (hasInfo && hasProperties)"
           role="tablist"
           class="contentheader__options"
         >
@@ -27,7 +26,7 @@
             />
           </a>
           <a
-            v-if="(hasInfo && hasProperties)"
+            v-if="hasInfo"
             ref="info-tab"
             :id="tabId('info')"
             :aria-selected="isInfoActive"
@@ -39,7 +38,7 @@
             @keydown.right="switchTab('properties')"
           >{{ 'options.info' | localize }}</a>
           <a
-            v-if="(hasInfo && hasProperties)"
+            v-if="hasProperties"
             ref="properties-tab"
             :id="tabId('properties')"
             :aria-selected="isPropertiesActive"
@@ -49,12 +48,25 @@
             class="contentheader__option"
             @click.prevent="activeSection = 'properties'"
             @keydown.left="switchTab('info')"
+            @keydown.right="switchTab('theme-properties')"
           > {{ 'options.properties' | localize }}</a>
+          <a
+            v-if="hasThemeProperties"
+            ref="theme-properties-tab"
+            :id="tabId('theme-properties')"
+            :aria-selected="isThemePropertiesActive"
+            :tabindex="isThemePropertiesActive ? false : '-1'"
+            role="tab"
+            href="#theme-properties"
+            class="contentheader__option"
+            @click.prevent="activeSection = 'theme-properties'"
+            @keydown.left="switchTab('properties')"
+          > {{ 'options.theme_properties' | localize }}</a>
         </div>
       </content-header>
 
       <div
-        v-if="hasInfo || hasProperties"
+        v-if="hasInfo || hasProperties || hasThemeProperties"
         class="uie-sot-xs"
       >
         <div
@@ -145,6 +157,23 @@
             />
           </div>
         </div>
+
+        <div
+          v-if="hasThemeProperties"
+          :aria-labelledby="tabId('theme-properties')"
+          :hidden="!isThemePropertiesActive"
+          class="contentsection"
+          role="tabpanel"
+        >
+          <div class="content">
+            <content-theme-properties
+              :title="'options.theme_properties' | localize"
+              :themes="themes"
+              :theme-properties="component.themeProperties"
+              class="uie-sob-xl"
+            />
+          </div>
+        </div>
       </div>
     </section>
 
@@ -168,6 +197,7 @@ import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentText from './ContentText'
 import ContentProperties from './ContentProperties'
+import ContentThemeProperties from './ContentThemeProperties'
 import ContentLabel from './ContentLabel'
 import ContentTag from './ContentTag'
 import ComponentVariant from './ComponentVariant'
@@ -178,6 +208,7 @@ export default {
     ContentHeading,
     ContentText,
     ContentProperties,
+    ContentThemeProperties,
     ContentLabel,
     ContentTag,
     ComponentVariant
@@ -226,6 +257,16 @@ export default {
       return properties && Object.keys(properties).length > 0
     },
 
+    themes () {
+      const { themes } = this.config.ui
+      return themes || []
+    },
+
+    hasThemeProperties () {
+      const { themeProperties } = this.component
+      return this.themes.length > 0 && themeProperties && themeProperties.length > 0
+    },
+
     hasInfo () {
       return !!(this.component.content || this.hasManyVariants || this.hasDependencies || this.hasDependentComponents)
     },
@@ -236,6 +277,10 @@ export default {
 
     isPropertiesActive () {
       return this.activeSection === 'properties' || (!this.activeSection && !this.hasInfo && this.hasProperties)
+    },
+
+    isThemePropertiesActive () {
+      return this.activeSection === 'theme-properties' || (!this.activeSection && !this.hasInfo && !this.hasProperties && this.hasThemeProperties)
     },
 
     repoLink () {

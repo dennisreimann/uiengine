@@ -88,10 +88,11 @@
 
     th,
     td
-      padding var(--uie-space-xs) var(--uie-space-m)
-      &:first-child
+      vertical-align top
+      padding var(--uie-space-s) var(--uie-space-m)
+      &:first-child:not(.uie-rowspan-left)
         padding-left 0
-      &:last-child
+      &:last-child:not(.uie-rowspan-right)
         padding-right 0
 
   hr

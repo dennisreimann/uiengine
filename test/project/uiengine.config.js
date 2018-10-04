@@ -76,8 +76,8 @@ module.exports = {
     ],
     themes: [
       {
-        id: 'default',
-        title: 'Default'
+        id: 'plain',
+        title: 'Plain'
       },
       {
         id: 'funky',

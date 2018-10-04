@@ -6,6 +6,7 @@ module.exports = {
     'edit': 'Edit',
     'info': 'Info',
     'properties': 'Properties',
+    'theme_properties': 'Themes',
     'preview': 'Preview',
     'code': 'Code',
     'copy_permalink': 'Copy link to variant',
@@ -44,6 +45,13 @@ module.exports = {
     'property_description': 'Description',
     'property_required': 'Required',
     'property_default': 'Default'
+  },
+  'theme_properties': {
+    'property': 'Property',
+    'theme': 'Theme',
+    'value': 'Value',
+    'variable': 'Variable',
+    'default': 'Default'
   },
   'footer': {
     'version': 'Version',

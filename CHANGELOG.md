@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0]
+
+### Added
+
+- The UI displays theme properties (css custom properties)
+
 ## [1.2.0] - 2018-09-30
 
 ### Added
