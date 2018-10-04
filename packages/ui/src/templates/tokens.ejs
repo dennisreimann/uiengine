@@ -176,8 +176,10 @@ _%>
     </table>
   <%%_ } else { _%%>
     <%%_
+      const visualizable = element => element.type === 'size'
       const haveProperty = property => element => element[property]
       const columns = {
+        visualization: tokens.some(visualizable),
         variable: tokens.some(haveProperty('variable')),
         reference: tokens.some(haveProperty('reference')),
         description: tokens.some(haveProperty('description'))
@@ -188,6 +190,9 @@ _%>
         <tr>
           <th class="uie-default-token__label uie-default-token__label--name"><%%= helpers.localize(lang, 'token.name') %%></th>
           <th class="uie-default-token__label uie-default-token__label--value"><%%= helpers.localize(lang, 'token.value') %%></th>
+          <%%_ if (columns.visualization) { _%%>
+            <th class="uie-default-token__label uie-default-token__label--visualization"></th>
+          <%%_ } _%%>
           <%%_ if (columns.variable) { _%%>
             <th class="uie-default-token__label uie-default-token__label--variable"><%%= helpers.localize(lang, 'token.variable') %%></th>
           <%%_ } _%%>
@@ -204,6 +209,13 @@ _%>
           <tr class="uie-default-token">
             <td class="uie-default-token__value"><%%= token.name %%></td>
             <td class="uie-default-token__value uie-default-token__value--value"><%%= token.value %%></td>
+            <%% if (columns.visualization) { %%>
+              <td class="uie-default-token__value uie-default-token__value--visualization">
+                <%%_ if (type === 'size') { _%%>
+                  <span class="uie-size-token__size" style="width:<%%= token.value %%>"></span>
+                <%%_ } _%%>
+              </td>
+            <%% } %%>
             <%% if (columns.variable) { %%>
               <td class="uie-default-token__value uie-default-token__value--variable"><%%= token.variable %%></td>
             <%% } %%>

@@ -6,6 +6,7 @@
         <th class="themeProperty__property">{{ 'theme_properties.property' | localize }}</th>
         <th class="themeProperty__theme">{{ 'theme_properties.theme' | localize }}</th>
         <th class="themeProperty__value">{{ 'theme_properties.value' | localize }}</th>
+        <th class="themeProperty__visualization" />
         <th class="themeProperty__variable">{{ 'theme_properties.variable' | localize }}</th>
         <th class="themeProperty__default">{{ 'theme_properties.default' | localize }}</th>
       </tr>

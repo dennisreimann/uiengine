@@ -21,6 +21,25 @@
         class="themeProperty__theme uie-rowspan-left"
       >{{ theme.title }}</td>
       <td class="themeProperty__value">{{ lookup(themeProperty.themes, theme.id, 'value') }}</td>
+      <td class="themeProperty__visualization">
+        <template v-if="lookup(themeProperty.themes, theme.id, 'value')">
+          <span
+            v-if="themeProperty.type === 'color'"
+            class="themeProperty__swatch"
+          >
+            <span
+              :style="{ backgroundColor: lookup(themeProperty.themes, theme.id, 'value') }"
+              class="themeProperty__swatch__inner"
+            />
+          </span>
+
+          <span
+            v-else-if="themeProperty.type === 'size'"
+            :style="{ width: lookup(themeProperty.themes, theme.id, 'value') }"
+            class="themeProperty__size"
+          />
+        </template>
+      </td>
       <td class="themeProperty__variable">{{ lookup(themeProperty.themes, theme.id, 'variable') }}</td>
       <td class="themeProperty__default">{{ isDefault(themeProperty.themes, theme.id) }}</td>
     </tr>
@@ -64,7 +83,7 @@ export default {
 .themeProperty
   &__variablename
     display inline-block
-    margin-top var(--uie-space-s)
+    margin-top var(--uie-space-xs)
 
   &__value,
   &__variable
@@ -72,6 +91,31 @@ export default {
 
   &__default
     text-align center
+
+  &__swatch
+    display inline-block
+    width 1.2em
+    height 1.2em
+    margin-right var(--uie-space-xs)
+    border-radius 50%
+    border-bottom-right-radius 0 !important
+    border 1px solid var(--uie-color-border-medium)
+    padding 2px
+
+    &__inner
+      display block
+      width 100%
+      height 100%
+      border-radius 50%
+      border-bottom-right-radius 0 !important
+
+  &__size
+    position relative
+    bottom -.15em
+    display inline-block
+    height 1.2em
+    border 1px solid var(--uie-color-accent-medium)
+    background-color var(--uie-color-accent-extralight)
 
 .themeProperty__property,
 tbody tr:last-child td
