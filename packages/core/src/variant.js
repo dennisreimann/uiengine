@@ -18,11 +18,13 @@ const convertUserProvidedVariants = list =>
   R.map(item => typeof item === 'string' ? { file: item } : item, list)
 
 async function findVariants (state, componentId) {
-  const { components } = state.config.source
+  const { config: { adapters, source: { components } } } = state
   if (!components) return []
 
+  // register only files with adapter extensions
   const variantsPath = componentIdToVariantsPath(components, componentId)
-  const pattern = join(variantsPath, '*')
+  const exts = Object.keys(adapters).join(',')
+  const pattern = join(variantsPath, `*.{${exts}}`)
   const variantPaths = await glob(pattern)
   const variants = R.map(variantPath => ({ file: basename(variantPath) }), variantPaths)
 

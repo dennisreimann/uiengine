@@ -237,6 +237,7 @@ async function regenerateComponent (id) {
 
   // the component
   const tasks = [
+    fetchAndAssocNavigation(),
     Builder.generateComponentVariants(_state, id),
     Builder.generateIncrement(_state)
   ]
