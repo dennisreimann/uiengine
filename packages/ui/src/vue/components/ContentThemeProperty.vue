@@ -1,12 +1,12 @@
 <template>
   <tbody>
     <tr
-      v-for="(theme, index) in themes"
-      :key="theme.id"
+      v-for="(prop, themeId, index) in themeProperty.themes"
+      :key="themeId"
     >
       <td
         v-if="index === 0"
-        :rowspan="themes.length"
+        :rowspan="Object.keys(themeProperty.themes).length"
         class="themeProperty__property uie-rowspan-right"
       >
         <div class="themeProperty__name">
@@ -19,29 +19,29 @@
       </td>
       <td
         class="themeProperty__theme uie-rowspan-left"
-      >{{ theme.title }}</td>
-      <td class="themeProperty__value">{{ lookup(themeProperty.themes, theme.id, 'value') }}</td>
+      >{{ themeTitle(themeId) }}</td>
+      <td class="themeProperty__value">{{ prop.value }}</td>
       <td class="themeProperty__visualization">
-        <template v-if="lookup(themeProperty.themes, theme.id, 'value')">
+        <template v-if="prop.value">
           <span
             v-if="themeProperty.type === 'color'"
             class="themeProperty__swatch"
           >
             <span
-              :style="{ backgroundColor: lookup(themeProperty.themes, theme.id, 'value') }"
+              :style="{ backgroundColor: prop.value }"
               class="themeProperty__swatch__inner"
             />
           </span>
 
           <span
             v-else-if="themeProperty.type === 'size'"
-            :style="{ width: lookup(themeProperty.themes, theme.id, 'value') }"
+            :style="{ width: prop.value }"
             class="themeProperty__size"
           />
         </template>
       </td>
-      <td class="themeProperty__variable">{{ lookup(themeProperty.themes, theme.id, 'variable') }}</td>
-      <td class="themeProperty__default">{{ isDefault(themeProperty.themes, theme.id) }}</td>
+      <td class="themeProperty__variable">{{ prop.variable }}</td>
+      <td class="themeProperty__default">{{ isDefault(prop) }}</td>
     </tr>
   </tbody>
 </template>
@@ -61,15 +61,15 @@ export default {
   },
 
   methods: {
-    lookup (themes, themeId, key) {
-      return themes[themeId][key]
+    themeTitle (themeId) {
+      const theme = this.themes.find(theme => theme.id === themeId)
+      return theme && theme.title
     },
 
-    isDefault (themes, themeId) {
+    isDefault ({ value, variable }) {
       if (!this.themeProperty.default) return false
 
       const { value: defaultValue, variable: defaultVariable } = this.themeProperty.default
-      const { value, variable } = themes[themeId]
       const valMatches = (typeof defaultValue !== 'undefined' && defaultValue === value)
       const varMatches = (typeof defaultVariable !== 'undefined' && defaultVariable === variable)
 

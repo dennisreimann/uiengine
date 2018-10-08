@@ -48,9 +48,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-table
-  width 100%
-
 .themeProperty__default
   width 6em
   text-align center

@@ -165,14 +165,12 @@
           class="contentsection"
           role="tabpanel"
         >
-          <div class="content">
-            <content-theme-properties
-              :title="'options.theme_properties' | localize"
-              :themes="themes"
-              :theme-properties="component.themeProperties"
-              class="uie-sob-xl"
-            />
-          </div>
+          <content-theme-properties
+            :title="'options.theme_properties' | localize"
+            :themes="themes"
+            :theme-properties="component.themeProperties"
+            class="uie-sob-xl"
+          />
         </div>
       </div>
     </section>
