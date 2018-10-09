@@ -1,10 +1,7 @@
 
 <template>
   <header class="contentheader">
-    <content-heading
-      v-if="title"
-      class="contentheader__title"
-    >{{ title }}</content-heading>
+    <content-heading v-if="title">{{ title }}</content-heading>
     <slot />
   </header>
 </template>
@@ -37,6 +34,7 @@ export default {
   display flex
   flex-wrap wrap
   align-items flex-end
+  margin-bottom var(--uie-space-l)
 
   &__title
     margin-right var(--uie-space-s)
@@ -45,10 +43,10 @@ export default {
   .label,
   .tag
     margin-left var(--uie-space-s)
-    margin-bottom calc(var(--uie-space-s) + var(--uie-space-xxs))
+    margin-bottom calc(var(--uie-space-l) - var(--uie-space-xxs))
 
     .variant &
-      margin-bottom var(--uie-space-s)
+      margin-bottom var(--uie-space-m)
 
   &__options
     display flex

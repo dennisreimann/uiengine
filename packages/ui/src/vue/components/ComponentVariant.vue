@@ -3,7 +3,7 @@
     :id="variant.id | dasherize"
     class="variant"
   >
-    <content-header class="uie-sob-m">
+    <content-header>
       <content-heading :level="2">{{ variant.title }}</content-heading>
       <content-label
         v-if="variant.label"

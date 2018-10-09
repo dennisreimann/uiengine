@@ -6,6 +6,12 @@
 
 - The UI displays theme properties (css custom properties)
 
+### Changed
+
+- Improved the styles and structure for content pages and elements
+  - Tl;DR More whitespace and bigger fonts
+  - The `intro` and `details` containers got added
+
 ## [1.2.0] - 2018-09-30
 
 ### Added

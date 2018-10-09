@@ -1,7 +1,10 @@
 # Test Cases
 
-These are just some pages that exclusively exist for testing.
-Nothing to see here, move along :)
+::: intro
+These are just some test cases and pages that exclusively exist for testing.
+Content formatting and all that good stuff.
+But really: Nothing interesting to see here, move along :)
+:::
 
 ## Code blocks
 
@@ -56,3 +59,7 @@ Text after a list.
 ### Headline 3
 
 Simple text in a paragraph.
+
+::: details Some more details
+See, you clicked it!
+:::

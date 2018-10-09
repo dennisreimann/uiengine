@@ -36,7 +36,10 @@
     "js-yaml": "3.12.0",
     "markdown-it": "8.4.2",
     "markdown-it-anchor": "5.0.2",
+    "markdown-it-container": "2.0.0",
+    "markdown-it-implicit-figures": "0.9.0",
     "markdown-it-include": "1.0.0",
+    "markdown-it-mark": "2.0.0",
     "ramda": "0.25.0"
   },
   "devDependencies": {

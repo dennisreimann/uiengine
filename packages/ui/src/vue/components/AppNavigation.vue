@@ -41,6 +41,6 @@ export default {
     padding-bottom var(--uie-space-s)
   @media $mq-l_and_up
     // align it with the content heading
-    padding-top calc(var(--uie-space-xxl) - var(--uie-space-xs))
+    padding-top calc(var(--uie-space-xxl) + var(--uie-space-m))
     padding-bottom var(--uie-space-xl)
 </style>

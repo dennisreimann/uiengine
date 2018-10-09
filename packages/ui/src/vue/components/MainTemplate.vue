@@ -3,7 +3,6 @@
     <section class="page">
       <content-header
         :title="page.title"
-        class="uie-sob-m"
       >
         <content-tag
           v-for="tag in page.tags"
