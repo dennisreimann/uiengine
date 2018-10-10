@@ -1,7 +1,6 @@
 <template>
   <div
     id="app"
-    :data-theme="themeId"
     class="layout"
     @click="closeModals"
   >
@@ -40,9 +39,11 @@ export default {
 
   created () {
     this.$root.$on('setting:hljs', this.setHljs)
+    this.$store.watch(() => this.$store.getters['preferences/currentTheme'], this.setCurrentTheme)
 
     const hljs = this.$store.getters['preferences/hljs']
     if (hljs) this.setHljs(hljs)
+    if (this.currentTheme) this.setCurrentTheme(this.currentTheme)
   },
 
   methods: {
@@ -52,6 +53,10 @@ export default {
 
     setHljs (hljs) {
       $hljs.setAttribute('href', HLJS_TMPL.replace('%s', hljs))
+    },
+
+    setCurrentTheme (theme) {
+      document.documentElement.setAttribute('data-theme', theme.id)
     }
   },
 
@@ -180,4 +185,10 @@ export default {
   @media $mq-xxl_and_up
     margin-left calc(var(--uie-space-xxxl) * -1)
     margin-right calc(var(--uie-space-xxxl) * -1)
+
+@media print
+  .topbar,
+  .navigation,
+  .footer
+    display none !important
 </style>
