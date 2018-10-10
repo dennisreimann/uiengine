@@ -10,7 +10,9 @@ const {
 const parserOpts = {
   sourceType: 'module', // 'unambiguous'
   plugins: [
-    'jsx'
+    'dynamicImport',
+    'jsx',
+    'objectRestSpread'
   ]
 }
 
