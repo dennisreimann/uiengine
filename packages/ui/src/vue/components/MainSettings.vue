@@ -67,6 +67,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import ContentHeader from './ContentHeader'
+import { LOCALES } from '../util'
 
 export default {
   components: {
@@ -75,16 +76,6 @@ export default {
 
   data () {
     return {
-      localeOptions: {
-        'en': 'English',
-        'de': 'Deutsch'
-      },
-
-      previewModeOptions: {
-        'breakpoints': 'Breakpoints',
-        'viewports': 'Viewports'
-      },
-
       hljsOptions: [
         'agate',
         'androidstudio',
@@ -177,6 +168,21 @@ export default {
 
       set (newValue) {
         this.setLocale(newValue)
+      }
+    },
+
+    localeOptions () {
+      return Object.keys(LOCALES).reduce((locales, id) => {
+        const { title } = LOCALES[id]._meta || {}
+        locales[id] = title || id
+        return locales
+      }, {})
+    },
+
+    previewModeOptions () {
+      return {
+        breakpoints: this.$options.filters.localize('settings.breakpoints'),
+        viewports: this.$options.filters.localize('settings.viewports')
       }
     },
 

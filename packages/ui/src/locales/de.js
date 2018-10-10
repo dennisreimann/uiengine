@@ -1,4 +1,7 @@
 module.exports = {
+  '_meta': {
+    'title': 'Deutsch'
+  },
   'navigation': {
     'toggle': 'Navigation umschalten'
   },
@@ -66,7 +69,9 @@ module.exports = {
     'title': 'Einstellungen',
     'locale': 'Sprache',
     'hljs': 'Highlight-Theme',
-    'preview_mode': 'Vorschaumodus'
+    'preview_mode': 'Vorschaumodus',
+    'breakpoints': 'Breakpoints',
+    'viewports': 'Viewports'
   },
   'not_found': {
     'title': 'Nicht gefunden',

@@ -38,7 +38,8 @@
   },
   "dependencies": {
     "@uiengine/util": "^1.2.6",
-    "color": "3.0.0",
+    "deepmerge": "2.2.1",
+    "color": "3.1.0",
     "ejs": "2.6.1",
     "fuse.js": "3.2.1",
     "highlight.js": "9.12.0",

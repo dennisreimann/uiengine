@@ -1,4 +1,7 @@
 module.exports = {
+  '_meta': {
+    'title': 'English'
+  },
   'navigation': {
     'toggle': 'Toggle navigation'
   },
@@ -66,7 +69,9 @@ module.exports = {
     'title': 'Settings',
     'locale': 'Locale',
     'hljs': 'Highlight-Theme',
-    'preview_mode': 'Preview Mode'
+    'preview_mode': 'Preview Mode',
+    'breakpoints': 'Breakpoints',
+    'viewports': 'Viewports'
   },
   'not_found': {
     'title': 'Not Found',

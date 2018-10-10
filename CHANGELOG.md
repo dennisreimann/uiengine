@@ -5,6 +5,8 @@
 ### Added
 
 - The UI displays theme properties (css custom properties)
+- Override locales or single keys in a locale
+  - For details see the [UI docs](/advanced/ui/#locales).
 
 ### Changed
 

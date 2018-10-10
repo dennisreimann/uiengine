@@ -32,7 +32,13 @@ This is what the full options look like:
         id: 'funky',
         title: 'Bright colors'
       }
-    ]
+    ],
+
+    locales: {
+      en: {
+        // custom locale overrides
+      }
+    }
   }
 }
 ```
@@ -140,3 +146,8 @@ The themes defined here will be shown in the topbar.
 
 The first theme is selected by default.
 The iframe is loaded with the theme id being the hash part of the url (i.e. `#funky`).
+
+### locales
+
+You can override the whole locale or specific keys.
+The keys you provide get merged deeply with the existing locales.
