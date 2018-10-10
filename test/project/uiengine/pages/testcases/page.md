@@ -56,7 +56,7 @@ Text after a list.
 
 ---
 
-### Headline 3
+### [Headline 3](#)
 
 Simple text in a paragraph.
 

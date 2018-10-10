@@ -98,6 +98,16 @@ export default {
     &:not([class])
       margin-bottom var(--uie-space-s)
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+    &:not([class])
+      a
+        text-decoration none
+
   pre,
   .intro,
   p:not([class]),

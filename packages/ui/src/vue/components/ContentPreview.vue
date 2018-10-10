@@ -300,17 +300,6 @@ export default {
     &--viewports
       display inline-block
       overflow auto
-      &:last-child
-        @media $mq-up_to_m
-          margin-right var(--uie-space-m)
-        @media $mq-m_to_l
-          margin-right var(--uie-space-l)
-        @media $mq-l_to_xl
-          margin-right var(--uie-space-xl)
-        @media $mq-xl_to_xxl
-          margin-right var(--uie-space-xxl)
-        @media $mq-xxl_and_up
-          margin-right var(--uie-space-xxxl)
 
     &--viewports + &--viewports
       margin-left var(--uie-space-xxl)

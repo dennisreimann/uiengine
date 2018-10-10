@@ -220,8 +220,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.row + .row
-  margin-top var(--uie-space-xl)
+.row
+  margin-bottom var(--uie-space-xl)
 
 select
   display block
