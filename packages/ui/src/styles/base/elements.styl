@@ -1,15 +1,15 @@
 .uie
   height 100%
-  line-height 1.5
+  line-height var(--uie-line-height)
   font-family var(--uie-font-family-light)
   @media print
     font-size 10pt
   @media $mq-up_to_m
-    font-size 14px
+    font-size var(--uie-base-font-size-s)
   @media $mq-m_to_l
-    font-size 15px
+    font-size var(--uie-base-font-size-m)
   @media $mq-l_and_up
-    font-size 16px
+    font-size var(--uie-base-font-size-l)
 
   *
     margin 0
@@ -30,15 +30,15 @@
   h2
   h3
     font-family var(--uie-font-family-bold)
-    font-weight 400
+    font-weight var(--uie-font-weight-bold)
 
   h1
     font-size var(--uie-font-size-xxl)
-    line-height 1.25
+    line-height var(--uie-line-height-heading)
 
   h2
     font-size var(--uie-font-size-xl)
-    line-height 1.35
+    line-height var(--uie-line-height-heading)
 
   h3
     font-size var(--uie-font-size-l)
@@ -48,12 +48,12 @@
   h6
     font-family var(--uie-font-family-regular)
     font-size var(--uie-font-size-m)
-    font-weight normal
+    font-weight var(--uie-font-weight-regular)
 
   .intro
     font-family var(--uie-font-family-bold)
     font-size var(--uie-font-size-l)
-    font-weight normal
+    font-weight var(--uie-font-weight-bold)
 
   .intro,
   details
@@ -61,8 +61,8 @@
 
   em,
   strong
-    font-style normal
-    font-weight normal
+    font-style var(--uie-font-style-italic)
+    font-weight var(--uie-font-weight-italic)
 
   em,
   summary
@@ -90,7 +90,7 @@
       border-bottom 1px solid var(--uie-color-border-medium)
       font-family var(--uie-font-family-light)
       font-size var(--uie-font-size-xs)
-      font-weight normal
+      font-weight var(--uie-font-weight-regular)
 
     td
       border-bottom 1px solid var(--uie-color-border-light)

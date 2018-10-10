@@ -12,6 +12,15 @@
   */
 }
 
-[data-theme="funky"] {
-  --uie-color-topbar-bg: purple;
+:root[data-theme="funky"] {
+  --uie-color-accent-extralight: thistle;
+  --uie-color-accent-light: orchid;
+  --uie-color-accent-medium: mediumpurple;
+  --uie-color-accent-middark: blueviolet;
+  --uie-color-accent-dark: rebeccapurple;
+  --uie-color-accent-extradark: indigo;
+
+  --uie-color-main-text: indigo;
+  --uie-color-main-link: mediumpurple;
+  --uie-color-secondary-text: blueviolet;
 }

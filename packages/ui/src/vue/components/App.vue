@@ -18,6 +18,7 @@ import AppNavigation from './AppNavigation'
 import AppFooter from './AppFooter'
 import AppMain from './AppMain'
 
+const $html = document.documentElement
 const $hljs = document.getElementById('hljs')
 const HLJS_TMPL = $hljs.getAttribute('data-tmpl')
 
@@ -56,7 +57,7 @@ export default {
     },
 
     setCurrentTheme (theme) {
-      document.documentElement.setAttribute('data-theme', theme.id)
+      $html.setAttribute('data-theme', theme.id)
     }
   },
 

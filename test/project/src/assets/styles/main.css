@@ -4,8 +4,8 @@
 }
 
 [data-theme="funky"]:root {
-  --text-color: purple;
-  --background-color: yellow;
+  --text-color: rebeccapurple;
+  --background-color: lavender;
 }
 
 html {
