@@ -52,7 +52,7 @@ module.exports = {
   'theme_properties': {
     'property': 'Eigenschaft',
     'theme': 'Theme',
-    'value': 'Value',
+    'value': 'Wert',
     'variable': 'Variable',
     'default': 'Standard'
   },
