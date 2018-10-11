@@ -41,7 +41,7 @@
     "ramda": "0.25.0"
   },
   "optionalDependencies": {
-    "browser-sync": "2.24.7",
+    "browser-sync": "2.26.0",
     "chokidar": "2.0.4"
   },
   "devDependencies": {
