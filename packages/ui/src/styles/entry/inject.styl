@@ -87,7 +87,8 @@
     &--code
       font-family var(--uie-font-family-code)
 
-.uie-size-token
+.uie-size-token,
+.uie-theme-token
   &__size
     position relative
     bottom -.15em
@@ -133,9 +134,28 @@
     font-size 1rem
 
 .uie-icon-token,
+.uie-theme-token,
 .uie-default-token
   &__value
     vertical-align middle
     &--value,
     &--variable
       font-family var(--uie-font-family-code)
+
+.uie-theme-token
+  &__color
+    display inline-block
+    width 1.2em
+    height 1.2em
+    margin-right var(--uie-space-xs)
+    border-radius 50%
+    border-bottom-right-radius 0 !important
+    border 1px solid var(--uie-color-border-medium)
+    padding 2px
+
+    &__inner
+      display block
+      width 100%
+      height 100%
+      border-radius 50%
+      border-bottom-right-radius 0 !important

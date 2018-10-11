@@ -1,15 +1,15 @@
 const { join, resolve } = require('path')
 const { compile } = require('ejs')
 const htmlescape = require('htmlescape')
+const merge = require('deepmerge')
 const Color = require('color')
-const locales = require('./locales')
+const defaultLocales = require('./locales')
 const { highlight, localize } = require('./util')
 const {
   FileUtil: { read, copy },
   StringUtil: { dasherize, titleize }
 } = require('@uiengine/util')
 
-const supportedLocales = ['en', 'de']
 const defaultOpts = {
   lang: 'en',
   hljs: 'atom-one-dark',
@@ -23,29 +23,6 @@ const templates = {}
 const templatesPath = resolve(__dirname, '..', 'lib', 'templates')
 const staticPath = resolve(__dirname, '..', 'dist')
 const templatePath = template => join(templatesPath, `${template}.ejs`)
-
-// template helpers
-const helpers = {
-  htmlescape,
-  dasherize,
-  titleize,
-
-  color (value) {
-    const color = Color(value)
-
-    return {
-      hex: color.hex().toString(),
-      rgb: color.rgb().toString(),
-      hsl: color.hsl().toString().replace(/(\(\d+\.(\d{1,3}))\d+/, '$1') // shorten the first values decimal places
-    }
-  },
-
-  localize (locale, key, interpolations) {
-    const dict = locales[locale]
-
-    return localize(dict, key, interpolations)
-  }
-}
 
 async function copyStatic (target) {
   await copy(staticPath, target)
@@ -79,10 +56,37 @@ async function setup (options) {
 }
 
 async function render (options, template = 'index', data = null) {
-  // sanitize and prepare options
+  // sanitize and prepare options, merge UI locales
+  const customLocales = options.locales || {}
+  const locales = merge(defaultLocales, customLocales)
+  delete options.locales
+  const supportedLocales = Object.keys(locales)
   if (!supportedLocales.includes(options.lang)) delete options.lang
+
   const opts = Object.assign({}, defaultOpts, options)
   const basePath = opts.base.replace(/\/$/, '')
+  const helpers = {
+    htmlescape,
+    dasherize,
+    titleize,
+
+    color (value) {
+      const color = Color(value)
+
+      return {
+        hex: color.hex().toString(),
+        rgb: color.rgb().toString(),
+        hsl: color.hsl().toString().replace(/(\(\d+\.(\d{1,3}))\d+/, '$1') // shorten the first values decimal places
+      }
+    },
+
+    localize (locale, key, interpolations) {
+      const dict = locales[locale]
+
+      return localize(dict, key, interpolations)
+    }
+  }
+
   const context = Object.assign({ basePath, helpers }, data, opts)
 
   try {

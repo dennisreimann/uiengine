@@ -39,7 +39,9 @@ module.exports = {
     'fontweight': 'Weight',
     'variable': 'Variable',
     'description': 'Description',
-    'reference': 'Reference'
+    'reference': 'Reference',
+    'property': 'Property',
+    'theme': 'Theme'
   },
   'entities': {
     'title': 'Datatypes',

@@ -63,7 +63,7 @@ export default {
   methods: {
     themeTitle (themeId) {
       const theme = this.themes.find(theme => theme.id === themeId)
-      return theme && theme.title
+      return theme && theme.title ? theme.title : themeId
     },
 
     isDefault ({ value, variable }) {
