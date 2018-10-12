@@ -87,8 +87,7 @@
     &--code
       font-family var(--uie-font-family-code)
 
-.uie-size-token,
-.uie-theme-token
+.uie-size-token
   &__size
     position relative
     bottom -.15em
@@ -134,7 +133,6 @@
     font-size 1rem
 
 .uie-icon-token,
-.uie-theme-token,
 .uie-default-token
   &__value
     vertical-align middle
@@ -143,7 +141,18 @@
       font-family var(--uie-font-family-code)
 
 .uie-theme-token
-  &__color
+  &__variablename
+    display inline-block
+    margin-top var(--uie-space-xs)
+
+  &__value
+    &--value,
+    &--variable
+      font-family var(--uie-font-family-code)
+    &--default
+      text-align center
+
+  &__swatch
     display inline-block
     width 1.2em
     height 1.2em
@@ -159,3 +168,16 @@
       height 100%
       border-radius 50%
       border-bottom-right-radius 0 !important
+
+  &__size
+    position relative
+    bottom -.15em
+    display inline-block
+    height 1.2em
+    border 1px solid var(--uie-color-accent-medium)
+    background-color var(--uie-color-accent-extralight)
+
+.uie-theme-token__value--property,
+.uie-theme-token__value--description,
+.uie-tokens__container--theme tbody tr:last-child td
+  border-bottom-color var(--uie-color-border-medium) !important

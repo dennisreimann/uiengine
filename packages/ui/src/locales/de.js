@@ -41,7 +41,8 @@ module.exports = {
     'description': 'Beschreibung',
     'reference': 'Referenz',
     'property': 'Eigenschaft',
-    'theme': 'Theme'
+    'theme': 'Theme',
+    'default': 'Standard'
   },
   'entities': {
     'title': 'Datentypen',
