@@ -11,7 +11,8 @@ const basePath = resolve(__dirname, 'fixtures')
 const elementsPath = resolve(basePath, 'elements')
 const modulesPath = resolve(basePath, 'modules')
 const atomFilePath = resolve(elementsPath, 'Atom/index.jsx')
-const moleculeFilePath = resolve(modulesPath, 'Molecule/index.jsx')
+const moleculeFilePath = resolve(modulesPath, 'Molecule/Molecule.jsx')
+const moleculeIndexFilePath = resolve(modulesPath, 'Molecule/index.js')
 const moleculeCssFilePath = resolve(modulesPath, 'Molecule/Molecule.css')
 const organismFilePath = resolve(modulesPath, 'Organism/index.jsx')
 const templatePath = resolve(basePath, 'template.jsx')
@@ -198,7 +199,8 @@ describe('React adapter', () => {
     it('should extract the component dependencies and dependents', async () => {
       const { dependentFiles, dependencyFiles } = await Adapter.registerComponentFile(adapterOptions, moleculeFilePath)
 
-      assert.strictEqual(dependentFiles.length, 1)
+      assert.strictEqual(dependentFiles.length, 2)
+      assert(dependentFiles.includes(moleculeIndexFilePath))
       assert(dependentFiles.includes(organismFilePath))
 
       assert.strictEqual(dependencyFiles.length, 3)
