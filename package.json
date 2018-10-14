@@ -47,16 +47,20 @@
     "cover": "nyc yarn test --forbid-only",
     "release": "yarn run lint && yarn run cover && NODE_ENV=production yarn run build && lerna publish",
     "demo": "rimraf test/demo && sleep 1 && uiengine init --dir test/demo --demo && cd test/demo && uiengine build -s -w",
+    "docs:lighthouse": "lighthouse-ci --report=. https://uiengine.uix.space/",
     "docs:deploy": "yarn run docs:deploy_latest && yarn run docs:deploy_version",
-    "docs:deploy_latest": "cd docs && uiengine build && cd .. && $npm_package_config_deployment_command --exclude=v/ deploy/ docs/dist/ uiengine@uiengine.uix.space:virtual/uiengine.uix.space",
+    "docs:deploy_latest": "cd docs && uiengine build && cd .. && $npm_package_config_deployment_command --exclude=v/ deploy/ docs/dist/ $npm_package_config_deployment_target_docs",
     "docs:deploy_version": "VERSION=`echo \"console.log(require('./packages/core/package.json').version);\" | node` && VERSION_PATH=/v/$VERSION && cd docs && uiengine build --override.ui.base=\"$VERSION_PATH/\" && cd .. && mkdir -p deploy/v && sed 's!RewriteBase /!RewriteBase '$VERSION_PATH'/!' deploy/.htaccess > deploy/v/.htaccess && $npm_package_config_deployment_command --rsync-path=\"mkdir -p virtual/uiengine.uix.space/$VERSION_PATH && rsync\" deploy/v/ docs/dist/ uiengine@uiengine.uix.space:virtual/uiengine.uix.space/$VERSION_PATH",
+    "docs:deploy_lighthouse": "$npm_package_config_deployment_command report.html $npm_package_config_deployment_target_docs",
     "test-project": "cd test/project && NODE_ENV=development yarn run dev",
     "test-project:build": "cd test/project && yarn install && NODE_ENV=production yarn run prod",
-    "test-project:deploy": "yarn run test-project:build && $npm_package_config_deployment_command deploy/ test/tmp/ uiengine@uiengine-sample-project.uix.space:virtual/uiengine-sample-project.uix.space"
+    "test-project:deploy": "yarn run test-project:build && $npm_package_config_deployment_command deploy/ test/tmp/ $npm_package_config_deployment_target_sample"
   },
   "config": {
     "deployment": {
-      "command": "rsync -ravzulO --chmod=u=rwX,g=rX --delete-after"
+      "command": "rsync -ravzulO --chmod=u=rwX,g=rX --delete-after",
+      "target_docs": "uiengine@uiengine.uix.space:virtual/uiengine.uix.space",
+      "target_sample": "uiengine@uiengine-sample-project.uix.space:virtual/uiengine-sample-project.uix.space"
     }
   },
   "husky": {

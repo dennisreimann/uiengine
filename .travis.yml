@@ -39,3 +39,6 @@ deploy:
     script: yarn run test-project:deploy
     on:
       branch: master
+after_deploy:
+  - yarn run docs:lighthouse
+  - yarn run docs:deploy_lighthouse

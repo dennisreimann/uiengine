@@ -15,6 +15,7 @@ deploy/v
 .coveralls.yml
 .nyc_output
 coverage
+report.html
 docs/dist
 test/demo
 test/tmp
