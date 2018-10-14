@@ -98,10 +98,10 @@
             </template>
 
             <template v-if="hasDependencies">
-              <h3>{{ 'component.dependencies' | localize }}</h3>
-              <ul>
-                <li
-                  v-for="dependency in component.dependencies"
+              <p>
+                {{ 'component.dependencies' | localize }}
+                <span
+                  v-for="(dependency, index) in component.dependencies"
                   v-if="componentById(dependency)"
                   :key="dependency"
                 >
@@ -113,15 +113,16 @@
                     exact-active-class=""
                   >{{ componentById(dependency).title }}</router-link>
                   <template v-else>{{ componentById(dependency).title }}</template>
-                </li>
-              </ul>
+                  <span class="divider">{{ (index != component.dependencies.length - 1) ? ',' : '.' }}</span>
+                </span>
+              </p>
             </template>
 
             <template v-if="hasDependentComponents">
-              <h3>{{ 'component.dependents' | localize }}</h3>
-              <ul>
-                <li
-                  v-for="dependent in component.dependentComponents"
+              <p>
+                {{ 'component.dependents' | localize }}
+                <span
+                  v-for="(dependent, index) in component.dependentComponents"
                   v-if="componentById(dependent)"
                   :key="dependent"
                 >
@@ -133,8 +134,9 @@
                     exact-active-class=""
                   >{{ componentById(dependent).title }}</router-link>
                   <template v-else>{{ componentById(dependency).title }}</template>
-                </li>
-              </ul>
+                  <span class="divider">{{ (index != component.dependentComponents.length - 1) ? ',' : '.' }}</span>
+                </span>
+              </p>
             </template>
           </div>
         </div>
@@ -313,3 +315,9 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.divider
+  margin-left -.45ch
+  margin-right .45ch
+</style>
