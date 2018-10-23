@@ -104,7 +104,7 @@ async function fetchById (state, id) {
   const sourceFile = hasComponentFile ? componentFile : undefined
   const title = attributes.title || titleFromContentHeading(content) || componentIdToTitle(id)
   const baseData = { id, title, content, variants, sourcePath, sourceFile, type: 'component' }
-  const fileData = R.reduce(R.mergeDeepLeft, attributes, R.pluck('data', fileRegistrations))
+  const fileData = R.reduce(R.mergeDeepWith(R.concat), attributes, R.pluck('data', fileRegistrations))
 
   // resolve dependencies and dependents
   const filePathToComponentId = R.partial(componentFilePathToId, [components])

@@ -1,4 +1,4 @@
-const { basename, dirname, relative } = require('path')
+const { basename, relative } = require('path')
 const R = require('ramda')
 const Config = require('./configuration')
 const Builder = require('./builder')
@@ -86,7 +86,6 @@ async function generate (options) {
 const getChangeObject = (filePath, action) => {
   const { source: { components, pages, templates, data, entities } } = _state.config
   const file = relative(process.cwd(), filePath)
-  const isComponentDir = !!components.find(coponentDir => dirname(filePath) === coponentDir)
   const isEntityFile = entities && !!filePath.startsWith(entities)
   const isDataFile = !isEntityFile && data && !!filePath.startsWith(data)
   let pageId, componentId, templateId, entityId, variantIdPrefix
@@ -97,14 +96,8 @@ const getChangeObject = (filePath, action) => {
     pageId = pages ? pageFilePathToId(pages, filePath) : undefined
     entityId = entities ? entityFilePathToId(entities, filePath) : undefined
     templateId = templates ? templateFilePathToId(templates, filePath) : undefined
-    componentId = components ? componentFilePathToId(components, filePath) : undefined
     variantIdPrefix = components ? variantFilePathToIdPrefix(components, filePath) : undefined
-  }
-
-  // In case a component directory has been deleted we
-  // need to reset the component id with the dirname
-  if (componentId && isComponentDir) {
-    componentId = componentPathToId(components, filePath)
+    componentId = components ? componentFilePathToId(components, filePath) || componentPathToId(components, filePath) : undefined
   }
 
   if (pageId) {

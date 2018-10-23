@@ -19,29 +19,49 @@ describe('ComponentUtil', () => {
 
   describe('#componentFilePathToId', () => {
     it('should return component id for component file path', () => {
-      const filePath = join(modulesPath, 'form', 'component.md')
+      const filePath = join(modulesPath, 'formfield', 'component.md')
       const componentId = ComponentUtil.componentFilePathToId(componentPaths, filePath)
 
-      assert.strictEqual(componentId, 'form')
+      assert.strictEqual(componentId, 'formfield')
     })
 
     it('should return component id for file path', () => {
-      const filePath = join(elementsPath, 'button', 'additional.pdf')
+      const filePath = join(elementsPath, 'label', 'props.js')
       const componentId = ComponentUtil.componentFilePathToId(componentPaths, filePath)
 
-      assert.strictEqual(componentId, 'button')
+      assert.strictEqual(componentId, 'label')
+    })
+
+    it('should return component id for folder path', () => {
+      const folderPath = join(elementsPath, 'label')
+      const componentId = ComponentUtil.componentFilePathToId(componentPaths, folderPath)
+
+      assert.strictEqual(componentId, 'label')
     })
 
     it('should return component id for variant file path', () => {
-      const filePath = join(elementsPath, 'button', 'variants', 'button.pug')
+      const filePath = join(elementsPath, 'label', 'variants', 'label.pug')
       const componentId = ComponentUtil.componentFilePathToId(componentPaths, filePath)
 
-      assert.strictEqual(componentId, 'button')
+      assert.strictEqual(componentId, 'label')
     })
 
     it('should return undefined for invalid file path', () => {
       const filePath = join(testProjectPath, 'uiengine', 'pages', 'page.md')
       const componentId = ComponentUtil.componentFilePathToId(componentPaths, filePath)
+
+      assert.strictEqual(componentId, undefined)
+    })
+
+    it('should return undefined for non-component file path', () => {
+      const filePath = join(elementsPath, 'index.js')
+      const componentId = ComponentUtil.componentFilePathToId(componentPaths, filePath)
+
+      assert.strictEqual(componentId, undefined)
+    })
+
+    it('should return undefined for components folder path', () => {
+      const componentId = ComponentUtil.componentFilePathToId(componentPaths, elementsPath)
 
       assert.strictEqual(componentId, undefined)
     })
