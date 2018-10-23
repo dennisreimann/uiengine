@@ -237,9 +237,10 @@ async function generateStateJSON (state) {
 async function generateState (state) {
   debug2(state, 'Builder.generateState():start')
 
-  const tasks = [generateStateHTML(state)]
-  if (state.config.debug) tasks.push(generateStateJSON(state))
-  await Promise.all(tasks)
+  await Promise.all([
+    generateStateHTML(state),
+    generateStateJSON(state)
+  ])
 
   debug2(state, 'Builder.generateState():end')
 }
