@@ -218,7 +218,7 @@ export default {
 
 <style lang="stylus" scoped>
 .variant
-  margin-top var(--uie-space-xxl)
-  padding-top var(--uie-space-xxl)
+  margin-top var(--uie-space-xxxl)
+  padding-top var(--uie-space-xl)
   border-top 1px solid var(--uie-color-border-light)
 </style>

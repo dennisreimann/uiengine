@@ -10,14 +10,14 @@
   padding 20px
 
   &__section + &__section
-    margin-top var(--uie-space-xxl)
+    margin-top var(--uie-space-xxxl)
 
   &__article + &__article
-    margin-top var(--uie-space-xl)
+    margin-top var(--uie-space-xxl)
 
 .uie-tokens
   &__category + &__category
-    margin-top var(--uie-space-xxl)
+    margin-top var(--uie-space-xxxl)
 
   &__title
     margin-bottom var(--uie-space-m)
@@ -98,7 +98,7 @@
 
 .uie-font-token
   + .uie-font-token
-    margin-top var(--uie-space-xl)
+    margin-top var(--uie-space-xxl)
 
   &__info
     display flex
@@ -146,9 +146,11 @@
     margin-top var(--uie-space-xs)
 
   &__value
-    &--value,
+    &--value
+      font-family var(--uie-font-family-code)
     &--variable
       font-family var(--uie-font-family-code)
+      white-space nowrap
     &--default
       text-align center
 

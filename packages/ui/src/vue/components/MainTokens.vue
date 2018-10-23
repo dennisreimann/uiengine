@@ -12,19 +12,19 @@
         />
       </content-header>
 
-      <div class="uie-sot-xs">
-        <content-text :item="page" />
-      </div>
+      <content-text
+        :item="page"
+        class="uie-sot-xs uie-sob-xxxl"
+      />
     </section>
 
-    <div class="uie-sot-xl">
-      <content-preview
-        :id="id"
-        :path="previewPath"
-        :title="page.title"
-        type="tokens"
-      />
-    </div>
+    <content-preview
+      :id="id"
+      :path="previewPath"
+      :title="page.title"
+      class="uie-sot-xl"
+      type="tokens"
+    />
   </div>
 </template>
 
