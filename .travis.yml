@@ -2,6 +2,7 @@ language: node_js
 cache: yarn
 node_js:
   - "node"
+  - "10"
   - "lts/*"
 
 before_script:
@@ -33,12 +34,14 @@ deploy:
     script: yarn run docs:deploy
     on:
       branch: master
+      node: "10"
   # Deploy test project
   - provider: script
     skip_cleanup: true
     script: yarn run test-project:deploy
     on:
       branch: master
+      node: "10"
 after_deploy:
   - yarn run docs:lighthouse
   - yarn run docs:deploy_lighthouse
