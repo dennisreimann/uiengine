@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.0] - ongoing development
+
+### Added
+
+- React Adapter: Partial support for PropType definitions in external files
+
 ## [1.3.0] - 2018-10-14
 
 ### Added

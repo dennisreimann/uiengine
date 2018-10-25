@@ -1,5 +1,6 @@
 const { readFile } = require('fs-extra')
 const reactDocs = require('react-docgen')
+const externalPropTypesHandler = require('react-docgen-external-proptypes-handler')
 const {
   StringUtil: { upcaseFirstChar }
 } = require('@uiengine/util')
@@ -40,9 +41,10 @@ async function extractProperties (filePath) {
   const source = await readFile(filePath, 'utf-8')
 
   const resolver = reactDocs.resolver.findAllExportedComponentDefinitions
+  const handlers = reactDocs.defaultHandlers.concat(externalPropTypesHandler(filePath))
   let reactDefinitions
   try {
-    reactDefinitions = reactDocs.parse(source, resolver)
+    reactDefinitions = reactDocs.parse(source, resolver, handlers)
   } catch (err) {
     reactDefinitions = []
   }

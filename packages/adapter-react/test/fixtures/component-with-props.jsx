@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Enum, Message } from './types'
 
-const Message = {}
 const ComponentWithProps = props => <div />
 
 // Supported propTypes taken from
@@ -40,7 +40,7 @@ ComponentWithProps.propTypes = {
 
   // You can ensure that your prop is limited to specific values by treating
   // it as an enum.
-  optionalEnum: PropTypes.oneOf(['News', 'Photos']),
+  optionalEnum: PropTypes.oneOf(Enum),
 
   // An object that could be one of many types
   optionalUnion: PropTypes.oneOfType([
