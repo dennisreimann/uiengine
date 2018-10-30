@@ -319,8 +319,9 @@ export default {
     color var(--uie-color-modal-text)
     background var(--uie-color-main-bg)
     display inline-block
-    font-size var(--uie-font-size-s)
     font-family var(--uie-font-family-light)
+    font-size var(--uie-font-size-s)
+    font-weight var(--uie-font-weight-light)
     cursor pointer
 
   &__options

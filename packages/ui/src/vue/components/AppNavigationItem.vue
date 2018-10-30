@@ -211,6 +211,7 @@ export default {
 
   &__item--current > &__link
     font-family var(--uie-font-family-bold)
+    font-weight var(--uie-font-weight-bold)
     color var(--uie-color-navigation-text-current) !important
     background-color var(--uie-color-navigation-bg-current) !important
     border-left-color var(--uie-color-navigation-border-current)

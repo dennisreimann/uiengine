@@ -146,6 +146,7 @@ export default {
     display block
     text-decoration none
     font-family var(--uie-font-family-regular)
+    font-weight var(--uie-font-weight-regular)
     margin-right var(--uie-space-m)
     &:focus,
     &:hover,
@@ -166,6 +167,7 @@ export default {
       display inline-block
       padding-top var(--uie-space-xs)
       font-family var(--uie-font-family-light)
+      font-weight var(--uie-font-weight-light)
       color var(--uie-color-topbar-text)
       &:focus,
       &:hover,
@@ -264,4 +266,5 @@ export default {
     padding-left calc(var(--icon-size) + var(--uie-space-m))
     font-family var(--uie-font-family-light)
     font-size var(--uie-font-size-m)
+    font-weight var(--uie-font-weight-light)
 </style>

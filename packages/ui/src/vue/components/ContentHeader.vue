@@ -68,6 +68,7 @@ export default {
     &[aria-selected]
       color var(--uie-color-contentheader-link-current)
       font-family var(--uie-font-family-bold)
+      font-weight var(--uie-font-weight-bold)
 
   &__option + &__option,
   &__action + &__option,

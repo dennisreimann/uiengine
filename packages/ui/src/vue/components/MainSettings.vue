@@ -236,4 +236,5 @@ select
   padding var(--uie-space-s) var(--uie-space-m)
   font-family var(--uie-font-family-light)
   font-size var(--uie-font-size-m)
+  font-weight var(--uie-font-weight-light)
 </style>
