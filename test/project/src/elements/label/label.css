@@ -1,3 +1,4 @@
 .label {
-  /* … */
+  color: var(--label-text-color, var(--app-text-color));
+  font-weight: bold;
 }
