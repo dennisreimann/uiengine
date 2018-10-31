@@ -1,7 +1,6 @@
 const { join } = require('path')
 const gulp = require('gulp')
 const concat = require('gulp-concat')
-const postcss = require('gulp-postcss')
 const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
 const UIengine = require('@uiengine/core')
@@ -57,14 +56,12 @@ gulp.task('assets', () =>
 
 gulp.task('css:components', () =>
   gulp.src(src.css.components)
-    .pipe(postcss())
     .pipe(concat('components.css'))
     .pipe(gulp.dest(join(dist.assets, 'styles')))
 )
 
 gulp.task('css:uiengine', () =>
   gulp.src(src.css.uiengine)
-    .pipe(postcss())
     .pipe(gulp.dest(join(dist.assets, 'styles')))
 )
 
@@ -72,7 +69,6 @@ themes.forEach(theme =>
   gulp.task(`css:theme:${theme}`, () => {
     const globs = src.css.themes.map(globToTheme(theme))
     return gulp.src(globs)
-      .pipe(postcss({ theme }))
       .pipe(concat(`theme-${theme}.css`))
       .pipe(gulp.dest(join(dist.assets, 'styles')))
   })
