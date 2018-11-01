@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "handlebars": "4.0.12",
-    "lint-staged": "^7.3.0"
+    "lint-staged": "^8.0.4"
   },
   "peerDependencies": {
     "handlebars": "^4.0.12"
