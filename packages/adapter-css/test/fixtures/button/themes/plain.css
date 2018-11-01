@@ -1,3 +1,4 @@
 .button {
+  --button-text-color: var(--special-color);
   --button-background-color: var(--background-color);
 }

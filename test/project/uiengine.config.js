@@ -2,6 +2,7 @@ const breakpoints = require('./lib/breakpoints.json')
 const viewports = require('./lib/viewports.json')
 const pugAdapterOptions = require('./lib/pug-adapter-options')
 const vueAdapterOptions = require('./lib/vue-adapter-options')
+const cssAdapterOptions = require('./lib/css-adapter-options')
 
 // option to simulate base - mainly for debugging and development purposes
 const simulateBase = false
@@ -47,7 +48,10 @@ module.exports = {
       module: '@uiengine/adapter-vue',
       options: vueAdapterOptions
     },
-    css: '@uiengine/adapter-css',
+    css: {
+      module: '@uiengine/adapter-css',
+      options: cssAdapterOptions
+    },
     js: '@uiengine/adapter-vue',
     jsx: '@uiengine/adapter-react',
     hbs: '@uiengine/adapter-handlebars',

@@ -1,0 +1,5 @@
+/* The variables defined in here are the plain app overrides */
+
+:root {
+  --special-color: rebeccapurple;
+}

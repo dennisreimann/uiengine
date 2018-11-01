@@ -1,6 +1,7 @@
 const { basename, dirname, join } = require('path')
 const { readFile } = require('fs-extra')
 const glob = require('globby')
+const merge = require('deepmerge')
 const postcss = require('postcss')
 
 const extractVarDefinition = value => {
@@ -19,6 +20,17 @@ const customPropToName = varName =>
     .map(w => w.charAt(0).toUpperCase() + w.slice(1))
     .join(' ')
     .trim()
+
+async function propsByThemeFromDir (dir) {
+  const pattern = join(dir, '*.css')
+  const themePaths = await glob(pattern, { onlyFiles: true })
+  const propsByTheme = {}
+  for (const themePath of themePaths) {
+    const id = basename(themePath, '.css')
+    propsByTheme[id] = await extractCustomProperties(themePath)
+  }
+  return propsByTheme
+}
 
 async function extractCustomProperties (filePath) {
   const contents = await readFile(filePath, 'utf-8')
@@ -46,19 +58,19 @@ async function extractCustomProperties (filePath) {
 }
 
 async function extractThemeProperties (options, filePath) {
-  const themesDir = options.themesDir || 'themes'
+  const globalThemesDir = options.globalThemesDir
+  const themesDir = options.componentThemesDir || 'themes'
   const themeIds = options.themeIds || []
   const customProps = await extractCustomProperties(filePath)
   if (Object.keys(customProps).length === 0) return []
 
-  // resolve properties for each theme
-  const pattern = join(dirname(filePath), themesDir, '*.css')
-  const themePaths = await glob(pattern, { onlyFiles: true })
-  const propsByTheme = {}
-  for (const themePath of themePaths) {
-    const id = basename(themePath, '.css')
-    propsByTheme[id] = await extractCustomProperties(themePath)
-  }
+  // resolve component and global properties for each theme
+  const componentThemesDir = join(dirname(filePath), themesDir)
+  const [localPropsByTheme, globalPropsByTheme] = await Promise.all([
+    propsByThemeFromDir(componentThemesDir),
+    globalThemesDir ? propsByThemeFromDir(globalThemesDir) : {}
+  ])
+  const propsByTheme = merge(globalPropsByTheme, localPropsByTheme)
 
   // build theme properties data structure based on custom props
   const result = []
@@ -107,7 +119,7 @@ async function extractThemeProperties (options, filePath) {
           } else if (themePropForVar) {
             cpVal = themePropForVar.value
           } else {
-            cpVal = undefined // TODO: this could be resolved by a global/app-wide set
+            cpVal = undefined
           }
         }
 

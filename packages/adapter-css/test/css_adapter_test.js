@@ -3,12 +3,14 @@ const { assertMatches } = require('../../../test/support/asserts')
 const { resolve } = require('path')
 const Adapter = require('../src/index')
 
-const adapterOptions = {
-  themesDir: 'themes',
-  themeIds: ['plain', 'funky']
-}
 const appPath = resolve(__dirname, 'fixtures', 'app.css')
 const buttonPath = resolve(__dirname, 'fixtures', 'button', 'button.css')
+const globalThemesDir = resolve(__dirname, 'fixtures', 'themes')
+
+const adapterOptions = {
+  globalThemesDir,
+  themeIds: ['plain', 'funky']
+}
 
 describe('CSS adapter', () => {
   describe('#registerComponentFile', () => {
@@ -78,8 +80,8 @@ describe('CSS adapter', () => {
       assert(textColor.themes.plain)
       assert.strictEqual(textColor.themes.funky.value, 'blue')
       assert.strictEqual(textColor.themes.funky.variable, undefined)
-      assert.strictEqual(textColor.themes.plain.value, textColor.default.value)
-      assert.strictEqual(textColor.themes.plain.variable, textColor.default.variable)
+      assert.strictEqual(textColor.themes.plain.value, 'rebeccapurple')
+      assert.strictEqual(textColor.themes.plain.variable, '--special-color')
 
       assert.strictEqual(backgroundColor.variable, '--button-background-color')
       assert.strictEqual(backgroundColor.name, 'Button Background Color')

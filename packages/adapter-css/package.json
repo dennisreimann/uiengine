@@ -23,6 +23,7 @@
     "css"
   ],
   "dependencies": {
+    "deepmerge": "2.2.1",
     "fs-extra": "7.0.0",
     "globby": "8.0.1",
     "postcss": "7.0.5"
