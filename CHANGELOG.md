@@ -1,9 +1,11 @@
 # Changelog
 
-## [1.4.0] - ongoing development
+## [1.4.0] - 2018-11-01
 
 ### Added
 
+- CSS Adapter: Parses css files for custom properties and display theme settings for components.
+  - For details see the [CSS adapter docs](/adapters/css/).
 - React Adapter: Partial support for PropType definitions in external files
 
 ## [1.3.0] - 2018-10-14
