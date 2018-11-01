@@ -1,3 +1,5 @@
-.paragraph {
-  color: #000;
+/* Test case for no variables defined */
+
+p {
+  color: var(--text-color);
 }

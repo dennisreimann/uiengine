@@ -1,0 +1,15 @@
+/* The variables defined in here are the app defaults */
+
+:root {
+  --dark-color: black;
+  /* Text Color */
+  --text-color: var(--dark-color, #111);
+  /* Background Color */
+  --background-color: white;
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--background-color);
+  padding: 2em;
+}

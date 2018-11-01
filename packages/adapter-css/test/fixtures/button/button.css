@@ -1,0 +1,11 @@
+/* The variables defined in here are the button defaults */
+
+.button {
+  /* Button Text Color */
+  --button-text-color: var(--text-color);
+  --button-background-color: var(--background-color);
+
+  color: var(--button-text-color);
+  background-color: var(--button-background-color);
+  border-color: grey;
+}

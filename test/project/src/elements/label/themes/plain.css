@@ -1,0 +1,3 @@
+.label {
+  --label-text-color: var(--app-text-color);
+}

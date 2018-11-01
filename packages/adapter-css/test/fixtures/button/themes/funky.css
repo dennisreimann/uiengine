@@ -1,0 +1,5 @@
+.button {
+  --funky-background-color: yellow;
+  --button-text-color: blue;
+  --button-background-color: var(--funky-background-color);
+}

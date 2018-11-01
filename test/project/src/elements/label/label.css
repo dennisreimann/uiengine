@@ -1,4 +1,7 @@
 .label {
-  color: var(--label-text-color, var(--app-text-color));
+  /* Special color for labels */
+  --label-text-color: var(--app-text-color);
+
+  color: var(--label-text-color);
   font-weight: bold;
 }

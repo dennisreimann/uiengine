@@ -22,6 +22,11 @@
     "uiengine",
     "css"
   ],
+  "dependencies": {
+    "fs-extra": "7.0.0",
+    "globby": "8.0.1",
+    "postcss": "7.0.5"
+  },
   "devDependencies": {
     "lint-staged": "^7.3.0"
   },

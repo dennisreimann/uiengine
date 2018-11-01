@@ -1,0 +1,6 @@
+/* The variables defined in here are the funky app overrides */
+
+:root {
+  --text-color: magenta;
+  --background-color: pink;
+}

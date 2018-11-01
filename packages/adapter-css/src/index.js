@@ -4,7 +4,7 @@ async function registerComponentFile (options, filePath) {
   const themeProperties = await extractThemeProperties(options, filePath)
 
   const info = {}
-  if (Object.keys(themeProperties).length > 0) info.themeProperties = themeProperties
+  if (themeProperties.length > 0) info.themeProperties = themeProperties
 
   return info
 }
