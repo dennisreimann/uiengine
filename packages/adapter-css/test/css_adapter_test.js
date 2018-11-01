@@ -5,16 +5,7 @@ const Adapter = require('../src/index')
 
 const adapterOptions = {
   themesDir: 'themes',
-  themes: [
-    {
-      id: 'plain',
-      title: 'Plain and simple'
-    },
-    {
-      id: 'funky',
-      title: 'Bright colors'
-    }
-  ]
+  themeIds: ['plain', 'funky']
 }
 const appPath = resolve(__dirname, 'fixtures', 'app.css')
 const buttonPath = resolve(__dirname, 'fixtures', 'button', 'button.css')
@@ -33,24 +24,40 @@ describe('CSS adapter', () => {
       assert.strictEqual(darkColor.name, 'Dark Color')
       assert.strictEqual(darkColor.type, 'color')
       assert.strictEqual(darkColor.default.value, 'black')
-      assert.strictEqual(Object.keys(darkColor.themes).length, 0)
+      assert.strictEqual(darkColor.default.variable, undefined)
+      assert.strictEqual(Object.keys(darkColor.themes).length, 2)
+      assert(darkColor.themes.funky)
+      assert(darkColor.themes.plain)
+      assert.strictEqual(darkColor.themes.funky.value, darkColor.default.value)
+      assert.strictEqual(darkColor.themes.funky.variable, darkColor.default.variable)
+      assert.strictEqual(darkColor.themes.plain.value, darkColor.default.value)
+      assert.strictEqual(darkColor.themes.plain.variable, darkColor.default.variable)
 
       assert.strictEqual(textColor.variable, '--text-color')
       assert.strictEqual(textColor.name, 'Text Color')
       assert.strictEqual(textColor.type, 'color')
       assert.strictEqual(textColor.default.variable, '--dark-color')
       assert.strictEqual(textColor.default.value, 'black')
-      assert.strictEqual(Object.keys(textColor.themes).length, 1)
+      assert.strictEqual(Object.keys(textColor.themes).length, 2)
       assert(textColor.themes.funky)
+      assert(textColor.themes.plain)
       assert.strictEqual(textColor.themes.funky.value, 'magenta')
+      assert.strictEqual(textColor.themes.funky.variable, undefined)
+      assert.strictEqual(textColor.themes.plain.value, textColor.default.value)
+      assert.strictEqual(textColor.themes.plain.variable, textColor.default.variable)
 
       assert.strictEqual(backgroundColor.variable, '--background-color')
       assert.strictEqual(backgroundColor.name, 'Background Color')
       assert.strictEqual(backgroundColor.type, 'color')
       assert.strictEqual(backgroundColor.default.value, 'white')
-      assert.strictEqual(Object.keys(backgroundColor.themes).length, 1)
+      assert.strictEqual(backgroundColor.default.variable, undefined)
+      assert.strictEqual(Object.keys(backgroundColor.themes).length, 2)
       assert(backgroundColor.themes.funky)
+      assert(backgroundColor.themes.plain)
       assert.strictEqual(backgroundColor.themes.funky.value, 'pink')
+      assert.strictEqual(backgroundColor.themes.funky.variable, undefined)
+      assert.strictEqual(backgroundColor.themes.plain.value, backgroundColor.default.value)
+      assert.strictEqual(backgroundColor.themes.plain.variable, backgroundColor.default.variable)
     })
 
     it('should extract the component themeProperties (button)', async () => {
@@ -70,7 +77,9 @@ describe('CSS adapter', () => {
       assert(textColor.themes.funky)
       assert(textColor.themes.plain)
       assert.strictEqual(textColor.themes.funky.value, 'blue')
-      assert.strictEqual(textColor.themes.plain.value, 'white')
+      assert.strictEqual(textColor.themes.funky.variable, undefined)
+      assert.strictEqual(textColor.themes.plain.value, textColor.default.value)
+      assert.strictEqual(textColor.themes.plain.variable, textColor.default.variable)
 
       assert.strictEqual(backgroundColor.variable, '--button-background-color')
       assert.strictEqual(backgroundColor.name, 'Button Background Color')

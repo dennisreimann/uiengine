@@ -47,6 +47,7 @@ async function extractCustomProperties (filePath) {
 
 async function extractThemeProperties (options, filePath) {
   const themesDir = options.themesDir || 'themes'
+  const themeIds = options.themeIds || []
   const customProps = await extractCustomProperties(filePath)
   if (Object.keys(customProps).length === 0) return []
 
@@ -75,9 +76,23 @@ async function extractThemeProperties (options, filePath) {
     // infer type based on name
     const type = prop.match('color') ? 'color' : undefined
 
-    const themes = Object.keys(propsByTheme).reduce((themeResult, themeId) => {
+    // if the value itself is a variable, try to resolve the value
+    // by looking up previous custom property definitions
+    let defaultValue = value
+    if (variable) {
+      const propForVar = result.find(prop => prop.variable === variable)
+      defaultValue = propForVar && propForVar.default && propForVar.default.value
+    }
+
+    const _default = {
+      variable,
+      value: defaultValue
+    }
+
+    const themes = themeIds.reduce((themeResult, themeId) => {
       const themeProps = propsByTheme[themeId]
       const customProp = themeProps && themeProps[customPropVarName]
+      let info = _default
       if (customProp) {
         // if the value itself is a variable, try to resolve the value
         // by looking up previous custom property definitions
@@ -96,33 +111,20 @@ async function extractThemeProperties (options, filePath) {
           }
         }
 
-        return Object.assign(themeResult, {
-          [themeId]: {
-            variable: cpVar,
-            value: cpVal
-          }
-        })
-      } else {
-        return themeResult
+        info = {
+          variable: cpVar,
+          value: cpVal
+        }
       }
-    }, {})
 
-    // if the value itself is a variable, try to resolve the value
-    // by looking up previous custom property definitions
-    let defaultValue = value
-    if (variable) {
-      const propForVar = result.find(prop => prop.variable === variable)
-      defaultValue = propForVar && propForVar.default && propForVar.default.value
-    }
+      return Object.assign(themeResult, { [themeId]: info })
+    }, {})
 
     const info = {
       type,
       name,
       variable: prop,
-      default: {
-        variable,
-        value: defaultValue
-      },
+      default: _default,
       themes
     }
 
