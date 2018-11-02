@@ -107,7 +107,7 @@ describe('CSS adapter', () => {
 
   describe('#filesForComponent', () => {
     it('should return the component file', () => {
-      const files = Adapter.filesForComponent('button')
+      const files = Adapter.filesForComponent(adapterOptions, 'button')
 
       assert.strictEqual(files.length, 1)
       assert.strictEqual(files[0].basename, 'button.css')

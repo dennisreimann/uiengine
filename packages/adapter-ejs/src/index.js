@@ -12,7 +12,7 @@ async function render (options, filePath, data = {}) {
   })
 }
 
-function filesForComponent (componentName) {
+function filesForComponent (options, componentName) {
   return [
     {
       basename: `${componentName}.ejs`,
@@ -21,7 +21,7 @@ function filesForComponent (componentName) {
   ]
 }
 
-function filesForVariant (componentName, variantName) {
+function filesForVariant (options, componentName, variantName) {
   return [
     {
       basename: `${variantName}.ejs`,

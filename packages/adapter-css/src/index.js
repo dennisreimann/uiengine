@@ -9,7 +9,7 @@ async function registerComponentFile (options, filePath) {
   return info
 }
 
-function filesForComponent (componentName) {
+function filesForComponent (options, componentName) {
   return [
     {
       basename: `${componentName}.css`,

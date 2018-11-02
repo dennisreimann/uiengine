@@ -62,7 +62,7 @@ describe('Marko adapter', () => {
 
   describe('#filesForComponent', () => {
     it('should return the component file', () => {
-      const files = Adapter.filesForComponent('button')
+      const files = Adapter.filesForComponent({}, 'button')
 
       assert.strictEqual(files.length, 1)
       assert.strictEqual(files[0].basename, 'button.marko')
@@ -71,7 +71,7 @@ describe('Marko adapter', () => {
 
   describe('#filesForVariant', () => {
     it('should return the variant file', () => {
-      const files = Adapter.filesForVariant('button', 'primary')
+      const files = Adapter.filesForVariant({}, 'button', 'primary')
 
       assert.strictEqual(files.length, 1)
       assert.strictEqual(files[0].basename, 'primary.marko')

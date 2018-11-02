@@ -20,7 +20,7 @@ async function registerComponentFile (options, filePath) {
   return info
 }
 
-const filesForComponent = (componentName) =>
+const filesForComponent = (options, componentName) =>
   [
     {
       basename: `${componentName}.pug`,
@@ -28,7 +28,7 @@ const filesForComponent = (componentName) =>
     }
   ]
 
-const filesForVariant = (componentName, variantName) =>
+const filesForVariant = (options, componentName, variantName) =>
   [
     {
       basename: `${variantName}.pug`,

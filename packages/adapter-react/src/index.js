@@ -56,7 +56,7 @@ async function render (options, filePath, data = {}) {
   return rendered
 }
 
-function filesForComponent (componentName) {
+function filesForComponent (options, componentName) {
   const name = upcaseFirstChar(componentName)
 
   return [
@@ -78,7 +78,7 @@ export default ${name}
   ]
 }
 
-function filesForVariant (componentName, variantName) {
+function filesForVariant (options, componentName, variantName) {
   const cName = upcaseFirstChar(componentName)
   const vName = upcaseFirstChar(variantName)
 

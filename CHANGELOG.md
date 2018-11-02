@@ -5,6 +5,7 @@
 ### Changed
 
 - Moved `analyticsId` config option into [`ui` config](/advanced/ui/).
+- The `filesFor…` adapter function now also receive the [`options` as first argument](/adapters/#scaffolding)
 
 ---
 

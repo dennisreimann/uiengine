@@ -123,8 +123,8 @@ When generating incremental changes during development you can also use this to 
 
 Adapters can also provide async functions to be used when scaffolding components and variants:
 
-- `filesForComponent(componentName)`
-- `filesForVariant(componentName, variantName)`
+- `filesForComponent(opts, componentName)`
+- `filesForVariant(opts, componentName, variantName)`
 
 Both functions should resolve with an array containing information about the files that need to be created.
 For each file the array should contain an object providing a `basename` and `data`.
@@ -132,7 +132,7 @@ For each file the array should contain an object providing a `basename` and `dat
 Here is an example from the [Pug adapter](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-pug/src/index.js):
 
 ```js
-const filesForComponent = (componentName) =>
+const filesForComponent = (opts, componentName) =>
   [
     {
       basename: `${componentName}.pug`,
@@ -140,7 +140,7 @@ const filesForComponent = (componentName) =>
     }
   ]
 
-const filesForVariant = (componentName, variantName) =>
+const filesForVariant = (opts, componentName, variantName) =>
   [
     {
       basename: `${variantName}.pug`,

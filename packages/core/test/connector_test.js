@@ -159,7 +159,7 @@ describe('Connector', () => {
       await Connector.filesForComponent(state, 'test', 'button')
 
       this.sinon.assert.calledOnce(TestAdapter.filesForComponent)
-      this.sinon.assert.calledWith(TestAdapter.filesForComponent, 'button')
+      this.sinon.assert.calledWith(TestAdapter.filesForComponent, expandedAdapterOptions, 'button')
     })
 
     it('should return an empty array if the adapter does not implement the filesForComponent function', async () => {
@@ -175,7 +175,7 @@ describe('Connector', () => {
       await Connector.filesForVariant(state, 'test', 'button', 'primary')
 
       this.sinon.assert.calledOnce(TestAdapter.filesForVariant)
-      this.sinon.assert.calledWith(TestAdapter.filesForVariant, 'button', 'primary')
+      this.sinon.assert.calledWith(TestAdapter.filesForVariant, expandedAdapterOptions, 'button', 'primary')
     })
 
     it('should return an empty array if the adapter does not implement the filesForVariant function', async () => {

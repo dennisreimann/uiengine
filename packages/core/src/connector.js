@@ -89,7 +89,7 @@ async function filesForComponent (state, ext, componentName) {
   const fnExists = typeof filesForComponent === 'function'
 
   if (fnExists && !options.skipScaffold) {
-    const files = await filesForComponent(componentName)
+    const files = await filesForComponent(options, componentName)
 
     return files
   } else {
@@ -103,7 +103,7 @@ async function filesForVariant (state, ext, componentName, variantName) {
   const fnExists = typeof filesForVariant === 'function'
 
   if (fnExists && !options.skipScaffold) {
-    const files = await filesForVariant(componentName, variantName)
+    const files = await filesForVariant(options, componentName, variantName)
 
     return files
   } else {

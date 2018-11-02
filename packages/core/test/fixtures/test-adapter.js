@@ -16,7 +16,7 @@ async function render (options, templatePath, data = {}) {
   })
 }
 
-async function filesForComponent (componentName) {
+async function filesForComponent (options, componentName) {
   return new Promise((resolve, reject) => {
     resolve([
       {
@@ -27,7 +27,7 @@ async function filesForComponent (componentName) {
   })
 }
 
-async function filesForVariant (componentName, variantName) {
+async function filesForVariant (options, componentName, variantName) {
   return new Promise((resolve, reject) => {
     resolve([
       {
