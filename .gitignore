@@ -13,7 +13,6 @@ deploy/v
 
 # Test and coverage reports
 .coveralls.yml
-.nyc_output
 coverage
 report.html
 docs/dist

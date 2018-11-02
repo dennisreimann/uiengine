@@ -5,7 +5,6 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "**/.nyc_output": true,
     "**/coverage": true
   },
   "search.exclude": {

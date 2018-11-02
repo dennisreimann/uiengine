@@ -16,7 +16,7 @@ script:
   - yarn run cover
 after_success:
   # Upload coverage data
-  - nyc report --reporter=text-lcov | coveralls
+  - c8 report --reporter=text-lcov | coveralls
 
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_226d8df99612_key -iv $encrypted_226d8df99612_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
