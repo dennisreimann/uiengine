@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.0] - ongoing development
+
+### Changed
+
+- Moved `analyticsId` config option into [`ui` config](/advanced/ui/).
+
+---
+
 ## [1.4.0] - 2018-11-01
 
 ### Added

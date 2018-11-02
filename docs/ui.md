@@ -12,6 +12,7 @@ This is what the full options look like:
     base: '/',
     repoBaseUrl: 'https://github.com/dennisreimann/uiengine/blob/master/test/project/',
     customStylesFile: '/custom-styles-file.css',
+    analyticsId: 'UA-XXX-X',
     debug: false,
     cache: true,
 
@@ -61,6 +62,10 @@ For a list of available options see the [highlight.js demo](https://highlightjs.
 
 The path to a css files containing variable overrides and extensions for the UI.
 For an example see the [custom styles file of the test project](../test/project/src/assets/styles/uiengine-custom-styles.css).
+
+### analyticsId
+
+Optionally you can provide an `analyticsId` (from Google Analytics `UA-XXX-X`) to track the site.
 
 ### base
 

@@ -10,7 +10,7 @@ import store from './store'
 import './filters'
 import './global-components'
 
-const { analyticsId } = window.UIengine.state.config
+const { analyticsId } = window.UIengine.state.config.ui || {}
 const isProd = process.env.NODE_ENV === 'production'
 
 __webpack_public_path__ = window.UIengine.base // eslint-disable-line
