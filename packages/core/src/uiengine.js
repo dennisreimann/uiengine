@@ -203,9 +203,6 @@ const startServer = (state, opts) => {
   return server
 }
 
-const theo = (theo, options = {}) =>
-  require('./integrations/theo')(theo, options)
-
 async function build (options = {}) {
   options.info = optionWithDefault(true, options.info)
   options.serve = optionWithDefault(false, options.serve)
@@ -231,6 +228,5 @@ async function build (options = {}) {
 }
 
 module.exports = {
-  theo,
   build
 }

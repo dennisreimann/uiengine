@@ -60,6 +60,8 @@ The UIengine generates the `/_sketch.html` file which can be used with `html-ske
 
 You can integrate and consume design tokens defined with the [Theo](https://github.com/salesforce-ux/theo#spec) tokens spec.
 
+You need the `@uiengine/bridge-theo` package for this.
+
 The UIengine integration can be used inside a JavaScript file referenced in the `tokens` attribute:
 
 ```md
@@ -73,13 +75,12 @@ Our colors.
 The contents of the transforming JavaScript file look something like this:
 
 ```js
-import path from 'path'
-import theo from 'theo'
-import { theo as UItheo } from '@uiengine/core'
+const { resolve } = require('path')
+const convert = require('@uiengine/bridge-theo')
 
-const filePath = path.resolve(__dirname, 'colors.yml')
+const filePath = resolve(__dirname, 'colors.yml')
 
-module.exports = UItheo(theo).convert(filePath)
+module.exports = convert(filePath)
 ```
 
 The transformations converts your Theo `props` into a format that can be rendered by the UIengine tokens template.
@@ -89,11 +90,10 @@ You can also pass a modification callback to the `convert` function.
 This allows you to further modify the property data:
 
 ```js
-import path from 'path'
-import theo from 'theo'
-import { theo as UItheo } from '@uiengine/core'
+const { resolve } = require('path')
+const convert = require('@uiengine/bridge-theo')
 
-const filePath = path.resolve(__dirname, 'colors.yml')
+const filePath = resolve(__dirname, 'colors.yml')
 const titleize = string => string.replace(/^color/, '').replace(/([A-Z\d]+)/g, ' $1').replace(/^./, str => str.toUpperCase())
 const variablize = string => `$${string.replace(/([a-z])([A-Z\d]+)/g, '$1-$2').replace(/\s+/g, '-').toLowerCase()}`
 const modify = prop => {
@@ -104,5 +104,5 @@ const modify = prop => {
   return prop
 }
 
-module.exports = UItheo(theo).convert(filePath, modify)
+module.exports = convert(filePath, modify)
 ```

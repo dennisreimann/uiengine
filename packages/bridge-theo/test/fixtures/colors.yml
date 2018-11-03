@@ -1,0 +1,35 @@
+global:
+  type: color
+
+categories:
+  brand: &brand Brand
+  neutral: &neutral Neutral
+
+aliases:
+  # brand
+  colorBrandPrimary: &colorBrandPrimary "#FF183E"
+  colorBrandSecondary: &colorBrandSecondary "#331833"
+  # neutral
+  colorNeutral100: &colorNeutral100 "#FFF"
+  colorNeutral0: &colorNeutral0 "#000"
+
+props:
+  # brand
+  - name: colorBrandPrimary
+    value: *colorBrandPrimary
+    comment: Primary brand color
+    category: *brand
+
+  - name: colorBrandSecondary
+    value: *colorBrandSecondary
+    comment: Secondary brand color
+    category: *brand
+
+  # neutral
+  - name: colorNeutralWhite
+    value: "{!colorNeutral100}"
+    category: *neutral
+
+  - name: colorNeutralBlack
+    value: "{!colorNeutral0}"
+    category: *neutral

@@ -6,6 +6,7 @@
 
 - Moved `analyticsId` config option into [`ui` config](/advanced/ui/).
 - The `filesFor…` adapter function now also receive the [`options` as first argument](/adapters/#scaffolding)
+- Extracted Theo integration into its own [`@uiengine/bridge-theo` package](/advanced/integrations/#theo)
 
 ---
 
