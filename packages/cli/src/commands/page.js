@@ -9,8 +9,8 @@ const {
 
 exports.describe = 'Create basic files for a new page'
 
-exports.builder = argv =>
-  argv
+exports.builder = yargs =>
+  yargs
     .demandCommand(1)
     .example('$0 page <page_id> [page2_id page3_id ...]')
     // force
@@ -20,16 +20,12 @@ exports.builder = argv =>
     .default('force', false)
 
 exports.handler = async argv => {
-  const opts = {
-    config: argv.config,
-    debug: argv.debug
-  }
   const pageId = argv._[1]
   const additionalPageIds = argv._.slice(2)
   const pageIds = additionalPageIds.length ? [pageId, ...additionalPageIds] : [pageId]
 
   try {
-    const { config } = await Core.init(opts)
+    const { config } = await Core.init(argv)
     const pagesDir = config.source.pages
     const pageTemplate = require('../templates/page').template
 

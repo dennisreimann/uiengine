@@ -1,8 +1,8 @@
 const assert = require('assert')
 const { join } = require('path')
-const { ensureDirSync, removeSync } = require('fs-extra')
+const { ensureDirSync, outputFileSync, removeSync } = require('fs-extra')
 const { runCommand } = require('./support/util')
-const { assertContentMatches, assertExists, assertMatches } = require('../../../test/support/asserts')
+const { assertContentMatches, assertDoesNotExist, assertExists, assertMatches } = require('../../../test/support/asserts')
 const { testTmpPath } = require('../../../test/support/paths')
 const testPath = join(testTmpPath, 'cli-project')
 
@@ -237,6 +237,176 @@ describe('CLI', function () {
         assertExists(indexPath)
         assertContentMatches(indexPath, '123.456.789')
         assertContentMatches(indexPath, 'html lang="de"')
+      })
+    })
+  })
+
+  describe('migrate command', () => {
+    const migratePath = join(__dirname, 'fixtures/migrate')
+
+    describe('with component.md migration', () => {
+      const componentsPath = join(migratePath, 'components')
+      const buttonPath = join(componentsPath, 'button')
+      const componentMdPath = join(buttonPath, 'component.md')
+      const readmePath = join(buttonPath, 'README.md')
+      const configPath = join(buttonPath, 'component.config.js')
+
+      afterEach(() => { removeSync(componentsPath) })
+
+      it('should replace component.md file with component.config.js and README.md', async () => {
+        outputFileSync(componentMdPath, `---\ntitle: Button\nvariants:\n- test.pug\n---\nThis is the button description.`)
+
+        await runCommand(migratePath, 'uiengine migrate component.md')
+
+        assertExists(configPath)
+        const component = require(configPath)
+        assert.strictEqual(Object.keys(component).length, 2)
+        assert.strictEqual(component.title, 'Button')
+        assert.strictEqual(component.variants.length, 1)
+        assert.strictEqual(component.variants[0], 'test.pug')
+
+        assertContentMatches(readmePath, 'This is the button description.\n')
+
+        assertDoesNotExist(componentMdPath, `${componentMdPath} should have been deleted.`)
+      })
+    })
+
+    describe('with page.md migration', () => {
+      const pagesPath = join(migratePath, 'pages')
+      const pageMdPath = join(pagesPath, 'page.md')
+      const readmePath = join(pagesPath, 'README.md')
+      const configPath = join(pagesPath, 'page.config.js')
+
+      afterEach(() => { removeSync(pagesPath) })
+
+      describe('and pages with only title attribute', () => {
+        it('should replace page.md file with README.md and convert title to first heading', async () => {
+          outputFileSync(pageMdPath, `---\ntitle: Homepage\n---\nThis is the homepage content.`)
+
+          await runCommand(migratePath, 'uiengine migrate page.md')
+
+          assertContentMatches(readmePath, '# Homepage\n\nThis is the homepage content.\n')
+
+          assertDoesNotExist(configPath, `${configPath} should not exist, because there should be no attributes.`)
+
+          assertDoesNotExist(pageMdPath, `${pageMdPath} should have been deleted.`)
+        })
+
+        it('should replace page.md file with README.md and not convert title to first heading if it is already present', async () => {
+          outputFileSync(pageMdPath, `---\ntitle: Homepage\n---\n# Homepage\n\nThis is the homepage content.`)
+
+          await runCommand(migratePath, 'uiengine migrate page.md')
+
+          assertContentMatches(readmePath, '# Homepage\n\nThis is the homepage content.\n')
+
+          assertDoesNotExist(configPath, `${configPath} should not exist, because there should be no attributes.`)
+
+          assertDoesNotExist(pageMdPath, `${pageMdPath} should have been deleted.`)
+        })
+      })
+
+      describe('and pages with multiple attributes', () => {
+        it('should replace page.md file with page.config.js and README.md', async () => {
+          outputFileSync(pageMdPath, `---\ntitle: Homepage\ntemplate: page.pug\n---\nThis is the homepage content.`)
+          await runCommand(migratePath, 'uiengine migrate page.md')
+
+          assertExists(configPath)
+          const page = require(configPath)
+          assert.strictEqual(Object.keys(page).length, 1)
+          assert.strictEqual(page.template, 'page.pug')
+
+          assertContentMatches(readmePath, '# Homepage\n\nThis is the homepage content.\n')
+
+          assertDoesNotExist(pageMdPath, `${pageMdPath} should have been deleted.`)
+        })
+      })
+
+      describe('and pages with neither attributes nor content', () => {
+        it('should replace page.md file with README.md', async () => {
+          outputFileSync(pageMdPath, '')
+          await runCommand(migratePath, 'uiengine migrate page.md')
+
+          assertDoesNotExist(configPath, `${configPath} should not exist, because there should be no attributes.`)
+
+          assertDoesNotExist(readmePath, `${readmePath} should not exist, because there should be no content.`)
+
+          assertDoesNotExist(pageMdPath, `${pageMdPath} should have been deleted.`)
+        })
+      })
+
+      describe('and pages with just attributes', () => {
+        it('should replace page.md file with README.md', async () => {
+          outputFileSync(pageMdPath, '---\ntemplate: page.pug\n---')
+          await runCommand(migratePath, 'uiengine migrate page.md')
+
+          assertExists(configPath)
+          const page = require(configPath)
+          assert.strictEqual(Object.keys(page).length, 1)
+          assert.strictEqual(page.template, 'page.pug')
+
+          assertDoesNotExist(readmePath, `${readmePath} should not exist, because there should be no content.`)
+
+          assertDoesNotExist(pageMdPath, `${pageMdPath} should have been deleted.`)
+        })
+      })
+
+      describe('and pages with just content', () => {
+        it('should replace page.md file with README.md', async () => {
+          outputFileSync(pageMdPath, `This is the homepage content.`)
+          await runCommand(migratePath, 'uiengine migrate page.md')
+
+          assertContentMatches(readmePath, 'This is the homepage content.\n')
+
+          assertDoesNotExist(configPath, `${configPath} should not exist, because there should be no attributes.`)
+
+          assertDoesNotExist(pageMdPath, `${pageMdPath} should have been deleted.`)
+        })
+      })
+    })
+
+    describe('with entity.yml migration', () => {
+      const entitiesPath = join(migratePath, 'entities')
+      const ymlPath = join(entitiesPath, 'Entity.yml')
+      const jsPath = join(entitiesPath, 'Entity.js')
+
+      afterEach(() => { removeSync(entitiesPath) })
+
+      it('should replace Entity.yml file with Entity.js', async () => {
+        outputFileSync(ymlPath, `name:\n  type: String\n  description: Product name or title\n  required: true\namount:\n  type: Number`)
+
+        await runCommand(migratePath, 'uiengine migrate entity.yml')
+
+        assertExists(jsPath)
+        const entity = require(jsPath)
+        assert.strictEqual(Object.keys(entity).length, 2)
+        assert.strictEqual(entity.name.type, 'String')
+        assert.strictEqual(entity.name.description, 'Product name or title')
+        assert.strictEqual(entity.name.required, true)
+
+        assert.strictEqual(entity.amount.type, 'Number')
+
+        assertDoesNotExist(ymlPath, `${ymlPath} should have been deleted.`)
+      })
+    })
+
+    describe('with data.yml migration', () => {
+      const dataPath = join(migratePath, 'data')
+      const ymlPath = join(dataPath, 'data.yml')
+      const jsPath = join(dataPath, 'data.js')
+
+      afterEach(() => { removeSync(dataPath) })
+
+      it('should replace data.yml file with data.js', async () => {
+        outputFileSync(ymlPath, `name: "Test"`)
+
+        await runCommand(migratePath, 'uiengine migrate data.yml')
+
+        assertExists(jsPath)
+        const entity = require(jsPath)
+        assert.strictEqual(Object.keys(entity).length, 1)
+        assert.strictEqual(entity.name, 'Test')
+
+        assertDoesNotExist(ymlPath, `${ymlPath} should have been deleted.`)
       })
     })
   })

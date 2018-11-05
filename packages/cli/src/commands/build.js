@@ -2,8 +2,8 @@ const UIengine = require('@uiengine/core')
 
 exports.describe = 'Build the site'
 
-exports.builder = argv =>
-  argv
+exports.builder = yargs =>
+  yargs
     .example('$0 build')
     // watch
     .array('watch')

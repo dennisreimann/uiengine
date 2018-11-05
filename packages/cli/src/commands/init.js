@@ -9,8 +9,8 @@ const {
 
 exports.desc = 'Create a basic structure and config file'
 
-exports.builder = argv =>
-  argv
+exports.builder = yargs =>
+  yargs
     // base directory
     .string('dir')
     .default('dir', '.')

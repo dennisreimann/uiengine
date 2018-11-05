@@ -10,12 +10,12 @@ const exists = filePath => {
   }
 }
 
-const assertExists = filePath => {
-  assert(exists(filePath), `File does not exist: ${filePath}`)
+const assertExists = (filePath, message) => {
+  assert(exists(filePath), message || `File does not exist: ${filePath}`)
 }
 
-const assertDoesNotExist = filePath => {
-  assert(!exists(filePath), `File exist: ${filePath}`)
+const assertDoesNotExist = (filePath, message) => {
+  assert(!exists(filePath), message || `File exist: ${filePath}`)
 }
 
 const assertMatches = (content, regexp) => {

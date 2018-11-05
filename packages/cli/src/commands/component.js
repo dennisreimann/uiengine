@@ -15,8 +15,8 @@ const getTemplate = id =>
 
 exports.describe = 'Create basic files for a new component'
 
-exports.builder = argv =>
-  argv
+exports.builder = yargs =>
+  yargs
     .demandCommand(1)
     .example('$0 component <component_id> [variant1 variant2 ...]')
     // force
@@ -26,16 +26,12 @@ exports.builder = argv =>
     .default('force', false)
 
 exports.handler = async argv => {
-  const opts = {
-    config: argv.config,
-    debug: argv.debug
-  }
   const componentId = argv._[1]
   const variants = argv._.slice(2)
   const variantNames = variants.length ? variants : [componentId]
 
   try {
-    const state = await Core.init(opts)
+    const state = await Core.init(argv)
     const { config } = state
 
     const tasks = []
