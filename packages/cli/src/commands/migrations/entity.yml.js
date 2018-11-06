@@ -2,9 +2,10 @@ const { basename, dirname, join } = require('path')
 const { outputFile, remove } = require('fs-extra')
 const Core = require('@uiengine/core/src/core')
 const glob = require('globby')
+const prettier = require('prettier')
 const {
   YamlUtil,
-  MessageUtil: { reportSuccess, reportError }
+  MessageUtil: { reportSuccess, reportError, reportInfo }
 } = require('@uiengine/util')
 
 exports.describe = 'Replaces Entity.yml files with Entity.js'
@@ -23,12 +24,16 @@ exports.handler = async argv => {
       const attributes = await YamlUtil.fromFile(ymlPath)
 
       await Promise.all([
-        outputFile(jsPath, 'module.exports = ' + JSON.stringify(attributes, null, 2) + '\n')
+        outputFile(jsPath, prettier.format(`module.exports = ${JSON.stringify(attributes, null, 2)}\n`))
       ])
       await remove(ymlPath)
     })
 
-    reportSuccess('Migration succeeded. The Entity.yml files have been replaced with Entity.js files.')
+    if (filePaths.length > 0) {
+      reportSuccess('The Entity.yml files have been replaced with Entity.js files.')
+    } else {
+      reportInfo('No Entity.yml files to migrate.', { icon: 'ℹ️', transient: false })
+    }
   } catch (err) {
     reportError('Migrating the component.md files failed!', err)
     process.exit(1)

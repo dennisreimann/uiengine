@@ -2,9 +2,10 @@ const { dirname, join } = require('path')
 const { outputFile, remove } = require('fs-extra')
 const Core = require('@uiengine/core/src/core')
 const glob = require('globby')
+const prettier = require('prettier')
 const {
   FrontmatterUtil,
-  MessageUtil: { reportSuccess, reportError }
+  MessageUtil: { reportSuccess, reportError, reportInfo }
 } = require('@uiengine/util')
 
 exports.describe = 'Replaces component.md files with component.config.js and README.md'
@@ -22,15 +23,25 @@ exports.handler = async argv => {
       const readmePath = join(componentPath, 'README.md')
       const configPath = join(componentPath, 'component.config.js')
       const { attributes, body } = await FrontmatterUtil.fromFile(componentMdPath, source)
+      const tasks = []
 
-      await Promise.all([
-        outputFile(readmePath, body + '\n'),
-        outputFile(configPath, 'module.exports = ' + JSON.stringify(attributes, null, 2) + '\n')
-      ])
+      if (Object.keys(attributes).length > 0) {
+        outputFile(configPath, prettier.format(`module.exports = ${JSON.stringify(attributes, null, 2)}\n`))
+      }
+
+      if (body.length) {
+        tasks.push(outputFile(readmePath, body + '\n'))
+      }
+
+      await Promise.all(tasks)
       await remove(componentMdPath)
     })
 
-    reportSuccess('Migration succeeded. The component.md files have been replaced with component.config.js and README.md files.')
+    if (filePaths.length > 0) {
+      reportSuccess('The component.md files have been replaced with component.config.js and README.md files.')
+    } else {
+      reportInfo('No component.md files to migrate.', { icon: 'ℹ️', transient: false })
+    }
   } catch (err) {
     reportError('Migrating the component.md files failed!', err)
     process.exit(1)

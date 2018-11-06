@@ -256,7 +256,8 @@ describe('CLI', function () {
       it('should replace component.md file with component.config.js and README.md', async () => {
         outputFileSync(componentMdPath, `---\ntitle: Button\nvariants:\n- test.pug\n---\nThis is the button description.`)
 
-        await runCommand(migratePath, 'uiengine migrate component.md')
+        const out = await runCommand(migratePath, 'uiengine migrate component.md')
+        assertMatches(out, 'The component.md files have been replaced with component.config.js and README.md files.')
 
         assertExists(configPath)
         const component = require(configPath)
@@ -269,6 +270,24 @@ describe('CLI', function () {
 
         assertDoesNotExist(componentMdPath, `${componentMdPath} should have been deleted.`)
       })
+
+      it('should report info if there are no component.md files to migrate', async () => {
+        const out = await runCommand(migratePath, 'uiengine migrate component.md')
+        assertMatches(out, 'No component.md files to migrate.')
+      })
+
+      describe('and component with just content', () => {
+        it('should replace component.md file with README.md', async () => {
+          outputFileSync(componentMdPath, `This is the button description.`)
+          await runCommand(migratePath, 'uiengine migrate component.md')
+
+          assertContentMatches(readmePath, 'This is the button description.\n')
+
+          assertDoesNotExist(configPath, `${configPath} should not exist, because there should be no attributes.`)
+
+          assertDoesNotExist(componentMdPath, `${componentMdPath} should have been deleted.`)
+        })
+      })
     })
 
     describe('with page.md migration', () => {
@@ -278,6 +297,18 @@ describe('CLI', function () {
       const configPath = join(pagesPath, 'page.config.js')
 
       afterEach(() => { removeSync(pagesPath) })
+
+      it('should report success if there are page.md files', async () => {
+        outputFileSync(pageMdPath, `---\ntitle: Homepage\n---\n# Homepage\n\nThis is the homepage content.`)
+
+        const out = await runCommand(migratePath, 'uiengine migrate page.md')
+        assertMatches(out, 'The page.md files have been replaced with page.config.js and README.md files.')
+      })
+
+      it('should report info if there are no page.md files to migrate', async () => {
+        const out = await runCommand(migratePath, 'uiengine migrate page.md')
+        assertMatches(out, 'No page.md files to migrate.')
+      })
 
       describe('and pages with only title attribute', () => {
         it('should replace page.md file with README.md and convert title to first heading', async () => {
@@ -322,7 +353,7 @@ describe('CLI', function () {
       })
 
       describe('and pages with neither attributes nor content', () => {
-        it('should replace page.md file with README.md', async () => {
+        it('should delete page.md file', async () => {
           outputFileSync(pageMdPath, '')
           await runCommand(migratePath, 'uiengine migrate page.md')
 
@@ -335,7 +366,7 @@ describe('CLI', function () {
       })
 
       describe('and pages with just attributes', () => {
-        it('should replace page.md file with README.md', async () => {
+        it('should replace page.md file with README.mdpage.config.js', async () => {
           outputFileSync(pageMdPath, '---\ntemplate: page.pug\n---')
           await runCommand(migratePath, 'uiengine migrate page.md')
 
@@ -374,7 +405,8 @@ describe('CLI', function () {
       it('should replace Entity.yml file with Entity.js', async () => {
         outputFileSync(ymlPath, `name:\n  type: String\n  description: Product name or title\n  required: true\namount:\n  type: Number`)
 
-        await runCommand(migratePath, 'uiengine migrate entity.yml')
+        const out = await runCommand(migratePath, 'uiengine migrate entity.yml')
+        assertMatches(out, 'The Entity.yml files have been replaced with Entity.js files.')
 
         assertExists(jsPath)
         const entity = require(jsPath)
@@ -386,6 +418,11 @@ describe('CLI', function () {
         assert.strictEqual(entity.amount.type, 'Number')
 
         assertDoesNotExist(ymlPath, `${ymlPath} should have been deleted.`)
+      })
+
+      it('should report info if there are no Entity.yml files to migrate', async () => {
+        const out = await runCommand(migratePath, 'uiengine migrate entity.yml')
+        assertMatches(out, 'No Entity.yml files to migrate.')
       })
     })
 
@@ -399,7 +436,8 @@ describe('CLI', function () {
       it('should replace data.yml file with data.js', async () => {
         outputFileSync(ymlPath, `name: "Test"`)
 
-        await runCommand(migratePath, 'uiengine migrate data.yml')
+        const out = await runCommand(migratePath, 'uiengine migrate data.yml')
+        assertMatches(out, 'The data.yml files have been replaced with data.js files.')
 
         assertExists(jsPath)
         const entity = require(jsPath)
@@ -407,6 +445,11 @@ describe('CLI', function () {
         assert.strictEqual(entity.name, 'Test')
 
         assertDoesNotExist(ymlPath, `${ymlPath} should have been deleted.`)
+      })
+
+      it('should report info if there are no data.yml files to migrate', async () => {
+        const out = await runCommand(migratePath, 'uiengine migrate data.yml')
+        assertMatches(out, 'No data.yml files to migrate.')
       })
     })
   })

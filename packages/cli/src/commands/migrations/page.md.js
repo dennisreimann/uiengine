@@ -2,9 +2,10 @@ const { dirname, join } = require('path')
 const { outputFile, remove } = require('fs-extra')
 const Core = require('@uiengine/core/src/core')
 const glob = require('globby')
+const prettier = require('prettier')
 const {
   FrontmatterUtil,
-  MessageUtil: { reportSuccess, reportError },
+  MessageUtil: { reportSuccess, reportError, reportInfo },
   StringUtil: { titleFromContentHeading }
 } = require('@uiengine/util')
 
@@ -36,7 +37,7 @@ exports.handler = async argv => {
       }
 
       if (Object.keys(attributes).length > 0) {
-        tasks.push(outputFile(pageConfig, 'module.exports = ' + JSON.stringify(attributes, null, 2) + '\n'))
+        tasks.push(outputFile(pageConfig, prettier.format(`module.exports = ${JSON.stringify(attributes, null, 2)}\n`)))
       }
 
       if (content.length) {
@@ -47,7 +48,11 @@ exports.handler = async argv => {
       await remove(pageMdPath)
     })
 
-    reportSuccess('Migration succeeded. The page.md files have been replaced with page.config.js and README.md files.')
+    if (filePaths.length > 0) {
+      reportSuccess('The page.md files have been replaced with page.config.js and README.md files.')
+    } else {
+      reportInfo('No page.md files to migrate.', { icon: 'ℹ️', transient: false })
+    }
   } catch (err) {
     reportError('Migrating the page.md files failed!', err)
     process.exit(1)

@@ -7,6 +7,13 @@
 - Moved `analyticsId` config option into [`ui` config](/advanced/ui/).
 - The `filesFor…` adapter function now also receive the [`options` as first argument](/adapters/#scaffolding)
 - Extracted Theo integration into its own [`@uiengine/bridge-theo` package](/advanced/integrations/#theo)
+- YAML and Frontmatter in Markdown files has been removed.
+  - File changes:
+    - component.md -> component.config.js and README.md
+    - page.md -> page.config.js and README.md
+    - data.yml -> data.js
+    - Entity.yml -> Entity.js
+  - Use the `npx uiengine migrate` command to automatically migrate
 
 ---
 
