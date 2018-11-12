@@ -98,7 +98,7 @@ const startServer = (state, opts) => {
   const { browserSync, target, ui } = state.config
   const { watch, info } = opts
   const server = requireOptional('browser-sync', 'serve').create('UIengine')
-  const history = requireOptional('connect-history-api-fallback')
+  const history = requireOptional('connect-history-api-fallback', 'serve')
   const pagesPattern = join('_pages', '**', '*')
   const tokensPattern = join('_tokens', '**', '*')
   const variantsPattern = join('_variants', '**', '*')
