@@ -133,7 +133,7 @@
                     active-class=""
                     exact-active-class=""
                   >{{ componentById(dependent).title }}</router-link>
-                  <template v-else>{{ componentById(dependency).title }}</template>
+                  <template v-else>{{ componentById(dependent).title }}</template>
                   <span class="divider">{{ (index != component.dependentComponents.length - 1) ? ',' : '.' }}</span>
                 </span>
               </p>
