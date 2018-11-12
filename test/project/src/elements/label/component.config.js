@@ -15,10 +15,14 @@ module.exports = {
       }
     }
   },
+
+  // This context is applied to all variants
   context: {
     id: 'name',
     title: 'Name'
   },
+
+  // Sample for variant objects
   variants: [
     {
       file: 'label.ejs',
