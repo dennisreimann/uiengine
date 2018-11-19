@@ -3,11 +3,13 @@ const R = require('ramda')
 const {
   FileUtil: { copy, exists, write },
   MessageUtil: { reportSuccess, reportError },
-  PageUtil: { PAGE_FILENAME },
+  PageUtil: { PAGE_CONFNAME, PAGE_DOCSNAME },
   StringUtil: { titleize }
 } = require('@uiengine/util')
 
-exports.desc = 'Create a basic structure and config file'
+const getTemplate = id => require(`../templates/${id}`).template
+
+exports.describe = 'Create a basic structure and config file'
 
 exports.builder = yargs =>
   yargs
@@ -26,9 +28,10 @@ exports.builder = yargs =>
 
 exports.handler = async argv => {
   const directory = resolve(process.cwd(), argv.dir)
-  const configTemplate = require('../templates/config').template
-  const previewTemplate = require('../templates/preview').template
-  const pageTemplate = require('../templates/initial_page').template
+  const configTemplate = getTemplate('config')
+  const previewTemplate = getTemplate('preview')
+  const pageDocsTemplate = getTemplate('initial_page_readme')
+  const pageConfTemplate = getTemplate('initial_page_config')
   const defaults = {
     name: titleize(basename(directory)),
     source: {
@@ -47,13 +50,16 @@ exports.handler = async argv => {
     }
   }
 
+  const cwd = process.cwd()
   const config = argv.override ? R.mergeDeepRight(defaults, argv.override) : defaults
-  const previewContent = previewTemplate(config.name).trim()
-  const configContent = configTemplate(config).trim()
-  const indexContent = pageTemplate(config.name).trim()
-  const previewPath = relative(process.cwd(), join(directory, config.source.templates, config.template))
-  const indexPath = relative(process.cwd(), join(directory, config.source.pages, PAGE_FILENAME))
-  const configPath = relative(process.cwd(), join(directory, argv.config))
+  const previewContent = previewTemplate(config.name)
+  const configContent = configTemplate(config)
+  const indexConfContent = pageConfTemplate(config.name)
+  const indexDocsContent = pageDocsTemplate(config.name)
+  const previewPath = relative(cwd, join(directory, config.source.templates, config.template))
+  const indexConfPath = relative(cwd, join(directory, config.source.pages, PAGE_CONFNAME))
+  const indexDocsPath = relative(cwd, join(directory, config.source.pages, PAGE_DOCSNAME))
+  const configPath = relative(cwd, join(directory, argv.config))
 
   const tasks = []
   const filesCreated = []
@@ -70,7 +76,8 @@ exports.handler = async argv => {
 
   eventuallyWriteFile(configPath, configContent)
   eventuallyWriteFile(previewPath, previewContent)
-  eventuallyWriteFile(indexPath, indexContent)
+  eventuallyWriteFile(indexConfPath, indexConfContent)
+  eventuallyWriteFile(indexDocsPath, indexDocsContent)
 
   try {
     await Promise.all(tasks)
@@ -88,13 +95,13 @@ exports.handler = async argv => {
     if (filesExisted.length) {
       message.push(
         'The following files already existed:',
-        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesExisted).join('\n')
+        R.map(filePath => '- ' + relative(cwd, filePath), filesExisted).join('\n')
       )
     }
     if (filesCreated.length) {
       message.push(
         'The following files were created:',
-        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
+        R.map(filePath => '- ' + relative(cwd, filePath), filesCreated).join('\n'),
         'Enjoy! ✌️'
       )
     }

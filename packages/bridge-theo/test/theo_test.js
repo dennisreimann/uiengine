@@ -6,7 +6,7 @@ const colorsFile = resolve(__dirname, 'fixtures', 'colors.yml')
 
 describe('Theo bridge', function () {
   describe('without modfiy function', () => {
-    it('should create a basic structure and config file', async () => {
+    it('should convert tokens', async () => {
       const result = convert(colorsFile)
 
       assert.strictEqual(result.length, 2)
@@ -53,7 +53,7 @@ describe('Theo bridge', function () {
   })
 
   describe('with modify function', () => {
-    it('should overwrite existing files', async () => {
+    it('should convert tokens', async () => {
       const titleize = string => string.replace(/([A-Z\d]+)/g, ' $1').replace(/^./, str => str.toUpperCase()).replace(/^Color /, '')
       const variablize = string => `$${string.replace(/([a-z])([A-Z\d]+)/g, '$1-$2').replace(/\s+/g, '-').toLowerCase()}`
       const modify = prop => {

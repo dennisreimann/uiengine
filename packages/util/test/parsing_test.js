@@ -6,7 +6,7 @@ const assert = require('assert')
 
 const ParsingUtil = require('../src/parsing')
 
-const filePath = resolve(__dirname, 'fixtures', 'yaml.yml')
+const filePath = resolve(__dirname, 'fixtures', 'markdown.md')
 const fileContent = readFileSync(filePath, 'utf8')
 
 const sourcePaths = {

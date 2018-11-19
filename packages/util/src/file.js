@@ -25,6 +25,11 @@ const invalidateRequireCache = filePath => {
   delete require.cache[require.resolve(filePath)]
 }
 
+const requireUncached = filePath => {
+  invalidateRequireCache(filePath)
+  return require(filePath)
+}
+
 async function read (filePath) {
   const string = await fs.readFile(filePath, 'utf8')
   return string.trim()
@@ -47,5 +52,6 @@ module.exports = {
   extension,
   exists,
   isDirectory,
+  requireUncached,
   invalidateRequireCache
 }

@@ -3,10 +3,8 @@ const { outputFile, remove } = require('fs-extra')
 const Core = require('@uiengine/core/src/core')
 const glob = require('globby')
 const prettier = require('prettier')
-const {
-  YamlUtil,
-  MessageUtil: { reportSuccess, reportError, reportInfo }
-} = require('@uiengine/util')
+const YamlUtil = require('../../yaml')
+const { MessageUtil: { reportSuccess, reportError, reportInfo } } = require('@uiengine/util')
 
 exports.describe = 'Replaces data.yml files with data.js'
 
@@ -14,8 +12,11 @@ exports.handler = async argv => {
   try {
     const state = await Core.init(argv)
     const { config: { source } } = state
+    const { data } = source
 
-    const pattern = join(source.data, '**', '*.yml')
+    if (!data) return
+
+    const pattern = join(data, '**', '*.yml')
     const filePaths = await glob(pattern, { onlyFiles: true })
 
     filePaths.forEach(async ymlPath => {

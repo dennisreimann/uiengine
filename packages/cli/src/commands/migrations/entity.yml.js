@@ -3,10 +3,8 @@ const { outputFile, remove } = require('fs-extra')
 const Core = require('@uiengine/core/src/core')
 const glob = require('globby')
 const prettier = require('prettier')
-const {
-  YamlUtil,
-  MessageUtil: { reportSuccess, reportError, reportInfo }
-} = require('@uiengine/util')
+const YamlUtil = require('../../yaml')
+const { MessageUtil: { reportSuccess, reportError, reportInfo } } = require('@uiengine/util')
 
 exports.describe = 'Replaces Entity.yml files with Entity.js'
 
@@ -14,8 +12,11 @@ exports.handler = async argv => {
   try {
     const state = await Core.init(argv)
     const { config: { source } } = state
+    const { entities } = source
 
-    const pattern = join(source.entities, '**', '*.yml')
+    if (!entities) return
+
+    const pattern = join(entities, '**', '*.yml')
     const filePaths = await glob(pattern, { onlyFiles: true })
 
     filePaths.forEach(async ymlPath => {

@@ -29,25 +29,27 @@ describe('PageUtil', () => {
     it('should return page file path for index page', () => {
       assert.strictEqual(
         PageUtil.pageIdToFilePath(pagesPath, 'index'),
-        join(pagesPath, 'page.md')
+        join(pagesPath, 'page.config.js')
       )
     })
 
     it('should return page file path for page', () => {
       assert.strictEqual(
         PageUtil.pageIdToFilePath(pagesPath, 'patterns/atoms/buttons'),
-        join(pagesPath, 'patterns', 'atoms', 'buttons', 'page.md')
+        join(pagesPath, 'patterns', 'atoms', 'buttons', 'page.config.js')
       )
     })
   })
 
   describe('#pageFilePathToId', () => {
     it('should return page id for index file path', () => {
-      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, join(pagesPath, 'page.md')), 'index')
+      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, join(pagesPath, 'page.config.js')), 'index')
+      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, join(pagesPath, 'README.md')), 'index')
     })
 
     it('should return page id for page file path', () => {
-      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, join(pagesPath, 'patterns', 'atoms', 'copytext', 'page.md')), 'patterns/atoms/copytext')
+      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, join(pagesPath, 'patterns', 'atoms', 'copytext', 'page.config.js')), 'patterns/atoms/copytext')
+      assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, join(pagesPath, 'patterns', 'atoms', 'copytext', 'README.md')), 'patterns/atoms/copytext')
     })
 
     it('should return page id for file path', () => {
@@ -63,7 +65,7 @@ describe('PageUtil', () => {
     })
 
     it('should return null for invalid file path', () => {
-      const filePath = resolve(testProjectPath, 'src', 'components', 'component.md')
+      const filePath = resolve(testProjectPath, 'src', 'components', 'component.config.js')
       assert.strictEqual(PageUtil.pageFilePathToId(pagesPath, filePath), null)
     })
   })

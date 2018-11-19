@@ -78,8 +78,8 @@ describe('FileUtil', () => {
 
   describe('#copy', () => {
     it('should copy file from source to destination', async () => {
-      const src = join(__dirname, 'fixtures/frontmatter.txt')
-      const dst = join(testTmpPath, 'frontmatter.txt')
+      const src = join(__dirname, 'fixtures/markdown.md')
+      const dst = join(testTmpPath, 'markdown.md')
       await FileUtil.copy(src, dst)
 
       assertExists(dst)
@@ -91,7 +91,7 @@ describe('FileUtil', () => {
       const dst = join(testTmpPath, 'fixtures')
       await FileUtil.copy(src, dst)
 
-      assertExists(join(dst, 'yaml.yml'))
+      assertExists(join(dst, 'markdown.md'))
       removeSync(dst)
     })
   })

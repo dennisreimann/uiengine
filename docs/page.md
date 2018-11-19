@@ -9,26 +9,37 @@ Here is an example structure for some pages using the [Atomic Design Methodology
 ```tree
 pages
 |___atoms
-|   |___page.md
+|   |___page.config.js
+|   |___README.md
 |___molecules
-|   |___page.md
+|   |___page.config.js
+|   |___README.md
 |___organisms
-|   |___page.md
+|   |___page.config.js
+|   |___README.md
 |___prototype
-|   |___page.md
+|   |___page.config.js
+|   |___README.md
 |   |___homepage
-|   |   |___page.md
+|   |   |___page.config.js
+|   |   |___README.md
 |   |___productlist
-|   |   |___page.md
+|   |   |___page.config.js
+|   |   |___README.md
 |   |___productdetails
-|   |   |___page.md
+|   |   |___page.config.js
+|   |   |___README.md
 |   |___cart
-|       |___page.md
+|       |___page.config.js
+|       |___README.md
 |       |___empty
-|       |   |___page.md
+|       |   |___page.config.js
+|       |   |___README.md
 |       |___full
-|           |___page.md
-|___page.md
+|           |___page.config.js
+|           |___README.md
+|___page.config.js
+|___README.md
     |___static
         |___brandmanual.pdf
         |___components.sketch
@@ -37,27 +48,26 @@ pages
 
 A page can contain child pages and have [additional files](#additional-page-files).
 
-## Page file
+## Page files
 
-A page is identified by the presence of a `page.md` markdown file.
-This file contains meta data about the page and can supply the title, and description as well as define the template the page gets redered with.
+A page is identified by the presence of a `README.md` markdown file, which contains the page content:
 
-The `page.md` contents for the home/index page might look like this:
-
-```markdown
----
-title: Home
-children:
-- atoms
-- molecules
-- organisms
-- prototype
----
-
-<img src="static/logo.svg" alt="ACME Design System" class="acme-logo" />
+```md
+![ACME Design System](/static/logo.svg)
 
 The ACME Design System: Components and templates for our web application.
 ````
+
+In addition to this you can also provide a `page.config.js` file, which can list the subpages/components or define the template the page gets rendered with.
+
+The `page.config.js` contents for the home/index page might look like this:
+
+```js
+module.exports = {
+  title: "Home",
+  children: ["atoms", "molecules", "organisms", "prototype"]
+}
+```
 
 The `title` is the name of the page that is refered to in the navigation.
 The `template` defines the template the page gets rendered with. See the [templates section](#templates) for details.
@@ -66,18 +76,13 @@ The `tags` list is optional and can be used to search for pages.
 
 ### Referencing components
 
-The `page.md` contents for the atoms page might look like this:
+The `README.md` contents for the atoms page might look like this:
 
-```markdown
----
-title: Atoms
-components:
-- heading
-- text
-- link
-- button
----
-The most basic elements of our application.
+```js
+module.exports = {
+  title: "Atoms",
+  components: ["heading", "text", "link", "button"]
+}
 ```
 
 The `components` list references the component ids that should be included as child pages for this page.
@@ -85,7 +90,7 @@ Think of the components parent page as a kind of category – here we are using
 
 ### Referencing design tokens
 
-The `page.md` can also reference design tokens.
+The `page.config.js` can also reference design tokens.
 For details see the [design token docs](/advanced/design-tokens/).
 
 ## Additional page files
@@ -116,15 +121,17 @@ Templates are expected to return the whole content of the page, from `DOCTYPE` t
 As you can use these custom templates to render example/prototype pages for your website/application, you might want to provide some [sample data](/advanced/yaml/#include).
 To pass this data into your template, you can use the `context` property of the page:
 
-```markdown
----
-title: Sample home page
-template: home.pug
-context:
-  pageTitle: "Welcome to ACME Corp."
-  teasers: !data /teasers/home.json
----
-This is an example of our homepage with some teasers.
+```js
+const teasers = require("teasers/home.json")
+
+module.exports = {
+  title: "Sample home page",
+  template: "home.pug",
+  context: {
+    pageTitle: "Welcome to ACME Corp.",
+    teasers
+  }
+}
 ```
 
 In this case the template `home` gets rendered with the variables `pageTitle` and `teasers`.

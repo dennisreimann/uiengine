@@ -79,23 +79,10 @@
           <content-text :item="component" />
 
           <div
-            class="content uie-sot-l uie-fs-s"
+            v-if="hasSecondaryInfo"
+            class="content uie-sot-l"
           >
-            <template v-if="hasManyVariants">
-              <ul>
-                <li
-                  v-for="variant in component.variants"
-                  :key="variant.id"
-                >
-                  <router-link
-                    :to="{ hash: dasherize(variant.id) }"
-                    class=""
-                    active-class=""
-                    exact-active-class=""
-                  >{{ variant.title }}</router-link>
-                </li>
-              </ul>
-            </template>
+            <hr>
 
             <template v-if="hasDependencies">
               <p>
@@ -137,6 +124,22 @@
                   <span class="divider">{{ (index != component.dependentComponents.length - 1) ? ',' : '.' }}</span>
                 </span>
               </p>
+            </template>
+
+            <template v-if="hasManyVariants">
+              <ul>
+                <li
+                  v-for="variant in component.variants"
+                  :key="variant.id"
+                >
+                  <router-link
+                    :to="{ hash: dasherize(variant.id) }"
+                    class=""
+                    active-class=""
+                    exact-active-class=""
+                  >{{ variant.title }}</router-link>
+                </li>
+              </ul>
             </template>
           </div>
         </div>
@@ -268,7 +271,11 @@ export default {
     },
 
     hasInfo () {
-      return !!(this.component.content || this.hasManyVariants || this.hasDependencies || this.hasDependentComponents)
+      return !!(this.component.content || this.hasSecondaryInfo)
+    },
+
+    hasSecondaryInfo () {
+      return this.hasManyVariants || this.hasDependencies || this.hasDependentComponents
     },
 
     isInfoActive () {

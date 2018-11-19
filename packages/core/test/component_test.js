@@ -34,10 +34,10 @@ describe('Component', () => {
       assert.strictEqual(data.id, 'input')
       assert.strictEqual(data.title, 'Inputs')
       assert.strictEqual(data.sourcePath, 'src/elements/input')
-      assert.strictEqual(data.sourceFile, 'src/elements/input/component.md')
+      assert.strictEqual(data.sourceFile, 'src/elements/input/component.config.js')
     })
 
-    it('should return component object for components without component.md file', async () => {
+    it('should return component object for components without component.config.js file', async () => {
       const data = await Component.fetchById(state, 'form')
 
       assert.strictEqual(data.id, 'form')

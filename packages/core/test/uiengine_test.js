@@ -107,7 +107,7 @@ describe('UIengine', function () {
       const itFn = process.env.CI === 'true' ? it.skip : it
       itFn('should report file changes', function (done) {
         const pagesPath = resolve(testProjectPath, 'uiengine', 'pages')
-        const filePath = join(pagesPath, 'testcases', 'created', 'page.md')
+        const filePath = join(pagesPath, 'testcases', 'created', 'README.md')
         const fileDir = dirname(filePath)
 
         try {
@@ -122,7 +122,7 @@ describe('UIengine', function () {
           })
 
           mkdirsSync(fileDir)
-          writeFileSync(filePath, '---\ntitle: Created Page\n---\nContent for created page.')
+          writeFileSync(filePath, '# Created Page\n\nContent for created page.')
         } catch (err) {
           removeSync(fileDir)
           done(err)

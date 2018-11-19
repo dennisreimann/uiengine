@@ -7,7 +7,6 @@ const UIengine = require('@uiengine/core')
 
 const src = {
   assets: ['./src/assets/**'],
-  tokens: ['./src/tokens/*.yml'],
   css: {
     components: [
       './src/styles/main.css',
@@ -41,7 +40,7 @@ gulp.task('uiengine', ['webpack'], done => {
   const opts = {
     debug: isDev,
     serve: isDev,
-    watch: isDev ? src.tokens : false
+    watch: isDev
   }
 
   UIengine.build(opts)

@@ -3,10 +3,8 @@ const { outputFile, remove } = require('fs-extra')
 const Core = require('@uiengine/core/src/core')
 const glob = require('globby')
 const prettier = require('prettier')
-const {
-  FrontmatterUtil,
-  MessageUtil: { reportSuccess, reportError, reportInfo }
-} = require('@uiengine/util')
+const FrontmatterUtil = require('../../frontmatter')
+const { MessageUtil: { reportSuccess, reportError, reportInfo } } = require('@uiengine/util')
 
 exports.describe = 'Replaces component.md files with component.config.js and README.md'
 
@@ -14,8 +12,11 @@ exports.handler = async argv => {
   try {
     const state = await Core.init(argv)
     const { config: { source } } = state
+    const { components } = source
 
-    const patterns = source.components.map(componentsPath => join(componentsPath, '**', 'component.md'))
+    if (!components) return
+
+    const patterns = components.map(componentsPath => join(componentsPath, '**', 'component.md'))
     const filePaths = await glob(patterns, { onlyFiles: true })
 
     filePaths.forEach(async componentMdPath => {

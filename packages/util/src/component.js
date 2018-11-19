@@ -2,15 +2,17 @@ const { dirname, join, relative, sep } = require('path')
 const { titleize } = require('./string')
 const { exists, isDirectory } = require('./file')
 
-const COMPONENT_FILENAME = 'component.md'
+const COMPONENT_CONFNAME = 'component.config.js'
+const COMPONENT_DOCSNAME = 'README.md'
 
 const componentIdToTitle = (componentId) =>
   titleize(componentId)
 
-const componentIdToFilePath = (componentPaths, componentId, fileName = COMPONENT_FILENAME) => {
+const componentIdToFilePath = (componentPaths, componentId, fileName = COMPONENT_CONFNAME) => {
   const componentPath = componentPaths.find(componentPath => exists(join(componentPath, componentId)))
+  const absolutePath = join(componentPath, componentId, fileName)
 
-  return join(componentPath, componentId, fileName)
+  return absolutePath
 }
 
 const componentFilePathToId = (componentPaths, componentFilePath) => {
@@ -37,7 +39,8 @@ const componentPathToId = (componentPaths, componentPath) => {
 }
 
 module.exports = {
-  COMPONENT_FILENAME,
+  COMPONENT_CONFNAME,
+  COMPONENT_DOCSNAME,
   componentIdToTitle,
   componentIdToFilePath,
   componentFilePathToId,

@@ -22,35 +22,40 @@ To add meta data to the variant, just use the `variants` list in the [component 
 The meta data can supply the `file`, `title`, `description` and `label` for the variant.
 You might also want to provide the `context` (data and variables) for rendering the variant.
 
-The component file for the button (`button/component.md`) might look like this:
+The component file for the button (`button/component.config.js`) might look like this:
 
-```md
----
-title: Button
-label: A1
+```js
+module.exports = {
+  title: "Button",
+  label: "B1",
 
-# General context, shared across all variants
-context:
-  title: Click me!
-  type: submit
-
-variants:
-  - file: button-default.png
-    title: Default button
-    label: A1-1
-    # the default button inherits the general context
-
-  - file: button-primary.png
-    title: Primary button
-    description: Use this for calls to action
-    label: A1-2
-    # the primary button provides its own context,
-    # hence it does not inherit the general context
-    context:
-      title: Click me now!
-      primary: true
-      type: submit
----
+  // General context, shared across all variants
+  context: {
+    title: "Click me!",
+    type: "submit"
+  },
+  variants: [
+    {
+      file: "button-default.png",
+      title: "Default button",
+      label: "B1-1"
+      // the default button inherits the general context
+    },
+    {
+      file: "button-primary.png",
+      title: "Primary button",
+      description: "Use this for calls to action",
+      label: "B1-2",
+      // the primary button provides its own context,
+      // hence it does not inherit the general context
+      context: {
+        title: "Click me now!",
+        type: "submit",
+        primary: true
+      }
+    }
+  ]
+}
 ````
 
 Attributes:
@@ -63,20 +68,22 @@ Attributes:
 
 You can also provide a short version of the `variants` list like this:
 
-```md
----
-title: Button
-label: A1
+```js
+module.exports = {
+  title: "Button",
+  label: "B1",
 
-# General context, shared across all variants
-context:
-  title: Click me!
-  type: submit
+  // General context, shared across all variants
+  context: {
+    title: "Click me!",
+    type: "submit"
+  },
 
-variants:
-  - button-default.png
-  - button-primary.png
----
+  variants: [
+    "button-default.png",
+    "button-primary.png"
+  ]
+}
 ````
 
 This is useful if you want to manipulate the order and are fine with these defaults:

@@ -62,17 +62,7 @@ You can integrate and consume design tokens defined with the [Theo](https://gith
 
 You need the `@uiengine/bridge-theo` package for this.
 
-The UIengine integration can be used inside a JavaScript file referenced in the `tokens` attribute:
-
-```md
----
-title: Colors
-tokens: !include colors.js
----
-Our colors.
-```
-
-The contents of the transforming JavaScript file look something like this:
+The UIengine integration can be used inside the `page.config.js`:
 
 ```js
 const { resolve } = require('path')
@@ -80,7 +70,10 @@ const convert = require('@uiengine/bridge-theo')
 
 const filePath = resolve(__dirname, 'colors.yml')
 
-module.exports = convert(filePath)
+module.exports = {
+  title: 'Colors',
+  tokens: convert(filePath)
+}
 ```
 
 The transformations converts your Theo `props` into a format that can be rendered by the UIengine tokens template.
@@ -104,5 +97,8 @@ const modify = prop => {
   return prop
 }
 
-module.exports = convert(filePath, modify)
+module.exports = {
+  title: 'Colors',
+  tokens: convert(filePath, modify)
+}
 ```

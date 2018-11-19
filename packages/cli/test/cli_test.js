@@ -25,7 +25,7 @@ describe('CLI', function () {
 
       // stdout
       assertMatches(stdout, 'Initialized Cli Project')
-      assertMatches(stdout, 'The following files were created:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- uiengine/pages/page.md')
+      assertMatches(stdout, 'The following files were created:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- uiengine/pages/page.config.js\n- uiengine/pages/README.md')
 
       // config
       const configPath = join(testPath, 'uiengine.config.js')
@@ -44,7 +44,7 @@ describe('CLI', function () {
       assert.strictEqual(config.template, 'uiengine.html')
 
       // homepage
-      const homepagePath = join(testPath, 'uiengine/pages/page.md')
+      const homepagePath = join(testPath, 'uiengine/pages/README.md')
       assertContentMatches(homepagePath, 'It looks like you have just set up this project.')
 
       // preview
@@ -60,7 +60,7 @@ describe('CLI', function () {
       const stdout = await runCommand(testPath, 'uiengine init')
 
       // stdout
-      assertMatches(stdout, 'The following files already existed:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- uiengine/pages/page.md')
+      assertMatches(stdout, 'The following files already existed:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- uiengine/pages/page.config.js\n- uiengine/pages/README.md')
     })
 
     describe('with force flag', () => {
@@ -68,7 +68,7 @@ describe('CLI', function () {
         const stdout = await runCommand(testPath, 'uiengine init -f')
 
         // stdout
-        assertMatches(stdout, 'The following files were created:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- uiengine/pages/page.md')
+        assertMatches(stdout, 'The following files were created:\n\n- uiengine.config.js\n- src/templates/uiengine.html\n- uiengine/pages/page.config.js\n- uiengine/pages/README.md')
       })
     })
 
@@ -102,9 +102,10 @@ describe('CLI', function () {
         assertMatches(stdout, 'In addition to these we also created some demo components and pages.')
 
         // page files
-        assertExists(join(testPath, 'uiengine/pages/patterns/page.md'))
-        assertExists(join(testPath, 'uiengine/pages/patterns/elements/page.md'))
-        assertExists(join(testPath, 'uiengine/pages/patterns/components/page.md'))
+        assertExists(join(testPath, 'uiengine/pages/patterns/page.config.js'))
+        assertExists(join(testPath, 'uiengine/pages/patterns/README.md'))
+        assertExists(join(testPath, 'uiengine/pages/patterns/elements/page.config.js'))
+        assertExists(join(testPath, 'uiengine/pages/patterns/components/page.config.js'))
 
         // component files
         assertExists(join(testPath, 'src/components/button'))
@@ -118,37 +119,44 @@ describe('CLI', function () {
   describe('page command', () => {
     it('should create the page files', async () => {
       const stdout = await runCommand(testPath, 'uiengine page atoms molecules')
-      const atomsPagePath = 'uiengine/pages/atoms/page.md'
-      const moleculesPagePath = 'uiengine/pages/molecules/page.md'
+      const atomsConfigPath = 'uiengine/pages/atoms/page.config.js'
+      const atomsReadmePath = 'uiengine/pages/atoms/README.md'
+      const moleculesConfigPath = 'uiengine/pages/molecules/page.config.js'
+      const moleculesReadmePath = 'uiengine/pages/molecules/README.md'
 
       // stdout
       assertMatches(stdout, 'Pages created')
-      assertMatches(stdout, `The following files were created:\n\n- ${atomsPagePath}\n- ${moleculesPagePath}`)
+      assertMatches(stdout, `The following files were created:\n\n- ${atomsConfigPath}\n- ${atomsReadmePath}\n- ${moleculesConfigPath}\n- ${moleculesReadmePath}`)
 
-      //  page files
-      assertContentMatches(join(testPath, atomsPagePath), '# Atoms')
-      assertContentMatches(join(testPath, moleculesPagePath), '# Molecules')
+      // page files
+      assertContentMatches(join(testPath, atomsReadmePath), '# Atoms')
+      assertContentMatches(join(testPath, atomsConfigPath), 'module.exports = {}')
+      assertContentMatches(join(testPath, moleculesReadmePath), '# Molecules')
+      assertContentMatches(join(testPath, moleculesConfigPath), 'module.exports = {}')
     })
 
     it('should not overwrite existing files', async () => {
       const stdout = await runCommand(testPath, 'uiengine page atoms molecules organisms')
-      const atomsPagePath = 'uiengine/pages/atoms/page.md'
-      const moleculesPagePath = 'uiengine/pages/molecules/page.md'
-      const organismsPagePath = 'uiengine/pages/organisms/page.md'
+      const atomsPagePath = 'uiengine/pages/atoms/page.config.js'
+      const atomsReadmePath = 'uiengine/pages/atoms/README.md'
+      const moleculesPagePath = 'uiengine/pages/molecules/page.config.js'
+      const moleculesReadmePath = 'uiengine/pages/molecules/README.md'
+      const organismsPagePath = 'uiengine/pages/organisms/page.config.js'
+      const organismsReadmePath = 'uiengine/pages/organisms/README.md'
 
-      // stdout
-      assertMatches(stdout, `The following files already existed:\n\n- ${atomsPagePath}\n- ${moleculesPagePath}`)
-      assertMatches(stdout, `The following files were created:\n\n- ${organismsPagePath}`)
+      assertMatches(stdout, `The following files already existed:\n\n- ${atomsPagePath}\n- ${atomsReadmePath}\n- ${moleculesPagePath}\n- ${moleculesReadmePath}`)
+      assertMatches(stdout, `The following files were created:\n\n- ${organismsPagePath}\n- ${organismsReadmePath}`)
     })
 
     describe('with force flag', () => {
       it('should overwrite existing files ', async () => {
         const stdout = await runCommand(testPath, 'uiengine page atoms molecules --force')
-        const atomsPagePath = 'uiengine/pages/atoms/page.md'
-        const moleculesPagePath = 'uiengine/pages/molecules/page.md'
+        const atomsPagePath = 'uiengine/pages/atoms/page.config.js'
+        const atomsReadmePath = 'uiengine/pages/atoms/README.md'
+        const moleculesPagePath = 'uiengine/pages/molecules/page.config.js'
+        const moleculesReadmePath = 'uiengine/pages/molecules/README.md'
 
-        // stdout
-        assertMatches(stdout, `The following files were created:\n\n- ${atomsPagePath}\n- ${moleculesPagePath}`)
+        assertMatches(stdout, `The following files were created:\n\n- ${atomsPagePath}\n- ${atomsReadmePath}\n- ${moleculesPagePath}\n- ${moleculesReadmePath}`)
       })
     })
   })
@@ -156,29 +164,29 @@ describe('CLI', function () {
   describe('component command', () => {
     it('should create the basic files for a new component', async () => {
       const stdout = await runCommand(testPath, 'uiengine component list')
+      const configPath = 'src/components/list/component.config.js'
+      const readmePath = 'src/components/list/README.md'
 
       // stdout
       assertMatches(stdout, 'List created')
-      assertMatches(stdout, `The following files were created:\n\n- src/components/list/component.md`)
+      assertMatches(stdout, `The following files were created:\n\n- ${configPath}\n- ${readmePath}`)
 
       // component file
-      const markdownPath = join(testPath, 'src/components/list/component.md')
-      assertContentMatches(markdownPath, 'title: List')
+      assertContentMatches(join(testPath, configPath), 'module.exports = {}')
+      assertContentMatches(join(testPath, readmePath), '# List')
     })
 
     it('should not overwrite existing files', async () => {
       const stdout = await runCommand(testPath, 'uiengine component button default primary')
 
-      // stdout
-      assertMatches(stdout, `The following files already existed:\n\n- src/components/button/component.md`)
+      assertMatches(stdout, `The following files already existed:\n\n- src/components/button/component.config.js\n- src/components/button/README.md`)
     })
 
     describe('with force flag', () => {
       it('should overwrite existing files ', async () => {
         const stdout = await runCommand(testPath, 'uiengine component button --force')
 
-        // stdout
-        assertMatches(stdout, `The following files were created:\n\n- src/components/button/component.md`)
+        assertMatches(stdout, `The following files were created:\n\n- src/components/button/component.config.js\n- src/components/button/README.md`)
       })
     })
   })

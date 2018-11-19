@@ -6,7 +6,8 @@ const { UiengineInputError } = require('./error')
 
 const INDEX_FILE_PATH = '.'
 const INDEX_PAGE_PATH = ''
-const PAGE_FILENAME = 'page.md'
+const PAGE_CONFNAME = 'page.config.js'
+const PAGE_DOCSNAME = 'README.md'
 const INDEX_ID = 'index'
 
 // types
@@ -47,31 +48,32 @@ const pageIdToTitle = pageId => {
   return title
 }
 
-const pageIdToFilePath = (pagesPath, pageId) => {
+const pageIdToFilePath = (pagesPath, pageId, fileName = PAGE_CONFNAME) => {
   const relativePath = isIndexPage(pageId) ? INDEX_FILE_PATH : pageId
-  const absolutePath = join(pagesPath, relativePath, PAGE_FILENAME)
+  const absolutePath = join(pagesPath, relativePath, fileName)
 
   return absolutePath
 }
 
-const pageFilePathToId = (pagesPath, pageFilePath) => {
-  const relativePath = relative(pagesPath, pageFilePath)
+const pageFilePathToId = (pagesPath, filePath) => {
+  const relativePath = relative(pagesPath, filePath)
 
   // invalid path: this is not a page
   if (relativePath.startsWith('..')) return null
 
   const dir = dirname(relativePath)
   const file = basename(relativePath)
+  const isPageFile = file === PAGE_CONFNAME || file === PAGE_DOCSNAME
 
-  if (file === PAGE_FILENAME || FileUtil.exists(resolve(pageFilePath, '..', PAGE_FILENAME))) {
+  if (isPageFile || FileUtil.exists(resolve(filePath, '..', PAGE_CONFNAME)) || FileUtil.exists(resolve(filePath, '..', PAGE_DOCSNAME))) {
     const pageId = isIndexFilePath(dir) ? INDEX_ID : dir.replace('\\', '/')
 
     return pageId
   } else {
-    const parentPath = resolve(pageFilePath, '..', '..')
-    const parentPageFilePath = join(parentPath, file)
+    const parentPath = resolve(filePath, '..', '..')
+    const parentFilePath = join(parentPath, file)
 
-    return pageFilePathToId(pagesPath, parentPageFilePath)
+    return pageFilePathToId(pagesPath, parentFilePath)
   }
 }
 
@@ -80,11 +82,9 @@ const parentIdForPageId = (pageIds, pageId) => {
   const parentDir = dirname(pageId)
   const parentId = isIndexFilePath(parentDir) ? INDEX_ID : parentDir
 
-  if (pageIds.includes(parentId)) {
-    return parentId
-  } else {
-    return parentIdForPageId(pageIds, parentId)
-  }
+  return pageIds.includes(parentId)
+    ? parentId
+    : parentIdForPageId(pageIds, parentId)
 }
 
 const determineType = attributes => {
@@ -136,7 +136,8 @@ const convertUserProvidedComponentsList = (pageId, attributes) => {
 }
 
 module.exports = {
-  PAGE_FILENAME,
+  PAGE_CONFNAME,
+  PAGE_DOCSNAME,
   INDEX_ID,
   convertUserProvidedChildrenList,
   convertUserProvidedComponentsList,

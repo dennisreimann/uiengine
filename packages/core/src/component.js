@@ -1,34 +1,39 @@
-const { dirname, relative, resolve } = require('path')
+const { dirname, join, relative, resolve } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const { registerComponentFile } = require('./connector')
 const Variant = require('./variant')
 const {
-  FrontmatterUtil,
   MarkdownUtil,
-  ComponentUtil: { componentFilePathToId, componentIdToFilePath, componentIdToTitle, componentPathToId },
+  ComponentUtil: { COMPONENT_DOCSNAME, componentFilePathToId, componentIdToFilePath, componentIdToTitle, componentPathToId },
+  FileUtil: { requireUncached },
   TemplateUtil: { templateFilePathToId },
   StringUtil: { titleFromContentHeading },
-  DebugUtil: { debug2, debug3, debug4, debug5 }
+  DebugUtil: { debug2, debug3, debug4 }
 } = require('@uiengine/util')
 
-async function readComponentFile (state, filePath) {
-  debug4(state, `Component.readComponentFile(${filePath}):start`)
+async function readComponentFiles (state, id) {
+  debug4(state, `Component.readComponentFiles(${id}):start`)
 
-  const { source } = state.config
-  let data = { attributes: {}, hasComponentFile: false } // in case there is no component file
+  const { base, components } = state.config.source
+  const configPath = componentIdToFilePath(components, id)
+  const dir = dirname(configPath)
+  const readmePath = join(dir, COMPONENT_DOCSNAME)
+  const data = { attributes: {}, sourcePath: relative(base, dir) }
 
+  // config
   try {
-    const component = await FrontmatterUtil.fromFile(filePath, source)
-    const { attributes, body } = component
-    const content = await MarkdownUtil.fromString(body)
+    data.attributes = requireUncached(configPath)
+    data.sourceFile = relative(base, configPath)
+  } catch (err) { }
 
-    data = { attributes, content, hasComponentFile: true }
-  } catch (err) {
-    debug5(state, 'Could not read component file', filePath, err)
-  }
+  // readme
+  try {
+    data.content = await MarkdownUtil.fromFile(readmePath)
+    data.readmeFile = relative(base, readmePath)
+  } catch (err) { }
 
-  debug4(state, `Component.readComponentFile(${filePath}):end`)
+  debug4(state, `Component.readComponentFiles(${id}):end`)
 
   return data
 }
@@ -87,23 +92,19 @@ async function fetchAll (state) {
 async function fetchById (state, id) {
   debug3(state, `Component.fetchById(${id}):start`)
 
-  const { base, components, templates } = state.config.source
+  const { components, templates } = state.config.source
   if (!components) return null
 
-  const componentFilePath = componentIdToFilePath(components, id)
   const [componentData, fileRegistrations] = await Promise.all([
-    readComponentFile(state, componentFilePath),
+    readComponentFiles(state, id),
     registerComponentFiles(state, id)
   ])
 
-  let { attributes, content, attributes: { context, variants }, hasComponentFile } = componentData
+  let { attributes, content, sourcePath, sourceFile, readmeFile, attributes: { context, variants } } = componentData
   variants = await Variant.fetchObjects(state, id, context, variants)
 
-  const componentFile = relative(base, componentFilePath)
-  const sourcePath = dirname(componentFile)
-  const sourceFile = hasComponentFile ? componentFile : undefined
   const title = attributes.title || titleFromContentHeading(content) || componentIdToTitle(id)
-  const baseData = { id, title, content, variants, sourcePath, sourceFile, type: 'component' }
+  const baseData = { id, title, content, variants, sourcePath, sourceFile, readmeFile, type: 'component' }
   const fileData = R.reduce(R.mergeDeepWith(R.concat), attributes, R.pluck('data', fileRegistrations))
 
   // resolve dependencies and dependents

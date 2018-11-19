@@ -104,7 +104,7 @@ describe('Core', function () {
 
   describe('#generateIncrementForFileChange', () => {
     it('should generate page on change', async () => {
-      const filePath = join(pagesPath, 'patterns', 'page.md')
+      const filePath = join(pagesPath, 'patterns', 'page.config.js')
       fs.removeSync(indexPath)
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
@@ -112,11 +112,11 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'patterns')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'patterns', 'page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'patterns', 'page.config.js'))
     })
 
     it('should generate state file on change', async () => {
-      const filePath = join(pagesPath, 'page.md')
+      const filePath = join(pagesPath, 'page.config.js')
       fs.removeSync(indexPath)
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
@@ -124,7 +124,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'index')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'page.config.js'))
     })
 
     it('should copy page files on change', async () => {
@@ -139,11 +139,11 @@ describe('Core', function () {
     })
 
     it('should generate page on create', async () => {
-      const filePath = join(pagesPath, 'testcases', 'created', 'page.md')
+      const filePath = join(pagesPath, 'testcases', 'created', 'README.md')
       const fileDir = dirname(filePath)
 
       fs.mkdirsSync(fileDir)
-      fs.writeFileSync(filePath, '---\ntitle: Created\ncomponents:\n- label\n---\nContent for created page.')
+      fs.writeFileSync(filePath, '# Created\n\nContent for created page.')
 
       const { change } = await Core.generateIncrementForFileChange(filePath, 'created')
       fs.removeSync(fileDir)
@@ -152,15 +152,15 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'created')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'testcases/created')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine/pages/testcases/created/page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine/pages/testcases/created/README.md'))
     })
 
     it('should generate page on delete', async () => {
-      const filePath = join(pagesPath, 'testcases', 'created', 'page.md')
+      const filePath = join(pagesPath, 'testcases', 'created', 'README.md')
       const fileDir = dirname(filePath)
 
       fs.mkdirsSync(fileDir)
-      fs.writeFileSync(filePath, '---\ntitle: Created Page\n---\nContent for created page.')
+      fs.writeFileSync(filePath, '# Created Page\n\nContent for created page.')
 
       await Core.generateIncrementForFileChange(filePath, 'created')
 
@@ -176,11 +176,11 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'deleted')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'testcases/created')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'testcases', 'created', 'page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'testcases', 'created', 'README.md'))
     })
 
     it('should generate entity update on change', async () => {
-      const filePath = join(entitiesPath, 'Entity.yml')
+      const filePath = join(entitiesPath, 'Entity.js')
       fs.removeSync(indexPath)
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
@@ -188,7 +188,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'entity')
       assert.strictEqual(change.item, 'Entity')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'entities', 'Entity.yml'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'entities', 'Entity.js'))
     })
 
     it('should generate component on change', async () => {
@@ -204,10 +204,10 @@ describe('Core', function () {
 
     it('should generate component on create', async () => {
       const componentPath = join(modulesPath, 'my-new-component')
-      const filePath = join(componentPath, 'component.md')
+      const filePath = join(componentPath, 'README.md')
       const fileDir = dirname(filePath)
       fs.mkdirsSync(fileDir)
-      fs.writeFileSync(filePath, '---\ntitle: New component\n---\n')
+      fs.writeFileSync(filePath, '# New component\n')
       const { change, state } = await Core.generateIncrementForFileChange(filePath, 'created')
       fs.removeSync(fileDir)
 
@@ -215,14 +215,14 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'created')
       assert.strictEqual(change.type, 'component')
       assert.strictEqual(change.item, 'my-new-component')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'modules', 'my-new-component', 'component.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'modules', 'my-new-component', 'README.md'))
     })
 
     it('should generate component on delete', async () => {
       const componentPath = join(modulesPath, 'my-new-component')
-      const filePath = join(componentPath, 'component.md')
+      const filePath = join(componentPath, 'README.md')
       fs.mkdirsSync(componentPath)
-      fs.writeFileSync(filePath, '---\ntitle: New component\n---\n')
+      fs.writeFileSync(filePath, '# New component\n')
       const result1 = await Core.generateIncrementForFileChange(filePath, 'created')
       fs.removeSync(filePath)
 
@@ -235,7 +235,7 @@ describe('Core', function () {
       assert.strictEqual(result2.change.action, 'deleted')
       assert.strictEqual(result2.change.type, 'component')
       assert.strictEqual(result2.change.item, 'my-new-component')
-      assert.strictEqual(result2.change.file, join(testProjectRelativePath, 'src', 'modules', 'my-new-component', 'component.md'))
+      assert.strictEqual(result2.change.file, join(testProjectRelativePath, 'src', 'modules', 'my-new-component', 'README.md'))
 
       const result3 = await Core.generateIncrementForFileChange(componentPath, 'deleted')
       fs.removeSync(componentPath)
@@ -296,7 +296,7 @@ describe('Core', function () {
     })
 
     it('should regenerate pages with tokens on change', async () => {
-      const filePath = join(pagesPath, 'documentation', 'tokens', 'colors', 'page.md')
+      const filePath = join(pagesPath, 'documentation', 'tokens', 'colors', 'page.config.js')
       const templatePath = join(testProjectTargetPath, '_tokens', 'documentation', 'tokens', 'colors.html')
       fs.removeSync(templatePath)
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
@@ -305,11 +305,11 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'documentation/tokens/colors')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'documentation', 'tokens', 'colors', 'page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'documentation', 'tokens', 'colors', 'page.config.js'))
     })
 
     it('should regenerate pages with template on change', async () => {
-      const filePath = join(pagesPath, 'testcases', 'custom-template', 'page.md')
+      const filePath = join(pagesPath, 'testcases', 'custom-template', 'page.config.js')
       const templatePath = join(testProjectTargetPath, '_pages', 'testcases', 'custom-template.html')
       fs.removeSync(templatePath)
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
@@ -318,7 +318,7 @@ describe('Core', function () {
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'testcases/custom-template')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'testcases', 'custom-template', 'page.md'))
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'testcases', 'custom-template', 'page.config.js'))
     })
 
     it('should regenerate pages with template on template change', async () => {

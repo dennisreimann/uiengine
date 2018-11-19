@@ -13,13 +13,13 @@ describe('ComponentUtil', () => {
     it('should return component file path for component', () => {
       const filePath = ComponentUtil.componentIdToFilePath(componentPaths, 'formfield')
 
-      assert.strictEqual(filePath, join(modulesPath, 'formfield', 'component.md'))
+      assert.strictEqual(filePath, join(modulesPath, 'formfield', 'component.config.js'))
     })
   })
 
   describe('#componentFilePathToId', () => {
     it('should return component id for component file path', () => {
-      const filePath = join(modulesPath, 'formfield', 'component.md')
+      const filePath = join(modulesPath, 'formfield', 'component.config.js')
       const componentId = ComponentUtil.componentFilePathToId(componentPaths, filePath)
 
       assert.strictEqual(componentId, 'formfield')
@@ -47,7 +47,7 @@ describe('ComponentUtil', () => {
     })
 
     it('should return undefined for invalid file path', () => {
-      const filePath = join(testProjectPath, 'uiengine', 'pages', 'page.md')
+      const filePath = join(testProjectPath, 'uiengine', 'pages', 'page.config.js')
       const componentId = ComponentUtil.componentFilePathToId(componentPaths, filePath)
 
       assert.strictEqual(componentId, undefined)
@@ -81,7 +81,7 @@ describe('ComponentUtil', () => {
     })
 
     it('should return undefined for invalid component id', () => {
-      const filePath = join(testProjectPath, 'uiengine', 'pages', 'page.md')
+      const filePath = join(testProjectPath, 'uiengine', 'pages', 'page.config.js')
       const componentId = ComponentUtil.componentPathToId(componentPaths, filePath)
 
       assert.strictEqual(componentId, undefined)

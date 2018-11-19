@@ -18,19 +18,19 @@ describe('EntityUtil', () => {
     it('should return entities file path for entities', () => {
       assert.strictEqual(
         EntityUtil.entityIdToFilePath(entitiesPath, 'Entity'),
-        join(entitiesPath, 'Entity.yml')
+        join(entitiesPath, 'Entity.js')
       )
     })
   })
 
   describe('#entityFilePathToId', () => {
     it('should return entities id for entities file path', () => {
-      const entityPath = join(entitiesPath, 'Entity.yml')
+      const entityPath = join(entitiesPath, 'Entity.js')
       assert.strictEqual(EntityUtil.entityFilePathToId(entitiesPath, entityPath), 'Entity')
     })
 
     it('should return null for invalid file path', () => {
-      const filePath = resolve(testProjectPath, 'src', 'components', 'component.md')
+      const filePath = resolve(testProjectPath, 'src', 'components', 'component.config.js')
       assert.strictEqual(EntityUtil.entityFilePathToId(entitiesPath, filePath), null)
     })
   })

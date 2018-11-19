@@ -5,26 +5,33 @@ These tokens can be referenced in the [YAML frontmatter](/advanced/yaml/#frontma
 
 ## Tokens definition
 
-The design tokens are listed under the `tokens` key of a page:
+The design tokens are listed under the `tokens` key of a `page.config.js` file:
 
-```markdown
----
-title: Spaces
-tokens:
-- type: size
-  name: S
-  value: .5rem
-- type: size
-  name: M
-  value: 1rem
-- type: size
-  name: L
-  value: 1.5rem
-- type: size
-  name: XL
-  value: 3rem
----
-Our spacings.
+```js
+module.exports = {
+  tokens: [
+    {
+      type: 'size',
+      name: 'S',
+      value: '.5rem'
+    },
+    {
+      type: 'size',
+      name: 'M',
+      value: '1rem'
+    },
+    {
+      type: 'size',
+      name: 'L',
+      value: '1.5rem'
+    },
+    {
+      type: 'size',
+      name: 'XL',
+      value: '3rem'
+    }
+  ]
+}
 ```
 
 Each token consists of the following attributes:
@@ -51,29 +58,44 @@ The category type supports the following attributes:
 - `tokens`: A list of tokens
 - `id`: An optional ID for the container
 
-```markdown
----
-title: Colors
-tokens:
-- type: category
-  name: Brand
-  tokens:
-  - type: color
-    name: brandPrimary
-    value: yellow
-  - type: color
-    name: brandSecondary
-    value: blue
-- type: category
-  name: Neutral
-  tokens:
-  - type: color
-    name: neutralWhite
-    value: "#FFF"
-  - type: color
-    name: neutralBlack
-    value: "#000"
----
+```js
+module.exports = {
+  title: 'Colors',
+  tokens: [
+    {
+      type: 'category',
+      name: 'Brand',
+      tokens: [
+        {
+          type: 'color',
+          name: 'brandPrimary',
+          value: 'yellow'
+        },
+        {
+          type: 'color',
+          name: 'brandSecondary',
+          value: 'blue'
+        }
+      ]
+    },
+    {
+      type: 'category',
+      name: 'Neutral',
+      tokens: [
+        {
+          type: 'color',
+          name: 'neutralWhite',
+          value: '#FFF'
+        },
+        {
+          type: 'color',
+          name: 'neutralBlack',
+          value: '#000'
+        }
+      ]
+    }
+  ]
+}
 ```
 
 #### `color`
@@ -87,23 +109,30 @@ The color type supports the following attributes:
 - `reference`
 - `description`
 
-```markdown
----
-title: Colors
-tokens:
-- type: color
-  name: Brand Primary
-  value: yellow
-  variable: --brand-primary
-- type: color
-  name: Brand Secondary
-  value: blue
-  variable: --brand-secondary
-- type: color
-  name: background
-  value: blue
-  reference: Brand Secondary
----
+```js
+module.exports = {
+  title: 'Colors',
+  tokens: [
+    {
+      type: 'color',
+      name: 'Brand Primary',
+      value: 'yellow',
+      variable: '--brand-primary'
+    },
+    {
+      type: 'color',
+      name: 'Brand Secondary',
+      value: 'blue',
+      variable: '--brand-secondary'
+    },
+    {
+      type: 'color',
+      name: 'Background',
+      value: 'blue',
+      reference: 'Brand Secondary'
+    }
+  ]
+}
 ```
 
 #### `font`
@@ -118,37 +147,49 @@ The font type supports the following attributes:
 - `license`
 - `fontweight`
 
-```markdown
----
-title: Fonts
-tokens:
-- name: Arial
-  type: category
-  tokens:
-  - type: font
-    fontweight: light / 100
-    value: "font-family: Arial; font-weight: 100;"
-  - type: font
-    fontweight: regular / 400
-    value: "font-family: Arial; font-weight: 400;"
-  - type: font
-    fontweight: bold / 800
-    value: "font-family: Arial; font-weight: 800;"
-- name: Lato
-  type: category
-  tokens:
-  - type: font
-    fontweight: regular
-    value: "font-family: Lato;"
-    variable: Lato
-    description: "Use wisely."
-    text: "Just some custom sample text to show the usage of this font."
-    license: Google Fonts
-    sizes:
-      - 24px
-      - 18px
-      - 14px
----
+```js
+module.exports = {
+  title: 'Fonts',
+  tokens: [
+    {
+      type: 'category',
+      name: 'Arial',
+      tokens: [
+        {
+          type: 'font',
+          fontweight: 'light / 100',
+          value: 'font-family: Arial; font-weight: 100;'
+        },
+        {
+          type: 'font',
+          fontweight: 'regular / 400',
+          value: 'font-family: Arial; font-weight: 400;'
+        },
+        {
+          type: 'font',
+          fontweight: 'bold / 800',
+          value: 'font-family: Arial; font-weight: 800;'
+        }
+      ]
+    },
+    {
+      type: 'category',
+      name: 'Lato',
+      tokens: [
+        {
+          type: 'font',
+          fontweight: 'regular',
+          value: 'font-family: Lato;',
+          variable: 'Lato',
+          description: 'Use wisely.',
+          text: 'Just some custom sample text to show the usage of this font.',
+          license: 'Google Fonts',
+          sizes: ['24px', '18px', '14px']
+        }
+      ]
+    }
+  ]
+}
 ```
 
 #### `icon`
@@ -162,25 +203,32 @@ The icon type supports the following attributes:
 - `variable`
 - `reference`
 
-```markdown
----
-title: Icons
-tokens:
-- type: icon
-  name: Search
-  value: '<i class="search icon"></i>'
-  variable: search
-- type: icon
-  name: Check
-  value: '<i class="green check icon"></i>'
-  description: Display successful user input
-  variable: green check
-- type: icon
-  name: Check
-  value: '<i class="red remove icon icon"></i>'
-  description: Error hints and messages
-  variable: red remove
----
+```js
+module.exports = {
+  title: 'Icons',
+  tokens: [
+    {
+      type: 'icon',
+      name: 'Search',
+      value: '<i class="search icon"></i>',
+      variable: 'search'
+    },
+    {
+      type: 'icon',
+      name: 'Check',
+      value: '<i class="green check icon"></i>',
+      description: 'Display successful user input',
+      variable: 'green check'
+    },
+    {
+      type: 'icon',
+      name: 'Error',
+      value: '<i class="red error icon"></i>',
+      description: 'Error hints and messages',
+      variable: 'red error'
+    }
+  ]
+}
 ```
 
 ## Theo integration

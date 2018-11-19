@@ -24,7 +24,8 @@ describe('Page', () => {
       assert.strictEqual(data.id, 'index')
       assert.strictEqual(data.title, 'Home')
       assert.strictEqual(data.sourcePath, 'uiengine/pages')
-      assert.strictEqual(data.sourceFile, 'uiengine/pages/page.md')
+      assert.strictEqual(data.sourceFile, undefined)
+      assert.strictEqual(data.readmeFile, 'uiengine/pages/README.md')
     })
 
     it('should return page object for child page', async () => {
@@ -33,7 +34,7 @@ describe('Page', () => {
       assert.strictEqual(data.id, 'patterns')
       assert.strictEqual(data.title, 'Pattern Library')
       assert.strictEqual(data.sourcePath, 'uiengine/pages/patterns')
-      assert.strictEqual(data.sourceFile, 'uiengine/pages/patterns/page.md')
+      assert.strictEqual(data.sourceFile, 'uiengine/pages/patterns/page.config.js')
     })
 
     it('should return page object for grand child page', async () => {
@@ -59,7 +60,7 @@ describe('Page', () => {
     it('should infer childIds if they are not provided', async () => {
       const data = await Page.fetchById(state, 'testcases')
 
-      assert.strictEqual(data.childIds.length, 3)
+      assert.strictEqual(data.childIds.length, 3, `Actual children:\n\n${data.childIds.join('\n')}`)
       assertItem(data.childIds, 'testcases/custom-data')
       assertItem(data.childIds, 'testcases/custom-path')
       assertItem(data.childIds, 'testcases/custom-template')

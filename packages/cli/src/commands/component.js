@@ -3,15 +3,14 @@ const R = require('ramda')
 const Core = require('@uiengine/core/src/core')
 const Connector = require('@uiengine/core/src/connector')
 const {
-  ComponentUtil: { COMPONENT_FILENAME },
+  ComponentUtil: { COMPONENT_CONFNAME, COMPONENT_DOCSNAME },
   VariantUtil: { VARIANTS_DIRNAME },
   FileUtil: { exists, write },
   StringUtil: { titleize },
   MessageUtil: { reportSuccess, reportError }
 } = require('@uiengine/util')
 
-const getTemplate = id =>
-  require(`../templates/${id}`).template
+const getTemplate = id => require(`../templates/${id}`).template
 
 exports.describe = 'Create basic files for a new component'
 
@@ -48,14 +47,20 @@ exports.handler = async argv => {
     }
 
     // component
+    const cwd = process.cwd()
     const componentDirs = config.source.components
     const componentsDir = componentDirs[0] // create component in first folder
-    const componentDir = relative(process.cwd(), join(componentsDir, componentId))
+    const componentDir = relative(cwd, join(componentsDir, componentId))
     const componentTitle = titleize(componentId)
-    const componentTemplate = getTemplate('component')
-    const componentData = componentTemplate(componentTitle).trim()
-    const componentFilePath = join(componentDir, COMPONENT_FILENAME)
-    eventuallyWriteFile(componentFilePath, componentData)
+    const confTemp = getTemplate('component_config')
+    const docsTemp = getTemplate('component_readme')
+    const confData = confTemp(componentTitle)
+    const docsData = docsTemp(componentTitle)
+    const confPath = join(componentDir, COMPONENT_CONFNAME)
+    const docsPath = join(componentDir, COMPONENT_DOCSNAME)
+
+    eventuallyWriteFile(confPath, confData)
+    eventuallyWriteFile(docsPath, docsData)
 
     // adapters
     const adapters = Object.keys(config.adapters)
@@ -97,22 +102,20 @@ exports.handler = async argv => {
     if (filesExisted.length) {
       message.push(
         'The following files already existed:',
-        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesExisted).join('\n')
+        R.map(filePath => '- ' + relative(cwd, filePath), filesExisted).join('\n')
       )
     }
     if (filesCreated.length) {
       message.push(
         'The following files were created:',
-        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
+        R.map(filePath => '- ' + relative(cwd, filePath), filesCreated).join('\n'),
         'Enjoy! ✌️'
       )
     }
     message.push('Add the component to a page by adding the component id to the page file:',
-      `---
-title: PAGE_TITLE
-components:
-- ${componentId}
----`)
+      `module.exports = {
+  components: ['${componentId}']
+}`)
     reportSuccess(message)
   } catch (err) {
     reportError(`Creating the component ${componentId} failed!`, err)

@@ -67,7 +67,7 @@ npx uiengine init
 ```
 
 This command creates a config file named `uiengine.config.js`, which contains the basic configuration.
-It also creates the folder `pages` containing a `page.md` file.
+It also creates the folder `pages` containing a `README.md` file.
 This is the page file for the index page of the documentation.
 
 You can also use the demo flag when initializing the project:
@@ -124,7 +124,7 @@ To generate the basic files and folders of a page you can use the `page` command
 npx uiengine page PAGE_ID
 ```
 
-This generate a `page.md` inside the folder matching the page id in you pages source directory.
+This generates a `README.md` and a `page.config.js` file inside the folder matching the page id in you pages source directory.
 In case you want to directly add some pages, you can list them like so:
 
 ```bash

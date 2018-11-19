@@ -1,11 +1,10 @@
-const template = title =>
-  `
-<!DOCTYPE html>
+const template = title => `<!DOCTYPE html>
 <html class="<!-- uiengine:class -->">
   <head>
     <title><!-- uiengine:title --></title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <!-- add your custom styles here:
     <link href="/styles/my.css" rel="stylesheet">
     -->

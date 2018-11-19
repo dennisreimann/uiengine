@@ -4,8 +4,10 @@ const Core = require('@uiengine/core/src/core')
 const {
   FileUtil: { exists, write },
   MessageUtil: { reportSuccess, reportError },
-  PageUtil: { pageIdToFilePath, pageIdToTitle }
+  PageUtil: { PAGE_CONFNAME, PAGE_DOCSNAME, pageIdToFilePath, pageIdToTitle }
 } = require('@uiengine/util')
+
+const getTemplate = id => require(`../templates/${id}`).template
 
 exports.describe = 'Create basic files for a new page'
 
@@ -27,26 +29,31 @@ exports.handler = async argv => {
   try {
     const { config } = await Core.init(argv)
     const pagesDir = config.source.pages
-    const pageTemplate = require('../templates/page').template
+    const docsTemp = getTemplate('page_readme')
+    const confTemp = getTemplate('page_config')
 
     const tasks = []
     const filesCreated = []
     const filesExisted = []
 
+    const eventuallyWriteFile = (filePath, content) => {
+      if (exists(filePath) && !argv.force) {
+        filesExisted.push(filePath)
+      } else {
+        tasks.push(write(filePath, content))
+        filesCreated.push(filePath)
+      }
+    }
+
     const createPages = R.map(pageId => {
       const pageTitle = pageIdToTitle(pageId)
-      const pageContent = pageTemplate(pageTitle).trim()
-      const pageFilePath = pageIdToFilePath(pagesDir, pageId)
+      const confData = confTemp(pageTitle)
+      const docsData = docsTemp(pageTitle)
+      const confPath = pageIdToFilePath(pagesDir, pageId, PAGE_CONFNAME)
+      const docsPath = pageIdToFilePath(pagesDir, pageId, PAGE_DOCSNAME)
 
-      if (exists(pageFilePath) && !argv.force) {
-        filesExisted.push(pageFilePath)
-
-        return null
-      } else {
-        filesCreated.push(pageFilePath)
-
-        return write(pageFilePath, pageContent)
-      }
+      eventuallyWriteFile(confPath, confData)
+      eventuallyWriteFile(docsPath, docsData)
     }, pageIds)
 
     tasks.push(...createPages)

@@ -3,8 +3,8 @@ const { outputFile, remove } = require('fs-extra')
 const Core = require('@uiengine/core/src/core')
 const glob = require('globby')
 const prettier = require('prettier')
+const FrontmatterUtil = require('../../frontmatter')
 const {
-  FrontmatterUtil,
   MessageUtil: { reportSuccess, reportError, reportInfo },
   StringUtil: { titleFromContentHeading }
 } = require('@uiengine/util')
@@ -15,8 +15,11 @@ exports.handler = async argv => {
   try {
     const state = await Core.init(argv)
     const { config: { source } } = state
+    const { pages } = source
 
-    const pattern = join(source.pages, '**', 'page.md')
+    if (!pages) return
+
+    const pattern = join(pages, '**', 'page.md')
     const filePaths = await glob(pattern, { onlyFiles: true })
 
     filePaths.forEach(async pageMdPath => {

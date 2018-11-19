@@ -9,7 +9,7 @@ const entityIdToTitle = id => {
 }
 
 const entityIdToFilePath = (path, id) => {
-  const absolutePath = join(path, `${id}.yml`)
+  const absolutePath = join(path, `${id}.js`)
 
   return absolutePath
 }
@@ -20,7 +20,7 @@ const entityFilePathToId = (path, filePath) => {
   // invalid path: this is not an entity
   if (relativePath.startsWith('..')) return null
 
-  const id = basename(relativePath, '.yml')
+  const id = basename(relativePath, '.js')
 
   return id
 }
