@@ -11,9 +11,11 @@
   - File changes:
     - component.md -> component.config.js and README.md
     - page.md -> page.config.js and README.md
-    - data.yml -> data.js
+    - data.yml -> data.js (deprecated, see below)
     - Entity.yml -> Entity.js
   - Use the `npx uiengine migrate` command to automatically migrate
+- Removed `source.data` config option
+  - Require files directly in your `component.config.js` or `page.config.js`.
 
 ---
 

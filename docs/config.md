@@ -23,7 +23,6 @@ The base directories for the input, your raw source files:
 - `components` is the root of the directory (or directories) containing the components
 - `templates` contains the variant preview and application templates
 - `pages` is the directory of the UIengine's site structure and page markdown files
-- `data` contains sample data that can be referenced in variants and pages
 - `entities` contains the optional [entity definitions](/advanced/entities-properties/) for the components
 
 ```js
@@ -32,7 +31,6 @@ The base directories for the input, your raw source files:
     components: './src/components',
     templates: './src/templates',
     pages: './uiengine/pages',
-    data: './uiengine/data',
     entities: './uiengine/entities'
   }
 }

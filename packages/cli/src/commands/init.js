@@ -38,7 +38,6 @@ exports.handler = async argv => {
       components: './src/components',
       templates: './src/templates',
       pages: './uiengine/pages',
-      data: './uiengine/data',
       entities: './uiengine/entities'
     },
     target: './dist',

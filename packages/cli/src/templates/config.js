@@ -15,7 +15,6 @@ module.exports = values => `module.exports = {
     components: '${values.source.components}',
     templates: '${values.source.templates}',
     pages: '${values.source.pages}',
-    data: '${values.source.data}',
     entities: '${values.source.entities}'
   },
 
