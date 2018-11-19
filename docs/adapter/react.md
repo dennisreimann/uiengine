@@ -8,31 +8,37 @@
 
 Plain and simple:
 
-```yaml
-adapters:
-  jsx: @uiengine/adapter-react
+```js
+{
+  adapters: {
+    jsx: '@uiengine/adapter-react'
+  }
+}
 ```
 
 With options:
 
-```yaml
-adapters:
-  jsx:
-    module: @uiengine/adapter-react
-    options:
-      debug: true
-      # the babel register module that is used.
-      # default: '@babel/register'
-      babelRegisterModule: @babel/register
-      # babel options that get passed to
-      # `require('@babel/register')()
-      # default: none
-      babel:
-        presets:
-          - @babel/preset-env
-          - @babel/preset-react
-        plugins:
-          - css-modules-transform
+```js
+{
+  adapters: {
+    jsx: {
+      module: '@uiengine/adapter-react',
+      options: {
+        debug: true,
+        // the babel register module that is used.
+        // (default: '@babel/register')
+        babelRegisterModule: '@babel/register',
+        // babel options that get passed to
+        // `require('@babel/register')()
+        // (default: none)
+        babel: {
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+          plugins: ['css-modules-transform']
+        }
+      }
+    }
+  }
+}
 ```
 
 The `debug` option allows for a more detailed output in case of rendering errors.

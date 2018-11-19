@@ -8,20 +8,28 @@
 
 Plain and simple:
 
-```yaml
-adapters:
-  vue: @uiengine/adapter-vue
+```js
+{
+  adapters: {
+    vue: '@uiengine/adapter-vue'
+  }
+}
 ```
 
 With options:
 
-```yaml
-adapters:
-  vue:
-    module: @uiengine/adapter-vue
-    options:
-      debug: true
-      bundle: /absolute-path-to/server-side-bundle.js
+```js
+{
+  adapters: {
+    vue: {
+      module: '@uiengine/adapter-vue',
+      options: {
+        debug: true,
+        bundle: '/absolute-path-to/server-side-bundle.js'
+      }
+    }
+  }
+}
 ```
 
 The `debug` option allows for a more detailed output in case of rendering errors.

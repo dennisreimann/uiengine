@@ -8,19 +8,27 @@
 
 Plain and simple:
 
-```yaml
-adapters:
-  hbs: @uiengine/adapter-handlebars
+```js
+{
+  adapters: {
+    hbs: '@uiengine/adapter-hbs'
+  }
+}
 ```
 
 With options:
 
-```yaml
-adapters:
-  hbs:
-    module: @uiengine/adapter-handlebars
-    options:
-      namespace: 'myapp'
+```js
+{
+  adapters: {
+    hbs: {
+      module: '@uiengine/adapter-handlebars',
+      options: {
+        namespace: 'myapp'
+      }
+    }
+  }
+}
 ```
 
 Available options:

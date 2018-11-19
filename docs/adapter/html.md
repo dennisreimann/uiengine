@@ -8,20 +8,28 @@
 
 Plain and simple:
 
-```yaml
-adapters:
-  html: @uiengine/adapter-html
+```js
+{
+  adapters: {
+    html: '@uiengine/adapter-html'
+  }
+}
 ```
 
 With options:
 
-```yaml
-adapters:
-  html:
-    module: @uiengine/adapter-html
-    options:
-      basedir: ./src/components
-      debug: true
+```js
+{
+  adapters: {
+    html: {
+      module: '@uiengine/adapter-html',
+      options: {
+        basedir: './src/components',
+        debug: true
+      }
+    }
+  }
+}
 ```
 
 The `basedir` option allows for referencing includes with an absolute path.

@@ -12,20 +12,28 @@ The adapter extracts css variables and constructs a data structure that gets dis
 
 Plain and simple:
 
-```yaml
-adapters:
-  css: @uiengine/adapter-css
+```js
+{
+  adapters: {
+    css: '@uiengine/adapter-css'
+  }
+}
 ```
 
 With options:
 
-```yaml
-adapters:
-  css:
-    module: @uiengine/adapter-css
-    options:
-      componentThemesDir: themes # 'themes' is the default
-      globalThemesDir: ./src/styles/themes
+```js
+{
+  adapters: {
+    css: {
+      module: '@uiengine/adapter-css',
+      options: {
+        componentThemesDir: 'themes', // 'themes' is the default
+        globalThemesDir: './src/styles/themes'
+      }
+    }
+  }
+}
 ```
 
 The `componentThemesDir` option is the directory name of the component custom properties (defaults to "themes").

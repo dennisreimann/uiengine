@@ -118,7 +118,7 @@ Templates are expected to return the whole content of the page, from `DOCTYPE` t
 
 ### Providing data
 
-As you can use these custom templates to render example/prototype pages for your website/application, you might want to provide some [sample data](/advanced/yaml/#include).
+As you can use these custom templates to render example/prototype pages for your website/application, you might want to provide some sample data.
 To pass this data into your template, you can use the `context` property of the page:
 
 ```js

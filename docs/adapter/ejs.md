@@ -8,19 +8,27 @@
 
 Plain and simple:
 
-```yaml
-adapters:
-  ejs: @uiengine/adapter-ejs
+```js
+{
+  adapters: {
+    ejs: '@uiengine/adapter-ejs'
+  }
+}
 ```
 
 With options:
 
-```yaml
-adapters:
-  ejs:
-    module: @uiengine/adapter-ejs
-    options:
-      debug: true
+```js
+{
+  adapters: {
+    ejs: {
+      module: '@uiengine/adapter-ejs',
+      options: {
+        debug: true
+      }
+    }
+  }
+}
 ```
 
 The options are passed to the [EJS renderer](https://www.npmjs.com/package/ejs#options).

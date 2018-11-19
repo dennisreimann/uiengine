@@ -1,7 +1,6 @@
 # Design Tokens
 
 The UIengine interface includes templates for displaying various types of design tokens.
-These tokens can be referenced in the [YAML frontmatter](/advanced/yaml/#frontmatter) of a [page file](/basics/page/#page-file).
 
 ## Tokens definition
 

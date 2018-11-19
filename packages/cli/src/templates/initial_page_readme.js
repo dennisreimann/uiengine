@@ -24,9 +24,6 @@ npx uiengine component COMPONENT_ID VARIANT_1 VARIANT_2 VARIANT_3
 A variant needs at least a file to render.
 You create a variant by adding a file renderable by one of the configured adapters to the \`variants\` directory of a component.
 
-In addition to the raw render file, you can also add a markdown file containing the metadata for the variant.
-This markdown file can contain [YAML frontmatter](https://uiengine.uix.space/advanced/yaml/) and has to be named like the variant, but must have the file extension \`.md\`.
-
 To render a variant, we also need a layout.
 The \`npx uiengine init\` command created a basic html layout file in \`src/templates/uiengine.html\`.
 It includes the \`<!-- uiengine:content -->\` comment, which will be replaced with the HTML of the rendered variant.
