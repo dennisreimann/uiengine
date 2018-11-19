@@ -7,7 +7,7 @@ const {
   StringUtil: { titleize }
 } = require('@uiengine/util')
 
-const getTemplate = id => require(`../templates/${id}`).template
+const getTemplate = id => require(`../templates/${id}`)
 
 exports.describe = 'Create a basic structure and config file'
 
@@ -56,9 +56,10 @@ exports.handler = async argv => {
   const configContent = configTemplate(config)
   const indexConfContent = pageConfTemplate(config.name)
   const indexDocsContent = pageDocsTemplate(config.name)
-  const previewPath = relative(cwd, join(directory, config.source.templates, config.template))
-  const indexConfPath = relative(cwd, join(directory, config.source.pages, PAGE_CONFNAME))
-  const indexDocsPath = relative(cwd, join(directory, config.source.pages, PAGE_DOCSNAME))
+  const { components, pages, templates } = config.source
+  const previewPath = relative(cwd, join(directory, templates, config.template))
+  const indexConfPath = relative(cwd, join(directory, pages, PAGE_CONFNAME))
+  const indexDocsPath = relative(cwd, join(directory, pages, PAGE_DOCSNAME))
   const configPath = relative(cwd, join(directory, argv.config))
 
   const tasks = []
@@ -84,9 +85,9 @@ exports.handler = async argv => {
 
     if (argv.demo) {
       const demoPath = resolve(__dirname, '..', '..', 'demo')
-      const copyDemoPages = copy(join(demoPath, 'pages'), join(directory, config.source.pages))
-      const copyDemoComponents = copy(join(demoPath, 'components'), join(directory, config.source.components))
-      const copyDemoTemplates = copy(join(demoPath, 'templates'), join(directory, config.source.templates))
+      const copyDemoPages = copy(join(demoPath, 'pages'), join(directory, pages))
+      const copyDemoComponents = copy(join(demoPath, 'components'), join(directory, components))
+      const copyDemoTemplates = copy(join(demoPath, 'templates'), join(directory, templates))
 
       await Promise.all([copyDemoComponents, copyDemoPages, copyDemoTemplates])
     }

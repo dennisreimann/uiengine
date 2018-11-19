@@ -1,4 +1,4 @@
-const template = title => `# ${title}
+module.exports = title => `# ${title}
 
 Hey! It looks like you have just set up this project.
 Here are some first tips to get started.
@@ -82,7 +82,3 @@ npx uiengine build --watch --serve
 Under the hood [BrowserSync](https://www.browsersync.io/) is used to provide serving and watching the files.
 For information on how to configure the server and pass additional options, see the [configuration documentation](https://uiengine.uix.space/basics/config/#BrowserSync).
 `
-
-module.exports = {
-  template
-}

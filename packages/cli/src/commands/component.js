@@ -10,7 +10,7 @@ const {
   MessageUtil: { reportSuccess, reportError }
 } = require('@uiengine/util')
 
-const getTemplate = id => require(`../templates/${id}`).template
+const getTemplate = id => require(`../templates/${id}`)
 
 exports.describe = 'Create basic files for a new component'
 

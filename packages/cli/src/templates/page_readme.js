@@ -1,5 +1,1 @@
-const template = title => `# ${title}\n`
-
-module.exports = {
-  template
-}
+module.exports = title => `# ${title}\n`

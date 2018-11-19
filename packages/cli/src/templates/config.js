@@ -1,4 +1,4 @@
-const template = values => `module.exports = {
+module.exports = values => `module.exports = {
   // Project config: Defaults to name and version from package.json.
   // Here you can overwrite it and add more custom properties.
   // For a detailed documentation of all the options in here see
@@ -56,7 +56,3 @@ const template = values => `module.exports = {
   }
 }
 `
-
-module.exports = {
-  template
-}

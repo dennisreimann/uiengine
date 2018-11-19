@@ -1,4 +1,4 @@
-const template = title => `# ${title}
+module.exports = title => `# ${title}
 
 ## What problem does it solve?
 
@@ -12,7 +12,3 @@ Examples and scenarios; maybe an explanation when not to use it.
 
 Explain UX concerns or technical details.
 `
-
-module.exports = {
-  template
-}

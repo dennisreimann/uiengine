@@ -7,7 +7,7 @@ const {
   PageUtil: { PAGE_CONFNAME, PAGE_DOCSNAME, pageIdToFilePath, pageIdToTitle }
 } = require('@uiengine/util')
 
-const getTemplate = id => require(`../templates/${id}`).template
+const getTemplate = id => require(`../templates/${id}`)
 
 exports.describe = 'Create basic files for a new page'
 
