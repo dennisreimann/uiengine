@@ -1,13 +1,15 @@
 const assert = require('assert')
-const { resolve } = require('path')
+const { join, resolve } = require('path')
+const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
+
 const Adapter = require('../src/index')
 
-const basePath = resolve(__dirname, 'fixtures')
-const elementsPath = resolve(basePath, 'elements')
-const modulesPath = resolve(basePath, 'modules')
-const atomFilePath = resolve(elementsPath, 'atom/atom.pug')
-const moleculeFilePath = resolve(modulesPath, 'molecule/molecule.pug')
-const organismFilePath = resolve(modulesPath, 'organism/organism.pug')
+const basePath = join(__dirname, 'fixtures')
+const elementsPath = join(basePath, 'elements')
+const modulesPath = join(basePath, 'modules')
+const atomFilePath = join(elementsPath, 'atom', 'atom.pug')
+const moleculeFilePath = join(modulesPath, 'molecule', 'molecule.pug')
+const organismFilePath = join(modulesPath, 'organism', 'organism.pug')
 
 const adapterOptions = {
   components: [elementsPath, modulesPath],
@@ -38,10 +40,10 @@ describe('Pug adapter', () => {
       const { dependentFiles, dependencyFiles } = await Adapter.registerComponentFile(adapterOptions, moleculeFilePath)
 
       assert.strictEqual(dependencyFiles.length, 1)
-      assert(dependencyFiles.includes(atomFilePath))
+      assert(dependencyFiles.includes(crossPlatformPath(atomFilePath)))
 
       assert.strictEqual(dependentFiles.length, 1)
-      assert(dependentFiles.includes(organismFilePath))
+      assert(dependentFiles.includes(crossPlatformPath(organismFilePath)))
     })
 
     it('should return undefined dependentFiles if there are no component dependents', async () => {

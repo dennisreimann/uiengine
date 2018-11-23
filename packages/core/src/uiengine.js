@@ -2,6 +2,7 @@ const { dirname, join, relative } = require('path')
 const Core = require('./core')
 const {
   DebugUtil: { debug3 },
+  StringUtil: { crossPlatformPath },
   MessageUtil: { reportSuccess, reportInfo, reportError }
 } = require('@uiengine/util')
 
@@ -81,7 +82,7 @@ const startWatcher = (state, opts, server) => {
     }
   }
 
-  const watchFiles = sourceFiles.concat(additionalFiles)
+  const watchFiles = sourceFiles.concat(additionalFiles).map(crossPlatformPath)
   const watcher = chokidar.watch(watchFiles, watchOptions)
     .on('add', filePath => handleFileChange(filePath, 'added'))
     .on('addDir', filePath => handleFileChange(filePath, 'added'))

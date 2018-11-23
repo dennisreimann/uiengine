@@ -8,7 +8,7 @@ const {
   ComponentUtil: { COMPONENT_DOCSNAME, componentFilePathToId, componentIdToFilePath, componentIdToTitle, componentPathToId },
   FileUtil: { requireUncached },
   TemplateUtil: { templateFilePathToId },
-  StringUtil: { titleFromContentHeading },
+  StringUtil: { crossPlatformPath, titleFromContentHeading },
   DebugUtil: { debug2, debug3, debug4 }
 } = require('@uiengine/util')
 
@@ -19,18 +19,19 @@ async function readComponentFiles (state, id) {
   const configPath = componentIdToFilePath(components, id)
   const dir = dirname(configPath)
   const readmePath = join(dir, COMPONENT_DOCSNAME)
-  const data = { attributes: {}, sourcePath: relative(base, dir) }
+  const sourcePath = crossPlatformPath(relative(base, dir))
+  const data = { attributes: {}, sourcePath }
 
   // config
   try {
     data.attributes = requireUncached(configPath)
-    data.sourceFile = relative(base, configPath)
+    data.sourceFile = crossPlatformPath(relative(base, configPath))
   } catch (err) { }
 
   // readme
   try {
     data.content = await MarkdownUtil.fromFile(readmePath)
-    data.readmeFile = relative(base, readmePath)
+    data.readmeFile = crossPlatformPath(relative(base, readmePath))
   } catch (err) { }
 
   debug4(state, `Component.readComponentFiles(${id}):end`)

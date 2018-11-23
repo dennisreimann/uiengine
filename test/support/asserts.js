@@ -18,34 +18,35 @@ const assertDoesNotExist = (filePath, message) => {
   assert(!exists(filePath), message || `File exist: ${filePath}`)
 }
 
-const assertMatches = (content, regexp) => {
+const matches = (content, expected) => {
+  const regexp = typeof expected === 'string' ? expected.replace(/\\/g, '\\\\') : expected
   const match = content.match(regexp)
 
-  assert(match, `\n\n${content}\n\ndoes not match\n\n${regexp}`)
+  return match !== null
+}
+
+const assertMatches = (content, regexp) => {
+  assert(matches(content, regexp), `\n\n${content}\n\ndoes not match\n\n${regexp}`)
 }
 
 const assertDoesNotMatch = (content, regexp) => {
-  const match = content.match(regexp)
-
-  assert.strictEqual(match, null, `\n\n${content}\n\nmatches\n\n${regexp}`)
+  assert(!matches(content, regexp), `\n\n${content}\n\nmatches\n\n${regexp}`)
 }
 
 const assertContentMatches = (filePath, regexp) => {
   assertExists(filePath)
 
   const content = readFileSync(filePath, 'utf8')
-  const match = content.match(regexp)
 
-  assert(match, `Content in file ${filePath} does not match\n\n${regexp}\n\n${content}`)
+  assert(matches(content, regexp), `Content in file ${filePath} does not match\n\n${regexp}\n\n${content}`)
 }
 
 const assertContentDoesNotMatch = (filePath, regexp) => {
   assertExists(filePath)
 
   const content = readFileSync(filePath, 'utf8')
-  const match = content.match(regexp)
 
-  assert.strictEqual(match, null, `Content in file ${filePath} matches\n\n${regexp}\n\n${content}`)
+  assert(!matches(content, regexp), `Content in file ${filePath} matches\n\n${regexp}\n\n${content}`)
 }
 
 module.exports = {

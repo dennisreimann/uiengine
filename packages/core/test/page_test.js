@@ -1,6 +1,7 @@
 const assert = require('assert')
 const { assertMatches } = require('../../../test/support/asserts')
 const { join, resolve } = require('path')
+const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
 
 const Page = require('../src/page')
 const { testProjectPath } = require('../../../test/support/paths')
@@ -146,18 +147,18 @@ describe('Page', () => {
       const data = await Page.fetchById(state, 'testcases')
 
       assert.strictEqual(data.files.length, 3)
-      assertItem(data.files, join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
-      assertItem(data.files, join(pagesPath, 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'))
-      assertItem(data.files, join(pagesPath, 'testcases', 'index.txt'))
+      assertItem(data.files, crossPlatformPath(join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt')))
+      assertItem(data.files, crossPlatformPath(join(pagesPath, 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt')))
+      assertItem(data.files, crossPlatformPath(join(pagesPath, 'testcases', 'index.txt')))
     })
 
     it('should register files in folders that do not start with an underscore', async () => {
       const data = await Page.fetchById(state, 'testcases')
 
       assert.strictEqual(data.files.length, 3)
-      assertItem(data.files, join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt'))
-      assertItem(data.files, join(pagesPath, 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt'))
-      assertItem(data.files, join(pagesPath, 'testcases', 'index.txt'))
+      assertItem(data.files, crossPlatformPath(join(pagesPath, 'testcases', 'extra-files', 'file-in-folder.txt')))
+      assertItem(data.files, crossPlatformPath(join(pagesPath, 'testcases', 'extra-files', 'subfolder', 'file-in-subfolder.txt')))
+      assertItem(data.files, crossPlatformPath(join(pagesPath, 'testcases', 'index.txt')))
     })
 
     it('should have no files property if no files are present', async () => {

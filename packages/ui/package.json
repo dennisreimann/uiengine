@@ -25,8 +25,8 @@
   ],
   "scripts": {
     "clean": "rimraf dist lib",
-    "start": "yarn run clean && NODE_ENV=development webpack --watch",
-    "build": "yarn run clean && NODE_ENV=production webpack",
+    "start": "yarn run clean && cross-env NODE_ENV=development webpack --watch",
+    "build": "yarn run clean && cross-env NODE_ENV=production webpack",
     "lint": "eslint --ext .js,.vue src test",
     "precommit": "lint-staged"
   },

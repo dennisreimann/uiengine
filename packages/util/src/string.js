@@ -31,7 +31,11 @@ const titleFromContentHeading = content => {
   return title
 }
 
+const crossPlatformPath = id =>
+  id.replace(/\\/g, '/')
+
 module.exports = {
+  crossPlatformPath,
   dasherize,
   titleize,
   upcaseFirstChar,

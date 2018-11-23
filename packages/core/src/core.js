@@ -84,21 +84,13 @@ async function generate (options) {
 }
 
 const getChangeObject = (filePath, action) => {
-  const { source: { components, pages, templates, data, entities } } = _state.config
+  const { source: { components, pages, templates, entities } } = _state.config
   const file = relative(process.cwd(), filePath)
-  const isEntityFile = entities && !!filePath.startsWith(entities)
-  const isDataFile = !isEntityFile && data && !!filePath.startsWith(data)
-  let pageId, componentId, templateId, entityId, variantIdPrefix
-
-  // Skip generating individual items in case the data
-  // got changed as we need to regenerate everything
-  if (!isDataFile) {
-    pageId = pages ? pageFilePathToId(pages, filePath) : undefined
-    entityId = entities ? entityFilePathToId(entities, filePath) : undefined
-    templateId = templates ? templateFilePathToId(templates, filePath) : undefined
-    variantIdPrefix = components ? variantFilePathToIdPrefix(components, filePath) : undefined
-    componentId = components ? componentFilePathToId(components, filePath) || componentPathToId(components, filePath) : undefined
-  }
+  const pageId = pages ? pageFilePathToId(pages, filePath) : undefined
+  const entityId = entities ? entityFilePathToId(entities, filePath) : undefined
+  const templateId = templates ? templateFilePathToId(templates, filePath) : undefined
+  const variantIdPrefix = components ? variantFilePathToIdPrefix(components, filePath) : undefined
+  const componentId = components ? componentFilePathToId(components, filePath) || componentPathToId(components, filePath) : undefined
 
   if (pageId) {
     return { file, filePath, action, type: 'page', item: pageId }

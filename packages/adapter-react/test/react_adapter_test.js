@@ -1,21 +1,23 @@
 require('mocha-sinon')()
 
 const assert = require('assert')
-const { resolve } = require('path')
+const { join, resolve } = require('path')
+const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
+
 const Adapter = require('../src/index')
 const babel = require('../babel.config')
 
 const defaultOptions = { babel }
 
-const basePath = resolve(__dirname, 'fixtures')
-const elementsPath = resolve(basePath, 'elements')
-const modulesPath = resolve(basePath, 'modules')
-const atomFilePath = resolve(elementsPath, 'Atom/index.jsx')
-const moleculeFilePath = resolve(modulesPath, 'Molecule/Molecule.jsx')
-const moleculeIndexFilePath = resolve(modulesPath, 'Molecule/index.js')
-const moleculeCssFilePath = resolve(modulesPath, 'Molecule/Molecule.css')
-const organismFilePath = resolve(modulesPath, 'Organism/index.jsx')
-const templatePath = resolve(basePath, 'template.jsx')
+const basePath = join(__dirname, 'fixtures')
+const elementsPath = join(basePath, 'elements')
+const modulesPath = join(basePath, 'modules')
+const atomFilePath = join(elementsPath, 'Atom', 'index.jsx')
+const moleculeFilePath = join(modulesPath, 'Molecule', 'Molecule.jsx')
+const moleculeIndexFilePath = join(modulesPath, 'Molecule', 'index.js')
+const moleculeCssFilePath = join(modulesPath, 'Molecule', 'Molecule.css')
+const organismFilePath = join(modulesPath, 'Organism', 'index.jsx')
+const templatePath = join(basePath, 'template.jsx')
 const reactPath = require.resolve('react')
 
 const adapterOptions = {
@@ -200,13 +202,13 @@ describe('React adapter', () => {
       const { dependentFiles, dependencyFiles } = await Adapter.registerComponentFile(adapterOptions, moleculeFilePath)
 
       assert.strictEqual(dependentFiles.length, 2)
-      assert(dependentFiles.includes(moleculeIndexFilePath))
-      assert(dependentFiles.includes(organismFilePath))
+      assert(dependentFiles.includes(crossPlatformPath(moleculeIndexFilePath)))
+      assert(dependentFiles.includes(crossPlatformPath(organismFilePath)))
 
       assert.strictEqual(dependencyFiles.length, 3)
-      assert(dependencyFiles.includes(reactPath))
-      assert(dependencyFiles.includes(atomFilePath))
-      assert(dependencyFiles.includes(moleculeCssFilePath))
+      assert(dependencyFiles.includes(crossPlatformPath(reactPath)))
+      assert(dependencyFiles.includes(crossPlatformPath(atomFilePath)))
+      assert(dependencyFiles.includes(crossPlatformPath(moleculeCssFilePath)))
     })
 
     it('should return undefined dependentFiles if there are no component dependents', async () => {

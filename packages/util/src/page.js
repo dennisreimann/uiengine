@@ -1,7 +1,7 @@
 const { basename, dirname, join, relative, resolve } = require('path')
 const R = require('ramda')
 const FileUtil = require('./file')
-const StringUtil = require('./string')
+const { crossPlatformPath, titleize } = require('./string')
 const { UiengineInputError } = require('./error')
 
 const INDEX_FILE_PATH = '.'
@@ -43,7 +43,7 @@ const pageIdToTitle = pageId => {
   if (isIndexPage(pageId)) return 'Home'
 
   const base = basename(pageId)
-  const title = StringUtil.titleize(base)
+  const title = titleize(base)
 
   return title
 }
@@ -66,7 +66,7 @@ const pageFilePathToId = (pagesPath, filePath) => {
   const isPageFile = file === PAGE_CONFNAME || file === PAGE_DOCSNAME
 
   if (isPageFile || FileUtil.exists(resolve(filePath, '..', PAGE_CONFNAME)) || FileUtil.exists(resolve(filePath, '..', PAGE_DOCSNAME))) {
-    const pageId = isIndexFilePath(dir) ? INDEX_ID : dir.replace('\\', '/')
+    const pageId = isIndexFilePath(dir) ? INDEX_ID : crossPlatformPath(dir)
 
     return pageId
   } else {

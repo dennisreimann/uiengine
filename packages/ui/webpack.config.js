@@ -13,7 +13,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 const highlightjsStyles = dirname(require.resolve('highlight.js/styles/github.css'))
 const resolve = dir => join(__dirname, dir)
 const assetsPath = '_assets'
-const publicPath = filePath => join(assetsPath, filePath)
+const publicPath = filePath => `${assetsPath}/${filePath}`
 const assetPath = filePath => `<%= basePath %>${filePath}`
 const fileNameTmpl = `[name]${isProduction ? '.[contenthash:7]' : ''}`
 const plugins = [

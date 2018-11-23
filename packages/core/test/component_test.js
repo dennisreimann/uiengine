@@ -27,7 +27,9 @@ describe('Component', () => {
   before(() => { Connector.setup(state) })
   afterEach(() => { removeSync(testTmpPath) })
 
-  describe('#fetchById', () => {
+  describe('#fetchById', function () {
+    this.timeout(5000)
+
     it('should return component object', async () => {
       const data = await Component.fetchById(state, 'input')
 
@@ -48,10 +50,11 @@ describe('Component', () => {
 
     it('should infer variants if they are not provided', async () => {
       const data = await Component.fetchById(state, 'formfield')
+      const ids = data.variants.map(v => v.id.replace(/-\d$/, ''))
 
-      assert.strictEqual(Object.keys(data.variants).length, 2)
-      assert.strictEqual(data.variants[0].id, 'formfield/text-with-label.pug-1')
-      assert.strictEqual(data.variants[1].id, 'formfield/text-without-label.pug-2')
+      assert.strictEqual(ids.length, 2)
+      assert(ids.includes('formfield/text-with-label.pug'))
+      assert(ids.includes('formfield/text-without-label.pug'))
     })
 
     it('should not infer variants if they are explicitely provided by variants attribute', async () => {

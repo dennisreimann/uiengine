@@ -1,5 +1,5 @@
 const { basename, dirname, extname, join, relative, sep } = require('path')
-const { titleize } = require('./string')
+const { crossPlatformPath, titleize } = require('./string')
 const { componentIdToFilePath, componentFilePathToId } = require('./component')
 
 const VARIANTS_DIRNAME = 'variants'
@@ -8,7 +8,7 @@ const componentIdToVariantsPath = (componentPaths, componentId) =>
   componentIdToFilePath(componentPaths, componentId, VARIANTS_DIRNAME)
 
 const variantIdToComponentId = id =>
-  dirname(id).split(sep)[0]
+  crossPlatformPath(dirname(id).split(sep)[0])
 
 const variantIdToTitle = id => {
   const base = basename(id, extname(id))
@@ -18,7 +18,7 @@ const variantIdToTitle = id => {
 const variantFilePathToComponentId = (componentPaths, variantFilePath) => {
   const componentId = componentFilePathToId(componentPaths, variantFilePath)
 
-  return variantFilePath.match(`/${VARIANTS_DIRNAME}/`) && componentId
+  return variantFilePath.match(/([/\\])variants\1/) && componentId
 }
 
 const variantIdToFilePath = (componentPaths, id) => {

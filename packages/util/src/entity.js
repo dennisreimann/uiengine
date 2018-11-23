@@ -1,9 +1,9 @@
 const { join, basename, relative } = require('path')
-const StringUtil = require('./string')
+const { crossPlatformPath, titleize } = require('./string')
 
 const entityIdToTitle = id => {
   const base = basename(id)
-  const title = StringUtil.titleize(base)
+  const title = titleize(base)
 
   return title
 }
@@ -20,7 +20,7 @@ const entityFilePathToId = (path, filePath) => {
   // invalid path: this is not an entity
   if (relativePath.startsWith('..')) return null
 
-  const id = basename(relativePath, '.js')
+  const id = crossPlatformPath(basename(relativePath, '.js'))
 
   return id
 }

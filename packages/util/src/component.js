@@ -1,5 +1,5 @@
-const { dirname, join, relative, sep } = require('path')
-const { titleize } = require('./string')
+const { dirname, join, relative } = require('path')
+const { crossPlatformPath, titleize } = require('./string')
 const { exists, isDirectory } = require('./file')
 
 const COMPONENT_CONFNAME = 'component.config.js'
@@ -19,12 +19,12 @@ const componentFilePathToId = (componentPaths, componentFilePath) => {
   const relativePath = componentPathToId(componentPaths, componentFilePath)
 
   if (relativePath) {
-    const dir = dirname(relativePath).split(sep)[0]
+    const dir = dirname(relativePath).split('/')[0]
 
     if (dir === '.') {
-      return isDirectory(componentFilePath) ? relativePath : undefined
+      return isDirectory(componentFilePath) ? crossPlatformPath(relativePath) : undefined
     } else {
-      return dir
+      return crossPlatformPath(dir)
     }
   }
 
@@ -35,7 +35,9 @@ const componentPathToId = (componentPaths, componentPath) => {
   const relativePaths = componentPaths.map(basePath => relative(basePath, componentPath))
 
   // paths starting with '..' are invalid: not a file/dir in the base dir
-  return relativePaths.find(relPath => !relPath.startsWith('..') && relPath.length > 0)
+  const relativePath = relativePaths.find(relPath => !relPath.startsWith('..') && relPath.length > 0)
+
+  return relativePath ? crossPlatformPath(relativePath) : undefined
 }
 
 module.exports = {

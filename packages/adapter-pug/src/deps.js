@@ -5,6 +5,7 @@ const pugLexer = require('pug-lexer')
 const pugWalk = require('pug-walk')
 const glob = require('globby')
 const {
+  StringUtil: { crossPlatformPath },
   VariantUtil: { VARIANTS_DIRNAME }
 } = require('@uiengine/util')
 
@@ -47,6 +48,10 @@ async function getDependencyFiles (options, filePath, cache) {
           dependencyPath = resolve(dir, filePath)
         }
 
+        // as globby/fast-glob use unixified file paths we convert our path here
+        // https://github.com/mrmlnc/fast-glob/pull/56/commits/cc702eab74c1013061001bccb9d5b408f29abd96
+        dependencyPath = crossPlatformPath(dependencyPath)
+
         if (filePaths.indexOf(dependencyPath) === -1) {
           filePaths.push(dependencyPath)
         }
@@ -68,7 +73,7 @@ async function getDependentFiles (options, filePath, dirs, cache) {
   const filePaths = await glob(patterns, { ignore })
   const dependentFiles = await filter(filePaths, async file => {
     const dependencies = await getDependencyFiles(options, file, cache)
-    return dependencies.includes(filePath)
+    return dependencies.includes(crossPlatformPath(filePath))
   })
 
   return dependentFiles

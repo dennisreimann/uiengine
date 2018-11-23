@@ -3,6 +3,7 @@ const { basename, dirname, join, resolve } = require('path')
 const { parse } = require('@babel/parser')
 const glob = require('globby')
 const {
+  StringUtil: { crossPlatformPath },
   VariantUtil: { VARIANTS_DIRNAME }
 } = require('@uiengine/util')
 
@@ -51,13 +52,20 @@ async function getDependencyFiles (parserOpts, filePath, cache) {
     const importPath = imp.source.value
     const fileDir = dirname(filePath)
     const modulePathOrName = importPath.startsWith('.') ? resolve(fileDir, importPath) : importPath
+    let dependencyPath
 
     try {
-      return require.resolve(modulePathOrName)
+      dependencyPath = require.resolve(modulePathOrName)
     } catch (err) {
       // require.resolve does not work for non-js files, i.e. when using css modules
-      return modulePathOrName
+      dependencyPath = modulePathOrName
     }
+
+    // as globby/fast-glob use unixified file paths we convert our path here
+    // https://github.com/mrmlnc/fast-glob/pull/56/commits/cc702eab74c1013061001bccb9d5b408f29abd96
+    dependencyPath = crossPlatformPath(dependencyPath)
+
+    return dependencyPath
   })
 
   if (cache) cache[filePath] = filePaths
@@ -73,11 +81,11 @@ async function getDependentFiles (parserOpts, filePath, dirs, cache) {
   const dependentFiles = await filter(filePaths, async file => {
     const dependencies = await getDependencyFiles(parserOpts, file, cache)
     return (
-      dependencies.includes(filePath) ||
+      dependencies.includes(crossPlatformPath(filePath)) ||
       dependencies.find(dependencyFilePath => {
         // assume the index file contains an import for the filePath
         const isIndex = basename(dependencyFilePath).match(INDEX_FILE_REGEXP)
-        const folderMatches = dirname(dependencyFilePath) === dirname(filePath)
+        const folderMatches = dirname(dependencyFilePath) === crossPlatformPath(dirname(filePath))
         return isIndex && folderMatches
       })
     )
