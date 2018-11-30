@@ -4,6 +4,10 @@ node_js:
   - "node"
   - "10"
   - "lts/*"
+os:
+  - windows
+  - linux
+  - osx
 
 before_script:
   - yarn run setup
@@ -35,6 +39,7 @@ deploy:
     on:
       branch: master
       node: "10"
+      os: osx
   # Deploy test project
   - provider: script
     skip_cleanup: true
@@ -42,6 +47,7 @@ deploy:
     on:
       branch: master
       node: "10"
+      os: osx
 after_deploy:
   - yarn run docs:lighthouse
   - yarn run docs:deploy_lighthouse
