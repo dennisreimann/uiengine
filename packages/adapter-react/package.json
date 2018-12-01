@@ -2,7 +2,7 @@
   "name": "@uiengine/adapter-react",
   "description": "UIengine template adapter for React/JSX.",
   "license": "MIT",
-  "version": "1.4.0",
+  "version": "2.0.0-alpha.0",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "@babel/parser": "7.1.6",
-    "@uiengine/util": "^1.4.0",
+    "@uiengine/util": "^2.0.0-alpha.0",
     "fs-extra": "7.0.1",
     "globby": "8.0.1",
     "react-docgen": "2.21.0",
