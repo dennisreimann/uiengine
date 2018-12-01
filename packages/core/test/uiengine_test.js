@@ -88,7 +88,6 @@ describe('UIengine', function () {
     //   it('should start the server', done => {
     //     UIengine.build(optsWith({ serve: true, watch: false })).then(({ server }) => {
     //       assert(server)
-
     //       server.emitter.on('init', () => {
     //         server.exit()
     //         done()
@@ -98,56 +97,44 @@ describe('UIengine', function () {
     // })
 
     describe('with watch option', function () {
-      let watchProcess
-
-      before(function (done) {
-        // suppress output during tests
-        this.sinon.stub(process.stdout, 'write')
+      it('should start the watcher and  report file changes', function (done) {
+        // skip this test on CI as file watching does not seem to work in this environment
+        if (process.env.CI === 'true') return
 
         UIengine.build(optsWith({ watch: true, serve: false })).then(({ watcher }) => {
-          watchProcess = watcher
-          done()
-        })
-      })
+          assert(watcher)
+          assert(watcher.options.ignoreInitial)
+          assert(watcher.options.awaitWriteFinish)
 
-      after(function () {
-        this.sinon.restore()
+          const pagesPath = resolve(testProjectPath, 'uiengine', 'pages')
+          const filePath = join(pagesPath, 'testcases', 'created', 'README.md')
+          const fileDir = dirname(filePath)
 
-        watchProcess.close()
-      })
+          const cleanup = () => {
+            watcher.close()
+            removeSync(fileDir)
+          }
 
-      it('should start the watcher', () => {
-        assert(watchProcess)
-        assert(watchProcess.options.ignoreInitial)
-        assert(watchProcess.options.awaitWriteFinish)
-      })
+          try {
+            watcher.on('all', (changeType, changedFilePath) => {
+              if (changedFilePath === filePath) {
+                setTimeout(() => {
+                  cleanup()
+                  this.sinon.assert.calledWithMatch(process.stdout.write, '✨  Rebuilt page testcases/created')
+                  done()
+                }, 250)
+              }
+            })
 
-      // skip this test on CI as file watching does not seem to work in this environment
-      const itFn = process.env.CI === 'true' ? it.skip : it
-      itFn('should report file changes', function (done) {
-        const pagesPath = resolve(testProjectPath, 'uiengine', 'pages')
-        const filePath = join(pagesPath, 'testcases', 'created', 'README.md')
-        const fileDir = dirname(filePath)
-
-        try {
-          watchProcess.on('all', (changeType, changedFilePath) => {
-            if (changedFilePath === filePath) {
-              setTimeout(() => {
-                removeSync(fileDir)
-                this.sinon.assert.calledWithMatch(process.stdout.write, '✨  Rebuilt page testcases/created')
-                setTimeout(done, 250)
-              }, 250)
-            }
-          })
-
-          setTimeout(() => {
-            mkdirsSync(fileDir)
-            writeFileSync(filePath, '# Created Page\n\nContent for created page.')
-          }, 250)
-        } catch (err) {
-          removeSync(fileDir)
-          done(err)
-        }
+            setTimeout(() => {
+              mkdirsSync(fileDir)
+              writeFileSync(filePath, '# Created Page\n\nContent for created page.')
+            }, 250)
+          } catch (err) {
+            cleanup()
+            done(err)
+          }
+        }).catch(done)
       })
     })
   })
