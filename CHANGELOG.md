@@ -1,6 +1,10 @@
 # Changelog
 
-## [2.0.0] - ongoing development
+## [2.0.0] - ongoing development (pre-release)
+
+### Added
+
+- Improved Windows compatibility, feedback welcome!
 
 ### Changed
 
