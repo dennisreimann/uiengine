@@ -30,14 +30,14 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "fs-extra": "7.0.0",
+    "fs-extra": "7.0.1",
     "globby": "8.0.1",
-    "prettier": "1.14.3",
-    "ramda": "0.25.0",
-    "yargs": "12.0.2"
+    "prettier": "1.15.3",
+    "ramda": "0.26.1",
+    "yargs": "12.0.5"
   },
   "devDependencies": {
-    "lint-staged": "^8.0.4"
+    "lint-staged": "^8.1.0"
   },
   "lint-staged": {
     "*.js": [

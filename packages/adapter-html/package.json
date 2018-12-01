@@ -23,7 +23,7 @@
     "html"
   ],
   "devDependencies": {
-    "lint-staged": "^8.0.4"
+    "lint-staged": "^8.1.0"
   },
   "scripts": {
     "lint": "eslint src test",

@@ -29,9 +29,9 @@
     "vue-template-compiler": "2.5.17"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
-    "lint-staged": "^8.0.4",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "lint-staged": "^8.1.0",
     "vue": "2.5.17"
   },
   "peerDependencies": {
