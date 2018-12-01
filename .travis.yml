@@ -5,7 +5,7 @@ node_js:
   - "10"
   - "lts/*"
 os:
-  - windows
+  # - windows
   - linux
   - osx
 

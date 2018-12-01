@@ -98,9 +98,6 @@ describe('UIengine', function () {
 
     describe('with watch option', function () {
       it('should start the watcher and  report file changes', function (done) {
-        // skip this test on CI as file watching does not seem to work in this environment
-        if (process.env.CI === 'true') return
-
         UIengine.build(optsWith({ watch: true, serve: false })).then(({ watcher }) => {
           assert(watcher)
           assert(watcher.options.ignoreInitial)

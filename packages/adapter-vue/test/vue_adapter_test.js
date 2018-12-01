@@ -7,7 +7,7 @@ const templatePath = file => resolve(__dirname, 'fixtures', file)
 describe('Vue adapter', () => {
   describe('#render', () => {
     describe('html template', function () {
-      this.timeout(5000)
+      this.timeout(10000)
 
       describe('with custom bundle', () => {
         it('should render the vue template with the given data', async () => {
