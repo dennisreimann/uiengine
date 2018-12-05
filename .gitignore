@@ -16,6 +16,8 @@ deploy/v
 coverage
 report.html
 docs/dist
+test/acceptance/screenshots
+test/acceptance/videos
 test/demo
 test/tmp
 test/project/dist

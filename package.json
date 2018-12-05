@@ -53,6 +53,7 @@
     "docs:deploy_latest": "cd docs && uiengine build && cd .. && $npm_package_confisg_deployment_command --exclude=v/ deploy/ docs/dist/ $npm_package_config_deployment_target_docs",
     "docs:deploy_version": "VERSION=`echo \"console.log(require('./packages/core/package.json').version);\" | node` && VERSION_PATH=/v/$VERSION && cd docs && uiengine build --override.ui.base=\"$VERSION_PATH/\" && cd .. && mkdir -p deploy/v && sed 's!RewriteBase /!RewriteBase '$VERSION_PATH'/!' deploy/.htaccess > deploy/v/.htaccess && $npm_package_config_deployment_command --rsync-path=\"mkdir -p virtual/uiengine.uix.space/$VERSION_PATH && rsync\" deploy/v/ docs/dist/ uiengine@uiengine.uix.space:virtual/uiengine.uix.space/$VERSION_PATH",
     "docs:deploy_lighthouse": "$npm_package_config_deployment_command report.html $npm_package_config_deployment_target_docs",
+    "test-acceptance": "cd test/acceptance && cypress run",
     "test-project": "cd test/project && cross-env NODE_ENV=development yarn run dev",
     "test-project:build": "cd test/project && yarn install && cross-env NODE_ENV=production yarn run prod",
     "test-project:deploy": "yarn run test-project:build && $npm_package_config_deployment_command deploy/ test/tmp/ $npm_package_config_deployment_target_sample"
@@ -71,6 +72,7 @@
   },
   "workspaces": [
     "packages/*",
+    "test/acceptance",
     "test/project"
   ],
   "standard": {

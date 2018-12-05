@@ -1,0 +1,32 @@
+{
+  "private": true,
+  "name": "@uiengine/acceptance",
+  "description": "UIengine Acceptance Tests",
+  "license": "MIT",
+  "version": "2.0.0-alpha.0",
+  "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
+  "homepage": "https://github.com/dennisreimann/uiengine",
+  "bugs": "https://github.com/dennisreimann/uiengine",
+  "repository": "dennisreimann/uiengine",
+  "engines": {
+    "node": ">=10.13"
+  },
+  "scripts": {
+    "start": "cypress open",
+    "test": "cypress run",
+    "lint": "eslint integration plugins support",
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "cypress": "^3.1.3",
+    "eslint": "^5.9.0",
+    "eslint-plugin-cypress": "^2.1.2",
+    "lint-staged": "^8.1.0"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "yarn run lint --fix",
+      "git add"
+    ]
+  }
+}
