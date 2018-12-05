@@ -1,5 +1,8 @@
 language: node_js
-cache: yarn
+cache:
+  yarn: true
+  directories:
+    - ~/.cache
 node_js:
   - "node"
   - "10"
@@ -51,3 +54,6 @@ deploy:
 after_deploy:
   - yarn run docs:lighthouse
   - yarn run docs:deploy_lighthouse
+  # Acceptance tests
+  - export CYPRESS_baseUrl=https://uiengine.uix.space/
+  - yarn run test-acceptance
