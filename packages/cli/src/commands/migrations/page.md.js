@@ -44,7 +44,7 @@ exports.handler = async argv => {
       }
 
       if (content.length) {
-        tasks.push(outputFile(pageReadme, content + '\n'))
+        tasks.push(outputFile(pageReadme, `${content.trim()}\n`))
       }
 
       await Promise.all(tasks)
