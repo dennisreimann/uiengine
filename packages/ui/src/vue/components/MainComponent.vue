@@ -16,8 +16,8 @@
           class="contentheader__options"
         >
           <a
-            v-if="repoLink"
-            :href="repoLink"
+            v-if="fileLink"
+            :href="fileLink"
             class="contentheader__action"
           >
             <app-icon
@@ -196,6 +196,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { dasherize } from '@uiengine/util/src/string'
+import Docs from '../mixins/docs'
 import ContentHeader from './ContentHeader'
 import ContentHeading from './ContentHeading'
 import ContentText from './ContentText'
@@ -216,6 +217,10 @@ export default {
     ContentTag,
     ComponentVariant
   },
+
+  mixins: [
+    Docs
+  ],
 
   props: {
     id: {
@@ -290,13 +295,8 @@ export default {
       return this.activeSection === 'theme-properties' || (!this.activeSection && !this.hasInfo && !this.hasProperties && this.hasThemeProperties)
     },
 
-    repoLink () {
-      const { repoBaseUrl } = this.config.ui
-      if (!repoBaseUrl) return null
-
-      const { sourceFile, sourcePath } = this.component
-
-      return `${repoBaseUrl}${sourceFile || sourcePath}`
+    fileLink () {
+      return this.findFileLink(this.component)
     }
   },
 

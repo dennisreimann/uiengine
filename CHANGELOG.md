@@ -5,6 +5,7 @@
 ### Added
 
 - Improved Windows compatibility, feedback welcome!
+- The pen icon in the interface opens files in VS Code when working locally
 
 ### Changed
 

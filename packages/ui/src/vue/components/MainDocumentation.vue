@@ -10,11 +10,11 @@
         class="uie-sob-m"
       />
       <div
-        v-if="repoLink"
+        v-if="fileLink"
         class="contentheader__options"
       >
         <a
-          :href="repoLink"
+          :href="fileLink"
           class="contentheader__action"
         >
           <app-icon
@@ -30,6 +30,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Docs from '../mixins/docs'
 import ContentHeader from './ContentHeader'
 import ContentText from './ContentText'
 import ContentTag from './ContentTag'
@@ -40,6 +41,10 @@ export default {
     ContentText,
     ContentTag
   },
+
+  mixins: [
+    Docs
+  ],
 
   props: {
     id: {
@@ -55,13 +60,8 @@ export default {
       return this.pages[this.id]
     },
 
-    repoLink () {
-      const { repoBaseUrl } = this.config.ui
-      if (!repoBaseUrl) return null
-
-      const { sourceFile, sourcePath } = this.page
-
-      return `${repoBaseUrl}${sourceFile || sourcePath}`
+    fileLink () {
+      return this.findFileLink(this.page)
     }
   }
 }
