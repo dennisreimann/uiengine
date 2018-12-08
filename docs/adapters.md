@@ -136,7 +136,7 @@ const filesForComponent = (opts, componentName) =>
   [
     {
       basename: `${componentName}.pug`,
-      data: `mixin ${componentName}()\n  .${componentName}\n    //- TODO: implement\n`
+      data: `mixin ${componentName}()\n  .${componentName}\n    //- TODO: implement`
     }
   ]
 
@@ -144,7 +144,7 @@ const filesForVariant = (opts, componentName, variantName) =>
   [
     {
       basename: `${variantName}.pug`,
-      data: `+${componentName}()\n`
+      data: `+${componentName}()`
     }
   ]
 ```

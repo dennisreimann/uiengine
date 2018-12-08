@@ -57,41 +57,26 @@ async function render (options, filePath, data = {}) {
 }
 
 function filesForComponent (options, componentName) {
-  const name = upcaseFirstChar(componentName)
+  const upcasedComponentName = upcaseFirstChar(componentName)
+  const tmpl = require(`./files/component`)
 
   return [
     {
-      basename: `${name}.jsx`,
-      data: `import React from 'react'
-
-const ${name} = props => {
-  return (
-    <div className='${componentName}'>
-      {props.children}
-    </div>
-  )
-}
-
-export default ${name}
-`
+      basename: `${upcasedComponentName}.jsx`,
+      data: tmpl(componentName, upcasedComponentName)
     }
   ]
 }
 
 function filesForVariant (options, componentName, variantName) {
-  const cName = upcaseFirstChar(componentName)
-  const vName = upcaseFirstChar(variantName)
+  const upcasedComponentName = upcaseFirstChar(componentName)
+  const upcasedVariantName = upcaseFirstChar(variantName)
+  const tmpl = require(`./files/variant`)
 
   return [
     {
-      basename: `${vName}.jsx`,
-      data: `import React from 'react'
-import ${cName} from '../${cName}.jsx'
-
-export default props => (
-  <${cName} {...props} />
-)
-`
+      basename: `${upcasedVariantName}.jsx`,
+      data: tmpl(upcasedComponentName)
     }
   ]
 }

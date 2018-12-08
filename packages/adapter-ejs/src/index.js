@@ -16,7 +16,7 @@ function filesForComponent (options, componentName) {
   return [
     {
       basename: `${componentName}.ejs`,
-      data: `<div class="${componentName}">\n  <!-- TODO: implement -->\n</div>\n`
+      data: `<div class="${componentName}">\n  <!-- TODO: implement -->\n</div>`
     }
   ]
 }
@@ -25,7 +25,7 @@ function filesForVariant (options, componentName, variantName) {
   return [
     {
       basename: `${variantName}.ejs`,
-      data: `<%- include ../${componentName} -%>\n`
+      data: `<%- include ../${componentName} -%>`
     }
   ]
 }

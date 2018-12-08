@@ -66,12 +66,12 @@ describe('FileUtil', () => {
   })
 
   describe('#write', () => {
-    it('should write content to file', async () => {
+    it('should write content to file, trim it and add a newline at the end', async () => {
       const filePath = join(testTmpPath, 'writeFileUtilTest.txt')
-      await FileUtil.write(filePath, 'Test')
+      await FileUtil.write(filePath, '\n\n    Test    \n\n')
       const content = readFileSync(filePath, 'utf8')
 
-      assert.strictEqual(content, 'Test')
+      assert.strictEqual(content, 'Test\n')
       removeSync(filePath)
     })
   })

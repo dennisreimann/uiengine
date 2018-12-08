@@ -39,7 +39,7 @@ function filesForComponent (options, componentName) {
   return [
     {
       basename: `${componentName}.marko`,
-      data: `<div class="${componentName}">\n  <!-- TODO: implement -->\n</div>\n`
+      data: `<div class="${componentName}">\n  <!-- TODO: implement -->\n</div>`
     }
   ]
 }
@@ -48,7 +48,7 @@ function filesForVariant (options, componentName, variantName) {
   return [
     {
       basename: `${variantName}.marko`,
-      data: `<include('../${componentName}.marko', input)/>\n`
+      data: `<include('../${componentName}.marko', input)/>`
     }
   ]
 }

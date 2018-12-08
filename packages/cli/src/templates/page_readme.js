@@ -1,1 +1,1 @@
-module.exports = title => `# ${title}\n`
+module.exports = title => `# ${title}`

@@ -1,4 +1,5 @@
-module.exports = title => `# ${title}
+module.exports = title => `
+# ${title}
 
 ## What problem does it solve?
 
@@ -10,5 +11,4 @@ Examples and scenarios; maybe an explanation when not to use it.
 
 ## Guidelines and recommendations
 
-Explain UX concerns or technical details.
-`
+Explain UX concerns or technical details.`

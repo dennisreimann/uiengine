@@ -1,10 +1,10 @@
 const { dirname, join } = require('path')
-const { outputFile, remove } = require('fs-extra')
 const Core = require('@uiengine/core/src/core')
 const glob = require('globby')
 const prettier = require('prettier')
 const FrontmatterUtil = require('../../frontmatter')
 const {
+  FileUtil: { write, remove },
   MessageUtil: { reportSuccess, reportError, reportInfo },
   StringUtil: { titleFromContentHeading }
 } = require('@uiengine/util')
@@ -40,11 +40,11 @@ exports.handler = async argv => {
       }
 
       if (Object.keys(attributes).length > 0) {
-        tasks.push(outputFile(pageConfig, prettier.format(`module.exports = ${JSON.stringify(attributes, null, 2)}\n`)))
+        tasks.push(write(pageConfig, prettier.format(`module.exports = ${JSON.stringify(attributes, null, 2)}`)))
       }
 
       if (content.length) {
-        tasks.push(outputFile(pageReadme, `${content.trim()}\n`))
+        tasks.push(write(pageReadme, content))
       }
 
       await Promise.all(tasks)

@@ -1,4 +1,5 @@
-module.exports = title => `<!DOCTYPE html>
+module.exports = title => `
+<!DOCTYPE html>
 <html class="<!-- uiengine:class -->">
   <head>
     <title><!-- uiengine:title --></title>
@@ -16,5 +17,4 @@ module.exports = title => `<!DOCTYPE html>
     <script src="/scripts/my.js"></script>
     -->
   </body>
-</html>
-`
+</html>`

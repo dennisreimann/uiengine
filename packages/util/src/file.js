@@ -36,7 +36,7 @@ async function read (filePath) {
 }
 
 async function write (filePath, content) {
-  await fs.outputFile(filePath, content)
+  await fs.outputFile(filePath, `${content.trim()}\n`)
 }
 
 async function copy (src, dst) {
@@ -46,6 +46,7 @@ async function copy (src, dst) {
 }
 
 module.exports = {
+  remove: fs.remove,
   read,
   write,
   copy,

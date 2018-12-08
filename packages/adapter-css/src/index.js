@@ -13,7 +13,7 @@ function filesForComponent (options, componentName) {
   return [
     {
       basename: `${componentName}.css`,
-      data: `.${componentName} {\n  /* TODO: implement */\n}\n`
+      data: `.${componentName} {\n  /* TODO: implement */\n}`
     }
   ]
 }
