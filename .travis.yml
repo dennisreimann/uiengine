@@ -1,59 +1,70 @@
 language: node_js
 cache:
-  yarn: true
   directories:
     - ~/.cache
 node_js:
-  - "node"
-  - "10"
   - "lts/*"
+  - "node"
 os:
-  # - windows
   - linux
-  - osx
+  # - osx
+  # - windows
+stages:
+  - name: check
+  - name: test
+  - name: deploy
+    if: branch = master
+  - name: verify
+    if: branch = master
 
-before_script:
-  - yarn run setup
-script:
-  # Build all packages
-  - yarn run build
-  # Lint all packages
-  - yarn run lint
-  # Run tests and coverage
-  - yarn run cover
-after_success:
-  # Upload coverage data
-  - c8 report --reporter=text-lcov | coveralls
+before_script: yarn run build
+script: yarn test
+
+jobs:
+  include:
+    - stage: check
+      name: lint
+      before_script: skip
+      script: yarn run lint
+
+    - stage: deploy
+      name: coverage
+      script: yarn run coverage
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script: yarn run coverage:deploy
+
+    - stage: deploy
+      name: test project
+      script: yarn run test-project:build
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script: yarn run test-project:deploy
+
+    - stage: deploy
+      name: docs
+      script: yarn run docs:build
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script: yarn run docs:deploy
+
+    - stage: verify
+      name: acceptance
+      before_script: skip
+      script:
+        - export CYPRESS_baseUrl=https://uiengine-sample-project.uix.space/
+        - yarn run test-acceptance
 
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_226d8df99612_key -iv $encrypted_226d8df99612_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
+
 addons:
   ssh_known_hosts:
     - uiengine.uix.space
     - uiengine-sample-project.uix.space
-deploy:
-  # Deploy doc site
-  - provider: script
-    skip_cleanup: true
-    script: yarn run docs:deploy
-    on:
-      branch: master
-      node: "10"
-      condition: $TRAVIS_OS_NAME = osx
-  # Deploy test project
-  - provider: script
-    skip_cleanup: true
-    script: yarn run test-project:deploy
-    on:
-      branch: master
-      node: "10"
-      condition: $TRAVIS_OS_NAME = osx
-after_deploy:
-  - yarn run docs:lighthouse
-  - yarn run docs:deploy_lighthouse
-  # Acceptance tests
-  - export CYPRESS_baseUrl=https://uiengine.uix.space/
-  - yarn run test-acceptance

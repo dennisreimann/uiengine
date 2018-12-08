@@ -45,18 +45,20 @@
     "lint": "lerna run lint --parallel && eslint test/support && cd test/project && yarn run lint",
     "test": "mocha -R dot packages/*/test/**/*_test.js",
     "test-watch": "yarn test -w --watch-extensions ejs,hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",
-    "cover": "c8 yarn test --forbid-only",
-    "release": "yarn run lint && yarn run cover && cross-env NODE_ENV=production yarn run build && lerna publish",
+    "coverage": "c8 yarn test --forbid-only",
+    "coverage:deploy": "c8 report --reporter=text-lcov | coveralls",
+    "release": "yarn run lint && yarn run coverage && cross-env NODE_ENV=production yarn run build && lerna publish",
     "demo": "rimraf test/demo && sleep 1 && uiengine init --dir test/demo --demo && cd test/demo && uiengine build -s -w",
+    "docs:build": "cd docs && uiengine build",
     "docs:lighthouse": "lighthouse-ci --report=. https://uiengine.uix.space/",
-    "docs:deploy": "yarn run docs:deploy_latest && yarn run docs:deploy_version",
-    "docs:deploy_latest": "cd docs && uiengine build && cd .. && $npm_package_config_deployment_command --exclude=v/ deploy/ docs/dist/ $npm_package_config_deployment_target_docs",
-    "docs:deploy_version": "VERSION=`echo \"console.log(require('./packages/core/package.json').version);\" | node` && VERSION_PATH=/v/$VERSION && cd docs && uiengine build --override.ui.base=\"$VERSION_PATH/\" && cd .. && mkdir -p deploy/v && sed 's!RewriteBase /!RewriteBase '$VERSION_PATH'/!' deploy/.htaccess > deploy/v/.htaccess && $npm_package_config_deployment_command --rsync-path=\"mkdir -p virtual/uiengine.uix.space/$VERSION_PATH && rsync\" deploy/v/ docs/dist/ uiengine@uiengine.uix.space:virtual/uiengine.uix.space/$VERSION_PATH",
+    "docs:deploy": "yarn run docs:deploy_latest && yarn run docs:deploy_version && yarn run docs:lighthouse && yarn run docs:deploy_lighthouse",
+    "docs:deploy_latest": "$npm_package_config_deployment_command --exclude=v/ deploy/ docs/dist/ $npm_package_config_deployment_target_docs",
+    "docs:deploy_version": "VERSION=`echo \"console.log(require('./packages/core/package.json').version);\" | node` && VERSION_PATH=/v/$VERSION && cd docs && uiengine build --override.ui.base=\"$VERSION_PATH/\" && cd .. && mkdir -p deploy/v && sed 's!RewriteBase /!RewriteBase '$VERSION_PATH'/!' deploy/.htaccess > deploy/v/.htaccess && $npm_package_config_deployment_command --rsync-path=\"mkdir -p virtual/uiengine.uix.space/$VERSION_PATH && rsync\" deploy/v/ docs/dist/ $npm_package_config_deployment_target_docs/$VERSION_PATH",
     "docs:deploy_lighthouse": "$npm_package_config_deployment_command report.html $npm_package_config_deployment_target_docs",
     "test-acceptance": "cd test/acceptance && cypress run",
     "test-project": "cd test/project && cross-env NODE_ENV=development yarn run dev",
     "test-project:build": "cd test/project && yarn install && cross-env NODE_ENV=production yarn run prod",
-    "test-project:deploy": "yarn run test-project:build && $npm_package_config_deployment_command deploy/ test/tmp/ $npm_package_config_deployment_target_sample"
+    "test-project:deploy": "$npm_package_config_deployment_command deploy/ test/tmp/ $npm_package_config_deployment_target_sample"
   },
   "config": {
     "deployment": {

@@ -11,7 +11,7 @@ Dependencies are managed via [Yarn](https://yarnpkg.com/).
 Once you have Yarn installed and this repo cloned, you can setup the packages:
 
 ```bash
-yarn run setup
+yarn install
 ```
 
 ### 🛠 Development
