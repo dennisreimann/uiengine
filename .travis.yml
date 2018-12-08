@@ -42,7 +42,7 @@ deploy:
     on:
       branch: master
       node: "10"
-      os: osx
+      condition: $TRAVIS_OS_NAME = osx
   # Deploy test project
   - provider: script
     skip_cleanup: true
@@ -50,7 +50,7 @@ deploy:
     on:
       branch: master
       node: "10"
-      os: osx
+      condition: $TRAVIS_OS_NAME = osx
 after_deploy:
   - yarn run docs:lighthouse
   - yarn run docs:deploy_lighthouse
