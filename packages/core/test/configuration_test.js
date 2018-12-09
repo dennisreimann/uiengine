@@ -57,7 +57,7 @@ describe('Configuration', () => {
     })
 
     it('should resolve components source paths as array if string is given', async () => {
-      const opts = { config: resolve(testProjectPath, 'uiengine-default-ui.yml') }
+      const opts = { config: resolve(testProjectPath, 'uiengine-source-components-string.config.js') }
       const config = await Configuration.read(opts)
 
       assert.strictEqual(config.source.components.length, 1)
@@ -78,10 +78,19 @@ describe('Configuration', () => {
     })
 
     it('should resolve default UI if no object is given', async () => {
-      const opts = { config: resolve(testProjectPath, 'uiengine-default-ui.yml') }
+      const opts = { config: resolve(testProjectPath, 'uiengine-default-ui.config.js') }
       const config = await Configuration.read(opts)
 
       assert.strictEqual(Object.keys(config.ui).length, 0)
+    })
+
+    it('should resolve default themes if no array is given', async () => {
+      const opts = { config: resolve(testProjectPath, 'uiengine-default-themes.config.js') }
+      const config = await Configuration.read(opts)
+
+      assert.strictEqual(config.themes.length, 1)
+      assert.strictEqual(config.themes[0].id, '_default')
+      assert.strictEqual(config.themes[0].title, 'Default')
     })
 
     it('should resolve adapters', async () => {

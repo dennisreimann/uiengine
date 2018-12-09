@@ -21,6 +21,12 @@ const state = {
       base: testProjectPath
     },
     target: testProjectTargetPath,
+    themes: [
+      {
+        id: '_default',
+        title: 'Default'
+      }
+    ],
     adapters
   }
 }

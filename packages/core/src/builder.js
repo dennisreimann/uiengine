@@ -73,6 +73,8 @@ async function generatePageWithTemplate (state, pageId) {
   }
 
   if (page.template) {
+    // TODO: Add themes
+
     // render template with context
     const { id, context, template } = page
     const { rendered } = await render(state, template, context, identifier)
@@ -111,6 +113,8 @@ async function generatePageWithTokens (state, pageId) {
   }
 
   if (isTokensPage(page.type)) {
+    // TODO: Add themes
+
     // render tokens with context, in preview layout
     const { id, title } = page
     const data = page
@@ -136,6 +140,8 @@ async function generateVariant (state, variant) {
   const { config, components } = state
   const identifier = `Variant "${variant.id}"`
   const component = components[variant.componentId]
+
+  // TODO: Add themes
 
   // render variant preview, with layout
   const data = { state }
@@ -251,6 +257,8 @@ const generateIncrement = generateState
 
 async function generateSketch (state) {
   debug2(state, `Builder.generateSketch():start`)
+
+  // TODO: Add themes
 
   const { config: { name, target, template, version, source: { templates } } } = state
   const identifier = 'HTML Sketchapp Export'

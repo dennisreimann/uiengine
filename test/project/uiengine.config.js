@@ -63,6 +63,17 @@ module.exports = {
   // Here you can configure the template that the variant preview gets embeded in.
   template: 'uiengine.pug',
 
+  themes: [
+    {
+      id: 'plain',
+      title: 'Plain'
+    },
+    {
+      id: 'funky',
+      title: 'Funky crazy awesome'
+    }
+  ],
+
   ui: {
     base,
     breakpoints,
@@ -77,16 +88,6 @@ module.exports = {
         type: 'TOGGLE_CLASS',
         selector: 'body',
         className: 'show-grid'
-      }
-    ],
-    themes: [
-      {
-        id: 'plain',
-        title: 'Plain'
-      },
-      {
-        id: 'funky',
-        title: 'Funky crazy awesome'
       }
     ]
   },

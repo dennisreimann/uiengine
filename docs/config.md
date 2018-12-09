@@ -126,6 +126,31 @@ Other comments that also get replaced:
 
 - `<!-- uiengine:title -->` is the page title: `<title><!-- uiengine:title --></title>`
 - `<!-- uiengine:class -->` is the page class: `<html class="<!-- uiengine:class -->">`
+- `<!-- uiengine:theme -->` is the theme id: `<html data-theme="<!-- uiengine:theme -->">`
+
+### Themes
+
+The themes defined here will be shown in the topbar.
+The first theme is selected by default.
+
+Each variant will be rendered per theme.
+
+```js
+{
+  themes: [
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'funky',
+      title: 'Bright colors'
+    }
+  ]
+}
+```
+
+If no themes are defined, one with the id `_default` will be used.
 
 ### UI
 

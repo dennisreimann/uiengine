@@ -17,6 +17,12 @@ const state = {
       data: resolve(__dirname, 'fixtures'),
       base: testProjectPath
     },
+    themes: [
+      {
+        id: '_default',
+        title: 'Default'
+      }
+    ],
     adapters
   }
 }

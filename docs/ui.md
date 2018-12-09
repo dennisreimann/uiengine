@@ -24,17 +24,6 @@ This is what the full options look like:
       XL: 1280
     },
 
-    themes: [
-      {
-        id: 'default',
-        title: 'Default'
-      },
-      {
-        id: 'funky',
-        title: 'Bright colors'
-      }
-    ],
-
     locales: {
       en: {
         // custom locale overrides
@@ -144,13 +133,6 @@ Available options:
 - `viewports`
 
 The preview mode can also be switched in the preference settings.
-
-### themes
-
-The themes defined here will be shown in the topbar.
-
-The first theme is selected by default.
-The iframe is loaded with the theme id being the hash part of the url (i.e. `#funky`).
 
 ### locales
 

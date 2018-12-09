@@ -19,8 +19,8 @@ const getModule = ({ config: { adapters } }, ext, filePath) => {
 }
 
 const getOptions = (state, ext) => {
-  const { config: { adapters, target, source: { base, components, templates }, ui } } = state
-  const themeIds = ui && ui.themes ? ui.themes.map(theme => theme.id) : []
+  const { config: { adapters, target, themes, source: { base, components, templates } } } = state
+  const themeIds = themes.map(theme => theme.id)
   const { options } = adapters[ext]
 
   return Object.assign({}, options, { ext, base, components, templates, target, themeIds })
@@ -73,6 +73,8 @@ async function render (state, templatePath, data = {}) {
   const { render } = getModule(state, ext, templatePath)
 
   if (typeof render === 'function') {
+    // TODO: Add themes
+
     const options = getOptions(state, ext)
     const rendered = await render(options, templatePath, data)
     const result = typeof rendered === 'string' ? { rendered, parts: [{ title: 'HTML', lang: 'html', content: rendered }] } : rendered

@@ -32,9 +32,7 @@ const stateWithModule = module => ({
         options: testAdapterOptions
       }
     },
-    ui: {
-      themes: themeIds.map(id => ({ id, title: id }))
-    }
+    themes: themeIds.map(id => ({ id, title: id }))
   }
 })
 

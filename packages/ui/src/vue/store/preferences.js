@@ -1,12 +1,11 @@
 import { upcaseFirstChar } from '@uiengine/util/src/string'
 
-const appState = window.UIengine.state
-const ui = appState.config && appState.config.ui
+const { ui, themes } = window.UIengine.state.config
 
 const properties = {
   hljs: document.getElementById('hljs').getAttribute('data-default'),
   locale: document.documentElement.getAttribute('lang'),
-  currentTheme: (ui && ui.themes && ui.themes[0]),
+  currentTheme: (themes && themes[0]),
   navigationCollapsed: false,
   navigationItemsCollapsed: {},
   searchCollapsed: true,

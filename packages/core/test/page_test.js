@@ -11,7 +11,13 @@ const state = {
     source: {
       base: testProjectPath,
       pages: pagesPath
-    }
+    },
+    themes: [
+      {
+        id: '_default',
+        title: 'Default'
+      }
+    ]
   }
 }
 

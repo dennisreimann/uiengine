@@ -92,7 +92,7 @@ export default {
     ...mapGetters('preferences', ['locale', 'navigationCollapsed', 'searchCollapsed', 'currentTheme']),
 
     themes () {
-      return this.config.ui.themes
+      return this.config.themes
     }
   },
 

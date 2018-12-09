@@ -25,10 +25,17 @@ const state = {
       pages: resolve(testProjectPath, 'uiengine', 'pages'),
       data: resolve(testProjectPath, '..', 'fixtures')
     },
+    template: 'uiengine.pug',
+    themes: [
+      {
+        id: '_default',
+        title: 'Default'
+      }
+    ],
     target,
-    adapters,
-    template: 'uiengine.pug'
+    adapters
   },
+
   pages: {
     'index': Factory.page('index', {
       title: 'Home',

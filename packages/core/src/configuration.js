@@ -93,9 +93,7 @@ const _read = (configFilePath, projectConfig, flags) => {
   const update = Date.now()
   const defaults = { name, version, update }
   let data = R.mergeAll([defaults, projectConfig, options])
-
-  // resolve paths, adapters, and ui
-  let { source, target, ui, adapters } = data
+  let { source, target, ui, themes, adapters } = data
 
   assert(source, 'Please provide a "source" config.')
   assert(target, 'Please provide a "target" config with the destination path for the generated site.')
@@ -113,10 +111,12 @@ const _read = (configFilePath, projectConfig, flags) => {
   target = resolvePath(configPath, target)
   adapters = R.map(resolveAdapters, adapters || {})
   ui = data.ui || {}
+  themes = data.themes || [{ id: '_default', title: 'Default' }]
 
   data = R.assoc('source', source, data)
   data = R.assoc('target', target, data)
   data = R.assoc('ui', ui, data)
+  data = R.assoc('themes', themes, data)
   data = R.assoc('adapters', adapters, data)
 
   return data

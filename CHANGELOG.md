@@ -21,6 +21,8 @@
   - Use the `npx uiengine migrate` command to automatically migrate
 - Removed `source.data` config option
   - Require files directly in your `component.config.js` or `page.config.js`.
+- Themes are now a first-class citizen and widely supported
+  - The `themes` config option moved to the root level (previously `ui.themes`)
 
 ---
 
