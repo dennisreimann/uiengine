@@ -4,7 +4,7 @@ const Adapter = require('../src/index')
 
 const templatePath = file => resolve(__dirname, 'fixtures', file)
 
-describe('Vue adapter', () => {
+describe('Vue adapter @nowatch', () => {
   describe('#render', () => {
     describe('html template', function () {
       this.timeout(10000)

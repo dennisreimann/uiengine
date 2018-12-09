@@ -44,7 +44,7 @@
     "build": "cd packages/ui && yarn build",
     "lint": "lerna run lint --parallel && eslint test/support && cd test/project && yarn run lint",
     "test": "mocha -R dot packages/*/test/**/*_test.js",
-    "test-watch": "yarn test -w --watch-extensions ejs,hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",
+    "test-watch": "yarn test --grep @nowatch --invert -w --watch-extensions ejs,hbs,js,jsx,json,marko,md,pug,vhtml,vue,yml",
     "coverage": "c8 yarn test --forbid-only",
     "coverage:deploy": "c8 report --reporter=text-lcov | coveralls",
     "release": "yarn run lint && yarn run coverage && cross-env NODE_ENV=production yarn run build && lerna publish",

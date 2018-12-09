@@ -13,7 +13,7 @@ const readConfigFile = configPath => {
 
 // Beware: These tests assume that the whole suite runs in order.
 // The tests build up on each other – keeping it pragmatic here.
-describe('CLI', function () {
+describe('CLI @nowatch', function () {
   this.timeout(10000)
 
   before(() => { ensureDirSync(testPath) })

@@ -32,7 +32,7 @@ const state = {
 }
 
 // "end to end" tests
-describe('UIengine', function () {
+describe('UIengine @nowatch', function () {
   this.timeout(10000)
 
   before(function () {
