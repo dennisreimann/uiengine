@@ -1,10 +1,10 @@
 <template>
   <div>
     <section class="page">
-      <content-header
+      <ContentHeader
         :title="page.title"
       >
-        <content-tag
+        <ContentTag
           v-for="tag in page.tags"
           :key="tag"
           :tag="tag"
@@ -16,8 +16,8 @@
           class="contentheader__options"
         >
           <a
-            ref="info-tab"
             :id="tabId('info')"
+            ref="info-tab"
             :aria-selected="isInfoActive"
             :tabindex="isInfoActive ? false : '-1'"
             role="tab"
@@ -25,10 +25,12 @@
             class="contentheader__option"
             @click.prevent="activeSectionTop = 'info'"
             @keydown.right="switchTabTop('properties')"
-          >{{ 'options.info' | localize }}</a>
+          >
+            {{ 'options.info' | localize }}
+          </a>
           <a
-            ref="properties-tab"
             :id="tabId('properties')"
+            ref="properties-tab"
             :aria-selected="isPropertiesActive"
             :tabindex="isPropertiesActive ? false : '-1'"
             role="tab"
@@ -36,9 +38,11 @@
             class="contentheader__option"
             @click.prevent="activeSectionTop = 'properties'"
             @keydown.left="switchTabTop('info')"
-          >{{ 'options.properties' | localize }}</a>
+          >
+            {{ 'options.properties' | localize }}
+          </a>
         </div>
-      </content-header>
+      </ContentHeader>
 
       <div
         v-if="hasInfo || hasProperties"
@@ -51,7 +55,7 @@
           class="contentsection"
           role="tabpanel"
         >
-          <content-text :item="page" />
+          <ContentText :item="page" />
         </div>
 
         <div
@@ -62,7 +66,7 @@
           role="tabpanel"
         >
           <div class="content">
-            <content-properties
+            <ContentProperties
               v-for="(properties, templateId) in page.properties"
               :key="templateId"
               :title="templateId"
@@ -74,7 +78,7 @@
         </div>
       </div>
 
-      <content-header class="uie-sob-m">
+      <ContentHeader class="uie-sob-m">
         <div
           v-if="hasPreview && hasCode"
           role="tablist"
@@ -88,11 +92,13 @@
             class="contentheader__action"
             @click.prevent="handleCustomAction(action)"
           >
-            <app-icon
+            <AppIcon
               v-if="action.icon"
               :symbol="action.icon"
             />
-            <span v-else>{{ action.title }}</span>
+            <span v-else>
+              {{ action.title }}
+            </span>
           </a>
           <a
             :target="page.id | dasherize"
@@ -101,11 +107,11 @@
             class="contentheader__action"
             @click.stop
           >
-            <app-icon symbol="open-in-window" />
+            <AppIcon symbol="open-in-window" />
           </a>
           <a
-            ref="preview-tab"
             :id="tabId('preview')"
+            ref="preview-tab"
             :aria-selected="isPreviewActive"
             :tabindex="isPreviewActive ? false : '-1'"
             href="#"
@@ -113,10 +119,12 @@
             class="contentheader__option"
             @click.prevent="activeSectionBottom = 'preview'"
             @keydown.right="switchTabBottom('code')"
-          >{{ 'options.preview' | localize }}</a>
+          >
+            {{ 'options.preview' | localize }}
+          </a>
           <a
-            ref="code-tab"
             :id="tabId('code')"
+            ref="code-tab"
             :aria-selected="isCodeActive"
             :tabindex="isCodeActive ? false : '-1'"
             href="#"
@@ -124,9 +132,11 @@
             class="contentheader__option"
             @click.prevent="activeSectionBottom = 'code'"
             @keydown.left="switchTabBottom('preview')"
-          > {{ 'options.code' | localize }}</a>
+          >
+            {{ 'options.code' | localize }}
+          </a>
         </div>
-      </content-header>
+      </ContentHeader>
     </section>
 
     <div
@@ -140,9 +150,9 @@
         class="contentsection"
         role="tabpanel"
       >
-        <content-preview
-          ref="preview"
+        <ContentPreview
           :id="id"
+          ref="preview"
           :path="previewPath"
           :title="page.title"
           :viewports="config.ui.viewports"
@@ -158,7 +168,7 @@
         class="contentsection"
         role="tabpanel"
       >
-        <content-code
+        <ContentCode
           :extension="page.extension"
           :raw="page.raw"
           :context="page.context"
@@ -174,20 +184,16 @@ import { mapGetters } from 'vuex'
 import { dasherize } from '@uiengine/util/src/string'
 import Preview from '../mixins/preview'
 import ContentHeader from './ContentHeader'
-import ContentHeading from './ContentHeading'
 import ContentText from './ContentText'
 import ContentPreview from './ContentPreview'
 import ContentProperties from './ContentProperties'
-import ContentLabel from './ContentLabel'
 import ContentTag from './ContentTag'
 import ContentCode from './ContentCode'
 
 export default {
   components: {
     ContentHeader,
-    ContentHeading,
     ContentText,
-    ContentLabel,
     ContentTag,
     ContentProperties,
     ContentPreview,

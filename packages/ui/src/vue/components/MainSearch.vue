@@ -1,17 +1,21 @@
 <template>
   <section class="page">
-    <content-header
+    <ContentHeader
       :title="title"
       class="uie-sob-l"
     />
     <article class="content">
-      <p v-if="results.length === 0">{{ 'search.no_results' | localize }}</p>
+      <p v-if="results.length === 0">
+        {{ 'search.no_results' | localize }}
+      </p>
       <ul v-else>
         <li
           v-for="result in results"
           :key="result.id"
         >
-          <router-link :to="result">{{ result.title }}</router-link>
+          <RouterLink :to="result">
+            {{ result.title }}
+          </RouterLink>
           ({{ result.type | upcaseFirstChar }})
         </li>
       </ul>
@@ -23,7 +27,6 @@
 import Fuse from 'fuse.js'
 import { mapGetters } from 'vuex'
 import ContentHeader from './ContentHeader'
-import ContentProperties from './ContentProperties'
 
 // For details on the options see http://fusejs.io/
 const searchOptions = {
@@ -41,8 +44,7 @@ const searchOptions = {
 
 export default {
   components: {
-    ContentHeader,
-    ContentProperties
+    ContentHeader
   },
 
   props: {

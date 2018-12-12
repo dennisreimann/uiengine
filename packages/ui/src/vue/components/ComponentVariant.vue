@@ -3,12 +3,16 @@
     :id="variant.id | dasherize"
     class="variant"
   >
-    <content-header>
-      <content-heading :level="2">{{ variant.title }}</content-heading>
-      <content-label
+    <ContentHeader>
+      <ContentHeading :level="2">
+        {{ variant.title }}
+      </ContentHeading>
+      <ContentLabel
         v-if="variant.label"
-      >{{ variant.label }}</content-label>
-      <content-tag
+      >
+        {{ variant.label }}
+      </ContentLabel>
+      <ContentTag
         v-for="tag in variant.tags"
         :key="tag"
         :tag="tag"
@@ -26,11 +30,13 @@
           class="contentheader__action"
           @click.prevent="handleCustomAction(action)"
         >
-          <app-icon
+          <AppIcon
             v-if="action.icon"
             :symbol="action.icon"
           />
-          <span v-else>{{ action.title }}</span>
+          <span v-else>
+            {{ action.title }}
+          </span>
         </a>
         <a
           :href="permalinkUrl"
@@ -39,7 +45,7 @@
           class="permalink contentheader__action"
           @click.prevent
         >
-          <app-icon
+          <AppIcon
             symbol="link-45"
             class="permalink__icon"
           />
@@ -51,12 +57,12 @@
           class="contentheader__action"
           @click.stop
         >
-          <app-icon symbol="open-in-window" />
+          <AppIcon symbol="open-in-window" />
         </a>
 
         <a
-          ref="preview-tab"
           :id="tabId('preview')"
+          ref="preview-tab"
           :aria-selected="isPreviewActive"
           :tabindex="isPreviewActive ? false : '-1'"
           href="#"
@@ -64,10 +70,12 @@
           class="contentheader__option"
           @click.prevent="activeSection = 'preview'"
           @keydown.right="switchTab('code')"
-        >{{ 'options.preview' | localize }}</a>
+        >
+          {{ 'options.preview' | localize }}
+        </a>
         <a
-          ref="code-tab"
           :id="tabId('code')"
+          ref="code-tab"
           :aria-selected="isCodeActive"
           :tabindex="isCodeActive ? false : '-1'"
           href="#"
@@ -75,9 +83,11 @@
           class="contentheader__option"
           @click.prevent="activeSection = 'code'"
           @keydown.left="switchTab('preview')"
-        > {{ 'options.code' | localize }}</a>
+        >
+          {{ 'options.code' | localize }}
+        </a>
       </div>
-    </content-header>
+    </ContentHeader>
 
     <div
       v-if="variant.description"
@@ -96,9 +106,9 @@
         class="contentsection"
         role="tabpanel"
       >
-        <content-preview
-          ref="preview"
+        <ContentPreview
           :id="variant.id | dasherize"
+          ref="preview"
           :path="previewPath"
           :title="variant.title"
           :viewports="config.ui.viewports"
@@ -114,7 +124,7 @@
         class="contentsection"
         role="tabpanel"
       >
-        <content-code
+        <ContentCode
           :extension="variant.extension"
           :raw="variant.raw"
           :context="variant.context"

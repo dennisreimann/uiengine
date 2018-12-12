@@ -11,8 +11,10 @@
         type="button"
         @click.prevent="toggleExpanded('raw')"
       >
-        <h4 class="code__title">{{ 'code.raw' | localize }}</h4>
-        <app-icon
+        <h4 class="code__title">
+          {{ 'code.raw' | localize }}
+        </h4>
+        <AppIcon
           symbol="caret-down-double"
           class="code__expandicon"
         />
@@ -34,8 +36,10 @@
         type="button"
         @click.prevent="toggleExpanded('context')"
       >
-        <h4 class="code__title">{{ 'code.context' | localize }}</h4>
-        <app-icon
+        <h4 class="code__title">
+          {{ 'code.context' | localize }}
+        </h4>
+        <AppIcon
           symbol="caret-down-double"
           class="code__expandicon"
         />
@@ -47,8 +51,7 @@
     </div>
 
     <div
-      v-for="part in parts"
-      v-if="part.title && part.content"
+      v-for="part in codeParts"
       :key="part.title"
       class="code__segment"
     >
@@ -59,8 +62,10 @@
         type="button"
         @click.prevent="toggleExpanded(part.title)"
       >
-        <h4 class="code__title">{{ part.title }}</h4>
-        <app-icon
+        <h4 class="code__title">
+          {{ part.title }}
+        </h4>
+        <AppIcon
           symbol="caret-down-double"
           class="code__expandicon"
         />
@@ -116,6 +121,10 @@ export default {
   },
 
   computed: {
+    codeParts () {
+      return this.parts.filter(part => part.title && part.content)
+    },
+
     renderedRaw () {
       const raw = omit('code', this.raw)
 

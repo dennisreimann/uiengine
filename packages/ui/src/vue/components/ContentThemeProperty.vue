@@ -15,12 +15,18 @@
         <code
           v-if="themeProperty.variable"
           class="themeProperty__variablename"
-        >{{ themeProperty.variable }}</code>
+        >
+          {{ themeProperty.variable }}
+        </code>
       </td>
       <td
         class="themeProperty__theme uie-rowspan-left"
-      >{{ themeTitle(themeId) }}</td>
-      <td class="themeProperty__value">{{ prop.value }}</td>
+      >
+        {{ themeTitle(themeId) }}
+      </td>
+      <td class="themeProperty__value">
+        {{ prop.value }}
+      </td>
       <td class="themeProperty__visualization">
         <template v-if="prop.value">
           <span
@@ -40,8 +46,12 @@
           />
         </template>
       </td>
-      <td class="themeProperty__variable">{{ prop.variable }}</td>
-      <td class="themeProperty__default">{{ isDefault(prop) }}</td>
+      <td class="themeProperty__variable">
+        {{ prop.variable }}
+      </td>
+      <td class="themeProperty__default">
+        {{ isDefault(prop) }}
+      </td>
     </tr>
   </tbody>
 </template>

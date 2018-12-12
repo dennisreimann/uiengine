@@ -6,6 +6,6 @@ import AppNavigationTree from './components/AppNavigationTree'
 import AppNavigationItem from './components/AppNavigationItem'
 import AppIcon from './components/AppIcon'
 
-Vue.component('app-navigation-tree', AppNavigationTree)
-Vue.component('app-navigation-item', AppNavigationItem)
-Vue.component('app-icon', AppIcon)
+Vue.component('AppNavigationTree', AppNavigationTree)
+Vue.component('AppNavigationItem', AppNavigationItem)
+Vue.component('AppIcon', AppIcon)

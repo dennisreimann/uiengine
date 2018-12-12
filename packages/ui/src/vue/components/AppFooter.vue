@@ -4,22 +4,22 @@
       v-if="prevPage || nextPage"
       class="footer__nav"
     >
-      <router-link
+      <RouterLink
         v-if="prevPage"
         :to="prevPage"
         class="footer__prevlink"
       >
-        <app-icon symbol="caret-left" />
+        <AppIcon symbol="caret-left" />
         {{ prevPage.title }}
-      </router-link>
-      <router-link
+      </RouterLink>
+      <RouterLink
         v-if="nextPage"
         :to="nextPage"
         class="footer__nextlink"
       >
         {{ nextPage.title }}
-        <app-icon symbol="caret-right" />
-      </router-link>
+        <AppIcon symbol="caret-right" />
+      </RouterLink>
     </p>
     <div>
       <p

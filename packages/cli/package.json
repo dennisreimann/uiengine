@@ -30,6 +30,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "@uiengine/util": "2.0.0-alpha.0",
     "fs-extra": "7.0.1",
     "globby": "8.0.1",
     "prettier": "1.15.3",
@@ -37,7 +38,7 @@
     "yargs": "12.0.5"
   },
   "devDependencies": {
-    "lint-staged": "^8.1.0"
+    "lint-staged": "8.1.0"
   },
   "lint-staged": {
     "*.js": [

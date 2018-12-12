@@ -1,8 +1,10 @@
 <template>
   <tr>
-    <td class="property__name">{{ id }}</td>
+    <td class="property__name">
+      {{ id }}
+    </td>
     <td class="property__type">
-      <component
+      <Component
         :is="propertyType"
         v-bind="$props"
       />
@@ -11,8 +13,12 @@
       class="property__description"
       v-html="description"
     />
-    <td class="property__required">{{ required }}</td>
-    <td class="property__default">{{ defaultValue }}</td>
+    <td class="property__required">
+      {{ required }}
+    </td>
+    <td class="property__default">
+      {{ defaultValue }}
+    </td>
   </tr>
 </template>
 

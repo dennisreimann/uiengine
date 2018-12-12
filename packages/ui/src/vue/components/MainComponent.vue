@@ -1,12 +1,14 @@
 <template>
   <div>
     <section class="component">
-      <content-header :title="component.title">
-        <content-label
+      <ContentHeader :title="component.title">
+        <ContentLabel
           v-if="component.label"
           inverted
-        >{{ component.label }}</content-label>
-        <content-tag
+        >
+          {{ component.label }}
+        </ContentLabel>
+        <ContentTag
           v-for="tag in component.tags"
           :key="tag"
           :tag="tag"
@@ -20,15 +22,15 @@
             :href="fileLink"
             class="contentheader__action"
           >
-            <app-icon
+            <AppIcon
               :title="'options.edit' | localize"
               symbol="pencil"
             />
           </a>
           <a
             v-if="hasInfo"
-            ref="info-tab"
             :id="tabId('info')"
+            ref="info-tab"
             :aria-selected="isInfoActive"
             :tabindex="isInfoActive ? false : '-1'"
             role="tab"
@@ -36,11 +38,13 @@
             class="contentheader__option"
             @click.prevent="activeSection = 'info'"
             @keydown.right="switchTab('properties')"
-          >{{ 'options.info' | localize }}</a>
+          >
+            {{ 'options.info' | localize }}
+          </a>
           <a
             v-if="hasProperties"
-            ref="properties-tab"
             :id="tabId('properties')"
+            ref="properties-tab"
             :aria-selected="isPropertiesActive"
             :tabindex="isPropertiesActive ? false : '-1'"
             role="tab"
@@ -49,11 +53,13 @@
             @click.prevent="activeSection = 'properties'"
             @keydown.left="switchTab('info')"
             @keydown.right="switchTab('theme-properties')"
-          > {{ 'options.properties' | localize }}</a>
+          >
+            {{ 'options.properties' | localize }}
+          </a>
           <a
             v-if="hasThemeProperties"
-            ref="theme-properties-tab"
             :id="tabId('theme-properties')"
+            ref="theme-properties-tab"
             :aria-selected="isThemePropertiesActive"
             :tabindex="isThemePropertiesActive ? false : '-1'"
             role="tab"
@@ -61,9 +67,11 @@
             class="contentheader__option"
             @click.prevent="activeSection = 'theme-properties'"
             @keydown.left="switchTab('properties')"
-          > {{ 'options.theme_properties' | localize }}</a>
+          >
+            {{ 'options.theme_properties' | localize }}
+          </a>
         </div>
-      </content-header>
+      </ContentHeader>
 
       <div
         v-if="hasInfo || hasProperties || hasThemeProperties"
@@ -76,7 +84,7 @@
           class="contentsection"
           role="tabpanel"
         >
-          <content-text :item="component" />
+          <ContentText :item="component" />
 
           <div
             v-if="hasSecondaryInfo"
@@ -88,19 +96,24 @@
               <p>
                 {{ 'component.dependencies' | localize }}
                 <span
-                  v-for="(dependency, index) in component.dependencies"
-                  v-if="componentById(dependency)"
+                  v-for="(dependency, index) in dependencies"
                   :key="dependency"
                 >
-                  <router-link
+                  <RouterLink
                     v-if="componentLink(dependency)"
                     :to="componentLink(dependency)"
                     class=""
                     active-class=""
                     exact-active-class=""
-                  >{{ componentById(dependency).title }}</router-link>
-                  <template v-else>{{ componentById(dependency).title }}</template>
-                  <span class="divider">{{ (index != component.dependencies.length - 1) ? ',' : '.' }}</span>
+                  >
+                    {{ componentById(dependency).title }}
+                  </RouterLink>
+                  <template v-else>
+                    {{ componentById(dependency).title }}
+                  </template>
+                  <span class="divider">
+                    {{ (index != dependencies.length - 1) ? ',' : '.' }}
+                  </span>
                 </span>
               </p>
             </template>
@@ -109,19 +122,24 @@
               <p>
                 {{ 'component.dependents' | localize }}
                 <span
-                  v-for="(dependent, index) in component.dependentComponents"
-                  v-if="componentById(dependent)"
+                  v-for="(dependent, index) in dependentComponents"
                   :key="dependent"
                 >
-                  <router-link
+                  <RouterLink
                     v-if="componentLink(dependent)"
                     :to="componentLink(dependent)"
                     class=""
                     active-class=""
                     exact-active-class=""
-                  >{{ componentById(dependent).title }}</router-link>
-                  <template v-else>{{ componentById(dependent).title }}</template>
-                  <span class="divider">{{ (index != component.dependentComponents.length - 1) ? ',' : '.' }}</span>
+                  >
+                    {{ componentById(dependent).title }}
+                  </RouterLink>
+                  <template v-else>
+                    {{ componentById(dependent).title }}
+                  </template>
+                  <span class="divider">
+                    {{ (index != dependentComponents.length - 1) ? ',' : '.' }}
+                  </span>
                 </span>
               </p>
             </template>
@@ -132,12 +150,14 @@
                   v-for="variant in component.variants"
                   :key="variant.id"
                 >
-                  <router-link
+                  <RouterLink
                     :to="{ hash: dasherize(variant.id) }"
                     class=""
                     active-class=""
                     exact-active-class=""
-                  >{{ variant.title }}</router-link>
+                  >
+                    {{ variant.title }}
+                  </RouterLink>
                 </li>
               </ul>
             </template>
@@ -152,7 +172,7 @@
           role="tabpanel"
         >
           <div class="content">
-            <content-properties
+            <ContentProperties
               v-for="(properties, componentId) in component.properties"
               :key="componentId"
               :title="componentId"
@@ -170,7 +190,7 @@
           class="contentsection"
           role="tabpanel"
         >
-          <content-theme-properties
+          <ContentThemeProperties
             :title="'options.theme_properties' | localize"
             :themes="themes"
             :theme-properties="component.themeProperties"
@@ -184,7 +204,7 @@
       v-if="hasVariants"
       class="variants"
     >
-      <component-variant
+      <ComponentVariant
         v-for="variant in component.variants"
         :key="variant.id"
         :variant="variant"
@@ -198,7 +218,6 @@ import { mapGetters } from 'vuex'
 import { dasherize } from '@uiengine/util/src/string'
 import Docs from '../mixins/docs'
 import ContentHeader from './ContentHeader'
-import ContentHeading from './ContentHeading'
 import ContentText from './ContentText'
 import ContentProperties from './ContentProperties'
 import ContentThemeProperties from './ContentThemeProperties'
@@ -209,7 +228,6 @@ import ComponentVariant from './ComponentVariant'
 export default {
   components: {
     ContentHeader,
-    ContentHeading,
     ContentText,
     ContentProperties,
     ContentThemeProperties,
@@ -237,6 +255,14 @@ export default {
 
   computed: {
     ...mapGetters('state', ['components', 'config', 'entities', 'navigation']),
+
+    dependencies () {
+      return this.component.dependencies.filter(dependency => this.componentById(dependency))
+    },
+
+    dependentComponents () {
+      return this.component.dependentComponents.filter(dependent => this.componentById(dependent))
+    },
 
     component () {
       return this.components[this.id]

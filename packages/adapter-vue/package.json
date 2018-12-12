@@ -23,19 +23,19 @@
     "vue"
   ],
   "dependencies": {
-    "@uiengine/util": "^2.0.0-alpha.0",
+    "@uiengine/util": "2.0.0-alpha.0",
     "vue-component-compiler": "2.0.0",
-    "vue-server-renderer": "2.5.17",
-    "vue-template-compiler": "2.5.17"
+    "vue-server-renderer": "2.5.21",
+    "vue-template-compiler": "2.5.21"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/preset-env": "^7.1.6",
-    "lint-staged": "^8.1.0",
-    "vue": "2.5.17"
+    "@babel/core": "7.2.0",
+    "@babel/preset-env": "7.2.0",
+    "lint-staged": "8.1.0",
+    "vue": "2.5.21"
   },
   "peerDependencies": {
-    "vue": "^2.5.17"
+    "vue": "^2.5.21"
   },
   "scripts": {
     "lint": "eslint --ext .js,.vue src test",

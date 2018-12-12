@@ -1,9 +1,11 @@
 <template>
   <section class="page">
-    <content-header
+    <ContentHeader
       :title="'not_found.title' | localize"
     />
-    <article class="content">{{ 'not_found.content' | localize }}</article>
+    <article class="content">
+      {{ 'not_found.content' | localize }}
+    </article>
   </section>
 </template>
 

@@ -1,11 +1,11 @@
 <template>
   <section class="page">
-    <content-header
+    <ContentHeader
       :title="title"
       class="uie-sob-l"
     />
     <article class="content">
-      <content-properties
+      <ContentProperties
         v-for="(properties, entityId) in entities"
         :key="entityId"
         :title="entityId"

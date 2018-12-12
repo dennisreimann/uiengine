@@ -1,22 +1,25 @@
 <template>
   <section class="page">
-    <content-header
+    <ContentHeader
       :title="title"
       class="uie-sob-l"
     />
     <article class="content">
       <div class="row">
-        <label for="locale">{{ 'settings.locale' | localize }}</label>
+        <label for="locale">
+          {{ 'settings.locale' | localize }}
+        </label>
         <select
           id="locale"
           v-model="locale"
         >
           <option
-            v-for="(title, value) in localeOptions"
+            v-for="(localeTitle, value) in localeOptions"
             :key="value"
             :value="value"
-            :selected="locale === value">
-            {{ title }}
+            :selected="locale === value"
+          >
+            {{ localeTitle }}
           </option>
         </select>
       </div>
@@ -25,23 +28,28 @@
         v-if="hasPreviewModes"
         class="row"
       >
-        <label for="previewMode">{{ 'settings.preview_mode' | localize }}</label>
+        <label for="previewMode">
+          {{ 'settings.preview_mode' | localize }}
+        </label>
         <select
           id="previewMode"
           v-model="previewMode"
         >
           <option
-            v-for="(title, value) in previewModeOptions"
+            v-for="(previewTitle, value) in previewModeOptions"
             :key="value"
             :value="value"
-            :selected="previewMode === value">
-            {{ title }}
+            :selected="previewMode === value"
+          >
+            {{ previewTitle }}
           </option>
         </select>
       </div>
 
       <div class="row">
-        <label for="hljs">{{ 'settings.hljs' | localize }}</label>
+        <label for="hljs">
+          {{ 'settings.hljs' | localize }}
+        </label>
         <select
           id="hljs"
           v-model="hljs"
@@ -50,7 +58,8 @@
             v-for="value in hljsOptions"
             :key="value"
             :value="value"
-            :selected="hljs === value">
+            :selected="hljs === value"
+          >
             {{ value | titleize }}
           </option>
         </select>

@@ -5,7 +5,7 @@
     :hidden="navigationCollapsed"
     class="navigation"
   >
-    <app-navigation-tree
+    <AppNavigationTree
       v-if="navigation.index.childIds"
       id="navigation-root"
       :items="navigation.index.childIds"
@@ -17,13 +17,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import AppNavigationItem from './AppNavigationItem'
 
 export default {
-  components: {
-    AppNavigationItem
-  },
-
   computed: {
     ...mapGetters('state', ['navigation']),
     ...mapGetters('preferences', ['locale', 'navigationCollapsed'])

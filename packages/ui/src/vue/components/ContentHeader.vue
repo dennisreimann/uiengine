@@ -1,7 +1,9 @@
 
 <template>
   <header class="contentheader">
-    <content-heading v-if="title">{{ title }}</content-heading>
+    <ContentHeading v-if="title">
+      {{ title }}
+    </ContentHeading>
     <slot />
   </header>
 </template>

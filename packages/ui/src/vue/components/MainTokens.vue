@@ -1,24 +1,24 @@
 <template>
   <div>
     <section class="page">
-      <content-header
+      <ContentHeader
         :title="page.title"
       >
-        <content-tag
+        <ContentTag
           v-for="tag in page.tags"
           :key="tag"
           :tag="tag"
           class="uie-sob-m"
         />
-      </content-header>
+      </ContentHeader>
 
-      <content-text
+      <ContentText
         :item="page"
         class="uie-sot-xs uie-sob-xxxl"
       />
     </section>
 
-    <content-preview
+    <ContentPreview
       :id="id"
       :path="previewPath"
       :title="page.title"
@@ -32,18 +32,14 @@
 import { mapGetters } from 'vuex'
 import Preview from '../mixins/preview'
 import ContentHeader from './ContentHeader'
-import ContentHeading from './ContentHeading'
 import ContentText from './ContentText'
 import ContentPreview from './ContentPreview'
-import ContentLabel from './ContentLabel'
 import ContentTag from './ContentTag'
 
 export default {
   components: {
     ContentHeader,
-    ContentHeading,
     ContentText,
-    ContentLabel,
     ContentTag,
     ContentPreview
   },

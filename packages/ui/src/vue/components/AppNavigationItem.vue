@@ -6,12 +6,16 @@
     <span
       v-if="item.isStructural"
       class="navigation__link"
-    >{{ title }}</span>
-    <router-link
+    >
+      {{ title }}
+    </span>
+    <RouterLink
       v-else
       :to="item"
       class="navigation__link"
-    >{{ title }}</router-link>
+    >
+      {{ title }}
+    </RouterLink>
     <button
       v-if="children"
       :aria-expanded="!isCollapsed | bool2string"
@@ -21,12 +25,12 @@
       aria-haspopup="true"
       @click.prevent="setCollapsed(!isCollapsed)"
     >
-      <app-icon
+      <AppIcon
         class="navigation__icon"
         symbol="caret-down"
       />
     </button>
-    <app-navigation-tree
+    <AppNavigationTree
       v-if="children"
       ref="children"
       :navigation="navigation"

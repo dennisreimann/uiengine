@@ -4,10 +4,10 @@
     class="layout"
     @click="closeModals"
   >
-    <app-topbar />
-    <app-navigation />
-    <app-main />
-    <app-footer />
+    <AppTopbar />
+    <AppNavigation />
+    <AppMain />
+    <AppFooter />
   </div>
 </template>
 

@@ -1,9 +1,9 @@
 <template>
   <section class="page">
-    <content-header
+    <ContentHeader
       :title="page.title"
     >
-      <content-tag
+      <ContentTag
         v-for="tag in page.tags"
         :key="tag"
         :tag="tag"
@@ -17,14 +17,14 @@
           :href="fileLink"
           class="contentheader__action"
         >
-          <app-icon
+          <AppIcon
             :title="'options.edit' | localize"
             symbol="pencil"
           />
         </a>
       </div>
-    </content-header>
-    <content-text :item="page" />
+    </ContentHeader>
+    <ContentText :item="page" />
   </section>
 </template>
 

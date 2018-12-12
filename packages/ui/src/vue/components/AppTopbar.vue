@@ -8,16 +8,18 @@
       aria-controls="navigation-root"
       @click.prevent="setNavigationCollapsed(!navigationCollapsed)"
     >
-      <app-icon
+      <AppIcon
         class="topbar__icon"
         symbol="burger"
       />
     </button>
 
-    <router-link
+    <RouterLink
       :to="navigation.index"
       class="topbar__home"
-    >{{ config.name }}</router-link>
+    >
+      {{ config.name }}
+    </RouterLink>
 
     <div
       v-if="themes"
@@ -28,7 +30,9 @@
         class="topbar__theme-toggle"
         type="button"
         @click.stop="isThemesActive = !isThemesActive"
-      >{{ currentTheme.title }}</button>
+      >
+        {{ currentTheme.title }}
+      </button>
 
       <div
         :class="{ 'topbar__theme-options--active': isThemesActive }"
@@ -41,7 +45,9 @@
             class="topbar__theme-option"
             type="button"
             @click="setCurrentTheme(theme)"
-          >{{ theme.title }}</button>
+          >
+            {{ theme.title }}
+          </button>
         </div>
       </div>
     </div>
@@ -54,7 +60,7 @@
       type="button"
       @click.prevent="toggleSearch"
     >
-      <app-icon
+      <AppIcon
         class="topbar__icon"
         symbol="search"
       />

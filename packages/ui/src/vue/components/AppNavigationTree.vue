@@ -3,9 +3,8 @@
     :class="levelClass"
     class="navigation__tree"
   >
-    <app-navigation-item
-      v-for="itemId in items"
-      v-if="navigation[itemId]"
+    <AppNavigationItem
+      v-for="itemId in navigationItems"
       :key="itemId"
       :navigation="navigation"
       :item="navigation[itemId]"
@@ -37,6 +36,10 @@ export default {
   computed: {
     levelClass () {
       return `navigation__tree--level-${this.level}`
+    },
+
+    navigationItems () {
+      return this.items.filter(itemId => this.navigation[itemId] !== undefined)
     }
   }
 }

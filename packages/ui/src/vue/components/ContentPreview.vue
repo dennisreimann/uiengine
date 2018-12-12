@@ -44,7 +44,9 @@
                 class="preview__toggle"
                 type="button"
                 @click.stop="isBreakpointsActive = !isBreakpointsActive"
-              >{{ size }}</button>
+              >
+                {{ size }}
+              </button>
             </div>
             <div
               :class="{ 'preview__options--active': isBreakpointsActive }"
@@ -57,12 +59,16 @@
                   class="preview__option"
                   type="button"
                   @click="setWidth(width)"
-                >{{ previewTitle(breakpoint, width) }}</button>
+                >
+                  {{ previewTitle(breakpoint, width) }}
+                </button>
                 <button
                   class="preview__option"
                   type="button"
                   @click="setWidth(null)"
-                >{{ 'options.reset' | localize }}</button>
+                >
+                  {{ 'options.reset' | localize }}
+                </button>
               </div>
             </div>
           </template>

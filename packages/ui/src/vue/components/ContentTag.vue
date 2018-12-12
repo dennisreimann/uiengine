@@ -1,8 +1,10 @@
 <template>
-  <router-link
+  <RouterLink
     :to="target"
     class="tag"
-  >{{ tag }}</router-link>
+  >
+    {{ tag }}
+  </RouterLink>
 </template>
 
 <script>
