@@ -54,23 +54,23 @@ async function fetchObjects (state, componentId, context, variants) {
 
 async function fetchObject (state, componentId, componentContext, data, index) {
   const { file } = data
-
   const id = `${componentId}/${file}-${index + 1}`
   debug3(state, `Variant.fetchObject(${id}):start`)
 
-  const { components } = state.config.source
+  const { source: { components } } = state.config
+  const themeIds = R.pluck('id', state.config.themes)
   const filePath = variantIdToFilePath(components, id)
   const extension = fileExtension(filePath)
   const context = data.context || componentContext
   const title = data.title || variantIdToTitle(id)
 
   // render raw variant, without layout
-  let raw, render
+  let raw, rendered
   const readTemplate = readFile(filePath)
-  const renderTemplate = Connector.render(state, filePath, context)
+  const renderThemes = themeIds.map(themeId => Connector.render(state, filePath, context, themeId))
 
   try {
-    [raw, render] = await Promise.all([readTemplate, renderTemplate])
+    [raw, ...rendered] = await Promise.all([readTemplate, ...renderThemes])
   } catch (err) {
     const relativeFilePath = relative(process.cwd(), filePath)
     const message = [
@@ -85,7 +85,8 @@ async function fetchObject (state, componentId, componentContext, data, index) {
   }
 
   const fixData = { id, componentId, title, file, extension, raw, context }
-  const variant = R.mergeAll([data, fixData, render])
+  const themes = R.zipObj(themeIds, rendered)
+  const variant = R.mergeAll([data, fixData, { themes }])
 
   debug3(state, `Variant.fetchObject(${id}):end`)
 

@@ -198,7 +198,7 @@ describe('Page', () => {
       const data = await Page.fetchAll(state)
       const pageIds = Object.keys(data)
 
-      assert.strictEqual(pageIds.length, 20)
+      assert.strictEqual(pageIds.length, 21)
 
       assertItem(pageIds, 'index')
       assertItem(pageIds, 'documentation')
@@ -210,6 +210,7 @@ describe('Page', () => {
       assertItem(pageIds, 'documentation/tokens/icons')
       assertItem(pageIds, 'documentation/tokens/spaces')
       assertItem(pageIds, 'documentation/tokens/typography')
+      assertItem(pageIds, 'documentation/tokens/variables')
       assertItem(pageIds, 'patterns')
       assertItem(pageIds, 'patterns/atoms')
       assertItem(pageIds, 'patterns/molecules')

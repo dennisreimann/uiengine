@@ -13,12 +13,13 @@
             {{ previewTitle(name, width) }}
           </div>
           <div
-            :class="iframeContainerClass"
             class="preview__iframe-container"
           >
             <iframe
+              v-for="theme in displayedThemes"
+              :key="theme.id"
               ref="iframes"
-              :src="path"
+              :src="iframeSrc(theme.id)"
               :title="title"
               :style="{ width: `${iframeSize(width)}px` }"
               :width="iframeSize(width)"
@@ -73,12 +74,13 @@
             </div>
           </template>
           <div
-            :class="iframeContainerClass"
             class="preview__iframe-container"
           >
             <iframe
+              v-for="theme in displayedThemes"
+              :key="theme.id"
               ref="iframes"
-              :src="path"
+              :src="iframeSrc(theme.id)"
               :title="title"
               class="preview__iframe"
               frameborder="0"
@@ -93,19 +95,17 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import { iframeResizer } from 'iframe-resizer'
-
-// iframe resizing, see https://github.com/davidjbradshaw/iframe-resizer
-const iframeResizerOpts = { resizeFrom: 'child' }
+import Iframe from '../mixins/iframe'
+import Preview from '../mixins/preview'
 
 export default {
+  mixins: [
+    Iframe,
+    Preview
+  ],
+
   props: {
     id: {
-      type: String,
-      required: true
-    },
-
-    type: {
       type: String,
       required: true
     },
@@ -115,34 +115,37 @@ export default {
       required: true
     },
 
-    path: {
+    pathPrefix: {
       type: String,
       required: true
     },
 
-    breakpoints: {
-      type: Object,
-      default: null
-    },
-
-    viewports: {
-      type: Object,
-      default: null
+    pathPostfix: {
+      type: String,
+      required: true
     }
   },
 
   data () {
     return {
-      isBreakpointsActive: false,
-      iframeWidth: null
+      isBreakpointsActive: false
     }
   },
 
   computed: {
+    ...mapGetters('state', ['config']),
     ...mapGetters('preferences', ['previewWidths', 'previewMode']),
 
+    breakpoints () {
+      return this.config.ui.breakpoints
+    },
+
+    viewports () {
+      return this.config.ui.viewports
+    },
+
     isModeViewports () {
-      return this.type !== 'tokens' && this.previewMode === 'viewports'
+      return this.previewMode === 'viewports'
     },
 
     breakpointNames () {
@@ -168,7 +171,7 @@ export default {
     },
 
     viewportClass () {
-      return `preview__viewport--${this.previewMode} preview__viewport--${this.type}`
+      return `preview__viewport--${this.previewMode}`
     },
 
     viewportStyle () {
@@ -177,10 +180,6 @@ export default {
       const width = this.previewWidths[this.id]
 
       return width ? { 'width': `calc(${width}px + var(--uie-preview-border-width) * 2)` } : {}
-    },
-
-    iframeContainerClass () {
-      return `preview__iframe-container--${this.type}`
     },
 
     iframes () {
@@ -196,13 +195,17 @@ export default {
     this.$root.$on('modal:close', () => {
       this.isBreakpointsActive = false
     })
+
+    this.$store.watch(() => this.$store.getters['preferences/currentTheme'], () => {
+      // use requestAnimationFrame to wait for vue rendering and update the $refs.iframes
+      window.requestAnimationFrame(() => {
+        this.iframes.forEach(this.resizableIframe)
+      })
+    })
   },
 
   mounted () {
-    // setup iframes on their initial load
-    this.iframes.forEach(iframe => {
-      iframe.addEventListener('load', this.setupIframe.bind(this))
-    })
+    this.iframes.forEach(this.resizableIframe)
   },
 
   methods: {
@@ -227,44 +230,12 @@ export default {
       return isNaN(int) ? null : int
     },
 
+    iframeSrc (themeId) {
+      return `${window.UIengine.base}${this.pathPrefix}/${themeId}/${this.pathPostfix}.html`
+    },
+
     previewTitle (name, width) {
       return `${name} @ ${width}px`
-    },
-
-    setupIframe (event) {
-      const iframe = event.currentTarget
-      const height = iframe.getAttribute('height')
-
-      if (!height) {
-        const { contentWindow } = iframe
-
-        // dynamically add runtime and iframe sizer scripts
-        this.addScriptToIframe(window.UIengine.runtimeSrc, iframe)
-        this.addScriptToIframe(window.UIengine.previewSrc, iframe)
-
-        // initialize iframe sizer
-        iframeResizer(iframeResizerOpts, iframe)
-
-        // set initial iframe width and update it on resize
-        this.iframeWidth = contentWindow.innerWidth
-        contentWindow.onresize = this.iframeResizeHandler.bind(this)
-      }
-    },
-
-    iframeResizeHandler (event) {
-      const { innerWidth } = event.target
-      this.iframeWidth = innerWidth
-    },
-
-    addScriptToIframe (scriptSrc, iframe) {
-      const { contentDocument } = iframe
-      const head = contentDocument.getElementsByTagName('head')[0]
-      const script = document.createElement('script')
-      script.src = scriptSrc
-      // script tags inserted via js load async by default. prevent this by explicitly
-      // turning off async loading to ensure the correct loading order.
-      script.async = false
-      head.appendChild(script)
     },
 
     handleCustomAction (action) {
@@ -314,10 +285,6 @@ export default {
       resize horizontal
       width 100%
 
-    &--tokens
-      display block
-      resize none
-
   &__title
     padding-bottom var(--uie-space-s)
 
@@ -354,13 +321,15 @@ export default {
     border-top 1px solid var(--uie-color-modal-border-inner)
 
   &__iframe-container
-    &--variant,
-    &--template
-      box-sizing content-box
-      border var(--uie-preview-border-width) solid var(--uie-color-border-preview)
-      border-radius var(--uie-preview-border-width)
+    box-sizing content-box
+    border var(--uie-preview-border-width) solid var(--uie-color-border-preview)
+    border-radius var(--uie-preview-border-width)
+
+  &__iframe + &__iframe
+    border-top var(--uie-preview-border-width) solid var(--uie-color-border-preview)
 
   &__iframe
+    box-sizing content-box
     display block
     width 100%
 </style>

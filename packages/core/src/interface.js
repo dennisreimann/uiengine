@@ -4,28 +4,28 @@ const {
   MarkdownUtil: { markdownIt }
 } = require('@uiengine/util')
 
-const getOptions = state => {
-  const { config: { ui, target } } = state
+const getOptions = (state, additional = {}) => {
+  const { config: { ui, target, themes } } = state
 
-  return Object.assign({}, ui, { markdownIt, target })
+  return Object.assign({}, ui, additional, { markdownIt, target, themes })
 }
 
 async function setup (state) {
-  debug3(state, 'UI.setup():start')
+  debug3(state, 'Interface.setup():start')
 
   const options = getOptions(state)
   await UI.setup(options)
 
-  debug3(state, 'UI.setup():end')
+  debug3(state, 'Interface.setup():end')
 }
 
-async function render (state, template, data) {
-  debug3(state, 'UI.render():start')
+async function render (state, template, data, themeId) {
+  debug3(state, `Interface.render(${template}, ${themeId}):start`)
 
-  const options = getOptions(state)
+  const options = getOptions(state, { themeId })
   const rendered = await UI.render(options, template, data)
 
-  debug3(state, 'UI.render():end')
+  debug3(state, `Interface.render(${template}, ${themeId}):end`)
 
   return rendered
 }

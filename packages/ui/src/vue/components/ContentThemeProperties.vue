@@ -6,7 +6,10 @@
         <th class="themeProperty__property">
           {{ 'theme_properties.property' | localize }}
         </th>
-        <th class="themeProperty__theme">
+        <th
+          v-if="displayAllThemes"
+          class="themeProperty__theme"
+        >
           {{ 'theme_properties.theme' | localize }}
         </th>
         <th class="themeProperty__value">
@@ -26,11 +29,14 @@
       :key="themeProperty.name"
       :themes="themes"
       :theme-property="themeProperty"
+      :current-theme="currentTheme"
+      :display-all-themes="displayAllThemes"
     />
   </table>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ContentThemeProperty from './ContentThemeProperty'
 
 export default {
@@ -44,14 +50,26 @@ export default {
       required: true
     },
 
-    themes: {
-      type: Array,
-      required: true
-    },
-
     themeProperties: {
       type: Array,
       required: true
+    }
+  },
+
+  computed: {
+    ...mapGetters('state', ['config']),
+    ...mapGetters('preferences', ['currentTheme']),
+
+    themes () {
+      return this.config.themes
+    },
+
+    currentThemeId () {
+      return this.currentTheme && this.currentTheme.id
+    },
+
+    displayAllThemes () {
+      return this.currentThemeId === '_all'
     }
   }
 }

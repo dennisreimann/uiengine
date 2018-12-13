@@ -54,7 +54,7 @@ gulp.task('uiengine', done => {
 The [html-sketchapp](https://github.com/brainly/html-sketchapp) functionality is integrated via a [html-sketchapp-cli](https://github.com/seek-oss/html-sketchapp-cli) compatible export.
 It generates Sketch libraries for your component variants.
 
-The UIengine generates the `/_sketch.html` file which can be used with `html-sketchapp-cli`.
+The UIengine generates the `/_sketch/THEME_ID.html` file which can be used with `html-sketchapp-cli`.
 
 ## Theo
 

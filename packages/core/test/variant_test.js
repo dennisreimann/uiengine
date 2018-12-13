@@ -2,7 +2,7 @@ const { resolve } = require('path')
 const R = require('ramda')
 const assert = require('assert')
 const { assertMatches } = require('../../../test/support/asserts')
-
+const Connector = require('../src/connector')
 const Variant = require('../src/variant')
 
 const { testProjectPath } = require('../../../test/support/paths')
@@ -29,6 +29,8 @@ const state = {
 }
 
 describe('Variant', () => {
+  before(() => Connector.setup(state))
+
   describe('#fetchObject', () => {
     it('should return variant object', async () => {
       const data = await Variant.fetchObject(state, 'input', {}, {
@@ -47,7 +49,7 @@ describe('Variant', () => {
       assert.strictEqual(data.extension, 'pug')
       assert.strictEqual(data.context.id, 'name')
       assert.strictEqual(data.context.name, 'person[name]')
-      assertMatches(data.rendered, /<input class="input input--text" id="name" name="person\[name\]" type="text"\/>/g)
+      assertMatches(data.themes._default.rendered, /<input class="input input--text" id="name" name="person\[name\]" type="text"\/>/g)
       assertMatches(data.raw, 'include /elements/input/input.pug')
       assertMatches(data.raw, /\+input\(id, name\)/)
     })

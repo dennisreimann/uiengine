@@ -35,12 +35,10 @@ const state = {
 describe('UIengine @nowatch', function () {
   this.timeout(10000)
 
-  before(function () {
-    return Promise.all([
-      Interface.setup(state),
-      Connector.setup(state)
-    ])
-  })
+  before(() => Promise.all([
+    Interface.setup(state),
+    Connector.setup(state)
+  ]))
 
   beforeEach(function () {
     this.sinon.stub(process.stdout, 'write')

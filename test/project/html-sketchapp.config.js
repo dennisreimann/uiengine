@@ -8,7 +8,7 @@ const viewportsSketch = Object.keys(viewports).reduce((result, name) => {
 }, {})
 
 module.exports = {
-  url: 'http://localhost:3000/_sketch.html',
+  url: 'http://localhost:3000/_sketch/plain.html',
   outDir: '../tmp/_sketch',
   viewports: viewportsSketch
 }

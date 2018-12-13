@@ -192,7 +192,6 @@
         >
           <ContentThemeProperties
             :title="'options.theme_properties' | localize"
-            :themes="themes"
             :theme-properties="component.themeProperties"
             class="uie-sob-xl"
           />
@@ -291,14 +290,9 @@ export default {
       return properties && Object.keys(properties).length > 0
     },
 
-    themes () {
-      const { themes } = this.config.ui
-      return themes || []
-    },
-
     hasThemeProperties () {
       const { themeProperties } = this.component
-      return this.themes.length > 0 && themeProperties && themeProperties.length > 0
+      return themeProperties && themeProperties.length > 0
     },
 
     hasInfo () {

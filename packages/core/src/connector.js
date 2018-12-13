@@ -18,12 +18,12 @@ const getModule = ({ config: { adapters } }, ext, filePath) => {
   }
 }
 
-const getOptions = (state, ext) => {
+const getOptions = (state, ext, additional = {}) => {
   const { config: { adapters, target, themes, source: { base, components, templates } } } = state
   const themeIds = themes.map(theme => theme.id)
   const { options } = adapters[ext]
 
-  return Object.assign({}, options, { ext, base, components, templates, target, themeIds })
+  return Object.assign({}, options, additional, { ext, base, components, templates, target, themeIds })
 }
 
 async function setup (state) {
@@ -68,18 +68,17 @@ async function registerComponentFile (state, filePath) {
   }
 }
 
-async function render (state, templatePath, data = {}) {
+async function render (state, templatePath, data = {}, themeId) {
   const ext = extension(templatePath)
   const { render } = getModule(state, ext, templatePath)
 
   if (typeof render === 'function') {
-    // TODO: Add themes
-
-    const options = getOptions(state, ext)
+    const options = getOptions(state, ext, { themeId })
     const rendered = await render(options, templatePath, data)
-    const result = typeof rendered === 'string' ? { rendered, parts: [{ title: 'HTML', lang: 'html', content: rendered }] } : rendered
 
-    return result
+    return typeof rendered === 'string'
+      ? { rendered, parts: [{ title: 'HTML', lang: 'html', content: rendered }] }
+      : rendered
   } else {
     throw new UiengineInputError(`The "${ext}" adapter does not support rendering.`)
   }

@@ -7,7 +7,8 @@ const Interface = require('../src/interface')
 const { testTmpPath } = require('../../../test/support/paths')
 const target = resolve(testTmpPath, 'site')
 const TestUI = require('@uiengine/ui')
-const testUiOptions = { opt1: 1, opt2: 2, target }
+const themeId = '_default'
+const testUiOptions = { opt1: 1, opt2: 2, target, themeId }
 
 const state = {
   config: {
@@ -42,7 +43,7 @@ describe('UI', () => {
       this.sinon.stub(TestUI, 'render').returns('')
       const template = 'testtemplate'
       const data = { test: 1 }
-      await Interface.render(state, template, data)
+      await Interface.render(state, template, data, themeId)
 
       this.sinon.assert.calledOnce(TestUI.render)
       this.sinon.assert.calledWithMatch(TestUI.render, testUiOptions, template, data)

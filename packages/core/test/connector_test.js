@@ -93,19 +93,22 @@ describe('Connector', () => {
     it('should call the adapter render function with the options, the template id and data', async function () {
       this.sinon.stub(TestAdapter, 'render').returns('')
       const templatePath = './src/templates/my-template.test'
+      const themeId = 'test-theme'
       const data = { myData: 1 }
-      await Connector.render(state, templatePath, data)
+      const expectedOpts = Object.assign({}, expandedAdapterOptions, { themeId })
+      await Connector.render(state, templatePath, data, themeId)
 
       this.sinon.assert.calledOnce(TestAdapter.render)
-      this.sinon.assert.calledWith(TestAdapter.render, expandedAdapterOptions, templatePath, data)
+      this.sinon.assert.calledWith(TestAdapter.render, expectedOpts, templatePath, data)
     })
 
     it('should return structured object for rendered string', async function () {
       const rendered = '<div>rendered html</div>'
       this.sinon.stub(TestAdapter, 'render').returns(rendered)
       const templatePath = './src/templates/my-template.test'
+      const themeId = 'test-theme'
       const data = { myData: 1 }
-      const result = await Connector.render(state, templatePath, data)
+      const result = await Connector.render(state, templatePath, data, themeId)
 
       assert.strictEqual(result.rendered, rendered)
       assert.strictEqual(result.parts.length, 1)
@@ -128,15 +131,16 @@ describe('Connector', () => {
       }
       this.sinon.stub(TestAdapter, 'render').returns(renderResult)
       const templatePath = './src/templates/my-template.test'
+      const themeId = 'test-theme'
       const data = { myData: 1 }
-      const result = await Connector.render(state, templatePath, data)
+      const result = await Connector.render(state, templatePath, data, themeId)
 
       assert.strictEqual(result, renderResult)
     })
 
     it('should throw error if the adapter does not implement the render function', async () => {
       try {
-        await Connector.render(stateNoop, './src/templates/my-template.test', {})
+        await Connector.render(stateNoop, './src/templates/my-template.test', {}, 'test-theme')
       } catch (error) {
         assert(error)
       }
@@ -144,7 +148,7 @@ describe('Connector', () => {
 
     it('should throw error if the adapter for the filetype is missing', async () => {
       try {
-        await Connector.render(stateNoop, './src/templates/my-template.unknown', {})
+        await Connector.render(stateNoop, './src/templates/my-template.unknown', {}, 'test-theme')
       } catch (error) {
         assert(error)
       }

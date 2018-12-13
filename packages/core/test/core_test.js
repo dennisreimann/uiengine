@@ -14,6 +14,11 @@ const templatesPath = resolve(testProjectPath, 'src', 'templates')
 const indexPath = join(testProjectTargetPath, 'index.html')
 const opts = { config: resolve(testProjectPath, 'uiengine.config.js') }
 
+const assertDirectoryContainsThemeFiles = (prefixPath, postfixPath) => {
+  assertExists(join(prefixPath, 'funky', `${postfixPath}.html`))
+  assertExists(join(prefixPath, 'plain', `${postfixPath}.html`))
+}
+
 // "end to end" tests
 describe('Core', function () {
   this.timeout(5000)
@@ -54,35 +59,37 @@ describe('Core', function () {
     })
 
     it('should generate variant previews', async () => {
-      await Core.generate(opts)
+      await Core.generate(opts);
 
-      assertExists(join(testProjectTargetPath, '_variants', 'form', 'form.pug-1.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'formfield', 'text-with-label.pug-1.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'formfield', 'text-without-label.pug-2.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text.hbs-1.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text.pug-2.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text-required.pug-3.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text-disabled.pug-4.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'number.pug-5.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text-required.pug-3.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'input', 'text-disabled.pug-4.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.ejs-1.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.hbs-2.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.marko-4.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.pug-5.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.jsx-6.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label.jsx-7.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label-vue.js-8.html'))
-      assertExists(join(testProjectTargetPath, '_variants', 'label', 'label-vue-sfc.vhtml-9.html'))
+      [ ['form', 'form.pug-1'],
+        ['formfield', 'text-with-label.pug-1'],
+        ['formfield', 'text-without-label.pug-2'],
+        ['input', 'text.hbs-1'],
+        ['input', 'text.pug-2'],
+        ['input', 'text-required.pug-3'],
+        ['input', 'text-disabled.pug-4'],
+        ['input', 'number.pug-5'],
+        ['input', 'text-required.pug-3'],
+        ['input', 'text-disabled.pug-4'],
+        ['label', 'label.ejs-1'],
+        ['label', 'label.hbs-2'],
+        ['label', 'label.marko-4'],
+        ['label', 'label.pug-5'],
+        ['label', 'label.jsx-6'],
+        ['label', 'label.jsx-7'],
+        ['label', 'label-vue.js-8'],
+        ['label', 'label-vue-sfc.vhtml-9']
+      ].forEach(([componentId, variantId]) => {
+        assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_variants'), join(componentId, variantId))
+      })
     })
 
     it('should generate token previews', async () => {
-      await Core.generate(opts)
+      await Core.generate(opts);
 
-      assertExists(join(testProjectTargetPath, '_tokens', 'documentation', 'tokens', 'colors.html'))
-      assertExists(join(testProjectTargetPath, '_tokens', 'documentation', 'tokens', 'icons.html'))
-      assertExists(join(testProjectTargetPath, '_tokens', 'documentation', 'tokens', 'spaces.html'))
-      assertExists(join(testProjectTargetPath, '_tokens', 'documentation', 'tokens', 'typography.html'))
+      ['colors', 'icons', 'spaces', 'typography'].forEach(tokens => {
+        assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_tokens'), join('documentation', 'tokens', tokens))
+      })
     })
 
     it('should copy UI assets', async () => {
@@ -195,7 +202,7 @@ describe('Core', function () {
       const filePath = join(modulesPath, 'form', 'form.pug')
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
-      assertExists(join(testProjectTargetPath, '_variants', 'form', 'form.pug-1.html'))
+      assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_variants'), join('form', 'form.pug-1'))
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'component')
       assert.strictEqual(change.item, 'form')
@@ -249,12 +256,11 @@ describe('Core', function () {
 
     it('should generate variant on change', async () => {
       const filePath = join(modulesPath, 'form', 'variants', 'form.pug')
-      const existingVariantPath = join(testProjectTargetPath, '_variants', 'form', 'form.pug-1.html')
-      fs.removeSync(existingVariantPath)
+      fs.removeSync(join(testProjectTargetPath, '_variants'))
       fs.removeSync(indexPath)
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
-      assertExists(existingVariantPath)
+      assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_variants'), join('form', 'form.pug-1'))
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'variant')
       assert.strictEqual(change.item, 'form/form.pug')
@@ -297,11 +303,10 @@ describe('Core', function () {
 
     it('should regenerate pages with tokens on change', async () => {
       const filePath = join(pagesPath, 'documentation', 'tokens', 'colors', 'page.config.js')
-      const templatePath = join(testProjectTargetPath, '_tokens', 'documentation', 'tokens', 'colors.html')
-      fs.removeSync(templatePath)
+      fs.removeSync(join(testProjectTargetPath, '_tokens'))
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
-      assertExists(templatePath)
+      assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_tokens'), join('documentation', 'tokens', 'colors'))
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'documentation/tokens/colors')
@@ -310,11 +315,10 @@ describe('Core', function () {
 
     it('should regenerate pages with template on change', async () => {
       const filePath = join(pagesPath, 'testcases', 'custom-template', 'page.config.js')
-      const templatePath = join(testProjectTargetPath, '_pages', 'testcases', 'custom-template.html')
-      fs.removeSync(templatePath)
+      fs.removeSync(join(testProjectTargetPath, '_pages'))
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
-      assertExists(templatePath)
+      assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_pages'), join('testcases', 'custom-template'))
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'testcases/custom-template')
@@ -323,12 +327,11 @@ describe('Core', function () {
 
     it('should regenerate pages with template on template change', async () => {
       const filePath = join(templatesPath, 'page.pug')
-      const templatePath = join(testProjectTargetPath, '_pages', 'testcases', 'custom-template.html')
-      fs.removeSync(templatePath)
+      fs.removeSync(join(testProjectTargetPath, '_pages'))
 
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
-      assertExists(templatePath)
+      assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_pages'), join('testcases', 'custom-template'))
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'template')
       assert.strictEqual(change.item, 'page.pug')

@@ -18,8 +18,15 @@ const copyPageFile = (targetPath, sourcePath, source) => {
   return copy(source, target)
 }
 
-async function render (state, template, data, identifier) {
-  debug4(state, `Builder.render(${template}):start`)
+const withThemes = async (themes, task, includingAll = false) => {
+  const tasks = themes.map(({ id: themeId }) => task(themeId))
+  if (includingAll) tasks.push(task('_all'))
+
+  return Promise.all(tasks)
+}
+
+async function render (state, template, data, themeId, identifier) {
+  debug4(state, `Builder.render(${template}, ${themeId}):start`)
 
   const { templates } = state.config.source
   if (!templates) throw new UiengineInputError('Templates source directory must be defined!')
@@ -27,7 +34,7 @@ async function render (state, template, data, identifier) {
 
   let rendered
   try {
-    rendered = await Connector.render(state, templatePath, data)
+    rendered = await Connector.render(state, templatePath, data, themeId)
   } catch (err) {
     const message = [`${identifier} could not be generated!`]
 
@@ -36,7 +43,7 @@ async function render (state, template, data, identifier) {
     throw new UiengineInputError(message, err)
   }
 
-  debug4(state, `Builder.render(${template}):end`)
+  debug4(state, `Builder.render(${template}, ${themeId}):end`)
 
   return rendered
 }
@@ -64,7 +71,7 @@ async function generatePageFiles (state, pageId) {
 async function generatePageWithTemplate (state, pageId) {
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):start`)
 
-  const { pages, config: { target } } = state
+  const { pages, config: { target, themes, name, version } } = state
   const identifier = `Page "${pageId}"`
   const page = pages[pageId]
 
@@ -73,15 +80,21 @@ async function generatePageWithTemplate (state, pageId) {
   }
 
   if (page.template) {
-    // TODO: Add themes
+    await withThemes(themes, async themeId => {
+      // render template with context
+      const { id, context, template } = page
+      let { rendered } = await render(state, template, context, themeId, identifier)
+      rendered = replaceTemplateComments(rendered, {
+        'class': `uie-page uie-page--${dasherize(id)}`,
+        'title': `${page.title} • ${name} (${version})`,
+        'theme': themeId,
+        'content': rendered
+      })
 
-    // render template with context
-    const { id, context, template } = page
-    const { rendered } = await render(state, template, context, identifier)
-
-    // write file
-    const filePath = resolve(target, '_pages', `${id}.html`)
-    await write(filePath, rendered)
+      // write file
+      const filePath = resolve(target, '_pages', themeId, `${id}.html`)
+      return write(filePath, rendered)
+    })
   }
 
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):end`)
@@ -104,7 +117,7 @@ async function generatePageWithTokens (state, pageId) {
   debug2(state, `Builder.generatePageWithTokens(${pageId}):start`)
 
   const { pages, config } = state
-  const { name, target, version } = config
+  const { name, target, themes, version } = config
   const identifier = `Page "${pageId}"`
   const page = pages[pageId]
 
@@ -113,51 +126,59 @@ async function generatePageWithTokens (state, pageId) {
   }
 
   if (isTokensPage(page.type)) {
-    // TODO: Add themes
-
     // render tokens with context, in preview layout
     const { id, title } = page
     const data = page
     const template = page.template || config.template
-    let { rendered } = await render(state, template, data, identifier)
-    rendered = replaceTemplateComments(rendered, {
-      'content': await Interface.render(state, 'tokens', page),
-      'class': `uie-tokens uie-tokens--${dasherize(id)}`,
-      'title': `${title} • ${name} (${version})`
-    })
 
-    // write file
-    const filePath = resolve(target, '_tokens', `${id}.html`)
-    await write(filePath, rendered)
+    await withThemes(themes, async themeId => {
+      let { rendered } = await render(state, template, data, themeId, identifier)
+      const content = await Interface.render(state, 'tokens', page, themeId)
+      rendered = replaceTemplateComments(rendered, {
+        'class': `uie-tokens uie-tokens--${dasherize(id)}`,
+        'title': `${title} • ${name} (${version})`,
+        'theme': themeId,
+        'content': content
+      })
+
+      // write file
+      const filePath = resolve(target, '_tokens', themeId, `${id}.html`)
+      await write(filePath, rendered)
+    }, true)
   }
 
   debug2(state, `Builder.generatePageWithTokens(${pageId}):end`)
 }
 
 async function generateVariant (state, variant) {
-  debug2(state, `Builder.generateVariant(${variant.id}):start`)
+  const { id, componentId } = variant
+  debug2(state, `Builder.generateVariant(${id}):start`)
 
   const { config, components } = state
-  const identifier = `Variant "${variant.id}"`
-  const component = components[variant.componentId]
-
-  // TODO: Add themes
+  const { target, themes, name, version } = config
+  const identifier = `Variant "${id}"`
+  const component = components[componentId]
 
   // render variant preview, with layout
   const data = { state }
   const template = variant.template || config.template
-  let { rendered } = await render(state, template, data, identifier)
-  rendered = replaceTemplateComments(rendered, {
-    'content': variant.rendered,
-    'class': `uie-variant uie-variant--${dasherize(variant.componentId)} uie-variant--${dasherize(variant.id)}`,
-    'title': `${component.title}: ${variant.title} • ${config.name} (${config.version})`
+
+  await withThemes(themes, async themeId => {
+    let { rendered } = await render(state, template, data, themeId, identifier)
+    const content = variant.themes[themeId].rendered
+    rendered = replaceTemplateComments(rendered, {
+      'class': `uie-variant uie-variant--${dasherize(componentId)} uie-variant--${dasherize(id)}`,
+      'title': `${component.title}: ${variant.title} • ${name} (${version})`,
+      'theme': themeId,
+      'content': content
+    })
+
+    // write file
+    const filePath = resolve(target, '_variants', themeId, `${id}.html`)
+    return write(filePath, rendered)
   })
 
-  // write file
-  const filePath = resolve(config.target, '_variants', `${variant.id}.html`)
-  await write(filePath, rendered)
-
-  debug2(state, `Builder.generateVariant(${variant.id}):end`)
+  debug2(state, `Builder.generateVariant(${id}):end`)
 }
 
 async function generateComponentVariants (state, componentId) {
@@ -258,24 +279,27 @@ const generateIncrement = generateState
 async function generateSketch (state) {
   debug2(state, `Builder.generateSketch():start`)
 
-  // TODO: Add themes
-
-  const { config: { name, target, template, version, source: { templates } } } = state
+  const { config: { name, target, template, version, themes, source: { templates } } } = state
   const identifier = 'HTML Sketchapp Export'
 
   if (templates && template) {
     // render variant preview, with layout
     const data = { state }
-    let { rendered } = await render(state, template, data, identifier)
-    rendered = replaceTemplateComments(rendered, {
-      'content': await Interface.render(state, 'sketch', data),
-      'class': 'uie-html-sketchapp',
-      'title': `HTML Sketchapp Export • ${name} (${version})`
-    })
 
-    // write file
-    const filePath = resolve(target, '_sketch.html')
-    await write(filePath, rendered)
+    await withThemes(themes, async themeId => {
+      let { rendered } = await render(state, template, data, themeId, identifier)
+      const content = await Interface.render(state, 'sketch', data, themeId)
+      rendered = replaceTemplateComments(rendered, {
+        'class': 'uie-html-sketchapp',
+        'title': `HTML Sketchapp Export ${themeId} • ${name} (${version})`,
+        'theme': themeId,
+        'content': content
+      })
+
+      // write file
+      const filePath = resolve(target, '_sketch', `${themeId}.html`)
+      return write(filePath, rendered)
+    })
   }
 
   debug2(state, `Builder.generateSketch():end`)

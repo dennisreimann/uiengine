@@ -101,6 +101,7 @@ const startServer = (state, opts) => {
   const server = requireOptional('browser-sync', 'serve').create('UIengine')
   const history = requireOptional('connect-history-api-fallback', 'serve')
   const pagesPattern = join('_pages', '**', '*')
+  const sketchPattern = join('_sketch', '**', '*')
   const tokensPattern = join('_tokens', '**', '*')
   const variantsPattern = join('_variants', '**', '*')
   const defaults = {
@@ -116,11 +117,11 @@ const startServer = (state, opts) => {
             // exclude files with state as they change on every rebuild.
             // changes are injected via websockets (see handleFileChange)
             'index.html',
-            '_sketch.html',
             '_state.json',
             // exclude pages, tokens and variants as the iframes are
             // reloaded separately (see server.init callback)
             pagesPattern,
+            sketchPattern,
             tokensPattern,
             variantsPattern
           ]

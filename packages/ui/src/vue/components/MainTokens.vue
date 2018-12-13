@@ -18,34 +18,32 @@
       />
     </section>
 
-    <ContentPreview
-      :id="id"
-      :path="previewPath"
+    <iframe
+      ref="iframe"
+      :src="iframeSrc"
       :title="page.title"
-      class="uie-sot-xl"
-      type="tokens"
+      frameborder="0"
+      scrolling="no"
     />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import Preview from '../mixins/preview'
 import ContentHeader from './ContentHeader'
 import ContentText from './ContentText'
-import ContentPreview from './ContentPreview'
 import ContentTag from './ContentTag'
+import Iframe from '../mixins/iframe'
 
 export default {
   components: {
     ContentHeader,
     ContentText,
-    ContentTag,
-    ContentPreview
+    ContentTag
   },
 
   mixins: [
-    Preview
+    Iframe
   ],
 
   props: {
@@ -57,14 +55,25 @@ export default {
 
   computed: {
     ...mapGetters('state', ['config', 'pages']),
+    ...mapGetters('preferences', ['currentTheme']),
 
     page () {
       return this.pages[this.id]
     },
 
-    previewPath () {
-      return this.expandPreviewPath(`_tokens/${this.page.id}.html`)
+    iframeSrc () {
+      return `${window.UIengine.base}_tokens/${this.currentTheme.id}/${this.page.id}.html`
     }
+  },
+
+  mounted () {
+    this.resizableIframe(this.$refs.iframe)
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+iframe
+  display block
+  width 100%
+</style>

@@ -69,6 +69,10 @@ This set of `opts` is also extended with the following properties:
 This function should render the file at `filePath` with the given `data` and return the rendered output.
 
 - `opts` are the extended adapter options explained above.
+  In addition to the custom options that are provided via the config, these are also present:
+    - `ext` as the file extension
+    - `base`, `components`, `templates` from the sources config, as well as `target`
+    - `themeIds` and the current `themeId`
 - `filePath` is the absolute path of the file that should be rendered.
 - `data` is the `context` that is provided via the
   [variant metadata](/basics/variant/) or for

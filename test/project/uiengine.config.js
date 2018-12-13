@@ -3,6 +3,7 @@ const viewports = require('./lib/viewports.json')
 const pugAdapterOptions = require('./lib/pug-adapter-options')
 const vueAdapterOptions = require('./lib/vue-adapter-options')
 const cssAdapterOptions = require('./lib/css-adapter-options')
+const reactAdapterOptions = require('./lib/react-adapter-options')
 
 // option to simulate base - mainly for debugging and development purposes
 const simulateBase = false
@@ -52,8 +53,11 @@ module.exports = {
       module: '@uiengine/adapter-css',
       options: cssAdapterOptions
     },
+    jsx: {
+      module: '@uiengine/adapter-react',
+      options: reactAdapterOptions
+    },
     js: '@uiengine/adapter-vue',
-    jsx: '@uiengine/adapter-react',
     hbs: '@uiengine/adapter-handlebars',
     marko: '@uiengine/adapter-marko',
     html: '@uiengine/adapter-html',

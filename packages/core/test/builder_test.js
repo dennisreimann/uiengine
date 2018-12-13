@@ -4,8 +4,6 @@ const Factory = require('./support/factory')
 const assert = require('assert')
 const { assertContentMatches, assertContentDoesNotMatch, assertMatches, assertExists, assertDoesNotExist } = require('../../../test/support/asserts')
 const Builder = require('../src/builder')
-const Interface = require('../src/interface')
-const Connector = require('../src/connector')
 
 const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
 const { adapters } = require('./support/adapters')
@@ -196,9 +194,13 @@ const state = {
           file: 'text.pug',
           path: resolve(testProjectPath, 'src', 'components', 'input', 'variants', 'text.pug'),
           content: '<p>This is documentation for the text input.</p>',
-          rendered: '<input class="input input--text" id="name" name="person[name]" type="text"/>',
           context: { id: 'name', name: 'person[name]' },
-          title: 'Text Input'
+          title: 'Text Input',
+          themes: {
+            _default: {
+              rendered: '<input class="input input--text" id="name" name="person[name]" type="text"/>'
+            }
+          }
         },
         {
           id: 'input/number.pug',
@@ -207,9 +209,13 @@ const state = {
           path: resolve(testProjectPath, 'src', 'components', 'input', 'variants', 'number.pug'),
           template: 'page.pug', // custom template
           content: '<p>This is documentation for the number input.</p>',
-          rendered: '<input class="input input--number" id="amount" name="person[amount]" type="text"/>',
           context: { id: 'amount', name: 'person[amount]' },
-          title: 'Number Input'
+          title: 'Number Input',
+          themes: {
+            _default: {
+              rendered: '<input class="input input--number" id="amount" name="person[amount]" type="text"/>'
+            }
+          }
         }
       ]
     })
@@ -248,10 +254,6 @@ const state = {
 
 describe('Builder', () => {
   afterEach(() => { removeSync(testTmpPath) })
-  before(() => Promise.all([
-    Interface.setup(state),
-    Connector.setup(state)
-  ]))
 
   describe('#generate', () => {
     it('should generate index page', async () => {
@@ -263,7 +265,7 @@ describe('Builder', () => {
     it('should generate the sketch page', async () => {
       await Builder.generate(state)
 
-      assertExists(join(target, '_sketch.html'))
+      assertExists(join(target, '_sketch', '_default.html'))
     })
   })
 
@@ -271,7 +273,7 @@ describe('Builder', () => {
     it('should generate page with custom template', async () => {
       await Builder.generatePageWithTemplate(state, 'prototype/custom-page')
 
-      const pagePath = join(target, '_pages', 'prototype', 'custom-page.html')
+      const pagePath = join(target, '_pages', '_default', 'prototype', 'custom-page.html')
       assertContentMatches(pagePath, 'This is my context')
       assertContentDoesNotMatch(pagePath, 'uie-page uie-page--prototype-custom-page')
     })
@@ -325,7 +327,7 @@ describe('Builder', () => {
     it('should generate page with tokens', async () => {
       await Builder.generatePageWithTokens(state, 'tokens')
 
-      const pagePath = join(target, '_tokens', 'tokens.html')
+      const pagePath = join(target, '_tokens', '_default', 'tokens.html')
       assertContentMatches(pagePath, '#123456')
     })
 
@@ -361,7 +363,7 @@ describe('Builder', () => {
     it('should generate pages having this template', async () => {
       await Builder.generatePagesWithTemplate(state, 'page.pug')
 
-      assertExists(join(target, '_pages', 'prototype', 'custom-page.html'))
+      assertExists(join(target, '_pages', '_default', 'prototype', 'custom-page.html'))
     })
   })
 
@@ -369,15 +371,15 @@ describe('Builder', () => {
     it('should generate tokens using the default preview template', async () => {
       await Builder.generateTokensWithTemplate(state, 'uiengine.pug')
 
-      assertExists(join(target, '_tokens', 'tokens.html'))
-      assertDoesNotExist(join(target, '_tokens', 'tokens-with-custom-template.html'))
+      assertExists(join(target, '_tokens', '_default', 'tokens.html'))
+      assertDoesNotExist(join(target, '_tokens', '_default', 'tokens-with-custom-template.html'))
     })
 
     it('should generate tokens having a custom template', async () => {
       await Builder.generateTokensWithTemplate(state, 'page.pug')
 
-      assertExists(join(target, '_tokens', 'tokens-with-custom-template.html'))
-      assertDoesNotExist(join(target, '_tokens', 'tokens.html'))
+      assertExists(join(target, '_tokens', '_default', 'tokens-with-custom-template.html'))
+      assertDoesNotExist(join(target, '_tokens', '_default', 'tokens.html'))
     })
   })
 
@@ -385,15 +387,15 @@ describe('Builder', () => {
     it('should generate variants using the default preview template', async () => {
       await Builder.generateVariantsWithTemplate(state, 'uiengine.pug')
 
-      assertExists(join(target, '_variants', 'input', 'text.pug.html'))
-      assertDoesNotExist(join(target, '_variants', 'input', 'number.pug.html'))
+      assertExists(join(target, '_variants', '_default', 'input', 'text.pug.html'))
+      assertDoesNotExist(join(target, '_variants', '_default', 'input', 'number.pug.html'))
     })
 
     it('should generate variants having a custom template', async () => {
       await Builder.generateVariantsWithTemplate(state, 'page.pug')
 
-      assertExists(join(target, '_variants', 'input', 'number.pug.html'))
-      assertDoesNotExist(join(target, '_variants', 'input', 'text.pug.html'))
+      assertExists(join(target, '_variants', '_default', 'input', 'number.pug.html'))
+      assertDoesNotExist(join(target, '_variants', '_default', 'input', 'text.pug.html'))
     })
   })
 
@@ -401,7 +403,7 @@ describe('Builder', () => {
     it('should generate component variant pages', async () => {
       await Builder.generateComponentVariants(state, 'input')
 
-      assertExists(join(target, '_variants', 'input', 'text.pug.html'))
+      assertExists(join(target, '_variants', '_default', 'input', 'text.pug.html'))
     })
 
     it('should not throw an error if the component has no', async () => {
@@ -409,16 +411,20 @@ describe('Builder', () => {
       delete stateWithNoVariants.components.input.variants
       await Builder.generateComponentVariants(stateWithNoVariants, 'input')
 
-      assertDoesNotExist(join(target, '_variants', 'input', 'text.pug.html'))
+      assertDoesNotExist(join(target, '_variants', '_default', 'input', 'text.pug.html'))
     })
   })
 
   describe('#generateVariant', () => {
     it('should generate variant page', async () => {
       const variant = state.components.input.variants[0]
+      const filePath = join(target, '_variants', '_default', 'input', 'text.pug.html')
       await Builder.generateVariant(state, variant)
 
-      assertExists(join(target, '_variants', 'input', 'text.pug.html'))
+      assertContentMatches(filePath, '<title>Awesome Input: Text Input • Builder Test (0.1.0)</title>')
+      assertContentMatches(filePath, 'class="uie-variant uie-variant--input uie-variant--input-text-pug"')
+      assertContentMatches(filePath, 'data-theme="_default"')
+      assertContentMatches(filePath, '<input class="input input--text" id="name" name="person[name]" type="text"/>')
     })
   })
 

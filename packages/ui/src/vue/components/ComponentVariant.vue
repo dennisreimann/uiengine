@@ -39,6 +39,16 @@
           </span>
         </a>
         <a
+          v-if="!displayAllThemes"
+          :href="href"
+          :target="variant.id | dasherize"
+          :title="'options.open_in_window' | localize"
+          class="contentheader__action"
+          @click.stop
+        >
+          <AppIcon symbol="open-in-window" />
+        </a>
+        <a
           :href="permalinkUrl"
           :data-clipboard-text="permalinkUrl"
           :title="'options.copy_permalink' | localize"
@@ -49,15 +59,6 @@
             symbol="link-45"
             class="permalink__icon"
           />
-        </a>
-        <a
-          :href="previewPath"
-          :target="variant.id | dasherize"
-          :title="'options.open_in_window' | localize"
-          class="contentheader__action"
-          @click.stop
-        >
-          <AppIcon symbol="open-in-window" />
         </a>
 
         <a
@@ -109,11 +110,9 @@
         <ContentPreview
           :id="variant.id | dasherize"
           ref="preview"
-          :path="previewPath"
           :title="variant.title"
-          :viewports="config.ui.viewports"
-          :breakpoints="config.ui.breakpoints"
-          type="variant"
+          :path-postfix="variant.id"
+          path-prefix="_variants"
         />
       </div>
 
@@ -128,7 +127,7 @@
           :extension="variant.extension"
           :raw="variant.raw"
           :context="variant.context"
-          :parts="variant.parts"
+          :parts="parts"
         />
       </div>
     </div>
@@ -178,15 +177,23 @@ export default {
     ...mapGetters('preferences', ['currentTheme']),
 
     customActions () {
-      return this.config.ui && this.config.ui.customActions
+      return this.config.ui.customActions
+    },
+
+    parts () {
+      return this.displayAllThemes
+        ? []
+        : this.variant.themes[this.currentTheme.id].parts
     },
 
     hasPreview () {
-      return !!this.variant.rendered
+      return this.displayedThemes.some(theme => {
+        return !!this.variant.themes[theme.id].rendered
+      })
     },
 
     hasCode () {
-      return !!(this.variant.raw || this.variant.context || this.variant.parts)
+      return !!(this.variant.raw || this.variant.context || this.parts)
     },
 
     isPreviewActive () {
@@ -197,15 +204,15 @@ export default {
       return this.activeSection === 'code' || (!this.activeSection && !this.hasPreview && this.hasCode)
     },
 
-    previewPath () {
-      return this.expandPreviewPath(`_variants/${this.variant.id}.html`)
-    },
-
     permalinkUrl () {
       const loc = window.location
       const anchor = dasherize(this.variant.id)
 
       return `${loc.protocol}//${loc.host}${loc.pathname}#${anchor}`
+    },
+
+    href () {
+      return `${window.UIengine.base}_variants/${this.currentTheme.id}/${this.variant.id}.html`
     }
   },
 
@@ -220,7 +227,7 @@ export default {
     },
 
     handleCustomAction (action) {
-      this.$refs.preview.handleCustomAction(action)
+      this.$refs.preview.forEach(preview => preview.handleCustomAction(action))
     }
   }
 }

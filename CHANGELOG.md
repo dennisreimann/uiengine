@@ -9,6 +9,10 @@
 
 ### Changed
 
+- Themes are now a first-class citizen and widely supported
+  - The `themes` config option moved to the [root level config](/basics/config/) (previously `ui.themes`)
+  - Each variant and page gets rendered per theme
+  - The adapters [`render` function](/adapters/#render(opts%2C-filepath%2C-data)) gets the `themeId` as an option
 - Moved `analyticsId` config option into [`ui` config](/advanced/ui/).
 - The `filesFor…` adapter function now also receive the [`options` as first argument](/adapters/#scaffolding)
 - Extracted Theo integration into its own [`@uiengine/bridge-theo` package](/advanced/integrations/#theo)
@@ -21,8 +25,6 @@
   - Use the `npx uiengine migrate` command to automatically migrate
 - Removed `source.data` config option
   - Require files directly in your `component.config.js` or `page.config.js`.
-- Themes are now a first-class citizen and widely supported
-  - The `themes` config option moved to the root level (previously `ui.themes`)
 
 ---
 

@@ -50,7 +50,7 @@ module.exports = {
   tags: ["atom", "form"],
   variants: ["button-default.html", "button-primary.html"]
 }
-````
+```
 
 The `title` and `label` get displayed in the documentation.
 The `label` is an individual marker that can be used as a reference in mockups or wireframes to reference components.

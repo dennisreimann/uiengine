@@ -101,9 +101,10 @@
             </span>
           </a>
           <a
+            v-if="!displayAllThemes"
             :target="page.id | dasherize"
             :title="'options.open_in_window' | localize"
-            :href="previewPath"
+            :href="href"
             class="contentheader__action"
             @click.stop
           >
@@ -153,11 +154,9 @@
         <ContentPreview
           :id="id"
           ref="preview"
-          :path="previewPath"
           :title="page.title"
-          :viewports="config.ui.viewports"
-          :breakpoints="config.ui.breakpoints"
-          type="template"
+          :path-postfix="page.id"
+          path-prefix="_pages"
         />
       </div>
 
@@ -170,9 +169,7 @@
       >
         <ContentCode
           :extension="page.extension"
-          :raw="page.raw"
           :context="page.context"
-          :rendered="page.rendered"
         />
       </div>
     </div>
@@ -226,7 +223,7 @@ export default {
     },
 
     customActions () {
-      return this.config.ui && this.config.ui.customActions
+      return this.config.ui.customActions
     },
 
     hasProperties () {
@@ -262,8 +259,8 @@ export default {
       return this.activeSectionBottom === 'code' || (!this.activeSectionBottom && !this.hasPreview && this.hasCode)
     },
 
-    previewPath () {
-      return this.expandPreviewPath(`_pages/${this.page.id}.html`)
+    href () {
+      return `${window.UIengine.base}_pages/${this.currentTheme.id}/${this.page.id}.html`
     }
   },
 
@@ -283,7 +280,7 @@ export default {
     },
 
     handleCustomAction (action) {
-      this.$refs.preview.handleCustomAction(action)
+      this.$refs.preview.forEach(preview => preview.handleCustomAction(action))
     }
   }
 }

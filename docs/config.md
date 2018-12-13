@@ -133,7 +133,7 @@ Other comments that also get replaced:
 The themes defined here will be shown in the topbar.
 The first theme is selected by default.
 
-Each variant will be rendered per theme.
+Each variant and page will be rendered per theme.
 
 ```js
 {

@@ -19,7 +19,8 @@ const assertDoesNotExist = (filePath, message) => {
 }
 
 const matches = (content, expected) => {
-  const regexp = typeof expected === 'string' ? expected.replace(/\\/g, '\\\\') : expected
+  // see https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
+  const regexp = typeof expected === 'string' ? expected.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&') : expected
   const match = content.match(regexp)
 
   return match !== null

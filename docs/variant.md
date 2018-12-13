@@ -56,7 +56,7 @@ module.exports = {
     }
   ]
 }
-````
+```
 
 Attributes:
 
@@ -84,7 +84,7 @@ module.exports = {
     "button-primary.png"
   ]
 }
-````
+```
 
 This is useful if you want to manipulate the order and are fine with these defaults:
 

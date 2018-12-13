@@ -1,12 +1,12 @@
 <template>
   <tbody>
     <tr
-      v-for="(prop, themeId, index) in themeProperty.themes"
+      v-for="(prop, themeId, index) in displayedThemes"
       :key="themeId"
     >
       <td
         v-if="index === 0"
-        :rowspan="Object.keys(themeProperty.themes).length"
+        :rowspan="Object.keys(displayedThemes).length"
         class="themeProperty__property uie-rowspan-right"
       >
         <div class="themeProperty__name">
@@ -20,6 +20,7 @@
         </code>
       </td>
       <td
+        v-if="displayAllThemes"
         class="themeProperty__theme uie-rowspan-left"
       >
         {{ themeTitle(themeId) }}
@@ -67,6 +68,24 @@ export default {
     themeProperty: {
       type: Object,
       required: true
+    },
+
+    currentTheme: {
+      type: Object,
+      required: true
+    },
+
+    displayAllThemes: {
+      type: Boolean,
+      required: true
+    }
+  },
+
+  computed: {
+    displayedThemes () {
+      return this.displayAllThemes
+        ? this.themeProperty.themes
+        : { [this.currentTheme.id]: this.themeProperty.themes[this.currentTheme.id] }
     }
   },
 

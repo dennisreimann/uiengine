@@ -101,8 +101,8 @@ describe('Configuration', () => {
       assert.strictEqual(config.adapters.pug.options.basedir, resolve(testProjectPath, 'src'))
       assert.strictEqual(config.adapters.jsx.module, '@uiengine/adapter-react')
       assert.strictEqual(config.adapters.hbs.module, '@uiengine/adapter-handlebars')
-      assert.strictEqual(Object.keys(config.adapters.jsx.options).length, 0)
       assert.strictEqual(Object.keys(config.adapters.hbs.options).length, 0)
+      assert(config.adapters.jsx.options.babel)
     })
 
     it('should throw error if config does not exist', async () => {

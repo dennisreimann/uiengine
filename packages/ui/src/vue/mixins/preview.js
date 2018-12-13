@@ -1,10 +1,22 @@
-export default {
-  methods: {
-    expandPreviewPath (pagePath) {
-      const currentTheme = this.$store.getters['preferences/currentTheme']
-      const themeHash = currentTheme ? `#${currentTheme.id}` : ''
+import { mapGetters } from 'vuex'
 
-      return `${window.UIengine.base}${pagePath}${themeHash}`
+export default {
+  computed: {
+    ...mapGetters('state', ['config']),
+    ...mapGetters('preferences', ['currentTheme']),
+
+    displayAllThemes () {
+      return this.currentTheme.id === '_all'
+    },
+
+    displayedThemes () {
+      return this.displayAllThemes
+        ? this.themes
+        : [this.currentTheme]
+    },
+
+    themes () {
+      return this.config.themes
     }
   }
 }

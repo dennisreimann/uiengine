@@ -22,7 +22,7 @@
     </RouterLink>
 
     <div
-      v-if="themes"
+      v-if="themes && themes.length > 1"
       class="topbar__theme"
     >
       <button
@@ -47,6 +47,13 @@
             @click="setCurrentTheme(theme)"
           >
             {{ theme.title }}
+          </button>
+          <button
+            class="topbar__theme-option topbar__theme-option--all"
+            type="button"
+            @click="setCurrentThemeAll()"
+          >
+            {{ 'options.all_themes' | localize }}
           </button>
         </div>
       </div>
@@ -120,6 +127,13 @@ export default {
           params: { query }
         })
       }
+    },
+
+    setCurrentThemeAll () {
+      this.setCurrentTheme({
+        id: '_all',
+        title: this.$options.filters.localize('options.all_themes')
+      })
     },
 
     toggleSearch () {

@@ -16,7 +16,8 @@ module.exports = {
     'open_in_window': 'Open in separate window',
     'edit_on_codepen': 'Edit on Codepen',
     'reset': 'reset',
-    'toggle': 'toggle'
+    'toggle': 'toggle',
+    'all_themes': 'All themes'
   },
   'code': {
     'raw': 'Code',

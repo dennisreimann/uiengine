@@ -218,7 +218,7 @@ describe('CLI @nowatch', function () {
       assertExists(join(testPath, 'dist', '_assets', 'styles'))
 
       // sketch file
-      assertExists(join(testPath, 'dist', '_sketch.html'))
+      assertExists(join(testPath, 'dist', '_sketch', '_default.html'))
     })
 
     it('should build the demo', async () => {
@@ -230,8 +230,8 @@ describe('CLI @nowatch', function () {
       assertMatches(stdout, 'Build done')
 
       // variants
-      assertExists(join(testPath, 'dist', '_variants', 'heading', 'title.html-1.html'))
-      assertExists(join(testPath, 'dist', '_variants', 'heading', 'subtitle.html-2.html'))
+      assertExists(join(testPath, 'dist', '_variants', '_default', 'heading', 'title.html-1.html'))
+      assertExists(join(testPath, 'dist', '_variants', '_default', 'heading', 'subtitle.html-2.html'))
     })
 
     describe('with debug flag', () => {

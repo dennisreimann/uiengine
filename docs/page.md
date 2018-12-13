@@ -56,7 +56,7 @@ A page is identified by the presence of a `README.md` markdown file, which conta
 ![ACME Design System](/static/logo.svg)
 
 The ACME Design System: Components and templates for our web application.
-````
+```
 
 In addition to this you can also provide a `page.config.js` file, which can list the subpages/components or define the template the page gets rendered with.
 

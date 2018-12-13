@@ -44,7 +44,7 @@ export default {
 
     const hljs = this.$store.getters['preferences/hljs']
     if (hljs) this.setHljs(hljs)
-    if (this.currentTheme) this.setCurrentTheme(this.currentTheme)
+    this.setCurrentTheme(this.currentTheme)
   },
 
   methods: {

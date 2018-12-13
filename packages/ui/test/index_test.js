@@ -8,7 +8,9 @@ const UI = require('../src/index')
 
 const { testTmpPath } = require('../../../test/support/paths')
 const target = resolve(testTmpPath, 'site')
-const testOptions = { target, markdownIt: { set: function () {} } }
+const themeId = '_default'
+const themes = [{ id: themeId, title: 'Default' }]
+const testOptions = { target, themeId, themes, markdownIt: { set: function () {} } }
 
 const tokensPage = {
   tokens: [
@@ -70,7 +72,8 @@ describe('UI', () => {
 
   describe('#render', async () => {
     it('should render the index.html file including the state', async () => {
-      const index = await UI.render(testOptions, 'index', { state: { config: { name: 'Test Render' } } })
+      const data = { state: { config: { name: 'Test Render' } } }
+      const index = await UI.render(testOptions, 'index', data, null)
 
       assertMatches(index, 'Test Render')
     })
@@ -119,7 +122,11 @@ describe('UI', () => {
             variants: [
               {
                 title: 'Primary',
-                rendered: '<button class="button button--primary">Call To Action</button>'
+                themes: {
+                  [themeId]: {
+                    rendered: '<button class="button button--primary">Call To Action</button>'
+                  }
+                }
               }
             ]
           }
@@ -133,21 +140,24 @@ describe('UI', () => {
 
     it('should include the set locale if the passed language is available', async () => {
       const opts = Object.assign({}, testOptions, { lang: 'de' })
-      const index = await UI.render(opts, 'index', { state: {} })
+      const data = { state: {} }
+      const index = await UI.render(opts, 'index', data)
 
       assertMatches(index, 'html lang="de"')
     })
 
     it('should default to english locale if the passed language is not available', async () => {
       const opts = Object.assign({}, testOptions, { lang: 'pl' })
-      const index = await UI.render(opts, 'index', { state: {} })
+      const data = { state: {} }
+      const index = await UI.render(opts, 'index', data)
 
       assertMatches(index, 'html lang="en"')
     })
 
     it('should throw error if the template cannot be rendered', async () => {
       try {
-        await UI.render({}, 'does-not-exist', { state: {} })
+        const data = { state: {} }
+        await UI.render({}, 'does-not-exist', data)
       } catch (error) {
         assert(error)
 
@@ -157,7 +167,8 @@ describe('UI', () => {
 
     it('should throw detailed error if the debug option is set', async () => {
       try {
-        await UI.render({ debug: true }, 'index', { state: {} })
+        const data = { state: {} }
+        await UI.render({ debug: true }, 'index', data)
       } catch (error) {
         assert(error)
 

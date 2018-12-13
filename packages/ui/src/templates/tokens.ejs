@@ -4,20 +4,27 @@ css = htmlWebpackPlugin.files.css
 _%>
 
 <%%_ const renderTokens = (tokens, level) => { _%%>
-  <%%_ const type = ((tokens && tokens[0].type) || 'default').split('/')[0] _%%>
-  <%%_ const tokenThemes = tokens && tokens[0].themes _%%>
-  <%%_ const visualizable = element => ['size', 'color'].includes(element.type) _%%>
-  <%%_ const haveProperty = property => element => element[property] _%%>
-  <%%_ const haveThemeProperty = property => element => element.themes && Object.values(element.themes).some(haveProperty(property)) _%%>
+  <%%_
+    const allThemeIds = themes.map(theme => theme.id)
+    const displayAllThemes = themeId === '_all'
+    const displayItem = item => !!(displayAllThemes || !item.theme || item.theme === themeId)
+    const type = ((tokens && tokens[0].type) || 'default').split('/')[0]
+    const isCategory = !!(type === 'category' && tokens && tokens.length)
+    const isTokenThemes = !!(tokens && tokens[0].themes)
+    const visualizable = element => ['size', 'color'].includes(element.type)
+    const haveProperty = property => element => element[property]
+    const haveThemeProperty = property => element => element.themes && Object.values(element.themes).some(haveProperty(property))
+  _%%>
 
-  <%%_ if (type === 'category' && tokens && tokens.length) { _%%>
-    <%%_ Object.values(tokens).forEach(category => { _%%>
+  <%%_ if (isCategory) { _%%>
+    <%%_ Object.values(tokens).forEach(category => { if (displayItem(category)) { _%%>
       <section class="uie-tokens__category" id="<%%= category.id || helpers.dasherize(category.name) %%>">
         <h<%%= level + 1 %%> class="uie-tokens__title"><%%= category.name %%></h<%%= level + 1 %%>>
         <%%= renderTokens(category.tokens, level + 1) _%%>
       </section>
-    <%%_ }) _%%>
-  <%%_ } else if (tokenThemes) { _%%>
+    <%%_ } }) _%%>
+
+  <%%_ } else if (isTokenThemes) { _%%>
     <%%_
       const columns = {
         visualization: tokens.some(visualizable),
@@ -40,9 +47,11 @@ _%>
           <%%_ if (columns.description) { _%%>
             <th class="uie-theme-token__label uie-theme-token__label--description"><%%= helpers.localize(lang, 'token.description') %%></th>
           <%%_ } _%%>
-          <th class="uie-theme-token__label uie-theme-token__label--theme">
-            <%%= helpers.localize(lang, 'token.theme') %%>
-          </th>
+          <%%_ if (displayAllThemes) { _%%>
+            <th class="uie-theme-token__label uie-theme-token__label--theme">
+              <%%= helpers.localize(lang, 'token.theme') %%>
+            </th>
+          <%%_ } _%%>
           <th class="uie-theme-token__label uie-theme-token__label--value">
             <%%= helpers.localize(lang, 'token.value') %%>
           </th>
@@ -60,59 +69,71 @@ _%>
           <%%_ } _%%>
         </tr>
       </thead>
-      <%%_ Object.values(tokens).forEach(token => { _%%>
+      <%%_ Object.values(tokens).forEach(token => { if (displayItem(token)) { _%%>
         <tbody>
-          <%%_ const themeIds = Object.keys(token.themes) _%%>
-          <%%_ themeIds.forEach((themeId, index) => { _%%>
-            <%%_ const property = token.themes[themeId] _%%>
+          <%%_ const displayedThemeIds = displayAllThemes ? allThemeIds /* Object.keys(token.themes) */ : [themeId] _%%>
+          <%%_ const rowspan = Object.keys(displayedThemeIds).length _%%>
+          <%%_ displayedThemeIds.forEach((rowThemeId, index) => { _%%>
+            <%%_ const property = token.themes[rowThemeId] _%%>
             <tr class="uie-theme-token">
               <%%_ if (index === 0) { _%%>
-                <td class="uie-theme-token__value uie-theme-token__value--property uie-rowspan-right" rowspan="<%%= themeIds.length %%>">
+                <td
+                  class="uie-theme-token__value uie-theme-token__value--property uie-rowspan-right"
+                  rowspan="<%%= rowspan %%>"
+                >
                   <div><%%= token.name %%></div>
                   <%%_ if (token.variable) { _%%>
                     <code class="uie-theme-token__variablename"><%%= token.variable %%></code>
                   <%%_ } _%%>
                 </td>
                 <%%_ if (columns.description) { _%%>
-                  <td class="uie-theme-token__value uie-theme-token__value--description uie-rowspan-right" rowspan="<%%= themeIds.length %%>">
+                  <td
+                    class="uie-theme-token__value uie-theme-token__value--description uie-rowspan-right"
+                    rowspan="<%%= rowspan %%>"
+                  >
                     <%%= token.description %%>
                   </td>
                 <%%_ } _%%>
               <%%_ } _%%>
-              <td class="uie-theme-token__value uie-theme-token__value--theme uie-rowspan-left">
-                <%%= themeTitle(themeId) %%>
-              </td>
+              <%%_ if (displayAllThemes) { _%%>
+                <td class="uie-theme-token__value uie-theme-token__value--theme uie-rowspan-left">
+                  <%%= themeTitle(rowThemeId) %%>
+                </td>
+              <%%_ } _%%>
               <td class="uie-theme-token__value uie-theme-token__value--value">
-                <%%= property.value %%>
+                <%%= property && property.value %%>
               </td>
               <%%_ if (columns.visualization) { _%%>
                 <td class="uie-theme-token__value uie-theme-token__value--visualization">
-                  <%%_ if (token.type === 'size') { _%%>
-                    <span class="uie-theme-token__size" style="width:<%%= property.value %%>"></span>
-                  <%%_ } else if (token.type === 'color') { _%%>
-                    <span class="uie-theme-token__swatch">
-                      <span class="uie-theme-token__swatch__inner" style="background-color:<%%= property.value %%>"></span>
-                    </span>
+                  <%%_ if (property) { _%%>
+                    <%%_ if (token.type === 'size') { _%%>
+                      <span class="uie-theme-token__size" style="width:<%%= property.value %%>"></span>
+                    <%%_ } else if (token.type === 'color') { _%%>
+                      <span class="uie-theme-token__swatch">
+                        <span class="uie-theme-token__swatch__inner" style="background-color:<%%= property.value %%>"></span>
+                      </span>
+                    <%%_ } _%%>
                   <%%_ } _%%>
                 </td>
               <%%_ } _%%>
               <%%_ if (columns.variable) { _%%>
-                <td class="uie-theme-token__value uie-theme-token__value--variable"><%%= property.variable %%></td>
+                <td class="uie-theme-token__value uie-theme-token__value--variable"><%%= property && property.variable %%></td>
               <%%_ } _%%>
               <%%_ if (columns.reference) { _%%>
-                <td class="uie-theme-token__value uie-theme-token__value--reference"><%%= property.reference %%></td>
+                <td class="uie-theme-token__value uie-theme-token__value--reference"><%%= property && property.reference %%></td>
               <%%_ } _%%>
               <%%_ if (columns.default) { _%%>
-                <td class="uie-theme-token__value uie-theme-token__value--default"><%%= property.default ? '*' : '' %%></td>
+                <td class="uie-theme-token__value uie-theme-token__value--default"><%%= property && property.default ? '*' : '' %%></td>
               <%%_ } _%%>
             </tr>
           <%%_ }) _%%>
         </tbody>
-      <%%_ }) _%%>
+      <%%_ } }) _%%>
     </table>
+
   <%%_ } else if (type === 'color') { _%%>
     <div class="uie-tokens__container uie-tokens__container--<%%= type %%>">
-      <%%_ Object.values(tokens).forEach(token => { _%%>
+      <%%_ Object.values(tokens).forEach(token => { if (displayItem(token)) { _%%>
         <%%_ const color = helpers.color(token.value) _%%>
         <dl class="uie-color-token" id="<%%= helpers.dasherize(token.name) %%>">
           <div class="uie-color-token__info uie-color-token__info--top">
@@ -156,11 +177,12 @@ _%>
             </div>
           <%% } %%>
         </dl>
-      <%%_ }) _%%>
+      <%%_ } }) _%%>
     </div>
+
   <%%_ } else if (type === 'font') { _%%>
     <div class="uie-tokens__container uie-tokens__container--<%%= type %%>">
-      <%%_ Object.values(tokens).forEach(token => { _%%>
+      <%%_ Object.values(tokens).forEach(token => { if (displayItem(token)) { _%%>
         <dl class="uie-font-token"<%% if (token.name) { %%> id="<%%= helpers.dasherize(token.name) %%>"<%% } %%>>
           <%% if (token.name) { %%>
             <div class="uie-font-token__info">
@@ -224,8 +246,9 @@ _%>
             </div>
           <%% } %%>
         </dl>
-      <%%_ }) _%%>
+      <%%_ } }) _%%>
     </div>
+
   <%%_ } else if (type === 'icon') { _%%>
     <%%_
       const haveProperty = property => element => element[property]
@@ -253,7 +276,7 @@ _%>
         </tr>
       </thead>
       <tbody>
-        <%%_ Object.values(tokens).forEach(token => { _%%>
+        <%%_ Object.values(tokens).forEach(token => { if (displayItem(token)) { _%%>
           <tr class="uie-icon-token">
             <td class="uie-icon-token__value uie-icon-token__value--icon"><%%- token.value %%></td>
             <td class="uie-icon-token__value"><%%= token.name %%></td>
@@ -268,9 +291,10 @@ _%>
               <td class="uie-icon-token__value uie-icon-token__value--reference"><%%= token.reference %%></td>
             <%% } %%>
           </tr>
-        <%%_ }) _%%>
+        <%%_ } }) _%%>
       </tbody>
     </table>
+
   <%%_ } else { _%%>
     <%%_
       const columns = {
@@ -300,7 +324,7 @@ _%>
         </tr>
       </thead>
       <tbody>
-        <%%_ Object.values(tokens).forEach(token => { _%%>
+        <%%_ Object.values(tokens).forEach(token => { if (displayItem(token)) { _%%>
           <tr class="uie-default-token">
             <td class="uie-default-token__value"><%%= token.name %%></td>
             <td class="uie-default-token__value uie-default-token__value--value"><%%= token.value %%></td>
@@ -321,7 +345,7 @@ _%>
               <td class="uie-default-token__value uie-default-token__value--reference"><%%= token.reference %%></td>
             <%% } %%>
           </tr>
-        <%%_ }) _%%>
+        <%%_ } }) _%%>
       </tbody>
     </table>
   <%%_ } _%%>

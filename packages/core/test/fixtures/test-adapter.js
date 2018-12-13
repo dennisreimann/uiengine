@@ -12,7 +12,7 @@ async function registerComponentFile (options, filePath) {
 
 async function render (options, templatePath, data = {}) {
   return new Promise((resolve, reject) => {
-    resolve(`${templatePath} ${JSON.stringify(data)}`)
+    resolve(`${templatePath} ${options.themeId} ${JSON.stringify(data)}`)
   })
 }
 

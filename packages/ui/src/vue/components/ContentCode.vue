@@ -122,7 +122,9 @@ export default {
 
   computed: {
     codeParts () {
-      return this.parts.filter(part => part.title && part.content)
+      return this.parts
+        ? this.parts.filter(part => part.title && part.content)
+        : []
     },
 
     renderedRaw () {
