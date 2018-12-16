@@ -6,6 +6,7 @@
 
 - Improved Windows compatibility, feedback welcome!
 - The pen icon in the interface opens files in VS Code when working locally
+- Pages can be set to be initially collapsed – [see the docs](/basics/page/)
 
 ### Changed
 

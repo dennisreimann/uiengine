@@ -12,7 +12,7 @@ const state = {
   pages: {
     'index': Factory.page('index', { title: 'Home', childIds: ['atoms', 'molecules'], content: '<h1>Homepage</h1>\n<p>This is some content.</p>' }),
     'atoms': Factory.page('atoms', { title: 'Atoms', childIds: ['atoms/docs', 'atoms/more-docs'], componentIds: ['link', 'button'] }),
-    'molecules': Factory.page('molecules', { title: 'Molecules' }),
+    'molecules': Factory.page('molecules', { title: 'Molecules', collapsed: true }),
     'atoms/docs': Factory.page('atoms/docs', { title: 'Atom Docs' }),
     'atoms/more-docs': Factory.page('atoms/more-docs', { title: 'More Atom Docs' })
   }
@@ -45,6 +45,7 @@ describe('Navigation', () => {
       assert.strictEqual(index.parentId, undefined)
       assert.strictEqual(index.prevSiblingId, undefined)
       assert.strictEqual(index.nextSiblingId, undefined)
+      assert.strictEqual(index.collapsed, undefined)
 
       const atoms = data['atoms']
       assert.strictEqual(atoms.id, 'atoms')
@@ -60,6 +61,7 @@ describe('Navigation', () => {
       assert.strictEqual(atoms.parentId, 'index')
       assert.strictEqual(atoms.prevSiblingId, undefined)
       assert.strictEqual(atoms.nextSiblingId, 'molecules')
+      assert.strictEqual(atoms.collapsed, undefined)
 
       const molecules = data['molecules']
       assert.strictEqual(molecules.id, 'molecules')
@@ -71,6 +73,7 @@ describe('Navigation', () => {
       assert.strictEqual(molecules.parentId, 'index')
       assert.strictEqual(molecules.prevSiblingId, 'atoms')
       assert.strictEqual(molecules.nextSiblingId, undefined)
+      assert.strictEqual(molecules.collapsed, true)
 
       const atomsDocs = data['atoms/docs']
       assert.strictEqual(atomsDocs.id, 'atoms/docs')
@@ -81,6 +84,7 @@ describe('Navigation', () => {
       assert.strictEqual(atomsDocs.parentId, 'atoms')
       assert.strictEqual(atomsDocs.prevSiblingId, undefined)
       assert.strictEqual(atomsDocs.nextSiblingId, 'atoms/more-docs')
+      assert.strictEqual(atomsDocs.collapsed, undefined)
 
       const atomsMoreDocs = data['atoms/more-docs']
       assert.strictEqual(atomsMoreDocs.id, 'atoms/more-docs')
@@ -91,6 +95,7 @@ describe('Navigation', () => {
       assert.strictEqual(atomsMoreDocs.parentId, 'atoms')
       assert.strictEqual(atomsMoreDocs.prevSiblingId, 'atoms/docs')
       assert.strictEqual(atomsMoreDocs.nextSiblingId, 'atoms/link')
+      assert.strictEqual(atomsMoreDocs.collapsed, undefined)
 
       const atomsLink = data['atoms/link']
       assert.strictEqual(atomsLink.id, 'atoms/link')
@@ -101,6 +106,7 @@ describe('Navigation', () => {
       assert.strictEqual(atomsLink.parentId, 'atoms')
       assert.strictEqual(atomsLink.prevSiblingId, 'atoms/more-docs')
       assert.strictEqual(atomsLink.nextSiblingId, 'atoms/button')
+      assert.strictEqual(atomsLink.collapsed, undefined)
 
       const atomsButton = data['atoms/button']
       assert.strictEqual(atomsButton.id, 'atoms/button')
@@ -111,6 +117,7 @@ describe('Navigation', () => {
       assert.strictEqual(atomsButton.parentId, 'atoms')
       assert.strictEqual(atomsButton.prevSiblingId, 'atoms/link')
       assert.strictEqual(atomsButton.nextSiblingId, undefined)
+      assert.strictEqual(atomsButton.collapsed, undefined)
     })
   })
 

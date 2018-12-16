@@ -39,6 +39,7 @@ const dataForPageId = (state, id) => {
   })
 
   if (!data.isStructural) delete data.isStructural
+  if (page.collapsed) data.collapsed = true
   if (data.keywords.length === 0) delete data.keywords
 
   // component childpages

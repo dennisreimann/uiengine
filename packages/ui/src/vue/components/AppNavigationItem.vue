@@ -75,7 +75,9 @@ export default {
     },
 
     isCollapsed () {
-      return this.navigationItemsCollapsed[this.item.id] || false
+      return this.navigationItemsCollapsed[this.item.id] !== undefined
+        ? this.navigationItemsCollapsed[this.item.id]
+        : (this.item.collapsed || false)
     },
 
     title () {

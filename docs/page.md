@@ -73,6 +73,7 @@ The `title` is the name of the page that is refered to in the navigation.
 The `template` defines the template the page gets rendered with. See the [templates section](#templates) for details.
 The `children` list is optional and can be used to leave out or reorder certain pages.
 The `tags` list is optional and can be used to search for pages.
+The `collapsed` attribute is optional and can be used to initially collapse the children pages.
 
 ### Referencing components
 

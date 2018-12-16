@@ -43,6 +43,17 @@ context('Navigation', () => {
     cy.get('[data-test-navtree-id="documentation/tokens"]').should('be.visible')
   })
 
+  it('should display initially collapsed pages', () => {
+    cy.get('[data-test-navtree-id="patterns/organisms"]').should('not.be.visible')
+    cy.get('[data-test-navitem-id="patterns/organisms"] > button').click()
+    cy.get('[data-test-navtree-id="patterns/organisms"]').should('be.visible')
+
+    cy.reload()
+    cy.get('[data-test-navtree-id="patterns/organisms"]').should('be.visible')
+    cy.get('[data-test-navitem-id="patterns/organisms"] > button').click()
+    cy.get('[data-test-navtree-id="patterns/organisms"]').should('not.be.visible')
+  })
+
   it('should be toggleable', () => {
     cy.get('[data-test-navtoggle]').click()
     cy.get('[data-test-navigation]').should('not.be.visible')
