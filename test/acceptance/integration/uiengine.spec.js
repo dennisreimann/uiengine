@@ -5,11 +5,9 @@ context('UIengine', () => {
     cy.visit('/')
   })
 
-  it('shows the page title', () => {
-    cy.get('h1').should('contain', 'Home')
+  it('shows the home page content', () => {
+    cy.get('.main h1').should('be', 'Home')
 
-    cy.get(':nth-child(1) > .navigation__tree--level-1 > :nth-child(1) > .navigation__link').click()
-
-    cy.get('h1').should('contain', 'Getting Started')
+    cy.get('.main .content').should('contain', 'Welcome! This is the UIengine Sample Project.')
   })
 })

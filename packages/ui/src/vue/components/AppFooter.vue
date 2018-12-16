@@ -8,6 +8,7 @@
         v-if="prevPage"
         :to="prevPage"
         class="footer__prevlink"
+        data-test-footer-prevlink
       >
         <AppIcon symbol="caret-left" />
         {{ prevPage.title }}
@@ -16,6 +17,7 @@
         v-if="nextPage"
         :to="nextPage"
         class="footer__nextlink"
+        data-test-footer-nextlink
       >
         {{ nextPage.title }}
         <AppIcon symbol="caret-right" />
@@ -25,11 +27,13 @@
       <p
         v-if="config.copyright"
         class="footer__copyright"
+        data-test-footer-copyright
         v-html="config.copyright"
       />
       <p
         v-if="config.version"
         class="footer__version"
+        data-test-footer-version
       >
         {{ 'footer.version' | localize }} {{ config.version }} –
         {{ 'footer.last_update' | localize }} {{ lastUpdate }}.

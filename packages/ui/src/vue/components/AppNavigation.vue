@@ -4,6 +4,7 @@
     id="navigation"
     :hidden="navigationCollapsed"
     class="navigation"
+    data-test-navigation
   >
     <AppNavigationTree
       v-if="navigation.index.childIds"

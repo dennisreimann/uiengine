@@ -6,6 +6,7 @@
       type="button"
       class="topbar__toggle topbar__toggle--menu"
       aria-controls="navigation-root"
+      data-test-navtoggle
       @click.prevent="setNavigationCollapsed(!navigationCollapsed)"
     >
       <AppIcon
@@ -84,6 +85,7 @@
         type="search"
         class="topbar__searchfield"
         name="query"
+        data-test-searchfield
       >
     </form>
   </div>

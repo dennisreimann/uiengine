@@ -2,6 +2,7 @@
   <li
     :class="classes"
     class="navigation__item"
+    :data-test-navitem-id="item.id"
   >
     <span
       v-if="item.isStructural"
@@ -36,6 +37,7 @@
       :navigation="navigation"
       :items="children"
       :level="level + 1"
+      :data-test-navtree-id="item.id"
     />
   </li>
 </template>
