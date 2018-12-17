@@ -3,6 +3,7 @@
 context('Footer', () => {
   beforeEach(() => {
     cy.visit('/')
+    cy.clearLocalStorage()
   })
 
   it('should contain prev and next page links', () => {

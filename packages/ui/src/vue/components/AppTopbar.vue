@@ -25,11 +25,13 @@
     <div
       v-if="themes && themes.length > 1"
       class="topbar__theme"
+      data-test-theme-switch
     >
       <button
         :title="'options.toggle' | localize"
         class="topbar__theme-toggle"
         type="button"
+        data-test-theme-switch-current
         @click.stop="isThemesActive = !isThemesActive"
       >
         {{ currentTheme.title }}
@@ -45,6 +47,7 @@
             :key="theme.id"
             class="topbar__theme-option"
             type="button"
+            :data-test-theme-switch-id="theme.id"
             @click="setCurrentTheme(theme)"
           >
             {{ theme.title }}
@@ -52,6 +55,7 @@
           <button
             class="topbar__theme-option topbar__theme-option--all"
             type="button"
+            data-test-theme-switch-all
             @click="setCurrentThemeAll()"
           >
             {{ 'options.all_themes' | localize }}

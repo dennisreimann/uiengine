@@ -3,6 +3,7 @@
 context('Navigation', () => {
   beforeEach(() => {
     cy.visit('/')
+    cy.clearLocalStorage()
   })
 
   it('should switch pages', () => {

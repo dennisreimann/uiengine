@@ -19,7 +19,9 @@ _%>
   <%%_ if (isCategory) { _%%>
     <%%_ Object.values(tokens).forEach(category => { if (displayItem(category)) { _%%>
       <section class="uie-tokens__category" id="<%%= category.id || helpers.dasherize(category.name) %%>">
-        <h<%%= level + 1 %%> class="uie-tokens__title"><%%= category.name %%></h<%%= level + 1 %%>>
+        <%%_ if (category.name) { _%%>
+          <h<%%= level + 1 %%> class="uie-tokens__title"><%%= category.name %%></h<%%= level + 1 %%>>
+        <%%_ } _%%>
         <%%= renderTokens(category.tokens, level + 1) _%%>
       </section>
     <%%_ } }) _%%>

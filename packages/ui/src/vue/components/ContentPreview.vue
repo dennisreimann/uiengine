@@ -25,6 +25,7 @@
               :width="iframeSize(width)"
               :height="iframeSize(height)"
               :scrolling="height ? 'yes' : 'no'"
+              :data-test-viewport-iframe="`${theme.id}-${name}`"
               class="preview__iframe"
               frameborder="0"
             />
@@ -82,6 +83,7 @@
               ref="iframes"
               :src="iframeSrc(theme.id)"
               :title="title"
+              :data-test-breakpoint-iframe="theme.id"
               class="preview__iframe"
               frameborder="0"
               scrolling="no"

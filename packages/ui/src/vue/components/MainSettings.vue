@@ -10,7 +10,7 @@
           {{ 'settings.locale' | localize }}
         </label>
         <select
-          id="locale"
+          id="locale-select"
           v-model="locale"
         >
           <option
@@ -32,7 +32,7 @@
           {{ 'settings.preview_mode' | localize }}
         </label>
         <select
-          id="previewMode"
+          id="previewMode-select"
           v-model="previewMode"
         >
           <option
@@ -51,7 +51,7 @@
           {{ 'settings.hljs' | localize }}
         </label>
         <select
-          id="hljs"
+          id="hljs-select"
           v-model="hljs"
         >
           <option

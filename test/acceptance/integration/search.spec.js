@@ -3,6 +3,7 @@
 context('Search', () => {
   beforeEach(() => {
     cy.visit('/')
+    cy.clearLocalStorage()
   })
 
   it('should list multiple results', () => {

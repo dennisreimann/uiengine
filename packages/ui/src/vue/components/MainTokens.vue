@@ -24,6 +24,7 @@
       :title="page.title"
       frameborder="0"
       scrolling="no"
+      data-test-tokens-iframe
     />
   </div>
 </template>

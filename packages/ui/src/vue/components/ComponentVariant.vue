@@ -44,6 +44,7 @@
           :target="variant.id | dasherize"
           :title="'options.open_in_window' | localize"
           class="contentheader__action"
+          data-test-openinwindow-link
           @click.stop
         >
           <AppIcon symbol="open-in-window" />
@@ -69,6 +70,7 @@
           href="#"
           role="tab"
           class="contentheader__option"
+          data-test-variant-tab-link="preview"
           @click.prevent="activeSection = 'preview'"
           @keydown.right="switchTab('code')"
         >
@@ -82,6 +84,7 @@
           href="#"
           role="tab"
           class="contentheader__option"
+          data-test-variant-tab-link="code"
           @click.prevent="activeSection = 'code'"
           @keydown.left="switchTab('preview')"
         >

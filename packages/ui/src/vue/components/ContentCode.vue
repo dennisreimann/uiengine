@@ -7,6 +7,7 @@
       <button
         :title="'navigation.toggle' | localize"
         :aria-expanded="isExpanded('raw') | bool2string"
+        data-test-variant-code-button="raw"
         class="code__header"
         type="button"
         @click.prevent="toggleExpanded('raw')"
@@ -21,6 +22,7 @@
       </button>
       <div
         :hidden="!isExpanded('raw')"
+        data-test-variant-code-part="raw"
         v-html="renderedRaw"
       />
     </div>
@@ -32,6 +34,7 @@
       <button
         :title="'navigation.toggle' | localize"
         :aria-expanded="isExpanded('context') | bool2string"
+        data-test-variant-code-button="context"
         class="code__header"
         type="button"
         @click.prevent="toggleExpanded('context')"
@@ -46,6 +49,7 @@
       </button>
       <div
         :hidden="!isExpanded('context')"
+        data-test-variant-code-part="context"
         v-html="renderedContext"
       />
     </div>
@@ -58,6 +62,7 @@
       <button
         :title="'navigation.toggle' | localize"
         :aria-expanded="isExpanded(part.title) | bool2string"
+        :data-test-variant-code-button="part.title"
         class="code__header"
         type="button"
         @click.prevent="toggleExpanded(part.title)"
@@ -72,6 +77,7 @@
       </button>
       <div
         :hidden="!isExpanded(part.title)"
+        :data-test-variant-code-part="part.title"
         v-html="renderPart(part)"
       />
     </div>
