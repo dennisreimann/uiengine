@@ -30,11 +30,21 @@ const isGenerating = () => _isGenerating
 const aggregateDependentComponents = (components, id) => {
   const aggregate = componentId => {
     const { dependentComponents } = components[componentId]
-    return dependentComponents
-      ? dependentComponents.concat(...R.map(aggregate, dependentComponents))
-      : []
+
+    if (dependentComponents) {
+      const nonCyclicList = R.reject(dependentId => {
+        const { dependentComponents: dependentDependents } = components[dependentId]
+        return dependentDependents.includes(componentId)
+      }, dependentComponents)
+
+      return dependentComponents.concat(R.map(aggregate, nonCyclicList))
+    } else {
+      return []
+    }
   }
-  return R.reject(componentId => componentId === id, R.uniq(aggregate(id)))
+  const results = R.uniq(aggregate(id))
+
+  return R.reject(componentId => componentId === id, results)
 }
 
 async function init (options = {}) {

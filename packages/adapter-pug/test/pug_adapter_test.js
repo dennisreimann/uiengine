@@ -9,7 +9,10 @@ const elementsPath = join(basePath, 'elements')
 const modulesPath = join(basePath, 'modules')
 const atomFilePath = join(elementsPath, 'atom', 'atom.pug')
 const moleculeFilePath = join(modulesPath, 'molecule', 'molecule.pug')
+const moleculeVariantPath = join(modulesPath, 'molecule', 'variants', 'molecule.pug')
 const organismFilePath = join(modulesPath, 'organism', 'organism.pug')
+const organismVariantPath = join(modulesPath, 'organism', 'variants', 'organism.pug')
+const templatePath = resolve(basePath, 'template.pug')
 
 const adapterOptions = {
   components: [elementsPath, modulesPath],
@@ -19,7 +22,6 @@ const adapterOptions = {
 describe('Pug adapter', () => {
   describe('#render', () => {
     it('should render the template with the given data', async () => {
-      const templatePath = resolve(__dirname, 'fixtures', 'template.pug')
       const data = { myData: 1 }
       const rendered = await Adapter.render(adapterOptions, templatePath, data)
 
@@ -42,12 +44,14 @@ describe('Pug adapter', () => {
       assert.strictEqual(dependencyFiles.length, 1)
       assert(dependencyFiles.includes(crossPlatformPath(atomFilePath)))
 
-      assert.strictEqual(dependentFiles.length, 1)
+      assert.strictEqual(dependentFiles.length, 3)
+      assert(dependentFiles.includes(crossPlatformPath(moleculeVariantPath)))
       assert(dependentFiles.includes(crossPlatformPath(organismFilePath)))
+      assert(dependentFiles.includes(crossPlatformPath(organismVariantPath)))
     })
 
     it('should return undefined dependentFiles if there are no component dependents', async () => {
-      const { dependentFiles } = await Adapter.registerComponentFile(adapterOptions, organismFilePath)
+      const { dependentFiles } = await Adapter.registerComponentFile(adapterOptions, templatePath)
 
       assert.strictEqual(dependentFiles, undefined)
     })

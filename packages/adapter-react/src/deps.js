@@ -2,14 +2,11 @@ const { readFile } = require('fs-extra')
 const { basename, dirname, join, resolve } = require('path')
 const { parse } = require('@babel/parser')
 const glob = require('globby')
-const {
-  StringUtil: { crossPlatformPath },
-  VariantUtil: { VARIANTS_DIRNAME }
-} = require('@uiengine/util')
+const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
 
 // parse in strict mode and allow module declarations, enable jsx syntax
-const parserOpts = {
-  sourceType: 'module', // 'unambiguous'
+const PARSER_OPTS = {
+  sourceType: 'module',
   plugins: [
     'dynamicImport',
     'exportDefaultFrom',
@@ -17,7 +14,6 @@ const parserOpts = {
     'objectRestSpread'
   ]
 }
-
 const DEPENDENCY_CACHE = {}
 const DEPENDENCY_DECLARATION_TYPES = ['ImportDeclaration', 'ExportNamedDeclaration']
 const FILE_TYPES = ['js', 'jsx', 'ts']
@@ -39,14 +35,13 @@ async function getDependencyFiles (parserOpts, filePath, cache) {
     const code = await readFile(filePath, 'utf-8')
     parsed = parse(code, parserOpts)
   } catch (err) {
-    // console.warn(`Could not parse file "${filePath}"`, err)
     if (cache) cache[filePath] = []
     return []
   }
 
   // resolve imports
   const { body } = parsed.program
-  const imports = body.filter(node => DEPENDENCY_DECLARATION_TYPES.includes(node.type))
+  const imports = body.filter(node => node.source && DEPENDENCY_DECLARATION_TYPES.includes(node.type))
 
   const filePaths = imports.map(imp => {
     const importPath = imp.source.value
@@ -75,9 +70,7 @@ async function getDependencyFiles (parserOpts, filePath, cache) {
 
 async function getDependentFiles (parserOpts, filePath, dirs, cache) {
   const patterns = dirs.map(dir => join(dir, '**', FILE_GLOB_PATTERN))
-  const variantPaths = dirs.map(dir => join(dir, '**', VARIANTS_DIRNAME))
-  const ignore = [filePath, ...variantPaths]
-  const filePaths = await glob(patterns, { ignore })
+  const filePaths = await glob(patterns, { ignore: [filePath] })
   const dependentFiles = await filter(filePaths, async file => {
     const dependencies = await getDependencyFiles(parserOpts, file, cache)
     return (
@@ -99,13 +92,13 @@ module.exports = {
     const { components, templates } = options
     const dirs = [...components]
     if (templates) dirs.push(templates)
-    const files = await getDependentFiles(parserOpts, filePath, dirs, DEPENDENCY_CACHE)
+    const files = await getDependentFiles(PARSER_OPTS, filePath, dirs, DEPENDENCY_CACHE)
     return files
   },
 
   async extractDependencyFiles (options, filePath) {
     delete DEPENDENCY_CACHE[filePath]
-    const files = await getDependencyFiles(parserOpts, filePath, DEPENDENCY_CACHE)
+    const files = await getDependencyFiles(PARSER_OPTS, filePath, DEPENDENCY_CACHE)
     return files
   }
 }

@@ -14,9 +14,11 @@ const elementsPath = join(basePath, 'elements')
 const modulesPath = join(basePath, 'modules')
 const atomFilePath = join(elementsPath, 'Atom', 'index.jsx')
 const moleculeFilePath = join(modulesPath, 'Molecule', 'Molecule.jsx')
-const moleculeIndexFilePath = join(modulesPath, 'Molecule', 'index.js')
-const moleculeCssFilePath = join(modulesPath, 'Molecule', 'Molecule.css')
+const moleculeIndexPath = join(modulesPath, 'Molecule', 'index.js')
+const moleculeVariantPath = join(modulesPath, 'Molecule', 'variants', 'Molecule.jsx')
+const moleculeCssPath = join(modulesPath, 'Molecule', 'Molecule.css')
 const organismFilePath = join(modulesPath, 'Organism', 'index.jsx')
+const organismVariantPath = join(modulesPath, 'Organism', 'variants', 'Organism.jsx')
 const templatePath = join(basePath, 'template.jsx')
 const reactPath = require.resolve('react')
 
@@ -201,18 +203,20 @@ describe('React adapter', () => {
     it('should extract the component dependencies and dependents', async () => {
       const { dependentFiles, dependencyFiles } = await Adapter.registerComponentFile(adapterOptions, moleculeFilePath)
 
-      assert.strictEqual(dependentFiles.length, 2)
-      assert(dependentFiles.includes(crossPlatformPath(moleculeIndexFilePath)))
+      assert.strictEqual(dependentFiles.length, 4)
+      assert(dependentFiles.includes(crossPlatformPath(moleculeIndexPath)))
+      assert(dependentFiles.includes(crossPlatformPath(moleculeVariantPath)))
       assert(dependentFiles.includes(crossPlatformPath(organismFilePath)))
+      assert(dependentFiles.includes(crossPlatformPath(organismVariantPath)))
 
       assert.strictEqual(dependencyFiles.length, 3)
       assert(dependencyFiles.includes(crossPlatformPath(reactPath)))
       assert(dependencyFiles.includes(crossPlatformPath(atomFilePath)))
-      assert(dependencyFiles.includes(crossPlatformPath(moleculeCssFilePath)))
+      assert(dependencyFiles.includes(crossPlatformPath(moleculeCssPath)))
     })
 
     it('should return undefined dependentFiles if there are no component dependents', async () => {
-      const { dependentFiles } = await Adapter.registerComponentFile(adapterOptions, organismFilePath)
+      const { dependentFiles } = await Adapter.registerComponentFile(adapterOptions, templatePath)
 
       assert.strictEqual(dependentFiles, undefined)
     })

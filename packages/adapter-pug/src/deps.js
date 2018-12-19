@@ -4,10 +4,7 @@ const pugParser = require('pug-parser')
 const pugLexer = require('pug-lexer')
 const pugWalk = require('pug-walk')
 const glob = require('globby')
-const {
-  StringUtil: { crossPlatformPath },
-  VariantUtil: { VARIANTS_DIRNAME }
-} = require('@uiengine/util')
+const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
 
 const DEPENDENCY_CACHE = {}
 const DEPENDENCY_NODE_TYPES = ['Extends', 'Include', 'RawInclude']
@@ -68,9 +65,7 @@ async function getDependencyFiles (options, filePath, cache) {
 
 async function getDependentFiles (options, filePath, dirs, cache) {
   const patterns = dirs.map(dir => join(dir, '**', '*.pug'))
-  const variantPaths = dirs.map(dir => join(dir, '**', VARIANTS_DIRNAME))
-  const ignore = [filePath, ...variantPaths]
-  const filePaths = await glob(patterns, { ignore })
+  const filePaths = await glob(patterns, { ignore: [filePath] })
   const dependentFiles = await filter(filePaths, async file => {
     const dependencies = await getDependencyFiles(options, file, cache)
     return dependencies.includes(crossPlatformPath(filePath))
