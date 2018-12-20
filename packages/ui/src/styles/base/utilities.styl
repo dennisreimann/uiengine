@@ -1,12 +1,7 @@
 .uie
-  $fontsizes = json(pathjoin('tokens', 'fontsizes.json'), { hash: true })
-  for $name, $value in $fontsizes
-    .uie-fs-{$name}
-      font-size $value
-
   $spaces = json(pathjoin('tokens', 'spaces.json'), { hash: true })
   for $name, $value in $spaces
     .uie-sot-{$name}
-      margin-top $value
+      margin-top s("var(--uie-space-%s)", unquote($name))
     .uie-sob-{$name}
-      margin-bottom $value
+      margin-bottom s("var(--uie-space-%s)", unquote($name))

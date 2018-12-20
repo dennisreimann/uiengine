@@ -76,6 +76,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+table
+  margin-bottom var(--uie-space-xl)
+
 .themeProperty__default
   width 6em
   text-align center

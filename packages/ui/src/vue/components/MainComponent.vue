@@ -178,7 +178,6 @@
               :title="componentId"
               :entities="entities"
               :properties="properties"
-              class="uie-sob-xl"
             />
           </div>
         </div>
@@ -193,7 +192,6 @@
           <ContentThemeProperties
             :title="'options.theme_properties' | localize"
             :theme-properties="component.themeProperties"
-            class="uie-sob-xl"
           />
         </div>
       </div>

@@ -72,7 +72,6 @@
               :title="templateId"
               :entities="entities"
               :properties="properties"
-              class="uie-sob-xl"
             />
           </div>
         </div>

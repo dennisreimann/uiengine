@@ -62,4 +62,7 @@ export default {
 <style lang="stylus" scoped>
 table
   width 100%
+
+table + table
+  margin-top var(--uie-space-xxl)
 </style>
