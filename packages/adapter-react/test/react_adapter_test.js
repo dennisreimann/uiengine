@@ -16,7 +16,6 @@ const atomFilePath = join(elementsPath, 'Atom', 'index.jsx')
 const moleculeFilePath = join(modulesPath, 'Molecule', 'Molecule.jsx')
 const moleculeIndexPath = join(modulesPath, 'Molecule', 'index.js')
 const moleculeVariantPath = join(modulesPath, 'Molecule', 'variants', 'Molecule.jsx')
-const moleculeCssPath = join(modulesPath, 'Molecule', 'Molecule.css')
 const organismFilePath = join(modulesPath, 'Organism', 'index.jsx')
 const organismVariantPath = join(modulesPath, 'Organism', 'variants', 'Organism.jsx')
 const templatePath = join(basePath, 'template.jsx')
@@ -91,108 +90,142 @@ describe('React adapter', () => {
   })
 
   describe('#registerComponentFile', () => {
-    it('should invalidate the module cache', async () => {
-      // is set by previous render test
-      assert(require.cache[require.resolve(templatePath)])
-
-      await Adapter.registerComponentFile(adapterOptions, templatePath)
-
-      assert(!require.cache[require.resolve(templatePath)])
-    })
-
     it('should extract the component properties', async () => {
       const componentPath = resolve(__dirname, 'fixtures', 'component-with-props.jsx')
       const { properties } = await Adapter.registerComponentFile(adapterOptions, componentPath)
       assert(properties)
 
-      const props = properties['<ComponentWithProps>']
-      assert(props)
+      // see if OneMoreComponent is present
+      assert.strictEqual(Object.keys(properties).length, 2)
+      assert.strictEqual(typeof properties['<OneMoreComponent>'], 'object')
 
-      assert(props.optionalArray)
-      assert.strictEqual(props.optionalArray.type, 'Array', 'Wrong optionalArray format')
-      assert.strictEqual(props.optionalArray.description, 'Optional JS Array')
+      // deep check props on ComponentWithProps
+      const props = properties['<ComponentWithProps>']
+      assert.strictEqual(typeof props, 'object')
+
+      assert.strictEqual(typeof props.optionalArray, 'object')
+      assert.strictEqual(props.optionalArray.type, 'Array')
       assert.strictEqual(props.optionalArray.required, false)
 
-      assert(props.optionalBool)
-      assert.strictEqual(props.optionalBool.type, 'Bool', 'Wrong optionalBool format')
-      assert.strictEqual(props.optionalBool.description, 'Optional JS Boolean')
+      assert.strictEqual(typeof props.optionalBool, 'object')
+      assert.strictEqual(props.optionalBool.type, 'Bool')
       assert.strictEqual(props.optionalBool.required, false)
-      assert.strictEqual(props.optionalBool.default, 'false')
+      assert.strictEqual(props.optionalBool.default, false)
 
-      assert(props.optionalFunc)
-      assert.strictEqual(props.optionalFunc.type, 'Func', 'Wrong optionalFunc format')
-      assert.strictEqual(props.optionalFunc.description, 'Optional JS Function')
+      assert.strictEqual(typeof props.optionalFunc, 'object')
+      assert.strictEqual(props.optionalFunc.type, 'Func')
       assert.strictEqual(props.optionalFunc.required, false)
 
-      assert(props.optionalNumber)
-      assert.strictEqual(props.optionalNumber.type, 'Number', 'Wrong optionalNumber format')
-      assert.strictEqual(props.optionalNumber.description, 'Optional JS Number')
+      assert.strictEqual(typeof props.optionalNumber, 'object')
+      assert.strictEqual(props.optionalNumber.type, 'Number')
       assert.strictEqual(props.optionalNumber.required, false)
 
-      assert(props.optionalObject)
-      assert.strictEqual(props.optionalObject.type, 'Object', 'Wrong optionalObject format')
+      assert.strictEqual(typeof props.optionalObject, 'object')
+      assert.strictEqual(props.optionalObject.type, 'Object')
       assert.strictEqual(props.optionalObject.required, false)
 
-      assert(props.optionalString)
-      assert.strictEqual(props.optionalString.type, 'String', 'Wrong optionalString format')
+      assert.strictEqual(typeof props.optionalString, 'object')
+      assert.strictEqual(props.optionalString.type, 'String')
       assert.strictEqual(props.optionalString.required, false)
       assert.strictEqual(props.optionalString.default, 'This is the default string')
 
-      assert(props.optionalSymbol)
-      assert.strictEqual(props.optionalSymbol.type, 'Symbol', 'Wrong optionalSymbol format')
+      assert.strictEqual(typeof props.optionalSymbol, 'object')
+      assert.strictEqual(props.optionalSymbol.type, 'Symbol')
       assert.strictEqual(props.optionalSymbol.required, false)
 
-      assert(props.optionalNode)
-      assert.strictEqual(props.optionalNode.type, 'Node', 'Wrong optionalNode format')
+      assert.strictEqual(typeof props.optionalNode, 'object')
+      assert.strictEqual(props.optionalNode.type, 'Node')
       assert.strictEqual(props.optionalNode.required, false)
 
-      assert(props.optionalElement)
-      assert.strictEqual(props.optionalElement.type, 'Element', 'Wrong optionalElement format')
+      assert.strictEqual(typeof props.optionalElement, 'object')
+      assert.strictEqual(props.optionalElement.type, 'Element')
       assert.strictEqual(props.optionalElement.required, false)
 
-      assert(props.optionalMessage)
-      assert.strictEqual(props.optionalMessage.type, 'Message', 'Wrong optionalMessage format')
-      assert.strictEqual(props.optionalMessage.required, false)
+      assert.strictEqual(typeof props.optionalInstance, 'object')
+      assert.strictEqual(props.optionalInstance.type, 'MyClass')
+      assert.strictEqual(props.optionalInstance.required, false)
 
-      assert(props.optionalEnum)
-      assert.strictEqual(props.optionalEnum.type, 'News|Photos', 'Wrong optionalEnum format')
+      assert.strictEqual(typeof props.optionalEnum, 'object')
+      assert.strictEqual(props.optionalEnum.type, '"News"|"Photos"')
       assert.strictEqual(props.optionalEnum.required, false)
 
-      assert(props.optionalUnion)
-      assert.strictEqual(props.optionalUnion.type, 'String|Number|Message', 'Wrong optionalUnion format')
+      assert.strictEqual(typeof props.optionalUnion, 'object')
+      assert.strictEqual(props.optionalUnion.type, 'String|Number')
       assert.strictEqual(props.optionalUnion.required, false)
 
-      assert(props.optionalArrayOf)
-      assert.strictEqual(props.optionalArrayOf.type, '[Number]', 'Wrong optionalArrayOf format')
-      assert.strictEqual(props.optionalArrayOf.required, false)
+      assert.strictEqual(typeof props.optionalShape, 'object')
+      assert.strictEqual(props.optionalShape.type, 'Shape')
+      assert.strictEqual(props.optionalShape.required, false)
+      assert.strictEqual(typeof props.optionalShape.value, 'object')
+      assert.strictEqual(props.optionalShape.value.firstName.type, 'String')
+      assert.strictEqual(props.optionalShape.value.firstName.required, false)
+      assert.strictEqual(props.optionalShape.value.lastName.type, 'String')
+      assert.strictEqual(props.optionalShape.value.lastName.required, false)
 
-      assert(props.optionalObjectOf)
-      assert.strictEqual(props.optionalObjectOf.type, 'Number', 'Wrong optionalObjectOf format')
-      assert.strictEqual(props.optionalObjectOf.required, false)
+      assert.strictEqual(typeof props.externalComponent, 'object')
+      assert.strictEqual(props.externalComponent.type, 'Shape')
+      assert.strictEqual(props.externalComponent.required, false)
+      assert.strictEqual(typeof props.externalComponent.value, 'object')
+      assert.strictEqual(props.externalComponent.value.str.type, 'String')
+      assert.strictEqual(props.externalComponent.value.str.required, false)
+      assert.strictEqual(props.externalComponent.value.num.type, 'Number')
+      assert.strictEqual(props.externalComponent.value.num.required, false)
 
-      assert(props.optionalObjectWithShape)
-      assert.strictEqual(props.optionalObjectWithShape.type, '{color:String, fontSize:Number}', 'Wrong optionalObjectWithShape format')
-      assert.strictEqual(props.optionalObjectWithShape.required, false)
+      assert.strictEqual(typeof props.optionalArrayOfPrimitives, 'object')
+      assert.strictEqual(props.optionalArrayOfPrimitives.type, 'Array')
+      assert.strictEqual(props.optionalArrayOfPrimitives.required, false)
+      assert.strictEqual(props.optionalArrayOfPrimitives.value, 'Number')
 
-      assert(props.requiredFunc)
+      assert.strictEqual(typeof props.optionalArrayOfShapes, 'object')
+      assert.strictEqual(props.optionalArrayOfShapes.type, 'Array')
+      assert.strictEqual(props.optionalArrayOfShapes.required, false)
+      assert.strictEqual(props.optionalArrayOfShapes.value.type, 'Shape')
+      assert.strictEqual(typeof props.optionalArrayOfShapes.value.value, 'object')
+      assert.strictEqual(props.optionalArrayOfShapes.value.value.firstName.type, 'String')
+      assert.strictEqual(props.optionalArrayOfShapes.value.value.firstName.required, false)
+      assert.strictEqual(props.optionalArrayOfShapes.value.value.lastName.type, 'String')
+      assert.strictEqual(props.optionalArrayOfShapes.value.value.lastName.required, false)
+
+      assert.strictEqual(typeof props.optionalArrayOfAnotherComponent, 'object')
+      assert.strictEqual(props.optionalArrayOfAnotherComponent.type, 'Array')
+      assert.strictEqual(props.optionalArrayOfAnotherComponent.required, false)
+      assert.strictEqual(props.optionalArrayOfAnotherComponent.value.type, 'Shape')
+      assert.strictEqual(typeof props.optionalArrayOfAnotherComponent.value.value, 'object')
+      assert.strictEqual(props.optionalArrayOfAnotherComponent.value.value.str.type, 'String')
+      assert.strictEqual(props.optionalArrayOfAnotherComponent.value.value.str.required, false)
+      assert.strictEqual(props.optionalArrayOfAnotherComponent.value.value.num.type, 'Number')
+      assert.strictEqual(props.optionalArrayOfAnotherComponent.value.value.num.required, false)
+
+      assert.strictEqual(typeof props.optionalObjectOfPrimitive, 'object')
+      assert.strictEqual(props.optionalObjectOfPrimitive.type, 'Object')
+      assert.strictEqual(props.optionalObjectOfPrimitive.required, false)
+      assert.strictEqual(props.optionalObjectOfPrimitive.value, 'Number')
+
+      assert.strictEqual(typeof props.optionalObjectOfShape, 'object')
+      assert.strictEqual(props.optionalObjectOfShape.type, 'Object')
+      assert.strictEqual(props.optionalObjectOfShape.required, false)
+      assert.strictEqual(typeof props.optionalObjectOfShape.value.value, 'object')
+      assert.strictEqual(props.optionalObjectOfShape.value.value.firstName.type, 'String')
+      assert.strictEqual(props.optionalObjectOfShape.value.value.firstName.required, false)
+      assert.strictEqual(props.optionalObjectOfShape.value.value.lastName.type, 'String')
+      assert.strictEqual(props.optionalObjectOfShape.value.value.lastName.required, false)
+
+      assert.strictEqual(typeof props.requiredFunc, 'object')
       assert.strictEqual(props.requiredFunc.type, 'Func')
       assert.strictEqual(props.requiredFunc.required, true)
 
-      assert(props.requiredAny)
+      assert.strictEqual(typeof props.requiredAny, 'object')
       assert.strictEqual(props.requiredAny.type, 'Any')
       assert.strictEqual(props.requiredAny.required, true)
 
-      assert(props.customType)
-      assert.strictEqual(props.customType.type, 'Message')
-      assert.strictEqual(props.customType.required, false)
-
-      assert(props.customProp)
+      assert.strictEqual(typeof props.customProp, 'object')
       assert.strictEqual(props.customProp.type, 'Custom')
       assert.strictEqual(props.customProp.required, false)
 
-      assert(props.customArrayProp)
-      assert.strictEqual(props.customArrayProp.type, '[Custom]')
+      assert.strictEqual(typeof props.customArrayProp, 'object')
+      assert.strictEqual(props.customArrayProp.type, 'Array')
       assert.strictEqual(props.customArrayProp.required, false)
+      assert.strictEqual(props.customArrayProp.value, 'Custom')
     })
 
     it('should return undefined properties if there are no component properties', async () => {
@@ -209,10 +242,9 @@ describe('React adapter', () => {
       assert(dependentFiles.includes(crossPlatformPath(organismFilePath)))
       assert(dependentFiles.includes(crossPlatformPath(organismVariantPath)))
 
-      assert.strictEqual(dependencyFiles.length, 3)
+      assert.strictEqual(dependencyFiles.length, 2)
       assert(dependencyFiles.includes(crossPlatformPath(reactPath)))
       assert(dependencyFiles.includes(crossPlatformPath(atomFilePath)))
-      assert(dependencyFiles.includes(crossPlatformPath(moleculeCssPath)))
     })
 
     it('should return undefined dependentFiles if there are no component dependents', async () => {

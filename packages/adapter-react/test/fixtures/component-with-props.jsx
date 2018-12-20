@@ -1,8 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Enum, Message } from './types'
+import { AnotherComponent, Enum } from './types'
 
-const ComponentWithProps = props => <div />
+const ComponentWithProps = props => <div {...props} />
+
+class MyClass {
+}
+
+const personShape = PropTypes.shape({
+  firstName: PropTypes.string,
+  lastName: PropTypes.string
+})
 
 // Supported propTypes taken from
 // https://reactjs.org/docs/typechecking-with-proptypes.html
@@ -11,14 +19,17 @@ ComponentWithProps.propTypes = {
    * Optional JS Array
    */
   optionalArray: PropTypes.array,
+
   /**
    * Optional JS Boolean
    */
   optionalBool: PropTypes.bool,
+
   /**
    * Optional JS Function
    */
   optionalFunc: PropTypes.func,
+
   /**
    * Optional JS Number
    */
@@ -36,7 +47,7 @@ ComponentWithProps.propTypes = {
 
   // You can also declare that a prop is an instance of a class. This uses
   // JS's instanceof operator.
-  optionalMessage: PropTypes.instanceOf(Message),
+  optionalInstance: PropTypes.instanceOf(MyClass),
 
   // You can ensure that your prop is limited to specific values by treating
   // it as an enum.
@@ -45,21 +56,25 @@ ComponentWithProps.propTypes = {
   // An object that could be one of many types
   optionalUnion: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.number,
-    PropTypes.instanceOf(Message)
+    PropTypes.number
   ]),
 
+  optionalShape: personShape,
+
+  externalComponent: PropTypes.shape(AnotherComponent.propTypes),
+
   // An array of a certain type
-  optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
+  optionalArrayOfPrimitives: PropTypes.arrayOf(PropTypes.number),
+
+  optionalArrayOfShapes: PropTypes.arrayOf(personShape),
+
+  optionalArrayOfAnotherComponent: PropTypes.arrayOf(PropTypes.shape(AnotherComponent.propTypes)),
 
   // An object with property values of a certain type
-  optionalObjectOf: PropTypes.objectOf(PropTypes.number),
+  optionalObjectOfPrimitive: PropTypes.objectOf(PropTypes.number),
 
   // An object taking on a particular shape
-  optionalObjectWithShape: PropTypes.shape({
-    color: PropTypes.string,
-    fontSize: PropTypes.number
-  }),
+  optionalObjectOfShape: PropTypes.objectOf(personShape),
 
   // You can chain any of the above with `isRequired` to make sure a warning
   // is shown if the prop isn't provided.
@@ -67,8 +82,6 @@ ComponentWithProps.propTypes = {
 
   // A value of any data type
   requiredAny: PropTypes.any.isRequired,
-
-  customType: Message,
 
   // You can also specify a custom validator. It should return an Error
   // object if the validation fails. Don't `console.warn` or throw, as this
@@ -103,3 +116,11 @@ ComponentWithProps.defaultProps = {
 }
 
 export default ComponentWithProps
+
+export const OneMoreComponent = props => <div {...props} />
+
+OneMoreComponent.propTypes = {
+  name: PropTypes.string
+}
+
+export function test () {}

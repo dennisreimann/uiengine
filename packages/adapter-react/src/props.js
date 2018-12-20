@@ -1,78 +1,81 @@
-const { readFile } = require('fs-extra')
-const reactDocs = require('react-docgen')
-const externalPropTypesHandler = require('react-docgen-external-proptypes-handler')
-const {
-  StringUtil: { upcaseFirstChar }
-} = require('@uiengine/util')
+const { default: parsePropTypes } = require('parse-prop-types')
+const { StringUtil: { upcaseFirstChar } } = require('@uiengine/util')
 
-const extractPropertyDisplayType = type => {
-  if (type) {
-    if (type.value) {
-      if (type.value instanceof Array) {
-        return type.value
-          .map(subType => extractPropertyDisplayType(subType))
-          .join('|')
-          .replace(/["']/g, '')
-      } else if (type.value instanceof Object) {
-        if (type.name === 'arrayOf') {
-          return `[${extractPropertyDisplayType(type.value)}]`
-        } else if (type.name === 'shape') {
-          return `{${Object.keys(type.value).map(key =>
-            `${key}:${extractPropertyDisplayType(type.value[key])}`
-          ).join(', ')}}`
-        } else {
-          return extractPropertyDisplayType(type.value)
-        }
-      } else {
-        return upcaseFirstChar(type.value)
-      }
-    } else if (type.name) {
-      if (type.name === 'custom' && type.raw && type.raw.match(/^\w+$/)) {
-        return upcaseFirstChar(type.raw)
-      }
-      return upcaseFirstChar(type.name)
-    }
-  } else {
-    return null
+const propertyDefinitionByType = (type, debugInfo) => {
+  const { name, value } = type
+
+  switch (name) {
+    case 'shape':
+      const shapeValue = transformPropTypes(value, debugInfo)
+      return { type: upcaseFirstChar(name), value: shapeValue }
+
+    case 'arrayOf':
+      const arrayName = value.name || 'Custom'
+      const arrayValue = value.value
+        ? propertyDefinitionByType(value, debugInfo)
+        : upcaseFirstChar(arrayName)
+      return { type: 'Array', value: arrayValue }
+
+    case 'objectOf':
+      const objectName = value.name
+      const objectValue = value.value
+        ? propertyDefinitionByType(value, debugInfo)
+        : upcaseFirstChar(objectName)
+      return { type: 'Object', value: objectValue }
+
+    case 'instanceOf':
+      return { type: value }
+
+    case 'oneOf':
+      return { type: value.map(val => `"${val}"`).join('|') }
+
+    case 'oneOfType':
+      return { type: value.map(({ name }) => upcaseFirstChar(name)).join('|') }
+
+    default:
+      return { type: upcaseFirstChar(name) }
   }
 }
 
+const transformPropTypes = (propTypes, debugInfo) =>
+  Object.keys(propTypes).reduce((result, key) => {
+    const { type, required, description, defaultValue } = propTypes[key]
+    let definition = { type }
+    try {
+      definition = propertyDefinitionByType(type, debugInfo)
+    } catch (err) {
+      const { componentName, filePath } = debugInfo
+      console.error(`Error transforming prop-types for ${componentName} in ${filePath}:`, err, `\n\nProperty: ${key} =`, propTypes[key])
+    }
+
+    definition.required = required
+
+    if (description) definition.description = description
+    if (defaultValue) definition.default = defaultValue.value
+
+    return Object.assign(result, { [key]: definition })
+  }, {})
+
 async function extractProperties (filePath) {
-  const source = await readFile(filePath, 'utf-8')
+  const module = require(filePath)
+  const components = Object.values(module).filter(m => m.propTypes)
 
-  const resolver = reactDocs.resolver.findAllExportedComponentDefinitions
-  const handlers = reactDocs.defaultHandlers.concat(externalPropTypesHandler(filePath))
-  let reactDefinitions
-  try {
-    reactDefinitions = reactDocs.parse(source, resolver, handlers)
-  } catch (err) {
-    reactDefinitions = []
-  }
-
-  const uieProperties = reactDefinitions.reduce((result, reactDefinition) => {
-    const reactProps = reactDefinition.props || {}
-    const uiengineProps = Object.keys(reactProps).reduce((component, propertyKey) => {
-      const { type, description, required, defaultValue } = reactProps[propertyKey]
-
-      component[propertyKey] = {
-        type: extractPropertyDisplayType(type),
-        default: defaultValue && defaultValue.value.replace(/["']/g, ''),
-        description,
-        required
-      }
-
-      return component
-    }, {})
+  return components.reduce((result, Component) => {
+    const componentName = Component.displayName || Component.name || 'Component'
+    let propTypes = {}
+    try {
+      propTypes = parsePropTypes(Component)
+    } catch (err) {
+      console.error(`Error parsing prop-types for ${componentName} in ${filePath}:`, err)
+    }
 
     // only set if there are actual properties defined
-    if (Object.keys(uiengineProps).length) {
-      result[`<${reactDefinition.displayName}>`] = uiengineProps
+    if (Object.keys(propTypes).length) {
+      result[`<${componentName}>`] = transformPropTypes(propTypes, { componentName, filePath })
     }
 
     return result
   }, {})
-
-  return uieProperties
 }
 
 module.exports = {
