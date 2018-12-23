@@ -45,7 +45,7 @@ module.exports = {
     'theme': 'Theme',
     'default': 'Default'
   },
-  'entities': {
+  'properties': {
     'title': 'Datatypes',
     'property_name': 'Property',
     'property_type': 'Type',

@@ -8,7 +8,6 @@ const Core = require('../src/core')
 const { testProjectPath, testProjectRelativePath, testProjectTargetPath } = require('../../../test/support/paths')
 const dataPath = resolve(testProjectPath, 'uiengine', 'data')
 const pagesPath = resolve(testProjectPath, 'uiengine', 'pages')
-const entitiesPath = resolve(testProjectPath, 'uiengine', 'entities')
 const elementsPath = resolve(testProjectPath, 'src', 'elements')
 const modulesPath = resolve(testProjectPath, 'src', 'modules')
 const templatesPath = resolve(testProjectPath, 'src', 'templates')
@@ -185,18 +184,6 @@ describe('Core', function () {
       assert.strictEqual(change.type, 'page')
       assert.strictEqual(change.item, 'testcases/created')
       assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'pages', 'testcases', 'created', 'README.md'))
-    })
-
-    it('should generate entity update on change', async () => {
-      const filePath = join(entitiesPath, 'Entity.js')
-      fs.removeSync(indexPath)
-      const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
-
-      assertContentMatches(indexPath, 'Entity')
-      assert.strictEqual(change.action, 'changed')
-      assert.strictEqual(change.type, 'entity')
-      assert.strictEqual(change.item, 'Entity')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine', 'entities', 'Entity.js'))
     })
 
     it('should generate component on change', async () => {

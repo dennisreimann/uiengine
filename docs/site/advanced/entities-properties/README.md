@@ -1,1 +1,0 @@
-!!!include(entities-properties.md)!!!

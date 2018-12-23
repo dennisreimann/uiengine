@@ -24,8 +24,14 @@
     - data.yml -> data.js (deprecated, see below)
     - Entity.yml -> Entity.js
   - Use the `npx uiengine migrate` command to automatically migrate
+
+### Removed
+
 - Removed `source.data` config option
   - Require files directly in your `component.config.js` or `page.config.js`.
+- Removed `source.entities` config option
+  - Require files directly in your `component.config.js`.
+  - One less custom concept to worry about :)
 
 ---
 

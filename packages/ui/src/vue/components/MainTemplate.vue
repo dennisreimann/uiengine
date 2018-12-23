@@ -70,7 +70,6 @@
               v-for="(properties, templateId) in page.properties"
               :key="templateId"
               :title="templateId"
-              :entities="entities"
               :properties="properties"
             />
           </div>
@@ -215,7 +214,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['config', 'pages', 'entities']),
+    ...mapGetters('state', ['config', 'pages']),
 
     page () {
       return this.pages[this.id]

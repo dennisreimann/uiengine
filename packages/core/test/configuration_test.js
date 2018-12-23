@@ -44,8 +44,6 @@ describe('Configuration', () => {
 
       assert.strictEqual(config.source.templates, resolve(testProjectPath, 'src', 'templates'))
       assert.strictEqual(config.source.pages, resolve(testProjectPath, 'uiengine', 'pages'))
-      assert.strictEqual(config.source.entities, resolve(testProjectPath, 'uiengine', 'entities'))
-      assert.strictEqual(config.source.data, resolve(testProjectPath, 'uiengine', 'data'))
     })
 
     it('should resolve components source paths as array', async () => {

@@ -19,7 +19,6 @@ const state = {
       configFile: resolve(testProjectPath, 'uiengine.config.js'),
       components: [resolve(testProjectPath, 'src', 'elements'), resolve(testProjectPath, 'src', 'modules')],
       templates: resolve(testProjectPath, 'src', 'templates'),
-      entities: resolve(testProjectPath, 'uiengine', 'entities'),
       pages: resolve(testProjectPath, 'uiengine', 'pages'),
       data: resolve(testProjectPath, '..', 'fixtures')
     },
@@ -106,12 +105,6 @@ const state = {
         resolve(testProjectPath, 'uiengine', 'pages', 'testcases', 'custom-path', 'file.txt'),
         resolve(testProjectPath, 'uiengine', 'pages', 'testcases', 'custom-path', 'extra-files', 'file-in-folder.txt')
       ]
-    }),
-
-    'entities': Factory.page('entities', {
-      title: 'Entities',
-      path: '_entities',
-      type: 'entities'
     })
   },
 
@@ -158,14 +151,6 @@ const state = {
         myContextVariable: 'This is my context'
       },
       parentId: 'prototype'
-    }),
-
-    'entities': Factory.navigation('entities', {
-      itemId: 'entities',
-      title: 'Entities',
-      path: '_entities',
-      type: 'entities',
-      parentId: 'index'
     }),
 
     'testcases': Factory.navigation('testcases', {
@@ -219,36 +204,6 @@ const state = {
         }
       ]
     })
-  },
-
-  entities: {
-    Entity: {
-      title: {
-        type: 'String',
-        description: 'Title',
-        required: true
-      },
-      date: {
-        type: 'Date',
-        description: 'Publising date',
-        required: true
-      },
-      customObject: {
-        type: 'CustomObject',
-        description: 'A custom object'
-      }
-    },
-    CustomObject: {
-      tags: {
-        type: 'Array',
-        description: 'Tags as strings'
-      },
-      isHidden: {
-        type: 'Boolean',
-        default: 'false',
-        description: 'Entity should be hidden'
-      }
-    }
   }
 }
 

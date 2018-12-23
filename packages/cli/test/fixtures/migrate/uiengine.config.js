@@ -4,8 +4,9 @@ module.exports = {
   source: {
     components: ['./components'],
     templates: './templates',
-    entities: './entities',
     pages: './pages',
+    // deprecated sources, keep them in here for the migrations
+    entities: './entities',
     data: './data'
   },
 

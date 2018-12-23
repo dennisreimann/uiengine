@@ -42,7 +42,6 @@ describe('CLI @nowatch', function () {
       assert.strictEqual(config.source.components, './src/components')
       assert.strictEqual(config.source.templates, './src/templates')
       assert.strictEqual(config.source.pages, './uiengine/pages')
-      assert.strictEqual(config.source.entities, './uiengine/entities')
       assert.strictEqual(config.target, './dist')
       assert.strictEqual(config.adapters.html, '@uiengine/adapter-html')
       assert.strictEqual(config.template, 'uiengine.html')

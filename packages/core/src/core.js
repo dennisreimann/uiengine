@@ -5,11 +5,9 @@ const Builder = require('./builder')
 const Navigation = require('./navigation')
 const Component = require('./component')
 const Page = require('./page')
-const Entity = require('./entity')
 const Interface = require('./interface')
 const Connector = require('./connector')
 const {
-  EntityUtil: { entityFilePathToId },
   ComponentUtil: { componentFilePathToId, componentPathToId },
   PageUtil: { pageFilePathToId, parentIdForPageId },
   TemplateUtil: { templateFilePathToId },
@@ -68,12 +66,10 @@ async function generate (options) {
 
     // 1. data fetching
     const fetchPages = Page.fetchAll(_state)
-    const fetchEntities = Entity.fetchAll(_state)
     const fetchComponents = Component.fetchAll(_state)
-    const [pages, entities, components] = await Promise.all([fetchPages, fetchEntities, fetchComponents])
+    const [pages, components] = await Promise.all([fetchPages, fetchComponents])
 
     _state = R.assoc('pages', pages, _state)
-    _state = R.assoc('entities', entities, _state)
     _state = R.assoc('components', components, _state)
 
     // 2. transformations
@@ -94,10 +90,9 @@ async function generate (options) {
 }
 
 const getChangeObject = (filePath, action) => {
-  const { source: { components, pages, templates, entities } } = _state.config
+  const { source: { components, pages, templates } } = _state.config
   const file = relative(process.cwd(), filePath)
   const pageId = pages ? pageFilePathToId(pages, filePath) : undefined
-  const entityId = entities ? entityFilePathToId(entities, filePath) : undefined
   const templateId = templates ? templateFilePathToId(templates, filePath) : undefined
   const variantIdPrefix = components ? variantFilePathToIdPrefix(components, filePath) : undefined
   const componentId = components ? componentFilePathToId(components, filePath) || componentPathToId(components, filePath) : undefined
@@ -108,8 +103,6 @@ const getChangeObject = (filePath, action) => {
     return { file, filePath, action, type: 'variant', item: variantIdPrefix }
   } else if (componentId) {
     return { file, filePath, action, type: 'component', item: componentId }
-  } else if (entityId) {
-    return { file, filePath, action, type: 'entity', item: entityId }
   } else if (templateId) {
     return { file, filePath, action, type: 'template', item: templateId }
   } else {
@@ -130,11 +123,6 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
 
     case 'variant':
       fn = isDeleted ? removeVariant : regenerateVariant
-      await fn(change.item)
-      break
-
-    case 'entity':
-      fn = isDeleted ? removeEntity : regenerateEntity
       await fn(change.item)
       break
 
@@ -164,12 +152,6 @@ async function fetchAndAssocPage (id) {
   const page = await Page.fetchById(_state, id)
   _state = R.assocPath(['pages', id], page, _state)
   return page
-}
-
-async function fetchAndAssocEntity (id) {
-  const entity = await Entity.fetchById(_state, id)
-  _state = R.assocPath(['entities', id], entity, _state)
-  return entity
 }
 
 async function fetchAndAssocComponent (id) {
@@ -214,16 +196,6 @@ async function removePage (id) {
 
   await fetchAndAssocPage(parentId)
   await fetchAndAssocNavigation()
-  await Builder.generateIncrement(_state)
-}
-
-async function regenerateEntity (id) {
-  await fetchAndAssocEntity(id)
-  await Builder.generateIncrement(_state)
-}
-
-async function removeEntity (id) {
-  _state = R.dissocPath(['entities', id], _state)
   await Builder.generateIncrement(_state)
 }
 

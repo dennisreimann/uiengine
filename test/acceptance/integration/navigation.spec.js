@@ -22,9 +22,6 @@ context('Navigation', () => {
     cy.get('[data-test-navitem-id="testcases/custom-template"] > a').click()
     cy.get('h1').should('be', 'Custom Template')
 
-    cy.get('[data-test-navitem-id="entities"] > a').click()
-    cy.get('h1').should('be', 'Datatypes')
-
     cy.get('[data-test-navitem-id="settings"] >   a').click()
     cy.get('h1').should('be', 'Settings')
   })

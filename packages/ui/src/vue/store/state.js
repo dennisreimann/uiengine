@@ -1,7 +1,7 @@
 import { createRoutes } from '../router'
 
 const transformState = uiengineState => {
-  const { entities, navigation } = uiengineState
+  const { navigation } = uiengineState
 
   const addIndexChild = (id, title) => {
     navigation[id] = {
@@ -16,11 +16,6 @@ const transformState = uiengineState => {
     navigation.index.childIds.push(id)
   }
 
-  // eventually add entities
-  if (Object.keys(entities).length > 0) {
-    addIndexChild('entities', 'Entities')
-  }
-
   // append settings
   addIndexChild('settings', 'Settings')
 
@@ -32,7 +27,6 @@ const initialState = transformState(window.UIengine.state)
 const getters = {
   config: state => state.config,
   pages: state => state.pages,
-  entities: state => state.entities,
   components: state => state.components,
   navigation: state => state.navigation
 }

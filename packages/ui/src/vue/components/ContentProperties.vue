@@ -7,22 +7,22 @@
     <thead>
       <tr>
         <th class="property__name">
-          {{ 'entities.property_name' | localize }}
+          {{ 'properties.property_name' | localize }}
         </th>
         <th class="property__type">
-          {{ 'entities.property_type' | localize }}
+          {{ 'properties.property_type' | localize }}
         </th>
         <th
           v-if="displayDescription"
           class="property__description"
         >
-          {{ 'entities.property_description' | localize }}
+          {{ 'properties.property_description' | localize }}
         </th>
         <th class="property__required">
-          {{ 'entities.property_required' | localize }}
+          {{ 'properties.property_required' | localize }}
         </th>
         <th class="property__default">
-          {{ 'entities.property_default' | localize }}
+          {{ 'properties.property_default' | localize }}
         </th>
       </tr>
     </thead>
@@ -32,7 +32,6 @@
         :id="propertyId"
         :key="propertyId"
         :property="property"
-        :entities="entities"
         :display-description="displayDescription"
       />
     </tbody>
@@ -54,11 +53,6 @@ export default {
     },
 
     properties: {
-      type: Object,
-      required: true
-    },
-
-    entities: {
       type: Object,
       required: true
     }

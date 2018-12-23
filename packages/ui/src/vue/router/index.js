@@ -36,12 +36,6 @@ const router = new Router({
       meta: { navItemId: '_search' }
     },
     {
-      name: 'entities',
-      path: '/_entities/',
-      component: mainComponent('entities'),
-      meta: { navItemId: '_entities' }
-    },
-    {
       name: 'settings',
       path: '/_settings/',
       component: mainComponent('settings'),

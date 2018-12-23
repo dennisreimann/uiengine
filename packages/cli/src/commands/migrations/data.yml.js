@@ -22,8 +22,8 @@ exports.handler = async argv => {
     const filePaths = await glob(pattern, { onlyFiles: true })
 
     filePaths.forEach(async ymlPath => {
-      const entityPath = dirname(ymlPath)
-      const jsPath = join(entityPath, `${basename(ymlPath, '.yml')}.js`)
+      const dataPath = dirname(ymlPath)
+      const jsPath = join(dataPath, `${basename(ymlPath, '.yml')}.js`)
       const attributes = await YamlUtil.fromFile(ymlPath)
 
       await Promise.all([

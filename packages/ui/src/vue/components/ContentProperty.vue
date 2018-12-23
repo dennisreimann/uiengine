@@ -27,7 +27,6 @@
         :key="propertyId"
         :level="level + 1"
         :property="prop"
-        :entities="entities"
         :display-description="displayDescription"
       />
     </template>
@@ -54,11 +53,6 @@ export default {
     },
 
     property: {
-      type: Object,
-      required: true
-    },
-
-    entities: {
       type: Object,
       required: true
     },

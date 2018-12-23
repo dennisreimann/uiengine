@@ -26,7 +26,6 @@ module.exports = {
   source: {
     components: ['./src/elements', './src/modules'],
     templates: './src/templates',
-    entities: './uiengine/entities',
     pages: './uiengine/pages',
     data: './uiengine/data'
   },

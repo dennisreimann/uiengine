@@ -18,7 +18,7 @@ context('Component', () => {
     context('in viewport mode', () => {
       beforeEach(() => {
         cy.visit('/_settings/')
-        cy.get('#previewMode').select('Viewports')
+        cy.get('#previewMode-select').select('Viewports')
         cy.visit('/patterns/atoms/label/')
       })
 
@@ -65,7 +65,7 @@ context('Component', () => {
     context('in breakpoint mode', () => {
       beforeEach(() => {
         cy.visit('/_settings/')
-        cy.get('#previewMode').select('Breakpoints')
+        cy.get('#previewMode-select').select('Breakpoints')
         cy.visit('/patterns/atoms/label/')
       })
 

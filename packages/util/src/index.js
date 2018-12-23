@@ -1,6 +1,5 @@
 const ComponentUtil = require('./component')
 const DebugUtil = require('./debug')
-const EntityUtil = require('./entity')
 const FileUtil = require('./file')
 const MarkdownUtil = require('./markdown')
 const MessageUtil = require('./message')
@@ -13,7 +12,6 @@ const { UiengineInputError } = require('./error')
 module.exports = {
   ComponentUtil,
   DebugUtil,
-  EntityUtil,
   FileUtil,
   MarkdownUtil,
   MessageUtil,

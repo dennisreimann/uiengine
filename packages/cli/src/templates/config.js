@@ -11,12 +11,10 @@ module.exports = {
   // - templates contains the variant preview and application templates
   // - pages is the directory of the UIengine's site structure and page markdown files
   // - data contains sample data that can be referenced in variants and pages
-  // - entities contains the optional entity definitions for the components
   source: {
     components: '${values.source.components}',
     templates: '${values.source.templates}',
-    pages: '${values.source.pages}',
-    entities: '${values.source.entities}'
+    pages: '${values.source.pages}'
   },
 
   // Destination paths for the generated output.

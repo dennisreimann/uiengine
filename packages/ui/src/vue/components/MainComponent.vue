@@ -176,7 +176,6 @@
               v-for="(properties, componentId) in component.properties"
               :key="componentId"
               :title="componentId"
-              :entities="entities"
               :properties="properties"
             />
           </div>
@@ -251,7 +250,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['components', 'config', 'entities', 'navigation']),
+    ...mapGetters('state', ['components', 'config', 'navigation']),
 
     dependencies () {
       return this.component.dependencies.filter(dependency => this.componentById(dependency))
