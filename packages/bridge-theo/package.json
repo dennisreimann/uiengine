@@ -28,11 +28,11 @@
     "precommit": "lint-staged"
   },
   "peerDependencies": {
-    "theo": "8.0.1"
+    "theo": "8.1.1"
   },
   "devDependencies": {
     "lint-staged": "8.1.0",
-    "theo": "8.0.1"
+    "theo": "8.1.1"
   },
   "lint-staged": {
     "*.js": [
