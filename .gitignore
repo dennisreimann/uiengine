@@ -26,3 +26,4 @@ test/project/dist
 # we can profit from Standard.js ignoring the paths listed in gitignore.
 /packages/*/lib
 /packages/*/dist
+/packages/ui/src/preview

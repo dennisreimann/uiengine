@@ -8,8 +8,6 @@
 </template>
 
 <script>
-import { decorateContent } from '../../util'
-
 export default {
   props: {
     item: {
@@ -19,10 +17,16 @@ export default {
   },
 
   computed: {
+    // replace headings which resemble the component/page title
     renderedContent () {
-      return this.item.content
-        ? decorateContent(this.item)
-        : null
+      const { content, title } = this.item
+
+      if (content) {
+        const regexp = new RegExp(`^<h1.*?>${title}</h1>`)
+        return content.replace(regexp, '').trim()
+      } else {
+        return null
+      }
     }
   },
 

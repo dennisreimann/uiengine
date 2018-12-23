@@ -85,13 +85,21 @@
 </template>
 
 <script>
-import { decorateContext, decorateCode } from '../../util'
+import highlight from '../../shared/highlight'
 
 const regexpClean = new RegExp('([\\s]*?<!--\\s?omit:.*?\\s?-->)', 'gi')
 
 const omit = (mark, string) => {
   const regexpOmit = new RegExp(`([\\s]*?<!--\\s?omit:${mark}:start\\s?-->[\\s\\S]*?<!--\\s?omit:${mark}:end\\s?-->)`, 'gi')
   return string.replace(regexpOmit, '').replace(regexpClean, '')
+}
+
+const decorateCode = (code, lang) => {
+  return highlight(code, lang)
+}
+
+const decorateContext = json => {
+  return highlight(JSON.stringify(json, null, 2), 'json')
 }
 
 export default {

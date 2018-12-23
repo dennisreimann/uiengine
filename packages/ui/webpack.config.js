@@ -96,7 +96,7 @@ module.exports = {
   entry: {
     main: resolve('src/vue/main.js'),
     inject: resolve('src/styles/entry/inject.styl'),
-    preview: 'iframe-resizer/js/iframeResizer.contentWindow.js'
+    preview: resolve('src/preview/iframeResizer.contentWindow.js')
   },
   output: {
     path: resolve('dist'),
@@ -112,6 +112,27 @@ module.exports = {
   optimization: {
     runtimeChunk: 'single',
     noEmitOnErrors: true,
+    splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 1,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name (module) {
+            // replace @ symbols in otherwise URL-safe package name
+            const packageName = module.context
+              .match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
+              .replace('@', '')
+            // group into vue, highlight.js and other
+            const group = packageName.startsWith('vue')
+              ? 'vue'
+              : (packageName.startsWith('highlight') ? 'hljs' : 'other')
+            return `vendor_${group}`
+          }
+        }
+      }
+    },
     minimizer: [
       new TerserPlugin({
         extractComments: true,

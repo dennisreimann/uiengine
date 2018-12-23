@@ -43,6 +43,8 @@ _%>
     </svg>
     <div id="app"></div>
     <script src="<%- assetPath(files.chunks.runtime.entry) %>"></script>
+    <script src="<%- assetPath(files.chunks.vendor_other.entry) %>"></script>
+    <script src="<%- assetPath(files.chunks.vendor_vue.entry) %>"></script>
     <script src="<%- assetPath(files.chunks.main.entry) %>"></script>
   </body>
 </html>

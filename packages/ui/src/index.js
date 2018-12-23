@@ -4,7 +4,8 @@ const htmlescape = require('htmlescape')
 const merge = require('deepmerge')
 const Color = require('color')
 const defaultLocales = require('./locales')
-const { highlight, localize } = require('./util')
+const highlight = require('./shared/highlight')
+const localize = require('./shared/localize')
 const {
   FileUtil: { read, copy },
   StringUtil: { dasherize, titleize }
