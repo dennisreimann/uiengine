@@ -78,8 +78,8 @@ export default {
 <style lang="stylus">
 @require "base/settings"
 @require "base/fonts"
-@require "base/utilities"
 @require "base/elements"
+@require "base/utilities"
 
 // general layout
 @media $mq-up_to_l

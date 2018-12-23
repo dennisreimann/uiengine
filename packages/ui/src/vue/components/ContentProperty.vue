@@ -1,33 +1,56 @@
 <template>
-  <tr>
-    <td class="property__name">
-      {{ id }}
-    </td>
-    <td class="property__type">
-      <Component
-        :is="propertyType"
-        v-bind="$props"
+  <Fragment>
+    <tr :class="levelClass">
+      <td class="property__name">
+        {{ id }}
+      </td>
+      <td class="property__type">
+        {{ propertyType }}
+      </td>
+      <td
+        v-if="displayDescription"
+        class="property__description"
+      >
+        {{ description }}
+      </td>
+      <td class="property__required">
+        {{ required }}
+      </td>
+      <td class="property__default">
+        {{ defaultValue }}
+      </td>
+    </tr>
+    <template v-if="displayNestedProps">
+      <ContentProperty
+        v-for="(prop, propertyId) in nestedProps"
+        :id="propertyId"
+        :key="propertyId"
+        :level="level + 1"
+        :property="prop"
+        :entities="entities"
+        :display-description="displayDescription"
       />
-    </td>
-    <td
-      class="property__description"
-      v-html="description"
-    />
-    <td class="property__required">
-      {{ required }}
-    </td>
-    <td class="property__default">
-      {{ defaultValue }}
-    </td>
-  </tr>
+    </template>
+  </Fragment>
 </template>
 
 <script>
+import { Fragment } from 'vue-fragment'
+
 export default {
+  components: {
+    Fragment
+  },
+
   props: {
     id: {
       type: String,
       required: true
+    },
+
+    level: {
+      type: Number,
+      default: 0
     },
 
     property: {
@@ -38,30 +61,20 @@ export default {
     entities: {
       type: Object,
       required: true
+    },
+
+    displayDescription: {
+      type: Boolean,
+      required: true
     }
   },
 
   computed: {
     propertyType () {
-      const regexp = new RegExp(
-        // before: either the start of the string or a bounding character,
-        // this is optional to make it non-greedy
-        `(^|([[|:]))?` +
-        // the type name match options
-        `(${Object.keys(this.entities).join('|')})` +
-        // after: either the end of the string or a bounding character
-        `(([\\]|,}])|$)`, 'g')
-
-      const output = this.property.type.replace(regexp, (match, before, unused, typeName, after) => {
-        // https://forum.vuejs.org/t/dynamically-compile-router-link/7410
-        const to = JSON.stringify({ path: '/_entities/', hash: typeName })
-        return `${before || ''}<router-link :to='${to}' class="" active-class="" exact-active-class="" exact>${typeName}</router-link>${after || ''}`
-      })
-
-      return {
-        template: `<span>${output}</span>`,
-        props: this.$options.props
-      }
+      const { value, type } = this.property
+      return ['Array', 'Object'].includes(type)
+        ? `${this.property.type}[${value.type || value}]`
+        : this.property.type
     },
 
     description () {
@@ -74,6 +87,24 @@ export default {
 
     defaultValue () {
       return this.property.default
+    },
+
+    displayNestedProps () {
+      return !!this.nestedProps
+    },
+
+    nestedProps () {
+      const { value } = this.property
+
+      if (value && typeof value === 'object') {
+        return value.type && value.value ? value.value : value
+      }
+
+      return undefined
+    },
+
+    levelClass () {
+      return `property--level-${this.level}`
     }
   }
 }
@@ -81,29 +112,27 @@ export default {
 
 <style lang="stylus" scoped>
 .property
-  &__name
-    width 10em
-
-  &__type
-    width 6em
-
-  &__description
-    width auto
+  &--level-1 &__name
+    padding-left var(--uie-space-xl) !important
+  &--level-2 &__name
+    padding-left calc(var(--uie-space-xl) * 2) !important
+  &--level-3 &__name
+    padding-left calc(var(--uie-space-xl) * 3) !important
+  &--level-4 &__name
+    padding-left calc(var(--uie-space-xl) * 4) !important
+  &--level-5 &__name
+    padding-left calc(var(--uie-space-xl) * 5) !important
 
   &__name,
   &__type,
   &__description code,
   &__default,
   &__required
-    td&
-      font-family var(--uie-font-family-code)
+    font-family var(--uie-font-family-code)
+
+  &__type
+    white-space nowrap
 
   &__required
-    width 4em
-    th&,
-    td&
-      text-align center
-
-  &__default
-    width 6em
+    text-align center
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <table :id="title">
+  <table
+    :id="title"
+    :class="{ 'withDescription': displayDescription }"
+  >
     <caption>{{ title }}</caption>
     <thead>
       <tr>
@@ -9,7 +12,10 @@
         <th class="property__type">
           {{ 'entities.property_type' | localize }}
         </th>
-        <th class="property__description">
+        <th
+          v-if="displayDescription"
+          class="property__description"
+        >
           {{ 'entities.property_description' | localize }}
         </th>
         <th class="property__required">
@@ -27,6 +33,7 @@
         :key="propertyId"
         :property="property"
         :entities="entities"
+        :display-description="displayDescription"
       />
     </tbody>
   </table>
@@ -55,6 +62,12 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  computed: {
+    displayDescription () {
+      return Object.values(this.properties).some(prop => prop.description)
+    }
   }
 }
 </script>
@@ -65,4 +78,22 @@ table
 
 table + table
   margin-top var(--uie-space-xxl)
+
+.property
+  &__name
+    .withDescription &
+      width 10em
+
+  &__type
+    width 12em
+
+  &__description
+    width auto
+
+  &__required
+    width 4em
+    text-align center
+
+  &__default
+    width 6em
 </style>

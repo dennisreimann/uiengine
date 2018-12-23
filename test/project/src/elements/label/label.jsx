@@ -17,7 +17,17 @@ Label.propTypes = {
   /**
    * The id of the referenced form element
    */
-  for: PropTypes.string.isRequired
+  for: PropTypes.string.isRequired,
+
+  test: PropTypes.arrayOf(
+    PropTypes.shape({
+      nested: PropTypes.arrayOf(
+        PropTypes.shape({
+          deeply: PropTypes.objectOf(PropTypes.bool)
+        })
+      )
+    })
+  )
 }
 
 export default Label
