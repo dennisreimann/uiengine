@@ -180,9 +180,9 @@ import { dasherize } from '@uiengine/util/src/string'
 import Preview from '../mixins/preview'
 import ContentHeader from './ContentHeader'
 import ContentText from './ContentText'
-import ContentPreview from './ContentPreview'
 import ContentProperties from './ContentProperties'
 import ContentTag from './ContentTag'
+import ContentPreview from './ContentPreview'
 import ContentCode from './ContentCode'
 
 export default {
