@@ -134,8 +134,10 @@ describe('Component', () => {
       const { dependentComponents, dependentTemplates } = data
 
       assert(dependentComponents, 'Dependent components for label are not defined')
-      assert.strictEqual(dependentComponents.length, 1)
+
+      assert.strictEqual(dependentComponents.length, 2)
       assert(dependentComponents.includes('formfield'), 'Dependent components for label do not include "formfield".')
+      assert(dependentComponents.includes('form'), 'Dependent components for label do not include "form".')
 
       assert(dependentTemplates, 'Dependent templates for label are not defined')
       assert.strictEqual(dependentTemplates.length, 1)

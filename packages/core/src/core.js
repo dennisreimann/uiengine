@@ -37,7 +37,7 @@ const aggregateDependentComponents = (components, id) => {
         return dependentDependents.includes(componentId)
       }, dependentComponents)
 
-      return dependentComponents.concat(R.map(aggregate, nonCyclicList))
+      return dependentComponents.concat(...R.map(aggregate, nonCyclicList))
     } else {
       return []
     }

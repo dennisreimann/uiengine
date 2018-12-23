@@ -9,6 +9,7 @@ const { testProjectPath, testProjectRelativePath, testProjectTargetPath } = requ
 const dataPath = resolve(testProjectPath, 'uiengine', 'data')
 const pagesPath = resolve(testProjectPath, 'uiengine', 'pages')
 const entitiesPath = resolve(testProjectPath, 'uiengine', 'entities')
+const elementsPath = resolve(testProjectPath, 'src', 'elements')
 const modulesPath = resolve(testProjectPath, 'src', 'modules')
 const templatesPath = resolve(testProjectPath, 'src', 'templates')
 const indexPath = join(testProjectTargetPath, 'index.html')
@@ -199,14 +200,14 @@ describe('Core', function () {
     })
 
     it('should generate component on change', async () => {
-      const filePath = join(modulesPath, 'form', 'form.pug')
+      const filePath = join(elementsPath, 'label', 'label.pug')
       const { change } = await Core.generateIncrementForFileChange(filePath, 'changed')
 
-      assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_variants'), join('form', 'form.pug-1'))
+      assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_variants'), join('label', 'label.pug-5'))
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'component')
-      assert.strictEqual(change.item, 'form')
-      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'modules', 'form', 'form.pug'))
+      assert.strictEqual(change.item, 'label')
+      assert.strictEqual(change.file, join(testProjectRelativePath, 'src', 'elements', 'label', 'label.pug'))
     })
 
     it('should generate component on create', async () => {
