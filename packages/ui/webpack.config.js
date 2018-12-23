@@ -1,6 +1,7 @@
 'use strict'
 
 const { dirname, join } = require('path')
+const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -16,8 +17,17 @@ const assetsPath = '_assets'
 const publicPath = filePath => `${assetsPath}/${filePath}`
 const assetPath = filePath => `<%= basePath %>${filePath}`
 const fileNameTmpl = `[name]${isProduction ? '.[contenthash:7]' : ''}`
+
+const { LANGUAGES } = require('./src/shared/highlight')
+
 const plugins = [
   new VueLoaderPlugin(),
+  // restrict highlight.js to what we need
+  // https://bjacobel.com/2016/12/04/highlight-bundle-size/
+  new webpack.ContextReplacementPlugin(
+    /highlight\.js\/lib\/languages$/,
+    new RegExp(`^./(${LANGUAGES.join('|')})$`)
+  ),
   // extract css into its own file
   new MiniCssExtractPlugin({
     filename: publicPath(`styles/${fileNameTmpl}.css`)
