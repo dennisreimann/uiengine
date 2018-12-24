@@ -89,6 +89,7 @@
         type="search"
         class="topbar__searchfield"
         name="query"
+        :aria-label="'search.label' | localize"
         data-test-searchfield
       >
     </form>

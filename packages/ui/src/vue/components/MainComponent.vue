@@ -20,12 +20,10 @@
           <a
             v-if="fileLink"
             :href="fileLink"
+            :aria-label="'options.edit' | localize"
             class="contentheader__action"
           >
-            <AppIcon
-              :title="'options.edit' | localize"
-              symbol="pencil"
-            />
+            <AppIcon symbol="pencil" />
           </a>
           <a
             v-if="hasInfo"

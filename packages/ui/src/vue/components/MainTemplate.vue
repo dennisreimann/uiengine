@@ -86,6 +86,7 @@
             v-for="action in customActions"
             :key="action.title"
             :title="action.title"
+            :aria-label="action.title"
             href="#"
             class="contentheader__action"
             @click.prevent="handleCustomAction(action)"

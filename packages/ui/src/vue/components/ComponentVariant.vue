@@ -26,6 +26,7 @@
           v-for="action in customActions"
           :key="action.title"
           :title="action.title"
+          :aria-label="action.title"
           href="#"
           class="contentheader__action"
           @click.prevent="handleCustomAction(action)"
@@ -43,6 +44,7 @@
           :href="href"
           :target="variant.id | dasherize"
           :title="'options.open_in_window' | localize"
+          :aria-label="'options.open_in_window' | localize"
           class="contentheader__action"
           data-test-openinwindow-link
           @click.stop
@@ -53,6 +55,7 @@
           :href="permalinkUrl"
           :data-clipboard-text="permalinkUrl"
           :title="'options.copy_permalink' | localize"
+          :aria-label="'options.copy_permalink' | localize"
           class="permalink contentheader__action"
           @click.prevent
         >

@@ -65,6 +65,7 @@ module.exports = {
     'last_update': 'Last updated on'
   },
   'search': {
+    'label': 'Search',
     'toggle': 'Toggle search',
     'title': 'Search results for "%{query}"',
     'no_results': 'Unfortunately there is no content matching your search query.'

@@ -10,7 +10,7 @@ LANGUAGES.forEach(name => {
 module.exports = (code, lang) => {
   const languages = (lang != null) ? [lang] : undefined
   const { value, language } = hljs.highlightAuto(code, languages)
-  const highlighted = `<pre class="hljs" lang="${lang || language}"><code>${value}</code></pre>`
+  const highlighted = `<pre class="hljs lang-${lang || language}"><code>${value}</code></pre>`
 
   return highlighted
 }

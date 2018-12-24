@@ -16,11 +16,9 @@
         <a
           :href="fileLink"
           class="contentheader__action"
+          :aria-label="'options.edit' | localize"
         >
-          <AppIcon
-            :title="'options.edit' | localize"
-            symbol="pencil"
-          />
+          <AppIcon symbol="pencil" />
         </a>
       </div>
     </ContentHeader>

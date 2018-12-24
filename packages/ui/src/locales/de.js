@@ -65,6 +65,7 @@ module.exports = {
     'last_update': 'Letztes Update am'
   },
   'search': {
+    'label': 'Suche',
     'toggle': 'Suche umschalten',
     'title': 'Suchergebnisse für "%{query}"',
     'no_results': 'Leider konnten keine passenden Suchergebnisse gefunden werden.'
