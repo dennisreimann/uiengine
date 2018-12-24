@@ -66,10 +66,14 @@ const plugins = [
 ]
 
 if (isProduction) {
-  // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-  // plugins.push(
-  //   new BundleAnalyzerPlugin()
-  // )
+  const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+  plugins.push(
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false,
+      reportFilename: resolve('report.html')
+    })
+  )
 } else {
   plugins.push(
     new FriendlyErrorsPlugin({
