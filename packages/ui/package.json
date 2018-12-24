@@ -24,7 +24,7 @@
     "uiengine"
   ],
   "scripts": {
-    "clean": "rimraf dist lib && cp ../../node_modules/iframe-resizer/js/iframeResizer.contentWindow.js src/preview",
+    "clean": "rimraf dist lib",
     "start": "yarn run clean && cross-env NODE_ENV=development webpack --watch",
     "build": "yarn run clean && cross-env NODE_ENV=production webpack",
     "lint": "eslint --ext .js,.vue src test",
