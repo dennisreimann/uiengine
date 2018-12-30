@@ -48,7 +48,7 @@ function filesForVariant (options, componentName, variantName) {
   return [
     {
       basename: `${variantName}.marko`,
-      data: `<include('../${componentName}.marko', input)/>`
+      data: `import ${componentName} from '../${componentName}.marko'\n\n<${componentName} ...input />`
     }
   ]
 }
