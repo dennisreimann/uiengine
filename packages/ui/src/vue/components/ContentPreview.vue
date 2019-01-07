@@ -238,27 +238,6 @@ export default {
 
     previewTitle (name, width) {
       return `${name} @ ${width}px`
-    },
-
-    handleCustomAction (action) {
-      let { type, elem, className } = action
-      elem = elem || 'body'
-
-      if (type === 'TOGGLE_CLASS') {
-        if (!className) {
-          return console.error('Please specify a className to toggle.')
-        }
-        this.iframes.forEach(iframe => {
-          const el = iframe.contentDocument.querySelector(elem)
-          if (el) {
-            el.classList.toggle(className)
-          } else {
-            console.warn(`Element with selector "${el}" could not be found in preview.`)
-          }
-        })
-      } else {
-        console.error(`Custom action of type "${type}" does not exist.`)
-      }
     }
   }
 }

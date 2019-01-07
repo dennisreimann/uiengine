@@ -23,23 +23,6 @@
         class="contentheader__options"
       >
         <a
-          v-for="action in customActions"
-          :key="action.title"
-          :title="action.title"
-          :aria-label="action.title"
-          href="#"
-          class="contentheader__action"
-          @click.prevent="handleCustomAction(action)"
-        >
-          <AppIcon
-            v-if="action.icon"
-            :symbol="action.icon"
-          />
-          <span v-else>
-            {{ action.title }}
-          </span>
-        </a>
-        <a
           v-if="!displayAllThemes"
           :href="href"
           :target="variant.id | dasherize"
@@ -182,10 +165,6 @@ export default {
     ...mapGetters('state', ['config']),
     ...mapGetters('preferences', ['currentTheme']),
 
-    customActions () {
-      return this.config.ui.customActions
-    },
-
     parts () {
       return this.displayAllThemes
         ? []
@@ -230,10 +209,6 @@ export default {
     switchTab (section) {
       this.activeSection = section
       this.$refs[`${section}-tab`].focus()
-    },
-
-    handleCustomAction (action) {
-      this.$refs.preview.forEach(preview => preview.handleCustomAction(action))
     }
   }
 }

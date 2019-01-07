@@ -32,6 +32,8 @@
 - Removed `source.entities` config option
   - Require files directly in your `component.config.js`.
   - One less custom concept to worry about :)
+- Removed `ui.customActions`
+  - Will be replaced with a third-party plugin API
 
 ---
 
