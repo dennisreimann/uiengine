@@ -17,6 +17,9 @@ stages:
   - name: verify
     if: branch = master
 
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$PATH"
 before_script: yarn run build
 script: yarn test
 
@@ -26,6 +29,11 @@ jobs:
       name: lint
       before_script: skip
       script: yarn run lint
+
+    - stage: check
+      name: audit
+      before_script: skip
+      script: yarn audit
 
     - stage: deploy
       name: coverage
