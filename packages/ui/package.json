@@ -18,7 +18,8 @@
     "dist",
     "lib",
     "src/*.js",
-    "src/locales"
+    "src/locales",
+    "src/shared"
   ],
   "keywords": [
     "uiengine"
