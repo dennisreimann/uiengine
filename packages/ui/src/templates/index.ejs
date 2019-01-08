@@ -15,6 +15,9 @@ const resourceHint = asset => {
   <%_ }
 }
 _%>
+<%%_
+plugin = state.plugins ? state.plugins.ui : {}
+_%%>
 <!DOCTYPE html>
 <html lang="<%%= lang %>" class="uie">
   <head>
@@ -25,6 +28,9 @@ _%>
     <link href="<%- assetPath(stylesheet) %>" rel="stylesheet">
     <%_ }) _%>
     <link rel="stylesheet" href="<%- assetPath('/_assets/styles/hljs/') %><%%= hljs %%>.css" id="hljs" data-default="<%%= hljs %%>" data-tmpl="<%- assetPath('/_assets/styles/hljs/%s.css') %>">
+    <%%_ for (index in plugin.css) { _%%>
+    <link href="<%%- plugin.css[index] %%>" rel="stylesheet">
+    <%%_ } _%%>
     <%%_ if (customStylesFile) { _%%>
     <link rel="stylesheet" href="<%%= customStylesFile %%>">
     <%%_ } _%%>
@@ -33,9 +39,14 @@ _%>
       window.UIengine = {
         base: <%%- helpers.htmlescape(base) %%>,
         state: <%%- helpers.htmlescape(state) %%>,
-        previewSrc: <%- JSON.stringify(assetPath(files.chunks.preview.entry)) %>,
-        runtimeSrc: <%- JSON.stringify(assetPath(files.chunks.runtime.entry)) %>,
-        locales: <%- JSON.stringify(htmlWebpackPlugin.options.locales) %>
+        locales: <%- JSON.stringify(htmlWebpackPlugin.options.locales) %>,
+        iframeScripts: [
+          <%- JSON.stringify(assetPath(files.chunks.preview.entry)) %>,
+          <%- JSON.stringify(assetPath(files.chunks.runtime.entry)) %>,
+          <%%_ for (index in plugin.iframe_js) { _%%>
+          <%%- JSON.stringify(plugin.iframe_js[index]) %%>,
+          <%%_ } _%%>
+        ]
       };
     </script>
   </head>
@@ -62,6 +73,9 @@ _%>
     <script src="<%- assetPath(files.chunks.vendor_other.entry) %>"></script>
     <script src="<%- assetPath(files.chunks.vendor_vue.entry) %>"></script>
     <script src="<%- assetPath(files.chunks.main.entry) %>"></script>
+    <%%_ for (index in plugin.js) { _%%>
+    <script src="<%%- plugin.js[index] %%>"></script>
+    <%%_ } _%%>
     <%%- foot %%>
     <noscript>The content cannot be displayed because JavaScript failed to load or is disabled.</noscript>
   </body>

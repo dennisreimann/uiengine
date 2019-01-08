@@ -101,12 +101,12 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import Iframe from '../mixins/iframe'
-import Preview from '../mixins/preview'
+import Themes from '../mixins/themes'
 
 export default {
   mixins: [
     Iframe,
-    Preview
+    Themes
   ],
 
   props: {
@@ -189,7 +189,7 @@ export default {
 
     iframes () {
       let { iframes } = this.$refs
-      // convert single brakpoints iframe into array
+      // convert single breakpoints iframe into array
       if (iframes instanceof HTMLElement) iframes = [iframes]
 
       return iframes
@@ -245,6 +245,18 @@ export default {
 
     previewTitle (name, width) {
       return `${name} @ ${width}px`
+    },
+
+    dispatchPluginEvent (type, plugin, payload) {
+      const { id } = plugin
+
+      this.iframes.forEach(iframe => {
+        document.dispatchEvent(
+          new CustomEvent(`${id}:${type}`, {
+            detail: Object.assign(payload, { plugin, iframe })
+          })
+        )
+      })
     }
   }
 }

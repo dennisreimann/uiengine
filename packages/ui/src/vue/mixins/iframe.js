@@ -28,9 +28,8 @@ export default {
       if (!height && iframe.src !== 'about:blank') {
         const { contentWindow } = iframe
 
-        // dynamically add runtime and iframe sizer scripts
-        this.addScriptToIframe(window.UIengine.runtimeSrc, iframe)
-        this.addScriptToIframe(window.UIengine.previewSrc, iframe)
+        // dynamically add runtime and iframe sizer as well as plugin scripts
+        window.UIengine.iframeScripts.forEach(src => this.addScriptToIframe(src, iframe))
 
         // initialize iframe sizer
         if (!iframe.iFrameResizer) iframeResizer(iframeResizerOpts, iframe)
@@ -38,6 +37,9 @@ export default {
         // set initial iframe width and update it on resize
         this.iframeWidth = contentWindow.innerWidth
         contentWindow.onresize = this.iframeResizeHandler.bind(this)
+
+        // notify
+        this.$emit('iframe:load', iframe)
       }
     },
 

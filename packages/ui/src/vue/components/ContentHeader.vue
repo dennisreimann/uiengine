@@ -78,7 +78,13 @@ export default {
     margin-left var(--uie-space-l)
 
   &__action
+    display flex
     color var(--uie-color-contentheader-link)
+    cursor pointer
+    background transparent
+    font-family var(--uie-font-family-light)
+    font-size var(--uie-font-size-s)
+    font-weight var(--uie-font-weight-light)
     transition-duration var(--uie-transition-duration-fast)
     text-decoration none
 

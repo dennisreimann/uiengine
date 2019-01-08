@@ -25,8 +25,9 @@ const transformState = uiengineState => {
 const initialState = transformState(window.UIengine.state)
 
 const getters = {
-  config: state => state.config,
   pages: state => state.pages,
+  config: state => state.config,
+  plugins: state => state.plugins,
   components: state => state.components,
   navigation: state => state.navigation
 }

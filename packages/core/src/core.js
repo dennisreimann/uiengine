@@ -7,6 +7,7 @@ const Component = require('./component')
 const Page = require('./page')
 const Interface = require('./interface')
 const Connector = require('./connector')
+const Plugin = require('./plugin')
 const {
   ComponentUtil: { componentFilePathToId, componentPathToId },
   FileUtil: { relativeToCwd },
@@ -63,15 +64,18 @@ async function generate (options) {
     // 1. setup and data fetching
     const setupInterface = Interface.setup(_state)
     const setupConnector = Connector.setup(_state)
+    const setupPlugins = Plugin.setup(_state)
     const fetchPages = Page.fetchAll(_state)
     const fetchComponents = Component.fetchAll(_state)
-    const [pages, components] = await Promise.all([fetchPages, fetchComponents, setupInterface, setupConnector])
+    const [pages, components, plugins] = await Promise.all([fetchPages, fetchComponents, setupPlugins, setupInterface, setupConnector])
 
+    _state = R.assoc('plugins', plugins, _state)
     _state = R.assoc('pages', pages, _state)
     _state = R.assoc('components', components, _state)
 
     // 2. transformations
     const navigation = await Navigation.fetch(_state)
+
     _state = R.assoc('navigation', navigation, _state)
 
     // 3. output

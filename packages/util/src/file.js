@@ -45,8 +45,8 @@ async function write (filePath, content) {
 }
 
 async function copy (src, dst) {
-  const dir = dirname(dst)
-  await fs.mkdirs(dir)
+  fs.mkdirSync(dirname(dst), { recursive: true })
+
   await fs.copy(src, dst, { dereference: true })
 }
 
