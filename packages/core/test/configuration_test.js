@@ -78,6 +78,20 @@ describe('Configuration', () => {
       assert.strictEqual(config.ui.base, '/')
     })
 
+    it('should resolve plugins', async () => {
+      const config = await Configuration.read(opts)
+
+      assert.strictEqual(config.plugins.length, 2)
+
+      const [toggle, a11y] = config.plugins
+
+      assert.strictEqual(toggle.module, '@uiengine/plugin-preview-toggle-class')
+      assert.strictEqual(Object.keys(toggle.options).length, 4)
+
+      assert.strictEqual(a11y.module, '@uiengine/plugin-preview-a11y')
+      assert.strictEqual(Object.keys(a11y.options).length, 1)
+    })
+
     it('should resolve adapters', async () => {
       const config = await Configuration.read(opts)
 

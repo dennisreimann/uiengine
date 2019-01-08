@@ -1,0 +1,34 @@
+{
+  "name": "@uiengine/plugin-preview-a11y",
+  "description": "UIengine plugin for adding accessibility tests to the preview",
+  "license": "MIT",
+  "version": "2.0.1",
+  "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
+  "homepage": "https://github.com/dennisreimann/uiengine",
+  "bugs": "https://github.com/dennisreimann/uiengine",
+  "repository": "dennisreimann/uiengine",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=10.13"
+  },
+  "main": "./src/index.js",
+  "files": [
+    "src",
+    "ui"
+  ],
+  "keywords": [
+    "uiengine-plugin",
+    "uiengine"
+  ],
+  "dependencies": {
+    "axe-core": "3.2.2"
+  },
+  "peerDependencies": {
+    "@uiengine/core": "^2.3.0"
+  },
+  "scripts": {
+    "lint": "eslint src test"
+  }
+}

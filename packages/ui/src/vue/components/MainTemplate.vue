@@ -82,6 +82,24 @@
           role="tablist"
           class="contentheader__options"
         >
+          <button
+            v-for="plugin in pluginActions"
+            ref="plugin-action"
+            :key="plugin.title"
+            :title="plugin.title"
+            :aria-label="plugin.title"
+            href="#"
+            class="contentheader__action"
+            @click.prevent="dispatchPluginEvent('click', plugin, $event)"
+          >
+            <AppIcon
+              v-if="plugin.icon"
+              :symbol="plugin.icon"
+            />
+            <span v-else>
+              {{ plugin.title }}
+            </span>
+          </button>
           <a
             v-if="!displayAllThemes"
             :target="page.id | dasherize"
@@ -95,28 +113,41 @@
           <a
             :id="tabId('preview')"
             ref="preview-tab"
-            :aria-selected="isPreviewActive"
-            :tabindex="isPreviewActive ? false : '-1'"
+            :aria-selected="isTabActive('preview')"
+            :tabindex="isTabActive('preview') ? false : '-1'"
             href="#"
             role="tab"
             class="contentheader__option"
             @click.prevent="activeSectionBottom = 'preview'"
-            @keydown.right="switchTabBottom('code')"
           >
             {{ 'options.preview' | localize }}
           </a>
           <a
             :id="tabId('code')"
             ref="code-tab"
-            :aria-selected="isCodeActive"
-            :tabindex="isCodeActive ? false : '-1'"
+            :aria-selected="isTabActive('code')"
+            :tabindex="isTabActive('code') ? false : '-1'"
             href="#"
             role="tab"
             class="contentheader__option"
             @click.prevent="activeSectionBottom = 'code'"
-            @keydown.left="switchTabBottom('preview')"
           >
             {{ 'options.code' | localize }}
+          </a>
+          <a
+            v-for="tab in pluginTabs"
+            :id="tabId(tab.id)"
+            :key="tab.id"
+            ref="plugin-tab"
+            :aria-selected="isTabActive(tab.id)"
+            :tabindex="isTabActive(tab.id) ? false : '-1'"
+            :data-test-variant-tab-link="tab.id"
+            href="#"
+            role="tab"
+            class="contentheader__option"
+            @click.prevent="activeSectionBottom = tab.id"
+          >
+            {{ tab.title }}
           </a>
         </div>
       </ContentHeader>
@@ -129,7 +160,7 @@
       <div
         v-if="hasPreview"
         :aria-labelledby="tabId('preview')"
-        :hidden="!isPreviewActive"
+        :hidden="!isTabActive('preview')"
         class="contentsection"
         role="tabpanel"
       >
@@ -145,7 +176,7 @@
       <div
         v-if="hasCode"
         :aria-labelledby="tabId('code')"
-        :hidden="!isCodeActive"
+        :hidden="!isTabActive('code')"
         class="contentsection"
         role="tabpanel"
       >
@@ -156,6 +187,18 @@
           path-prefix="_pages"
         />
       </div>
+
+      <div
+        v-for="plugin in pluginTabs"
+        :key="plugin.id"
+        ref="plugin-tab-content"
+        :aria-labelledby="tabId(plugin.id)"
+        :hidden="!isTabActive(plugin.id)"
+        class="contentsection content"
+        role="tabpanel"
+      >
+        {{ plugin.id }}
+      </div>
     </div>
   </div>
 </template>
@@ -163,7 +206,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import { dasherize } from '@uiengine/util/src/string'
-import Preview from '../mixins/preview'
+import Plugins from '../mixins/plugins'
+import Themes from '../mixins/themes'
 import ContentHeader from './ContentHeader'
 import ContentText from './ContentText'
 import ContentProperties from './ContentProperties'
@@ -182,7 +226,8 @@ export default {
   },
 
   mixins: [
-    Preview
+    Plugins,
+    Themes
   ],
 
   props: {
@@ -231,14 +276,6 @@ export default {
       return !!this.page.context
     },
 
-    isPreviewActive () {
-      return this.activeSectionBottom === 'preview' || (!this.activeSectionBottom && this.hasPreview)
-    },
-
-    isCodeActive () {
-      return this.activeSectionBottom === 'code' || (!this.activeSectionBottom && !this.hasPreview && this.hasCode)
-    },
-
     href () {
       return `${window.UIengine.base}_pages/${this.currentTheme.id}/${this.page.id}.html`
     }
@@ -247,6 +284,15 @@ export default {
   methods: {
     tabId (section) {
       return `${dasherize(this.page.id)}-${section}`
+    },
+
+    isTabActive (id) {
+      return this.activeSectionBottom === id || (
+        !this.activeSectionBottom && (
+          (id === 'preview' && this.hasPreview) ||
+          (id === 'code' && !this.hasPreview && this.hasCode)
+        )
+      )
     },
 
     switchTabTop (section) {

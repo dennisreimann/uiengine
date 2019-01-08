@@ -6,3 +6,8 @@ body {
   color: var(--app-text-color);
   background: var(--app-background-color);
 }
+
+body.show-grid {
+  background-size: 80px 100%;
+  background-image: linear-gradient(to right, #eee 1px, transparent 1px);
+}

@@ -89,7 +89,7 @@ describe('UIengine @nowatch', function () {
         this.sinon.assert.neverCalledWithMatch(process.stdout.write, '✅  Build done!')
       })
 
-      it('should log the error output', async () => {
+      it('should log the error output', async function () {
         try {
           await UIengine.build(optsWith({ info: false }))
         } catch (err) {

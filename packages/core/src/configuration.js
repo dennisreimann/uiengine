@@ -93,12 +93,13 @@ const _read = (configFilePath, projectConfig, flags) => {
   const update = Date.now()
   const defaults = { name, version, update }
   let data = R.mergeAll([defaults, projectConfig, options])
-  let { source, target, ui, themes, adapters } = data
+  let { source, target, ui, themes, adapters, plugins } = data
 
   assert(source, 'Please provide a "source" config.')
   assert(target, 'Please provide a "target" config with the destination path for the generated site.')
 
   const resolvePaths = R.partial(resolvePath, [configPath])
+  const resolvePlugins = R.partial(resolvePackage, [configPath], 'Plugin')
   const resolveAdapters = R.partial(resolvePackage, [configPath], 'Adapter')
 
   source = R.map(resolvePaths, source)
@@ -108,6 +109,7 @@ const _read = (configFilePath, projectConfig, flags) => {
   if (source.additionalWatches) source.additionalWatches = resolvePathAsArray(configPath, source.additionalWatches)
 
   target = resolvePath(configPath, target)
+  plugins = R.map(resolvePlugins, plugins || [])
   adapters = R.map(resolveAdapters, adapters || {})
   ui = data.ui || {}
   ui.base = ui.base || '/'
@@ -118,6 +120,7 @@ const _read = (configFilePath, projectConfig, flags) => {
   data = R.assoc('ui', ui, data)
   data = R.assoc('themes', themes, data)
   data = R.assoc('adapters', adapters, data)
+  data = R.assoc('plugins', plugins, data)
 
   return data
 }

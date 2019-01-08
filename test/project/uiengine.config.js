@@ -59,6 +59,24 @@ module.exports = {
   // Here you can configure the template that the variant preview gets embeded in.
   template: 'uiengine.pug',
 
+  plugins: [
+    {
+      module: '@uiengine/plugin-preview-toggle-class',
+      options: {
+        title: 'Toggle Grid',
+        icon: 'grid',
+        selector: 'body',
+        className: 'show-grid'
+      }
+    },
+    {
+      module: '@uiengine/plugin-preview-a11y',
+      options: {
+        title: 'A11y'
+      }
+    }
+  ],
+
   themes: [
     {
       id: 'plain',

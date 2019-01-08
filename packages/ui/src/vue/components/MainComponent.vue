@@ -211,7 +211,7 @@
 import { mapGetters } from 'vuex'
 import { dasherize } from '@uiengine/util/src/string'
 import Docs from '../mixins/docs'
-import Preview from '../mixins/preview'
+import Themes from '../mixins/themes'
 import ContentHeader from './ContentHeader'
 import ContentText from './ContentText'
 import ContentProperties from './ContentProperties'
@@ -233,7 +233,7 @@ export default {
 
   mixins: [
     Docs,
-    Preview
+    Themes
   ],
 
   props: {

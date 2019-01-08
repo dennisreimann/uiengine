@@ -17,7 +17,7 @@ const state = {
   }
 }
 
-describe('UI', () => {
+describe('Interface', () => {
   afterEach(function () {
     this.sinon.restore()
   })
