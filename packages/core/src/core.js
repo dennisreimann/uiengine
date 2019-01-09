@@ -32,7 +32,7 @@ const aggregateDependentComponents = (components, id) => {
     if (dependentComponents) {
       const nonCyclicList = R.reject(dependentId => {
         const { dependentComponents: dependentDependents } = components[dependentId]
-        return dependentDependents.includes(componentId)
+        return dependentDependents && dependentDependents.includes(componentId)
       }, dependentComponents)
 
       return dependentComponents.concat(...R.map(aggregate, nonCyclicList))
