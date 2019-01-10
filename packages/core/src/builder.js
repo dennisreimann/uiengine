@@ -161,7 +161,7 @@ async function generateVariant (state, variant) {
 
   // render variant preview, with layout
   const data = { state }
-  const template = variant.template || config.template
+  const template = variant.template || component.template || config.template
 
   await withThemes(themes, async themeId => {
     let { rendered } = await render(state, template, data, themeId, identifier)
