@@ -47,17 +47,10 @@ module.exports = {
   },
   'properties': {
     'title': 'Datatypes',
-    'property_name': 'Property',
-    'property_type': 'Type',
-    'property_description': 'Description',
-    'property_required': 'Required',
-    'property_default': 'Default'
-  },
-  'theme_properties': {
-    'property': 'Property',
-    'theme': 'Theme',
-    'value': 'Value',
-    'variable': 'Variable',
+    'name': 'Property',
+    'type': 'Type',
+    'description': 'Description',
+    'required': 'Required',
     'default': 'Default'
   },
   'footer': {

@@ -7,22 +7,22 @@
     <thead>
       <tr>
         <th class="property__name">
-          {{ 'properties.property_name' | localize }}
+          {{ 'properties.name' | localize }}
         </th>
         <th class="property__type">
-          {{ 'properties.property_type' | localize }}
+          {{ 'properties.type' | localize }}
         </th>
         <th
           v-if="displayDescription"
           class="property__description"
         >
-          {{ 'properties.property_description' | localize }}
+          {{ 'properties.description' | localize }}
         </th>
         <th class="property__required">
-          {{ 'properties.property_required' | localize }}
+          {{ 'properties.required' | localize }}
         </th>
         <th class="property__default">
-          {{ 'properties.property_default' | localize }}
+          {{ 'properties.default' | localize }}
         </th>
       </tr>
     </thead>

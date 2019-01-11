@@ -4,23 +4,23 @@
     <thead>
       <tr>
         <th class="themeProperty__property">
-          {{ 'theme_properties.property' | localize }}
+          {{ 'token.property' | localize }}
         </th>
         <th
           v-if="displayAllThemes"
           class="themeProperty__theme"
         >
-          {{ 'theme_properties.theme' | localize }}
+          {{ 'token.theme' | localize }}
         </th>
         <th class="themeProperty__value">
-          {{ 'theme_properties.value' | localize }}
+          {{ 'token.value' | localize }}
         </th>
         <th class="themeProperty__visualization" />
         <th class="themeProperty__variable">
-          {{ 'theme_properties.variable' | localize }}
+          {{ 'token.variable' | localize }}
         </th>
         <th class="themeProperty__default">
-          {{ 'theme_properties.default' | localize }}
+          {{ 'token.default' | localize }}
         </th>
       </tr>
     </thead>

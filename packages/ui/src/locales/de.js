@@ -47,17 +47,10 @@ module.exports = {
   },
   'properties': {
     'title': 'Datentypen',
-    'property_name': 'Property',
-    'property_type': 'Typ',
-    'property_description': 'Beschreibung',
-    'property_required': 'Pflicht',
-    'property_default': 'Standard'
-  },
-  'theme_properties': {
-    'property': 'Eigenschaft',
-    'theme': 'Theme',
-    'value': 'Wert',
-    'variable': 'Variable',
+    'name': 'Property',
+    'type': 'Typ',
+    'description': 'Beschreibung',
+    'required': 'Pflicht',
     'default': 'Standard'
   },
   'footer': {
