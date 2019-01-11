@@ -25,8 +25,8 @@
   "dependencies": {
     "deepmerge": "3.0.0",
     "fs-extra": "7.0.1",
-    "globby": "8.0.1",
-    "postcss": "7.0.7"
+    "globby": "9.0.0",
+    "postcss": "7.0.9"
   },
   "devDependencies": {
     "lint-staged": "8.1.0"

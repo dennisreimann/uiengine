@@ -27,10 +27,10 @@
   },
   "devDependencies": {
     "lint-staged": "8.1.0",
-    "marko": "4.14.15"
+    "marko": "4.14.17"
   },
   "peerDependencies": {
-    "marko": "^4.14.15"
+    "marko": "^4.14.17"
   },
   "scripts": {
     "lint": "eslint src test",
