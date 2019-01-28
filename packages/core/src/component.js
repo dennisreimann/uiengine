@@ -12,6 +12,8 @@ const {
   DebugUtil: { debug2, debug3, debug4 }
 } = require('@uiengine/util')
 
+const mergeFn = (a, b) => (R.is(Array, a) && R.is(Array, b)) ? R.concat(a, b) : a
+
 async function readComponentFiles (state, id) {
   debug4(state, `Component.readComponentFiles(${id}):start`)
 
@@ -106,7 +108,7 @@ async function fetchById (state, id) {
 
   const title = attributes.title || titleFromContentHeading(content) || componentIdToTitle(id)
   const baseData = { id, title, content, variants, sourcePath, sourceFile, readmeFile, type: 'component' }
-  const fileData = R.reduce(R.mergeDeepWith(R.concat), attributes, R.pluck('data', fileRegistrations))
+  const fileData = R.reduce(R.mergeDeepWith(mergeFn), attributes, R.pluck('data', fileRegistrations))
 
   // resolve dependencies and dependents
   const filePathToComponentId = R.partial(componentFilePathToId, [components])
