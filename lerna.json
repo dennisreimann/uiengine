@@ -2,5 +2,10 @@
   "lerna": "3.10.5",
   "version": "2.0.0",
   "npmClient": "yarn",
-  "useWorkspaces": true
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "message": "🔖 release: %s"
+    }
+  }
 }
