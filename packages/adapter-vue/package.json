@@ -24,16 +24,16 @@
   ],
   "dependencies": {
     "@uiengine/util": "^2.0.0-alpha.4",
-    "vue-server-renderer": "2.5.21"
+    "vue-server-renderer": "2.5.22"
   },
   "devDependencies": {
     "@babel/core": "7.2.2",
-    "@babel/preset-env": "7.2.3",
+    "@babel/preset-env": "7.3.1",
     "lint-staged": "8.1.0",
-    "vue": "2.5.21"
+    "vue": "2.5.22"
   },
   "peerDependencies": {
-    "vue": "^2.5.21"
+    "vue": "^2.5.22"
   },
   "scripts": {
     "lint": "eslint --ext .js,.vue src test",
