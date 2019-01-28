@@ -45,7 +45,7 @@
     "chokidar": "2.0.4"
   },
   "devDependencies": {
-    "lint-staged": "8.1.0"
+    "lint-staged": "8.1.1"
   },
   "lint-staged": {
     "*.js": [

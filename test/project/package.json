@@ -72,7 +72,7 @@
     "gulp": "4.0.0",
     "gulp-concat": "2.6.1",
     "html-sketchapp-cli": "0.6.2",
-    "lint-staged": "8.1.0",
+    "lint-staged": "8.1.1",
     "theo": "8.1.1",
     "vue-loader": "14.2.2",
     "vue-template-compiler": "2.5.22",
