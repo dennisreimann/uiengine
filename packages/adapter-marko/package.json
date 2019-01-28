@@ -23,7 +23,7 @@
     "marko"
   ],
   "dependencies": {
-    "@uiengine/util": "^2.0.0-alpha.4"
+    "@uiengine/util": "^2.0.0"
   },
   "devDependencies": {
     "lint-staged": "8.1.0",
