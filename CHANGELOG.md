@@ -1,12 +1,13 @@
 # Changelog
 
-## [2.0.0] - ongoing development (pre-release)
+## [2.0.0] - 2019-01-28
 
 ### Added
 
 - Improved Windows compatibility, feedback welcome!
 - The pen icon in the interface opens files in VS Code when working locally
 - Pages can be set to be initially collapsed – [see the docs](/basics/page/)
+- `@uiengine/core` exports the `markdown` function to transform markdown to html
 
 ### Changed
 

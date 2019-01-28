@@ -31,6 +31,15 @@ const state = {
   }
 }
 
+describe('UIengine', function () {
+  describe('#markdown', function () {
+    it('should export the MarkdownUtil string parsing', () => {
+      const { MarkdownUtil: { parseString } } = require('@uiengine/util')
+      assert.strictEqual(UIengine.markdown, parseString)
+    })
+  })
+})
+
 // "end to end" tests
 describe('UIengine @nowatch', function () {
   this.timeout(10000)

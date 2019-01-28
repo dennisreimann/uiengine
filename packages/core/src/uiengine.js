@@ -3,6 +3,7 @@ const Core = require('./core')
 const {
   DebugUtil: { debug3 },
   StringUtil: { crossPlatformPath },
+  MarkdownUtil: { parseString: markdown },
   MessageUtil: { reportSuccess, reportInfo, reportError }
 } = require('@uiengine/util')
 
@@ -70,7 +71,7 @@ const startWatcher = (state, opts, server) => {
     if (Core.isGenerating()) return
 
     try {
-      if (info) reportInfo('Rebuiling …', { icon: '🚧', transient: true })
+      if (info) reportInfo('Rebuilding …', { icon: '🚧', transient: true })
 
       const { state, change } = await Core.generateIncrementForFileChange(filePath, type)
 
@@ -229,5 +230,6 @@ async function build (options = {}) {
 }
 
 module.exports = {
-  build
+  build,
+  markdown
 }
