@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.0] - ongoing development
+
+### Fixes
+
+- HTML escaping in titles
+
 ## [2.0.0] - 2019-01-28
 
 ### Added

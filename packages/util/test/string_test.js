@@ -32,6 +32,10 @@ describe('StringUtil', () => {
       assert.strictEqual('Atoms 1', StringUtil.titleFromContentHeading('<h1 id="atoms-1">Atoms 1</h1>'))
     })
 
+    it('should unescape html entities', () => {
+      assert.strictEqual('"€ & ¢"', StringUtil.titleFromContentHeading('<h1>&quot;&euro; &amp; &cent;&quot;</h1>'))
+    })
+
     it('should return undefined if content has no heading', () => {
       assert.strictEqual(undefined, StringUtil.titleFromContentHeading(''))
     })

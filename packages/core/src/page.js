@@ -93,12 +93,19 @@ async function fetchById (state, id) {
 
   let { attributes, content, sourcePath, sourceFile, readmeFile } = pageData
 
-  const title = attributes.title || titleFromContentHeading(content) || pageIdToTitle(id)
+  let title = attributes.title
+  let isTitleFromHeading
+  if (!title) {
+    const titleFromHeading = titleFromContentHeading(content)
+    title = titleFromHeading || pageIdToTitle(id)
+    isTitleFromHeading = !!titleFromHeading
+  }
+
   const type = determineType(attributes)
   attributes = convertUserProvidedChildrenList(id, childIds, attributes)
   attributes = convertUserProvidedComponentsList(id, attributes)
   const baseData = { childIds }
-  const fixData = { id, title, path: pagePath, sourcePath, sourceFile, readmeFile, type, content, files }
+  const fixData = { id, title, isTitleFromHeading, path: pagePath, sourcePath, sourceFile, readmeFile, type, content, files }
   const data = R.mergeAll([baseData, attributes, fixData])
 
   if (data.files.length === 0) delete data.files

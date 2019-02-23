@@ -1,3 +1,5 @@
+const unescape = require('unescape')
+
 const HEADING_REGEXP = /^<h1.*?>(.*?)<\/h1>/
 
 const titleize = string =>
@@ -28,7 +30,7 @@ const replaceTemplateComments = (html, marks) =>
 const titleFromContentHeading = content => {
   const [, title] = (content && content.match(HEADING_REGEXP)) || []
 
-  return title
+  return title && unescape(title, 'all')
 }
 
 const crossPlatformPath = id =>

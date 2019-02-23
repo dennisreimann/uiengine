@@ -106,8 +106,15 @@ async function fetchById (state, id) {
   let { attributes, content, sourcePath, sourceFile, readmeFile, attributes: { context, variants } } = componentData
   variants = await Variant.fetchObjects(state, id, context, variants)
 
-  const title = attributes.title || titleFromContentHeading(content) || componentIdToTitle(id)
-  const baseData = { id, title, content, variants, sourcePath, sourceFile, readmeFile, type: 'component' }
+  let title = attributes.title
+  let isTitleFromHeading
+  if (!title) {
+    const titleFromHeading = titleFromContentHeading(content)
+    title = titleFromHeading || componentIdToTitle(id)
+    isTitleFromHeading = !!titleFromHeading
+  }
+
+  const baseData = { id, title, isTitleFromHeading, content, variants, sourcePath, sourceFile, readmeFile, type: 'component' }
   const fileData = R.reduce(R.mergeDeepWith(mergeFn), attributes, R.pluck('data', fileRegistrations))
 
   // resolve dependencies and dependents

@@ -6,7 +6,7 @@ Content formatting and all that good stuff.
 But really: Nothing interesting to see here, move along :)
 :::
 
-## Code blocks
+## Code & blocks
 
 This is `inline code`.
 

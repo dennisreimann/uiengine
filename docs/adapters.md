@@ -17,7 +17,7 @@ using the file extension as the adapter key:
 }
 ```
 
-You can also provide a set of adapter specific options – see the individual adapters documentation for details:
+You can also provide a set of adapter specifict options – see the individual adapters documentation for details:
 
 ```js
 {

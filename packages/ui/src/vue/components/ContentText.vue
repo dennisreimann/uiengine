@@ -8,6 +8,8 @@
 </template>
 
 <script>
+const TITLE_REGEXP = new RegExp(`^<h1.*?>.*</h1>`)
+
 export default {
   props: {
     item: {
@@ -19,11 +21,12 @@ export default {
   computed: {
     // replace headings which resemble the component/page title
     renderedContent () {
-      const { content, title } = this.item
+      const { content, isTitleFromHeading } = this.item
 
       if (content) {
-        const regexp = new RegExp(`^<h1.*?>${title}</h1>`)
-        return content.replace(regexp, '').trim()
+        return isTitleFromHeading
+          ? content.replace(TITLE_REGEXP, '').trim()
+          : content
       } else {
         return null
       }

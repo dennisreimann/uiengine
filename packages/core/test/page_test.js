@@ -30,6 +30,7 @@ describe('Page', () => {
 
       assert.strictEqual(data.id, 'index')
       assert.strictEqual(data.title, 'Home')
+      assert.strictEqual(data.isTitleFromHeading, true)
       assert.strictEqual(data.sourcePath, 'uiengine/pages')
       assert.strictEqual(data.sourceFile, undefined)
       assert.strictEqual(data.readmeFile, 'uiengine/pages/README.md')
@@ -40,6 +41,7 @@ describe('Page', () => {
 
       assert.strictEqual(data.id, 'patterns')
       assert.strictEqual(data.title, 'Pattern Library')
+      assert.strictEqual(data.isTitleFromHeading, true)
       assert.strictEqual(data.sourcePath, 'uiengine/pages/patterns')
       assert.strictEqual(data.sourceFile, 'uiengine/pages/patterns/page.config.js')
     })
@@ -49,6 +51,7 @@ describe('Page', () => {
 
       assert.strictEqual(data.id, 'testcases/custom-data')
       assert.strictEqual(data.title, 'Custom Data')
+      assert.strictEqual(data.isTitleFromHeading, false)
       assert.strictEqual(data.description, 'This is some custom page data')
     })
 
@@ -56,12 +59,14 @@ describe('Page', () => {
       const data = await Page.fetchById(state, 'testcases')
 
       assert.strictEqual(data.title, 'Test Cases')
+      assert.strictEqual(data.isTitleFromHeading, true)
     })
 
     it('should resolve title from component id if there is no title in attributes or content', async () => {
       const data = await Page.fetchById(state, 'patterns/atoms')
 
       assert.strictEqual(data.title, 'Atoms')
+      assert.strictEqual(data.isTitleFromHeading, false)
     })
 
     it('should infer childIds if they are not provided', async () => {
