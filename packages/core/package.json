@@ -35,17 +35,17 @@
     "@uiengine/cli": "^2.0.1",
     "@uiengine/ui": "^2.0.1",
     "@uiengine/util": "^2.0.1",
-    "cosmiconfig": "5.0.7",
+    "cosmiconfig": "5.1.0",
     "fs-extra": "7.0.1",
     "globby": "9.0.0",
     "ramda": "0.26.1"
   },
   "optionalDependencies": {
     "browser-sync": "2.26.3",
-    "chokidar": "2.0.4"
+    "chokidar": "2.1.2"
   },
   "devDependencies": {
-    "lint-staged": "8.1.1"
+    "lint-staged": "8.1.4"
   },
   "lint-staged": {
     "*.js": [

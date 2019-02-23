@@ -23,13 +23,13 @@
     "css"
   ],
   "dependencies": {
-    "deepmerge": "3.1.0",
+    "deepmerge": "3.2.0",
     "fs-extra": "7.0.1",
     "globby": "9.0.0",
     "postcss": "7.0.14"
   },
   "devDependencies": {
-    "lint-staged": "8.1.1"
+    "lint-staged": "8.1.4"
   },
   "scripts": {
     "lint": "eslint src test",

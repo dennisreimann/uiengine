@@ -37,12 +37,12 @@
     "markdown-it-anchor": "5.0.2",
     "markdown-it-container": "2.0.0",
     "markdown-it-implicit-figures": "0.9.0",
-    "markdown-it-include": "1.0.0",
+    "markdown-it-include": "1.1.0",
     "markdown-it-mark": "2.0.0",
     "ramda": "0.26.1",
     "unescape": "^1.0.1"
   },
   "devDependencies": {
-    "lint-staged": "8.1.1"
+    "lint-staged": "8.1.4"
   }
 }

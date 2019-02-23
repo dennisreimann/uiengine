@@ -26,11 +26,11 @@
     "globby": "9.0.0"
   },
   "devDependencies": {
-    "handlebars": "4.0.12",
-    "lint-staged": "8.1.1"
+    "handlebars": "4.1.0",
+    "lint-staged": "8.1.4"
   },
   "peerDependencies": {
-    "handlebars": "^4.0.12"
+    "handlebars": "^4.1.0"
   },
   "scripts": {
     "lint": "eslint src test",
