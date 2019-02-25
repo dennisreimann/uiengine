@@ -30,10 +30,10 @@ jobs:
       before_script: skip
       script: yarn run lint
 
-    - stage: check
-      name: audit
-      before_script: skip
-      script: yarn audit
+    # - stage: check
+    #   name: audit
+    #   before_script: skip
+    #   script: yarn audit
 
     - stage: deploy
       name: coverage
