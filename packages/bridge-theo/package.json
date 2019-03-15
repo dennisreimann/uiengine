@@ -27,11 +27,11 @@
     "lint": "eslint src test",
     "precommit": "lint-staged"
   },
-  "peerDependencies": {
+  "devDependencies": {
+    "lint-staged": "8.1.5",
     "theo": "8.1.2"
   },
-  "devDependencies": {
-    "lint-staged": "8.1.4",
+  "peerDependencies": {
     "theo": "8.1.2"
   },
   "lint-staged": {

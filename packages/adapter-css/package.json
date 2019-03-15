@@ -25,11 +25,11 @@
   "dependencies": {
     "deepmerge": "3.2.0",
     "fs-extra": "7.0.1",
-    "globby": "9.0.0",
+    "globby": "9.2.0",
     "postcss": "7.0.14"
   },
   "devDependencies": {
-    "lint-staged": "8.1.4"
+    "lint-staged": "8.1.5"
   },
   "scripts": {
     "lint": "eslint src test",

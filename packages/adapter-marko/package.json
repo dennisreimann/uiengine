@@ -26,11 +26,11 @@
     "@uiengine/util": "^2.0.2"
   },
   "devDependencies": {
-    "lint-staged": "8.1.4",
-    "marko": "4.15.2"
+    "lint-staged": "8.1.5",
+    "marko": "4.16.6"
   },
   "peerDependencies": {
-    "marko": "^4.15.2"
+    "marko": "^4.16.6"
   },
   "scripts": {
     "lint": "eslint src test",

@@ -25,13 +25,13 @@
   "dependencies": {
     "@uiengine/util": "^2.0.2",
     "fs-extra": "7.0.1",
-    "globby": "9.0.0",
+    "globby": "9.2.0",
     "pug-lexer": "4.0.0",
     "pug-parser": "5.0.0",
     "pug-walk": "1.1.7"
   },
   "devDependencies": {
-    "lint-staged": "8.1.4",
+    "lint-staged": "8.1.5",
     "pug": "2.0.3"
   },
   "peerDependencies": {

@@ -24,7 +24,7 @@
   ],
   "devDependencies": {
     "ejs": "2.6.1",
-    "lint-staged": "8.1.4"
+    "lint-staged": "8.1.5"
   },
   "peerDependencies": {
     "ejs": "^2.6.1"

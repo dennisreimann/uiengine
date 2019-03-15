@@ -43,6 +43,6 @@
     "unescape": "^1.0.1"
   },
   "devDependencies": {
-    "lint-staged": "8.1.4"
+    "lint-staged": "8.1.5"
   }
 }
