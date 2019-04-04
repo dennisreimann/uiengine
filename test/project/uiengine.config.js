@@ -26,8 +26,7 @@ module.exports = {
   source: {
     components: ['./src/elements', './src/modules'],
     templates: './src/templates',
-    pages: './uiengine/pages',
-    data: './uiengine/data'
+    pages: './uiengine/pages'
   },
 
   // Destination path for the generated site.

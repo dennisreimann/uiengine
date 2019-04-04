@@ -29,7 +29,7 @@ The base directories for the input, your raw source files:
   source: {
     components: './src/components',
     templates: './src/templates',
-    pages: './uiengine/pages'
+    pages: './uiengine'
   }
 }
 ```
