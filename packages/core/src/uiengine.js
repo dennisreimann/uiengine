@@ -14,7 +14,7 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, pages, 
   const templatesGlob = templates ? join(templates, globPattern) : null
   const pagesGlob = pages ? join(pages, globPattern) : null
   const dataGlob = data ? join(data, globPattern) : null
-  const sourceFiles = [...componentGlobs, configFile, dataGlob, pagesGlob, templatesGlob].filter(a => a)
+  const sourceFiles = [configFile, dataGlob, pagesGlob, templatesGlob].concat(componentGlobs).filter(a => a)
 
   if (debug) {
     const uiSrc = dirname(require.resolve('@uiengine/ui'))

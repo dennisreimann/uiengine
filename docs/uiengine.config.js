@@ -10,6 +10,10 @@ module.exports = {
 
   target: 'dist',
 
+  ui: {
+    customStylesFile: '/styles/docs.css'
+  },
+
   browserSync: {
     open: false
   }

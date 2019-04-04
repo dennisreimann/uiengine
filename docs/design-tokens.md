@@ -2,6 +2,8 @@
 
 The UIengine interface includes templates for displaying various types of design tokens.
 
+<div class='ytEmbed'><iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2&index=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+
 ## Tokens definition
 
 The design tokens are listed under the `tokens` key of a `page.config.js` file:

@@ -3,6 +3,8 @@
 A variant is an usage example of a component.
 In the UIengine terminology it offers a preview of the component and the data it can be rendered with.
 
+<div class='ytEmbed'><iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2&index=2" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+
 ## Directory Structure
 
 Variants are stored per component in the components `variants` folder.

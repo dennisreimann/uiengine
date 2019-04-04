@@ -2,6 +2,8 @@
 
 The project configuration lives in a file named `uiengine.config.js`.
 
+<div class='ytEmbed'><iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2&index=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+
 ## Sections
 
 ### Project config
