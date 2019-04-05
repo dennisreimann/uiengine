@@ -1,6 +1,19 @@
 <%_
 assetPath = htmlWebpackPlugin.options.assetPath
 files = htmlWebpackPlugin.files
+assets = webpack.assets
+
+const resourceHint = asset => {
+  var assetFilePath = asset.name;
+  if (assetFilePath.match('/hljs/')) return;
+  if (assetFilePath.endsWith('.woff2')) { _%>
+    <link href="<%- assetPath(assetFilePath) %>" rel="preload" as="font" type="font/woff2" crossorigin>
+  <%_ } else if (assetFilePath.endsWith('.css')) { _%>
+    <link href="<%- assetPath(assetFilePath) %>" rel="preload" as="style">
+  <%_ } else if (assetFilePath.endsWith('.js')) { _%>
+    <link href="<%- assetPath(assetFilePath) %>" rel="prefetch" as="script">
+  <%_ }
+}
 _%>
 <!DOCTYPE html>
 <html lang="<%%= lang %>" class="uie">
@@ -15,6 +28,7 @@ _%>
     <%%_ if (customStylesFile) { _%%>
     <link rel="stylesheet" href="<%%= customStylesFile %%>">
     <%%_ } _%%>
+    <%_ assets.forEach(resourceHint) _%>
     <script>
       window.UIengine = {
         base: <%%- helpers.htmlescape(base) %%>,
