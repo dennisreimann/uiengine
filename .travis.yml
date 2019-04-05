@@ -9,6 +9,7 @@ os:
   - linux
   # - osx
   # - windows
+
 stages:
   - name: check
   - name: test
@@ -73,6 +74,7 @@ before_deploy:
   - ssh-add /tmp/deploy_rsa
 
 addons:
+  chrome: stable
   ssh_known_hosts:
     - uiengine.uix.space
     - uiengine-sample-project.uix.space
