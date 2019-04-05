@@ -5,11 +5,12 @@ _%>
 <!DOCTYPE html>
 <html lang="<%%= lang %>" class="uie">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <%_ for (index in files.css) { _%>
-    <link href="<%- assetPath(files.css[index]) %>" rel="stylesheet">
-    <%_ } _%>
+    <%%_ meta.forEach(m => { _%%>
+    <<%%= m.tag %%><%% Object.keys(m.attrs).forEach(key => { var val = m.attrs[key]; %%><%%- ` ${key}="` %%><%%= val %%><%%- '"' %%><%% }) %%>>
+    <%%_ }) _%%>
+    <%_ files.css.forEach(stylesheet => { _%>
+    <link href="<%- stylesheet %>" rel="stylesheet">
+    <%_ }) _%>
     <link rel="stylesheet" href="<%- assetPath('/_assets/styles/hljs/') %><%%= hljs %%>.css" id="hljs" data-default="<%%= hljs %%>" data-tmpl="<%- assetPath('/_assets/styles/hljs/%s.css') %>">
     <%%_ if (customStylesFile) { _%%>
     <link rel="stylesheet" href="<%%= customStylesFile %%>">

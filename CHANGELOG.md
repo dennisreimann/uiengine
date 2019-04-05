@@ -2,6 +2,10 @@
 
 ## [2.1.0] - ongoing development
 
+### Added
+
+- Provide custom meta tags via the [`ui` config](/advanced/ui/).
+
 ### Fixes
 
 - HTML escaping in titles

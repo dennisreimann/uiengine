@@ -24,11 +24,33 @@ This is what the full options look like:
       XL: 1280
     },
 
+    viewports: {
+      Phone: {
+        width: 320
+      },
+      Tablet: {
+        width: 768
+      },
+      Desktop: {
+        width: 1280
+      }
+    },
+
     locales: {
       en: {
         // custom locale overrides
       }
-    }
+    },
+
+    meta: [
+      {
+        tag: 'link'
+        attrs: {
+          rel: 'icon',
+          href: '/my-special-favicon.ico'
+        }
+      }
+    ]
   }
 }
 ```
@@ -138,3 +160,19 @@ The preview mode can also be switched in the preference settings.
 
 You can override the whole locale or specific keys.
 The keys you provide get merged deeply with the existing locales.
+
+### meta
+
+An optional list of tags to be included in the `<head>`:
+
+```js
+meta: [
+  {
+    tag: 'link'
+    attrs: {
+      rel: 'icon',
+      href: '/my-special-favicon.ico'
+    }
+  }
+]
+```
