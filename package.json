@@ -49,6 +49,7 @@
     "coverage:deploy": "c8 report --reporter=text-lcov | coveralls",
     "release": "yarn audit && yarn run lint && yarn run coverage && cross-env NODE_ENV=production yarn run build && lerna publish",
     "demo": "rimraf test/demo && sleep 1 && uiengine init --dir test/demo --demo && cd test/demo && uiengine build -s -w",
+    "docs:start": "cd docs && uiengine build --serve --watch=./*.md ./adapter/*.md",
     "docs:build": "cd docs && uiengine build",
     "docs:lighthouse": "lighthouse-ci --report=. https://uiengine.uix.space/",
     "docs:deploy": "yarn run docs:deploy_latest && yarn run docs:deploy_version && yarn run docs:lighthouse && yarn run docs:deploy_lighthouse",
