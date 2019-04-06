@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import MainDocumentation from '../components/MainDocumentation'
 import { upcaseFirstChar } from '@uiengine/util/src/string'
 
 Vue.use(Router)
@@ -8,9 +9,17 @@ Vue.use(Router)
 // https://dzone.com/articles/code-splitting-with-vuejs-and-webpack
 // https://dzone.com/articles/3-code-splitting-patterns-for-vuejs-and-webpack
 const mainComponent = type => {
+  if (type === 'documentation') {
+    return MainDocumentation
+  }
+
   const componentName = upcaseFirstChar(type)
 
-  return () => import(`../components/Main${componentName}`)
+  return () => import(
+    /* webpackPrefetch: true */
+    /* webpackChunkName: "[request]" */
+    `../components/Main${componentName}`
+  )
 }
 
 const { base, mode } = window.UIengine.state.config.ui

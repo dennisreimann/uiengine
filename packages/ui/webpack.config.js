@@ -221,7 +221,10 @@ module.exports = {
       },
       {
         test: /\.ejs$/,
-        loader: 'compile-ejs-loader'
+        loader: 'compile-ejs-loader',
+        options: {
+          beautify: false
+        }
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
