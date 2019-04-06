@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "lint-staged": "8.1.5",
-    "marko": "4.16.6"
+    "marko": "4.16.9"
   },
   "peerDependencies": {
     "marko": "^4.16.6"

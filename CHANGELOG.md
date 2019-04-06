@@ -5,7 +5,7 @@
 ### Added
 
 - Provide custom meta tags via the [`ui` config](/advanced/ui/).
-- Option to restricts variant display to a given theme id.
+- Option to restrict variant display to a given theme id.
   - See the `theme` option of the [variant configuration](/basics/variant/).
 
 ### Fixes
