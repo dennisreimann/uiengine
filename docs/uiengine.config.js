@@ -21,6 +21,13 @@ module.exports = {
   ui: {
     customStylesFile: '/styles/docs.css',
     meta: [
+      {
+        tag: 'meta',
+        attrs: {
+          name: 'description',
+          content: 'The UIengine is a workbench for UI-driven development: A tool for developers and designers to build and document web sites and apps.'
+        }
+      },
       preconnect('https://s.ytimg.com'),
       preconnect('https://i.ytimg.com'),
       preconnect('https://www.google.com'),
