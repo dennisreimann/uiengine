@@ -34,6 +34,11 @@ context('Component', () => {
         cy.get('#label-label-ejs-1 [data-test-viewport-iframe="plain-Phone"]')
           .should('have.attr', 'src', plainUrl)
 
+        // shown for this theme
+        cy.get('#label-label-pug-5 iframe').should(($iframes) => {
+          expect($iframes).to.have.length(3)
+        })
+
         // Funky
         cy.get('[data-test-theme-switch-current]').click()
         cy.get('[data-test-theme-switch-id="funky"]').click()
@@ -45,6 +50,9 @@ context('Component', () => {
         cy.get('#label-label-ejs-1 [data-test-viewport-iframe="funky-Phone"]')
           .should('have.attr', 'src', funkyUrl)
 
+        // hidden for this theme
+        cy.get('#label-label-pug-5 iframe').should('have.length', 0)
+
         // All
         cy.get('[data-test-theme-switch-current]').click()
         cy.get('[data-test-theme-switch-all]').click()
@@ -55,6 +63,9 @@ context('Component', () => {
 
         cy.get('#label-label-ejs-1 [data-test-viewport-iframe="plain-Phone"]')
         cy.get('#label-label-ejs-1 [data-test-viewport-iframe="funky-Phone"]')
+
+        cy.get('#label-label-pug-5 [data-test-viewport-iframe="plain-Phone"]')
+        cy.get('#label-label-pug-5 [data-test-viewport-iframe="funky-Phone"]')
 
         // Back to plain
         cy.get('[data-test-theme-switch-current]').click()
@@ -81,6 +92,9 @@ context('Component', () => {
         cy.get('#label-label-ejs-1 [data-test-breakpoint-iframe="plain"]')
           .should('have.attr', 'src', plainUrl)
 
+        // shown for this theme
+        cy.get('#label-label-pug-5 [data-test-breakpoint-iframe="funky"]').should('have.length', 0)
+
         // Funky
         cy.get('[data-test-theme-switch-current]').click()
         cy.get('[data-test-theme-switch-id="funky"]').click()
@@ -92,6 +106,9 @@ context('Component', () => {
         cy.get('#label-label-ejs-1 [data-test-breakpoint-iframe="funky"]')
           .should('have.attr', 'src', funkyUrl)
 
+        // hidden for this theme
+        cy.get('#label-label-pug-5 [data-test-breakpoint-iframe="funky"]').should('have.length', 0)
+
         // All
         cy.get('[data-test-theme-switch-current]').click()
         cy.get('[data-test-theme-switch-all]').click()
@@ -102,6 +119,9 @@ context('Component', () => {
 
         cy.get('#label-label-ejs-1 [data-test-breakpoint-iframe="plain"]')
         cy.get('#label-label-ejs-1 [data-test-breakpoint-iframe="funky"]')
+
+        cy.get('#label-label-pug-5 [data-test-breakpoint-iframe="plain"]')
+        cy.get('#label-label-pug-5 [data-test-breakpoint-iframe="funky"]')
 
         // Back to plain
         cy.get('[data-test-theme-switch-current]').click()

@@ -67,6 +67,7 @@ Attributes:
   If the veriant does not specify an own context it will be inherited from the general context specified on the component level.
 - `title` and `description` get displayed in the documentation.
 - `label` is an individual marker that can be used as a reference in mockups or wireframes to reference variants.
+- `theme`: Restricts display to only the given theme id.
 
 You can also provide a short version of the `variants` list like this:
 

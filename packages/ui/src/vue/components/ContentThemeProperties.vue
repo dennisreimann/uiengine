@@ -64,12 +64,8 @@ export default {
       return this.config.themes
     },
 
-    currentThemeId () {
-      return this.currentTheme && this.currentTheme.id
-    },
-
     displayAllThemes () {
-      return this.currentThemeId === '_all'
+      return this.currentTheme.id === '_all'
     }
   }
 }
