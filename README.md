@@ -32,7 +32,7 @@ See the [getting started guide](https://uiengine.uix.space/basics/getting-starte
 for further details.
 There are also some [introduction videos](https://www.youtube.com/watch?v=YBm_ye9da-Q&list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2):
 
-<div class='ytEmbed'><iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class='ytEmbed'><iframe title="UIengine Introduction Videos" src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 
 ## 🖥 Examples and Screenshots
 
