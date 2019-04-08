@@ -64,7 +64,12 @@ jobs:
       name: acceptance
       before_script: skip
       script:
+        # test root deployment
         - export CYPRESS_baseUrl=https://uiengine-sample-project.uix.space/
+        - yarn run test-acceptance
+        # test subdirectory deployment
+        - export VERSION=`echo \"console.log(require('./packages/core/package.json').version);\" | node`
+        - export CYPRESS_baseUrl=https://uiengine-sample-project.uix.space/v/$VERSION/
         - yarn run test-acceptance
 
 before_deploy:
