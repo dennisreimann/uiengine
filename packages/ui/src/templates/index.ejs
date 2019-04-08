@@ -22,7 +22,7 @@ _%>
     <<%%= m.tag %%><%% Object.keys(m.attrs).forEach(key => { var val = m.attrs[key]; %%><%%- ` ${key}="` %%><%%= val %%><%%- '"' %%><%% }) %%>>
     <%%_ }) _%%>
     <%_ files.css.forEach(stylesheet => { _%>
-    <link href="<%- stylesheet %>" rel="stylesheet">
+    <link href="<%- assetPath(stylesheet) %>" rel="stylesheet">
     <%_ }) _%>
     <link rel="stylesheet" href="<%- assetPath('/_assets/styles/hljs/') %><%%= hljs %%>.css" id="hljs" data-default="<%%= hljs %%>" data-tmpl="<%- assetPath('/_assets/styles/hljs/%s.css') %>">
     <%%_ if (customStylesFile) { _%%>

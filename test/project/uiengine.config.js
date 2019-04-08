@@ -10,6 +10,7 @@ const simulateBase = false
 const base = simulateBase ? '/design-system/' : '/'
 const target = simulateBase ? `../tmp${base}` : '../tmp'
 const baseDir = simulateBase ? '../tmp' : undefined
+const customStylesFile = `${base}assets/styles/uiengine-custom-styles.css`
 
 module.exports = {
   // Project config: Defaults to name and version from package.json.
@@ -80,9 +81,9 @@ module.exports = {
     base,
     breakpoints,
     viewports,
+    customStylesFile,
     defaultPreviewMode: 'viewports',
-    repoBaseUrl: 'https://github.com/dennisreimann/uiengine/blob/master/test/project/',
-    customStylesFile: '/assets/styles/uiengine-custom-styles.css'
+    repoBaseUrl: 'https://github.com/dennisreimann/uiengine/blob/master/test/project/'
   },
 
   browserSync: {
