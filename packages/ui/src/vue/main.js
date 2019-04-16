@@ -4,6 +4,7 @@ import Vue from 'vue'
 import Meta from 'vue-meta'
 import Analytics from 'vue-analytics'
 import Clipboard from 'clipboard'
+import yall from 'yall-js'
 import App from './components/App'
 import router from './router'
 import store from './store'
@@ -38,6 +39,14 @@ new Vue({
   router,
   store,
   components: { App },
+  mounted: function () {
+    this.$nextTick(() => {
+      yall({
+        observeChanges: true,
+        observeRootSelector: 'main.main'
+      })
+    })
+  },
   template: '<App/>'
 })
 
