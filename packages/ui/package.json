@@ -50,7 +50,8 @@
     "vue-fragment": "^1.5.0",
     "vue-meta": "1.5.8",
     "vue-router": "3.0.2",
-    "vuex": "3.1.0"
+    "vuex": "3.1.0",
+    "yall-js": "^3.1.1"
   },
   "devDependencies": {
     "@babel/core": "7.3.3",
