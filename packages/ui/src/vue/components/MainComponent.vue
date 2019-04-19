@@ -335,7 +335,7 @@ export default {
     },
 
     displayVariant (variant) {
-      return !!(!variant.theme || this.currentTheme.id.includes(variant.theme))
+      return !!(!variant.theme || variant.theme.includes(this.currentTheme.id))
     },
 
     tabId (section) {
