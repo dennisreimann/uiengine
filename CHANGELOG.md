@@ -5,8 +5,13 @@
 ### Added
 
 - Provide custom meta tags via the [`ui` config](/advanced/ui/).
-- Option to restrict variant display to a given theme id.
-  - See the `theme` option of the [variant configuration](/basics/variant/).
+- Option to restrict variant display to a list of given theme ids.
+  - See the `themeIds` option of the [variant configuration](/basics/variant/).
+
+### Changed
+
+- Option to restrict token display to a list of given theme ids changes from `theme` to `themeIds`.
+  - See the `themeIds` option of the [token configuration](/advanced/design-tokens/).
 
 ### Fixes
 

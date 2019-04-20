@@ -53,7 +53,7 @@ module.exports = {
       title: 'Label (Pug)',
       label: 'A1.4',
       tags: ['Pug'],
-      theme: 'plain'
+      themeIds: ['plain']
     },
     {
       file: 'label.jsx',

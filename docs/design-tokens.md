@@ -46,7 +46,7 @@ These attributes are optional:
 - `variable`: Variable name
 - `reference`: The name of the referenced token
 - `description`
-- `theme`: Restricts display to only the given theme id. Can be used for categories and tokens.
+- `themeIds`: Restricts display to only the given list of theme ids. Can be used for categories and tokens.
 
 ### Types
 
