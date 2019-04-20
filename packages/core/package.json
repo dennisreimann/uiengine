@@ -32,9 +32,9 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@uiengine/cli": "^2.0.5",
-    "@uiengine/ui": "^2.0.6",
-    "@uiengine/util": "^2.0.3",
+    "@uiengine/cli": "2.0.5",
+    "@uiengine/ui": "2.0.6",
+    "@uiengine/util": "2.0.3",
     "cosmiconfig": "5.2.0",
     "fs-extra": "7.0.1",
     "globby": "9.2.0",

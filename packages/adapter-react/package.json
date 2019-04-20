@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "@babel/parser": "7.4.3",
-    "@uiengine/util": "^2.0.3",
+    "@uiengine/util": "2.0.3",
     "fs-extra": "7.0.1",
     "globby": "9.2.0",
     "parse-prop-types": "0.3.0"

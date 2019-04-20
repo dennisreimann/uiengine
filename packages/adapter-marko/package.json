@@ -23,14 +23,14 @@
     "marko"
   ],
   "dependencies": {
-    "@uiengine/util": "^2.0.3"
+    "@uiengine/util": "2.0.3"
   },
   "devDependencies": {
     "lint-staged": "8.1.5",
-    "marko": "4.16.9"
+    "marko": "4.16.11"
   },
   "peerDependencies": {
-    "marko": "^4.16.6"
+    "marko": "^4.16.11"
   },
   "scripts": {
     "lint": "eslint src test",

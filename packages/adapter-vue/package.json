@@ -23,7 +23,7 @@
     "vue"
   ],
   "dependencies": {
-    "@uiengine/util": "^2.0.3",
+    "@uiengine/util": "2.0.3",
     "vue-server-renderer": "2.6.10"
   },
   "devDependencies": {
