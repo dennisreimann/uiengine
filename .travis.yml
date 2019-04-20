@@ -65,7 +65,7 @@ jobs:
       before_script: skip
       script:
         - export CYPRESS_baseUrl=https://uiengine-sample-project.uix.space/
-        - yarn run test-acceptance
+        - yarn run test-acceptance --config video=false
 
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_226d8df99612_key -iv $encrypted_226d8df99612_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
