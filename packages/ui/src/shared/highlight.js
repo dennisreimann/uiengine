@@ -1,6 +1,6 @@
 const hljs = require('highlight.js/lib/highlight')
 
-const LANGUAGES = ['bash', 'css', 'javascript', 'handlebars', 'json', 'markdown', 'nginx', 'xml']
+const LANGUAGES = ['bash', 'css', 'scss', 'less', 'stylus', 'javascript', 'handlebars', 'json', 'markdown', 'nginx', 'xml']
 
 LANGUAGES.forEach(name => {
   const lang = require(`highlight.js/lib/languages/${name}`)
