@@ -1,15 +1,14 @@
 <template>
-  <label
-    :id="id"
-    class="label"
-  >
-    {{ title }}
-  </label>
+  <my-label v-bind="$props" />
 </template>
 
 <script>
+import MyLabel from '../label.vue'
+
 export default {
-  name: 'MyLabel',
+  components: {
+    MyLabel
+  },
 
   props: {
     id: {

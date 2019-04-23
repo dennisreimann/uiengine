@@ -32,17 +32,17 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@uiengine/cli": "^2.0.7",
-    "@uiengine/ui": "^2.0.7",
-    "@uiengine/util": "^2.0.7",
+    "@uiengine/cli": "2.0.7",
+    "@uiengine/ui": "2.0.7",
+    "@uiengine/util": "2.0.7",
     "cosmiconfig": "5.2.0",
     "fs-extra": "7.0.1",
     "globby": "9.2.0",
     "ramda": "0.26.1"
   },
   "optionalDependencies": {
-    "browser-sync": "2.26.4",
-    "chokidar": "2.1.5"
+    "browser-sync": "^2.26.5",
+    "chokidar": "^2.1.5"
   },
   "devDependencies": {
     "lint-staged": "8.1.5"

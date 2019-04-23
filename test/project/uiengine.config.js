@@ -1,9 +1,10 @@
 const breakpoints = require('./lib/breakpoints.json')
 const viewports = require('./lib/viewports.json')
 const pugAdapterOptions = require('./lib/pug-adapter-options')
-const vueAdapterOptions = require('./lib/vue-adapter-options')
 const cssAdapterOptions = require('./lib/css-adapter-options')
 const reactAdapterOptions = require('./lib/react-adapter-options')
+const webpackAdapterReactOptions = require('./lib/webpack-adapter-react-options')
+const webpackAdapterVueOptions = require('./lib/webpack-adapter-vue-options')
 
 // option to simulate base - mainly for debugging and development purposes
 const simulateBase = false
@@ -11,6 +12,8 @@ const base = simulateBase ? '/design-system/' : '/'
 const target = simulateBase ? `../tmp${base}` : '../tmp'
 const baseDir = simulateBase ? '../tmp' : undefined
 const customStylesFile = `${base}assets/styles/uiengine-custom-styles.css`
+
+const reactViaWebpack = false
 
 module.exports = {
   // Project config: Defaults to name and version from package.json.
@@ -41,22 +44,23 @@ module.exports = {
       options: pugAdapterOptions
     },
     vue: {
-      module: '@uiengine/adapter-vue',
-      options: vueAdapterOptions
-    },
-    vhtml: {
-      module: '@uiengine/adapter-vue',
-      options: vueAdapterOptions
+      module: '@uiengine/adapter-webpack',
+      options: webpackAdapterVueOptions
     },
     css: {
       module: '@uiengine/adapter-css',
       options: cssAdapterOptions
     },
-    jsx: {
-      module: '@uiengine/adapter-react',
-      options: reactAdapterOptions
-    },
-    js: '@uiengine/adapter-vue',
+    jsx: (reactViaWebpack
+      ? {
+        module: '@uiengine/adapter-webpack',
+        options: webpackAdapterReactOptions
+      }
+      : {
+        module: '@uiengine/adapter-react',
+        options: reactAdapterOptions
+      }
+    ),
     hbs: '@uiengine/adapter-handlebars',
     marko: '@uiengine/adapter-marko',
     html: '@uiengine/adapter-html',

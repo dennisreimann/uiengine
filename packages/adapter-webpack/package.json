@@ -1,9 +1,12 @@
 {
-  "name": "@uiengine/adapter-react",
-  "description": "UIengine template adapter for React/JSX.",
+  "name": "@uiengine/adapter-webpack",
+  "description": "UIengine template adapter for Webpack projects.",
   "license": "MIT",
   "version": "2.0.7",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
+  "contributors": [
+    "Michael Geers <michael@geers.tv> (http://geers.tv/)"
+  ],
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
   "repository": "dennisreimann/uiengine",
@@ -20,31 +23,39 @@
   "keywords": [
     "uiengine-adapter",
     "uiengine",
-    "react"
+    "webpack"
   ],
   "dependencies": {
     "@babel/parser": "7.4.3",
     "@uiengine/util": "2.0.7",
     "fs-extra": "7.0.1",
     "globby": "9.2.0",
-    "parse-prop-types": "0.3.0"
+    "htmlescape": "1.1.1",
+    "memory-fs": "0.4.1",
+    "require-from-string": "2.0.2"
   },
   "devDependencies": {
     "@babel/core": "7.4.3",
     "@babel/preset-env": "7.4.3",
     "@babel/preset-react": "7.0.0",
     "@babel/register": "7.4.0",
+    "babel-eslint": "10.0.1",
+    "babel-loader": "8.0.5",
+    "babel-preset-vue": "2.0.2",
+    "css-loader": "2.1.1",
     "lint-staged": "8.1.5",
-    "prop-types": "15.6.2",
     "react": "16.8.6",
-    "react-dom": "16.8.6"
-  },
-  "optionalDependencies": {
-    "prop-types": "15.6.2"
+    "react-dom": "16.8.6",
+    "vue": "2.6.10",
+    "vue-loader": "15.7.0",
+    "vue-server-renderer": "2.6.10",
+    "vue-template-compiler": "2.6.10",
+    "webpack": "4.30.0",
+    "webpack-merge": "4.2.1",
+    "webpack-node-externals": "1.7.2"
   },
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "webpack": "^4.30.0"
   },
   "scripts": {
     "lint": "eslint src test",

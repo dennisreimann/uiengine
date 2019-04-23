@@ -83,12 +83,13 @@ async function generatePageWithTemplate (state, pageId) {
     await withThemes(themes, async themeId => {
       // render template with context
       const { id, context, template } = page
-      let { rendered } = await render(state, template, context, themeId, identifier)
+      let { rendered, foot } = await render(state, template, context, themeId, identifier)
       rendered = replaceTemplateComments(rendered, {
         'class': `uie-page uie-page--${dasherize(id)}`,
         'title': `${page.title} • ${name} (${version})`,
         'theme': themeId,
-        'content': rendered
+        'content': rendered,
+        'foot': foot
       })
 
       // write file
@@ -132,13 +133,14 @@ async function generatePageWithTokens (state, pageId) {
     const template = page.template || config.template
 
     await withThemes(themes, async themeId => {
-      let { rendered } = await render(state, template, data, themeId, identifier)
+      let { rendered, foot } = await render(state, template, data, themeId, identifier)
       const content = await Interface.render(state, 'tokens', page, themeId)
       rendered = replaceTemplateComments(rendered, {
         'class': `uie-tokens uie-tokens--${dasherize(id)}`,
         'title': `${title} • ${name} (${version})`,
         'theme': themeId,
-        'content': content
+        'content': content,
+        'foot': foot
       })
 
       // write file
@@ -165,12 +167,13 @@ async function generateVariant (state, variant) {
 
   await withThemes(themes, async themeId => {
     let { rendered } = await render(state, template, data, themeId, identifier)
-    const content = variant.themes[themeId].rendered
+    const { rendered: content, foot } = variant.themes[themeId]
     rendered = replaceTemplateComments(rendered, {
       'class': `uie-variant uie-variant--${dasherize(componentId)} uie-variant--${dasherize(id)}`,
       'title': `${component.title}: ${variant.title} • ${name} (${version})`,
       'theme': themeId,
-      'content': content
+      'content': content,
+      'foot': foot
     })
 
     // write file
@@ -287,13 +290,14 @@ async function generateSketch (state) {
     const data = { state }
 
     await withThemes(themes, async themeId => {
-      let { rendered } = await render(state, template, data, themeId, identifier)
+      let { rendered, foot } = await render(state, template, data, themeId, identifier)
       const content = await Interface.render(state, 'sketch', data, themeId)
       rendered = replaceTemplateComments(rendered, {
         'class': 'uie-html-sketchapp',
         'title': `HTML Sketchapp Export ${themeId} • ${name} (${version})`,
         'theme': themeId,
-        'content': content
+        'content': content,
+        'foot': foot
       })
 
       // write file

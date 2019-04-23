@@ -1,4 +1,4 @@
-const { join, resolve } = require('path')
+const { resolve } = require('path')
 const { testProjectPath } = require('../../../../test/support/paths')
 const srcPath = resolve(testProjectPath, 'src')
 
@@ -16,8 +16,8 @@ const adapters = {
       basedir: srcPath
     }
   },
-  vhtml: {
-    module: '@uiengine/adapter-vue',
+  vue: {
+    module: '@uiengine/adapter-webpack',
     options: {}
   },
   js: {
@@ -27,7 +27,12 @@ const adapters = {
   jsx: {
     module: '@uiengine/adapter-react',
     options: {
-      babel: require(join(testProjectPath, 'babel.config'))
+      babel: {
+        presets: [
+          '@babel/preset-env',
+          '@babel/preset-react'
+        ]
+      }
     }
   },
   ejs: {

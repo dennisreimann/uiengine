@@ -24,7 +24,7 @@ const replaceTemplateComments = (html, marks) =>
   Object.keys(marks).reduce((current, key) => {
     const regexp = new RegExp(`<!--\\s?uiengine:${key}\\s?-->`, 'gi')
     const content = marks[key]
-    return current.replace(regexp, content)
+    return current.replace(regexp, content || '')
   }, html)
 
 const titleFromContentHeading = content => {

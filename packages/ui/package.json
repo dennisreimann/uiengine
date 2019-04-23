@@ -38,8 +38,8 @@
     ]
   },
   "dependencies": {
-    "@uiengine/util": "^2.0.7",
-    "color": "3.1.0",
+    "@uiengine/util": "2.0.7",
+    "color": "3.1.1",
     "deepmerge": "3.2.0",
     "ejs": "2.6.1",
     "fuse.js": "3.4.4",
@@ -62,7 +62,7 @@
     "babel-loader": "8.0.5",
     "clipboard": "2.0.4",
     "compile-ejs-loader": "0.0.2",
-    "copy-webpack-plugin": "5.0.2",
+    "copy-webpack-plugin": "5.0.3",
     "css-loader": "2.1.1",
     "css-mqpacker": "7.0.0",
     "csswring": "7.0.0",

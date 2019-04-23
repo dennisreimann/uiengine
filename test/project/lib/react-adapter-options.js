@@ -1,5 +1,8 @@
-const babel = require('../babel.config')
-
 module.exports = {
-  babel
+  babel: {
+    presets: [
+      '@babel/preset-env',
+      '@babel/preset-react'
+    ]
+  }
 }

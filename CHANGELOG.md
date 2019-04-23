@@ -7,6 +7,8 @@
 - Provide custom meta tags via the [`ui` config](/advanced/ui/).
 - Option to restrict variant display to a list of given theme ids.
   - See the `themeIds` option of the [variant configuration](/basics/variant/).
+- Experimental Webpack adapter
+  - See the [Webpack adapter docs](/adapters/webpack/) for details.
 
 ### Changed
 

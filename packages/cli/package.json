@@ -30,7 +30,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@uiengine/util": "^2.0.7",
+    "@uiengine/util": "2.0.7",
     "fs-extra": "7.0.1",
     "globby": "9.2.0",
     "js-yaml": "3.13.1",
