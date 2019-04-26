@@ -55,6 +55,7 @@ describe('CLI @nowatch', function () {
       assertContentMatches(previewPath, '<!-- uiengine:title -->')
       assertContentMatches(previewPath, '<!-- uiengine:class -->')
       assertContentMatches(previewPath, '<!-- uiengine:content -->')
+      assertContentMatches(previewPath, '<!-- uiengine:foot -->')
       assertContentMatches(previewPath, 'add your custom styles here')
       assertContentMatches(previewPath, 'add your custom scripts here')
     })

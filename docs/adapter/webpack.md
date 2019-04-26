@@ -30,6 +30,8 @@ This adapter needs the following options:
 
 See the [test project](https://github.com/dennisreimann/uiengine/tree/master/test/project/) `lib` and `webpack` folder for full details on how to configure the adapter.
 
+Note: This feature requires the `<!-- uiengine:foot -->` comment to be present in the template.
+
 ### Options for Vue
 
 The `vue-adapter-options.js` file required above might look like this:

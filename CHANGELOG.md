@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.1.0] - ongoing development
+## [2.1.0] - 2019-04-25
 
 ### Added
 
@@ -9,6 +9,7 @@
   - See the `themeIds` option of the [variant configuration](/basics/variant/).
 - Experimental Webpack adapter
   - See the [Webpack adapter docs](/adapters/webpack/) for details.
+  - Requires the `<!-- uiengine:foot -->` comment to be present in the template.
 
 ### Changed
 

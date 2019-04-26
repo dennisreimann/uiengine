@@ -127,6 +127,7 @@ Other comments that also get replaced:
 - `<!-- uiengine:title -->` is the page title: `<title><!-- uiengine:title --></title>`
 - `<!-- uiengine:class -->` is the page class: `<html class="<!-- uiengine:class -->">`
 - `<!-- uiengine:theme -->` is the theme id: `<html data-theme="<!-- uiengine:theme -->">`
+- `<!-- uiengine:foot -->` is the client side rendering code that gets injected.
 
 ### Themes
 
