@@ -2,7 +2,7 @@
   "name": "@uiengine/core",
   "description": "Create, document and evolve your design system collaboratively.",
   "license": "MIT",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
@@ -32,20 +32,20 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@uiengine/cli": "^2.0.2",
-    "@uiengine/ui": "^2.0.2",
-    "@uiengine/util": "^2.0.2",
-    "cosmiconfig": "5.1.0",
+    "@uiengine/cli": "^2.1.0",
+    "@uiengine/ui": "^2.1.0",
+    "@uiengine/util": "^2.1.0",
+    "cosmiconfig": "5.2.0",
     "fs-extra": "7.0.1",
-    "globby": "9.0.0",
+    "globby": "9.2.0",
     "ramda": "0.26.1"
   },
   "optionalDependencies": {
-    "browser-sync": "2.26.3",
-    "chokidar": "2.1.2"
+    "browser-sync": "^2.26.5",
+    "chokidar": "^2.1.5"
   },
   "devDependencies": {
-    "lint-staged": "8.1.4"
+    "lint-staged": "8.1.5"
   },
   "lint-staged": {
     "*.js": [

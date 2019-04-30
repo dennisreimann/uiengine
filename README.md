@@ -17,16 +17,6 @@ Useful if you want to …
 - Replace deliverables with usable, testable and production ready output/code.
 - Make documentation fun and easy by providing structure and nice looking pages.
 
-## 🖥 Examples and Screenshots
-
-To get an idea of what this looks like, see the React sample project:
-
-- [Tasty BBQ Design System](https://uiengine-sample-react.uix.space/design-system/): The UIengine output for this sample project
-- [Tasty BBQ Website](https://uiengine-sample-react.uix.space/): The corresponding website, built with React and Next.js.
-- [Tasty BBQ Source Code](https://github.com/dennisreimann/uiengine-sample-react).
-
-There is also an [introduction video](https://www.youtube.com/watch?v=OKHAhIQLvjU).
-
 ## 🏎 Quickstart
 
 To explore the features yourself you can quickly initialize a project with some demo content:
@@ -40,6 +30,17 @@ npx uiengine build --serve --watch
 
 See the [getting started guide](https://uiengine.uix.space/basics/getting-started/)
 for further details.
+There are also some [introduction videos](https://www.youtube.com/watch?v=YBm_ye9da-Q&list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2):
+
+<div class='ytEmbed'><iframe title="UIengine Introduction Videos" src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+
+## 🖥 Examples and Screenshots
+
+To get an idea of what a real-world project looks like, see the React sample project:
+
+- [Tasty BBQ Design System](https://uiengine-sample-react.uix.space/design-system/): The UIengine output for this sample project
+- [Tasty BBQ Website](https://uiengine-sample-react.uix.space/): The corresponding website, built with React and Next.js.
+- [Tasty BBQ Source Code](https://github.com/dennisreimann/uiengine-sample-react).
 
 ## 📘 Documentation
 
@@ -53,6 +54,7 @@ See the [documentation](https://uiengine.uix.space/) site, which is also generat
 [![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/uiengine/badge.svg)](https://snyk.io/test/github/dennisreimann/uiengine)
 [![Coverage Status](https://coveralls.io/repos/github/dennisreimann/uiengine/badge.svg?branch=master)](https://coveralls.io/github/dennisreimann/uiengine?branch=master)
 [![Maintained with lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
+[![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@dennisreimann/F0918E)](https://tippin.me/@dennisreimann)
 
 ### ⚒ How does it work?
 

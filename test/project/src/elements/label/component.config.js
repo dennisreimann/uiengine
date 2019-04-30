@@ -52,7 +52,8 @@ module.exports = {
       file: 'label.pug',
       title: 'Label (Pug)',
       label: 'A1.4',
-      tags: ['Pug']
+      tags: ['Pug'],
+      themeIds: ['plain']
     },
     {
       file: 'label.jsx',
@@ -71,15 +72,9 @@ module.exports = {
       }
     },
     {
-      file: 'label-vue.js',
-      title: 'Label (Vue JS)',
+      file: 'label.vue',
+      title: 'Label (Vue)',
       label: 'A1.6',
-      tags: ['Vue']
-    },
-    {
-      file: 'label-vue-sfc.vhtml',
-      title: 'Label (Vue SFC)',
-      label: 'A1.7',
       tags: ['Vue']
     }
   ]

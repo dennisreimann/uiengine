@@ -2,7 +2,7 @@
   "name": "@uiengine/bridge-theo",
   "description": "UIengine integration for Saleforce Theo.",
   "license": "MIT",
-  "version": "2.0.2",
+  "version": "2.0.7",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
@@ -14,9 +14,6 @@
     "node": ">=10.13"
   },
   "main": "./src/index.js",
-  "bin": {
-    "uiengine": "./bin/uiengine.js"
-  },
   "files": [
     "src"
   ],
@@ -27,11 +24,11 @@
     "lint": "eslint src test",
     "precommit": "lint-staged"
   },
-  "peerDependencies": {
+  "devDependencies": {
+    "lint-staged": "8.1.5",
     "theo": "8.1.2"
   },
-  "devDependencies": {
-    "lint-staged": "8.1.4",
+  "peerDependencies": {
     "theo": "8.1.2"
   },
   "lint-staged": {

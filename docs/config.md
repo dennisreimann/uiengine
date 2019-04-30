@@ -2,6 +2,8 @@
 
 The project configuration lives in a file named `uiengine.config.js`.
 
+<div class='ytEmbed'><iframe title="UIengine Introduction 02: Config, Pages and Design Tokens" src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2&index=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+
 ## Sections
 
 ### Project config
@@ -29,7 +31,7 @@ The base directories for the input, your raw source files:
   source: {
     components: './src/components',
     templates: './src/templates',
-    pages: './uiengine/pages'
+    pages: './uiengine'
   }
 }
 ```
@@ -125,6 +127,7 @@ Other comments that also get replaced:
 - `<!-- uiengine:title -->` is the page title: `<title><!-- uiengine:title --></title>`
 - `<!-- uiengine:class -->` is the page class: `<html class="<!-- uiengine:class -->">`
 - `<!-- uiengine:theme -->` is the theme id: `<html data-theme="<!-- uiengine:theme -->">`
+- `<!-- uiengine:foot -->` is the client side rendering code that gets injected.
 
 ### Themes
 

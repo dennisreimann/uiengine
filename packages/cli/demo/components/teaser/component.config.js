@@ -1,5 +1,6 @@
 module.exports = {
   label: 'A5',
+  variants: ['default.html'],
   context: {
     button: {
       text: 'Book your shuttle now!',

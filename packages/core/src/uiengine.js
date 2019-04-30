@@ -14,7 +14,7 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, pages, 
   const templatesGlob = templates ? join(templates, globPattern) : null
   const pagesGlob = pages ? join(pages, globPattern) : null
   const dataGlob = data ? join(data, globPattern) : null
-  const sourceFiles = [...componentGlobs, configFile, dataGlob, pagesGlob, templatesGlob].filter(a => a)
+  const sourceFiles = [configFile, dataGlob, pagesGlob, templatesGlob].concat(componentGlobs).filter(a => a)
 
   if (debug) {
     const uiSrc = dirname(require.resolve('@uiengine/ui'))
@@ -152,7 +152,7 @@ const startServer = (state, opts) => {
         // whole iframe host in case just the iframe content changes.
         // as the browser-sync client scripts loads asynchronously, we may need to
         // retrigger this function a few times.
-        return match + `\n<!-- UIengine: inject start -->\n${snippet}\n<script>
+        return match + `\n\n<!-- UIengine: inject start -->\n${snippet}\n<script>
         let retries = 0;
         function setupSocket () {
           const socket = window.___browserSync___ && window.___browserSync___.socket;
@@ -172,7 +172,7 @@ const startServer = (state, opts) => {
           }
         }
         setupSocket();
-        </script>\n<!-- UIengine: inject end -->`
+        </script>\n<!-- UIengine: inject end -->\n\n`
       }
     }
   }

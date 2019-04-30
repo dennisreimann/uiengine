@@ -8,11 +8,19 @@
 </template>
 
 <script>
-import props from './props'
-
 export default {
   name: 'MyLabel',
 
-  props
+  props: {
+    id: {
+      type: String,
+      required: true
+    },
+
+    title: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>

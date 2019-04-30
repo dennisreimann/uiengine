@@ -2,6 +2,8 @@
 
 The UIengine interface includes templates for displaying various types of design tokens.
 
+<div class='ytEmbed'><iframe title="UIengine Introduction 02: Config, Pages and Design Tokens" src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2&index=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+
 ## Tokens definition
 
 The design tokens are listed under the `tokens` key of a `page.config.js` file:
@@ -44,7 +46,7 @@ These attributes are optional:
 - `variable`: Variable name
 - `reference`: The name of the referenced token
 - `description`
-- `theme`: Restricts display to only the given theme id. Can be used for categories and tokens.
+- `themeIds`: Restricts display to only the given list of theme ids. Can be used for categories and tokens.
 
 ### Types
 

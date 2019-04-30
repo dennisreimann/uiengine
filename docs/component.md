@@ -8,6 +8,8 @@ In the UIengine terminology it encapsulates everything belonging to the componen
 - Scripts
 - Tests
 
+<div class='ytEmbed'><iframe title="UIengine Introduction 03: Components and Variants" src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2&index=2" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+
 ## Directory Structure
 
 Here is an example structure for some components that use Pug as templating engine (see [adapters](/adapters/)), as well as plain CSS and JavaScript:

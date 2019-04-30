@@ -1,6 +1,20 @@
 # Changelog
 
-## [2.1.0] - ongoing development
+## [2.1.0] - 2019-04-25
+
+### Added
+
+- Provide custom meta tags via the [`ui` config](/advanced/ui/).
+- Option to restrict variant display to a list of given theme ids.
+  - See the `themeIds` option of the [variant configuration](/basics/variant/).
+- Experimental Webpack adapter
+  - See the [Webpack adapter docs](/adapters/webpack/) for details.
+  - Requires the `<!-- uiengine:foot -->` comment to be present in the template.
+
+### Changed
+
+- Option to restrict token display to a list of given theme ids changes from `theme` to `themeIds`.
+  - See the `themeIds` option of the [token configuration](/advanced/design-tokens/).
 
 ### Fixes
 

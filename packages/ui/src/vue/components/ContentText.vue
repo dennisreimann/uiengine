@@ -35,7 +35,8 @@ export default {
 
   methods: {
     handleLinkClicks ($event) {
-      const { target } = $event
+      let { target } = $event
+      while (target && target.tagName !== 'A') target = target.parentNode
 
       if (target && target.matches(".content a:not([href*='://'])") && target.href) {
         // some sanity checks taken from vue-router:

@@ -16,5 +16,7 @@ module.exports = title => `
     <!-- add your custom scripts here:
     <script src="/scripts/my.js"></script>
     -->
+
+    <!-- uiengine:foot -->
   </body>
 </html>`

@@ -16,7 +16,22 @@ const defaultOpts = {
   hljs: 'atom-one-dark',
   base: '/',
   cache: true,
-  customStylesFile: null
+  customStylesFile: null,
+  meta: [
+    {
+      tag: 'meta',
+      attrs: {
+        charset: 'utf-8'
+      }
+    },
+    {
+      tag: 'meta',
+      attrs: {
+        name: 'viewport',
+        content: 'width=device-width,initial-scale=1.0'
+      }
+    }
+  ]
 }
 
 // templates are loaded on setup
@@ -64,7 +79,7 @@ async function render (options, template = 'index', data = null) {
   const supportedLocales = Object.keys(locales)
   if (!supportedLocales.includes(options.lang)) delete options.lang
 
-  const opts = Object.assign({}, defaultOpts, options)
+  const opts = merge(defaultOpts, options)
   const basePath = opts.base.replace(/\/$/, '')
   const helpers = {
     htmlescape,

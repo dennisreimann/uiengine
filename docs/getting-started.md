@@ -9,6 +9,10 @@ We will use `npx` to run the locally installed `uiengine` in the following.
 
 ## 🏎 TL;DR – The fast lane
 
+The following process is also covered in the [introduction videos](https://www.youtube.com/watch?v=YBm_ye9da-Q&list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2):
+
+<div class='ytEmbed'><iframe title="UIengine Introduction Videos" src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+
 Initialize a new npm project:
 
 ```bash

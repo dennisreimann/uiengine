@@ -77,8 +77,7 @@ describe('Core', function () {
         ['label', 'label.pug-5'],
         ['label', 'label.jsx-6'],
         ['label', 'label.jsx-7'],
-        ['label', 'label-vue.js-8'],
-        ['label', 'label-vue-sfc.vhtml-9']
+        ['label', 'label.vue-8']
       ].forEach(([componentId, variantId]) => {
         assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_variants'), join(componentId, variantId))
       })

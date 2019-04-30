@@ -1,19 +1,34 @@
 <%_
 assetPath = htmlWebpackPlugin.options.assetPath
 files = htmlWebpackPlugin.files
+assets = webpack.assets
+
+const resourceHint = asset => {
+  const assetFilePath = asset.name;
+  if (assetFilePath.match(/\/hljs\//)) return;
+  if (assetFilePath.match(/-(light|bold)(\.\w+)?\.woff2/)) { _%>
+    <link href="<%- assetPath(assetFilePath) %>" rel="preload" as="font" type="font/woff2" crossorigin>
+  <%_ } else if (assetFilePath.match(/(MainComponent|inject)(.*)?\.css/)) { _%>
+    <link href="<%- assetPath(assetFilePath) %>" rel="prefetch" as="style">
+  <%_ } else if (assetFilePath.match(/(MainComponent|inject)(.*)?\.js/)) { _%>
+    <link href="<%- assetPath(assetFilePath) %>" rel="prefetch" as="script">
+  <%_ }
+}
 _%>
 <!DOCTYPE html>
 <html lang="<%%= lang %>" class="uie">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <%_ for (index in files.css) { _%>
-    <link href="<%- assetPath(files.css[index]) %>" rel="stylesheet">
-    <%_ } _%>
+    <%%_ meta.forEach(m => { _%%>
+    <<%%= m.tag %%><%% Object.keys(m.attrs).forEach(key => { var val = m.attrs[key]; %%><%%- ` ${key}="` %%><%%= val %%><%%- '"' %%><%% }) %%>>
+    <%%_ }) _%%>
+    <%_ files.css.forEach(stylesheet => { _%>
+    <link href="<%- assetPath(stylesheet) %>" rel="stylesheet">
+    <%_ }) _%>
     <link rel="stylesheet" href="<%- assetPath('/_assets/styles/hljs/') %><%%= hljs %%>.css" id="hljs" data-default="<%%= hljs %%>" data-tmpl="<%- assetPath('/_assets/styles/hljs/%s.css') %>">
     <%%_ if (customStylesFile) { _%%>
     <link rel="stylesheet" href="<%%= customStylesFile %%>">
     <%%_ } _%%>
+    <%_ assets.forEach(resourceHint) _%>
     <script>
       window.UIengine = {
         base: <%%- helpers.htmlescape(base) %%>,

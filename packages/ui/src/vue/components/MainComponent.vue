@@ -145,7 +145,7 @@
             <template v-if="hasManyVariants">
               <ul>
                 <li
-                  v-for="variant in component.variants"
+                  v-for="variant in variants"
                   :key="variant.id"
                 >
                   <RouterLink
@@ -199,7 +199,7 @@
       class="variants"
     >
       <ComponentVariant
-        v-for="variant in component.variants"
+        v-for="variant in variants"
         :key="variant.id"
         :variant="variant"
       />
@@ -211,6 +211,7 @@
 import { mapGetters } from 'vuex'
 import { dasherize } from '@uiengine/util/src/string'
 import Docs from '../mixins/docs'
+import Preview from '../mixins/preview'
 import ContentHeader from './ContentHeader'
 import ContentText from './ContentText'
 import ContentProperties from './ContentProperties'
@@ -231,7 +232,8 @@ export default {
   },
 
   mixins: [
-    Docs
+    Docs,
+    Preview
   ],
 
   props: {
@@ -262,6 +264,12 @@ export default {
       return this.components[this.id]
     },
 
+    variants () {
+      return this.displayAllThemes
+        ? this.component.variants
+        : this.component.variants.filter(this.displayVariant)
+    },
+
     hasDependencies () {
       return this.component.dependencies &&
         this.component.dependencies.filter(this.componentById).length > 0
@@ -273,11 +281,11 @@ export default {
     },
 
     hasVariants () {
-      return this.component.variants.length > 0
+      return this.variants.length > 0
     },
 
     hasManyVariants () {
-      return this.component.variants.length > 1
+      return this.variants.length > 1
     },
 
     hasProperties () {
@@ -324,6 +332,10 @@ export default {
 
     componentById (componentId) {
       return this.components[componentId]
+    },
+
+    displayVariant (variant) {
+      return !!(!variant.themeIds || variant.themeIds.includes(this.currentTheme.id))
     },
 
     tabId (section) {

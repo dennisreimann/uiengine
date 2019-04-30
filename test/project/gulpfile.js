@@ -1,8 +1,6 @@
 const { join } = require('path')
-const { src, dest, series, parallel, task, watch } = require('gulp')
+const { src, dest, parallel, task, watch } = require('gulp')
 const concat = require('gulp-concat')
-const webpack = require('webpack')
-const webpackStream = require('webpack-stream')
 const UIengine = require('@uiengine/core')
 
 const srcs = {
@@ -34,24 +32,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 const globToTheme = theme =>
   glob => glob.replace(/\*\.css$/, `${theme}.css`)
 
-// webpack
-const webpackBuild = env => {
-  return () => {
-    const webpackConfig = require(`./build/webpack.${env}.conf`)
-
-    return src(webpackConfig.entry)
-      .pipe(webpackStream(webpackConfig, webpack))
-      .pipe(dest(dist.root))
-  }
-}
-
-task('webpack-vue-server', webpackBuild('vue-server'))
-task('webpack-vue-client', webpackBuild('vue-client'))
-task('webpack', parallel('webpack-vue-server', 'webpack-vue-client'))
-
-// run webpack as a task dependency, because its output
-// is required for the vue adapter (see adapter options)
-task('uiengine', series('webpack', done => {
+task('uiengine', done => {
   const opts = {
     debug: isDev,
     serve: isDev,
@@ -59,9 +40,9 @@ task('uiengine', series('webpack', done => {
   }
 
   UIengine.build(opts)
-    .then(state => { done() })
+    .then(() => { done() })
     .catch(done)
-}))
+})
 
 task('assets', () =>
   src(srcs.assets)

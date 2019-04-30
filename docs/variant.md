@@ -3,6 +3,8 @@
 A variant is an usage example of a component.
 In the UIengine terminology it offers a preview of the component and the data it can be rendered with.
 
+<div class='ytEmbed'><iframe title="UIengine Introduction 03: Components and Variants" src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2&index=2" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+
 ## Directory Structure
 
 Variants are stored per component in the components `variants` folder.
@@ -65,6 +67,7 @@ Attributes:
   If the veriant does not specify an own context it will be inherited from the general context specified on the component level.
 - `title` and `description` get displayed in the documentation.
 - `label` is an individual marker that can be used as a reference in mockups or wireframes to reference variants.
+- `themeIds`: Restricts display to only the given list of theme ids.
 
 You can also provide a short version of the `variants` list like this:
 

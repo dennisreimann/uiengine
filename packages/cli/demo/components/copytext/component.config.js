@@ -1,5 +1,6 @@
 module.exports = {
   label: 'A2',
+  variants: ['default.html'],
   // General context, shared across all variants
   context: {
     copytext: {

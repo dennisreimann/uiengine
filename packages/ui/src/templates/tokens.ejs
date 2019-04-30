@@ -7,7 +7,7 @@ _%>
   <%%_
     const allThemeIds = themes.map(theme => theme.id)
     const displayAllThemes = themeId === '_all'
-    const displayItem = item => !!(displayAllThemes || !item.theme || item.theme === themeId)
+    const displayItem = item => !!(displayAllThemes || !item.themeIds || item.themeIds.includes(themeId))
     const type = ((tokens && tokens[0].type) || 'default').split('/')[0]
     const isCategory = !!(type === 'category' && tokens && tokens.length)
     const isTokenThemes = !!(tokens && tokens[0].themes)
