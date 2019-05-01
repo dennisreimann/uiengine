@@ -2,8 +2,8 @@
 const viewports = require('./lib/viewports.json')
 
 const viewportsSketch = Object.keys(viewports).reduce((result, name) => {
-  const { width, height } = viewports[name]
-  result[name] = `${width}x${height}`
+  const { width } = viewports[name]
+  result[name] = `${width}x2500`
   return result
 }, {})
 

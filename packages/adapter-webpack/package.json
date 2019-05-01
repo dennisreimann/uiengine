@@ -26,8 +26,8 @@
     "webpack"
   ],
   "dependencies": {
-    "@babel/parser": "7.4.3",
-    "@uiengine/util": "^2.1.0",
+    "@babel/parser": "7.4.4",
+    "@uiengine/util": "2.1.0",
     "fs-extra": "7.0.1",
     "globby": "9.2.0",
     "htmlescape": "1.1.1",
@@ -35,10 +35,10 @@
     "require-from-string": "2.0.2"
   },
   "devDependencies": {
-    "@babel/core": "7.4.3",
-    "@babel/preset-env": "7.4.3",
+    "@babel/core": "7.4.4",
+    "@babel/preset-env": "7.4.4",
     "@babel/preset-react": "7.0.0",
-    "@babel/register": "7.4.0",
+    "@babel/register": "7.4.4",
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.5",
     "babel-preset-vue": "2.0.2",

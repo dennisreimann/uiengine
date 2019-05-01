@@ -23,17 +23,17 @@
     "react"
   ],
   "dependencies": {
-    "@babel/parser": "7.4.3",
-    "@uiengine/util": "^2.1.0",
+    "@babel/parser": "7.4.4",
+    "@uiengine/util": "2.1.0",
     "fs-extra": "7.0.1",
     "globby": "9.2.0",
     "parse-prop-types": "0.3.0"
   },
   "devDependencies": {
-    "@babel/core": "7.4.3",
-    "@babel/preset-env": "7.4.3",
+    "@babel/core": "7.4.4",
+    "@babel/preset-env": "7.4.4",
     "@babel/preset-react": "7.0.0",
-    "@babel/register": "7.4.0",
+    "@babel/register": "7.4.4",
     "lint-staged": "8.1.5",
     "prop-types": "15.6.2",
     "react": "16.8.6",

@@ -23,7 +23,7 @@
     "pug"
   ],
   "dependencies": {
-    "@uiengine/util": "^2.1.0",
+    "@uiengine/util": "2.1.0",
     "fs-extra": "7.0.1",
     "globby": "9.2.0",
     "pug-lexer": "4.0.0",
