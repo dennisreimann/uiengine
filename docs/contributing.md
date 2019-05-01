@@ -71,3 +71,7 @@ We try to keep it as functional as possible, so we are using [Ramda](http://ramd
 
 - Are always `async`
 - First argument should always be the `state`
+
+### Emojis in commit messages
+
+Please make sure that your commit messages start with a somehow fitting emoji.
