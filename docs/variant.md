@@ -117,3 +117,8 @@ Hide something in the rendered preview:
 Everything in between these HTML comments is omitted in the rendered preview
 <!-- omit:preview:end -->
 ```
+
+### Testing
+
+In case you are running browser tests against the previews (i.e. visual regression testing), please make sure to use the iframe content pages directly.
+This way you will enjoy faster load times and more stable tests.

@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.2.0] - ongoing development
+
+### Added
+
+- Lazy load preview iframes to improve performance on component pages with many variants.
+
 ## [2.1.0] - 2019-04-25
 
 ### Added

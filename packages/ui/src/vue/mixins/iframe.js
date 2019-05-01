@@ -1,7 +1,7 @@
 import { iframeResizer } from 'iframe-resizer'
 
 // iframe resizing, see https://github.com/davidjbradshaw/iframe-resizer
-const iframeResizerOpts = { resizeFrom: 'child' }
+const iframeResizerOpts = { resizeFrom: 'child', checkOrigin: false }
 
 export default {
   data () {
