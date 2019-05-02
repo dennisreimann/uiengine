@@ -21,7 +21,7 @@ const assertDirectoryContainsThemeFiles = (prefixPath, postfixPath) => {
 
 // "end to end" tests
 describe('Core', function () {
-  this.timeout(5000)
+  this.timeout(7500)
 
   afterEach(() => { fs.removeSync(testProjectTargetPath) })
 

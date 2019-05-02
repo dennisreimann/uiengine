@@ -22,6 +22,9 @@
     "uiengine",
     "html"
   ],
+  "dependencies": {
+    "fs-extra": "7.0.1"
+  },
   "devDependencies": {
     "lint-staged": "8.1.5"
   },

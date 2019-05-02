@@ -1,6 +1,9 @@
-const { readFileSync } = require('fs')
+const { readFile } = require('fs-extra')
 const { dirname, isAbsolute, join, resolve } = require('path')
 const assert = require('assert')
+
+const INCLUDE_REGEXP = /<!--#\s?include file="(.*?)".*?-->/
+const INCLUDES_REGEXP = new RegExp(INCLUDE_REGEXP, 'g')
 
 const resolveFilePath = (options, embeddingFilePath, filePath) => {
   if (isAbsolute(filePath)) {
@@ -34,29 +37,26 @@ const resolveVariable = (data, varPath, varPathComps) => {
 const renderString = (str, data) =>
   str.replace(/\$\{(.+?)\}/g, (match, varPath) => resolveVariable(data, varPath))
 
-const renderFile = (options, filePath, data) => {
-  const template = readFileSync(filePath, 'utf-8')
-  const html = renderString(template, data)
+const renderFile = async (options, filePath, data) => {
+  const template = await readFile(filePath, 'utf-8')
+  let html = renderString(template, data)
+  const matches = html.match(INCLUDES_REGEXP)
+  if (!matches) return html
 
-  const rendered = html.replace(/<!--#\s?include file="(.*?)"(.*?)-->/g, (match, includeFile) => {
+  await Promise.all(matches.map(async include => {
+    const [, includeFile] = include.match(INCLUDE_REGEXP)
     const includePath = resolveFilePath(options, filePath, includeFile)
+    const contents = await renderFile(options, includePath, data)
+    html = html.replace(include, contents)
+  }))
 
-    return renderFile(options, includePath, data)
-  })
-
-  return rendered
+  return html
 }
 
 async function render (options, filePath, data = {}) {
-  return new Promise((resolve, reject) => {
-    try {
-      const rendered = renderFile(options, filePath, data)
+  const result = await renderFile(options, filePath, data)
 
-      resolve(rendered)
-    } catch (error) {
-      reject(error)
-    }
-  })
+  return result
 }
 
 module.exports = {
