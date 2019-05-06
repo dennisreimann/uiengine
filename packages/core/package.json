@@ -44,9 +44,6 @@
     "browser-sync": "^2.26.5",
     "chokidar": "^3.0.0"
   },
-  "devDependencies": {
-    "lint-staged": "8.1.5"
-  },
   "lint-staged": {
     "*.js": [
       "yarn run lint --fix",

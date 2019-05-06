@@ -25,9 +25,6 @@
   "dependencies": {
     "fs-extra": "7.0.1"
   },
-  "devDependencies": {
-    "lint-staged": "8.1.5"
-  },
   "scripts": {
     "lint": "eslint src test",
     "precommit": "lint-staged"

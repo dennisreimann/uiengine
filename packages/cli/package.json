@@ -38,9 +38,6 @@
     "ramda": "0.26.1",
     "yargs": "13.2.2"
   },
-  "devDependencies": {
-    "lint-staged": "8.1.5"
-  },
   "lint-staged": {
     "*.js": [
       "yarn run lint --fix",

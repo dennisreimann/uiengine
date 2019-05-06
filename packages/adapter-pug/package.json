@@ -31,7 +31,6 @@
     "pug-walk": "1.1.7"
   },
   "devDependencies": {
-    "lint-staged": "8.1.5",
     "pug": "2.0.3"
   },
   "peerDependencies": {

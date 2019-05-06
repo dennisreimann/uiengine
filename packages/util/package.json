@@ -41,8 +41,5 @@
     "markdown-it-mark": "2.0.0",
     "ramda": "0.26.1",
     "unescape": "1.0.1"
-  },
-  "devDependencies": {
-    "lint-staged": "8.1.5"
   }
 }

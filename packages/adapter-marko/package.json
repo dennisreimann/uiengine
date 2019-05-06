@@ -26,7 +26,6 @@
     "@uiengine/util": "2.1.0"
   },
   "devDependencies": {
-    "lint-staged": "8.1.5",
     "marko": "4.16.13"
   },
   "peerDependencies": {

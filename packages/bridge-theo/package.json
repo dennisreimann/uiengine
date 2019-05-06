@@ -25,7 +25,6 @@
     "precommit": "lint-staged"
   },
   "devDependencies": {
-    "lint-staged": "8.1.5",
     "theo": "8.1.2"
   },
   "peerDependencies": {
