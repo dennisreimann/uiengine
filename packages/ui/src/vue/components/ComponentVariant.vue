@@ -116,7 +116,6 @@
           :extension="variant.extension"
           :raw="variant.raw"
           :context="variant.context"
-          :parts="parts"
         />
       </div>
     </div>
@@ -165,20 +164,12 @@ export default {
     ...mapGetters('state', ['config']),
     ...mapGetters('preferences', ['currentTheme']),
 
-    parts () {
-      return this.displayAllThemes
-        ? []
-        : this.variant.themes[this.currentTheme.id].parts
-    },
-
     hasPreview () {
-      return this.displayedThemes.some(theme => {
-        return !!this.variant.themes[theme.id].rendered
-      })
+      return !this.variant.themeIds || this.displayedThemes.some(theme => this.variant.themeIds.includes(theme.id))
     },
 
     hasCode () {
-      return !!(this.variant.raw || this.variant.context || this.parts)
+      return !!(this.variant.raw || this.variant.context)
     },
 
     isPreviewActive () {

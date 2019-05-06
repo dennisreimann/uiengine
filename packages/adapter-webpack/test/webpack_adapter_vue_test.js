@@ -31,13 +31,8 @@ describe('Webpack adapter with Vue templates', () => {
 
       const templatePath = join(basePath, 'template.vue')
       const data = { myData: 'this is my data' }
-      const { rendered, foot, parts } = await Adapter.render(options, templatePath, data)
+      const { rendered, foot } = await Adapter.render(options, templatePath, data)
       const html = '<p data-server-rendered="true" data-v-5c9d4f22>this is my data</p>'
-
-      assert.strictEqual(parts.length, 1)
-      assert.strictEqual(parts[0].lang, 'html')
-      assert.strictEqual(parts[0].title, 'HTML')
-      assert.strictEqual(parts[0].content, html)
 
       assertMatches(rendered, html)
       assertMatches(foot, /<script/)

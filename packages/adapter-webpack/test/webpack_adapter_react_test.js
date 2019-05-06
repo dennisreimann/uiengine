@@ -31,13 +31,8 @@ describe('Webpack adapter with React templates', () => {
 
       const templatePath = join(basePath, 'template.jsx')
       const data = { myData: 'this is my data' }
-      const { rendered, parts, foot } = await Adapter.render(options, templatePath, data)
+      const { rendered, foot } = await Adapter.render(options, templatePath, data)
       const html = '<p data-reactroot="">this is my data</p>'
-
-      assert.strictEqual(parts.length, 1)
-      assert.strictEqual(parts[0].lang, 'html')
-      assert.strictEqual(parts[0].title, 'HTML')
-      assert.strictEqual(parts[0].content, html)
 
       assertMatches(rendered, html)
       assertMatches(foot, /<script/)

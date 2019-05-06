@@ -6,6 +6,10 @@
 
 - Lazy load preview iframes to improve performance on component pages with many variants.
 
+### Removed
+
+- Removed variant parts and rendered output from state as it bloats up the UI file size.
+
 ## [2.1.0] - 2019-04-25
 
 ### Added

@@ -78,7 +78,7 @@ This function should render the file at `filePath` with the given `data` and ret
   [variant metadata](/basics/variant/) or for
   [pages with custom templates](/basics/page/#templates).
 
-The return value can either be a string of HTML or a structured object containing the `rendered` HTML and an optional array of `parts`:
+The return value can either be a string of HTML or a structured object containing the `rendered` HTML and an optional `foot`:
 
 - String:
     ```html
@@ -89,26 +89,12 @@ The return value can either be a string of HTML or a structured object containin
     ```json
     {
       rendered: "<div>rendered html</div>",
-      parts: [
-        {
-          title: 'HTML',
-          content: "<div>rendered html</div>",
-          lang: 'html'
-        },
-        {
-          title: 'CSS',
-          content: "div { background: yellow; }",
-          lang: 'css'
-        }
-      ]
+      foot:
     }
     ```
 
     - `rendered` is required and is used to display the preview
-    - `parts` are optional and get displayed in the code view:
-        - `title`: The title of the code block
-        - `content`: The content of the code block
-        - `lang`: The language of the code block, used for syntax highlighting
+    - `foot` optional client side rendering code that gets injected (script tag including the code)
 
 #### `setup(opts)`
 

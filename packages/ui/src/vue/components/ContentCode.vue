@@ -53,34 +53,6 @@
         v-html="renderedContext"
       />
     </div>
-
-    <div
-      v-for="part in codeParts"
-      :key="part.title"
-      class="code__segment"
-    >
-      <button
-        :title="'navigation.toggle' | localize"
-        :aria-expanded="isExpanded(part.title) | bool2string"
-        :data-test-variant-code-button="part.title"
-        class="code__header"
-        type="button"
-        @click.prevent="toggleExpanded(part.title)"
-      >
-        <h4 class="code__title">
-          {{ part.title }}
-        </h4>
-        <AppIcon
-          symbol="caret-down-double"
-          class="code__expandicon"
-        />
-      </button>
-      <div
-        :hidden="!isExpanded(part.title)"
-        :data-test-variant-code-part="part.title"
-        v-html="renderPart(part)"
-      />
-    </div>
   </div>
 </template>
 
@@ -102,11 +74,6 @@ export default {
     context: {
       type: Object,
       default: null
-    },
-
-    parts: {
-      type: Array,
-      default: null
     }
   },
 
@@ -120,12 +87,6 @@ export default {
   },
 
   computed: {
-    codeParts () {
-      return this.parts
-        ? this.parts.filter(part => part.title && part.content)
-        : []
-    },
-
     renderedRaw () {
       const raw = omit('code', this.raw)
 

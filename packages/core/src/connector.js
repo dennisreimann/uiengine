@@ -76,9 +76,7 @@ async function render (state, templatePath, data = {}, themeId) {
     const options = getOptions(state, ext, { themeId })
     const rendered = await render(options, templatePath, data)
 
-    return typeof rendered === 'string'
-      ? { rendered, parts: [{ title: 'HTML', lang: 'html', content: rendered }] }
-      : rendered
+    return typeof rendered === 'string' ? { rendered } : rendered
   } else {
     throw new UiengineInputError(`The "${ext}" adapter does not support rendering.`)
   }

@@ -10,11 +10,11 @@ async function render (options, filePath, data = {}) {
   const config = buildConfig(options, filePath)
   await runWebpack(config)
 
-  let html, foot
+  let rendered, foot
   if (config.server) {
     const serverRender = requireFromMemory(filePath, 'serverRender.js')
     const Component = requireFromMemory(filePath, 'serverComponent.js')
-    html = await serverRender(Component, data)
+    rendered = await serverRender(Component, data)
   }
 
   if (config.client) {
@@ -32,14 +32,7 @@ async function render (options, filePath, data = {}) {
   }
 
   return {
-    rendered: html,
-    parts: [
-      {
-        title: 'HTML',
-        lang: 'html',
-        content: html
-      }
-    ],
+    rendered,
     foot
   }
 }

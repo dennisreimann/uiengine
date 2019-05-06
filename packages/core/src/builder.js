@@ -25,6 +25,19 @@ const withThemes = async (themes, task, includingAll = false) => {
   return Promise.all(tasks)
 }
 
+const pruneStateForView = state => {
+  // remove components[id].variants[].themes form state,
+  // because it contains the rendered html which is huge.
+  const components = state.components || {}
+  const viewComponents = R.map(component => {
+    const variants = component.variants || []
+    const viewVariants = R.map(variant => R.dissoc('themes', variant), variants)
+    return R.assoc('variants', viewVariants, component)
+  }, components)
+
+  return R.assoc('components', viewComponents, state)
+}
+
 async function render (state, template, data, themeId, identifier) {
   debug4(state, `Builder.render(${template}, ${themeId}):start`)
 
@@ -267,9 +280,11 @@ async function generateStateJSON (state) {
 async function generateState (state) {
   debug2(state, 'Builder.generateState():start')
 
+  const viewState = pruneStateForView(state)
+
   await Promise.all([
-    generateStateHTML(state),
-    generateStateJSON(state)
+    generateStateHTML(viewState),
+    generateStateJSON(viewState)
   ])
 
   debug2(state, 'Builder.generateState():end')

@@ -111,24 +111,11 @@ describe('Connector', () => {
       const result = await Connector.render(state, templatePath, data, themeId)
 
       assert.strictEqual(result.rendered, rendered)
-      assert.strictEqual(result.parts.length, 1)
-      assert.strictEqual(result.parts[0].lang, 'html')
-      assert.strictEqual(result.parts[0].title, 'HTML')
-      assert.strictEqual(result.parts[0].content, rendered)
     })
 
     it('should return structured object for rendered object', async function () {
       const rendered = '<div>rendered html</div>'
-      const renderResult = {
-        rendered,
-        parts: [
-          {
-            lang: 'html',
-            title: 'HTML',
-            content: rendered
-          }
-        ]
-      }
+      const renderResult = { rendered }
       this.sinon.stub(TestAdapter, 'render').returns(renderResult)
       const templatePath = './src/templates/my-template.test'
       const themeId = 'test-theme'
