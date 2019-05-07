@@ -61,6 +61,14 @@ async function render (state, template, data, themeId, identifier) {
   return rendered
 }
 
+async function generatePage (state, pageId) {
+  return Promise.all([
+    generatePageWithTemplate(state, pageId),
+    generatePageWithTokens(state, pageId),
+    generatePageFiles(state, pageId)
+  ])
+}
+
 async function generatePageFiles (state, pageId) {
   debug4(state, `Builder.generatePageFiles(${pageId}):start`)
 
@@ -360,10 +368,11 @@ module.exports = {
   generate,
   generateIncrement,
   generateComponentVariants,
+  generatePage,
   generatePageFiles,
+  generatePageWithTokens,
   generatePageWithTemplate,
   generatePagesWithTemplate,
-  generatePageWithTokens,
   generateVariant,
   generateVariantsWithTemplate,
   generateTokensWithTemplate

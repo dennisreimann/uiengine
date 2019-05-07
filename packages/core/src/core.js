@@ -181,9 +181,7 @@ async function regeneratePage (id) {
   await Promise.all(fetchTasks)
   await fetchAndAssocNavigation()
   await Promise.all([
-    Builder.generatePageWithTemplate(_state, id),
-    Builder.generatePageWithTokens(_state, id),
-    Builder.generatePageFiles(_state, id),
+    Builder.generatePage(_state, id),
     Builder.generateIncrement(_state)
   ])
 }
