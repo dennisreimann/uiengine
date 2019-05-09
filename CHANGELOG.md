@@ -5,6 +5,8 @@
 ### Added
 
 - Lazy load preview iframes to improve performance on component pages with many variants.
+- Pages can now also define a `fragment`, which works similar to the `template`.
+  - See the [page documentation](/basics/page/#templates) for details.
 
 ### Removed
 

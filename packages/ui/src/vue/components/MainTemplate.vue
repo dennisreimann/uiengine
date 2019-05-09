@@ -222,7 +222,7 @@ export default {
     },
 
     hasPreview () {
-      return !!this.page.template
+      return !!(this.page.template || this.page.fragment)
     },
 
     hasCode () {

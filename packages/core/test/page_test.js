@@ -72,9 +72,11 @@ describe('Page', () => {
     it('should infer childIds if they are not provided', async () => {
       const data = await Page.fetchById(state, 'testcases')
 
-      assert.strictEqual(data.childIds.length, 3, `Actual children:\n\n${data.childIds.join('\n')}`)
+      assert.strictEqual(data.childIds.length, 5, `Actual children:\n\n${data.childIds.join('\n')}`)
       assertItem(data.childIds, 'testcases/custom-data')
       assertItem(data.childIds, 'testcases/custom-path')
+      assertItem(data.childIds, 'testcases/custom-fragment')
+      assertItem(data.childIds, 'testcases/custom-fragment-and-template')
       assertItem(data.childIds, 'testcases/custom-template')
     })
 
@@ -191,6 +193,22 @@ describe('Page', () => {
       assert.strictEqual(data.template, 'page.pug')
     })
 
+    it('should determine page type template for pages with custom fragment', async () => {
+      const data = await Page.fetchById(state, 'testcases/custom-fragment')
+
+      assert.strictEqual(data.type, 'template')
+      assert.strictEqual(data.fragment, 'fragment.pug')
+      assert.strictEqual(data.template, undefined)
+    })
+
+    it('should determine page type template for pages with custom fragment and template', async () => {
+      const data = await Page.fetchById(state, 'testcases/custom-fragment-and-template')
+
+      assert.strictEqual(data.type, 'template')
+      assert.strictEqual(data.fragment, 'fragment.pug')
+      assert.strictEqual(data.template, 'template.pug')
+    })
+
     it('should determine page type tokens for pages with tokens attribute', async () => {
       const data = await Page.fetchById(state, 'documentation/tokens/spaces')
 
@@ -203,7 +221,7 @@ describe('Page', () => {
       const data = await Page.fetchAll(state)
       const pageIds = Object.keys(data)
 
-      assert.strictEqual(pageIds.length, 21)
+      assert.strictEqual(pageIds.length, 23)
 
       assertItem(pageIds, 'index')
       assertItem(pageIds, 'documentation')
@@ -225,6 +243,8 @@ describe('Page', () => {
       assertItem(pageIds, 'patterns/templates')
       assertItem(pageIds, 'testcases/custom-data')
       assertItem(pageIds, 'testcases/custom-path')
+      assertItem(pageIds, 'testcases/custom-fragment')
+      assertItem(pageIds, 'testcases/custom-fragment-and-template')
       assertItem(pageIds, 'testcases/custom-template')
     })
   })

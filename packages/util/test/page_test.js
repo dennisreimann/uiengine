@@ -195,6 +195,10 @@ describe('PageUtil', () => {
       assert.strictEqual('template', PageUtil.determineType({ template: 'custom.pug' }))
     })
 
+    it('should return "template" if page attributes has fragment', () => {
+      assert.strictEqual('template', PageUtil.determineType({ fragment: 'fragment.pug' }))
+    })
+
     it('should return "tokens" if page attributes has tokens', () => {
       assert.strictEqual('tokens', PageUtil.determineType({ tokens: {} }))
     })

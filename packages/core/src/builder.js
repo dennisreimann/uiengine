@@ -92,7 +92,8 @@ async function generatePageFiles (state, pageId) {
 async function generatePageWithTemplate (state, pageId) {
   debug2(state, `Builder.generatePageWithTemplate(${pageId}):start`)
 
-  const { pages, config: { target, themes, name, version } } = state
+  const { pages, config } = state
+  const { name, target, themes, version } = config
   const identifier = `Page "${pageId}"`
   const page = pages[pageId]
 
@@ -100,16 +101,20 @@ async function generatePageWithTemplate (state, pageId) {
     throw new UiengineInputError(`${identifier} does not exist or has not been fetched yet.`)
   }
 
-  if (page.template) {
+  if (page.template || page.fragment) {
+    const template = page.template || config.template
+    const { id, context, fragment } = page
+
     await withThemes(themes, async themeId => {
-      // render template with context
-      const { id, context, template } = page
       let { rendered, foot } = await render(state, template, context, themeId, identifier)
+      const content = fragment
+        ? (await render(state, fragment, context, themeId, identifier)).rendered
+        : rendered
       rendered = replaceTemplateComments(rendered, {
         'class': `uie-page uie-page--${dasherize(id)}`,
         'title': `${page.title} • ${name} (${version})`,
         'theme': themeId,
-        'content': rendered,
+        'content': content,
         'foot': foot
       })
 
@@ -125,7 +130,7 @@ async function generatePageWithTemplate (state, pageId) {
 async function generatePagesWithTemplate (state, template) {
   debug3(state, `Builder.generatePagesWithTemplate(${template}):start`)
 
-  const affectedPages = R.filter(page => page.template === template, state.pages)
+  const affectedPages = R.filter(page => [page.template, page.fragment].includes(template), state.pages)
   const pageIds = Object.keys(affectedPages)
   const build = R.partial(generatePageWithTemplate, [state])
   const builds = R.map(build, pageIds)

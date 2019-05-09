@@ -73,6 +73,7 @@ module.exports = {
 
 The `title` is the name of the page that is refered to in the navigation.
 The `template` defines the template the page gets rendered with. See the [templates section](#templates) for details.
+The `fragment` is optional, see the [templates section](#templates) for details.
 The `children` list is optional and can be used to leave out or reorder certain pages.
 The `tags` list is optional and can be used to search for pages.
 The `collapsed` attribute is optional and can be used to initially collapse the children pages.
@@ -114,10 +115,35 @@ templates
 |___home.pug
 |___checkout
     |___cart.pug
+    |___partial.pug
 ```
 
 You can reference these templates as `home.pug` and `checkout/cart.pug` as the value for the `template` attribute of the page.
 Templates are expected to return the whole content of the page, from `DOCTYPE` to `</html>`.
+
+```js
+module.exports = {
+  title: "Sample home page",
+  template: "home.pug",
+  context: {
+    pageTitle: "Welcome to ACME Corp."
+  }
+}
+```
+
+In addition to that you can also define a `fragment`.
+If this is defined, it will be rendered and the output will replace the `<!-- uiengine:content -->` comment in the `template`.
+Fragments in contrast to templates only provide the partial content, not the whole page markup.
+
+```js
+module.exports = {
+  title: "Page with fragment",
+  fragment: "checkout/partial.pug",
+  context: {
+    variableInFragment: "Hello from inside the fragment!"
+  }
+}
+```
 
 ### Providing data
 

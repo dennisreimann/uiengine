@@ -87,6 +87,26 @@ const state = {
       }
     }),
 
+    'prototype/custom-page-with-fragment': Factory.page('prototype/custom-page-with-fragment', {
+      title: 'Custom Page with Fragment',
+      fragment: 'fragment.pug',
+      content: 'Content for custom page with fragment',
+      context: {
+        myFragmentVariable: 'This is my fragment'
+      }
+    }),
+
+    'prototype/custom-page-with-fragment-and-template': Factory.page('prototype/custom-page-with-fragment-and-template', {
+      title: 'Custom Page with Fragment and Template',
+      template: 'template.pug',
+      fragment: 'fragment.pug',
+      content: 'Content for custom page with fragment and template',
+      context: {
+        myContextVariable: 'This is my context',
+        myFragmentVariable: 'This is my fragment'
+      }
+    }),
+
     'testcases': Factory.page('testcases', {
       title: 'Testcases',
       path: 'testcases',
@@ -230,7 +250,30 @@ describe('Builder', () => {
 
       const pagePath = join(target, '_pages', '_default', 'prototype', 'custom-page.html')
       assertContentMatches(pagePath, 'This is my context')
+      assertContentMatches(pagePath, '<title>Page template</title>')
       assertContentDoesNotMatch(pagePath, 'uie-page uie-page--prototype-custom-page')
+    })
+
+    it('should generate page with custom fragment and default template', async () => {
+      await Builder.generatePageWithTemplate(state, 'prototype/custom-page-with-fragment')
+
+      const pagePath = join(target, '_pages', '_default', 'prototype', 'custom-page-with-fragment.html')
+      assertContentMatches(pagePath, 'Page fragment')
+      assertContentMatches(pagePath, 'This is my fragment')
+      assertContentMatches(pagePath, '<title>Custom Page with Fragment • Builder Test (0.1.0)</title>')
+      assertContentMatches(pagePath, 'uie-page uie-page--prototype-custom-page-with-fragment')
+      assertContentDoesNotMatch(pagePath, 'This is my context')
+    })
+
+    it('should generate page with custom fragment and template', async () => {
+      await Builder.generatePageWithTemplate(state, 'prototype/custom-page-with-fragment-and-template')
+
+      const pagePath = join(target, '_pages', '_default', 'prototype', 'custom-page-with-fragment-and-template.html')
+      assertContentMatches(pagePath, 'Page fragment')
+      assertContentMatches(pagePath, 'This is my fragment')
+      assertContentMatches(pagePath, 'This is my context')
+      assertContentMatches(pagePath, '<title>Custom template</title>')
+      assertContentDoesNotMatch(pagePath, 'uie-page uie-page--prototype-custom-page-with-fragment-and-template')
     })
 
     it('should throw error if the page does not exist', async () => {
@@ -319,6 +362,16 @@ describe('Builder', () => {
       await Builder.generatePagesWithTemplate(state, 'page.pug')
 
       assertExists(join(target, '_pages', '_default', 'prototype', 'custom-page.html'))
+      assertDoesNotExist(join(target, '_pages', '_default', 'prototype', 'custom-page-with-fragment.html'))
+      assertDoesNotExist(join(target, '_pages', '_default', 'prototype', 'custom-page-with-fragment-and-template.html'))
+    })
+
+    it('should generate pages having this fragment', async () => {
+      await Builder.generatePagesWithTemplate(state, 'fragment.pug')
+
+      assertExists(join(target, '_pages', '_default', 'prototype', 'custom-page-with-fragment.html'))
+      assertExists(join(target, '_pages', '_default', 'prototype', 'custom-page-with-fragment-and-template.html'))
+      assertDoesNotExist(join(target, '_pages', '_default', 'prototype', 'custom-page.html'))
     })
   })
 

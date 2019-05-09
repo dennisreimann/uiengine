@@ -90,7 +90,7 @@ const parentIdForPageId = (pageIds, pageId) => {
 const determineType = attributes => {
   if (attributes.tokens) {
     return PAGE_TYPE_TOKENS
-  } else if (attributes.template) {
+  } else if (attributes.template || attributes.fragment) {
     return PAGE_TYPE_TEMPLATE
   } else {
     return PAGE_TYPE_DOCUMENTATION
