@@ -50,7 +50,7 @@
     "vue-fragment": "1.5.1",
     "vue-meta": "1.6.0",
     "vue-router": "3.0.6",
-    "vuex": "3.1.0",
+    "vuex": "3.1.1",
     "yall-js": "3.1.1"
   },
   "devDependencies": {
@@ -87,7 +87,7 @@
     "vue-loader": "15.7.0",
     "vue-style-loader": "4.1.2",
     "vue-template-compiler": "2.6.10",
-    "webpack": "4.30.0",
+    "webpack": "4.31.0",
     "webpack-bundle-analyzer": "3.3.2",
     "webpack-cli": "3.3.2",
     "webpack-merge": "4.2.1"
