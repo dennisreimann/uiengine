@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "chalk": "2.4.2",
-    "fs-extra": "7.0.1",
+    "fs-extra": "8.0.1",
     "markdown-it": "8.4.2",
     "markdown-it-anchor": "5.0.2",
     "markdown-it-container": "2.0.0",

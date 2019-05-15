@@ -23,7 +23,7 @@
     "html"
   ],
   "dependencies": {
-    "fs-extra": "7.0.1"
+    "fs-extra": "8.0.1"
   },
   "scripts": {
     "lint": "eslint src test",
