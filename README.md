@@ -118,6 +118,14 @@ Here are some other projects that you might want to evaluate:
 You like this project and are interested in participating?
 See the [development docs](https://uiengine.uix.space/development/contributing/) for an introduction and workflows when hacking on the UIengine.
 
+## 👛 Tip jar
+
+[![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@dennisreimann/F0918E)](https://tippin.me/@dennisreimann)
+
+<a target="_blank" rel="noopener noreferrer" href="https://tiphub.io/user/249025030/tip?site=github">
+  <img src="https://tiphub.io/static/images/tip-button-dark.png" alt="Tip dennisreimann on TipHub" height="42">
+</a>
+
 - - - - -
 
 👨🏻‍💻 Brought to you by the nice people behind [UIengineering](https://www.uiengineering.de). 👨🏻‍💻
