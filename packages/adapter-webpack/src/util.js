@@ -1,4 +1,4 @@
-const { join } = require('path')
+const { join, relative, sep: MEMORY_PATH } = require('path')
 const webpack = require('webpack')
 const MemoryFS = require('memory-fs')
 const requireFromString = require('require-from-string')
@@ -10,12 +10,17 @@ const runAsync = compiler =>
     compiler.run((err, stats) => (err ? reject(err) : resolve(stats)))
   })
 
-const readFromMemory = (originalPath, outputPath) =>
-  MEMORY_FS.readFileSync(join(originalPath, outputPath), 'utf-8')
+const fileId = (filePath, type) =>
+  relative(process.cwd(), filePath).replace(/[^\w\s]/gi, '_') + `-${type}`
 
-const requireFromMemory = (originalPath, outputPath) => {
-  const jsString = readFromMemory(originalPath, outputPath)
-  let Element = requireFromString(jsString, originalPath)
+const readFromMemory = (filePath, type) => {
+  const memPath = join(MEMORY_PATH, `${fileId(filePath, type)}.js`)
+  return MEMORY_FS.readFileSync(memPath, 'utf-8')
+}
+
+const requireFromMemory = (filePath, type) => {
+  const jsString = readFromMemory(filePath, type)
+  let Element = requireFromString(jsString, filePath)
   return Element.default || Element
 }
 
@@ -57,11 +62,11 @@ const buildConfig = (options, filePath) => {
     config.client = Object.assign({}, clientConfig, {
       target: 'web',
       entry: {
-        clientComponent: filePath,
-        clientRender: clientRenderPath
+        [fileId(filePath, 'clientComponent')]: filePath,
+        [fileId(filePath, 'clientRender')]: clientRenderPath
       },
       output: {
-        path: filePath, // use filePath as namespacing prefix
+        path: MEMORY_PATH,
         filename: '[name].js'
       }
     })
@@ -71,11 +76,11 @@ const buildConfig = (options, filePath) => {
     config.server = Object.assign({}, serverConfig, {
       target: 'node',
       entry: {
-        serverComponent: filePath,
-        serverRender: serverRenderPath
+        [fileId(filePath, 'serverComponent')]: filePath,
+        [fileId(filePath, 'serverRender')]: serverRenderPath
       },
       output: {
-        path: filePath, // use filePath as namespacing prefix
+        path: MEMORY_PATH,
         filename: '[name].js',
         libraryTarget: 'commonjs2'
       }

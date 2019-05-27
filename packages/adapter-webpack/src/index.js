@@ -12,14 +12,14 @@ async function render (options, filePath, data = {}) {
 
   let rendered, foot
   if (config.server) {
-    const serverRender = requireFromMemory(filePath, 'serverRender.js')
-    const Component = requireFromMemory(filePath, 'serverComponent.js')
+    const serverRender = requireFromMemory(filePath, 'serverRender')
+    const Component = requireFromMemory(filePath, 'serverComponent')
     rendered = await serverRender(Component, data)
   }
 
   if (config.client) {
-    const clientRenderJs = readFromMemory(filePath, 'clientRender.js')
-    const clientComponentJs = readFromMemory(filePath, 'clientComponent.js')
+    const clientRenderJs = readFromMemory(filePath, 'clientRender')
+    const clientComponentJs = readFromMemory(filePath, 'clientComponent')
     const renderJs = `(function() {
         var ClientRenderModule = ${clientRenderJs};
         var ComponentModule = ${clientComponentJs};
