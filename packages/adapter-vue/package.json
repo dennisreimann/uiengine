@@ -27,8 +27,8 @@
     "vue-server-renderer": "2.6.10"
   },
   "devDependencies": {
-    "@babel/core": "7.4.4",
-    "@babel/preset-env": "7.4.4",
+    "@babel/core": "7.4.5",
+    "@babel/preset-env": "7.4.5",
     "babel-preset-vue": "2.0.2",
     "vue": "2.6.10"
   },

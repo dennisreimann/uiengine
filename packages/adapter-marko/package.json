@@ -26,7 +26,7 @@
     "@uiengine/util": "2.2.0"
   },
   "devDependencies": {
-    "marko": "4.16.14"
+    "marko": "4.17.2"
   },
   "peerDependencies": {
     "marko": "^4.16.14"

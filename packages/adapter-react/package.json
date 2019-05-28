@@ -23,15 +23,15 @@
     "react"
   ],
   "dependencies": {
-    "@babel/parser": "7.4.4",
+    "@babel/parser": "7.4.5",
     "@uiengine/util": "2.2.0",
     "fs-extra": "8.0.1",
     "globby": "9.2.0",
     "parse-prop-types": "0.3.0"
   },
   "devDependencies": {
-    "@babel/core": "7.4.4",
-    "@babel/preset-env": "7.4.4",
+    "@babel/core": "7.4.5",
+    "@babel/preset-env": "7.4.5",
     "@babel/preset-react": "7.0.0",
     "@babel/register": "7.4.4",
     "prop-types": "15.6.2",
