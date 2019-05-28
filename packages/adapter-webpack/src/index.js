@@ -1,23 +1,24 @@
 
 const htmlescape = require('htmlescape')
-const { runWebpack, buildConfig, requireFromMemory, readFromMemory } = require('./util')
+const { requireFromMemory, readFromMemory, buildQueued } = require('./util')
 
 async function registerComponentFile (options, filePath) {
   // TODO: Implement strategies for the particular extract use cases.
 }
 
 async function render (options, filePath, data = {}) {
-  const config = buildConfig(options, filePath)
-  await runWebpack(config)
+  const { serverConfig, clientConfig } = options
+
+  await buildQueued(options, filePath)
 
   let rendered, foot
-  if (config.server) {
+  if (serverConfig) {
     const serverRender = requireFromMemory(filePath, 'serverRender')
     const Component = requireFromMemory(filePath, 'serverComponent')
     rendered = await serverRender(Component, data)
   }
 
-  if (config.client) {
+  if (clientConfig) {
     const clientRenderJs = readFromMemory(filePath, 'clientRender')
     const clientComponentJs = readFromMemory(filePath, 'clientComponent')
     const renderJs = `(function() {

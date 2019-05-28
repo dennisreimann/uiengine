@@ -1,4 +1,5 @@
 const ComponentUtil = require('./component')
+const DebounceUtil = require('./debounce')
 const DebugUtil = require('./debug')
 const FileUtil = require('./file')
 const MarkdownUtil = require('./markdown')
@@ -11,6 +12,7 @@ const { UiengineInputError } = require('./error')
 
 module.exports = {
   ComponentUtil,
+  DebounceUtil,
   DebugUtil,
   FileUtil,
   MarkdownUtil,
