@@ -5,14 +5,19 @@ const MemoryFS = require('memory-fs')
 const requireFromString = require('require-from-string')
 const { DebounceUtil: { debounce } } = require('@uiengine/util')
 
+const CACHES = {}
 const QUEUES = {}
 const MEMORY_FS = new MemoryFS()
+const WEBPACK_NAME_SERVER = 'server'
+const WEBPACK_NAME_CLIENT = 'client'
 
-const fileId = (filePath, type) =>
+const getFileId = (filePath, type) =>
   relative(process.cwd(), filePath).replace(/[^\w\s]/gi, '_') + `-${type}`
 
+const getQueueId = options => `webpack-${hash(options)}`
+
 const readFromMemory = (filePath, type) => {
-  const memPath = join(MEMORY_PATH, `${fileId(filePath, type)}.js`)
+  const memPath = join(MEMORY_PATH, `${getFileId(filePath, type)}.js`)
   return MEMORY_FS.readFileSync(memPath, 'utf-8')
 }
 
@@ -28,19 +33,9 @@ const buildConfig = options => {
 
   // build webpack config by overriding entry and output
   // and explicitely setting the target
-  if (clientConfig) {
-    config.client = Object.assign({}, clientConfig, {
-      target: 'web',
-      entry: {},
-      output: {
-        path: MEMORY_PATH,
-        filename: '[name].js'
-      }
-    })
-  }
-
   if (serverConfig) {
     config.server = Object.assign({}, serverConfig, {
+      name: WEBPACK_NAME_SERVER,
       target: 'node',
       entry: {},
       output: {
@@ -51,65 +46,91 @@ const buildConfig = options => {
     })
   }
 
+  if (clientConfig) {
+    config.client = Object.assign({}, clientConfig, {
+      name: WEBPACK_NAME_CLIENT,
+      target: 'web',
+      entry: {},
+      output: {
+        path: MEMORY_PATH,
+        filename: '[name].js'
+      }
+    })
+  }
+
   return config
 }
 
 const addFileToQueue = (options, filePath, queue) => {
-  const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
+  if (queue.promises[filePath]) return queue.promises[filePath]
 
-  if (clientConfig) {
-    queue.config.client.entry[fileId(filePath, 'clientComponent')] = filePath
-    queue.config.client.entry[fileId(filePath, 'clientRender')] = clientRenderPath
-  }
+  const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
+  const serverId = getFileId(filePath, 'serverComponent')
+  const clientId = getFileId(filePath, 'clientComponent')
 
   if (serverConfig) {
-    queue.config.server.entry[fileId(filePath, 'serverComponent')] = filePath
-    queue.config.server.entry[fileId(filePath, 'serverRender')] = serverRenderPath
+    queue.config.server.entry[serverId] = filePath
+    queue.config.server.entry[getFileId(filePath, 'serverRender')] = serverRenderPath
   }
 
-  return new Promise((resolve, reject) => { queue.handles.push({ resolve, reject }) })
+  if (clientConfig) {
+    queue.config.client.entry[clientId] = filePath
+    queue.config.client.entry[getFileId(filePath, 'clientRender')] = clientRenderPath
+  }
+
+  // cache the promises so that files do not get added multiple times
+  const promise = new Promise((resolve, reject) => {
+    queue.handles[filePath] = {
+      reject,
+      resolve,
+      filePath,
+      serverId,
+      clientId
+    }
+  })
+
+  queue.promises[filePath] = promise
+
+  return promise
 }
 
-const runAsync = compiler =>
+const compile = compiler =>
   new Promise((resolve, reject) => {
-    compiler.run((err, stats) => (err ? reject(err) : resolve(stats)))
+    compiler.outputFileSystem = MEMORY_FS
+    compiler.run((error, stats) => (error ? reject(error) : resolve(stats)))
   })
 
 const runWebpack = async config => {
   const compiler = webpack(Object.values(config))
-  compiler.outputFileSystem = MEMORY_FS
 
-  let stats
-  try {
-    stats = await runAsync(compiler)
-  } catch (err) {
-    console.error(err.stack || err)
-    if (err.details) {
-      console.error(err.details.join('\n'))
-      throw new Error(err)
-    }
-    return
-  }
+  // https://webpack.js.org/api/node#error-handling
+  const stats = await compile(compiler)
+  const { warnings, errors } = stats.toJson('errors-warnings')
 
-  const info = stats.toJson()
+  if (warnings.length) console.warn(warnings.join('\n'))
+  if (errors.length) throw new Error(errors.join('\n'))
 
-  if (stats.hasWarnings()) {
-    console.warn(info.warnings.join('\n'))
-  }
+  return stats
+}
 
-  if (stats.hasErrors()) {
-    console.error(info.errors.join('\n'))
-    throw new Error(info.errors)
+function clearCache (options, filePath) {
+  const queueId = getQueueId(options)
+
+  if (CACHES[queueId] && CACHES[queueId][filePath]) {
+    delete CACHES[queueId][filePath]
   }
 }
 
 async function buildQueued (options, filePath) {
-  const queueId = `wepack-${hash(options)}`
+  const queueId = getQueueId(options)
+
+  if (CACHES[queueId] && CACHES[queueId][filePath]) return CACHES[queueId][filePath]
 
   if (!QUEUES[queueId]) {
     QUEUES[queueId] = {
       config: buildConfig(options),
-      handles: []
+      handles: {},
+      promises: {}
     }
   }
 
@@ -120,10 +141,40 @@ async function buildQueued (options, filePath) {
     delete QUEUES[queueId]
 
     try {
-      await runWebpack(config)
-      handles.forEach(({ resolve }) => resolve())
+      const stats = await runWebpack(config)
+      const info = stats.toJson()
+      const serverInfo = info.children.find(child => child.name === WEBPACK_NAME_SERVER)
+      const clientInfo = info.children.find(child => child.name === WEBPACK_NAME_CLIENT)
+
+      Object.values(handles).forEach(({ resolve, filePath, serverId, clientId }) => {
+        const serverChunk = serverInfo && serverInfo.chunks.find(chunk => chunk.id === serverId)
+        const clientChunk = clientInfo && clientInfo.chunks.find(chunk => chunk.id === clientId)
+        const serverRender = serverChunk && requireFromMemory(filePath, 'serverRender')
+        const serverComponent = serverChunk && requireFromMemory(filePath, 'serverComponent')
+        const clientRender = clientChunk && readFromMemory(filePath, 'clientRender')
+        const clientComponent = clientChunk && readFromMemory(filePath, 'clientComponent')
+        const object = {
+          filePath,
+          serverId,
+          serverChunk,
+          serverRender,
+          serverComponent,
+          clientId,
+          clientChunk,
+          clientRender,
+          clientComponent
+        }
+
+        CACHES[queueId] = CACHES[queueId] || {}
+        CACHES[queueId][filePath] = object
+
+        resolve(object)
+      })
+      // console.group(queueId)
+      // console.log(Object.keys(handles))
+      // console.groupEnd()
     } catch (error) {
-      handles.forEach(({ reject }) => reject(error))
+      Object.values(handles).forEach(({ reject }) => reject(error))
     }
   })
 
@@ -133,5 +184,6 @@ async function buildQueued (options, filePath) {
 module.exports = {
   readFromMemory,
   requireFromMemory,
+  clearCache,
   buildQueued
 }

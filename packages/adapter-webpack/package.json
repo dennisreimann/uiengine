@@ -26,9 +26,7 @@
     "webpack"
   ],
   "dependencies": {
-    "@babel/parser": "7.4.5",
     "@uiengine/util": "2.2.0",
-    "fs-extra": "8.0.1",
     "globby": "9.2.0",
     "htmlescape": "1.1.1",
     "memory-fs": "0.4.1",
@@ -55,7 +53,7 @@
     "webpack-node-externals": "1.7.2"
   },
   "peerDependencies": {
-    "webpack": "^4.31.0"
+    "webpack": "^4.32.2"
   },
   "scripts": {
     "lint": "eslint src test",

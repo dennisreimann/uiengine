@@ -50,11 +50,16 @@ const assertContentDoesNotMatch = (filePath, regexp) => {
   assert(!matches(content, regexp), `Content in file ${filePath} matches\n\n${regexp}\n\n${content}`)
 }
 
+const assertIncludes = (list, item) => {
+  assert(list.includes(item), `Item\n\n${item}\n\nnot included in list:\n\n${list.join('\n')}`)
+}
+
 module.exports = {
   assertExists,
   assertDoesNotExist,
   assertMatches,
   assertDoesNotMatch,
   assertContentMatches,
-  assertContentDoesNotMatch
+  assertContentDoesNotMatch,
+  assertIncludes
 }

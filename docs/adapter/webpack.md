@@ -12,6 +12,7 @@ This adapter needs the following options:
 - `serverRenderPath`: Path to file containing the server-side rendering code
 - `clientConfig`: The Webpack config for clientver-side rendering
 - `clientRenderPath`: Path to file containing the client-side rendering code
+- `extensions`: List of file extensions the adapter should handle
 
 ```js
 {
@@ -48,11 +49,14 @@ const [clientConfig, serverConfig] = require('./webpack.conf')
 const serverRenderPath = resolve(__dirname, 'vue-server-render.js')
 const clientRenderPath = resolve(__dirname, 'vue-client-render.js')
 
+const extensions = ['js', 'vue']
+
 module.exports = {
   serverConfig,
   clientConfig,
   serverRenderPath,
-  clientRenderPath
+  clientRenderPath,
+  extensions
 }
 ```
 
@@ -106,11 +110,14 @@ const [clientConfig, serverConfig] = require('./webpack.conf')
 const serverRenderPath = resolve(__dirname, 'react-server-render.js')
 const clientRenderPath = resolve(__dirname, 'react-client-render.js')
 
+const extensions = ['js', 'jsx']
+
 module.exports = {
   serverConfig,
   clientConfig,
   serverRenderPath,
-  clientRenderPath
+  clientRenderPath,
+  extensions
 }
 ```
 
