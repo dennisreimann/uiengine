@@ -72,7 +72,7 @@ For a list of available options see the [highlight.js demo](https://highlightjs.
 ### customStylesFile
 
 The path to a css files containing variable overrides and extensions for the UI.
-For an example see the [custom styles file of the test project](../test/project/src/assets/styles/uiengine-custom-styles.css).
+For an example see the [custom styles file of the test project](https://github.com/dennisreimann/uiengine/blob/master/test/project/src/styles/uiengine-custom-styles.css).
 
 ### analyticsId
 
