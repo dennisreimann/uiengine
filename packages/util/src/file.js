@@ -42,7 +42,7 @@ async function write (filePath, content) {
 async function copy (src, dst) {
   const dir = dirname(dst)
   await fs.mkdirs(dir)
-  await fs.copy(src, dst)
+  await fs.copy(src, dst, { dereference: true })
 }
 
 module.exports = {
