@@ -24,7 +24,9 @@ const options = {
   components: [elementsPath, modulesPath]
 }
 
-describe('Webpack adapter with Vue templates', () => {
+describe('Webpack adapter with Vue templates', function () {
+  this.timeout(5000)
+
   afterEach(function () {
     this.sinon.restore()
   })
@@ -40,9 +42,7 @@ describe('Webpack adapter with Vue templates', () => {
       }
     })
 
-    it(`should render the template with the given data`, async function () {
-      this.timeout(5000)
-
+    it(`should render the template with the given data`, async () => {
       const templatePath = join(basePath, 'template.vue')
       const data = { myData: 'this is my data' }
       const { rendered, foot } = await Adapter.render(options, templatePath, data)
@@ -76,11 +76,5 @@ describe('Webpack adapter with Vue templates', () => {
 
       assert.strictEqual(dependentFiles, undefined)
     })
-
-    // it('should return undefined dependencyFiles if there are no component dependents', async () => {
-    //   const { dependencyFiles } = await Adapter.registerComponentFile(options, atomFilePath)
-
-    //   assert.strictEqual(dependencyFiles, undefined)
-    // })
   })
 })
