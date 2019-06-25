@@ -2,7 +2,7 @@
   "name": "@uiengine/core",
   "description": "Create, document and evolve your design system collaboratively.",
   "license": "MIT",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
@@ -32,9 +32,9 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@uiengine/cli": "2.2.0",
-    "@uiengine/ui": "2.2.0",
-    "@uiengine/util": "2.2.0",
+    "@uiengine/cli": "2.2.1",
+    "@uiengine/ui": "2.2.1",
+    "@uiengine/util": "2.2.1",
     "cosmiconfig": "5.2.1",
     "fs-extra": "8.0.1",
     "globby": "9.2.0",
