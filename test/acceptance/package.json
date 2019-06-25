@@ -3,7 +3,7 @@
   "name": "@uiengine/acceptance",
   "description": "UIengine Acceptance Tests",
   "license": "MIT",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
