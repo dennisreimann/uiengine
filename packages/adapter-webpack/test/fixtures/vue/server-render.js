@@ -1,7 +1,12 @@
 const Vue = require('vue')
 const { createRenderer } = require('vue-server-renderer')
 
-const renderer = createRenderer()
+const renderer = createRenderer({
+  template: (result, context) => {
+    const styles = context.styles ? `${context.styles}\n` : ''
+    return styles + result
+  }
+})
 
 module.exports = function serverRender (Component, props) {
   return renderer.renderToString(
@@ -9,6 +14,6 @@ module.exports = function serverRender (Component, props) {
       render (h) {
         return h(Component, { props })
       }
-    })
+    }), {}
   )
 }

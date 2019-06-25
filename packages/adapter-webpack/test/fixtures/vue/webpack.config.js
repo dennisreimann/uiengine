@@ -23,7 +23,10 @@ const baseConfig = {
       },
       {
         test: /\.css$/,
-        loader: 'css-loader'
+        loader: [
+          'vue-style-loader',
+          'css-loader'
+        ]
       },
       {
         test: /\.js$/,

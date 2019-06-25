@@ -21,9 +21,11 @@ async function getDependencyFiles (options, filePath, cache) {
   // https://webpack.js.org/api/stats#chunk-objects
   const filePaths = chunk ? chunk.modules.map(({ id }) => {
     const mod = id.split('?!').pop().replace(/\?.*$/, '')
-    const modulePath = mod.startsWith('.') ? resolve(mod) : require.resolve(mod)
+    let modulePath
+    if (mod) modulePath = mod.startsWith('.') ? resolve(mod) : require.resolve(mod)
     return modulePath && crossPlatformPath(modulePath)
   }).filter((depPath, index, array) => {
+    if (!depPath) return false
     const unique = array.indexOf(depPath) === index
     const notSameFile = depPath !== filePath
     return unique && notSameFile
