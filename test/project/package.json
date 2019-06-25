@@ -17,14 +17,7 @@
     "prod": "yarn run clean && gulp build",
     "sketch": "html-sketchapp --config html-sketchapp.config.js && open -a Sketch && open ../tmp/_sketch",
     "lint": "eslint --ext .js,.vue src webpack",
-    "precommit": "lint-staged",
     "standalone": "yarn run clean && uiengine build -s -w"
-  },
-  "lint-staged": {
-    "*.{js,vue}": [
-      "yarn run lint --fix",
-      "git add"
-    ]
   },
   "dependencies": {
     "ejs": "2.6.2",

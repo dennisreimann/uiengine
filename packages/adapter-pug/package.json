@@ -37,13 +37,6 @@
     "pug": "^2.0.4"
   },
   "scripts": {
-    "lint": "eslint src test",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.js": [
-      "yarn run lint --fix",
-      "git add"
-    ]
+    "lint": "eslint src test"
   }
 }

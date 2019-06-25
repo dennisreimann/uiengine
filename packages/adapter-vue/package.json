@@ -36,13 +36,6 @@
     "vue": "^2.6.10"
   },
   "scripts": {
-    "lint": "eslint --ext .js,.vue src test",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,vue}": [
-      "yarn run lint --fix",
-      "git add"
-    ]
+    "lint": "eslint --ext .js,.vue src test"
   }
 }

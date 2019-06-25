@@ -56,13 +56,6 @@
     "webpack": "^4.35.0"
   },
   "scripts": {
-    "lint": "eslint src test",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.js": [
-      "yarn run lint --fix",
-      "git add"
-    ]
+    "lint": "eslint src test"
   }
 }

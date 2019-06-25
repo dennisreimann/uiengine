@@ -28,14 +28,7 @@
     "clean": "rimraf dist lib",
     "start": "yarn run clean && cross-env NODE_ENV=development webpack --watch",
     "build": "yarn run clean && cross-env NODE_ENV=production webpack",
-    "lint": "eslint --ext .js,.vue src test",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,vue}": [
-      "yarn run lint --fix",
-      "git add"
-    ]
+    "lint": "eslint --ext .js,.vue src test"
   },
   "dependencies": {
     "@uiengine/util": "2.2.1",

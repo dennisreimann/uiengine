@@ -29,13 +29,6 @@
     "ejs": "^2.6.2"
   },
   "scripts": {
-    "lint": "eslint src test",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.js": [
-      "yarn run lint --fix",
-      "git add"
-    ]
+    "lint": "eslint src test"
   }
 }

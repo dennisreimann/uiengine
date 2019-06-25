@@ -21,19 +21,12 @@
     "uiengine"
   ],
   "scripts": {
-    "lint": "eslint src test",
-    "precommit": "lint-staged"
+    "lint": "eslint src test"
   },
   "devDependencies": {
     "theo": "8.1.3"
   },
   "peerDependencies": {
     "theo": "^8.1.3"
-  },
-  "lint-staged": {
-    "*.js": [
-      "yarn run lint --fix",
-      "git add"
-    ]
   }
 }

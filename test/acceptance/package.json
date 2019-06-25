@@ -14,18 +14,11 @@
   "scripts": {
     "start": "cypress open",
     "test": "cypress run",
-    "lint": "eslint integration plugins support",
-    "precommit": "lint-staged"
+    "lint": "eslint integration plugins support"
   },
   "devDependencies": {
     "cypress": "3.3.1",
     "eslint": "6.0.1",
     "eslint-plugin-cypress": "2.2.1"
-  },
-  "lint-staged": {
-    "**/*.js": [
-      "yarn run lint --fix",
-      "git add"
-    ]
   }
 }

@@ -26,8 +26,7 @@
     "uiengine"
   ],
   "scripts": {
-    "lint": "eslint src test",
-    "precommit": "lint-staged"
+    "lint": "eslint src test"
   },
   "dependencies": {
     "@uiengine/util": "2.2.1",
@@ -37,11 +36,5 @@
     "prettier": "1.18.2",
     "ramda": "0.26.1",
     "yargs": "13.2.4"
-  },
-  "lint-staged": {
-    "*.js": [
-      "yarn run lint --fix",
-      "git add"
-    ]
   }
 }

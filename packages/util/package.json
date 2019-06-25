@@ -21,14 +21,7 @@
     "uiengine"
   ],
   "scripts": {
-    "lint": "eslint src test",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.js": [
-      "yarn run lint --fix",
-      "git add"
-    ]
+    "lint": "eslint src test"
   },
   "dependencies": {
     "chalk": "2.4.2",
