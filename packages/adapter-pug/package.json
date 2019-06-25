@@ -26,15 +26,15 @@
     "@uiengine/util": "2.2.0",
     "fs-extra": "8.0.1",
     "globby": "9.2.0",
-    "pug-lexer": "4.0.0",
-    "pug-parser": "5.0.0",
-    "pug-walk": "1.1.7"
+    "pug-lexer": "4.1.0",
+    "pug-parser": "5.0.1",
+    "pug-walk": "1.1.8"
   },
   "devDependencies": {
-    "pug": "2.0.3"
+    "pug": "2.0.4"
   },
   "peerDependencies": {
-    "pug": "^2.0.3"
+    "pug": "^2.0.4"
   },
   "scripts": {
     "lint": "eslint src test",

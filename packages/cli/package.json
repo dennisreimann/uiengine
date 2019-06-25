@@ -34,7 +34,7 @@
     "fs-extra": "8.0.1",
     "globby": "9.2.0",
     "js-yaml": "3.13.1",
-    "prettier": "1.17.1",
+    "prettier": "1.18.2",
     "ramda": "0.26.1",
     "yargs": "13.2.4"
   },

@@ -38,22 +38,22 @@
     "@babel/preset-env": "7.4.5",
     "@babel/preset-react": "7.0.0",
     "@babel/register": "7.4.4",
-    "babel-eslint": "10.0.1",
+    "babel-eslint": "10.0.2",
     "babel-loader": "8.0.6",
     "babel-preset-vue": "2.0.2",
-    "css-loader": "2.1.1",
+    "css-loader": "3.0.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "vue": "2.6.10",
     "vue-loader": "15.7.0",
     "vue-server-renderer": "2.6.10",
     "vue-template-compiler": "2.6.10",
-    "webpack": "4.32.2",
+    "webpack": "4.35.0",
     "webpack-merge": "4.2.1",
     "webpack-node-externals": "1.7.2"
   },
   "peerDependencies": {
-    "webpack": "^4.32.2"
+    "webpack": "^4.35.0"
   },
   "scripts": {
     "lint": "eslint src test",

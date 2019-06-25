@@ -23,10 +23,10 @@
     "ejs"
   ],
   "devDependencies": {
-    "ejs": "2.6.1"
+    "ejs": "2.6.2"
   },
   "peerDependencies": {
-    "ejs": "^2.6.1"
+    "ejs": "^2.6.2"
   },
   "scripts": {
     "lint": "eslint src test",
