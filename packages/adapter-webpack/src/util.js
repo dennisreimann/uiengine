@@ -24,7 +24,7 @@ const readFromMemory = (filePath, type) => {
 const requireFromMemory = (filePath, type) => {
   const jsString = readFromMemory(filePath, type)
   let Element = requireFromString(jsString, filePath)
-  return Element.default || Element
+  return Element
 }
 
 const buildConfig = options => {
@@ -113,6 +113,20 @@ const runWebpack = async config => {
   return stats
 }
 
+const getExtractProperties = (options, filePath) => {
+  let { properties } = options
+  if (['prop-types', 'vue'].includes(properties)) {
+    const extractProperties = require(`./props/${properties}`)
+    return async (opts, file) => {
+      const { serverComponent } = await buildQueued(opts, file)
+      return serverComponent ? extractProperties(file, serverComponent) : {}
+    }
+  } else {
+    // return no op function
+    return () => ({})
+  }
+}
+
 function clearCache (options, filePath) {
   const queueId = getQueueId(options)
 
@@ -170,9 +184,6 @@ async function buildQueued (options, filePath) {
 
         resolve(object)
       })
-      // console.group(queueId)
-      // console.log(Object.keys(handles))
-      // console.groupEnd()
     } catch (error) {
       Object.values(handles).forEach(({ reject }) => reject(error))
     }
@@ -185,5 +196,6 @@ module.exports = {
   readFromMemory,
   requireFromMemory,
   clearCache,
-  buildQueued
+  buildQueued,
+  getExtractProperties
 }

@@ -3,8 +3,11 @@ const { createRenderer } = require('vue-server-renderer')
 
 const renderer = createRenderer({
   template: (result, context) => {
-    const styles = context.styles ? `${context.styles}\n` : ''
-    return styles + result
+    const state = context.renderState()
+    const styles = context.renderStyles()
+    const scripts = context.renderScripts()
+
+    return styles + result + state + scripts
   }
 })
 
@@ -14,6 +17,6 @@ module.exports = function serverRender (Component, props) {
       render (h) {
         return h(Component, { props })
       }
-    }), {}
+    }), { state: props }
   )
 }

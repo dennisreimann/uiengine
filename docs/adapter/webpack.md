@@ -13,6 +13,7 @@ This adapter needs the following options:
 - `clientConfig`: The Webpack config for clientver-side rendering
 - `clientRenderPath`: Path to file containing the client-side rendering code
 - `extensions`: List of file extensions the adapter should handle
+- `properties`: Optional property extraction handler (options: `prop-types`, `vue`)
 
 ```js
 {
@@ -50,13 +51,15 @@ const serverRenderPath = resolve(__dirname, 'vue-server-render.js')
 const clientRenderPath = resolve(__dirname, 'vue-client-render.js')
 
 const extensions = ['js', 'vue']
+const properties = 'vue'
 
 module.exports = {
   serverConfig,
   clientConfig,
   serverRenderPath,
   clientRenderPath,
-  extensions
+  extensions,
+  properties
 }
 ```
 
@@ -68,8 +71,11 @@ const { createRenderer } = require('vue-server-renderer')
 
 const renderer = createRenderer({
   template: (result, context) => {
-    const styles = context.styles ? `${context.styles}\n` : ''
-    return styles + result
+    const state = context.renderState()
+    const styles = context.renderStyles()
+    const scripts = context.renderScripts()
+
+    return styles + result + state + scripts
   }
 })
 
@@ -79,7 +85,7 @@ module.exports = function serverRender (Component, props) {
       render (h) {
         return h(Component, { props })
       }
-    }), {}
+    }), { state: props }
   )
 }
 ```
@@ -116,13 +122,15 @@ const serverRenderPath = resolve(__dirname, 'react-server-render.js')
 const clientRenderPath = resolve(__dirname, 'react-client-render.js')
 
 const extensions = ['js', 'jsx']
+const properties = 'prop-types'
 
 module.exports = {
   serverConfig,
   clientConfig,
   serverRenderPath,
   clientRenderPath,
-  extensions
+  extensions,
+  properties
 }
 ```
 

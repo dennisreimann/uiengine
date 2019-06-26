@@ -42,6 +42,8 @@
     "babel-loader": "8.0.6",
     "babel-preset-vue": "2.0.2",
     "css-loader": "3.0.0",
+    "parse-prop-types": "0.3.0",
+    "prop-types": "15.6.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "vue": "2.6.10",
@@ -54,6 +56,10 @@
   },
   "peerDependencies": {
     "webpack": "^4.35.0"
+  },
+  "optionalDependencies": {
+    "parse-prop-types": "0.3.0",
+    "prop-types": "15.6.2"
   },
   "scripts": {
     "lint": "eslint src test"

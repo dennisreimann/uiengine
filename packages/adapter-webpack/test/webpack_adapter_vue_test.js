@@ -76,5 +76,56 @@ describe('Webpack adapter with Vue templates', function () {
 
       assert.strictEqual(dependentFiles, undefined)
     })
+
+    it('should extract the component properties', async () => {
+      const componentPath = join(basePath, 'props-full.vue')
+      const { properties } = await Adapter.registerComponentFile(options, componentPath)
+      assert(properties)
+
+      const props = properties['<FullProps>']
+
+      assert.strictEqual(typeof props, 'object')
+      assert.strictEqual(typeof props.id, 'object')
+      assert.strictEqual(props.id.type, 'Number')
+      assert.strictEqual(props.id.required, true)
+
+      assert.strictEqual(typeof props.title, 'object')
+      assert.strictEqual(props.title.type, 'String')
+      assert.strictEqual(props.title.default, 'This is the default title')
+      assert.strictEqual(props.title.description, 'An optional description')
+    })
+
+    it('should return undefined properties if there are no component properties', async () => {
+      const componentPath = join(basePath, 'props-undefined.vue')
+      const { properties } = await Adapter.registerComponentFile(options, componentPath)
+      assert.strictEqual(properties, undefined)
+    })
+
+    it('should return basic properties if props is an array', async () => {
+      const componentPath = join(basePath, 'props-array.vue')
+      const { properties } = await Adapter.registerComponentFile(options, componentPath)
+      assert(properties)
+
+      const props = properties['<ArrayProps>']
+
+      assert.strictEqual(typeof props, 'object')
+      assert.strictEqual(typeof props.id, 'object')
+      assert.strictEqual(typeof props.title, 'object')
+    })
+
+    it('should return basic properties if props is a object with types', async () => {
+      const componentPath = join(basePath, 'props-typed.vue')
+      const { properties } = await Adapter.registerComponentFile(options, componentPath)
+      assert(properties)
+
+      const props = properties['<TypedProps>']
+
+      assert.strictEqual(typeof props, 'object')
+      assert.strictEqual(typeof props.id, 'object')
+      assert.strictEqual(props.id.type, 'Number')
+
+      assert.strictEqual(typeof props.title, 'object')
+      assert.strictEqual(props.title.type, 'String')
+    })
   })
 })
