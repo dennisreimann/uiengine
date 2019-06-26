@@ -33,7 +33,7 @@
     "vue": "2.6.10"
   },
   "peerDependencies": {
-    "vue": "^2.6.10"
+    "vue": "^2.6.0"
   },
   "scripts": {
     "lint": "eslint --ext .js,.vue src test"

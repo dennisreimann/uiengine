@@ -34,7 +34,7 @@
     "pug": "2.0.4"
   },
   "peerDependencies": {
-    "pug": "^2.0.4"
+    "pug": "^2.0.0"
   },
   "scripts": {
     "lint": "eslint src test"

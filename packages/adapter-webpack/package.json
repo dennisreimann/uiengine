@@ -43,7 +43,7 @@
     "babel-preset-vue": "2.0.2",
     "css-loader": "3.0.0",
     "parse-prop-types": "0.3.0",
-    "prop-types": "15.6.2",
+    "prop-types": "15.6.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "vue": "2.6.10",
@@ -55,11 +55,11 @@
     "webpack-node-externals": "1.7.2"
   },
   "peerDependencies": {
-    "webpack": "^4.35.0"
+    "webpack": "^4.0.0"
   },
   "optionalDependencies": {
-    "parse-prop-types": "0.3.0",
-    "prop-types": "15.6.2"
+    "parse-prop-types": "^0.3.0",
+    "prop-types": "^15.6.0"
   },
   "scripts": {
     "lint": "eslint src test"

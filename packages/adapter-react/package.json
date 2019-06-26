@@ -34,16 +34,16 @@
     "@babel/preset-env": "7.4.5",
     "@babel/preset-react": "7.0.0",
     "@babel/register": "7.4.4",
-    "prop-types": "15.6.2",
+    "prop-types": "15.6.0",
     "react": "16.8.6",
     "react-dom": "16.8.6"
   },
   "optionalDependencies": {
-    "prop-types": "15.6.2"
+    "prop-types": "^15.6.0"
   },
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
   },
   "scripts": {
     "lint": "eslint src test"

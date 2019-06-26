@@ -26,7 +26,7 @@
     "ejs": "2.6.2"
   },
   "peerDependencies": {
-    "ejs": "^2.6.2"
+    "ejs": "^2.0.0"
   },
   "scripts": {
     "lint": "eslint src test"
