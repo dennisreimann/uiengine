@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.0] - ongoing development
+
+### Added
+
+- Webpack adapter production ready
+  - Support dependency graph and property extartion for Vue and React
+  - See the [Webpack adapter docs](/adapters/webpack/) for details.
+
 ## [2.2.0] - 2019-05-09
 
 ### Added
