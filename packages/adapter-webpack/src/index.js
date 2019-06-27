@@ -1,10 +1,10 @@
 
 const htmlescape = require('htmlescape')
 const { extractDependentFiles, extractDependencyFiles } = require('./deps')
-const { buildQueued, clearCache, getExtractProperties } = require('./util')
+const { buildQueued, getExtractProperties } = require('./util')
 
 async function registerComponentFile (options, filePath) {
-  clearCache(options, filePath)
+  await buildQueued(options, filePath, true)
 
   const extractProperties = getExtractProperties(options, filePath)
 
@@ -24,7 +24,7 @@ async function registerComponentFile (options, filePath) {
 
 async function render (options, filePath, data = {}) {
   let rendered, foot
-  const { serverRender, serverComponent, clientRender, clientComponent } = await buildQueued(options, filePath)
+  const { serverRender, serverComponent, clientRender, clientComponent } = await buildQueued(options, filePath, true)
 
   if (serverRender && serverComponent) {
     const Component = serverComponent.default || serverComponent

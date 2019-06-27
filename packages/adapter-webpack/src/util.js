@@ -4,8 +4,8 @@ const webpack = require('webpack')
 const MemoryFS = require('memory-fs')
 const requireFromString = require('require-from-string')
 const { DebounceUtil: { debounce } } = require('@uiengine/util')
+const { cacheGet, cachePut, cacheDel } = require('./cache')
 
-const CACHES = {}
 const QUEUES = {}
 const MEMORY_FS = new MemoryFS()
 const WEBPACK_NAME_SERVER = 'server'
@@ -14,6 +14,9 @@ const WEBPACK_NAME_CLIENT = 'client'
 const getFileId = (filePath, type) =>
   relative(process.cwd(), filePath).replace(/[^\w\s]/gi, '_') + `-${type}`
 
+// queue ids separate different adapter types, as in one project multiple
+// file types (i.e. react and vue) can be build with the webpack adapter.
+// -> one queue per file type
 const getQueueId = options => `webpack-${hash(options)}`
 
 const readFromMemory = (filePath, type) => {
@@ -127,18 +130,15 @@ const getExtractProperties = (options, filePath) => {
   }
 }
 
-function clearCache (options, filePath) {
+async function buildQueued (options, filePath, clearCache = false) {
   const queueId = getQueueId(options)
 
-  if (CACHES[queueId] && CACHES[queueId][filePath]) {
-    delete CACHES[queueId][filePath]
+  if (clearCache) {
+    cacheDel(queueId, filePath)
+  } else {
+    const cached = cacheGet(queueId, filePath)
+    if (cached) return cached
   }
-}
-
-async function buildQueued (options, filePath) {
-  const queueId = getQueueId(options)
-
-  if (CACHES[queueId] && CACHES[queueId][filePath]) return CACHES[queueId][filePath]
 
   if (!QUEUES[queueId]) {
     QUEUES[queueId] = {
@@ -167,6 +167,7 @@ async function buildQueued (options, filePath) {
         const serverComponent = serverChunk && requireFromMemory(filePath, 'serverComponent')
         const clientRender = clientChunk && readFromMemory(filePath, 'clientRender')
         const clientComponent = clientChunk && readFromMemory(filePath, 'clientComponent')
+
         const object = {
           filePath,
           serverId,
@@ -179,8 +180,7 @@ async function buildQueued (options, filePath) {
           clientComponent
         }
 
-        CACHES[queueId] = CACHES[queueId] || {}
-        CACHES[queueId][filePath] = object
+        cachePut(queueId, filePath, object)
 
         resolve(object)
       })
@@ -195,7 +195,6 @@ async function buildQueued (options, filePath) {
 module.exports = {
   readFromMemory,
   requireFromMemory,
-  clearCache,
   buildQueued,
   getExtractProperties
 }
