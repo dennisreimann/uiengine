@@ -25,13 +25,15 @@ The base directories for the input, your raw source files:
 - `components` is the root of the directory (or directories) containing the components
 - `templates` contains the variant preview and application templates
 - `pages` is the directory of the UIengine's site structure and page markdown files
+- `additionalWatches` optional list of directories and files that should trigger a rebuild markdown files
 
 ```js
 {
   source: {
     components: './src/components',
     templates: './src/templates',
-    pages: './uiengine'
+    pages: './uiengine',
+    additionalWatches: ['./lib']
   }
 }
 ```

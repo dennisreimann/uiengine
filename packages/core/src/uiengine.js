@@ -1,6 +1,7 @@
 const { dirname, join, relative } = require('path')
 const Core = require('./core')
 const {
+  FileUtil: { isDirectory },
   DebugUtil: { debug3 },
   StringUtil: { crossPlatformPath },
   MarkdownUtil: { parseString: markdown },
@@ -9,12 +10,13 @@ const {
 
 const globPattern = join('**', '*')
 
-const sourceFilesFromConfig = ({ source: { configFile, components, data, pages, templates }, adapters, debug, ui }) => {
+const sourceFilesFromConfig = ({ source: { configFile, components, data, pages, templates, additionalWatches }, debug }) => {
+  const watchesGlob = additionalWatches ? additionalWatches.map(watchPath => isDirectory(watchPath) ? join(watchPath, globPattern) : watchPath) : null
   const componentGlobs = components ? components.map(dir => join(dir, '*', globPattern)) : null
   const templatesGlob = templates ? join(templates, globPattern) : null
   const pagesGlob = pages ? join(pages, globPattern) : null
   const dataGlob = data ? join(data, globPattern) : null
-  const sourceFiles = [configFile, dataGlob, pagesGlob, templatesGlob].concat(componentGlobs).filter(a => a)
+  const sourceFiles = [configFile, dataGlob, pagesGlob, templatesGlob].concat(componentGlobs).concat(watchesGlob).filter(a => a)
 
   if (debug) {
     const uiSrc = dirname(require.resolve('@uiengine/ui'))

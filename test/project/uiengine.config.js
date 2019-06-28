@@ -30,7 +30,8 @@ module.exports = {
   source: {
     components: ['./src/elements', './src/modules'],
     templates: './src/templates',
-    pages: './uiengine/pages'
+    pages: './uiengine/pages',
+    additionalWatches: './lib'
   },
 
   // Destination path for the generated site.

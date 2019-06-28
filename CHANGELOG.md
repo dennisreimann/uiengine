@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.3.0] - ongoing development
+## [2.3.0] - 2019-06-28
 
 ### Added
 
@@ -8,6 +8,8 @@
   - Support dependency graph and property extartion for Vue and React
   - Support for the `filesForComponent` and `filesForVariant` hooks
   - See the [Webpack adapter docs](/adapters/webpack/) for details.
+- Custom file watches can be listed as `source.additionalWatches` in the config
+  - See the [`config.source` docs](/basics/config/#source) for details.
 
 ## [2.2.0] - 2019-05-09
 

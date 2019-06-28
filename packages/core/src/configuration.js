@@ -104,9 +104,8 @@ const _read = (configFilePath, projectConfig, flags) => {
   source = R.map(resolvePaths, source)
   source.base = resolve(configPath)
   source.configFile = resolvePath(configPath, configFilePath)
-  if (source.components) {
-    source.components = resolvePathAsArray(configPath, source.components)
-  }
+  if (source.components) source.components = resolvePathAsArray(configPath, source.components)
+  if (source.additionalWatches) source.additionalWatches = resolvePathAsArray(configPath, source.additionalWatches)
 
   target = resolvePath(configPath, target)
   adapters = R.map(resolveAdapters, adapters || {})
