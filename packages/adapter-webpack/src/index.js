@@ -49,7 +49,19 @@ async function render (options, filePath, data = {}) {
   }
 }
 
+function filesForComponent (options, componentName) {
+  const fn = options.filesForComponent
+  if (typeof fn === 'function') return fn(options, componentName)
+}
+
+function filesForVariant (options, componentName, variantName) {
+  const fn = options.filesForVariant
+  if (typeof fn === 'function') return fn(options, componentName, variantName)
+}
+
 module.exports = {
   render,
-  registerComponentFile
+  registerComponentFile,
+  filesForComponent,
+  filesForVariant
 }

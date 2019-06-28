@@ -103,6 +103,8 @@ const compile = compiler =>
     compiler.run((error, stats) => (error ? reject(error) : resolve(stats)))
   })
 
+// TODO: Evaluate parallel-webpack
+// https://www.npmjs.com/package/parallel-webpack#nodejs-api
 const runWebpack = async config => {
   const compiler = webpack(Object.values(config))
 

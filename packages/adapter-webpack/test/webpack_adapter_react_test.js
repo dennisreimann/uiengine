@@ -224,4 +224,32 @@ describe('Webpack adapter with React templates', function () {
       assert.strictEqual(properties, undefined)
     })
   })
+
+  describe('#filesForComponent', () => {
+    it('should return the component file', () => {
+      const files = Adapter.filesForComponent(options, 'button')
+
+      assert.strictEqual(files.length, 1)
+      assert.strictEqual(files[0].basename, 'Button.jsx')
+
+      const content = files[0].data
+
+      assertMatches(content, "import React from 'react'")
+      assertMatches(content, 'export default Button')
+    })
+  })
+
+  describe('#filesForVariant', () => {
+    it('should return the variant file', () => {
+      const files = Adapter.filesForVariant(options, 'button', 'primary')
+
+      assert.strictEqual(files.length, 1)
+      assert.strictEqual(files[0].basename, 'Primary.jsx')
+
+      const content = files[0].data
+
+      assertMatches(content, "import React from 'react'")
+      assertMatches(content, "import Button from '../Button.jsx'")
+    })
+  })
 })

@@ -128,4 +128,39 @@ describe('Webpack adapter with Vue templates', function () {
       assert.strictEqual(props.title.type, 'String')
     })
   })
+
+  describe('#filesForComponent', () => {
+    it('should return the component file', () => {
+      const files = Adapter.filesForComponent(options, 'button')
+
+      assert.strictEqual(files.length, 2)
+      assert.strictEqual(files[0].basename, 'Button.vue')
+
+      const content = files[0].data
+
+      assertMatches(content, '<div class="button">')
+      assertMatches(content, 'export default {')
+      assertMatches(content, '.button {')
+
+      const index = files[1].data
+
+      assertMatches(index, "import Button from './Button.vue'")
+      assertMatches(index, 'export default Button')
+    })
+  })
+
+  describe('#filesForVariant', () => {
+    it('should return the variant file', () => {
+      const files = Adapter.filesForVariant(options, 'button', 'primary')
+
+      assert.strictEqual(files.length, 1)
+      assert.strictEqual(files[0].basename, 'Primary.vue')
+
+      const content = files[0].data
+
+      assertMatches(content, "import Button from '../Button.vue'")
+      assertMatches(content, 'props: Button.props')
+      assertMatches(content, '<Button v-bind="$props" />')
+    })
+  })
 })

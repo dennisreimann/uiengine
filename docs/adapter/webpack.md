@@ -14,6 +14,9 @@ This adapter needs the following options:
 - `clientRenderPath`: Path to file containing the client-side rendering code
 - `extensions`: List of file extensions the adapter should handle
 - `properties`: Optional property extraction handler (options: `prop-types`, `vue`)
+- `filesForComponent` and `filesForVariant`: See the [adapter scaffolding docs](../#scaffolding) and the test project files for
+  [React](https://github.com/dennisreimann/uiengine/blob/master/test/project/lib/react-scaffolding.js) and
+  [Vue](https://github.com/dennisreimann/uiengine/blob/master/test/project/lib/vue-scaffolding.js).
 
 ```js
 {
@@ -62,6 +65,10 @@ module.exports = {
   properties
 }
 ```
+
+For details on the `filesForComponent` and `filesForVariant` options see the
+[adapter scaffolding docs](../#scaffolding) and the accompanying
+[test project file](https://github.com/dennisreimann/uiengine/blob/master/test/project/lib/vue-scaffolding.js).
 
 The `vue-server-render.js` file might look like this:
 
@@ -133,6 +140,10 @@ module.exports = {
   properties
 }
 ```
+
+For details on the `filesForComponent` and `filesForVariant` options see the
+[adapter scaffolding docs](../#scaffolding) and the accompanying
+[test project file](https://github.com/dennisreimann/uiengine/blob/master/test/project/lib/react-scaffolding.js).
 
 The `react-server-render.js` file might look like this:
 

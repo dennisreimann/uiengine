@@ -6,6 +6,7 @@
 
 - Webpack adapter production ready
   - Support dependency graph and property extartion for Vue and React
+  - Support for the `filesForComponent` and `filesForVariant` hooks
   - See the [Webpack adapter docs](/adapters/webpack/) for details.
 
 ## [2.2.0] - 2019-05-09
