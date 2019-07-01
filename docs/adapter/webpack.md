@@ -1,6 +1,6 @@
 # Webpack
 
-🚦 *State:* Experimental, Proof of Concept
+🚦 *State:* Production ready
 
 [![npm](https://img.shields.io/npm/v/@uiengine/adapter-webpack.svg)](https://www.npmjs.com/package/@uiengine/adapter-webpack)
 

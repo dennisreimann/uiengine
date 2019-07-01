@@ -154,27 +154,27 @@ const startServer = (state, opts) => {
         // whole iframe host in case just the iframe content changes.
         // as the browser-sync client scripts loads asynchronously, we may need to
         // retrigger this function a few times.
-        return match + `\n\n<!-- UIengine: inject start -->\n${snippet}\n<script>
-        let retries = 0;
-        function setupSocket () {
-          const socket = window.___browserSync___ && window.___browserSync___.socket;
-          if (socket) {
-            socket.on('uiengine:file:change', function(filePath) {
-              if (window.location.pathname.endsWith(filePath)) {
-                window.location.reload();
-                console.debug('[UIengine]', 'Reload on file change', filePath);
-              }
-            })
-            console.debug('[UIengine]', 'Connection to browser-sync socket established.');
-          } else if (retries <= 10) {
-            setTimeout(setupSocket, 100);
-            retries++;
-          } else {
-            console.warn('[UIengine]', 'Could not connect to browser-sync socket.');
-          }
+        return match + `\n<!-- UIengine: inject start -->\n${snippet}<script>
+  let retries = 0;
+  function setupSocket () {
+    const socket = window.___browserSync___ && window.___browserSync___.socket;
+    if (socket) {
+      socket.on('uiengine:file:change', function(filePath) {
+        if (window.location.pathname.endsWith(filePath)) {
+          window.location.reload();
+          console.debug('[UIengine]', 'Reload on file change', filePath);
         }
-        setupSocket();
-        </script>\n<!-- UIengine: inject end -->\n\n`
+      })
+      console.debug('[UIengine]', 'Connection to browser-sync socket established.');
+    } else if (retries <= 10) {
+      setTimeout(setupSocket, 100);
+      retries++;
+    } else {
+      console.warn('[UIengine]', 'Could not connect to browser-sync socket.');
+    }
+  }
+  setupSocket();
+</script>\n<!-- UIengine: inject end -->`
       }
     }
   }

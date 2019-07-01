@@ -1,6 +1,6 @@
 # Vue
 
-🚦 *State:* Proof of concept
+🚦 *State:* Deprecated, please use the [Webpack adapter](/adapters/webpack/).
 
 [![npm](https://img.shields.io/npm/v/@uiengine/adapter-vue.svg)](https://www.npmjs.com/package/@uiengine/adapter-vue)
 

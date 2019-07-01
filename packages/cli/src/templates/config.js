@@ -30,7 +30,7 @@ module.exports = {
 
   ui: {
     lang: '${values.ui.lang}',
-    // hljs: '${values.ui.lang}',
+    // hljs: '${values.ui.hljs}',
     // customStylesFile: '${values.ui.customStylesFile}',
     viewports: {
       Phone: {

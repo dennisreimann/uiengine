@@ -106,7 +106,6 @@ The color type supports the following attributes:
 
 - `name`: The color name
 - `value`: The CSS value of the color
-- `text`: An optional text for the sample. Defaults to "The quick brown fox jumps over the lazy dog"
 - `variable`
 - `reference`
 - `description`
