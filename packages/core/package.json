@@ -35,8 +35,8 @@
     "@uiengine/ui": "2.2.3",
     "@uiengine/util": "2.2.2",
     "cosmiconfig": "5.2.1",
-    "fs-extra": "8.0.1",
-    "globby": "9.2.0",
+    "fs-extra": "8.1.0",
+    "globby": "10.0.0",
     "ramda": "0.26.1"
   },
   "optionalDependencies": {

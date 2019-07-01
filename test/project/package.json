@@ -22,7 +22,7 @@
   "dependencies": {
     "ejs": "2.6.2",
     "handlebars": "4.1.2",
-    "marko": "4.18.4",
+    "marko": "4.18.5",
     "prop-types": "15.6.0",
     "pug": "2.0.4",
     "react": "16.8.6",
@@ -68,7 +68,7 @@
     "theo": "8.1.3",
     "vue-loader": "15.7.0",
     "vue-template-compiler": "2.6.10",
-    "webpack": "4.35.0",
+    "webpack": "4.35.2",
     "webpack-merge": "4.2.1",
     "webpack-node-externals": "1.7.2"
   }

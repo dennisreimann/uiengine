@@ -24,8 +24,8 @@
   ],
   "dependencies": {
     "deepmerge": "3.3.0",
-    "fs-extra": "8.0.1",
-    "globby": "9.2.0",
+    "fs-extra": "8.1.0",
+    "globby": "10.0.0",
     "postcss": "7.0.17"
   },
   "scripts": {

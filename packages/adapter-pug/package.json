@@ -24,8 +24,8 @@
   ],
   "dependencies": {
     "@uiengine/util": "2.2.2",
-    "fs-extra": "8.0.1",
-    "globby": "9.2.0",
+    "fs-extra": "8.1.0",
+    "globby": "10.0.0",
     "pug-lexer": "4.1.0",
     "pug-parser": "5.0.1",
     "pug-walk": "1.1.8"

@@ -23,7 +23,7 @@
     "handlebars"
   ],
   "dependencies": {
-    "globby": "9.2.0"
+    "globby": "10.0.0"
   },
   "devDependencies": {
     "handlebars": "4.1.2"
