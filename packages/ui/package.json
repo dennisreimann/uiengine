@@ -42,7 +42,7 @@
     "vue-analytics": "5.17.0",
     "vue-fragment": "1.5.1",
     "vue-meta": "2.0.4",
-    "vue-router": "3.0.6",
+    "vue-router": "3.0.7",
     "vuex": "3.1.1",
     "yall-js": "3.1.1"
   },
@@ -60,7 +60,7 @@
     "css-loader": "3.0.0",
     "css-mqpacker": "7.0.0",
     "csswring": "7.0.0",
-    "eslint-loader": "2.1.2",
+    "eslint-loader": "2.2.0",
     "eslint-plugin-vue": "5.2.3",
     "file-loader": "4.0.0",
     "friendly-errors-webpack-plugin": "1.7.0",

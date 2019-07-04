@@ -219,7 +219,7 @@ _%>
               <div class="uie-font-token__info uie-font-token__info--example">
                 <dt class="uie-font-token__label"><%%= size %%></dt>
                 <dd class="uie-font-token__value">
-                  <p class="uie-font-token__example" style="font-size:<%%= size %%>;<%%= token.value %%>">
+                  <p class="uie-font-token__example" style="<%%= token.value %%>;font-size:<%%= size %%> !important;">
                     <%%= token.text || 'The quick brown fox jumps over the lazy dog' %%>
                   </p>
                 </dd>
