@@ -23,12 +23,12 @@
     "uiengine"
   ],
   "dependencies": {
-    "axe-core": "3.2.2"
+    "axe-core": "3.3.2"
   },
   "peerDependencies": {
     "@uiengine/core": "^2.3.0"
   },
   "scripts": {
-    "lint": "eslint src test"
+    "lint": "eslint --fix src test"
   }
 }
