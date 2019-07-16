@@ -184,7 +184,7 @@ export default {
 
       const width = this.previewWidths[this.id]
 
-      return width ? { 'width': `calc(${width}px + var(--uie-preview-border-width) * 2)` } : {}
+      return width ? { width: `calc(${width}px + var(--uie-preview-border-width) * 2)` } : {}
     },
 
     iframes () {

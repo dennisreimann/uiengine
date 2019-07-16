@@ -6,13 +6,13 @@ const Navigation = require('../src/navigation')
 
 const state = {
   components: {
-    'button': Factory.component('button', { title: 'Awesome Button' }),
-    'link': Factory.component('link', { title: 'Link' })
+    button: Factory.component('button', { title: 'Awesome Button' }),
+    link: Factory.component('link', { title: 'Link' })
   },
   pages: {
-    'index': Factory.page('index', { title: 'Home', childIds: ['atoms', 'molecules'], content: '<h1>Homepage</h1>\n<p>This is some content.</p>' }),
-    'atoms': Factory.page('atoms', { title: 'Atoms', childIds: ['atoms/docs', 'atoms/more-docs'], componentIds: ['link', 'button'] }),
-    'molecules': Factory.page('molecules', { title: 'Molecules', collapsed: true }),
+    index: Factory.page('index', { title: 'Home', childIds: ['atoms', 'molecules'], content: '<h1>Homepage</h1>\n<p>This is some content.</p>' }),
+    atoms: Factory.page('atoms', { title: 'Atoms', childIds: ['atoms/docs', 'atoms/more-docs'], componentIds: ['link', 'button'] }),
+    molecules: Factory.page('molecules', { title: 'Molecules', collapsed: true }),
     'atoms/docs': Factory.page('atoms/docs', { title: 'Atom Docs' }),
     'atoms/more-docs': Factory.page('atoms/more-docs', { title: 'More Atom Docs' })
   }
@@ -125,8 +125,8 @@ describe('Navigation', () => {
     it('should generate page navigation item', async () => {
       const state = {
         pages: {
-          'index': Factory.page('index', { childIds: ['child1'], content: '# Home' }),
-          'child1': Factory.page('child1', { childIds: ['child1/grandchild1'] }),
+          index: Factory.page('index', { childIds: ['child1'], content: '# Home' }),
+          child1: Factory.page('child1', { childIds: ['child1/grandchild1'] }),
           'child1/grandchild1': Factory.page('child1/grandchild1', { childIds: ['child1/grandchild1/greatgrandchild1'], content: '# Grandchild 1' }),
           'child1/grandchild1/greatgrandchild1': Factory.page('child1/grandchild1/greatgrandchild1')
         }

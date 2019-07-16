@@ -25,7 +25,7 @@
   "dependencies": {
     "@uiengine/util": "2.2.2",
     "fs-extra": "8.1.0",
-    "globby": "10.0.0",
+    "globby": "10.0.1",
     "pug-lexer": "4.1.0",
     "pug-parser": "5.0.1",
     "pug-walk": "1.1.8"
@@ -37,6 +37,6 @@
     "pug": "^2.0.0"
   },
   "scripts": {
-    "lint": "eslint src test"
+    "lint": "eslint --fix src test"
   }
 }

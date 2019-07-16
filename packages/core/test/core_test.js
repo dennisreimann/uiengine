@@ -61,7 +61,7 @@ describe('Core', function () {
     it('should generate variant previews', async () => {
       await Core.generate(opts);
 
-      [ ['form', 'form.pug-1'],
+      [['form', 'form.pug-1'],
         ['formfield', 'text-with-label.pug-1'],
         ['formfield', 'text-without-label.pug-2'],
         ['input', 'text.hbs-1'],

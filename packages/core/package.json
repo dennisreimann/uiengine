@@ -28,7 +28,7 @@
     "static-site"
   ],
   "scripts": {
-    "lint": "eslint src test"
+    "lint": "eslint --fix src test"
   },
   "dependencies": {
     "@uiengine/cli": "2.2.2",
@@ -36,11 +36,11 @@
     "@uiengine/util": "2.2.2",
     "cosmiconfig": "5.2.1",
     "fs-extra": "8.1.0",
-    "globby": "10.0.0",
+    "globby": "10.0.1",
     "ramda": "0.26.1"
   },
   "optionalDependencies": {
     "browser-sync": "^2.26.7",
-    "chokidar": "^3.0.1"
+    "chokidar": "^3.0.2"
   }
 }

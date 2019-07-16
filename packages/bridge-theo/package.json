@@ -21,7 +21,7 @@
     "uiengine"
   ],
   "scripts": {
-    "lint": "eslint src test"
+    "lint": "eslint --fix src test"
   },
   "devDependencies": {
     "theo": "8.1.3"

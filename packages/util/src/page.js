@@ -100,7 +100,7 @@ const determineType = attributes => {
 // turns the list of children from the user provided attributes
 // into a list of correctly named childIds
 const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes) => {
-  let { children } = attributes
+  const { children } = attributes
   if (!(children instanceof Array)) return attributes
 
   const prefix = pageIdToPath(pageId)
@@ -126,7 +126,7 @@ const convertUserProvidedChildrenList = (pageId, availableChildIds, attributes) 
 // turns the list of components from the user provided attributes
 // into a list of correctly named componentIds
 const convertUserProvidedComponentsList = (pageId, attributes) => {
-  let { components } = attributes
+  const { components } = attributes
   if (typeof components !== 'object') return attributes
 
   attributes = R.dissoc('components', attributes)

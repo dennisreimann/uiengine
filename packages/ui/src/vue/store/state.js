@@ -35,7 +35,7 @@ const mutations = {
   setState (state, uiengineState) {
     uiengineState = transformState(uiengineState)
 
-    for (let property in uiengineState) {
+    for (const property in uiengineState) {
       state[property] = uiengineState[property]
     }
 

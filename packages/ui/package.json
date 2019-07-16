@@ -28,12 +28,12 @@
     "clean": "rimraf dist lib",
     "start": "yarn run clean && cross-env NODE_ENV=development webpack --watch",
     "build": "yarn run clean && cross-env NODE_ENV=production webpack",
-    "lint": "eslint --ext .js,.vue src test"
+    "lint": "eslint --fix --ext .js,.vue src test"
   },
   "dependencies": {
     "@uiengine/util": "2.2.2",
     "color": "3.1.2",
-    "deepmerge": "3.3.0",
+    "deepmerge": "4.0.0",
     "ejs": "2.6.2",
     "fuse.js": "3.4.5",
     "highlight.js": "9.15.8",
@@ -41,17 +41,17 @@
     "vue": "2.6.10",
     "vue-analytics": "5.17.0",
     "vue-fragment": "1.5.1",
-    "vue-meta": "2.0.4",
+    "vue-meta": "2.0.5",
     "vue-router": "3.0.7",
     "vuex": "3.1.1",
-    "yall-js": "3.1.1"
+    "yall-js": "3.1.2"
   },
   "devDependencies": {
-    "@babel/core": "7.4.5",
-    "@babel/plugin-proposal-object-rest-spread": "7.4.4",
+    "@babel/core": "7.5.4",
+    "@babel/plugin-proposal-object-rest-spread": "7.5.4",
     "@babel/plugin-syntax-dynamic-import": "7.2.0",
-    "@babel/preset-env": "7.4.5",
-    "autoprefixer": "9.6.0",
+    "@babel/preset-env": "7.5.4",
+    "autoprefixer": "9.6.1",
     "babel-eslint": "10.0.2",
     "babel-loader": "8.0.6",
     "clipboard": "2.0.4",
@@ -60,7 +60,7 @@
     "css-loader": "3.0.0",
     "css-mqpacker": "7.0.0",
     "csswring": "7.0.0",
-    "eslint-loader": "2.2.0",
+    "eslint-loader": "2.2.1",
     "eslint-plugin-vue": "5.2.3",
     "file-loader": "4.0.0",
     "friendly-errors-webpack-plugin": "1.7.0",
@@ -80,9 +80,9 @@
     "vue-loader": "15.7.0",
     "vue-style-loader": "4.1.2",
     "vue-template-compiler": "2.6.10",
-    "webpack": "4.35.2",
+    "webpack": "4.35.3",
     "webpack-bundle-analyzer": "3.3.2",
-    "webpack-cli": "3.3.5",
+    "webpack-cli": "3.3.6",
     "webpack-merge": "4.2.1"
   }
 }

@@ -27,8 +27,8 @@
     "vue-server-renderer": "2.6.10"
   },
   "devDependencies": {
-    "@babel/core": "7.4.5",
-    "@babel/preset-env": "7.4.5",
+    "@babel/core": "7.5.4",
+    "@babel/preset-env": "7.5.4",
     "babel-preset-vue": "2.0.2",
     "vue": "2.6.10"
   },
@@ -36,6 +36,6 @@
     "vue": "^2.6.0"
   },
   "scripts": {
-    "lint": "eslint --ext .js,.vue src test"
+    "lint": "eslint --fix --ext .js,.vue src test"
   }
 }

@@ -29,6 +29,6 @@
     "ejs": "^2.0.0"
   },
   "scripts": {
-    "lint": "eslint src test"
+    "lint": "eslint --fix src test"
   }
 }

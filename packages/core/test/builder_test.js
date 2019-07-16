@@ -34,20 +34,20 @@ const state = {
   },
 
   pages: {
-    'index': Factory.page('index', {
+    index: Factory.page('index', {
       title: 'Home',
       path: '',
       content: '<h1>Homepage</h1>',
       childIds: ['patterns', 'testcases', 'tokens', 'tokens-with-custom-template']
     }),
 
-    'patterns': Factory.page('patterns', {
+    patterns: Factory.page('patterns', {
       title: 'Pattern Library',
       path: 'patterns',
       componentIds: ['input']
     }),
 
-    'tokens': Factory.page('tokens', {
+    tokens: Factory.page('tokens', {
       title: 'Tokens',
       path: 'tokens',
       tokens: [
@@ -72,7 +72,7 @@ const state = {
       ]
     }),
 
-    'prototype': Factory.page('prototype', {
+    prototype: Factory.page('prototype', {
       title: 'Sandbox',
       path: 'prototype',
       childIds: ['prototype/custom-page']
@@ -107,7 +107,7 @@ const state = {
       }
     }),
 
-    'testcases': Factory.page('testcases', {
+    testcases: Factory.page('testcases', {
       title: 'Testcases',
       path: 'testcases',
       files: [
@@ -129,7 +129,7 @@ const state = {
   },
 
   navigation: {
-    'index': Factory.navigation('index', {
+    index: Factory.navigation('index', {
       itemId: 'index',
       title: 'Home',
       path: '/',
@@ -137,7 +137,7 @@ const state = {
       childIds: ['patterns', 'testcases']
     }),
 
-    'patterns': Factory.navigation('patterns', {
+    patterns: Factory.navigation('patterns', {
       itemId: 'patterns',
       title: 'Pattern Library',
       path: '/patterns/',
@@ -153,7 +153,7 @@ const state = {
       parentId: 'patterns'
     }),
 
-    'prototype': Factory.navigation('prototype', {
+    prototype: Factory.navigation('prototype', {
       itemId: 'prototype',
       title: 'Sandbox',
       path: 'prototype',
@@ -173,7 +173,7 @@ const state = {
       parentId: 'prototype'
     }),
 
-    'testcases': Factory.navigation('testcases', {
+    testcases: Factory.navigation('testcases', {
       itemId: 'testcases',
       title: 'Testcases',
       path: 'testcases',

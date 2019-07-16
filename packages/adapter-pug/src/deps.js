@@ -20,7 +20,7 @@ async function filter (arr, callback) {
 async function getDependencyFiles (options, filePath, cache) {
   if (cache && cache[filePath]) return cache[filePath]
 
-  let filePaths = []
+  const filePaths = []
 
   try {
     const contents = await readFile(filePath, 'utf-8')

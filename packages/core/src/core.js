@@ -80,8 +80,6 @@ async function generate (options) {
     await Builder.generate(_state)
 
     debug2(_state, 'Core.generate():end')
-  } catch (err) {
-    throw err
   } finally {
     _isGenerating = false
   }

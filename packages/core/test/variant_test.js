@@ -79,7 +79,7 @@ describe('Variant', () => {
 
       assert.strictEqual(variants.length, 6);
 
-      [ 'checkbox.pug',
+      ['checkbox.pug',
         'number.pug',
         'text-disabled.pug',
         'text-required.pug',
@@ -95,7 +95,7 @@ describe('Variant', () => {
 
       assert.strictEqual(variants.length, 2);
 
-      [ 'input/checkbox.pug-1',
+      ['input/checkbox.pug-1',
         'input/text.pug-2'
       ].map(id => {
         assert(R.find(variant => variant.id === id, variants), `missing variant "${id}"`)
@@ -110,7 +110,7 @@ describe('Variant', () => {
 
       assert.strictEqual(variants.length, 2);
 
-      [ 'input/checkbox.pug-1',
+      ['input/checkbox.pug-1',
         'input/text.pug-2'
       ].map(id => {
         assert(R.find(variant => variant.id === id, variants), `missing variant "${id}"`)

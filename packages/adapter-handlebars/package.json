@@ -23,7 +23,7 @@
     "handlebars"
   ],
   "dependencies": {
-    "globby": "10.0.0"
+    "globby": "10.0.1"
   },
   "devDependencies": {
     "handlebars": "4.1.2"
@@ -32,6 +32,6 @@
     "handlebars": "^4.0.0"
   },
   "scripts": {
-    "lint": "eslint src test"
+    "lint": "eslint --fix src test"
   }
 }

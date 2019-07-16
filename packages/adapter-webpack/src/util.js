@@ -26,7 +26,7 @@ const readFromMemory = (filePath, type) => {
 
 const requireFromMemory = (filePath, type) => {
   const jsString = readFromMemory(filePath, type)
-  let Element = requireFromString(jsString, filePath)
+  const Element = requireFromString(jsString, filePath)
   return Element
 }
 
@@ -119,7 +119,7 @@ const runWebpack = async config => {
 }
 
 const getExtractProperties = (options, filePath) => {
-  let { properties } = options
+  const { properties } = options
   if (['prop-types', 'vue'].includes(properties)) {
     const extractProperties = require(`./props/${properties}`)
     return async (opts, file) => {

@@ -11,7 +11,7 @@ module.exports = (file, modify) => {
   const result = []
   const categories = {}
 
-  for (let propId in props) {
+  for (const propId in props) {
     const { type, name, value, originalValue, comment, category } = props[propId]
 
     // rename and modify theo input
