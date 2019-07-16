@@ -13,8 +13,6 @@ const target = simulateBase ? `../tmp${base}` : '../tmp'
 const baseDir = simulateBase ? '../tmp' : undefined
 const customStylesFile = `${base}assets/styles/uiengine-custom-styles.css`
 
-const reactViaWebpack = false
-
 module.exports = {
   // Project config: Defaults to name and version from package.json.
   // Here you can overwrite it and add more custom properties.
@@ -52,16 +50,10 @@ module.exports = {
       module: '@uiengine/adapter-css',
       options: cssAdapterOptions
     },
-    jsx: (reactViaWebpack
-      ? {
-        module: '@uiengine/adapter-webpack',
-        options: webpackAdapterReactOptions
-      }
-      : {
-        module: '@uiengine/adapter-react',
-        options: reactAdapterOptions
-      }
-    ),
+    jsx: {
+      module: '@uiengine/adapter-webpack',
+      options: webpackAdapterReactOptions
+    },
     hbs: '@uiengine/adapter-handlebars',
     marko: '@uiengine/adapter-marko',
     html: '@uiengine/adapter-html',
