@@ -25,7 +25,7 @@ const dist = {
   assets: '../tmp/assets'
 }
 
-const themes = ['plain', 'funky']
+const themes = ['plain', 'funky', '_all']
 
 const isDev = process.env.NODE_ENV !== 'production'
 
