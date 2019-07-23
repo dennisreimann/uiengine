@@ -12,15 +12,20 @@ export default {
   },
 
   methods: {
-    resizableIframe (iframe) {
+    mountResizableIframe (iframe) {
       iframe.addEventListener('load', this.setupIframe.bind(this))
+    },
+
+    unmountResizableIframe (iframe) {
+      if (iframe.iFrameResizer) iframe.iFrameResizer.close()
+      iframe.removeEventListener('load', this.setupIframe.bind(this))
     },
 
     setupIframe (event) {
       const iframe = event.currentTarget
       const height = iframe.getAttribute('height')
 
-      if (!height) {
+      if (!height && iframe.src !== 'about:blank') {
         const { contentWindow } = iframe
 
         // dynamically add runtime and iframe sizer scripts
@@ -28,7 +33,7 @@ export default {
         this.addScriptToIframe(window.UIengine.previewSrc, iframe)
 
         // initialize iframe sizer
-        iframeResizer(iframeResizerOpts, iframe)
+        if (!iframe.iFrameResizer) iframeResizer(iframeResizerOpts, iframe)
 
         // set initial iframe width and update it on resize
         this.iframeWidth = contentWindow.innerWidth

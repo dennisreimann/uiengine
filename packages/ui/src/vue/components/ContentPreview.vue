@@ -200,17 +200,21 @@ export default {
     this.$root.$on('modal:close', () => {
       this.isBreakpointsActive = false
     })
+  },
+
+  mounted () {
+    this.iframes.forEach(this.mountResizableIframe)
 
     this.$store.watch(() => this.$store.getters['preferences/currentTheme'], () => {
       // use requestAnimationFrame to wait for vue rendering and update the $refs.iframes
       window.requestAnimationFrame(() => {
-        this.iframes.forEach(this.resizableIframe)
+        this.iframes.forEach(this.mountResizableIframe)
       })
     })
   },
 
-  mounted () {
-    this.iframes.forEach(this.resizableIframe)
+  beforeDestroy () {
+    this.iframes.forEach(this.unmountResizableIframe)
   },
 
   methods: {

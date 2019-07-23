@@ -68,7 +68,11 @@ export default {
   },
 
   mounted () {
-    this.resizableIframe(this.$refs.iframe)
+    this.mountResizableIframe(this.$refs.iframe)
+  },
+
+  beforeDestroy () {
+    this.unmountResizableIframe(this.$refs.iframe)
   }
 }
 </script>
