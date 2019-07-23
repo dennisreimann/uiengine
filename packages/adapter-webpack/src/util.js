@@ -31,12 +31,12 @@ const requireFromMemory = (filePath, type) => {
 }
 
 const buildConfig = options => {
-  const { serverConfig, clientConfig } = options
+  const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
   const config = {}
 
   // build webpack config by overriding entry and output
   // and explicitely setting the target
-  if (serverConfig) {
+  if (serverConfig && serverRenderPath) {
     config.server = Object.assign({}, serverConfig, {
       name: WEBPACK_NAME_SERVER,
       target: 'node',
@@ -49,7 +49,7 @@ const buildConfig = options => {
     })
   }
 
-  if (clientConfig) {
+  if (clientConfig && clientRenderPath) {
     config.client = Object.assign({}, clientConfig, {
       name: WEBPACK_NAME_CLIENT,
       target: 'web',
@@ -71,12 +71,12 @@ const addFileToQueue = (options, filePath, queue) => {
   const serverId = getFileId(filePath, 'serverComponent')
   const clientId = getFileId(filePath, 'clientComponent')
 
-  if (serverConfig) {
+  if (serverConfig && serverRenderPath) {
     queue.config.server.entry[serverId] = filePath
     queue.config.server.entry[getFileId(filePath, 'serverRender')] = serverRenderPath
   }
 
-  if (clientConfig) {
+  if (clientConfig && clientRenderPath) {
     queue.config.client.entry[clientId] = filePath
     queue.config.client.entry[getFileId(filePath, 'clientRender')] = clientRenderPath
   }

@@ -2,6 +2,10 @@
 
 ## [2.4.0] - ongoing development
 
+### Added
+
+- Webpack adapter warns about incorrect config
+
 ### Changed
 
 - Deprecated Vue adapter, please use the [Webpack adapter](/adapters/webpack/).

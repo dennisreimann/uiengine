@@ -3,6 +3,18 @@ const htmlescape = require('htmlescape')
 const { extractDependentFiles, extractDependencyFiles } = require('./deps')
 const { buildQueued, getExtractProperties } = require('./util')
 
+async function setup (options) {
+  const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
+
+  if (!!serverConfig !== !!serverRenderPath) {
+    console.warn('Webpack: Please specify both serverConfig and serverRenderPath')
+  }
+
+  if (!!clientConfig !== !!clientRenderPath) {
+    console.warn('Webpack: Please specify both clientConfig and clientRenderPath')
+  }
+}
+
 async function registerComponentFile (options, filePath) {
   await buildQueued(options, filePath, true)
 
@@ -60,6 +72,7 @@ function filesForVariant (options, componentName, variantName) {
 }
 
 module.exports = {
+  setup,
   render,
   registerComponentFile,
   filesForComponent,
