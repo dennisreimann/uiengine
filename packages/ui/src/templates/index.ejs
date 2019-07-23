@@ -4,10 +4,10 @@ files = htmlWebpackPlugin.files
 assets = webpack.assets
 
 const resourceHint = asset => {
-  const assetFilePath = asset.name;
+  const assetFilePath = `/${asset.name}`;
   if (assetFilePath.match(/\/hljs\//)) return;
   if (assetFilePath.match(/-(light|bold)(\.\w+)?\.woff2/)) { _%>
-    <link href="<%- assetPath(assetFilePath) %>" rel="preload" as="font" type="font/woff2" crossorigin>
+    <link href="<%- assetPath(assetFilePath) %>" rel="prefetch" as="font" type="font/woff2" crossorigin>
   <%_ } else if (assetFilePath.match(/(MainComponent|inject)(.*)?\.css/)) { _%>
     <link href="<%- assetPath(assetFilePath) %>" rel="prefetch" as="style">
   <%_ } else if (assetFilePath.match(/(MainComponent|inject)(.*)?\.js/)) { _%>

@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.4.0] - ongoing development
+
+### Changed
+
+- Deprecated Vue adapter, please use the [Webpack adapter](/adapters/webpack/).
+
+### Fixes
+
+- UI: fix asset prefetch paths
+
 ## [2.3.0] - 2019-06-28
 
 ### Added
