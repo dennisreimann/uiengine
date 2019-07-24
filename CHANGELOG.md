@@ -1,10 +1,15 @@
 # Changelog
 
-## [2.4.0] - ongoing development
+## [2.4.0] - 2019-07-24
 
 ### Added
 
 - Webpack adapter warns about incorrect config
+
+### Removed
+
+- UI does not display nested properties anymore
+  - Will be brought back once prop-types parsing gets revised.
 
 ### Changed
 
@@ -13,7 +18,7 @@
 
 ### Fixes
 
-- UI: fix asset prefetch paths
+- UI: Asset prefetch paths got fixed
 
 ## [2.3.0] - 2019-06-28
 
