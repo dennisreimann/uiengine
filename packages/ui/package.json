@@ -40,7 +40,7 @@
     "htmlescape": "1.1.1",
     "vue": "2.6.10",
     "vue-analytics": "5.17.0",
-    "vue-meta": "2.0.5",
+    "vue-meta": "2.1.0",
     "vue-router": "3.0.7",
     "vuex": "3.1.1",
     "yall-js": "3.1.2"

@@ -1,6 +1,7 @@
 const { join, relative } = require('path')
 const hash = require('object-hash')
 const webpack = require('webpack')
+const merge = require('webpack-merge')
 const { DebounceUtil: { debounce } } = require('@uiengine/util')
 const { cacheGet, cachePut, cacheDel } = require('./cache')
 
@@ -23,6 +24,9 @@ const buildConfig = (options, isSetupBuild = false) => {
   const { ext, serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
   const config = {}
 
+  // deliberately skip optimizations
+  const mode = 'development'
+
   // build webpack config by overriding entry and output
   // and explicitely setting the target
   if (serverConfig && serverRenderPath) {
@@ -30,9 +34,10 @@ const buildConfig = (options, isSetupBuild = false) => {
       ? { [`${ext}-server`]: serverRenderPath }
       : {}
 
-    config.server = Object.assign({}, serverConfig, {
+    config.server = merge(serverConfig, {
       name: WEBPACK_NAME_SERVER,
       target: 'node',
+      mode,
       entry,
       output: {
         path: filesDir(options),
@@ -50,9 +55,10 @@ const buildConfig = (options, isSetupBuild = false) => {
       ? 'UIengineWebpack_render'
       : 'UIengineWebpack_component'
 
-    config.client = Object.assign({}, clientConfig, {
+    config.client = merge(clientConfig, {
       name: WEBPACK_NAME_CLIENT,
       target: 'web',
+      mode,
       entry,
       output: {
         path: filesDir(options),
@@ -113,7 +119,7 @@ const runWebpack = async config => {
   return stats
 }
 
-const getExtractProperties = (options, filePath) => {
+const getExtractProperties = options => {
   const { properties } = options
   if (['prop-types', 'vue'].includes(properties)) {
     const extractProperties = require(`./props/${properties}`)
@@ -172,6 +178,7 @@ async function buildQueued (options, filePath, clearCache = false) {
         const clientRenderPath = clientChunk && `${uiBase}${TARGET_FOLDER}/${ext}-client.js`
         const clientComponentPath = clientChunk && `${uiBase}${TARGET_FOLDER}/${getFileId(filePath, 'client')}.js`
 
+        // console.log(serverId, serverChunk, serverInfo.chunks)
         const object = {
           filePath,
           serverChunk,

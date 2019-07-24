@@ -20,8 +20,7 @@ async function setup (options) {
 async function registerComponentFile (options, filePath) {
   await buildQueued(options, filePath, true)
 
-  const extractProperties = getExtractProperties(options, filePath)
-
+  const extractProperties = getExtractProperties(options)
   const [properties, dependentFiles, dependencyFiles] = await Promise.all([
     extractProperties(options, filePath),
     extractDependentFiles(options, filePath),

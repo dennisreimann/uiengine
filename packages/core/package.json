@@ -40,7 +40,7 @@
     "ramda": "0.26.1"
   },
   "optionalDependencies": {
-    "browser-sync": "^2.26.7",
-    "chokidar": "^3.0.2"
+    "browser-sync": "2.26.7",
+    "chokidar": "3.0.2"
   }
 }

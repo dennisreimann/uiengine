@@ -38,7 +38,7 @@
     "react-dom": "16.8.6"
   },
   "optionalDependencies": {
-    "prop-types": "15.6.0"
+    "prop-types": "15.7.2"
   },
   "peerDependencies": {
     "react": "^16.8.0",
