@@ -57,8 +57,6 @@ const transformPropTypes = (propTypes, debugInfo) =>
   }, {})
 
 async function extractProperties (filePath, module) {
-  if (!module) module = require(filePath)
-
   const components = Object.values(module).filter(m => m.propTypes)
 
   return components.reduce((result, Component) => {

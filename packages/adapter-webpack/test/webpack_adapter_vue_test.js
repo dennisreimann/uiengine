@@ -2,8 +2,10 @@ require('mocha-sinon')()
 
 const assert = require('assert')
 const { join } = require('path')
+const { removeSync } = require('fs-extra')
 const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
-const { assertMatches, assertIncludes } = require('../../../test/support/asserts')
+const { assertMatches, assertIncludes, assertContentMatches } = require('../../../test/support/asserts')
+const { testTmpPath } = require('../../../test/support/paths')
 
 const Adapter = require('../src/index')
 
@@ -17,21 +19,65 @@ const moleculeVariantPath = join(modulesPath, 'Molecule', 'variants', 'Molecule.
 const organismFilePath = join(modulesPath, 'Organism', 'index.vue')
 const organismVariantPath = join(modulesPath, 'Organism', 'variants', 'Organism.vue')
 const templatePath = join(basePath, 'template.vue')
+const outputPath = join(testTmpPath, '_webpack')
 const componentNormalizerPath = require.resolve('vue-loader/lib/runtime/componentNormalizer.js')
 
 const options = {
   ...require(join(basePath, 'adapter_options')),
-  components: [elementsPath, modulesPath]
+  components: [elementsPath, modulesPath],
+  target: testTmpPath,
+  ext: 'vue',
+  uiBase: '/'
 }
 
 describe('Webpack adapter with Vue templates', function () {
   this.timeout(5000)
 
   afterEach(function () {
+    removeSync(outputPath)
     this.sinon.restore()
   })
 
+  describe('#setup', () => {
+    it('should warn if config is incorrect', async function () {
+      this.sinon.stub(console, 'warn')
+
+      let incorrectOptions
+
+      incorrectOptions = Object.assign({}, options)
+      delete incorrectOptions.serverRenderPath
+      delete incorrectOptions.clientRenderPath
+
+      await Adapter.setup(incorrectOptions)
+
+      this.sinon.assert.calledWith(console.warn, 'Webpack: Please specify both serverConfig and serverRenderPath')
+      this.sinon.assert.calledWith(console.warn, 'Webpack: Please specify both clientConfig and clientRenderPath')
+
+      incorrectOptions = Object.assign({}, options)
+      delete incorrectOptions.serverConfig
+      delete incorrectOptions.clientConfig
+
+      await Adapter.setup(incorrectOptions)
+
+      this.sinon.assert.calledWith(console.warn, 'Webpack: Please specify both serverConfig and serverRenderPath')
+      this.sinon.assert.calledWith(console.warn, 'Webpack: Please specify both clientConfig and clientRenderPath')
+    })
+
+    it(`should build the render files`, async () => {
+      await Adapter.setup(options)
+
+      const clientPath = join(outputPath, 'vue-client.js')
+      assertContentMatches(clientPath, 'window["UIengineWebpack_render"]')
+
+      const serverPath = join(outputPath, 'vue-server.js')
+      const serverRender = require(serverPath)
+      assert.strictEqual(typeof serverRender, 'function')
+    })
+  })
+
   describe('#render', () => {
+    before(async () => { await Adapter.setup(options) })
+
     it('should throw error if the file does not exist', async function () {
       this.sinon.stub(console, 'error')
 

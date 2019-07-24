@@ -1,7 +1,7 @@
 
 const htmlescape = require('htmlescape')
 const { extractDependentFiles, extractDependencyFiles } = require('./deps')
-const { buildQueued, getExtractProperties } = require('./util')
+const { buildSetup, buildQueued, getExtractProperties } = require('./util')
 
 async function setup (options) {
   const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
@@ -13,6 +13,8 @@ async function setup (options) {
   if (!!clientConfig !== !!clientRenderPath) {
     console.warn('Webpack: Please specify both clientConfig and clientRenderPath')
   }
+
+  await buildSetup(options)
 }
 
 async function registerComponentFile (options, filePath) {
@@ -36,23 +38,26 @@ async function registerComponentFile (options, filePath) {
 
 async function render (options, filePath, data = {}) {
   let rendered, foot
-  const { serverRender, serverComponent, clientRender, clientComponent } = await buildQueued(options, filePath, true)
+  const { serverRenderPath, serverComponentPath, clientRenderPath, clientComponentPath } = await buildQueued(options, filePath, true)
 
-  if (serverRender && serverComponent) {
-    const Component = serverComponent.default || serverComponent
-    rendered = await serverRender(Component, data)
+  if (serverRenderPath && serverComponentPath) {
+    const ServerRender = require(serverRenderPath)
+    const ServerComponent = require(serverComponentPath)
+    const serverRender = ServerRender.default || ServerRender
+    const serverComponent = ServerComponent.default || ServerComponent
+    rendered = await serverRender(serverComponent, data)
   }
 
-  if (clientRender && clientComponent) {
-    const render = `(function() {
-        var ClientRenderModule = ${clientRender};
-        var ComponentModule = ${clientComponent};
-        var clientRender = ClientRenderModule.default || ClientRenderModule;
-        var Component = ComponentModule.default || ComponentModule;
-        clientRender(Component, ${htmlescape(data)});
-      })();`
-    const script = `data:text/javascript;base64,${Buffer.from(render).toString('base64')}`
-    foot = `<script title="Webpack Adapter Client-Side Rendering" src="${script}"></script>`
+  if (clientRenderPath && clientComponentPath) {
+    foot = `
+      <script src="${clientRenderPath}"></script>
+      <script src="${clientComponentPath}"></script>
+      <script>
+        window.UIengineWebpack_render(
+          window.UIengineWebpack_component,
+          ${htmlescape(data)}
+        )
+      </script>`
   }
 
   return {

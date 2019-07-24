@@ -29,6 +29,9 @@ const state = {
         title: 'Default'
       }
     ],
+    ui: {
+      base: '/'
+    },
     target,
     adapters
   },

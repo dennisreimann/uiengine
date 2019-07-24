@@ -19,11 +19,11 @@ const getModule = ({ config: { adapters } }, ext, filePath) => {
 }
 
 const getOptions = (state, ext, additional = {}) => {
-  const { config: { adapters, target, themes, source: { base, components, templates } } } = state
+  const { config: { adapters, target, themes, source: { base, components, templates }, ui: { base: uiBase } } } = state
   const themeIds = themes.map(theme => theme.id)
   const { options } = adapters[ext]
 
-  return Object.assign({}, options, additional, { ext, base, components, templates, target, themeIds })
+  return Object.assign({}, options, additional, { ext, base, components, templates, target, themeIds, uiBase })
 }
 
 async function setup (state) {

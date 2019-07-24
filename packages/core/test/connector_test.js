@@ -15,7 +15,7 @@ const base = testProjectPath
 const testFilePath = resolve(components, 'form', 'form.test')
 const testAdapterOptions = { basedir: components }
 const themeIds = ['plain', 'funky']
-const expandedAdapterOptions = Object.assign({}, testAdapterOptions, { base, components, templates, target, themeIds, ext: 'test' })
+const expandedAdapterOptions = Object.assign({}, testAdapterOptions, { base, components, templates, target, themeIds, ext: 'test', uiBase: '/' })
 const TestAdapter = require(testAdapterPath)
 
 const stateWithModule = module => ({
@@ -31,6 +31,9 @@ const stateWithModule = module => ({
         module,
         options: testAdapterOptions
       }
+    },
+    ui: {
+      base: '/'
     },
     themes: themeIds.map(id => ({ id, title: id }))
   }

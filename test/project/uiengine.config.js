@@ -2,7 +2,6 @@ const breakpoints = require('./lib/breakpoints.json')
 const viewports = require('./lib/viewports.json')
 const pugAdapterOptions = require('./lib/pug-adapter-options')
 const cssAdapterOptions = require('./lib/css-adapter-options')
-const reactAdapterOptions = require('./lib/react-adapter-options')
 const webpackAdapterReactOptions = require('./lib/webpack-adapter-react-options')
 const webpackAdapterVueOptions = require('./lib/webpack-adapter-vue-options')
 
@@ -11,7 +10,6 @@ const simulateBase = false
 const base = simulateBase ? '/design-system/' : '/'
 const target = simulateBase ? `../tmp${base}` : '../tmp'
 const baseDir = simulateBase ? '../tmp' : undefined
-const customStylesFile = `${base}assets/styles/uiengine-custom-styles.css`
 
 module.exports = {
   // Project config: Defaults to name and version from package.json.
@@ -78,8 +76,8 @@ module.exports = {
     base,
     breakpoints,
     viewports,
-    customStylesFile,
     defaultPreviewMode: 'viewports',
+    customStylesFile: '/assets/styles/uiengine-custom-styles.css',
     repoBaseUrl: 'https://github.com/dennisreimann/uiengine/blob/master/test/project/'
   },
 

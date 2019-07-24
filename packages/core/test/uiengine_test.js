@@ -1,7 +1,7 @@
 require('mocha-sinon')()
 
-const { mkdirsSync, removeSync, writeFileSync } = require('fs-extra')
 const assert = require('assert')
+const { mkdirsSync, removeSync, writeFileSync } = require('fs-extra')
 const { assertExists } = require('../../../test/support/asserts')
 const { dirname, join, resolve } = require('path')
 
@@ -27,6 +27,9 @@ const state = {
         title: 'Default'
       }
     ],
+    ui: {
+      base: '/'
+    },
     adapters
   }
 }

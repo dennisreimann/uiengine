@@ -8,6 +8,7 @@
 
 ### Changed
 
+- Improve Webpack adapter build
 - Deprecated Vue adapter, please use the [Webpack adapter](/adapters/webpack/).
 
 ### Fixes

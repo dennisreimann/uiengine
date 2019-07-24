@@ -42,9 +42,7 @@ async function getDependentFiles (options, filePath, dirs, cache) {
   const patterns = dirs.map(dir => join(dir, '**', filePattern))
   const filePaths = await glob(patterns, { ignore: [filePath] })
   const dependentFiles = await filter(filePaths, async dependentPath => {
-    const { serverChunk, clientChunk } = await buildQueued(options, dependentPath)
-    const chunk = serverChunk || clientChunk
-    const dependencies = await getDependencyFiles(options, dependentPath, chunk, cache)
+    const dependencies = await getDependencyFiles(options, dependentPath, cache)
     return dependencies.includes(crossPlatformPath(filePath))
   })
 

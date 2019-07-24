@@ -65,7 +65,16 @@ describe('Configuration', () => {
     it('should resolve UI', async () => {
       const config = await Configuration.read(opts)
 
+      assert.strictEqual(config.ui.base, '/')
       assert.strictEqual(config.ui.customStylesFile, '/assets/styles/uiengine-custom-styles.css')
+    })
+
+    it('should resolve default UI if no object is given', async () => {
+      const opts = { config: resolve(testProjectPath, 'uiengine-default-ui.config.js') }
+      const config = await Configuration.read(opts)
+
+      assert.strictEqual(Object.keys(config.ui).length, 1)
+      assert.strictEqual(config.ui.base, '/')
     })
 
     it('should resolve adapters', async () => {
@@ -73,13 +82,6 @@ describe('Configuration', () => {
 
       assert.strictEqual(config.adapters.pug.module, '@uiengine/adapter-pug')
       assert.strictEqual(config.adapters.pug.options.pretty, true)
-    })
-
-    it('should resolve default UI if no object is given', async () => {
-      const opts = { config: resolve(testProjectPath, 'uiengine-default-ui.config.js') }
-      const config = await Configuration.read(opts)
-
-      assert.strictEqual(Object.keys(config.ui).length, 0)
     })
 
     it('should resolve default themes if no array is given', async () => {
