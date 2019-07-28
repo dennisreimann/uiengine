@@ -109,7 +109,8 @@ const _read = (configFilePath, projectConfig, flags) => {
 
   target = resolvePath(configPath, target)
   adapters = R.map(resolveAdapters, adapters || {})
-  ui = data.ui || { base: '/' }
+  ui = data.ui || {}
+  ui.base = ui.base || '/'
   themes = data.themes || [{ id: '_default', title: 'Default' }]
 
   data = R.assoc('source', source, data)
