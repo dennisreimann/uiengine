@@ -75,3 +75,8 @@ We try to keep it as functional as possible, so we are using [Ramda](http://ramd
 ### Emojis in commit messages
 
 Please make sure that your commit messages start with a somehow fitting emoji.
+
+### Reward yourself
+
+We are using [All Contributors](https://allcontributors.org/) to show who helped the project.
+In case you have contributed and are missing on that list, feel free to [add yourself](https://allcontributors.org/docs/en/bot/usage)!

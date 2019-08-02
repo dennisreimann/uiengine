@@ -53,6 +53,7 @@ See the [documentation](https://uiengine.uix.space/) site, which is also generat
 [![Build Status](https://travis-ci.org/dennisreimann/uiengine.svg?branch=master)](https://travis-ci.org/dennisreimann/uiengine)
 [![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/uiengine/badge.svg)](https://snyk.io/test/github/dennisreimann/uiengine)
 [![Coverage Status](https://coveralls.io/repos/github/dennisreimann/uiengine/badge.svg?branch=master)](https://coveralls.io/github/dennisreimann/uiengine?branch=master)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 [![Maintained with lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 [![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@dennisreimann/F0918E)](https://tippin.me/@dennisreimann)
 
@@ -117,6 +118,23 @@ Here are some other projects that you might want to evaluate:
 
 You like this project and are interested in participating?
 See the [development docs](https://uiengine.uix.space/development/contributing/) for an introduction and workflows when hacking on the UIengine.
+
+## ✨ Contributors
+
+Thanks goes to these wonderful people:
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="http://www.persiel.com"><img src="https://avatars2.githubusercontent.com/u/6762951?v=4" width="100px;" alt="Jan Persiel"/><br /><sub><b>Jan Persiel</b></sub></a><br /><a href="#design-janpersiel" title="Design">🎨</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.
+Contributions of any kind welcome!
 
 ## 👛 Tip jar
 
