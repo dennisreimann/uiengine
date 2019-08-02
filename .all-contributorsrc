@@ -13,6 +13,15 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "naltatis",
+      "name": "Michael Geers",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/152287?v=4",
+      "profile": "http://geers.tv",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
