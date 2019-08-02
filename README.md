@@ -53,7 +53,7 @@ See the [documentation](https://uiengine.uix.space/) site, which is also generat
 [![Build Status](https://travis-ci.org/dennisreimann/uiengine.svg?branch=master)](https://travis-ci.org/dennisreimann/uiengine)
 [![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/uiengine/badge.svg)](https://snyk.io/test/github/dennisreimann/uiengine)
 [![Coverage Status](https://coveralls.io/repos/github/dennisreimann/uiengine/badge.svg?branch=master)](https://coveralls.io/github/dennisreimann/uiengine?branch=master)
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 [![Maintained with lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 [![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@dennisreimann/F0918E)](https://tippin.me/@dennisreimann)
 
@@ -128,6 +128,7 @@ Thanks goes to these wonderful people:
 <table>
   <tr>
     <td align="center"><a href="http://www.persiel.com"><img src="https://avatars2.githubusercontent.com/u/6762951?v=4" width="100px;" alt="Jan Persiel"/><br /><sub><b>Jan Persiel</b></sub></a><br /><a href="#design-janpersiel" title="Design">🎨</a></td>
+    <td align="center"><a href="http://geers.tv"><img src="https://avatars3.githubusercontent.com/u/152287?v=4" width="100px;" alt="Michael Geers"/><br /><sub><b>Michael Geers</b></sub></a><br /><a href="https://github.com/dennisreimann/uiengine/commits?author=naltatis" title="Code">💻</a></td>
   </tr>
 </table>
 
