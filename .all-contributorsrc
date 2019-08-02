@@ -1,0 +1,23 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "janpersiel",
+      "name": "Jan Persiel",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6762951?v=4",
+      "profile": "http://www.persiel.com",
+      "contributions": [
+        "design"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "uiengine",
+  "projectOwner": "dennisreimann",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
