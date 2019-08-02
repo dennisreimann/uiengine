@@ -1,4 +1,5 @@
 # UIengine
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 Workbench for UI-driven development:
 A tool for developers and designers to build and document web sites and apps.
@@ -129,3 +130,19 @@ See the [development docs](https://uiengine.uix.space/development/contributing/)
 - - - - -
 
 👨🏻‍💻 Brought to you by the nice people behind [UIengineering](https://www.uiengineering.de). 👨🏻‍💻
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="http://www.persiel.com"><img src="https://avatars2.githubusercontent.com/u/6762951?v=4" width="100px;" alt="Jan Persiel"/><br /><sub><b>Jan Persiel</b></sub></a><br /><a href="#design-janpersiel" title="Design">🎨</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
