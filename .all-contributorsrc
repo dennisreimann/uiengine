@@ -13,6 +13,15 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "JonasHavers",
+      "name": "Jonas Havers",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1322093?v=4",
+      "profile": "https://jonas-havers.de",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
