@@ -13,6 +13,42 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "naltatis",
+      "name": "Michael Geers",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/152287?v=4",
+      "profile": "http://geers.tv",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "therealpecus",
+      "name": "Matteo Fogli",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/858428?v=4",
+      "profile": "https://modo.md",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "JonasHavers",
+      "name": "Jonas Havers",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1322093?v=4",
+      "profile": "https://jonas-havers.de",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "MrAvantiC",
+      "name": "René Mäkeler",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/17713179?v=4",
+      "profile": "https://www.lost-in-technology.com/blog/",
+      "contributions": [
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7,
