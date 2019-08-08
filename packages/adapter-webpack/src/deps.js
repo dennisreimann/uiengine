@@ -1,4 +1,4 @@
-const { join, resolve } = require('path')
+const path = require('path') // dont spread import because of "resolve" ambiguity
 const glob = require('globby')
 const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
 const { buildQueued } = require('./util')
@@ -15,31 +15,39 @@ async function filter (arr, callback) {
 async function getDependencyFiles (options, filePath, cache) {
   if (cache && cache[filePath]) return cache[filePath]
 
-  const { serverChunk, clientChunk } = await buildQueued(options, filePath)
-  const chunk = serverChunk || clientChunk
+  // cache the promises so that files do not get added multiple times
+  const promise = new Promise((resolve, reject) => {
+    buildQueued(options, filePath)
+      .then(({ serverChunk, clientChunk }) => {
+        const chunk = serverChunk || clientChunk
 
-  // https://webpack.js.org/api/stats#chunk-objects
-  const filePaths = chunk ? chunk.modules.map(({ id }) => {
-    const mod = id.split('?!').pop().replace(/\?.*$/, '')
-    let modulePath
-    if (mod) modulePath = mod.startsWith('.') ? resolve(mod) : require.resolve(mod)
-    return modulePath && crossPlatformPath(modulePath)
-  }).filter((depPath, index, array) => {
-    if (!depPath) return false
-    const unique = array.indexOf(depPath) === index
-    const notSameFile = depPath !== filePath
-    return unique && notSameFile
-  }) : []
+        // https://webpack.js.org/api/stats#chunk-objects
+        const filePaths = chunk ? chunk.modules.map(({ id }) => {
+          const mod = id.split('?!').pop().replace(/\?.*$/, '')
+          let modulePath
+          if (mod) modulePath = mod.startsWith('.') ? path.resolve(mod) : require.resolve(mod)
+          return modulePath && crossPlatformPath(modulePath)
+        }).filter((depPath, index, array) => {
+          if (!depPath) return false
+          const unique = array.indexOf(depPath) === index
+          const notSameFile = depPath !== filePath
+          return unique && notSameFile
+        }) : []
 
-  if (cache) cache[filePath] = filePaths
+        resolve(filePaths)
+      })
+      .catch(reject)
+  })
 
-  return filePaths
+  if (cache) cache[filePath] = promise
+
+  return promise
 }
 
 async function getDependentFiles (options, filePath, dirs, cache) {
   const extensions = options.extensions || EXTENSIONS
   const filePattern = '*.' + (extensions.length === 1 ? extensions[0] : `{${extensions.join(',')}}`)
-  const patterns = dirs.map(dir => join(dir, '**', filePattern))
+  const patterns = dirs.map(dir => path.join(dir, '**', filePattern))
   const filePaths = await glob(patterns, { ignore: [filePath] })
   const dependentFiles = await filter(filePaths, async dependentPath => {
     const dependencies = await getDependencyFiles(options, dependentPath, cache)
