@@ -60,6 +60,7 @@ jobs:
         skip_cleanup: true
         script: yarn run docs:deploy
 
+    # https://docs.cypress.io/guides/guides/continuous-integration.html#Travis
     - stage: verify
       name: acceptance
       before_script: skip
@@ -78,3 +79,8 @@ addons:
   ssh_known_hosts:
     - uiengine.uix.space
     - uiengine-sample-project.uix.space
+  apt:
+    packages:
+      # Ubuntu 16+ does not install this dependency by default,
+      # so we need to install it ourselves
+      - libgconf-2-4
