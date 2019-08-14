@@ -43,7 +43,12 @@ const buildConfig = (options, isSetupBuild = false) => {
         path: filesDir(options),
         filename: '[name].js',
         libraryTarget: 'commonjs2'
-      }
+      },
+      plugins: [
+        new webpack.DefinePlugin({
+          'process.env.target': JSON.stringify('server')
+        })
+      ]
     })
   }
 
@@ -66,7 +71,12 @@ const buildConfig = (options, isSetupBuild = false) => {
         library,
         libraryTarget: 'window',
         libraryExport: 'default'
-      }
+      },
+      plugins: [
+        new webpack.DefinePlugin({
+          'process.env.target': JSON.stringify('client')
+        })
+      ]
     })
   }
 

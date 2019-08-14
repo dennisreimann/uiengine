@@ -37,6 +37,17 @@ See the [test project](https://github.com/dennisreimann/uiengine/tree/master/tes
 
 Note: This feature requires the `<!-- uiengine:foot -->` comment to be present in the template.
 
+### Webpack build
+
+The adapter builds the components/variants by merging your Webpack configuration with some custom additions.
+For instance you can use the `process.env.target` variable provided by the `DefinePlugin` to check whether rendering occurs on the `server` or `client`:
+
+```js
+if (process.env.target === 'client') window.doSomething()
+```
+
+The build output is stored in the `${config.target}/_webpack` directory.
+
 ### Options for Vue
 
 The `vue-adapter-options.js` file required above might look like this:
