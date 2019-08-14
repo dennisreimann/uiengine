@@ -34,8 +34,8 @@
     "@babel/preset-env": "7.5.5",
     "@babel/preset-react": "7.0.0",
     "@babel/register": "7.5.5",
-    "react": "16.8.6",
-    "react-dom": "16.8.6"
+    "react": "16.9.0",
+    "react-dom": "16.9.0"
   },
   "optionalDependencies": {
     "prop-types": "15.7.2"
