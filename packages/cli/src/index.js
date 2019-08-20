@@ -21,7 +21,7 @@ module.exports = require('yargs')
   .demandCommand(1)
   .commandDir(join(__dirname, 'commands'))
   // help / usage
-  .usage(`Usage: $0 <command> [options]`)
+  .usage('Usage: $0 <command> [options]')
   .help()
   .recommendCommands()
   .alias('h', 'help')

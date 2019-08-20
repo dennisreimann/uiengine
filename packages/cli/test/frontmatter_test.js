@@ -38,7 +38,7 @@ describe('FrontmatterUtil', () => {
 
   describe('#fromString', () => {
     it('should return attributes and body', async () => {
-      const string = `---\nname: Index\n---\nHello`
+      const string = '---\nname: Index\n---\nHello'
       const data = await FrontmatterUtil.fromString(string, sourcePaths)
 
       assert.strictEqual(data.attributes.name, 'Index')
@@ -46,7 +46,7 @@ describe('FrontmatterUtil', () => {
     })
 
     it('should work with only the attributes', async () => {
-      const string = `---\nname: Index\n---`
+      const string = '---\nname: Index\n---'
       const data = await FrontmatterUtil.fromString(string, sourcePaths)
 
       assert.strictEqual(data.attributes.name, 'Index')
@@ -54,7 +54,7 @@ describe('FrontmatterUtil', () => {
     })
 
     it('should work with empty attributes and empty body', async () => {
-      const string = `---\n\n---\n`
+      const string = '---\n\n---\n'
       const data = await FrontmatterUtil.fromString(string, sourcePaths)
 
       assert.strictEqual(Object.keys(data.attributes).length, 0)

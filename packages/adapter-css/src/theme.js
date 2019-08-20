@@ -25,6 +25,9 @@ async function propsByThemeFromDir (dir) {
   const pattern = join(dir, '*.css')
   const themePaths = await glob(pattern, { onlyFiles: true })
   const propsByTheme = {}
+
+  // FIXME: Remove once this is fixed https://github.com/eslint/eslint/issues/12117
+  // eslint-disable-next-line no-unused-vars
   for (const themePath of themePaths) {
     const id = basename(themePath, '.css')
     propsByTheme[id] = await extractCustomProperties(themePath)

@@ -5,35 +5,36 @@ const propertyDefinitionByType = (type, debugInfo) => {
   const { name, value } = type
 
   switch (name) {
-    case 'shape':
+    case 'shape': {
       const shapeValue = transformPropTypes(value, debugInfo)
       return { type: upcaseFirstChar(name), value: shapeValue }
-
-    case 'arrayOf':
+    }
+    case 'arrayOf': {
       const arrayName = value.name || 'Custom'
       const arrayValue = value.value
         ? propertyDefinitionByType(value, debugInfo)
         : upcaseFirstChar(arrayName)
       return { type: 'Array', value: arrayValue }
-
-    case 'objectOf':
+    }
+    case 'objectOf': {
       const objectName = value.name
       const objectValue = value.value
         ? propertyDefinitionByType(value, debugInfo)
         : upcaseFirstChar(objectName)
       return { type: 'Object', value: objectValue }
-
-    case 'instanceOf':
+    }
+    case 'instanceOf': {
       return { type: value }
-
-    case 'oneOf':
+    }
+    case 'oneOf': {
       return { type: value.map(val => `"${val}"`).join('|') }
-
-    case 'oneOfType':
+    }
+    case 'oneOfType': {
       return { type: value.map(({ name }) => upcaseFirstChar(name)).join('|') }
-
-    default:
+    }
+    default: {
       return { type: upcaseFirstChar(name) }
+    }
   }
 }
 

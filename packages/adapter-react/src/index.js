@@ -58,7 +58,7 @@ async function render (options, filePath, data = {}) {
 
 function filesForComponent (options, componentName) {
   const upcasedComponentName = upcaseFirstChar(componentName)
-  const tmpl = require(`./files/component`)
+  const tmpl = require('./files/component')
 
   return [
     {
@@ -71,7 +71,7 @@ function filesForComponent (options, componentName) {
 function filesForVariant (options, componentName, variantName) {
   const upcasedComponentName = upcaseFirstChar(componentName)
   const upcasedVariantName = upcaseFirstChar(variantName)
-  const tmpl = require(`./files/variant`)
+  const tmpl = require('./files/variant')
 
   return [
     {

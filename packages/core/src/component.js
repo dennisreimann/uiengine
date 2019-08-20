@@ -79,7 +79,7 @@ async function refetchVariants (state, id) {
 }
 
 async function fetchAll (state) {
-  debug2(state, `Component.fetchAll():start`)
+  debug2(state, 'Component.fetchAll():start')
 
   const componentIds = await findComponentIds(state)
   const fetch = R.partial(fetchById, [state])
@@ -87,7 +87,7 @@ async function fetchAll (state) {
   const list = await Promise.all(fetches)
   const components = R.reduce((components, component) => R.assoc(component.id, component, components), {}, list)
 
-  debug2(state, `Component.fetchAll():end`)
+  debug2(state, 'Component.fetchAll():end')
 
   return components
 }

@@ -62,7 +62,7 @@ async function findPageIds (state, pagePath = '**') {
 }
 
 async function fetchAll (state) {
-  debug2(state, `Page.fetchAll():start`)
+  debug2(state, 'Page.fetchAll():start')
 
   const pageIds = await findPageIds(state)
 
@@ -72,7 +72,7 @@ async function fetchAll (state) {
 
   const pages = R.reduce((pages, page) => R.assoc(page.id, page, pages), {}, pageList)
 
-  debug2(state, `Page.fetchAll():end`)
+  debug2(state, 'Page.fetchAll():end')
 
   return pages
 }

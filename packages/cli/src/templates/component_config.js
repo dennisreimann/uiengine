@@ -1,1 +1,1 @@
-module.exports = title => `module.exports = {}`
+module.exports = title => 'module.exports = {}'

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-const TITLE_REGEXP = new RegExp(`^<h1.*?>.*</h1>`)
+const TITLE_REGEXP = new RegExp('^<h1.*?>.*</h1>')
 
 export default {
   props: {

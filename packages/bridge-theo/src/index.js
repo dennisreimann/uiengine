@@ -11,6 +11,8 @@ module.exports = (file, modify) => {
   const result = []
   const categories = {}
 
+  // FIXME: Remove once this is fixed https://github.com/eslint/eslint/issues/12117
+  // eslint-disable-next-line no-unused-vars
   for (const propId in props) {
     const { type, name, value, originalValue, comment, category } = props[propId]
 

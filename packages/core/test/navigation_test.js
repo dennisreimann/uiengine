@@ -25,15 +25,15 @@ describe('Navigation', () => {
 
       assert.strictEqual(Object.keys(data).length, 7)
 
-      assert(data['index'])
-      assert(data['atoms'])
-      assert(data['molecules'])
+      assert(data.index)
+      assert(data.atoms)
+      assert(data.molecules)
       assert(data['atoms/docs'])
       assert(data['atoms/more-docs'])
       assert(data['atoms/button'])
       assert(data['atoms/link'])
 
-      const index = data['index']
+      const index = data.index
       assert.strictEqual(index.id, 'index')
       assert.strictEqual(index.path, '/')
       assert.strictEqual(index.title, 'Home')
@@ -47,7 +47,7 @@ describe('Navigation', () => {
       assert.strictEqual(index.nextSiblingId, undefined)
       assert.strictEqual(index.collapsed, undefined)
 
-      const atoms = data['atoms']
+      const atoms = data.atoms
       assert.strictEqual(atoms.id, 'atoms')
       assert.strictEqual(atoms.path, '/atoms/')
       assert.strictEqual(atoms.title, 'Atoms')
@@ -63,7 +63,7 @@ describe('Navigation', () => {
       assert.strictEqual(atoms.nextSiblingId, 'molecules')
       assert.strictEqual(atoms.collapsed, undefined)
 
-      const molecules = data['molecules']
+      const molecules = data.molecules
       assert.strictEqual(molecules.id, 'molecules')
       assert.strictEqual(molecules.path, '/molecules/')
       assert.strictEqual(molecules.title, 'Molecules')

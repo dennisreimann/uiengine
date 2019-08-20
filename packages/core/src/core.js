@@ -114,17 +114,17 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
   let fn
 
   switch (change.type) {
-    case 'page':
+    case 'page': {
       fn = isDeleted ? removePage : regeneratePage
       await fn(change.item)
       break
-
-    case 'variant':
+    }
+    case 'variant': {
       fn = isDeleted ? removeVariant : regenerateVariant
       await fn(change.item)
       break
-
-    case 'component':
+    }
+    case 'component': {
       // check whether a file has been deleted or the component directory
       const isDirectory = basename(filePath) === change.item
       if (isDeleted && isDirectory) {
@@ -133,14 +133,15 @@ async function generateIncrementForFileChange (filePath, action = 'changed') {
         await regenerateComponent(change.item)
       }
       break
-
-    case 'template':
+    }
+    case 'template': {
       await regenerateTemplate(change.item)
       break
-
-    default:
+    }
+    default: {
       await generate({ config: _state.config.source.configFile })
       break
+    }
   }
 
   return { state: _state, change }

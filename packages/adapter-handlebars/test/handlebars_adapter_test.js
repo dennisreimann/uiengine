@@ -13,7 +13,7 @@ describe('Handlebars adapter', () => {
     it('should register all components files', async () => {
       await Adapter.setup({ components, ext: 'hbs' })
 
-      assert.strictEqual(Handlebars.partials['button'], '<button>{{title}}</button>\n')
+      assert.strictEqual(Handlebars.partials.button, '<button>{{title}}</button>\n')
     })
   })
 
@@ -37,7 +37,7 @@ describe('Handlebars adapter', () => {
     it('should register the template as partial', async () => {
       await Adapter.registerComponentFile(options, templatePath)
 
-      assert.strictEqual(Handlebars.partials['template'], '<p>{{myData}}</p>\n')
+      assert.strictEqual(Handlebars.partials.template, '<p>{{myData}}</p>\n')
     })
 
     it('should register the template as namespaced partial', async () => {

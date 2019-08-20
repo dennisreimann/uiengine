@@ -269,7 +269,7 @@ describe('CLI @nowatch', function () {
       afterEach(() => { removeSync(componentsPath) })
 
       it('should replace component.md file with component.config.js and README.md', async () => {
-        outputFileSync(componentMdPath, `---\ntitle: Button\nvariants:\n- test.pug\n---\nThis is the button description.`)
+        outputFileSync(componentMdPath, '---\ntitle: Button\nvariants:\n- test.pug\n---\nThis is the button description.')
 
         const out = await runCommand(migratePath, 'uiengine migrate component.md')
         assertMatches(out, 'The component.md files have been replaced with component.config.js and README.md files.')
@@ -293,7 +293,7 @@ describe('CLI @nowatch', function () {
 
       describe('and component with just content', () => {
         it('should replace component.md file with README.md', async () => {
-          outputFileSync(componentMdPath, `This is the button description.`)
+          outputFileSync(componentMdPath, 'This is the button description.')
           await runCommand(migratePath, 'uiengine migrate component.md')
 
           assertContentMatches(readmePath, 'This is the button description.\n')
@@ -314,7 +314,7 @@ describe('CLI @nowatch', function () {
       afterEach(() => { removeSync(pagesPath) })
 
       it('should report success if there are page.md files', async () => {
-        outputFileSync(pageMdPath, `---\ntitle: Homepage\n---\n# Homepage\n\nThis is the homepage content.`)
+        outputFileSync(pageMdPath, '---\ntitle: Homepage\n---\n# Homepage\n\nThis is the homepage content.')
 
         const out = await runCommand(migratePath, 'uiengine migrate page.md')
         assertMatches(out, 'The page.md files have been replaced with page.config.js and README.md files.')
@@ -327,7 +327,7 @@ describe('CLI @nowatch', function () {
 
       describe('and pages with only title attribute', () => {
         it('should replace page.md file with README.md and convert title to first heading', async () => {
-          outputFileSync(pageMdPath, `---\ntitle: Homepage\n---\nThis is the homepage content.`)
+          outputFileSync(pageMdPath, '---\ntitle: Homepage\n---\nThis is the homepage content.')
 
           await runCommand(migratePath, 'uiengine migrate page.md')
 
@@ -339,7 +339,7 @@ describe('CLI @nowatch', function () {
         })
 
         it('should replace page.md file with README.md and not convert title to first heading if it is already present', async () => {
-          outputFileSync(pageMdPath, `---\ntitle: Homepage\n---\n# Homepage\n\nThis is the homepage content.`)
+          outputFileSync(pageMdPath, '---\ntitle: Homepage\n---\n# Homepage\n\nThis is the homepage content.')
 
           await runCommand(migratePath, 'uiengine migrate page.md')
 
@@ -353,7 +353,7 @@ describe('CLI @nowatch', function () {
 
       describe('and pages with multiple attributes', () => {
         it('should replace page.md file with page.config.js and README.md', async () => {
-          outputFileSync(pageMdPath, `---\ntitle: Homepage\ntemplate: page.pug\n---\nThis is the homepage content.`)
+          outputFileSync(pageMdPath, '---\ntitle: Homepage\ntemplate: page.pug\n---\nThis is the homepage content.')
           await runCommand(migratePath, 'uiengine migrate page.md')
 
           assertExists(configPath)
@@ -398,7 +398,7 @@ describe('CLI @nowatch', function () {
 
       describe('and pages with just content', () => {
         it('should replace page.md file with README.md', async () => {
-          outputFileSync(pageMdPath, `This is the homepage content.`)
+          outputFileSync(pageMdPath, 'This is the homepage content.')
           await runCommand(migratePath, 'uiengine migrate page.md')
 
           assertContentMatches(readmePath, 'This is the homepage content.\n')
@@ -418,7 +418,7 @@ describe('CLI @nowatch', function () {
       afterEach(() => { removeSync(entitiesPath) })
 
       it('should replace Entity.yml file with Entity.js', async () => {
-        outputFileSync(ymlPath, `name:\n  type: String\n  description: Product name or title\n  required: true\namount:\n  type: Number`)
+        outputFileSync(ymlPath, 'name:\n  type: String\n  description: Product name or title\n  required: true\namount:\n  type: Number')
 
         const out = await runCommand(migratePath, 'uiengine migrate entity.yml')
         assertMatches(out, 'The Entity.yml files have been replaced with Entity.js files.')
@@ -449,7 +449,7 @@ describe('CLI @nowatch', function () {
       afterEach(() => { removeSync(dataPath) })
 
       it('should replace data.yml file with data.js', async () => {
-        outputFileSync(ymlPath, `name: "Test"`)
+        outputFileSync(ymlPath, 'name: "Test"')
 
         const out = await runCommand(migratePath, 'uiengine migrate data.yml')
         assertMatches(out, 'The data.yml files have been replaced with data.js files.')

@@ -308,7 +308,7 @@ async function generateState (state) {
 const generateIncrement = generateState
 
 async function generateSketch (state) {
-  debug2(state, `Builder.generateSketch():start`)
+  debug2(state, 'Builder.generateSketch():start')
 
   const { config: { name, target, template, version, themes, source: { templates } } } = state
   const identifier = 'HTML Sketchapp Export'
@@ -334,7 +334,7 @@ async function generateSketch (state) {
     })
   }
 
-  debug2(state, `Builder.generateSketch():end`)
+  debug2(state, 'Builder.generateSketch():end')
 }
 
 async function generate (state) {
