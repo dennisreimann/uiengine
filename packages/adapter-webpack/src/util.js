@@ -21,8 +21,8 @@ const filesDir = ({ target }) => join(target, TARGET_FOLDER)
 // -> one queue per file type
 const getQueueId = options => `webpack-${hash(options)}`
 
-const buildConfig = (options, isSetupBuild = false) => {
-  const { ext, serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
+const buildConfig = options => {
+  const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
   const config = {}
 
   // deliberately skip optimizations
@@ -31,15 +31,11 @@ const buildConfig = (options, isSetupBuild = false) => {
   // build webpack config by overriding entry and output
   // and explicitely setting the target
   if (serverConfig && serverRenderPath) {
-    const entry = isSetupBuild
-      ? { [`${ext}-server`]: serverRenderPath }
-      : {}
-
     config.server = merge(serverConfig, {
+      mode,
       name: WEBPACK_NAME_SERVER,
       target: 'node',
-      mode,
-      entry,
+      entry: {},
       output: {
         path: filesDir(options),
         filename: '[name].js',
@@ -54,15 +50,11 @@ const buildConfig = (options, isSetupBuild = false) => {
   }
 
   if (clientConfig && clientRenderPath) {
-    const entry = isSetupBuild
-      ? { [`${ext}-client`]: clientRenderPath }
-      : {}
-
     config.client = merge(clientConfig, {
+      mode,
       name: WEBPACK_NAME_CLIENT,
       target: 'web',
-      mode,
-      entry,
+      entry: {},
       output: {
         path: filesDir(options),
         filename: '[name].js'
@@ -178,11 +170,6 @@ const getExtractProperties = options => {
   }
 }
 
-async function buildSetup (options) {
-  const config = buildConfig(options, true)
-  await runWebpack(config)
-}
-
 async function buildQueued (options, filePath, data = {}, clearCache = false) {
   const queueId = getQueueId(options)
 
@@ -246,7 +233,6 @@ async function buildQueued (options, filePath, data = {}, clearCache = false) {
 }
 
 module.exports = {
-  buildSetup,
   buildQueued,
   getExtractProperties
 }

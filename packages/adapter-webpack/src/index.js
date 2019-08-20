@@ -1,6 +1,6 @@
 const { FileUtil: { requireUncached } } = require('@uiengine/util')
 const { extractDependentFiles, extractDependencyFiles } = require('./deps')
-const { buildSetup, buildQueued, getExtractProperties } = require('./util')
+const { buildQueued, getExtractProperties } = require('./util')
 
 async function setup (options) {
   const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
@@ -12,8 +12,6 @@ async function setup (options) {
   if (!!clientConfig !== !!clientRenderPath) {
     console.warn('Webpack: Please specify both clientConfig and clientRenderPath')
   }
-
-  await buildSetup(options)
 }
 
 async function registerComponentFile (options, filePath) {

@@ -4,7 +4,7 @@ const assert = require('assert')
 const { join } = require('path')
 const { removeSync } = require('fs-extra')
 const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
-const { assertMatches, assertIncludes, assertExists } = require('../../../test/support/asserts')
+const { assertMatches, assertIncludes } = require('../../../test/support/asserts')
 const { testTmpPath } = require('../../../test/support/paths')
 
 const Adapter = require('../src/index')
@@ -62,17 +62,6 @@ describe('Webpack adapter with Vue templates', function () {
       this.sinon.assert.calledWith(console.warn, 'Webpack: Please specify both serverConfig and serverRenderPath')
       this.sinon.assert.calledWith(console.warn, 'Webpack: Please specify both clientConfig and clientRenderPath')
     })
-
-    it(`should build the render files`, async () => {
-      await Adapter.setup(options)
-
-      const clientPath = join(outputPath, 'vue-client.js')
-      assertExists(clientPath)
-
-      const serverPath = join(outputPath, 'vue-server.js')
-      const serverRender = require(serverPath)
-      assert.strictEqual(typeof serverRender, 'function')
-    })
   })
 
   describe('#render', () => {
@@ -88,7 +77,7 @@ describe('Webpack adapter with Vue templates', function () {
       }
     })
 
-    it(`should render the template with the given data`, async () => {
+    it('should render the template with the given data', async () => {
       const templatePath = join(basePath, 'template.vue')
       const data = { myData: 'this is my data' }
       const { rendered, foot } = await Adapter.render(options, templatePath, data)
