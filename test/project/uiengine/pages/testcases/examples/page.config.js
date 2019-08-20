@@ -1,4 +1,4 @@
 module.exports = {
-  components: ['ReactContext'],
+  components: ['ReactContext', 'ReactHooks'],
   collapsed: true
 }
