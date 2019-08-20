@@ -1,9 +1,9 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { hydrate } from 'react-dom'
 
-export default function clientRender (Component, props) {
-  ReactDOM.hydrate(
-    React.createElement(Component, props),
+export default (Component, props) =>
+  hydrate(
+    <Component {...props} />,
     document.querySelector('#app')
   )
-}

@@ -72,12 +72,13 @@ describe('Page', () => {
     it('should infer childIds if they are not provided', async () => {
       const data = await Page.fetchById(state, 'testcases')
 
-      assert.strictEqual(data.childIds.length, 5, `Actual children:\n\n${data.childIds.join('\n')}`)
+      assert.strictEqual(data.childIds.length, 6, `Actual children:\n\n${data.childIds.join('\n')}`)
       assertItem(data.childIds, 'testcases/custom-data')
       assertItem(data.childIds, 'testcases/custom-path')
       assertItem(data.childIds, 'testcases/custom-fragment')
       assertItem(data.childIds, 'testcases/custom-fragment-and-template')
       assertItem(data.childIds, 'testcases/custom-template')
+      assertItem(data.childIds, 'testcases/examples')
     })
 
     it('should infer childIds for index if they are not provided', async () => {
@@ -221,7 +222,7 @@ describe('Page', () => {
       const data = await Page.fetchAll(state)
       const pageIds = Object.keys(data)
 
-      assert.strictEqual(pageIds.length, 23)
+      assert.strictEqual(pageIds.length, 24)
 
       assertItem(pageIds, 'index')
       assertItem(pageIds, 'documentation')
@@ -246,6 +247,7 @@ describe('Page', () => {
       assertItem(pageIds, 'testcases/custom-fragment')
       assertItem(pageIds, 'testcases/custom-fragment-and-template')
       assertItem(pageIds, 'testcases/custom-template')
+      assertItem(pageIds, 'testcases/examples')
     })
   })
 })

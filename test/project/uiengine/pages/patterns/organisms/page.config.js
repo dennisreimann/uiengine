@@ -1,4 +1,3 @@
 module.exports = {
-  components: ['form'],
-  collapsed: true
+  components: ['form']
 }

@@ -42,14 +42,15 @@ context('Navigation', () => {
   })
 
   it('should display initially collapsed pages', () => {
-    cy.get('[data-test-navtree-id="patterns/organisms"]').should('not.be.visible')
-    cy.get('[data-test-navitem-id="patterns/organisms"] > button').click()
-    cy.get('[data-test-navtree-id="patterns/organisms"]').should('be.visible')
+    cy.get('[data-test-navtree-id="testcases/examples"]').should('not.be.visible')
+    cy.get('[data-test-navitem-id="testcases/examples"] > button').click()
+    cy.get('[data-test-navtree-id="testcases/examples"]').should('be.visible')
 
     cy.reload()
-    cy.get('[data-test-navtree-id="patterns/organisms"]').should('be.visible')
-    cy.get('[data-test-navitem-id="patterns/organisms"] > button').click()
-    cy.get('[data-test-navtree-id="patterns/organisms"]').should('not.be.visible')
+
+    cy.get('[data-test-navtree-id="testcases/examples"]').should('be.visible')
+    cy.get('[data-test-navitem-id="testcases/examples"] > button').click()
+    cy.get('[data-test-navtree-id="testcases/examples"]').should('not.be.visible')
   })
 
   it('should be toggleable', () => {

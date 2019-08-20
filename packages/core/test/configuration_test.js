@@ -49,9 +49,10 @@ describe('Configuration', () => {
     it('should resolve components source paths as array', async () => {
       const config = await Configuration.read(opts)
 
-      assert.strictEqual(config.source.components.length, 2)
+      assert.strictEqual(config.source.components.length, 3)
       assert.strictEqual(config.source.components[0], resolve(testProjectPath, 'src', 'elements'))
       assert.strictEqual(config.source.components[1], resolve(testProjectPath, 'src', 'modules'))
+      assert.strictEqual(config.source.components[2], resolve(testProjectPath, 'src', 'examples'))
     })
 
     it('should resolve components source paths as array if string is given', async () => {
