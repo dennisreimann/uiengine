@@ -1,5 +1,4 @@
-
-const htmlescape = require('htmlescape')
+const { FileUtil: { requireUncached } } = require('@uiengine/util')
 const { extractDependentFiles, extractDependencyFiles } = require('./deps')
 const { buildSetup, buildQueued, getExtractProperties } = require('./util')
 
@@ -18,7 +17,7 @@ async function setup (options) {
 }
 
 async function registerComponentFile (options, filePath) {
-  await buildQueued(options, filePath, true)
+  await buildQueued(options, filePath, undefined, true)
 
   const extractProperties = getExtractProperties(options)
   const [properties, dependentFiles, dependencyFiles] = await Promise.all([
@@ -37,32 +36,17 @@ async function registerComponentFile (options, filePath) {
 
 async function render (options, filePath, data = {}) {
   let rendered, foot
-  const { serverRenderPath, serverComponentPath, clientRenderPath, clientComponentPath } = await buildQueued(options, filePath, true)
+  const { serverResultPath, clientResultPath } = await buildQueued(options, filePath, data, true)
 
-  if (serverRenderPath && serverComponentPath) {
-    const ServerRender = require(serverRenderPath)
-    const ServerComponent = require(serverComponentPath)
-    const serverRender = ServerRender.default || ServerRender
-    const serverComponent = ServerComponent.default || ServerComponent
-    rendered = await serverRender(serverComponent, data)
+  if (serverResultPath) {
+    rendered = await requireUncached(serverResultPath)
   }
 
-  if (clientRenderPath && clientComponentPath) {
-    foot = `
-      <script src="${clientRenderPath}"></script>
-      <script src="${clientComponentPath}"></script>
-      <script>
-        window.UIengineWebpack_render(
-          window.UIengineWebpack_component,
-          ${htmlescape(data)}
-        )
-      </script>`
+  if (clientResultPath) {
+    foot = ` <script src="${clientResultPath}"></script>`
   }
 
-  return {
-    rendered,
-    foot
-  }
+  return { rendered, foot }
 }
 
 function filesForComponent (options, componentName) {

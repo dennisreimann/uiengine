@@ -18,12 +18,13 @@ async function getDependencyFiles (options, filePath, cache) {
   // cache the promises so that files do not get added multiple times
   const promise = new Promise((resolve, reject) => {
     buildQueued(options, filePath)
-      .then(({ serverChunk, clientChunk }) => {
-        const chunk = serverChunk || clientChunk
+      .then(({ serverComponentChunk, clientComponentChunk }) => {
+        const chunk = serverComponentChunk || clientComponentChunk
 
         // https://webpack.js.org/api/stats#chunk-objects
-        const filePaths = chunk ? chunk.modules.map(({ id }) => {
-          const mod = id.split('?!').pop().replace(/\?.*$/, '')
+        const filePaths = chunk ? chunk.modules.map(({ id, name }) => {
+          const ident = typeof id === 'number' ? (name.match(/\s([^\s]*)/g) || ['']).shift().trim() : id
+          const mod = ident && ident.split('?!').pop().replace(/\?.*$/, '')
           let modulePath
           if (mod) modulePath = mod.startsWith('.') ? path.resolve(mod) : require.resolve(mod)
           return modulePath && crossPlatformPath(modulePath)

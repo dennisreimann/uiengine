@@ -4,7 +4,7 @@ const assert = require('assert')
 const { join } = require('path')
 const { removeSync } = require('fs-extra')
 const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
-const { assertMatches, assertIncludes, assertContentMatches } = require('../../../test/support/asserts')
+const { assertMatches, assertIncludes, assertExists } = require('../../../test/support/asserts')
 const { testTmpPath } = require('../../../test/support/paths')
 
 const Adapter = require('../src/index')
@@ -67,7 +67,7 @@ describe('Webpack adapter with React templates', function () {
       await Adapter.setup(options)
 
       const clientPath = join(outputPath, 'jsx-client.js')
-      assertContentMatches(clientPath, 'window["UIengineWebpack_render"]')
+      assertExists(clientPath)
 
       const serverPath = join(outputPath, 'jsx-server.js')
       const serverRender = require(serverPath)

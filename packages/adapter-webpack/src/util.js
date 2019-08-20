@@ -2,6 +2,7 @@ const { join, relative } = require('path')
 const hash = require('object-hash')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const VirtualModulesPlugin = require('webpack-virtual-modules')
 const { DebounceUtil: { debounce } } = require('@uiengine/util')
 const { cacheGet, cachePut, cacheDel } = require('./cache')
 
@@ -56,9 +57,6 @@ const buildConfig = (options, isSetupBuild = false) => {
     const entry = isSetupBuild
       ? { [`${ext}-client`]: clientRenderPath }
       : {}
-    const library = isSetupBuild
-      ? 'UIengineWebpack_render'
-      : 'UIengineWebpack_component'
 
     config.client = merge(clientConfig, {
       name: WEBPACK_NAME_CLIENT,
@@ -67,10 +65,7 @@ const buildConfig = (options, isSetupBuild = false) => {
       entry,
       output: {
         path: filesDir(options),
-        filename: '[name].js',
-        library,
-        libraryTarget: 'window',
-        libraryExport: 'default'
+        filename: '[name].js'
       },
       plugins: [
         new webpack.DefinePlugin({
@@ -83,15 +78,52 @@ const buildConfig = (options, isSetupBuild = false) => {
   return config
 }
 
-const addFileToQueue = (options, filePath, queue) => {
+const addFileToQueue = (options, filePath, data, queue) => {
   if (queue.promises[filePath]) return queue.promises[filePath]
 
-  const { serverConfig, clientConfig } = options
-  const serverId = getFileId(filePath, 'server')
-  const clientId = getFileId(filePath, 'client')
+  const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
+  const serverComponentId = getFileId(filePath, 'server-component')
+  const serverResultId = getFileId(filePath, 'server-result')
+  const clientComponentId = getFileId(filePath, 'client-component')
+  const clientResultId = getFileId(filePath, 'client-result')
 
-  if (serverConfig) queue.config.server.entry[serverId] = filePath
-  if (clientConfig) queue.config.client.entry[clientId] = filePath
+  if (serverConfig) {
+    queue.config.server.entry[serverComponentId] = filePath
+
+    if (data) {
+      queue.config.server.entry[serverResultId] = `/${serverResultId}.js`
+      queue.config.server.plugins.push(
+        new VirtualModulesPlugin({
+          [queue.config.server.entry[serverResultId]]: `
+            const ServerRender = require('${serverRenderPath}')
+            const ServerComponent = require('${filePath}')
+            const serverRender = ServerRender.default || ServerRender
+            const serverComponent = ServerComponent.default || ServerComponent
+
+            module.exports = serverRender(serverComponent, ${JSON.stringify(data)})
+            `
+        })
+      )
+    }
+  }
+
+  if (clientConfig) {
+    queue.config.client.entry[clientComponentId] = filePath
+
+    if (data) {
+      queue.config.client.entry[clientResultId] = `/${clientResultId}.js`
+      queue.config.client.plugins.push(
+        new VirtualModulesPlugin({
+          [queue.config.client.entry[clientResultId]]: `
+            import clientRender from '${clientRenderPath}'
+            import Component from '${filePath}'
+
+            export default clientRender(Component, ${JSON.stringify(data)})
+            `
+        })
+      )
+    }
+  }
 
   // cache the promises so that files do not get added multiple times
   const promise = new Promise((resolve, reject) => {
@@ -99,8 +131,10 @@ const addFileToQueue = (options, filePath, queue) => {
       reject,
       resolve,
       filePath,
-      serverId,
-      clientId
+      serverComponentId,
+      serverResultId,
+      clientComponentId,
+      clientResultId
     }
   })
 
@@ -149,7 +183,7 @@ async function buildSetup (options) {
   await runWebpack(config)
 }
 
-async function buildQueued (options, filePath, clearCache = false) {
+async function buildQueued (options, filePath, data = {}, clearCache = false) {
   const queueId = getQueueId(options)
 
   if (clearCache) {
@@ -167,7 +201,7 @@ async function buildQueued (options, filePath, clearCache = false) {
     }
   }
 
-  const promise = addFileToQueue(options, filePath, QUEUES[queueId])
+  const promise = addFileToQueue(options, filePath, data, QUEUES[queueId])
 
   debounce(queueId, async () => {
     const { config, handles } = QUEUES[queueId]
@@ -178,25 +212,25 @@ async function buildQueued (options, filePath, clearCache = false) {
       const info = stats.toJson()
       const serverInfo = info.children.find(child => child.name === WEBPACK_NAME_SERVER)
       const clientInfo = info.children.find(child => child.name === WEBPACK_NAME_CLIENT)
-      const { ext, uiBase } = options
+      const { uiBase } = options
 
-      Object.values(handles).forEach(({ resolve, filePath, serverId, clientId }) => {
-        const serverChunk = serverInfo && serverInfo.chunks.find(chunk => chunk.id === serverId)
-        const clientChunk = clientInfo && clientInfo.chunks.find(chunk => chunk.id === clientId)
-        const serverRenderPath = serverChunk && join(filesDir(options), `${ext}-server.js`)
-        const serverComponentPath = serverChunk && join(filesDir(options), `${getFileId(filePath, 'server')}.js`)
-        const clientRenderPath = clientChunk && `${uiBase}${TARGET_FOLDER}/${ext}-client.js`
-        const clientComponentPath = clientChunk && `${uiBase}${TARGET_FOLDER}/${getFileId(filePath, 'client')}.js`
+      Object.values(handles).forEach(({ resolve, filePath, serverComponentId, clientComponentId }) => {
+        // needed for dependency resolution
+        const serverComponentChunk = serverInfo && serverInfo.chunks.find(chunk => chunk.id === serverComponentId)
+        const clientComponentChunk = clientInfo && clientInfo.chunks.find(chunk => chunk.id === clientComponentId)
+        // needed for property extraction
+        const serverComponentPath = serverComponentChunk && join(filesDir(options), `${getFileId(filePath, 'server-component')}.js`)
+        // needed for rendering
+        const serverResultPath = serverComponentChunk && join(filesDir(options), `${getFileId(filePath, 'server-result')}.js`)
+        const clientResultPath = clientComponentChunk && `${uiBase}${TARGET_FOLDER}/${getFileId(filePath, 'client-result')}.js`
 
-        // console.log(serverId, serverChunk, serverInfo.chunks)
         const object = {
           filePath,
-          serverChunk,
-          serverRenderPath,
-          serverComponentPath,
-          clientChunk,
-          clientRenderPath,
-          clientComponentPath
+          clientComponentChunk,
+          clientResultPath,
+          serverComponentChunk,
+          serverResultPath,
+          serverComponentPath
         }
 
         cachePut(queueId, filePath, object)
