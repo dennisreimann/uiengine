@@ -59,15 +59,12 @@ async function generate (options) {
 
     debug2(_state, 'Core.generate():start')
 
-    // 0. setup
+    // 1. setup and data fetching
     const setupInterface = Interface.setup(_state)
     const setupConnector = Connector.setup(_state)
-    await Promise.all([setupInterface, setupConnector])
-
-    // 1. data fetching
     const fetchPages = Page.fetchAll(_state)
     const fetchComponents = Component.fetchAll(_state)
-    const [pages, components] = await Promise.all([fetchPages, fetchComponents])
+    const [pages, components] = await Promise.all([fetchPages, fetchComponents, setupInterface, setupConnector])
 
     _state = R.assoc('pages', pages, _state)
     _state = R.assoc('components', components, _state)

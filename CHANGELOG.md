@@ -9,6 +9,7 @@
 ### Changed
 
 - Webpack adapter: Improve build
+- Core: Build performance improvements
 
 ## [2.4.0] - 2019-07-24
 
