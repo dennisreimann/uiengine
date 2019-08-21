@@ -20,12 +20,12 @@ async function setup (state) {
 }
 
 async function render (state, template, data, themeId) {
-  debug3(state, `Interface.render(${template}, ${themeId}):start`)
+  debug3(state, `Interface.render(${template}, ${themeId}, ${data.id}):start`)
 
   const options = getOptions(state, { themeId })
   const rendered = await UI.render(options, template, data)
 
-  debug3(state, `Interface.render(${template}, ${themeId}):end`)
+  debug3(state, `Interface.render(${template}, ${themeId}, ${data.id}):end`)
 
   return rendered
 }

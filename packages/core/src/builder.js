@@ -39,7 +39,7 @@ const pruneStateForView = state => {
 }
 
 async function render (state, template, data, themeId, identifier) {
-  debug4(state, `Builder.render(${template}, ${themeId}):start`)
+  debug4(state, `Builder.render(${template}, ${themeId}, ${identifier}):start`)
 
   const { templates } = state.config.source
   if (!templates) throw new UiengineInputError('Templates source directory must be defined!')
@@ -56,7 +56,7 @@ async function render (state, template, data, themeId, identifier) {
     throw new UiengineInputError(message, err)
   }
 
-  debug4(state, `Builder.render(${template}, ${themeId}):end`)
+  debug4(state, `Builder.render(${template}, ${themeId}, ${identifier}):end`)
 
   return rendered
 }
@@ -86,7 +86,7 @@ async function generatePageFiles (state, pageId) {
 
   await Promise.all(copyFiles)
 
-  debug4(state, `Builder.generatePageFiles(${pageId}):start`)
+  debug4(state, `Builder.generatePageFiles(${pageId}):end`)
 }
 
 async function generatePageWithTemplate (state, pageId) {

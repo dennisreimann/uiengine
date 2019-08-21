@@ -78,10 +78,10 @@ async function generate (options) {
 
     // 3. output
     await Builder.generate(_state)
-
-    debug2(_state, 'Core.generate():end')
   } finally {
     _isGenerating = false
+
+    debug2(_state, 'Core.generate():end')
   }
 
   return _state
