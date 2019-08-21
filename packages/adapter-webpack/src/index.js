@@ -1,6 +1,6 @@
 const { FileUtil: { requireUncached } } = require('@uiengine/util')
 const { extractDependentFiles, extractDependencyFiles } = require('./deps')
-const { buildQueued, getExtractProperties } = require('./util')
+const { buildQueued, renderQueued, getExtractProperties } = require('./util')
 
 async function setup (options) {
   const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
@@ -15,7 +15,7 @@ async function setup (options) {
 }
 
 async function registerComponentFile (options, filePath) {
-  await buildQueued(options, filePath, undefined, undefined, true)
+  await buildQueued(options, filePath, true)
 
   const extractProperties = getExtractProperties(options)
   const [properties, dependentFiles, dependencyFiles] = await Promise.all([
@@ -34,14 +34,14 @@ async function registerComponentFile (options, filePath) {
 
 async function render (options, filePath, data = {}, renderId) {
   let rendered, foot
-  const { serverResultPath, clientResultPath } = await buildQueued(options, filePath, data, renderId, true)
+  const { serverPath, clientPath } = await renderQueued(options, filePath, data, renderId)
 
-  if (serverResultPath) {
-    rendered = await requireUncached(serverResultPath)
+  if (serverPath) {
+    rendered = await requireUncached(serverPath)
   }
 
-  if (clientResultPath) {
-    foot = ` <script src="${clientResultPath}"></script>`
+  if (clientPath) {
+    foot = ` <script src="${clientPath}"></script>`
   }
 
   return { rendered, foot }

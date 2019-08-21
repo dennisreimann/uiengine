@@ -18,9 +18,7 @@ async function getDependencyFiles (options, filePath, cache) {
   // cache the promises so that files do not get added multiple times
   const promise = new Promise((resolve, reject) => {
     buildQueued(options, filePath)
-      .then(({ serverComponentChunk, clientComponentChunk }) => {
-        const chunk = serverComponentChunk || clientComponentChunk
-
+      .then(({ chunk }) => {
         // https://webpack.js.org/api/stats#chunk-objects
         const filePaths = chunk ? chunk.modules.map(({ id, name }) => {
           const ident = typeof id === 'number' ? (name.match(/\s([^\s]*)/g) || ['']).shift().trim() : id

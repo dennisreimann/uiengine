@@ -1,19 +1,16 @@
 const CACHES = {}
 
-function cacheGet (queueId, filePath, renderId) {
-  const id = renderId || filePath
-  return CACHES[queueId] && CACHES[queueId][id]
+function cacheGet (queueId, filePath) {
+  return CACHES[queueId] && CACHES[queueId][filePath]
 }
 
-function cachePut (queueId, filePath, renderId, object) {
-  const id = renderId || filePath
+function cachePut (queueId, filePath, object) {
   CACHES[queueId] = CACHES[queueId] || {}
-  CACHES[queueId][id] = object
+  CACHES[queueId][filePath] = object
 }
 
-function cacheDel (queueId, filePath, renderId) {
-  const id = renderId || filePath
-  if (CACHES[queueId]) delete CACHES[queueId][id]
+function cacheDel (queueId, filePath) {
+  if (CACHES[queueId]) delete CACHES[queueId][filePath]
 }
 
 module.exports = {
