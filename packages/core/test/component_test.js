@@ -26,6 +26,7 @@ const state = {
     ui: {
       base: '/'
     },
+    target: testTmpPath,
     adapters
   }
 }
@@ -116,11 +117,10 @@ describe('Component', () => {
 
       assert(labelProps, 'React Label properties are not defined')
 
-      // FIXME: These don't work anymore with prop-types > 15.6.2
-      // assert.strictEqual(labelProps.title.type, 'String')
-      // assert.strictEqual(labelProps.title.required, true)
-      // assert.strictEqual(labelProps.for.type, 'String')
-      // assert.strictEqual(labelProps.for.required, true)
+      assert.strictEqual(labelProps.title.type, 'String')
+      assert.strictEqual(labelProps.title.required, true)
+      assert.strictEqual(labelProps.for.type, 'String')
+      assert.strictEqual(labelProps.for.required, true)
     })
 
     it('should register component files and extract dependencies', async () => {

@@ -5,6 +5,8 @@
 ### Removed
 
 - Webpack adapter: Removed `extensions` option (now they are inferred automatically)
+- Deprecated `@uiengine/adapter-react` and `@uiengine/adapter-vue`
+  - Please use the [Webpack adapter](/adapters/webpack/)
 
 ### Changed
 

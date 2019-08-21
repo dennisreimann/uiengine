@@ -1,6 +1,9 @@
-const { resolve } = require('path')
+const { join, resolve } = require('path')
 const { testProjectPath } = require('../../../../test/support/paths')
 const srcPath = resolve(testProjectPath, 'src')
+
+const webpackAdapterReactOptions = require(join(testProjectPath, 'lib/webpack-adapter-react-options'))
+const webpackAdapterVueOptions = require(join(testProjectPath, 'lib/webpack-adapter-vue-options'))
 
 const adapters = {
   pug: {
@@ -18,22 +21,11 @@ const adapters = {
   },
   vue: {
     module: '@uiengine/adapter-webpack',
-    options: {}
-  },
-  js: {
-    module: '@uiengine/adapter-vue',
-    options: {}
+    options: webpackAdapterVueOptions
   },
   jsx: {
-    module: '@uiengine/adapter-react',
-    options: {
-      babel: {
-        presets: [
-          '@babel/preset-env',
-          '@babel/preset-react'
-        ]
-      }
-    }
+    module: '@uiengine/adapter-webpack',
+    options: webpackAdapterReactOptions
   },
   ejs: {
     module: '@uiengine/adapter-ejs',

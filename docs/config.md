@@ -75,8 +75,7 @@ The first way is to directly reference the module or path that will get required
 {
   adapters: {
     pug: '@uiengine/adapter-pug',
-    hbs: '@uiengine/adapter-handlebars',
-    jsx: '@uiengine/adapter-react'
+    hbs: '@uiengine/adapter-handlebars'
   }
 }
 ```

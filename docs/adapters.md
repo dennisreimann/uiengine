@@ -12,7 +12,7 @@ using the file extension as the adapter key:
 ```js
 {
   adapters: {
-    jsx: '@uiengine/adapter-react'
+    pug: '@uiengine/adapter-pug'
   }
 }
 ```
@@ -22,18 +22,11 @@ You can also provide a set of adapter specifict options – see the individual 
 ```js
 {
   adapters: {
-    jsx: {
-      module: '@uiengine/adapter-react',
+    pug: {
+      module: '@uiengine/adapter-pug',
       options: {
-        babel: {
-          presets: [
-            '@babel/preset-env',
-            '@babel/preset-react'
-          ],
-          plugins: [
-            'css-modules-transform'
-          ]
-        }
+        pretty: true,
+        basedir: './src/components'
       }
     }
   }
@@ -104,8 +97,7 @@ You can use this hook to i.e. [register partials when working with Handlebars](h
 #### `registerComponentFile(opts, filePath)`
 
 This function gets called for each component file, which has an associated adapter.
-Use this function to generate documentation from your components, i.e.
-[extract properties from React PropTypes](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-react/src/index.js).
+Use this function to generate documentation from your components, i.e. extract properties from React PropTypes.
 
 When generating incremental changes during development you can also use this to update the registered component files.
 
@@ -144,8 +136,8 @@ To skip scaffolding for certain adapters, provide the `skipScaffold` option in t
 ```js
 {
   adapters: {
-    jsx: {
-      module: '@uiengine/adapter-react',
+    pug: {
+      module: '@uiengine/adapter-pug',
       options: {
         skipScaffold: true
       }

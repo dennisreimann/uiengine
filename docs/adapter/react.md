@@ -1,6 +1,6 @@
 # React
 
-🚦 *State:* Production ready
+🚦 *State:* Deprecated, please use the [Webpack adapter](/adapters/webpack/).
 
 [![npm](https://img.shields.io/npm/v/@uiengine/adapter-react.svg)](https://www.npmjs.com/package/@uiengine/adapter-react)
 

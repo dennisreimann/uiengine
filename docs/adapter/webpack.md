@@ -10,9 +10,8 @@ This adapter needs the following options:
 
 - `serverConfig`: The Webpack config for server-side rendering
 - `serverRenderPath`: Path to file containing the server-side rendering code
-- `clientConfig`: The Webpack config for clientver-side rendering
+- `clientConfig`: The Webpack config for client-side rendering
 - `clientRenderPath`: Path to file containing the client-side rendering code
-- `extensions`: List of file extensions the adapter should handle
 - `properties`: Optional property extraction handler (options: `prop-types`, `vue`)
 - `filesForComponent` and `filesForVariant`: See the [adapter scaffolding docs](../#scaffolding) and the test project files for
   [React](https://github.com/dennisreimann/uiengine/blob/master/test/project/lib/react-scaffolding.js) and
