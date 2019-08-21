@@ -149,7 +149,9 @@ describe('Component', () => {
     })
   })
 
-  describe('#fetchAll', () => {
+  describe('#fetchAll', function () {
+    this.timeout(7500)
+
     it('should return components object', async () => {
       const data = await Component.fetchAll(state)
       const componentIds = Object.keys(data)
