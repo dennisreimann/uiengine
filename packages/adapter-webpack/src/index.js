@@ -15,7 +15,7 @@ async function setup (options) {
 }
 
 async function registerComponentFile (options, filePath) {
-  await buildQueued(options, filePath, undefined, true)
+  await buildQueued(options, filePath, undefined, undefined, true)
 
   const extractProperties = getExtractProperties(options)
   const [properties, dependentFiles, dependencyFiles] = await Promise.all([
@@ -32,9 +32,9 @@ async function registerComponentFile (options, filePath) {
   return info
 }
 
-async function render (options, filePath, data = {}) {
+async function render (options, filePath, data = {}, renderId) {
   let rendered, foot
-  const { serverResultPath, clientResultPath } = await buildQueued(options, filePath, data, true)
+  const { serverResultPath, clientResultPath } = await buildQueued(options, filePath, data, renderId, true)
 
   if (serverResultPath) {
     rendered = await requireUncached(serverResultPath)

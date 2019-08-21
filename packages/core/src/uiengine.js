@@ -106,6 +106,7 @@ const startServer = (state, opts) => {
   const sketchPattern = join('_sketch', '**', '*')
   const tokensPattern = join('_tokens', '**', '*')
   const variantsPattern = join('_variants', '**', '*')
+  const webpackPattern = join('_webpack', '**', '*')
   const defaults = {
     server: {
       baseDir: target
@@ -125,7 +126,8 @@ const startServer = (state, opts) => {
             pagesPattern,
             sketchPattern,
             tokensPattern,
-            variantsPattern
+            variantsPattern,
+            webpackPattern
           ]
         }
       }

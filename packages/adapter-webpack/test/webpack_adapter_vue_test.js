@@ -80,7 +80,7 @@ describe('Webpack adapter with Vue templates', function () {
     it('should render the template with the given data', async () => {
       const templatePath = join(basePath, 'template.vue')
       const data = { myData: 'this is my data' }
-      const { rendered, foot } = await Adapter.render(options, templatePath, data)
+      const { rendered, foot } = await Adapter.render(options, templatePath, data, 'test-template')
       const html = '<p data-server-rendered="true" data-v-5c9d4f22>this is my data</p>'
       const css = 'p[data-v-5c9d4f22] { font-size: 2rem;'
 

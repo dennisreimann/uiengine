@@ -11,8 +11,10 @@ const TARGET_FOLDER = '_webpack'
 const WEBPACK_NAME_SERVER = 'server'
 const WEBPACK_NAME_CLIENT = 'client'
 
-const getFileId = (filePath, type) =>
-  relative(process.cwd(), filePath).replace(/[^\w\s]/gi, '_') + `-${type}`
+const getFileId = (filePath, renderId, type) => {
+  const id = renderId || relative(process.cwd(), filePath).replace(/[^\w\s]/gi, '_')
+  return `${id}/${type}`
+}
 
 const filesDir = ({ target }) => join(target, TARGET_FOLDER)
 
@@ -70,51 +72,19 @@ const buildConfig = options => {
   return config
 }
 
-const addFileToQueue = (options, filePath, data, queue) => {
+const addFileToBuildQueue = (options, filePath, queue) => {
   if (queue.promises[filePath]) return queue.promises[filePath]
 
-  const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
-  const serverComponentId = getFileId(filePath, 'server-component')
-  const serverResultId = getFileId(filePath, 'server-result')
-  const clientComponentId = getFileId(filePath, 'client-component')
-  const clientResultId = getFileId(filePath, 'client-result')
+  const { serverConfig, clientConfig } = options
+  const serverComponentId = getFileId(filePath, null, 'server-component')
+  const clientComponentId = getFileId(filePath, null, 'client-component')
 
   if (serverConfig) {
     queue.config.server.entry[serverComponentId] = filePath
-
-    if (data) {
-      queue.config.server.entry[serverResultId] = `/${serverResultId}.js`
-      queue.config.server.plugins.push(
-        new VirtualModulesPlugin({
-          [queue.config.server.entry[serverResultId]]: `
-            const ServerRender = require('${serverRenderPath}')
-            const ServerComponent = require('${filePath}')
-            const serverRender = ServerRender.default || ServerRender
-            const serverComponent = ServerComponent.default || ServerComponent
-
-            module.exports = serverRender(serverComponent, ${JSON.stringify(data)})
-            `
-        })
-      )
-    }
   }
 
   if (clientConfig) {
     queue.config.client.entry[clientComponentId] = filePath
-
-    if (data) {
-      queue.config.client.entry[clientResultId] = `/${clientResultId}.js`
-      queue.config.client.plugins.push(
-        new VirtualModulesPlugin({
-          [queue.config.client.entry[clientResultId]]: `
-            import clientRender from '${clientRenderPath}'
-            import Component from '${filePath}'
-
-            export default clientRender(Component, ${JSON.stringify(data)})
-            `
-        })
-      )
-    }
   }
 
   // cache the promises so that files do not get added multiple times
@@ -124,13 +94,64 @@ const addFileToQueue = (options, filePath, data, queue) => {
       resolve,
       filePath,
       serverComponentId,
-      serverResultId,
-      clientComponentId,
-      clientResultId
+      clientComponentId
     }
   })
 
   queue.promises[filePath] = promise
+
+  return promise
+}
+
+const addFileToRenderQueue = (options, filePath, queue, data, renderId) => {
+  if (queue.promises[renderId]) return queue.promises[renderId]
+
+  const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
+  let serverResultId, clientResultId
+
+  if (serverConfig) {
+    serverResultId = getFileId(filePath, renderId, 'server-result')
+    queue.config.server.entry[serverResultId] = `/${serverResultId}.js`
+    queue.config.server.plugins.push(
+      new VirtualModulesPlugin({
+        [queue.config.server.entry[serverResultId]]: `
+          const ServerRender = require('${serverRenderPath}')
+          const ServerComponent = require('${filePath}')
+          const serverRender = ServerRender.default || ServerRender
+          const serverComponent = ServerComponent.default || ServerComponent
+
+          module.exports = serverRender(serverComponent, ${JSON.stringify(data)})`
+      })
+    )
+  }
+
+  if (clientConfig) {
+    clientResultId = getFileId(filePath, renderId, 'client-result')
+    queue.config.client.entry[clientResultId] = `/${clientResultId}.js`
+    queue.config.client.plugins.push(
+      new VirtualModulesPlugin({
+        [queue.config.client.entry[clientResultId]]: `
+          import clientRender from '${clientRenderPath}'
+          import Component from '${filePath}'
+
+          export default clientRender(Component, ${JSON.stringify(data)})`
+      })
+    )
+  }
+
+  // cache the promises so that files do not get added multiple times
+  const promise = new Promise((resolve, reject) => {
+    queue.handles[renderId] = {
+      reject,
+      resolve,
+      filePath,
+      renderId,
+      serverResultId,
+      clientResultId
+    }
+  })
+
+  queue.promises[renderId] = promise
 
   return promise
 }
@@ -170,13 +191,14 @@ const getExtractProperties = options => {
   }
 }
 
-async function buildQueued (options, filePath, data = {}, clearCache = false) {
+// TODO: Refactor to distinguish the two use cases of building and rendering files
+async function buildQueued (options, filePath, data = {}, renderId = undefined, clearCache = false) {
   const queueId = getQueueId(options)
 
   if (clearCache) {
-    cacheDel(queueId, filePath)
+    cacheDel(queueId, filePath, renderId)
   } else {
-    const cached = cacheGet(queueId, filePath)
+    const cached = cacheGet(queueId, filePath, renderId)
     if (cached) return cached
   }
 
@@ -188,7 +210,9 @@ async function buildQueued (options, filePath, data = {}, clearCache = false) {
     }
   }
 
-  const promise = addFileToQueue(options, filePath, data, QUEUES[queueId])
+  const promise = renderId
+    ? addFileToRenderQueue(options, filePath, QUEUES[queueId], data, renderId)
+    : addFileToBuildQueue(options, filePath, QUEUES[queueId])
 
   debounce(queueId, async () => {
     const { config, handles } = QUEUES[queueId]
@@ -201,15 +225,24 @@ async function buildQueued (options, filePath, data = {}, clearCache = false) {
       const clientInfo = info.children.find(child => child.name === WEBPACK_NAME_CLIENT)
       const { uiBase } = options
 
-      Object.values(handles).forEach(({ resolve, filePath, serverComponentId, clientComponentId }) => {
+      Object.values(handles).forEach(({
+        resolve,
+        filePath,
+        renderId,
+        serverComponentId,
+        serverResultId,
+        clientComponentId,
+        clientResultId
+      }) => {
         // needed for dependency resolution
         const serverComponentChunk = serverInfo && serverInfo.chunks.find(chunk => chunk.id === serverComponentId)
         const clientComponentChunk = clientInfo && clientInfo.chunks.find(chunk => chunk.id === clientComponentId)
         // needed for property extraction
-        const serverComponentPath = serverComponentChunk && join(filesDir(options), `${getFileId(filePath, 'server-component')}.js`)
+        const serverComponentPath = serverComponentChunk && join(filesDir(options), `${getFileId(filePath, renderId, 'server-component')}.js`)
+
         // needed for rendering
-        const serverResultPath = serverComponentChunk && join(filesDir(options), `${getFileId(filePath, 'server-result')}.js`)
-        const clientResultPath = clientComponentChunk && `${uiBase}${TARGET_FOLDER}/${getFileId(filePath, 'client-result')}.js`
+        const serverResultPath = serverResultId && join(filesDir(options), `${getFileId(filePath, renderId, 'server-result')}.js`)
+        const clientResultPath = clientResultId && `${uiBase}${TARGET_FOLDER}/${getFileId(filePath, renderId, 'client-result')}.js`
 
         const object = {
           filePath,
@@ -220,7 +253,7 @@ async function buildQueued (options, filePath, data = {}, clearCache = false) {
           serverComponentPath
         }
 
-        cachePut(queueId, filePath, object)
+        cachePut(queueId, filePath, renderId, object)
 
         resolve(object)
       })

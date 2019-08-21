@@ -67,7 +67,7 @@ async function fetchObject (state, componentId, componentContext, data, index) {
   // render raw variant, without layout
   let raw, rendered
   const readTemplate = readFile(filePath)
-  const renderThemes = themeIds.map(themeId => Connector.render(state, filePath, context, themeId))
+  const renderThemes = themeIds.map(themeId => Connector.render(state, filePath, context, themeId, id))
 
   try {
     [raw, ...rendered] = await Promise.all([readTemplate, ...renderThemes])

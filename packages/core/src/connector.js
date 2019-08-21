@@ -34,11 +34,11 @@ async function setup (state) {
   const tasks = []
 
   exts.map(ext => {
-    const { setup } = getModule(state, ext)
+    const { setup: setupFn } = getModule(state, ext)
 
-    if (typeof setup === 'function') {
+    if (typeof setupFn === 'function') {
       const options = getOptions(state, ext)
-      tasks.push(setup(options))
+      tasks.push(setupFn(options))
     }
   })
 
@@ -53,11 +53,11 @@ async function registerComponentFile (state, filePath) {
   const adapter = adapters[ext]
 
   if (adapter) {
-    const { registerComponentFile } = getModule(state, ext, filePath)
+    const { registerComponentFile: registerFn } = getModule(state, ext, filePath)
 
-    if (typeof registerComponentFile === 'function') {
+    if (typeof registerFn === 'function') {
       const options = getOptions(state, ext)
-      const data = await registerComponentFile(options, filePath)
+      const data = await registerFn(options, filePath)
 
       if (data) {
         const id = componentFilePathToId(components, filePath)
@@ -68,13 +68,14 @@ async function registerComponentFile (state, filePath) {
   }
 }
 
-async function render (state, templatePath, data = {}, themeId) {
+async function render (state, templatePath, data = {}, themeId, identifier) {
   const ext = extension(templatePath)
-  const { render } = getModule(state, ext, templatePath)
+  const { render: renderFn } = getModule(state, ext, templatePath)
 
-  if (typeof render === 'function') {
+  if (typeof renderFn === 'function') {
     const options = getOptions(state, ext, { themeId })
-    const rendered = await render(options, templatePath, data)
+    const renderId = `${themeId}/${identifier}`
+    const rendered = await renderFn(options, templatePath, data, renderId)
 
     return typeof rendered === 'string' ? { rendered } : rendered
   } else {
@@ -83,12 +84,12 @@ async function render (state, templatePath, data = {}, themeId) {
 }
 
 async function filesForComponent (state, ext, componentName) {
-  const { filesForComponent } = getModule(state, ext)
+  const { filesForComponent: filesFn } = getModule(state, ext)
   const options = getOptions(state, ext)
-  const fnExists = typeof filesForComponent === 'function'
+  const fnExists = typeof filesFn === 'function'
 
   if (fnExists && !options.skipScaffold) {
-    const files = await filesForComponent(options, componentName)
+    const files = await filesFn(options, componentName)
 
     return files
   } else {
@@ -97,12 +98,12 @@ async function filesForComponent (state, ext, componentName) {
 }
 
 async function filesForVariant (state, ext, componentName, variantName) {
-  const { filesForVariant } = getModule(state, ext)
+  const { filesForVariant: filesFn } = getModule(state, ext)
   const options = getOptions(state, ext)
-  const fnExists = typeof filesForVariant === 'function'
+  const fnExists = typeof filesFn === 'function'
 
   if (fnExists && !options.skipScaffold) {
-    const files = await filesForVariant(options, componentName, variantName)
+    const files = await filesFn(options, componentName, variantName)
 
     return files
   } else {

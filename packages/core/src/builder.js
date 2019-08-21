@@ -47,7 +47,7 @@ async function render (state, template, data, themeId, identifier) {
 
   let rendered
   try {
-    rendered = await Connector.render(state, templatePath, data, themeId)
+    rendered = await Connector.render(state, templatePath, data, themeId, identifier)
   } catch (err) {
     const message = [`${identifier} could not be generated!`]
 
@@ -94,11 +94,10 @@ async function generatePageWithTemplate (state, pageId) {
 
   const { pages, config } = state
   const { name, target, themes, version } = config
-  const identifier = `Page "${pageId}"`
   const page = pages[pageId]
 
   if (!page) {
-    throw new UiengineInputError(`${identifier} does not exist or has not been fetched yet.`)
+    throw new UiengineInputError(`Page "${pageId}" does not exist or has not been fetched yet.`)
   }
 
   if (page.template || page.fragment) {
@@ -106,9 +105,9 @@ async function generatePageWithTemplate (state, pageId) {
     const { id, context, fragment } = page
 
     await withThemes(themes, async themeId => {
-      let { rendered, foot } = await render(state, template, context, themeId, identifier)
+      let { rendered, foot } = await render(state, template, context, themeId, pageId)
       const content = fragment
-        ? (await render(state, fragment, context, themeId, identifier)).rendered
+        ? (await render(state, fragment, context, themeId, pageId)).rendered
         : rendered
       rendered = replaceTemplateComments(rendered, {
         class: `uie-page uie-page--${dasherize(id)}`,
@@ -145,11 +144,10 @@ async function generatePageWithTokens (state, pageId) {
 
   const { pages, config } = state
   const { name, target, themes, version } = config
-  const identifier = `Page "${pageId}"`
   const page = pages[pageId]
 
   if (!page) {
-    throw new UiengineInputError(`${identifier} does not exist or has not been fetched yet.`)
+    throw new UiengineInputError(`Page "${pageId}" does not exist or has not been fetched yet.`)
   }
 
   if (isTokensPage(page.type)) {
@@ -159,7 +157,7 @@ async function generatePageWithTokens (state, pageId) {
     const template = page.template || config.template
 
     await withThemes(themes, async themeId => {
-      let { rendered, foot } = await render(state, template, data, themeId, identifier)
+      let { rendered, foot } = await render(state, template, data, themeId, pageId)
       const content = await Interface.render(state, 'tokens', page, themeId)
       rendered = replaceTemplateComments(rendered, {
         class: `uie-tokens uie-tokens--${dasherize(id)}`,
@@ -184,7 +182,6 @@ async function generateVariant (state, variant) {
 
   const { config, components } = state
   const { target, themes, name, version } = config
-  const identifier = `Variant "${id}"`
   const component = components[componentId]
 
   // render variant preview, with layout
@@ -192,7 +189,7 @@ async function generateVariant (state, variant) {
   const template = variant.template || component.template || config.template
 
   await withThemes(themes, async themeId => {
-    let { rendered } = await render(state, template, data, themeId, identifier)
+    let { rendered } = await render(state, template, data, themeId, id)
     const { rendered: content, foot } = variant.themes[themeId]
     rendered = replaceTemplateComments(rendered, {
       class: `uie-variant uie-variant--${dasherize(componentId)} uie-variant--${dasherize(id)}`,
@@ -311,13 +308,13 @@ async function generateSketch (state) {
   debug2(state, 'Builder.generateSketch():start')
 
   const { config: { name, target, template, version, themes, source: { templates } } } = state
-  const identifier = 'HTML Sketchapp Export'
 
   if (templates && template) {
     // render variant preview, with layout
     const data = { state }
 
     await withThemes(themes, async themeId => {
+      const identifier = 'HTML Sketchapp Export'
       let { rendered, foot } = await render(state, template, data, themeId, identifier)
       const content = await Interface.render(state, 'sketch', data, themeId)
       rendered = replaceTemplateComments(rendered, {

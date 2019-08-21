@@ -305,7 +305,7 @@ describe('Builder', () => {
       } catch (error) {
         assert(error)
 
-        assertMatches(error.message, 'Page "prototype/custom-page-erroneous" could not be generated!')
+        assertMatches(error.message, 'prototype/custom-page-erroneous could not be generated!')
       }
     })
 
