@@ -7,8 +7,8 @@ node_js:
   - "node"
 os:
   - linux
-  # - osx
-  # - windows
+  - osx
+  - windows
 
 stages:
   - name: check
