@@ -15,9 +15,7 @@ const modulesPath = join(basePath, 'modules')
 const atomFilePath = join(elementsPath, 'Atom', 'index.vue')
 const moleculeFilePath = join(modulesPath, 'Molecule', 'Molecule.vue')
 const moleculeIndexPath = join(modulesPath, 'Molecule', 'index.js')
-const moleculeVariantPath = join(modulesPath, 'Molecule', 'variants', 'Molecule.vue')
 const organismFilePath = join(modulesPath, 'Organism', 'index.vue')
-const organismVariantPath = join(modulesPath, 'Organism', 'variants', 'Organism.vue')
 const templatePath = join(basePath, 'template.vue')
 const outputPath = join(testTmpPath, '_webpack')
 const componentNormalizerPath = require.resolve('vue-loader/lib/runtime/componentNormalizer.js')
@@ -99,11 +97,9 @@ describe('Webpack adapter with Vue templates', function () {
       assertIncludes(dependencyFiles, crossPlatformPath(componentNormalizerPath))
       assertIncludes(dependencyFiles, crossPlatformPath(atomFilePath))
 
-      assert.strictEqual(dependentFiles.length, 4, JSON.stringify(dependentFiles, null, 2))
+      assert.strictEqual(dependentFiles.length, 2, JSON.stringify(dependentFiles, null, 2))
       assertIncludes(dependentFiles, crossPlatformPath(moleculeIndexPath))
-      assertIncludes(dependentFiles, crossPlatformPath(moleculeVariantPath))
       assertIncludes(dependentFiles, crossPlatformPath(organismFilePath))
-      assertIncludes(dependentFiles, crossPlatformPath(organismVariantPath))
     })
 
     it('should return undefined dependentFiles if there are no component dependents', async () => {

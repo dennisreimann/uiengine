@@ -4,7 +4,6 @@ const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
 const { buildQueued } = require('./util')
 
 const DEPENDENCY_CACHE = {}
-const EXTENSIONS = ['js', 'jsx', 'ts', 'vue']
 
 // taken from https://stackoverflow.com/a/46842181/183537
 async function filter (arr, callback) {
@@ -35,7 +34,10 @@ async function getDependencyFiles (options, filePath, cache) {
 
         resolve(filePaths)
       })
-      .catch(reject)
+      .catch(err => { // eslint-disable-line handle-callback-err
+        // console.debug(`Error getting dependencies for "${filePath}": `, err)
+        resolve([])
+      })
   })
 
   if (cache) cache[filePath] = promise
@@ -44,10 +46,18 @@ async function getDependencyFiles (options, filePath, cache) {
 }
 
 async function getDependentFiles (options, filePath, dirs, cache) {
-  const extensions = options.extensions || EXTENSIONS
-  const filePattern = '*.' + (extensions.length === 1 ? extensions[0] : `{${extensions.join(',')}}`)
-  const patterns = dirs.map(dir => path.join(dir, '**', filePattern))
-  const filePaths = await glob(patterns, { ignore: [filePath] })
+  const extensions = Array.from(new Set(['js', options.ext]))
+  const exts = extensions.length === 1 ? extensions[0] : `{${extensions.join(',')}}`
+  const patterns = dirs.map(dir => path.join(dir, '**', `*.${exts}`))
+  const filePaths = await glob(patterns, {
+    ignore: [
+      filePath,
+      path.join('**', `*{.,_}{config,marko,spec,test}.${exts}`),
+      path.join('**', '__*'),
+      path.join('**', 'variants')
+    ]
+  })
+
   const dependentFiles = await filter(filePaths, async dependentPath => {
     const dependencies = await getDependencyFiles(options, dependentPath, cache)
     return dependencies.includes(crossPlatformPath(filePath))

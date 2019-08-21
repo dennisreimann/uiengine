@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.5.0] - ongoing development
+
+### Removed
+
+- Webpack adapter: Removed `extensions` option (now they are inferred automatically)
+
+### Changed
+
+- Webpack adapter: Improve build
+
 ## [2.4.0] - 2019-07-24
 
 ### Added

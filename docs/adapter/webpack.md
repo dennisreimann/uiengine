@@ -64,7 +64,6 @@ const [clientConfig, serverConfig] = require('./webpack.conf')
 const serverRenderPath = resolve(__dirname, 'vue-server-render.js')
 const clientRenderPath = resolve(__dirname, 'vue-client-render.js')
 
-const extensions = ['js', 'vue']
 const properties = 'vue'
 
 module.exports = {
@@ -72,7 +71,6 @@ module.exports = {
   clientConfig,
   serverRenderPath,
   clientRenderPath,
-  extensions,
   properties
 }
 ```
@@ -139,7 +137,6 @@ const [clientConfig, serverConfig] = require('./webpack.conf')
 const serverRenderPath = resolve(__dirname, 'react-server-render.js')
 const clientRenderPath = resolve(__dirname, 'react-client-render.js')
 
-const extensions = ['js', 'jsx']
 const properties = 'prop-types'
 
 module.exports = {
@@ -147,7 +144,6 @@ module.exports = {
   clientConfig,
   serverRenderPath,
   clientRenderPath,
-  extensions,
   properties
 }
 ```

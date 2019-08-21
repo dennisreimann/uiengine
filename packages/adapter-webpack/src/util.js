@@ -172,8 +172,8 @@ const runWebpack = async config => {
   const stats = await compile(compiler)
   const { warnings, errors } = stats.toJson('errors-warnings')
 
-  if (warnings.length) console.warn(warnings.join('\n'))
-  if (errors.length) throw new Error(errors.join('\n'))
+  if (warnings.length) console.warn(warnings.join('\n\n'))
+  if (errors.length) throw new Error(errors.join('\n\n'))
 
   return stats
 }
