@@ -5,7 +5,8 @@ const merge = require('webpack-merge')
 const VirtualModulesPlugin = require('webpack-virtual-modules')
 const {
   DebounceUtil: { debounce },
-  FileUtil: { requireUncached }
+  FileUtil: { requireUncached },
+  StringUtil: { crossPlatformPath }
 } = require('@uiengine/util')
 const { cacheGet, cachePut, cacheDel } = require('./cache')
 
@@ -117,8 +118,8 @@ const addFileToRenderQueue = (options, filePath, queue, data, renderId) => {
     queue.config.server.plugins.push(
       new VirtualModulesPlugin({
         [queue.config.server.entry[serverId]]: `
-          const ServerRender = require('${serverRenderPath}')
-          const ServerComponent = require('${filePath}')
+          const ServerRender = require('${crossPlatformPath(serverRenderPath)}')
+          const ServerComponent = require('${crossPlatformPath(filePath)}')
           const serverRender = ServerRender.default || ServerRender
           const serverComponent = ServerComponent.default || ServerComponent
 
@@ -133,8 +134,8 @@ const addFileToRenderQueue = (options, filePath, queue, data, renderId) => {
     queue.config.client.plugins.push(
       new VirtualModulesPlugin({
         [queue.config.client.entry[clientId]]: `
-          import clientRender from '${clientRenderPath}'
-          import Component from '${filePath}'
+          import clientRender from '${crossPlatformPath(clientRenderPath)}'
+          import Component from '${crossPlatformPath(filePath)}'
 
           export default clientRender(Component, ${JSON.stringify(data)})`
       })
