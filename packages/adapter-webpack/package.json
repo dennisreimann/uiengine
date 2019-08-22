@@ -39,6 +39,7 @@
     "babel-eslint": "10.0.2",
     "babel-loader": "8.0.6",
     "babel-preset-vue": "2.0.2",
+    "chalk": "2.4.2",
     "css-loader": "3.2.0",
     "react": "16.9.0",
     "react-dom": "16.9.0",

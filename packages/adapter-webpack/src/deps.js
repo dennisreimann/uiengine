@@ -1,7 +1,8 @@
 const path = require('path') // dont spread import because of "resolve" ambiguity
 const glob = require('globby')
+const { white, green, red } = require('chalk')
 const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
-const { buildQueued } = require('./util')
+const { buildQueued, debug } = require('./util')
 
 const DEPENDENCY_CACHE = {}
 
@@ -12,7 +13,12 @@ async function filter (arr, callback) {
 }
 
 async function getDependencyFiles (options, filePath, cache) {
-  if (cache && cache[filePath]) return cache[filePath]
+  if (cache && cache[filePath]) {
+    debug(options, `getDependencyFiles() ${white('->')} ${green('dependency cache hit')}`, filePath)
+    return cache[filePath]
+  } else {
+    debug(options, `getDependencyFiles() ${white('->')} ${red('dependency cache miss')}`, filePath)
+  }
 
   // cache the promises so that files do not get added multiple times
   const promise = new Promise((resolve, reject) => {

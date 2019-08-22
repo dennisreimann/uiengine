@@ -9,7 +9,7 @@ const _debug = (level, state, label, ...additional) => {
     const action = timingEvent === 'start' ? 'time' : 'timeEnd'
     console[action](yellow(timingLabel))
   } else {
-    console.info(yellow(label, additional.join(['\n\n'])))
+    console.debug(yellow(label, additional.join(['\n\n'])))
   }
 }
 

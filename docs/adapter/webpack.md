@@ -16,6 +16,7 @@ This adapter needs the following options:
 - `filesForComponent` and `filesForVariant`: See the [adapter scaffolding docs](../#scaffolding) and the test project files for
   [React](https://github.com/dennisreimann/uiengine/blob/master/test/project/lib/react-scaffolding.js) and
   [Vue](https://github.com/dennisreimann/uiengine/blob/master/test/project/lib/vue-scaffolding.js).
+- `debug`: Display action logging and timing information
 
 ```js
 {

@@ -1,8 +1,10 @@
 const { FileUtil: { requireUncached } } = require('@uiengine/util')
 const { extractDependentFiles, extractDependencyFiles } = require('./deps')
-const { buildQueued, renderQueued, getExtractProperties } = require('./util')
+const { buildQueued, renderQueued, getExtractProperties, debug } = require('./util')
 
 async function setup (options) {
+  debug(options, 'setup():start')
+
   const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
 
   if (!!serverConfig !== !!serverRenderPath) {
@@ -12,9 +14,13 @@ async function setup (options) {
   if (!!clientConfig !== !!clientRenderPath) {
     console.warn('Webpack: Please specify both clientConfig and clientRenderPath')
   }
+
+  debug(options, 'setup():end')
 }
 
 async function registerComponentFile (options, filePath) {
+  debug(options, `registerComponentFile(${filePath}):start`)
+
   await buildQueued(options, filePath, true)
 
   const extractProperties = getExtractProperties(options)
@@ -29,10 +35,14 @@ async function registerComponentFile (options, filePath) {
   if (Object.keys(dependentFiles).length > 0) info.dependentFiles = dependentFiles
   if (Object.keys(dependencyFiles).length > 0) info.dependencyFiles = dependencyFiles
 
+  debug(options, `registerComponentFile(${filePath}):end`)
+
   return info
 }
 
 async function render (options, filePath, data = {}, renderId) {
+  debug(options, `render(${renderId}):start`)
+
   let rendered, foot
   const { serverPath, clientPath } = await renderQueued(options, filePath, data, renderId)
 
@@ -43,6 +53,8 @@ async function render (options, filePath, data = {}, renderId) {
   if (clientPath) {
     foot = ` <script src="${clientPath}"></script>`
   }
+
+  debug(options, `render(${renderId}):end`)
 
   return { rendered, foot }
 }

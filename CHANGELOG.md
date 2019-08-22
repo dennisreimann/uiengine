@@ -2,6 +2,10 @@
 
 ## [2.5.0] - ongoing development
 
+### Added
+
+- Webpack adapter: Add `debug` option for displaying detailed build information
+
 ### Removed
 
 - Webpack adapter: Removed `extensions` option (now they are inferred automatically)

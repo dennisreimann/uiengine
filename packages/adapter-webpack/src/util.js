@@ -1,14 +1,19 @@
 const { join, relative } = require('path')
-const hash = require('object-hash')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const VirtualModulesPlugin = require('webpack-virtual-modules')
+const { yellow, cyan, white, green, red, blue } = require('chalk')
 const {
   DebounceUtil: { debounce },
   FileUtil: { requireUncached },
   StringUtil: { crossPlatformPath }
 } = require('@uiengine/util')
 const { cacheGet, cachePut, cacheDel } = require('./cache')
+
+// queue ids separate different adapter types, as in one project multiple
+// file types (i.e. react and vue) can be build with the webpack adapter.
+// -> one queue per file type
+const getQueueId = require('object-hash')
 
 const QUEUES = {}
 const TARGET_FOLDER = '_webpack'
@@ -19,11 +24,6 @@ const getFileId = (filePath, type) =>
   join('_build', relative(process.cwd(), filePath).replace(/[^\w\s]/gi, '_'), type)
 
 const filesDir = ({ target }) => join(target, TARGET_FOLDER)
-
-// queue ids separate different adapter types, as in one project multiple
-// file types (i.e. react and vue) can be build with the webpack adapter.
-// -> one queue per file type
-const getQueueId = options => `webpack-${hash(options)}`
 
 const buildConfig = options => {
   const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
@@ -199,13 +199,20 @@ async function buildQueued (options, filePath, clearCache = false) {
 
   if (clearCache) {
     cacheDel(queueId, filePath)
+    debug(options, `buildQueued(${queueId}) ${white('->')} ${blue('build cache clear')}`, filePath)
   } else {
     const cached = cacheGet(queueId, filePath)
-    if (cached) return cached
+    if (cached) {
+      debug(options, `buildQueued(${queueId}) ${white('->')} ${green('build cache hit')}`, filePath)
+      return cached
+    } else {
+      debug(options, `buildQueued(${queueId}) ${white('->')} ${red('build cache miss')}`, filePath)
+    }
   }
 
   if (!QUEUES[queueId]) {
     QUEUES[queueId] = {
+      id: queueId,
       config: buildConfig(options),
       handles: {},
       promises: {}
@@ -218,13 +225,17 @@ async function buildQueued (options, filePath, clearCache = false) {
     const { config, handles } = QUEUES[queueId]
     delete QUEUES[queueId]
 
+    const items = Object.values(handles)
+
+    debug(options, `buildQueued(${queueId}) ${white(`-> queue start (${items.length} files)`)}`)
+
     try {
       const stats = await runWebpack(config)
       const info = stats.toJson()
       const serverInfo = info.children.find(child => child.name === WEBPACK_NAME_SERVER)
       const clientInfo = info.children.find(child => child.name === WEBPACK_NAME_CLIENT)
 
-      Object.values(handles).forEach(({
+      items.forEach(({
         resolve,
         filePath,
         serverId,
@@ -245,7 +256,9 @@ async function buildQueued (options, filePath, clearCache = false) {
         resolve(object)
       })
     } catch (error) {
-      Object.values(handles).forEach(({ reject }) => reject(error))
+      items.forEach(({ reject }) => reject(error))
+    } finally {
+      debug(options, `buildQueued(${queueId}) ${white(`-> queue end (${items.length} files)`)}`)
     }
   })
 
@@ -255,8 +268,11 @@ async function buildQueued (options, filePath, clearCache = false) {
 async function renderQueued (options, filePath, data = {}, renderId) {
   const queueId = getQueueId(options)
 
+  debug(options, `renderQueued(${queueId}) ${white('->')} ${blue('render cache none')}`, renderId) // intentionally no cache
+
   if (!QUEUES[queueId]) {
     QUEUES[queueId] = {
+      id: queueId,
       config: buildConfig(options),
       handles: {},
       promises: {}
@@ -269,10 +285,14 @@ async function renderQueued (options, filePath, data = {}, renderId) {
     const { config, handles } = QUEUES[queueId]
     delete QUEUES[queueId]
 
+    const items = Object.values(handles)
+
+    debug(options, `renderQueued(${queueId}) ${white(`-> queue start (${items.length} files)`)}`)
+
     try {
       await runWebpack(config)
 
-      Object.values(handles).forEach(({
+      items.forEach(({
         resolve,
         serverId,
         clientId
@@ -283,15 +303,33 @@ async function renderQueued (options, filePath, data = {}, renderId) {
         })
       })
     } catch (error) {
-      Object.values(handles).forEach(({ reject }) => reject(error))
+      items.forEach(({ reject }) => reject(error))
+    } finally {
+      debug(options, `renderQueued(${queueId}) ${white((`-> queue end (${items.length} files)`))}`)
     }
   })
 
   return promise
 }
 
+const debug = (opts, label, ...additional) => {
+  if (!opts.debug) return
+
+  // we intentionally skip the timing functions here
+  const prefix = `WebpackAdapter[${opts.ext}]`
+  const [, timingLabel, timingEvent] = label.match(/(.*):(start|end)$/) || []
+  if (timingLabel && timingEvent) {
+    const action = timingEvent === 'start' ? 'time' : 'timeEnd'
+    if (timingEvent === 'start') console.debug(yellow(`${prefix}.${timingLabel} -> start`), additional.join(['\n\n']))
+    console[action](yellow(`${prefix}.${timingLabel} -> end`))
+  } else {
+    console.debug(cyan(`${prefix}.${label}`), additional.join(['\n\n']))
+  }
+}
+
 module.exports = {
   buildQueued,
   renderQueued,
-  getExtractProperties
+  getExtractProperties,
+  debug
 }
