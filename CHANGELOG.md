@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.5.0] - ongoing development
+## [2.5.0] - 2019-08-22
 
 ### Added
 
