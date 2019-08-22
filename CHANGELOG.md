@@ -5,6 +5,7 @@
 ### Added
 
 - Webpack adapter: Add `debug` option for displaying detailed build information
+- Provide custom page `foot` via the [`ui` config](/advanced/ui/).
 
 ### Removed
 

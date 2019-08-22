@@ -31,7 +31,8 @@ const defaultOpts = {
         content: 'width=device-width,initial-scale=1.0'
       }
     }
-  ]
+  ],
+  foot: ''
 }
 
 // templates are loaded on setup

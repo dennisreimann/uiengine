@@ -50,7 +50,9 @@ This is what the full options look like:
           href: '/my-special-favicon.ico'
         }
       }
-    ]
+    ],
+
+    foot: '<script src="/scripts/my-custom-script.js"></script>'
   }
 }
 ```
@@ -176,3 +178,7 @@ meta: [
   }
 ]
 ```
+
+### foot
+
+Optional tags for the end of the body.
