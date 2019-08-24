@@ -23,6 +23,10 @@ const WEBPACK_NAME_CLIENT = 'client'
 const getFileId = (filePath, type) =>
   join('_build', relative(process.cwd(), filePath).replace(/[^\w\s]/gi, '_'), type)
 
+// prevent problems with cache-loader not being able to lookup virtual
+// files by using a custom file type that no other loader uses.
+const getEntryPath = id => `/${id}.js-virtual`
+
 const filesDir = ({ target }) => join(target, TARGET_FOLDER)
 
 const buildConfig = options => {
@@ -114,7 +118,7 @@ const addFileToRenderQueue = (options, filePath, queue, data, renderId) => {
 
   if (serverConfig) {
     serverId = `${renderId}/server`
-    queue.config.server.entry[serverId] = `/${serverId}.js`
+    queue.config.server.entry[serverId] = getEntryPath(serverId)
     queue.config.server.plugins.push(
       new VirtualModulesPlugin({
         [queue.config.server.entry[serverId]]: `
@@ -130,7 +134,7 @@ const addFileToRenderQueue = (options, filePath, queue, data, renderId) => {
 
   if (clientConfig) {
     clientId = `${renderId}/client`
-    queue.config.client.entry[clientId] = `/${clientId}.js`
+    queue.config.client.entry[clientId] = getEntryPath(clientId)
     queue.config.client.plugins.push(
       new VirtualModulesPlugin({
         [queue.config.client.entry[clientId]]: `
