@@ -1,89 +1,66 @@
 const path = require('path') // dont spread import because of "resolve" ambiguity
-const glob = require('globby')
 const { white, green, red } = require('chalk')
 const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
-const { buildQueued, debug } = require('./util')
+const { getBuildId, debug } = require('./util')
+const cache = require('./cache')
 
-const DEPENDENCY_CACHE = {}
+async function extractDependencyFiles (options, filePath) {
+  // expect build result to be in cache, as registerFileComponent should
+  // alwas have been run before and cache should be prefilled with result.
+  const buildId = getBuildId(options)
+  const cached = cache.get(buildId, filePath)
 
-// taken from https://stackoverflow.com/a/46842181/183537
-async function filter (arr, callback) {
-  const fail = Symbol('filter')
-  return (await Promise.all(arr.map(async item => (await callback(item)) ? item : fail))).filter(i => i !== fail)
-}
-
-async function getDependencyFiles (options, filePath, cache) {
-  if (cache && cache[filePath]) {
-    debug(options, `getDependencyFiles() ${white('->')} ${green('dependency cache hit')}`, filePath)
-    return cache[filePath]
+  if (cached.dependencyFiles) {
+    debug(options, `extractDependencyFiles(${white(filePath)}) ${white('->')} ${green('dependencies cache hit')}`)
   } else {
-    debug(options, `getDependencyFiles() ${white('->')} ${red('dependency cache miss')}`, filePath)
+    debug(options, `extractDependencyFiles(${white(filePath)}) ${white('->')} ${red('dependencies cache miss')}`)
+
+    // https://webpack.js.org/api/stats#chunk-objects
+    const { chunk } = cached
+    cached.dependencyFiles = chunk ? chunk.modules.map(({ id, name }) => {
+      const ident = typeof id === 'number' ? (name.match(/\s([^\s]*)/g) || ['']).shift().trim() : id
+      const mod = ident && ident.split('?!').pop().replace(/\?.*$/, '')
+      let modulePath
+      if (mod) modulePath = mod.startsWith('.') ? path.resolve(mod) : require.resolve(mod)
+      return modulePath && crossPlatformPath(modulePath)
+    }).filter((depPath, index, array) => {
+      if (!depPath) return false
+      const unique = array.indexOf(depPath) === index
+      const notSameFile = depPath !== filePath
+      return unique && notSameFile
+    }) : []
   }
 
-  // cache the promises so that files do not get added multiple times
-  const promise = new Promise((resolve, reject) => {
-    buildQueued(options, filePath)
-      .then(({ chunk }) => {
-        // https://webpack.js.org/api/stats#chunk-objects
-        const filePaths = chunk ? chunk.modules.map(({ id, name }) => {
-          const ident = typeof id === 'number' ? (name.match(/\s([^\s]*)/g) || ['']).shift().trim() : id
-          const mod = ident && ident.split('?!').pop().replace(/\?.*$/, '')
-          let modulePath
-          if (mod) modulePath = mod.startsWith('.') ? path.resolve(mod) : require.resolve(mod)
-          return modulePath && crossPlatformPath(modulePath)
-        }).filter((depPath, index, array) => {
-          if (!depPath) return false
-          const unique = array.indexOf(depPath) === index
-          const notSameFile = depPath !== filePath
-          return unique && notSameFile
-        }) : []
-
-        resolve(filePaths)
-      })
-      .catch(err => { // eslint-disable-line handle-callback-err
-        // console.debug(`Error getting dependencies for "${filePath}": `, err)
-        resolve([])
-      })
-  })
-
-  if (cache) cache[filePath] = promise
-
-  return promise
+  return cached.dependencyFiles
 }
 
-async function getDependentFiles (options, filePath, dirs, cache) {
-  const extensions = Array.from(new Set(['js', options.ext]))
-  const exts = extensions.length === 1 ? extensions[0] : `{${extensions.join(',')}}`
-  const patterns = dirs.map(dir => path.join(dir, '**', `*.${exts}`))
-  const filePaths = await glob(patterns, {
-    ignore: [
-      filePath,
-      path.join('**', `*{.,_}{config,marko,spec,test}.${exts}`),
-      path.join('**', '__*'),
-      path.join('**', 'variants')
-    ]
-  })
+async function extractDependentFiles (options, filePath) {
+  // expect build result to be in cache, as registerFileComponent should
+  // alwas have been run before and cache should be prefilled with result.
+  const buildId = getBuildId(options)
+  const cached = cache.get(buildId, filePath)
 
-  const dependentFiles = await filter(filePaths, async dependentPath => {
-    const dependencies = await getDependencyFiles(options, dependentPath, cache)
-    return dependencies.includes(crossPlatformPath(filePath))
-  })
+  if (cached.dependentFiles) {
+    debug(options, `extractDependentFiles(${white(filePath)}) ${white('->')} ${green('dependents cache hit')}`)
+  } else {
+    debug(options, `extractDependentFiles(${white(filePath)}) ${white('->')} ${red('dependents cache miss')}`)
 
-  return dependentFiles
+    const all = cache.all(buildId)
+    cached.dependentFiles = await all.reduce(async (resultPromise, item) => {
+      const result = await resultPromise
+      if (item.filePath !== filePath) {
+        const dependencyFiles = await extractDependencyFiles(options, item.filePath)
+
+        if (dependencyFiles.includes(filePath)) result.push(item.filePath)
+      }
+      return Promise.resolve(result)
+    }, Promise.resolve([]))
+  }
+
+  return cached.dependentFiles
 }
 
 module.exports = {
-  async extractDependentFiles (options, filePath) {
-    const { components, templates } = options
-    const dirs = [...components]
-    if (templates) dirs.push(templates)
-    const files = await getDependentFiles(options, filePath, dirs, DEPENDENCY_CACHE)
-    return files
-  },
-
-  async extractDependencyFiles (options, filePath) {
-    delete DEPENDENCY_CACHE[filePath]
-    const files = await getDependencyFiles(options, filePath, DEPENDENCY_CACHE)
-    return files
-  }
+  extractDependencyFiles,
+  extractDependentFiles
 }

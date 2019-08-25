@@ -82,20 +82,28 @@ describe('Webpack adapter with React templates', function () {
       const html = '<p data-reactroot="">this is my data</p>'
 
       assertMatches(rendered, html)
-      assertMatches(foot, /<script/)
-      assertMatches(foot, /<\/script>/)
+      assertMatches(foot, '<script src="/_webpack/test-template/client.js"></script>')
     })
   })
 
   describe('#registerComponentFile', () => {
     it('should extract the component dependencies and dependents', async () => {
-      const { dependentFiles, dependencyFiles } = await Adapter.registerComponentFile(options, moleculeFilePath)
+      // simulate build by invoking registerComponentFile on all files
+      const [{ dependentFiles, dependencyFiles }] = await Promise.all([
+        // file under test
+        Adapter.registerComponentFile(options, moleculeFilePath),
+        // other related files
+        Adapter.registerComponentFile(options, moleculeIndexPath),
+        Adapter.registerComponentFile(options, atomFilePath),
+        Adapter.registerComponentFile(options, organismFilePath),
+        Adapter.registerComponentFile(options, templatePath)
+      ])
 
-      assert.strictEqual(dependencyFiles.length, 2, JSON.stringify(dependencyFiles, null, 2))
+      assert.strictEqual(dependencyFiles.length, 2, `Count of dependencyFiles does not match: ${JSON.stringify(dependencyFiles, null, 2)}`)
       assertIncludes(dependencyFiles, crossPlatformPath(reactPath))
       assertIncludes(dependencyFiles, crossPlatformPath(atomFilePath))
 
-      assert.strictEqual(dependentFiles.length, 2, JSON.stringify(dependentFiles, null, 2))
+      assert.strictEqual(dependentFiles.length, 2, `Count of dependentFiles does not match: ${JSON.stringify(dependentFiles, null, 2)}`)
       assertIncludes(dependentFiles, crossPlatformPath(moleculeIndexPath))
       assertIncludes(dependentFiles, crossPlatformPath(organismFilePath))
     })

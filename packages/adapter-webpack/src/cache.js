@@ -1,20 +1,23 @@
 const CACHES = {}
 
-function cacheGet (queueId, filePath) {
-  return CACHES[queueId] && CACHES[queueId][filePath]
+const all = buildId => Object.values(CACHES[buildId])
+
+const get = (buildId, filePath) => {
+  return CACHES[buildId] && CACHES[buildId][filePath]
 }
 
-function cachePut (queueId, filePath, object) {
-  CACHES[queueId] = CACHES[queueId] || {}
-  CACHES[queueId][filePath] = object
+const put = (buildId, filePath, object) => {
+  CACHES[buildId] = CACHES[buildId] || {}
+  CACHES[buildId][filePath] = object
 }
 
-function cacheDel (queueId, filePath) {
-  if (CACHES[queueId]) delete CACHES[queueId][filePath]
+const del = (buildId, filePath) => {
+  if (CACHES[buildId]) delete CACHES[buildId][filePath]
 }
 
 module.exports = {
-  cacheGet,
-  cachePut,
-  cacheDel
+  all,
+  get,
+  put,
+  del
 }

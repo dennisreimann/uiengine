@@ -98,6 +98,7 @@ async function fetchById (state, id) {
   const { components, templates } = state.config.source
   if (!components) return null
 
+  // TODO: Check whether or not registerComponentFiles and Variant.fetchObjects can run in parallel
   const [componentData, fileRegistrations] = await Promise.all([
     readComponentFiles(state, id),
     registerComponentFiles(state, id)

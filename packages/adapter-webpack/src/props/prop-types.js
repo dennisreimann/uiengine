@@ -57,7 +57,7 @@ const transformPropTypes = (propTypes, debugInfo) =>
     return Object.assign(result, { [key]: definition })
   }, {})
 
-async function extractProperties (filePath, module) {
+const extractProperties = (filePath, module) => {
   const components = Object.values(module).filter(m => m.propTypes)
 
   return components.reduce((result, Component) => {
