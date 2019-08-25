@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.6.0] - ongoing development
+
+### Changed
+
+- Performance optimizations
+
 ## [2.5.0] - 2019-08-22
 
 ### Added

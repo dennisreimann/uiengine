@@ -28,13 +28,13 @@ async function readComponentFiles (state, id) {
   try {
     data.attributes = requireUncached(configPath)
     data.sourceFile = crossPlatformPath(relative(base, configPath))
-  } catch (err) { }
+  } catch (err) {}
 
   // readme
   try {
     data.content = await MarkdownUtil.fromFile(readmePath)
     data.readmeFile = crossPlatformPath(relative(base, readmePath))
-  } catch (err) { }
+  } catch (err) {}
 
   debug4(state, `Component.readComponentFiles(${id}):end`)
 
@@ -98,14 +98,12 @@ async function fetchById (state, id) {
   const { components, templates } = state.config.source
   if (!components) return null
 
-  // TODO: Check whether or not registerComponentFiles and Variant.fetchObjects can run in parallel
-  const [componentData, fileRegistrations] = await Promise.all([
-    readComponentFiles(state, id),
+  const { attributes, content, sourcePath, sourceFile, readmeFile, attributes: { context, variants: variantsObject } } = await readComponentFiles(state, id)
+
+  const [variants, fileRegistrations] = await Promise.all([
+    Variant.fetchObjects(state, id, context, variantsObject),
     registerComponentFiles(state, id)
   ])
-
-  let { attributes, content, sourcePath, sourceFile, readmeFile, attributes: { context, variants } } = componentData
-  variants = await Variant.fetchObjects(state, id, context, variants)
 
   let title = attributes.title
   let isTitleFromHeading
