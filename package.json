@@ -24,7 +24,7 @@
     "husky": "3.0.4",
     "lerna": "3.16.4",
     "lighthouse-ci": "1.10.0",
-    "marko": "4.18.11",
+    "marko": "4.18.12",
     "mocha": "6.2.0",
     "mocha-lcov-reporter": "1.3.0",
     "mocha-sinon": "2.1.0",
