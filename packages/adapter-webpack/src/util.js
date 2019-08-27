@@ -1,6 +1,6 @@
 const { join, relative } = require('path')
 const webpack = require('webpack')
-const merge = require('webpack-merge')
+const webpackMerge = require('webpack-merge')
 const VirtualModulesPlugin = require('webpack-virtual-modules')
 const getBuildId = require('object-hash')
 const cache = require('./cache')
@@ -67,6 +67,8 @@ const debug = (opts, label, ...additional) => {
     console.debug(cyan(`${prefix}.${label}`), additional.join(['\n\n']))
   }
 }
+
+const merge = webpackMerge.strategy({ entry: 'replace', output: 'replace' })
 
 const buildConfig = options => {
   const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
