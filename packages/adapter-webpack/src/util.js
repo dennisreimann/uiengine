@@ -119,28 +119,23 @@ const buildConfig = options => {
   return config
 }
 
-const compile = compiler =>
-  new Promise((resolve, reject) => {
-    compiler.run((error, stats) => error
-      ? reject(error)
-      : resolve(stats)
-    )
-  })
-
-// TODO: Evaluate parallel-webpack
 // https://www.npmjs.com/package/parallel-webpack#nodejs-api
-const runWebpack = async config => {
-  const compiler = webpack(Object.values(config))
+const runWebpack = config =>
+  new Promise((resolve, reject) => {
+    webpack(Object.values(config), (error, stats) => {
+      if (error) {
+        reject(error)
+      } else {
+        const { warnings, errors } = stats.toJson('errors-warnings')
 
-  // https://webpack.js.org/api/node#error-handling
-  const stats = await compile(compiler)
-  const { warnings, errors } = stats.toJson('errors-warnings')
+        // warnings an errors eventually occur twice, once per client and server
+        if (warnings.length) console.warn(warnings.join('\n\n'))
+        if (errors.length) return reject(new Error(errors.join('\n\n')))
 
-  if (warnings.length) console.warn(warnings.join('\n\n'))
-  if (errors.length) throw new Error(errors.join('\n\n'))
-
-  return stats
-}
+        return resolve(stats)
+      }
+    })
+  })
 
 async function buildQueued (options, filePath) {
   const queue = getQueue(options)
