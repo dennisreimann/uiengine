@@ -25,11 +25,11 @@ async function registerComponentFile (options, filePath) {
   await buildQueued(options, filePath)
 
   const extractProperties = getExtractProperties(options)
-  const [properties, dependencyFiles, dependentFiles] = await Promise.all([
+  const [properties, dependencyFiles] = await Promise.all([
     extractProperties(options, filePath),
-    extractDependencyFiles(options, filePath),
-    extractDependentFiles(options, filePath)
+    extractDependencyFiles(options, filePath)
   ])
+  const dependentFiles = extractDependentFiles(options, filePath)
 
   const info = {}
   if (Object.keys(properties).length > 0) info.properties = properties

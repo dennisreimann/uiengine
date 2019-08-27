@@ -4,7 +4,7 @@ const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
 const { getBuildId, debug } = require('./util')
 const cache = require('./cache')
 
-async function extractDependencyFiles (options, filePath) {
+function extractDependencyFiles (options, filePath) {
   // expect build result to be in cache, as registerFileComponent should
   // alwas have been run before and cache should be prefilled with result.
   const buildId = getBuildId(options)
@@ -34,7 +34,7 @@ async function extractDependencyFiles (options, filePath) {
   return cached.dependencyFiles
 }
 
-async function extractDependentFiles (options, filePath) {
+function extractDependentFiles (options, filePath) {
   // expect build result to be in cache, as registerFileComponent should
   // alwas have been run before and cache should be prefilled with result.
   const buildId = getBuildId(options)
@@ -46,15 +46,13 @@ async function extractDependentFiles (options, filePath) {
     debug(options, `extractDependentFiles(${white(filePath)}) ${white('->')} ${red('dependents cache miss')}`)
 
     const all = cache.all(buildId)
-    cached.dependentFiles = await all.reduce(async (resultPromise, item) => {
-      const result = await resultPromise
+    cached.dependentFiles = all.reduce((result, item) => {
       if (item.filePath !== filePath) {
-        const dependencyFiles = await extractDependencyFiles(options, item.filePath)
-
+        const { dependencyFiles = [] } = cache.get(buildId, item.filePath)
         if (dependencyFiles.includes(filePath)) result.push(item.filePath)
       }
-      return Promise.resolve(result)
-    }, Promise.resolve([]))
+      return result
+    }, [])
   }
 
   return cached.dependentFiles
