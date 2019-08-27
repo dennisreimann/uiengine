@@ -1,4 +1,4 @@
-const { join, relative } = require('path')
+const { join } = require('path')
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const VirtualModulesPlugin = require('webpack-virtual-modules')
@@ -7,6 +7,7 @@ const cache = require('./cache')
 const { yellow, cyan } = require('chalk')
 const {
   DebounceUtil: { debounce },
+  FileUtil: { relativeToCwd },
   StringUtil: { crossPlatformPath }
 } = require('@uiengine/util')
 
@@ -45,7 +46,7 @@ const getDebounceThreshold = buildId =>
   cache.all(buildId).length === 0 ? 500 : 50
 
 const getFileId = (filePath, type) =>
-  join('_build', relative(process.cwd(), filePath).replace(/[^\w\s]/gi, '_'), type)
+  join('_build', relativeToCwd(filePath).replace(/[^\w\s]/gi, '_'), type)
 
 // prevent problems with cache-loader not being able to lookup virtual
 // files by using a custom file type that no other loader uses.

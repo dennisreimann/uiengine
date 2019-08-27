@@ -1,5 +1,10 @@
-const { dirname, extname } = require('path')
+const { dirname, extname, relative } = require('path')
 const fs = require('fs-extra')
+
+const cwd = process.cwd()
+
+const relativeToCwd = filePath =>
+  relative(cwd, filePath)
 
 const extension = filePath =>
   extname(filePath).replace(/^\./, '')
@@ -54,5 +59,6 @@ module.exports = {
   exists,
   isDirectory,
   requireUncached,
-  invalidateRequireCache
+  invalidateRequireCache,
+  relativeToCwd
 }

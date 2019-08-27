@@ -1,11 +1,11 @@
-const { join, relative } = require('path')
+const { join } = require('path')
 const R = require('ramda')
 const Core = require('@uiengine/core/src/core')
 const Connector = require('@uiengine/core/src/connector')
 const {
   ComponentUtil: { COMPONENT_CONFNAME, COMPONENT_DOCSNAME },
   VariantUtil: { VARIANTS_DIRNAME },
-  FileUtil: { exists, write },
+  FileUtil: { exists, relativeToCwd, write },
   StringUtil: { titleize },
   MessageUtil: { reportSuccess, reportError }
 } = require('@uiengine/util')
@@ -47,10 +47,9 @@ exports.handler = async argv => {
     }
 
     // component
-    const cwd = process.cwd()
     const componentDirs = config.source.components
     const componentsDir = componentDirs[0] // create component in first folder
-    const componentDir = relative(cwd, join(componentsDir, componentId))
+    const componentDir = relativeToCwd(join(componentsDir, componentId))
     const componentTitle = titleize(componentId)
     const confTemp = getTemplate('component_config')
     const docsTemp = getTemplate('component_readme')
@@ -102,13 +101,13 @@ exports.handler = async argv => {
     if (filesExisted.length) {
       message.push(
         'The following files already existed:',
-        R.map(filePath => '- ' + relative(cwd, filePath), filesExisted).join('\n')
+        R.map(filePath => '- ' + relativeToCwd(filePath), filesExisted).join('\n')
       )
     }
     if (filesCreated.length) {
       message.push(
         'The following files were created:',
-        R.map(filePath => '- ' + relative(cwd, filePath), filesCreated).join('\n'),
+        R.map(filePath => '- ' + relativeToCwd(filePath), filesCreated).join('\n'),
         'Enjoy! ✌️'
       )
     }

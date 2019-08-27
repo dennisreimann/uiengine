@@ -1,4 +1,4 @@
-const { basename, join, relative } = require('path')
+const { basename, join } = require('path')
 const R = require('ramda')
 const glob = require('globby')
 const Connector = require('./connector')
@@ -8,7 +8,7 @@ const {
   DebugUtil: { debug2, debug3 },
   MessageUtil: { markSample },
   VariantUtil: { componentIdToVariantsPath, variantIdToFilePath, variantIdToTitle },
-  FileUtil: { extension: fileExtension, read: readFile }
+  FileUtil: { extension: fileExtension, read: readFile, relativeToCwd }
 } = require('@uiengine/util')
 
 const mapIndexed = R.addIndex(R.map)
@@ -72,7 +72,7 @@ async function fetchObject (state, componentId, componentContext, data, index) {
   try {
     [raw, ...rendered] = await Promise.all([readTemplate, ...renderThemes])
   } catch (err) {
-    const relativeFilePath = relative(process.cwd(), filePath)
+    const relativeFilePath = relativeToCwd(filePath)
     const message = [
       `Variant "${title}" could not be rendered!`,
       `Component: ${componentId}\nFile: ${relativeFilePath}`,

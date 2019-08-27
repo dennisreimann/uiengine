@@ -1,8 +1,7 @@
-const { relative } = require('path')
 const R = require('ramda')
 const Core = require('@uiengine/core/src/core')
 const {
-  FileUtil: { exists, write },
+  FileUtil: { exists, relativeToCwd, write },
   MessageUtil: { reportSuccess, reportError },
   PageUtil: { PAGE_CONFNAME, PAGE_DOCSNAME, pageIdToFilePath, pageIdToTitle }
 } = require('@uiengine/util')
@@ -64,13 +63,13 @@ exports.handler = async argv => {
     if (filesExisted.length) {
       message.push(
         'The following files already existed:',
-        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesExisted).join('\n')
+        R.map(filePath => '- ' + relativeToCwd(filePath), filesExisted).join('\n')
       )
     }
     if (filesCreated.length) {
       message.push(
         'The following files were created:',
-        R.map(filePath => '- ' + relative(process.cwd(), filePath), filesCreated).join('\n'),
+        R.map(filePath => '- ' + relativeToCwd(filePath), filesCreated).join('\n'),
         'Enjoy! ✌️'
       )
     }

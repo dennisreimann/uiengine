@@ -1,7 +1,7 @@
-const { basename, join, relative, resolve } = require('path')
+const { basename, join, resolve } = require('path')
 const R = require('ramda')
 const {
-  FileUtil: { copy, exists, write },
+  FileUtil: { copy, exists, relativeToCwd, write },
   MessageUtil: { reportSuccess, reportError },
   PageUtil: { PAGE_CONFNAME, PAGE_DOCSNAME },
   StringUtil: { titleize }
@@ -48,17 +48,16 @@ exports.handler = async argv => {
     }
   }
 
-  const cwd = process.cwd()
   const config = argv.override ? R.mergeDeepRight(defaults, argv.override) : defaults
   const previewContent = previewTemplate(config.name)
   const configContent = configTemplate(config)
   const indexConfContent = pageConfTemplate(config.name)
   const indexDocsContent = pageDocsTemplate(config.name)
   const { components, pages, templates } = config.source
-  const previewPath = relative(cwd, join(directory, templates, config.template))
-  const indexConfPath = relative(cwd, join(directory, pages, PAGE_CONFNAME))
-  const indexDocsPath = relative(cwd, join(directory, pages, PAGE_DOCSNAME))
-  const configPath = relative(cwd, join(directory, argv.config))
+  const previewPath = relativeToCwd(join(directory, templates, config.template))
+  const indexConfPath = relativeToCwd(join(directory, pages, PAGE_CONFNAME))
+  const indexDocsPath = relativeToCwd(join(directory, pages, PAGE_DOCSNAME))
+  const configPath = relativeToCwd(join(directory, argv.config))
 
   const tasks = []
   const filesCreated = []
@@ -94,13 +93,13 @@ exports.handler = async argv => {
     if (filesExisted.length) {
       message.push(
         'The following files already existed:',
-        R.map(filePath => '- ' + relative(cwd, filePath), filesExisted).join('\n')
+        R.map(filePath => '- ' + relativeToCwd(filePath), filesExisted).join('\n')
       )
     }
     if (filesCreated.length) {
       message.push(
         'The following files were created:',
-        R.map(filePath => '- ' + relative(cwd, filePath), filesCreated).join('\n'),
+        R.map(filePath => '- ' + relativeToCwd(filePath), filesCreated).join('\n'),
         'Enjoy! ✌️'
       )
     }

@@ -1,4 +1,4 @@
-const { FileUtil: { requireUncached } } = require('@uiengine/util')
+const { FileUtil: { requireUncached, relativeToCwd } } = require('@uiengine/util')
 const { extractDependentFiles, extractDependencyFiles } = require('./deps')
 const { getExtractProperties } = require('./props')
 const { buildQueued, renderQueued, debug } = require('./util')
@@ -20,7 +20,7 @@ async function setup (options) {
 }
 
 async function registerComponentFile (options, filePath) {
-  debug(options, `registerComponentFile(${filePath}):start`)
+  debug(options, `registerComponentFile(${relativeToCwd(filePath)}):start`)
 
   await buildQueued(options, filePath)
 
@@ -36,7 +36,7 @@ async function registerComponentFile (options, filePath) {
   if (Object.keys(dependentFiles).length > 0) info.dependentFiles = dependentFiles
   if (Object.keys(dependencyFiles).length > 0) info.dependencyFiles = dependencyFiles
 
-  debug(options, `registerComponentFile(${filePath}):end`)
+  debug(options, `registerComponentFile(${relativeToCwd(filePath)}):end`)
 
   return info
 }

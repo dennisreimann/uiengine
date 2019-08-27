@@ -1,4 +1,4 @@
-const { basename, relative } = require('path')
+const { basename } = require('path')
 const R = require('ramda')
 const Config = require('./configuration')
 const Builder = require('./builder')
@@ -9,6 +9,7 @@ const Interface = require('./interface')
 const Connector = require('./connector')
 const {
   ComponentUtil: { componentFilePathToId, componentPathToId },
+  FileUtil: { relativeToCwd },
   PageUtil: { pageFilePathToId, parentIdForPageId },
   TemplateUtil: { templateFilePathToId },
   VariantUtil: { variantFilePathToIdPrefix, variantIdToComponentId },
@@ -86,7 +87,7 @@ async function generate (options) {
 
 const getChangeObject = (filePath, action) => {
   const { source: { components, pages, templates } } = _state.config
-  const file = relative(process.cwd(), filePath)
+  const file = relativeToCwd(filePath)
   const pageId = pages ? pageFilePathToId(pages, filePath) : undefined
   const templateId = templates ? templateFilePathToId(templates, filePath) : undefined
   const variantIdPrefix = components ? variantFilePathToIdPrefix(components, filePath) : undefined

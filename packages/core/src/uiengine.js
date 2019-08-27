@@ -1,7 +1,7 @@
 const { dirname, join, relative } = require('path')
 const Core = require('./core')
 const {
-  FileUtil: { isDirectory },
+  FileUtil: { isDirectory, relativeToCwd },
   DebugUtil: { debug3 },
   StringUtil: { crossPlatformPath },
   MarkdownUtil: { parseString: markdown },
@@ -80,7 +80,7 @@ const startWatcher = (state, opts, server) => {
       if (info) reportInfo(`Rebuilt ${change.type} ${change.item} (${change.action} ${change.file})`, { icon: '✨', transient: false })
       if (server) server.sockets.emit('uiengine:state:update', state)
     } catch (err) {
-      reportError(`Rebuild for changed file ${relative(process.cwd(), filePath)} failed:`, err)
+      reportError(`Rebuild for changed file ${relativeToCwd(filePath)} failed:`, err)
     }
   }
 
