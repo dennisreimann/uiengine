@@ -23,12 +23,11 @@ const assertDirectoryContainsThemeFiles = (prefixPath, postfixPath) => {
 describe('Core', function () {
   this.timeout(15000)
 
-  afterEach(() => { fs.removeSync(testProjectTargetPath) })
+  before(async () => { await Core.generate(opts) })
+  after(async () => { await fs.remove(testProjectTargetPath) })
 
   describe('#generate', () => {
-    it('should generate index page', async () => {
-      await Core.generate(opts)
-
+    it('should generate index page', () => {
       assertExists(indexPath)
 
       // containing token list
@@ -49,18 +48,11 @@ describe('Core', function () {
       assertContentMatches(indexPath, 'Primary brand color')
     })
 
-    describe('with debug level set', () => {
-      it('should generate state file', async () => {
-        const optsWithDebug = Object.assign({}, opts, { debug: true })
-        await Core.generate(optsWithDebug)
-
-        assertExists(join(testProjectTargetPath, '_state.json'))
-      })
+    it('should generate state file', () => {
+      assertExists(join(testProjectTargetPath, '_state.json'))
     })
 
-    it('should generate variant previews', async () => {
-      await Core.generate(opts);
-
+    it('should generate variant previews', () => {
       [['form', 'form.pug-1'],
         ['formfield', 'text-with-label.pug-1'],
         ['formfield', 'text-without-label.pug-2'],
@@ -83,17 +75,14 @@ describe('Core', function () {
       })
     })
 
-    it('should generate token previews', async () => {
-      await Core.generate(opts);
-
+    it('should generate token previews', () => {
       ['colors', 'icons', 'spaces', 'typography'].forEach(tokens => {
         assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_tokens'), join('documentation', 'tokens', tokens))
       })
     })
 
-    it('should copy UI assets', async () => {
+    it('should copy UI assets', () => {
       const assetsPath = join(testProjectTargetPath, '_assets')
-      await Core.generate(opts)
 
       assertExists(join(assetsPath, 'styles'))
       assertExists(join(assetsPath, 'scripts'))

@@ -1,7 +1,6 @@
 const path = require('path') // dont spread import because of "resolve" ambiguity
-const { white, green, red } = require('chalk')
 const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
-const { getBuildId, debug } = require('./util')
+const { getBuildId } = require('./util')
 const cache = require('./cache')
 
 function extractDependencyFiles (options, filePath) {
@@ -10,11 +9,7 @@ function extractDependencyFiles (options, filePath) {
   const buildId = getBuildId(options)
   const cached = cache.get(buildId, filePath)
 
-  if (cached.dependencyFiles) {
-    debug(options, `extractDependencyFiles(${white(filePath)}) ${white('->')} ${green('dependencies cache hit')}`)
-  } else {
-    debug(options, `extractDependencyFiles(${white(filePath)}) ${white('->')} ${red('dependencies cache miss')}`)
-
+  if (!cached.dependencyFiles) {
     // https://webpack.js.org/api/stats#chunk-objects
     const { chunk } = cached
     cached.dependencyFiles = chunk ? chunk.modules.map(({ id, name }) => {
@@ -40,11 +35,7 @@ function extractDependentFiles (options, filePath) {
   const buildId = getBuildId(options)
   const cached = cache.get(buildId, filePath)
 
-  if (cached.dependentFiles) {
-    debug(options, `extractDependentFiles(${white(filePath)}) ${white('->')} ${green('dependents cache hit')}`)
-  } else {
-    debug(options, `extractDependentFiles(${white(filePath)}) ${white('->')} ${red('dependents cache miss')}`)
-
+  if (!cached.dependentFiles) {
     const all = cache.all(buildId)
     cached.dependentFiles = all.reduce((result, item) => {
       if (item.filePath !== filePath) {

@@ -440,15 +440,13 @@ describe('Builder', () => {
   })
 
   describe('#generateIncrement', () => {
-    describe('with debug level set', () => {
-      it('should generate state file', async () => {
-        const stateWithDebug = JSON.parse(JSON.stringify(state))
-        stateWithDebug.config.debug = true
+    it('should generate state file', async () => {
+      const stateWithDebug = JSON.parse(JSON.stringify(state))
+      stateWithDebug.config.debug = true
 
-        await Builder.generateIncrement(stateWithDebug)
+      await Builder.generateIncrement(stateWithDebug)
 
-        assertExists(join(target, '_state.json'))
-      })
+      assertExists(join(target, '_state.json'))
     })
   })
 })

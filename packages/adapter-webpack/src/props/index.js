@@ -1,6 +1,5 @@
 const { FileUtil: { requireUncached } } = require('@uiengine/util')
-const { getBuildId, debug } = require('../util')
-const { white, green, red } = require('chalk')
+const { getBuildId } = require('../util')
 const cache = require('../cache')
 
 const getExtractProperties = options => {
@@ -14,11 +13,7 @@ const getExtractProperties = options => {
       const buildId = getBuildId(opts)
       const cached = cache.get(buildId, filePath)
 
-      if (cached.properties) {
-        debug(options, `extractProperties(${white(filePath)}) ${white('->')} ${green('properties cache hit')}`)
-      } else {
-        debug(options, `extractProperties(${white(filePath)}) ${white('->')} ${red('properties cache miss')}`)
-
+      if (!cached.properties) {
         const { serverPath } = cached
         const ServerComponent = requireUncached(serverPath)
         cached.properties = ServerComponent

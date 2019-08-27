@@ -4,7 +4,7 @@ const webpackMerge = require('webpack-merge')
 const VirtualModulesPlugin = require('webpack-virtual-modules')
 const getBuildId = require('object-hash')
 const cache = require('./cache')
-const { yellow, cyan, white, green, blue } = require('chalk')
+const { yellow, cyan } = require('chalk')
 const {
   DebounceUtil: { debounce },
   StringUtil: { crossPlatformPath }
@@ -56,7 +56,6 @@ const filesDir = ({ target }) => join(target, TARGET_FOLDER)
 const debug = (opts, label, ...additional) => {
   if (!opts.debug) return
 
-  // we intentionally skip the timing functions here
   const prefix = `WebpackAdapter[${opts.ext}]`
   const [, timingLabel, timingEvent] = label.match(/(.*):(start|end)$/) || []
   if (timingLabel && timingEvent) {
@@ -141,12 +140,7 @@ async function buildQueued (options, filePath) {
   const queue = getQueue(options)
 
   const cachedPromise = queue.promises[filePath]
-  if (cachedPromise) {
-    debug(options, `buildQueued(${queue.id}, ${white(filePath)}) ${white('->')} ${green('cache hit')}`)
-    return cachedPromise
-  } else {
-    debug(options, `buildQueued(${queue.id}, ${white(filePath)}) ${white('->')} ${blue('cache clear')}`)
-  }
+  if (cachedPromise) return cachedPromise
 
   // add file to build config
   const { serverConfig, clientConfig } = options
@@ -178,7 +172,7 @@ async function runBuildQueue (options, buildId) {
   const { config, handles } = drainQueue(buildId)
   const items = Object.values(handles)
 
-  debug(options, `runBuildQueue(${buildId}) ${white(`-> queue start (${items.length} files)`)}`)
+  debug(options, `runBuildQueue(${buildId} -> ${items.length} files):start`)
 
   try {
     const stats = await runWebpack(config)
@@ -202,7 +196,7 @@ async function runBuildQueue (options, buildId) {
   } catch (error) {
     items.forEach(({ reject }) => reject(error))
   } finally {
-    debug(options, `runBuildQueue(${buildId}) ${white(`-> queue end (${items.length} files)`)}`)
+    debug(options, `runBuildQueue(${buildId} -> ${items.length} files):end`)
   }
 }
 
@@ -210,12 +204,7 @@ async function renderQueued (options, filePath, data = {}, renderId) {
   const queue = getQueue(options)
 
   const cachedPromise = queue.promises[renderId]
-  if (cachedPromise) {
-    debug(options, `renderQueued(${queue.id}, ${white(filePath)}) ${white('->')} ${green('cache hit')}`)
-    return cachedPromise
-  } else {
-    debug(options, `renderQueued(${queue.id}, ${white(filePath)}) ${white('->')} ${blue('cache clear')}`)
-  }
+  if (cachedPromise) return cachedPromise
 
   // add file to render config
   const { serverConfig, serverRenderPath, clientConfig, clientRenderPath } = options
@@ -267,7 +256,7 @@ async function runRenderQueue (options, queueId) {
   const { config, handles } = drainQueue(queueId)
   const items = Object.values(handles)
 
-  debug(options, `runRenderQueue(${queueId}) ${white(`-> queue start (${items.length} files)`)}`)
+  debug(options, `runRenderQueue(${queueId} -> ${items.length} files):start`)
 
   try {
     await runWebpack(config)
@@ -281,7 +270,7 @@ async function runRenderQueue (options, queueId) {
   } catch (error) {
     items.forEach(({ reject }) => reject(error))
   } finally {
-    debug(options, `runRenderQueue(${queueId}) ${white(`-> queue end (${items.length} files)`)}`)
+    debug(options, `runRenderQueue(${queueId} -> ${items.length} files):end`)
   }
 }
 

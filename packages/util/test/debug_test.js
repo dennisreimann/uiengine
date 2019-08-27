@@ -87,14 +87,16 @@ describe('DebugUtil', () => {
 
   describe('timings', () => {
     it('should be recorded', function () {
+      this.sinon.stub(console, 'debug')
       this.sinon.stub(console, 'time')
       this.sinon.stub(console, 'timeEnd')
 
       debug(state1, 'debug():start')
+      this.sinon.assert.calledWithMatch(console.debug, 'debug() -> start')
       this.sinon.assert.calledWithMatch(console.time, 'debug()')
 
       debug(state1, 'debug():end')
-      this.sinon.assert.calledWithMatch(console.timeEnd, 'debug()')
+      this.sinon.assert.calledWithMatch(console.timeEnd, 'debug() -> end')
     })
   })
 })
