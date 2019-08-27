@@ -1,6 +1,6 @@
 const CACHES = {}
 
-const all = buildId => Object.values(CACHES[buildId])
+const all = buildId => Object.values(CACHES[buildId] || {})
 
 const get = (buildId, filePath) => {
   return CACHES[buildId] && CACHES[buildId][filePath]
