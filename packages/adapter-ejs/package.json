@@ -23,7 +23,7 @@
     "ejs"
   ],
   "devDependencies": {
-    "ejs": "2.6.2"
+    "ejs": "2.7.1"
   },
   "peerDependencies": {
     "ejs": "^2.0.0"
