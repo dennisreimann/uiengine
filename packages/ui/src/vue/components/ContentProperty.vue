@@ -43,7 +43,7 @@ export default {
   computed: {
     propertyType () {
       const { value, type } = this.property
-      return ['Array', 'Object'].includes(type)
+      return ['Array', 'Object'].includes(type) && value
         ? `${this.property.type}[${value.type || value}]`
         : this.property.type
     },
