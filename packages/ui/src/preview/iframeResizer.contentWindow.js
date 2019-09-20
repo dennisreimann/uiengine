@@ -486,15 +486,15 @@
     }
   }
 
-  function stopMsgsToParent () {
-    log('Disable outgoing messages')
-    sendPermit = false
-  }
+  //   function stopMsgsToParent() {
+  //     log('Disable outgoing messages')
+  //     sendPermit = false
+  //   }
 
-  function removeMsgListener () {
-    log('Remove event listener: Message')
-    removeEventListener(window, 'message', receiver)
-  }
+  //   function removeMsgListener() {
+  //     log('Remove event listener: Message')
+  //     removeEventListener(window, 'message', receiver)
+  //   }
 
   function disconnectMutationObserver () {
     if (bodyObserver !== null) {
@@ -509,11 +509,11 @@
     clearInterval(intervalTimer)
   }
 
-  function teardown () {
-    stopMsgsToParent()
-    removeMsgListener()
-    if (autoResize === true) stopEventListeners()
-  }
+  //   function teardown() {
+  //     stopMsgsToParent()
+  //     removeMsgListener()
+  //     if (true === autoResize) stopEventListeners()
+  //   }
 
   function injectClearFixIntoBodyElement () {
     var clearFix = document.createElement('div')
@@ -659,7 +659,7 @@
 
       close: function closeF () {
         sendMsg(0, 0, 'close')
-        teardown()
+        // teardown()
       },
 
       getId: function getIdF () {

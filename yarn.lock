@@ -3661,10 +3661,10 @@ check-types@^7.3.0:
   resolved "https://registry.yarnpkg.com/check-types/-/check-types-7.4.0.tgz#0378ec1b9616ec71f774931a3c6516fad8c152f4"
   integrity sha512-YbulWHdfP99UfZ73NcUDlNJhEIDgm9Doq9GhpyXbF+7Aegi3CVV7qqMCKTTqJxlvEvnQBp9IA+dxsGN6xK/nSg==
 
-chokidar@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.1.0.tgz#ff23d077682a90eadd209bfa76eb10ed6d359668"
-  integrity sha512-6vZfo+7W0EOlbSo0nhVKMz4yyssrwiPbBZ8wj1lq8/+l4ZhGZ2U4Md7PspvmijXp1a26D3B7AHEBmIB7aVtaOQ==
+chokidar@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.1.1.tgz#27e953f3950336efcc455fd03e240c7299062003"
+  integrity sha512-df4o16uZmMHzVQwECZRHwfguOt5ixpuQVaZHjYMvYisgKhE+JXwcj/Tcr3+3bu/XeOJQ9ycYmzu7Mv8XrGxJDQ==
   dependencies:
     anymatch "^3.1.0"
     braces "^3.0.2"
@@ -4456,12 +4456,12 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-cross-env@5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.2.1.tgz#b2c76c1ca7add66dc874d11798466094f551b34d"
-  integrity sha512-1yHhtcfAd1r4nwQgknowuUNfIT9E8dOMMspC36g45dN+iD1blloi7xp8X/xAIDnjHWyt1uQ8PHk2fkNaym7soQ==
+cross-env@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-6.0.0.tgz#3c8e71440ea20aa6faaf5aec541235efc565dac6"
+  integrity sha512-G/B6gtkjgthT8AP/xN1wdj5Xe18fVyk58JepK8GxpUbqcz3hyWxegocMbvnZK+KoTslwd0ACZ3woi/DVUdVjyQ==
   dependencies:
-    cross-spawn "^6.0.5"
+    cross-spawn "^7.0.0"
 
 cross-spawn@6.0.5, cross-spawn@^6.0.0, cross-spawn@^6.0.5:
   version "6.0.5"
@@ -7574,10 +7574,10 @@ iferr@^0.1.5:
   resolved "https://registry.yarnpkg.com/iferr/-/iferr-0.1.5.tgz#c60eed69e6d8fdb6b3104a1fcbca1c192dc5b501"
   integrity sha1-xg7taebY/bazEEofy8ocGS3FtQE=
 
-iframe-resizer@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/iframe-resizer/-/iframe-resizer-4.1.1.tgz#607c36edfb4547ecce8247226ef062e269a4eccc"
-  integrity sha512-+cs/M4ivpLyKYDs9AZWK0eRA1FKXut0yQr0iaEqdMKuk5yZJeF9H691q1qW1Cz5D3wHmiT+cTubWEsaSJBLUJA==
+iframe-resizer@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/iframe-resizer/-/iframe-resizer-4.2.0.tgz#0b903635574c935acc3b765ac2e3bd25c69985f1"
+  integrity sha512-o9pI6e49l3Ucd4gg971oKJbDCr4w7or2Unq/ohR/J+sQDssoqgyvGmPWjSKzzcHDidr1eKpi49L3WBWTq1EpSQ==
 
 ignore-walk@^3.0.1:
   version "3.0.2"
@@ -9279,10 +9279,10 @@ markdown-it@10.0.0:
     mdurl "^1.0.1"
     uc.micro "^1.0.5"
 
-marko@4.18.13:
-  version "4.18.13"
-  resolved "https://registry.yarnpkg.com/marko/-/marko-4.18.13.tgz#3c108e46bd33d0d3e01bfa79619abf4a13f7d814"
-  integrity sha512-1sFI4yfbOXxY/48lgunZgpoiOd86ZGuO42bshBiZqlkmcumlznnHknbBPKtq+CLq+LTXL2apW/XlUSWqAe09Rw==
+marko@4.18.14:
+  version "4.18.14"
+  resolved "https://registry.yarnpkg.com/marko/-/marko-4.18.14.tgz#c00f629486d83b6352b7bd1d86117d74cc3b34bb"
+  integrity sha512-gzmbJfeovjIYzN9oCGGK8ox96IiGB02KENjxjdhCbBfvdBkOIqjfepRxtyanddur65hcqnRgr/0KzjiK9Nqr6A==
   dependencies:
     app-module-path "^2.2.0"
     argly "^1.0.0"
@@ -13187,10 +13187,10 @@ standard-engine@^12.0.0:
     minimist "^1.1.0"
     pkg-conf "^3.1.0"
 
-standard@14.3.0:
-  version "14.3.0"
-  resolved "https://registry.yarnpkg.com/standard/-/standard-14.3.0.tgz#0c650fba1ee0cdacf109d91c68f3b837507d6d82"
-  integrity sha512-F3Su3IAxDrOW+v4O/WiPFp6SZ0FWj+H4NEtGrEI1iaCf5LWD0nIfcXh0GIyKQgpmswQFWBIAvgONihT8U5UM4w==
+standard@14.3.1:
+  version "14.3.1"
+  resolved "https://registry.yarnpkg.com/standard/-/standard-14.3.1.tgz#f6a5d9244fbb6b76d0c2dbcc1048a03c863038b6"
+  integrity sha512-TUQwU7znlZLfgKH1Zwn/D84FitWZkUTfbxSiz/vFx+4c9GV+clSfG/qLiLZOlcdyzhw3oF5/pZydNjbNDfHPEw==
   dependencies:
     eslint "~6.4.0"
     eslint-config-standard "14.1.0"
