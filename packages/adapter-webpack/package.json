@@ -33,22 +33,22 @@
     "webpack-virtual-modules": "0.1.11"
   },
   "devDependencies": {
-    "@babel/core": "7.6.0",
-    "@babel/preset-env": "7.6.0",
+    "@babel/core": "7.6.2",
+    "@babel/preset-env": "7.6.2",
     "@babel/preset-react": "7.0.0",
-    "@babel/register": "7.6.0",
+    "@babel/register": "7.6.2",
     "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
     "babel-preset-vue": "2.0.2",
     "chalk": "2.4.2",
     "css-loader": "3.2.0",
-    "react": "16.9.0",
-    "react-dom": "16.9.0",
+    "react": "16.10.0",
+    "react-dom": "16.10.0",
     "vue": "2.6.10",
     "vue-loader": "15.7.1",
     "vue-server-renderer": "2.6.10",
     "vue-template-compiler": "2.6.10",
-    "webpack": "4.40.2",
+    "webpack": "4.41.0",
     "webpack-node-externals": "1.7.2"
   },
   "optionalDependencies": {
