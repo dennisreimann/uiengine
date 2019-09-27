@@ -82,7 +82,7 @@ describe('Webpack adapter with React templates', function () {
       const html = '<p data-reactroot="">this is my data</p>'
 
       assertMatches(rendered, html)
-      assertMatches(foot, '<script src="/_webpack/test-template/client.js"></script>')
+      assertMatches(foot, '<script src="/_webpack/test_template_client.js"></script>')
     })
   })
 

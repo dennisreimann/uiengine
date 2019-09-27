@@ -84,7 +84,7 @@ describe('Webpack adapter with Vue templates', function () {
 
       assertMatches(rendered, html)
       assertMatches(rendered, css)
-      assertMatches(foot, '<script src="/_webpack/test-template/client.js"></script>')
+      assertMatches(foot, '<script src="/_webpack/test_template_client.js"></script>')
     })
   })
 

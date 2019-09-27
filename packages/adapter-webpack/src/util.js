@@ -40,19 +40,24 @@ const drainQueue = id => {
   return queue
 }
 
+const flattenFilePath = filePath =>
+  filePath.replace(/[^\w\s]/gi, '_')
+
 // naive implementation of a  dynamic threshold, which ensures
 // high value for initial build and keeps rebuild times low.
 const getDebounceThreshold = buildId =>
   cache.all(buildId).length === 0 ? 500 : 50
 
 const getFileId = (filePath, type) =>
-  join('_build', relativeToCwd(filePath).replace(/[^\w\s]/gi, '_'), type)
+  join('_build', flattenFilePath(relativeToCwd(filePath)), type)
 
 // prevent problems with cache-loader not being able to lookup virtual
 // files by using a custom file type that no other loader uses.
 const getEntryPath = id => `/${id}.js-virtual`
 
 const filesDir = ({ target }) => join(target, TARGET_FOLDER)
+
+const publicPath = ({ uiBase }) => `${uiBase}${TARGET_FOLDER}/`
 
 const debug = (opts, label, ...additional) => {
   if (!opts.debug) return
@@ -87,6 +92,7 @@ const buildConfig = options => {
       entry: {},
       output: {
         path: filesDir(options),
+        publicPath: publicPath(options),
         filename: '[name].js',
         libraryTarget: 'commonjs2'
       },
@@ -106,6 +112,7 @@ const buildConfig = options => {
       entry: {},
       output: {
         path: filesDir(options),
+        publicPath: publicPath(options),
         filename: '[name].js'
       },
       plugins: [
@@ -212,7 +219,7 @@ async function renderQueued (options, filePath, data = {}, renderId) {
   let serverId, clientId
 
   if (serverConfig) {
-    serverId = `${renderId}/server`
+    serverId = flattenFilePath(`${renderId}/server`)
     queue.config.server.entry[serverId] = getEntryPath(serverId)
     queue.config.server.plugins.push(
       new VirtualModulesPlugin({
@@ -228,7 +235,7 @@ async function renderQueued (options, filePath, data = {}, renderId) {
   }
 
   if (clientConfig) {
-    clientId = `${renderId}/client`
+    clientId = flattenFilePath(`${renderId}/client`)
     queue.config.client.entry[clientId] = getEntryPath(clientId)
     queue.config.client.plugins.push(
       new VirtualModulesPlugin({
@@ -264,7 +271,7 @@ async function runRenderQueue (options, queueId) {
 
     items.forEach(({ resolve, serverId, clientId }) => {
       resolve({
-        clientPath: clientId && `${options.uiBase}${TARGET_FOLDER}/${clientId}.js`,
+        clientPath: clientId && `${publicPath(options)}${clientId}.js`,
         serverPath: serverId && join(filesDir(options), `${serverId}.js`)
       })
     })
