@@ -43,11 +43,6 @@ const drainQueue = id => {
 const flattenFilePath = filePath =>
   filePath.replace(/[^\w\s]/gi, '_')
 
-// naive implementation of a  dynamic threshold, which ensures
-// high value for initial build and keeps rebuild times low.
-const getDebounceThreshold = buildId =>
-  cache.all(buildId).length === 0 ? 500 : 50
-
 const getFileId = (filePath, type) =>
   join('_build', flattenFilePath(relativeToCwd(filePath)), type)
 
@@ -171,7 +166,10 @@ async function buildQueued (options, filePath) {
     queue.handles[filePath] = { reject, resolve, filePath, serverId, clientId }
   })
 
-  debounce(queue.id, () => runBuildQueue(options, queue.id), getDebounceThreshold(queue.id))
+  // naive implementation of a dynamic threshold, which ensures
+  // high value for initial build and keeps rebuild times low.
+  const threshold = cache.all(queue.id).length === 0 ? 500 : 50
+  debounce(queue.id, () => runBuildQueue(options, queue.id), threshold)
 
   return queue.promises[filePath]
 }
@@ -255,7 +253,8 @@ async function renderQueued (options, filePath, data = {}, renderId) {
     queue.handles[renderId] = { reject, resolve, serverId, clientId }
   })
 
-  debounce(queue.id, () => runRenderQueue(options, queue.id), getDebounceThreshold(queue.id))
+  const threshold = Math.min(50 + Object.values(queue.handles).length * 25, 500)
+  debounce(queue.id, () => runRenderQueue(options, queue.id), threshold)
 
   return queue.promises[renderId]
 }

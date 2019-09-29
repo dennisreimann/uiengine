@@ -195,14 +195,10 @@ async function removePage (id) {
 }
 
 async function regenerateComponent (id) {
-  const { dependentComponents, dependentTemplates } = await fetchAndAssocComponent(id)
+  const { dependentComponents, dependentTemplates } = _state.components[id] || {}
 
   // the component
-  const tasks = [
-    fetchAndAssocNavigation(),
-    Builder.generateComponentVariants(_state, id),
-    Builder.generateIncrement(_state)
-  ]
+  const tasks = [fetchAndAssocComponent(id)]
 
   // its dependent components and recursively their dependents
   if (dependentComponents) {
@@ -219,6 +215,12 @@ async function regenerateComponent (id) {
   }
 
   await Promise.all(tasks)
+
+  await Promise.all([
+    fetchAndAssocNavigation(),
+    Builder.generateComponentVariants(_state, id),
+    Builder.generateIncrement(_state)
+  ])
 }
 
 async function removeComponent (id) {
