@@ -6,6 +6,10 @@
 
 - Performance optimizations
 
+### Fixes
+
+- Core: Correct error report in case config file cannot be read
+
 ## [2.5.0] - 2019-08-22
 
 ### Added
