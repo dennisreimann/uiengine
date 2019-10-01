@@ -21,7 +21,7 @@ function extractDependencyFiles (options, filePath) {
     }).filter((depPath, index, array) => {
       if (!depPath) return false
       const unique = array.indexOf(depPath) === index
-      const notSameFile = depPath !== filePath
+      const notSameFile = depPath !== crossPlatformPath(filePath)
       return unique && notSameFile
     }) : []
   }
@@ -38,9 +38,11 @@ function extractDependentFiles (options, filePath) {
   if (!cached.dependentFiles) {
     const all = cache.all(buildId)
     cached.dependentFiles = all.reduce((result, item) => {
-      if (item.filePath !== filePath) {
+      const fPath = crossPlatformPath(filePath)
+      const itemPath = crossPlatformPath(item.filePath)
+      if (itemPath !== fPath) {
         const { dependencyFiles = [] } = cache.get(buildId, item.filePath)
-        if (dependencyFiles.includes(filePath)) result.push(item.filePath)
+        if (dependencyFiles.includes(fPath)) result.push(itemPath)
       }
       return result
     }, [])
