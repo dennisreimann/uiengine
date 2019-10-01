@@ -30,7 +30,7 @@
     "object-hash": "1.3.1",
     "require-from-string": "2.0.2",
     "webpack-merge": "4.2.2",
-    "webpack-virtual-modules": "0.1.11"
+    "webpack-virtual-modules": "0.1.12"
   },
   "devDependencies": {
     "@babel/core": "7.6.2",
@@ -42,8 +42,8 @@
     "babel-preset-vue": "2.0.2",
     "chalk": "2.4.2",
     "css-loader": "3.2.0",
-    "react": "16.10.0",
-    "react-dom": "16.10.0",
+    "react": "16.10.1",
+    "react-dom": "16.10.1",
     "vue": "2.6.10",
     "vue-loader": "15.7.1",
     "vue-server-renderer": "2.6.10",
