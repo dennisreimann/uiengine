@@ -8,7 +8,11 @@ node_js:
 os:
   - linux
   - osx
-  # - windows
+  - windows
+
+matrix:
+  allow_failures:
+    - os: windows
 
 stages:
   - name: check
