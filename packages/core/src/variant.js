@@ -8,7 +8,8 @@ const {
   DebugUtil: { debug2, debug3 },
   MessageUtil: { markSample },
   VariantUtil: { componentIdToVariantsPath, variantIdToFilePath, variantIdToTitle },
-  FileUtil: { extension: fileExtension, read: readFile, relativeToCwd }
+  FileUtil: { extension: fileExtension, read: readFile, relativeToCwd },
+  StringUtil: { crossPlatformPath }
 } = require('@uiengine/util')
 
 const mapIndexed = R.addIndex(R.map)
@@ -24,7 +25,7 @@ async function findVariants (state, componentId) {
   // register only files with adapter extensions
   const variantsPath = componentIdToVariantsPath(components, componentId)
   const exts = Object.keys(adapters).join(',')
-  const pattern = join(variantsPath, `*.{${exts}}`)
+  const pattern = crossPlatformPath(join(variantsPath, `*.{${exts}}`))
   const variantPaths = await glob(pattern)
   const variants = R.map(variantPath => ({ file: basename(variantPath) }), variantPaths)
 

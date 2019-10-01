@@ -6,7 +6,7 @@ const FrontmatterUtil = require('../../frontmatter')
 const {
   FileUtil: { write, remove },
   MessageUtil: { reportSuccess, reportError, reportInfo },
-  StringUtil: { titleFromContentHeading }
+  StringUtil: { crossPlatformPath, titleFromContentHeading }
 } = require('@uiengine/util')
 
 exports.describe = 'Replaces page.md files with page.config.js and README.md'
@@ -19,7 +19,7 @@ exports.handler = async argv => {
 
     if (!pages) return
 
-    const pattern = join(pages, '**', 'page.md')
+    const pattern = crossPlatformPath(join(pages, '**', 'page.md'))
     const filePaths = await glob(pattern, { onlyFiles: true })
 
     filePaths.forEach(async pageMdPath => {

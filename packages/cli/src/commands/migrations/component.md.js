@@ -6,7 +6,8 @@ const prettier = require('prettier')
 const FrontmatterUtil = require('../../frontmatter')
 const {
   FileUtil: { write },
-  MessageUtil: { reportSuccess, reportError, reportInfo }
+  MessageUtil: { reportSuccess, reportError, reportInfo },
+  StringUtil: { crossPlatformPath }
 } = require('@uiengine/util')
 
 exports.describe = 'Replaces component.md files with component.config.js and README.md'
@@ -19,7 +20,7 @@ exports.handler = async argv => {
 
     if (!components) return
 
-    const patterns = components.map(componentsPath => join(componentsPath, '**', 'component.md'))
+    const patterns = components.map(componentsPath => crossPlatformPath(join(componentsPath, '**', 'component.md')))
     const filePaths = await glob(patterns, { onlyFiles: true })
 
     filePaths.forEach(async componentMdPath => {

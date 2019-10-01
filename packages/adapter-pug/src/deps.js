@@ -64,7 +64,7 @@ async function getDependencyFiles (options, filePath, cache) {
 }
 
 async function getDependentFiles (options, filePath, dirs, cache) {
-  const patterns = dirs.map(dir => join(dir, '**', '*.pug'))
+  const patterns = dirs.map(dir => crossPlatformPath(join(dir, '**', '*.pug')))
   const filePaths = await glob(patterns, { ignore: [filePath] })
   const dependentFiles = await filter(filePaths, async file => {
     const dependencies = await getDependencyFiles(options, file, cache)

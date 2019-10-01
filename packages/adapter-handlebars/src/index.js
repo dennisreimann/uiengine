@@ -2,6 +2,7 @@ const { readFile } = require('fs')
 const { basename, extname, join } = require('path')
 const glob = require('globby')
 const Handlebars = require('handlebars')
+const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
 
 async function setup (options) {
   const { components, ext } = options
@@ -9,7 +10,7 @@ async function setup (options) {
   if (!components) return
 
   // register all components files, but no variants!
-  const patterns = components.map(componentPath => join(componentPath, '*', `*.${ext}`))
+  const patterns = components.map(componentPath => crossPlatformPath(join(componentPath, '*', `*.${ext}`)))
   const paths = await glob(patterns, { onlyFiles: true })
   const registers = []
 

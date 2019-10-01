@@ -9,6 +9,7 @@
 ### Fixes
 
 - Core: Correct error report in case config file cannot be read
+- Windows compatibility
 
 ## [2.5.0] - 2019-08-22
 

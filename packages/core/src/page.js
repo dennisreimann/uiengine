@@ -40,9 +40,9 @@ async function readPageFiles (state, id) {
 async function findPageFiles (pagesPath, pagePath, childIds = []) {
   // see the glob option described here for details:
   // https://github.com/mrmlnc/fast-glob#how-to-exclude-directory-from-reading
-  const filesPattern = join(pagesPath, pagePath, '**')
-  const pageExcludes = [join('**', '_{*,**}', '**'), join('**', `{${PAGE_CONFNAME},${PAGE_DOCSNAME}}`)]
-  const childExcludes = R.map(id => join('**', id, '**'), childIds)
+  const filesPattern = crossPlatformPath(join(pagesPath, pagePath, '**'))
+  const pageExcludes = [crossPlatformPath(join('**', '_{*,**}', '**')), crossPlatformPath(join('**', `{${PAGE_CONFNAME},${PAGE_DOCSNAME}}`))]
+  const childExcludes = R.map(id => crossPlatformPath(join('**', id, '**')), childIds)
   const ignore = R.concat(pageExcludes, childExcludes)
   const filePaths = await glob(filesPattern, { ignore })
 
@@ -53,7 +53,7 @@ async function findPageIds (state, pagePath = '**') {
   const { pages } = state.config.source
   if (!pages) return []
 
-  const pattern = resolve(pages, pagePath, `{${PAGE_CONFNAME},${PAGE_DOCSNAME}}`)
+  const pattern = crossPlatformPath(resolve(pages, pagePath, `{${PAGE_CONFNAME},${PAGE_DOCSNAME}}`))
   const pagePaths = await glob(pattern)
   const pageIdFromPageFilePath = R.partial(pageFilePathToId, [pages])
   const pageIds = R.uniq(R.map(pageIdFromPageFilePath, pagePaths))

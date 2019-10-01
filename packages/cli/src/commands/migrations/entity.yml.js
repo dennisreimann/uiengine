@@ -5,7 +5,8 @@ const prettier = require('prettier')
 const YamlUtil = require('../../yaml')
 const {
   FileUtil: { write, remove },
-  MessageUtil: { reportSuccess, reportError, reportInfo }
+  MessageUtil: { reportSuccess, reportError, reportInfo },
+  StringUtil: { crossPlatformPath }
 } = require('@uiengine/util')
 
 exports.describe = 'Replaces Entity.yml files with Entity.js'
@@ -18,7 +19,7 @@ exports.handler = async argv => {
 
     if (!entities) return
 
-    const pattern = join(entities, '**', '*.yml')
+    const pattern = crossPlatformPath(join(entities, '**', '*.yml'))
     const filePaths = await glob(pattern, { onlyFiles: true })
 
     filePaths.forEach(async ymlPath => {

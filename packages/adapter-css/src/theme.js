@@ -3,6 +3,7 @@ const { readFile } = require('fs-extra')
 const glob = require('globby')
 const merge = require('deepmerge')
 const postcss = require('postcss')
+const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
 
 const extractVarDefinition = value => {
   const match = value.match(/var\((.*?)(,\s?(.*))?\)/)
@@ -22,7 +23,7 @@ const customPropToName = varName =>
     .trim()
 
 async function propsByThemeFromDir (dir) {
-  const pattern = join(dir, '*.css')
+  const pattern = crossPlatformPath(join(dir, '*.css'))
   const themePaths = await glob(pattern, { onlyFiles: true })
   const propsByTheme = {}
 

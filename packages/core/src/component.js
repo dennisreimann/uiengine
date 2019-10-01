@@ -48,7 +48,7 @@ async function registerComponentFiles (state, id) {
   // in the component folder root. No variants!
   const { config: { adapters, source: { components } } } = state
   const exts = Object.keys(adapters).join(',')
-  const pattern = componentIdToFilePath(components, id, `*.{${exts}}`)
+  const pattern = crossPlatformPath(componentIdToFilePath(components, id, `*.{${exts}}`))
   const paths = await glob(pattern, { onlyFiles: true })
 
   const register = R.partial(registerComponentFile, [state])
@@ -64,7 +64,7 @@ async function findComponentIds (state) {
   const { components } = state.config.source
   if (!components) return []
 
-  const patterns = components.map(componentPath => resolve(componentPath, '**'))
+  const patterns = components.map(componentPath => crossPlatformPath(resolve(componentPath, '**')))
   const componentPaths = await glob(patterns, { onlyDirectories: true, deep: false })
   const componentIdFromComponentPath = R.partial(componentPathToId, [components])
   const componentIds = R.map(componentIdFromComponentPath, componentPaths)
