@@ -13,7 +13,7 @@ describe('Handlebars adapter', () => {
     it('should register all components files', async () => {
       await Adapter.setup({ components, ext: 'hbs' })
 
-      assert.strictEqual(Handlebars.partials.button, '<button>{{title}}</button>\n')
+      assert.strictEqual(Handlebars.partials.button.trim(), '<button>{{title}}</button>')
     })
   })
 
@@ -21,7 +21,7 @@ describe('Handlebars adapter', () => {
     it('should render the template with the given data', async () => {
       const rendered = await Adapter.render(options, templatePath, data)
 
-      assert.strictEqual(rendered, '<p>1</p>\n')
+      assert.strictEqual(rendered.trim(), '<p>1</p>')
     })
 
     it('should throw error if the file does not exist', async () => {
@@ -37,13 +37,13 @@ describe('Handlebars adapter', () => {
     it('should register the template as partial', async () => {
       await Adapter.registerComponentFile(options, templatePath)
 
-      assert.strictEqual(Handlebars.partials.template, '<p>{{myData}}</p>\n')
+      assert.strictEqual(Handlebars.partials.template.trim(), '<p>{{myData}}</p>')
     })
 
     it('should register the template as namespaced partial', async () => {
       await Adapter.registerComponentFile({ namespace: 'adapter' }, templatePath)
 
-      assert.strictEqual(Handlebars.partials['adapter/template'], '<p>{{myData}}</p>\n')
+      assert.strictEqual(Handlebars.partials['adapter/template'].trim(), '<p>{{myData}}</p>')
     })
 
     it('should throw error if the file does not exist', async () => {

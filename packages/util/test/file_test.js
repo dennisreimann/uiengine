@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { assertExists } = require('../../../test/support/asserts')
+const { assertExists, assertMatches } = require('../../../test/support/asserts')
 const { readFileSync, removeSync } = require('fs-extra')
 const { join } = require('path')
 
@@ -53,7 +53,7 @@ describe('FileUtil', () => {
     it('should return file content', async () => {
       const data = await FileUtil.read(join(__dirname, 'fixtures/markdown.md'))
 
-      assert.strictEqual(data, '# Homepage\n\nWelcome!')
+      assertMatches(data, /# Homepage(\r?\n){2}Welcome!/)
     })
 
     it('should throw error in case the file does not exist', async () => {
@@ -71,7 +71,7 @@ describe('FileUtil', () => {
       await FileUtil.write(filePath, '\n\n    Test    \n\n')
       const content = readFileSync(filePath, 'utf8')
 
-      assert.strictEqual(content, 'Test\n')
+      assert.strictEqual(content.trim(), 'Test')
       removeSync(filePath)
     })
   })

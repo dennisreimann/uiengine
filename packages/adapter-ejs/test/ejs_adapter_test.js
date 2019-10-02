@@ -10,7 +10,7 @@ describe('EJS adapter', () => {
       const data = { myData: 1 }
       const rendered = await Adapter.render(options, templatePath, data)
 
-      assert.strictEqual(rendered, '<p>1</p>\n')
+      assert.strictEqual(rendered.trim(), '<p>1</p>')
     })
 
     it('should resolve the includes', async () => {
