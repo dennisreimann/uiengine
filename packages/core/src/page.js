@@ -3,7 +3,7 @@ const R = require('ramda')
 const glob = require('globby')
 const {
   MarkdownUtil,
-  FileUtil: { requireUncached },
+  FileUtil: { exists, requireUncached },
   PageUtil: { PAGE_CONFNAME, PAGE_DOCSNAME, pageFilePathToId, pageIdToFilePath, pageIdToPath, pageIdToTitle, determineType, convertUserProvidedChildrenList, convertUserProvidedComponentsList },
   StringUtil: { crossPlatformPath, titleFromContentHeading },
   DebugUtil: { debug2, debug3, debug4 }
@@ -16,21 +16,21 @@ async function readPageFiles (state, id) {
 
   const configPath = pageIdToFilePath(pages, id)
   const dir = dirname(configPath)
-  const docsPath = join(dir, PAGE_DOCSNAME)
+  const readmePath = join(dir, PAGE_DOCSNAME)
   const sourcePath = crossPlatformPath(relative(base, dir))
   const data = { attributes: {}, sourcePath }
 
   // config
-  try {
+  if (exists(configPath)) {
     data.attributes = requireUncached(configPath)
     data.sourceFile = crossPlatformPath(relative(base, configPath))
-  } catch (err) { }
+  }
 
   // readme
-  try {
-    data.content = await MarkdownUtil.fromFile(docsPath)
-    data.readmeFile = crossPlatformPath(relative(base, docsPath))
-  } catch (err) { }
+  if (exists(readmePath)) {
+    data.content = await MarkdownUtil.fromFile(readmePath)
+    data.readmeFile = crossPlatformPath(relative(base, readmePath))
+  }
 
   debug4(state, `Page.readPageFiles(${id}):end`)
 

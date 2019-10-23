@@ -6,7 +6,7 @@ const Variant = require('./variant')
 const {
   MarkdownUtil,
   ComponentUtil: { COMPONENT_DOCSNAME, componentFilePathToId, componentIdToFilePath, componentIdToTitle, componentPathToId },
-  FileUtil: { requireUncached },
+  FileUtil: { exists, requireUncached },
   TemplateUtil: { templateFilePathToId },
   StringUtil: { crossPlatformPath, titleFromContentHeading },
   DebugUtil: { debug2, debug3, debug4 }
@@ -25,16 +25,16 @@ async function readComponentFiles (state, id) {
   const data = { attributes: {}, sourcePath }
 
   // config
-  try {
+  if (exists(configPath)) {
     data.attributes = requireUncached(configPath)
     data.sourceFile = crossPlatformPath(relative(base, configPath))
-  } catch (err) {}
+  }
 
   // readme
-  try {
+  if (exists(readmePath)) {
     data.content = await MarkdownUtil.fromFile(readmePath)
     data.readmeFile = crossPlatformPath(relative(base, readmePath))
-  } catch (err) {}
+  }
 
   debug4(state, `Component.readComponentFiles(${id}):end`)
 
