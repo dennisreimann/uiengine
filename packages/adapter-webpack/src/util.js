@@ -89,6 +89,7 @@ const buildConfig = options => {
         path: filesDir(options),
         publicPath: publicPath(options),
         filename: '[name].js',
+        chunkFilename: '[id]_server.js',
         libraryTarget: 'commonjs2'
       },
       plugins: [
@@ -108,7 +109,8 @@ const buildConfig = options => {
       output: {
         path: filesDir(options),
         publicPath: publicPath(options),
-        filename: '[name].js'
+        filename: '[name].js',
+        chunkFilename: '[id]_client.js'
       },
       plugins: [
         new webpack.DefinePlugin({

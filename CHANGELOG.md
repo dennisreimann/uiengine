@@ -8,6 +8,7 @@
 
 ### Fixes
 
+- Webpack: Set correct chunk names
 - Core: Correct error report in case config file cannot be read
 - Windows compatibility
 
