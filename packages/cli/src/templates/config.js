@@ -27,6 +27,10 @@ module.exports = {
 
   // Here you can configure the template that the variant preview gets embeded in.
   template: '${values.template}',
+  // <!-- uiengine:preview:start --> comments are used to display rendered components
+  // in code view
+  componentCommentDelimiter: true,
+
 
   ui: {
     lang: '${values.ui.lang}',

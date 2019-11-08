@@ -84,7 +84,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { decorateCode, decorateContext, omit } from '../../shared/code'
+import { decorateCode, decorateContext, omit, isolateCode } from '../../shared/code'
 import { LOCALES } from '../util'
 import localize from '../../shared/localize'
 
@@ -126,7 +126,7 @@ export default {
         content: '',
         lang: 'text'
       },
-      HTMLhasLoaded:false
+      HTMLhasLoaded: false
     }
   },
 
@@ -178,7 +178,8 @@ export default {
 
   methods: {
     renderPart ({ content, lang }) {
-      const code = omit('preview', content).trim()
+      let code = isolateCode('preview', content)
+      code = omit('preview', code).trim()
 
       return decorateCode(code, lang)
     },

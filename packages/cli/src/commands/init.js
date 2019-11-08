@@ -41,6 +41,7 @@ exports.handler = async argv => {
     },
     target: './dist',
     template: 'uiengine.html',
+    componentCommentDelimiter: true,
     ui: {
       lang: 'en',
       hljs: 'atom-one-dark',
