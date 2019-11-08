@@ -157,17 +157,18 @@ export default {
         fetch(`${window.location.origin}${this.iframeSrc}`)
           .then(response => {
             if (!response.ok) {
-              this.renderedHTML.content = `Error accessing ${window.location.origin}${this.iframeSrc} (${response.status})`
+              return Promise.reject(Error(`Error accessing ${window.location.origin}${this.iframeSrc} (${response.status})`))
             } else {
-              response.text().then(html => {
-                this.renderedHTML = {
-                  content: html,
-                  lang: 'html'
-                }
-              })
+              return response.text()
             }
           })
-          .catch(err => console.error(new Error(err)))
+          .then(html => {
+            this.renderedHTML = {
+              content: html,
+              lang: 'html'
+            }
+          })
+          .catch(err => { this.renderedHTML.content = err.message })
       }
     }
   },
