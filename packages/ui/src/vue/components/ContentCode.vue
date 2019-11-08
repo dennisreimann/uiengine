@@ -53,11 +53,40 @@
         v-html="renderedContext"
       />
     </div>
+
+    <div
+      class="code__segment"
+    >
+      <button
+        :title="'navigation.toggle' | localize"
+        :aria-expanded="isExpanded('HTML') | bool2string"
+        :data-test-variant-code-button="'HTML'"
+        class="code__header"
+        type="button"
+        @click.prevent="toggleExpanded('HTML')"
+      >
+        <h4 class="code__title">
+          HTML
+        </h4>
+        <AppIcon
+          symbol="caret-down-double"
+          class="code__expandicon"
+        />
+      </button>
+      <div
+        :hidden="!isExpanded('HTML')"
+        :data-test-variant-code-part="'HTML'"
+        v-html="renderPart(renderedHTML)"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { decorateCode, decorateContext, omit } from '../../shared/code'
+import { LOCALES } from '../util'
+import localize from '../../shared/localize'
 
 export default {
   props: {
@@ -74,6 +103,16 @@ export default {
     context: {
       type: Object,
       default: null
+    },
+
+    pathPrefix: {
+      type: String,
+      required: true
+    },
+
+    pathPostfix: {
+      type: String,
+      required: true
     }
   },
 
@@ -82,11 +121,18 @@ export default {
       expanded: {
         raw: true,
         context: true
-      }
+      },
+      renderedHTML: {
+        content: '',
+        lang: 'text'
+      },
+      HTMLhasLoaded:false
     }
   },
 
   computed: {
+    ...mapGetters('preferences', ['currentTheme', 'locale']),
+
     renderedRaw () {
       const raw = omit('code', this.raw)
 
@@ -95,7 +141,39 @@ export default {
 
     renderedContext () {
       return decorateContext(this.context)
+    },
+
+    iframeSrc () {
+      const themeId = this.currentTheme.id
+      return `${window.UIengine.base}${this.pathPrefix}/${themeId}/${this.pathPostfix}.html`
     }
+  },
+
+  watch: {
+    expanded (oldValue, newValue) {
+      if (!this.HTMLhasLoaded && newValue.HTML) {
+        this.HTMLhasLoaded = true
+        // fetch HTML of rendered template
+        fetch(`${window.location.origin}${this.iframeSrc}`)
+          .then(response => {
+            if (!response.ok) {
+              this.renderedHTML.content = `Error accessing ${window.location.origin}${this.iframeSrc} (${response.status})`
+            } else {
+              response.text().then(html => {
+                this.renderedHTML = {
+                  content: html,
+                  lang: 'html'
+                }
+              })
+            }
+          })
+          .catch(err => console.error(new Error(err)))
+      }
+    }
+  },
+
+  created () {
+    this.renderedHTML.content = this.localize('options.loading')
   },
 
   methods: {
@@ -111,7 +189,15 @@ export default {
 
     toggleExpanded (key) {
       this.$set(this.expanded, key, !this.expanded[key])
+    },
+
+    localize (key, interpolations) {
+      const id = this.locale
+      const dict = LOCALES[id]
+
+      return localize(dict, key, interpolations)
     }
+
   }
 }
 </script>

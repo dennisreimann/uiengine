@@ -17,7 +17,8 @@ module.exports = {
     edit_on_codepen: 'Edit on Codepen',
     reset: 'reset',
     toggle: 'toggle',
-    all_themes: 'All themes'
+    all_themes: 'All themes',
+    loading: 'Loading…'
   },
   code: {
     raw: 'Code',
