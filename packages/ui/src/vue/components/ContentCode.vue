@@ -76,8 +76,16 @@
       <div
         :hidden="!isExpanded('HTML')"
         :data-test-variant-code-part="'HTML'"
-        v-html="renderPart(renderedHTML)"
-      />
+      >
+        <div
+          v-if="renderedHTML.content"
+          v-html="renderPart(renderedHTML)"
+        />
+        <div
+          v-else
+          v-html="renderPart({ content: localize('options.loading'), lang: 'text' })"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -125,8 +133,7 @@ export default {
       renderedHTML: {
         content: '',
         lang: 'text'
-      },
-      HTMLhasLoaded: false
+      }
     }
   },
 
@@ -150,31 +157,17 @@ export default {
   },
 
   watch: {
-    expanded (oldValue, newValue) {
-      if (!this.HTMLhasLoaded && newValue.HTML) {
-        this.HTMLhasLoaded = true
+    async expanded (oldValue, newValue) {
+      if (!this.renderedHTML.content && newValue.HTML) {
         // fetch HTML of rendered template
-        fetch(`${window.location.origin}${this.iframeSrc}`)
-          .then(response => {
-            if (!response.ok) {
-              return Promise.reject(Error(`Error accessing ${window.location.origin}${this.iframeSrc} (${response.status})`))
-            } else {
-              return response.text()
-            }
-          })
-          .then(html => {
-            this.renderedHTML = {
-              content: html,
-              lang: 'html'
-            }
-          })
-          .catch(err => { this.renderedHTML.content = err.message })
+        console.log('fetch component source', this.renderedHTML, newValue)
+        const response = await fetch(`${window.location.origin}${this.iframeSrc}`)
+        this.renderedHTML = {
+          content: response.ok ? await response.text() : `Error accessing ${window.location.origin}${this.iframeSrc} (${response.status})`,
+          lang: 'html'
+        }
       }
     }
-  },
-
-  created () {
-    this.renderedHTML.content = this.localize('options.loading')
   },
 
   methods: {
