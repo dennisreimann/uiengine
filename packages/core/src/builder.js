@@ -109,7 +109,7 @@ async function generatePageWithTemplate (state, pageId) {
       const content = fragment
         ? (await render(state, fragment, context, themeId, pageId)).rendered
         : rendered
-      const isolatedContent = state.config.componentCommentDelimiter ? `<!-- uiengine:preview:start -->${content}<!-- uiengine:preview:end -->` : content
+      const isolatedContent = `<!-- uiengine:preview:start -->${content}<!-- uiengine:preview:end -->`
       rendered = replaceTemplateComments(rendered, {
         class: `uie-page uie-page--${dasherize(id)}`,
         title: `${page.title} • ${name} (${version})`,
@@ -160,7 +160,7 @@ async function generatePageWithTokens (state, pageId) {
     await withThemes(themes, async themeId => {
       let { rendered, foot } = await render(state, template, data, themeId, pageId)
       const content = await Interface.render(state, 'tokens', page, themeId)
-      const isolatedContent = state.config.componentCommentDelimiter ? `<!-- uiengine:preview:start -->${content}<!-- uiengine:preview:end -->` : content
+      const isolatedContent = `<!-- uiengine:preview:start -->${content}<!-- uiengine:preview:end -->`
       rendered = replaceTemplateComments(rendered, {
         class: `uie-tokens uie-tokens--${dasherize(id)}`,
         title: `${title} • ${name} (${version})`,
@@ -193,7 +193,7 @@ async function generateVariant (state, variant) {
   await withThemes(themes, async themeId => {
     let { rendered } = await render(state, template, data, themeId, id)
     const { rendered: content, foot } = variant.themes[themeId]
-    const isolatedContent = state.config.componentCommentDelimiter ? `<!-- uiengine:preview:start -->${content}<!-- uiengine:preview:end -->` : content
+    const isolatedContent = `<!-- uiengine:preview:start -->${content}<!-- uiengine:preview:end -->`
     rendered = replaceTemplateComments(rendered, {
       class: `uie-variant uie-variant--${dasherize(componentId)} uie-variant--${dasherize(id)}`,
       title: `${component.title}: ${variant.title} • ${name} (${version})`,
@@ -320,7 +320,7 @@ async function generateSketch (state) {
       const identifier = 'HTML Sketchapp Export'
       let { rendered, foot } = await render(state, template, data, themeId, identifier)
       const content = await Interface.render(state, 'sketch', data, themeId)
-      const isolatedContent = state.config.componentCommentDelimiter ? `<!-- uiengine:preview:start -->${content}<!-- uiengine:preview:end -->` : content
+      const isolatedContent = `<!-- uiengine:preview:start -->${content}<!-- uiengine:preview:end -->`
       rendered = replaceTemplateComments(rendered, {
         class: 'uie-html-sketchapp',
         title: `HTML Sketchapp Export ${themeId} • ${name} (${version})`,
