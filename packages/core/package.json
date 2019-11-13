@@ -34,13 +34,13 @@
     "@uiengine/cli": "2.5.8",
     "@uiengine/ui": "2.5.8",
     "@uiengine/util": "2.5.8",
-    "cosmiconfig": "5.2.1",
+    "cosmiconfig": "6.0.0",
     "fs-extra": "8.1.0",
     "globby": "10.0.1",
     "ramda": "0.26.1"
   },
   "optionalDependencies": {
     "browser-sync": "2.26.7",
-    "chokidar": "3.2.2"
+    "chokidar": "3.3.0"
   }
 }

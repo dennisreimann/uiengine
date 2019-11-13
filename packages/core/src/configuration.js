@@ -1,7 +1,7 @@
 const { dirname, resolve } = require('path')
 const R = require('ramda')
 const assert = require('assert')
-const cosmiconfig = require('cosmiconfig')
+const { cosmiconfig } = require('cosmiconfig')
 const {
   UiengineInputError,
   FileUtil: { invalidateRequireCache },

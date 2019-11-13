@@ -24,10 +24,10 @@
   ],
   "dependencies": {
     "@uiengine/util": "2.5.8",
-    "deepmerge": "4.2.1",
+    "deepmerge": "4.2.2",
     "fs-extra": "8.1.0",
     "globby": "10.0.1",
-    "postcss": "7.0.18"
+    "postcss": "7.0.21"
   },
   "scripts": {
     "lint": "eslint --fix src test"

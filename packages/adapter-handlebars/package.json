@@ -27,7 +27,7 @@
     "globby": "10.0.1"
   },
   "devDependencies": {
-    "handlebars": "4.4.5"
+    "handlebars": "4.5.1"
   },
   "peerDependencies": {
     "handlebars": "^4.0.0"
