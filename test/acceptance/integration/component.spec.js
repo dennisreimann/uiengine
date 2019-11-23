@@ -143,6 +143,11 @@ context('Component', () => {
       cy.get('#label-label-ejs-1 [data-test-variant-code-part="context"]').should('be.visible')
       cy.get('#label-label-ejs-1 [data-test-variant-code-button="context"]').click()
       cy.get('#label-label-ejs-1 [data-test-variant-code-part="context"]').should('not.be.visible')
+
+      // HTML
+      cy.get('#label-label-ejs-1 [data-test-variant-code-part="HTML"]').should('not.be.visible')
+      cy.get('#label-label-ejs-1 [data-test-variant-code-button="HTML"]').click()
+      cy.get('#label-label-ejs-1 [data-test-variant-code-part="HTML"]').should('be.visible')
     })
   })
 })

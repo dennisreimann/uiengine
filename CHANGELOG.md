@@ -2,6 +2,10 @@
 
 ## [2.6.0] - ongoing development
 
+### Added
+
+- UI: Re-add variant HTML to code view. [Thanks @therealpecus](https://github.com/dennisreimann/uiengine/pull/54)
+
 ### Changed
 
 - Performance optimizations

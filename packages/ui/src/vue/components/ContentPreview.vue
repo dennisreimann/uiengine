@@ -75,9 +75,7 @@
               </div>
             </div>
           </template>
-          <div
-            class="preview__iframe-container"
-          >
+          <div class="preview__iframe-container">
             <iframe
               v-for="theme in displayedThemes"
               :key="theme.id"

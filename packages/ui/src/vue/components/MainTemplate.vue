@@ -152,6 +152,8 @@
         <ContentCode
           :extension="page.extension"
           :context="page.context"
+          :path-postfix="page.id"
+          path-prefix="_pages"
         />
       </div>
     </div>

@@ -53,13 +53,52 @@
         v-html="renderedContext"
       />
     </div>
+
+    <div
+      v-if="!displayAllThemes"
+      class="code__segment"
+    >
+      <button
+        :title="'navigation.toggle' | localize"
+        :aria-expanded="isExpanded('HTML') | bool2string"
+        data-test-variant-code-button="HTML"
+        class="code__header"
+        type="button"
+        @click.prevent="toggleExpanded('HTML')"
+      >
+        <h4 class="code__title">
+          HTML
+        </h4>
+        <AppIcon
+          symbol="caret-down-double"
+          class="code__expandicon"
+        />
+      </button>
+      <div
+        :hidden="!isExpanded('HTML')"
+        :data-test-variant-code-part="'HTML'"
+      >
+        <div
+          v-if="renderedHTML.content"
+          v-html="renderPart(renderedHTML)"
+        />
+        <div v-else>
+          <pre>{{ 'options.loading' | localize }}</pre>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { decorateCode, decorateContext, omit } from '../../shared/code'
+import { decorateCode, decorateContext, omit, isolateCode } from '../../shared/code'
+import Preview from '../mixins/preview'
 
 export default {
+  mixins: [
+    Preview
+  ],
+
   props: {
     extension: {
       type: String,
@@ -74,6 +113,16 @@ export default {
     context: {
       type: Object,
       default: null
+    },
+
+    pathPrefix: {
+      type: String,
+      required: true
+    },
+
+    pathPostfix: {
+      type: String,
+      required: true
     }
   },
 
@@ -82,6 +131,10 @@ export default {
       expanded: {
         raw: true,
         context: true
+      },
+      renderedHTML: {
+        content: '',
+        lang: 'text'
       }
     }
   },
@@ -95,12 +148,31 @@ export default {
 
     renderedContext () {
       return decorateContext(this.context)
+    },
+
+    iframeSrc () {
+      const themeId = this.currentTheme.id
+      return `${window.UIengine.base}${this.pathPrefix}/${themeId}/${this.pathPostfix}.html`
+    }
+  },
+
+  watch: {
+    async expanded (oldValue, newValue) {
+      if (!this.renderedHTML.content && newValue.HTML) {
+        const response = await fetch(`${window.location.origin}${this.iframeSrc}`)
+
+        this.renderedHTML = {
+          content: response.ok ? await response.text() : `Error accessing ${window.location.origin}${this.iframeSrc} (${response.status})`,
+          lang: 'html'
+        }
+      }
     }
   },
 
   methods: {
     renderPart ({ content, lang }) {
-      const code = omit('preview', content).trim()
+      let code = isolateCode('preview', content)
+      code = omit('preview', code).trim()
 
       return decorateCode(code, lang)
     },

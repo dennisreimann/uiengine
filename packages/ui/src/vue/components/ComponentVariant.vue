@@ -116,6 +116,8 @@
           :extension="variant.extension"
           :raw="variant.raw"
           :context="variant.context"
+          :path-postfix="variant.id"
+          path-prefix="_variants"
         />
       </div>
     </div>

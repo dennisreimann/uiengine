@@ -120,7 +120,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      vue$: 'vue/dist/vue.esm.js'
     }
   },
   optimization: {
@@ -178,6 +178,8 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')],
+        // do not process the vendor iframe-resizer file
+        exclude: [resolve('src/preview')],
         // we keep the babel options in this webpack config because the babelrc
         // needs to be configured with the node compile options. this makes this
         // file more complex, because we also need to configure the vue-loader
@@ -186,7 +188,8 @@ module.exports = {
           presets: ['@babel/preset-env'],
           plugins: [
             '@babel/plugin-proposal-object-rest-spread',
-            '@babel/plugin-syntax-dynamic-import'
+            '@babel/plugin-syntax-dynamic-import',
+            '@babel/plugin-transform-runtime'
           ]
         }
       },

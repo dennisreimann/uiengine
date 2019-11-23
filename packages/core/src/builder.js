@@ -38,6 +38,9 @@ const pruneStateForView = state => {
   return R.assoc('components', viewComponents, state)
 }
 
+const wrapContent = content =>
+  `\n<!-- uiengine:preview:start -->\n${content}\n<!-- uiengine:preview:end -->\n`
+
 async function render (state, template, data, themeId, identifier) {
   debug4(state, `Builder.render(${template}, ${themeId}, ${identifier}):start`)
 
@@ -109,11 +112,12 @@ async function generatePageWithTemplate (state, pageId) {
       const content = fragment
         ? (await render(state, fragment, context, themeId, pageId)).rendered
         : rendered
+
       rendered = replaceTemplateComments(rendered, {
         class: `uie-page uie-page--${dasherize(id)}`,
         title: `${page.title} • ${name} (${version})`,
         theme: themeId,
-        content: content,
+        content: wrapContent(content),
         foot: foot
       })
 
@@ -159,11 +163,12 @@ async function generatePageWithTokens (state, pageId) {
     await withThemes(themes, async themeId => {
       let { rendered, foot } = await render(state, template, data, themeId, pageId)
       const content = await Interface.render(state, 'tokens', page, themeId)
+
       rendered = replaceTemplateComments(rendered, {
         class: `uie-tokens uie-tokens--${dasherize(id)}`,
         title: `${title} • ${name} (${version})`,
         theme: themeId,
-        content: content,
+        content,
         foot: foot
       })
 
@@ -191,11 +196,12 @@ async function generateVariant (state, variant) {
   await withThemes(themes, async themeId => {
     let { rendered } = await render(state, template, data, themeId, id)
     const { rendered: content, foot } = variant.themes[themeId]
+
     rendered = replaceTemplateComments(rendered, {
       class: `uie-variant uie-variant--${dasherize(componentId)} uie-variant--${dasherize(id)}`,
       title: `${component.title}: ${variant.title} • ${name} (${version})`,
       theme: themeId,
-      content: content,
+      content: wrapContent(content),
       foot: foot
     })
 
@@ -317,11 +323,12 @@ async function generateSketch (state) {
       const identifier = 'HTML Sketchapp Export'
       let { rendered, foot } = await render(state, template, data, themeId, identifier)
       const content = await Interface.render(state, 'sketch', data, themeId)
+
       rendered = replaceTemplateComments(rendered, {
         class: 'uie-html-sketchapp',
         title: `HTML Sketchapp Export ${themeId} • ${name} (${version})`,
         theme: themeId,
-        content: content,
+        content,
         foot: foot
       })
 

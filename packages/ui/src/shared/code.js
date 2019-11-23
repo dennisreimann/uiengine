@@ -7,6 +7,12 @@ const omit = (mark, string) => {
   return string.replace(regexpOmit, '').replace(REGEX_CLEAN, '')
 }
 
+const isolateCode = (mark, string) => {
+  const regexpExtract = new RegExp(`<!--\\s?uiengine:${mark}:start\\s?-->([\\s\\S]*)<!--\\s?uiengine:${mark}:end\\s?-->`, 'i')
+  const code = string.match(regexpExtract)
+  return code && code[1] ? isolateCode(mark, code[1]) : string
+}
+
 const decorateCode = (code, lang) => {
   return highlight(code, lang)
 }
@@ -18,5 +24,6 @@ const decorateContext = json => {
 module.exports = {
   decorateCode,
   decorateContext,
-  omit
+  omit,
+  isolateCode
 }
