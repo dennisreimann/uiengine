@@ -44,7 +44,7 @@ This is what the full options look like:
 
     meta: [
       {
-        tag: 'link'
+        tag: 'link',
         attrs: {
           rel: 'icon',
           href: '/my-special-favicon.ico'
@@ -170,7 +170,7 @@ An optional list of tags to be included in the `<head>`:
 ```js
 meta: [
   {
-    tag: 'link'
+    tag: 'link',
     attrs: {
       rel: 'icon',
       href: '/my-special-favicon.ico'
