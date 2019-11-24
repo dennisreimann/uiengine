@@ -6,6 +6,7 @@
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
+  "funding": "https://dennisreimann.de/donate.html",
   "repository": "dennisreimann/uiengine",
   "publishConfig": {
     "access": "public"
