@@ -35,7 +35,7 @@
     "@uiengine/util": "2.5.8",
     "color": "3.1.2",
     "deepmerge": "4.2.2",
-    "ejs": "2.7.4",
+    "ejs": "3.0.1",
     "fuse.js": "3.4.6",
     "highlight.js": "9.16.2",
     "htmlescape": "1.1.1",

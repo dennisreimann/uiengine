@@ -25,7 +25,7 @@ function filesForVariant (options, componentName, variantName) {
   return [
     {
       basename: `${variantName}.ejs`,
-      data: `<%- include ../${componentName} -%>`
+      data: `<%- include('../${componentName}') -%>`
     }
   ]
 }

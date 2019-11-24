@@ -9,6 +9,7 @@
 ### Changed
 
 - Performance optimizations
+- EJS: Adapter upgrades to EJS 3
 
 ### Fixes
 
