@@ -9,7 +9,11 @@
   ],
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
-  "repository": "dennisreimann/uiengine",
+  "repository": {
+    "type" : "git",
+    "url": "ssh://git@github.com/dennisreimann/uiengine.git",
+    "directory": "packages/adapter-webpack"
+  },
   "publishConfig": {
     "access": "public"
   },

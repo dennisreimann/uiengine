@@ -7,7 +7,10 @@
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
   "funding": "https://dennisreimann.de/donate.html",
-  "repository": "dennisreimann/uiengine",
+  "repository": {
+    "type" : "git",
+    "url": "ssh://git@github.com/dennisreimann/uiengine.git"
+  },
   "devDependencies": {
     "c8": "6.0.1",
     "coveralls": "3.0.8",
