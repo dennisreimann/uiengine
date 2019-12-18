@@ -8,7 +8,7 @@
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
   "funding": "https://dennisreimann.de/donate.html",
   "repository": {
-    "type" : "git",
+    "type": "git",
     "url": "ssh://git@github.com/dennisreimann/uiengine.git",
     "directory": "packages/core"
   },
@@ -46,6 +46,6 @@
   },
   "optionalDependencies": {
     "browser-sync": "2.26.7",
-    "chokidar": "3.3.0"
+    "chokidar": "3.3.1"
   }
 }

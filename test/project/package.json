@@ -22,13 +22,13 @@
   "dependencies": {
     "ejs": "3.0.1",
     "handlebars": "4.5.3",
-    "marko": "4.18.27",
+    "marko": "4.18.28",
     "prop-types": "15.7.2",
     "pug": "2.0.4",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-    "vue": "2.6.10",
-    "vue-server-renderer": "2.6.10"
+    "vue": "2.6.11",
+    "vue-server-renderer": "2.6.11"
   },
   "devDependencies": {
     "@babel/core": "7.7.5",
@@ -53,7 +53,7 @@
     "babel-loader": "8.0.6",
     "babel-preset-vue": "2.0.2",
     "cross-env": "6.0.3",
-    "css-loader": "3.3.0",
+    "css-loader": "3.4.0",
     "eslint": "6.7.2",
     "eslint-config-standard": "14.1.0",
     "eslint-plugin-import": "2.19.1",
@@ -64,9 +64,9 @@
     "gulp-concat": "2.6.1",
     "html-sketchapp-cli": "0.6.2",
     "theo": "8.1.4",
-    "vue-loader": "15.7.2",
-    "vue-template-compiler": "2.6.10",
-    "webpack": "4.41.2",
+    "vue-loader": "15.8.3",
+    "vue-template-compiler": "2.6.11",
+    "webpack": "4.41.3",
     "webpack-merge": "4.2.2",
     "webpack-node-externals": "1.7.2"
   }

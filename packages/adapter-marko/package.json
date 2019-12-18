@@ -7,7 +7,7 @@
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
   "repository": {
-    "type" : "git",
+    "type": "git",
     "url": "ssh://git@github.com/dennisreimann/uiengine.git",
     "directory": "packages/adapter-marko"
   },
@@ -30,7 +30,7 @@
     "@uiengine/util": "2.5.9"
   },
   "devDependencies": {
-    "marko": "4.18.27"
+    "marko": "4.18.28"
   },
   "peerDependencies": {
     "marko": "^4.0.0"

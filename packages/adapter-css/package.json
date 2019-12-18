@@ -7,7 +7,7 @@
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
   "repository": {
-    "type" : "git",
+    "type": "git",
     "url": "ssh://git@github.com/dennisreimann/uiengine.git",
     "directory": "packages/adapter-css"
   },
@@ -31,7 +31,7 @@
     "deepmerge": "4.2.2",
     "fs-extra": "8.1.0",
     "globby": "10.0.1",
-    "postcss": "7.0.24"
+    "postcss": "7.0.25"
   },
   "scripts": {
     "lint": "eslint --fix src test"
