@@ -154,7 +154,7 @@ describe('Page', () => {
     it('should render content from markdown', async () => {
       const data = await Page.fetchById(state, 'index')
 
-      assertMatches(data.content, '<p>Welcome! This is the UIengine Sample Project.')
+      assertMatches(data.content, '<p>Welcome! This is the UIengine Test Project.')
     })
 
     it('should register files that do not start with an underscore', async () => {

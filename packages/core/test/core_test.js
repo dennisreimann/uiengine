@@ -321,7 +321,7 @@ describe('Core', function () {
       assertExists(join(testProjectTargetPath, 'index.html'))
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'site')
-      assert.strictEqual(change.item, 'UIengine Sample Project')
+      assert.strictEqual(change.item, 'UIengine Test Project')
       assert.strictEqual(change.file, join(testProjectRelativePath, 'uiengine/data/items.yml'))
     })
 
@@ -332,7 +332,7 @@ describe('Core', function () {
       assertExists(join(testProjectTargetPath, 'index.html'))
       assert.strictEqual(change.action, 'changed')
       assert.strictEqual(change.type, 'site')
-      assert.strictEqual(change.item, 'UIengine Sample Project')
+      assert.strictEqual(change.item, 'UIengine Test Project')
       assert.strictEqual(change.file, join(testProjectRelativePath, 'node_modules/@uiengine/ui/lib/index.js'))
     })
   })

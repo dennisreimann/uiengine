@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@uiengine/sample-project",
-  "description": "UIengine Sample Project",
+  "description": "UIengine Test Project",
   "license": "MIT",
   "version": "2.5.9",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
@@ -12,10 +12,10 @@
     "node": ">=10.13"
   },
   "scripts": {
-    "clean": "rimraf ../tmp",
+    "clean": "rimraf ../test-project",
     "dev": "yarn run clean && gulp develop",
     "prod": "yarn run clean && gulp build",
-    "sketch": "html-sketchapp --config html-sketchapp.config.js && open -a Sketch && open ../tmp/_sketch",
+    "sketch": "html-sketchapp --config html-sketchapp.config.js && open -a Sketch && open ../test-project/_sketch",
     "lint": "eslint --fix --ext .js,.vue src webpack",
     "standalone": "yarn run clean && uiengine build -s -w"
   },

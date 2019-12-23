@@ -6,7 +6,7 @@
       "request": "launch",
       "name": "Launch test-project in Chrome",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}/test/tmp/"
+      "webRoot": "${workspaceFolder}/test/test-project/"
     },
     {
       "type": "node",

@@ -15,7 +15,7 @@ describe('Configuration', () => {
     it('should return config object', async () => {
       const config = await Configuration.read(opts)
 
-      assert.strictEqual(config.name, 'UIengine Sample Project')
+      assert.strictEqual(config.name, 'UIengine Test Project')
       assert.strictEqual(config.version, '1.0.0')
     })
 
@@ -66,8 +66,8 @@ describe('Configuration', () => {
     it('should resolve UI', async () => {
       const config = await Configuration.read(opts)
 
-      assert.strictEqual(config.ui.base, '/')
-      assert.strictEqual(config.ui.customStylesFile, '/assets/styles/uiengine-custom-styles.css')
+      assert.strictEqual(config.ui.base, '/test-project/')
+      assert.strictEqual(config.ui.customStylesFile, '/test-project/assets/styles/uiengine-custom-styles.css')
     })
 
     it('should resolve default UI if no object is given', async () => {

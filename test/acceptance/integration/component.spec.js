@@ -10,7 +10,7 @@ context('Component', () => {
     // https://github.com/cypress-io/cypress-example-recipes/blob/master/examples/testing-dom__tab-handling-links/cypress/integration/tab_handling_anchor_links_spec.js
     const linkSelector = '#label-label-ejs-1 [data-test-openinwindow-link]'
 
-    cy.get(linkSelector).should('have.attr', 'href', '/_variants/plain/label/label.ejs-1.html')
+    cy.get(linkSelector).should('have.attr', 'href', '/test-project/_variants/plain/label/label.ejs-1.html')
     cy.get(linkSelector).should('have.attr', 'target', 'label-label-ejs-1')
   })
 
@@ -23,8 +23,8 @@ context('Component', () => {
       })
 
       it('should show first theme by default and switch themes', () => {
-        const plainUrl = '/_variants/plain/label/label.ejs-1.html'
-        const funkyUrl = '/_variants/funky/label/label.ejs-1.html'
+        const plainUrl = '/test-project/_variants/plain/label/label.ejs-1.html'
+        const funkyUrl = '/test-project/_variants/funky/label/label.ejs-1.html'
 
         // Plain
         cy.get('#label-label-ejs-1 iframe').should(($iframes) => {
@@ -81,8 +81,8 @@ context('Component', () => {
       })
 
       it('should show first theme by default and switch themes', () => {
-        const plainUrl = '/_variants/plain/label/label.ejs-1.html'
-        const funkyUrl = '/_variants/funky/label/label.ejs-1.html'
+        const plainUrl = '/test-project/_variants/plain/label/label.ejs-1.html'
+        const funkyUrl = '/test-project/_variants/funky/label/label.ejs-1.html'
 
         // Plain
         cy.get('#label-label-ejs-1 iframe').should(($iframes) => {

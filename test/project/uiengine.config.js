@@ -5,16 +5,14 @@ const cssAdapterOptions = require('./lib/css-adapter-options')
 const webpackAdapterReactOptions = require('./lib/webpack-adapter-react-options')
 const webpackAdapterVueOptions = require('./lib/webpack-adapter-vue-options')
 
-// option to simulate base - mainly for debugging and development purposes
-const simulateBase = false
-const base = simulateBase ? '/design-system/' : '/'
-const target = simulateBase ? `../tmp${base}` : '../tmp'
-const baseDir = simulateBase ? '../tmp' : undefined
+const base = '/test-project/'
+const target = `..${base}`
+const baseDir = '..'
 
 module.exports = {
   // Project config: Defaults to name and version from package.json.
   // Here you can overwrite it and add more custom properties.
-  name: 'UIengine Sample Project',
+  name: 'UIengine Test Project',
   version: '1.0.0',
   copyright: '<a href="https://github.com/dennisreimann/uiengine">Generated with UIengine</a>',
   debug: 1,
@@ -77,7 +75,7 @@ module.exports = {
     breakpoints,
     viewports,
     defaultPreviewMode: 'viewports',
-    customStylesFile: '/assets/styles/uiengine-custom-styles.css',
+    customStylesFile: '/test-project/assets/styles/uiengine-custom-styles.css',
     repoBaseUrl: 'https://github.com/dennisreimann/uiengine/blob/master/test/project/'
   },
 
