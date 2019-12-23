@@ -13,7 +13,7 @@ context('UIengine', () => {
   })
 
   it('shows the 404 page', () => {
-    cy.visit('/does-not-exist')
+    cy.visit('/does-not-exist', { failOnStatusCode: false })
     cy.get('.main h1').should('be', 'Not Found ')
 
     cy.get('.main .content').should('be', 'This page does not exist. ')

@@ -2,7 +2,7 @@
 
 context('Component', () => {
   beforeEach(() => {
-    cy.visit('/_settings')
+    cy.visit('/_settings', { failOnStatusCode: false })
     cy.clearLocalStorage()
   })
 

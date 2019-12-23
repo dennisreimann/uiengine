@@ -2,7 +2,7 @@
 
 context('Component', () => {
   beforeEach(() => {
-    cy.visit('/patterns/atoms/label/')
+    cy.visit('/patterns/atoms/label/', { failOnStatusCode: false })
     cy.clearLocalStorage()
   })
 
@@ -17,9 +17,9 @@ context('Component', () => {
   context('preview', () => {
     context('in viewport mode', () => {
       beforeEach(() => {
-        cy.visit('/_settings/')
+        cy.visit('/_settings/', { failOnStatusCode: false })
         cy.get('#previewMode-select').select('Viewports')
-        cy.visit('/patterns/atoms/label/')
+        cy.visit('/patterns/atoms/label/', { failOnStatusCode: false })
       })
 
       it('should show first theme by default and switch themes', () => {
@@ -75,9 +75,9 @@ context('Component', () => {
 
     context('in breakpoint mode', () => {
       beforeEach(() => {
-        cy.visit('/_settings/')
+        cy.visit('/_settings/', { failOnStatusCode: false })
         cy.get('#previewMode-select').select('Breakpoints')
-        cy.visit('/patterns/atoms/label/')
+        cy.visit('/patterns/atoms/label/', { failOnStatusCode: false })
       })
 
       it('should show first theme by default and switch themes', () => {
