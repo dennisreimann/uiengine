@@ -26,6 +26,8 @@ jobs:
       run: |
         yarn run build
         yarn run docs:build
+        yarn run test-project:build
+        cp -r test/tmp docs/dist/test-project
         # https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
         touch docs/dist/.nojekyll
         # https://help.github.com/en/articles/managing-a-custom-domain-for-your-github-pages-site
