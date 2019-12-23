@@ -29,6 +29,11 @@ jobs:
         yarn run test-project:build
         cp -r test/test-project docs/dist/test-project
         cp deploy/404.html docs/dist/404.html
+        cp deploy/gh-pages-spa.js docs/dist/gh-pages-spa.js
+        sed '7i\'$'\n''<script src="/gh-pages-spa.js"></script>'$'\n' docs/dist/index.html > docs/dist/index-modified.html
+        mv docs/dist/index{-modified,}.html
+        sed '7i\'$'\n''<script src="/gh-pages-spa.js"></script>'$'\n' docs/dist/test-project/index.html > docs/dist/test-project/index-modified.html
+        mv docs/dist/test-project/index{-modified,}.html
         # https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
         touch docs/dist/.nojekyll
         # https://help.github.com/en/articles/managing-a-custom-domain-for-your-github-pages-site
