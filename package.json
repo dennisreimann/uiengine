@@ -12,11 +12,11 @@
     "url": "ssh://git@github.com/dennisreimann/uiengine.git"
   },
   "devDependencies": {
-    "c8": "6.0.1",
+    "c8": "7.0.0",
     "coveralls": "3.0.9",
     "cross-env": "6.0.3",
     "ejs": "3.0.1",
-    "eslint": "6.7.2",
+    "eslint": "6.8.0",
     "eslint-config-standard": "14.1.0",
     "eslint-friendly-formatter": "4.0.1",
     "eslint-plugin-import": "2.19.1",
@@ -27,7 +27,7 @@
     "handlebars": "4.5.3",
     "husky": "3.1.0",
     "lerna": "3.19.0",
-    "lockfile-lint": "3.0.3",
+    "lockfile-lint": "3.0.4",
     "marko": "4.18.28",
     "mocha": "6.2.2",
     "mocha-lcov-reporter": "1.3.0",
@@ -36,11 +36,11 @@
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "rimraf": "3.0.0",
-    "sinon": "7.5.0",
+    "sinon": "8.0.1",
     "standard": "14.3.1",
     "theo": "8.1.4",
     "vue": "2.6.11",
-    "webpack": "4.41.3"
+    "webpack": "4.41.4"
   },
   "scripts": {
     "clean": "lerna clean --yes && rimraf node_modules test/project/node_modules",

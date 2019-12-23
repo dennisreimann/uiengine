@@ -35,7 +35,7 @@
     "lint": "eslint --fix --ext .js,.vue src test"
   },
   "dependencies": {
-    "@babel/runtime": "7.7.6",
+    "@babel/runtime": "7.7.7",
     "@uiengine/util": "2.5.9",
     "color": "3.1.2",
     "deepmerge": "4.2.2",
@@ -51,11 +51,11 @@
     "yall-js": "3.1.7"
   },
   "devDependencies": {
-    "@babel/core": "7.7.5",
-    "@babel/plugin-proposal-object-rest-spread": "7.7.4",
+    "@babel/core": "7.7.7",
+    "@babel/plugin-proposal-object-rest-spread": "7.7.7",
     "@babel/plugin-syntax-dynamic-import": "7.7.4",
-    "@babel/plugin-transform-runtime": "^7.7.6",
-    "@babel/preset-env": "7.7.6",
+    "@babel/plugin-transform-runtime": "7.7.6",
+    "@babel/preset-env": "7.7.7",
     "autoprefixer": "9.7.3",
     "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
@@ -72,7 +72,7 @@
     "fs-extra": "8.1.0",
     "html-webpack-plugin": "3.2.0",
     "iframe-resizer": "4.2.8",
-    "mini-css-extract-plugin": "0.8.2",
+    "mini-css-extract-plugin": "0.9.0",
     "node-notifier": "6.0.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "postcss-import": "12.0.1",
@@ -85,7 +85,7 @@
     "vue-loader": "15.8.3",
     "vue-style-loader": "4.1.2",
     "vue-template-compiler": "2.6.11",
-    "webpack": "4.41.3",
+    "webpack": "4.41.4",
     "webpack-bundle-analyzer": "3.6.0",
     "webpack-cli": "3.3.10",
     "webpack-merge": "4.2.2"
