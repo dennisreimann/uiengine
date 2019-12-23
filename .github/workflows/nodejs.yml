@@ -1,0 +1,39 @@
+name: Node CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install
+      run: yarn && yarn setup
+    - name: Build
+      run: |
+        yarn run build
+        yarn run docs:build
+        # https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
+        touch docs/dist/.nojekyll
+        # https://help.github.com/en/articles/managing-a-custom-domain-for-your-github-pages-site
+        echo uiengine.uix.space > docs/dist/CNAME
+      env:
+        CI: true
+    - name: GitHub Pages Deploy
+      uses: maxheld83/ghpages@v0.2.1
+      env:
+        BUILD_DIR: docs/dist/
+        GH_PAT: ${{ secrets.GH_PAT }}

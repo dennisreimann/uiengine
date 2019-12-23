@@ -27,7 +27,6 @@
     "handlebars": "4.5.3",
     "husky": "3.1.0",
     "lerna": "3.19.0",
-    "lighthouse-ci": "1.10.0",
     "lockfile-lint": "3.0.3",
     "marko": "4.18.28",
     "mocha": "6.2.2",
@@ -58,11 +57,6 @@
     "demo": "rimraf test/demo && sleep 1 && uiengine init --dir test/demo --demo && cd test/demo && uiengine build -s -w",
     "docs:start": "cd docs && uiengine build -s -w",
     "docs:build": "cd docs && uiengine build",
-    "docs:lighthouse": "lighthouse-ci --report=. https://uiengine.uix.space/",
-    "docs:deploy": "yarn run docs:deploy_latest && yarn run docs:deploy_version && yarn run docs:lighthouse && yarn run docs:deploy_lighthouse",
-    "docs:deploy_latest": "$npm_package_config_deployment_command --exclude=v/ deploy/ docs/dist/ $npm_package_config_deployment_target_docs",
-    "docs:deploy_version": "VERSION=`echo \"console.log(require('./packages/core/package.json').version);\" | node` && VERSION_PATH=/v/$VERSION && cd docs && uiengine build --override.ui.base=\"$VERSION_PATH/\" && cd .. && mkdir -p deploy/v && sed 's!RewriteBase /!RewriteBase '$VERSION_PATH'/!' deploy/.htaccess > deploy/v/.htaccess && $npm_package_config_deployment_command --rsync-path=\"mkdir -p virtual/uiengine.uix.space/$VERSION_PATH && rsync\" deploy/v/ docs/dist/ $npm_package_config_deployment_target_docs/$VERSION_PATH",
-    "docs:deploy_lighthouse": "$npm_package_config_deployment_command report.html $npm_package_config_deployment_target_docs",
     "test-acceptance": "cd test/acceptance && cypress run",
     "test-project": "cd test/project && cross-env NODE_ENV=development yarn run dev",
     "test-project:build": "cd test/project && yarn install && cross-env NODE_ENV=production yarn run prod",
@@ -71,7 +65,6 @@
   "config": {
     "deployment": {
       "command": "rsync -ravzulO --chmod=u=rwX,g=rX --delete-after",
-      "target_docs": "uiengine@uiengine.uix.space:virtual/uiengine.uix.space",
       "target_sample": "uiengine@uiengine-sample-project.uix.space:virtual/uiengine-sample-project.uix.space"
     }
   },

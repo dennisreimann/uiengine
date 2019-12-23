@@ -35,11 +35,6 @@ jobs:
       before_script: skip
       script: yarn run lint
 
-    # - stage: check
-    #   name: audit
-    #   before_script: skip
-    #   script: yarn audit
-
     - stage: deploy
       name: coverage
       script: yarn run coverage
@@ -55,14 +50,6 @@ jobs:
         provider: script
         skip_cleanup: true
         script: yarn run test-project:deploy
-
-    - stage: deploy
-      name: docs
-      script: yarn run docs:build
-      deploy:
-        provider: script
-        skip_cleanup: true
-        script: yarn run docs:deploy
 
     # https://docs.cypress.io/guides/guides/continuous-integration.html#Travis
     - stage: verify
@@ -81,7 +68,6 @@ before_deploy:
 addons:
   chrome: stable
   ssh_known_hosts:
-    - uiengine.uix.space
     - uiengine-sample-project.uix.space
   apt:
     packages:
