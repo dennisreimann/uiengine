@@ -16,5 +16,6 @@
     "**/dist": true,
     "**/packages/*/lib": true,
     "**/packages/ui/static": true
-  }
+  },
+  "editor.formatOnSave": false
 }
