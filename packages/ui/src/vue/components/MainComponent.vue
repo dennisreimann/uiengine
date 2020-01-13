@@ -202,6 +202,7 @@
         v-for="variant in variants"
         :key="variant.id"
         :variant="variant"
+        :component="component"
       />
     </section>
   </div>

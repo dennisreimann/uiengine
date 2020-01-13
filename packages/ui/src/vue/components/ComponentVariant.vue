@@ -198,6 +198,10 @@ export default {
     variant: {
       type: Object,
       required: true
+    },
+    component: {
+      type: Object,
+      required: true
     }
   },
 
