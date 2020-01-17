@@ -4,7 +4,7 @@
 
 ### Added
 
-- Plugins API, see the [plugin docs](/basics/plugins/).
+- Plugins API, see the [plugin docs](/advanced/plugins/).
 - UI: Re-add variant HTML to code view. [Thanks @therealpecus](https://github.com/dennisreimann/uiengine/pull/54)
 
 ### Changed
