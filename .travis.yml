@@ -10,9 +10,10 @@ os:
   - osx
   - windows
 
-matrix:
-  allow_failures:
-    - os: windows
+# Workaround for stalled Windows build, see
+# https://travis-ci.community/t/timeout-after-build-finished-and-succeeded/1336
+env:
+  - YARN_GPG=no
 
 stages:
   - name: check
