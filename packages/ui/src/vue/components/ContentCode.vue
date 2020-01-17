@@ -92,11 +92,13 @@
 
 <script>
 import { decorateCode, decorateContext, omit, isolateCode } from '../../shared/code'
-import Preview from '../mixins/preview'
+import Iframe from '../mixins/iframe'
+import Themes from '../mixins/themes'
 
 export default {
   mixins: [
-    Preview
+    Iframe,
+    Themes
   ],
 
   props: {

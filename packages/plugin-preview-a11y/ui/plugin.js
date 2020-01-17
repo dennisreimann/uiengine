@@ -8,7 +8,6 @@ document.addEventListener('plugin-preview-a11y:iframe:load', ({ detail }) => {
     const { contentWindow: { axe } } = iframe
 
     if (axe) {
-      console.log('plugin-preview-a11y:iframe:load', detail)
       if (!axe) return console.error('Axe could not be found in preview iframe.')
 
       if (axeOpts) {
@@ -17,8 +16,6 @@ document.addEventListener('plugin-preview-a11y:iframe:load', ({ detail }) => {
 
       axe.run((error, results) => {
         if (error) return console.error('[UIengine]', 'Error running Axe:', error)
-
-        console.debug('[UIengine]', 'Axe plugin results:', results, { target, content, iframe, plugin })
 
         let targetInfo = target.querySelector('span.info')
         if (!targetInfo) {

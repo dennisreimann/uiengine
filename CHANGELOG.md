@@ -1,9 +1,10 @@
 # Changelog
 
-## [2.6.0] - ongoing development
+## [2.6.0] - 17.01.2020
 
 ### Added
 
+- Plugins API, see the [plugin docs](/basics/plugins/).
 - UI: Re-add variant HTML to code view. [Thanks @therealpecus](https://github.com/dennisreimann/uiengine/pull/54)
 
 ### Changed
