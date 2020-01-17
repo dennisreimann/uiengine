@@ -2,7 +2,7 @@
   "name": "@uiengine/plugin-preview-a11y",
   "description": "UIengine plugin for adding accessibility tests to the preview",
   "license": "MIT",
-  "version": "2.0.1",
+  "version": "2.6.0",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",

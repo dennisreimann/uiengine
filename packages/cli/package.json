@@ -2,12 +2,12 @@
   "name": "@uiengine/cli",
   "description": "UIengine command line interface.",
   "license": "MIT",
-  "version": "2.5.9",
+  "version": "2.6.0",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
   "repository": {
-    "type" : "git",
+    "type": "git",
     "url": "ssh://git@github.com/dennisreimann/uiengine.git",
     "directory": "packages/cli"
   },
@@ -33,7 +33,7 @@
     "lint": "eslint --fix src test"
   },
   "dependencies": {
-    "@uiengine/util": "2.5.9",
+    "@uiengine/util": "2.6.0",
     "fs-extra": "8.1.0",
     "globby": "11.0.0",
     "js-yaml": "3.13.1",

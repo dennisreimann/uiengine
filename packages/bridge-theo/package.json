@@ -2,12 +2,12 @@
   "name": "@uiengine/bridge-theo",
   "description": "UIengine integration for Saleforce Theo.",
   "license": "MIT",
-  "version": "2.5.9",
+  "version": "2.6.0",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
   "repository": {
-    "type" : "git",
+    "type": "git",
     "url": "ssh://git@github.com/dennisreimann/uiengine.git",
     "directory": "packages/bridge-theo"
   },
