@@ -29,27 +29,17 @@ export default {
       this.$refs.preview.$on('iframe:load', iframe => {
         this.pluginActions.forEach((plugin, index) => {
           const target = this.$refs['plugin-action'][index]
-          this.dispatchPluginEvent('iframe:load', plugin, { target, iframe, variant, component })
-        })
-
-        this.pluginTabs.forEach((plugin, index) => {
-          const target = this.$refs['plugin-tab'][index]
-          const content = this.$refs['plugin-tab-content'][index]
-          this.dispatchPluginEvent('iframe:load', plugin, { target, content, iframe, variant, component })
-        })
-
-        this.pluginActions.forEach((plugin, index) => {
-          const target = this.$refs['plugin-action'][index]
           this.dispatchPluginEvent('init', plugin, { target, variant, component })
+          this.dispatchPluginEvent('iframe:load', plugin, { target, variant, component, iframe })
         })
 
         this.pluginTabs.forEach((plugin, index) => {
           const target = this.$refs['plugin-tab'][index]
           const content = this.$refs['plugin-tab-content'][index]
           this.dispatchPluginEvent('init', plugin, { target, content, variant, component })
+          this.dispatchPluginEvent('iframe:load', plugin, { target, content, variant, component, iframe })
         })
       })
     })
-
   }
 }
