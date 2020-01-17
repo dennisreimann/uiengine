@@ -6,6 +6,7 @@
   "screenshotsFolder": "screenshots",
   "supportFile": "support/index.js",
   "videosFolder": "videos",
+  "chromeWebSecurity": false,
   "viewportWidth": 1200,
   "viewportHeight": 1200
 }

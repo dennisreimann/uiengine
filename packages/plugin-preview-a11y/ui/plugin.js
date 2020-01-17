@@ -5,10 +5,8 @@ document.addEventListener('plugin-preview-a11y:iframe:load', ({ detail }) => {
   let retries = 0
 
   function setupAxe () {
-    const { contentWindow: { axe } } = iframe
-
-    if (axe) {
-      if (!axe) return console.error('Axe could not be found in preview iframe.')
+    if (iframe.contentWindow && iframe.contentWindow.axe) {
+      const { contentWindow: { axe } } = iframe
 
       if (axeOpts) {
         axe.configure(axeOpts)

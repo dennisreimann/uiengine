@@ -3,6 +3,8 @@
 context('Component', () => {
   beforeEach(() => {
     cy.visit('/patterns/atoms/label/', { failOnStatusCode: false })
+    cy.get('[data-test-theme-switch-current]').click()
+    cy.get('[data-test-theme-switch-id="plain"]').click()
     cy.clearLocalStorage()
   })
 
@@ -15,6 +17,12 @@ context('Component', () => {
   })
 
   context('preview', () => {
+    afterEach(() => {
+      // Back to plain
+      cy.get('[data-test-theme-switch-current]').click()
+      cy.get('[data-test-theme-switch-id="plain"]').click()
+    })
+
     context('in viewport mode', () => {
       beforeEach(() => {
         cy.visit('/_settings/', { failOnStatusCode: false })
@@ -66,10 +74,6 @@ context('Component', () => {
 
         cy.get('#label-label-pug-5 [data-test-viewport-iframe="plain-Phone"]')
         cy.get('#label-label-pug-5 [data-test-viewport-iframe="funky-Phone"]')
-
-        // Back to plain
-        cy.get('[data-test-theme-switch-current]').click()
-        cy.get('[data-test-theme-switch-id="plain"]').click()
       })
     })
 
@@ -122,10 +126,6 @@ context('Component', () => {
 
         cy.get('#label-label-pug-5 [data-test-breakpoint-iframe="plain"]')
         cy.get('#label-label-pug-5 [data-test-breakpoint-iframe="funky"]')
-
-        // Back to plain
-        cy.get('[data-test-theme-switch-current]').click()
-        cy.get('[data-test-theme-switch-id="plain"]').click()
       })
     })
   })
