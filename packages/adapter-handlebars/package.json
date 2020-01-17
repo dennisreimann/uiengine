@@ -28,10 +28,10 @@
   ],
   "dependencies": {
     "@uiengine/util": "2.5.9",
-    "globby": "10.0.1"
+    "globby": "11.0.0"
   },
   "devDependencies": {
-    "handlebars": "4.5.3"
+    "handlebars": "4.7.2"
   },
   "peerDependencies": {
     "handlebars": "^4.0.0"

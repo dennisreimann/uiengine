@@ -30,8 +30,8 @@
     "@uiengine/util": "2.5.9",
     "deepmerge": "4.2.2",
     "fs-extra": "8.1.0",
-    "globby": "10.0.1",
-    "postcss": "7.0.25"
+    "globby": "11.0.0",
+    "postcss": "7.0.26"
   },
   "scripts": {
     "lint": "eslint --fix src test"

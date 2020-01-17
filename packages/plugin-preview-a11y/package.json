@@ -23,7 +23,7 @@
     "uiengine"
   ],
   "dependencies": {
-    "axe-core": "3.3.2"
+    "axe-core": "3.4.1"
   },
   "peerDependencies": {
     "@uiengine/core": "^2.3.0"
