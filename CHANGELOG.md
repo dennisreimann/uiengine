@@ -174,7 +174,7 @@
 ### Changed
 
 - Removed parent package `uiengine`
-  - use scoped packages directly, i.e. `@uiengine/core` plus `@uiengine/adapter-html`
+  - use scoped packages directly, e.g. `@uiengine/core` plus `@uiengine/adapter-html`
 
 ## [1.1.0] - 2018-09-02
 
@@ -349,7 +349,7 @@ For details see the
 - More flexible configuration lookup
   - The config file is now retrieved via [cosmiconfig](https://github.com/davidtheclark/cosmiconfig)
   - The default config file is `uiengine.config.js`
-  - For alternative ways to store your config (i.e. in package.json) see the cosmiconfig docs
+  - For alternative ways to store your config (e.g. in package.json) see the cosmiconfig docs
 
 ## [0.13.0] - 2018-02-09
 

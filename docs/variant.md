@@ -120,5 +120,5 @@ Everything in between these HTML comments is omitted in the rendered preview
 
 ### Testing
 
-In case you are running browser tests against the previews (i.e. visual regression testing), please make sure to use the iframe content pages directly.
+In case you are running browser tests against the previews (e.g. visual regression testing), please make sure to use the iframe content pages directly.
 This way you will enjoy faster load times and more stable tests.

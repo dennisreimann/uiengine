@@ -10,7 +10,7 @@ module.exports = require('yargs')
   // config overrides
   .global('override')
   .array('override')
-  .describe('override', 'Config overrides, i.e. override.ui.base="/patterns/"')
+  .describe('override', 'Config overrides, e.g. override.ui.base="/patterns/"')
   // debug
   .global('debug')
   .choices('debug', [0, 1, 2, 3, 4])

@@ -92,12 +92,12 @@ The return value can either be a string of HTML or a structured object containin
 #### `setup(opts)`
 
 This function is called before the project gets generated.
-You can use this hook to i.e. [register partials when working with Handlebars](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-handlebars/src/index.js).
+You can use this hook to e.g. [register partials when working with Handlebars](https://github.com/dennisreimann/uiengine/tree/master/packages/adapter-handlebars/src/index.js).
 
 #### `registerComponentFile(opts, filePath)`
 
 This function gets called for each component file, which has an associated adapter.
-Use this function to generate documentation from your components, i.e. extract properties from React PropTypes.
+Use this function to generate documentation from your components, e.g. extract properties from React PropTypes.
 
 When generating incremental changes during development you can also use this to update the registered component files.
 

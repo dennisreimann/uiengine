@@ -5,7 +5,7 @@ const transformProperties = (props, debugInfo) => {
 
   return Object.keys(props).reduce((result, key) => {
     let { type, required, description, default: defaultValue } = props[key]
-    if (!type) type = props[key] // basic prop definition, i.e. { name: String }
+    if (!type) type = props[key] // basic prop definition, e.g. { name: String }
 
     const definition = { type: (typeof type === 'function') ? type.name : type }
 

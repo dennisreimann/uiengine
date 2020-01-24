@@ -29,5 +29,5 @@ module.exports = {
 }
 ```
 
-The name (i.e. `+episode(episode)`) is an arbitrary value and will be displayed as the title.
+The name (e.g. `+episode(episode)`) is an arbitrary value and will be displayed as the title.
 You can use it to describe the code that should be used to render the component – like the example above for a Pug component.

@@ -7,7 +7,7 @@ exports.builder = yargs =>
     .example('$0 build')
     // watch
     .array('watch')
-    .describe('watch', 'Rebuild on file change. Can be a list of additional files to watch, i.e. watch=resources docs/*.md')
+    .describe('watch', 'Rebuild on file change. Can be a list of additional files to watch, e.g. watch=resources docs/*.md')
     .alias('w', 'watch')
     // server
     .boolean('serve')

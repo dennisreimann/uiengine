@@ -87,9 +87,9 @@ Defaults to `/`.
 
 ### repoBaseUrl
 
-Sets the repository web view base URL (i.e. for GitHub/GitLab).
+Sets the repository web view base URL (e.g. for GitHub/GitLab).
 This adds a link for components and pages to view/edit the corresponding files in the repo.
-Set this to the blob resource for a particular branch, i.e. `https://github.com/dennisreimann/uiengine/blob/master/test/project/`.
+Set this to the blob resource for a particular branch, e.g. `https://github.com/dennisreimann/uiengine/blob/master/test/project/`.
 
 ### debug
 

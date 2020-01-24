@@ -75,7 +75,7 @@ This provides you with a development environment for creating the components, pr
 - **Templating agnostic**:
   Various templating engines are integrated via adapters.
   This gives you flexibility of choice and the option to integrate custom ones.
-  It works with whatever can be rendered via JavaScript, i.e. JSX, Vue, EJS, Pug/Jade, Handlebars.
+  It works with whatever can be rendered via JavaScript, e.g. JSX, Vue, EJS, Pug/Jade, Handlebars.
 - **Prototyping environment**:
   Build your UI without the need for an existing backend/API.
   Render your templates and components with mock data.

@@ -17,7 +17,7 @@ const WEBPACK_NAME_SERVER = 'server'
 const WEBPACK_NAME_CLIENT = 'client'
 
 // queue ids separate different adapter types, as in one project multiple
-// file types (i.e. react and vue) can be build with the webpack adapter.
+// file types (e.g. react and vue) can be build with the webpack adapter.
 // -> one queue per file type
 const getQueue = options => {
   const id = getBuildId(options)
