@@ -28,7 +28,7 @@
     "lint": "eslint --fix src test"
   },
   "devDependencies": {
-    "theo": "8.1.4"
+    "theo": "8.1.5"
   },
   "peerDependencies": {
     "theo": "^8.0.0"
