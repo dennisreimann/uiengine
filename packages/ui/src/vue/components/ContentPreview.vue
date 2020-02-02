@@ -13,11 +13,18 @@
             {{ previewTitle(name, width) }}
           </div>
           <div
+            v-for="theme in displayedThemes"
+            :key="theme.id"
             class="preview__iframe-container"
+            :data-test-iframe-container="`${theme.id}-${name}`"
           >
+            <div
+              v-if="displayAllThemes"
+              class="preview__theme-title"
+            >
+              {{ theme.title }}
+            </div>
             <iframe
-              v-for="theme in displayedThemes"
-              :key="theme.id"
               ref="iframes"
               src="about:blank"
               :data-src="iframeSrc(theme.id)"
@@ -75,10 +82,19 @@
               </div>
             </div>
           </template>
-          <div class="preview__iframe-container">
+          <div
+            v-for="theme in displayedThemes"
+            :key="theme.id"
+            class="preview__iframe-container"
+            :data-test-iframe-container="theme.id"
+          >
+            <div
+              v-if="displayAllThemes"
+              class="preview__theme-title"
+            >
+              {{ theme.title }}
+            </div>
             <iframe
-              v-for="theme in displayedThemes"
-              :key="theme.id"
               ref="iframes"
               src="about:blank"
               aria-roledescription="iframe"
@@ -320,11 +336,14 @@ export default {
 
   &__iframe-container
     box-sizing content-box
-    border var(--uie-preview-border-width) solid var(--uie-color-border-preview)
-    border-radius var(--uie-preview-border-width)
+    background var(--uie-color-border-preview)
+    padding var(--uie-preview-border-width)
+    margin-bottom calc(var(--uie-preview-border-width) * 2)
 
-  &__iframe + &__iframe
-    border-top var(--uie-preview-border-width) solid var(--uie-color-border-preview)
+  &__theme-title
+    padding-bottom calc(var(--uie-preview-border-width) / 2)
+    font-family var(--uie-font-family-light)
+    font-size var(--uie-font-size-xs)
 
   &__iframe
     box-sizing content-box

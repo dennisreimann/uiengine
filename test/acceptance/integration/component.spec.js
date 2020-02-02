@@ -41,6 +41,8 @@ context('Component', () => {
 
         cy.get('#label-label-ejs-1 [data-test-viewport-iframe="plain-Phone"]')
           .should('have.attr', 'src', plainUrl)
+        cy.get('#label-label-ejs-1 [data-test-iframe-container="plain-Phone"]')
+          .should('not.contain', 'Plain')
 
         // shown for this theme
         cy.get('#label-label-pug-5 iframe').should(($iframes) => {
@@ -57,6 +59,8 @@ context('Component', () => {
 
         cy.get('#label-label-ejs-1 [data-test-viewport-iframe="funky-Phone"]')
           .should('have.attr', 'src', funkyUrl)
+        cy.get('#label-label-ejs-1 [data-test-iframe-container="funky-Phone"]')
+          .should('not.contain', 'Funky crazy awesome')
 
         // hidden for this theme
         cy.get('#label-label-pug-5 iframe').should('have.length', 0)
@@ -70,10 +74,20 @@ context('Component', () => {
         })
 
         cy.get('#label-label-ejs-1 [data-test-viewport-iframe="plain-Phone"]')
+        cy.get('#label-label-ejs-1 [data-test-iframe-container="plain-Phone"]')
+          .should('contain', 'Plain')
+
         cy.get('#label-label-ejs-1 [data-test-viewport-iframe="funky-Phone"]')
+        cy.get('#label-label-ejs-1 [data-test-iframe-container="funky-Phone"]')
+          .should('contain', 'Funky crazy awesome')
 
         cy.get('#label-label-pug-5 [data-test-viewport-iframe="plain-Phone"]')
+        cy.get('#label-label-pug-5 [data-test-iframe-container="plain-Phone"]')
+          .should('contain', 'Plain')
+
         cy.get('#label-label-pug-5 [data-test-viewport-iframe="funky-Phone"]')
+        cy.get('#label-label-pug-5 [data-test-iframe-container="funky-Phone"]')
+          .should('contain', 'Funky crazy awesome')
       })
     })
 
@@ -95,6 +109,8 @@ context('Component', () => {
 
         cy.get('#label-label-ejs-1 [data-test-breakpoint-iframe="plain"]')
           .should('have.attr', 'src', plainUrl)
+        cy.get('#label-label-ejs-1 [data-test-iframe-container="plain"]')
+          .should('not.contain', 'Plain')
 
         // shown for this theme
         cy.get('#label-label-pug-5 [data-test-breakpoint-iframe="funky"]').should('have.length', 0)
@@ -109,6 +125,8 @@ context('Component', () => {
 
         cy.get('#label-label-ejs-1 [data-test-breakpoint-iframe="funky"]')
           .should('have.attr', 'src', funkyUrl)
+        cy.get('#label-label-ejs-1 [data-test-iframe-container="funky"]')
+          .should('not.contain', 'Funky crazy awesome')
 
         // hidden for this theme
         cy.get('#label-label-pug-5 [data-test-breakpoint-iframe="funky"]').should('have.length', 0)
@@ -122,10 +140,20 @@ context('Component', () => {
         })
 
         cy.get('#label-label-ejs-1 [data-test-breakpoint-iframe="plain"]')
+        cy.get('#label-label-ejs-1 [data-test-iframe-container="plain"]')
+          .should('contain', 'Plain')
+
         cy.get('#label-label-ejs-1 [data-test-breakpoint-iframe="funky"]')
+        cy.get('#label-label-ejs-1 [data-test-iframe-container="funky"]')
+          .should('contain', 'Funky crazy awesome')
 
         cy.get('#label-label-pug-5 [data-test-breakpoint-iframe="plain"]')
+        cy.get('#label-label-pug-5 [data-test-iframe-container="plain"]')
+          .should('contain', 'Plain')
+
         cy.get('#label-label-pug-5 [data-test-breakpoint-iframe="funky"]')
+        cy.get('#label-label-pug-5 [data-test-iframe-container="funky"]')
+          .should('contain', 'Funky crazy awesome')
       })
     })
   })

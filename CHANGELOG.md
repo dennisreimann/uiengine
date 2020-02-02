@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.7.0] - ongoing development
+
+### Added
+
+- Add theme labels for preview iframes
+
 ## [2.6.0] - 17.01.2020
 
 ### Added
