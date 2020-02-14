@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.7.0] - ongoing development
+## [3.0.0] - ongoing development
 
 ### Added
 
