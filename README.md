@@ -107,12 +107,9 @@ OK, the UIengine looks really cool but it's not quite what you are looking for?
 Or you want to first compare a few solutions to see which one is the right fit?
 Here are some other projects that you might want to evaluate:
 
-- [Fractal](http://fractal.build/)
 - [Storybook](https://storybook.js.org/)
 - [Pattern Lab](http://patternlab.io/)
-- [patternplate](https://github.com/sinnerschrader/patternplate/)
-
-… or have a look at [the ever growing list of similar tools](https://github.com/davidhund/styleguide-generators).
+- or have a look at [the ever growing list of similar tools](https://github.com/davidhund/styleguide-generators).
 
 ## 🛠 Development
 

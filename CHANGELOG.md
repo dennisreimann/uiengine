@@ -5,6 +5,7 @@
 ### Added
 
 - Add theme labels for preview iframes
+- Official logo, thanks [@janpersiel](https://persiel.com/)!
 
 ## [2.6.0] - 17.01.2020
 
