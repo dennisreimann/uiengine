@@ -22,6 +22,12 @@ test/demo
 test/test-project
 test/project/dist
 
+# Yarn
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.pnp.*
+
 # Package specific rules: Specify them here and not in the package path so
 # we can profit from Standard.js ignoring the paths listed in gitignore.
 /packages/*/lib

@@ -43,12 +43,12 @@
     "webpack": "4.41.6"
   },
   "scripts": {
-    "clean": "lerna clean --yes && rimraf node_modules test/project/node_modules",
+    "clean": "lerna clean --yes",
     "setup": "yarn install && lerna bootstrap",
-    "deps": "yarn upgrade-interactive --latest",
+    "deps": "yarn upgrade-interactive",
     "start": "cd packages/ui && yarn start",
     "build": "cd packages/ui && yarn build",
-    "lint": "lerna run lint --parallel && eslint test/support && cd test/project && yarn run lint && cd - && lockfile-lint --path yarn.lock --validate-https",
+    "lint": "yarn workspaces foreach -p run lint && lockfile-lint --path yarn.lock --validate-https",
     "test": "mocha packages/*/test/**/*_test.js",
     "test-watch": "yarn test -R dot --grep @nowatch --invert -w --extensions ejs,hbs,js,jsx,json,marko,md,pug,vue,yml",
     "coverage": "c8 yarn test --forbid-only",
@@ -80,5 +80,8 @@
       "describe",
       "it"
     ]
+  },
+  "dependencies": {
+    "@yarnpkg/pnpify": "^2.0.0-rc.18"
   }
 }
