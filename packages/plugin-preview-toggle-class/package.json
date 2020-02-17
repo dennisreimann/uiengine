@@ -23,7 +23,7 @@
     "uiengine"
   ],
   "peerDependencies": {
-    "@uiengine/core": "^2.3.0"
+    "@uiengine/core": "^2.6.0"
   },
   "scripts": {
     "lint": "eslint --fix src test"
