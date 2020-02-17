@@ -7,6 +7,10 @@
 - Add theme labels for preview iframes
 - Official logo, thanks [@janpersiel](https://persiel.com/)!
 
+### Changed
+
+- Require Node.js >= 12.16 (current latest LTS)
+
 ## [2.6.0] - 17.01.2020
 
 ### Added

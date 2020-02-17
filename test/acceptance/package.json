@@ -9,7 +9,7 @@
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
   "repository": "dennisreimann/uiengine",
   "engines": {
-    "node": ">=10.13"
+    "node": ">=12.16"
   },
   "scripts": {
     "start": "cypress open",
