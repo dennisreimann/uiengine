@@ -2407,6 +2407,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/emscripten@npm:^1.38.0":
+  version: 1.39.2
+  resolution: "@types/emscripten@npm:1.39.2"
+  checksum: 2/e4f456861a643373896a2dfcad09e74bc6fe7d981e6100a4a63228b030d4d69cd100713e18b77d16c5c08b12b8ab56a003792ef6a02831a606c7b0ba92aaf617
+  languageName: node
+  linkType: hard
+
 "@types/estree@npm:0.0.38":
   version: 0.0.38
   resolution: "@types/estree@npm:0.0.38"
@@ -2487,7 +2494,12 @@ __metadata:
   dependencies:
     cypress: 4.0.2
     eslint: 6.8.0
+    eslint-config-standard: 14.1.0
     eslint-plugin-cypress: 2.10.1
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
   languageName: unknown
   linkType: soft
 
@@ -2497,6 +2509,12 @@ __metadata:
   dependencies:
     "@uiengine/util": 2.6.0
     deepmerge: 4.2.2
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
     fs-extra: 8.1.0
     globby: 11.0.0
     postcss: 7.0.26
@@ -2508,6 +2526,12 @@ __metadata:
   resolution: "@uiengine/adapter-ejs@workspace:packages/adapter-ejs"
   dependencies:
     ejs: 3.0.1
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
   peerDependencies:
     ejs: ^3.0.0
   languageName: unknown
@@ -2518,6 +2542,12 @@ __metadata:
   resolution: "@uiengine/adapter-handlebars@workspace:packages/adapter-handlebars"
   dependencies:
     "@uiengine/util": 2.6.0
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
     globby: 11.0.0
     handlebars: 4.7.3
   peerDependencies:
@@ -2529,6 +2559,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-html@workspace:packages/adapter-html"
   dependencies:
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
     fs-extra: 8.1.0
   languageName: unknown
   linkType: soft
@@ -2538,6 +2574,12 @@ __metadata:
   resolution: "@uiengine/adapter-marko@workspace:packages/adapter-marko"
   dependencies:
     "@uiengine/util": 2.6.0
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
     marko: 4.18.46
   peerDependencies:
     marko: ^4.0.0
@@ -2549,6 +2591,12 @@ __metadata:
   resolution: "@uiengine/adapter-pug@workspace:packages/adapter-pug"
   dependencies:
     "@uiengine/util": 2.6.0
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
     fs-extra: 8.1.0
     globby: 11.0.0
     pug: 2.0.4
@@ -2575,6 +2623,12 @@ __metadata:
     chalk: 3.0.0
     css-loader: 3.4.2
     eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
+    eslint-plugin-vue: 6.2.0
     object-hash: 2.0.2
     parse-prop-types: 0.3.0
     prop-types: 15.7.2
@@ -2603,6 +2657,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/bridge-theo@workspace:packages/bridge-theo"
   dependencies:
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
     theo: 8.1.5
   peerDependencies:
     theo: ^8.0.0
@@ -2614,6 +2674,12 @@ __metadata:
   resolution: "@uiengine/cli@workspace:packages/cli"
   dependencies:
     "@uiengine/util": 2.6.0
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
     fs-extra: 8.1.0
     globby: 11.0.0
     js-yaml: 3.13.1
@@ -2635,6 +2701,12 @@ __metadata:
     browser-sync: 2.26.7
     chokidar: 3.3.1
     cosmiconfig: 6.0.0
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
     fs-extra: 8.1.0
     globby: 11.0.0
     ramda: 0.27.0
@@ -2650,13 +2722,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/monorepo@workspace:."
   dependencies:
+    "@yarnpkg/pnpify": ^2.0.0-rc.18
+    babel-eslint: 10.0.3
     c8: 7.1.0
     coveralls: 3.0.9
     cross-env: 7.0.0
     ejs: 3.0.1
     eslint: 6.8.0
     eslint-config-standard: 14.1.0
-    eslint-friendly-formatter: 4.0.1
     eslint-plugin-import: 2.20.1
     eslint-plugin-node: 11.0.0
     eslint-plugin-promise: 4.2.1
@@ -2687,6 +2760,12 @@ __metadata:
   resolution: "@uiengine/plugin-preview-a11y@workspace:packages/plugin-preview-a11y"
   dependencies:
     axe-core: 3.5.1
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
   peerDependencies:
     "@uiengine/core": ^2.6.0
   languageName: unknown
@@ -2695,6 +2774,13 @@ __metadata:
 "@uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class":
   version: 0.0.0-use.local
   resolution: "@uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class"
+  dependencies:
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
   peerDependencies:
     "@uiengine/core": ^2.6.0
   languageName: unknown
@@ -2734,6 +2820,7 @@ __metadata:
     eslint-plugin-node: 11.0.0
     eslint-plugin-promise: 4.2.1
     eslint-plugin-standard: 4.0.1
+    eslint-plugin-vue: 6.2.0
     gulp: 4.0.2
     gulp-concat: 2.6.1
     handlebars: 4.7.3
@@ -2778,8 +2865,14 @@ __metadata:
     deepmerge: 4.2.2
     ejs: 3.0.1
     eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-friendly-formatter: 4.0.1
     eslint-loader: 3.0.3
-    eslint-plugin-vue: 6.1.2
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
+    eslint-plugin-vue: 6.2.0
     file-loader: 5.0.2
     friendly-errors-webpack-plugin: 1.7.0
     fs-extra: 8.1.0
@@ -2819,6 +2912,12 @@ __metadata:
   resolution: "@uiengine/util@workspace:packages/util"
   dependencies:
     chalk: 3.0.0
+    eslint: 6.8.0
+    eslint-config-standard: 14.1.0
+    eslint-plugin-import: 2.20.1
+    eslint-plugin-node: 11.0.0
+    eslint-plugin-promise: 4.2.1
+    eslint-plugin-standard: 4.0.1
     fs-extra: 8.1.0
     markdown-it: 10.0.0
     markdown-it-anchor: 5.2.5
@@ -3060,10 +3159,51 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@yarnpkg/fslib@npm:^2.0.0-rc.16":
+  version: 2.0.0-rc.16
+  resolution: "@yarnpkg/fslib@npm:2.0.0-rc.16"
+  dependencies:
+    "@yarnpkg/libzip": ^2.0.0-rc.10
+    tmp: ^0.1.0
+  checksum: 2/89c4dff7e203a755fd4e2ce845ef777c6a3fec394085c6b3d9e23629baf8900f6277e2d4e3df35a87a45b08cb9e4d564a86d6d7df81b18ee0846d005dfc970a3
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/libzip@npm:^2.0.0-rc.10":
+  version: 2.0.0-rc.10
+  resolution: "@yarnpkg/libzip@npm:2.0.0-rc.10"
+  dependencies:
+    "@types/emscripten": ^1.38.0
+  checksum: 2/95ae332b349eee4d53e0f098b7d1e4a399960d6661f33873f26cce47d32daa7e0cca7fbeb5f236aa17a20a1e5fd0d250e585267ec356df7732b6a835d934bd66
+  languageName: node
+  linkType: hard
+
 "@yarnpkg/lockfile@npm:^1.1.0":
   version: 1.1.0
   resolution: "@yarnpkg/lockfile@npm:1.1.0"
   checksum: 2/76f3f2625334fb4d37881408643b61ae08e1cfcdeb5db3e3e92f626b3535f99e963df8bafe5c07d85aa1dd09a308939eb4d0667ed4a4e93e645417b6af6e9a2f
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/pnpify@npm:^2.0.0-rc.18":
+  version: 2.0.0-rc.18
+  resolution: "@yarnpkg/pnpify@npm:2.0.0-rc.18"
+  dependencies:
+    "@yarnpkg/fslib": ^2.0.0-rc.16
+    chalk: ^3.0.0
+    comment-json: ^2.2.0
+    cross-spawn: 6.0.5
+  peerDependencies:
+    eslint: "*"
+    typescript: "*"
+  peerDependenciesMeta:
+    eslint:
+      optional: true
+    typescript:
+      optional: true
+  bin:
+    pnpify: ./lib/cli.js
+  checksum: 2/ea1146fe2318480c7a082d79dcdfa1863ff8bc31fd94059d00119bc7aaf07600e334cda5ff8000579c8dbfcf746127db7a07537c9ec0dc813be89edb31a30b1e
   languageName: node
   linkType: hard
 
@@ -5769,6 +5909,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"comment-json@npm:^2.2.0":
+  version: 2.4.2
+  resolution: "comment-json@npm:2.4.2"
+  dependencies:
+    core-util-is: ^1.0.2
+    esprima: ^4.0.1
+    has-own-prop: ^2.0.0
+    repeat-string: ^1.6.1
+  checksum: 2/80bc181741f7966946e09ba253e97a4709288acb65e8b30e641efbca0a1a2c79f31d4df6cd1412a17ddb3d1289f552ec13e1d3f983b42ac84de6344fd062cf3d
+  languageName: node
+  linkType: hard
+
 "common-tags@npm:1.8.0":
   version: 1.8.0
   resolution: "common-tags@npm:1.8.0"
@@ -6202,7 +6354,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-util-is@npm:1.0.2, core-util-is@npm:~1.0.0":
+"core-util-is@npm:1.0.2, core-util-is@npm:^1.0.2, core-util-is@npm:~1.0.0":
   version: 1.0.2
   resolution: "core-util-is@npm:1.0.2"
   checksum: 2/089015ee3c462dfceba70faa1df83b42a7bb35db26dae6af283247b06fe3216c65fccd9f00eebcaf98300dc31e981d56aae9f90b624f8f6ff1153e235ff88b65
@@ -8021,15 +8173,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vue@npm:6.1.2":
-  version: 6.1.2
-  resolution: "eslint-plugin-vue@npm:6.1.2"
+"eslint-plugin-vue@npm:6.2.0":
+  version: 6.2.0
+  resolution: "eslint-plugin-vue@npm:6.2.0"
   dependencies:
+    natural-compare: ^1.4.0
     semver: ^5.6.0
     vue-eslint-parser: ^7.0.0
   peerDependencies:
     eslint: ^5.0.0 || ^6.0.0
-  checksum: 2/052e9406dd3d03326b6c0319d8003c29dd6cb40b82844da96676e75d81582cb720a881bdc732b29c1e403dfd78c2190dbdf195d8a39e00d3e74af57fafd2011c
+  checksum: 2/5512a15cb4da9502cd00c1c57d6336da934a22a7f1e8eac2c2237694042e1be76981fc0df58218ac4b8f021ac82a507a460daf41ead8124f340be4b821f424f2
   languageName: node
   linkType: hard
 
@@ -8220,7 +8373,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esprima@npm:^4.0.0":
+"esprima@npm:^4.0.0, esprima@npm:^4.0.1":
   version: 4.0.1
   resolution: "esprima@npm:4.0.1"
   bin:
@@ -10005,6 +10158,13 @@ fsevents@^1.2.7:
   version: 4.0.0
   resolution: "has-flag@npm:4.0.0"
   checksum: 2/2e5391139d3d287231ccb58659702392f6e3abeac3296fb4721afaff46493f3d9b99a9329ae015dfe973aa206ed5c75f43e86aec0267dce79aa5c2b6e811b3ad
+  languageName: node
+  linkType: hard
+
+"has-own-prop@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "has-own-prop@npm:2.0.0"
+  checksum: 2/8513ff905297afb7b65f4e22012a2c8e20ab006067841015bf338cfd23019b6c7cec89b5192b4cb7eaaa2a5370d2474dc9a0bcfdfd71100c45b8d3be9882f45b
   languageName: node
   linkType: hard
 
@@ -18421,7 +18581,7 @@ resolve@^1.2.0:
   languageName: node
   linkType: hard
 
-"tmp@npm:0.1.0":
+"tmp@npm:0.1.0, tmp@npm:^0.1.0":
   version: 0.1.0
   resolution: "tmp@npm:0.1.0"
   dependencies:

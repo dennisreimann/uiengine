@@ -14,6 +14,11 @@ module.exports = {
   extends: [
     'standard' // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   ],
+  plugins: [
+    'import',
+    'node',
+    'promise'
+  ],
   // custom rules
   rules: {
     // allow debugger during development
