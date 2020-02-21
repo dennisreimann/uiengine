@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@uiengine/acceptance",
+  "name": "@uiengine/test-acceptance",
   "description": "UIengine Acceptance Tests",
   "license": "MIT",
   "version": "2.6.1",
@@ -20,7 +20,8 @@
     "cypress": "4.0.2",
     "eslint": "6.8.0",
     "eslint-config-standard": "14.1.0",
-    "eslint-plugin-cypress": "2.10.1",
+    "eslint-import-resolver-node": "0.3.3",
+    "eslint-plugin-cypress": "2.10.3",
     "eslint-plugin-import": "2.20.1",
     "eslint-plugin-node": "11.0.0",
     "eslint-plugin-promise": "4.2.1",

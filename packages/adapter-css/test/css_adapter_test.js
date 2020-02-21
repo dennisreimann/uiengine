@@ -1,6 +1,6 @@
 const assert = require('assert')
-const { assertMatches } = require('../../../test/support/asserts')
 const { resolve } = require('path')
+const { assertMatches } = require('../../../test/support/asserts')
 const Adapter = require('../src/index')
 
 const appPath = resolve(__dirname, 'fixtures', 'app.css')

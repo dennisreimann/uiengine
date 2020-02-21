@@ -14,11 +14,12 @@ const mainComponent = type => {
   }
 
   const componentName = upcaseFirstChar(type)
+  const componentPath = `../components/Main${componentName}`
 
   return () => import(
     /* webpackPrefetch: true */
     /* webpackChunkName: "[request]" */
-    `../components/Main${componentName}`
+    componentPath
   )
 }
 

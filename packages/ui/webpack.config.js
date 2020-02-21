@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const PnpWebpackPlugin = require('pnp-webpack-plugin')
 
 const isProduction = process.env.NODE_ENV === 'production'
 const highlightjsStyles = dirname(require.resolve('highlight.js/styles/github.css'))
@@ -121,7 +122,15 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       vue$: 'vue/dist/vue.esm.js'
-    }
+    },
+    plugins: [
+      PnpWebpackPlugin,
+    ]
+  },
+  resolveLoader: {
+    plugins: [
+      PnpWebpackPlugin.moduleLoader(module),
+    ],
   },
   optimization: {
     runtimeChunk: 'single',
@@ -162,7 +171,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
+        loader: require.resolve('eslint-loader'),
         enforce: 'pre',
         include: [resolve('src'), resolve('test')],
         options: {
@@ -172,11 +181,11 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: require.resolve('vue-loader')
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: require.resolve('babel-loader'),
         include: [resolve('src'), resolve('test')],
         // do not process the vendor iframe-resizer file
         exclude: [resolve('src/preview')],
@@ -200,19 +209,19 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader
           },
           {
-            loader: 'css-loader',
+            loader: require.resolve('css-loader'),
             options: {
               sourceMap: true
             }
           },
           {
-            loader: 'postcss-loader',
+            loader: require.resolve('postcss-loader'),
             options: {
               sourceMap: true
             }
           },
           {
-            loader: 'stylus-loader',
+            loader: require.resolve('stylus-loader'),
             options: {
               sourceMap: true,
               paths: [resolve('src/styles')],
@@ -224,14 +233,14 @@ module.exports = {
       },
       {
         test: /\.ejs$/,
-        loader: 'compile-ejs-loader',
+        loader: require.resolve('compile-ejs-loader'),
         options: {
           beautify: false
         }
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
+        loader: require.resolve('url-loader'),
         options: {
           limit: 10000,
           name: publicPath('img/[name].[hash:7].[ext]')
@@ -239,7 +248,7 @@ module.exports = {
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-        loader: 'url-loader',
+        loader: require.resolve('url-loader'),
         options: {
           limit: 10000,
           name: publicPath('media/[name].[hash:7].[ext]')
@@ -247,7 +256,7 @@ module.exports = {
       },
       {
         test: /\.woff2?$/,
-        loader: 'file-loader',
+        loader: require.resolve('file-loader'),
         options: {
           limit: 10000,
           // useRelativePath: true did not work, hence the dance
