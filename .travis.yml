@@ -1,7 +1,8 @@
 language: node_js
 cache:
+  npm: false
   directories:
-    - ~/.cache
+    - ./.yarn/cache
 node_js:
   - "lts/*"
   - "node"
@@ -23,6 +24,13 @@ stages:
   - name: verify
     if: branch = master
 
+before_install:
+  # Upgrade yarn 1.x: https://classic.yarnpkg.com/en/docs/install
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$PATH"
+  # Then use yarn 2: https://yarnpkg.com/getting-started/install
+  - yarn set version latest
+install: yarn
 before_script: yarn run build
 script: yarn test
 

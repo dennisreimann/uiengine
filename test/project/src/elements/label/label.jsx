@@ -1,3 +1,7 @@
+// Require the parse-prop-types package right up front as a workaround
+// for this issue: https://github.com/diegohaz/parse-prop-types/issues/4
+import 'parse-prop-types'
+
 import React from 'react'
 import PropTypes from 'prop-types'
 

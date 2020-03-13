@@ -117,6 +117,8 @@ describe('Component', () => {
 
       assert(labelProps, 'React Label properties are not defined')
 
+      // In case the following asserts do not work, see this issue:
+      // https://github.com/diegohaz/parse-prop-types/issues/4
       assert.strictEqual(labelProps.title.type, 'String')
       assert.strictEqual(labelProps.title.required, true)
       assert.strictEqual(labelProps.for.type, 'String')

@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const nodeExternals = require('webpack-node-externals')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const PnpWebpackPlugin = require('pnp-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 
@@ -12,31 +13,40 @@ const baseConfig = {
   // because the adapter overwrites them anyways
 
   resolve: {
-    extensions: ['.js', '.vue']
+    extensions: ['.js', '.vue'],
+    plugins: [
+      PnpWebpackPlugin
+    ]
+  },
+
+  resolveLoader: {
+    plugins: [
+      PnpWebpackPlugin.moduleLoader(module)
+    ]
   },
 
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: require.resolve('vue-loader')
       },
       {
         test: /\.css$/,
         loader: [
-          'vue-style-loader',
-          'css-loader'
+          require.resolve('vue-style-loader'),
+          require.resolve('css-loader')
         ]
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: require.resolve('babel-loader'),
         options: {
           cacheDirectory: true,
           presets: [
-            '@babel/preset-env',
-            'vue'
+            require.resolve('@babel/preset-env'),
+            require.resolve('babel-preset-vue')
           ]
         }
       }

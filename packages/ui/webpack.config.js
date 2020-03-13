@@ -124,13 +124,13 @@ module.exports = {
       vue$: 'vue/dist/vue.esm.js'
     },
     plugins: [
-      PnpWebpackPlugin,
+      PnpWebpackPlugin
     ]
   },
   resolveLoader: {
     plugins: [
-      PnpWebpackPlugin.moduleLoader(module),
-    ],
+      PnpWebpackPlugin.moduleLoader(module)
+    ]
   },
   optimization: {
     runtimeChunk: 'single',
@@ -194,11 +194,13 @@ module.exports = {
         // file more complex, because we also need to configure the vue-loader
         // separately, see https://github.com/vuejs/vue-loader/issues/350
         options: {
-          presets: ['@babel/preset-env'],
+          presets: [
+            require.resolve('@babel/preset-env')
+          ],
           plugins: [
-            '@babel/plugin-proposal-object-rest-spread',
-            '@babel/plugin-syntax-dynamic-import',
-            '@babel/plugin-transform-runtime'
+            require.resolve('@babel/plugin-proposal-object-rest-spread'),
+            require.resolve('@babel/plugin-syntax-dynamic-import'),
+            require.resolve('@babel/plugin-transform-runtime')
           ]
         }
       },

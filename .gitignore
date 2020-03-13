@@ -23,10 +23,10 @@ test/test-project
 test/project/dist
 
 # Yarn
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.pnp.*
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
 
 # Package specific rules: Specify them here and not in the package path so
 # we can profit from Standard.js ignoring the paths listed in gitignore.
