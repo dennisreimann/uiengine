@@ -118,7 +118,6 @@ export default {
         'color-brewer',
         'darcula',
         'dark',
-        'darkula',
         'default',
         'docco',
         'dracula',

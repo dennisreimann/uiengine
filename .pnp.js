@@ -3845,7 +3845,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["friendly-errors-webpack-plugin", "virtual:fe5d6daca819d319bcc26db2c27e76bb709fa173c70c5f00b3aec3a492e21cbe32ff46039514b4ecf0e1a2d07c773a33277cb033da4a2e5beb6ceeca70f6bb68#npm:1.7.0"],
             ["fs-extra", "npm:9.0.0"],
             ["fuse.js", "npm:3.4.6"],
-            ["highlight.js", "npm:9.18.1"],
+            ["highlight.js", "npm:10.0.0"],
             ["html-minifier", "npm:4.0.0"],
             ["html-webpack-plugin", "virtual:fe5d6daca819d319bcc26db2c27e76bb709fa173c70c5f00b3aec3a492e21cbe32ff46039514b4ecf0e1a2d07c773a33277cb033da4a2e5beb6ceeca70f6bb68#npm:3.2.0"],
             ["htmlescape", "npm:1.1.1"],
@@ -11779,10 +11779,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["highlight.js", [
-        ["npm:9.18.1", {
-          "packageLocation": "./.yarn/cache/highlight.js-npm-9.18.1-3aa55e5737-2.zip/node_modules/highlight.js/",
+        ["npm:10.0.0", {
+          "packageLocation": "./.yarn/cache/highlight.js-npm-10.0.0-a8006feaa7-2.zip/node_modules/highlight.js/",
           "packageDependencies": [
-            ["highlight.js", "npm:9.18.1"]
+            ["highlight.js", "npm:10.0.0"]
           ],
           "linkType": "HARD",
         }]

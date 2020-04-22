@@ -37,11 +37,11 @@ context('Component', () => {
     it('should switch the hljs theme', () => {
       cy.get('#hljs-select').should('be', 'Atom One Dark')
 
-      cy.get('#hljs-select').select('Darkula')
+      cy.get('#hljs-select').select('Darcula')
 
       cy.reload()
 
-      cy.get('#hljs-select').select('Darkula')
+      cy.get('#hljs-select').select('Darcula')
     })
   })
 })

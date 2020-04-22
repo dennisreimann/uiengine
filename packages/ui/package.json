@@ -42,7 +42,7 @@
     "deepmerge": "4.2.2",
     "ejs": "3.0.2",
     "fuse.js": "3.4.6",
-    "highlight.js": "9.18.1",
+    "highlight.js": "10.0.0",
     "htmlescape": "1.1.1",
     "vue": "2.6.11",
     "vue-analytics": "5.22.1",

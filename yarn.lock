@@ -2990,7 +2990,7 @@ __metadata:
     friendly-errors-webpack-plugin: 1.7.0
     fs-extra: 9.0.0
     fuse.js: 3.4.6
-    highlight.js: 9.18.1
+    highlight.js: 10.0.0
     html-minifier: 4.0.0
     html-webpack-plugin: 3.2.0
     htmlescape: 1.1.1
@@ -9779,10 +9779,10 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"highlight.js@npm:9.18.1":
-  version: 9.18.1
-  resolution: "highlight.js@npm:9.18.1"
-  checksum: 2/3fe99105e4cda17ae8dac7b49b791065b9b8306c1de40955cd59ce1a2cd2bed2683135a26f9ffd8f872a1d6e9d77935c48ffbb2557c228e647fe940a3bbbc4f2
+"highlight.js@npm:10.0.0":
+  version: 10.0.0
+  resolution: "highlight.js@npm:10.0.0"
+  checksum: 2/205e7f515f5db1fe0f8d6cd2617ecac8dace874a065d8cfd3234d51b62e1adf0b27ef1be473f646f6c76c63403f90a3adca12e8677a373ded33f8539fc5465b0
   languageName: node
   linkType: hard
 

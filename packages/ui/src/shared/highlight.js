@@ -1,4 +1,4 @@
-const hljs = require('highlight.js/lib/highlight')
+const hljs = require('highlight.js/lib/core')
 
 const LANGUAGES = ['bash', 'css', 'scss', 'less', 'stylus', 'javascript', 'handlebars', 'json', 'markdown', 'nginx', 'xml']
 
