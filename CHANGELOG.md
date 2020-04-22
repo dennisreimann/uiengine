@@ -11,6 +11,10 @@
 
 - Require Node.js >= 12.16 (current latest LTS)
 
+### Removed
+
+- Removed migrations for v2
+
 ## [2.6.0] - 17.01.2020
 
 ### Added

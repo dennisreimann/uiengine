@@ -3632,8 +3632,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fast-glob", "npm:3.1.1"],
             ["fs-extra", "npm:9.0.0"],
             ["globby", "npm:11.0.0"],
-            ["js-yaml", "npm:3.13.1"],
-            ["prettier", "npm:2.0.5"],
             ["ramda", "npm:0.27.0"],
             ["yargs", "npm:15.3.1"]
           ],
@@ -3656,8 +3654,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fast-glob", "npm:3.1.1"],
             ["fs-extra", "npm:9.0.0"],
             ["globby", "npm:11.0.0"],
-            ["js-yaml", "npm:3.13.1"],
-            ["prettier", "npm:2.0.5"],
             ["ramda", "npm:0.27.0"],
             ["yargs", "npm:15.3.1"]
           ],
@@ -17988,13 +17984,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/prettier-npm-1.19.1-e56d246fd2-2.zip/node_modules/prettier/",
           "packageDependencies": [
             ["prettier", "npm:1.19.1"]
-          ],
-          "linkType": "HARD",
-        }],
-        ["npm:2.0.5", {
-          "packageLocation": "./.yarn/cache/prettier-npm-2.0.5-f0ee4e15ce-2.zip/node_modules/prettier/",
-          "packageDependencies": [
-            ["prettier", "npm:2.0.5"]
           ],
           "linkType": "HARD",
         }]

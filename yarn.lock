@@ -2769,8 +2769,6 @@ __metadata:
     fast-glob: 3.1.1
     fs-extra: 9.0.0
     globby: 11.0.0
-    js-yaml: 3.13.1
-    prettier: 2.0.5
     ramda: 0.27.0
     yargs: 15.3.1
   peerDependencies:
@@ -15332,15 +15330,6 @@ fsevents@^1.2.7:
   version: 1.0.4
   resolution: "prepend-http@npm:1.0.4"
   checksum: 2/f723f34a23394b568a9ff0cd502bdda244b343c03b12a259343566eab1184cf41a6c7e9975d9e6010ccb2901b7c428d296e56a67a72d0a6ecb0f13531a3fa44e
-  languageName: node
-  linkType: hard
-
-"prettier@npm:2.0.5":
-  version: 2.0.5
-  resolution: "prettier@npm:2.0.5"
-  bin:
-    prettier: bin-prettier.js
-  checksum: 2/d249d89361870a29b20e8b268cb09e908490b8c9e21f70393d12a213701f29ba7e95b7f9ce0ad63929c16ce475176742481911737ae3da4a498873e4a3b90990
   languageName: node
   linkType: hard
 

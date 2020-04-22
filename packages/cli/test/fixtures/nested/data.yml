@@ -1,4 +1,0 @@
-absolute_data: !data /yaml.yml
-relative_data: !data ../yaml.yml
-absolute_include: !include /fixtures/yaml.yml
-relative_include: !include ../yaml.yml
