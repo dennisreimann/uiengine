@@ -27,17 +27,20 @@
   "scripts": {
     "lint": "eslint --fix src test"
   },
-  "dependencies": {
-    "error-symbol": "0.1.0"
-  },
   "devDependencies": {
+    "error-symbol": "0.1.0",
     "eslint": "6.8.0",
     "eslint-config-standard": "14.1.1",
     "eslint-plugin-import": "2.20.2",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-standard": "4.0.1",
-    "theo": "8.1.5"
+    "info-symbol": "0.1.0",
+    "log-ok": "0.1.1",
+    "success-symbol": "0.1.0",
+    "theo": "8.1.5",
+    "time-stamp": "1.0.1",
+    "warning-symbol": "0.1.0"
   },
   "peerDependencies": {
     "theo": "^8.0.0"

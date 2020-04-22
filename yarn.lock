@@ -2744,7 +2744,12 @@ __metadata:
     eslint-plugin-node: 11.1.0
     eslint-plugin-promise: 4.2.1
     eslint-plugin-standard: 4.0.1
+    info-symbol: 0.1.0
+    log-ok: 0.1.1
+    success-symbol: 0.1.0
     theo: 8.1.5
+    time-stamp: 1.0.1
+    warning-symbol: 0.1.0
   peerDependencies:
     theo: ^8.0.0
   languageName: unknown
@@ -2845,6 +2850,7 @@ __metadata:
     coveralls: 3.0.13
     cross-env: 7.0.2
     ejs: 3.0.2
+    error-symbol: 0.1.0
     eslint: 6.8.0
     eslint-config-standard: 14.1.1
     eslint-import-resolver-node: 0.3.3
@@ -2856,7 +2862,9 @@ __metadata:
     fs-extra: 9.0.0
     html-minifier: 4.0.0
     husky: 4.2.5
+    info-symbol: 0.1.0
     lerna: 3.20.2
+    log-ok: 0.1.1
     mocha: 7.1.1
     mocha-lcov-reporter: 1.3.0
     react: 16.13.1
@@ -2864,9 +2872,12 @@ __metadata:
     rimraf: 3.0.2
     sinon: 9.0.2
     standard: 14.3.3
+    success-symbol: 0.1.0
+    time-stamp: 1.0.1
     uglify-js: 3.9.1
     vue: 2.6.11
     vue-server-renderer: 2.6.11
+    warning-symbol: 0.1.0
     webpack: 4.43.0
     webpack-cli: 3.3.11
   languageName: unknown
@@ -2951,6 +2962,7 @@ __metadata:
     cross-env: 7.0.2
     css-loader: 3.5.2
     ejs: 3.0.2
+    error-symbol: 0.1.0
     eslint: 6.8.0
     eslint-config-standard: 14.1.1
     eslint-import-resolver-node: 0.3.3
@@ -2963,6 +2975,8 @@ __metadata:
     gulp-concat: 2.6.1
     handlebars: 4.7.6
     html-sketchapp-cli: 0.6.2
+    info-symbol: 0.1.0
+    log-ok: 0.1.1
     marko: 4.21.1
     parse-prop-types: 0.3.0
     pnp-webpack-plugin: 1.6.4
@@ -2971,12 +2985,15 @@ __metadata:
     react: 16.13.1
     react-dom: 16.13.1
     rimraf: 3.0.2
+    success-symbol: 0.1.0
     theo: 8.1.5
+    time-stamp: 1.0.1
     vue: 2.6.11
     vue-loader: 15.9.1
     vue-server-renderer: 2.6.11
     vue-style-loader: 4.1.2
     vue-template-compiler: 2.6.11
+    warning-symbol: 0.1.0
     webpack: 4.43.0
     webpack-merge: 4.2.2
     webpack-node-externals: 1.7.2
@@ -10801,7 +10818,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"info-symbol@npm:^0.1.0":
+"info-symbol@npm:0.1.0, info-symbol@npm:^0.1.0":
   version: 0.1.0
   resolution: "info-symbol@npm:0.1.0"
   checksum: 2/e19dab315a80963508ae6ea680cee0b9a5c2eef59eff1ae666d395e36c566ba2dd096e44e24c09bf7af6c65f4723f605b0affb9a9423064bb6bb8a8dfba6b833
@@ -12404,7 +12421,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"log-ok@npm:^0.1.1":
+"log-ok@npm:0.1.1, log-ok@npm:^0.1.1":
   version: 0.1.1
   resolution: "log-ok@npm:0.1.1"
   dependencies:
@@ -18044,7 +18061,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"success-symbol@npm:^0.1.0":
+"success-symbol@npm:0.1.0, success-symbol@npm:^0.1.0":
   version: 0.1.0
   resolution: "success-symbol@npm:0.1.0"
   checksum: 2/7d55ab76ffba8cf4993c80f7d32cfd756ad3882b989c936e16d89352810ca57ee00dd51d1ca259b939aba4fa61dff8616ef15ef44a55424957c929e1d7bfb5fa
@@ -18387,6 +18404,13 @@ fsevents@^1.2.7:
   version: 2.3.8
   resolution: "through@npm:2.3.8"
   checksum: 2/918d9151680b5355990011eb8c4b02e8cb8cf6e9fb6ea3d3e5a1faa688343789e261634ae35de4ea9167ab029d1e7bac6af2fe61b843931768d405fdc3e8897c
+  languageName: node
+  linkType: hard
+
+"time-stamp@npm:1.0.1":
+  version: 1.0.1
+  resolution: "time-stamp@npm:1.0.1"
+  checksum: 2/37248db1ebd14d250b09554e9acf36a2e5c64e27d34f0d24e18334b547c10e3a767ed2a36e97d271edce0117b9b29f81700cd77cf51b54bdbc89314ac77440bd
   languageName: node
   linkType: hard
 
@@ -19477,7 +19501,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"warning-symbol@npm:^0.1.0":
+"warning-symbol@npm:0.1.0, warning-symbol@npm:^0.1.0":
   version: 0.1.0
   resolution: "warning-symbol@npm:0.1.0"
   checksum: 2/2554ada758de8308553c99aa6288344b9c28c6d0bb680ba65af9e1aa355e825b2b70887fd882b2a68c20a058d34916e3accc4b21c817b3654141c0a59bd29eb9
