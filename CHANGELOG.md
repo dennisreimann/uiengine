@@ -14,6 +14,7 @@
 ### Removed
 
 - Removed migrations for v2
+- Deprecated `@uiengine/bridge-theo`
 
 ## [2.6.0] - 17.01.2020
 

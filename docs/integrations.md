@@ -58,6 +58,8 @@ The UIengine generates the `/_sketch/THEME_ID.html` file which can be used with 
 
 ## Theo
 
+**Please note:** The Theo integration is now deprecated, docs stay as reference for older versions.
+
 You can integrate and consume design tokens defined with the [Theo](https://github.com/salesforce-ux/theo#spec) tokens spec.
 
 You need the `@uiengine/bridge-theo` package for this.

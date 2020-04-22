@@ -231,8 +231,3 @@ module.exports = {
   ]
 }
 ```
-
-## Theo integration
-
-You can integrate and consume design tokens defined with the [Theo](https://github.com/salesforce-ux/theo#spec) tokens spec.
-For details on the format see the [integrations docs](/advanced/integrations/#theo).
