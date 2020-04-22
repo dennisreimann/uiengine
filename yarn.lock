@@ -2989,7 +2989,7 @@ __metadata:
     file-loader: 6.0.0
     friendly-errors-webpack-plugin: 1.7.0
     fs-extra: 9.0.0
-    fuse.js: 3.4.6
+    fuse.js: 5.2.3
     highlight.js: 10.0.0
     html-minifier: 4.0.0
     html-webpack-plugin: 3.2.0
@@ -9010,10 +9010,10 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"fuse.js@npm:3.4.6":
-  version: 3.4.6
-  resolution: "fuse.js@npm:3.4.6"
-  checksum: 2/8ff4907cfe9e87b7d4fb43d30694637bb78f4573123214a46e7bd3545067856bcd9c2aaa1101b702514cf4d73906cb8798b8fb39a78fa43fcf5bd6724ffc88e9
+"fuse.js@npm:5.2.3":
+  version: 5.2.3
+  resolution: "fuse.js@npm:5.2.3"
+  checksum: 2/f3244904d5446b97b4c2bbc989d29f43239d6a2504fad6415a65e303ccc68ecf4ff3989e30452aabf9225b0e9018bedafb3d322fd6aa5bb906c23b133eed4335
   languageName: node
   linkType: hard
 

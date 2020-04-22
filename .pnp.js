@@ -3844,7 +3844,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["file-loader", "virtual:fe5d6daca819d319bcc26db2c27e76bb709fa173c70c5f00b3aec3a492e21cbe32ff46039514b4ecf0e1a2d07c773a33277cb033da4a2e5beb6ceeca70f6bb68#npm:6.0.0"],
             ["friendly-errors-webpack-plugin", "virtual:fe5d6daca819d319bcc26db2c27e76bb709fa173c70c5f00b3aec3a492e21cbe32ff46039514b4ecf0e1a2d07c773a33277cb033da4a2e5beb6ceeca70f6bb68#npm:1.7.0"],
             ["fs-extra", "npm:9.0.0"],
-            ["fuse.js", "npm:3.4.6"],
+            ["fuse.js", "npm:5.2.3"],
             ["highlight.js", "npm:10.0.0"],
             ["html-minifier", "npm:4.0.0"],
             ["html-webpack-plugin", "virtual:fe5d6daca819d319bcc26db2c27e76bb709fa173c70c5f00b3aec3a492e21cbe32ff46039514b4ecf0e1a2d07c773a33277cb033da4a2e5beb6ceeca70f6bb68#npm:3.2.0"],
@@ -10954,10 +10954,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["fuse.js", [
-        ["npm:3.4.6", {
-          "packageLocation": "./.yarn/cache/fuse.js-npm-3.4.6-c7cc963769-2.zip/node_modules/fuse.js/",
+        ["npm:5.2.3", {
+          "packageLocation": "./.yarn/cache/fuse.js-npm-5.2.3-4f2de71e43-2.zip/node_modules/fuse.js/",
           "packageDependencies": [
-            ["fuse.js", "npm:3.4.6"]
+            ["fuse.js", "npm:5.2.3"]
           ],
           "linkType": "HARD",
         }]

@@ -85,7 +85,7 @@ export default {
 
   methods: {
     search () {
-      this.results = this.repo.search(this.query)
+      this.results = this.repo.search(this.query).map(r => r.item)
 
       // jump to single search results directly
       if (this.results.length === 1) {
