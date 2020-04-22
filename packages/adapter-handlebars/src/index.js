@@ -1,8 +1,10 @@
 const { readFile } = require('fs')
 const { basename, extname, join } = require('path')
-const glob = require('globby')
 const Handlebars = require('handlebars')
-const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
+const {
+  FileUtil: { glob },
+  StringUtil: { crossPlatformPath }
+} = require('@uiengine/util')
 
 async function setup (options) {
   const { components, ext } = options

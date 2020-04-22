@@ -1,12 +1,11 @@
 const { dirname, join, relative, resolve } = require('path')
 const R = require('ramda')
-const glob = require('globby')
 const { registerComponentFile } = require('./connector')
 const Variant = require('./variant')
 const {
   MarkdownUtil,
   ComponentUtil: { COMPONENT_DOCSNAME, componentFilePathToId, componentIdToFilePath, componentIdToTitle, componentPathToId },
-  FileUtil: { exists, requireUncached },
+  FileUtil: { exists, glob, requireUncached },
   TemplateUtil: { templateFilePathToId },
   StringUtil: { crossPlatformPath, titleFromContentHeading },
   DebugUtil: { debug2, debug3, debug4 }

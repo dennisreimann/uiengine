@@ -1,9 +1,8 @@
 const { dirname, join, relative, resolve } = require('path')
 const R = require('ramda')
-const glob = require('globby')
 const {
   MarkdownUtil,
-  FileUtil: { exists, requireUncached },
+  FileUtil: { exists, glob, requireUncached },
   PageUtil: { PAGE_CONFNAME, PAGE_DOCSNAME, pageFilePathToId, pageIdToFilePath, pageIdToPath, pageIdToTitle, determineType, convertUserProvidedChildrenList, convertUserProvidedComponentsList },
   StringUtil: { crossPlatformPath, titleFromContentHeading },
   DebugUtil: { debug2, debug3, debug4 }

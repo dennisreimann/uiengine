@@ -1,9 +1,11 @@
 const { basename, dirname, join } = require('path')
 const { readFile } = require('fs-extra')
-const glob = require('globby')
 const merge = require('deepmerge')
 const postcss = require('postcss')
-const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
+const {
+  FileUtil: { glob },
+  StringUtil: { crossPlatformPath }
+} = require('@uiengine/util')
 
 const extractVarDefinition = value => {
   const match = value.match(/var\((.*?)(,\s?(.*))?\)/)

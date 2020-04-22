@@ -1,8 +1,7 @@
 const { basename, join } = require('path')
 const R = require('ramda')
-const glob = require('globby')
 const Connector = require('./connector')
-const { UiengineInputError } = require('@uiengine/util')
+const { FileUtil: { glob }, UiengineInputError } = require('@uiengine/util')
 
 const {
   DebugUtil: { debug2, debug3 },

@@ -1,5 +1,6 @@
 const { dirname, extname, relative } = require('path')
 const fs = require('fs-extra')
+const glob = require('globby')
 
 const cwd = process.cwd()
 
@@ -55,6 +56,7 @@ module.exports = {
   read,
   write,
   copy,
+  glob,
   extension,
   exists,
   isDirectory,

@@ -3,8 +3,10 @@ const { dirname, isAbsolute, join, resolve } = require('path')
 const pugParser = require('pug-parser')
 const pugLexer = require('pug-lexer')
 const pugWalk = require('pug-walk')
-const glob = require('globby')
-const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
+const {
+  FileUtil: { glob },
+  StringUtil: { crossPlatformPath }
+} = require('@uiengine/util')
 
 const DEPENDENCY_CACHE = {}
 const DEPENDENCY_NODE_TYPES = ['Extends', 'Include', 'RawInclude']
