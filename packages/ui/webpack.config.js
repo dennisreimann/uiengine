@@ -47,6 +47,7 @@ const plugins = [
     template: resolve('src/templates/index.ejs'),
     excludeChunks: ['inject'],
     inject: false,
+    minify: false,
     locales: require('./src/locales'),
     assetPath
   }),
@@ -55,6 +56,7 @@ const plugins = [
     template: resolve('src/templates/sketch.ejs'),
     excludeChunks: ['main'],
     inject: false,
+    minify: false,
     assetPath
   }),
   new HtmlWebpackPlugin({
@@ -62,6 +64,7 @@ const plugins = [
     template: resolve('src/templates/tokens.ejs'),
     excludeChunks: ['main'],
     inject: false,
+    minify: false,
     assetPath
   })
 ]

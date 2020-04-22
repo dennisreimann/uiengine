@@ -1,10 +1,18 @@
 <%_
 assetPath = htmlWebpackPlugin.options.assetPath
+assets = Object.keys(compilation.assets)
 files = htmlWebpackPlugin.files
-assets = webpack.assets
+
+chunks = {
+  runtime: files.js.find(asset => asset.includes('/runtime.')),
+  vendor_other: files.js.find(asset => asset.includes('/vendor_other.')),
+  vendor_vue: files.js.find(asset => asset.includes('/vendor_vue.')),
+  main: files.js.find(asset => asset.includes('/main.')),
+  preview: files.js.find(asset => asset.includes('/preview.'))
+}
 
 const resourceHint = asset => {
-  const assetFilePath = `/${asset.name}`;
+  const assetFilePath = `/${asset}`;
   if (assetFilePath.match(/\/hljs\//)) return;
   if (assetFilePath.match(/-(light|bold)(\.\w+)?\.woff2/)) { _%>
     <link href="<%- assetPath(assetFilePath) %>" rel="prefetch" as="font" type="font/woff2" crossorigin>
@@ -41,8 +49,8 @@ _%%>
         state: <%%- helpers.htmlescape(state) %%>,
         locales: <%- JSON.stringify(htmlWebpackPlugin.options.locales) %>,
         iframeScripts: [
-          <%- JSON.stringify(assetPath(files.chunks.preview.entry)) %>,
-          <%- JSON.stringify(assetPath(files.chunks.runtime.entry)) %>,
+          <%- JSON.stringify(assetPath(chunks.preview)) %>,
+          <%- JSON.stringify(assetPath(chunks.runtime)) %>,
           <%%_ for (index in plugin.iframe_js) { _%%>
           <%%- JSON.stringify(plugin.iframe_js[index]) %%>,
           <%%_ } _%%>
@@ -69,10 +77,10 @@ _%%>
     </svg>
     <div id="app"></div>
     <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
-    <script src="<%- assetPath(files.chunks.runtime.entry) %>"></script>
-    <script src="<%- assetPath(files.chunks.vendor_other.entry) %>"></script>
-    <script src="<%- assetPath(files.chunks.vendor_vue.entry) %>"></script>
-    <script src="<%- assetPath(files.chunks.main.entry) %>"></script>
+    <script src="<%- assetPath(chunks.runtime) %>"></script>
+    <script src="<%- assetPath(chunks.vendor_other) %>"></script>
+    <script src="<%- assetPath(chunks.vendor_vue) %>"></script>
+    <script src="<%- assetPath(chunks.main) %>"></script>
     <%%_ for (index in plugin.js) { _%%>
     <script src="<%%- plugin.js[index] %%>"></script>
     <%%_ } _%%>
