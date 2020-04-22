@@ -1,6 +1,6 @@
 # Changelog
 
-## [3.0.0] - ongoing development
+## [3.0.0] - 22.04.2020
 
 ### Added
 
