@@ -2,7 +2,7 @@
   "name": "@uiengine/adapter-handlebars",
   "description": "UIengine template adapter for Handlebars.",
   "license": "MIT",
-  "version": "2.6.0",
+  "version": "3.0.0",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
@@ -27,7 +27,7 @@
     "handlebars"
   ],
   "dependencies": {
-    "@uiengine/util": "2.6.0"
+    "@uiengine/util": "3.0.0"
   },
   "devDependencies": {
     "eslint": "6.8.0",
