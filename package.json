@@ -15,8 +15,9 @@
     "@yarnpkg/pnpify": "^2.0.0-rc.21"
   },
   "devDependencies": {
-    "@uiengine/cli": "3.0.0",
-    "@uiengine/core": "3.0.0",
+    "@uiengine/adapter-html": "3.0.0",
+    "@uiengine/cli": "3.0.1",
+    "@uiengine/core": "3.0.1",
     "babel-eslint": "10.1.0",
     "babel-plugin-syntax-jsx": "6.18.0",
     "c8": "7.1.0",
