@@ -21,8 +21,8 @@ const srcs = {
 }
 
 const dist = {
-  root: '../test-project',
-  assets: '../test-project/assets'
+  root: 'dist/test-project',
+  assets: 'dist/test-project/assets'
 }
 
 const themes = ['plain', 'funky', '_all']

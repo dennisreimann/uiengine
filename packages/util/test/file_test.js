@@ -4,7 +4,7 @@ const { readFileSync, removeSync } = require('fs-extra')
 const { join } = require('path')
 
 const FileUtil = require('../src/file')
-const { testTmpPath } = require('../../../test/support/paths')
+const { testProjectTargetPath } = require('../../../test/support/paths')
 
 describe('FileUtil', () => {
   describe('#exists', () => {
@@ -67,7 +67,7 @@ describe('FileUtil', () => {
 
   describe('#write', () => {
     it('should write content to file, trim it and add a newline at the end', async () => {
-      const filePath = join(testTmpPath, 'writeFileUtilTest.txt')
+      const filePath = join(testProjectTargetPath, 'writeFileUtilTest.txt')
       await FileUtil.write(filePath, '\n\n    Test    \n\n')
       const content = readFileSync(filePath, 'utf8')
 
@@ -79,7 +79,7 @@ describe('FileUtil', () => {
   describe('#copy', () => {
     it('should copy file from source to destination', async () => {
       const src = join(__dirname, 'fixtures/markdown.md')
-      const dst = join(testTmpPath, 'markdown.md')
+      const dst = join(testProjectTargetPath, 'markdown.md')
       await FileUtil.copy(src, dst)
 
       assertExists(dst)
@@ -88,7 +88,7 @@ describe('FileUtil', () => {
 
     it('should copy directory from source to destination', async () => {
       const src = join(__dirname, 'fixtures')
-      const dst = join(testTmpPath, 'fixtures')
+      const dst = join(testProjectTargetPath, 'fixtures')
       await FileUtil.copy(src, dst)
 
       assertExists(join(dst, 'markdown.md'))

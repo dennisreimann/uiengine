@@ -6,8 +6,8 @@ const assert = require('assert')
 const { assertExists, assertMatches } = require('../../../test/support/asserts')
 const UI = require('../src/index')
 
-const { testTmpPath } = require('../../../test/support/paths')
-const target = resolve(testTmpPath, 'site')
+const { testProjectTargetPath } = require('../../../test/support/paths')
+const target = resolve(testProjectTargetPath, 'site')
 const themeId = '_default'
 const themes = [{ id: themeId, title: 'Default' }]
 const testOptions = { target, themeId, themes, markdownIt: { set: function () {} } }
@@ -25,7 +25,7 @@ const tokensPage = {
 }
 
 describe('UI', () => {
-  afterEach(() => { removeSync(testTmpPath) })
+  afterEach(() => { removeSync(testProjectTargetPath) })
 
   describe('#setup', () => {
     it('should copy the UI static files', async () => {

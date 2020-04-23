@@ -19,7 +19,6 @@ docs/dist
 test/acceptance/screenshots
 test/acceptance/videos
 test/demo
-test/test-project
 test/project/dist
 
 # Yarn

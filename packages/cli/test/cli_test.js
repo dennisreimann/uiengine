@@ -3,8 +3,8 @@ const { join } = require('path')
 const { ensureDirSync, removeSync } = require('fs-extra')
 const { runCommand } = require('./support/util')
 const { assertContentMatches, assertExists, assertMatches } = require('../../../test/support/asserts')
-const { testTmpPath } = require('../../../test/support/paths')
-const testPath = join(testTmpPath, 'cli-project')
+const { testProjectTargetPath } = require('../../../test/support/paths')
+const testPath = join(testProjectTargetPath, 'cli-project')
 
 const readConfigFile = configPath => {
   delete require.cache[require.resolve(configPath)]
@@ -17,7 +17,7 @@ describe('CLI @nowatch', function () {
   this.timeout(10000)
 
   before(() => { ensureDirSync(testPath) })
-  after(() => { removeSync(testTmpPath) })
+  after(() => { removeSync(testProjectTargetPath) })
 
   describe('init command', () => {
     const configFile = 'uiengine.config.js'
@@ -79,7 +79,7 @@ describe('CLI @nowatch', function () {
     describe('with override flag', () => {
       it('should override config parameters', async () => {
         // remove files from previous run
-        removeSync(testTmpPath)
+        removeSync(testProjectTargetPath)
         ensureDirSync(testPath)
 
         await runCommand(testPath, 'uiengine init --override.name=OVERRIDE --override.source.pages=patternlib --override.target=./dist/override-target --override.ui.lang=de')
@@ -97,7 +97,7 @@ describe('CLI @nowatch', function () {
     describe('with demo flag', () => {
       it('should create the demo files', async () => {
         // remove files from previous run
-        removeSync(testTmpPath)
+        removeSync(testProjectTargetPath)
         ensureDirSync(testPath)
 
         const stdout = await runCommand(testPath, 'uiengine init --demo')

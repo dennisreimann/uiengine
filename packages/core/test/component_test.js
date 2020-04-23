@@ -3,7 +3,7 @@ const { removeSync } = require('fs-extra')
 const { resolve } = require('path')
 const Connector = require('../src/connector')
 
-const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
+const { testProjectPath, testProjectTargetPath } = require('../../../test/support/paths')
 const { adapters } = require('./support/adapters')
 const Component = require('../src/component')
 const state = {
@@ -26,7 +26,7 @@ const state = {
     ui: {
       base: '/'
     },
-    target: testTmpPath,
+    target: testProjectTargetPath,
     adapters
   }
 }
@@ -35,7 +35,7 @@ const assertComponent = (componentIds, componentId) => assert(componentIds.inclu
 
 describe('Component', () => {
   before(() => Connector.setup(state))
-  afterEach(() => { removeSync(testTmpPath) })
+  afterEach(() => { removeSync(testProjectTargetPath) })
 
   describe('#fetchById', function () {
     this.timeout(5000)

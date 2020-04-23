@@ -5,7 +5,7 @@ const { join } = require('path')
 const { removeSync } = require('fs-extra')
 const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
 const { assertMatches, assertIncludes } = require('../../../test/support/asserts')
-const { testTmpPath } = require('../../../test/support/paths')
+const { testProjectTargetPath } = require('../../../test/support/paths')
 
 const Adapter = require('../src/index')
 
@@ -17,13 +17,13 @@ const moleculeFilePath = join(modulesPath, 'Molecule', 'Molecule.jsx')
 const moleculeIndexPath = join(modulesPath, 'Molecule', 'index.jsx')
 const organismFilePath = join(modulesPath, 'Organism', 'index.jsx')
 const templatePath = join(basePath, 'template.jsx')
-const outputPath = join(testTmpPath, '_webpack')
+const outputPath = join(testProjectTargetPath, '_webpack')
 const reactPath = require.resolve('react')
 
 const options = {
   ...require(join(basePath, 'adapter_options')),
   components: [elementsPath, modulesPath],
-  target: testTmpPath,
+  target: testProjectTargetPath,
   ext: 'jsx',
   uiBase: '/'
 }

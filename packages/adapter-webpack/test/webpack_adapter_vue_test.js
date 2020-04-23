@@ -5,7 +5,7 @@ const { join } = require('path')
 const { removeSync } = require('fs-extra')
 const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
 const { assertMatches, assertIncludes } = require('../../../test/support/asserts')
-const { testTmpPath } = require('../../../test/support/paths')
+const { testProjectTargetPath } = require('../../../test/support/paths')
 
 const Adapter = require('../src/index')
 
@@ -17,13 +17,13 @@ const moleculeFilePath = join(modulesPath, 'Molecule', 'Molecule.vue')
 const moleculeIndexPath = join(modulesPath, 'Molecule', 'index.vue')
 const organismFilePath = join(modulesPath, 'Organism', 'index.vue')
 const templatePath = join(basePath, 'template.vue')
-const outputPath = join(testTmpPath, '_webpack')
+const outputPath = join(testProjectTargetPath, '_webpack')
 const componentNormalizerPath = require.resolve('vue-loader/lib/runtime/componentNormalizer.js')
 
 const options = {
   ...require(join(basePath, 'adapter_options')),
   components: [elementsPath, modulesPath],
-  target: testTmpPath,
+  target: testProjectTargetPath,
   ext: 'vue',
   uiBase: '/'
 }

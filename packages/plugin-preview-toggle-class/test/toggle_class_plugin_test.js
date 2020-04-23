@@ -2,11 +2,11 @@ const { resolve } = require('path')
 const assert = require('assert')
 const Plugin = require('@uiengine/core/src/plugin')
 
-const { testTmpPath } = require('../../../test/support/paths')
+const { testProjectTargetPath } = require('../../../test/support/paths')
 
 const state = {
   config: {
-    target: testTmpPath,
+    target: testProjectTargetPath,
     ui: {},
     plugins: [
       {

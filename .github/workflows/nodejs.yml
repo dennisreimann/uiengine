@@ -27,7 +27,7 @@ jobs:
         yarn run build
         yarn run docs:build
         yarn run test-project:build
-        cp -r test/test-project docs/dist/test-project
+        cp -r test/project/dist/test-project docs/dist/test-project
         cp deploy/404.html docs/dist/404.html
         cp deploy/gh-pages-spa.js docs/dist/gh-pages-spa.js
         sed '7i\'$'\n''<script src="/gh-pages-spa.js"></script>'$'\n' docs/dist/index.html > docs/dist/index-modified.html

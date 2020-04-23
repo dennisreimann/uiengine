@@ -4,8 +4,8 @@ const { removeSync } = require('fs-extra')
 const { resolve } = require('path')
 const Interface = require('../src/interface')
 
-const { testTmpPath } = require('../../../test/support/paths')
-const target = resolve(testTmpPath, 'site')
+const { testProjectTargetPath } = require('../../../test/support/paths')
+const target = resolve(testProjectTargetPath, 'site')
 const TestUI = require('@uiengine/ui')
 const themeId = '_default'
 const testUiOptions = { opt1: 1, opt2: 2, target, themeId }
@@ -23,7 +23,7 @@ describe('Interface', () => {
   })
 
   describe('#setup', () => {
-    afterEach(() => { removeSync(testTmpPath) })
+    afterEach(() => { removeSync(testProjectTargetPath) })
 
     it('should call the UIs setup function', async function () {
       this.sinon.stub(TestUI, 'setup')

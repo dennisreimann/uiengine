@@ -5,12 +5,12 @@ const { resolve } = require('path')
 
 const Connector = require('../src/connector')
 
-const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
+const { testProjectPath, testProjectTargetPath } = require('../../../test/support/paths')
 const testAdapterPath = resolve(__dirname, 'fixtures', 'test-adapter')
 const noopAdapterPath = resolve(__dirname, 'fixtures', 'noop-adapter')
 const components = resolve(testProjectPath, 'src', 'components')
 const templates = resolve(testProjectPath, 'src', 'templates')
-const target = testTmpPath
+const target = testProjectTargetPath
 const base = testProjectPath
 const testFilePath = resolve(components, 'form', 'form.test')
 const testAdapterOptions = { basedir: components }

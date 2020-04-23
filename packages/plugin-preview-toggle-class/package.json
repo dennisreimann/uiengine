@@ -32,7 +32,7 @@
     "eslint-plugin-standard": "4.0.1"
   },
   "peerDependencies": {
-    "@uiengine/core": "^2.6.0"
+    "@uiengine/core": "^3.0.0"
   },
   "scripts": {
     "lint": "eslint --fix src test"

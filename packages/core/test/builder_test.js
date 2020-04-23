@@ -5,9 +5,9 @@ const assert = require('assert')
 const { assertContentMatches, assertContentDoesNotMatch, assertMatches, assertExists, assertDoesNotExist } = require('../../../test/support/asserts')
 const Builder = require('../src/builder')
 
-const { testProjectPath, testTmpPath } = require('../../../test/support/paths')
+const { testProjectPath, testProjectTargetPath } = require('../../../test/support/paths')
 const { adapters } = require('./support/adapters')
-const target = resolve(testTmpPath, 'site')
+const target = resolve(testProjectTargetPath, 'site')
 
 const state = {
   config: {
@@ -231,7 +231,7 @@ const state = {
 }
 
 describe('Builder', () => {
-  afterEach(() => { removeSync(testTmpPath) })
+  afterEach(() => { removeSync(testProjectTargetPath) })
 
   describe('#generate', () => {
     it('should generate index page', async () => {

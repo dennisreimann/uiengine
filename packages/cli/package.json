@@ -47,6 +47,6 @@
     "eslint-plugin-standard": "4.0.1"
   },
   "peerDependencies": {
-    "@uiengine/core": "2.6.1"
+    "@uiengine/core": "^3.0.0"
   }
 }

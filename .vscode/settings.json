@@ -12,7 +12,6 @@
     "**/bower_components": true,
     "**/coverage": true,
     "**/test/demo": true,
-    "**/test/test-project": true,
     "**/dist": true,
     "**/packages/*/lib": true,
     "**/packages/ui/static": true

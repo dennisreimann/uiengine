@@ -6,8 +6,8 @@ const webpackAdapterReactOptions = require('./lib/webpack-adapter-react-options'
 const webpackAdapterVueOptions = require('./lib/webpack-adapter-vue-options')
 
 const base = '/test-project/'
-const target = `..${base}`
-const baseDir = '..'
+const baseDir = 'dist'
+const target = baseDir + base
 
 module.exports = {
   // Project config: Defaults to name and version from package.json.
