@@ -8,6 +8,11 @@ const preconnect = href => ({
   }
 })
 
+const meta = (name, content) => ({
+  tag: 'meta',
+  attrs: { name, content }
+})
+
 module.exports = {
   name: 'UIengine Documentation',
   version: pkg.version,
@@ -22,13 +27,7 @@ module.exports = {
   ui: {
     customStylesFile: '/styles/docs.css',
     meta: [
-      {
-        tag: 'meta',
-        attrs: {
-          name: 'description',
-          content: 'The UIengine is a workbench for UI-driven development: A tool for developers and designers to build and document web sites and apps.'
-        }
-      },
+      meta('description', 'The UIengine is a workbench for UI-driven development: A tool for developers and designers to build and document web sites and apps.'),
       {
         tag: 'link',
         attrs: {
@@ -49,7 +48,20 @@ module.exports = {
       preconnect('https://www.google.com'),
       preconnect('https://fonts.gstatic.com'),
       preconnect('https://www.youtube-nocookie.com'),
-      preconnect('https://yt3.ggpht.com')
+      preconnect('https://yt3.ggpht.com'),
+
+      meta('og:type', 'website'),
+      meta('og:title', 'UIengine'),
+      meta('og:url', 'https://uiengine.uix.space/'),
+      meta('og:site_name', 'UIengine Documentation'),
+      meta('og:description', 'The UIengine is a workbench for UI-driven development: A tool for developers and designers to build and document web sites and apps.'),
+      meta('og:image:width', 1024),
+      meta('og:image:height', 640),
+      meta('og:image', 'http://uiengine.uix.space/card.png'),
+      meta('og:image:secure_url', 'https://uiengine.uix.space/card.png'),
+      meta('twitter:image', 'https://uiengine.uix.space/card.png'),
+      meta('twitter:card', 'summary_large_image'),
+      meta('twitter:site', '@dennisreimann')
     ],
     foot: `
       <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>

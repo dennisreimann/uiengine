@@ -10,6 +10,8 @@ Useful if you want to …
 - Prototype with your apps components and templates
 - Use code as a single source of truth
 
+![UIengine: Workbench for UI-driven development](./uiengine.png)
+
 ## 🚀  What it enables
 
 - Establish a UI-driven workflow and structure your web UI into modular components.
@@ -55,7 +57,7 @@ See the [documentation](https://uiengine.uix.space/) site, which is also generat
 [![Coverage Status](https://coveralls.io/repos/github/dennisreimann/uiengine/badge.svg?branch=master)](https://coveralls.io/github/dennisreimann/uiengine?branch=master)
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#-contributors)
 [![Maintained with lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
-[![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@dennisreimann/F0918E)](https://tippin.me/@dennisreimann)
+[![Support the project](https://badgen.net/badge/support/via%20donation/cyan)](https://dennisreimann.de/donate.html)
 
 ### ⚒ How does it work?
 
@@ -136,14 +138,6 @@ Thanks goes to these wonderful people:
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.
 Contributions of any kind welcome!
-
-## 👛 Tip jar
-
-[![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@dennisreimann/F0918E)](https://tippin.me/@dennisreimann)
-
-<a target="_blank" rel="noopener noreferrer" href="https://tiphub.io/user/249025030/tip?site=github">
-  <img src="https://tiphub.io/static/images/tip-button-dark.png" alt="Tip dennisreimann on TipHub" height="42">
-</a>
 
 - - - - -
 
