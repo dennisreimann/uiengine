@@ -2,7 +2,7 @@
   "name": "@uiengine/plugin-preview-toggle-class",
   "description": "UIengine plugin for toggling a class on the preview",
   "license": "MIT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
@@ -23,7 +23,7 @@
     "uiengine"
   ],
   "devDependencies": {
-    "@uiengine/core": "3.0.1",
+    "@uiengine/core": "3.0.2",
     "eslint": "6.8.0",
     "eslint-config-standard": "14.1.1",
     "eslint-plugin-import": "2.20.2",
