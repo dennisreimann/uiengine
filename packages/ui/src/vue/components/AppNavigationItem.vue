@@ -130,7 +130,7 @@ export default {
 
     @media $mq-l_and_up
       &:not(&--level-0)
-        font-size var(--uie-font-size-xs)
+        font-size var(--uie-font-size-s)
 
   &__item--collapsed &__tree
     display none
