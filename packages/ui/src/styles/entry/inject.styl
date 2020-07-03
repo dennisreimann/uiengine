@@ -15,6 +15,16 @@
   &__article + &__article
     margin-top var(--uie-space-xxl)
 
+.uie-table-wrapper
+  @media $mq-up_to_l
+    width 100%
+    margin-bottom var(--uie-space-xs)
+    padding-bottom var(--uie-space-xs)
+    overflow-x auto
+    table
+      min-width 680px
+    custom-fixed-scrollbar()
+
 .uie-tokens
   &__category + &__category
     margin-top var(--uie-space-xxxl)
@@ -25,10 +35,19 @@
     font-size var(--uie-font-size-m)
     font-weight var(--uie-font-weight-regular)
 
+  &__grid
+    display grid
+    grid-template-columns repeat(auto-fill, 120px)
+    grid-gap 1rem
+    padding 1rem
+    border-radius var(--uie-base-border-radius)
+    background-color var(--uie-color-neutral-20)
+
   &__container
     &--color
-      display flex
-      flex-wrap wrap
+      display grid
+      grid-template-columns repeat(auto-fill, minmax(250px, 1fr))
+      grid-gap 2rem
 
 .uie-token
   &__color
@@ -36,17 +55,13 @@
     height 40px
 
 .uie-color-token
-  flex 0 0 22.5rem
-  margin-bottom var(--uie-space-xl)
-  padding-right var(--uie-space-xxl)
-
   &__swatch
     display inline-block
     width 4.5rem
     height 4.5rem
     border-radius 50%
     border-bottom-right-radius 0 !important
-    border 1px solid var(--uie-color-border-medium)
+    border 1px solid var(--uie-color-neutral-30)
     padding 2px
 
     &__inner
@@ -90,14 +105,17 @@
     &--code
       font-family var(--uie-font-family-code)
 
+      code
+        border 1px solid var(--uie-color-neutral-30)
+        font-size var(--uie-font-size-xs)
+
 .uie-size-token
   &__size
     position relative
     bottom -.15em
     display inline-block
-    height 1.2em
-    border 1px solid var(--uie-color-accent-medium)
-    background-color var(--uie-color-accent-extralight)
+    border 1px solid var(--uie-color-neutral-50)
+    background-color var(--uie-color-neutral-30)
 
 .uie-font-token
   + .uie-font-token
@@ -144,10 +162,28 @@
     &--variable
       font-family var(--uie-font-family-code)
 
+      code
+        border 1px solid var(--uie-color-neutral-30)
+
+.uie-icon-token
+  &__icon
+    display flex
+    align-items center
+    justify-content center
+    height 80px
+    margin-bottom var(--uie-space-s)
+    border-radius var(--uie-base-border-radius)
+    background-color var(--uie-color-neutral-0)
+    box-shadow 0 2px 6px 0 rgba(0,41,77,.07)
+  &__name
+    font-size var(--uie-font-size-xs)
+    text-align center
+
 .uie-theme-token
   &__variablename
     display inline-block
     margin-top var(--uie-space-xs)
+    border 1px solid var(--uie-color-neutral-30)
 
   &__value
     &--value
@@ -155,17 +191,19 @@
     &--variable
       font-family var(--uie-font-family-code)
       white-space nowrap
+      code
+        border 1px solid var(--uie-color-neutral-30)
     &--default
       text-align center
 
   &__swatch
     display inline-block
-    width 1.2em
-    height 1.2em
+    width 2em
+    height 2em
     margin-right var(--uie-space-xs)
     border-radius 50%
     border-bottom-right-radius 0 !important
-    border 1px solid var(--uie-color-border-medium)
+    border 1px solid var(--uie-color-neutral-30)
     padding 2px
 
     &__inner
@@ -179,11 +217,5 @@
     position relative
     bottom -.15em
     display inline-block
-    height 1.2em
-    border 1px solid var(--uie-color-accent-medium)
-    background-color var(--uie-color-accent-extralight)
-
-.uie-theme-token__value--property,
-.uie-theme-token__value--description,
-.uie-tokens__container--theme tbody tr:last-child td
-  border-bottom-color var(--uie-color-border-medium) !important
+    border 1px solid var(--uie-color-neutral-50)
+    background-color var(--uie-color-neutral-30)

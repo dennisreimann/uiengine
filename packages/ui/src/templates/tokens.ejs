@@ -11,6 +11,7 @@ _%>
     const type = ((tokens && tokens[0].type) || 'default').split('/')[0]
     const isCategory = !!(type === 'category' && tokens && tokens.length)
     const isTokenThemes = !!(tokens && tokens[0].themes)
+    const hasGridLayout = !!(tokens && tokens[0].layout && tokens[0].layout === 'grid')
     const visualizable = element => ['size', 'color'].includes(element.type)
     const haveProperty = property => element => element[property]
     const haveThemeProperty = property => element => element.themes && Object.values(element.themes).some(haveProperty(property))
@@ -40,6 +41,8 @@ _%>
         return theme && theme.title ? theme.title : themeId
       }
     _%%>
+
+    <div class="uie-table-wrapper">
     <table class="uie-tokens__container uie-tokens__container--theme">
       <thead>
         <tr>
@@ -57,11 +60,11 @@ _%>
           <th class="uie-theme-token__label uie-theme-token__label--value">
             <%%= helpers.localize(lang, 'token.value') %%>
           </th>
-          <%%_ if (columns.visualization) { _%%>
-            <th class="uie-theme-token__label uie-theme-token__label--visualization"></th>
-          <%%_ } _%%>
           <%%_ if (columns.variable) { _%%>
             <th class="uie-theme-token__label uie-theme-token__label--variable"><%%= helpers.localize(lang, 'token.variable') %%></th>
+          <%%_ } _%%>
+          <%%_ if (columns.visualization) { _%%>
+            <th class="uie-theme-token__label uie-theme-token__label--visualization"></th>
           <%%_ } _%%>
           <%%_ if (columns.reference) { _%%>
             <th class="uie-theme-token__label uie-theme-token__label--reference"><%%= helpers.localize(lang, 'token.reference') %%></th>
@@ -71,8 +74,8 @@ _%>
           <%%_ } _%%>
         </tr>
       </thead>
-      <%%_ Object.values(tokens).forEach(token => { if (displayItem(token)) { _%%>
-        <tbody>
+      <tbody>
+        <%%_ Object.values(tokens).forEach(token => { if (displayItem(token)) { _%%>
           <%%_ const displayedThemeIds = displayAllThemes ? allThemeIds /* Object.keys(token.themes) */ : [themeId] _%%>
           <%%_ const rowspan = Object.keys(displayedThemeIds).length _%%>
           <%%_ displayedThemeIds.forEach((rowThemeId, index) => { _%%>
@@ -105,11 +108,14 @@ _%>
               <td class="uie-theme-token__value uie-theme-token__value--value">
                 <%%= property && property.value %%>
               </td>
+              <%%_ if (columns.variable) { _%%>
+                <td class="uie-theme-token__value uie-theme-token__value--variable"><code><%%= property && property.variable %%></code></td>
+              <%%_ } _%%>
               <%%_ if (columns.visualization) { _%%>
                 <td class="uie-theme-token__value uie-theme-token__value--visualization">
                   <%%_ if (property) { _%%>
                     <%%_ if (token.type === 'size') { _%%>
-                      <span class="uie-theme-token__size" style="width:<%%= property.value %%>"></span>
+                      <span class="uie-theme-token__size" style="--value: <%%= property.value %%>; width:<%%= property.value %%>; height:<%%= property.value %%>"></span>
                     <%%_ } else if (token.type === 'color') { _%%>
                       <span class="uie-theme-token__swatch">
                         <span class="uie-theme-token__swatch__inner" style="background-color:<%%= property.value %%>"></span>
@@ -117,9 +123,6 @@ _%>
                     <%%_ } _%%>
                   <%%_ } _%%>
                 </td>
-              <%%_ } _%%>
-              <%%_ if (columns.variable) { _%%>
-                <td class="uie-theme-token__value uie-theme-token__value--variable"><%%= property && property.variable %%></td>
               <%%_ } _%%>
               <%%_ if (columns.reference) { _%%>
                 <td class="uie-theme-token__value uie-theme-token__value--reference"><%%= property && property.reference %%></td>
@@ -129,9 +132,10 @@ _%>
               <%%_ } _%%>
             </tr>
           <%%_ }) _%%>
-        </tbody>
-      <%%_ } }) _%%>
+        <%%_ } }) _%%>
+      </tbody>
     </table>
+  </div>
 
   <%%_ } else if (type === 'color') { _%%>
     <div class="uie-tokens__container uie-tokens__container--<%%= type %%>">
@@ -155,7 +159,7 @@ _%>
           <%% if (token.variable) { %%>
             <div class="uie-color-token__info">
               <dt class="uie-color-token__label"><%%= helpers.localize(lang, 'token.variable') %%></dt>
-              <dd class="uie-color-token__value uie-color-token__value--code"><%%= token.variable %%></dd>
+              <dd class="uie-color-token__value uie-color-token__value--code"><code><%%= token.variable %%></code></dd>
             </div>
           <%% } %%>
           <%# if this color references another color only display the reference, otherwise the values %>
@@ -167,15 +171,15 @@ _%>
           <%% } else if (token.value) { %%>
             <div class="uie-color-token__info">
               <dt class="uie-color-token__label">HEX</dt>
-              <dd class="uie-color-token__value uie-color-token__value--code"><%%= color.hex %%></dd>
+              <dd class="uie-color-token__value uie-color-token__value--code"><code><%%= color.hex %%></code></dd>
             </div>
             <div class="uie-color-token__info">
               <dt class="uie-color-token__label">RGB</dt>
-              <dd class="uie-color-token__value uie-color-token__value--code"><%%= color.rgb %%></dd>
+              <dd class="uie-color-token__value uie-color-token__value--code"><code><%%= color.rgb %%></code></dd>
             </div>
             <div class="uie-color-token__info">
               <dt class="uie-color-token__label">HSL</dt>
-              <dd class="uie-color-token__value uie-color-token__value--code"><%%= color.hsl %%></dd>
+              <dd class="uie-color-token__value uie-color-token__value--code"><code><%%= color.hsl %%></code></dd>
             </div>
           <%% } %%>
         </dl>
@@ -201,7 +205,7 @@ _%>
           <%% if (token.variable) { %%>
             <div class="uie-font-token__info">
               <dt class="uie-font-token__label"><%%= helpers.localize(lang, 'token.variable') %%></dt>
-              <dd class="uie-font-token__value uie-color-token__value--code"><%%= token.variable %%></dd>
+              <dd class="uie-font-token__value uie-color-token__value--code"><code><%%= token.variable %%></code></dd>
             </div>
           <%% } %%>
           <div class="uie-font-token__info uie-font-token__info--example">
@@ -260,6 +264,7 @@ _%>
         description: tokens.some(haveProperty('description'))
       }
     _%%>
+    <div class="uie-table-wrapper">
     <table class="uie-tokens__container uie-tokens__container--icon">
       <thead>
         <tr>
@@ -282,9 +287,9 @@ _%>
           <tr class="uie-icon-token">
             <td class="uie-icon-token__value uie-icon-token__value--icon"><%%- token.value %%></td>
             <td class="uie-icon-token__value"><%%= token.name %%></td>
-            <td class="uie-icon-token__value uie-icon-token__value--value"><%%= token.usage || token.value %%></td>
+            <td class="uie-icon-token__value uie-icon-token__value--value"><code><%%= token.usage || token.value %%></code></td>
             <%% if (columns.variable) { %%>
-              <td class="uie-icon-token__value uie-icon-token__value--variable"><%%= token.variable %%></td>
+              <td class="uie-icon-token__value uie-icon-token__value--variable"><code><%%= token.variable %%></code></td>
             <%% } %%>
             <%% if (columns.description) { %%>
               <td class="uie-icon-token__value uie-icon-token__value--description"><%%= token.description %%></td>
@@ -296,6 +301,21 @@ _%>
         <%%_ } }) _%%>
       </tbody>
     </table>
+    </div>
+
+    <!-- TODO: Rendering icon tokens in a grid layout should be optional based on a `layout: 'grid'` property in `page.config.js` - see `test/project/uiengine/pages/documentation/tokens/icons/page.config.js`. -->
+    <div class="uie-tokens__grid">
+      <%%_ Object.values(tokens).forEach(token => { if (displayItem(token)) { _%%>
+        <figure class="uie-icon-token">
+          <div class="uie-icon-token__icon">
+            <%%- token.value %%>
+          </div>
+          <figcaption class="uie-icon-token__name">
+            <%%= token.name %%>
+          </figcaption>
+        </figure>
+      <%%_ } }) _%%>
+    </div>
 
   <%%_ } else { _%%>
     <%%_
@@ -306,16 +326,17 @@ _%>
         description: tokens.some(haveProperty('description'))
       }
     _%%>
+    <div class="uie-table-wrapper">
     <table class="uie-tokens__container uie-tokens__container--default">
       <thead>
         <tr>
           <th class="uie-default-token__label uie-default-token__label--name"><%%= helpers.localize(lang, 'token.name') %%></th>
           <th class="uie-default-token__label uie-default-token__label--value"><%%= helpers.localize(lang, 'token.value') %%></th>
-          <%%_ if (columns.visualization) { _%%>
-            <th class="uie-default-token__label uie-default-token__label--visualization"></th>
-          <%%_ } _%%>
           <%%_ if (columns.variable) { _%%>
             <th class="uie-default-token__label uie-default-token__label--variable"><%%= helpers.localize(lang, 'token.variable') %%></th>
+          <%%_ } _%%>
+          <%%_ if (columns.visualization) { _%%>
+            <th class="uie-default-token__label uie-default-token__label--visualization"></th>
           <%%_ } _%%>
           <%%_ if (columns.description) { _%%>
             <th class="uie-default-token__label uie-default-token__label--description"><%%= helpers.localize(lang, 'token.description') %%></th>
@@ -330,15 +351,15 @@ _%>
           <tr class="uie-default-token">
             <td class="uie-default-token__value"><%%= token.name %%></td>
             <td class="uie-default-token__value uie-default-token__value--value"><%%= token.value %%></td>
+            <%% if (columns.variable) { %%>
+              <td class="uie-default-token__value uie-default-token__value--variable"><code><%%= token.variable %%></code></td>
+            <%% } %%>
             <%% if (columns.visualization) { %%>
               <td class="uie-default-token__value uie-default-token__value--visualization">
                 <%%_ if (type === 'size') { _%%>
-                  <span class="uie-size-token__size" style="width:<%%= token.value %%>"></span>
+                  <span class="uie-size-token__size" style="width:<%%= token.value %%>; height:<%%= token.value %%>"></span>
                 <%%_ } _%%>
               </td>
-            <%% } %%>
-            <%% if (columns.variable) { %%>
-              <td class="uie-default-token__value uie-default-token__value--variable"><%%= token.variable %%></td>
             <%% } %%>
             <%% if (columns.description) { %%>
               <td class="uie-default-token__value uie-default-token__value--description"><%%= token.description %%></td>
@@ -350,6 +371,7 @@ _%>
         <%%_ } }) _%%>
       </tbody>
     </table>
+    </div>
   <%%_ } _%%>
 <%%_ } _%%>
 

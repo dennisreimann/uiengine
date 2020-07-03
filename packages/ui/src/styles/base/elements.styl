@@ -54,9 +54,9 @@
     font-weight var(--uie-font-weight-regular)
 
   .intro
-    font-family var(--uie-font-family-bold)
+    font-family var(--uie-font-family-regular)
     font-size var(--uie-font-size-l)
-    font-weight var(--uie-font-weight-bold)
+    font-weight var(--uie-font-weight-regular)
 
   .intro,
   details
@@ -81,35 +81,33 @@
     font-weight var(--uie-font-weight-bold)
 
   table
+    width 100%
     border-collapse collapse
 
     caption
-      font-family var(--uie-font-family-regular)
+      font-family var(--uie-font-family-bold)
       font-size var(--uie-font-size-l)
-      font-weight var(--uie-font-weight-regular)
+      font-weight var(--uie-font-weight-bold)
       text-align left
       margin-bottom var(--uie-space-m)
 
     th
-      color var(--uie-color-secondary-text)
+      color var(--uie-color-neutral-80)
       text-align left
-      border-bottom 1px solid var(--uie-color-border-medium)
-      font-family var(--uie-font-family-light)
-      font-size var(--uie-font-size-xs)
-      font-weight var(--uie-font-weight-light)
+      border-top 1px solid var(--uie-color-neutral-30)
+      border-bottom 1px solid var(--uie-color-neutral-30)
+      font-size var(--uie-font-size-s)
+      font-weight var(--uie-font-weight-bold)
+      background-color var(--uie-color-neutral-10)
 
     td
-      border-bottom 1px solid var(--uie-color-border-light)
+      border-bottom 1px solid var(--uie-color-neutral-30)
       font-size var(--uie-font-size-s)
 
     th,
     td
-      vertical-align top
+      vertical-align middle
       padding var(--uie-space-s) var(--uie-space-m)
-      &:first-child:not(.uie-rowspan-left)
-        padding-left 0
-      &:last-child:not(.uie-rowspan-right)
-        padding-right 0
 
   hr
     border-top 1px solid var(--uie-color-border-light)
@@ -121,6 +119,7 @@
 
   code
     code()
+    font-size var(--uie-font-size-s)
     padding var(--uie-space-xxs) var(--uie-space-xs)
     border-radius var(--uie-space-xs)
     background-color var(--uie-color-bg-medium)
@@ -128,9 +127,6 @@
   pre
     code()
     overflow-x auto
-    // defaults, will be overriden by hljs
-    color var(--uie-color-code-text)
-    background-color var(--uie-color-code-bg)
     // use important to override hljs styling which differs per theme
     padding var(--uie-space-m) !important
     // reset inline code styles when nested in pre

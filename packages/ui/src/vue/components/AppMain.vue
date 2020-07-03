@@ -77,11 +77,18 @@ export default {
 
   hr
     margin-top var(--uie-space-xl)
+    margin-bottom var(--uie-space-xl)
 
   pre,
   mark:not([class]),
   code:not([class])
     border-radius var(--uie-space-xs)
+
+  code:not([class])
+    border 1px solid var(--uie-color-neutral-30)
+
+  pre code:not([class])
+    border-width 0
 
   h1,
   h2,
@@ -105,6 +112,8 @@ export default {
   h5,
   h6
     &:not([class])
+      color var(--uie-color-main-text)
+      font-weight var(--uie-font-weight-bold)
       a
         text-decoration none
 
