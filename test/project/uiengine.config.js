@@ -12,6 +12,7 @@ const target = baseDir + base
 module.exports = {
   // Project config: Defaults to name and version from package.json.
   // Here you can overwrite it and add more custom properties.
+  logo: 'https://res.cloudinary.com/dxdo1zzwx/image/upload/v1593206893/image.png',
   name: 'UIengine Test Project',
   version: '1.0.0',
   copyright: '<a href="https://github.com/dennisreimann/uiengine">Generated with UIengine</a>',
