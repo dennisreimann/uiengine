@@ -62,3 +62,20 @@ modal-option()
 
 code()
   font-family var(--uie-font-family-code)
+
+// Custom fixed visible horizontal scrollbar
+custom-fixed-scrollbar($size = 7px, $border-radius = 7px, $thumb-color = var(--uie-color-neutral-50), $track-color = var(--uie-color-neutral-20))
+  &::-webkit-scrollbar
+    width: $size
+    height: $size
+  &::-webkit-scrollbar-thumb
+    display: block
+    border 2px solid var(--uie-color-neutral-20)
+    border-radius: $border-radius
+    background-color: $thumb-color
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5)
+  &::-webkit-scrollbar-track
+    border-radius: $border-radius
+    background-color var(--uie-color-neutral-20)
+  scrollbar-width: thin
+  scrollbar-color: $thumb-color $track-color
