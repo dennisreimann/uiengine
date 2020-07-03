@@ -118,15 +118,19 @@ export default {
 .navigation
   &__item
     position relative
+    font-weight var(--uie-font-weight-medium)
 
     &--level-0
       font-size var(--uie-font-size-s)
 
     &--level-0 + &--level-0
-      margin-top var(--uie-space-xs)
+      margin-top var(--uie-space-xxl)
 
-    &--level-0&--children:not(&--collapsed) + &--level-0
-      margin-top var(--uie-space-l)
+    &--level-1&--children:not(&--collapsed)
+      border-radius var(--uie-base-border-radius)
+
+      & + &
+        margin-top var(--uie-space-s)
 
     @media $mq-l_and_up
       &:not(&--level-0)
@@ -143,18 +147,12 @@ export default {
     cursor pointer
     background transparent
     position absolute
+    top 4px
     width 30px
     height 30px
     padding 6px
-
-    @media $mq-up_to_m
-      top 4px
-    @media $mq-m_to_l
-      top 5px
     @media $mq-l_and_up
-      top 1px
-      .navigation__item--level-0 > &
-        top 2px
+      top 0
 
     &:focus,
     &:hover,
@@ -167,7 +165,7 @@ export default {
 
     .navigation__item--level-0 > &,
     .navigation__item--level-1 > &
-      left var(--uie-space-s)
+      right 0
 
     .navigation__item--level-2 > &,
     .navigation__item--level-3 > &,
@@ -177,7 +175,6 @@ export default {
 
   &__icon
     icon-size(24px)
-    fill var(--uie-color-navigation-text)
     transition-property transform
     transition-duration var(--uie-transition-duration-fast)
 
@@ -185,8 +182,11 @@ export default {
     display block
     color inherit
     text-decoration none
-    border-left var(--uie-space-xs) solid transparent
+    border-radius var(--uie-base-border-radius)
     padding-right var(--uie-space-m)
+    font-family var(--uie-font-family-regular)
+    font-weight var(--uie-font-weight-regular)
+    line-height 1.2
     &[href]
       &:focus,
       &:hover,
@@ -200,12 +200,19 @@ export default {
       padding-bottom var(--uie-space-s)
 
     .navigation__item--level-0 &
-      padding-left calc(var(--uie-space-xxl) + var(--uie-space-xs))
+      padding-left var(--uie-space-m)
       color var(--uie-color-navigation-text)
       background-color var(--uie-color-navigation-bg)
 
+    .navigation__item--level-0 > &
+      font-family var(--uie-font-family-bold)
+      font-size var(--uie-font-size-xs)
+      font-weight var(--uie-font-weight-bold)
+      color var(--uie-color-neutral-50)
+      text-transform uppercase
+
     .navigation__item--level-1 &
-      padding-left calc(var(--uie-space-xxl) + var(--uie-space-xs))
+      padding-left var(--uie-space-m)
       color var(--uie-color-navigation-text-subnav)
       background-color var(--uie-color-navigation-bg-subnav)
 
@@ -213,16 +220,15 @@ export default {
     .navigation__item--level-3 &,
     .navigation__item--level-4 &,
     .navigation__item--level-5 &
-      padding-left calc(var(--uie-space-xxl) + var(--uie-space-xl))
+      padding-left var(--uie-space-xl)
       color var(--uie-color-navigation-text-subnav)
       background-color var(--uie-color-navigation-bg-subnav)
 
   &__item--current > &__link
     font-family var(--uie-font-family-bold)
-    font-weight var(--uie-font-weight-bold)
+    font-weight var(--uie-font-weight-semibold)
     color var(--uie-color-navigation-text-current) !important
     background-color var(--uie-color-navigation-bg-current) !important
-    border-left-color var(--uie-color-navigation-border-current)
 
   &__item--current > &__itemtoggle &__icon
     fill var(--uie-color-navigation-text-current) !important

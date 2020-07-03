@@ -92,8 +92,8 @@ export default {
 
 @media $mq-l_and_up
   .layout
-    --topbar-height 3rem
-    --navigation-width 300px
+    --topbar-height 4rem
+    --navigation-width 264px
     display flex
     flex-direction column
     height 100%
@@ -113,6 +113,8 @@ export default {
     bottom 0
     width var(--navigation-width)
     overflow-y auto
+    @media $mq-l_and_up
+      border-right 1px solid var(--uie-color-neutral-30)
 
   .main
     flex 1
@@ -141,15 +143,9 @@ export default {
     padding-right var(--uie-space-l)
 
 .topbar
-  @media $mq-l_to_xl
-    padding-left var(--uie-space-m)
-    padding-right var(--uie-space-xl)
-  @media $mq-xl_and_up
-    padding-left var(--uie-space-m)
-    padding-right var(--uie-space-xxl)
-  @media $mq-xxl_and_up
-    padding-left var(--uie-space-m)
-    padding-right var(--uie-space-xxxl)
+  @media $mq-l_and_up
+    padding-left var(--uie-space-l)
+    padding-right var(--uie-space-l)
 
 .main,
 .main + .footer,

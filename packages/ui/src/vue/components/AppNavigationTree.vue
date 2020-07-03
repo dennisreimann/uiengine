@@ -49,4 +49,7 @@ export default {
 .navigation
   &__tree
     list-style none
+    &--level-0
+      @media $mq-l_and_up
+        margin-top var(--uie-space-xxl)
 </style>
