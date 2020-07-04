@@ -32,7 +32,7 @@ describe('Shared', () => {
     it('should return the highlighted and pretty-printed json', () => {
       const decorated = decorateContext({ data: true })
 
-      assertMatches(decorated, '<pre class="hljs lang-json"><code>{\n  <span class="hljs-attr">"data"</span>: <span class="hljs-literal">true</span>\n}</code></pre>')
+      assertMatches(decorated, '<pre class="hljs lang-json"><code>{\n  <span class="hljs-attr">&quot;data&quot;</span>: <span class="hljs-literal">true</span>\n}</code></pre>')
     })
   })
 
