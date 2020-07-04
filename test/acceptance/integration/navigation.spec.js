@@ -4,6 +4,7 @@ context('Navigation', () => {
   beforeEach(() => {
     cy.visit('/')
     cy.clearLocalStorage()
+    cy.window().then(win => win.sessionStorage.clear())
   })
 
   it('should switch pages', () => {
@@ -42,11 +43,15 @@ context('Navigation', () => {
   })
 
   it('should display initially collapsed pages', () => {
+    cy.get('[data-test-navitem-id="testcases"]').scrollIntoView()
+
     cy.get('[data-test-navtree-id="testcases/examples"]').should('not.be.visible')
     cy.get('[data-test-navitem-id="testcases/examples"] > button').click()
     cy.get('[data-test-navtree-id="testcases/examples"]').should('be.visible')
 
     cy.reload()
+
+    cy.get('[data-test-navitem-id="testcases"]').scrollIntoView()
 
     cy.get('[data-test-navtree-id="testcases/examples"]').should('be.visible')
     cy.get('[data-test-navitem-id="testcases/examples"] > button').click()
