@@ -14,7 +14,9 @@ Here you can overwrite it and add more custom properties.
 ```js
 {
   name: 'ACME Design System',
-  version: '1.0.0'
+  version: '1.0.0',
+  logo: '/images/logo.png',
+  copyright: 'ACME Corp',
 }
 ```
 
