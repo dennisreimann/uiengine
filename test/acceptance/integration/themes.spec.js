@@ -33,7 +33,7 @@ context('Themes', () => {
         expect($ths.eq(0)).to.contain('Property')
         expect($ths.eq(1)).to.contain('Description')
         expect($ths.eq(2)).to.contain('Value')
-        expect($ths.eq(4)).to.contain('Variable')
+        expect($ths.eq(3)).to.contain('Variable')
       })
       cy.get('#Colors .uie-tokens__container--theme tbody:first-of-type tr.uie-theme-token:first-child td').should(($tds) => {
         expect($tds).to.have.length(5)
@@ -47,7 +47,7 @@ context('Themes', () => {
         expect($ths.eq(1)).to.contain('Description')
         expect($ths.eq(2)).to.contain('Theme')
         expect($ths.eq(3)).to.contain('Value')
-        expect($ths.eq(5)).to.contain('Variable')
+        expect($ths.eq(4)).to.contain('Variable')
       })
       cy.get('#Colors .uie-tokens__container--theme tbody:first-of-type tr.uie-theme-token:nth-child(1) td').should(($tds) => {
         expect($tds).to.have.length(6)
