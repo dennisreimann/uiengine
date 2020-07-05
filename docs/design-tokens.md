@@ -207,6 +207,7 @@ The icon type supports the following attributes:
 ```js
 module.exports = {
   title: 'Icons',
+  layout: 'grid',  // 'grid' is default, the other option is 'table'
   tokens: [
     {
       type: 'icon',

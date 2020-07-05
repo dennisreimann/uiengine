@@ -3,15 +3,16 @@ assetPath = htmlWebpackPlugin.options.assetPath
 css = htmlWebpackPlugin.files.css
 _%>
 
-<%%_ const renderTokens = (tokens, level) => { _%%>
+<%%_ const renderTokens = (tokens, config) => { _%%>
   <%%_
     const allThemeIds = themes.map(theme => theme.id)
     const displayAllThemes = themeId === '_all'
-    const displayItem = item => !!(displayAllThemes || !item.themeIds || item.themeIds.includes(themeId))
     const type = ((tokens && tokens[0].type) || 'default').split('/')[0]
     const isCategory = !!(type === 'category' && tokens && tokens.length)
     const isTokenThemes = !!(tokens && tokens[0].themes)
-    const hasGridLayout = !!(tokens && tokens[0].layout && tokens[0].layout === 'grid')
+    const level = config.level
+    const renderConfig = { level: level + 1, layout: config.layout }
+    const displayItem = item => !!(displayAllThemes || !item.themeIds || item.themeIds.includes(themeId))
     const visualizable = element => ['size', 'color'].includes(element.type)
     const haveProperty = property => element => element[property]
     const haveThemeProperty = property => element => element.themes && Object.values(element.themes).some(haveProperty(property))
@@ -21,9 +22,10 @@ _%>
     <%%_ Object.values(tokens).forEach(category => { if (displayItem(category)) { _%%>
       <section class="uie-tokens__category" id="<%%= category.id || helpers.dasherize(category.name) %%>">
         <%%_ if (category.name) { _%%>
-          <h<%%= level + 1 %%> class="uie-tokens__title"><%%= category.name %%></h<%%= level + 1 %%>>
+          <h<%%= renderConfig.level %%> class="uie-tokens__title"><%%= category.name %%></h<%%= renderConfig.level %%>>
         <%%_ } _%%>
-        <%%= renderTokens(category.tokens, level + 1) _%%>
+        <%%_ renderConfig.layout = category.layout _%%>
+        <%%= renderTokens(category.tokens, renderConfig) _%%>
       </section>
     <%%_ } }) _%%>
 
@@ -256,67 +258,66 @@ _%>
     </div>
 
   <%%_ } else if (type === 'icon') { _%%>
-    <%%_
-      const haveProperty = property => element => element[property]
-      const columns = {
-        variable: tokens.some(haveProperty('variable')),
-        reference: tokens.some(haveProperty('reference')),
-        description: tokens.some(haveProperty('description'))
-      }
-    _%%>
-    <div class="uie-table-wrapper">
-    <table class="uie-tokens__container uie-tokens__container--icon">
-      <thead>
-        <tr>
-          <th class="uie-icon-token__label uie-icon-token__label--icon"><%%= helpers.localize(lang, 'token.icon') %%></th>
-          <th class="uie-icon-token__label uie-icon-token__label--name"><%%= helpers.localize(lang, 'token.name') %%></th>
-          <th class="uie-icon-token__label uie-icon-token__label--value"><%%= helpers.localize(lang, 'token.usage') %%></th>
-          <%%_ if (columns.variable) { _%%>
-            <th class="uie-icon-token__label uie-icon-token__label--variable"><%%= helpers.localize(lang, 'token.variable') %%></th>
-          <%%_ } _%%>
-          <%%_ if (columns.description) { _%%>
-            <th class="uie-icon-token__label uie-icon-token__label--description"><%%= helpers.localize(lang, 'token.description') %%></th>
-          <%%_ } _%%>
-          <%%_ if (columns.reference) { _%%>
-            <th class="uie-icon-token__label uie-icon-token__label--reference"><%%= helpers.localize(lang, 'token.reference') %%></th>
-          <%%_ } _%%>
-        </tr>
-      </thead>
-      <tbody>
+    <%% if (renderConfig.layout === 'table') { %%>
+      <%%_
+        const columns = {
+          variable: tokens.some(haveProperty('variable')),
+          reference: tokens.some(haveProperty('reference')),
+          description: tokens.some(haveProperty('description'))
+        }
+      _%%>
+      <div class="uie-table-wrapper">
+        <table class="uie-tokens__container uie-tokens__container--icon">
+          <thead>
+            <tr>
+              <th class="uie-icon-token__label uie-icon-token__label--icon"><%%= helpers.localize(lang, 'token.icon') %%></th>
+              <th class="uie-icon-token__label uie-icon-token__label--name"><%%= helpers.localize(lang, 'token.name') %%></th>
+              <th class="uie-icon-token__label uie-icon-token__label--value"><%%= helpers.localize(lang, 'token.usage') %%></th>
+              <%%_ if (columns.variable) { _%%>
+                <th class="uie-icon-token__label uie-icon-token__label--variable"><%%= helpers.localize(lang, 'token.variable') %%></th>
+              <%%_ } _%%>
+              <%%_ if (columns.description) { _%%>
+                <th class="uie-icon-token__label uie-icon-token__label--description"><%%= helpers.localize(lang, 'token.description') %%></th>
+              <%%_ } _%%>
+              <%%_ if (columns.reference) { _%%>
+                <th class="uie-icon-token__label uie-icon-token__label--reference"><%%= helpers.localize(lang, 'token.reference') %%></th>
+              <%%_ } _%%>
+            </tr>
+          </thead>
+          <tbody>
+            <%%_ Object.values(tokens).forEach(token => { if (displayItem(token)) { _%%>
+              <tr class="uie-icon-token">
+                <td class="uie-icon-token__value uie-icon-token__value--icon"><%%- token.value %%></td>
+                <td class="uie-icon-token__value"><%%= token.name %%></td>
+                <td class="uie-icon-token__value uie-icon-token__value--value"><code><%%= token.usage || token.value %%></code></td>
+                <%% if (columns.variable) { %%>
+                  <td class="uie-icon-token__value uie-icon-token__value--variable"><code><%%= token.variable %%></code></td>
+                <%% } %%>
+                <%% if (columns.description) { %%>
+                  <td class="uie-icon-token__value uie-icon-token__value--description"><%%= token.description %%></td>
+                <%% } %%>
+                <%% if (columns.reference) { %%>
+                  <td class="uie-icon-token__value uie-icon-token__value--reference"><%%= token.reference %%></td>
+                <%% } %%>
+              </tr>
+            <%%_ } }) _%%>
+          </tbody>
+        </table>
+      </div>
+    <%%_ } else { _%%>
+      <div class="uie-tokens__grid">
         <%%_ Object.values(tokens).forEach(token => { if (displayItem(token)) { _%%>
-          <tr class="uie-icon-token">
-            <td class="uie-icon-token__value uie-icon-token__value--icon"><%%- token.value %%></td>
-            <td class="uie-icon-token__value"><%%= token.name %%></td>
-            <td class="uie-icon-token__value uie-icon-token__value--value"><code><%%= token.usage || token.value %%></code></td>
-            <%% if (columns.variable) { %%>
-              <td class="uie-icon-token__value uie-icon-token__value--variable"><code><%%= token.variable %%></code></td>
-            <%% } %%>
-            <%% if (columns.description) { %%>
-              <td class="uie-icon-token__value uie-icon-token__value--description"><%%= token.description %%></td>
-            <%% } %%>
-            <%% if (columns.reference) { %%>
-              <td class="uie-icon-token__value uie-icon-token__value--reference"><%%= token.reference %%></td>
-            <%% } %%>
-          </tr>
+          <figure class="uie-icon-token">
+            <div class="uie-icon-token__icon">
+              <%%- token.value %%>
+            </div>
+            <figcaption class="uie-icon-token__name">
+              <%%= token.name %%>
+            </figcaption>
+          </figure>
         <%%_ } }) _%%>
-      </tbody>
-    </table>
-    </div>
-
-    <!-- TODO: Rendering icon tokens in a grid layout should be optional based on a `layout: 'grid'` property in `page.config.js` - see `test/project/uiengine/pages/documentation/tokens/icons/page.config.js`. -->
-    <div class="uie-tokens__grid">
-      <%%_ Object.values(tokens).forEach(token => { if (displayItem(token)) { _%%>
-        <figure class="uie-icon-token">
-          <div class="uie-icon-token__icon">
-            <%%- token.value %%>
-          </div>
-          <figcaption class="uie-icon-token__name">
-            <%%= token.name %%>
-          </figcaption>
-        </figure>
-      <%%_ } }) _%%>
-    </div>
-
+      </div>
+    <%%_ } _%%>
   <%%_ } else { _%%>
     <%%_
       const columns = {
@@ -382,7 +383,7 @@ _%>
 <div class="uie">
   <div class="uie-tokens">
     <%%_ if (tokens) { %%>
-      <%%= renderTokens(tokens, 1) _%%>
+      <%%= renderTokens(tokens, { level: 1 }) _%%>
     <%%_ } _%%>
   </div>
 </div>

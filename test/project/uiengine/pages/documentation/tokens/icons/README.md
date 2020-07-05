@@ -4,7 +4,7 @@ Icons are used to provide additional meaning or in places where text label doesn
 
 Each icon ships in SVG format.
 
-### Usage
+## Usage
 
 The recommended way to use the project icons is to reference them from the sprite:
 
@@ -14,7 +14,7 @@ The recommended way to use the project icons is to reference them from the sprit
 </svg>
 ```
 
-### Styling
+## Styling
 
 You can easily style the icons using CSS:
 

@@ -3,7 +3,6 @@ module.exports = {
     {
       name: 'General',
       type: 'category',
-      layout: 'grid',
       tokens: [
         {
           type: 'icon',
@@ -22,6 +21,7 @@ module.exports = {
     {
       name: 'Form',
       type: 'category',
+      layout: 'table',
       tokens: [
         {
           type: 'icon',
