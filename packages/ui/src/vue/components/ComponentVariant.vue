@@ -18,95 +18,109 @@
         :tag="tag"
       />
       <div
-        v-if="hasPreview && hasCode"
-        role="tablist"
-        class="contentheader__options"
+        class="contentheader__right"
       >
-        <button
-          v-for="plugin in pluginActions"
-          ref="plugin-action"
-          :key="plugin.id"
-          :title="plugin.title"
-          :aria-label="plugin.title"
-          type="button"
-          class="contentheader__action"
-          @click.prevent="dispatchPluginEvent('click', plugin, $event)"
+        <div
+          v-if="hasPreview && hasCode"
+          role="tablist"
+          class="contentheader__options"
         >
-          <AppIcon
-            v-if="plugin.icon"
-            :symbol="plugin.icon"
-          />
-          <span v-else>
-            {{ plugin.title }}
-          </span>
-        </button>
-        <a
-          v-if="!displayAllThemes"
-          :href="href"
-          :target="variant.id | dasherize"
-          :title="'options.open_in_window' | localize"
-          :aria-label="'options.open_in_window' | localize"
-          class="contentheader__action"
-          data-test-openinwindow-link
-          @click.stop
-        >
-          <AppIcon symbol="open-in-window" />
-        </a>
-        <a
-          :href="permalinkUrl"
-          :data-clipboard-text="permalinkUrl"
-          :title="'options.copy_permalink' | localize"
-          :aria-label="'options.copy_permalink' | localize"
-          class="permalink contentheader__action"
-          @click.prevent
-        >
-          <AppIcon
-            symbol="link-45"
-            class="permalink__icon"
-          />
-        </a>
+          <button
+            v-for="plugin in pluginActions"
+            ref="plugin-action"
+            :key="plugin.id"
+            :title="plugin.title"
+            :aria-label="plugin.title"
+            type="button"
+            class="contentheader__action"
+            @click.prevent="dispatchPluginEvent('click', plugin, $event)"
+          >
+            <AppIcon
+              v-if="plugin.icon"
+              :symbol="plugin.icon"
+            />
+            <span v-else>
+              {{ plugin.title }}
+            </span>
+          </button>
+          <a
+            v-if="!displayAllThemes"
+            :href="href"
+            :target="variant.id | dasherize"
+            :title="'options.open_in_window' | localize"
+            :aria-label="'options.open_in_window' | localize"
+            class="contentheader__action"
+            data-test-openinwindow-link
+            @click.stop
+          >
+            <AppIcon symbol="open-in-window" />
+          </a>
+          <a
+            :href="permalinkUrl"
+            :data-clipboard-text="permalinkUrl"
+            :title="'options.copy_permalink' | localize"
+            :aria-label="'options.copy_permalink' | localize"
+            class="permalink contentheader__action"
+            @click.prevent
+          >
+            <AppIcon
+              symbol="link"
+              class="permalink__icon"
+            />
+          </a>
 
-        <a
-          :id="tabId('preview')"
-          ref="preview-tab"
-          :aria-selected="isTabActive('preview')"
-          :tabindex="isTabActive('preview') ? false : '-1'"
-          href="#"
-          role="tab"
-          class="contentheader__option"
-          data-test-variant-tab-link="preview"
-          @click.prevent="activeSection = 'preview'"
-        >
-          {{ 'options.preview' | localize }}
-        </a>
-        <a
-          :id="tabId('code')"
-          ref="code-tab"
-          :aria-selected="isTabActive('code')"
-          :tabindex="isTabActive('code') ? false : '-1'"
-          href="#"
-          role="tab"
-          class="contentheader__option"
-          data-test-variant-tab-link="code"
-          @click.prevent="activeSection = 'code'"
-        >
-          {{ 'options.code' | localize }}
-        </a>
-        <a
-          v-for="plugin in pluginTabs"
-          :id="tabId(plugin.id)"
-          :key="plugin.id"
-          ref="plugin-tab"
-          :aria-selected="isTabActive(plugin.id)"
-          :tabindex="isTabActive(plugin.id) ? false : '-1'"
-          :data-test-variant-tab-link="plugin.id"
-          href="#"
-          role="tab"
-          class="contentheader__option"
-          @click.prevent="activeSection = plugin.id"
-        >
-          {{ plugin.title }}
-        </a>
+          <div
+            class="contentheader__buttons"
+          >
+            <a
+              :id="tabId('preview')"
+              ref="preview-tab"
+              :aria-selected="isTabActive('preview')"
+              :tabindex="isTabActive('preview') ? false : '-1'"
+              href="#"
+              role="tab"
+              class="contentheader__option"
+              data-test-variant-tab-link="preview"
+              @click.prevent="activeSection = 'preview'"
+            >
+              <AppIcon
+                symbol="preview"
+                class="contentheader__option-icon"
+              />
+            </a>
+            <a
+              :id="tabId('code')"
+              ref="code-tab"
+              :aria-selected="isTabActive('code')"
+              :tabindex="isTabActive('code') ? false : '-1'"
+              href="#"
+              role="tab"
+              class="contentheader__option"
+              data-test-variant-tab-link="code"
+              @click.prevent="activeSection = 'code'"
+            >
+              <AppIcon
+                symbol="code"
+                class="contentheader__option-icon"
+              />
+            </a>
+            <a
+              v-for="plugin in pluginTabs"
+              :id="tabId(plugin.id)"
+              :key="plugin.id"
+              ref="plugin-tab"
+              :aria-selected="isTabActive(plugin.id)"
+              :tabindex="isTabActive(plugin.id) ? false : '-1'"
+              :data-test-variant-tab-link="plugin.id"
+              href="#"
+              role="tab"
+              class="contentheader__option"
+              @click.prevent="activeSection = plugin.id"
+            >
+              {{ plugin.title }}
+            </a>
+          </div>
+        </div>
       </div>
     </ContentHeader>
 
@@ -265,7 +279,8 @@ export default {
 
 <style lang="stylus" scoped>
 .variant
-  margin-top var(--uie-space-xxxl)
-  padding-top var(--uie-space-xl)
-  border-top 1px solid var(--uie-color-border-light)
+  & + &
+    margin-top var(--uie-space-xxxl)
+    // padding-top var(--uie-space-xl)
+    // border-top 1px solid var(--uie-color-border-light)
 </style>

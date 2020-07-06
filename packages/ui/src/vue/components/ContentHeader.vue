@@ -35,20 +35,44 @@ export default {
   position relative
   display flex
   flex-wrap wrap
-  align-items flex-end
+  align-items center
   margin-bottom var(--uie-space-l)
+
+  &__right
+    display flex
+    align-items center
+    margin-left auto
 
   &__title
     margin-right var(--uie-space-s)
     margin-bottom var(--uie-space-s)
+    @media $mq-xl_and_up
+      margin-bottom 0
 
   .label,
   .tag
     margin-left var(--uie-space-s)
     margin-bottom calc(var(--uie-space-l) - var(--uie-space-xxs))
+    @media $mq-xl_and_up
+      margin-bottom 0
 
     .variant &
       margin-bottom var(--uie-space-m)
+      @media $mq-xl_and_up
+        margin-bottom 0
+
+  &__edit
+    display inline-flex
+    align-items center
+
+  &__edit-icon
+    icon-size(16px)
+    margin-left var(--uie-space-m)
+    fill var(--uie-color-contentheader-link)
+
+  &__buttons
+    display inline-flex
+    align-items center
 
   &__options
     display flex
@@ -56,29 +80,49 @@ export default {
     margin-left auto
     margin-bottom var(--uie-space-s)
     font-size var(--uie-font-size-s)
+    @media $mq-xl_and_up
+      margin-bottom 0
 
   &__option
-    display inline-block
+    display inline-flex
+    align-items center
+    height 32px
+    padding var(--uie-space-s) var(--uie-space-m)
+    border 1px solid var(--uie-color-neutral-30)
     color var(--uie-color-contentheader-link)
+    line-height 1.2
     text-decoration none
     transition-property color
     transition-duration var(--uie-transition-duration-fast)
 
+    &:first-child
+      margin-left var(--uie-space-l)
+      border-top-left-radius var(--uie-base-border-radius)
+      border-bottom-left-radius var(--uie-base-border-radius)
+
+    &:last-child
+      border-top-right-radius: var(--uie-base-border-radius)
+      border-bottom-right-radius: var(--uie-base-border-radius)
+
     &:not([aria-selected]):hover
       color var(--uie-color-contentheader-link-hover)
 
-    &[aria-selected]
+    &[aria-selected]:not(:only-child)
       color var(--uie-color-contentheader-link-current)
-      font-family var(--uie-font-family-bold)
-      font-weight var(--uie-font-weight-bold)
+      background-color var(--uie-color-neutral-30)
 
-  &__option + &__option,
-  &__action + &__option,
-  &__action + &__action
+    .icon
+      fill var(--uie-color-contentheader-link)
+      transition-duration var(--uie-transition-duration-fast)
+      icon-size(16px)
+
+  &__option + &__option
+    border-left-width 0
+
+  &__action:not(&__option)
+    display inline-flex
+    align-items center
     margin-left var(--uie-space-l)
-
-  &__action
-    display flex
     color var(--uie-color-contentheader-link)
     cursor pointer
     background transparent
@@ -96,7 +140,7 @@ export default {
         fill var(--uie-color-contentheader-link-hover)
 
     .icon
-      transition-duration var(--uie-transition-duration-fast)
       fill var(--uie-color-contentheader-link)
-      icon-size(24px)
+      transition-duration var(--uie-transition-duration-fast)
+      icon-size(16px)
 </style>

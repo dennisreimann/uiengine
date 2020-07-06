@@ -163,6 +163,10 @@ export default {
   color var(--uie-color-topbar-text)
   background var(--uie-color-topbar-bg)
   border-bottom: 1px solid var(--uie-color-neutral-30)
+  @media $mq-l_and_up
+    display grid
+    grid-template-columns 1fr 2fr 1fr
+    grid-gap 1rem
 
   a
     color var(--uie-color-topbar-text)
@@ -186,6 +190,8 @@ export default {
     position relative
     @media $mq-up_to_l
       margin-left auto
+    @media $mq-l_and_up
+      justify-self end
 
     &-toggle
       appearance none
@@ -270,22 +276,23 @@ export default {
 
   &__search
     flex-grow 1
-    max-width 600px
-    margin-right var(--uie-space-m)
+    width 100%
     padding-top var(--uie-space-m)
     padding-bottom var(--uie-space-m)
     @media $mq-up_to_l
-      width 100%
       margin-right 0
       order 4
       &--collapsed
         display none
+    @media $mq-l_and_up
+      max-width 600px
+      justify-self center
 
   &__searchfield
     --icon-size 16px
     width 100%
     background-color var(--uie-color-neutral-20)
-    background-image embedurl('../../icons/magnifying-glass.svg')
+    background-image embedurl('../../icons/search.svg')
     background-size var(--icon-size)
     background-repeat no-repeat
     background-position top 50% left var(--uie-space-s)

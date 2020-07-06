@@ -16,7 +16,7 @@
           {{ 'code.raw' | localize }}
         </h4>
         <AppIcon
-          symbol="caret-down-double"
+          symbol="caret-down"
           class="code__expandicon"
         />
       </button>
@@ -43,7 +43,7 @@
           {{ 'code.context' | localize }}
         </h4>
         <AppIcon
-          symbol="caret-down-double"
+          symbol="caret-down"
           class="code__expandicon"
         />
       </button>
@@ -70,7 +70,7 @@
           HTML
         </h4>
         <AppIcon
-          symbol="caret-down-double"
+          symbol="caret-down"
           class="code__expandicon"
         />
       </button>

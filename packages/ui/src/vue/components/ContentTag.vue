@@ -32,9 +32,9 @@ export default {
   position relative
   padding var(--uie-space-xxs) var(--uie-space-s)
   border 1px solid var(--uie-color-contentheader-tag-text)
-  border-radius var(--uie-space-m)
-  border-bottom-left-radius 0 !important
+  border-radius 20rem
   color var(--uie-color-contentheader-tag-text)
-  font-size var(--uie-font-size-s)
+  font-size var(--uie-font-size-xs)
+  font-weight var(--uie-font-weight-bold)
   text-decoration none
 </style>

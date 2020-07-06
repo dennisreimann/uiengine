@@ -90,6 +90,9 @@ export default {
     padding-top var(--uie-space-xl)
     padding-bottom var(--uie-space-xl)
 
+  .in-page-nav
+    display none
+
 @media $mq-l_and_up
   .layout
     --topbar-height 4rem
@@ -112,9 +115,8 @@ export default {
     left 0
     bottom 0
     width var(--navigation-width)
+    border-right 1px solid var(--uie-color-neutral-30)
     overflow-y auto
-    @media $mq-l_and_up
-      border-right 1px solid var(--uie-color-neutral-30)
 
   .main
     flex 1
@@ -122,6 +124,13 @@ export default {
     margin-left var(--navigation-width)
     padding-top var(--uie-space-xxl)
     padding-bottom var(--uie-space-xxl)
+
+  .in-page-nav
+    display block
+    position fixed
+    top calc(var(--topbar-height) + var(--uie-space-xxl))
+    right var(--uie-space-xxl)
+    width 140px
 
   .footer
     margin-left var(--navigation-width)
@@ -143,16 +152,15 @@ export default {
     padding-right var(--uie-space-l)
 
 .topbar
-  @media $mq-l_and_up
-    padding-left var(--uie-space-l)
-    padding-right var(--uie-space-l)
+  padding-left var(--uie-space-l)
+  padding-right var(--uie-space-l)
 
 .main,
 .main + .footer,
 .sih--main
-  @media $mq-l_and_up
-    .navigation[hidden] + &
-      padding-left calc(var(--uie-space-xxl) + var(--uie-space-s))
+  // @media $mq-l_and_up
+  //   .navigation[hidden] + &
+  //     padding-left calc(var(--uie-space-xxl) + var(--uie-space-s))
   @media $mq-l_to_xl
     padding-left var(--uie-space-xl)
     padding-right var(--uie-space-xl)
@@ -162,6 +170,10 @@ export default {
   @media $mq-xxl_and_up
     padding-left var(--uie-space-xxxl)
     padding-right var(--uie-space-xxxl)
+
+.main
+  @media $mq-xl_and_up
+    padding-right calc(var(--uie-space-xxl) * 3 + 140px)
 
 .soh--main-escape
   @media $mq-up_to_m
