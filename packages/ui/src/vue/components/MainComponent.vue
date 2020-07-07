@@ -366,6 +366,9 @@ export default {
 
 .contentsection__list-item
   display inline-block
+  color var(--uie-color-main-link)
+  &:hover
+    color var(--uie-color-main-link-hover)
 
 .divider
   display inline-block

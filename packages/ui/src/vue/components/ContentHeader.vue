@@ -116,6 +116,12 @@ export default {
       transition-duration var(--uie-transition-duration-fast)
       icon-size(16px)
 
+    &:focus,
+    &:hover,
+    &:active
+      .icon
+        fill var(--uie-color-contentheader-link-hover)
+
   &__option + &__option
     border-left-width 0
 
