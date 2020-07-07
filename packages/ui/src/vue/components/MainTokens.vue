@@ -18,6 +18,8 @@
       />
     </section>
 
+    <hr class="sections-divider">
+
     <iframe
       ref="iframe"
       :src="iframeSrc"
@@ -78,6 +80,14 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.sections-divider
+  margin-top var(--uie-space-xxxl)
+  margin-bottom var(--uie-space-xxxl)
+  border-width 1px
+  @media $mq-l_and_up
+    margin-left calc(var(--uie-space-xxl) * -1)
+    margin-right calc(var(--uie-space-xxl) * -1)
+
 iframe
   display block
   width 100%

@@ -173,10 +173,10 @@ export default {
 
   methods: {
     renderPart ({ content, lang }) {
-      let code = isolateCode('preview', content)
-      code = omit('preview', code).trim()
+      const code = isolateCode('preview', content)
+      const cleanCode = omit('code', code).trim()
 
-      return decorateCode(code, lang)
+      return decorateCode(cleanCode, lang)
     },
 
     isExpanded (key) {
@@ -193,20 +193,23 @@ export default {
 <style lang="stylus" scoped>
 .code
   &__segment
+    border 1px solid var(--uie-color-border-preview)
+    border-radius var(--uie-base-border-radius)
+    overflow hidden
+    &:not(:last-child)
+      margin-bottom var(--uie-space-l)
     .code__expandicon
-      fill var(--uie-color-code-header)
+      icon-size(24px)
     .code__header
       color var(--uie-color-code-header)
       &:focus,
       &:hover,
       &:active
         color var(--uie-color-code-header-hover)
-        .code__expandicon
-          fill var(--uie-color-code-header-hover)
       &[aria-expanded="true"]
         color var(--uie-color-code-header-current)
+        background-color var(--uie-color-code-header-bg)
         .code__expandicon
-          fill var(--uie-color-code-header-current)
           transform rotate(-180deg)
 
   &__header
@@ -215,10 +218,18 @@ export default {
     background transparent
     align-items center
     justify-content space-between
-    border 1px solid var(--uie-color-border-medium)
     padding var(--uie-space-s) var(--uie-space-m)
     cursor pointer
     color var(--uie-color-code-header)
+
+    &:focus
+      outline none
+
+    &[aria-expanded="true"] + div
+      border-top 1px solid var(--uie-color-border-preview)
+
+  &__title
+    font-weight var(--uie-font-weight-bold)
 
   &__segment + &__segment &__header
     border-top 0
@@ -227,4 +238,5 @@ export default {
     transition-property transform
     transition-duration var(--uie-transition-duration-fast)
     icon-size(24px)
+    fill var(--uie-color-code-header)
 </style>
