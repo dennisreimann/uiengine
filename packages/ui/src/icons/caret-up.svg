@@ -1,1 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><defs><style>.a{fill:#1a171b}</style></defs><title>chocolate-white-24-caret-up</title><path class="a" d="M5.85 14.85l5.65-5.64 5.65 5.64.7-.7-6.35-6.36-6.35 6.36.7.7z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <path d="M11.293 8.293a1 1 0 0 1 1.32-.083l.094.083 6 6a1 1 0 0 1-1.32 1.497l-.094-.083L12 10.415l-5.293 5.292a1 1 0 0 1-1.32.083l-.094-.083a1 1 0 0 1-.083-1.32l.083-.094 6-6z"/>
+</svg>

@@ -10,37 +10,39 @@
           :tag="tag"
           class="uie-sob-m"
         />
-        <div
-          v-if="hasInfo && hasProperties"
-          role="tablist"
-          class="contentheader__options"
-        >
-          <a
-            :id="tabId('info')"
-            ref="info-tab"
-            :aria-selected="isInfoActive"
-            :tabindex="isInfoActive ? false : '-1'"
-            role="tab"
-            href="#info"
-            class="contentheader__option"
-            @click.prevent="activeSectionTop = 'info'"
-            @keydown.right="switchTabTop('properties')"
+        <div class="contentheader__right">
+          <div
+            v-if="hasInfo && hasProperties"
+            role="tablist"
+            class="contentheader__options"
           >
-            {{ 'options.info' | localize }}
-          </a>
-          <a
-            :id="tabId('properties')"
-            ref="properties-tab"
-            :aria-selected="isPropertiesActive"
-            :tabindex="isPropertiesActive ? false : '-1'"
-            role="tab"
-            href="#properties"
-            class="contentheader__option"
-            @click.prevent="activeSectionTop = 'properties'"
-            @keydown.left="switchTabTop('info')"
-          >
-            {{ 'options.properties' | localize }}
-          </a>
+            <a
+              :id="tabId('info')"
+              ref="info-tab"
+              :aria-selected="isInfoActive"
+              :tabindex="isInfoActive ? false : '-1'"
+              role="tab"
+              href="#info"
+              class="contentheader__option"
+              @click.prevent="activeSectionTop = 'info'"
+              @keydown.right="switchTabTop('properties')"
+            >
+              {{ 'options.info' | localize }}
+            </a>
+            <a
+              :id="tabId('properties')"
+              ref="properties-tab"
+              :aria-selected="isPropertiesActive"
+              :tabindex="isPropertiesActive ? false : '-1'"
+              role="tab"
+              href="#properties"
+              class="contentheader__option"
+              @click.prevent="activeSectionTop = 'properties'"
+              @keydown.left="switchTabTop('info')"
+            >
+              {{ 'options.properties' | localize }}
+            </a>
+          </div>
         </div>
       </ContentHeader>
 
@@ -76,79 +78,85 @@
         </div>
       </div>
 
+      <hr class="sections-divider">
+
       <ContentHeader class="uie-sob-m">
-        <div
-          v-if="hasPreview && hasCode"
-          role="tablist"
-          class="contentheader__options"
-        >
-          <button
-            v-for="plugin in pluginActions"
-            ref="plugin-action"
-            :key="plugin.title"
-            :title="plugin.title"
-            :aria-label="plugin.title"
-            href="#"
-            class="contentheader__action"
-            @click.prevent="dispatchPluginEvent('click', plugin, $event)"
+        <div class="contentheader__right">
+          <div
+            v-if="hasPreview && hasCode"
+            role="tablist"
+            class="contentheader__options"
           >
-            <AppIcon
-              v-if="plugin.icon"
-              :symbol="plugin.icon"
-            />
-            <span v-else>
-              {{ plugin.title }}
-            </span>
-          </button>
-          <a
-            v-if="!displayAllThemes"
-            :target="page.id | dasherize"
-            :title="'options.open_in_window' | localize"
-            :href="href"
-            class="contentheader__action"
-            @click.stop
-          >
-            <AppIcon symbol="open-in-window" />
-          </a>
-          <a
-            :id="tabId('preview')"
-            ref="preview-tab"
-            :aria-selected="isTabActive('preview')"
-            :tabindex="isTabActive('preview') ? false : '-1'"
-            href="#"
-            role="tab"
-            class="contentheader__option"
-            @click.prevent="activeSectionBottom = 'preview'"
-          >
-            {{ 'options.preview' | localize }}
-          </a>
-          <a
-            :id="tabId('code')"
-            ref="code-tab"
-            :aria-selected="isTabActive('code')"
-            :tabindex="isTabActive('code') ? false : '-1'"
-            href="#"
-            role="tab"
-            class="contentheader__option"
-            @click.prevent="activeSectionBottom = 'code'"
-          >
-            {{ 'options.code' | localize }}
-          </a>
-          <a
-            v-for="tab in pluginTabs"
-            :id="tabId(tab.id)"
-            :key="tab.id"
-            ref="plugin-tab"
-            :aria-selected="isTabActive(tab.id)"
-            :tabindex="isTabActive(tab.id) ? false : '-1'"
-            :data-test-variant-tab-link="tab.id"
-            href="#"
-            role="tab"
-            class="contentheader__option"
-            @click.prevent="activeSectionBottom = tab.id"
-          >
-            {{ tab.title }}
-          </a>
+            <button
+              v-for="plugin in pluginActions"
+              ref="plugin-action"
+              :key="plugin.title"
+              :title="plugin.title"
+              :aria-label="plugin.title"
+              href="#"
+              class="contentheader__action"
+              @click.prevent="dispatchPluginEvent('click', plugin, $event)"
+            >
+              <AppIcon
+                v-if="plugin.icon"
+                :symbol="plugin.icon"
+              />
+              <span v-else>
+                {{ plugin.title }}
+              </span>
+            </button>
+            <a
+              v-if="!displayAllThemes"
+              :target="page.id | dasherize"
+              :title="'options.open_in_window' | localize"
+              :href="href"
+              class="contentheader__action"
+              @click.stop
+            >
+              <AppIcon symbol="open-in-window" />
+            </a>
+            <div class="contentheader__buttons">
+              <a
+                :id="tabId('preview')"
+                ref="preview-tab"
+                :aria-selected="isTabActive('preview')"
+                :tabindex="isTabActive('preview') ? false : '-1'"
+                href="#"
+                role="tab"
+                class="contentheader__option"
+                @click.prevent="activeSectionBottom = 'preview'"
+              >
+                {{ 'options.preview' | localize }}
+              </a>
+              <a
+                :id="tabId('code')"
+                ref="code-tab"
+                :aria-selected="isTabActive('code')"
+                :tabindex="isTabActive('code') ? false : '-1'"
+                href="#"
+                role="tab"
+                class="contentheader__option"
+                @click.prevent="activeSectionBottom = 'code'"
+              >
+                {{ 'options.code' | localize }}
+              </a>
+              <a
+                v-for="tab in pluginTabs"
+                :id="tabId(tab.id)"
+                :key="tab.id"
+                ref="plugin-tab"
+                :aria-selected="isTabActive(tab.id)"
+                :tabindex="isTabActive(tab.id) ? false : '-1'"
+                :data-test-variant-tab-link="tab.id"
+                href="#"
+                role="tab"
+                class="contentheader__option"
+                @click.prevent="activeSectionBottom = tab.id"
+              >
+                {{ tab.title }}
+              </a>
+            </div>
+          </div>
         </div>
       </ContentHeader>
     </section>
@@ -307,3 +315,13 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+  .sections-divider
+    margin-top var(--uie-space-xxxl)
+    margin-bottom var(--uie-space-xxxl)
+    border-width 1px
+    @media $mq-l_and_up
+      margin-left calc(var(--uie-space-xxl) * -1)
+      margin-right calc(var(--uie-space-xxl) * -1)
+</style>

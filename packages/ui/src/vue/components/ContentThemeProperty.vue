@@ -113,6 +113,7 @@ export default {
   &__variablename
     display inline-block
     margin-top var(--uie-space-xs)
+    border 1px solid var(--uie-color-neutral-30)
 
   &__value,
   &__variable
@@ -123,8 +124,8 @@ export default {
 
   &__swatch
     display inline-block
-    width 1.2em
-    height 1.2em
+    width 2.5rem
+    height 2.5rem
     margin-right var(--uie-space-xs)
     border-radius 50%
     border-bottom-right-radius 0 !important

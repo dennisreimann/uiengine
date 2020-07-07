@@ -13,67 +13,69 @@
           :key="tag"
           :tag="tag"
         />
-        <div
-          role="tablist"
-          class="contentheader__options"
-        >
+        <div class="contentheader__right">
           <a
             v-if="fileLink"
             :href="fileLink"
             :aria-label="'options.edit' | localize"
             class="contentheader__action"
           >
-            <AppIcon symbol="pencil" />
+            <AppIcon symbol="edit" />
           </a>
-          <a
-            v-if="hasInfo"
-            :id="tabId('info')"
-            ref="info-tab"
-            :aria-selected="isInfoActive"
-            :tabindex="isInfoActive ? false : '-1'"
-            role="tab"
-            href="#info"
-            class="contentheader__option"
-            @click.prevent="activeSection = 'info'"
-            @keydown.right="switchTab('properties')"
+          <div
+            role="tablist"
+            class="contentheader__options"
           >
-            {{ 'options.info' | localize }}
-          </a>
-          <a
-            v-if="hasProperties"
-            :id="tabId('properties')"
-            ref="properties-tab"
-            :aria-selected="isPropertiesActive"
-            :tabindex="isPropertiesActive ? false : '-1'"
-            role="tab"
-            href="#properties"
-            class="contentheader__option"
-            @click.prevent="activeSection = 'properties'"
-            @keydown.left="switchTab('info')"
-            @keydown.right="switchTab('theme-properties')"
-          >
-            {{ 'options.properties' | localize }}
-          </a>
-          <a
-            v-if="hasThemeProperties"
-            :id="tabId('theme-properties')"
-            ref="theme-properties-tab"
-            :aria-selected="isThemePropertiesActive"
-            :tabindex="isThemePropertiesActive ? false : '-1'"
-            role="tab"
-            href="#theme-properties"
-            class="contentheader__option"
-            @click.prevent="activeSection = 'theme-properties'"
-            @keydown.left="switchTab('properties')"
-          >
-            {{ 'options.theme_properties' | localize }}
-          </a>
+            <a
+              v-if="hasInfo"
+              :id="tabId('info')"
+              ref="info-tab"
+              :aria-selected="isInfoActive"
+              :tabindex="isInfoActive ? false : '-1'"
+              role="tab"
+              href="#info"
+              class="contentheader__option"
+              @click.prevent="activeSection = 'info'"
+              @keydown.right="switchTab('properties')"
+            >
+              {{ 'options.info' | localize }}
+            </a>
+            <a
+              v-if="hasProperties"
+              :id="tabId('properties')"
+              ref="properties-tab"
+              :aria-selected="isPropertiesActive"
+              :tabindex="isPropertiesActive ? false : '-1'"
+              role="tab"
+              href="#properties"
+              class="contentheader__option"
+              @click.prevent="activeSection = 'properties'"
+              @keydown.left="switchTab('info')"
+              @keydown.right="switchTab('theme-properties')"
+            >
+              {{ 'options.properties' | localize }}
+            </a>
+            <a
+              v-if="hasThemeProperties"
+              :id="tabId('theme-properties')"
+              ref="theme-properties-tab"
+              :aria-selected="isThemePropertiesActive"
+              :tabindex="isThemePropertiesActive ? false : '-1'"
+              role="tab"
+              href="#theme-properties"
+              class="contentheader__option"
+              @click.prevent="activeSection = 'theme-properties'"
+              @keydown.left="switchTab('properties')"
+            >
+              {{ 'options.theme_properties' | localize }}
+            </a>
+          </div>
         </div>
       </ContentHeader>
 
       <div
         v-if="hasInfo || hasProperties || hasThemeProperties"
-        class="uie-sot-xs"
+        class="uie-sot-xxl"
       >
         <div
           v-if="hasInfo"
@@ -88,10 +90,8 @@
             v-if="hasSecondaryInfo"
             class="content uie-sot-l"
           >
-            <hr>
-
             <template v-if="hasDependencies">
-              <p>
+              <p class="content__smallprint">
                 {{ 'component.dependencies' | localize }}
                 <span
                   v-for="(dependency, index) in dependencies"
@@ -100,7 +100,7 @@
                   <RouterLink
                     v-if="componentLink(dependency)"
                     :to="componentLink(dependency)"
-                    class=""
+                    class="contentsection__list-item"
                     active-class=""
                     exact-active-class=""
                   >
@@ -117,7 +117,7 @@
             </template>
 
             <template v-if="hasDependentComponents">
-              <p>
+              <p class="content__smallprint">
                 {{ 'component.dependents' | localize }}
                 <span
                   v-for="(dependent, index) in dependentComponents"
@@ -126,7 +126,7 @@
                   <RouterLink
                     v-if="componentLink(dependent)"
                     :to="componentLink(dependent)"
-                    class=""
+                    class="contentsection__list-item"
                     active-class=""
                     exact-active-class=""
                   >
@@ -143,21 +143,24 @@
             </template>
 
             <template v-if="hasManyVariants">
-              <ul>
-                <li
-                  v-for="variant in variants"
-                  :key="variant.id"
-                >
-                  <RouterLink
-                    :to="{ hash: dasherize(variant.id) }"
-                    class=""
-                    active-class=""
-                    exact-active-class=""
+              <div class="in-page-nav">
+                <span class="in-page-nav__heading">On this page</span>
+                <ul class="in-page-nav__list">
+                  <li
+                    v-for="variant in variants"
+                    :key="variant.id"
                   >
-                    {{ variant.title }}
-                  </RouterLink>
-                </li>
-              </ul>
+                    <RouterLink
+                      :to="{ hash: dasherize(variant.id) }"
+                      class="in-page-nav__link"
+                      active-class=""
+                      exact-active-class=""
+                    >
+                      {{ variant.title }}
+                    </RouterLink>
+                  </li>
+                </ul>
+              </div>
             </template>
           </div>
         </div>
@@ -193,6 +196,8 @@
         </div>
       </div>
     </section>
+
+    <hr class="sections-divider">
 
     <section
       v-if="hasVariants"
@@ -352,7 +357,52 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.component
+  margin-bottom var(--uie-space-xxl)
+
+.content__smallprint
+  color var(--uie-color-neutral-70)
+  font-size var(--uie-font-size-xs)
+
+.contentsection__list-item
+  display inline-block
+  color var(--uie-color-main-link)
+  &:hover
+    color var(--uie-color-main-link-hover)
+
 .divider
+  display inline-block
   margin-left -.45ch
   margin-right .45ch
+
+.sections-divider
+  margin-top var(--uie-space-xxxl)
+  margin-bottom var(--uie-space-xxxl)
+  border-width 1px
+  @media $mq-l_and_up
+    margin-left calc(var(--uie-space-xxl) * -1)
+    margin-right calc(var(--uie-space-xxl) * -1)
+
+.in-page-nav__heading
+  display block
+  margin-bottom var(--uie-space-m)
+  font-size var(--uie-font-size-xs)
+  font-weight var(--uie-font-weight-bold)
+  color var(--uie-color-neutral-70)
+  text-transform uppercase
+
+.in-page-nav__list
+  list-style-type none
+
+.in-page-nav__link
+  display block
+  padding-top var(--uie-space-xs)
+  padding-bottom var(--uie-space-xs)
+  max-width var(--uie-in-page-navigation-width)
+  font-size var(--uie-font-size-s)
+  color var(--uie-color-navigation-text-subnav)
+  text-decoration none
+  line-height 1
+  &:hover
+    color var(--uie-color-navigation-text-current)
 </style>

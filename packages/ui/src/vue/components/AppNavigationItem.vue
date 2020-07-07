@@ -177,6 +177,7 @@ export default {
     icon-size(24px)
     transition-property transform
     transition-duration var(--uie-transition-duration-fast)
+    fill var(--uie-color-navigation-text)
 
   &__link
     display block
@@ -226,7 +227,7 @@ export default {
 
   &__item--current > &__link
     font-family var(--uie-font-family-bold)
-    font-weight var(--uie-font-weight-semibold)
+    font-weight var(--uie-font-weight-bold)
     color var(--uie-color-navigation-text-current) !important
     background-color var(--uie-color-navigation-bg-current) !important
 

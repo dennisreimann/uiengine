@@ -22,11 +22,11 @@ export default {
 .label
   padding var(--uie-space-xxs) var(--uie-space-s)
   border 1px solid var(--uie-color-contentheader-label-bg)
-  border-radius var(--uie-space-m)
-  border-bottom-left-radius 0 !important
+  border-radius 20rem
   color var(--uie-color-contentheader-label-text)
   background var(--uie-color-contentheader-label-bg)
-  font-size var(--uie-font-size-s)
+  font-size var(--uie-font-size-xs)
+  font-weight var(--uie-font-weight-bold)
 
   &--inverted
     color var(--uie-color-contentheader-label-bg)
