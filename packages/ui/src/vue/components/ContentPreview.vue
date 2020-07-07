@@ -1,5 +1,37 @@
 <template>
   <div class="preview">
+    <template v-if="!isModeViewports">
+      <div
+        :class="{ 'preview__options--active': isBreakpointsActive }"
+        class="preview__options"
+      >
+        <div class="preview__options-inner">
+          <button
+            v-for="(width, breakpoint) in breakpoints"
+            :key="breakpoint"
+            class="preview__option"
+            type="button"
+            @click="setWidth(width)"
+          >
+            <span class="preview__option-label">{{ breakpoint }}</span>
+            <span class="preview__option-width">{{ width }}px</span>
+          </button>
+          <button
+            class="preview__option"
+            type="button"
+            @click="setWidth(null)"
+          >
+            <span class="preview__option-label">
+              <AppIcon
+                symbol="reset"
+                class="preview__option-label-icon"
+              />
+            </span>
+            {{ 'options.reset' | localize }}
+          </button>
+        </div>
+      </div>
+    </template>
     <div class="preview__viewports sih--main soh--main-escape">
       <template v-if="isModeViewports">
         <div
@@ -49,37 +81,7 @@
         >
           <template v-if="breakpoints">
             <div class="preview__title">
-              <button
-                :title="'options.toggle' | localize"
-                class="preview__toggle"
-                type="button"
-                @click.stop="isBreakpointsActive = !isBreakpointsActive"
-              >
-                {{ size }}
-              </button>
-            </div>
-            <div
-              :class="{ 'preview__options--active': isBreakpointsActive }"
-              class="preview__options"
-            >
-              <div class="preview__options-inner">
-                <button
-                  v-for="(width, breakpoint) in breakpoints"
-                  :key="breakpoint"
-                  class="preview__option"
-                  type="button"
-                  @click="setWidth(width)"
-                >
-                  {{ previewTitle(breakpoint, width) }}
-                </button>
-                <button
-                  class="preview__option"
-                  type="button"
-                  @click="setWidth(null)"
-                >
-                  {{ 'options.reset' | localize }}
-                </button>
-              </div>
+              {{ size }}
             </div>
           </template>
           <div
@@ -198,7 +200,7 @@ export default {
 
       const width = this.previewWidths[this.id]
 
-      return width ? { width: `calc(${width}px + var(--uie-preview-border-width) * 2)` } : {}
+      return width ? { width: `calc(${width}px + var(--uie-preview-padding) * 2 + 2px)` } : {}
     },
 
     iframes () {
@@ -286,6 +288,7 @@ export default {
 
   &__viewport
     vertical-align top
+    margin-bottom var(--uie-space-l)
 
     &--breakpoints,
     &--viewports
@@ -300,45 +303,61 @@ export default {
       width 100%
 
   &__title
-    padding-bottom var(--uie-space-s)
+    display inline-block
+    background-color var(--uie-color-border-preview)
+    font-size var(--uie-font-size-xs)
+    padding var(--uie-space-xs) var(--uie-space-s)
+    border-radius var(--uie-base-border-radius) var(--uie-base-border-radius) 0 0
+    color var(--uie-color-preview-title)
 
   &__toggle
-    color var(--uie-color-modal-text)
-    background var(--uie-color-main-bg)
+    background-color transparent
     display inline-block
     font-family var(--uie-font-family-light)
-    font-size var(--uie-font-size-s)
-    font-weight var(--uie-font-weight-light)
     cursor pointer
 
   &__options
-    position absolute
-    z-index 5
-    left calc(var(--uie-space-m) * -1)
-    max-height 0
-    transition-duration var(--uie-transition-duration-medium)
-    transition-property max-height
-    transition-timing-function ease-out
-    overflow hidden
-
-    &--active
-      max-height 20rem
-      transition-timing-function ease-in
-
-  &__options-inner
-    border 1px solid var(--uie-color-modal-border-outer)
+    margin-bottom var(--uie-space-l)
+    overflow-x auto
+    &-inner
+      display flex
+      justify-content center
+      align-items center
 
   &__option
-    modal-option()
-
-  &__option + &__option
-    border-top 1px solid var(--uie-color-modal-border-inner)
+    padding var(--uie-space-s)
+    font-size var(--uie-font-size-xs)
+    color var(--uie-color-neutral-50)
+    text-align center
+    border-radius var(--uie-space-xs)
+    background-color transparent
+    &-label
+      display block
+      font-size var(--uie-font-size-s)
+      margin-bottom var(--uie-space-xs)
+      padding-bottom var(--uie-space-xs)
+      min-width 36px
+      border-bottom 1px solid var(--uie-color-neutral-30)
+      color var(--uie-color-neutral-70)
+      &-icon
+        icon-size(12px)
+        fill var(--uie-color-neutral-70)
+    &:hover
+      cursor pointer
+      background-color var(--uie-color-neutral-20)
+    &:focus
+      outline none
+    &:active
+      .preview__option-label
+        color var(--uie-color-neutral-90)
 
   &__iframe-container
     box-sizing content-box
-    background var(--uie-color-border-preview)
-    padding var(--uie-preview-border-width)
-    margin-bottom calc(var(--uie-preview-border-width) * 2)
+    padding var(--uie-preview-padding)
+    border 1px solid var(--uie-color-border-preview)
+    border-radius var(--uie-base-border-radius)
+    border-top-left-radius 0
+    overflow hidden
 
   &__theme-title
     padding-bottom calc(var(--uie-preview-border-width) / 2)

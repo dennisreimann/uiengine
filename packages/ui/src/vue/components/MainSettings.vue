@@ -6,7 +6,10 @@
     />
     <article class="content">
       <div class="row">
-        <label for="locale">
+        <label
+          for="locale"
+          class="uie-select-label"
+        >
           {{ 'settings.locale' | localize }}
         </label>
         <select
@@ -28,7 +31,10 @@
         v-if="hasPreviewModes"
         class="row"
       >
-        <label for="previewMode">
+        <label
+          for="previewMode"
+          class="uie-select-label"
+        >
           {{ 'settings.preview_mode' | localize }}
         </label>
         <select
@@ -47,7 +53,10 @@
       </div>
 
       <div class="row">
-        <label for="hljs">
+        <label
+          for="hljs"
+          class="uie-select-label"
+        >
           {{ 'settings.hljs' | localize }}
         </label>
         <select
@@ -237,12 +246,34 @@ export default {
 .row
   margin-bottom var(--uie-space-xl)
 
+.uie-select-label
+  display block
+  font-size var(--uie-font-size-m)
+  line-height 1.5;
+  margin-bottom 0.5rem;
+  transition color .25s ease;
+  font-weight 600;
+  line-height 1;
+
 select
   display block
-  width 260px
-  margin-top var(--uie-space-xs)
-  padding var(--uie-space-s) var(--uie-space-m)
-  font-family var(--uie-font-family-light)
-  font-size var(--uie-font-size-m)
-  font-weight var(--uie-font-weight-light)
+  position relative;
+  width 240px;
+  padding var(--uie-space-s);
+  transition border-color .25s ease;
+  border 1px solid var(--uie-color-neutral-30);
+  border-radius 5px;
+  outline 0;
+  background-color transparent;
+  background-image embedurl('../../icons/caret-down.svg')
+  background-repeat no-repeat;
+  background-position 95% 50%;
+  background-size 16px 16px;
+  color var(--uie-color-main-text);
+  font-size var(--uie-font-size-s);
+  cursor pointer;
+  z-index 1;
+  -webkit-appearance none;
+  -moz-appearance none;
+  appearance none;
 </style>
