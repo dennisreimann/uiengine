@@ -34,13 +34,17 @@ const plugins = [
     filename: publicPath(`styles/${fileNameTmpl}.css`)
   }),
   // copy custom static assets
-  new CopyWebpackPlugin([
-    {
-      from: highlightjsStyles,
-      to: publicPath('styles/hljs'),
-      ignore: ['.*']
-    }
-  ]),
+  new CopyWebpackPlugin({
+    patterns: [
+      {
+        from: highlightjsStyles,
+        to: publicPath('styles/hljs'),
+        globOptions: {
+          ignore: ['.*']
+        }
+      }
+    ]
+  }),
   // https://github.com/ampedandwired/html-webpack-plugin
   new HtmlWebpackPlugin({
     filename: resolve('lib/templates/index.ejs'),

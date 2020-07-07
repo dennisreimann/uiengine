@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 const nodeExternals = require('webpack-node-externals')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const PnpWebpackPlugin = require('pnp-webpack-plugin')

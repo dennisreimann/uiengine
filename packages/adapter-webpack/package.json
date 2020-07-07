@@ -33,7 +33,7 @@
     "@uiengine/util": "3.0.2",
     "object-hash": "2.0.3",
     "require-from-string": "2.0.2",
-    "webpack-merge": "4.2.2",
+    "webpack-merge": "5.0.8",
     "webpack-virtual-modules": "0.2.2"
   },
   "devDependencies": {
@@ -47,7 +47,7 @@
     "babel-preset-vue": "2.0.2",
     "chalk": "4.1.0",
     "css-loader": "3.6.0",
-    "eslint": "6.8.0",
+    "eslint": "7.4.0",
     "eslint-config-standard": "14.1.1",
     "eslint-import-resolver-node": "0.3.4",
     "eslint-plugin-import": "2.22.0",
