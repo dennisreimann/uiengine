@@ -1,3 +1,7 @@
+.topbar__search > span {
+  display: block !important;
+}
+
 .ytEmbed {
   position: relative;
   padding-bottom: 56.25%;
