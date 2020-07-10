@@ -45,6 +45,7 @@ module.exports = {
         {
           'variable': '--app-box-shadow',
           'name': 'App Box Shadow',
+          'type': 'shadow',
           'themes': {
             'plain': {
               'value': '0 0 8px 2px rgba(92,43,54,0.2)'
@@ -63,10 +64,10 @@ module.exports = {
         {
           'variable': '--app-border-radius',
           'name': 'App Border Radius',
-          'type': 'size',
+          'type': 'border-radius',
           'themes': {
             'plain': {
-              'value': '0'
+              'value': '20rem'
             },
             'funky': {
               'value': '3px'
@@ -74,15 +75,73 @@ module.exports = {
           }
         },
         {
-          'variable': '--app-divider',
-          'name': 'App Divider',
-          'type': 'size',
+          'variable': '--app-border-width',
+          'name': 'App Border Width',
+          'type': 'border-width',
           'themes': {
             'plain': {
               'value': '2px'
             },
             'funky': {
               'value': '7px'
+            }
+          }
+        },
+        {
+          'variable': '--app-border-style',
+          'name': 'App Border Style',
+          'type': 'border-style',
+          'themes': {
+            'plain': {
+              'value': 'dashed'
+            },
+            'funky': {
+              'value': 'dotted'
+            }
+          }
+        }
+      ]
+    },
+    {
+      'type': 'category',
+      'name': 'Opacity',
+      'tokens': [
+        {
+          'variable': '--app-opacity-30',
+          'name': 'Opacity 30%',
+          'type': 'opacity',
+          'themes': {
+            'plain': {
+              'value': '0.3'
+            },
+            'funky': {
+              'value': '0.3'
+            }
+          }
+        },
+        {
+          'variable': '--app-opacity-60',
+          'name': 'Opacity 60%',
+          'type': 'opacity',
+          'themes': {
+            'plain': {
+              'value': '0.6'
+            },
+            'funky': {
+              'value': '0.6'
+            }
+          }
+        },
+        {
+          'variable': '--app-opacity-90',
+          'name': 'Opacity 90%',
+          'type': 'opacity',
+          'themes': {
+            'plain': {
+              'value': '0.9'
+            },
+            'funky': {
+              'value': '0.9'
             }
           }
         }

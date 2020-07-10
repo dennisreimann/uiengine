@@ -114,7 +114,6 @@
     position relative
     bottom -.15em
     display inline-block
-    border 1px solid var(--uie-color-neutral-50)
     background-color var(--uie-color-neutral-30)
 
 .uie-font-token
@@ -217,5 +216,36 @@
     position relative
     bottom -.15em
     display inline-block
-    border 1px solid var(--uie-color-neutral-50)
     background-color var(--uie-color-neutral-30)
+
+.uie-shadow-token
+  display block
+  width 12rem
+  height 3rem
+  margin-top var(--uie-space-m)
+  margin-bottom var(--uie-space-m)
+  background-color var(--uie-color-neutral-30)
+
+.uie-border-token
+  display block
+  width 12rem
+  height 3rem
+  border-style solid // this would be overwritten by the inline style applied in case of the border style token
+  border-color var(--uie-color-neutral-50)
+  background-color var(--uie-color-neutral-30)
+
+.uie-opacity-token
+  display block
+  position relative
+  width 12rem
+  height 3rem
+  background-image linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%)
+  background-size 20px 20px
+  background-position 0 0, 0 10px, 10px -10px, -10px 0px
+  &__inner
+    position absolute
+    top 0
+    right 0
+    bottom 0
+    left 0
+    background-color var(--uie-color-accent-ultradark)
