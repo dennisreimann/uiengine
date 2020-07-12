@@ -13,7 +13,7 @@ _%>
     const level = config.level
     const renderConfig = { level: level + 1, layout: config.layout }
     const displayItem = item => !!(displayAllThemes || !item.themeIds || item.themeIds.includes(themeId))
-    const visualizable = element => ['size', 'color', 'shadow', 'border-width', 'border-style', 'border-radius', 'opacity'].includes(element.type)
+    const visualizable = element => ['size', 'color', 'box-shadow', 'border-width', 'border-style', 'border-radius', 'opacity'].includes(element.type)
     const haveProperty = property => element => element[property]
     const haveThemeProperty = property => element => element.themes && Object.values(element.themes).some(haveProperty(property))
   _%%>
@@ -122,7 +122,7 @@ _%>
                       <span class="uie-theme-token__swatch">
                         <span class="uie-theme-token__swatch__inner" style="background-color:<%%= property.value %%>"></span>
                       </span>
-                    <%%_ } else if (token.type === 'shadow') { _%%>
+                    <%%_ } else if (token.type === 'box-shadow') { _%%>
                       <span class="uie-shadow-token" style="box-shadow: <%%= property.value %%>"></span>
                     <%%_ } else if (token.type === 'border-width') { _%%>
                       <span class="uie-border-token" style="border-width: <%%= property.value %%>"></span>
@@ -371,7 +371,7 @@ _%>
               <td class="uie-default-token__value uie-default-token__value--visualization">
                 <%%_ if (type === 'size') { _%%>
                   <span class="uie-size-token__size" style="width:<%%= token.value %%>; height:<%%= token.value %%>"></span>
-                <%%_ } else if (token.type === 'shadow') { _%%>
+                <%%_ } else if (token.type === 'box-shadow') { _%%>
                   <span class="uie-shadow-token" style="box-shadow: <%%= token.value %%>"></span>
                 <%%_ } else if (token.type === 'border-width') { _%%>
                   <span class="uie-border-token" style="border-width: <%%= token.value %%>"></span>
