@@ -232,3 +232,143 @@ module.exports = {
   ]
 }
 ```
+
+#### `border-width`
+
+The border-width type supports the following attributes:
+
+- `name`: The border-width token name
+- `value`: The CSS value to render the border width
+- `variable`
+- `description`
+- `reference`
+
+```js
+module.exports = {
+  title: 'Border Widths',
+  tokens: [
+    {
+      name: 'Border Width Thin',
+      value: '1px',
+      variable: '$border-width-thin'
+    },
+    {
+      name: 'Border Width Thick',
+      value: '4px',
+      variable: '$border-width-thick'
+    }
+  ]
+}
+```
+
+#### `border-style`
+
+The border-style type supports the following attributes:
+
+- `name`: The border-style token name
+- `value`: The CSS value to render the border style
+- `variable`
+- `description`
+- `reference`
+
+```js
+module.exports = {
+  title: 'Border Styles',
+  tokens: [
+    {
+      name: 'Border Style Solid',
+      value: 'solid',
+      variable: '$border-style-solid'
+    },
+    {
+      name: 'Border Style Dashed',
+      value: 'dashed',
+      variable: '$border-style-dashed'
+    }
+  ]
+}
+```
+
+#### `border-radius`
+
+The border-radius type supports the following attributes:
+
+- `name`: The border-radius token name
+- `value`: The CSS value to render the border radius
+- `variable`
+- `description`
+- `reference`
+
+```js
+module.exports = {
+  title: 'Border Radius',
+  tokens: [
+    {
+      name: 'Border Radius Default',
+      value: '6px',
+      variable: '$border-radius-default'
+    },
+    {
+      name: 'Border Radius Pill',
+      value: '20rem',
+      variable: '$border-radius-pill'
+    }
+  ]
+}
+```
+
+#### `box-shadow`
+
+The box-shadow type supports the following attributes:
+
+- `name`: The box-shadow token name
+- `value`: The CSS value to render the box shadow
+- `variable`
+- `description`
+- `reference`
+
+```js
+module.exports = {
+  title: 'Box Shadows',
+  tokens: [
+    {
+      name: 'Box Shadow Default',
+      value: '0 2px 6px 0 rgba(0, 41, 77, 0.1)',
+      variable: '$box-shadow-default'
+    },
+    {
+      name: 'Box Shadow Modal',
+      value: '0 2px 20px 0 rgba(0, 0, 0, 0.2)',
+      variable: '$box-shadow-modal'
+    }
+  ]
+}
+```
+
+#### `opacity`
+
+The opacity type supports the following attributes:
+
+- `name`: The opacity token name
+- `value`: The CSS value to render the opacity
+- `variable`
+- `description`
+- `reference`
+
+```js
+module.exports = {
+  title: 'Opacity',
+  tokens: [
+    {
+      name: 'Opacity 30%',
+      value: '0.3',
+      variable: '$opacity-30'
+    },
+    {
+      name: 'Opacity 75%',
+      value: '0.75',
+      variable: '$opacity-75'
+    }
+  ]
+}
+```
