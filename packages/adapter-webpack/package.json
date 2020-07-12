@@ -33,7 +33,7 @@
     "@uiengine/util": "3.0.2",
     "object-hash": "2.0.3",
     "require-from-string": "2.0.2",
-    "webpack-merge": "5.0.8",
+    "webpack-merge": "5.0.9",
     "webpack-virtual-modules": "0.2.2"
   },
   "devDependencies": {
@@ -68,7 +68,7 @@
     "vue-style-loader": "4.1.2",
     "vue-template-compiler": "2.6.11",
     "webpack": "4.43.0",
-    "webpack-node-externals": "1.7.2"
+    "webpack-node-externals": "2.5.0"
   },
   "optionalDependencies": {
     "parse-prop-types": "0.3.0",

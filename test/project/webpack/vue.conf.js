@@ -83,7 +83,7 @@ const serverConfig = merge(baseConfig, {
     'vue-server-renderer',
     nodeExternals({
       // do not externalize CSS files in case we need to import it from a dep
-      whitelist: /\.css$/
+      allowlist: /\.css$/
     })
   ],
 

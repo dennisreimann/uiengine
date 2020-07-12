@@ -62,7 +62,7 @@ const serverConfig = merge(baseConfig, {
   // and generates a smaller bundle file.
   externals: nodeExternals({
     // do not externalize CSS files in case we need to import it from a dep
-    whitelist: /\.css$/
+    allowlist: /\.css$/
   })
 })
 
