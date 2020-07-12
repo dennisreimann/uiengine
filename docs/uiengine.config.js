@@ -15,6 +15,7 @@ const meta = (name, content) => ({
 
 module.exports = {
   name: 'UIengine Documentation',
+  logo: '/images/logo.svg',
   version: pkg.version,
 
   source: {
