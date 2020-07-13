@@ -90,9 +90,6 @@ export default {
     padding-top var(--uie-space-xl)
     padding-bottom var(--uie-space-xl)
 
-  .in-page-nav
-    display none
-
 @media $mq-l_and_up
   .layout
     --topbar-height 4rem
@@ -124,13 +121,6 @@ export default {
     margin-left var(--navigation-width)
     padding-top var(--uie-space-xxl)
     padding-bottom var(--uie-space-xxl)
-
-  .in-page-nav
-    display block
-    position fixed
-    top calc(var(--topbar-height) + var(--uie-space-xxl))
-    right var(--uie-space-xxl)
-    width 140px
 
   .footer
     margin-left var(--navigation-width)
@@ -169,6 +159,16 @@ export default {
 .main
   @media $mq-xl_and_up
     padding-right calc(var(--uie-space-xxl) * 3 + 140px)
+
+.in-page-nav
+  margin-top var(--uie-space-xxl)
+  @media $mq-xl_and_up
+    display block
+    position fixed
+    top calc(var(--topbar-height) + var(--uie-space-xxl))
+    right var(--uie-space-xxl)
+    width 140px
+    margin-top 0
 
 @media print
   .topbar,

@@ -380,6 +380,9 @@ export default {
   margin-bottom var(--uie-space-xxxl)
   border-width 1px
   @media $mq-l_and_up
+    margin-left calc(var(--uie-space-xl) * -1)
+    margin-right calc(var(--uie-space-xl) * -1)
+  @media $mq-xl_and_up
     margin-left calc(var(--uie-space-xxl) * -1)
     margin-right calc(var(--uie-space-xxl) * -1)
 
