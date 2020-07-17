@@ -162,7 +162,7 @@ export default {
   justify-content space-between
   color var(--uie-color-topbar-text)
   background var(--uie-color-topbar-bg)
-  border-bottom: 1px solid var(--uie-color-neutral-30)
+  border-bottom: 1px solid var(--uie-color-border-dark)
   @media $mq-l_and_up
     display grid
     grid-template-columns 1fr 2fr 1fr
@@ -306,7 +306,7 @@ export default {
     font-size var(--uie-font-size-m)
 
     &:focus
-      border-color var(--uie-color-neutral-30)
+      border-color var(--uie-color-border-dark)
       background-color var(--uie-color-neutral-0)
       outline none
 

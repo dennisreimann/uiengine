@@ -261,7 +261,7 @@ select
   width 240px;
   padding var(--uie-space-s);
   transition border-color .25s ease;
-  border 1px solid var(--uie-color-neutral-30);
+  border 1px solid var(--uie-color-border-dark);
   border-radius 5px;
   outline 0;
   background-color transparent;

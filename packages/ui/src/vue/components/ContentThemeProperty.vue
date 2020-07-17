@@ -113,7 +113,7 @@ export default {
   &__variablename
     display inline-block
     margin-top var(--uie-space-xs)
-    border 1px solid var(--uie-color-neutral-30)
+    border 1px solid var(--uie-color-border-dark)
 
   &__value,
   &__variable

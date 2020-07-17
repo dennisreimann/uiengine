@@ -337,7 +337,7 @@ export default {
       margin-bottom var(--uie-space-xs)
       padding-bottom var(--uie-space-xs)
       min-width 36px
-      border-bottom 1px solid var(--uie-color-neutral-30)
+      border-bottom 1px solid var(--uie-color-border-dark)
       color var(--uie-color-neutral-70)
       &-icon
         icon-size(12px)

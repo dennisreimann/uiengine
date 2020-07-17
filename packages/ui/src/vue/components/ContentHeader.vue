@@ -88,7 +88,7 @@ export default {
     align-items center
     height 32px
     padding var(--uie-space-s) var(--uie-space-m)
-    border 1px solid var(--uie-color-neutral-30)
+    border 1px solid var(--uie-color-border-dark)
     color var(--uie-color-contentheader-link)
     line-height 1.2
     text-decoration none
@@ -109,7 +109,7 @@ export default {
 
     &[aria-selected]:not(:only-child)
       color var(--uie-color-contentheader-link-current)
-      background-color var(--uie-color-neutral-30)
+      background-color var(--uie-color-bg-dark)
 
     .icon
       fill var(--uie-color-contentheader-link)
