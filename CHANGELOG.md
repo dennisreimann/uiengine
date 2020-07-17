@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.1.0] - 17.07.2020
+
+### Changed
+
+- UI overhaul, major thanks and props to [@CosAnca](https://github.com/CosAnca)!
+
+### Added
+
+- Add logo option to [config](/basics/config/#project-config)
+- [Extend tokens representations](/advanced/design-tokens/) with opacity, box-shadow and border styles.
+
 ## [3.0.0] - 22.04.2020
 
 ### Added
