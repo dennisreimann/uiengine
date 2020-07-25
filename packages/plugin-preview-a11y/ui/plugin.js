@@ -18,7 +18,7 @@ document.addEventListener('plugin-preview-a11y:iframe:load', ({ detail }) => {
         let targetInfo = target.querySelector('span.info')
         if (!targetInfo) {
           targetInfo = document.createElement('span')
-          targetInfo.setAttribute('class', 'info')
+          targetInfo.setAttribute('class', 'a11y-info')
           target.append(targetInfo)
         }
         targetInfo.innerHTML = `(${results.violations.length} violations)`
