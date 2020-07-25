@@ -62,6 +62,7 @@
             :key="theme.id"
             class="topbar__theme-option"
             type="button"
+            :aria-selected="currentTheme.id === theme.id"
             :data-test-theme-switch-id="theme.id"
             @click="setCurrentTheme(theme)"
           >
@@ -70,6 +71,7 @@
           <button
             class="topbar__theme-option topbar__theme-option--all"
             type="button"
+            :aria-selected="displayAllThemes"
             data-test-theme-switch-all
             @click="setCurrentThemeAll()"
           >
@@ -95,8 +97,13 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import Themes from '../mixins/themes'
 
 export default {
+  mixins: [
+    Themes
+  ],
+
   data () {
     return {
       query: '',
@@ -105,12 +112,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters('state', ['config', 'navigation']),
-    ...mapGetters('preferences', ['locale', 'navigationCollapsed', 'searchCollapsed', 'currentTheme']),
-
-    themes () {
-      return this.config.themes
-    }
+    ...mapGetters('state', ['navigation']),
+    ...mapGetters('preferences', ['locale', 'navigationCollapsed', 'searchCollapsed'])
   },
 
   created () {
@@ -162,7 +165,7 @@ export default {
   justify-content space-between
   color var(--uie-color-topbar-text)
   background var(--uie-color-topbar-bg)
-  border-bottom: 1px solid var(--uie-color-border-dark)
+  border-bottom 1px solid var(--uie-color-topbar-border)
   @media $mq-l_and_up
     display grid
     grid-template-columns 1fr 2fr 1fr
@@ -230,7 +233,7 @@ export default {
         transition-timing-function ease-in
 
       &-inner
-        border 1px solid var(--uie-color-modal-border-outer)
+        border 1px solid var(--uie-color-modal-border)
         border-radius var(--uie-base-border-radius)
         overflow hidden
 
@@ -238,7 +241,7 @@ export default {
       modal-option()
 
     &-option + &-option
-      border-top 1px solid var(--uie-color-modal-border-inner)
+      border-top 1px solid var(--uie-color-modal-border)
 
   &__spacer
     margin-right auto

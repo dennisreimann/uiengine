@@ -85,10 +85,10 @@ export default {
     border-radius var(--uie-space-xs)
 
   code:not([class])
-    border 1px solid var(--uie-color-border-dark)
+    border 1px solid var(--uie-color-code-border)
 
   pre code:not([class])
-    border-width 0
+    border 0
 
   h1,
   h2,

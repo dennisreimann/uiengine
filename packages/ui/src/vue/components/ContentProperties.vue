@@ -75,11 +75,13 @@ table + table
 
 .property
   &__name
+    font-size var(--uie-font-size-xs)
     .withDescription &
       width 10em
 
   &__type
     width 12em
+    font-size var(--uie-font-size-xs)
 
   &__description
     width auto

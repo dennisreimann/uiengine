@@ -71,6 +71,7 @@ export default {
   &__default,
   &__required
     font-family var(--uie-font-family-code)
+    font-size var(--uie-font-size-s)
 
   &__type
     white-space nowrap

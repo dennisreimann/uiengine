@@ -46,6 +46,7 @@ export default {
 
 <style lang="stylus" scoped>
 .navigation
+  border-right 1px solid var(--uie-color-navigation-border)
   padding-right var(--uie-space-m)
   padding-left var(--uie-space-m)
   color var(--uie-color-navigation-text)

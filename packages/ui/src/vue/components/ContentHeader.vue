@@ -88,12 +88,13 @@ export default {
     align-items center
     height 32px
     padding var(--uie-space-s) var(--uie-space-m)
-    border 1px solid var(--uie-color-border-dark)
+    border 1px solid var(--uie-color-contentheader-border)
     color var(--uie-color-contentheader-link)
     line-height 1.2
     text-decoration none
     transition-property color
     transition-duration var(--uie-transition-duration-fast)
+    background-color var(--uie-color-contentheader-bg)
 
     &:first-child
       margin-left var(--uie-space-l)
@@ -101,15 +102,16 @@ export default {
       border-bottom-left-radius var(--uie-base-border-radius)
 
     &:last-child
-      border-top-right-radius: var(--uie-base-border-radius)
-      border-bottom-right-radius: var(--uie-base-border-radius)
+      border-top-right-radius var(--uie-base-border-radius)
+      border-bottom-right-radius var(--uie-base-border-radius)
 
     &:not([aria-selected]):hover
       color var(--uie-color-contentheader-link-hover)
+      background-color var(--uie-color-contentheader-bg-hover)
 
     &[aria-selected]:not(:only-child)
       color var(--uie-color-contentheader-link-current)
-      background-color var(--uie-color-bg-dark)
+      background-color var(--uie-color-contentheader-bg-current)
 
     .icon
       fill var(--uie-color-contentheader-link)

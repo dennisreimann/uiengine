@@ -21,7 +21,7 @@ export default {
 <style lang="stylus" scoped>
 .label
   padding var(--uie-space-xxs) var(--uie-space-s)
-  border 1px solid var(--uie-color-contentheader-label-bg)
+  border 1px solid var(--uie-color-contentheader-label-border)
   border-radius 20rem
   color var(--uie-color-contentheader-label-text)
   background var(--uie-color-contentheader-label-bg)

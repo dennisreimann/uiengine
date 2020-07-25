@@ -48,7 +48,7 @@
         </template>
       </td>
       <td class="themeProperty__variable">
-        {{ prop.variable }}
+        <code>{{ prop.variable }}</code>
       </td>
       <td class="themeProperty__default">
         {{ isDefault(prop) }}
@@ -113,11 +113,19 @@ export default {
   &__variablename
     display inline-block
     margin-top var(--uie-space-xs)
-    border 1px solid var(--uie-color-border-dark)
+    border 1px solid var(--uie-color-code-border)
+    font-size var(--uie-font-size-xs)
 
-  &__value,
-  &__variable
+  &__default
+    width 6em
+    text-align center
+
+  &__value
     font-family var(--uie-font-family-code)
+
+  &__variable
+    code
+      font-size var(--uie-font-size-xs)
 
   &__default
     text-align center

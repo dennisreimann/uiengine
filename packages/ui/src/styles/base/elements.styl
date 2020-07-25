@@ -121,7 +121,8 @@
     font-size var(--uie-font-size-s)
     padding var(--uie-space-xxs) var(--uie-space-xs)
     border-radius var(--uie-space-xs)
-    background-color var(--uie-color-bg-medium)
+    border 1px solid var(--uie-color-code-border)
+    background-color var(--uie-color-code-bg)
 
   pre
     code()
@@ -131,6 +132,7 @@
     // reset inline code styles when nested in pre
     code
       padding 0
+      border 0
       border-radius 0
       background-color transparent
 

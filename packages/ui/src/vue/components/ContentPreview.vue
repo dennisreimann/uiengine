@@ -41,9 +41,9 @@
           :class="viewportClass"
           class="preview__viewport"
         >
-          <div class="preview__title">
+          <span class="preview__title">
             {{ previewTitle(name, width) }}
-          </div>
+          </span>
           <div
             v-for="theme in displayedThemes"
             :key="theme.id"
@@ -80,9 +80,9 @@
           class="preview__viewport"
         >
           <template v-if="breakpoints">
-            <div class="preview__title">
+            <span class="preview__title">
               {{ size }}
-            </div>
+            </span>
           </template>
           <div
             v-for="theme in displayedThemes"
@@ -304,11 +304,11 @@ export default {
 
   &__title
     display inline-block
-    background-color var(--uie-color-border-preview)
     font-size var(--uie-font-size-xs)
     padding var(--uie-space-xs) var(--uie-space-s)
     border-radius var(--uie-base-border-radius) var(--uie-base-border-radius) 0 0
     color var(--uie-color-preview-title)
+    background-color var(--uie-color-preview-title-bg)
 
   &__toggle
     background-color transparent
@@ -327,37 +327,44 @@ export default {
   &__option
     padding var(--uie-space-s)
     font-size var(--uie-font-size-xs)
-    color var(--uie-color-neutral-50)
+    color var(--uie-color-preview-option-text)
     text-align center
     border-radius var(--uie-space-xs)
-    background-color transparent
+    background-color var(--uie-color-preview-option-bg)
     &-label
       display block
       font-size var(--uie-font-size-s)
       margin-bottom var(--uie-space-xs)
       padding-bottom var(--uie-space-xs)
       min-width 36px
-      border-bottom 1px solid var(--uie-color-border-dark)
-      color var(--uie-color-neutral-70)
+      border-bottom 1px solid var(--uie-color-preview-option-border)
+      color var(--uie-color-preview-option-label)
       &-icon
         icon-size(12px)
-        fill var(--uie-color-neutral-70)
-    &:hover
-      cursor pointer
-      background-color var(--uie-color-neutral-20)
-    &:focus
-      outline none
+        fill var(--uie-color-preview-option-label)
+    &:focus,
+    &:hover,
     &:active
-      .preview__option-label
-        color var(--uie-color-neutral-90)
+      cursor pointer
+      color var(--uie-color-preview-option-text-hover)
+      background-color var(--uie-color-preview-option-bg-hover)
+      outline none
 
   &__iframe-container
     box-sizing content-box
-    padding var(--uie-preview-padding)
-    border 1px solid var(--uie-color-border-preview)
-    border-radius var(--uie-base-border-radius)
-    border-top-left-radius 0
     overflow hidden
+    padding var(--uie-preview-padding)
+    border 1px solid var(--uie-color-preview-border)
+
+    &:first-of-type
+      border-top-right-radius var(--uie-base-border-radius)
+
+    &:last-of-type
+      border-bottom-left-radius var(--uie-base-border-radius)
+      border-bottom-right-radius var(--uie-base-border-radius)
+
+  &__iframe-container + &__iframe-container
+      border-top 0
 
   &__theme-title
     padding-bottom calc(var(--uie-preview-border-width) / 2)

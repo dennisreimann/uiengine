@@ -112,7 +112,6 @@ export default {
     left 0
     bottom 0
     width var(--navigation-width)
-    border-right 1px solid var(--uie-color-border-dark)
     overflow-y auto
 
   .main

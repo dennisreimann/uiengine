@@ -75,7 +75,11 @@ export default {
 table
   margin-bottom var(--uie-space-xl)
 
-.themeProperty__default
-  width 6em
-  text-align center
+.themeProperty
+  code
+    font-size var(--uie-font-size-xs)
+
+  &__default
+    width 6em
+    text-align center
 </style>

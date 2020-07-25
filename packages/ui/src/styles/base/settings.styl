@@ -29,7 +29,7 @@
   --uie-font-size-xxl 2.25rem
   --uie-font-size-xxxl 3rem
 
-  --uie-line-height 1.5
+  --uie-line-height 1.6
   --uie-line-height-heading 1.25
 
   // spaces
@@ -80,6 +80,7 @@
   --uie-color-topbar-bg var(--uie-color-accent-ultradark)
   --uie-color-topbar-text var(--uie-color-neutral-0)
   --uie-color-topbar-text-hover var(--uie-color-accent-ultralight)
+  --uie-color-topbar-border var(--uie-color-border-dark)
 
   --uie-color-navigation-bg var(--uie-color-bg-medium)
   --uie-color-navigation-text var(--uie-color-neutral-80)
@@ -89,14 +90,7 @@
   --uie-color-navigation-bg-current var(--uie-color-bg-dark)
   --uie-color-navigation-text-current var(--uie-color-accent-dark)
   --uie-color-navigation-border-current var(--uie-color-accent-light)
-
-  --uie-color-contentheader-link var(--uie-color-accent-light)
-  --uie-color-contentheader-link-hover var(--uie-color-accent-dark)
-  --uie-color-contentheader-link-current var(--uie-color-accent-dark)
-  --uie-color-contentheader-label-bg var(--uie-color-accent-medium)
-  --uie-color-contentheader-label-text var(--uie-color-neutral-0)
-  --uie-color-contentheader-tag-bg var(--uie-color-neutral-0)
-  --uie-color-contentheader-tag-text var(--uie-color-neutral-40)
+  --uie-color-navigation-border var(--uie-color-border-dark)
 
   --uie-color-main-bg var(--uie-color-neutral-0)
   --uie-color-main-text var(--uie-color-neutral-90)
@@ -106,19 +100,52 @@
   --uie-color-secondary-link var(--uie-color-neutral-80)
   --uie-color-secondary-link-hover var(--uie-color-neutral-90)
 
-  --uie-color-modal-bg var(--uie-color-neutral-0)
-  --uie-color-modal-bg-hover var(--uie-color-bg-light)
-  --uie-color-modal-text var(--uie-color-secondary-text)
-  --uie-color-modal-text-hover var(--uie-color-secondary-text)
-  --uie-color-modal-border-outer var(--uie-color-border-dark)
-  --uie-color-modal-border-inner var(--uie-color-border-dark)
+  --uie-color-option-text var(--uie-color-accent-light)
+  --uie-color-option-text-hover var(--uie-color-accent-dark)
+  --uie-color-option-text-current var(--uie-color-accent-dark)
+  --uie-color-option-bg var(--uie-color-neutral-0)
+  --uie-color-option-bg-hover var(--uie-color-bg-medium)
+  --uie-color-option-bg-current var(--uie-color-bg-dark)
+  --uie-color-option-border var(--uie-color-border-dark)
 
-  --uie-color-code-bg var(--uie-color-accent-ultradark)
-  --uie-color-code-text var(--uie-color-neutral-10)
-  --uie-color-code-header var(--uie-color-accent-medium)
-  --uie-color-code-header-bg var(--uie-color-neutral-20)
-  --uie-color-code-header-hover var(--uie-color-accent-middark)
-  --uie-color-code-header-current var(--uie-color-accent-dark)
+  --uie-color-contentheader-link var(--uie-color-option-text)
+  --uie-color-contentheader-link-hover var(--uie-color-option-text-hover)
+  --uie-color-contentheader-link-current var(--uie-color-option-text-current)
+  --uie-color-contentheader-bg var(--uie-color-option-bg)
+  --uie-color-contentheader-bg-hover var(--uie-color-option-bg-hover)
+  --uie-color-contentheader-bg-current var(--uie-color-option-bg-current)
+  --uie-color-contentheader-border var(--uie-color-option-border)
+  --uie-color-contentheader-label-bg var(--uie-color-accent-medium)
+  --uie-color-contentheader-label-text var(--uie-color-neutral-0)
+  --uie-color-contentheader-label-border var(--uie-color-accent-medium)
+  --uie-color-contentheader-tag-bg var(--uie-color-neutral-0)
+  --uie-color-contentheader-tag-text var(--uie-color-neutral-50)
+  --uie-color-contentheader-tag-border var(--uie-color-neutral-50)
+
+  --uie-color-preview-option-text var(--uie-color-neutral-50)
+  --uie-color-preview-option-label var(--uie-color-neutral-70)
+  --uie-color-preview-option-text-hover var(--uie-color-neutral-70)
+  --uie-color-preview-option-label-hover var(--uie-color-neutral-90)
+  --uie-color-preview-option-bg var(--uie-color-neutral-0)
+  --uie-color-preview-option-bg-hover var(--uie-color-neutral-20)
+  --uie-color-preview-option-border var(--uie-color-border-dark)
+
+  --uie-color-modal-bg var(--uie-color-option-bg)
+  --uie-color-modal-bg-hover var(--uie-color-option-bg-hover)
+  --uie-color-modal-bg-current var(--uie-color-option-bg-current)
+  --uie-color-modal-text var(--uie-color-option-text)
+  --uie-color-modal-text-hover var(--uie-color-option-text-hover)
+  --uie-color-modal-text-current var(--uie-color-option-text-current)
+  --uie-color-modal-border var(--uie-color-option-border)
+
+  --uie-color-code-bg var(--uie-color-bg-medium)
+  --uie-color-code-border var(--uie-color-option-border)
+  --uie-color-code-header-text var(--uie-color-option-text)
+  --uie-color-code-header-bg var(--uie-color-option-bg)
+  --uie-color-code-header-text-hover var(--uie-color-option-text-hoveer)
+  --uie-color-code-header-bg-hover var(--uie-color-option-bg-hover)
+  --uie-color-code-header-text-current var(--uie-color-option-text-hover)
+  --uie-color-code-header-bg-current var(--uie-color-option-bg-hover)
 
   --uie-color-footer-bg var(--uie-color-bg-light)
   --uie-color-footer-text var(--uie-color-secondary-text)
@@ -128,4 +155,5 @@
   --uie-preview-border-width var(--uie-space-s)
   --uie-preview-padding var(--uie-preview-border-width, var(--uie-space-m))
   --uie-color-preview-title var(--uie-color-main-text)
-  --uie-color-border-preview var(--uie-color-border-dark)
+  --uie-color-preview-title-bg var(--uie-color-bg-medium)
+  --uie-color-preview-border var(--uie-color-border-dark)

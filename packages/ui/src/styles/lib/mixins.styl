@@ -38,8 +38,6 @@ modal-option()
   color var(--uie-color-modal-text)
   background var(--uie-color-modal-bg)
   font-size var(--uie-font-size-s)
-  font-family var(--uie-font-family-light)
-  font-weight var(--uie-font-weight-light)
   text-decoration none
   text-align left
   white-space nowrap
@@ -51,14 +49,21 @@ modal-option()
     icon-size(21px)
     icon-position(6px)
 
-  &:focus,
-  &:hover,
-  &:active
+  &:not([aria-selected]):focus,
+  &:not([aria-selected]):hover,
+  &:not([aria-selected]):active
     color var(--uie-color-modal-text-hover)
-    background var(--uie-color-modal-bg-hover)
+    background-color var(--uie-color-modal-bg-hover)
 
     .icon
       fill var(--uie-color-modal-text-hover)
+
+  &[aria-selected]:not(:only-child)
+    color var(--uie-color-modal-text-current)
+    background-color var(--uie-color-modal-bg-current)
+
+    .icon
+      fill var(--uie-color-modal-text-current)
 
 code()
   font-family var(--uie-font-family-code)

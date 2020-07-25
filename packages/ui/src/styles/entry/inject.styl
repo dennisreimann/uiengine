@@ -49,6 +49,9 @@
       grid-template-columns repeat(auto-fill, minmax(250px, 1fr))
       grid-gap 2rem
 
+  code
+    font-size var(--uie-font-size-xs)
+
 .uie-token
   &__color
     width 100%
@@ -61,8 +64,8 @@
     height 4.5rem
     border-radius 50%
     border-bottom-right-radius 0 !important
-    border 1px solid var(--uie-color-border-dark)
-    padding 2px
+    border 1px solid var(--uie-color-code-border)
+    padding var(--uie-space-xxs)
 
     &__inner
       width 100%
@@ -104,10 +107,6 @@
 
     &--code
       font-family var(--uie-font-family-code)
-
-      code
-        border 1px solid var(--uie-color-border-dark)
-        font-size var(--uie-font-size-xs)
 
 .uie-size-token
   &__size
@@ -161,9 +160,6 @@
     &--variable
       font-family var(--uie-font-family-code)
 
-      code
-        border 1px solid var(--uie-color-border-dark)
-
 .uie-icon-token
   &__icon
     display flex
@@ -182,7 +178,6 @@
   &__variablename
     display inline-block
     margin-top var(--uie-space-xs)
-    border 1px solid var(--uie-color-border-dark)
 
   &__value
     &--value
@@ -190,8 +185,6 @@
     &--variable
       font-family var(--uie-font-family-code)
       white-space nowrap
-      code
-        border 1px solid var(--uie-color-border-dark)
     &--default
       text-align center
 
@@ -202,8 +195,8 @@
     margin-right var(--uie-space-xs)
     border-radius 50%
     border-bottom-right-radius 0 !important
-    border 1px solid var(--uie-color-border-dark)
-    padding 2px
+    border 1px solid var(--uie-color-code-border)
+    padding var(--uie-space-xxs)
 
     &__inner
       display block

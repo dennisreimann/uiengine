@@ -31,7 +31,7 @@ export default {
 .tag
   position relative
   padding var(--uie-space-xxs) var(--uie-space-s)
-  border 1px solid var(--uie-color-contentheader-tag-text)
+  border 1px solid var(--uie-color-contentheader-tag-border)
   border-radius 20rem
   color var(--uie-color-contentheader-tag-text)
   font-size var(--uie-font-size-xs)
