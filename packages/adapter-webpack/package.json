@@ -47,7 +47,7 @@
     "babel-preset-vue": "2.0.2",
     "chalk": "4.1.0",
     "css-loader": "3.6.0",
-    "eslint": "7.4.0",
+    "eslint": "7.5.0",
     "eslint-config-standard": "14.1.1",
     "eslint-import-resolver-node": "0.3.4",
     "eslint-plugin-import": "2.22.0",
@@ -67,7 +67,7 @@
     "vue-server-renderer": "2.6.11",
     "vue-style-loader": "4.1.2",
     "vue-template-compiler": "2.6.11",
-    "webpack": "4.43.0",
+    "webpack": "4.44.0",
     "webpack-node-externals": "2.5.0"
   },
   "optionalDependencies": {
