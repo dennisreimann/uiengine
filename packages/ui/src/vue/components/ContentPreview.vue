@@ -13,18 +13,18 @@
             type="button"
             @click="setWidth(width)"
           >
-            <span class="preview__option-label">{{ breakpoint }}</span>
-            <span class="preview__option-width">{{ width }}px</span>
+            <span class="preview__option-text">{{ breakpoint }}</span>
+            <span class="preview__option-label">{{ width }}px</span>
           </button>
           <button
             class="preview__option"
             type="button"
             @click="setWidth(null)"
           >
-            <span class="preview__option-label">
+            <span class="preview__option-text">
               <AppIcon
                 symbol="reset"
-                class="preview__option-label-icon"
+                class="preview__option-text-icon"
               />
             </span>
             {{ 'options.reset' | localize }}
@@ -327,28 +327,35 @@ export default {
   &__option
     padding var(--uie-space-s)
     font-size var(--uie-font-size-xs)
-    color var(--uie-color-preview-option-text)
+    color var(--uie-color-preview-option-label)
     text-align center
     border-radius var(--uie-space-xs)
     background-color var(--uie-color-preview-option-bg)
-    &-label
+    cursor pointer
+    outline none
+    &-text
       display block
       font-size var(--uie-font-size-s)
       margin-bottom var(--uie-space-xs)
       padding-bottom var(--uie-space-xs)
       min-width 36px
       border-bottom 1px solid var(--uie-color-preview-option-border)
-      color var(--uie-color-preview-option-label)
+      color var(--uie-color-preview-option-text)
       &-icon
         icon-size(12px)
-        fill var(--uie-color-preview-option-label)
+        fill currentColor
     &:focus,
     &:hover,
     &:active
-      cursor pointer
       color var(--uie-color-preview-option-text-hover)
       background-color var(--uie-color-preview-option-bg-hover)
-      outline none
+    &:focus &-label,
+    &:hover &-label,
+    &:active &-label
+      color var(--uie-color-preview-option-label-hover)
+
+  &__option + &__option
+    margin-left var(--uie-space-xs)
 
   &__iframe-container
     box-sizing content-box

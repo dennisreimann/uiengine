@@ -2,10 +2,7 @@
   <div>
     <section class="component">
       <ContentHeader :title="component.title">
-        <ContentLabel
-          v-if="component.label"
-          inverted
-        >
+        <ContentLabel v-if="component.label">
           {{ component.label }}
         </ContentLabel>
         <ContentTag
@@ -401,11 +398,10 @@ export default {
   display block
   padding-top var(--uie-space-xs)
   padding-bottom var(--uie-space-xs)
-  max-width var(--uie-in-page-navigation-width)
   font-size var(--uie-font-size-s)
-  color var(--uie-color-navigation-text-subnav)
+  color var(--uie-color-navigation-text)
   text-decoration none
   line-height 1
   &:hover
-    color var(--uie-color-navigation-text-current)
+    color var(--uie-color-navigation-text-hover)
 </style>

@@ -153,7 +153,7 @@ export default {
     display inline-block
     height 1.2em
     border 1px solid var(--uie-color-accent-medium)
-    background-color var(--uie-color-accent-extralight)
+    background-color var(--uie-color-accent-ultralight)
 
 .themeProperty__property,
 tbody tr:last-child td

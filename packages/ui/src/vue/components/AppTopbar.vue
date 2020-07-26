@@ -211,9 +211,11 @@ export default {
       &:hover,
       &:active
         color var(--uie-color-topbar-text-hover)
+        .icon
+          fill currentColor
       &-icon
         icon-size(16px)
-        margin-left var(--uie-space-m)
+        margin-left var(--uie-space-s)
         fill var(--uie-color-topbar-text)
 
     &-options
@@ -257,8 +259,9 @@ export default {
     &:focus,
     &:hover,
     &:active
-      .topbar__icon
-        fill var(--uie-color-topbar-text-hover)
+      color var(--uie-color-topbar-text-hover)
+      .icon
+        fill currentColor
 
     &--menu
       margin-left calc(var(--uie-space-s) * -1)

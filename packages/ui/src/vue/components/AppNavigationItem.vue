@@ -200,8 +200,7 @@ export default {
       padding-top var(--uie-space-s)
       padding-bottom var(--uie-space-s)
 
-    .navigation__item--level-0 &
-      padding-left var(--uie-space-m)
+    .navigation__item &
       color var(--uie-color-navigation-text)
       background-color var(--uie-color-navigation-bg)
 
@@ -212,18 +211,15 @@ export default {
       color var(--uie-color-neutral-50)
       text-transform uppercase
 
+    .navigation__item--level-0 &,
     .navigation__item--level-1 &
       padding-left var(--uie-space-m)
-      color var(--uie-color-navigation-text-subnav)
-      background-color var(--uie-color-navigation-bg-subnav)
 
     .navigation__item--level-2 &,
     .navigation__item--level-3 &,
     .navigation__item--level-4 &,
     .navigation__item--level-5 &
       padding-left var(--uie-space-xl)
-      color var(--uie-color-navigation-text-subnav)
-      background-color var(--uie-color-navigation-bg-subnav)
 
   &__item--current > &__link
     font-family var(--uie-font-family-bold)

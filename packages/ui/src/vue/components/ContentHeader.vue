@@ -68,7 +68,7 @@ export default {
   &__edit-icon
     icon-size(16px)
     margin-left var(--uie-space-m)
-    fill var(--uie-color-contentheader-link)
+    fill currentColor
 
   &__buttons
     display inline-flex
@@ -89,7 +89,7 @@ export default {
     height 32px
     padding var(--uie-space-s) var(--uie-space-m)
     border 1px solid var(--uie-color-contentheader-border)
-    color var(--uie-color-contentheader-link)
+    color var(--uie-color-contentheader-text)
     line-height 1.2
     text-decoration none
     transition-property color
@@ -106,23 +106,22 @@ export default {
       border-bottom-right-radius var(--uie-base-border-radius)
 
     &:not([aria-selected]):hover
-      color var(--uie-color-contentheader-link-hover)
+      color var(--uie-color-contentheader-text-hover)
       background-color var(--uie-color-contentheader-bg-hover)
 
     &[aria-selected]:not(:only-child)
-      color var(--uie-color-contentheader-link-current)
+      color var(--uie-color-contentheader-text-current)
       background-color var(--uie-color-contentheader-bg-current)
 
     .icon
-      fill var(--uie-color-contentheader-link)
+      fill currentColor
       transition-duration var(--uie-transition-duration-fast)
       icon-size(16px)
 
     &:focus,
     &:hover,
     &:active
-      .icon
-        fill var(--uie-color-contentheader-link-hover)
+      color var(--uie-color-contentheader-text-hover)
 
   &__option + &__option
     border-left-width 0
@@ -131,7 +130,7 @@ export default {
     display inline-flex
     align-items center
     margin-left var(--uie-space-l)
-    color var(--uie-color-contentheader-link)
+    color var(--uie-color-contentheader-text)
     cursor pointer
     background transparent
     font-family var(--uie-font-family-light)
@@ -140,15 +139,13 @@ export default {
     transition-duration var(--uie-transition-duration-fast)
     text-decoration none
 
+    .icon
+      fill currentColor
+      transition-duration var(--uie-transition-duration-fast)
+      icon-size(16px)
+
     &:focus,
     &:hover,
     &:active
-      color var(--uie-color-contentheader-link-hover)
-      .icon
-        fill var(--uie-color-contentheader-link-hover)
-
-    .icon
-      fill var(--uie-color-contentheader-link)
-      transition-duration var(--uie-transition-duration-fast)
-      icon-size(16px)
+      color var(--uie-color-contentheader-text-hover)
 </style>
