@@ -27,7 +27,7 @@
                 class="preview__option-text-icon"
               />
             </span>
-            {{ 'options.reset' | localize }}
+            <span class="preview__option-label">{{ 'options.reset' | localize }}</span>
           </button>
         </div>
       </div>
