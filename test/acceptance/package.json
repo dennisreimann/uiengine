@@ -17,8 +17,8 @@
     "lint": "eslint --fix integration plugins support"
   },
   "devDependencies": {
-    "cypress": "4.11.0",
-    "eslint": "7.5.0",
+    "cypress": "4.12.1",
+    "eslint": "7.6.0",
     "eslint-config-standard": "14.1.1",
     "eslint-import-resolver-node": "0.3.4",
     "eslint-plugin-cypress": "2.11.1",
