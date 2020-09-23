@@ -30,10 +30,10 @@
     "@uiengine/util": "3.1.2",
     "deepmerge": "4.2.2",
     "fs-extra": "9.0.1",
-    "postcss": "7.0.32"
+    "postcss": "8.0.8"
   },
   "devDependencies": {
-    "eslint": "7.6.0",
+    "eslint": "7.9.0",
     "eslint-config-standard": "14.1.1",
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-node": "11.1.0",

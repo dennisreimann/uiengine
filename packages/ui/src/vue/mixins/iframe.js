@@ -39,7 +39,7 @@ export default {
         contentWindow.onresize = this.iframeResizeHandler.bind(this)
 
         // notify
-        this.$emit('iframe:load', iframe)
+        this.$emit('iframe-load', iframe)
       }
     },
 

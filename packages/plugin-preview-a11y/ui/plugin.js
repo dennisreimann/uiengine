@@ -1,4 +1,4 @@
-document.addEventListener('plugin-preview-a11y:iframe:load', ({ detail }) => {
+document.addEventListener('plugin-preview-a11y:iframe-load', ({ detail }) => {
   const { target, content, iframe, plugin } = detail
   const { axe: axeOpts } = plugin
 

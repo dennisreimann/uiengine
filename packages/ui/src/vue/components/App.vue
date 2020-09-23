@@ -39,7 +39,7 @@ export default {
   },
 
   created () {
-    this.$root.$on('setting:hljs', this.setHljs)
+    this.$root.$on('setting-hljs', this.setHljs)
     this.$store.watch(() => this.$store.getters['preferences/currentTheme'], this.setCurrentTheme)
 
     const hljs = this.$store.getters['preferences/hljs']
@@ -49,7 +49,7 @@ export default {
 
   methods: {
     closeModals () {
-      this.$root.$emit('modal:close')
+      this.$root.$emit('modal-close')
     },
 
     setHljs (hljs) {

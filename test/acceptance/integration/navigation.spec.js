@@ -9,22 +9,22 @@ context('Navigation', () => {
 
   it('should switch pages', () => {
     cy.get('[data-test-navitem-id="documentation/getting-started"] > a').click()
-    cy.get('h1').should('be', 'Getting Started')
+    cy.get('h1').should('contain', 'Getting Started')
 
     cy.get('[data-test-navitem-id="documentation/tokens/colors"] > a').click()
-    cy.get('h1').should('be', 'Colors')
+    cy.get('h1').should('contain', 'Colors')
 
     cy.get('[data-test-navitem-id="patterns"] > a').click()
-    cy.get('h1').should('be', 'Pattern Library')
+    cy.get('h1').should('contain', 'Pattern Library')
 
     cy.get('[data-test-navitem-id="patterns/atoms/input"] > a').click()
-    cy.get('h1').should('be', 'Inputs')
+    cy.get('h1').should('contain', 'Inputs')
 
     cy.get('[data-test-navitem-id="testcases/custom-template"] > a').click()
-    cy.get('h1').should('be', 'Custom Template')
+    cy.get('h1').should('contain', 'Custom Template')
 
     cy.get('[data-test-navitem-id="settings"] >   a').click()
-    cy.get('h1').should('be', 'Settings')
+    cy.get('h1').should('contain', 'Settings')
   })
 
   it('should toggle categories', () => {

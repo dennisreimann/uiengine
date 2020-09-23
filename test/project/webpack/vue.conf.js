@@ -35,7 +35,12 @@ const baseConfig = {
         test: /\.css$/,
         loader: [
           require.resolve('vue-style-loader'),
-          require.resolve('css-loader')
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              esModule: false
+            }
+          }
         ]
       },
       {

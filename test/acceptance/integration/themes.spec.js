@@ -8,19 +8,19 @@ context('Themes', () => {
     })
 
     it('should show first theme by default', () => {
-      cy.get('[data-test-theme-switch-current]').should('be', 'Plain')
+      cy.get('[data-test-theme-switch-current]').should('contain', 'Plain')
     })
 
     it('should switch and keep selected theme', () => {
       cy.get('[data-test-theme-switch-current]').click()
       cy.get('[data-test-theme-switch-id="funky"]').click()
-      cy.get('[data-test-theme-switch-current]').should('be', 'Funky')
+      cy.get('[data-test-theme-switch-current]').should('contain', 'Funky')
 
       cy.reload()
-      cy.get('[data-test-theme-switch-current]').should('be', 'Funky')
+      cy.get('[data-test-theme-switch-current]').should('contain', 'Funky')
       cy.get('[data-test-theme-switch-current]').click()
       cy.get('[data-test-theme-switch-id="plain"]').click()
-      cy.get('[data-test-theme-switch-current]').should('be', 'Plain')
+      cy.get('[data-test-theme-switch-current]').should('contain', 'Plain')
     })
   })
 

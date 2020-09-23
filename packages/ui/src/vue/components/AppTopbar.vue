@@ -117,7 +117,7 @@ export default {
   },
 
   created () {
-    this.$root.$on('modal:close', () => {
+    this.$root.$on('modal-close', () => {
       this.isThemesActive = false
     })
   },

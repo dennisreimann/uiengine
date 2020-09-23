@@ -216,7 +216,7 @@ export default {
 
       set (newValue) {
         this.setHljs(newValue)
-        this.$root.$emit('setting:hljs', newValue)
+        this.$root.$emit('setting-hljs', newValue)
       }
     },
 

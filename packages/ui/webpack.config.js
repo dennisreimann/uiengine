@@ -220,13 +220,22 @@ module.exports = {
           {
             loader: require.resolve('css-loader'),
             options: {
+              esModule: false,
               sourceMap: true
             }
           },
           {
             loader: require.resolve('postcss-loader'),
             options: {
-              sourceMap: true
+              sourceMap: true,
+              postcssOptions: {
+                plugins: [
+                  require.resolve('postcss-import'),
+                  require.resolve('css-mqpacker'),
+                  require.resolve('autoprefixer'),
+                  require.resolve('csswring')
+                ]
+              }
             }
           },
           {
