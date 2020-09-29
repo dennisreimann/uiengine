@@ -23,9 +23,8 @@ export default {
 
     setupIframe (event) {
       const iframe = event.currentTarget
-      const height = iframe.getAttribute('height')
 
-      if (!height && iframe.src !== 'about:blank') {
+      if (iframe.src !== 'about:blank') {
         const { contentWindow } = iframe
 
         // dynamically add runtime and iframe sizer as well as plugin scripts

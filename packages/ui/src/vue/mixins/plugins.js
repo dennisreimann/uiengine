@@ -24,21 +24,19 @@ export default {
   },
 
   mounted () {
-    this.$nextTick(() => {
-      const { variant, component } = this.$props
-      this.$refs.preview.$on('iframe-load', iframe => {
-        this.pluginActions.forEach((plugin, index) => {
-          const target = this.$refs['plugin-action'][index]
-          this.dispatchPluginEvent('init', plugin, { target, variant, component })
-          this.dispatchPluginEvent('iframe-load', plugin, { target, variant, component, iframe })
-        })
+    const { variant, component } = this.$props
+    this.$refs.preview.$on('iframe-load', iframe => {
+      this.pluginActions.forEach((plugin, index) => {
+        const target = this.$refs['plugin-action'][index]
+        this.dispatchPluginEvent('init', plugin, { target, variant, component })
+        this.dispatchPluginEvent('iframe-load', plugin, { target, variant, component, iframe })
+      })
 
-        this.pluginTabs.forEach((plugin, index) => {
-          const target = this.$refs['plugin-tab'][index]
-          const content = this.$refs['plugin-tab-content'][index]
-          this.dispatchPluginEvent('init', plugin, { target, content, variant, component })
-          this.dispatchPluginEvent('iframe-load', plugin, { target, content, variant, component, iframe })
-        })
+      this.pluginTabs.forEach((plugin, index) => {
+        const target = this.$refs['plugin-tab'][index]
+        const content = this.$refs['plugin-tab-content'][index]
+        this.dispatchPluginEvent('init', plugin, { target, content, variant, component })
+        this.dispatchPluginEvent('iframe-load', plugin, { target, content, variant, component, iframe })
       })
     })
   }
