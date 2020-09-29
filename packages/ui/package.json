@@ -2,7 +2,7 @@
   "name": "@uiengine/ui",
   "description": "UIengine user interface.",
   "license": "MIT",
-  "version": "3.1.3",
+  "version": "3.1.4",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.11.2",
-    "@uiengine/util": "3.1.3",
+    "@uiengine/util": "3.1.4",
     "color": "3.1.2",
     "cross-env": "7.0.2",
     "deepmerge": "4.2.2",
