@@ -39,6 +39,7 @@
     >
       <button
         :title="'options.toggle' | localize"
+        :aria-expanded="isThemesActive | bool2string"
         class="topbar__theme-toggle"
         type="button"
         data-test-theme-switch-current
@@ -215,8 +216,12 @@ export default {
           fill currentColor
       &-icon
         icon-size(16px)
+        transition-property transform
+        transition-duration var(--uie-transition-duration-fast)
         margin-left var(--uie-space-s)
         fill var(--uie-color-topbar-text)
+      &[aria-expanded="false"] &-icon
+        transform rotate(-90deg)
 
     &-options
       position absolute

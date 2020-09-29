@@ -281,6 +281,4 @@ export default {
 .variant
   & + &
     margin-top var(--uie-space-xxxl)
-    // padding-top var(--uie-space-xl)
-    // border-top 1px solid var(--uie-color-border-light)
 </style>

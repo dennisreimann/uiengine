@@ -208,11 +208,11 @@ export default {
       &:not([aria-expanded="true"]):active
         color var(--uie-color-code-header-text-hover)
         background-color var(--uie-color-code-header-bg-hover)
-      &[aria-expanded="true"]
+      &[aria-expanded="false"]
         color var(--uie-color-code-header-text-current)
         background-color var(--uie-color-code-header-bg-current)
         .code__expandicon
-          transform rotate(-180deg)
+          transform rotate(-90deg)
 
   &__header
     display flex
