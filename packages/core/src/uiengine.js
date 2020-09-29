@@ -21,7 +21,8 @@ const sourceFilesFromConfig = ({ source: { configFile, components, data, pages, 
   if (debug) {
     const uiSrc = dirname(require.resolve('@uiengine/ui'))
     const uiGlob = join(uiSrc.replace(join('ui', 'src'), join('ui', '{dist,lib}')), globPattern)
-    sourceFiles.push(uiGlob)
+    const pluginGlob = join(uiSrc.replace(join('ui', 'src'), join('plugin-*', '{src,ui}')), globPattern)
+    sourceFiles.push(uiGlob, pluginGlob)
   }
 
   return sourceFiles
