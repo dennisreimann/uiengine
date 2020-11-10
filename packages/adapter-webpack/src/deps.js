@@ -13,19 +13,21 @@ function extractDependencyFiles (options, filePath) {
     // https://webpack.js.org/api/stats#chunk-objects
     const { chunk } = cached
 
-    cached.dependencyFiles = chunk ? chunk.modules.map(({ id, name, depth }) => {
-      if (depth >= 2) return null
-      const ident = typeof id === 'number' ? (name.match(/\s([^\s]*)/g) || ['']).shift().trim() : id
-      const mod = ident && ident.split('?!').pop().replace(/\?.*$/, '')
-      let modulePath
-      if (mod) modulePath = mod.startsWith('.') ? path.resolve(mod) : require.resolve(mod)
-      return modulePath && crossPlatformPath(modulePath)
-    }).filter((depPath, index, array) => {
-      if (!depPath) return false
-      const unique = array.indexOf(depPath) === index
-      const notSameFile = depPath !== crossPlatformPath(filePath)
-      return unique && notSameFile
-    }) : []
+    cached.dependencyFiles = chunk
+      ? chunk.modules.map(({ id, name, depth }) => {
+          if (depth >= 2) return null
+          const ident = typeof id === 'number' ? (name.match(/\s([^\s]*)/g) || ['']).shift().trim() : id
+          const mod = ident && ident.split('?!').pop().replace(/\?.*$/, '')
+          let modulePath
+          if (mod) modulePath = mod.startsWith('.') ? path.resolve(mod) : require.resolve(mod)
+          return modulePath && crossPlatformPath(modulePath)
+        }).filter((depPath, index, array) => {
+          if (!depPath) return false
+          const unique = array.indexOf(depPath) === index
+          const notSameFile = depPath !== crossPlatformPath(filePath)
+          return unique && notSameFile
+        })
+      : []
   }
 
   return cached.dependencyFiles

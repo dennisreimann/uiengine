@@ -1,6 +1,6 @@
 const highlight = require('./highlight')
 
-const REGEX_CLEAN = new RegExp('([\\s]*?<!--\\s?omit:.*?\\s?-->)', 'gi')
+const REGEX_CLEAN = /([\\s]*?<!--\\s?omit:.*?\\s?-->)/gi
 
 const omit = (mark, string) => {
   const regexpOmit = new RegExp(`([\\s]*?<!--\\s?omit:${mark}:start\\s?-->[\\s\\S]*?<!--\\s?omit:${mark}:end\\s?-->)`, 'gi')

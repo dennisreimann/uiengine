@@ -7,9 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-const PnpWebpackPlugin = require('pnp-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 const isProduction = process.env.NODE_ENV === 'production'
 const highlightjsStyles = dirname(require.resolve('highlight.js/styles/github.css'))
@@ -82,33 +80,6 @@ if (isProduction) {
       reportFilename: resolve('report.html')
     })
   )
-} else {
-  plugins.push(
-    new FriendlyErrorsPlugin({
-      onErrors: () => {
-        const notifier = require('node-notifier')
-
-        return (severity, errors) => {
-          if (severity !== 'error') return
-
-          const error = errors[0]
-          const filename = error.file && error.file.split('!').pop()
-
-          notifier.notify({
-            title: 'UIengine UI',
-            message: `${severity}: ${error.name}`,
-            subtitle: filename || '',
-            timeout: 5
-          })
-
-          notifier.on('click', () => {
-            const exec = require('child_process').exec
-            exec(`$EDITOR ${resolve(filename)}`)
-          })
-        }
-      }
-    })
-  )
 }
 
 module.exports = {
@@ -129,19 +100,11 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       vue$: 'vue/dist/vue.esm.js'
-    },
-    plugins: [
-      PnpWebpackPlugin
-    ]
-  },
-  resolveLoader: {
-    plugins: [
-      PnpWebpackPlugin.moduleLoader(module)
-    ]
+    }
   },
   optimization: {
     runtimeChunk: 'single',
-    noEmitOnErrors: true,
+    emitOnErrors: true,
     splitChunks: {
       chunks: 'all',
       maxInitialRequests: Infinity,
@@ -163,14 +126,10 @@ module.exports = {
         }
       }
     },
+    minimize: isProduction,
     minimizer: [
-      new TerserPlugin({
-        extractComments: true,
-        cache: true,
-        parallel: true,
-        sourceMap: true
-      }),
-      new OptimizeCSSPlugin({})
+      new TerserPlugin(),
+      new CssMinimizerPlugin()
     ]
   },
   plugins,
@@ -242,9 +201,11 @@ module.exports = {
             loader: require.resolve('stylus-loader'),
             options: {
               sourceMap: true,
-              paths: [resolve('src/styles')],
-              import: ['lib/mediaQueries', 'lib/mixins'],
-              url: { name: 'embedurl' }
+              stylusOptions: {
+                paths: [resolve('src/styles')],
+                import: ['lib/mediaQueries', 'lib/mixins'],
+                url: { name: 'embedurl' }
+              }
             }
           }
         ]
@@ -285,17 +246,5 @@ module.exports = {
         }
       }
     ]
-  },
-  node: {
-    // prevent webpack from injecting useless setImmediate polyfill because Vue
-    // source contains it (although only uses it if it's native).
-    setImmediate: false,
-    // prevent webpack from injecting mocks to Node native modules
-    // that does not make sense for the client
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty'
   }
 }

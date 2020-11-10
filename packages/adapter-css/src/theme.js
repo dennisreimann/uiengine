@@ -78,7 +78,7 @@ async function extractThemeProperties (options, filePath) {
 
   // build theme properties data structure based on custom props
   const result = []
-  Object.keys(customProps).map(customPropVarName => {
+  Object.keys(customProps).forEach(customPropVarName => {
     const {
       prop,
       value,

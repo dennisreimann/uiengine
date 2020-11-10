@@ -2,7 +2,7 @@ const { join } = require('path')
 const webpack = require('webpack')
 const { mergeWithCustomize, customizeObject } = require('webpack-merge')
 const VirtualModulesPlugin = require('webpack-virtual-modules')
-const getBuildId = require('object-hash')
+const objectHash = require('object-hash')
 const cache = require('./cache')
 const { yellow, cyan } = require('chalk')
 const {
@@ -15,6 +15,10 @@ const QUEUES = {}
 const TARGET_FOLDER = '_webpack'
 const WEBPACK_NAME_SERVER = 'server'
 const WEBPACK_NAME_CLIENT = 'client'
+
+const getBuildId = obj => objectHash(obj, {
+  excludeKeys: key => ['module'].includes(key)
+})
 
 // queue ids separate different adapter types, as in one project multiple
 // file types (e.g. react and vue) can be build with the webpack adapter.

@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const nodeExternals = require('webpack-node-externals')
-const PnpWebpackPlugin = require('pnp-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 
@@ -12,16 +11,7 @@ const baseConfig = {
   // because the adapter overwrites them anyways
 
   resolve: {
-    extensions: ['.js', '.jsx'],
-    plugins: [
-      PnpWebpackPlugin
-    ]
-  },
-
-  resolveLoader: {
-    plugins: [
-      PnpWebpackPlugin.moduleLoader(module)
-    ]
+    extensions: ['.js', '.jsx']
   },
 
   module: {
