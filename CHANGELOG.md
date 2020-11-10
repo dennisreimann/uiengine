@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.0] - current development
+
+### Changed
+
+- Require Node.js >= 14.15 (current latest LTS)
+
 ## [3.1.0] - 17.07.2020
 
 ### Changed

@@ -16,7 +16,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=12.16"
+    "node": ">=14.15"
   },
   "main": "./src/uiengine.js",
   "files": [
