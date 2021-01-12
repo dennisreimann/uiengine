@@ -2,7 +2,7 @@
   "name": "@uiengine/adapter-css",
   "description": "UIengine template adapter for CSS.",
   "license": "MIT",
-  "version": "3.1.5",
+  "version": "3.1.6",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
@@ -27,7 +27,7 @@
     "css"
   ],
   "dependencies": {
-    "@uiengine/util": "3.1.5",
+    "@uiengine/util": "3.1.6",
     "deepmerge": "4.2.2",
     "fs-extra": "9.0.1",
     "postcss": "8.2.4"
