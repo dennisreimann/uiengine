@@ -53,7 +53,7 @@
     "test-watch": "yarn test -R dot --grep @nowatch --invert -w --extensions ejs,hbs,js,jsx,json,marko,md,pug,vue,yml",
     "coverage": "c8 yarn test --forbid-only",
     "coverage:deploy": "c8 report --reporter=text-lcov | coveralls",
-    "release": "yarn run lint && yarn run coverage && cross-env NODE_ENV=production yarn run build && lerna publish --exact",
+    "release": "cross-env NODE_ENV=production yarn run build && lerna publish --exact",
     "demo": "rimraf test/demo && sleep 1 && uiengine init --dir test/demo --demo && cd test/demo && uiengine build -s -w",
     "docs:start": "cd docs && uiengine build -s -w",
     "docs:build": "cd docs && cross-env NODE_ENV=production uiengine build",
