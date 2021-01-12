@@ -88,7 +88,7 @@ describe('Variant', () => {
         'text-required.pug',
         'text.hbs',
         'text.pug'
-      ].map(file => {
+      ].forEach(file => {
         assert(R.find(variant => variant.file === file, variants), `missing variant "${file}"`)
       })
     })
@@ -100,7 +100,7 @@ describe('Variant', () => {
 
       ['input/checkbox.pug-1',
         'input/text.pug-2'
-      ].map(id => {
+      ].forEach(id => {
         assert(R.find(variant => variant.id === id, variants), `missing variant "${id}"`)
       })
     })
@@ -115,7 +115,7 @@ describe('Variant', () => {
 
       ['input/checkbox.pug-1',
         'input/text.pug-2'
-      ].map(id => {
+      ].forEach(id => {
         assert(R.find(variant => variant.id === id, variants), `missing variant "${id}"`)
       })
     })

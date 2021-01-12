@@ -33,7 +33,7 @@ async function setup (state) {
   const exts = Object.keys(adapters || {})
   const tasks = []
 
-  exts.map(ext => {
+  exts.forEach(ext => {
     const { setup: setupFn } = getModule(state, ext)
 
     if (typeof setupFn === 'function') {

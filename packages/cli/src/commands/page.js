@@ -44,7 +44,7 @@ exports.handler = async argv => {
       }
     }
 
-    const createPages = R.map(pageId => {
+    const createPages = R.forEach(pageId => {
       const pageTitle = pageIdToTitle(pageId)
       const confData = confTemp(pageTitle)
       const docsData = docsTemp(pageTitle)

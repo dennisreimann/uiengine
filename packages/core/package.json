@@ -54,26 +54,26 @@
     "@uiengine/plugin-preview-a11y": "3.1.5",
     "@uiengine/plugin-preview-toggle-class": "3.1.5",
     "ejs": "3.1.5",
-    "eslint": "7.15.0",
+    "eslint": "7.17.0",
     "eslint-config-standard": "16.0.2",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-standard": "5.0.0",
     "handlebars": "4.7.6",
-    "marko": "4.23.9",
+    "marko": "4.23.10",
     "mocha": "8.2.1",
     "mocha-sinon": "2.1.2",
     "prop-types": "15.7.2",
     "pug": "3.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "sinon": "9.2.1",
+    "sinon": "9.2.3",
     "vue": "2.6.12"
   },
   "optionalDependencies": {
     "browser-sync": "2.26.13",
-    "chokidar": "3.4.3",
+    "chokidar": "3.5.0",
     "connect-history-api-fallback": "1.6.0"
   }
 }
