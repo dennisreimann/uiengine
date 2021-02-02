@@ -15,18 +15,18 @@ function extractDependencyFiles (options, filePath) {
 
     cached.dependencyFiles = chunk
       ? chunk.modules.map(({ id, name, depth }) => {
-          if (depth >= 2) return null
-          const ident = typeof id === 'number' ? (name.match(/\s([^\s]*)/g) || ['']).shift().trim() : id
-          const mod = ident && ident.split('?!').pop().replace(/\?.*$/, '')
-          let modulePath
-          if (mod) modulePath = mod.startsWith('.') ? path.resolve(mod) : require.resolve(mod)
-          return modulePath && crossPlatformPath(modulePath)
-        }).filter((depPath, index, array) => {
-          if (!depPath) return false
-          const unique = array.indexOf(depPath) === index
-          const notSameFile = depPath !== crossPlatformPath(filePath)
-          return unique && notSameFile
-        })
+        if (depth >= 2) return null
+        const ident = typeof id === 'number' ? (name.match(/\s([^\s]*)/g) || ['']).shift().trim() : id
+        const mod = ident && ident.split('?!').pop().replace(/\?.*$/, '')
+        let modulePath
+        if (mod) modulePath = mod.startsWith('.') ? path.resolve(mod) : require.resolve(mod)
+        return modulePath && crossPlatformPath(modulePath)
+      }).filter((depPath, index, array) => {
+        if (!depPath) return false
+        const unique = array.indexOf(depPath) === index
+        const notSameFile = depPath !== crossPlatformPath(filePath)
+        return unique && notSameFile
+      })
       : []
   }
 
