@@ -41,7 +41,7 @@
     "rimraf": "3.0.2",
     "standard": "16.0.3",
     "uglify-js": "3.12.6",
-    "webpack": "5.20.0",
+    "webpack": "5.20.1",
     "webpack-cli": "4.5.0"
   },
   "scripts": {
