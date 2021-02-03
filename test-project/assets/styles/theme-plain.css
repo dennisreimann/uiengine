@@ -1,0 +1,10 @@
+:root {
+  /* Text Color */
+  --app-text-color: #111;
+  /* Background Color */
+  --app-background-color: #FFF;
+}
+
+.label {
+  --label-text-color: var(--app-text-color);
+}

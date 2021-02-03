@@ -1,0 +1,26 @@
+.topbar__search > span {
+  display: block !important;
+}
+
+.ytEmbed {
+  position: relative;
+  padding-bottom: 56.25%;
+  margin-bottom: var(--uie-space-xxxl);
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.ytEmbed iframe,
+.ytEmbed object,
+.ytEmbed embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.page .content figure {
+  border: none;
+}

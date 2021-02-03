@@ -1,0 +1,25 @@
+/*
+  You most likely want to configure the accent colors to fit your needs.
+  For a full reference of available custom properties see this file:
+  https://github.com/dennisreimann/uiengine/blob/master/packages/ui/src/styles/base/settings.styl
+*/
+:root {
+  /*
+  --uie-color-accent-light: #D797B3;
+  --uie-color-accent-medium: #D72A47;
+  --uie-color-accent-dark: #323;
+  --uie-color-accent-ultradark: #221022;
+  */
+}
+
+:root[data-theme="funky"] {
+  --uie-color-accent-ultralight: thistle;
+  --uie-color-accent-light: orchid;
+  --uie-color-accent-medium: mediumpurple;
+  --uie-color-accent-dark: rebeccapurple;
+  --uie-color-accent-ultradark: indigo;
+
+  --uie-color-main-text: indigo;
+  --uie-color-main-link: mediumpurple;
+  --uie-color-secondary-text: blueviolet;
+}

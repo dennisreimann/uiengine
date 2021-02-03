@@ -1,0 +1,8 @@
+:root {
+  --app-text-color: purple;
+  --app-background-color: yellow;
+}
+
+.label {
+  --label-text-color: blue;
+}

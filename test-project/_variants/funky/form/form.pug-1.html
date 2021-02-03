@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html class="uie-variant uie-variant--form uie-variant--form-form-pug-1" data-theme="funky">
+  <head>
+    <title>Form: Form • UIengine Test Project (1.0.0)</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="/test-project/assets/semantic/semantic.min.css" rel="stylesheet">
+    <link href="/test-project/assets/styles/components.css" rel="stylesheet">
+    <link href="/test-project/assets/styles/theme-funky.css" rel="stylesheet">
+    <link href="/test-project/assets/styles/uiengine-custom-styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app">
+<!-- uiengine:preview:start -->
+
+<form class="ui form" action="#" type="GET">
+  <div class="field">
+    <label class="label" for="first_name">First name
+    </label>
+    <input class="input input--text" id="first_name" name="person[first_name]" type="text" placeholder="First Name"/>
+  </div>
+  <div class="field">
+    <label class="label" for="last_name">Last name
+    </label>
+    <input class="input input--text" id="last_name" name="person[last_name]" type="text" placeholder="Last Name"/>
+  </div><!-- omit:code:start -->
+  <div class="field">
+    <label class="label" for="username">Username
+    </label>
+    <input class="input input--text" id="username" name="person[username]" type="text"/>
+  </div><!-- omit:code:end -->
+<!-- omit:preview:start -->
+  <div class="field">
+    <label class="label" for="password">Password
+    </label>
+    <input class="input input--Password" id="password" name="person[password]" type="Password"/>
+  </div><!-- omit:preview:end -->
+</form>
+<!-- uiengine:preview:end -->
+</div>
+    <script src="/test-project/assets/scripts/main.js" defer></script>
+  </body>
+</html>
