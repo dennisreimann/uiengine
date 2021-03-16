@@ -3263,7 +3263,6 @@ __metadata:
     eslint-plugin-vue: 7.7.0
     fs-extra: 9.1.0
     html-minifier: 4.0.0
-    husky: 5.1.3
     lerna: 4.0.0
     mocha: 8.3.2
     mocha-lcov-reporter: 1.3.0
@@ -10362,15 +10361,6 @@ fsevents@~2.3.1:
   dependencies:
     ms: ^2.0.0
   checksum: 4a08769434132a229a6153e77c869a9fe7132dc003d90119d54958e7b75feb65a3c4eca19fb18921568878ac455b6f399013279ad33248d94bd61a25def1fdda
-  languageName: node
-  linkType: hard
-
-"husky@npm:5.1.3":
-  version: 5.1.3
-  resolution: "husky@npm:5.1.3"
-  bin:
-    husky: lib/bin.js
-  checksum: 99baafebe710d3d9008d7e8523a2bba28b73acb71d92c22dfb05cd0fb38160c7d47594b5178ad1979032e1c7334afbc96f6137c3879a5c6c24ee339c74dd972b
   languageName: node
   linkType: hard
 

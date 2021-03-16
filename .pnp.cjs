@@ -132,7 +132,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-vue", "virtual:fe5d6daca819d319bcc26db2c27e76bb709fa173c70c5f00b3aec3a492e21cbe32ff46039514b4ecf0e1a2d07c773a33277cb033da4a2e5beb6ceeca70f6bb68#npm:7.7.0"],
             ["fs-extra", "npm:9.1.0"],
             ["html-minifier", "npm:4.0.0"],
-            ["husky", "npm:5.1.3"],
             ["lerna", "npm:4.0.0"],
             ["mocha", "npm:8.3.2"],
             ["mocha-lcov-reporter", "npm:1.3.0"],
@@ -4710,7 +4709,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-vue", "virtual:fe5d6daca819d319bcc26db2c27e76bb709fa173c70c5f00b3aec3a492e21cbe32ff46039514b4ecf0e1a2d07c773a33277cb033da4a2e5beb6ceeca70f6bb68#npm:7.7.0"],
             ["fs-extra", "npm:9.1.0"],
             ["html-minifier", "npm:4.0.0"],
-            ["husky", "npm:5.1.3"],
             ["lerna", "npm:4.0.0"],
             ["mocha", "npm:8.3.2"],
             ["mocha-lcov-reporter", "npm:1.3.0"],
@@ -13086,15 +13084,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["humanize-ms", "npm:1.2.1"],
             ["ms", "npm:2.1.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["husky", [
-        ["npm:5.1.3", {
-          "packageLocation": "./.yarn/cache/husky-npm-5.1.3-62d158903e-99baafebe7.zip/node_modules/husky/",
-          "packageDependencies": [
-            ["husky", "npm:5.1.3"]
           ],
           "linkType": "HARD",
         }]
