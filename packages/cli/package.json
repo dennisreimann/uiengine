@@ -2,7 +2,7 @@
   "name": "@uiengine/cli",
   "description": "UIengine command line interface.",
   "license": "MIT",
-  "version": "3.1.8",
+  "version": "3.1.9",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
@@ -33,7 +33,7 @@
     "lint": "eslint --fix src test"
   },
   "dependencies": {
-    "@uiengine/util": "3.1.8",
+    "@uiengine/util": "3.1.9",
     "fs-extra": "9.1.0",
     "ramda": "0.27.1",
     "yargs": "17.0.1"
