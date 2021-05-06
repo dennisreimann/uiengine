@@ -28,11 +28,11 @@
     "lint": "eslint --fix src test"
   },
   "dependencies": {
-    "chalk": "4.1.0",
-    "fast-glob": "3.1.1",
+    "chalk": "4.1.1",
+    "fast-glob": "3.2.5",
     "fs-extra": "9.1.0",
-    "globby": "11.0.2",
-    "markdown-it": "12.0.4",
+    "globby": "11.0.3",
+    "markdown-it": "12.0.6",
     "markdown-it-anchor": "7.1.0",
     "markdown-it-container": "3.0.0",
     "markdown-it-implicit-figures": "0.10.0",
@@ -42,14 +42,14 @@
     "unescape": "1.0.1"
   },
   "devDependencies": {
-    "eslint": "7.22.0",
+    "eslint": "7.25.0",
     "eslint-config-standard": "16.0.2",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "4.3.1",
+    "eslint-plugin-promise": "5.1.0",
     "eslint-plugin-standard": "5.0.0",
     "mocha": "8.3.2",
     "mocha-sinon": "2.1.2",
-    "sinon": "9.2.4"
+    "sinon": "10.0.0"
   }
 }
