@@ -15,7 +15,8 @@ module.exports = {
   logo: '/test-project/assets/images/uiengine-logo.png',
   name: 'UIengine Test Project',
   version: '1.0.0',
-  copyright: '<a href="https://github.com/dennisreimann/uiengine">Generated with UIengine</a>',
+  copyright:
+    '<a href="https://github.com/dennisreimann/uiengine">Generated with UIengine</a>',
   debug: 1,
 
   // Base directories for the input, your raw source files:
@@ -26,7 +27,7 @@ module.exports = {
     components: ['./src/elements', './src/modules', './src/examples'],
     templates: './src/templates',
     pages: './uiengine/pages',
-    additionalWatches: './lib'
+    additionalWatches: './lib',
   },
 
   // Destination path for the generated site.
@@ -37,24 +38,42 @@ module.exports = {
   adapters: {
     pug: {
       module: '@uiengine/adapter-pug',
-      options: pugAdapterOptions
+      options: pugAdapterOptions,
     },
     vue: {
       module: '@uiengine/adapter-webpack',
-      options: webpackAdapterVueOptions
+      options: webpackAdapterVueOptions,
     },
     css: {
       module: '@uiengine/adapter-css',
-      options: cssAdapterOptions
+      options: cssAdapterOptions,
     },
     jsx: {
       module: '@uiengine/adapter-webpack',
-      options: webpackAdapterReactOptions
+      options: webpackAdapterReactOptions,
+    },
+    njk: {
+      module: '/Users/cos/Playground/uiengine/packages/adapter-nunjucks',
+      options: {
+        trimBlocks: true,
+        lstripBlocks: true,
+        noCache: true,
+        globals: {
+          time: () => {
+            return new Date().getTime()
+          }
+        },
+        filters: {
+          shorten: (str, count) => {
+            return str.slice(0, count || 5)
+          }
+        }
+      },
     },
     hbs: '@uiengine/adapter-handlebars',
     marko: '@uiengine/adapter-marko',
     html: '@uiengine/adapter-html',
-    ejs: '@uiengine/adapter-ejs'
+    ejs: '@uiengine/adapter-ejs',
   },
 
   // Here you can configure the template that the variant preview gets embeded in.
@@ -67,26 +86,26 @@ module.exports = {
         title: 'Toggle Grid',
         icon: 'grid',
         selector: 'body',
-        className: 'show-grid'
-      }
+        className: 'show-grid',
+      },
     },
     {
       module: '@uiengine/plugin-preview-a11y',
       options: {
-        title: 'A11y'
-      }
-    }
+        title: 'A11y',
+      },
+    },
   ],
 
   themes: [
     {
       id: 'plain',
-      title: 'Plain'
+      title: 'Plain',
     },
     {
       id: 'funky',
-      title: 'Funky crazy awesome'
-    }
+      title: 'Funky crazy awesome',
+    },
   ],
 
   ui: {
@@ -95,13 +114,14 @@ module.exports = {
     viewports,
     defaultPreviewMode: 'viewports',
     customStylesFile: '/test-project/assets/styles/uiengine-custom-styles.css',
-    repoBaseUrl: 'https://github.com/dennisreimann/uiengine/blob/master/test/project/'
+    repoBaseUrl:
+      'https://github.com/dennisreimann/uiengine/blob/master/test/project/',
   },
 
   browserSync: {
     open: false,
     server: {
-      baseDir
-    }
-  }
-}
+      baseDir,
+    },
+  },
+};

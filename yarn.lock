@@ -3192,11 +3192,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uiengine/adapter-css@3.1.8, @uiengine/adapter-css@workspace:packages/adapter-css":
+"@uiengine/adapter-css@3.1.10, @uiengine/adapter-css@workspace:packages/adapter-css":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-css@workspace:packages/adapter-css"
   dependencies:
-    "@uiengine/util": 3.1.8
+    "@uiengine/util": 3.1.10
     deepmerge: 4.2.2
     eslint: 7.25.0
     eslint-config-standard: 16.0.2
@@ -3209,7 +3209,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-ejs@3.1.8, @uiengine/adapter-ejs@workspace:packages/adapter-ejs":
+"@uiengine/adapter-ejs@3.1.10, @uiengine/adapter-ejs@workspace:packages/adapter-ejs":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-ejs@workspace:packages/adapter-ejs"
   dependencies:
@@ -3225,11 +3225,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-handlebars@3.1.8, @uiengine/adapter-handlebars@workspace:packages/adapter-handlebars":
+"@uiengine/adapter-handlebars@3.1.10, @uiengine/adapter-handlebars@workspace:packages/adapter-handlebars":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-handlebars@workspace:packages/adapter-handlebars"
   dependencies:
-    "@uiengine/util": 3.1.8
+    "@uiengine/util": 3.1.10
     eslint: 7.25.0
     eslint-config-standard: 16.0.2
     eslint-plugin-import: 2.22.1
@@ -3242,7 +3242,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-html@3.1.8, @uiengine/adapter-html@workspace:packages/adapter-html":
+"@uiengine/adapter-html@3.1.10, @uiengine/adapter-html@workspace:packages/adapter-html":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-html@workspace:packages/adapter-html"
   dependencies:
@@ -3256,11 +3256,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-marko@3.1.8, @uiengine/adapter-marko@workspace:packages/adapter-marko":
+"@uiengine/adapter-marko@3.1.10, @uiengine/adapter-marko@workspace:packages/adapter-marko":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-marko@workspace:packages/adapter-marko"
   dependencies:
-    "@uiengine/util": 3.1.8
+    "@uiengine/util": 3.1.10
     eslint: 7.25.0
     eslint-config-standard: 16.0.2
     eslint-plugin-import: 2.22.1
@@ -3276,11 +3276,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-pug@3.1.8, @uiengine/adapter-pug@workspace:packages/adapter-pug":
+"@uiengine/adapter-nunjucks@workspace:packages/adapter-nunjucks":
+  version: 0.0.0-use.local
+  resolution: "@uiengine/adapter-nunjucks@workspace:packages/adapter-nunjucks"
+  dependencies:
+    eslint: 7.25.0
+    eslint-config-standard: 16.0.2
+    eslint-plugin-import: 2.22.1
+    eslint-plugin-node: 11.1.0
+    eslint-plugin-promise: 5.1.0
+    eslint-plugin-standard: 5.0.0
+    nunjucks: 3.2.3
+  peerDependencies:
+    nunjucks: ^3.0.0
+  languageName: unknown
+  linkType: soft
+
+"@uiengine/adapter-pug@3.1.10, @uiengine/adapter-pug@workspace:packages/adapter-pug":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-pug@workspace:packages/adapter-pug"
   dependencies:
-    "@uiengine/util": 3.1.8
+    "@uiengine/util": 3.1.10
     eslint: 7.25.0
     eslint-config-standard: 16.0.2
     eslint-plugin-import: 2.22.1
@@ -3297,7 +3313,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-webpack@3.1.8, @uiengine/adapter-webpack@workspace:packages/adapter-webpack":
+"@uiengine/adapter-webpack@3.1.10, @uiengine/adapter-webpack@workspace:packages/adapter-webpack":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-webpack@workspace:packages/adapter-webpack"
   dependencies:
@@ -3305,7 +3321,7 @@ __metadata:
     "@babel/preset-env": 7.14.1
     "@babel/preset-react": 7.13.13
     "@babel/register": 7.13.16
-    "@uiengine/util": 3.1.8
+    "@uiengine/util": 3.1.10
     babel-eslint: 10.1.0
     babel-loader: 8.2.2
     babel-plugin-syntax-jsx: 6.18.0
@@ -3349,11 +3365,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/cli@3.1.8, @uiengine/cli@workspace:packages/cli":
+"@uiengine/cli@3.1.10, @uiengine/cli@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "@uiengine/cli@workspace:packages/cli"
   dependencies:
-    "@uiengine/util": 3.1.8
+    "@uiengine/util": 3.1.10
     eslint: 7.25.0
     eslint-config-standard: 16.0.2
     eslint-plugin-import: 2.22.1
@@ -3370,22 +3386,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/core@3.1.8, @uiengine/core@workspace:packages/core":
+"@uiengine/core@3.1.10, @uiengine/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@uiengine/core@workspace:packages/core"
   dependencies:
-    "@uiengine/adapter-css": 3.1.8
-    "@uiengine/adapter-ejs": 3.1.8
-    "@uiengine/adapter-handlebars": 3.1.8
-    "@uiengine/adapter-html": 3.1.8
-    "@uiengine/adapter-marko": 3.1.8
-    "@uiengine/adapter-pug": 3.1.8
-    "@uiengine/adapter-webpack": 3.1.8
-    "@uiengine/cli": 3.1.8
-    "@uiengine/plugin-preview-a11y": 3.1.8
-    "@uiengine/plugin-preview-toggle-class": 3.1.8
-    "@uiengine/ui": 3.1.8
-    "@uiengine/util": 3.1.8
+    "@uiengine/adapter-css": 3.1.10
+    "@uiengine/adapter-ejs": 3.1.10
+    "@uiengine/adapter-handlebars": 3.1.10
+    "@uiengine/adapter-html": 3.1.10
+    "@uiengine/adapter-marko": 3.1.10
+    "@uiengine/adapter-pug": 3.1.10
+    "@uiengine/adapter-webpack": 3.1.10
+    "@uiengine/cli": 3.1.10
+    "@uiengine/plugin-preview-a11y": 3.1.10
+    "@uiengine/plugin-preview-toggle-class": 3.1.10
+    "@uiengine/ui": 3.1.10
+    "@uiengine/util": 3.1.10
     browser-sync: 2.26.14
     chokidar: 3.5.1
     connect-history-api-fallback: 1.6.0
@@ -3454,11 +3470,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/plugin-preview-a11y@3.1.8, @uiengine/plugin-preview-a11y@workspace:packages/plugin-preview-a11y":
+"@uiengine/plugin-preview-a11y@3.1.10, @uiengine/plugin-preview-a11y@workspace:packages/plugin-preview-a11y":
   version: 0.0.0-use.local
   resolution: "@uiengine/plugin-preview-a11y@workspace:packages/plugin-preview-a11y"
   dependencies:
-    "@uiengine/core": 3.1.8
+    "@uiengine/core": 3.1.10
     axe-core: 4.2.0
     eslint: 7.25.0
     eslint-config-standard: 16.0.2
@@ -3471,11 +3487,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/plugin-preview-toggle-class@3.1.8, @uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class":
+"@uiengine/plugin-preview-toggle-class@3.1.10, @uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class":
   version: 0.0.0-use.local
   resolution: "@uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class"
   dependencies:
-    "@uiengine/core": 3.1.8
+    "@uiengine/core": 3.1.10
     eslint: 7.25.0
     eslint-config-standard: 16.0.2
     eslint-plugin-import: 2.22.1
@@ -3514,17 +3530,18 @@ __metadata:
     "@babel/preset-env": 7.14.1
     "@babel/preset-react": 7.13.13
     "@babel/register": 7.13.16
-    "@uiengine/adapter-css": 3.1.8
-    "@uiengine/adapter-ejs": 3.1.8
-    "@uiengine/adapter-handlebars": 3.1.8
-    "@uiengine/adapter-html": 3.1.8
-    "@uiengine/adapter-marko": 3.1.8
-    "@uiengine/adapter-pug": 3.1.8
-    "@uiengine/adapter-webpack": 3.1.8
-    "@uiengine/cli": 3.1.8
-    "@uiengine/core": 3.1.8
-    "@uiengine/ui": 3.1.8
-    "@uiengine/util": 3.1.8
+    "@uiengine/adapter-css": 3.1.10
+    "@uiengine/adapter-ejs": 3.1.10
+    "@uiengine/adapter-handlebars": 3.1.10
+    "@uiengine/adapter-html": 3.1.10
+    "@uiengine/adapter-marko": 3.1.10
+    "@uiengine/adapter-nunjucks": "workspace:packages/adapter-nunjucks"
+    "@uiengine/adapter-pug": 3.1.10
+    "@uiengine/adapter-webpack": 3.1.10
+    "@uiengine/cli": 3.1.10
+    "@uiengine/core": 3.1.10
+    "@uiengine/ui": 3.1.10
+    "@uiengine/util": 3.1.10
     babel-eslint: 10.1.0
     babel-loader: 8.2.2
     babel-plugin-syntax-jsx: 6.18.0
@@ -3545,6 +3562,7 @@ __metadata:
     handlebars: 4.7.7
     html-sketchapp-cli: 0.6.2
     marko: 4.23.16
+    nunjucks: ^3.2.3
     parse-prop-types: 0.3.0
     prop-types: 15.7.2
     pug: 3.0.2
@@ -3562,7 +3580,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/ui@3.1.8, @uiengine/ui@workspace:packages/ui":
+"@uiengine/ui@3.1.10, @uiengine/ui@workspace:packages/ui":
   version: 0.0.0-use.local
   resolution: "@uiengine/ui@workspace:packages/ui"
   dependencies:
@@ -3572,7 +3590,7 @@ __metadata:
     "@babel/plugin-transform-runtime": 7.13.15
     "@babel/preset-env": 7.14.1
     "@babel/runtime": 7.14.0
-    "@uiengine/util": 3.1.8
+    "@uiengine/util": 3.1.10
     autoprefixer: 10.2.5
     babel-eslint: 10.1.0
     babel-loader: 8.2.2
@@ -3637,7 +3655,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/util@3.1.8, @uiengine/util@workspace:packages/util":
+"@uiengine/util@3.1.10, @uiengine/util@workspace:packages/util":
   version: 0.0.0-use.local
   resolution: "@uiengine/util@workspace:packages/util"
   dependencies:
@@ -4070,6 +4088,13 @@ __metadata:
   bin:
     JSONStream: ./bin.js
   checksum: e9849f8a52cde19c95d7fbf0bdab7bde1f31c9fbf2062e47044817eeebb31217c99aaa041366f377243aa852c64fa144c4397ef76965d6491eb47827464d8479
+  languageName: node
+  linkType: hard
+
+"a-sync-waterfall@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "a-sync-waterfall@npm:1.0.1"
+  checksum: da11585ce7067691fa27ce2c4b731dfb632b090cfe32decb8a6f6e9b2cd6150353a5d78f1eb4555d4a9f8849eb66f443b34f3324dd0099badf208aea335be7f4
   languageName: node
   linkType: hard
 
@@ -4703,7 +4728,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"asap@npm:^2.0.0, asap@npm:~2.0.3":
+"asap@npm:^2.0.0, asap@npm:^2.0.3, asap@npm:~2.0.3":
   version: 2.0.6
   resolution: "asap@npm:2.0.6"
   checksum: 3d314f8c598b625a98347bacdba609d4c889c616ca5d8ea65acaae8050ab8b7aa6630df2cfe9856c20b260b432adf2ee7a65a1021f268ef70408c70f809e3a39
@@ -13644,6 +13669,24 @@ fsevents@~2.3.1:
   version: 1.0.1
   resolution: "number-is-nan@npm:1.0.1"
   checksum: 42251b2653a16f8b47639d93c3b646fff295a4582a6b3a2fc51a651d4511427c247629709063d19befbceb8a3db1a8e9f17016b3a207291e79e4bd1413032918
+  languageName: node
+  linkType: hard
+
+"nunjucks@npm:3.2.3, nunjucks@npm:^3.2.3":
+  version: 3.2.3
+  resolution: "nunjucks@npm:3.2.3"
+  dependencies:
+    a-sync-waterfall: ^1.0.0
+    asap: ^2.0.3
+    commander: ^5.1.0
+  peerDependencies:
+    chokidar: ^3.3.0
+  peerDependenciesMeta:
+    chokidar:
+      optional: true
+  bin:
+    nunjucks-precompile: bin/precompile
+  checksum: 5cf89eb605ee3f59d988ee8c01e180a3a909222d860e2aba42c7b69f1bda239f8a54bb4c0a60b5f0be0288eb3b7e49e0d5344cacf95d21c6d232ee921161a066
   languageName: node
   linkType: hard
 

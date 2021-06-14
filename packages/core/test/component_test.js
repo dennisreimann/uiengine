@@ -70,7 +70,7 @@ describe('Component', () => {
     it('should not infer variants if they are explicitely provided by variants attribute', async () => {
       const data = await Component.fetchById(state, 'label')
 
-      assert.strictEqual(Object.keys(data.variants).length, 8)
+      assert.strictEqual(Object.keys(data.variants).length, 9)
       assert.strictEqual(data.variants[0].id, 'label/label.ejs-1')
       assert.strictEqual(data.variants[1].id, 'label/label.hbs-2')
       assert.strictEqual(data.variants[2].id, 'label/label.html-3')
@@ -79,6 +79,7 @@ describe('Component', () => {
       assert.strictEqual(data.variants[5].id, 'label/label.jsx-6')
       assert.strictEqual(data.variants[6].id, 'label/label.jsx-7')
       assert.strictEqual(data.variants[7].id, 'label/label.vue-8')
+      assert.strictEqual(data.variants[8].id, 'label/label.njk-9')
     })
 
     it('should render content from markdown', async () => {

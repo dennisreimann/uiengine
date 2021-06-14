@@ -1,0 +1,44 @@
+{
+  "name": "@uiengine/adapter-nunjucks",
+  "description": "UIengine template adapter for nunjucks.",
+  "license": "MIT",
+  "version": "3.1.10",
+  "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
+  "homepage": "https://github.com/dennisreimann/uiengine",
+  "bugs": "https://github.com/dennisreimann/uiengine/issues",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/dennisreimann/uiengine.git",
+    "directory": "packages/adapter-nunjucks"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=14.16"
+  },
+  "main": "./src/index.js",
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "uiengine-adapter",
+    "uiengine",
+    "nunjucks"
+  ],
+  "devDependencies": {
+    "eslint": "7.25.0",
+    "eslint-config-standard": "16.0.2",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "5.1.0",
+    "eslint-plugin-standard": "5.0.0",
+    "nunjucks": "3.2.3"
+  },
+  "peerDependencies": {
+    "nunjucks": "^3.0.0"
+  },
+  "scripts": {
+    "lint": "eslint --fix src test"
+  }
+}
