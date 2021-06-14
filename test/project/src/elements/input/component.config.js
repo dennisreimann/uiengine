@@ -12,6 +12,7 @@ module.exports = {
   variants: [
     'text.hbs',
     'text.pug',
+    'text.njk',
     'text-required.pug',
     'text-disabled.pug',
     'number.pug'

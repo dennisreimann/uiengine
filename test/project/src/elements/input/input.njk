@@ -1,0 +1,5 @@
+{% macro input(id, name, type) %}
+  {% set type = type or "text" %}
+  {% set classes = "input input--" + type %}
+  <input type="{{ type }}" id="{{ id }}" class="{{ classes }}" name="{{ name }}">
+{% endmacro %}

@@ -76,6 +76,12 @@ module.exports = {
       title: 'Label (Vue)',
       label: 'A1.6',
       tags: ['Vue']
+    },
+    {
+      file: 'label.njk',
+      title: 'Label (Nunjucks)',
+      label: 'A1.0',
+      tags: ['Nunjucks']
     }
   ]
 }

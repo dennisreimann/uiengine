@@ -58,18 +58,20 @@ describe('Core', function () {
         ['formfield', 'text-without-label.pug-2'],
         ['input', 'text.hbs-1'],
         ['input', 'text.pug-2'],
-        ['input', 'text-required.pug-3'],
-        ['input', 'text-disabled.pug-4'],
-        ['input', 'number.pug-5'],
-        ['input', 'text-required.pug-3'],
-        ['input', 'text-disabled.pug-4'],
+        ['input', 'text.njk-3'],
+        ['input', 'text-required.pug-4'],
+        ['input', 'text-disabled.pug-5'],
+        ['input', 'number.pug-6'],
+        ['input', 'text-required.pug-4'],
+        ['input', 'text-disabled.pug-5'],
         ['label', 'label.ejs-1'],
         ['label', 'label.hbs-2'],
         ['label', 'label.marko-4'],
         ['label', 'label.pug-5'],
         ['label', 'label.jsx-6'],
         ['label', 'label.jsx-7'],
-        ['label', 'label.vue-8']
+        ['label', 'label.vue-8'],
+        ['label', 'label.njk-9']
       ].forEach(([componentId, variantId]) => {
         assertDirectoryContainsThemeFiles(join(testProjectTargetPath, '_variants'), join(componentId, variantId))
       })

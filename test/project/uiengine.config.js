@@ -2,6 +2,7 @@ const breakpoints = require('./lib/breakpoints.json')
 const viewports = require('./lib/viewports.json')
 const pugAdapterOptions = require('./lib/pug-adapter-options')
 const cssAdapterOptions = require('./lib/css-adapter-options')
+const nunjucksAdapterOptions = require('./lib/nunjucks-adapter-options')
 const webpackAdapterReactOptions = require('./lib/webpack-adapter-react-options')
 const webpackAdapterVueOptions = require('./lib/webpack-adapter-vue-options')
 
@@ -15,7 +16,8 @@ module.exports = {
   logo: '/test-project/assets/images/uiengine-logo.png',
   name: 'UIengine Test Project',
   version: '1.0.0',
-  copyright: '<a href="https://github.com/dennisreimann/uiengine">Generated with UIengine</a>',
+  copyright:
+    '<a href="https://github.com/dennisreimann/uiengine">Generated with UIengine</a>',
   debug: 1,
 
   // Base directories for the input, your raw source files:
@@ -50,6 +52,10 @@ module.exports = {
     jsx: {
       module: '@uiengine/adapter-webpack',
       options: webpackAdapterReactOptions
+    },
+    njk: {
+      module: '@uiengine/adapter-nunjucks',
+      options: nunjucksAdapterOptions
     },
     hbs: '@uiengine/adapter-handlebars',
     marko: '@uiengine/adapter-marko',
@@ -95,7 +101,8 @@ module.exports = {
     viewports,
     defaultPreviewMode: 'viewports',
     customStylesFile: '/test-project/assets/styles/uiengine-custom-styles.css',
-    repoBaseUrl: 'https://github.com/dennisreimann/uiengine/blob/master/test/project/'
+    repoBaseUrl:
+      'https://github.com/dennisreimann/uiengine/blob/master/test/project/'
   },
 
   browserSync: {
@@ -104,4 +111,4 @@ module.exports = {
       baseDir
     }
   }
-}
+};

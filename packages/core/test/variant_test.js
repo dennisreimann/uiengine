@@ -80,14 +80,15 @@ describe('Variant', () => {
     it('should find variants if list is not provided', async () => {
       const variants = await Variant.fetchObjects(state, 'input')
 
-      assert.strictEqual(variants.length, 6);
+      assert.strictEqual(variants.length, 7);
 
       ['checkbox.pug',
         'number.pug',
         'text-disabled.pug',
         'text-required.pug',
         'text.hbs',
-        'text.pug'
+        'text.pug',
+        'text.njk'
       ].forEach(file => {
         assert(R.find(variant => variant.file === file, variants), `missing variant "${file}"`)
       })

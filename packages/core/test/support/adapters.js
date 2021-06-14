@@ -38,6 +38,10 @@ const adapters = {
   marko: {
     module: '@uiengine/adapter-marko',
     options: {}
+  },
+  njk: {
+    module: '@uiengine/adapter-nunjucks',
+    options: {}
   }
 }
 

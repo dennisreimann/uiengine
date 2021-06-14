@@ -49,7 +49,7 @@
     "build": "yarn workspace @uiengine/ui run build",
     "lint": "yarn workspaces foreach -p run lint",
     "test": "mocha './packages/*/test/**/*_test.js'",
-    "test-watch": "yarn test -R dot --grep @nowatch --invert -w --extensions ejs,hbs,js,jsx,json,marko,md,pug,vue,yml",
+    "test-watch": "yarn test -R dot --grep @nowatch --invert -w --extensions ejs,hbs,js,jsx,json,marko,md,pug,vue,yml,njk",
     "coverage": "c8 yarn test --forbid-only",
     "coverage:deploy": "c8 report --reporter=text-lcov | coveralls",
     "release": "cross-env NODE_ENV=production yarn run build && lerna publish --exact",
