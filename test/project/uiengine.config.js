@@ -53,7 +53,7 @@ module.exports = {
       options: webpackAdapterReactOptions
     },
     njk: {
-      module: '/Users/cos/Playground/uiengine/packages/adapter-nunjucks',
+      module: '../../packages/adapter-nunjucks',
       options: {
         trimBlocks: true,
         lstripBlocks: true,
