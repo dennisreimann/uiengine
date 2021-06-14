@@ -1,6 +1,10 @@
 # Changelog
 
-## [3.2.0] - current development
+## [3.2.0] - 14.06.2021
+
+### Added
+
+- [Nunjucks adapter](/adapters/nunjucks/) provided by [@CosAnca](https://github.com/CosAnca).
 
 ### Changed
 
