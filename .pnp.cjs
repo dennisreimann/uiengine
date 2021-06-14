@@ -95,7 +95,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@uiengine/adapter-handlebars", ["virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-handlebars", "workspace:packages/adapter-handlebars"]],
       ["@uiengine/adapter-html", ["workspace:packages/adapter-html"]],
       ["@uiengine/adapter-marko", ["virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-marko", "workspace:packages/adapter-marko"]],
-      ["@uiengine/adapter-nunjucks", ["virtual:9262e81701b1091a94525fc4b59661b95901d965d9cbefb94d2984f3c006fca0fe8ca9039305b56be0c10fb2b9396c26c49f61f92098155d3845d48d2c2c7c34#workspace:packages/adapter-nunjucks", "workspace:packages/adapter-nunjucks"]],
+      ["@uiengine/adapter-nunjucks", ["virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-nunjucks", "virtual:9262e81701b1091a94525fc4b59661b95901d965d9cbefb94d2984f3c006fca0fe8ca9039305b56be0c10fb2b9396c26c49f61f92098155d3845d48d2c2c7c34#workspace:packages/adapter-nunjucks", "workspace:packages/adapter-nunjucks"]],
       ["@uiengine/adapter-pug", ["virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-pug", "workspace:packages/adapter-pug"]],
       ["@uiengine/adapter-webpack", ["virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-webpack", "virtual:9262e81701b1091a94525fc4b59661b95901d965d9cbefb94d2984f3c006fca0fe8ca9039305b56be0c10fb2b9396c26c49f61f92098155d3845d48d2c2c7c34#workspace:packages/adapter-webpack", "workspace:packages/adapter-webpack"]],
       ["@uiengine/cli", ["virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/cli", "workspace:packages/cli"]],
@@ -4653,6 +4653,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@uiengine/adapter-nunjucks", [
+        ["virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-nunjucks", {
+          "packageLocation": "./.yarn/$$virtual/@uiengine-adapter-nunjucks-virtual-55f941afb6/1/packages/adapter-nunjucks/",
+          "packageDependencies": [
+            ["@uiengine/adapter-nunjucks", "virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-nunjucks"],
+            ["@types/nunjucks", null],
+            ["eslint", "npm:7.25.0"],
+            ["eslint-config-standard", "virtual:171a978dcb04f7321f97d97786506b49a522571cf7b4117a240c96184bfb5bb1813456cca4b2e6830243b79487f0b46ca0a75a9ad1776b2062d56514f8f491f4#npm:16.0.2"],
+            ["eslint-plugin-import", "virtual:171a978dcb04f7321f97d97786506b49a522571cf7b4117a240c96184bfb5bb1813456cca4b2e6830243b79487f0b46ca0a75a9ad1776b2062d56514f8f491f4#npm:2.22.1"],
+            ["eslint-plugin-node", "virtual:171a978dcb04f7321f97d97786506b49a522571cf7b4117a240c96184bfb5bb1813456cca4b2e6830243b79487f0b46ca0a75a9ad1776b2062d56514f8f491f4#npm:11.1.0"],
+            ["eslint-plugin-promise", "virtual:171a978dcb04f7321f97d97786506b49a522571cf7b4117a240c96184bfb5bb1813456cca4b2e6830243b79487f0b46ca0a75a9ad1776b2062d56514f8f491f4#npm:5.1.0"],
+            ["eslint-plugin-standard", "virtual:171a978dcb04f7321f97d97786506b49a522571cf7b4117a240c96184bfb5bb1813456cca4b2e6830243b79487f0b46ca0a75a9ad1776b2062d56514f8f491f4#npm:5.0.0"],
+            ["nunjucks", "virtual:55f941afb6f5c2095e55198ec18f4c685e9cc8b8e257feed6abfedf9cbc3dde3845160efd5cec742a2f0db2969248b046aa705d13f5545020904056c55b53c0d#npm:3.2.3"]
+          ],
+          "packagePeers": [
+            "@types/nunjucks"
+          ],
+          "linkType": "SOFT",
+        }],
         ["virtual:9262e81701b1091a94525fc4b59661b95901d965d9cbefb94d2984f3c006fca0fe8ca9039305b56be0c10fb2b9396c26c49f61f92098155d3845d48d2c2c7c34#workspace:packages/adapter-nunjucks", {
           "packageLocation": "./.yarn/$$virtual/@uiengine-adapter-nunjucks-virtual-6a4601e908/1/packages/adapter-nunjucks/",
           "packageDependencies": [
@@ -4664,7 +4682,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-node", "virtual:171a978dcb04f7321f97d97786506b49a522571cf7b4117a240c96184bfb5bb1813456cca4b2e6830243b79487f0b46ca0a75a9ad1776b2062d56514f8f491f4#npm:11.1.0"],
             ["eslint-plugin-promise", "virtual:171a978dcb04f7321f97d97786506b49a522571cf7b4117a240c96184bfb5bb1813456cca4b2e6830243b79487f0b46ca0a75a9ad1776b2062d56514f8f491f4#npm:5.1.0"],
             ["eslint-plugin-standard", "virtual:171a978dcb04f7321f97d97786506b49a522571cf7b4117a240c96184bfb5bb1813456cca4b2e6830243b79487f0b46ca0a75a9ad1776b2062d56514f8f491f4#npm:5.0.0"],
-            ["nunjucks", "virtual:eba1441c70b35a9a3823e9d350a040e273879c1c4a088555d84edfb436c504c1d2e5653e8d517257fa3740fb66c2d3cd9f3436d52ee30d1effd5cb2302af87d8#npm:3.2.3"]
+            ["nunjucks", "virtual:55f941afb6f5c2095e55198ec18f4c685e9cc8b8e257feed6abfedf9cbc3dde3845160efd5cec742a2f0db2969248b046aa705d13f5545020904056c55b53c0d#npm:3.2.3"]
           ],
           "packagePeers": [
             "@types/nunjucks",
@@ -4682,7 +4700,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-node", "virtual:171a978dcb04f7321f97d97786506b49a522571cf7b4117a240c96184bfb5bb1813456cca4b2e6830243b79487f0b46ca0a75a9ad1776b2062d56514f8f491f4#npm:11.1.0"],
             ["eslint-plugin-promise", "virtual:171a978dcb04f7321f97d97786506b49a522571cf7b4117a240c96184bfb5bb1813456cca4b2e6830243b79487f0b46ca0a75a9ad1776b2062d56514f8f491f4#npm:5.1.0"],
             ["eslint-plugin-standard", "virtual:171a978dcb04f7321f97d97786506b49a522571cf7b4117a240c96184bfb5bb1813456cca4b2e6830243b79487f0b46ca0a75a9ad1776b2062d56514f8f491f4#npm:5.0.0"],
-            ["nunjucks", "virtual:eba1441c70b35a9a3823e9d350a040e273879c1c4a088555d84edfb436c504c1d2e5653e8d517257fa3740fb66c2d3cd9f3436d52ee30d1effd5cb2302af87d8#npm:3.2.3"]
+            ["nunjucks", "virtual:55f941afb6f5c2095e55198ec18f4c685e9cc8b8e257feed6abfedf9cbc3dde3845160efd5cec742a2f0db2969248b046aa705d13f5545020904056c55b53c0d#npm:3.2.3"]
           ],
           "linkType": "SOFT",
         }]
@@ -4930,6 +4948,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@uiengine/adapter-handlebars", "virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-handlebars"],
             ["@uiengine/adapter-html", "workspace:packages/adapter-html"],
             ["@uiengine/adapter-marko", "virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-marko"],
+            ["@uiengine/adapter-nunjucks", "virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-nunjucks"],
             ["@uiengine/adapter-pug", "virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-pug"],
             ["@uiengine/adapter-webpack", "virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/adapter-webpack"],
             ["@uiengine/cli", "virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/cli"],
@@ -5113,6 +5132,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@uiengine/adapter-webpack", "virtual:9262e81701b1091a94525fc4b59661b95901d965d9cbefb94d2984f3c006fca0fe8ca9039305b56be0c10fb2b9396c26c49f61f92098155d3845d48d2c2c7c34#workspace:packages/adapter-webpack"],
             ["@uiengine/cli", "virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/cli"],
             ["@uiengine/core", "workspace:packages/core"],
+            ["@uiengine/plugin-preview-a11y", "virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/plugin-preview-a11y"],
+            ["@uiengine/plugin-preview-toggle-class", "virtual:408c580d9f13bb740e03e1d7c2081d1ec4230d19a517cbfd3b003289473643226d652df4d940cd42287fc43c82a8d99d39bb087de6cb1605b919e257391091d5#workspace:packages/plugin-preview-toggle-class"],
             ["@uiengine/ui", "workspace:packages/ui"],
             ["@uiengine/util", "workspace:packages/util"],
             ["babel-eslint", "virtual:fe5d6daca819d319bcc26db2c27e76bb709fa173c70c5f00b3aec3a492e21cbe32ff46039514b4ecf0e1a2d07c773a33277cb033da4a2e5beb6ceeca70f6bb68#npm:10.1.0"],
@@ -5135,7 +5156,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["handlebars", "npm:4.7.7"],
             ["html-sketchapp-cli", "npm:0.6.2"],
             ["marko", "npm:4.23.16"],
-            ["nunjucks", "virtual:eba1441c70b35a9a3823e9d350a040e273879c1c4a088555d84edfb436c504c1d2e5653e8d517257fa3740fb66c2d3cd9f3436d52ee30d1effd5cb2302af87d8#npm:3.2.3"],
+            ["nunjucks", "virtual:55f941afb6f5c2095e55198ec18f4c685e9cc8b8e257feed6abfedf9cbc3dde3845160efd5cec742a2f0db2969248b046aa705d13f5545020904056c55b53c0d#npm:3.2.3"],
             ["parse-prop-types", "virtual:7dccfde46e92f668afa8e3a537fab824ec8f87cf097708f1ff153444f90e3a569378b6e3d5539aa6e62975cc5bfb99f7aa17c39a449c2bdb61e3579461cef0ed#npm:0.3.0"],
             ["prop-types", "npm:15.7.2"],
             ["pug", "npm:3.0.2"],
@@ -16858,10 +16879,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:eba1441c70b35a9a3823e9d350a040e273879c1c4a088555d84edfb436c504c1d2e5653e8d517257fa3740fb66c2d3cd9f3436d52ee30d1effd5cb2302af87d8#npm:3.2.3", {
-          "packageLocation": "./.yarn/$$virtual/nunjucks-virtual-768fa27a99/0/cache/nunjucks-npm-3.2.3-ae8b5fd14c-5cf89eb605.zip/node_modules/nunjucks/",
+        ["virtual:55f941afb6f5c2095e55198ec18f4c685e9cc8b8e257feed6abfedf9cbc3dde3845160efd5cec742a2f0db2969248b046aa705d13f5545020904056c55b53c0d#npm:3.2.3", {
+          "packageLocation": "./.yarn/$$virtual/nunjucks-virtual-a45f6044fd/0/cache/nunjucks-npm-3.2.3-ae8b5fd14c-5cf89eb605.zip/node_modules/nunjucks/",
           "packageDependencies": [
-            ["nunjucks", "virtual:eba1441c70b35a9a3823e9d350a040e273879c1c4a088555d84edfb436c504c1d2e5653e8d517257fa3740fb66c2d3cd9f3436d52ee30d1effd5cb2302af87d8#npm:3.2.3"],
+            ["nunjucks", "virtual:55f941afb6f5c2095e55198ec18f4c685e9cc8b8e257feed6abfedf9cbc3dde3845160efd5cec742a2f0db2969248b046aa705d13f5545020904056c55b53c0d#npm:3.2.3"],
             ["@types/chokidar", null],
             ["a-sync-waterfall", "npm:1.0.1"],
             ["asap", "npm:2.0.6"],

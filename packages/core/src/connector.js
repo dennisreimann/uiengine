@@ -11,11 +11,11 @@ const getModule = ({ config: { adapters } }, ext, filePath) => {
     throw new UiengineInputError(`Cannot handle ${filePath}: No "${ext}" adapter configured.`)
   }
 
-  try {
+  // try {
     return require(module)
-  } catch (err) {
-    throw new UiengineInputError(`Cannot load "${ext}" adapter.`, err)
-  }
+  // } catch (err) {
+  //   throw new UiengineInputError(`Cannot load "${ext}" adapter.`, err)
+  // }
 }
 
 const getOptions = (state, ext, additional = {}) => {

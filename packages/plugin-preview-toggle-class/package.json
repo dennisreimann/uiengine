@@ -23,7 +23,7 @@
     "uiengine"
   ],
   "devDependencies": {
-    "@uiengine/core": "3.1.10",
+    "@uiengine/core": "workspace:packages/core",
     "eslint": "7.25.0",
     "eslint-config-standard": "16.0.2",
     "eslint-plugin-import": "2.22.1",

@@ -40,7 +40,7 @@ const adapters = {
     options: {}
   },
   njk: {
-    module: '/Users/cos/Playground/uiengine/packages/adapter-nunjucks',
+    module: '@uiengine/adapter-nunjucks',
     options: {}
   }
 }

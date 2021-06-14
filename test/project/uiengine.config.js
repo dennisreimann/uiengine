@@ -2,6 +2,7 @@ const breakpoints = require('./lib/breakpoints.json')
 const viewports = require('./lib/viewports.json')
 const pugAdapterOptions = require('./lib/pug-adapter-options')
 const cssAdapterOptions = require('./lib/css-adapter-options')
+const nunjucksAdapterOptions = require('./lib/nunjucks-adapter-options')
 const webpackAdapterReactOptions = require('./lib/webpack-adapter-react-options')
 const webpackAdapterVueOptions = require('./lib/webpack-adapter-vue-options')
 
@@ -53,22 +54,8 @@ module.exports = {
       options: webpackAdapterReactOptions
     },
     njk: {
-      module: '../../packages/adapter-nunjucks',
-      options: {
-        trimBlocks: true,
-        lstripBlocks: true,
-        noCache: true,
-        globals: {
-          time: () => {
-            return new Date().getTime()
-          }
-        },
-        filters: {
-          shorten: (str, count) => {
-            return str.slice(0, count || 5)
-          }
-        }
-      }
+      module: '@uiengine/adapter-nunjucks',
+      options: nunjucksAdapterOptions
     },
     hbs: '@uiengine/adapter-handlebars',
     marko: '@uiengine/adapter-marko',
