@@ -1,0 +1,2124 @@
+{
+  "config": {
+    "name": "UIengine Test Project",
+    "version": "1.0.0",
+    "update": 1623689357903,
+    "logo": "/test-project/assets/images/uiengine-logo.png",
+    "copyright": "<a href=\"https://github.com/dennisreimann/uiengine\">Generated with UIengine</a>",
+    "debug": 1,
+    "source": {
+      "components": [
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules",
+        "/home/runner/work/uiengine/uiengine/test/project/src/examples"
+      ],
+      "templates": "/home/runner/work/uiengine/uiengine/test/project/src/templates",
+      "pages": "/home/runner/work/uiengine/uiengine/test/project/uiengine/pages",
+      "additionalWatches": [
+        "/home/runner/work/uiengine/uiengine/test/project/lib"
+      ],
+      "base": "/home/runner/work/uiengine/uiengine/test/project",
+      "configFile": "/home/runner/work/uiengine/uiengine/test/project/uiengine.config.js"
+    },
+    "target": "/home/runner/work/uiengine/uiengine/test/project/dist/test-project",
+    "adapters": {
+      "pug": {
+        "module": "@uiengine/adapter-pug",
+        "options": {
+          "pretty": true,
+          "basedir": "/home/runner/work/uiengine/uiengine/test/project/src"
+        }
+      },
+      "vue": {
+        "module": "@uiengine/adapter-webpack",
+        "options": {
+          "serverConfig": {
+            "mode": "production",
+            "resolve": {
+              "extensions": [
+                ".js",
+                ".vue"
+              ]
+            },
+            "module": {
+              "rules": [
+                {
+                  "test": {},
+                  "use": [
+                    {
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/vue-loader-virtual-9f82a7df7b/0/cache/vue-loader-npm-15.9.7-c92cce348e-48c7785a24.zip/node_modules/vue-loader/lib/index.js",
+                      "options": {},
+                      "ident": "vue-loader-options"
+                    }
+                  ]
+                },
+                {
+                  "test": {},
+                  "use": [
+                    {
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/cache/vue-style-loader-npm-4.1.3-878b169e65-6c5e914011.zip/node_modules/vue-style-loader/index.js"
+                    },
+                    {
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/css-loader-virtual-92d033d92d/0/cache/css-loader-npm-5.2.6-118c6d409e-b9e5a32246.zip/node_modules/css-loader/dist/cjs.js",
+                      "options": {
+                        "esModule": false
+                      },
+                      "ident": "clonedRuleSet-1[0].rules[0].use[1]"
+                    }
+                  ]
+                },
+                {
+                  "test": {},
+                  "exclude": {},
+                  "use": [
+                    {
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/babel-loader-virtual-0dc3962329/0/cache/babel-loader-npm-8.2.2-b4e600c2c5-362bb71573.zip/node_modules/babel-loader/lib/index.js",
+                      "options": {
+                        "cacheDirectory": true,
+                        "presets": [
+                          "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/@babel-preset-env-virtual-10364ce392/0/cache/@babel-preset-env-npm-7.14.5-735b7f0b5c-331b79a108.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-39ed684d07.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
+                        ]
+                      },
+                      "ident": "clonedRuleSet-2[0].rules[0]"
+                    }
+                  ]
+                }
+              ]
+            },
+            "plugins": [
+              {},
+              {
+                "definitions": {
+                  "process.env.NODE_ENV": "\"production\"",
+                  "process.env.VUE_ENV": "\"server\""
+                }
+              }
+            ],
+            "name": "server",
+            "target": "node",
+            "externals": [
+              "vue",
+              "vue-server-renderer",
+              null
+            ]
+          },
+          "clientConfig": {
+            "mode": "production",
+            "resolve": {
+              "extensions": [
+                ".js",
+                ".vue"
+              ]
+            },
+            "module": {
+              "rules": [
+                {
+                  "test": {},
+                  "use": [
+                    {
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/vue-loader-virtual-9f82a7df7b/0/cache/vue-loader-npm-15.9.7-c92cce348e-48c7785a24.zip/node_modules/vue-loader/lib/index.js",
+                      "options": {},
+                      "ident": "vue-loader-options"
+                    }
+                  ]
+                },
+                {
+                  "test": {},
+                  "use": [
+                    {
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/cache/vue-style-loader-npm-4.1.3-878b169e65-6c5e914011.zip/node_modules/vue-style-loader/index.js"
+                    },
+                    {
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/css-loader-virtual-92d033d92d/0/cache/css-loader-npm-5.2.6-118c6d409e-b9e5a32246.zip/node_modules/css-loader/dist/cjs.js",
+                      "options": {
+                        "esModule": false
+                      },
+                      "ident": "clonedRuleSet-1[0].rules[0].use[1]"
+                    }
+                  ]
+                },
+                {
+                  "test": {},
+                  "exclude": {},
+                  "use": [
+                    {
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/babel-loader-virtual-0dc3962329/0/cache/babel-loader-npm-8.2.2-b4e600c2c5-362bb71573.zip/node_modules/babel-loader/lib/index.js",
+                      "options": {
+                        "cacheDirectory": true,
+                        "presets": [
+                          "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/@babel-preset-env-virtual-10364ce392/0/cache/@babel-preset-env-npm-7.14.5-735b7f0b5c-331b79a108.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-39ed684d07.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
+                        ]
+                      },
+                      "ident": "clonedRuleSet-2[0].rules[0]"
+                    }
+                  ]
+                }
+              ]
+            },
+            "plugins": [
+              {},
+              {
+                "definitions": {
+                  "process.env.NODE_ENV": "\"production\"",
+                  "process.env.VUE_ENV": "\"client\""
+                }
+              }
+            ],
+            "name": "client"
+          },
+          "serverRenderPath": "/home/runner/work/uiengine/uiengine/test/project/lib/vue-server-render.js",
+          "clientRenderPath": "/home/runner/work/uiengine/uiengine/test/project/lib/vue-client-render.js",
+          "properties": "vue"
+        }
+      },
+      "css": {
+        "module": "@uiengine/adapter-css",
+        "options": {
+          "globalThemesDir": "/home/runner/work/uiengine/uiengine/test/project/src/styles/themes"
+        }
+      },
+      "jsx": {
+        "module": "@uiengine/adapter-webpack",
+        "options": {
+          "serverConfig": {
+            "mode": "production",
+            "resolve": {
+              "extensions": [
+                ".js",
+                ".jsx"
+              ]
+            },
+            "module": {
+              "rules": [
+                {
+                  "test": {},
+                  "exclude": {},
+                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/babel-loader-virtual-0dc3962329/0/cache/babel-loader-npm-8.2.2-b4e600c2c5-362bb71573.zip/node_modules/babel-loader/lib/index.js",
+                  "options": {
+                    "cacheDirectory": true,
+                    "presets": [
+                      "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/@babel-preset-env-virtual-10364ce392/0/cache/@babel-preset-env-npm-7.14.5-735b7f0b5c-331b79a108.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/@babel-preset-react-virtual-42ab6e684e/0/cache/@babel-preset-react-npm-7.14.5-0d65339ed0-58a96aef0a.zip/node_modules/@babel/preset-react/lib/index.js"
+                    ]
+                  }
+                }
+              ]
+            },
+            "plugins": [
+              {
+                "definitions": {
+                  "process.env.NODE_ENV": "\"production\""
+                }
+              }
+            ],
+            "name": "server",
+            "target": "node"
+          },
+          "clientConfig": {
+            "mode": "production",
+            "resolve": {
+              "extensions": [
+                ".js",
+                ".jsx"
+              ]
+            },
+            "module": {
+              "rules": [
+                {
+                  "test": {},
+                  "exclude": {},
+                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/babel-loader-virtual-0dc3962329/0/cache/babel-loader-npm-8.2.2-b4e600c2c5-362bb71573.zip/node_modules/babel-loader/lib/index.js",
+                  "options": {
+                    "cacheDirectory": true,
+                    "presets": [
+                      "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/@babel-preset-env-virtual-10364ce392/0/cache/@babel-preset-env-npm-7.14.5-735b7f0b5c-331b79a108.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/@babel-preset-react-virtual-42ab6e684e/0/cache/@babel-preset-react-npm-7.14.5-0d65339ed0-58a96aef0a.zip/node_modules/@babel/preset-react/lib/index.js"
+                    ]
+                  }
+                }
+              ]
+            },
+            "plugins": [
+              {
+                "definitions": {
+                  "process.env.NODE_ENV": "\"production\""
+                }
+              }
+            ],
+            "name": "client"
+          },
+          "serverRenderPath": "/home/runner/work/uiengine/uiengine/test/project/lib/react-server-render.js",
+          "clientRenderPath": "/home/runner/work/uiengine/uiengine/test/project/lib/react-client-render.js",
+          "properties": "prop-types"
+        }
+      },
+      "njk": {
+        "module": "@uiengine/adapter-nunjucks",
+        "options": {
+          "trimBlocks": true,
+          "lstripBlocks": true,
+          "noCache": true,
+          "globals": {},
+          "filters": {}
+        }
+      },
+      "hbs": {
+        "module": "@uiengine/adapter-handlebars",
+        "options": {}
+      },
+      "marko": {
+        "module": "@uiengine/adapter-marko",
+        "options": {}
+      },
+      "html": {
+        "module": "@uiengine/adapter-html",
+        "options": {}
+      },
+      "ejs": {
+        "module": "@uiengine/adapter-ejs",
+        "options": {}
+      }
+    },
+    "template": "uiengine.pug",
+    "plugins": [
+      {
+        "module": "@uiengine/plugin-preview-toggle-class",
+        "options": {
+          "title": "Toggle Grid",
+          "icon": "grid",
+          "selector": "body",
+          "className": "show-grid"
+        }
+      },
+      {
+        "module": "@uiengine/plugin-preview-a11y",
+        "options": {
+          "title": "A11y"
+        }
+      }
+    ],
+    "themes": [
+      {
+        "id": "plain",
+        "title": "Plain"
+      },
+      {
+        "id": "funky",
+        "title": "Funky crazy awesome"
+      }
+    ],
+    "ui": {
+      "base": "/test-project/",
+      "breakpoints": {
+        "XS": 320,
+        "S": 480,
+        "M": 760,
+        "L": 1000,
+        "XL": 1280
+      },
+      "viewports": {
+        "Phone": {
+          "width": 320,
+          "height": 568
+        },
+        "Tablet": {
+          "width": 768
+        },
+        "Desktop": {
+          "width": 1200
+        }
+      },
+      "defaultPreviewMode": "viewports",
+      "customStylesFile": "/test-project/assets/styles/uiengine-custom-styles.css",
+      "repoBaseUrl": "https://github.com/dennisreimann/uiengine/blob/master/test/project/"
+    },
+    "browserSync": {
+      "open": false,
+      "server": {
+        "baseDir": "dist"
+      }
+    }
+  },
+  "plugins": {
+    "ui": {
+      "js": [
+        "/test-project/_assets/plugins/plugin-preview-toggle-class/plugin.js",
+        "/test-project/_assets/plugins/plugin-preview-a11y/plugin.js"
+      ],
+      "css": [
+        "/test-project/_assets/plugins/plugin-preview-a11y/plugin.css"
+      ],
+      "tabs": [
+        {
+          "id": "plugin-preview-a11y",
+          "title": "A11y"
+        }
+      ],
+      "actions": [
+        {
+          "id": "plugin-preview-toggle-class",
+          "title": "Toggle Grid",
+          "icon": "grid",
+          "selector": "body",
+          "className": "show-grid"
+        }
+      ],
+      "iframe_js": [
+        "/test-project/_assets/plugins/plugin-preview-a11y/axe.min.js"
+      ]
+    }
+  },
+  "pages": {
+    "index": {
+      "childIds": [
+        "documentation",
+        "patterns",
+        "testcases"
+      ],
+      "id": "index",
+      "title": "Home",
+      "isTitleFromHeading": true,
+      "path": "",
+      "sourcePath": "uiengine/pages",
+      "readmeFile": "uiengine/pages/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"home\">Home</h1>\n<p>Welcome! This is the UIengine Test Project.\nIt contains some sample pages to showcase and also test the basic functionality provided by the UIengine.</p>\n<p>You can use this project as an overview to look at certain features, like <a href=\"/test-project/documentation/getting-started/\">documentation written in markdown</a> or the <a href=\"/test-project/documentation/tokens/colors/\">design token templates</a>.</p>\n<p>The sample project pattern styles are provided by <a href=\"https://semantic-ui.com/\">Semantic UI</a>.\nThis is just to make them look a bit nicer and give you an idea of how to integrate assets in the templates.</p>\n<p>Please ignore the “Test Cases” part, as it only contains some pages that exist for testing.</p>"
+    },
+    "documentation": {
+      "childIds": [
+        "documentation/getting-started",
+        "documentation/development",
+        "documentation/tokens"
+      ],
+      "id": "documentation",
+      "title": "Documentation",
+      "isTitleFromHeading": true,
+      "path": "documentation",
+      "sourcePath": "uiengine/pages/documentation",
+      "sourceFile": "uiengine/pages/documentation/page.config.js",
+      "readmeFile": "uiengine/pages/documentation/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"documentation\">Documentation</h1>"
+    },
+    "patterns": {
+      "childIds": [
+        "patterns/atoms",
+        "patterns/molecules",
+        "patterns/organisms",
+        "patterns/templates",
+        "patterns/pages"
+      ],
+      "id": "patterns",
+      "title": "Pattern Library",
+      "isTitleFromHeading": true,
+      "path": "patterns",
+      "sourcePath": "uiengine/pages/patterns",
+      "sourceFile": "uiengine/pages/patterns/page.config.js",
+      "readmeFile": "uiengine/pages/patterns/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"pattern-library\">Pattern Library</h1>\n<p>The test project pattern styles are provided by <a href=\"https://semantic-ui.com/collections/form.html\">Semantic UI</a>.</p>"
+    },
+    "testcases": {
+      "childIds": [
+        "testcases/custom-data",
+        "testcases/custom-fragment",
+        "testcases/custom-fragment-and-template",
+        "testcases/custom-path",
+        "testcases/custom-template",
+        "testcases/examples"
+      ],
+      "id": "testcases",
+      "title": "Test Cases",
+      "isTitleFromHeading": true,
+      "path": "testcases",
+      "sourcePath": "uiengine/pages/testcases",
+      "readmeFile": "uiengine/pages/testcases/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"test-cases\">Test Cases</h1>\n<div class=\"intro\">\n<p>These are just some test cases and pages that exclusively exist for testing.\nContent formatting and all that good stuff.\nBut really: Nothing interesting to see here, move along :)</p>\n</div>\n<h2 id=\"code-%26-blocks\">Code &amp; blocks</h2>\n<p>This is <code>inline code</code>.</p>\n<p>Here is indented code block:</p>\n<pre><code>var test = true;\n</code></pre>\n<p>And this is a fenced code block with syntax highlighting:</p>\n<pre class=\"hljs lang-js\"><code><span class=\"hljs-keyword\">var</span> test = <span class=\"hljs-literal\">true</span>;\n</code></pre>\n<p>That’s it.</p>\n<h2 id=\"relative-links\">Relative links</h2>\n<h3 id=\"with-base-not-being-set\">With base not being set</h3>\n<table>\n<thead>\n<tr>\n<th>Type</th>\n<th>Default base</th>\n<th>Base being set to <code>/design-system/</code></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Existing, but not a documentation page</td>\n<td><a href=\"/_pages/testcases/custom-template.html\">Link</a></td>\n<td><a href=\"/design-system/_pages/testcases/custom-template.html\">Link</a></td>\n</tr>\n<tr>\n<td>Custom Template</td>\n<td><a href=\"/testcases/custom-template/\">Link</a></td>\n<td><a href=\"/design-system/testcases/custom-template/\">Link</a></td>\n</tr>\n<tr>\n<td>Entities page</td>\n<td><a href=\"/_entities/\">Link</a></td>\n<td><a href=\"/design-system/_entities/\">Link</a></td>\n</tr>\n<tr>\n<td>Settings page</td>\n<td><a href=\"/_settings/\">Link</a></td>\n<td><a href=\"/design-system/_settings/\">Link</a></td>\n</tr>\n<tr>\n<td>Non existing page</td>\n<td><a href=\"/doesnotexist/\">Link</a></td>\n<td><a href=\"/design-system/doesnotexist/\">Link</a></td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h1 id=\"content\">Content</h1>\n<p>Simple text in a paragraph.</p>\n<ul>\n<li>list 1</li>\n<li>list 2</li>\n</ul>\n<hr>\n<h2 id=\"headline-2\">Headline 2</h2>\n<p>Test text.</p>\n<ol>\n<li>list</li>\n<li>list</li>\n</ol>\n<p>Text after a list.</p>\n<hr>\n<h3 id=\"headline-3\"><a href=\"#\">Headline 3</a></h3>\n<p>Simple text in a paragraph.</p>\n<details><summary>Some more details</summary>\n<p>See, you clicked it!</p>\n</details>",
+      "files": [
+        "/home/runner/work/uiengine/uiengine/test/project/uiengine/pages/testcases/index.txt",
+        "/home/runner/work/uiengine/uiengine/test/project/uiengine/pages/testcases/extra-files/file-in-folder.txt",
+        "/home/runner/work/uiengine/uiengine/test/project/uiengine/pages/testcases/extra-files/subfolder/file-in-subfolder.txt"
+      ]
+    },
+    "documentation/development": {
+      "childIds": [],
+      "id": "documentation/development",
+      "title": "Contributing",
+      "isTitleFromHeading": true,
+      "path": "documentation/development",
+      "sourcePath": "uiengine/pages/documentation/development",
+      "readmeFile": "uiengine/pages/documentation/development/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"contributing\">Contributing</h1>\n<ul>\n<li><a href=\"#development-workflow\">Development Workflow</a></li>\n<li><a href=\"#notes\">Important Notes and Guidelines</a></li>\n</ul>\n<h2 id=\"development-workflow\">Development workflow</h2>\n<h3 id=\"%F0%9F%93%A6-setup\">📦 Setup</h3>\n<p>Dependencies are managed via <a href=\"https://yarnpkg.com/\">Yarn</a>.\nOnce you have Yarn installed and this repo cloned, you can setup the packages:</p>\n<pre class=\"hljs lang-bash\"><code>yarn install\n</code></pre>\n<h3 id=\"%F0%9F%9B%A0-development\">🛠 Development</h3>\n<p>Create a build and rebuild on file change.</p>\n<pre class=\"hljs lang-bash\"><code>yarn start\n</code></pre>\n<h3 id=\"%F0%9F%9A%A5-tests\">🚥 Tests</h3>\n<p>Basic linting is done in the project root:</p>\n<pre class=\"hljs lang-bash\"><code>yarn lint\n</code></pre>\n<p>Run the tests:</p>\n<pre class=\"hljs lang-bash\"><code>yarn <span class=\"hljs-built_in\">test</span>\n</code></pre>\n<p>Run the tests continually on file change:</p>\n<pre class=\"hljs lang-bash\"><code>yarn test-watch\n</code></pre>\n<p>Tests with coverage info:</p>\n<pre class=\"hljs lang-bash\"><code>yarn cover\n</code></pre>\n<h3 id=\"%F0%9F%9A%80-release\">🚀 Release</h3>\n<p>Build and publish new release:</p>\n<pre class=\"hljs lang-bash\"><code>yarn release\n</code></pre>\n<p>This command also accepts the <a href=\"https://github.com/lerna/lerna#publish\">lerna publish options</a>.</p>\n<h2 id=\"notes\">Notes</h2>\n<p>Here are some things to keep in mind and guidelines for working on the UIengine codebase.</p>\n<h3 id=\"coding-standards\">Coding standards</h3>\n<p>This project uses the <a href=\"http://standardjs.com/\">JavaScript Standard Style</a>.\nWe try to keep it as functional as possible, so we are using <a href=\"http://ramdajs.com/\">Ramda</a> a lot.</p>\n<h3 id=\"public-functions-in-core\">Public functions in core</h3>\n<ul>\n<li>Are always <code>async</code></li>\n<li>First argument should always be the <code>state</code></li>\n</ul>\n<h3 id=\"emojis-in-commit-messages\">Emojis in commit messages</h3>\n<p>Please make sure that your commit messages start with a somehow fitting emoji.</p>\n<h3 id=\"reward-yourself\">Reward yourself</h3>\n<p>We are using <a href=\"https://allcontributors.org/\">All Contributors</a> to show who helped the project.\nIn case you have contributed and are missing on that list, feel free to <a href=\"https://allcontributors.org/docs/en/bot/usage\">add yourself</a>!</p>"
+    },
+    "documentation/getting-started": {
+      "childIds": [],
+      "id": "documentation/getting-started",
+      "title": "Getting Started",
+      "isTitleFromHeading": true,
+      "path": "documentation/getting-started",
+      "sourcePath": "uiengine/pages/documentation/getting-started",
+      "readmeFile": "uiengine/pages/documentation/getting-started/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"getting-started\">Getting Started</h1>\n<p>This guide helps you to get started quickly with the <code>uiengine</code>.\nWe will use <code>npx</code> to run the locally installed <code>uiengine</code> in the following.</p>\n<blockquote></blockquote>\n<p><code>npx</code> is bundled with <code>npm</code> since <a href=\"https://github.com/npm/npm/releases/tag/v5.2.0\">v5.2.0</a>.\nIt allows us to easily run locally installed packages like <code>uiengine</code>, which must have been installed globally otherwise, setup in the <code>$PATH</code> variable or called with a path prefix.</p>\n<h2 id=\"%F0%9F%8F%8E-tl%3Bdr-%E2%80%93-the-fast-lane\">🏎 TL;DR – The fast lane</h2>\n<p>The following process is also covered in the <a href=\"https://www.youtube.com/watch?v=YBm_ye9da-Q&amp;list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2\">introduction videos</a>:</p>\n<div class='ytEmbed'><iframe title=\"UIengine Introduction Videos\" src=\"https://www.youtube-nocookie.com/embed/videoseries?list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2\" frameborder=\"0\" allow=\"autoplay; encrypted-media; picture-in-picture\" allowfullscreen></iframe></div>\n<p>Initialize a new npm project:</p>\n<pre class=\"hljs lang-bash\"><code>mkdir uiengine-demo &amp;&amp; <span class=\"hljs-built_in\">cd</span> uiengine-demo &amp;&amp; npm init\n</code></pre>\n<p>You will be prompted for the project information.\nTo skip the prompt and use some empty defaults, run <code>npm init -y</code> instead.</p>\n<p>Next, install the UIengine development dependencies locally:</p>\n<pre class=\"hljs lang-bash\"><code>npm install @uiengine/core @uiengine/adapter-html --save-dev\n</code></pre>\n<p>Now initialize an empty UIengine demo project:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine init --demo\n</code></pre>\n<p>Serve the project locally and watch for changes:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine build --serve --watch\n</code></pre>\n<p>Congratulations! 🎉\nNow you have a basic UIengine demo project running.</p>\n<p>In the following you can read about the steps in more detail.</p>\n<h2 id=\"%F0%9F%93%A6-how-to-install-the-uiengine%3F\">📦 How to install the UIengine?</h2>\n<p>The UIengine should be installed as a dependency for a project.</p>\n<pre class=\"hljs lang-bash\"><code>npm install --save-dev @uiengine/core\n</code></pre>\n<p>You will also need at least one adapter to render your components.\nHere we will use the HTML adapter as an example, so go ahead and install it:</p>\n<pre class=\"hljs lang-bash\"><code>npm install --save-dev @uiengine/adapter-html\n</code></pre>\n<p>See the <a href=\"/adapters/\">adapter docs</a> for details and a list of available adapters.</p>\n<h2 id=\"%F0%9F%94%B0-how-to-setup-the-uiengine-in-a-project%3F\">🔰 How to setup the UIengine in a project?</h2>\n<p>You should initialize the UIengine in the directory that also contains your <code>package.json</code>.</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine init\n</code></pre>\n<p>This command creates a config file named <code>uiengine.config.js</code>, which contains the basic configuration.\nIt also creates the folder <code>pages</code> containing a <code>README.md</code> file.\nThis is the page file for the index page of the documentation.</p>\n<p>You can also use the demo flag when initializing the project:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine init --demo\n</code></pre>\n<p>This generates some demo pages and components to give a basic overview for some of the features.\nBeware: It uses the HTML adapter, hence the components are very simplistic.</p>\n<h2 id=\"%E2%9A%99%EF%B8%8F-how-to-configure-the-project%3F\">⚙️ How to configure the project?</h2>\n<p>The config file <code>uiengine.config.js</code> contains the basic configuration for your project.\nIf you generated the file with the <code>init</code> command it contains comments for the individual sections.\nSee the <a href=\"/basics/config/\">config documentation</a> for details.</p>\n<h2 id=\"%E2%9E%95-how-to-create-a-component%3F\">➕ How to create a component?</h2>\n<p>To generate the basic files of a component you can use the <code>component</code> command:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine component COMPONENT_ID\n</code></pre>\n<p>This will also generate a default variant named after the component.\nIn case you want to directly add some variants, you can list them like so:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine component COMPONENT_ID VARIANT_1 VARIANT_2 VARIANT_3\n</code></pre>\n<h2 id=\"%E2%9E%95-how-to-create-a-variant%3F\">➕ How to create a variant?</h2>\n<p>A variant needs at least a file to render.\nYou create a variant by adding a file renderable by one of the configured adapters to the <code>variants</code> directory of a component.</p>\n<p>To render a variant, we also need a layout.\nThe <code>npx uiengine init</code> command created a basic html layout file in <code>src/templates/uiengine.html</code>.\nIt includes the <code>&lt;!-- uiengine:content --&gt;</code> comment, which will be replaced with the HTML of the rendered variant.\nYou can go ahead and extend the layout to fit your needs and include the correct HTML and style and script references.</p>\n<p>This layout file is just there to get you started.\nFeel free to change its content and use an other adapter to fit your projects needs.</p>\n<h2 id=\"%E2%9E%95-how-to-create-a-page%3F\">➕ How to create a page?</h2>\n<p>To generate the basic files and folders of a page you can use the <code>page</code> command:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine page PAGE_ID\n</code></pre>\n<p>This generates a <code>README.md</code> and a <code>page.config.js</code> file inside the folder matching the page id in you pages source directory.\nIn case you want to directly add some pages, you can list them like so:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine page PAGE_1_ID PAGE_2_ID PAGE_3_ID\n</code></pre>\n<p>Say you would like to create pages for grouping your components with the <a href=\"http://atomicdesign.bradfrost.com/chapter-2/\">Atomic Design Methodology</a>:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine page atoms molecules organisms templates pages\n</code></pre>\n<h2 id=\"%E2%9C%A8-how-to-generate-the-project%3F\">✨ How to generate the project?</h2>\n<p>The site can be generated with the following command:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine build\n</code></pre>\n<p>To rebuild on file change you can also leverage the watch mode:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine build --watch\n</code></pre>\n<p>You can also spawn a server for the generated site:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine build --serve\n</code></pre>\n<p>The <code>watch</code> and <code>serve</code> options can be combined, which makes a good development environment:</p>\n<pre class=\"hljs lang-bash\"><code>npx uiengine build --watch --serve\n</code></pre>\n<p>Under the hood <a href=\"https://www.browsersync.io/\">BrowserSync</a> is used to provide serving and watching the files.\nFor information on how to configure the server and pass additional options, see the <a href=\"/basics/config/#BrowserSync\">configuration documentation</a>.</p>"
+    },
+    "documentation/tokens": {
+      "childIds": [
+        "documentation/tokens/colors",
+        "documentation/tokens/icons",
+        "documentation/tokens/spaces",
+        "documentation/tokens/typography",
+        "documentation/tokens/variables"
+      ],
+      "id": "documentation/tokens",
+      "title": "Tokens",
+      "isTitleFromHeading": true,
+      "path": "documentation/tokens",
+      "sourcePath": "uiengine/pages/documentation/tokens",
+      "readmeFile": "uiengine/pages/documentation/tokens/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"tokens\">Tokens</h1>"
+    },
+    "patterns/atoms": {
+      "childIds": [],
+      "componentIds": [
+        "label",
+        "input"
+      ],
+      "id": "patterns/atoms",
+      "title": "Atoms",
+      "isTitleFromHeading": false,
+      "path": "patterns/atoms",
+      "sourcePath": "uiengine/pages/patterns/atoms",
+      "sourceFile": "uiengine/pages/patterns/atoms/page.config.js",
+      "type": "documentation"
+    },
+    "patterns/molecules": {
+      "childIds": [],
+      "componentIds": [
+        "formfield"
+      ],
+      "id": "patterns/molecules",
+      "title": "Molecules",
+      "isTitleFromHeading": true,
+      "path": "patterns/molecules",
+      "sourcePath": "uiengine/pages/patterns/molecules",
+      "sourceFile": "uiengine/pages/patterns/molecules/page.config.js",
+      "readmeFile": "uiengine/pages/patterns/molecules/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"molecules\">Molecules</h1>"
+    },
+    "patterns/organisms": {
+      "childIds": [],
+      "componentIds": [
+        "form"
+      ],
+      "id": "patterns/organisms",
+      "title": "Organisms",
+      "isTitleFromHeading": true,
+      "path": "patterns/organisms",
+      "sourcePath": "uiengine/pages/patterns/organisms",
+      "sourceFile": "uiengine/pages/patterns/organisms/page.config.js",
+      "readmeFile": "uiengine/pages/patterns/organisms/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"organisms\">Organisms</h1>"
+    },
+    "patterns/pages": {
+      "childIds": [],
+      "id": "patterns/pages",
+      "title": "Pages",
+      "isTitleFromHeading": true,
+      "path": "patterns/pages",
+      "sourcePath": "uiengine/pages/patterns/pages",
+      "readmeFile": "uiengine/pages/patterns/pages/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"pages\">Pages</h1>"
+    },
+    "patterns/templates": {
+      "childIds": [],
+      "id": "patterns/templates",
+      "title": "Templates",
+      "isTitleFromHeading": true,
+      "path": "patterns/templates",
+      "sourcePath": "uiengine/pages/patterns/templates",
+      "readmeFile": "uiengine/pages/patterns/templates/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"templates\">Templates</h1>"
+    },
+    "testcases/custom-data": {
+      "childIds": [],
+      "description": "This is some custom page data",
+      "id": "testcases/custom-data",
+      "title": "Custom Data",
+      "isTitleFromHeading": false,
+      "path": "testcases/custom-data",
+      "sourcePath": "uiengine/pages/testcases/custom-data",
+      "sourceFile": "uiengine/pages/testcases/custom-data/page.config.js",
+      "type": "documentation"
+    },
+    "testcases/custom-fragment": {
+      "childIds": [],
+      "fragment": "fragment.pug",
+      "tags": [
+        "Template"
+      ],
+      "context": {
+        "myFragmentVariable": "This is my fragment"
+      },
+      "id": "testcases/custom-fragment",
+      "title": "Custom Fragment",
+      "isTitleFromHeading": false,
+      "path": "testcases/custom-fragment",
+      "sourcePath": "uiengine/pages/testcases/custom-fragment",
+      "sourceFile": "uiengine/pages/testcases/custom-fragment/page.config.js",
+      "readmeFile": "uiengine/pages/testcases/custom-fragment/README.md",
+      "type": "template",
+      "content": "<p>This is a page with a custom fragment.</p>"
+    },
+    "testcases/custom-fragment-and-template": {
+      "childIds": [],
+      "template": "template.pug",
+      "fragment": "fragment.pug",
+      "tags": [
+        "Template"
+      ],
+      "context": {
+        "myContextVariable": "This is my context",
+        "myFragmentVariable": "This is my fragment"
+      },
+      "id": "testcases/custom-fragment-and-template",
+      "title": "Custom Fragment And Template",
+      "isTitleFromHeading": false,
+      "path": "testcases/custom-fragment-and-template",
+      "sourcePath": "uiengine/pages/testcases/custom-fragment-and-template",
+      "sourceFile": "uiengine/pages/testcases/custom-fragment-and-template/page.config.js",
+      "readmeFile": "uiengine/pages/testcases/custom-fragment-and-template/README.md",
+      "type": "template",
+      "content": "<p>This is a page with a custom fragment and template.</p>"
+    },
+    "testcases/custom-path": {
+      "childIds": [],
+      "path": "testcases/custom-path",
+      "id": "testcases/custom-path",
+      "title": "Custom Path",
+      "isTitleFromHeading": false,
+      "sourcePath": "uiengine/pages/testcases/custom-path",
+      "sourceFile": "uiengine/pages/testcases/custom-path/page.config.js",
+      "type": "documentation",
+      "files": [
+        "/home/runner/work/uiengine/uiengine/test/project/uiengine/pages/testcases/custom-path/file.txt",
+        "/home/runner/work/uiengine/uiengine/test/project/uiengine/pages/testcases/custom-path/extra-files/file-in-folder.txt"
+      ]
+    },
+    "testcases/custom-template": {
+      "childIds": [],
+      "template": "page.pug",
+      "tags": [
+        "Template"
+      ],
+      "context": {
+        "myContextVariable": "This is a page with a custom template."
+      },
+      "properties": {
+        "Page": {
+          "myContextVariable": {
+            "type": "String",
+            "required": true
+          }
+        }
+      },
+      "id": "testcases/custom-template",
+      "title": "Custom Template",
+      "isTitleFromHeading": false,
+      "path": "testcases/custom-template",
+      "sourcePath": "uiengine/pages/testcases/custom-template",
+      "sourceFile": "uiengine/pages/testcases/custom-template/page.config.js",
+      "readmeFile": "uiengine/pages/testcases/custom-template/README.md",
+      "type": "template",
+      "content": "<p>This is a page with a custom template.</p>"
+    },
+    "testcases/examples": {
+      "childIds": [],
+      "collapsed": true,
+      "componentIds": [
+        "ReactContext",
+        "ReactHooks"
+      ],
+      "id": "testcases/examples",
+      "title": "Examples",
+      "isTitleFromHeading": false,
+      "path": "testcases/examples",
+      "sourcePath": "uiengine/pages/testcases/examples",
+      "sourceFile": "uiengine/pages/testcases/examples/page.config.js",
+      "type": "documentation"
+    },
+    "documentation/tokens/colors": {
+      "childIds": [],
+      "tokens": [
+        {
+          "name": "Brand",
+          "type": "category",
+          "tokens": [
+            {
+              "type": "color",
+              "name": "Brand Primary",
+              "value": "#FF183E",
+              "description": "Primary brand color",
+              "reference": null,
+              "variable": "$color-brand-primary"
+            },
+            {
+              "type": "color",
+              "name": "Brand Secondary",
+              "value": "#331833",
+              "description": "Secondary brand color",
+              "reference": null,
+              "variable": "$color-brand-secondary"
+            }
+          ]
+        },
+        {
+          "name": "Neutral",
+          "type": "category",
+          "tokens": [
+            {
+              "type": "color",
+              "name": "Neutral 100",
+              "value": "#FFF",
+              "reference": null,
+              "variable": "$color-neutral-100"
+            },
+            {
+              "type": "color",
+              "name": "Neutral 90",
+              "value": "#E5E5E5",
+              "reference": null,
+              "variable": "$color-neutral-90"
+            },
+            {
+              "type": "color",
+              "name": "Neutral 75",
+              "value": "#BFBFBF",
+              "reference": null,
+              "variable": "$color-neutral-75"
+            },
+            {
+              "type": "color",
+              "name": "Neutral 50",
+              "value": "#7F7F7F",
+              "reference": null,
+              "variable": "$color-neutral-50"
+            },
+            {
+              "type": "color",
+              "name": "Neutral 25",
+              "value": "#404040",
+              "reference": null,
+              "variable": "$color-neutral-25"
+            },
+            {
+              "type": "color",
+              "name": "Neutral 10",
+              "value": "#1A1A1A",
+              "reference": null,
+              "variable": "$color-neutral-10"
+            },
+            {
+              "type": "color",
+              "name": "Neutral 0",
+              "value": "#000",
+              "reference": null,
+              "variable": "$color-neutral-0"
+            },
+            {
+              "type": "color",
+              "name": "Neutral White",
+              "value": "#FFF",
+              "reference": "Neutral 100",
+              "variable": "$color-neutral-white"
+            },
+            {
+              "type": "color",
+              "name": "Neutral Black",
+              "value": "#000",
+              "reference": "Neutral 0",
+              "variable": "$color-neutral-black"
+            }
+          ]
+        },
+        {
+          "name": "Text",
+          "type": "category",
+          "tokens": [
+            {
+              "type": "color",
+              "name": "Text Default",
+              "value": "#331833",
+              "reference": "Brand Secondary",
+              "variable": "$color-text-default"
+            },
+            {
+              "type": "color",
+              "name": "Text On Dark",
+              "value": "#FFF",
+              "reference": "Neutral 100",
+              "variable": "$color-text-on-dark"
+            },
+            {
+              "type": "color",
+              "name": "Text On Black",
+              "value": "#E5E5E5",
+              "reference": "Neutral 90",
+              "variable": "$color-text-on-black"
+            }
+          ]
+        },
+        {
+          "name": "Background",
+          "type": "category",
+          "tokens": [
+            {
+              "type": "color",
+              "name": "Background White",
+              "value": "#FFF",
+              "reference": "Neutral 100",
+              "variable": "$color-background-white"
+            },
+            {
+              "type": "color",
+              "name": "Background Dark",
+              "value": "#FF183E",
+              "reference": "Brand Primary",
+              "variable": "$color-background-dark"
+            },
+            {
+              "type": "color",
+              "name": "Background Black",
+              "value": "#000",
+              "reference": "Neutral 0",
+              "variable": "$color-background-black"
+            }
+          ]
+        }
+      ],
+      "tags": [
+        "Token"
+      ],
+      "id": "documentation/tokens/colors",
+      "title": "Colors",
+      "isTitleFromHeading": true,
+      "path": "documentation/tokens/colors",
+      "sourcePath": "uiengine/pages/documentation/tokens/colors",
+      "sourceFile": "uiengine/pages/documentation/tokens/colors/page.config.js",
+      "readmeFile": "uiengine/pages/documentation/tokens/colors/README.md",
+      "type": "tokens",
+      "content": "<h1 id=\"colors\">Colors</h1>\n<p>Our colors.</p>"
+    },
+    "documentation/tokens/icons": {
+      "childIds": [],
+      "tokens": [
+        {
+          "name": "General",
+          "type": "category",
+          "tokens": [
+            {
+              "type": "icon",
+              "name": "Search",
+              "value": "<i class=\"search icon\"></i>",
+              "variable": "search"
+            },
+            {
+              "type": "icon",
+              "name": "menu",
+              "value": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"16\" viewBox=\"0 0 22 16\"><path fill=\"#000\" fill-rule=\"nonzero\" d=\"M20 12.8a1.3 1.3 0 01.1 2.4H2a1.3 1.3 0 01-.1-2.4H20zm0-6a1.3 1.3 0 01.1 2.4H2a1.2 1.2 0 01-.1-2.4H20zm0-6a1.3 1.3 0 01.1 2.4H2A1.2 1.2 0 011.9.9H20z\"/></svg>",
+              "variable": "search"
+            }
+          ]
+        },
+        {
+          "name": "Form",
+          "type": "category",
+          "layout": "table",
+          "tokens": [
+            {
+              "type": "icon",
+              "name": "Check",
+              "value": "<i class=\"green check icon\"></i>",
+              "description": "Display successful user input",
+              "variable": "green check"
+            },
+            {
+              "type": "icon",
+              "name": "Error",
+              "value": "<i class=\"red remove icon icon\"></i>",
+              "description": "Error hints and messages",
+              "variable": "red remove"
+            }
+          ]
+        }
+      ],
+      "tags": [
+        "Token"
+      ],
+      "id": "documentation/tokens/icons",
+      "title": "Icons",
+      "isTitleFromHeading": false,
+      "path": "documentation/tokens/icons",
+      "sourcePath": "uiengine/pages/documentation/tokens/icons",
+      "sourceFile": "uiengine/pages/documentation/tokens/icons/page.config.js",
+      "readmeFile": "uiengine/pages/documentation/tokens/icons/README.md",
+      "type": "tokens",
+      "content": "<div class=\"intro\">\n<p>Icons are used to provide additional meaning or in places where text label doesn’t fit. They communicate messages at a glance and draw attention to important information.</p>\n</div>\n<p>Each icon ships in SVG format.</p>\n<h2 id=\"usage\">Usage</h2>\n<p>The recommended way to use the project icons is to reference them from the sprite:</p>\n<pre class=\"hljs lang-svg\"><code><span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">svg</span> <span class=\"hljs-attr\">viewBox</span>=<span class=\"hljs-string\">&quot;0 0 1 1&quot;</span> <span class=\"hljs-attr\">class</span>=<span class=\"hljs-string\">&quot;c-icon [additional-classes]&quot;</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">use</span> <span class=\"hljs-attr\">xlink:href</span>=<span class=\"hljs-string\">&quot;[icon-name]&quot;</span>&gt;</span><span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">use</span>&gt;</span>\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">svg</span>&gt;</span>\n</code></pre>\n<h2 id=\"styling\">Styling</h2>\n<p>You can easily style the icons using CSS:</p>\n<pre class=\"hljs lang-css\"><code><span class=\"hljs-selector-class\">.c-icon</span> {\n  <span class=\"hljs-attribute\">width</span>: <span class=\"hljs-number\">2rem</span>;\n  <span class=\"hljs-attribute\">height</span>: <span class=\"hljs-number\">2rem</span>;\n  <span class=\"hljs-attribute\">color</span>: $brand-primary;\n}\n</code></pre>"
+    },
+    "documentation/tokens/spaces": {
+      "childIds": [],
+      "tokens": [
+        {
+          "type": "size",
+          "name": "S",
+          "value": ".5rem",
+          "variable": "$space-s"
+        },
+        {
+          "type": "size",
+          "name": "M",
+          "value": "1rem",
+          "variable": "$space-m"
+        },
+        {
+          "type": "size",
+          "name": "L",
+          "value": "1.5rem",
+          "variable": "$space-l"
+        },
+        {
+          "type": "size",
+          "name": "XL",
+          "value": "3rem",
+          "variable": "$space-xl"
+        }
+      ],
+      "tags": [
+        "Token"
+      ],
+      "id": "documentation/tokens/spaces",
+      "title": "Spaces",
+      "isTitleFromHeading": false,
+      "path": "documentation/tokens/spaces",
+      "sourcePath": "uiengine/pages/documentation/tokens/spaces",
+      "sourceFile": "uiengine/pages/documentation/tokens/spaces/page.config.js",
+      "readmeFile": "uiengine/pages/documentation/tokens/spaces/README.md",
+      "type": "tokens",
+      "content": "<p>Our spacings.</p>"
+    },
+    "documentation/tokens/typography": {
+      "childIds": [],
+      "tokens": [
+        {
+          "name": "Lato",
+          "type": "category",
+          "tokens": [
+            {
+              "type": "font",
+              "fontweight": "regular",
+              "value": "font-family: Lato;",
+              "variable": "Lato",
+              "description": "Use wisely.",
+              "text": "Just some custom sample text to show the usage of this font.",
+              "license": "Google Fonts",
+              "sizes": [
+                "24px",
+                "18px",
+                "14px"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Fallback",
+          "type": "category",
+          "tokens": [
+            {
+              "type": "font",
+              "fontweight": "light / 200",
+              "value": "font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 200;"
+            },
+            {
+              "type": "font",
+              "fontweight": "regular / 400",
+              "value": "font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 400;"
+            },
+            {
+              "type": "font",
+              "fontweight": "bold / 800",
+              "value": "font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 800;"
+            }
+          ]
+        }
+      ],
+      "tags": [
+        "Token"
+      ],
+      "id": "documentation/tokens/typography",
+      "title": "Typography",
+      "isTitleFromHeading": false,
+      "path": "documentation/tokens/typography",
+      "sourcePath": "uiengine/pages/documentation/tokens/typography",
+      "sourceFile": "uiengine/pages/documentation/tokens/typography/page.config.js",
+      "type": "tokens"
+    },
+    "documentation/tokens/variables": {
+      "childIds": [],
+      "tokens": [
+        {
+          "type": "category",
+          "name": "Colors",
+          "tokens": [
+            {
+              "variable": "--app-accent-color",
+              "name": "App Accent Color",
+              "type": "color",
+              "themes": {
+                "plain": {
+                  "value": "black",
+                  "variable": "--plain-black-color"
+                },
+                "funky": {
+                  "value": "orange",
+                  "variable": "--funky-orange-color"
+                }
+              },
+              "description": "Accent color"
+            },
+            {
+              "variable": "--app-call-to-action-color",
+              "name": "App Call To Action Color",
+              "type": "color",
+              "themes": {
+                "plain": {
+                  "value": "red",
+                  "variable": "--plain-red-color"
+                },
+                "funky": {
+                  "value": "orange",
+                  "variable": "--funky-orange-color"
+                }
+              },
+              "description": "Primary interaction color"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Shadows",
+          "tokens": [
+            {
+              "variable": "--app-box-shadow",
+              "name": "App Box Shadow",
+              "type": "shadow",
+              "themes": {
+                "plain": {
+                  "value": "0 0 8px 2px rgba(92,43,54,0.2)"
+                },
+                "funky": {
+                  "value": "0 0 8px 2px rgba(0,0,0,0.2)"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Borders",
+          "tokens": [
+            {
+              "variable": "--app-border-radius",
+              "name": "App Border Radius",
+              "type": "border-radius",
+              "themes": {
+                "plain": {
+                  "value": "20rem"
+                },
+                "funky": {
+                  "value": "3px"
+                }
+              }
+            },
+            {
+              "variable": "--app-border-width",
+              "name": "App Border Width",
+              "type": "border-width",
+              "themes": {
+                "plain": {
+                  "value": "2px"
+                },
+                "funky": {
+                  "value": "7px"
+                }
+              }
+            },
+            {
+              "variable": "--app-border-style",
+              "name": "App Border Style",
+              "type": "border-style",
+              "themes": {
+                "plain": {
+                  "value": "dashed"
+                },
+                "funky": {
+                  "value": "dotted"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Opacity",
+          "tokens": [
+            {
+              "variable": "--app-opacity-30",
+              "name": "Opacity 30%",
+              "type": "opacity",
+              "themes": {
+                "plain": {
+                  "value": "0.3"
+                },
+                "funky": {
+                  "value": "0.3"
+                }
+              }
+            },
+            {
+              "variable": "--app-opacity-60",
+              "name": "Opacity 60%",
+              "type": "opacity",
+              "themes": {
+                "plain": {
+                  "value": "0.6"
+                },
+                "funky": {
+                  "value": "0.6"
+                }
+              }
+            },
+            {
+              "variable": "--app-opacity-90",
+              "name": "Opacity 90%",
+              "type": "opacity",
+              "themes": {
+                "plain": {
+                  "value": "0.9"
+                },
+                "funky": {
+                  "value": "0.9"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Spaces",
+          "tokens": [
+            {
+              "variable": "--app-space-xs",
+              "name": "App Space XS",
+              "type": "size",
+              "themes": {
+                "plain": {
+                  "value": "0.25rem"
+                },
+                "funky": {
+                  "value": "0.25rem"
+                }
+              }
+            },
+            {
+              "variable": "--app-space-s",
+              "name": "App Space S",
+              "type": "size",
+              "themes": {
+                "plain": {
+                  "value": "0.5rem"
+                },
+                "funky": {
+                  "value": "0.5rem"
+                }
+              }
+            },
+            {
+              "variable": "--app-space-m",
+              "name": "App Space M",
+              "type": "size",
+              "themes": {
+                "plain": {
+                  "value": "1rem"
+                },
+                "funky": {
+                  "value": "1rem"
+                }
+              }
+            },
+            {
+              "variable": "--app-space-l",
+              "name": "App Space L",
+              "type": "size",
+              "themes": {
+                "plain": {
+                  "value": "1.5rem"
+                },
+                "funky": {
+                  "value": "1.5rem"
+                }
+              }
+            },
+            {
+              "variable": "--app-space-xl",
+              "name": "App Space XL",
+              "type": "size",
+              "themes": {
+                "plain": {
+                  "value": "2rem"
+                },
+                "funky": {
+                  "value": "2rem"
+                }
+              }
+            },
+            {
+              "variable": "--app-space-xxl",
+              "name": "App Space XXL",
+              "type": "size",
+              "themes": {
+                "plain": {
+                  "value": "4rem"
+                },
+                "funky": {
+                  "value": "4rem"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "id": "documentation/tokens/variables",
+      "title": "Variables",
+      "isTitleFromHeading": false,
+      "path": "documentation/tokens/variables",
+      "sourcePath": "uiengine/pages/documentation/tokens/variables",
+      "sourceFile": "uiengine/pages/documentation/tokens/variables/page.config.js",
+      "type": "tokens"
+    },
+    "patterns/pages/ajax/layer": {
+      "childIds": [],
+      "id": "patterns/pages/ajax/layer",
+      "title": "AJAX-Layer",
+      "isTitleFromHeading": true,
+      "path": "patterns/pages/ajax/layer",
+      "sourcePath": "uiengine/pages/patterns/pages/ajax/layer",
+      "readmeFile": "uiengine/pages/patterns/pages/ajax/layer/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"ajax-layer\">AJAX-Layer</h1>\n<p>This is the content</p>"
+    }
+  },
+  "components": {
+    "input": {
+      "id": "input",
+      "title": "Inputs",
+      "content": "<p>An input field that can be used inside a form.</p>",
+      "variants": [
+        {
+          "file": "text.hbs",
+          "id": "input/text.hbs-1",
+          "componentId": "input",
+          "title": "Text",
+          "extension": "hbs",
+          "raw": "<form class=\"ui form\">\n  <div class=\"field\">\n    {{> input id=id name=name}}\n  </div>\n</form>",
+          "context": {
+            "id": "name",
+            "name": "person[name]"
+          }
+        },
+        {
+          "file": "text.pug",
+          "id": "input/text.pug-2",
+          "componentId": "input",
+          "title": "Text",
+          "extension": "pug",
+          "raw": "include /modules/form/form.pug\ninclude /modules/formfield/formfield.pug\ninclude /elements/input/input.pug\n\n+form()\n  +formfield()\n    +input(id, name)",
+          "context": {
+            "id": "name",
+            "name": "person[name]"
+          }
+        },
+        {
+          "file": "text.njk",
+          "id": "input/text.njk-3",
+          "componentId": "input",
+          "title": "Text",
+          "extension": "njk",
+          "raw": "{% from \"../input.njk\" import input %}\n\n<form class=\"ui form\">\n  <div class=\"field\">\n    {{ input(id, name) }}\n  </div>\n</form>",
+          "context": {
+            "id": "name",
+            "name": "person[name]"
+          }
+        },
+        {
+          "file": "text-required.pug",
+          "id": "input/text-required.pug-4",
+          "componentId": "input",
+          "title": "Text Required",
+          "extension": "pug",
+          "raw": "include /modules/form/form.pug\ninclude /modules/formfield/formfield.pug\ninclude /elements/input/input.pug\n\n+form()\n  +formfield()\n    +input(id, name)(required=true)",
+          "context": {
+            "id": "name",
+            "name": "person[name]"
+          }
+        },
+        {
+          "file": "text-disabled.pug",
+          "id": "input/text-disabled.pug-5",
+          "componentId": "input",
+          "title": "Text Disabled",
+          "extension": "pug",
+          "raw": "include /modules/form/form.pug\ninclude /modules/formfield/formfield.pug\ninclude /elements/input/input.pug\n\n+form()\n  +formfield()\n    +input(id, name)(disabled=true)",
+          "context": {
+            "id": "name",
+            "name": "person[name]"
+          }
+        },
+        {
+          "file": "number.pug",
+          "id": "input/number.pug-6",
+          "componentId": "input",
+          "title": "Number",
+          "extension": "pug",
+          "raw": "include /modules/form/form.pug\ninclude /modules/formfield/formfield.pug\ninclude /elements/input/input.pug\n\n+form()\n  +formfield()\n    +input(\"amount\", \"amount\", \"number\")",
+          "context": {
+            "id": "name",
+            "name": "person[name]"
+          }
+        }
+      ],
+      "sourcePath": "src/elements/input",
+      "sourceFile": "src/elements/input/component.config.js",
+      "readmeFile": "src/elements/input/README.md",
+      "type": "component",
+      "tags": [
+        "Atom",
+        "Form"
+      ],
+      "context": {
+        "id": "name",
+        "name": "person[name]"
+      },
+      "dependentFiles": [
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/checkbox.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/number.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text-disabled.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text-required.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/formfield.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/form/variants/form.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-with-label.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-without-label.pug"
+      ],
+      "dependentComponents": [
+        "formfield",
+        "form"
+      ]
+    },
+    "label": {
+      "id": "label",
+      "title": "Label",
+      "isTitleFromHeading": false,
+      "content": "<p>A label for form elements</p>",
+      "variants": [
+        {
+          "file": "label.ejs",
+          "title": "Label (EJS)",
+          "label": "A1.0",
+          "tags": [
+            "EJS"
+          ],
+          "id": "label/label.ejs-1",
+          "componentId": "label",
+          "extension": "ejs",
+          "raw": "<%- include('../label') -%>",
+          "context": {
+            "id": "name",
+            "title": "Name"
+          }
+        },
+        {
+          "file": "label.hbs",
+          "title": "Label (Handlebars)",
+          "label": "A1.1",
+          "tags": [
+            "Handlebars"
+          ],
+          "id": "label/label.hbs-2",
+          "componentId": "label",
+          "extension": "hbs",
+          "raw": "{{> label id=id title=title}}",
+          "context": {
+            "id": "name",
+            "title": "Name"
+          }
+        },
+        {
+          "file": "label.html",
+          "title": "Label (HTML)",
+          "label": "A1.2",
+          "tags": [
+            "HTML"
+          ],
+          "id": "label/label.html-3",
+          "componentId": "label",
+          "extension": "html",
+          "raw": "<!--#include file=\"../label.html\" -->",
+          "context": {
+            "id": "name",
+            "title": "Name"
+          }
+        },
+        {
+          "file": "label.marko",
+          "title": "Label (Marko)",
+          "label": "A1.3",
+          "tags": [
+            "Marko"
+          ],
+          "id": "label/label.marko-4",
+          "componentId": "label",
+          "extension": "marko",
+          "raw": "import Label from '../label.marko'\n\n<${Label} ...input />",
+          "context": {
+            "id": "name",
+            "title": "Name"
+          }
+        },
+        {
+          "file": "label.pug",
+          "title": "Label (Pug)",
+          "label": "A1.4",
+          "tags": [
+            "Pug"
+          ],
+          "themeIds": [
+            "plain"
+          ],
+          "id": "label/label.pug-5",
+          "componentId": "label",
+          "extension": "pug",
+          "raw": "include /elements/label/label.pug\n\n+label(id, title)",
+          "context": {
+            "id": "name",
+            "title": "Name"
+          }
+        },
+        {
+          "file": "label.jsx",
+          "title": "Label (React)",
+          "label": "A1.5.1",
+          "tags": [
+            "React"
+          ],
+          "id": "label/label.jsx-6",
+          "componentId": "label",
+          "extension": "jsx",
+          "raw": "import React from 'react'\nimport Label from '../label.jsx'\n\nexport default ({ id, title }) => (\n  <Label for={id} title={title} />\n)",
+          "context": {
+            "id": "name",
+            "title": "Name"
+          }
+        },
+        {
+          "file": "label.jsx",
+          "title": "Label (React)",
+          "label": "A1.5.2",
+          "tags": [
+            "React"
+          ],
+          "context": {
+            "id": "surname",
+            "title": "Surname"
+          },
+          "id": "label/label.jsx-7",
+          "componentId": "label",
+          "extension": "jsx",
+          "raw": "import React from 'react'\nimport Label from '../label.jsx'\n\nexport default ({ id, title }) => (\n  <Label for={id} title={title} />\n)"
+        },
+        {
+          "file": "label.vue",
+          "title": "Label (Vue)",
+          "label": "A1.6",
+          "tags": [
+            "Vue"
+          ],
+          "id": "label/label.vue-8",
+          "componentId": "label",
+          "extension": "vue",
+          "raw": "<template>\n  <my-label v-bind=\"$props\" />\n</template>\n\n<script>\nimport MyLabel from '../label.vue'\n\nexport default {\n  components: {\n    MyLabel\n  },\n\n  props: {\n    id: {\n      type: String,\n      required: true\n    },\n\n    title: {\n      type: String,\n      required: true\n    }\n  }\n}\n</script>",
+          "context": {
+            "id": "name",
+            "title": "Name"
+          }
+        },
+        {
+          "file": "label.njk",
+          "title": "Label (Nunjucks)",
+          "label": "A1.0",
+          "tags": [
+            "Nunjucks"
+          ],
+          "id": "label/label.njk-9",
+          "componentId": "label",
+          "extension": "njk",
+          "raw": "{% from \"../label.njk\" import label %}\n\n{{ label(id, title) }}",
+          "context": {
+            "id": "name",
+            "title": "Name"
+          }
+        }
+      ],
+      "sourcePath": "src/elements/label",
+      "sourceFile": "src/elements/label/component.config.js",
+      "readmeFile": "src/elements/label/README.md",
+      "type": "component",
+      "label": "A1",
+      "tags": [
+        "Atom",
+        "Form"
+      ],
+      "properties": {
+        "Label": {
+          "id": {
+            "type": "String",
+            "description": "The label text",
+            "required": true
+          },
+          "title": {
+            "type": "String",
+            "description": "The id of the referenced form element",
+            "required": true
+          }
+        },
+        "<Label>": {
+          "title": {
+            "type": "String",
+            "required": true
+          },
+          "for": {
+            "type": "String",
+            "required": true
+          },
+          "test": {
+            "type": "Array",
+            "value": {
+              "type": "Shape",
+              "value": {
+                "nested": {
+                  "type": "Array",
+                  "value": {
+                    "type": "Shape",
+                    "value": {
+                      "deeply": {
+                        "type": "Object",
+                        "value": "Bool",
+                        "required": false
+                      }
+                    }
+                  },
+                  "required": false
+                }
+              }
+            },
+            "required": false
+          }
+        },
+        "<MyLabel>": {
+          "id": {
+            "type": "String",
+            "required": true
+          },
+          "title": {
+            "type": "String",
+            "required": true
+          }
+        }
+      },
+      "context": {
+        "id": "name",
+        "title": "Name"
+      },
+      "dependencyFiles": [
+        "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/parse-prop-types-virtual-0520e297d9/0/cache/parse-prop-types-npm-0.3.0-70cff89ca1-d2e950aa97.zip/node_modules/parse-prop-types/dist/index.js",
+        "/home/runner/work/uiengine/uiengine/.yarn/cache/prop-types-npm-15.7.2-d7a04f2274-a440dd406c.zip/node_modules/prop-types/index.js",
+        "/home/runner/work/uiengine/uiengine/.yarn/cache/react-npm-17.0.2-99ba37d931-7d0dfebafe.zip/node_modules/react/index.js",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/label/label.jsx",
+        "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/parse-prop-types-virtual-0520e297d9/0/cache/parse-prop-types-npm-0.3.0-70cff89ca1-d2e950aa97.zip/node_modules/parse-prop-types/dist/index.js",
+        "/home/runner/work/uiengine/uiengine/.yarn/cache/prop-types-npm-15.7.2-d7a04f2274-a440dd406c.zip/node_modules/prop-types/index.js",
+        "/home/runner/work/uiengine/uiengine/.yarn/cache/react-npm-17.0.2-99ba37d931-7d0dfebafe.zip/node_modules/react/index.js",
+        "/home/runner/work/uiengine/uiengine/.yarn/$$virtual/vue-loader-virtual-9f82a7df7b/0/cache/vue-loader-npm-15.9.7-c92cce348e-48c7785a24.zip/node_modules/vue-loader/lib/runtime/componentNormalizer.js"
+      ],
+      "themeProperties": [
+        {
+          "type": "color",
+          "name": "Special color for labels",
+          "variable": "--label-text-color",
+          "default": {
+            "variable": "--app-text-color"
+          },
+          "themes": {
+            "plain": {
+              "variable": "--app-text-color",
+              "value": "#111"
+            },
+            "funky": {
+              "value": "blue"
+            }
+          }
+        }
+      ],
+      "dependentFiles": [
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/label/index.jsx",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/label/variants/label.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/formfield.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/form/variants/form.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-with-label.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/templates/page.pug"
+      ],
+      "dependentTemplates": [
+        "page.pug"
+      ],
+      "dependentComponents": [
+        "formfield",
+        "form"
+      ]
+    },
+    "form": {
+      "id": "form",
+      "title": "Form",
+      "isTitleFromHeading": false,
+      "variants": [
+        {
+          "file": "form.pug",
+          "id": "form/form.pug-1",
+          "componentId": "form",
+          "title": "Form",
+          "extension": "pug",
+          "raw": "include /modules/form/form.pug\ninclude /modules/formfield/formfield.pug\ninclude /elements/input/input.pug\ninclude /elements/label/label.pug\n\n+form(\"#\")\n  +formfield()\n    +label(\"first_name\", \"First name\")\n    +input(\"first_name\", \"person[first_name]\")(placeholder=\"First Name\")\n  +formfield()\n    +label(\"last_name\", \"Last name\")\n    +input(\"last_name\", \"person[last_name]\")(placeholder=\"Last Name\")\n\n  <!-- omit:code:start -->\n  +formfield()\n    +label(\"username\", \"Username\")\n    +input(\"username\", \"person[username]\")\n  <!-- omit:code:end -->\n\n  <!-- omit:preview:start -->\n  +formfield()\n    +label(\"password\", \"Password\")\n    +input(\"password\", \"person[password]\", \"Password\")\n  <!-- omit:preview:end -->"
+        }
+      ],
+      "sourcePath": "src/modules/form",
+      "type": "component",
+      "dependentFiles": [
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/checkbox.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/number.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text-disabled.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text-required.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-with-label.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-without-label.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/form/variants/form.pug"
+      ],
+      "dependencyFiles": [
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/formfield.pug"
+      ],
+      "dependentComponents": [
+        "input",
+        "formfield"
+      ],
+      "dependencies": [
+        "formfield"
+      ]
+    },
+    "formfield": {
+      "id": "formfield",
+      "title": "Formfields",
+      "isTitleFromHeading": true,
+      "content": "<h1 id=\"formfields\">Formfields</h1>\n<p>Formfields contain the input and an optional label.</p>",
+      "variants": [
+        {
+          "file": "text-with-label.pug",
+          "id": "formfield/text-with-label.pug-1",
+          "componentId": "formfield",
+          "title": "Text With Label",
+          "extension": "pug",
+          "raw": "include /modules/form/form.pug\ninclude /modules/formfield/formfield.pug\ninclude /elements/input/input.pug\ninclude /elements/label/label.pug\n\n+form()\n  +formfield()\n    +label(\"name\", \"Name\")\n    +input(\"name\", \"person[name]\")(placeholder=\"Name\")"
+        },
+        {
+          "file": "text-without-label.pug",
+          "id": "formfield/text-without-label.pug-2",
+          "componentId": "formfield",
+          "title": "Text Without Label",
+          "extension": "pug",
+          "raw": "include /modules/form/form.pug\ninclude /modules/formfield/formfield.pug\ninclude /elements/input/input.pug\n\n+form()\n  +formfield()\n    +input(\"name\", \"person[name]\")(placeholder=\"Name\")"
+        }
+      ],
+      "sourcePath": "src/modules/formfield",
+      "sourceFile": "src/modules/formfield/component.config.js",
+      "readmeFile": "src/modules/formfield/README.md",
+      "type": "component",
+      "dependentFiles": [
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/checkbox.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/number.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text-disabled.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text-required.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/form/form.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/form/variants/form.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-with-label.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-without-label.pug"
+      ],
+      "dependencyFiles": [
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/label/label.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/input.pug"
+      ],
+      "dependentComponents": [
+        "input",
+        "form"
+      ],
+      "dependencies": [
+        "label",
+        "input"
+      ]
+    },
+    "ReactContext": {
+      "id": "ReactContext",
+      "title": "React Context",
+      "variants": [
+        {
+          "file": "ReactContext.jsx",
+          "id": "ReactContext/ReactContext.jsx-1",
+          "componentId": "ReactContext",
+          "title": "ReactContext",
+          "extension": "jsx",
+          "raw": "import React from 'react'\nimport ReactContext from '../ReactContext.jsx'\n\nexport default props => <ReactContext {...props} />"
+        }
+      ],
+      "sourcePath": "src/examples/ReactContext",
+      "sourceFile": "src/examples/ReactContext/component.config.js",
+      "type": "component",
+      "dependencyFiles": [
+        "/home/runner/work/uiengine/uiengine/.yarn/cache/react-npm-17.0.2-99ba37d931-7d0dfebafe.zip/node_modules/react/index.js",
+        "/home/runner/work/uiengine/uiengine/test/project/src/examples/ReactContext/ThemeContext.jsx",
+        "/home/runner/work/uiengine/uiengine/.yarn/cache/react-npm-17.0.2-99ba37d931-7d0dfebafe.zip/node_modules/react/index.js"
+      ],
+      "dependentFiles": [
+        "/home/runner/work/uiengine/uiengine/test/project/src/examples/ReactContext/ReactContext.jsx"
+      ]
+    },
+    "ReactHooks": {
+      "id": "ReactHooks",
+      "title": "React Hooks",
+      "variants": [
+        {
+          "file": "ReactHooks.jsx",
+          "id": "ReactHooks/ReactHooks.jsx-1",
+          "componentId": "ReactHooks",
+          "title": "ReactHooks",
+          "extension": "jsx",
+          "raw": "import React from 'react'\nimport ReactHooks from '../ReactHooks.jsx'\n\nexport default props => <ReactHooks {...props} />"
+        }
+      ],
+      "sourcePath": "src/examples/ReactHooks",
+      "sourceFile": "src/examples/ReactHooks/component.config.js",
+      "type": "component",
+      "dependencyFiles": [
+        "/home/runner/work/uiengine/uiengine/.yarn/cache/react-npm-17.0.2-99ba37d931-7d0dfebafe.zip/node_modules/react/index.js"
+      ]
+    }
+  },
+  "navigation": {
+    "index": {
+      "childIds": [
+        "documentation",
+        "patterns",
+        "testcases"
+      ],
+      "id": "index",
+      "itemId": "index",
+      "path": "/",
+      "type": "documentation",
+      "title": "Home"
+    },
+    "documentation": {
+      "nextSiblingId": "patterns",
+      "childIds": [
+        "documentation/getting-started",
+        "documentation/development",
+        "documentation/tokens"
+      ],
+      "parentId": "index",
+      "id": "documentation",
+      "itemId": "documentation",
+      "isStructural": true,
+      "path": "/documentation/",
+      "type": "documentation",
+      "title": "Documentation"
+    },
+    "patterns": {
+      "prevSiblingId": "documentation",
+      "nextSiblingId": "testcases",
+      "childIds": [
+        "patterns/atoms",
+        "patterns/molecules",
+        "patterns/organisms",
+        "patterns/templates",
+        "patterns/pages"
+      ],
+      "parentId": "index",
+      "id": "patterns",
+      "itemId": "patterns",
+      "path": "/patterns/",
+      "type": "documentation",
+      "title": "Pattern Library"
+    },
+    "testcases": {
+      "prevSiblingId": "patterns",
+      "childIds": [
+        "testcases/custom-data",
+        "testcases/custom-fragment",
+        "testcases/custom-fragment-and-template",
+        "testcases/custom-path",
+        "testcases/custom-template",
+        "testcases/examples"
+      ],
+      "parentId": "index",
+      "id": "testcases",
+      "itemId": "testcases",
+      "path": "/testcases/",
+      "type": "documentation",
+      "title": "Test Cases"
+    },
+    "documentation/development": {
+      "prevSiblingId": "documentation/getting-started",
+      "nextSiblingId": "documentation/tokens",
+      "parentId": "documentation",
+      "id": "documentation/development",
+      "itemId": "documentation/development",
+      "path": "/documentation/development/",
+      "type": "documentation",
+      "title": "Contributing"
+    },
+    "documentation/getting-started": {
+      "nextSiblingId": "documentation/development",
+      "parentId": "documentation",
+      "id": "documentation/getting-started",
+      "itemId": "documentation/getting-started",
+      "path": "/documentation/getting-started/",
+      "type": "documentation",
+      "title": "Getting Started"
+    },
+    "documentation/tokens": {
+      "prevSiblingId": "documentation/development",
+      "childIds": [
+        "documentation/tokens/colors",
+        "documentation/tokens/icons",
+        "documentation/tokens/spaces",
+        "documentation/tokens/typography",
+        "documentation/tokens/variables"
+      ],
+      "parentId": "documentation",
+      "id": "documentation/tokens",
+      "itemId": "documentation/tokens",
+      "isStructural": true,
+      "path": "/documentation/tokens/",
+      "type": "documentation",
+      "title": "Tokens"
+    },
+    "patterns/atoms": {
+      "nextSiblingId": "patterns/molecules",
+      "childIds": [
+        "patterns/atoms/label",
+        "patterns/atoms/input"
+      ],
+      "parentId": "patterns",
+      "id": "patterns/atoms",
+      "itemId": "patterns/atoms",
+      "isStructural": true,
+      "path": "/patterns/atoms/",
+      "type": "documentation",
+      "title": "Atoms"
+    },
+    "patterns/atoms/label": {
+      "nextSiblingId": "patterns/atoms/input",
+      "parentId": "patterns/atoms",
+      "id": "patterns/atoms/label",
+      "itemId": "label",
+      "path": "/patterns/atoms/label/",
+      "type": "component",
+      "title": "Label",
+      "keywords": [
+        "Atom",
+        "Form",
+        "EJS",
+        "Handlebars",
+        "HTML",
+        "Marko",
+        "Pug",
+        "React",
+        "Vue",
+        "Nunjucks"
+      ]
+    },
+    "patterns/atoms/input": {
+      "prevSiblingId": "patterns/atoms/label",
+      "parentId": "patterns/atoms",
+      "id": "patterns/atoms/input",
+      "itemId": "input",
+      "path": "/patterns/atoms/input/",
+      "type": "component",
+      "title": "Inputs",
+      "keywords": [
+        "Atom",
+        "Form",
+        null
+      ]
+    },
+    "patterns/molecules": {
+      "prevSiblingId": "patterns/atoms",
+      "nextSiblingId": "patterns/organisms",
+      "childIds": [
+        "patterns/molecules/formfield"
+      ],
+      "parentId": "patterns",
+      "id": "patterns/molecules",
+      "itemId": "patterns/molecules",
+      "isStructural": true,
+      "path": "/patterns/molecules/",
+      "type": "documentation",
+      "title": "Molecules"
+    },
+    "patterns/molecules/formfield": {
+      "parentId": "patterns/molecules",
+      "id": "patterns/molecules/formfield",
+      "itemId": "formfield",
+      "path": "/patterns/molecules/formfield/",
+      "type": "component",
+      "title": "Formfields",
+      "keywords": [
+        null
+      ]
+    },
+    "patterns/organisms": {
+      "prevSiblingId": "patterns/molecules",
+      "nextSiblingId": "patterns/templates",
+      "childIds": [
+        "patterns/organisms/form"
+      ],
+      "parentId": "patterns",
+      "id": "patterns/organisms",
+      "itemId": "patterns/organisms",
+      "isStructural": true,
+      "path": "/patterns/organisms/",
+      "type": "documentation",
+      "title": "Organisms"
+    },
+    "patterns/organisms/form": {
+      "parentId": "patterns/organisms",
+      "id": "patterns/organisms/form",
+      "itemId": "form",
+      "path": "/patterns/organisms/form/",
+      "type": "component",
+      "title": "Form",
+      "keywords": [
+        null
+      ]
+    },
+    "patterns/pages": {
+      "prevSiblingId": "patterns/templates",
+      "parentId": "patterns",
+      "id": "patterns/pages",
+      "itemId": "patterns/pages",
+      "isStructural": true,
+      "path": "/patterns/pages/",
+      "type": "documentation",
+      "title": "Pages"
+    },
+    "patterns/templates": {
+      "prevSiblingId": "patterns/organisms",
+      "nextSiblingId": "patterns/pages",
+      "parentId": "patterns",
+      "id": "patterns/templates",
+      "itemId": "patterns/templates",
+      "isStructural": true,
+      "path": "/patterns/templates/",
+      "type": "documentation",
+      "title": "Templates"
+    },
+    "testcases/custom-data": {
+      "nextSiblingId": "testcases/custom-fragment",
+      "parentId": "testcases",
+      "id": "testcases/custom-data",
+      "itemId": "testcases/custom-data",
+      "isStructural": true,
+      "path": "/testcases/custom-data/",
+      "type": "documentation",
+      "title": "Custom Data"
+    },
+    "testcases/custom-fragment": {
+      "prevSiblingId": "testcases/custom-data",
+      "nextSiblingId": "testcases/custom-fragment-and-template",
+      "parentId": "testcases",
+      "id": "testcases/custom-fragment",
+      "itemId": "testcases/custom-fragment",
+      "path": "/testcases/custom-fragment/",
+      "type": "template",
+      "title": "Custom Fragment",
+      "keywords": [
+        "Template"
+      ]
+    },
+    "testcases/custom-fragment-and-template": {
+      "prevSiblingId": "testcases/custom-fragment",
+      "nextSiblingId": "testcases/custom-path",
+      "parentId": "testcases",
+      "id": "testcases/custom-fragment-and-template",
+      "itemId": "testcases/custom-fragment-and-template",
+      "path": "/testcases/custom-fragment-and-template/",
+      "type": "template",
+      "title": "Custom Fragment And Template",
+      "keywords": [
+        "Template"
+      ]
+    },
+    "testcases/custom-path": {
+      "prevSiblingId": "testcases/custom-fragment-and-template",
+      "nextSiblingId": "testcases/custom-template",
+      "parentId": "testcases",
+      "id": "testcases/custom-path",
+      "itemId": "testcases/custom-path",
+      "isStructural": true,
+      "path": "/testcases/custom-path/",
+      "type": "documentation",
+      "title": "Custom Path"
+    },
+    "testcases/custom-template": {
+      "prevSiblingId": "testcases/custom-path",
+      "nextSiblingId": "testcases/examples",
+      "parentId": "testcases",
+      "id": "testcases/custom-template",
+      "itemId": "testcases/custom-template",
+      "path": "/testcases/custom-template/",
+      "type": "template",
+      "title": "Custom Template",
+      "keywords": [
+        "Template"
+      ]
+    },
+    "testcases/examples": {
+      "prevSiblingId": "testcases/custom-template",
+      "childIds": [
+        "testcases/examples/ReactContext",
+        "testcases/examples/ReactHooks"
+      ],
+      "parentId": "testcases",
+      "id": "testcases/examples",
+      "itemId": "testcases/examples",
+      "isStructural": true,
+      "path": "/testcases/examples/",
+      "type": "documentation",
+      "title": "Examples",
+      "collapsed": true
+    },
+    "testcases/examples/ReactContext": {
+      "nextSiblingId": "testcases/examples/ReactHooks",
+      "parentId": "testcases/examples",
+      "id": "testcases/examples/ReactContext",
+      "itemId": "ReactContext",
+      "path": "/testcases/examples/ReactContext/",
+      "type": "component",
+      "title": "React Context",
+      "keywords": [
+        null
+      ]
+    },
+    "testcases/examples/ReactHooks": {
+      "prevSiblingId": "testcases/examples/ReactContext",
+      "parentId": "testcases/examples",
+      "id": "testcases/examples/ReactHooks",
+      "itemId": "ReactHooks",
+      "path": "/testcases/examples/ReactHooks/",
+      "type": "component",
+      "title": "React Hooks",
+      "keywords": [
+        null
+      ]
+    },
+    "documentation/tokens/colors": {
+      "nextSiblingId": "documentation/tokens/icons",
+      "parentId": "documentation/tokens",
+      "id": "documentation/tokens/colors",
+      "itemId": "documentation/tokens/colors",
+      "path": "/documentation/tokens/colors/",
+      "type": "tokens",
+      "title": "Colors",
+      "keywords": [
+        "Token"
+      ]
+    },
+    "documentation/tokens/icons": {
+      "prevSiblingId": "documentation/tokens/colors",
+      "nextSiblingId": "documentation/tokens/spaces",
+      "parentId": "documentation/tokens",
+      "id": "documentation/tokens/icons",
+      "itemId": "documentation/tokens/icons",
+      "path": "/documentation/tokens/icons/",
+      "type": "tokens",
+      "title": "Icons",
+      "keywords": [
+        "Token"
+      ]
+    },
+    "documentation/tokens/spaces": {
+      "prevSiblingId": "documentation/tokens/icons",
+      "nextSiblingId": "documentation/tokens/typography",
+      "parentId": "documentation/tokens",
+      "id": "documentation/tokens/spaces",
+      "itemId": "documentation/tokens/spaces",
+      "path": "/documentation/tokens/spaces/",
+      "type": "tokens",
+      "title": "Spaces",
+      "keywords": [
+        "Token"
+      ]
+    },
+    "documentation/tokens/typography": {
+      "prevSiblingId": "documentation/tokens/spaces",
+      "nextSiblingId": "documentation/tokens/variables",
+      "parentId": "documentation/tokens",
+      "id": "documentation/tokens/typography",
+      "itemId": "documentation/tokens/typography",
+      "path": "/documentation/tokens/typography/",
+      "type": "tokens",
+      "title": "Typography",
+      "keywords": [
+        "Token"
+      ]
+    },
+    "documentation/tokens/variables": {
+      "prevSiblingId": "documentation/tokens/typography",
+      "parentId": "documentation/tokens",
+      "id": "documentation/tokens/variables",
+      "itemId": "documentation/tokens/variables",
+      "path": "/documentation/tokens/variables/",
+      "type": "tokens",
+      "title": "Variables"
+    },
+    "patterns/pages/ajax/layer": {
+      "parentId": "patterns/pages",
+      "id": "patterns/pages/ajax/layer",
+      "itemId": "patterns/pages/ajax/layer",
+      "path": "/patterns/pages/ajax/layer/",
+      "type": "documentation",
+      "title": "AJAX-Layer"
+    }
+  }
+}
