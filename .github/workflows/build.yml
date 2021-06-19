@@ -1,18 +1,20 @@
 name: Build
 
 on:
+  # Run the build for pushes and pull requests targeting master
   push:
+    branches:
+      - master
+  pull_request:
     branches:
       - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14]
-
     steps:
     - name: Checkout
       uses: actions/checkout@v1
@@ -34,14 +36,14 @@ jobs:
         mv docs/dist/index{-modified,}.html
         sed '7i\'$'\n''<script src="/gh-pages-spa.js"></script>'$'\n' docs/dist/test-project/index.html > docs/dist/test-project/index-modified.html
         mv docs/dist/test-project/index{-modified,}.html
-        # https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
-        touch docs/dist/.nojekyll
-        # https://help.github.com/en/articles/managing-a-custom-domain-for-your-github-pages-site
-        echo uiengine.uix.space > docs/dist/CNAME
       env:
         CI: true
-    - name: GitHub Pages Deploy
-      uses: maxheld83/ghpages@v0.2.1
-      env:
-        BUILD_DIR: docs/dist/
-        GH_PAT: ${{ secrets.GH_PAT }}
+    - name: Deploy
+      if: success() && github.ref == 'refs/heads/master'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        publish_dir: ./docs/dist
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        cname: uiengine.uix.space
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
