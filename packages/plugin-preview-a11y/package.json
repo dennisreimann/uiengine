@@ -23,11 +23,11 @@
     "uiengine"
   ],
   "dependencies": {
-    "axe-core": "4.2.2"
+    "axe-core": "4.2.3"
   },
   "devDependencies": {
     "@uiengine/core": "3.2.0",
-    "eslint": "7.28.0",
+    "eslint": "7.29.0",
     "eslint-config-standard": "16.0.3",
     "eslint-plugin-import": "2.23.4",
     "eslint-plugin-node": "11.1.0",

@@ -29,11 +29,11 @@
   },
   "dependencies": {
     "chalk": "4.1.1",
-    "fast-glob": "3.2.5",
+    "fast-glob": "3.2.6",
     "fs-extra": "9.1.0",
-    "globby": "11.0.3",
+    "globby": "11.0.4",
     "markdown-it": "12.0.6",
-    "markdown-it-anchor": "7.1.0",
+    "markdown-it-anchor": "8.0.5",
     "markdown-it-container": "3.0.0",
     "markdown-it-implicit-figures": "0.10.0",
     "markdown-it-include": "2.0.0",
@@ -42,7 +42,7 @@
     "unescape": "1.0.1"
   },
   "devDependencies": {
-    "eslint": "7.28.0",
+    "eslint": "7.29.0",
     "eslint-config-standard": "16.0.3",
     "eslint-plugin-import": "2.23.4",
     "eslint-plugin-node": "11.1.0",
