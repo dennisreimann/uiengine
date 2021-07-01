@@ -18,7 +18,9 @@ module.exports = {
     reset: 'reset',
     toggle: 'toggle',
     all_themes: 'All themes',
-    loading: 'Loading…'
+    loading: 'Loading…',
+    copy_code: 'Copy to clipboard',
+    copy_code_tooltip: 'Copied!'
   },
   code: {
     raw: 'Code',
