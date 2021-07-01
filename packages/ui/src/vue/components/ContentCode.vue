@@ -23,6 +23,22 @@
       <div
         :hidden="!isExpanded('raw')"
         data-test-variant-code-part="raw"
+      >
+        <button
+          class="code__copy"
+          type="button"
+          :aria-label="'options.copy_code' | localize"
+          :data-tooltip-text="'options.copy_code_tooltip' | localize"
+          data-clipboard-copy-code
+          @click.prevent="copyRawToClipboard()"
+        >
+          <AppIcon
+            symbol="clipboard-copy"
+            class="code__copy-icon"
+          />
+        </button>
+      </div>
+      <div
         v-html="renderedRaw"
       />
     </div>
@@ -50,8 +66,24 @@
       <div
         :hidden="!isExpanded('context')"
         data-test-variant-code-part="context"
-        v-html="renderedContext"
-      />
+      >
+        <button
+          class="code__copy"
+          type="button"
+          :aria-label="'options.copy_code' | localize"
+          :data-tooltip-text="'options.copy_code_tooltip' | localize"
+          data-clipboard-copy-code
+          @click.prevent="copyContextToClipboard()"
+        >
+          <AppIcon
+            symbol="clipboard-copy"
+            class="code__copy-icon"
+          />
+        </button>
+        <div
+          v-html="renderedContext"
+        />
+      </div>
     </div>
 
     <div
@@ -78,6 +110,19 @@
         :hidden="!isExpanded('HTML')"
         :data-test-variant-code-part="'HTML'"
       >
+        <button
+          class="code__copy"
+          type="button"
+          :aria-label="'options.copy_code' | localize"
+          :data-tooltip-text="'options.copy_code_tooltip' | localize"
+          data-clipboard-copy-code
+          @click.prevent="copyHtmlToClipboard(renderedHTML)"
+        >
+          <AppIcon
+            symbol="clipboard-copy"
+            class="code__copy-icon"
+          />
+        </button>
         <div
           v-if="renderedHTML.content"
           v-html="renderPart(renderedHTML)"
@@ -94,6 +139,7 @@
 import { decorateCode, decorateContext, omit, isolateCode } from '../../shared/code'
 import Iframe from '../mixins/iframe'
 import Themes from '../mixins/themes'
+import Clipboard from 'clipboard'
 
 export default {
   mixins: [
@@ -185,6 +231,41 @@ export default {
 
     toggleExpanded (key) {
       this.$set(this.expanded, key, !this.expanded[key])
+    },
+
+    copyRawToClipboard () {
+      const raw = omit('code', this.raw)
+      this.copyCodeToClipboard(raw)
+    },
+
+    copyContextToClipboard () {
+      const context = JSON.stringify(this.context, null, '  ')
+      this.copyCodeToClipboard(context)
+    },
+
+    copyHtmlToClipboard ({ content }) {
+      const code = isolateCode('preview', content)
+      const cleanCode = omit('code', code).trim()
+
+      this.copyCodeToClipboard(cleanCode)
+    },
+
+    copyCodeToClipboard (text) {
+      const showTooltip = (e) => e.trigger.classList.add('copied')
+      const clearTooltip = (e) => e.trigger.classList.remove('copied')
+
+      return new Clipboard('[data-clipboard-copy-code]', {
+        text: () => text
+      })
+        .on('success', event => {
+          showTooltip(event)
+          setTimeout(() => {
+            clearTooltip(event)
+          }, 2000)
+        })
+        .on('error', event => {
+          console.error('[UIengine]', 'Clipboard error:', event)
+        })
     }
   }
 }
@@ -228,7 +309,13 @@ export default {
       outline none
 
     &[aria-expanded="true"] + div
+      position relative
       border-top 1px solid var(--uie-color-preview-border)
+
+      .code__copy
+        position absolute
+        top var(--uie-space-s)
+        right var(--uie-space-s)
 
   &__title
     font-family var(--uie-font-family-regular)
@@ -242,4 +329,33 @@ export default {
     transition-duration var(--uie-transition-duration-fast)
     icon-size(24px)
     fill var(--uie-color-code-header-text)
+
+  &__copy
+    display inline-flex
+    padding var(--uie-space-s)
+    border 1px solid var(--uie-color-preview-border)
+    border-radius var(--uie-base-border-radius)
+    background-color var(--uie-color-code-header-bg)
+    cursor pointer
+    &:hover
+      background-color var(--uie-color-neutral-10)
+
+    &.copied
+      &::before
+        position absolute
+        top 50%
+        right calc(100% + var(--uie-space-s))
+        transform translateY(-50%)
+        content attr(data-tooltip-text)
+        padding var(--uie-space-xs) var(--uie-space-s)
+        border 1px solid var(--uie-color-preview-border)
+        border-radius var(--uie-base-border-radius)
+        background-color var(--uie-color-neutral-100)
+        color var(--uie-color-neutral-0)
+        font-size var(--uie-font-size-xs)
+
+    &-icon
+      icon-size(16px)
+      fill var(--uie-color-code-header-text)
+      pointer-events none
 </style>
