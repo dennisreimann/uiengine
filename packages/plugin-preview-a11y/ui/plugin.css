@@ -1,3 +1,55 @@
 .a11y-info {
   margin-left: var(--uie-space-xs);
 }
+
+.a11y-issue {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: var(--uie-space-m);
+}
+
+.a11y-issue__description {
+  flex-grow: 1;
+}
+
+.a11y-issue__link {
+  display: inline-block;
+  flex-shrink: 0;
+  color: var(--uie-color-main-link);
+  margin-top: var(--uie-space-xxs);
+  margin-left: var(--uie-space-m);
+  font-size: var(--uie-font-size-xs);
+}
+
+.a11y-issue__tag {
+  display: inline-block;
+  min-width: 4.75rem;
+  margin-top: var(--uie-space-xxs);
+  margin-right: var(--uie-space-s);
+  padding: var(--uie-space-xs) var(--uie-space-s);
+  border-radius: 25px;
+  font-size: var(--uie-font-size-xs);
+  font-weight: var(--uie-font-weight-bold);
+  line-height: 1;
+  text-align: center;
+}
+
+.a11y-issue__tag--minor {
+  background-color: #eeeeee;
+}
+
+.a11y-issue__tag--moderate {
+  background-color: #ffeb99;
+  color: #9d7920;
+}
+
+.a11y-issue__tag--serious {
+  background-color: #f9dfd4;
+  color: #ee572b;
+}
+
+.a11y-issue__tag--critical {
+  background-color: #ed5529;
+  color: #FFF;
+}
