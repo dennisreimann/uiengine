@@ -1,4 +1,19 @@
-function setupAxe (iframe, axeOpts, target, content, retries = 0) {
+function renderImpact(impact) {
+  switch (impact) {
+    case 'minor':
+      return `<span class="a11y-issue__tag a11y-issue__tag--minor">${impact}</span>`
+    case 'moderate':
+      return `<span class="a11y-issue__tag a11y-issue__tag--moderate">${impact}</span>`
+    case 'serious':
+      return `<span class="a11y-issue__tag a11y-issue__tag--serious">${impact}</span>`
+    case 'critical':
+      return `<span class="a11y-issue__tag a11y-issue__tag--critical">${impact}</span>`
+    default:
+      break;
+  }
+}
+
+function setupAxe(iframe, axeOpts, target, content, retries = 0) {
   if (iframe.contentWindow && iframe.contentWindow.axe) {
     const { contentWindow: { axe } } = iframe
 
@@ -19,7 +34,9 @@ function setupAxe (iframe, axeOpts, target, content, retries = 0) {
 
       content.innerHTML = `<h3>A11y: ${results.violations.length} violations</h3>
 
-      ${results.violations.map(item => `<h4>${item.id} (${item.impact})</h4><p>${item.description}</p>`).join('')}`
+      ${results.violations.map(item => {
+        return `<div class="a11y-issue">${renderImpact(item.impact)} <p class="a11y-issue__description">${item.description}</p><a href="${item.helpUrl}" class="a11y-issue__link" target="_blank" rel="noopener">More info...</a></div>`
+      }).join('')}`
     })
   } else if (retries <= 10) {
     setTimeout(() => { setupAxe(iframe, axeOpts, target, content, retries + 1) }, 100)
