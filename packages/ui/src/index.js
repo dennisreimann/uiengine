@@ -109,7 +109,6 @@ async function render (options, template = 'index', data = null) {
     },
 
     colorDefinition (color) {
-      console.log(color.definition, color[color.definition], typeof (color[color.definition]))
       return color[color.definition]
     },
 

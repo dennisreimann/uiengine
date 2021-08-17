@@ -3454,7 +3454,7 @@ __metadata:
     babel-plugin-syntax-jsx: 6.18.0
     babel-preset-vue: 2.0.2
     chalk: 4.1.2
-    css-loader: 5.2.7
+    css-loader: 6.2.0
     eslint: 7.32.0
     eslint-config-standard: 16.0.3
     eslint-import-resolver-node: 0.3.6
@@ -3635,7 +3635,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/test-acceptance@workspace:test/acceptance"
   dependencies:
-    cypress: 7.7.0
+    cypress: 8.3.0
     eslint: 7.32.0
     eslint-config-standard: 16.0.3
     eslint-import-resolver-node: 0.3.6
@@ -3677,7 +3677,7 @@ __metadata:
     babel-plugin-syntax-jsx: 6.18.0
     babel-preset-vue: 2.0.2
     cross-env: 7.0.3
-    css-loader: 5.2.7
+    css-loader: 6.2.0
     ejs: 3.1.6
     eslint: 7.32.0
     eslint-config-standard: 16.0.3
@@ -3730,7 +3730,7 @@ __metadata:
     compile-ejs-loader: 0.0.3
     copy-webpack-plugin: 9.0.1
     cross-env: 7.0.3
-    css-loader: 5.2.7
+    css-loader: 6.2.0
     css-minimizer-webpack-plugin: 3.0.2
     css-mqpacker: 7.0.0
     csswring: 7.0.0
@@ -6953,23 +6953,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:5.2.7":
-  version: 5.2.7
-  resolution: "css-loader@npm:5.2.7"
+"css-loader@npm:6.2.0":
+  version: 6.2.0
+  resolution: "css-loader@npm:6.2.0"
   dependencies:
     icss-utils: ^5.1.0
-    loader-utils: ^2.0.0
     postcss: ^8.2.15
     postcss-modules-extract-imports: ^3.0.0
     postcss-modules-local-by-default: ^4.0.0
     postcss-modules-scope: ^3.0.0
     postcss-modules-values: ^4.0.0
     postcss-value-parser: ^4.1.0
-    schema-utils: ^3.0.0
     semver: ^7.3.5
   peerDependencies:
-    webpack: ^4.27.0 || ^5.0.0
-  checksum: e121c9310e3597003126844c3bb9e0635273e14065730ae62102fea5f594da948479c56503299ceee6bc942da1b125e24fec27b3b0d9ea64a83f27a88f10bba4
+    webpack: ^5.0.0
+  checksum: eacc4ef15790f78c585ccaf77c178cb3ae54f0d830138031927826e503511d884c24e73dbb9309310a29b8e222b98d6adad7b774f1da81fceb2c3aa6326d414c
   languageName: node
   linkType: hard
 
@@ -7179,9 +7177,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:7.7.0":
-  version: 7.7.0
-  resolution: "cypress@npm:7.7.0"
+"cypress@npm:8.3.0":
+  version: 8.3.0
+  resolution: "cypress@npm:8.3.0"
   dependencies:
     "@cypress/request": ^2.88.5
     "@cypress/xvfb": ^1.2.4
@@ -7226,7 +7224,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: dff882452e408927a3cc71604f3fb445f2d8e02855b71ff7f4776de664d799fcffee1d53ec9fb2319ce71d3320ed3e387b71d8a4ad86046fad8187f18d70a966
+  checksum: 70c66d1ed5dcce7443c4cd5297cca5c8f39164e1d81612408471e1bbe32de0ce771165604649281f7b11c7ddcc6559721f83eceeda35a10c32e229d4bcd902b8
   languageName: node
   linkType: hard
 

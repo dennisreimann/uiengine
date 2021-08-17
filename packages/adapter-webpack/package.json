@@ -46,7 +46,7 @@
     "babel-plugin-syntax-jsx": "6.18.0",
     "babel-preset-vue": "2.0.2",
     "chalk": "4.1.2",
-    "css-loader": "5.2.7",
+    "css-loader": "6.2.0",
     "eslint": "7.32.0",
     "eslint-config-standard": "16.0.3",
     "eslint-import-resolver-node": "0.3.6",
