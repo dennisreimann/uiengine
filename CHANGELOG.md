@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.3.0] - Ongoing development
+
+### Added
+
+- Copy code to clipboard functionality
+- Handle RGB color token values
+
+### Changed
+
+- Update styles of A11y plugin UI
+
 ## [3.2.0] - 14.06.2021
 
 ### Added
