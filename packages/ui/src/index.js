@@ -90,12 +90,16 @@ async function render (options, template = 'index', data = null) {
     color (value) {
       let color, definition
 
-      if (value.startsWith('#')) {
-        definition = 'hex'
-      } else if (value.startsWith('hsl')) {
-        definition = 'hsl'
-      } else {
-        definition = 'rgb'
+      if (typeof value === 'string') {
+        if (value.startsWith('#')) {
+          definition = 'hex'
+        } else if (value.startsWith('hsl')) {
+          definition = 'hsl'
+        } else {
+          definition = 'rgb'
+        }
+      } else if (typeof value === 'object' && value.model) {
+        definition = value.model
       }
 
       try { color = Color(value) } catch { color = Color(`rgb(${value})`) }
