@@ -88,13 +88,29 @@ async function render (options, template = 'index', data = null) {
     titleize,
 
     color (value) {
-      const color = Color(value)
+      let color, definition
+
+      if (value.startsWith('#')) {
+        definition = 'hex'
+      } else if (value.startsWith('hsl')) {
+        definition = 'hsl'
+      } else {
+        definition = 'rgb'
+      }
+
+      try { color = Color(value) } catch { color = Color(`rgb(${value})`) }
 
       return {
+        definition,
         hex: color.hex().toString(),
         rgb: color.rgb().toString(),
         hsl: color.hsl().toString().replace(/(\(\d+\.(\d{1,3}))\d+/, '$1') // shorten the first values decimal places
       }
+    },
+
+    colorDefinition (color) {
+      console.log(color.definition, color[color.definition], typeof (color[color.definition]))
+      return color[color.definition]
     },
 
     localize (locale, key, interpolations) {

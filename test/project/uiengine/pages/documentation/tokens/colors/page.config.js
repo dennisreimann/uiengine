@@ -84,10 +84,22 @@ module.exports = {
         },
         {
           type: 'color',
+          name: 'Neutral White RGB',
+          value: '255, 255, 255',
+          variable: '$color-neutral-white-rgb'
+        },
+        {
+          type: 'color',
           name: 'Neutral Black',
           value: '#000',
           reference: 'Neutral 0',
           variable: '$color-neutral-black'
+        },
+        {
+          type: 'color',
+          name: 'Neutral Black RGB',
+          value: '0, 0, 0',
+          variable: '$color-neutral-black-rgb'
         }
       ]
     },
