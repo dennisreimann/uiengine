@@ -30,13 +30,13 @@
     "@uiengine/util": "3.2.0"
   },
   "devDependencies": {
-    "eslint": "7.29.0",
+    "eslint": "7.32.0",
     "eslint-config-standard": "16.0.3",
-    "eslint-plugin-import": "2.23.4",
+    "eslint-plugin-import": "2.24.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "5.1.0",
     "eslint-plugin-standard": "5.0.0",
-    "marko": "4.23.16",
+    "marko": "4.23.17",
     "mocha": "8.4.0",
     "mocha-sinon": "2.1.2",
     "sinon": "10.0.0"
