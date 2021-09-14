@@ -28,7 +28,6 @@
   ],
   "dependencies": {
     "@uiengine/util": "3.2.1",
-    "fs-extra": "9.1.0",
     "pug-lexer": "5.0.1",
     "pug-parser": "6.0.0",
     "pug-walk": "2.0.0"

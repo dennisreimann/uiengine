@@ -53,6 +53,8 @@ async function copy (src, dst) {
 
 module.exports = {
   remove: fs.remove,
+  removeSync: fs.removeSync,
+  ensureDirSync: fs.ensureDirSync,
   read,
   write,
   copy,

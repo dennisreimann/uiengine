@@ -1,6 +1,6 @@
 const assert = require('assert')
-const { removeSync } = require('fs-extra')
 const { resolve } = require('path')
+const { FileUtil: { removeSync } } = require('@uiengine/util')
 const Connector = require('../src/connector')
 
 const { testProjectPath, testProjectTargetPath } = require('../../../test/support/paths')

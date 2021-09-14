@@ -1,6 +1,6 @@
 const assert = require('assert')
 const { join } = require('path')
-const { ensureDirSync, removeSync } = require('fs-extra')
+const { FileUtil: { ensureDirSync, removeSync } } = require('@uiengine/util')
 const { runCommand } = require('./support/util')
 const { assertContentMatches, assertExists, assertMatches } = require('../../../test/support/asserts')
 const { testProjectTargetPath } = require('../../../test/support/paths')

@@ -1,7 +1,7 @@
 require('mocha-sinon')()
 
-const { removeSync } = require('fs-extra')
 const { resolve } = require('path')
+const { FileUtil: { removeSync } } = require('@uiengine/util')
 const Interface = require('../src/interface')
 
 const { testProjectTargetPath } = require('../../../test/support/paths')

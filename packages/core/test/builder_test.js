@@ -1,4 +1,4 @@
-const { removeSync } = require('fs-extra')
+const { FileUtil: { removeSync } } = require('@uiengine/util')
 const { join, resolve } = require('path')
 const Factory = require('./support/factory')
 const assert = require('assert')

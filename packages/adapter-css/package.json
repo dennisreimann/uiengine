@@ -29,7 +29,6 @@
   "dependencies": {
     "@uiengine/util": "3.2.1",
     "deepmerge": "4.2.2",
-    "fs-extra": "9.1.0",
     "postcss": "8.3.6"
   },
   "devDependencies": {

@@ -3436,7 +3436,6 @@ __metadata:
     eslint-plugin-node: 11.1.0
     eslint-plugin-promise: 5.1.0
     eslint-plugin-standard: 5.0.0
-    fs-extra: 9.1.0
     postcss: 8.3.6
   languageName: unknown
   linkType: soft
@@ -3478,13 +3477,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-html@workspace:packages/adapter-html"
   dependencies:
+    "@uiengine/util": 3.2.1
     eslint: 7.32.0
     eslint-config-standard: 16.0.3
     eslint-plugin-import: 2.24.2
     eslint-plugin-node: 11.1.0
     eslint-plugin-promise: 5.1.0
     eslint-plugin-standard: 5.0.0
-    fs-extra: 9.1.0
   languageName: unknown
   linkType: soft
 
@@ -3535,7 +3534,6 @@ __metadata:
     eslint-plugin-node: 11.1.0
     eslint-plugin-promise: 5.1.0
     eslint-plugin-standard: 5.0.0
-    fs-extra: 9.1.0
     pug: 3.0.2
     pug-lexer: 5.0.1
     pug-parser: 6.0.0
@@ -3568,7 +3566,6 @@ __metadata:
     eslint-plugin-promise: 5.1.0
     eslint-plugin-standard: 5.0.0
     eslint-plugin-vue: 7.17.0
-    fs-extra: 9.1.0
     mocha: 8.4.0
     mocha-sinon: 2.1.2
     object-hash: 2.2.0
@@ -3608,7 +3605,6 @@ __metadata:
     eslint-plugin-node: 11.1.0
     eslint-plugin-promise: 5.1.0
     eslint-plugin-standard: 5.0.0
-    fs-extra: 9.1.0
     ramda: 0.27.1
     yargs: 17.1.1
   peerDependencies:
@@ -3852,7 +3848,6 @@ __metadata:
     eslint-plugin-standard: 5.0.0
     eslint-plugin-vue: 7.17.0
     file-loader: 6.2.0
-    fs-extra: 9.1.0
     fuse.js: 6.4.6
     highlight.js: 10.7.3
     html-minifier: 4.0.0

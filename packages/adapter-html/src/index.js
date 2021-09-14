@@ -1,6 +1,6 @@
-const { readFile } = require('fs-extra')
 const { dirname, isAbsolute, join, resolve } = require('path')
 const assert = require('assert')
+const { FileUtil: { read } }  = require('@uiengine/util')
 
 const INCLUDE_REGEXP = /<!--#\s?include file="(.*?)".*?-->/
 const INCLUDES_REGEXP = new RegExp(INCLUDE_REGEXP, 'g')
@@ -38,7 +38,7 @@ const renderString = (str, data) =>
   str.replace(/\$\{(.+?)\}/g, (match, varPath) => resolveVariable(data, varPath))
 
 const renderFile = async (options, filePath, data) => {
-  const template = await readFile(filePath, 'utf-8')
+  const template = await read(filePath)
   let html = renderString(template, data)
   const matches = html.match(INCLUDES_REGEXP)
   if (!matches) return html

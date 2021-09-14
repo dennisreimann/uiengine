@@ -1,9 +1,8 @@
 const { basename, dirname, join } = require('path')
-const { readFile } = require('fs-extra')
 const merge = require('deepmerge')
 const postcss = require('postcss')
 const {
-  FileUtil: { glob },
+  FileUtil: { glob , read},
   StringUtil: { crossPlatformPath }
 } = require('@uiengine/util')
 
@@ -37,7 +36,7 @@ async function propsByThemeFromDir (dir) {
 }
 
 async function extractCustomProperties (filePath) {
-  const contents = await readFile(filePath, 'utf-8')
+  const contents = await read(filePath)
   const root = postcss.parse(contents, { from: filePath })
   const customProps = {}
 

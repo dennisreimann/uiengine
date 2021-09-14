@@ -1,8 +1,8 @@
 require('mocha-sinon')()
 
-const { removeSync } = require('fs-extra')
 const { join, resolve } = require('path')
 const assert = require('assert')
+const { FileUtil: { removeSync } } = require('@uiengine/util')
 const { assertExists, assertMatches } = require('../../../test/support/asserts')
 const UI = require('../src/index')
 

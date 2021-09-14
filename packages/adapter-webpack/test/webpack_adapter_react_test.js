@@ -2,8 +2,7 @@ require('mocha-sinon')()
 
 const assert = require('assert')
 const { join } = require('path')
-const { removeSync } = require('fs-extra')
-const { StringUtil: { crossPlatformPath } } = require('@uiengine/util')
+const { StringUtil: { crossPlatformPath }, FileUtil: { removeSync } } = require('@uiengine/util')
 const { assertMatches, assertIncludes } = require('../../../test/support/asserts')
 const { testProjectTargetPath } = require('../../../test/support/paths')
 

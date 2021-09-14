@@ -55,7 +55,6 @@
     "eslint-plugin-promise": "5.1.0",
     "eslint-plugin-standard": "5.0.0",
     "eslint-plugin-vue": "7.17.0",
-    "fs-extra": "9.1.0",
     "mocha": "8.4.0",
     "mocha-sinon": "2.1.2",
     "react": "17.0.2",

@@ -1,10 +1,9 @@
-const { readFile } = require('fs-extra')
 const { dirname, isAbsolute, join, resolve } = require('path')
 const pugParser = require('pug-parser')
 const pugLexer = require('pug-lexer')
 const pugWalk = require('pug-walk')
 const {
-  FileUtil: { glob },
+  FileUtil: { glob, read },
   StringUtil: { crossPlatformPath }
 } = require('@uiengine/util')
 
@@ -25,7 +24,7 @@ async function getDependencyFiles (options, filePath, cache) {
   const filePaths = []
 
   try {
-    const contents = await readFile(filePath, 'utf-8')
+    const contents = await read(filePath)
     const dir = dirname(filePath)
     const lex = pugLexer(contents, { filename: filePath })
     const parsed = pugParser(lex)
