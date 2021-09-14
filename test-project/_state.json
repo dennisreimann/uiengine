@@ -2,7 +2,7 @@
   "config": {
     "name": "UIengine Test Project",
     "version": "1.0.0",
-    "update": 1631611077482,
+    "update": 1631611323412,
     "logo": "/test-project/assets/images/uiengine-logo.png",
     "copyright": "<a href=\"https://github.com/dennisreimann/uiengine\">Generated with UIengine</a>",
     "debug": 1,
@@ -548,6 +548,17 @@
       "type": "documentation",
       "content": "<h1 id=\"templates\" tabindex=\"-1\">Templates</h1>"
     },
+    "testcases/custom-data": {
+      "childIds": [],
+      "description": "This is some custom page data",
+      "id": "testcases/custom-data",
+      "title": "Custom Data",
+      "isTitleFromHeading": false,
+      "path": "testcases/custom-data",
+      "sourcePath": "uiengine/pages/testcases/custom-data",
+      "sourceFile": "uiengine/pages/testcases/custom-data/page.config.js",
+      "type": "documentation"
+    },
     "testcases/custom-fragment": {
       "childIds": [],
       "fragment": "fragment.pug",
@@ -566,17 +577,6 @@
       "readmeFile": "uiengine/pages/testcases/custom-fragment/README.md",
       "type": "template",
       "content": "<p>This is a page with a custom fragment.</p>"
-    },
-    "testcases/custom-data": {
-      "childIds": [],
-      "description": "This is some custom page data",
-      "id": "testcases/custom-data",
-      "title": "Custom Data",
-      "isTitleFromHeading": false,
-      "path": "testcases/custom-data",
-      "sourcePath": "uiengine/pages/testcases/custom-data",
-      "sourceFile": "uiengine/pages/testcases/custom-data/page.config.js",
-      "type": "documentation"
     },
     "testcases/custom-fragment-and-template": {
       "childIds": [],
@@ -1635,9 +1635,9 @@
         "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text-disabled.pug",
         "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text-required.pug",
         "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/form/variants/form.pug",
         "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-with-label.pug",
-        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-without-label.pug",
-        "/home/runner/work/uiengine/uiengine/test/project/src/modules/form/variants/form.pug"
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-without-label.pug"
       ],
       "dependencyFiles": [
         "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/formfield.pug"
@@ -1965,6 +1965,16 @@
       "type": "documentation",
       "title": "Templates"
     },
+    "testcases/custom-data": {
+      "nextSiblingId": "testcases/custom-fragment",
+      "parentId": "testcases",
+      "id": "testcases/custom-data",
+      "itemId": "testcases/custom-data",
+      "isStructural": true,
+      "path": "/testcases/custom-data/",
+      "type": "documentation",
+      "title": "Custom Data"
+    },
     "testcases/custom-fragment": {
       "prevSiblingId": "testcases/custom-data",
       "nextSiblingId": "testcases/custom-fragment-and-template",
@@ -1977,16 +1987,6 @@
       "keywords": [
         "Template"
       ]
-    },
-    "testcases/custom-data": {
-      "nextSiblingId": "testcases/custom-fragment",
-      "parentId": "testcases",
-      "id": "testcases/custom-data",
-      "itemId": "testcases/custom-data",
-      "isStructural": true,
-      "path": "/testcases/custom-data/",
-      "type": "documentation",
-      "title": "Custom Data"
     },
     "testcases/custom-fragment-and-template": {
       "prevSiblingId": "testcases/custom-fragment",
