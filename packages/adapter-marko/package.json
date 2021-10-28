@@ -32,11 +32,11 @@
   "devDependencies": {
     "eslint": "7.32.0",
     "eslint-config-standard": "16.0.3",
-    "eslint-plugin-import": "2.24.2",
+    "eslint-plugin-import": "2.25.2",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "5.1.0",
+    "eslint-plugin-promise": "5.1.1",
     "eslint-plugin-standard": "5.0.0",
-    "marko": "4.23.17",
+    "marko": "4.24.2",
     "mocha": "8.4.0",
     "mocha-sinon": "2.1.2",
     "sinon": "10.0.0"
