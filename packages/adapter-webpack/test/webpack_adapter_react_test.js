@@ -17,7 +17,6 @@ const moleculeIndexPath = join(modulesPath, 'Molecule', 'index.jsx')
 const organismFilePath = join(modulesPath, 'Organism', 'index.jsx')
 const templatePath = join(basePath, 'template.jsx')
 const outputPath = join(testProjectTargetPath, '_webpack')
-const reactPath = require.resolve('react')
 
 const options = {
   ...require(join(basePath, 'adapter_options')),
@@ -98,8 +97,7 @@ describe('Webpack adapter with React templates', function () {
         Adapter.registerComponentFile(options, templatePath)
       ])
 
-      assert.strictEqual(dependencyFiles.length, 2, `Count of dependencyFiles does not match: ${JSON.stringify(dependencyFiles, null, 2)}`)
-      assertIncludes(dependencyFiles, crossPlatformPath(reactPath))
+      assert.strictEqual(dependencyFiles.length, 1, `Count of dependencyFiles does not match: ${JSON.stringify(dependencyFiles, null, 2)}`)
       assertIncludes(dependencyFiles, crossPlatformPath(atomFilePath))
 
       assert.strictEqual(dependentFiles.length, 2, `Count of dependentFiles does not match: ${JSON.stringify(dependentFiles, null, 2)}`)

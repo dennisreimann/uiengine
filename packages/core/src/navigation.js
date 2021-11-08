@@ -28,7 +28,7 @@ const dataForPageId = (state, id) => {
   }, componentIds)
   const childIds = page.childIds.concat(componentPageIds)
   const relations = dataForRelations(pages, id, childIds)
-  const data = R.merge(relations, {
+  const data = R.mergeRight(relations, {
     id: id,
     itemId: id,
     isStructural: isDocumentationPage(page.type) && !hasContent(page.content),
@@ -56,7 +56,7 @@ const dataForComponentId = (state, parent, id) => {
   const pagePath = pagePathForComponentId(parent.path, component.id)
   const relations = dataForRelations(pages, pageId, [])
   const variantTags = R.uniq(R.flatten(R.pluck('tags', component.variants)))
-  const data = R.merge(relations, {
+  const data = R.mergeRight(relations, {
     id: pageId,
     itemId: id,
     path: `/${pagePath}/`,

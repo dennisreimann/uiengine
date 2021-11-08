@@ -17,7 +17,6 @@ const moleculeIndexPath = join(modulesPath, 'Molecule', 'index.vue')
 const organismFilePath = join(modulesPath, 'Organism', 'index.vue')
 const templatePath = join(basePath, 'template.vue')
 const outputPath = join(testProjectTargetPath, '_webpack')
-const componentNormalizerPath = require.resolve('vue-loader/lib/runtime/componentNormalizer.js')
 
 const options = {
   ...require(join(basePath, 'adapter_options')),
@@ -100,8 +99,7 @@ describe('Webpack adapter with Vue templates', function () {
         Adapter.registerComponentFile(options, templatePath)
       ])
 
-      assert.strictEqual(dependencyFiles.length, 2, `Count of dependencyFiles does not match: ${JSON.stringify(dependencyFiles, null, 2)}`)
-      assertIncludes(dependencyFiles, crossPlatformPath(componentNormalizerPath))
+      assert.strictEqual(dependencyFiles.length, 1, `Count of dependencyFiles does not match: ${JSON.stringify(dependencyFiles, null, 2)}`)
       assertIncludes(dependencyFiles, crossPlatformPath(atomFilePath))
 
       assert.strictEqual(dependentFiles.length, 2, `Count of dependentFiles does not match: ${JSON.stringify(dependentFiles, null, 2)}`)

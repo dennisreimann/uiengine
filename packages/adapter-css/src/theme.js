@@ -2,7 +2,7 @@ const { basename, dirname, join } = require('path')
 const merge = require('deepmerge')
 const postcss = require('postcss')
 const {
-  FileUtil: { glob , read},
+  FileUtil: { glob, read },
   StringUtil: { crossPlatformPath }
 } = require('@uiengine/util')
 

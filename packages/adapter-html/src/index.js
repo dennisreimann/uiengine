@@ -1,6 +1,6 @@
 const { dirname, isAbsolute, join, resolve } = require('path')
 const assert = require('assert')
-const { FileUtil: { read } }  = require('@uiengine/util')
+const { FileUtil: { read } } = require('@uiengine/util')
 
 const INCLUDE_REGEXP = /<!--#\s?include file="(.*?)".*?-->/
 const INCLUDES_REGEXP = new RegExp(INCLUDE_REGEXP, 'g')
