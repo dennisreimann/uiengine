@@ -2,7 +2,7 @@
   "name": "@uiengine/adapter-pug",
   "description": "UIengine template adapter for Pug.",
   "license": "MIT",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
@@ -27,7 +27,7 @@
     "pug"
   ],
   "dependencies": {
-    "@uiengine/util": "3.2.3",
+    "@uiengine/util": "3.2.4",
     "pug-lexer": "5.0.1",
     "pug-parser": "6.0.0",
     "pug-walk": "2.0.0"
