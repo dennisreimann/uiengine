@@ -23,7 +23,7 @@
     "uiengine"
   ],
   "dependencies": {
-    "axe-core": "4.3.5"
+    "axe-core": "4.4.1"
   },
   "devDependencies": {
     "@uiengine/core": "3.2.4",
