@@ -1,0 +1,37 @@
+name: Test
+
+on:
+  # Run the build for pushes and pull requests targeting master
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install
+      run: yarn
+    - name: Lint
+      run: yarn run lint
+    - name: Unit Tests
+      run: yarn run test
+    - name: Acceptance Tests
+      run: |
+        export CYPRESS_baseUrl=https://uiengine.uix.space/test-project/
+        yarn run test-acceptance --config video=false
+    - name: Coverage
+      run: |
+        yarn run coverage
+        yarn run coverage:deploy
