@@ -1,8 +1,8 @@
 {
   "config": {
     "name": "UIengine Documentation",
-    "version": "3.2.4",
-    "update": 1646515559259,
+    "version": "3.2.5",
+    "update": 1646600325539,
     "logo": "/images/logo.svg",
     "source": {
       "pages": "/home/runner/work/uiengine/uiengine/docs/site",
@@ -228,8 +228,8 @@
         "advanced/design-tokens",
         "advanced/integrations",
         "advanced/plugins",
-        "advanced/properties",
-        "advanced/ui"
+        "advanced/ui",
+        "advanced/properties"
       ],
       "title": "Advanced",
       "id": "advanced",
@@ -577,8 +577,8 @@
         "advanced/design-tokens",
         "advanced/integrations",
         "advanced/plugins",
-        "advanced/properties",
-        "advanced/ui"
+        "advanced/ui",
+        "advanced/properties"
       ],
       "parentId": "index",
       "id": "advanced",
@@ -673,7 +673,7 @@
     },
     "advanced/plugins": {
       "prevSiblingId": "advanced/integrations",
-      "nextSiblingId": "advanced/properties",
+      "nextSiblingId": "advanced/ui",
       "parentId": "advanced",
       "id": "advanced/plugins",
       "itemId": "advanced/plugins",
@@ -682,8 +682,7 @@
       "title": "Plugins"
     },
     "advanced/properties": {
-      "prevSiblingId": "advanced/plugins",
-      "nextSiblingId": "advanced/ui",
+      "prevSiblingId": "advanced/ui",
       "parentId": "advanced",
       "id": "advanced/properties",
       "itemId": "advanced/properties",
@@ -692,7 +691,8 @@
       "title": "Properties"
     },
     "advanced/ui": {
-      "prevSiblingId": "advanced/properties",
+      "prevSiblingId": "advanced/plugins",
+      "nextSiblingId": "advanced/properties",
       "parentId": "advanced",
       "id": "advanced/ui",
       "itemId": "advanced/ui",
