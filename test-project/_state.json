@@ -2,7 +2,7 @@
   "config": {
     "name": "UIengine Test Project",
     "version": "1.0.0",
-    "update": 1647982228393,
+    "update": 1647982298164,
     "logo": "/test-project/assets/images/uiengine-logo.png",
     "copyright": "<a href=\"https://github.com/dennisreimann/uiengine\">Generated with UIengine</a>",
     "debug": 1,
@@ -1628,9 +1628,9 @@
         "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text-disabled.pug",
         "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text-required.pug",
         "/home/runner/work/uiengine/uiengine/test/project/src/elements/input/variants/text.pug",
-        "/home/runner/work/uiengine/uiengine/test/project/src/modules/form/variants/form.pug",
         "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-with-label.pug",
-        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-without-label.pug"
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/variants/text-without-label.pug",
+        "/home/runner/work/uiengine/uiengine/test/project/src/modules/form/variants/form.pug"
       ],
       "dependencyFiles": [
         "/home/runner/work/uiengine/uiengine/test/project/src/modules/formfield/formfield.pug"
