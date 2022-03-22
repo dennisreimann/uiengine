@@ -34,7 +34,7 @@ jobs:
         yarn run test-project:build
         export CYPRESS_baseUrl=https://uiengine.uix.space/test-project/
         yarn run test-acceptance --config video=false
-    - name: Coverage
-      run: |
-        yarn run coverage
-        yarn run coverage:deploy
+    # - name: Coverage
+    #   run: |
+    #     yarn run coverage
+    #     yarn run coverage:deploy
