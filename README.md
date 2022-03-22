@@ -52,12 +52,13 @@ See the [documentation](https://uiengine.uix.space/) site, which is also generat
 
 [![npm](https://img.shields.io/npm/v/@uiengine/core.svg)](https://www.npmjs.com/package/@uiengine/core)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![Build Status](https://travis-ci.org/dennisreimann/uiengine.svg?branch=master)](https://travis-ci.org/dennisreimann/uiengine)
+[![Build Status](https://github.com/dennisreimann/uiengine/actions/workflows/build.yml/badge.svg)](https://github.com/dennisreimann/uiengine/actions/workflows/build.yml)
+[![Test Status](https://github.com/dennisreimann/uiengine/actions/workflows/test.yml/badge.svg)](https://github.com/dennisreimann/uiengine/actions/workflows/test.yml)
 [![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/uiengine/badge.svg)](https://snyk.io/test/github/dennisreimann/uiengine)
 [![Coverage Status](https://coveralls.io/repos/github/dennisreimann/uiengine/badge.svg?branch=master)](https://coveralls.io/github/dennisreimann/uiengine?branch=master)
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#-contributors)
 [![Maintained with lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
-[![Support the project](https://badgen.net/badge/support/via%20donation/cyan)](https://dennisreimann.de/donate.html)
+[![Support the project](https://badgen.net/badge/support/via%20donation/cyan)](https://github.com/sponsors/dennisreimann)
 
 ### ⚒ How does it work?
 
