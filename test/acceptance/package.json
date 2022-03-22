@@ -13,8 +13,10 @@
   },
   "scripts": {
     "start": "cypress open",
-    "test": "cypress run",
-    "lint": "eslint --fix integration plugins support"
+    "lint": "eslint --fix integration plugins support",
+    "test": "cypress run --config video=false",
+    "test:ci": "start-server-and-test 'yarn run serve' http://localhost:3000/test-project/ 'yarn run test'",
+    "serve": "cd ../project && yarn run standalone"
   },
   "devDependencies": {
     "cypress": "9.5.2",
@@ -25,6 +27,7 @@
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "5.2.0",
-    "eslint-plugin-standard": "5.0.0"
+    "eslint-plugin-standard": "5.0.0",
+    "start-server-and-test": "1.14.0"
   }
 }

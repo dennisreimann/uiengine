@@ -57,6 +57,7 @@
     "docs:start": "cd docs && uiengine build -s -w",
     "docs:build": "cd docs && cross-env NODE_ENV=production uiengine build",
     "test-acceptance": "yarn workspace @uiengine/test-acceptance run test",
+    "test-acceptance:ci": "yarn workspace @uiengine/test-acceptance run test:ci",
     "test-project": "yarn workspace @uiengine/test-project run dev",
     "test-project:build": "yarn workspace @uiengine/test-project run prod"
   },
