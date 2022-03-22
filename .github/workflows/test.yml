@@ -25,10 +25,13 @@ jobs:
       run: yarn
     - name: Lint
       run: yarn run lint
+    - name: Build
+      run: yarn run build
     - name: Unit Tests
       run: yarn run test
     - name: Acceptance Tests
       run: |
+        yarn run test-project:build
         export CYPRESS_baseUrl=https://uiengine.uix.space/test-project/
         yarn run test-acceptance --config video=false
     - name: Coverage
