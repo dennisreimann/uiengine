@@ -143,4 +143,4 @@ Contributions of any kind welcome!
 
 - - - - -
 
-👨🏻‍💻 Brought to you by the nice people behind [UIengineering](https://www.uiengineering.de). 👨🏻‍💻
+👨🏻‍💻 Brought to you by the nice people behind [UIengineering](https://uiengineering.de). 👨🏻‍💻
