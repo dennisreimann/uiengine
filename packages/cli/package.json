@@ -35,7 +35,7 @@
   "dependencies": {
     "@uiengine/util": "3.2.5",
     "ramda": "0.28.0",
-    "yargs": "17.3.1"
+    "yargs": "17.4.0"
   },
   "devDependencies": {
     "eslint": "7.32.0",
