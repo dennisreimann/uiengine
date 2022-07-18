@@ -2,7 +2,7 @@
   "name": "@uiengine/adapter-webpack",
   "description": "UIengine template adapter for Webpack projects.",
   "license": "MIT",
-  "version": "3.2.6",
+  "version": "3.2.7",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "contributors": [
     "Michael Geers <michael@geers.tv> (http://geers.tv/)"
@@ -30,7 +30,7 @@
     "webpack"
   ],
   "dependencies": {
-    "@uiengine/util": "3.2.6",
+    "@uiengine/util": "3.2.7",
     "object-hash": "3.0.0",
     "require-from-string": "2.0.2",
     "webpack-merge": "5.8.0",
