@@ -6,6 +6,8 @@
 import MyLabel from '../label.vue'
 
 export default {
+  name: 'MyLabelVariant',
+
   components: {
     MyLabel
   },

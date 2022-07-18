@@ -5,7 +5,7 @@ const transformState = uiengineState => {
 
   const addIndexChild = (id, title) => {
     navigation[id] = {
-      id: id,
+      id,
       itemId: id,
       parentId: 'index',
       path: `/_${id}/`,

@@ -19,7 +19,10 @@ const baseConfig = {
     rules: [
       {
         test: /\.vue$/,
-        loader: require.resolve('vue-loader')
+        loader: require.resolve('vue-loader'),
+        options: {
+          prettify: false
+        }
       },
       {
         test: /\.css$/,

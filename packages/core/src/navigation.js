@@ -29,7 +29,7 @@ const dataForPageId = (state, id) => {
   const childIds = page.childIds.concat(componentPageIds)
   const relations = dataForRelations(pages, id, childIds)
   const data = R.mergeRight(relations, {
-    id: id,
+    id,
     itemId: id,
     isStructural: isDocumentationPage(page.type) && !hasContent(page.content),
     path: isIndexPage(id) ? '/' : `/${page.path}/`,

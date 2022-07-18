@@ -118,7 +118,7 @@ async function generatePageWithTemplate (state, pageId) {
         title: `${page.title} • ${name} (${version})`,
         theme: themeId,
         content: wrapContent(content),
-        foot: foot
+        foot
       })
 
       // write file
@@ -169,7 +169,7 @@ async function generatePageWithTokens (state, pageId) {
         title: `${title} • ${name} (${version})`,
         theme: themeId,
         content,
-        foot: foot
+        foot
       })
 
       // write file
@@ -202,7 +202,7 @@ async function generateVariant (state, variant) {
       title: `${component.title}: ${variant.title} • ${name} (${version})`,
       theme: themeId,
       content: wrapContent(content),
-      foot: foot
+      foot
     })
 
     // write file
@@ -329,7 +329,7 @@ async function generateSketch (state) {
         title: `HTML Sketchapp Export ${themeId} • ${name} (${version})`,
         theme: themeId,
         content,
-        foot: foot
+        foot
       })
 
       // write file
