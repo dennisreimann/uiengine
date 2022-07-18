@@ -51,5 +51,6 @@
     "mocha": "8.4.0",
     "mocha-sinon": "2.1.2",
     "sinon": "10.0.0"
-  }
+  },
+  "gitHead": "f169a8c3d06e9d7010c934061c5e26107c0dc384"
 }
