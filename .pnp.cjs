@@ -5165,7 +5165,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@uiengine/util", "workspace:packages/util"],
             ["browser-sync", "npm:2.27.10"],
             ["chokidar", "npm:3.5.3"],
-            ["connect-history-api-fallback", "npm:1.6.0"],
+            ["connect-history-api-fallback", "npm:2.0.0"],
             ["cosmiconfig", "npm:7.0.1"],
             ["ejs", "npm:3.1.8"],
             ["eslint", "npm:7.32.0"],
@@ -5305,7 +5305,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./test/acceptance/",
           "packageDependencies": [
             ["@uiengine/test-acceptance", "workspace:test/acceptance"],
-            ["cypress", "npm:9.7.0"],
+            ["cypress", "npm:10.3.0"],
             ["eslint", "npm:7.32.0"],
             ["eslint-config-standard", "virtual:6a544339f759efbb8863898ba53c2ea561c2aa93d740b0003202fffb47fd9acbfa760b5262faf819feb45c343d643ae1d5f45d02644ce47213436e62dcf277f5#npm:16.0.3"],
             ["eslint-import-resolver-node", "npm:0.3.6"],
@@ -8888,6 +8888,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["connect-history-api-fallback", "npm:1.6.0"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:2.0.0", {
+          "packageLocation": "./.yarn/cache/connect-history-api-fallback-npm-2.0.0-27b00b1571-dc5368690f.zip/node_modules/connect-history-api-fallback/",
+          "packageDependencies": [
+            ["connect-history-api-fallback", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["console-control-strings", [
@@ -9788,10 +9795,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["cypress", [
-        ["npm:9.7.0", {
-          "packageLocation": "./.yarn/unplugged/cypress-npm-9.7.0-f933f637cc/node_modules/cypress/",
+        ["npm:10.3.0", {
+          "packageLocation": "./.yarn/unplugged/cypress-npm-10.3.0-f5f8ff3f7c/node_modules/cypress/",
           "packageDependencies": [
-            ["cypress", "npm:9.7.0"],
+            ["cypress", "npm:10.3.0"],
             ["@cypress/request", "npm:2.88.10"],
             ["@cypress/xvfb", "npm:1.2.4"],
             ["@types/node", "npm:14.14.44"],
@@ -9809,7 +9816,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["commander", "npm:5.1.0"],
             ["common-tags", "npm:1.8.0"],
             ["dayjs", "npm:1.10.4"],
-            ["debug", "virtual:f933f637cc46bf5f3ece7d19e6fb27407ce6efb772fdb7d99e8e573a00755a506157f4c0468d095dff7ec87a69a151aec52f395ed22ec40718ede1318d499658#npm:4.3.2"],
+            ["debug", "virtual:f5f8ff3f7c6ad4a943c5479ea9423a175bad87d4bb3d54ba8748ee016087c81f1bcc8c8a6a5f1809a9163bdbec3d9887b3ffce5f2e07ba3093a0080080eb0371#npm:4.3.2"],
             ["enquirer", "npm:2.3.6"],
             ["eventemitter2", "npm:6.4.4"],
             ["execa", "npm:4.1.0"],
@@ -9821,7 +9828,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["is-ci", "npm:3.0.0"],
             ["is-installed-globally", "npm:0.4.0"],
             ["lazy-ass", "npm:1.6.0"],
-            ["listr2", "virtual:f933f637cc46bf5f3ece7d19e6fb27407ce6efb772fdb7d99e8e573a00755a506157f4c0468d095dff7ec87a69a151aec52f395ed22ec40718ede1318d499658#npm:3.10.0"],
+            ["listr2", "virtual:f5f8ff3f7c6ad4a943c5479ea9423a175bad87d4bb3d54ba8748ee016087c81f1bcc8c8a6a5f1809a9163bdbec3d9887b3ffce5f2e07ba3093a0080080eb0371#npm:3.10.0"],
             ["lodash", "npm:4.17.21"],
             ["log-symbols", "npm:4.0.0"],
             ["minimist", "npm:1.2.6"],
@@ -10064,10 +10071,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["virtual:f933f637cc46bf5f3ece7d19e6fb27407ce6efb772fdb7d99e8e573a00755a506157f4c0468d095dff7ec87a69a151aec52f395ed22ec40718ede1318d499658#npm:4.3.2", {
-          "packageLocation": "./.yarn/__virtual__/debug-virtual-312bdcfeb7/0/cache/debug-npm-4.3.2-f0148b6afe-820ea160e2.zip/node_modules/debug/",
+        ["virtual:f5f8ff3f7c6ad4a943c5479ea9423a175bad87d4bb3d54ba8748ee016087c81f1bcc8c8a6a5f1809a9163bdbec3d9887b3ffce5f2e07ba3093a0080080eb0371#npm:4.3.2", {
+          "packageLocation": "./.yarn/__virtual__/debug-virtual-ad5690daa2/0/cache/debug-npm-4.3.2-f0148b6afe-820ea160e2.zip/node_modules/debug/",
           "packageDependencies": [
-            ["debug", "virtual:f933f637cc46bf5f3ece7d19e6fb27407ce6efb772fdb7d99e8e573a00755a506157f4c0468d095dff7ec87a69a151aec52f395ed22ec40718ede1318d499658#npm:4.3.2"],
+            ["debug", "virtual:f5f8ff3f7c6ad4a943c5479ea9423a175bad87d4bb3d54ba8748ee016087c81f1bcc8c8a6a5f1809a9163bdbec3d9887b3ffce5f2e07ba3093a0080080eb0371#npm:4.3.2"],
             ["@types/supports-color", null],
             ["ms", "npm:2.1.2"],
             ["supports-color", "npm:8.1.1"]
@@ -15791,10 +15798,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:f933f637cc46bf5f3ece7d19e6fb27407ce6efb772fdb7d99e8e573a00755a506157f4c0468d095dff7ec87a69a151aec52f395ed22ec40718ede1318d499658#npm:3.10.0", {
-          "packageLocation": "./.yarn/__virtual__/listr2-virtual-d596d83bf1/0/cache/listr2-npm-3.10.0-b9e3e588d3-9dc1a89697.zip/node_modules/listr2/",
+        ["virtual:f5f8ff3f7c6ad4a943c5479ea9423a175bad87d4bb3d54ba8748ee016087c81f1bcc8c8a6a5f1809a9163bdbec3d9887b3ffce5f2e07ba3093a0080080eb0371#npm:3.10.0", {
+          "packageLocation": "./.yarn/__virtual__/listr2-virtual-286c543ad1/0/cache/listr2-npm-3.10.0-b9e3e588d3-9dc1a89697.zip/node_modules/listr2/",
           "packageDependencies": [
-            ["listr2", "virtual:f933f637cc46bf5f3ece7d19e6fb27407ce6efb772fdb7d99e8e573a00755a506157f4c0468d095dff7ec87a69a151aec52f395ed22ec40718ede1318d499658#npm:3.10.0"],
+            ["listr2", "virtual:f5f8ff3f7c6ad4a943c5479ea9423a175bad87d4bb3d54ba8748ee016087c81f1bcc8c8a6a5f1809a9163bdbec3d9887b3ffce5f2e07ba3093a0080080eb0371#npm:3.10.0"],
             ["@types/enquirer", null],
             ["cli-truncate", "npm:2.1.0"],
             ["colorette", "npm:1.2.2"],

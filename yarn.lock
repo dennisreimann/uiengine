@@ -3573,7 +3573,7 @@ __metadata:
     "@uiengine/util": 3.2.6
     browser-sync: 2.27.10
     chokidar: 3.5.3
-    connect-history-api-fallback: 1.6.0
+    connect-history-api-fallback: 2.0.0
     cosmiconfig: 7.0.1
     ejs: 3.1.8
     eslint: 7.32.0
@@ -3677,7 +3677,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/test-acceptance@workspace:test/acceptance"
   dependencies:
-    cypress: 9.7.0
+    cypress: 10.3.0
     eslint: 7.32.0
     eslint-config-standard: 16.0.3
     eslint-import-resolver-node: 0.3.6
@@ -6687,7 +6687,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"connect-history-api-fallback@npm:1.6.0, connect-history-api-fallback@npm:^1":
+"connect-history-api-fallback@npm:2.0.0":
+  version: 2.0.0
+  resolution: "connect-history-api-fallback@npm:2.0.0"
+  checksum: dc5368690f4a5c413889792f8df70d5941ca9da44523cde3f87af0745faee5ee16afb8195434550f0504726642734f2683d6c07f8b460f828a12c45fbd4c9a68
+  languageName: node
+  linkType: hard
+
+"connect-history-api-fallback@npm:^1":
   version: 1.6.0
   resolution: "connect-history-api-fallback@npm:1.6.0"
   checksum: 804ca2be28c999032ecd37a9f71405e5d7b7a4b3defcebbe41077bb8c5a0a150d7b59f51dcc33b2de30bc7e217a31d10f8cfad27e8e74c2fc7655eeba82d6e7e
@@ -7246,9 +7253,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:9.7.0":
-  version: 9.7.0
-  resolution: "cypress@npm:9.7.0"
+"cypress@npm:10.3.0":
+  version: 10.3.0
+  resolution: "cypress@npm:10.3.0"
   dependencies:
     "@cypress/request": ^2.88.10
     "@cypress/xvfb": ^1.2.4
@@ -7294,7 +7301,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 45df7c85bc7ec2e187153ff2b98bf5106d2313d70e2367a5742b5269a9e82d3fdd730d5bbc32ac8da72aeb120a52f9384c2ba4e2fc86b532f68440f22d700fc9
+  checksum: 9cc6d8cd087d7c79f07ad83b8ef9b183f44cf816499bba53e1cee2b6f987d0a6893be209fcd47660cdd0e8456bd132813abe8a6bd15f446d9c96e0129be2de29
   languageName: node
   linkType: hard
 
