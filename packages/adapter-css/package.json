@@ -29,7 +29,7 @@
   "dependencies": {
     "@uiengine/util": "3.2.6",
     "deepmerge": "4.2.2",
-    "postcss": "8.4.12"
+    "postcss": "8.4.14"
   },
   "devDependencies": {
     "eslint": "7.32.0",

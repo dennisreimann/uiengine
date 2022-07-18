@@ -36,7 +36,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "5.2.0",
     "eslint-plugin-standard": "5.0.0",
-    "marko": "4.24.4",
+    "marko": "4.24.5",
     "mocha": "8.4.0",
     "mocha-sinon": "2.1.2",
     "sinon": "10.0.0"

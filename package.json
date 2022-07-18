@@ -12,7 +12,7 @@
     "url": "ssh://git@github.com/dennisreimann/uiengine.git"
   },
   "dependencies": {
-    "@yarnpkg/pnpify": "4.0.0-rc.2"
+    "@yarnpkg/pnpify": "4.0.0-rc.12"
   },
   "devDependencies": {
     "@uiengine/adapter-html": "workspace:packages/adapter-html",
@@ -20,10 +20,10 @@
     "@uiengine/core": "workspace:packages/core",
     "babel-eslint": "10.1.0",
     "babel-plugin-syntax-jsx": "6.18.0",
-    "c8": "7.11.0",
+    "c8": "7.11.3",
     "coveralls": "3.1.1",
     "cross-env": "7.0.3",
-    "ejs": "3.1.6",
+    "ejs": "3.1.8",
     "eslint": "7.32.0",
     "eslint-config-standard": "16.0.3",
     "eslint-import-resolver-node": "0.3.6",
@@ -39,9 +39,10 @@
     "mocha-lcov-reporter": "1.3.0",
     "rimraf": "3.0.2",
     "standard": "16.0.4",
-    "uglify-js": "3.15.4",
-    "webpack": "5.72.0",
-    "webpack-cli": "4.9.2"
+    "uglify-js": "3.16.2",
+    "vue-template-compiler": "2.7.7",
+    "webpack": "5.73.0",
+    "webpack-cli": "4.10.0"
   },
   "scripts": {
     "deps": "yarn upgrade-interactive",
