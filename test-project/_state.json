@@ -2,7 +2,7 @@
   "config": {
     "name": "UIengine Test Project",
     "version": "1.0.0",
-    "update": 1650356858812,
+    "update": 1658136882997,
     "logo": "/test-project/assets/images/uiengine-logo.png",
     "copyright": "<a href=\"https://github.com/dennisreimann/uiengine\">Generated with UIengine</a>",
     "debug": 1,
@@ -46,7 +46,7 @@
                   "test": {},
                   "use": [
                     {
-                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/vue-loader-virtual-f05f5f7e61/0/cache/vue-loader-npm-15.9.8-438f4d0ff0-ca4c99b261.zip/node_modules/vue-loader/lib/index.js",
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/vue-loader-virtual-084b57aa7f/0/cache/vue-loader-npm-15.10.0-778eb54c35-1bf6c9ffea.zip/node_modules/vue-loader/lib/index.js",
                       "options": {},
                       "ident": "vue-loader-options"
                     }
@@ -63,7 +63,7 @@
                       "options": {
                         "esModule": false
                       },
-                      "ident": "clonedRuleSet-1[0].rules[0].use[1]"
+                      "ident": "clonedRuleSet-1.use[1]"
                     }
                   ]
                 },
@@ -72,15 +72,15 @@
                   "exclude": {},
                   "use": [
                     {
-                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-35a8b6a604/0/cache/babel-loader-npm-8.2.4-e2dfcd123f-4968251fc4.zip/node_modules/babel-loader/lib/index.js",
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-cff809cd42/0/cache/babel-loader-npm-8.2.5-e749e26bb5-a660555788.zip/node_modules/babel-loader/lib/index.js",
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
-                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-a049f85a21/0/cache/@babel-preset-env-npm-7.16.11-d097cc18a2-c8029c2720.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-461339d4ec/0/cache/@babel-preset-env-npm-7.18.6-adec1c5702-0598ff98b6.zip/node_modules/@babel/preset-env/lib/index.js",
                           "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-4ee7e24f67.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
                         ]
                       },
-                      "ident": "clonedRuleSet-2[0].rules[0]"
+                      "ident": "clonedRuleSet-2"
                     }
                   ]
                 }
@@ -117,7 +117,7 @@
                   "test": {},
                   "use": [
                     {
-                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/vue-loader-virtual-f05f5f7e61/0/cache/vue-loader-npm-15.9.8-438f4d0ff0-ca4c99b261.zip/node_modules/vue-loader/lib/index.js",
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/vue-loader-virtual-084b57aa7f/0/cache/vue-loader-npm-15.10.0-778eb54c35-1bf6c9ffea.zip/node_modules/vue-loader/lib/index.js",
                       "options": {},
                       "ident": "vue-loader-options"
                     }
@@ -134,7 +134,7 @@
                       "options": {
                         "esModule": false
                       },
-                      "ident": "clonedRuleSet-1[0].rules[0].use[1]"
+                      "ident": "clonedRuleSet-1.use[1]"
                     }
                   ]
                 },
@@ -143,15 +143,15 @@
                   "exclude": {},
                   "use": [
                     {
-                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-35a8b6a604/0/cache/babel-loader-npm-8.2.4-e2dfcd123f-4968251fc4.zip/node_modules/babel-loader/lib/index.js",
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-cff809cd42/0/cache/babel-loader-npm-8.2.5-e749e26bb5-a660555788.zip/node_modules/babel-loader/lib/index.js",
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
-                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-a049f85a21/0/cache/@babel-preset-env-npm-7.16.11-d097cc18a2-c8029c2720.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-461339d4ec/0/cache/@babel-preset-env-npm-7.18.6-adec1c5702-0598ff98b6.zip/node_modules/@babel/preset-env/lib/index.js",
                           "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-4ee7e24f67.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
                         ]
                       },
-                      "ident": "clonedRuleSet-2[0].rules[0]"
+                      "ident": "clonedRuleSet-2"
                     }
                   ]
                 }
@@ -195,12 +195,12 @@
                 {
                   "test": {},
                   "exclude": {},
-                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-35a8b6a604/0/cache/babel-loader-npm-8.2.4-e2dfcd123f-4968251fc4.zip/node_modules/babel-loader/lib/index.js",
+                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-cff809cd42/0/cache/babel-loader-npm-8.2.5-e749e26bb5-a660555788.zip/node_modules/babel-loader/lib/index.js",
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-a049f85a21/0/cache/@babel-preset-env-npm-7.16.11-d097cc18a2-c8029c2720.zip/node_modules/@babel/preset-env/lib/index.js",
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-e1d2eccb9e/0/cache/@babel-preset-react-npm-7.16.7-a0d2daefeb-d0a052a418.zip/node_modules/@babel/preset-react/lib/index.js"
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-461339d4ec/0/cache/@babel-preset-env-npm-7.18.6-adec1c5702-0598ff98b6.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-0e27edbae0/0/cache/@babel-preset-react-npm-7.18.6-d1cea43c32-540d9cf0a0.zip/node_modules/@babel/preset-react/lib/index.js"
                     ]
                   }
                 }
@@ -229,12 +229,12 @@
                 {
                   "test": {},
                   "exclude": {},
-                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-35a8b6a604/0/cache/babel-loader-npm-8.2.4-e2dfcd123f-4968251fc4.zip/node_modules/babel-loader/lib/index.js",
+                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-cff809cd42/0/cache/babel-loader-npm-8.2.5-e749e26bb5-a660555788.zip/node_modules/babel-loader/lib/index.js",
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-a049f85a21/0/cache/@babel-preset-env-npm-7.16.11-d097cc18a2-c8029c2720.zip/node_modules/@babel/preset-env/lib/index.js",
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-e1d2eccb9e/0/cache/@babel-preset-react-npm-7.16.7-a0d2daefeb-d0a052a418.zip/node_modules/@babel/preset-react/lib/index.js"
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-461339d4ec/0/cache/@babel-preset-env-npm-7.18.6-adec1c5702-0598ff98b6.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-0e27edbae0/0/cache/@babel-preset-react-npm-7.18.6-d1cea43c32-540d9cf0a0.zip/node_modules/@babel/preset-react/lib/index.js"
                     ]
                   }
                 }
@@ -1475,7 +1475,7 @@
           "id": "label/label.vue-8",
           "componentId": "label",
           "extension": "vue",
-          "raw": "<template>\n  <my-label v-bind=\"$props\" />\n</template>\n\n<script>\nimport MyLabel from '../label.vue'\n\nexport default {\n  components: {\n    MyLabel\n  },\n\n  props: {\n    id: {\n      type: String,\n      required: true\n    },\n\n    title: {\n      type: String,\n      required: true\n    }\n  }\n}\n</script>",
+          "raw": "<template>\n  <my-label v-bind=\"$props\" />\n</template>\n\n<script>\nimport MyLabel from '../label.vue'\n\nexport default {\n  name: 'MyLabelVariant',\n\n  components: {\n    MyLabel\n  },\n\n  props: {\n    id: {\n      type: String,\n      required: true\n    },\n\n    title: {\n      type: String,\n      required: true\n    }\n  }\n}\n</script>",
           "context": {
             "id": "name",
             "title": "Name"
