@@ -2670,7 +2670,7 @@ __metadata:
     eslint-plugin-promise: 6.0.0
     eslint-plugin-standard: 5.0.0
   peerDependencies:
-    "@uiengine/core": ^3.3.1
+    "@uiengine/core": ^3.3.4
   languageName: unknown
   linkType: soft
 
@@ -2856,7 +2856,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/util@3.3.3, @uiengine/util@workspace:packages/util":
+"@uiengine/util@npm:3.3.3":
+  version: 3.3.3
+  resolution: "@uiengine/util@npm:3.3.3"
+  dependencies:
+    chalk: 4.1.2
+    fast-glob: 3.2.11
+    fs-extra: 10.1.0
+    globby: 11.1.0
+    markdown-it: 13.0.1
+    markdown-it-anchor: 8.6.4
+    markdown-it-container: 3.0.0
+    markdown-it-implicit-figures: 0.10.0
+    markdown-it-include: 2.0.0
+    markdown-it-mark: 3.0.1
+    ramda: 0.28.0
+    unescape: 1.0.1
+  checksum: 37a5af883b61b5a8970127d08385d719b46653bee3b9db1b236bac0bfab176f11a329ce111652926a362b8030cec1b64b493e6b8d55020f2d6ae042ad41f75ce
+  languageName: node
+  linkType: hard
+
+"@uiengine/util@workspace:packages/util":
   version: 0.0.0-use.local
   resolution: "@uiengine/util@workspace:packages/util"
   dependencies:

@@ -52,7 +52,7 @@
     "test": "mocha './packages/*/test/**/*_test.js'",
     "test-watch": "yarn run test -R dot --grep @nowatch --invert -w --extensions ejs,hbs,js,jsx,json,marko,md,pug,vue,yml,njk",
     "coverage": "c8 yarn run test && c8 report --reporter=text-lcov > ./coverage/lcov.info",
-    "release": "cross-env NODE_ENV=production yarn run build && lerna publish --exact",
+    "release": "cross-env NODE_ENV=production yarn run build && lerna publish --exact --force-publish",
     "demo": "rimraf test/demo && sleep 1 && uiengine init --dir test/demo --demo && cd test/demo && uiengine build -s -w",
     "docs:start": "cd docs && uiengine build -s -w",
     "docs:build": "cd docs && cross-env NODE_ENV=production uiengine build",
