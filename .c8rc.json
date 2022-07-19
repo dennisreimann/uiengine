@@ -1,4 +1,8 @@
 {
+  "clean": true,
+  "report-dir": "coverage",
+  "reporter": ["text-lcov"],
+  "check-coverage": true,
   "include": [
     "packages/**/*.js"
   ]

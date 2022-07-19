@@ -28,10 +28,10 @@ jobs:
     - name: Build
       run: yarn run build
     - name: Unit Tests
-      run: yarn run test
+      run: yarn run coverage
     - name: Acceptance Tests
       run: yarn run test-acceptance:ci
-    # - name: Coverage
-    #   run: |
-    #     yarn run coverage
-    #     yarn run coverage:deploy
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
