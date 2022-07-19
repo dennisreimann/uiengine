@@ -2712,7 +2712,7 @@ __metadata:
     "@babel/plugin-transform-runtime": 7.18.9
     "@babel/preset-env": 7.18.9
     "@babel/runtime": 7.18.9
-    "@uiengine/util": 3.3.0
+    "@uiengine/util": "workspace:packages/util"
     autoprefixer: 10.4.7
     babel-eslint: 10.1.0
     babel-loader: 8.2.5
@@ -2776,7 +2776,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/util@3.3.0, @uiengine/util@workspace:packages/util":
+"@uiengine/util@workspace:packages/util":
   version: 0.0.0-use.local
   resolution: "@uiengine/util@workspace:packages/util"
   dependencies:
