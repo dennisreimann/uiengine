@@ -36,7 +36,7 @@
     "eslint-plugin-standard": "5.0.0"
   },
   "peerDependencies": {
-    "ejs": "^3.0.0"
+    "ejs": "^3.1.8"
   },
   "scripts": {
     "lint": "eslint --fix src test"
