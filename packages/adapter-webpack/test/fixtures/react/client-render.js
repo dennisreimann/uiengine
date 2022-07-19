@@ -1,9 +1,7 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { hydrateRoot } from 'react-dom/client'
 
 export default function clientRender (Component, props) {
-  ReactDOM.hydrate(
-    React.createElement(Component, props),
-    document.querySelector('#app')
-  )
+  const app = document.getElementById('app')
+  hydrateRoot(app, React.createElement(Component, props))
 }

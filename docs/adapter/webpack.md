@@ -166,12 +166,11 @@ The `react-client-render.js` file might look like this:
 
 ```js
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { hydrateRoot } from 'react-dom/client'
 
 export default function clientRender (Component, props) {
-  ReactDOM.hydrate(
-    React.createElement(Component, props),
-    document.querySelector('#app')  // your app container defined in the uiengine preview template
-  )
+  const app = document.getElementById('app') // your app container defined in the uiengine preview template
+  hydrateRoot(app, React.createElement(Component, props))
 }
+
 ```

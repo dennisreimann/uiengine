@@ -38,9 +38,6 @@ const pruneStateForView = state => {
   return R.assoc('components', viewComponents, state)
 }
 
-const wrapContent = content =>
-  `\n<!-- uiengine:preview:start -->\n${content}\n<!-- uiengine:preview:end -->\n`
-
 async function render (state, template, data, themeId, identifier) {
   debug4(state, `Builder.render(${template}, ${themeId}, ${identifier}):start`)
 
@@ -117,7 +114,7 @@ async function generatePageWithTemplate (state, pageId) {
         class: `uie-page uie-page--${dasherize(id)}`,
         title: `${page.title} • ${name} (${version})`,
         theme: themeId,
-        content: wrapContent(content),
+        content,
         foot
       })
 
@@ -201,7 +198,7 @@ async function generateVariant (state, variant) {
       class: `uie-variant uie-variant--${dasherize(componentId)} uie-variant--${dasherize(id)}`,
       title: `${component.title}: ${variant.title} • ${name} (${version})`,
       theme: themeId,
-      content: wrapContent(content),
+      content,
       foot
     })
 
