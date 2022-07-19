@@ -1,11 +1,24 @@
 {
-  "lerna": "5.1.8",
   "version": "3.2.8",
+  "loglevel": "verbose",
   "npmClient": "yarn",
-  "useWorkspaces": true,
   "command": {
-    "publish": {
-      "message": "🔖 release: %s"
+    "version": {
+      "conventionalCommits": false,
+      "syncWorkspaceLock": true,
+      "message": "🔖 release: %v"
+    },
+    "run": {
+      "cmdDryRun": false
     }
-  }
+  },
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/helpers/**",
+    "**/*.md"
+  ],
+  "packages": [
+    "packages/*"
+  ]
 }
