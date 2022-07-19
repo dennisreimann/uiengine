@@ -2,7 +2,7 @@
   "config": {
     "name": "UIengine Test Project",
     "version": "1.0.0",
-    "update": 1658136882997,
+    "update": 1658230081445,
     "logo": "/test-project/assets/images/uiengine-logo.png",
     "copyright": "<a href=\"https://github.com/dennisreimann/uiengine\">Generated with UIengine</a>",
     "debug": 1,
@@ -76,7 +76,7 @@
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
-                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-461339d4ec/0/cache/@babel-preset-env-npm-7.18.6-adec1c5702-0598ff98b6.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-a2fed90c43/0/cache/@babel-preset-env-npm-7.18.9-ff309468f5-311002b925.zip/node_modules/@babel/preset-env/lib/index.js",
                           "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-4ee7e24f67.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
                         ]
                       },
@@ -147,7 +147,7 @@
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
-                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-461339d4ec/0/cache/@babel-preset-env-npm-7.18.6-adec1c5702-0598ff98b6.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-a2fed90c43/0/cache/@babel-preset-env-npm-7.18.9-ff309468f5-311002b925.zip/node_modules/@babel/preset-env/lib/index.js",
                           "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-4ee7e24f67.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
                         ]
                       },
@@ -199,7 +199,7 @@
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-461339d4ec/0/cache/@babel-preset-env-npm-7.18.6-adec1c5702-0598ff98b6.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-a2fed90c43/0/cache/@babel-preset-env-npm-7.18.9-ff309468f5-311002b925.zip/node_modules/@babel/preset-env/lib/index.js",
                       "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-0e27edbae0/0/cache/@babel-preset-react-npm-7.18.6-d1cea43c32-540d9cf0a0.zip/node_modules/@babel/preset-react/lib/index.js"
                     ]
                   }
@@ -233,7 +233,7 @@
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-461339d4ec/0/cache/@babel-preset-env-npm-7.18.6-adec1c5702-0598ff98b6.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-a2fed90c43/0/cache/@babel-preset-env-npm-7.18.9-ff309468f5-311002b925.zip/node_modules/@babel/preset-env/lib/index.js",
                       "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-0e27edbae0/0/cache/@babel-preset-react-npm-7.18.6-d1cea43c32-540d9cf0a0.zip/node_modules/@babel/preset-react/lib/index.js"
                     ]
                   }
@@ -511,17 +511,6 @@
       "type": "documentation",
       "content": "<h1 id=\"molecules\" tabindex=\"-1\">Molecules</h1>"
     },
-    "patterns/pages": {
-      "childIds": [],
-      "id": "patterns/pages",
-      "title": "Pages",
-      "isTitleFromHeading": true,
-      "path": "patterns/pages",
-      "sourcePath": "uiengine/pages/patterns/pages",
-      "readmeFile": "uiengine/pages/patterns/pages/README.md",
-      "type": "documentation",
-      "content": "<h1 id=\"pages\" tabindex=\"-1\">Pages</h1>"
-    },
     "patterns/organisms": {
       "childIds": [],
       "componentIds": [
@@ -536,6 +525,17 @@
       "readmeFile": "uiengine/pages/patterns/organisms/README.md",
       "type": "documentation",
       "content": "<h1 id=\"organisms\" tabindex=\"-1\">Organisms</h1>"
+    },
+    "patterns/pages": {
+      "childIds": [],
+      "id": "patterns/pages",
+      "title": "Pages",
+      "isTitleFromHeading": true,
+      "path": "patterns/pages",
+      "sourcePath": "uiengine/pages/patterns/pages",
+      "readmeFile": "uiengine/pages/patterns/pages/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"pages\" tabindex=\"-1\">Pages</h1>"
     },
     "patterns/templates": {
       "childIds": [],
@@ -1907,16 +1907,6 @@
         null
       ]
     },
-    "patterns/pages": {
-      "prevSiblingId": "patterns/templates",
-      "parentId": "patterns",
-      "id": "patterns/pages",
-      "itemId": "patterns/pages",
-      "isStructural": true,
-      "path": "/patterns/pages/",
-      "type": "documentation",
-      "title": "Pages"
-    },
     "patterns/organisms": {
       "prevSiblingId": "patterns/molecules",
       "nextSiblingId": "patterns/templates",
@@ -1941,6 +1931,16 @@
       "keywords": [
         null
       ]
+    },
+    "patterns/pages": {
+      "prevSiblingId": "patterns/templates",
+      "parentId": "patterns",
+      "id": "patterns/pages",
+      "itemId": "patterns/pages",
+      "isStructural": true,
+      "path": "/patterns/pages/",
+      "type": "documentation",
+      "title": "Pages"
     },
     "patterns/templates": {
       "prevSiblingId": "patterns/organisms",
