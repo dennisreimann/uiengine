@@ -44,5 +44,5 @@
   "scripts": {
     "lint": "eslint --fix src test"
   },
-  "gitHead": "b01271fac54e969dff698edf3175ea6e6a1e3d5c"
+  "gitHead": "3d781693b2efbed9cd09bb0bd07360c10282fd9d"
 }
