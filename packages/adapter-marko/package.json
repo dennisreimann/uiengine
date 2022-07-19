@@ -27,7 +27,7 @@
     "marko"
   ],
   "dependencies": {
-    "@uiengine/util": "3.3.3"
+    "@uiengine/util": "workspace:*"
   },
   "devDependencies": {
     "eslint": "8.20.0",

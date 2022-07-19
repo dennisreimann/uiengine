@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.18.9",
-    "@uiengine/util": "3.3.3",
+    "@uiengine/util": "workspace:*",
     "color": "4.2.3",
     "cross-env": "7.0.3",
     "deepmerge": "4.2.2",

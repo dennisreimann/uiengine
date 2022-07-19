@@ -33,7 +33,7 @@
     "lint": "eslint --fix src test"
   },
   "dependencies": {
-    "@uiengine/util": "3.3.3",
+    "@uiengine/util": "workspace:*",
     "ramda": "0.28.0",
     "yargs": "17.5.1"
   },

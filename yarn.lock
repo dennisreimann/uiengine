@@ -2337,11 +2337,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uiengine/adapter-css@workspace:packages/adapter-css":
+"@uiengine/adapter-css@workspace:*, @uiengine/adapter-css@workspace:packages/adapter-css":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-css@workspace:packages/adapter-css"
   dependencies:
-    "@uiengine/util": 3.3.3
+    "@uiengine/util": "workspace:*"
     deepmerge: 4.2.2
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
@@ -2354,7 +2354,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-ejs@workspace:packages/adapter-ejs":
+"@uiengine/adapter-ejs@workspace:*, @uiengine/adapter-ejs@workspace:packages/adapter-ejs":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-ejs@workspace:packages/adapter-ejs"
   dependencies:
@@ -2371,11 +2371,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-handlebars@workspace:packages/adapter-handlebars":
+"@uiengine/adapter-handlebars@workspace:*, @uiengine/adapter-handlebars@workspace:packages/adapter-handlebars":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-handlebars@workspace:packages/adapter-handlebars"
   dependencies:
-    "@uiengine/util": 3.3.3
+    "@uiengine/util": "workspace:*"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2389,11 +2389,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-html@workspace:packages/adapter-html":
+"@uiengine/adapter-html@workspace:*, @uiengine/adapter-html@workspace:packages/adapter-html":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-html@workspace:packages/adapter-html"
   dependencies:
-    "@uiengine/util": 3.3.3
+    "@uiengine/util": "workspace:*"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2404,11 +2404,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-marko@workspace:packages/adapter-marko":
+"@uiengine/adapter-marko@workspace:*, @uiengine/adapter-marko@workspace:packages/adapter-marko":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-marko@workspace:packages/adapter-marko"
   dependencies:
-    "@uiengine/util": 3.3.3
+    "@uiengine/util": "workspace:*"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2425,7 +2425,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-nunjucks@workspace:packages/adapter-nunjucks":
+"@uiengine/adapter-nunjucks@workspace:*, @uiengine/adapter-nunjucks@workspace:packages/adapter-nunjucks":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-nunjucks@workspace:packages/adapter-nunjucks"
   dependencies:
@@ -2442,11 +2442,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-pug@workspace:packages/adapter-pug":
+"@uiengine/adapter-pug@workspace:*, @uiengine/adapter-pug@workspace:packages/adapter-pug":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-pug@workspace:packages/adapter-pug"
   dependencies:
-    "@uiengine/util": 3.3.3
+    "@uiengine/util": "workspace:*"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2463,7 +2463,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/adapter-webpack@workspace:packages/adapter-webpack":
+"@uiengine/adapter-webpack@workspace:*, @uiengine/adapter-webpack@workspace:packages/adapter-webpack":
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-webpack@workspace:packages/adapter-webpack"
   dependencies:
@@ -2471,7 +2471,7 @@ __metadata:
     "@babel/preset-env": 7.18.9
     "@babel/preset-react": 7.18.6
     "@babel/register": 7.18.9
-    "@uiengine/util": 3.3.3
+    "@uiengine/util": "workspace:*"
     "@vue/compiler-sfc": 3.2.37
     babel-eslint: 10.1.0
     babel-loader: 8.2.5
@@ -2516,26 +2516,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/cli@npm:3.3.3":
-  version: 3.3.3
-  resolution: "@uiengine/cli@npm:3.3.3"
-  dependencies:
-    "@uiengine/util": "workspace:packages/util"
-    ramda: 0.28.0
-    yargs: 17.5.1
-  peerDependencies:
-    "@uiengine/core": ^3.0.0
-  bin:
-    uiengine: bin/uiengine.js
-  checksum: a17d94189f0e78c4c0cefc47c293d543052ffa647865bf8914d9e560d4e5e80ec495a0d9abcfc71adcabdf7d23b6b0ad67098c1690c287a85122d0021aa065e5
-  languageName: node
-  linkType: hard
-
-"@uiengine/cli@workspace:packages/cli":
+"@uiengine/cli@workspace:*, @uiengine/cli@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "@uiengine/cli@workspace:packages/cli"
   dependencies:
-    "@uiengine/util": 3.3.3
+    "@uiengine/util": "workspace:*"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2552,23 +2537,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/core@workspace:packages/core":
+"@uiengine/core@workspace:*, @uiengine/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@uiengine/core@workspace:packages/core"
   dependencies:
-    "@uiengine/adapter-css": "workspace:packages/adapter-css"
-    "@uiengine/adapter-ejs": "workspace:packages/adapter-ejs"
-    "@uiengine/adapter-handlebars": "workspace:packages/adapter-handlebars"
-    "@uiengine/adapter-html": "workspace:packages/adapter-html"
-    "@uiengine/adapter-marko": "workspace:packages/adapter-marko"
-    "@uiengine/adapter-nunjucks": "workspace:packages/adapter-nunjucks"
-    "@uiengine/adapter-pug": "workspace:packages/adapter-pug"
-    "@uiengine/adapter-webpack": "workspace:packages/adapter-webpack"
-    "@uiengine/cli": 3.3.3
-    "@uiengine/plugin-preview-a11y": "workspace:packages/plugin-preview-a11y"
-    "@uiengine/plugin-preview-toggle-class": "workspace:packages/plugin-preview-toggle-class"
-    "@uiengine/ui": 3.3.3
-    "@uiengine/util": 3.3.3
+    "@uiengine/adapter-css": "workspace:*"
+    "@uiengine/adapter-ejs": "workspace:*"
+    "@uiengine/adapter-handlebars": "workspace:*"
+    "@uiengine/adapter-html": "workspace:*"
+    "@uiengine/adapter-marko": "workspace:*"
+    "@uiengine/adapter-nunjucks": "workspace:*"
+    "@uiengine/adapter-pug": "workspace:*"
+    "@uiengine/adapter-webpack": "workspace:*"
+    "@uiengine/cli": "workspace:*"
+    "@uiengine/plugin-preview-a11y": "workspace:*"
+    "@uiengine/plugin-preview-toggle-class": "workspace:*"
+    "@uiengine/ui": "workspace:*"
+    "@uiengine/util": "workspace:*"
     browser-sync: 2.27.10
     chokidar: 3.5.3
     connect-history-api-fallback: 2.0.0
@@ -2608,9 +2593,9 @@ __metadata:
   resolution: "@uiengine/monorepo@workspace:."
   dependencies:
     "@lerna-lite/cli": 1.6.0
-    "@uiengine/adapter-html": "workspace:packages/adapter-html"
-    "@uiengine/cli": "workspace:packages/cli"
-    "@uiengine/core": "workspace:packages/core"
+    "@uiengine/adapter-html": "workspace:*"
+    "@uiengine/cli": "workspace:*"
+    "@uiengine/core": "workspace:*"
     "@yarnpkg/pnpify": 4.0.0-rc.12
     babel-eslint: 10.1.0
     babel-plugin-syntax-jsx: 6.18.0
@@ -2639,11 +2624,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/plugin-preview-a11y@workspace:packages/plugin-preview-a11y":
+"@uiengine/plugin-preview-a11y@workspace:*, @uiengine/plugin-preview-a11y@workspace:packages/plugin-preview-a11y":
   version: 0.0.0-use.local
   resolution: "@uiengine/plugin-preview-a11y@workspace:packages/plugin-preview-a11y"
   dependencies:
-    "@uiengine/core": "workspace:packages/core"
+    "@uiengine/core": "workspace:*"
     axe-core: 4.4.3
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
@@ -2657,11 +2642,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class":
+"@uiengine/plugin-preview-toggle-class@workspace:*, @uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class":
   version: 0.0.0-use.local
   resolution: "@uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class"
   dependencies:
-    "@uiengine/core": "workspace:packages/core"
+    "@uiengine/core": "workspace:*"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2703,20 +2688,20 @@ __metadata:
     "@babel/preset-env": 7.18.9
     "@babel/preset-react": 7.18.6
     "@babel/register": 7.18.9
-    "@uiengine/adapter-css": "workspace:packages/adapter-css"
-    "@uiengine/adapter-ejs": "workspace:packages/adapter-ejs"
-    "@uiengine/adapter-handlebars": "workspace:packages/adapter-handlebars"
-    "@uiengine/adapter-html": "workspace:packages/adapter-html"
-    "@uiengine/adapter-marko": "workspace:packages/adapter-marko"
-    "@uiengine/adapter-nunjucks": "workspace:packages/adapter-nunjucks"
-    "@uiengine/adapter-pug": "workspace:packages/adapter-pug"
-    "@uiengine/adapter-webpack": "workspace:packages/adapter-webpack"
-    "@uiengine/cli": "workspace:packages/cli"
-    "@uiengine/core": "workspace:packages/core"
-    "@uiengine/plugin-preview-a11y": "workspace:packages/plugin-preview-a11y"
-    "@uiengine/plugin-preview-toggle-class": "workspace:packages/plugin-preview-toggle-class"
-    "@uiengine/ui": "workspace:packages/ui"
-    "@uiengine/util": "workspace:packages/util"
+    "@uiengine/adapter-css": "workspace:*"
+    "@uiengine/adapter-ejs": "workspace:*"
+    "@uiengine/adapter-handlebars": "workspace:*"
+    "@uiengine/adapter-html": "workspace:*"
+    "@uiengine/adapter-marko": "workspace:*"
+    "@uiengine/adapter-nunjucks": "workspace:*"
+    "@uiengine/adapter-pug": "workspace:*"
+    "@uiengine/adapter-webpack": "workspace:*"
+    "@uiengine/cli": "workspace:*"
+    "@uiengine/core": "workspace:*"
+    "@uiengine/plugin-preview-a11y": "workspace:*"
+    "@uiengine/plugin-preview-toggle-class": "workspace:*"
+    "@uiengine/ui": "workspace:*"
+    "@uiengine/util": "workspace:*"
     "@vue/compiler-sfc": 3.2.37
     babel-eslint: 10.1.0
     babel-loader: 8.2.5
@@ -2757,30 +2742,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/ui@npm:3.3.3":
-  version: 3.3.3
-  resolution: "@uiengine/ui@npm:3.3.3"
-  dependencies:
-    "@babel/runtime": 7.18.9
-    "@uiengine/util": "workspace:packages/util"
-    color: 4.2.3
-    cross-env: 7.0.3
-    deepmerge: 4.2.2
-    ejs: 3.1.8
-    fuse.js: 6.6.2
-    highlight.js: 10.7.3
-    htmlescape: 1.1.1
-    vue: 2.7.7
-    vue-analytics: 5.22.1
-    vue-meta: 2.4.0
-    vue-router: 3.5.4
-    vuex: 3.6.2
-    yall-js: 3.2.0
-  checksum: efa838e8ef43ab78290328fe034dfd651e3c20a3c8e0db0a3368d57bcab142428a8a7b0433c108a0d8be5626fd6679d5ec3885a51abd207eb2d915173afcf8a5
-  languageName: node
-  linkType: hard
-
-"@uiengine/ui@workspace:packages/ui":
+"@uiengine/ui@workspace:*, @uiengine/ui@workspace:packages/ui":
   version: 0.0.0-use.local
   resolution: "@uiengine/ui@workspace:packages/ui"
   dependencies:
@@ -2790,7 +2752,7 @@ __metadata:
     "@babel/plugin-transform-runtime": 7.18.9
     "@babel/preset-env": 7.18.9
     "@babel/runtime": 7.18.9
-    "@uiengine/util": 3.3.3
+    "@uiengine/util": "workspace:*"
     "@vue/compiler-sfc": 3.2.37
     autoprefixer: 10.4.7
     babel-eslint: 10.1.0
@@ -2856,27 +2818,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/util@npm:3.3.3":
-  version: 3.3.3
-  resolution: "@uiengine/util@npm:3.3.3"
-  dependencies:
-    chalk: 4.1.2
-    fast-glob: 3.2.11
-    fs-extra: 10.1.0
-    globby: 11.1.0
-    markdown-it: 13.0.1
-    markdown-it-anchor: 8.6.4
-    markdown-it-container: 3.0.0
-    markdown-it-implicit-figures: 0.10.0
-    markdown-it-include: 2.0.0
-    markdown-it-mark: 3.0.1
-    ramda: 0.28.0
-    unescape: 1.0.1
-  checksum: 37a5af883b61b5a8970127d08385d719b46653bee3b9db1b236bac0bfab176f11a329ce111652926a362b8030cec1b64b493e6b8d55020f2d6ae042ad41f75ce
-  languageName: node
-  linkType: hard
-
-"@uiengine/util@workspace:packages/util":
+"@uiengine/util@workspace:*, @uiengine/util@workspace:packages/util":
   version: 0.0.0-use.local
   resolution: "@uiengine/util@workspace:packages/util"
   dependencies:
