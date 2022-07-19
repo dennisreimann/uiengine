@@ -2,7 +2,7 @@
   "name": "@uiengine/adapter-html",
   "description": "UIengine template adapter for HTML.",
   "license": "MIT",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
