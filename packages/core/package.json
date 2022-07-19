@@ -2,7 +2,7 @@
   "name": "@uiengine/core",
   "description": "Create, document and evolve your design system collaboratively.",
   "license": "MIT",
-  "version": "3.2.8",
+  "version": "3.3.1",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
@@ -77,5 +77,5 @@
     "chokidar": "3.5.3",
     "connect-history-api-fallback": "2.0.0"
   },
-  "gitHead": "f169a8c3d06e9d7010c934061c5e26107c0dc384"
+  "gitHead": "b01271fac54e969dff698edf3175ea6e6a1e3d5c"
 }
