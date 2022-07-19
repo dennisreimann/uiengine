@@ -2317,7 +2317,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-css@workspace:packages/adapter-css"
   dependencies:
-    "@uiengine/util": 3.3.0
+    "@uiengine/util": "workspace:packages/util"
     deepmerge: 4.2.2
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
@@ -2349,7 +2349,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-handlebars@workspace:packages/adapter-handlebars"
   dependencies:
-    "@uiengine/util": 3.3.0
+    "@uiengine/util": "workspace:packages/util"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2366,7 +2366,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-html@workspace:packages/adapter-html"
   dependencies:
-    "@uiengine/util": 3.3.0
+    "@uiengine/util": "workspace:packages/util"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2380,7 +2380,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-marko@workspace:packages/adapter-marko"
   dependencies:
-    "@uiengine/util": 3.3.0
+    "@uiengine/util": "workspace:packages/util"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2416,7 +2416,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-pug@workspace:packages/adapter-pug"
   dependencies:
-    "@uiengine/util": 3.3.0
+    "@uiengine/util": "workspace:packages/util"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2440,7 +2440,7 @@ __metadata:
     "@babel/preset-env": 7.18.9
     "@babel/preset-react": 7.18.6
     "@babel/register": 7.18.9
-    "@uiengine/util": 3.3.0
+    "@uiengine/util": "workspace:packages/util"
     babel-eslint: 10.1.0
     babel-loader: 8.2.5
     babel-plugin-syntax-jsx: 6.18.0
@@ -2487,7 +2487,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/cli@workspace:packages/cli"
   dependencies:
-    "@uiengine/util": 3.3.0
+    "@uiengine/util": "workspace:packages/util"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2503,7 +2503,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/core@3.2.8, @uiengine/core@workspace:packages/core":
+"@uiengine/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@uiengine/core@workspace:packages/core"
   dependencies:
@@ -2516,8 +2516,8 @@ __metadata:
     "@uiengine/adapter-pug": "workspace:packages/adapter-pug"
     "@uiengine/adapter-webpack": "workspace:packages/adapter-webpack"
     "@uiengine/cli": "workspace:packages/cli"
-    "@uiengine/plugin-preview-a11y": 3.2.8
-    "@uiengine/plugin-preview-toggle-class": 3.2.8
+    "@uiengine/plugin-preview-a11y": "workspace:packages/plugin-preview-a11y"
+    "@uiengine/plugin-preview-toggle-class": "workspace:packages/plugin-preview-toggle-class"
     "@uiengine/ui": "workspace:packages/ui"
     "@uiengine/util": "workspace:packages/util"
     browser-sync: 2.27.10
@@ -2589,11 +2589,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/plugin-preview-a11y@3.2.8, @uiengine/plugin-preview-a11y@workspace:packages/plugin-preview-a11y":
+"@uiengine/plugin-preview-a11y@workspace:packages/plugin-preview-a11y":
   version: 0.0.0-use.local
   resolution: "@uiengine/plugin-preview-a11y@workspace:packages/plugin-preview-a11y"
   dependencies:
-    "@uiengine/core": 3.2.8
+    "@uiengine/core": "workspace:packages/core"
     axe-core: 4.4.3
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
@@ -2606,11 +2606,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/plugin-preview-toggle-class@3.2.8, @uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class":
+"@uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class":
   version: 0.0.0-use.local
   resolution: "@uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class"
   dependencies:
-    "@uiengine/core": 3.2.8
+    "@uiengine/core": "workspace:packages/core"
     eslint: 8.20.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
@@ -2659,9 +2659,9 @@ __metadata:
     "@uiengine/adapter-pug": "workspace:packages/adapter-pug"
     "@uiengine/adapter-webpack": "workspace:packages/adapter-webpack"
     "@uiengine/cli": "workspace:packages/cli"
-    "@uiengine/core": 3.2.8
-    "@uiengine/plugin-preview-a11y": 3.2.8
-    "@uiengine/plugin-preview-toggle-class": 3.2.8
+    "@uiengine/core": "workspace:packages/core"
+    "@uiengine/plugin-preview-a11y": "workspace:packages/plugin-preview-a11y"
+    "@uiengine/plugin-preview-toggle-class": "workspace:packages/plugin-preview-toggle-class"
     "@uiengine/ui": "workspace:packages/ui"
     "@uiengine/util": "workspace:packages/util"
     babel-eslint: 10.1.0

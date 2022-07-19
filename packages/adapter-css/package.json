@@ -27,7 +27,7 @@
     "css"
   ],
   "dependencies": {
-    "@uiengine/util": "3.3.0",
+    "@uiengine/util": "workspace:packages/util",
     "deepmerge": "4.2.2",
     "postcss": "8.4.14"
   },

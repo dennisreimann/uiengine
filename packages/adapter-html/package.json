@@ -27,7 +27,7 @@
     "html"
   ],
   "dependencies": {
-    "@uiengine/util": "3.3.0"
+    "@uiengine/util": "workspace:packages/util"
   },
   "devDependencies": {
     "eslint": "8.20.0",
