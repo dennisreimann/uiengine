@@ -1,6 +1,6 @@
 # Changelog
 
-## [3.3.0] - Ongoing development
+## [3.3.0] - 19.06.2022
 
 ### Added
 
@@ -9,7 +9,9 @@
 
 ### Changed
 
+- Update dependencies
 - Update styles of A11y plugin UI
+- Require Node.js >= 16.16 (current latest LTS)
 
 ## [3.2.0] - 14.06.2021
 

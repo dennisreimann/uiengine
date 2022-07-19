@@ -15,7 +15,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=14.16"
+    "node": ">=16.16"
   },
   "main": "./src/index.js",
   "files": [
