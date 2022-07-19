@@ -30,7 +30,7 @@
     "webpack"
   ],
   "dependencies": {
-    "@uiengine/util": "workspace:packages/util",
+    "@uiengine/util": "3.3.3",
     "object-hash": "3.0.0",
     "require-from-string": "2.0.2",
     "webpack-merge": "5.8.0",

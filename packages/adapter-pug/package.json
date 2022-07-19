@@ -27,7 +27,7 @@
     "pug"
   ],
   "dependencies": {
-    "@uiengine/util": "workspace:packages/util",
+    "@uiengine/util": "3.3.3",
     "pug-lexer": "5.0.1",
     "pug-parser": "6.0.0",
     "pug-walk": "2.0.0"

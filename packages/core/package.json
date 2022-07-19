@@ -36,9 +36,9 @@
     "lint": "eslint --fix src test"
   },
   "dependencies": {
-    "@uiengine/cli": "workspace:packages/cli",
-    "@uiengine/ui": "workspace:packages/ui",
-    "@uiengine/util": "workspace:packages/util",
+    "@uiengine/cli": "3.3.3",
+    "@uiengine/ui": "3.3.3",
+    "@uiengine/util": "3.3.3",
     "cosmiconfig": "7.0.1",
     "fs-extra": "10.1.0",
     "ramda": "0.28.0"

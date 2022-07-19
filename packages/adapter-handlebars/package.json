@@ -27,7 +27,7 @@
     "handlebars"
   ],
   "dependencies": {
-    "@uiengine/util": "workspace:packages/util"
+    "@uiengine/util": "3.3.3"
   },
   "devDependencies": {
     "eslint": "8.20.0",
