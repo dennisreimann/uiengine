@@ -55,7 +55,7 @@
     "@uiengine/plugin-preview-a11y": "workspace:*",
     "@uiengine/plugin-preview-toggle-class": "workspace:*",
     "ejs": "3.1.8",
-    "eslint": "8.20.0",
+    "eslint": "8.21.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.2.4",
@@ -71,7 +71,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sinon": "10.0.0",
-    "vue": "2.7.7"
+    "vue": "2.7.8"
   },
   "optionalDependencies": {
     "browser-sync": "2.27.10",
