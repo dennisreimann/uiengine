@@ -15,7 +15,7 @@
     "@yarnpkg/pnpify": "4.0.0-rc.14"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "1.9.1",
+    "@lerna-lite/cli": "1.10.0",
     "@uiengine/adapter-html": "workspace:*",
     "@uiengine/cli": "workspace:*",
     "@uiengine/core": "workspace:*",
