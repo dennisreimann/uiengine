@@ -5,6 +5,13 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@adobe/css-tools@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "@adobe/css-tools@npm:4.0.1"
+  checksum: 80226e2229024c21da9ffa6b5cd4a34b931f071e06f45aba4777ade071d7a6c94605cf73b13718b0c4b34e8b124c65c607b82eaa53a326d3eb73d9682a04a593
+  languageName: node
+  linkType: hard
+
 "@ampproject/remapping@npm:^2.1.0":
   version: 2.2.0
   resolution: "@ampproject/remapping@npm:2.2.0"
@@ -1683,6 +1690,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jridgewell/trace-mapping@npm:^0.3.14":
+  version: 0.3.15
+  resolution: "@jridgewell/trace-mapping@npm:0.3.15"
+  dependencies:
+    "@jridgewell/resolve-uri": ^3.0.3
+    "@jridgewell/sourcemap-codec": ^1.4.10
+  checksum: 38917e9c2b014d469a9f51c016ed506acbe44dd16ec2f6f99b553ebf3764d22abadbf992f2367b6d2b3511f3eae8ed3a8963f6c1030093fda23efd35ecab2bae
+  languageName: node
+  linkType: hard
+
 "@lerna-lite/cli@npm:1.10.0":
   version: 1.10.0
   resolution: "@lerna-lite/cli@npm:1.10.0"
@@ -2483,7 +2500,7 @@ __metadata:
   dependencies:
     "@uiengine/util": "workspace:*"
     deepmerge: 4.2.2
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -2499,7 +2516,7 @@ __metadata:
   resolution: "@uiengine/adapter-ejs@workspace:packages/adapter-ejs"
   dependencies:
     ejs: 3.1.8
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -2516,7 +2533,7 @@ __metadata:
   resolution: "@uiengine/adapter-handlebars@workspace:packages/adapter-handlebars"
   dependencies:
     "@uiengine/util": "workspace:*"
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -2534,7 +2551,7 @@ __metadata:
   resolution: "@uiengine/adapter-html@workspace:packages/adapter-html"
   dependencies:
     "@uiengine/util": "workspace:*"
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -2549,7 +2566,7 @@ __metadata:
   resolution: "@uiengine/adapter-marko@workspace:packages/adapter-marko"
   dependencies:
     "@uiengine/util": "workspace:*"
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -2569,7 +2586,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/adapter-nunjucks@workspace:packages/adapter-nunjucks"
   dependencies:
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -2587,7 +2604,7 @@ __metadata:
   resolution: "@uiengine/adapter-pug@workspace:packages/adapter-pug"
   dependencies:
     "@uiengine/util": "workspace:*"
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -2619,7 +2636,7 @@ __metadata:
     babel-preset-vue: 2.0.2
     chalk: 4.1.2
     css-loader: 6.7.1
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-import-resolver-node: 0.3.6
     eslint-plugin-import: 2.26.0
@@ -2661,7 +2678,7 @@ __metadata:
   resolution: "@uiengine/cli@workspace:packages/cli"
   dependencies:
     "@uiengine/util": "workspace:*"
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -2699,7 +2716,7 @@ __metadata:
     connect-history-api-fallback: 2.0.0
     cosmiconfig: 7.0.1
     ejs: 3.1.8
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -2742,7 +2759,7 @@ __metadata:
     c8: 7.12.0
     cross-env: 7.0.3
     ejs: 3.1.8
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-import-resolver-node: 0.3.6
     eslint-plugin-import: 2.26.0
@@ -2770,7 +2787,7 @@ __metadata:
   dependencies:
     "@uiengine/core": "workspace:*"
     axe-core: 4.4.3
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -2787,7 +2804,7 @@ __metadata:
   resolution: "@uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class"
   dependencies:
     "@uiengine/core": "workspace:*"
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -2803,8 +2820,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/test-acceptance@workspace:test/acceptance"
   dependencies:
-    cypress: 10.4.0
-    eslint: 8.21.0
+    cypress: 10.5.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-import-resolver-node: 0.3.6
     eslint-plugin-cypress: 2.12.1
@@ -2850,7 +2867,7 @@ __metadata:
     cross-env: 7.0.3
     css-loader: 6.7.1
     ejs: 3.1.8
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-import-resolver-node: 0.3.6
     eslint-plugin-import: 2.26.0
@@ -2897,7 +2914,7 @@ __metadata:
     autoprefixer: 10.4.8
     babel-eslint: 10.1.0
     babel-loader: 8.2.5
-    caniuse-lite: 1.0.30001374
+    caniuse-lite: 1.0.30001377
     clipboard: 2.0.11
     color: 4.2.3
     compile-ejs-loader: 0.0.3
@@ -2909,7 +2926,7 @@ __metadata:
     csswring: 7.0.0
     deepmerge: 4.2.2
     ejs: 3.1.8
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-friendly-formatter: 4.0.1
     eslint-import-resolver-node: 0.3.6
@@ -2937,9 +2954,9 @@ __metadata:
     rimraf: 3.0.2
     run-sequence: 2.2.1
     sinon: 10.0.0
-    stylus: 0.58.1
+    stylus: 0.59.0
     stylus-loader: 6.2.0
-    terser-webpack-plugin: 5.3.3
+    terser-webpack-plugin: 5.3.4
     uglify-js: 3.16.3
     url-loader: 4.1.1
     vue: 2.7.8
@@ -2964,7 +2981,7 @@ __metadata:
   dependencies:
     "@types/markdown-it": 12.2.3
     chalk: 4.1.2
-    eslint: 8.21.0
+    eslint: 8.22.0
     eslint-config-standard: 17.0.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-n: 15.2.4
@@ -4904,10 +4921,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:1.0.30001374":
-  version: 1.0.30001374
-  resolution: "caniuse-lite@npm:1.0.30001374"
-  checksum: a75656e971d7ef2af4d2f3529a4620ae1a45d09460601fbc34b26f6867f31bbca006f71d8840291c471a2f01fc1994044f319a5660241ffaf35a2d84535af442
+"caniuse-lite@npm:1.0.30001377":
+  version: 1.0.30001377
+  resolution: "caniuse-lite@npm:1.0.30001377"
+  checksum: bd42fa4255f30df914bcef846412c2710e032dfd43f5861753befbd45244574a8c281147247a57c11b19684c8516e3ef731b45bc12b1adfdad13b62f548b23fb
   languageName: node
   linkType: hard
 
@@ -5955,17 +5972,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "css@npm:3.0.0"
-  dependencies:
-    inherits: ^2.0.4
-    source-map: ^0.6.1
-    source-map-resolve: ^0.6.0
-  checksum: 4273ac816ddf99b99acb9c1d1a27d86d266a533cc01118369d941d8e8a78277a83cad3315e267a398c509d930fbb86504e193ea1ebc620a4a4212e06fe76e8be
-  languageName: node
-  linkType: hard
-
 "cssesc@npm:^3.0.0":
   version: 3.0.0
   resolution: "cssesc@npm:3.0.0"
@@ -6065,9 +6071,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:10.4.0":
-  version: 10.4.0
-  resolution: "cypress@npm:10.4.0"
+"cypress@npm:10.5.0":
+  version: 10.5.0
+  resolution: "cypress@npm:10.5.0"
   dependencies:
     "@cypress/request": ^2.88.10
     "@cypress/xvfb": ^1.2.4
@@ -6113,7 +6119,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 3f7385e076ac936683d1d1d104a7183f2e61ad0f4c901aff07146ae2e10197e8314019dcdfb6c188312fbf1be05484291f1cf8d49c4c37cf6485103c4ac5303e
+  checksum: aac72c70a91589dcb7d5e3e97ba1e21270ae23cc6f9b0340d5f5019e72556b827bcea1a59e39eef4629fa328e78c2869a47c01335da7554cd25665b71330c6bf
   languageName: node
   linkType: hard
 
@@ -7351,9 +7357,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.21.0":
-  version: 8.21.0
-  resolution: "eslint@npm:8.21.0"
+"eslint@npm:8.22.0":
+  version: 8.22.0
+  resolution: "eslint@npm:8.22.0"
   dependencies:
     "@eslint/eslintrc": ^1.3.0
     "@humanwhocodes/config-array": ^0.10.4
@@ -7396,7 +7402,7 @@ __metadata:
     v8-compile-cache: ^2.0.3
   bin:
     eslint: bin/eslint.js
-  checksum: 1d39ddb08772ea230cb7d74f7f81f85b9d46965d3600725c7eb39a27bcdaf28cb2a780dacf6cfa1cfbf2da606b57a5e7e3ab373ab474cbcf0ba042076821f501
+  checksum: 2d84a7a2207138cdb250759b047fdb05a57fede7f87b7a039d9370edba7f26e23a873a208becfd4b2c9e4b5499029f3fc3b9318da3290e693d25c39084119c80
   languageName: node
   linkType: hard
 
@@ -15245,16 +15251,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-resolve@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "source-map-resolve@npm:0.6.0"
-  dependencies:
-    atob: ^2.1.2
-    decode-uri-component: ^0.2.0
-  checksum: fe503b9e5dac1c54be835282fcfec10879434e7b3ee08a9774f230299c724a8d403484d9531276d1670c87390e0e4d1d3f92b14cca6e4a2445ea3016b786ecd4
-  languageName: node
-  linkType: hard
-
 "source-map-support@npm:^0.5.16, source-map-support@npm:~0.5.20":
   version: 0.5.21
   resolution: "source-map-support@npm:0.5.21"
@@ -15787,18 +15783,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylus@npm:0.58.1":
-  version: 0.58.1
-  resolution: "stylus@npm:0.58.1"
+"stylus@npm:0.59.0":
+  version: 0.59.0
+  resolution: "stylus@npm:0.59.0"
   dependencies:
-    css: ^3.0.0
+    "@adobe/css-tools": ^4.0.1
     debug: ^4.3.2
     glob: ^7.1.6
     sax: ~1.2.4
     source-map: ^0.7.3
   bin:
     stylus: bin/stylus
-  checksum: 58057736deca6cb4c8b1c8811def119ed093436e6b48448b14a246b28070cbeb996fa944444ff02fd84f89d6b566251d04c56e8dc193a53a9053783da850baa2
+  checksum: 2faf4a5618747c17b7d10854e40efdd43b438a6cf99d197b0231578f5091bfe9313663d846b5666bb37140140420c51606bb127fd877bbf2db46730c01403b01
   languageName: node
   linkType: hard
 
@@ -15927,7 +15923,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser-webpack-plugin@npm:5.3.3, terser-webpack-plugin@npm:^5.1.3":
+"terser-webpack-plugin@npm:5.3.4":
+  version: 5.3.4
+  resolution: "terser-webpack-plugin@npm:5.3.4"
+  dependencies:
+    "@jridgewell/trace-mapping": ^0.3.14
+    jest-worker: ^27.4.5
+    schema-utils: ^3.1.1
+    serialize-javascript: ^6.0.0
+    terser: ^5.14.1
+  peerDependencies:
+    webpack: ^5.1.0
+  peerDependenciesMeta:
+    "@swc/core":
+      optional: true
+    esbuild:
+      optional: true
+    uglify-js:
+      optional: true
+  checksum: 37f65cf0a3fd24c7ce48268e387e50d3315136c9afd27952e1c299995a951aa61c0d34d8eb07cf2eb667078176b5e0d56e7f7400b09984eaa74712d0c1e39203
+  languageName: node
+  linkType: hard
+
+"terser-webpack-plugin@npm:^5.1.3":
   version: 5.3.3
   resolution: "terser-webpack-plugin@npm:5.3.3"
   dependencies:
@@ -15949,7 +15967,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.10.0, terser@npm:^5.7.2":
+"terser@npm:^5.10.0, terser@npm:^5.14.1, terser@npm:^5.7.2":
   version: 5.14.2
   resolution: "terser@npm:5.14.2"
   dependencies:
