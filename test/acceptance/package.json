@@ -18,13 +18,13 @@
     "serve": "cd ../project && yarn run standalone"
   },
   "devDependencies": {
-    "cypress": "10.5.0",
+    "cypress": "10.6.0",
     "eslint": "8.22.0",
     "eslint-config-standard": "17.0.0",
     "eslint-import-resolver-node": "0.3.6",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-n": "15.2.4",
+    "eslint-plugin-n": "15.2.5",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-standard": "5.0.0",
