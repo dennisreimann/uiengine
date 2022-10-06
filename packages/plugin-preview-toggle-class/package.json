@@ -2,7 +2,7 @@
   "name": "@uiengine/plugin-preview-toggle-class",
   "description": "UIengine plugin for toggling a class on the preview",
   "license": "MIT",
-  "version": "3.3.5",
+  "version": "3.3.7",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine",
