@@ -7454,7 +7454,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cacheable-request", "npm:7.0.2"],\
             ["clone-response", "npm:1.0.3"],\
             ["get-stream", "npm:5.2.0"],\
-            ["http-cache-semantics", "npm:4.1.0"],\
+            ["http-cache-semantics", "npm:4.1.1"],\
             ["keyv", "npm:4.3.3"],\
             ["lowercase-keys", "npm:2.0.0"],\
             ["normalize-url", "npm:6.1.0"],\
@@ -13301,10 +13301,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["http-cache-semantics", [\
-        ["npm:4.1.0", {\
-          "packageLocation": "./.yarn/cache/http-cache-semantics-npm-4.1.0-860520a31f-974de94a81.zip/node_modules/http-cache-semantics/",\
+        ["npm:4.1.1", {\
+          "packageLocation": "./.yarn/cache/http-cache-semantics-npm-4.1.1-1120131375-83ac0bc60b.zip/node_modules/http-cache-semantics/",\
           "packageDependencies": [\
-            ["http-cache-semantics", "npm:4.1.0"]\
+            ["http-cache-semantics", "npm:4.1.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -15517,7 +15517,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["make-fetch-happen", "npm:10.1.8"],\
             ["agentkeepalive", "npm:4.2.1"],\
             ["cacache", "npm:16.1.1"],\
-            ["http-cache-semantics", "npm:4.1.0"],\
+            ["http-cache-semantics", "npm:4.1.1"],\
             ["http-proxy-agent", "npm:5.0.0"],\
             ["https-proxy-agent", "npm:5.0.1"],\
             ["is-lambda", "npm:1.0.1"],\
@@ -15540,7 +15540,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["make-fetch-happen", "npm:11.0.2"],\
             ["agentkeepalive", "npm:4.2.1"],\
             ["cacache", "npm:17.0.4"],\
-            ["http-cache-semantics", "npm:4.1.0"],\
+            ["http-cache-semantics", "npm:4.1.1"],\
             ["http-proxy-agent", "npm:5.0.0"],\
             ["https-proxy-agent", "npm:5.0.1"],\
             ["is-lambda", "npm:1.0.1"],\
