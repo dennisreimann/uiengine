@@ -2,7 +2,7 @@
   "config": {
     "name": "UIengine Test Project",
     "version": "1.0.0",
-    "update": 1672171502007,
+    "update": 1675933076534,
     "logo": "/test-project/assets/images/uiengine-logo.png",
     "copyright": "<a href=\"https://github.com/dennisreimann/uiengine\">Generated with UIengine</a>",
     "debug": 1,
@@ -72,7 +72,7 @@
                   "exclude": {},
                   "use": [
                     {
-                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-d1509581ff/0/cache/babel-loader-npm-9.1.0-6467162cbf-774758febd.zip/node_modules/babel-loader/lib/index.js",
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-242508bf81/0/cache/babel-loader-npm-9.1.2-a76340cb80-f0edb8e157.zip/node_modules/babel-loader/lib/index.js",
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
@@ -143,7 +143,7 @@
                   "exclude": {},
                   "use": [
                     {
-                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-d1509581ff/0/cache/babel-loader-npm-9.1.0-6467162cbf-774758febd.zip/node_modules/babel-loader/lib/index.js",
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-242508bf81/0/cache/babel-loader-npm-9.1.2-a76340cb80-f0edb8e157.zip/node_modules/babel-loader/lib/index.js",
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
@@ -195,7 +195,7 @@
                 {
                   "test": {},
                   "exclude": {},
-                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-d1509581ff/0/cache/babel-loader-npm-9.1.0-6467162cbf-774758febd.zip/node_modules/babel-loader/lib/index.js",
+                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-242508bf81/0/cache/babel-loader-npm-9.1.2-a76340cb80-f0edb8e157.zip/node_modules/babel-loader/lib/index.js",
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
@@ -229,7 +229,7 @@
                 {
                   "test": {},
                   "exclude": {},
-                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-d1509581ff/0/cache/babel-loader-npm-9.1.0-6467162cbf-774758febd.zip/node_modules/babel-loader/lib/index.js",
+                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-242508bf81/0/cache/babel-loader-npm-9.1.2-a76340cb80-f0edb8e157.zip/node_modules/babel-loader/lib/index.js",
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
