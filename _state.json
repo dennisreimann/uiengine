@@ -1,8 +1,8 @@
 {
   "config": {
     "name": "UIengine Documentation",
-    "version": "3.3.10",
-    "update": 1678541967881,
+    "version": "3.3.11",
+    "update": 1678545221919,
     "logo": "/images/logo.svg",
     "source": {
       "pages": "/home/runner/work/uiengine/uiengine/docs/site",
