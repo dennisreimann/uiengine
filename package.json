@@ -12,10 +12,10 @@
     "url": "ssh://git@github.com/dennisreimann/uiengine.git"
   },
   "dependencies": {
-    "@yarnpkg/pnpify": "4.0.0-rc.39"
+    "@yarnpkg/pnpify": "4.0.0-rc.40"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "1.15.1",
+    "@lerna-lite/cli": "1.16.1",
     "@uiengine/adapter-html": "workspace:*",
     "@uiengine/cli": "workspace:*",
     "@uiengine/core": "workspace:*",
@@ -24,7 +24,7 @@
     "c8": "7.13.0",
     "cross-env": "7.0.3",
     "ejs": "3.1.8",
-    "eslint": "8.34.0",
+    "eslint": "8.36.0",
     "eslint-config-standard": "17.0.0",
     "eslint-import-resolver-node": "0.3.7",
     "eslint-plugin-import": "2.27.5",
@@ -35,13 +35,13 @@
     "eslint-plugin-vue": "9.9.0",
     "fs-extra": "11.1.0",
     "html-minifier": "4.0.0",
-    "mocha": "8.4.0",
+    "mocha": "10.2.0",
     "mocha-lcov-reporter": "1.3.0",
-    "rimraf": "4.1.2",
+    "rimraf": "4.4.0",
     "standard": "17.0.0",
     "uglify-js": "3.17.4",
     "vue-template-compiler": "2.7.14",
-    "webpack": "5.75.0",
+    "webpack": "5.76.1",
     "webpack-cli": "5.0.1"
   },
   "scripts": {

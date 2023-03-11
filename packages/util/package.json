@@ -43,16 +43,16 @@
   },
   "devDependencies": {
     "@types/markdown-it": "12.2.3",
-    "eslint": "8.34.0",
+    "eslint": "8.36.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-n": "15.6.1",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.1.1",
     "eslint-plugin-standard": "5.0.0",
-    "mocha": "8.4.0",
+    "mocha": "10.2.0",
     "mocha-sinon": "2.1.2",
-    "sinon": "10.0.0"
+    "sinon": "15.0.1"
   },
   "gitHead": "3d781693b2efbed9cd09bb0bd07360c10282fd9d"
 }
