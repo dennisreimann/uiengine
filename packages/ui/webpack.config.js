@@ -186,9 +186,7 @@ module.exports = {
               postcssOptions: {
                 plugins: [
                   require.resolve('postcss-import'),
-                  require.resolve('css-mqpacker'),
                   require.resolve('autoprefixer'),
-                  require.resolve('csswring'),
                 ],
               },
             },

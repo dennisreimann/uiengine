@@ -61,7 +61,6 @@
     "eslint-plugin-n": "15.6.1",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.1.1",
-    "eslint-plugin-standard": "5.0.0",
     "handlebars": "4.7.7",
     "marko": "4.25.0",
     "mocha": "10.2.0",
