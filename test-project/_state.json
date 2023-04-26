@@ -2,7 +2,7 @@
   "config": {
     "name": "UIengine Test Project",
     "version": "1.0.0",
-    "update": 1682490928841,
+    "update": 1682491447020,
     "logo": "/test-project/assets/images/uiengine-logo.png",
     "copyright": "<a href=\"https://github.com/dennisreimann/uiengine\">Generated with UIengine</a>",
     "debug": 1,
@@ -511,6 +511,17 @@
       "type": "documentation",
       "content": "<h1 id=\"molecules\" tabindex=\"-1\">Molecules</h1>"
     },
+    "patterns/pages": {
+      "childIds": [],
+      "id": "patterns/pages",
+      "title": "Pages",
+      "isTitleFromHeading": true,
+      "path": "patterns/pages",
+      "sourcePath": "uiengine/pages/patterns/pages",
+      "readmeFile": "uiengine/pages/patterns/pages/README.md",
+      "type": "documentation",
+      "content": "<h1 id=\"pages\" tabindex=\"-1\">Pages</h1>"
+    },
     "patterns/organisms": {
       "childIds": [],
       "componentIds": [
@@ -525,17 +536,6 @@
       "readmeFile": "uiengine/pages/patterns/organisms/README.md",
       "type": "documentation",
       "content": "<h1 id=\"organisms\" tabindex=\"-1\">Organisms</h1>"
-    },
-    "patterns/pages": {
-      "childIds": [],
-      "id": "patterns/pages",
-      "title": "Pages",
-      "isTitleFromHeading": true,
-      "path": "patterns/pages",
-      "sourcePath": "uiengine/pages/patterns/pages",
-      "readmeFile": "uiengine/pages/patterns/pages/README.md",
-      "type": "documentation",
-      "content": "<h1 id=\"pages\" tabindex=\"-1\">Pages</h1>"
     },
     "patterns/templates": {
       "childIds": [],
@@ -1907,6 +1907,16 @@
         null
       ]
     },
+    "patterns/pages": {
+      "prevSiblingId": "patterns/templates",
+      "parentId": "patterns",
+      "id": "patterns/pages",
+      "itemId": "patterns/pages",
+      "isStructural": true,
+      "path": "/patterns/pages/",
+      "type": "documentation",
+      "title": "Pages"
+    },
     "patterns/organisms": {
       "prevSiblingId": "patterns/molecules",
       "nextSiblingId": "patterns/templates",
@@ -1931,16 +1941,6 @@
       "keywords": [
         null
       ]
-    },
-    "patterns/pages": {
-      "prevSiblingId": "patterns/templates",
-      "parentId": "patterns",
-      "id": "patterns/pages",
-      "itemId": "patterns/pages",
-      "isStructural": true,
-      "path": "/patterns/pages/",
-      "type": "documentation",
-      "title": "Pages"
     },
     "patterns/templates": {
       "prevSiblingId": "patterns/organisms",
