@@ -30,7 +30,7 @@
   "dependencies": {
     "chalk": "4.1.2",
     "fast-glob": "3.2.12",
-    "fs-extra": "11.1.0",
+    "fs-extra": "11.1.1",
     "globby": "11.1.0",
     "markdown-it": "13.0.1",
     "markdown-it-anchor": "8.6.7",
@@ -38,20 +38,20 @@
     "markdown-it-implicit-figures": "0.11.0",
     "markdown-it-include": "2.0.0",
     "markdown-it-mark": "3.0.1",
-    "ramda": "0.28.0",
+    "ramda": "0.29.0",
     "unescape": "1.0.1"
   },
   "devDependencies": {
     "@types/markdown-it": "12.2.3",
-    "eslint": "8.36.0",
+    "eslint": "8.39.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-n": "15.6.1",
+    "eslint-plugin-n": "15.7.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.1.1",
     "mocha": "10.2.0",
     "mocha-sinon": "2.1.2",
-    "sinon": "15.0.1"
+    "sinon": "15.0.4"
   },
   "gitHead": "3d781693b2efbed9cd09bb0bd07360c10282fd9d"
 }
