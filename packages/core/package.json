@@ -73,7 +73,7 @@
     "vue": "2.7.14"
   },
   "optionalDependencies": {
-    "browser-sync": "2.29.1",
+    "browser-sync": "2.29.3",
     "chokidar": "3.5.3",
     "connect-history-api-fallback": "2.0.0"
   },
