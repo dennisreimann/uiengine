@@ -2,7 +2,7 @@
   "name": "@uiengine/adapter-css",
   "description": "UIengine template adapter for CSS.",
   "license": "MIT",
-  "version": "3.3.13",
+  "version": "3.3.14",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
