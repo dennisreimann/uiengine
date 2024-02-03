@@ -40,7 +40,7 @@ async function findPageFiles (pagesPath, pagePath, childIds = []) {
   // see the glob option described here for details:
   // https://github.com/mrmlnc/fast-glob#how-to-exclude-directory-from-reading
   const filesPattern = crossPlatformPath(join(pagesPath, pagePath, '**'))
-  const pageExcludes = [crossPlatformPath(join('**', '_{*,**}', '**')), crossPlatformPath(join('**', `{${PAGE_CONFNAME},${PAGE_DOCSNAME}}`))]
+  const pageExcludes = [crossPlatformPath(join('**', '_**', '**')), crossPlatformPath(join('**', '_*')), crossPlatformPath(join('**', `{${PAGE_CONFNAME},${PAGE_DOCSNAME}}`))]
   const childExcludes = R.map(id => crossPlatformPath(join('**', id, '**')), childIds)
   const ignore = R.concat(pageExcludes, childExcludes)
   const filePaths = await glob(filesPattern, { ignore })

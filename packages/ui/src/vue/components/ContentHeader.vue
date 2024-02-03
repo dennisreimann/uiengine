@@ -1,4 +1,3 @@
-
 <template>
   <header class="contentheader">
     <ContentHeading v-if="title">
