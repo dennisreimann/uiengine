@@ -2,7 +2,7 @@
   "config": {
     "name": "UIengine Test Project",
     "version": "1.0.0",
-    "update": 1706966551072,
+    "update": 1709570404849,
     "logo": "/test-project/assets/images/uiengine-logo.png",
     "copyright": "<a href=\"https://github.com/dennisreimann/uiengine\">Generated with UIengine</a>",
     "debug": 1,
@@ -76,7 +76,7 @@
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
-                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-872c05377c/0/cache/@babel-preset-env-npm-7.23.9-ecf3dc35c0-23a48468ba.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-e3e5ee7d95/0/cache/@babel-preset-env-npm-7.24.0-5569280277-d9e8940373.zip/node_modules/@babel/preset-env/lib/index.js",
                           "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-4ee7e24f67.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
                         ]
                       },
@@ -147,7 +147,7 @@
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
-                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-872c05377c/0/cache/@babel-preset-env-npm-7.23.9-ecf3dc35c0-23a48468ba.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-e3e5ee7d95/0/cache/@babel-preset-env-npm-7.24.0-5569280277-d9e8940373.zip/node_modules/@babel/preset-env/lib/index.js",
                           "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-4ee7e24f67.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
                         ]
                       },
@@ -199,7 +199,7 @@
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-872c05377c/0/cache/@babel-preset-env-npm-7.23.9-ecf3dc35c0-23a48468ba.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-e3e5ee7d95/0/cache/@babel-preset-env-npm-7.24.0-5569280277-d9e8940373.zip/node_modules/@babel/preset-env/lib/index.js",
                       "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-b0eb52a9b4/0/cache/@babel-preset-react-npm-7.23.3-6a959abc25-2d90961e7e.zip/node_modules/@babel/preset-react/lib/index.js"
                     ]
                   }
@@ -233,7 +233,7 @@
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-872c05377c/0/cache/@babel-preset-env-npm-7.23.9-ecf3dc35c0-23a48468ba.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-e3e5ee7d95/0/cache/@babel-preset-env-npm-7.24.0-5569280277-d9e8940373.zip/node_modules/@babel/preset-env/lib/index.js",
                       "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-b0eb52a9b4/0/cache/@babel-preset-react-npm-7.23.3-6a959abc25-2d90961e7e.zip/node_modules/@babel/preset-react/lib/index.js"
                     ]
                   }
