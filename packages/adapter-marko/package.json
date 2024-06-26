@@ -35,11 +35,11 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-n": "16.6.2",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "6.1.1",
+    "eslint-plugin-promise": "6.2.0",
     "marko": "4.25.0",
-    "mocha": "10.3.0",
+    "mocha": "10.5.2",
     "mocha-sinon": "2.1.2",
-    "sinon": "17.0.1"
+    "sinon": "18.0.0"
   },
   "peerDependencies": {
     "marko": "^4.25.0"
