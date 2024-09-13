@@ -33,7 +33,7 @@
     "fs-extra": "11.2.0",
     "globby": "11.1.0",
     "markdown-it": "14.1.0",
-    "markdown-it-anchor": "9.0.1",
+    "markdown-it-anchor": "9.2.0",
     "markdown-it-container": "4.0.0",
     "markdown-it-implicit-figures": "0.12.0",
     "markdown-it-include": "2.0.0",
@@ -42,16 +42,16 @@
     "unescape": "1.0.1"
   },
   "devDependencies": {
-    "@types/markdown-it": "14.1.1",
+    "@types/markdown-it": "14.1.2",
     "eslint": "8.57.0",
     "eslint-config-standard": "17.1.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-n": "16.6.2",
+    "eslint-plugin-import": "2.30.0",
+    "eslint-plugin-n": "17.10.2",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "6.2.0",
-    "mocha": "10.5.2",
+    "eslint-plugin-promise": "7.1.0",
+    "mocha": "10.7.3",
     "mocha-sinon": "2.1.2",
-    "sinon": "18.0.0"
+    "sinon": "18.0.1"
   },
   "gitHead": "3d781693b2efbed9cd09bb0bd07360c10282fd9d"
 }
