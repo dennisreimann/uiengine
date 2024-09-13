@@ -15,7 +15,7 @@
   \************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// eslint-disable-next-line no-unused-vars\nvar React = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-18.3.1-af38f3c1ae-261137d3f3.zip/node_modules/react/index.js\");\nvar _require = __webpack_require__(/*! react-dom/server */ \"../../.yarn/__virtual__/react-dom-virtual-446b186f8a/0/cache/react-dom-npm-18.3.1-a805663f38-3f4b73a3aa.zip/node_modules/react-dom/server.node.js\"),\n  renderToString = _require.renderToString;\nmodule.exports = function (Component, props) {\n  return renderToString( /*#__PURE__*/React.createElement(Component, props));\n};\n\n//# sourceURL=webpack://@uiengine/test-project/./lib/react-server-render.js?");
+eval("// eslint-disable-next-line no-unused-vars\nvar React = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-18.3.1-af38f3c1ae-261137d3f3.zip/node_modules/react/index.js\");\nvar _require = __webpack_require__(/*! react-dom/server */ \"../../.yarn/__virtual__/react-dom-virtual-446b186f8a/0/cache/react-dom-npm-18.3.1-a805663f38-3f4b73a3aa.zip/node_modules/react-dom/server.node.js\"),\n  renderToString = _require.renderToString;\nmodule.exports = function (Component, props) {\n  return renderToString(/*#__PURE__*/React.createElement(Component, props));\n};\n\n//# sourceURL=webpack://@uiengine/test-project/./lib/react-server-render.js?");
 
 /***/ }),
 
