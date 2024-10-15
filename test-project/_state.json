@@ -2,7 +2,7 @@
   "config": {
     "name": "UIengine Test Project",
     "version": "1.0.0",
-    "update": 1726221854712,
+    "update": 1728972627995,
     "logo": "/test-project/assets/images/uiengine-logo.png",
     "copyright": "<a href=\"https://github.com/dennisreimann/uiengine\">Generated with UIengine</a>",
     "debug": 1,
@@ -72,11 +72,11 @@
                   "exclude": {},
                   "use": [
                     {
-                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-c76475e412/0/cache/babel-loader-npm-9.1.3-cbf4da21df-7086e67827.zip/node_modules/babel-loader/lib/index.js",
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-7021d53f92/0/cache/babel-loader-npm-9.2.1-6cf3231de6-f1f24ae3c2.zip/node_modules/babel-loader/lib/index.js",
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
-                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-5e86f2857d/0/cache/@babel-preset-env-npm-7.25.4-ec56d62db2-45ca65bdc7.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-4d792a3d62/0/cache/@babel-preset-env-npm-7.25.8-df8f85e71d-501d78f56d.zip/node_modules/@babel/preset-env/lib/index.js",
                           "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-87ebcdce9a.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
                         ]
                       },
@@ -143,11 +143,11 @@
                   "exclude": {},
                   "use": [
                     {
-                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-c76475e412/0/cache/babel-loader-npm-9.1.3-cbf4da21df-7086e67827.zip/node_modules/babel-loader/lib/index.js",
+                      "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-7021d53f92/0/cache/babel-loader-npm-9.2.1-6cf3231de6-f1f24ae3c2.zip/node_modules/babel-loader/lib/index.js",
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
-                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-5e86f2857d/0/cache/@babel-preset-env-npm-7.25.4-ec56d62db2-45ca65bdc7.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-4d792a3d62/0/cache/@babel-preset-env-npm-7.25.8-df8f85e71d-501d78f56d.zip/node_modules/@babel/preset-env/lib/index.js",
                           "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-87ebcdce9a.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
                         ]
                       },
@@ -195,12 +195,12 @@
                 {
                   "test": {},
                   "exclude": {},
-                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-c76475e412/0/cache/babel-loader-npm-9.1.3-cbf4da21df-7086e67827.zip/node_modules/babel-loader/lib/index.js",
+                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-7021d53f92/0/cache/babel-loader-npm-9.2.1-6cf3231de6-f1f24ae3c2.zip/node_modules/babel-loader/lib/index.js",
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-5e86f2857d/0/cache/@babel-preset-env-npm-7.25.4-ec56d62db2-45ca65bdc7.zip/node_modules/@babel/preset-env/lib/index.js",
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-1355e5b6db/0/cache/@babel-preset-react-npm-7.24.7-eaa2600adf-e861e6b923.zip/node_modules/@babel/preset-react/lib/index.js"
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-4d792a3d62/0/cache/@babel-preset-env-npm-7.25.8-df8f85e71d-501d78f56d.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-450ba27134/0/cache/@babel-preset-react-npm-7.25.7-472587e15c-4701a76b45.zip/node_modules/@babel/preset-react/lib/index.js"
                     ]
                   }
                 }
@@ -229,12 +229,12 @@
                 {
                   "test": {},
                   "exclude": {},
-                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-c76475e412/0/cache/babel-loader-npm-9.1.3-cbf4da21df-7086e67827.zip/node_modules/babel-loader/lib/index.js",
+                  "loader": "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/babel-loader-virtual-7021d53f92/0/cache/babel-loader-npm-9.2.1-6cf3231de6-f1f24ae3c2.zip/node_modules/babel-loader/lib/index.js",
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-5e86f2857d/0/cache/@babel-preset-env-npm-7.25.4-ec56d62db2-45ca65bdc7.zip/node_modules/@babel/preset-env/lib/index.js",
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-1355e5b6db/0/cache/@babel-preset-react-npm-7.24.7-eaa2600adf-e861e6b923.zip/node_modules/@babel/preset-react/lib/index.js"
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-4d792a3d62/0/cache/@babel-preset-env-npm-7.25.8-df8f85e71d-501d78f56d.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-450ba27134/0/cache/@babel-preset-react-npm-7.25.7-472587e15c-4701a76b45.zip/node_modules/@babel/preset-react/lib/index.js"
                     ]
                   }
                 }
