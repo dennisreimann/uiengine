@@ -2964,7 +2964,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/cli@workspace:packages/cli"
   dependencies:
-    "@uiengine/core": "npm:3.3.16"
+    "@uiengine/core": "npm:3.3.17"
     "@uiengine/util": "workspace:*"
     eslint: "npm:8.57.1"
     eslint-config-standard: "npm:17.1.0"
@@ -2981,7 +2981,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uiengine/core@npm:3.3.16, @uiengine/core@workspace:*, @uiengine/core@workspace:packages/core":
+"@uiengine/core@npm:3.3.17, @uiengine/core@workspace:*, @uiengine/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@uiengine/core@workspace:packages/core"
   dependencies:
@@ -3071,7 +3071,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/plugin-preview-a11y@workspace:packages/plugin-preview-a11y"
   dependencies:
-    "@uiengine/core": "npm:3.3.16"
+    "@uiengine/core": "npm:3.3.17"
     axe-core: "npm:4.10.0"
     eslint: "npm:8.57.1"
     eslint-config-standard: "npm:17.1.0"
@@ -3088,7 +3088,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uiengine/plugin-preview-toggle-class@workspace:packages/plugin-preview-toggle-class"
   dependencies:
-    "@uiengine/core": "npm:3.3.16"
+    "@uiengine/core": "npm:3.3.17"
     eslint: "npm:8.57.1"
     eslint-config-standard: "npm:17.1.0"
     eslint-plugin-import: "npm:2.31.0"
