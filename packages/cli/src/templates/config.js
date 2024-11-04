@@ -3,7 +3,7 @@ module.exports = {
   // Project config: Defaults to name and version from package.json.
   // Here you can overwrite it and add more custom properties.
   // For a detailed documentation of all the options in here see
-  // https://uiengine.uix.space/basics/config/
+  // https://dennisreimann.github.io/uiengine/basics/config/
   name: '${values.name}',
 
   // Base directories for the input, your raw source files:

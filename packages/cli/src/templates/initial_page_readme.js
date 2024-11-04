@@ -81,4 +81,4 @@ npx uiengine build --watch --serve
 \`\`\`
 
 Under the hood [BrowserSync](https://www.browsersync.io/) is used to provide serving and watching the files.
-For information on how to configure the server and pass additional options, see the [configuration documentation](https://uiengine.uix.space/basics/config/#BrowserSync).`
+For information on how to configure the server and pass additional options, see the [configuration documentation](https://dennisreimann.github.io/uiengine/basics/config/#BrowserSync).`

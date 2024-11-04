@@ -15,7 +15,7 @@ const meta = (name, content) => ({
 
 module.exports = {
   name: 'UIengine Documentation',
-  logo: '/images/logo.svg',
+  logo: '/uiengine/images/logo.svg',
   version: pkg.version,
 
   source: {
@@ -26,6 +26,7 @@ module.exports = {
   target: 'dist',
 
   ui: {
+    base: '/uiengine/',
     customStylesFile: '/styles/docs.css',
     meta: [
       meta('description', 'The UIengine is a workbench for UI-driven development: A tool for developers and designers to build and document web sites and apps.'),
@@ -53,14 +54,14 @@ module.exports = {
 
       meta('og:type', 'website'),
       meta('og:title', 'UIengine'),
-      meta('og:url', 'https://uiengine.uix.space/'),
+      meta('og:url', 'https://dennisreimann.github.io/uiengine/'),
       meta('og:site_name', 'UIengine Documentation'),
       meta('og:description', 'The UIengine is a workbench for UI-driven development: A tool for developers and designers to build and document web sites and apps.'),
       meta('og:image:width', 1024),
       meta('og:image:height', 640),
-      meta('og:image', 'http://uiengine.uix.space/card.png'),
-      meta('og:image:secure_url', 'https://uiengine.uix.space/card.png'),
-      meta('twitter:image', 'https://uiengine.uix.space/card.png'),
+      meta('og:image', 'http://dennisreimann.github.io/uiengine/card.png'),
+      meta('og:image:secure_url', 'https://dennisreimann.github.io/uiengine/card.png'),
+      meta('twitter:image', 'https://dennisreimann.github.io/uiengine/card.png'),
       meta('twitter:card', 'summary_large_image'),
       meta('twitter:site', '@dennisreimann')
     ],

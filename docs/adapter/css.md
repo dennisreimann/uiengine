@@ -60,4 +60,4 @@ src
 
 See the [test project](https://github.com/dennisreimann/uiengine/tree/master/test/project/src) for an example of the file contents.
 
-For an example of the output have a look at the "Themes" tab of the [label component sample](https://uiengine.uix.space/test-project/patterns/atoms/label/).
+For an example of the output have a look at the "Themes" tab of the [label component sample](https://dennisreimann.github.io/uiengine/test-project/patterns/atoms/label/).

@@ -30,7 +30,7 @@ npx uiengine init --demo
 npx uiengine build --serve --watch
 ```
 
-See the [getting started guide](https://uiengine.uix.space/basics/getting-started/)
+See the [getting started guide](https://dennisreimann.github.io/uiengine/basics/getting-started/)
 for further details.
 There are also some [introduction videos](https://www.youtube.com/watch?v=YBm_ye9da-Q&list=PLBXz0hPvV2jNAFb9KxvV-2Op8cy3tA8E2):
 
@@ -40,13 +40,13 @@ There are also some [introduction videos](https://www.youtube.com/watch?v=YBm_ye
 
 To get an idea of what a real-world project looks like, see the React sample project:
 
-- [Tasty BBQ Design System](https://uiengine-sample-react.uix.space/design-system/): The UIengine output for this sample project
-- [Tasty BBQ Website](https://uiengine-sample-react.uix.space/): The corresponding website, built with React and Next.js.
+- [Tasty BBQ Design System](https://dennisreimann.github.io/uiengine-sample-react/design-system/): The UIengine output for this sample project
+- [Tasty BBQ Website](https://dennisreimann.github.io/uiengine-sample-react/): The corresponding website, built with React and Next.js.
 - [Tasty BBQ Source Code](https://github.com/dennisreimann/uiengine-sample-react).
 
 ## 📘 Documentation
 
-See the [documentation](https://uiengine.uix.space/) site, which is also generated with the UIengine.
+See the [documentation](https://dennisreimann.github.io/uiengine/) site, which is also generated with the UIengine.
 
 ## 🔩 Technical TL;DR
 
@@ -117,7 +117,7 @@ Here are some other projects that you might want to evaluate:
 ## 🛠 Development
 
 You like this project and are interested in participating?
-See the [development docs](https://uiengine.uix.space/development/contributing/) for an introduction and workflows when hacking on the UIengine.
+See the [development docs](https://dennisreimann.github.io/uiengine/development/contributing/) for an introduction and workflows when hacking on the UIengine.
 
 ## ✨ Contributors
 

@@ -27,5 +27,5 @@ module.exports = require('yargs')
   .alias('h', 'help')
   .version()
   .alias('v', 'version')
-  .epilogue('Documentation: https://uiengine.uix.space/')
+  .epilogue('Documentation: https://dennisreimann.github.io/uiengine/')
   .argv

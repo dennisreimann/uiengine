@@ -263,7 +263,7 @@ For details see the
 ### Added
 
 - Set browser-sync `startPath` for custom UI base
-- New [documentation site](https://uiengine.uix.space/), generated with the UIengine itself
+- New [documentation site](https://dennisreimann.github.io/uiengine/), generated with the UIengine itself
 
 ### Changed
 
