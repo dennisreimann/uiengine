@@ -2,7 +2,7 @@
   "config": {
     "name": "UIengine Test Project",
     "version": "1.0.0",
-    "update": 1728972627995,
+    "update": 1730733256888,
     "logo": "/test-project/assets/images/uiengine-logo.png",
     "copyright": "<a href=\"https://github.com/dennisreimann/uiengine\">Generated with UIengine</a>",
     "debug": 1,
@@ -76,7 +76,7 @@
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
-                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-4d792a3d62/0/cache/@babel-preset-env-npm-7.25.8-df8f85e71d-501d78f56d.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-b382653804/0/cache/@babel-preset-env-npm-7.26.0-efb6b6fca8-a7a80314f8.zip/node_modules/@babel/preset-env/lib/index.js",
                           "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-87ebcdce9a.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
                         ]
                       },
@@ -147,7 +147,7 @@
                       "options": {
                         "cacheDirectory": true,
                         "presets": [
-                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-4d792a3d62/0/cache/@babel-preset-env-npm-7.25.8-df8f85e71d-501d78f56d.zip/node_modules/@babel/preset-env/lib/index.js",
+                          "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-b382653804/0/cache/@babel-preset-env-npm-7.26.0-efb6b6fca8-a7a80314f8.zip/node_modules/@babel/preset-env/lib/index.js",
                           "/home/runner/work/uiengine/uiengine/.yarn/cache/babel-preset-vue-npm-2.0.2-a1ddec7017-87ebcdce9a.zip/node_modules/babel-preset-vue/dist/babel-preset-vue.cjs.js"
                         ]
                       },
@@ -199,8 +199,8 @@
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-4d792a3d62/0/cache/@babel-preset-env-npm-7.25.8-df8f85e71d-501d78f56d.zip/node_modules/@babel/preset-env/lib/index.js",
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-450ba27134/0/cache/@babel-preset-react-npm-7.25.7-472587e15c-4701a76b45.zip/node_modules/@babel/preset-react/lib/index.js"
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-b382653804/0/cache/@babel-preset-env-npm-7.26.0-efb6b6fca8-a7a80314f8.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-6da8cb002d/0/cache/@babel-preset-react-npm-7.25.9-d1295a160d-3c9daf47cf.zip/node_modules/@babel/preset-react/lib/index.js"
                     ]
                   }
                 }
@@ -233,8 +233,8 @@
                   "options": {
                     "cacheDirectory": true,
                     "presets": [
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-4d792a3d62/0/cache/@babel-preset-env-npm-7.25.8-df8f85e71d-501d78f56d.zip/node_modules/@babel/preset-env/lib/index.js",
-                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-450ba27134/0/cache/@babel-preset-react-npm-7.25.7-472587e15c-4701a76b45.zip/node_modules/@babel/preset-react/lib/index.js"
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-env-virtual-b382653804/0/cache/@babel-preset-env-npm-7.26.0-efb6b6fca8-a7a80314f8.zip/node_modules/@babel/preset-env/lib/index.js",
+                      "/home/runner/work/uiengine/uiengine/.yarn/__virtual__/@babel-preset-react-virtual-6da8cb002d/0/cache/@babel-preset-react-npm-7.25.9-d1295a160d-3c9daf47cf.zip/node_modules/@babel/preset-react/lib/index.js"
                     ]
                   }
                 }
