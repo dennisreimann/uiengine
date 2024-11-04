@@ -33,13 +33,13 @@
     "eslint": "8.57.1",
     "eslint-config-standard": "17.1.0",
     "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-n": "17.11.1",
+    "eslint-plugin-n": "17.12.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "7.1.0",
     "marko": "4.25.0",
-    "mocha": "10.7.3",
+    "mocha": "10.8.2",
     "mocha-sinon": "2.1.2",
-    "sinon": "18.0.1"
+    "sinon": "19.0.2"
   },
   "peerDependencies": {
     "marko": "^4.25.0"
