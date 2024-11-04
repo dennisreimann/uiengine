@@ -2,7 +2,7 @@
   "name": "@uiengine/cli",
   "description": "UIengine command line interface.",
   "license": "MIT",
-  "version": "3.3.17",
+  "version": "3.3.18",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/uiengine",
   "bugs": "https://github.com/dennisreimann/uiengine/issues",
@@ -38,7 +38,7 @@
     "yargs": "17.7.2"
   },
   "devDependencies": {
-    "@uiengine/core": "3.3.17",
+    "@uiengine/core": "3.3.18",
     "eslint": "8.57.1",
     "eslint-config-standard": "17.1.0",
     "eslint-plugin-import": "2.31.0",
