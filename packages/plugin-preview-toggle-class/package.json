@@ -29,7 +29,7 @@
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-n": "17.14.0",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "7.1.0"
+    "eslint-plugin-promise": "7.2.1"
   },
   "peerDependencies": {
     "@uiengine/core": "^3.3.4"

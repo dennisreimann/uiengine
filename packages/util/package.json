@@ -48,7 +48,7 @@
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-n": "17.14.0",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "7.1.0",
+    "eslint-plugin-promise": "7.2.1",
     "mocha": "10.8.2",
     "mocha-sinon": "2.1.2",
     "sinon": "19.0.2"
