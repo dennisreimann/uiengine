@@ -19,49 +19,6 @@ eval("\n          const ServerRender = __webpack_require__(/*! ./lib/react-serve
 
 /***/ }),
 
-/***/ "./lib/react-server-render.js":
-/*!************************************!*\
-  !*** ./lib/react-server-render.js ***!
-  \************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("// eslint-disable-next-line no-unused-vars\nvar React = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\nvar _require = __webpack_require__(/*! react-dom/server */ \"../../.yarn/__virtual__/react-dom-virtual-3ad2f53657/0/cache/react-dom-npm-19.0.0-b7981c573e-aa64a2f199.zip/node_modules/react-dom/server.node.js\"),\n  renderToString = _require.renderToString;\nmodule.exports = function (Component, props) {\n  return renderToString(/*#__PURE__*/React.createElement(Component, props));\n};\n\n//# sourceURL=webpack://@uiengine/test-project/./lib/react-server-render.js?");
-
-/***/ }),
-
-/***/ "./src/examples/ReactContext/ReactContext.jsx":
-/*!****************************************************!*\
-  !*** ./src/examples/ReactContext/ReactContext.jsx ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var _ThemeContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ThemeContext */ \"./src/examples/ReactContext/ThemeContext.jsx\");\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ThemeContext__WEBPACK_IMPORTED_MODULE_1__.ThemeProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ThemeContext__WEBPACK_IMPORTED_MODULE_1__[\"default\"].Consumer, null, function (context) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", null, \"Context: \", context);\n  }));\n});\n\n//# sourceURL=webpack://@uiengine/test-project/./src/examples/ReactContext/ReactContext.jsx?");
-
-/***/ }),
-
-/***/ "./src/examples/ReactContext/ThemeContext.jsx":
-/*!****************************************************!*\
-  !*** ./src/examples/ReactContext/ThemeContext.jsx ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   ThemeProvider: () => (/* binding */ ThemeProvider),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\nfunction _typeof(o) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && \"function\" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? \"symbol\" : typeof o; }, _typeof(o); }\nfunction _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError(\"Cannot call a class as a function\"); }\nfunction _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, \"value\" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }\nfunction _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, \"prototype\", { writable: !1 }), e; }\nfunction _toPropertyKey(t) { var i = _toPrimitive(t, \"string\"); return \"symbol\" == _typeof(i) ? i : i + \"\"; }\nfunction _toPrimitive(t, r) { if (\"object\" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || \"default\"); if (\"object\" != _typeof(i)) return i; throw new TypeError(\"@@toPrimitive must return a primitive value.\"); } return (\"string\" === r ? String : Number)(t); }\nfunction _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }\nfunction _possibleConstructorReturn(t, e) { if (e && (\"object\" == _typeof(e) || \"function\" == typeof e)) return e; if (void 0 !== e) throw new TypeError(\"Derived constructors may only return object or undefined\"); return _assertThisInitialized(t); }\nfunction _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); return e; }\nfunction _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }\nfunction _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }\nfunction _inherits(t, e) { if (\"function\" != typeof e && null !== e) throw new TypeError(\"Super expression must either be null or a function\"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, \"prototype\", { writable: !1 }), e && _setPrototypeOf(t, e); }\nfunction _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }\n\nvar ThemeContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext('light');\nvar ThemeProvider = /*#__PURE__*/function (_Component) {\n  function ThemeProvider() {\n    _classCallCheck(this, ThemeProvider);\n    return _callSuper(this, ThemeProvider, arguments);\n  }\n  _inherits(ThemeProvider, _Component);\n  return _createClass(ThemeProvider, [{\n    key: \"render\",\n    value: function render() {\n      var _this$props = this.props,\n        children = _this$props.children,\n        _this$props$value = _this$props.value,\n        value = _this$props$value === void 0 ? 'dark' : _this$props$value;\n      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(ThemeContext.Provider, {\n        value: value\n      }, children);\n    }\n  }]);\n}(react__WEBPACK_IMPORTED_MODULE_0__.Component);\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThemeContext);\n\n//# sourceURL=webpack://@uiengine/test-project/./src/examples/ReactContext/ThemeContext.jsx?");
-
-/***/ }),
-
-/***/ "./src/examples/ReactContext/variants/ReactContext.jsx":
-/*!*************************************************************!*\
-  !*** ./src/examples/ReactContext/variants/ReactContext.jsx ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var _ReactContext_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactContext.jsx */ \"./src/examples/ReactContext/ReactContext.jsx\");\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ReactContext_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], props);\n});\n\n//# sourceURL=webpack://@uiengine/test-project/./src/examples/ReactContext/variants/ReactContext.jsx?");
-
-/***/ }),
-
 /***/ "../../.yarn/__virtual__/react-dom-virtual-3ad2f53657/0/cache/react-dom-npm-19.0.0-b7981c573e-aa64a2f199.zip/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js":
 /*!*****************************************************************************************************************************************************************************************!*\
   !*** ../../.yarn/__virtual__/react-dom-virtual-3ad2f53657/0/cache/react-dom-npm-19.0.0-b7981c573e-aa64a2f199.zip/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js ***!
@@ -136,6 +93,49 @@ eval("/**\n * @license React\n * react.production.js\n *\n * Copyright (c) Meta 
 
 "use strict";
 eval("\n\nif (true) {\n  module.exports = __webpack_require__(/*! ./cjs/react.production.js */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/cjs/react.production.js\");\n} else {}\n\n\n//# sourceURL=webpack://@uiengine/test-project/../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js?");
+
+/***/ }),
+
+/***/ "./lib/react-server-render.js":
+/*!************************************!*\
+  !*** ./lib/react-server-render.js ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("// eslint-disable-next-line no-unused-vars\nvar React = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\nvar _require = __webpack_require__(/*! react-dom/server */ \"../../.yarn/__virtual__/react-dom-virtual-3ad2f53657/0/cache/react-dom-npm-19.0.0-b7981c573e-aa64a2f199.zip/node_modules/react-dom/server.node.js\"),\n  renderToString = _require.renderToString;\nmodule.exports = function (Component, props) {\n  return renderToString(/*#__PURE__*/React.createElement(Component, props));\n};\n\n//# sourceURL=webpack://@uiengine/test-project/./lib/react-server-render.js?");
+
+/***/ }),
+
+/***/ "./src/examples/ReactContext/ReactContext.jsx":
+/*!****************************************************!*\
+  !*** ./src/examples/ReactContext/ReactContext.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var _ThemeContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ThemeContext */ \"./src/examples/ReactContext/ThemeContext.jsx\");\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ThemeContext__WEBPACK_IMPORTED_MODULE_1__.ThemeProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ThemeContext__WEBPACK_IMPORTED_MODULE_1__[\"default\"].Consumer, null, function (context) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", null, \"Context: \", context);\n  }));\n});\n\n//# sourceURL=webpack://@uiengine/test-project/./src/examples/ReactContext/ReactContext.jsx?");
+
+/***/ }),
+
+/***/ "./src/examples/ReactContext/ThemeContext.jsx":
+/*!****************************************************!*\
+  !*** ./src/examples/ReactContext/ThemeContext.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   ThemeProvider: () => (/* binding */ ThemeProvider),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\nfunction _typeof(o) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && \"function\" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? \"symbol\" : typeof o; }, _typeof(o); }\nfunction _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError(\"Cannot call a class as a function\"); }\nfunction _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, \"value\" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }\nfunction _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, \"prototype\", { writable: !1 }), e; }\nfunction _toPropertyKey(t) { var i = _toPrimitive(t, \"string\"); return \"symbol\" == _typeof(i) ? i : i + \"\"; }\nfunction _toPrimitive(t, r) { if (\"object\" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || \"default\"); if (\"object\" != _typeof(i)) return i; throw new TypeError(\"@@toPrimitive must return a primitive value.\"); } return (\"string\" === r ? String : Number)(t); }\nfunction _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }\nfunction _possibleConstructorReturn(t, e) { if (e && (\"object\" == _typeof(e) || \"function\" == typeof e)) return e; if (void 0 !== e) throw new TypeError(\"Derived constructors may only return object or undefined\"); return _assertThisInitialized(t); }\nfunction _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); return e; }\nfunction _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }\nfunction _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }\nfunction _inherits(t, e) { if (\"function\" != typeof e && null !== e) throw new TypeError(\"Super expression must either be null or a function\"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, \"prototype\", { writable: !1 }), e && _setPrototypeOf(t, e); }\nfunction _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }\n\nvar ThemeContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext('light');\nvar ThemeProvider = /*#__PURE__*/function (_Component) {\n  function ThemeProvider() {\n    _classCallCheck(this, ThemeProvider);\n    return _callSuper(this, ThemeProvider, arguments);\n  }\n  _inherits(ThemeProvider, _Component);\n  return _createClass(ThemeProvider, [{\n    key: \"render\",\n    value: function render() {\n      var _this$props = this.props,\n        children = _this$props.children,\n        _this$props$value = _this$props.value,\n        value = _this$props$value === void 0 ? 'dark' : _this$props$value;\n      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(ThemeContext.Provider, {\n        value: value\n      }, children);\n    }\n  }]);\n}(react__WEBPACK_IMPORTED_MODULE_0__.Component);\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThemeContext);\n\n//# sourceURL=webpack://@uiengine/test-project/./src/examples/ReactContext/ThemeContext.jsx?");
+
+/***/ }),
+
+/***/ "./src/examples/ReactContext/variants/ReactContext.jsx":
+/*!*************************************************************!*\
+  !*** ./src/examples/ReactContext/variants/ReactContext.jsx ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var _ReactContext_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactContext.jsx */ \"./src/examples/ReactContext/ReactContext.jsx\");\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ReactContext_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], props);\n});\n\n//# sourceURL=webpack://@uiengine/test-project/./src/examples/ReactContext/variants/ReactContext.jsx?");
 
 /***/ }),
 

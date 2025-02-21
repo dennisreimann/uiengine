@@ -9,35 +9,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./lib/react-server-render.js":
-/*!************************************!*\
-  !*** ./lib/react-server-render.js ***!
-  \************************************/
+/***/ "../../../../../../../plain_ReactHooks_ReactHooks_jsx_1_server.js-virtual":
+/*!********************************************************************************!*\
+  !*** ../../../../../../../plain_ReactHooks_ReactHooks_jsx_1_server.js-virtual ***!
+  \********************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// eslint-disable-next-line no-unused-vars\nvar React = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\nvar _require = __webpack_require__(/*! react-dom/server */ \"../../.yarn/__virtual__/react-dom-virtual-3ad2f53657/0/cache/react-dom-npm-19.0.0-b7981c573e-aa64a2f199.zip/node_modules/react-dom/server.node.js\"),\n  renderToString = _require.renderToString;\nmodule.exports = function (Component, props) {\n  return renderToString(/*#__PURE__*/React.createElement(Component, props));\n};\n\n//# sourceURL=webpack://@uiengine/test-project/./lib/react-server-render.js?");
-
-/***/ }),
-
-/***/ "./src/examples/ReactHooks/ReactHooks.jsx":
-/*!************************************************!*\
-  !*** ./src/examples/ReactHooks/ReactHooks.jsx ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\nfunction _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }\nfunction _nonIterableRest() { throw new TypeError(\"Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\nfunction _unsupportedIterableToArray(r, a) { if (r) { if (\"string\" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return \"Object\" === t && r.constructor && (t = r.constructor.name), \"Map\" === t || \"Set\" === t ? Array.from(r) : \"Arguments\" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }\nfunction _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }\nfunction _iterableToArrayLimit(r, l) { var t = null == r ? null : \"undefined\" != typeof Symbol && r[Symbol.iterator] || r[\"@@iterator\"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t[\"return\"] && (u = t[\"return\"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }\nfunction _arrayWithHoles(r) { if (Array.isArray(r)) return r; }\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {\n  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),\n    _useState2 = _slicedToArray(_useState, 2),\n    count = _useState2[0],\n    setCount = _useState2[1];\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"section\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"article\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", null, count), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"button\", {\n    type: \"button\",\n    onClick: function onClick() {\n      return setCount(count + 1);\n    }\n  }, \"Click me\")));\n});\n\n//# sourceURL=webpack://@uiengine/test-project/./src/examples/ReactHooks/ReactHooks.jsx?");
-
-/***/ }),
-
-/***/ "./src/examples/ReactHooks/variants/ReactHooks.jsx":
-/*!*********************************************************!*\
-  !*** ./src/examples/ReactHooks/variants/ReactHooks.jsx ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var _ReactHooks_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactHooks.jsx */ \"./src/examples/ReactHooks/ReactHooks.jsx\");\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ReactHooks_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], props);\n});\n\n//# sourceURL=webpack://@uiengine/test-project/./src/examples/ReactHooks/variants/ReactHooks.jsx?");
+eval("\n          const ServerRender = __webpack_require__(/*! ./lib/react-server-render.js */ \"./lib/react-server-render.js\")\n          const ServerComponent = __webpack_require__(/*! ./src/examples/ReactHooks/variants/ReactHooks.jsx */ \"./src/examples/ReactHooks/variants/ReactHooks.jsx\")\n          const serverRender = ServerRender.default || ServerRender\n          const serverComponent = ServerComponent.default || ServerComponent\n\n          module.exports = serverRender(serverComponent, {})\n\n//# sourceURL=webpack://@uiengine/test-project/../../../../../../../plain_ReactHooks_ReactHooks_jsx_1_server.js-virtual?");
 
 /***/ }),
 
@@ -118,13 +96,35 @@ eval("\n\nif (true) {\n  module.exports = __webpack_require__(/*! ./cjs/react.pr
 
 /***/ }),
 
-/***/ "../../../../../../../plain_ReactHooks_ReactHooks_jsx_1_server.js-virtual":
-/*!********************************************************************************!*\
-  !*** ../../../../../../../plain_ReactHooks_ReactHooks_jsx_1_server.js-virtual ***!
-  \********************************************************************************/
+/***/ "./lib/react-server-render.js":
+/*!************************************!*\
+  !*** ./lib/react-server-render.js ***!
+  \************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("\n          const ServerRender = __webpack_require__(/*! ./lib/react-server-render.js */ \"./lib/react-server-render.js\")\n          const ServerComponent = __webpack_require__(/*! ./src/examples/ReactHooks/variants/ReactHooks.jsx */ \"./src/examples/ReactHooks/variants/ReactHooks.jsx\")\n          const serverRender = ServerRender.default || ServerRender\n          const serverComponent = ServerComponent.default || ServerComponent\n\n          module.exports = serverRender(serverComponent, {})\n\n//# sourceURL=webpack://@uiengine/test-project/../../../../../../../plain_ReactHooks_ReactHooks_jsx_1_server.js-virtual?");
+eval("// eslint-disable-next-line no-unused-vars\nvar React = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\nvar _require = __webpack_require__(/*! react-dom/server */ \"../../.yarn/__virtual__/react-dom-virtual-3ad2f53657/0/cache/react-dom-npm-19.0.0-b7981c573e-aa64a2f199.zip/node_modules/react-dom/server.node.js\"),\n  renderToString = _require.renderToString;\nmodule.exports = function (Component, props) {\n  return renderToString(/*#__PURE__*/React.createElement(Component, props));\n};\n\n//# sourceURL=webpack://@uiengine/test-project/./lib/react-server-render.js?");
+
+/***/ }),
+
+/***/ "./src/examples/ReactHooks/ReactHooks.jsx":
+/*!************************************************!*\
+  !*** ./src/examples/ReactHooks/ReactHooks.jsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\nfunction _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }\nfunction _nonIterableRest() { throw new TypeError(\"Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\nfunction _unsupportedIterableToArray(r, a) { if (r) { if (\"string\" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return \"Object\" === t && r.constructor && (t = r.constructor.name), \"Map\" === t || \"Set\" === t ? Array.from(r) : \"Arguments\" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }\nfunction _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }\nfunction _iterableToArrayLimit(r, l) { var t = null == r ? null : \"undefined\" != typeof Symbol && r[Symbol.iterator] || r[\"@@iterator\"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t[\"return\"] && (u = t[\"return\"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }\nfunction _arrayWithHoles(r) { if (Array.isArray(r)) return r; }\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {\n  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),\n    _useState2 = _slicedToArray(_useState, 2),\n    count = _useState2[0],\n    setCount = _useState2[1];\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"section\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"article\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", null, count), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"button\", {\n    type: \"button\",\n    onClick: function onClick() {\n      return setCount(count + 1);\n    }\n  }, \"Click me\")));\n});\n\n//# sourceURL=webpack://@uiengine/test-project/./src/examples/ReactHooks/ReactHooks.jsx?");
+
+/***/ }),
+
+/***/ "./src/examples/ReactHooks/variants/ReactHooks.jsx":
+/*!*********************************************************!*\
+  !*** ./src/examples/ReactHooks/variants/ReactHooks.jsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var _ReactHooks_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactHooks.jsx */ \"./src/examples/ReactHooks/ReactHooks.jsx\");\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ReactHooks_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], props);\n});\n\n//# sourceURL=webpack://@uiengine/test-project/./src/examples/ReactHooks/variants/ReactHooks.jsx?");
 
 /***/ }),
 

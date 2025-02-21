@@ -9,28 +9,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/elements/label/index.jsx":
-/*!**************************************!*\
-  !*** ./src/elements/label/index.jsx ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* reexport safe */ _label_jsx__WEBPACK_IMPORTED_MODULE_0__[\"default\"])\n/* harmony export */ });\n/* harmony import */ var _label_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./label.jsx */ \"./src/elements/label/label.jsx\");\n\n\n//# sourceURL=webpack://@uiengine/test-project/./src/elements/label/index.jsx?");
-
-/***/ }),
-
-/***/ "./src/elements/label/label.jsx":
-/*!**************************************!*\
-  !*** ./src/elements/label/label.jsx ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var parse_prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! parse-prop-types */ \"../../.yarn/__virtual__/parse-prop-types-virtual-df868d0a1c/0/cache/parse-prop-types-npm-0.3.0-70cff89ca1-771b4800f9.zip/node_modules/parse-prop-types/dist/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ \"../../.yarn/cache/prop-types-npm-15.8.1-17c71ee7ee-7d959caec0.zip/node_modules/prop-types/index.js\");\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);\n// Require the parse-prop-types package right up front as a workaround\n// for this issue: https://github.com/diegohaz/parse-prop-types/issues/4\n\n\n\nvar Label = function Label(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"label\", {\n    className: \"label\",\n    htmlFor: props[\"for\"]\n  }, props.title);\n};\nLabel.propTypes = {\n  /**\n   * The label text\n   */\n  title: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string).isRequired,\n  /**\n   * The id of the referenced form element\n   */\n  \"for\": (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string).isRequired,\n  test: prop_types__WEBPACK_IMPORTED_MODULE_2___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default().shape({\n    nested: prop_types__WEBPACK_IMPORTED_MODULE_2___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default().shape({\n      deeply: prop_types__WEBPACK_IMPORTED_MODULE_2___default().objectOf((prop_types__WEBPACK_IMPORTED_MODULE_2___default().bool))\n    }))\n  }))\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Label);\n\n//# sourceURL=webpack://@uiengine/test-project/./src/elements/label/label.jsx?");
-
-/***/ }),
-
 /***/ "../../.yarn/__virtual__/parse-prop-types-virtual-df868d0a1c/0/cache/parse-prop-types-npm-0.3.0-70cff89ca1-771b4800f9.zip/node_modules/parse-prop-types/dist/ensureDevPropTypes.js":
 /*!*****************************************************************************************************************************************************************************************!*\
   !*** ../../.yarn/__virtual__/parse-prop-types-virtual-df868d0a1c/0/cache/parse-prop-types-npm-0.3.0-70cff89ca1-771b4800f9.zip/node_modules/parse-prop-types/dist/ensureDevPropTypes.js ***!
@@ -169,6 +147,28 @@ eval("/**\n * @license React\n * react.production.js\n *\n * Copyright (c) Meta 
 
 "use strict";
 eval("\n\nif (true) {\n  module.exports = __webpack_require__(/*! ./cjs/react.production.js */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/cjs/react.production.js\");\n} else {}\n\n\n//# sourceURL=webpack://@uiengine/test-project/../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js?");
+
+/***/ }),
+
+/***/ "./src/elements/label/index.jsx":
+/*!**************************************!*\
+  !*** ./src/elements/label/index.jsx ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* reexport safe */ _label_jsx__WEBPACK_IMPORTED_MODULE_0__[\"default\"])\n/* harmony export */ });\n/* harmony import */ var _label_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./label.jsx */ \"./src/elements/label/label.jsx\");\n\n\n//# sourceURL=webpack://@uiengine/test-project/./src/elements/label/index.jsx?");
+
+/***/ }),
+
+/***/ "./src/elements/label/label.jsx":
+/*!**************************************!*\
+  !*** ./src/elements/label/label.jsx ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var parse_prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! parse-prop-types */ \"../../.yarn/__virtual__/parse-prop-types-virtual-df868d0a1c/0/cache/parse-prop-types-npm-0.3.0-70cff89ca1-771b4800f9.zip/node_modules/parse-prop-types/dist/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ \"../../.yarn/cache/prop-types-npm-15.8.1-17c71ee7ee-7d959caec0.zip/node_modules/prop-types/index.js\");\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);\n// Require the parse-prop-types package right up front as a workaround\n// for this issue: https://github.com/diegohaz/parse-prop-types/issues/4\n\n\n\nvar Label = function Label(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"label\", {\n    className: \"label\",\n    htmlFor: props[\"for\"]\n  }, props.title);\n};\nLabel.propTypes = {\n  /**\n   * The label text\n   */\n  title: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string).isRequired,\n  /**\n   * The id of the referenced form element\n   */\n  \"for\": (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string).isRequired,\n  test: prop_types__WEBPACK_IMPORTED_MODULE_2___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default().shape({\n    nested: prop_types__WEBPACK_IMPORTED_MODULE_2___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default().shape({\n      deeply: prop_types__WEBPACK_IMPORTED_MODULE_2___default().objectOf((prop_types__WEBPACK_IMPORTED_MODULE_2___default().bool))\n    }))\n  }))\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Label);\n\n//# sourceURL=webpack://@uiengine/test-project/./src/elements/label/label.jsx?");
 
 /***/ })
 

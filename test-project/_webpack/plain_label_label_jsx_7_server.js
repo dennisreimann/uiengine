@@ -9,35 +9,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./lib/react-server-render.js":
-/*!************************************!*\
-  !*** ./lib/react-server-render.js ***!
-  \************************************/
+/***/ "../../../../../../../plain_label_label_jsx_7_server.js-virtual":
+/*!**********************************************************************!*\
+  !*** ../../../../../../../plain_label_label_jsx_7_server.js-virtual ***!
+  \**********************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// eslint-disable-next-line no-unused-vars\nvar React = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\nvar _require = __webpack_require__(/*! react-dom/server */ \"../../.yarn/__virtual__/react-dom-virtual-3ad2f53657/0/cache/react-dom-npm-19.0.0-b7981c573e-aa64a2f199.zip/node_modules/react-dom/server.node.js\"),\n  renderToString = _require.renderToString;\nmodule.exports = function (Component, props) {\n  return renderToString(/*#__PURE__*/React.createElement(Component, props));\n};\n\n//# sourceURL=webpack://@uiengine/test-project/./lib/react-server-render.js?");
-
-/***/ }),
-
-/***/ "./src/elements/label/label.jsx":
-/*!**************************************!*\
-  !*** ./src/elements/label/label.jsx ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var parse_prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! parse-prop-types */ \"../../.yarn/__virtual__/parse-prop-types-virtual-df868d0a1c/0/cache/parse-prop-types-npm-0.3.0-70cff89ca1-771b4800f9.zip/node_modules/parse-prop-types/dist/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ \"../../.yarn/cache/prop-types-npm-15.8.1-17c71ee7ee-7d959caec0.zip/node_modules/prop-types/index.js\");\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);\n// Require the parse-prop-types package right up front as a workaround\n// for this issue: https://github.com/diegohaz/parse-prop-types/issues/4\n\n\n\nvar Label = function Label(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"label\", {\n    className: \"label\",\n    htmlFor: props[\"for\"]\n  }, props.title);\n};\nLabel.propTypes = {\n  /**\n   * The label text\n   */\n  title: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string).isRequired,\n  /**\n   * The id of the referenced form element\n   */\n  \"for\": (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string).isRequired,\n  test: prop_types__WEBPACK_IMPORTED_MODULE_2___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default().shape({\n    nested: prop_types__WEBPACK_IMPORTED_MODULE_2___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default().shape({\n      deeply: prop_types__WEBPACK_IMPORTED_MODULE_2___default().objectOf((prop_types__WEBPACK_IMPORTED_MODULE_2___default().bool))\n    }))\n  }))\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Label);\n\n//# sourceURL=webpack://@uiengine/test-project/./src/elements/label/label.jsx?");
-
-/***/ }),
-
-/***/ "./src/elements/label/variants/label.jsx":
-/*!***********************************************!*\
-  !*** ./src/elements/label/variants/label.jsx ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var _label_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../label.jsx */ \"./src/elements/label/label.jsx\");\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (_ref) {\n  var id = _ref.id,\n    title = _ref.title;\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_label_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n    \"for\": id,\n    title: title\n  });\n});\n\n//# sourceURL=webpack://@uiengine/test-project/./src/elements/label/variants/label.jsx?");
+eval("\n          const ServerRender = __webpack_require__(/*! ./lib/react-server-render.js */ \"./lib/react-server-render.js\")\n          const ServerComponent = __webpack_require__(/*! ./src/elements/label/variants/label.jsx */ \"./src/elements/label/variants/label.jsx\")\n          const serverRender = ServerRender.default || ServerRender\n          const serverComponent = ServerComponent.default || ServerComponent\n\n          module.exports = serverRender(serverComponent, {\"id\":\"surname\",\"title\":\"Surname\"})\n\n//# sourceURL=webpack://@uiengine/test-project/../../../../../../../plain_label_label_jsx_7_server.js-virtual?");
 
 /***/ }),
 
@@ -237,13 +215,35 @@ eval("\n\nif (true) {\n  module.exports = __webpack_require__(/*! ./cjs/react.pr
 
 /***/ }),
 
-/***/ "../../../../../../../plain_label_label_jsx_7_server.js-virtual":
-/*!**********************************************************************!*\
-  !*** ../../../../../../../plain_label_label_jsx_7_server.js-virtual ***!
-  \**********************************************************************/
+/***/ "./lib/react-server-render.js":
+/*!************************************!*\
+  !*** ./lib/react-server-render.js ***!
+  \************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("\n          const ServerRender = __webpack_require__(/*! ./lib/react-server-render.js */ \"./lib/react-server-render.js\")\n          const ServerComponent = __webpack_require__(/*! ./src/elements/label/variants/label.jsx */ \"./src/elements/label/variants/label.jsx\")\n          const serverRender = ServerRender.default || ServerRender\n          const serverComponent = ServerComponent.default || ServerComponent\n\n          module.exports = serverRender(serverComponent, {\"id\":\"surname\",\"title\":\"Surname\"})\n\n//# sourceURL=webpack://@uiengine/test-project/../../../../../../../plain_label_label_jsx_7_server.js-virtual?");
+eval("// eslint-disable-next-line no-unused-vars\nvar React = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\nvar _require = __webpack_require__(/*! react-dom/server */ \"../../.yarn/__virtual__/react-dom-virtual-3ad2f53657/0/cache/react-dom-npm-19.0.0-b7981c573e-aa64a2f199.zip/node_modules/react-dom/server.node.js\"),\n  renderToString = _require.renderToString;\nmodule.exports = function (Component, props) {\n  return renderToString(/*#__PURE__*/React.createElement(Component, props));\n};\n\n//# sourceURL=webpack://@uiengine/test-project/./lib/react-server-render.js?");
+
+/***/ }),
+
+/***/ "./src/elements/label/label.jsx":
+/*!**************************************!*\
+  !*** ./src/elements/label/label.jsx ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var parse_prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! parse-prop-types */ \"../../.yarn/__virtual__/parse-prop-types-virtual-df868d0a1c/0/cache/parse-prop-types-npm-0.3.0-70cff89ca1-771b4800f9.zip/node_modules/parse-prop-types/dist/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ \"../../.yarn/cache/prop-types-npm-15.8.1-17c71ee7ee-7d959caec0.zip/node_modules/prop-types/index.js\");\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);\n// Require the parse-prop-types package right up front as a workaround\n// for this issue: https://github.com/diegohaz/parse-prop-types/issues/4\n\n\n\nvar Label = function Label(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"label\", {\n    className: \"label\",\n    htmlFor: props[\"for\"]\n  }, props.title);\n};\nLabel.propTypes = {\n  /**\n   * The label text\n   */\n  title: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string).isRequired,\n  /**\n   * The id of the referenced form element\n   */\n  \"for\": (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string).isRequired,\n  test: prop_types__WEBPACK_IMPORTED_MODULE_2___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default().shape({\n    nested: prop_types__WEBPACK_IMPORTED_MODULE_2___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default().shape({\n      deeply: prop_types__WEBPACK_IMPORTED_MODULE_2___default().objectOf((prop_types__WEBPACK_IMPORTED_MODULE_2___default().bool))\n    }))\n  }))\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Label);\n\n//# sourceURL=webpack://@uiengine/test-project/./src/elements/label/label.jsx?");
+
+/***/ }),
+
+/***/ "./src/elements/label/variants/label.jsx":
+/*!***********************************************!*\
+  !*** ./src/elements/label/variants/label.jsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../../.yarn/cache/react-npm-19.0.0-e33c9aa1c0-2490969c50.zip/node_modules/react/index.js\");\n/* harmony import */ var _label_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../label.jsx */ \"./src/elements/label/label.jsx\");\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (_ref) {\n  var id = _ref.id,\n    title = _ref.title;\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_label_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n    \"for\": id,\n    title: title\n  });\n});\n\n//# sourceURL=webpack://@uiengine/test-project/./src/elements/label/variants/label.jsx?");
 
 /***/ }),
 
